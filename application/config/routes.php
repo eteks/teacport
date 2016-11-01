@@ -49,6 +49,41 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
+//Aboutus
+$route['about'] = 'home/about';
+//for Candidate
+$route['regcandidate'] = 'home/regcandidate';
+$route['logincandidate'] = 'home/logincandidate';
+$route['browsejobs'] = 'home/browsejobs';
+$route['jobsbycategory'] = 'home/jobsbycategory';
+$route['faq'] = 'home/faq';
+//for Schools
+$route['regschool'] = 'home/regschool';
+$route['logschool'] = 'home/logschool';
+$route['faq'] = 'home/faq';
+//Contactus
+$route['contact'] = 'home/contact';
+//candidate dashboard
+$route['userdashboard'] = 'home/userdashboard';
+$route['usereditprofile'] = 'home/usereditprofile';
+$route['userfollowedcompanies'] = 'home/userfollowedcompanies';
+$route['userjobapplied'] = 'home/userjobapplied';
+$route['userresume'] = 'home/userresume';
+//Single job post
+$route['singlejob'] = 'home/singlejob';
+//company post jobs
+$route['postjob'] = 'home/postjob';
+//Company Dashboard
+$route['companydashboard'] = 'home/companydashboard';
+$route['companydashboardeditprofile'] = 'home/companydashboardeditprofile';
+$route['companydashboardactivejobs'] = 'home/companydashboardactivejobs';
+$route['companydashboardresume'] = 'home/companydashboardresume';
+$route['companydashboardfeaturedjobs'] = 'home/companydashboardfeaturedjobs';
+$route['companydashboardfollowers'] = 'home/companydashboardfollowers';
+
+
+
+
