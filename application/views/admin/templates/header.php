@@ -106,7 +106,7 @@ Website: http://thevectorlab.net/
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="index.php">
                                         <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Dulal Khan</span>
