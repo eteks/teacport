@@ -22290,3 +22290,28 @@ INFO - 01-11-2016 17:01:37 --> Controller Class Initialized
 INFO - 01-11-2016 17:01:37 --> File loaded: C:\xampp\htdocs\teacport\application\views\index.php
 INFO - 01-11-2016 17:01:37 --> Final output sent to browser
 DEBUG - 01-11-2016 17:01:37 --> Total execution time: 0.0400
+INFO - 01-11-2016 17:12:05 --> Config Class Initialized
+INFO - 01-11-2016 17:12:05 --> Hooks Class Initialized
+DEBUG - 01-11-2016 17:12:05 --> UTF-8 Support Enabled
+INFO - 01-11-2016 17:12:05 --> Utf8 Class Initialized
+INFO - 01-11-2016 17:12:05 --> URI Class Initialized
+DEBUG - 01-11-2016 17:12:05 --> No URI present. Default controller set.
+INFO - 01-11-2016 17:12:05 --> Router Class Initialized
+INFO - 01-11-2016 17:12:05 --> Output Class Initialized
+INFO - 01-11-2016 17:12:05 --> Security Class Initialized
+DEBUG - 01-11-2016 17:12:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 01-11-2016 17:12:05 --> Input Class Initialized
+INFO - 01-11-2016 17:12:05 --> Language Class Initialized
+INFO - 01-11-2016 17:12:05 --> Loader Class Initialized
+INFO - 01-11-2016 17:12:05 --> Helper loaded: url_helper
+INFO - 01-11-2016 17:12:05 --> Helper loaded: file_helper
+INFO - 01-11-2016 17:12:05 --> Helper loaded: form_helper
+INFO - 01-11-2016 17:12:05 --> Helper loaded: security_helper
+INFO - 01-11-2016 17:12:05 --> Database Driver Class Initialized
+DEBUG - 01-11-2016 17:12:05 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 01-11-2016 17:12:05 --> Session: Class initialized using 'files' driver.
+INFO - 01-11-2016 17:12:05 --> Form Validation Class Initialized
+INFO - 01-11-2016 17:12:05 --> Controller Class Initialized
+INFO - 01-11-2016 17:12:05 --> File loaded: C:\xampp\htdocs\teacport\application\views\index.php
+INFO - 01-11-2016 17:12:05 --> Final output sent to browser
+DEBUG - 01-11-2016 17:12:05 --> Total execution time: 0.0630
