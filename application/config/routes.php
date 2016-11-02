@@ -85,5 +85,6 @@ $route['companydashboardfeaturedjobs'] = 'home/companydashboardfeaturedjobs';
 $route['companydashboardfollowers'] = 'home/companydashboardfollowers';
 
 
-
-
+//Route url for admin
+$route['admin'] = 'admin/login/index_login';
+$route['admin/dashboard'] = 'admin/adminindex/dashboard';
