@@ -19,7 +19,7 @@
                     <ul class="drop-down-multilevel">
                     	<li><a href="job-seekers-login.html">Sign In</a></li>
                         <li><a href="register-job-seekers.html">Sign Up</a></li>
-                        <li><a href="faq.html">Sign Up</a></li>
+                        <li><a href="faq.html">FAQ's</a></li>
                      </ul>
                   </li>
                   <li> <a href="all-institutions.html"> Institutions </a> </li>
