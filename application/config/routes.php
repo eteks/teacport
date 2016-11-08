@@ -39,8 +39,14 @@
 */
 
 $route['default_controller'] = "home";
-$route['404_override'] = '';
+$route['404_override'] = 'missingpage';
 
+/* Route settings for Jobseeker and Jobprovider */
+$route['login/seeker'] = 'job_seeker';
+$route['login/provider'] = 'job_provider';
+
+$route['signup/seeker'] = 'job_seeker/signup';
+$route['signup/provider'] = 'job_provider/signup';
 
 
 
