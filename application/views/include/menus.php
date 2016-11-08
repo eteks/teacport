@@ -2,7 +2,7 @@
             <section class="menu-list-items">
                 <ul class="menu-logo">
                     <li>
-                        <a href="index.html"> <img src="images/logo.png" alt="logo" class="img-responsive"> </a>
+                        <a href="index.html"> <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> </a>
                     </li>
                 </ul>
                 <ul class="menu-links pull-right">
@@ -27,7 +27,7 @@
                   <li> <a href="contactus.html"> Contact Us </a> </li>
                     <li class="no-bg"><a href="company-dashboard-active-jobs.html" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
                     <li class="profile-pic">
-                        <a href="javascript:void(0)"> <img src="images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>
+                        <a href="javascript:void(0)"> <img src="<?php echo base_url(); ?>assets/images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>
                         <ul class="drop-down-multilevel left-side">
                             <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-user"></i> My Profile</a></li>
                             <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-mail-forward"></i> Inbox</a></li>
