@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------------
 | URI ROUTING
@@ -19,13 +17,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | Please see the user guide for complete details:
 |
-|	https://codeigniter.com/user_guide/general/routing.html
+|	http://codeigniter.com/user_guide/general/routing.html
 |
 | -------------------------------------------------------------------------
 | RESERVED ROUTES
 | -------------------------------------------------------------------------
 |
-| There are three reserved routes:
+| There area two reserved routes:
 |
 |	$route['default_controller'] = 'welcome';
 |
@@ -35,56 +33,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 |	$route['404_override'] = 'errors/page_missing';
 |
-| This route will tell the Router which controller/method to use if those
-| provided in the URL cannot be matched to a valid route.
+| This route will tell the Router what URI segments to use if those provided
+| in the URL cannot be matched to a valid route.
 |
-|	$route['translate_uri_dashes'] = FALSE;
-|
-| This is not exactly a route, but allows you to automatically route
-| controller and method names that contain dashes. '-' isn't a valid
-| class or method name character, so it requires translation.
-| When you set this option to TRUE, it will replace ALL dashes in the
-| controller and method URI segments.
-|
-| Examples:	my-controller/index	-> my_controller/index
-|		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'home';
-$route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
-//Aboutus
-$route['about'] = 'home/about';
-//for Candidate
-$route['regcandidate'] = 'home/regcandidate';
-$route['logincandidate'] = 'home/logincandidate';
-$route['browsejobs'] = 'home/browsejobs';
-$route['jobsbycategory'] = 'home/jobsbycategory';
-$route['faq'] = 'home/faq';
-//for Schools
-$route['regschool'] = 'home/regschool';
-$route['logschool'] = 'home/logschool';
-$route['faq'] = 'home/faq';
-//Contactus
-$route['contact'] = 'home/contact';
-//candidate dashboard
-$route['userdashboard'] = 'home/userdashboard';
-$route['usereditprofile'] = 'home/usereditprofile';
-$route['userfollowedcompanies'] = 'home/userfollowedcompanies';
-$route['userjobapplied'] = 'home/userjobapplied';
-$route['userresume'] = 'home/userresume';
-//Single job post
-$route['singlejob'] = 'home/singlejob';
-//company post jobs
-$route['postjob'] = 'home/postjob';
-//Company Dashboard
-$route['companydashboard'] = 'home/companydashboard';
-$route['companydashboardeditprofile'] = 'home/companydashboardeditprofile';
-$route['companydashboardactivejobs'] = 'home/companydashboardactivejobs';
-$route['companydashboardresume'] = 'home/companydashboardresume';
-$route['companydashboardfeaturedjobs'] = 'home/companydashboardfeaturedjobs';
-$route['companydashboardfollowers'] = 'home/companydashboardfollowers';
 
+$route['default_controller'] = "welcome";
+$route['404_override'] = '';
 
 //Route url for admin
 $route['admin'] = 'admin/login/index_login';
 $route['admin/dashboard'] = 'admin/adminindex/dashboard';
+
+/* End of file routes.php */
+/* Location: ./application/config/routes.php */
