@@ -110,7 +110,7 @@
                     	<li><a href="<?php echo base_url(); ?>regcandidate/">Register</a></li>
                         <li><a href="<?php echo base_url(); ?>logincandidate/">Login</a></li>
                         <li><a href="javascript:void(0)">Jobs <i class="fa fa-angle-right fa-indicator"></i></a>
-                        	<ul class="drop-down-multilevel right-side">
+                        	<ul class="drop-down-multilevel left-side">
                         		 <li><a href="<?php echo base_url(); ?>browsejobs/"><i class="fa fa-forumbee"></i>Browse Jobs</a></li>
                         		 <li><a href="<?php echo base_url(); ?>jobsbycategory/"><i class="fa fa-forumbee"></i>Jobs by category</a></li>
                         	</ul>
