@@ -194,7 +194,7 @@ if (defined('ENVIRONMENT'))
 	define("FACEBOOKAPPID", "800444590056438"); //facebook app id
 	define("FACEBOOKAPPSECRET", "d422bcf132c700ed89d03865cdff884a"); //facebook secret id
 	define("FACEBOOKGRAPHVERSION", "v2.5");//facebook graph version
-	define("FACEBOOKLOGINURL", APP_URL."/fblogin");//facebook login url
+	define("FACEBOOKLOGINURL", APP_URL."fblogin");//facebook login url
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
