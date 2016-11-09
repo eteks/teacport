@@ -49,6 +49,13 @@ $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
 
 
+//Route url for admin
+$route['admin'] = 'admin/login/index_login';
+$route['admin/dashboard'] = 'admin/adminindex/dashboard';
+$route['admin/state'] = 'admin/adminindex/state';
+$route['admin/district'] = 'admin/adminindex/district';
+
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
