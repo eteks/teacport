@@ -27,4 +27,25 @@
 #candidate-form select{
 	padding: 5px !important;
 }	
-
+/*Added by thangam*/
+/*css for login and registrartion start*/
+.error_input_field {
+	/*background: #ffebeb !important;*/
+    border: 1px solid #cb1d1d  !important;	
+}
+.error_input_field_email {
+	/*background: #ffebeb !important;*/
+    border: 1px solid #cb1d1d  !important;	
+}
+.error_test {
+	color :red ;
+	font-size : 12px;	
+	display : none;
+}
+.error_email  {
+	color :red ;
+	font-size : 12px;
+	display : none;
+}
+/*css for login and registrartion end*/
+/*Ended by thangam*/

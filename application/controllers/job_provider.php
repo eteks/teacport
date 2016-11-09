@@ -7,6 +7,6 @@ class Job_provider extends CI_Controller {
 	}
 	public function signup()
 	{
-		$this->load->view('register-job-providers.php');
+		$this->load->view('register-job-providers');
 	}
 }

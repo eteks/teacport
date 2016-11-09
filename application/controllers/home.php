@@ -19,16 +19,16 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		session_start();	
+		// session_start();	
 		$this->load->view('index');
-		$fb = new Facebook\Facebook([
-		  	'app_id' => FACEBOOKAPPID,
-		  	'app_secret' => FACEBOOKAPPSECRET,
-		  	'default_graph_version' => FACEBOOKGRAPHVERSION,
-	  	]);
-		$helper = $fb->getRedirectLoginHelper();
-		$permissions = ['email'];
-		$loginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
+		// $fb = new Facebook\Facebook([
+		//   	'app_id' => FACEBOOKAPPID,
+		//   	'app_secret' => FACEBOOKAPPSECRET,
+		//   	'default_graph_version' => FACEBOOKGRAPHVERSION,
+	 //  	]);
+		// $helper = $fb->getRedirectLoginHelper();
+		// $permissions = ['email'];
+		// $loginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
 		
 	}
 	

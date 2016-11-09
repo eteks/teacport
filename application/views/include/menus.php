@@ -10,15 +10,15 @@
                 <li> <a href="aboutus.html"> About Us </a> </li>
                 <li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
                     <ul class="drop-down-multilevel">
-                    	<li><a href="job-providers-login.html">Sign In</a></li>
-                        <li><a href="register-job-providers.html">Sign Up</a></li>
+                    	<li><a href="login/provider">Sign In</a></li>
+                        <li><a href="signup/provider">Sign Up</a></li>
                         <li><a href="">Pricing</a></li>
                      </ul>
                   </li>
                   <li><a href="javascript:void(0)"> Job Seekers <i class="fa fa-angle-down fa-indicator"></i></a> 
                     <ul class="drop-down-multilevel">
-                    	<li><a href="job-seekers-login.html">Sign In</a></li>
-                        <li><a href="register-job-seekers.html">Sign Up</a></li>
+                    	<li><a href="login/seeker">Sign In</a></li>
+                        <li><a href="signup/seeker">Sign Up</a></li>
                         <li><a href="faq.html">FAQ's</a></li>
                      </ul>
                   </li>
