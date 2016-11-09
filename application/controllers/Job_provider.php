@@ -1,12 +1,39 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Job_provider extends CI_Controller {
+	public function __construct(){
+		parent::__construct();
+		session_start();
+		
+	}
 	public function index()
 	{
-		$this->load->view('job-providers-login');
+		$CI =& get_instance();
+		$CI->load->library('Facebook/autoload');
+		$fb = new Facebook\Facebook([
+		  	'app_id' => FACEBOOKAPPID,
+		  	'app_secret' => FACEBOOKAPPSECRET,
+		  	'default_graph_version' => FACEBOOKGRAPHVERSION,
+	  	]);
+		$helper = $fb->getRedirectLoginHelper();
+		$permissions = ['email'];
+		$fbloginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
+		$data['fbloginurl'] = $fbloginUrl;
+		$this->load->view('job-providers-login',$data);
 	}
 	public function signup()
 	{
-		$this->load->view('register-job-providers.php');
+		$CI =& get_instance();
+		$CI->load->library('Facebook/autoload');
+		$fb = new Facebook\Facebook([
+		  	'app_id' => FACEBOOKAPPID,
+		  	'app_secret' => FACEBOOKAPPSECRET,
+		  	'default_graph_version' => FACEBOOKGRAPHVERSION,
+	  	]);
+		$helper = $fb->getRedirectLoginHelper();
+		$permissions = ['email'];
+		$fbloginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
+		$data['fbloginurl'] = $fbloginUrl;
+		$this->load->view('register-job-providers.php',$data);
 	}
 }

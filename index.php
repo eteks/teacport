@@ -191,10 +191,13 @@ if (defined('ENVIRONMENT'))
 		define('APPPATH', BASEPATH.$application_folder.'/');
 	}
 	define('APP_URL', ($_SERVER['SERVER_PORT'] == 443 ? 'https' : 'http') . "://{$_SERVER['SERVER_NAME']}".str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']));
-	define("FACEBOOKAPPID", "800444590056438"); //facebook app id
-	define("FACEBOOKAPPSECRET", "d422bcf132c700ed89d03865cdff884a"); //facebook secret id
+	define("FACEBOOKAPPID", "1434580023238776"); //facebook app id
+	define("FACEBOOKAPPSECRET", "372ac9b0b9e96d105d1b27da18a06e66"); //facebook secret id
 	define("FACEBOOKGRAPHVERSION", "v2.5");//facebook graph version
-	define("FACEBOOKLOGINURL", APP_URL."fblogin");//facebook login url
+	define("FACEBOOKLOGINURL", APP_URL."login/facebookverify");//facebook login url
+	// define("TWITTERCONSUMERKEY","WtZZYO7OMHN6a9GdI8QnIHFjT");
+	// define("TWITTERCONSUMERSECRET", "ebFGoz2TSiFtBLJMEB6v2z2GTnGHGNjRy8OpfgZVoX4nSKkbDE");
+	// define("TWITTERLOGINURL", APP_URL."login/twitterverify");
 /*
  * --------------------------------------------------------------------
  * LOAD THE BOOTSTRAP FILE
