@@ -31,6 +31,12 @@ class Home extends CI_Controller {
 		$loginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
 		
 	}
+	
+	
+	
+	
+	
+	
 }
 
 /* End of file welcome.php */

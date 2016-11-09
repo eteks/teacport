@@ -48,5 +48,7 @@ $route['login/provider'] = 'job_provider';
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
 
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
