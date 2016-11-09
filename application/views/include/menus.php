@@ -11,7 +11,7 @@
                 <li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
                     <ul class="drop-down-multilevel">
                     	<li><a href="<?php echo base_url();?>login/provider">Sign In</a></li>
-                        <li><a href="<?php echo base_url();?>/signup/provider">Sign Up</a></li>
+                        <li><a href="<?php echo base_url();?>signup/provider">Sign Up</a></li>
                         <li><a href="">Pricing</a></li>
                      </ul>
                   </li>

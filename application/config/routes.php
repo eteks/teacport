@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "home";
+$route['default_controller'] = "home/index";
 $route['404_override'] = 'missingpage';
 
 /* Route settings for Jobseeker and Jobprovider */
@@ -56,6 +56,12 @@ $route['signup/provider'] = 'job_provider/signup';
 
 $route['aboutus'] = 'home/aboutus';
 $route['contactus'] = 'home/contactus';
+
+//Route url for admin
+$route['admin'] = 'admin/login/index_login';
+$route['admin/dashboard'] = 'admin/adminindex/dashboard';
+$route['admin/state'] = 'admin/adminindex/state';
+$route['admin/district'] = 'admin/adminindex/district';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

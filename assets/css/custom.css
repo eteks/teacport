@@ -27,4 +27,14 @@
 #candidate-form select{
 	padding: 5px !important;
 }	
+/*Added by thangam*/
+/*css for login and registrartion start*/
 
+.registration_status {
+	color: #c24641;
+	display: none;
+	margin: 10px 0;
+	text-align: center;
+}
+/*css for login and registrartion end*/
+/*Ended by thangam*/
