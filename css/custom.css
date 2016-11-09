@@ -1,0 +1,35 @@
+/* Custom Code */
+#candidate-form h3 {
+    /*background-color: #29aafe !important;*/
+    color: #fff;
+    padding: 5px;
+}
+
+#candidate-form .fa-pencil{
+	font-size: 20px;
+ }	
+ 
+.style-btn-info {
+	margin: 10px 0;
+}
+.slide-featured-jobs {
+	padding: 10px;
+}	
+
+
+
+.inline-checkbox li{
+ display: inline-block;
+ padding: 0 5px;
+}
+.inline-checkbox  input[type="checkbox"]{
+ margin: 0 5px;
+}
+#candidate-form select{
+ padding: 5px !important;
+}
+/*style created By SINDHU */
+/*personal Profile */
+.ppform{
+	margin-bottom: 12px;
+}
