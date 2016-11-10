@@ -6,6 +6,8 @@ class Job_seeker extends CI_Controller {
         parent::__construct();
         $this->load->model('ajax_model'); 
         $this->load->library('form_validation'); 
+        $this->load->library('session'); 
+        $this->load->library('captcha');
         session_start();
     }
 
@@ -37,6 +39,8 @@ class Job_seeker extends CI_Controller {
 		$permissions = ['email'];
 		$fbloginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
 		$data['fbloginurl'] = $fbloginUrl;
+		$data['captcha'] = $this->captcha->main();
+		$this->session->set_userdata('captcha_info', $data['captcha']);
 		$this->load->view('register-job-seekers.php',$data);
 	}
 	public function register_job_seeker()
