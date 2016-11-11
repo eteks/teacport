@@ -4,8 +4,9 @@ class Job_seeker extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->library(array('form_validation','session')); 
+        $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_seeker_model','common_model')); 
+
         session_start();
     }
 

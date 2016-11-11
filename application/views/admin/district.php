@@ -29,12 +29,12 @@
                   </h3>
                    <ul class="breadcrumb">
                        <li>
-                           <a href="editable_table.html#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="editable_table.html#">Data Tables</a> <span class="divider">&nbsp;</span>
+                           <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="editable_table.html#">Editable Table</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/district">District</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -85,38 +85,38 @@
                                     </thead>
                                     <tbody>
                                     <tr class="">
-                                        <td>Mosaddek</td>
-                                        <td>Mosaddek Hossain</td>
-                                        <td>1234</td>
-                                        <td class="center">super user</td>
+                                        <td>Chennai</td>
+                                        <td>Tamil Nadu</td>
+                                        <td>Active</td>
+                                        <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="">
-                                        <td>Dulal</td>
-                                        <td>Dulal Khan</td>
-                                        <td>434</td>
-                                        <td class="center">new user</td>
+                                        <td>Puducherry</td>
+                                        <td>Puducherry</td>
+                                        <td>Inactive</td>
+                                        <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="">
-                                        <td>Sumon</td>
-                                        <td> Sumon Ahmed</td>
-                                        <td>232</td>
-                                        <td class="center">super user</td>
+                                        <td>Kerala</td>
+                                        <td>Kerala</td>
+                                        <td>Active</td>
+                                        <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="">
-                                        <td>vectorlab</td>
-                                        <td>dk mosa</td>
-                                        <td>132</td>
-                                        <td class="center">elite user</td>
+                                        <td>Madurai</td>
+                                        <td>Tamil Nadu</td>
+                                        <td>Active</td>
+                                        <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
-                                    <tr class="">
+                                    <!-- <tr class="">
                                         <td>Admin</td>
                                         <td> Admin lab</td>
                                         <td>462</td>
@@ -131,7 +131,7 @@
                                         <td class="center">new user</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
+                                    </tr> -->
                                     </tbody>
                                 </table>
                             </div>
@@ -150,4 +150,4 @@
       <!-- END PAGE -->
    </div>
    <!-- END CONTAINER -->
-<?php include "templates/footer.php" ?>
+<?php include "templates/footer_grid.php" ?>

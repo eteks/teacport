@@ -37,6 +37,8 @@
   left: 0;
   z-index: 1010;
   margin: 4px 0 0;
+  max-width: 200px !important;
+  min-width: 200px !important;
 }
 
 .chzn-container-single .chzn-single {
@@ -166,6 +168,8 @@
   font-size: 14px;
   line-height: 20px;
   color: #555555;
+  max-width: 200px !important;
+    min-width: 200px !important;
 }
 .chzn-container-multi .chzn-choices li {
   float: left;
@@ -360,6 +364,11 @@
   border: 1px solid rgba(82, 168, 236, 0.8);
   outline: 0;
   outline: thin dotted \9;
+   max-height: 100px !important;
+    max-width: 200px !important;
+    min-width: 200px !important;
+    
+    overflow: auto;
   /* IE6-9 */
 
 }

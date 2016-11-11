@@ -1,6 +1,22 @@
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
-  <!-- BEGIN CONTAINER -->
+   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
+      <!-- BEGIN SIDEBAR -->
+      <div id="sidebar" class="nav-collapse collapse">
+         <div class="sidebar-toggler hidden-phone"></div>
+         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+         <div class="navbar-inverse">
+            <form class="navbar-search visible-phone">
+               <input type="text" class="search-query" placeholder="Search" />
+            </form>
+         </div>
+         <!-- END RESPONSIVE QUICK SEARCH FORM -->
+         <!-- BEGIN SIDEBAR MENU -->
+          
+         <!-- END SIDEBAR MENU -->
+      </div>
+      <!-- END SIDEBAR -->
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
@@ -57,7 +73,7 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <button id="sample_editable_1_new" class="btn green">
+                                        <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
@@ -72,88 +88,66 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
-                                    <thead>
-                                    <tr>
-                                        <th>State Name</th>
+
+                                <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
+                                <?php } ?>
+                                <?php
+                                if(!empty($status)) :
+                                  echo "<p> $status </p>";
+                                endif;
+                                ?> 
+                                <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <thead>
+                                    <tr class="ajaxTitle">
+                                        <th>Statename</th>
                                         <th>Status</th>
-                                        <th>Created Date</th>
+                                        <th>Created date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr class="editable_table">
-                                        <td>
-                                          <span class="view_on_pageload">Andhra</span>
-                                          <input class="view_on_edit" type="text" value="Andhra">
-                                        </td>                                        
-                                        <td>
-                                        	 <span class="view_on_pageload">Active</span>
-                                        	 <select class="view_on_edit">
-												  <option value="active">Active</option>
-												  <option value="inactive">Inactive</option>
-											</select>
+                                  </thead>
+                                  <tbody>                                   
+                                    <?php
+                                    if(!empty($state_values)) :
+                                    foreach ($state_values as $sta_val) :
+                                    ?>
+                                    <tr class="parents_tr" id="column<?php echo $sta_val['state_id']; ?>">
+                                      <td class="state_name"> 
+                                        <?php echo $sta_val['state_name']; ?>
+                                      </td>
+                                      <td class="state_status"> 
+                                        <?php 
+                                        if ($sta_val['state_status'] == 1) 
+                                          echo "Active";
+                                        else
+                                          echo "Inactive";
+                                        ?>
+                                      </td>
+                                        <td class="created_date"> 
+                                          <?php echo $sta_val['state_created_date']; ?> 
                                         </td>
-                                        <td class="center">01-01-2000</td>
-                                        <td><a class="edit" data-edit="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" data-edit="cancel" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="editable_table">
-                                        <td>
-                                        	<span class="view_on_pageload">Tamilnadu</span>
-                                        	<input class="view_on_edit" type="text" value="Tamilnadu">
-                                        </td>
-                                        <td>
-                                        	<span class="view_on_pageload">Active</span>
-                                        	 <select class="view_on_edit">
-												  <option value="active">Active</option>
-												  <option value="inactive">Inactive</option>
-											</select>
-                                        </td>
-                                        <td class="center">01-01-2000</td>
-                                        <td><a class="edit" data-edit="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" data-edit="cancel" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="editable_table">
-                                        <td>
-                                        	<span class="view_on_pageload">Kerala</span>
-                                        	<input class="view_on_edit" type="text" value="Kerala">
+                                        <td class="edit_section">
+                                          <a class="ajaxEdit" id="column<?php echo $sta_val['state_id']; ?>" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
+                                            Edit
+                                          </a>
                                         </td>
                                         <td>
-                                        	<span class="view_on_pageload">Active</span>
-                                        	 <select class="view_on_edit">
-												  <option value="active">Active</option>
-												  <option value="inactive">Inactive</option>
-											</select>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
+                                            Delete
+                                          </a>
                                         </td>
-                                        <td class="center">01-01-2000</td>
-                                        <td><a class="edit" data-edit="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" data-edit="cancel" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <!-- <tr class="">
-                                        <td>vectorlab</td>
-                                        <td>Inactive</td>
-                                        <td class="center">01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Admin</td>
-                                        <td>Inactive</td>
-                                        <td class="center">01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Rafiqul</td>
-                                        <td>Active</td>
-                                        <td class="center">01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr> -->
-                                    </tbody>
+                                     </tr>
+
+                                    <?php
+                                    endforeach;
+                                    endif;
+                                    ?>
+                                  </tbody>
                                 </table>
+                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" class="csrf_token">
+
+                                <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -168,6 +162,16 @@
          <!-- END PAGE CONTAINER-->
       </div>
       <!-- END PAGE -->
-   </div>
-   <!-- END CONTAINER -->
+  </div>
+  <script>
+    // Define default values
+    var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("state_name","state_status"); // Set name of input types
+    var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table
+    var state_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
+    var state_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+  </script>
+
 <?php include "templates/footer.php" ?>
+<?php } ?>
