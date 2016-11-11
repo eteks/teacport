@@ -6,25 +6,25 @@
                     </li>
                 </ul>
                 <ul class="menu-links pull-right">
-                    <li> <a href="index.html"> Home </a> </li>
-                <li> <a href="aboutus.html"> About Us </a> </li>
+                    <li> <a href="<?php echo base_url();?>"> Home </a> </li>
+                <li> <a href="<?php echo base_url();?>aboutus"> About Us </a> </li>
                 <li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
                     <ul class="drop-down-multilevel">
-                    	<li><a href="login/provider">Sign In</a></li>
-                        <li><a href="signup/provider">Sign Up</a></li>
+                    	<li><a href="<?php echo base_url();?>login/provider">Sign In</a></li>
+                        <li><a href="<?php echo base_url();?>signup/provider">Sign Up</a></li>
                         <li><a href="">Pricing</a></li>
                      </ul>
                   </li>
                   <li><a href="javascript:void(0)"> Job Seekers <i class="fa fa-angle-down fa-indicator"></i></a> 
                     <ul class="drop-down-multilevel">
-                    	<li><a href="login/seeker">Sign In</a></li>
-                        <li><a href="signup/seeker">Sign Up</a></li>
+                    	<li><a href="<?php echo base_url();?>login/seeker">Sign In</a></li>
+                        <li><a href="<?php echo base_url();?>signup/seeker">Sign Up</a></li>
                         <li><a href="faq.html">FAQ's</a></li>
                      </ul>
                   </li>
                   <li> <a href="all-institutions.html"> Institutions </a> </li>
                   <li> <a href="vacancies.html"> Vacancies </a> </li>
-                  <li> <a href="contactus.html"> Contact Us </a> </li>
+                  <li> <a href="<?php echo base_url();?>contactus"> Contact Us </a> </li>
                     <li class="no-bg"><a href="company-dashboard-active-jobs.html" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
                     <li class="profile-pic">
                         <a href="javascript:void(0)"> <img src="<?php echo base_url(); ?>assets/images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>

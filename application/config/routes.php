@@ -44,10 +44,18 @@ $route['404_override'] = 'missingpage';
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] = 'job_seeker';
 $route['login/provider'] = 'job_provider';
+$route['login/facebook'] = 'social/facebook';
+$route['login/facebookverify'] = 'social/facebookverify';
+$route['login/twitter'] = 'social/twitter';
+// $route['login/twitterverify'] = 'social/facebookverify';
+// $route['login/twitterify'] = 'social/facebookverify';
+$route['login/linkedin'] = 'social/linkedin';
 
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
 
+$route['aboutus'] = 'home/aboutus';
+$route['contactus'] = 'home/contactus';
 
 //Route url for admin
 $route['admin'] = 'admin/login/index_login';
@@ -61,8 +69,6 @@ $route['admin/qualification'] = 'admin/adminindex/qualification';
 $route['admin/class_level'] = 'admin/adminindex/class_level';
 $route['admin/departments'] = 'admin/adminindex/departments';
 $route['admin/subject'] = 'admin/adminindex/subject';
-
-
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

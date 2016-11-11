@@ -19,24 +19,16 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		// session_start();	
 		$this->load->view('index');
-		// $fb = new Facebook\Facebook([
-		//   	'app_id' => FACEBOOKAPPID,
-		//   	'app_secret' => FACEBOOKAPPSECRET,
-		//   	'default_graph_version' => FACEBOOKGRAPHVERSION,
-	 //  	]);
-		// $helper = $fb->getRedirectLoginHelper();
-		// $permissions = ['email'];
-		// $loginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
-		
 	}
-	
-	
-	
-	
-	
-	
+	public function aboutus()
+	{
+		$this->load->view('aboutus');
+	}
+	public function contactus()
+	{
+		$this->load->view('contactus');
+	}
 }
 
 /* End of file welcome.php */

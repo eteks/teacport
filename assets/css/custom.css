@@ -29,23 +29,19 @@
 }	
 /*Added by thangam*/
 /*css for login and registrartion start*/
-.error_input_field {
-	/*background: #ffebeb !important;*/
-    border: 1px solid #cb1d1d  !important;	
+
+.registration_status {
+	color: #c24641;
+	display: none;
+	margin: 10px 0;
+	text-align: center;
 }
-.error_input_field_email {
-	/*background: #ffebeb !important;*/
-    border: 1px solid #cb1d1d  !important;	
-}
-.error_test {
-	color :red ;
-	font-size : 12px;	
-	display : none;
-}
-.error_email  {
-	color :red ;
-	font-size : 12px;
-	display : none;
+#Loading {
+	height: 28px;
+    width: 28px;
+    float: right;
+    margin-right: 146px;
+    margin-top: 43px;
 }
 /*css for login and registrartion end*/
 /*Ended by thangam*/
