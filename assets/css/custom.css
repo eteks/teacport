@@ -38,3 +38,8 @@
 }
 /*css for login and registrartion end*/
 /*Ended by thangam*/
+.registration_server_msg{
+	color: #c24641;
+	margin: 10px 0;
+	text-align: center;
+}
