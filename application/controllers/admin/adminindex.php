@@ -42,6 +42,34 @@ class Adminindex extends CI_Controller {
 	{	
 			$this->load->view('admin/district');
 	}
+	public function institution_types()
+	{	
+			$this->load->view('admin/institution_types');
+	}
+	public function extra_curricular()
+	{	
+			$this->load->view('admin/extra_curricular');
+	}
+	public function languages()
+	{	
+			$this->load->view('admin/languages');
+	}
+	public function qualification()
+	{	
+			$this->load->view('admin/qualification');
+	}
+	public function class_level()
+	{	
+			$this->load->view('admin/class_level');
+	}
+	public function departments()
+	{	
+			$this->load->view('admin/departments');
+	}
+	public function subject()
+	{	
+			$this->load->view('admin/subject');
+	}
 }
-/* End of file welcome.php */
+/* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */

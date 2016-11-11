@@ -11,7 +11,7 @@ Website: http://thevectorlab.net/
 <!-- BEGIN HEAD -->
 <head>
 	<meta charset="utf-8" />
-	<title> Admin Lab Dashboard</title>
+	<title> Teachers Recruit </title>
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
@@ -21,6 +21,7 @@ Website: http://thevectorlab.net/
 	<link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style_responsive.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style_default.css" rel="stylesheet" id="style_color" />
+	<link href="<?php echo base_url(); ?>assets/admin/assets/chosen-bootstrap/chosen/chosen.css" rel="stylesheet" type="text/css" />
 
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/admin/assets/uniform/css/uniform.default.css" />
@@ -37,7 +38,7 @@ Website: http://thevectorlab.net/
         <div class="navbar-inner">
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
-                <a class="brand" href="index.php">
+                <a class="brand" href="<?php echo base_url(); ?>admin/dashboard">
                     <img src="<?php echo base_url(); ?>assets/admin/img/logo_new.png" alt="Admin Lab" />
                 </a>
                 <!-- END LOGO -->
@@ -54,14 +55,14 @@ Website: http://thevectorlab.net/
                     <ul class="nav top-menu">
                         <!-- BEGIN SETTINGS -->
                         <li class="dropdown">
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="index.php#" data-original-title="Settings">
+                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Settings">
                                 <i class="icon-cog"></i>
                             </a>
                         </li>
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
-                            <a href="index.php#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-envelope-alt"></i>
                                 <span class="badge badge-important">5</span>
                             </a>
@@ -70,7 +71,7 @@ Website: http://thevectorlab.net/
                                     <p>You have 5 new messages</p>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Dulal Khan</span>
@@ -82,7 +83,7 @@ Website: http://thevectorlab.net/
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Rafiqul Islam</span>
@@ -94,7 +95,7 @@ Website: http://thevectorlab.net/
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Sumon Ahmed</span>
@@ -106,7 +107,7 @@ Website: http://thevectorlab.net/
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Dulal Khan</span>
@@ -118,14 +119,14 @@ Website: http://thevectorlab.net/
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">See all messages</a>
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">See all messages</a>
                                 </li>
                             </ul>
                         </li>
                         <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN NOTIFICATION DROPDOWN -->
                         <li class="dropdown" id="header_notification_bar">
-                            <a href="index.php#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
 
                                 <i class="icon-bell-alt"></i>
                                 <span class="badge badge-warning">7</span>
@@ -135,35 +136,35 @@ Website: http://thevectorlab.net/
                                     <p>You have 7 new notifications</p>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="label label-important"><i class="icon-bolt"></i></span>
                                         Server #3 overloaded.
                                         <span class="small italic">34 mins</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="label label-warning"><i class="icon-bell"></i></span>
                                         Server #10 not respoding.
                                         <span class="small italic">1 Hours</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="label label-important"><i class="icon-bolt"></i></span>
                                         Database overloaded 24%.
                                         <span class="small italic">4 hrs</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="label label-success"><i class="icon-plus"></i></span>
                                         New user registered.
                                         <span class="small italic">Just now</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="index.php#">
+                                    <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="label label-info"><i class="icon-bullhorn"></i></span>
                                         Application error.
                                         <span class="small italic">10 mins</span>
@@ -189,22 +190,22 @@ Website: http://thevectorlab.net/
                             </a>
                         </li> -->
                         <li class="dropdown mtop5">
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="index.php#" data-original-title="Help">
+                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Help">
                                 <i class="icon-headphones"></i>
                             </a>
                         </li>
                         <!-- END SUPPORT -->
                         <!-- BEGIN USER LOGIN DROPDOWN -->
                         <li class="dropdown">
-                            <a href="index.php#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
                                 <span class="username">Administrator</span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="index.php#"><i class="icon-user"></i> My Profile</a></li>
-                                <li><a href="index.php#"><i class="icon-tasks"></i> My Tasks</a></li>
-                                <li><a href="index.php#"><i class="icon-calendar"></i> Calendar</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-user"></i> My Profile</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-tasks"></i> My Tasks</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-calendar"></i> Calendar</a></li>
                                 <li class="divider"></li>
                                 <li><a href="login.php"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
@@ -234,7 +235,7 @@ Website: http://thevectorlab.net/
             <!-- BEGIN SIDEBAR MENU -->
             <ul class="sidebar-menu">
                 <li class="has-sub active">
-                    <a href="index.php" class="">
+                    <a href="<?php echo base_url(); ?>admin/dashboard" class="">
                         <span class="icon-box"> <i class="icon-dashboard"></i></span> Dashboard
                         <!-- <span class="arrow"></span> -->
                     </a>
@@ -260,7 +261,7 @@ Website: http://thevectorlab.net/
                     </ul>
                 </li>
                 <li class="has-sub">
-                    <a href="index.php" class="">
+                    <a href="<?php echo base_url(); ?>admin/dashboard" class="">
                         <span class="icon-box"> <i class="icon-dashboard"></i></span> Institution
                         <!-- <span class="arrow"></span> -->
                     </a>
@@ -322,13 +323,13 @@ Website: http://thevectorlab.net/
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/state">State</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/district">District</a></li>
-                        <li><a class="" href="#">Institution Types</a></li>
-                        <li><a class="" href="#">Extra-Curricular</a></li>
-                        <li><a class="" href="#">Languages</a></li>
-                        <li><a class="" href="#">Qualification</a></li>
-                        <li><a class="" href="#">Degree</a></li>
-                        <li><a class="" href="#">Departments</a></li>
-                        <li><a class="" href="#">Subjects</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/institution_types">Institution Type</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/extra_curricular">Extra-Curricular</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/languages">Languages</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/qualification">Qualification</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/class_level">Class Level</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/departments">Department</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/subject">Subject</a></li>
                     </ul>
                 </li>
                <!--  <li class="has-sub">

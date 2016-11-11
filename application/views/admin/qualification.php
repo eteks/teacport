@@ -34,7 +34,7 @@
                        <li>
                            <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/district">District</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/qualification">Qualification</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -75,8 +75,9 @@
                                 <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
                                     <thead>
                                     <tr>
-                                        <th>District Name</th>
-                                        <th>State</th>
+                                        <th>Qualification</th>
+                                        <th>Course Type</th>
+                                        <th>Institution Type</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Edit</th>
@@ -85,38 +86,41 @@
                                     </thead>
                                     <tbody>
                                     <tr class="">
-                                        <td>Chennai</td>
-                                        <td>Tamil Nadu</td>
+                                        <td>B.E</td>
+                                        <td>UG</td>
+                                        <td>Engineering</td>
                                         <td>Active</td>
                                         <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="">
-                                        <td>Puducherry</td>
-                                        <td>Puducherry</td>
+                                        <td>M.A</td>
+                                        <td>PG</td>
+                                        <td>Arts & Science</td>
                                         <td>Inactive</td>
                                         <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="">
-                                        <td>Kerala</td>
-                                        <td>Kerala</td>
-                                        <td>Active</td>
-                                        <td>01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Madurai</td>
-                                        <td>Tamil Nadu</td>
+                                        <td>B.Sc</td>
+                                        <td>UG</td>
+                                        <td>Arts & Science</td>
                                         <td>Active</td>
                                         <td>01-01-2000</td>
                                         <td><a class="edit" href="javascript:;">Edit</a></td>
                                         <td><a class="delete" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <!-- <tr class="">
+                                        <td>vectorlab</td>
+                                        <td>dk mosa</td>
+                                        <td>132</td>
+                                        <td class="center">elite user</td>
+                                        <td><a class="edit" href="javascript:;">Edit</a></td>
+                                        <td><a class="delete" href="javascript:;">Delete</a></td>
+                                    </tr>
+                                    <tr class="">
                                         <td>Admin</td>
                                         <td> Admin lab</td>
                                         <td>462</td>
