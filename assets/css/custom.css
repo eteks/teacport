@@ -27,6 +27,28 @@
 #candidate-form select{
 	padding: 5px !important;
 }	
+.alert {
+    color: #ff0030;
+    font-family: Tahoma;
+    font-size: 10px;
+} 
+/*personal Profile */
+.ppform{
+	margin: 5px 0 15px;
+	padding: 0 0 10px; 
+	border-bottom: 1px solid #ccc;
+}
+#candidate-form .form-group{
+	border-bottom: 1px solid #ccc;
+	margin: 5px 0 15px;
+	padding: 0 0 10px; 
+	
+}
+/* Pricing --Features */
+.all-jobs-list-box2 .fa{
+	color: #777;
+	font-size: 22px;
+}
 /*Added by thangam*/
 /*css for login and registrartion start*/
 
