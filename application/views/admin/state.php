@@ -29,12 +29,12 @@
                   </h3>
                    <ul class="breadcrumb">
                        <li>
-                           <a href="editable_table.html#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="editable_table.html#">Data Tables</a> <span class="divider">&nbsp;</span>
+                           <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="editable_table.html#">Editable Table</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/state">State</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -96,8 +96,8 @@
 											</select>
                                         </td>
                                         <td class="center">01-01-2000</td>
-                                        <td><a class="edit" data-edit="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" data-edit="cancel" href="javascript:;">Delete</a></td>
+                                        <td><a class="edit" data-mode="edit" href="javascript:;">Edit</a></td>
+                                        <td><a class="delete" data-mode="cancel" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="editable_table">
                                         <td>
@@ -112,8 +112,8 @@
 											</select>
                                         </td>
                                         <td class="center">01-01-2000</td>
-                                        <td><a class="edit" data-edit="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" data-edit="cancel" href="javascript:;">Delete</a></td>
+                                        <td><a class="edit" data-mode="edit" href="javascript:;">Edit</a></td>
+                                        <td><a class="delete" data-mode="cancel" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <tr class="editable_table">
                                         <td>
@@ -128,8 +128,8 @@
 											</select>
                                         </td>
                                         <td class="center">01-01-2000</td>
-                                        <td><a class="edit" data-edit="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" data-edit="cancel" href="javascript:;">Delete</a></td>
+                                        <td><a class="edit" data-mode="edit" href="javascript:;">Edit</a></td>
+                                        <td><a class="delete" data-mode="cancel" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <!-- <tr class="">
                                         <td>vectorlab</td>
@@ -160,6 +160,63 @@
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
+            
+            <!-- <div class="control-group">
+                              <label class="control-label">Custom Dropdown Multiple Select</label>
+                              <div class="controls">
+                                 <select data-placeholder="Your Favorite Teams" class="chosen span6" multiple="multiple" tabindex="6">
+                                    <option value=""></option>
+                                    <optgroup label="NFC EAST">
+                                       <option>Dallas Cowboys</option>
+                                       <option>New York Giants</option>
+                                       <option>Philadelphia Eagles</option>
+                                       <option>Washington Redskins</option>
+                                    </optgroup>
+                                    <optgroup label="NFC NORTH">
+                                       <option selected>Chicago Bears</option>
+                                       <option>Detroit Lions</option>
+                                       <option>Green Bay Packers</option>
+                                       <option>Minnesota Vikings</option>
+                                    </optgroup>
+                                    <optgroup label="NFC SOUTH">
+                                       <option>Atlanta Falcons</option>
+                                       <option selected>Carolina Panthers</option>
+                                       <option>New Orleans Saints</option>
+                                       <option>Tampa Bay Buccaneers</option>
+                                    </optgroup>
+                                    <optgroup label="NFC WEST">
+                                       <option>Arizona Cardinals</option>
+                                       <option>St. Louis Rams</option>
+                                       <option>San Francisco 49ers</option>
+                                       <option>Seattle Seahawks</option>
+                                    </optgroup>
+                                    <optgroup label="AFC EAST">
+                                       <option>Buffalo Bills</option>
+                                       <option>Miami Dolphins</option>
+                                       <option>New England Patriots</option>
+                                       <option>New York Jets</option>
+                                    </optgroup>
+                                    <optgroup label="AFC NORTH">
+                                       <option>Baltimore Ravens</option>
+                                       <option>Cincinnati Bengals</option>
+                                       <option>Cleveland Browns</option>
+                                       <option>Pittsburgh Steelers</option>
+                                    </optgroup>
+                                    <optgroup label="AFC SOUTH">
+                                       <option>Houston Texans</option>
+                                       <option>Indianapolis Colts</option>
+                                       <option>Jacksonville Jaguars</option>
+                                       <option>Tennessee Titans</option>
+                                    </optgroup>
+                                    <optgroup label="AFC WEST">
+                                       <option>Denver Broncos</option>
+                                       <option>Kansas City Chiefs</option>
+                                       <option>Oakland Raiders</option>
+                                       <option>San Diego Chargers</option>
+                                    </optgroup>
+                                 </select>
+                              </div>
+                           </div> -->
 
             <!-- END ADVANCED TABLE widget-->
 
@@ -170,4 +227,4 @@
       <!-- END PAGE -->
    </div>
    <!-- END CONTAINER -->
-<?php include "templates/footer.php" ?>
+<?php include "templates/footer_grid.php" ?>

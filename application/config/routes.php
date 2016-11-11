@@ -54,6 +54,13 @@ $route['admin'] = 'admin/login/index_login';
 $route['admin/dashboard'] = 'admin/adminindex/dashboard';
 $route['admin/state'] = 'admin/adminindex/state';
 $route['admin/district'] = 'admin/adminindex/district';
+$route['admin/institution_types'] = 'admin/adminindex/institution_types';
+$route['admin/extra_curricular'] = 'admin/adminindex/extra_curricular';
+$route['admin/languages'] = 'admin/adminindex/languages';
+$route['admin/qualification'] = 'admin/adminindex/qualification';
+$route['admin/class_level'] = 'admin/adminindex/class_level';
+$route['admin/departments'] = 'admin/adminindex/departments';
+$route['admin/subject'] = 'admin/adminindex/subject';
 
 
 
