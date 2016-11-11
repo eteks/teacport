@@ -36,5 +36,12 @@
 	margin: 10px 0;
 	text-align: center;
 }
+#Loading {
+	height: 28px;
+    width: 28px;
+    float: right;
+    margin-right: 146px;
+    margin-top: 43px;
+}
 /*css for login and registrartion end*/
 /*Ended by thangam*/

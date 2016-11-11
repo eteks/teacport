@@ -24,6 +24,11 @@ class Ajax_Model extends CI_Model {
             'field'   => 'registrant_password', 
             'label'   => 'Confirm Password', 
             'rules'   => 'trim|required|'
+            ),
+        array(
+            'field'   => 'captcha_value', 
+            'label'   => 'Captcha', 
+            'rules'   => 'trim|required|callback_captcha|xss_clean'
             )
         );
         $this->form_validation->set_rules($validation_rules);
@@ -49,6 +54,7 @@ class Ajax_Model extends CI_Model {
                 'registrant_email_id' => $this->input->post('registrant_email_id'),
                 'registrant_password' => $this->input->post('registrant_password'),
                 'registrant_password' => $this->input->post('registrant_password'),
+                'captcha_value' => $this->input->post('captcha_value'),
                 'organization_status' => '1'
                 );
             $this->db->insert('tr_organization_profile', $reg_data);

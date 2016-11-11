@@ -8,6 +8,8 @@ class Job_provider extends CI_Controller {
         $this->load->model('ajax_model'); 
         $this->load->library('form_validation'); 
         $this->load->library('session'); 
+        $this->load->library('captcha');
+        // $this->load->library('image_lib');
 		session_start();
     }
 	public function index()
@@ -38,12 +40,17 @@ class Job_provider extends CI_Controller {
 		$permissions = ['email'];
 		$fbloginUrl = $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
 		$data['fbloginurl'] = $fbloginUrl;
+		$data['captcha'] = $this->captcha->main();
+		$this->session->set_userdata('captcha_info', $data['captcha']);
+		// print_r($captcha);
 		$this->load->view('register-job-providers.php',$data);
+
+
 	}
 	public function register_job_provider()
 	{
 		$data = $this->ajax_model->get_registeration_status_provider();
-		echo $data;
+		echo $data;		
 	}
 	    public function login_job_provider()
     {   
