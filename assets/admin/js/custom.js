@@ -92,8 +92,16 @@ createInput = function(i,str){
         input += '</select>';
         //console.log(str);
     }
+    else if(inputType[i] == "list"){
+        input = '<div class="control-group"><div class="controls"><select class="chosen span6" multiple="multiple" tabindex="6"><option value=""></option>';
+        for(i=0;i<list_option.length;i++){
+            input += '<optgroup><option>'+list_option[i]+'</option></optgroup>';
+        }
+        input += '</select></div></div>';
+        //console.log(str);
+    }
     return input;
-}
+};
 
 ajax = function (params,action,form_id){
     var form = $('#'+form_id);
@@ -112,7 +120,7 @@ ajax = function (params,action,form_id){
             }
         }
     });
-}
+};
 
 $(document).ready(function(){
     default_credentials();
@@ -160,7 +168,7 @@ $(document).ready(function(){
 
     // Remove - New record
     $(document).on('click','.new_remove',function() {
-        if(editing==0 && ready_save==0) {
+        if(editing==0 && ready_save==1) {
             $(this).parents('tr').remove();
             ready_save=0;
         }
@@ -187,7 +195,7 @@ $(document).ready(function(){
 
         if(id && editing == 0 && tdediting == 0 && ready_save==0){
             // hide editing row, for the time being
-            $("."+table+" tbody tr:last-child").fadeOut("fast");
+            // $("."+table+" tbody tr:last-child").fadeOut("fast");
                         
             var html;
             for(i=0;i<columns.length;i++){
@@ -230,7 +238,7 @@ $(document).ready(function(){
         editing = 0;
         ready_save = 0;
     });
-
+    
 });
 
 

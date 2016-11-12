@@ -173,5 +173,5 @@
     var state_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
   </script>
 
-<?php include "templates/footer.php" ?>
+<?php include "templates/footer_grid.php" ?>
 <?php } ?>

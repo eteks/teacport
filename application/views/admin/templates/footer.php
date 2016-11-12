@@ -68,13 +68,13 @@
             });
            });
         </script>
-        <!-- <script>
+        <script>
             jQuery(document).ready(function() {
                 // initiate layout and plugins
                 App.setMainPage(true);
                 App.init();
             });
-        </script> -->
+        </script>
         <script>
             var admin_baseurl = "<?php echo base_url(); ?>admin/";
         </script>    
