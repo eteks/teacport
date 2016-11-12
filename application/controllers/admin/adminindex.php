@@ -7,9 +7,8 @@ class Adminindex extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/admin_model');
 		$this->load->library('form_validation');
-		$this->load->model('admin/dashboard');
+		$this->load->model('admin/dashboard_model');
 	}
-
 	// Edit unique function - To check the field is already exists or not
 	function edit_unique($value, $params) 
 	{
@@ -24,24 +23,6 @@ class Adminindex extends CI_Controller {
 	      {
 	          return FALSE;
 	      }
-	}
-
-	public function dashboard()
-	{	
-		$this->dashboard->count_vacancies_by_district();
-		$this->dashboard->count_vacancies_by_state();
-		$this->dashboard->count_vacancies_by_qualification();
-		$this->dashboard->count_vacancies_by_institution();
-		$this->dashboard->count_overall_vacancies();
-		$this->dashboard->count_overall_job_applied();
-		$this->dashboard->count_overall_job_seekers();
-		$this->dashboard->count_overall_job_providers();
-		$this->dashboard->count_unique_visitors();
-		$this->dashboard->paid_job_providers();
-		$this->dashboard->paid_job_providers_by_district();
-		$this->dashboard->free_job_providers_by_district();
-		
-		$this->load->view('admin/index');
 	}
 	public function state()
 	{	
