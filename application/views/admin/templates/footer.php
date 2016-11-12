@@ -5,6 +5,12 @@
                 <span class="go-top"><i class="icon-arrow-up"></i></span>
             </div>
         </div>
+        <!-- CSRF TOKEN -->
+        <script>
+            var csfrData = {};
+            csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
+                       = '<?php echo $this->security->get_csrf_hash(); ?>';
+        </script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
         <!-- Load javascripts at bottom, this will reduce page load time -->
@@ -51,6 +57,39 @@
         <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script> -->
 
         <script>
+            jQuery(document).ready(function() {
+                // initiate layout and plugins
+                App.setMainPage(true);
+                App.init();
+            });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.dash_table').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<''l><''f>r>t<'row-fluid'<''i><''p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "bFilter" : false,
+                 "aLengthMenu": false,
+                 "bLengthChange": false,                 
+                  "searching": false,
+                  'bSortable': false,                
+            });
+           });
+        </script> 
+        <script>
            jQuery(document).ready(function() {
               $('.admin_table').dataTable({
                 "aLengthMenu": [
@@ -75,13 +114,6 @@
                 ]
             });
            });
-        </script>
-        <script>
-            jQuery(document).ready(function() {
-                // initiate layout and plugins
-                App.setMainPage(true);
-                App.init();
-            });
         </script>
         <script>
             var admin_baseurl = "<?php echo base_url(); ?>admin/";

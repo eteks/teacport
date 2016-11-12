@@ -130,249 +130,151 @@
                     <!-- END OVERVIEW STATISTIC BARS-->
 
                     <div class="row-fluid">
-                        <div class="span12">
+                        <div class="span6">
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                    <h4><i class="icon-envelope"></i> Mailbox</h4>
-                                    <div class="tools pull-right mtop7 mail-btn">
-                                        <div class="btn-group">
-                                            <a class="btn btn-small element" data-original-title="Share" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-share-alt"></i>
-                                            </a>
-
-                                            <a class="btn btn-small element" data-original-title="Report" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-exclamation-sign">
-                                                </i>
-                                            </a>
-                                            <a class="btn btn-small element" data-original-title="Delete" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-trash">
-                                                </i>
-                                            </a>
-                                        </div>
-                                        <div class="btn-group">
-                                            <a class="btn btn-small element" data-original-title="Move to" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-folder-close">
-                                                </i>
-                                            </a>
-                                            <a class="btn btn-small element" data-original-title="Tag" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-tag">
-                                                </i>
-                                            </a>
-                                        </div>
-                                        <div class="btn-group">
-                                            <a class="btn btn-small element" data-original-title="Prev" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-chevron-left">
-                                                </i>
-                                            </a>
-                                            <a class="btn btn-small element" data-original-title="Next" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                                <i class="icon-chevron-right">
-                                                </i>
-                                            </a>
-                                        </div>
-                                    </div>
+                                <h4><i class="icon-user"></i> Vacancies By</h4>
+                                <div class="tools pull-right mtop7 mail-btn select_by_option">
+                                    <div class="btn-group">
+                                        <select class="select_by" data-placeholder="Select an option">
+								            <option value="1">State</option>
+								            <option value="2">District</option>
+								            <option value="2">Qualification</option>
+								            <option value="2">Institution Type</option>
+								        </select>
+                                    </div>                                    
+                                    <!-- <div class="btn-group prev_next_opt">
+                                        <a class="btn btn-small element" data-original-title="Prev" href="index.php#" data-toggle="tooltip" data-placement="top">
+                                            <i class="icon-chevron-left">
+                                            </i>
+                                        </a>
+                                        <a class="btn btn-small element" data-original-title="Next" href="index.php#" data-toggle="tooltip" data-placement="top">
+                                            <i class="icon-chevron-right"></i>
+                                        </a>
+                                    </div> -->
+                                </div>
+                            </div>
+                                <div class="widget-body">
+                                <table class="table table-condensed table-striped table-hover no-margin dash_table">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:17%">
+                                            State Name
+                                        </th>
+                                        <th class="hidden-phone" style="width:55%">
+                                            Count
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Tamil Nadu</td>
+                                        <td class="hidden-phone">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kerala</td>
+                                        <td class="hidden-phone">30</td>
+                                    </tr>
+                                    <tr>
+                                    	<td>Andhra</td>
+                                        <td class="hidden-phone">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Delhi</td>
+                                        <td class="hidden-phone">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Karnataka</td>
+                                        <td class="hidden-phone">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Puducherry</td>
+                                        <td class="hidden-phone">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jammu</td>
+                                        <td class="hidden-phone">30</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <!-- END MAILBOX PORTLET-->
+                        </div>
+                        <div class="span6">
+                            <!-- BEGIN MAILBOX PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                <h4><i class="icon-user"></i> Job Provided By</h4>
+                                <div class="tools pull-right mtop7 mail-btn select_by_option">
+                                    <div class="btn-group">
+                                         <select class="select_by" data-placeholder="Select an option">
+								            <option value="1">Paid</option>
+								            <option value="2">District Name</option>
+								        </select>
+                                    </div>                                    
+                                    <!-- <div class="btn-group prev_next_opt">
+                                        <a class="btn btn-small element" data-original-title="Prev" href="index.php#" data-toggle="tooltip" data-placement="top">
+                                            <i class="icon-chevron-left">
+                                            </i>
+                                        </a>
+                                        <a class="btn btn-small element" data-original-title="Next" href="index.php#" data-toggle="tooltip" data-placement="top">
+                                            <i class="icon-chevron-right">
+                                            </i>
+                                        </a>
+                                    </div> -->
                                 </div>
                                 <div class="widget-body">
-                                    <table class="table table-condensed table-striped table-hover no-margin">
-                                        <thead>
-                                        <tr>
-                                            <th style="width:3%">
-                                                <input type="checkbox" class="no-margin">
-                                            </th>
-                                            <th style="width:17%">
-                                                Sent by
-                                            </th>
-                                            <th class="hidden-phone" style="width:55%">
-                                                Subject
-                                            </th>
-                                            <th class="right-align-text hidden-phone" style="width:12%">
-                                                Labels
-                                            </th>
-                                            <th class="right-align-text hidden-phone" style="width:12%">
-                                                Date
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Dulal khan
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Zoology Teacher
-                                                </strong>
-                                                <small class="info-fade">
-                                                    Vidhayaarambam vidyalaya
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label label-info">
-                                                        Read
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                Yesterday
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Mosaddek Hossain
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Librarian
-                                                </strong>
-                                                <small class="info-fade">
-                                                    Mirapolis International
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label label-success">
-                                                        New
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                Today
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Sumon Ahmed
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Dance Teachers
-                                                </strong>
-
-                                                <small class="info-fade">
-                                                    ABC International
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label">
-                                                        Imp
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                Yesterday
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Rafiqul Islam
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Openings for Counsellor
-                                                </strong>
-
-                                                <small class="info-fade">
-                                                    Little Flowers Primary School, Salem
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label label-info">
-                                                        Read
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                18-04-2013
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Dkmosa
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Looking For Science lab assistant
-                                                </strong>
-                                                <small class="info-fade">
-                                                    Amalorpavam Matric school, Pondicherry
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label label-success">
-                                                        New
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                10-02-2013
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Mosaddek
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Wanted Office Assistant
-                                                </strong>
-                                                <small class="info-fade">
-                                                    Mahendragiri Public school
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label">
-                                                        Imp
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                21-01-2013
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <input type="checkbox" class="no-margin">
-                                            </td>
-                                            <td>
-                                                Dulal khan
-                                            </td>
-                                            <td class="hidden-phone">
-                                                <strong>
-                                                    Looking for science Lab Assistant
-                                                </strong>
-                                                <small class="info-fade">
-                                                    Amalorpavan School
-                                                </small>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                      <span class="label label label-info">
-                                                        New
-                                                      </span>
-                                            </td>
-                                            <td class="right-align-text hidden-phone">
-                                                19-01-2013
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                <table class="table table-condensed table-striped table-hover no-margin dash_table">
+                                    <thead>
+                                    <tr>
+                                        <th style="width:17%">
+                                            State Name
+                                        </th>
+                                        <th class="hidden-phone" style="width:55%">
+                                            Count
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>Tamil Nadu</td>
+                                        <td class="hidden-phone">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Kerala</td>
+                                        <td class="hidden-phone">30</td>
+                                    </tr>
+                                    <tr>
+                                    	<td>Andhra</td>
+                                        <td class="hidden-phone">20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Delhi</td>
+                                        <td class="hidden-phone">40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Karnataka</td>
+                                        <td class="hidden-phone">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Puducherry</td>
+                                        <td class="hidden-phone">10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jammu</td>
+                                        <td class="hidden-phone">30</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                             </div>
                             <!-- END MAILBOX PORTLET-->
                         </div>
                     </div>
                     <!-- BEGIN OVERVIEW STATISTIC BARS-->
-                    <div class="row-fluid metro-overview-cont">
+                    <!-- <div class="row-fluid metro-overview-cont">
                         <div data-desktop="span2" data-tablet="span4" class="span2 responsive">
                             <div class="metro-overview turquoise-color clearfix">
                                 <div class="display">
@@ -463,7 +365,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END OVERVIEW STATISTIC BARS-->
                     <div class="row-fluid">
                         <div class="span8">

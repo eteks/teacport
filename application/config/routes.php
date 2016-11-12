@@ -47,12 +47,17 @@ $route['login/provider'] = 'job_provider';
 $route['login/facebook'] = 'social/facebook';
 $route['login/facebookverify'] = 'social/facebookverify';
 $route['login/twitter'] = 'social/twitter';
-// $route['login/twitterverify'] = 'social/facebookverify';
-// $route['login/twitterify'] = 'social/facebookverify';
 $route['login/linkedin'] = 'social/linkedin';
 
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
+
+$route['provider/dashboard'] = 'job_provider/dashboard';
+$route['provider/logout'] = 'job_provider/provider_logout';
+
+$route['seeker/dashboard'] = 'job_seeker/dashboard';
+$route['seeker/logout'] = 'job_seeker/seeker_logout';
+
 
 $route['aboutus'] = 'home/aboutus';
 $route['contactus'] = 'home/contactus';
