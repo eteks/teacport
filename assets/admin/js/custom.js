@@ -29,9 +29,9 @@
     * along with this script.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
     */
 
-$( document ).ajaxError(function() {
-    window.location.href = admin_baseurl;
-});
+// $( document ).ajaxError(function() {
+//     window.location.href = admin_baseurl;
+// });
 
 // Set button class names 
 var savebutton = "ajaxSave";
@@ -110,12 +110,11 @@ createInput = function(i,str){
 ajax = function (params,action,form_id){
     var form = $('#'+form_id);
     var this_table = $('#'+form_id).find('table');
-    var csrf = form.find('.csrf_token').val();
     $.ajax({
         type : "POST",
         url : admin_baseurl+form.attr('action'),
         dataType : 'json',
-        data : params + '&action=' + action+ '&csrf_test_name=' + csrf,
+        data : params + '&action=' + action+ '&' + csfrData,
         success: function(res) {
             if(res.error==1) {
                 $('.val_error').html(res.status);
