@@ -29,6 +29,10 @@
     * along with this script.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
     */
 
+$( document ).ajaxError(function() {
+    window.location.href = admin_baseurl;
+});
+
 // Set button class names 
 var savebutton = "ajaxSave";
 var deletebutton = "ajaxDelete";
@@ -48,7 +52,6 @@ function default_credentials() {
     editingtrid = 0;
     editingtdcol = 0;
     ready_save = 0;
-   
 }
 
     
@@ -67,6 +70,7 @@ function add_new_record() {
 
 // Create Input
 createInput = function(i,str){
+    // alert(str);
     str = typeof str !== 'undefined' ? str : null;
     //alert(str);
     if(inputType[i] == "text"){
@@ -105,17 +109,24 @@ createInput = function(i,str){
 
 ajax = function (params,action,form_id){
     var form = $('#'+form_id);
-    // var csrf = form.find('.csrf_token').val();
+    var this_table = $('#'+form_id).find('table');
+    var csrf = form.find('.csrf_token').val();
     $.ajax({
         type : "POST",
         url : admin_baseurl+form.attr('action'),
-        data : params + '&action=' + action,
+        dataType : 'json',
+        data : params + '&action=' + action+ '&csrf_test_name=' + csrf,
         success: function(res) {
-            if(res==1) {
-               alert("test");   
+            if(res.error==1) {
+                $('.val_error').html(res.status);
+                $('.val_error').slideDown(350);
+                $('.val_error').fadeOut(3000);
             }
-            else {
-                form.html(res);
+            else if(res.error==2) {
+                $('.val_error').html();
+                form.html(res.output);
+                $('.db_status').fadeOut(3000);
+                setTimeout(function() { $('.db_status').remove(); }, 5000);
                 default_credentials();
             }
         }
@@ -140,13 +151,13 @@ $(document).ready(function(){
         var $inputs =
         $(document).find("."+table).find(inputs).filter(function() {
             // check if input element is blank ??
-            if($.trim( this.value ) == ""){
-                $(this).addClass("error");
-                validation = 0;
-            }else{
-                $(this).removeClass("error");
-                $(this).addClass("success");
-            }
+            // if($.trim( this.value ) == ""){
+            //     $(this).addClass("error");
+            //     validation = 0;
+            // }else{
+            //     $(this).removeClass("error");
+            //     $(this).addClass("success");
+            // }
             return $.trim( this.value );
         });
 
@@ -180,7 +191,7 @@ $(document).ready(function(){
         var form_id = $(this).parents('form').attr('id');
         if(id){
             if(confirm("Do you really want to delete record ?"))
-                ajax("rid="+id,"del",form_id);
+                ajax("rid="+id,"delete",form_id);
         }
         else {
             alert("Unable to process");
@@ -193,15 +204,14 @@ $(document).ready(function(){
         var id = $(this).attr("id");
         var update_id = $(this).data("id");
 
-        if(id && editing == 0 && tdediting == 0 && ready_save==0){
+        if(id && editing == 0 && tdediting == 0 && ready_save==0) {
             // hide editing row, for the time being
             // $("."+table+" tbody tr:last-child").fadeOut("fast");
                         
             var html;
             for(i=0;i<columns.length;i++){
                 // fetch value inside the TD and place as VALUE in input field
-                var val = $(document).find("."+table+" tr[id="+id+"] td[class='"+columns[i]+"']").html();
-                
+                var val = $(document).find("."+table+" tr[id="+id+"] td[class="+columns[i]+"]").html();
                 input = createInput(i,$.trim(val));
                 html +='<td>'+input+'</td>';
             }

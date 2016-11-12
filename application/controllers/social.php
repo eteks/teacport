@@ -4,8 +4,8 @@ class Social extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		session_start();
-		$this->load->library(array('twconnect'));
-		$this->load->library(array('linkedin/http_class','linkedin/oauth_client_class'));
+		$this->load->library(array('linkedin/http_class','linkedin/oauth_client_class','twconnect'));
+		$this->load->model('job_provider_model');
 	}
 	public function facebook(){
 		$CI =& get_instance();

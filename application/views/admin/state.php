@@ -93,9 +93,10 @@
                                 <?php } ?>
                                 <?php
                                 if(!empty($status)) :
-                                  echo "<p> $status </p>";
+                                  echo "<p class='db_status'> $status </p>";
                                 endif;
                                 ?> 
+                                <p class='val_error'> <p>
                                 <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                   <thead>
                                     <tr class="ajaxTitle">
@@ -169,9 +170,10 @@
     var columns = new Array("state_name","state_status"); // Set name of input types
     var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var state_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var state_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var state_status_option = new Array("Please select status","Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
+    var state_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
   </script>
 
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>
+
