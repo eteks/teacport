@@ -47,6 +47,14 @@
 	color: #777;
 	font-size: 22px;
 }
-
-
+/* footer */
+.footer_block .recentpost li {
+	border-bottom: 1px dotted #000;
+}
+/* Company Dashboard */
+.txtbox-height input[type="text"] {
+	height: 45px !important;
+	padding: 20px;
+	line-height: 40px;
+}
 
