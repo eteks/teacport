@@ -55,10 +55,7 @@ class Admin_Model extends CI_Model {
     $model_data['state_values'] = $this->db->get_where('tr_state')->result_array();
     return $model_data;
   }
-   
-
- 
-
+  
 }
 
 /* End of file Ajax_Model.php */

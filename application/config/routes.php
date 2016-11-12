@@ -47,12 +47,17 @@ $route['login/provider'] = 'job_provider';
 $route['login/facebook'] = 'social/facebook';
 $route['login/facebookverify'] = 'social/facebookverify';
 $route['login/twitter'] = 'social/twitter';
-// $route['login/twitterverify'] = 'social/facebookverify';
-// $route['login/twitterify'] = 'social/facebookverify';
 $route['login/linkedin'] = 'social/linkedin';
 
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
+
+$route['provider/dashboard'] = 'job_provider/dashboard';
+$route['provider/logout'] = 'job_provider/provider_logout';
+
+$route['seeker/dashboard'] = 'job_seeker/dashboard';
+$route['seeker/logout'] = 'job_seeker/seeker_logout';
+
 
 $route['aboutus'] = 'home/aboutus';
 $route['contactus'] = 'home/contactus';
@@ -62,6 +67,13 @@ $route['admin'] = 'admin/login/index_login';
 $route['admin/dashboard'] = 'admin/adminindex/dashboard';
 $route['admin/state'] = 'admin/adminindex/state';
 $route['admin/district'] = 'admin/adminindex/district';
+$route['admin/institution_types'] = 'admin/adminindex/institution_types';
+$route['admin/extra_curricular'] = 'admin/adminindex/extra_curricular';
+$route['admin/languages'] = 'admin/adminindex/languages';
+$route['admin/qualification'] = 'admin/adminindex/qualification';
+$route['admin/class_level'] = 'admin/adminindex/class_level';
+$route['admin/departments'] = 'admin/adminindex/departments';
+$route['admin/subject'] = 'admin/adminindex/subject';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

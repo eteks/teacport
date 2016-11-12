@@ -7,6 +7,7 @@ class Adminindex extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/admin_model');
 		$this->load->library('form_validation');
+		$this->load->model('admin/dashboard');
 	}
 
 	// Edit unique function - To check the field is already exists or not
@@ -27,7 +28,20 @@ class Adminindex extends CI_Controller {
 
 	public function dashboard()
 	{	
-			$this->load->view('admin/index');
+		$this->dashboard->count_vacancies_by_district();
+		$this->dashboard->count_vacancies_by_state();
+		$this->dashboard->count_vacancies_by_qualification();
+		$this->dashboard->count_vacancies_by_institution();
+		$this->dashboard->count_overall_vacancies();
+		$this->dashboard->count_overall_job_applied();
+		$this->dashboard->count_overall_job_seekers();
+		$this->dashboard->count_overall_job_providers();
+		$this->dashboard->count_unique_visitors();
+		$this->dashboard->paid_job_providers();
+		$this->dashboard->paid_job_providers_by_district();
+		$this->dashboard->free_job_providers_by_district();
+		
+		$this->load->view('admin/index');
 	}
 	public function state()
 	{	
@@ -153,6 +167,34 @@ class Adminindex extends CI_Controller {
 	{	
 			$this->load->view('admin/district');
 	}
+	public function institution_types()
+	{	
+			$this->load->view('admin/institution_types');
+	}
+	public function extra_curricular()
+	{	
+			$this->load->view('admin/extra_curricular');
+	}
+	public function languages()
+	{	
+			$this->load->view('admin/languages');
+	}
+	public function qualification()
+	{	
+			$this->load->view('admin/qualification');
+	}
+	public function class_level()
+	{	
+			$this->load->view('admin/class_level');
+	}
+	public function departments()
+	{	
+			$this->load->view('admin/departments');
+	}
+	public function subject()
+	{	
+			$this->load->view('admin/subject');
+	}
 }
-/* End of file welcome.php */
+/* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */

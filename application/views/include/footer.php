@@ -42,6 +42,28 @@
 			</script>			
 			<script src="<?php echo base_url(); ?>assets/js/ajax-call.js"></script>
 			
+			<!-- FOR TAGSINPUT & CKEDITOR IN JOBPOST PAGE ONLY -->
+	        <script type="text/javascript" src="js/jquery.tagsinput.min.js"></script>
+	        <script type="text/javascript">
+	            $(".questions-category").select2({
+	                placeholder: "Select Post Category",
+	                allowClear: true,
+	                maximumSelectionLength: 3,
+	                /*width: "50%",*/
+	            });
+	            $('#tags').tagsInput({
+	                width: 'auto'
+	            });
+	        </script>
+	
+	        <!-- CK-EDITOR -->
+	        <script src="http://cdn.ckeditor.com/4.5.10/standard/ckeditor.js"></script>
+	        <script type="text/javascript">
+	            CKEDITOR.replace('ckeditor');
+	        </script>
+			
+			
+			
 		</div>
 	</body>
 </html>

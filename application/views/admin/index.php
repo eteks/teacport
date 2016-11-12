@@ -120,7 +120,7 @@
                                 </div>
                                 <p>
                                     <strong>230</strong>
-                                    Updates
+                                    Page Visits
                                 </p>
                             </div>
                         </div>

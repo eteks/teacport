@@ -30,6 +30,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-knob/js/jquery.knob.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.resize.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/chosen-bootstrap/chosen/chosen.jquery.min.js"  type="text/javascript" ></script>
 
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.pie.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.stack.js"></script>
@@ -37,35 +38,16 @@
 
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.peity.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/uniform/jquery.uniform.min.js"></script>
-       <!--  <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script> -->
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script>
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->
         <script>
            jQuery(document).ready(function() {
-              $('.admin_table').dataTable({
-                "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
-                ],
-                // set the initial value
-                "iDisplayLength": 5,
-                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-                "sPaginationType": "bootstrap",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ records per page",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
-                    }
-                },
-                "aoColumnDefs": [{
-                        'bSortable': false,
-                        'aTargets': [0]
-                    }
-                ]
-            });
+               App.init();
+               TableEditable.init();
            });
         </script>
         <script>
@@ -75,9 +57,7 @@
                 App.init();
             });
         </script>
-        <script>
-            var admin_baseurl = "<?php echo base_url(); ?>admin/";
-        </script>    
+        
         <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
