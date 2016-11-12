@@ -37,11 +37,44 @@
 
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.peity.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/uniform/jquery.uniform.min.js"></script>
-       <!--  <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script> -->
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script>
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+        <script>
+            jQuery(document).ready(function() {
+                // initiate layout and plugins
+                App.setMainPage(true);
+                App.init();
+            });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.dash_table').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<''l><''f>r>t<'row-fluid'<''i><''p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "bFilter" : false,
+                 "aLengthMenu": false,
+                 "bLengthChange": false,                 
+                  "searching": false,
+                  'bSortable': false,                
+            });
+           });
+        </script> 
         <script>
            jQuery(document).ready(function() {
               $('.admin_table').dataTable({
@@ -67,13 +100,6 @@
                 ]
             });
            });
-        </script>
-        <script>
-            jQuery(document).ready(function() {
-                // initiate layout and plugins
-                App.setMainPage(true);
-                App.init();
-            });
         </script>
         <script>
             var admin_baseurl = "<?php echo base_url(); ?>admin/";

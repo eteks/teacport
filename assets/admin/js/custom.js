@@ -247,8 +247,7 @@ $(document).ready(function(){
         // clear editing flag
         editing = 0;
         ready_save = 0;
-    });
-    
+    });     
 });
 
 
