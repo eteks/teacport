@@ -96,8 +96,16 @@ createInput = function(i,str){
         input += '</select>';
         //console.log(str);
     }
+    else if(inputType[i] == "list"){
+        input = '<div class="control-group"><div class="controls"><select class="chosen span6" multiple="multiple" tabindex="6"><option value=""></option>';
+        for(i=0;i<list_option.length;i++){
+            input += '<optgroup><option>'+list_option[i]+'</option></optgroup>';
+        }
+        input += '</select></div></div>';
+        //console.log(str);
+    }
     return input;
-}
+};
 
 ajax = function (params,action,form_id){
     var form = $('#'+form_id);
@@ -122,7 +130,7 @@ ajax = function (params,action,form_id){
             }
         }
     });
-}
+};
 
 $(document).ready(function(){
     default_credentials();
@@ -239,7 +247,7 @@ $(document).ready(function(){
         editing = 0;
         ready_save = 0;
     });
-
+    
 });
 
 

@@ -57,7 +57,7 @@
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <button id="sample_editable_1_new" class="btn green">
+                                        <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
@@ -72,9 +72,10 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <table class="table table-striped table-hover table-bordered" id="sample_editable_1">
+                                <form method="post" action="adminindex/class_level" class="admin_module_form" id="class_level_form">
+                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
-                                    <tr>
+                                    <tr class="ajaxTitle">
                                         <th>Class Level</th>
                                         <th>Institution Type</th>
                                         <th>Status</th>
@@ -84,29 +85,35 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="">
-                                        <td>Primary</td>
-                                        <td>Schools</td>
-                                        <td>Active</td>
-                                        <td>01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
+                                    <tr class="parents_tr" id="column1">
+                                        <td class="class_level_name">Primary</td>
+                                        <td class="institution_type">Schools</td>
+                                        <td class="class_level_status">Active</td>
+                                        <td class="created_date">01-01-2000</td>
+                                        <td class="edit_section">
+                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                        </td>
+                                        <td><a class="ajaxDelete" id="column1" href="javascript:;">Delete</a></td>
                                     </tr>
-                                    <tr class="">
-                                        <td>Secondary</td>
-                                        <td>Schools</td>
-                                        <td>Inactive</td>
-                                        <td>01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
+                                    <tr class="parents_tr" id="column2">
+                                        <td class="class_level_name">Secondary</td>
+                                        <td class="institution_type">Schools</td>
+                                        <td class="class_level_status">Inactive</td>
+                                        <td class="created_date">01-01-2000</td>
+                                        <td class="edit_section">
+                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        </td>
+                                        <td><a class="ajaxDelete" id="column2" href="javascript:;">Delete</a></td>
                                     </tr>
-                                    <tr class="">
-                                        <td>Higher Secondary</td>
-                                        <td>Schools</td>
-                                        <td>Active</td>
-                                        <td>01-01-2000</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
+                                    <tr class="parents_tr" id="column3">
+                                        <td class="class_level_name">Higher Secondary</td>
+                                        <td class="institution_type">Schools</td>
+                                        <td class="class_level_status">Active</td>
+                                        <td class="created_date">01-01-2000</td>
+                                        <td class="edit_section">
+                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        </td>
+                                        <td><a class="ajaxDelete" id="column3" href="javascript:;">Delete</a></td>
                                     </tr>
                                     <!-- <tr class="">
                                         <td>vectorlab</td>
@@ -150,4 +157,15 @@
       <!-- END PAGE -->
    </div>
    <!-- END CONTAINER -->
+    <script>
+    // Define default values
+    var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("class_level_name","institution_type","class_level_status"); // Set name of input types
+    var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table
+    var institution_type_option = new Array("Schools","Engineering"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
+    var institution_type_value = new Array("1","0");
+    var class_level_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
+    var class_level_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+  </script>
 <?php include "templates/footer_grid.php" ?>

@@ -1,5 +1,4 @@
 var App = function () {
-
     var isMainPage = false;
     var isMapPage = false;
     var isIE8 = false;
@@ -2216,7 +2215,7 @@ var App = function () {
             if (isMainPage) { // this is for demo purpose. you may remove handleIntro function for your project
 //                handleIntro();
             }
-        },
+        },        
 
         // login page setup
         initLogin: function () {
