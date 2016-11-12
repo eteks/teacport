@@ -191,12 +191,16 @@ tr select {
 .select_by {
     height: 30px;
     margin-top: -5px;
-    max-width: 120px !important;
-    min-width: 120px !important;
+    max-width: 130px !important;
+    min-width: 130px !important;
 }
 .widget-title div.select_by_option{
 	border-left: none !important;
 }
 .widget-title .prev_next_opt{
 	margin-top: -17px !important;
+}
+.input-prepend {
+    margin-left: 15px;
+    margin-top: 5px;
 }

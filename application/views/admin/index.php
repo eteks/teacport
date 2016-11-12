@@ -225,6 +225,7 @@
                                         </a>
                                     </div> -->
                                 </div>
+                                </div>
                                 <div class="widget-body">
                                 <table class="table table-condensed table-striped table-hover no-margin dash_table">
                                     <thead>
