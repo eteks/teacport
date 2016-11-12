@@ -20,7 +20,7 @@
         <script src="js/excanvas.js"></script>
         <script src="js/respond.js"></script>
         <![endif]-->
-        <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
@@ -33,7 +33,7 @@
 
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.pie.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.stack.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.crosshair.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.crosshair.js"></script> -->
 
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.peity.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/uniform/jquery.uniform.min.js"></script>
@@ -42,6 +42,14 @@
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+
+        <!-- JS import link for charts -->
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/d3.v2.js'></script>
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/sugar.min.js'></script>
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/xcharts.min.js'></script>
+        <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/script.js'></script> -->
+        <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script> -->
+
         <script>
            jQuery(document).ready(function() {
               $('.admin_table').dataTable({
