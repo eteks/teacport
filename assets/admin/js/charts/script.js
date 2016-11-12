@@ -6,6 +6,10 @@ $(function() {
 
     var range = $('#range');
 
+    if (!jQuery().daterangepicker) {
+        return;
+    }
+
     // Show the dates in the range input
     range.val(startDate.format('{MM}/{dd}/{yyyy}') + ' - ' + endDate.format('{MM}/{dd}/{yyyy}'));
 

@@ -7,11 +7,11 @@
     width: 679px;
     /*border: 1px solid #CDCDCD;*/
     padding: 20px;
-    border-radius: 3px;
-    background-color: white;
+    /*border-radius: 3px;
+    background-color: white;*/
     margin-bottom: 15px;
     position: relative;
-    box-shadow: 1px 1px 2px #EEE, 0 -3px 5px #F3F3F3 inset;
+    /*box-shadow: 1px 1px 2px #EEE, 0 -3px 5px #F3F3F3 inset;*/
     height: 300px;
 }
 

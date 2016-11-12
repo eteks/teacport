@@ -27,19 +27,19 @@ class Dashboardpage extends CI_Controller {
 	}
 	public function get_chart_data() {
 		echo "get_chart_data";
-		// if (isset($_POST['start']) AND isset($_POST['end'])) {
-		// 	$start_date = $_POST['start'];
-		// 	$end_date = $_POST['end'];
-		// 	$results = $this->dashboard_model->get_chart_data_for_visits($start_date, $end_date);
-		// 	if ($results === NULL) {
-		// 		echo json_encode('No record found');
-		// 	} else {
-		// 		echo json_encode($results);
-		// 	}
-		// } 
-		// else {
-		// 	echo json_encode('Date must be selected.');
-		// }
+		if (isset($_POST['start']) AND isset($_POST['end'])) {
+			$start_date = $_POST['start'];
+			$end_date = $_POST['end'];
+			$results = $this->dashboard_model->get_chart_data_for_visits($start_date, $end_date);
+			if ($results === NULL) {
+				echo json_encode('No record found');
+			} else {
+				echo json_encode($results);
+			}
+		} 
+		else {
+			echo json_encode('Date must be selected.');
+		}
 	}
 }
 /* End of file dashboard.php */ 

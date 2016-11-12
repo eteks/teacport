@@ -1841,7 +1841,6 @@ var App = function () {
     }
 
     var handleDateTimePickers = function () {
-
         if (!jQuery().daterangepicker) {
             return;
         }
