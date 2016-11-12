@@ -69,8 +69,7 @@
                 ]
             });
            });
-        </script>
-        
+        </script>        
         <script>
             var admin_baseurl = "<?php echo base_url(); ?>admin/";
         </script>
