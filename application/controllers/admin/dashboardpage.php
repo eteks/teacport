@@ -25,20 +25,21 @@ class Dashboardpage extends CI_Controller {
 		$data['free_jobseekers_districtwise'] = $this->dashboard_model->free_job_providers_by_district();	
 		$this->load->view('admin/index',$data);
 	}
-	function get_chart_data() {
-		if (isset($_POST['start']) AND isset($_POST['end'])) {
-			$start_date = $_POST['start'];
-			$end_date = $_POST['end'];
-			$results = $this->dashboard_model->get_chart_data_for_visits($start_date, $end_date);
-			if ($results === NULL) {
-				echo json_encode('No record found');
-			} else {
-				echo json_encode($results);
-			}
-		} 
-		else {
-			echo json_encode('Date must be selected.');
-		}
+	public function get_chart_data() {
+		echo "get_chart_data";
+		// if (isset($_POST['start']) AND isset($_POST['end'])) {
+		// 	$start_date = $_POST['start'];
+		// 	$end_date = $_POST['end'];
+		// 	$results = $this->dashboard_model->get_chart_data_for_visits($start_date, $end_date);
+		// 	if ($results === NULL) {
+		// 		echo json_encode('No record found');
+		// 	} else {
+		// 		echo json_encode($results);
+		// 	}
+		// } 
+		// else {
+		// 	echo json_encode('Date must be selected.');
+		// }
 	}
 }
 /* End of file dashboard.php */ 

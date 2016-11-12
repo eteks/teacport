@@ -10,6 +10,8 @@
             var csfrData = {};
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
                        = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
+           
         </script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
@@ -54,7 +56,7 @@
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/sugar.min.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/xcharts.min.js'></script>
         <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/script.js'></script> -->
-        <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script> -->
+        <!--   <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script> -->
 
         <script>
             jQuery(document).ready(function() {

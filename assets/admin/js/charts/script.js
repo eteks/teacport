@@ -99,11 +99,15 @@ $(function() {
         }
 
         // Otherwise, issue an AJAX request
-
-        $.post(admin_baseurl+'dashboard/get_chart_data', {
-            start: startDate.format('{yyyy}-{MM}-{dd}'),
-            end: endDate.format('{yyyy}-{MM}-{dd}')
-        }, function(data) {
+        // csfrData = JSON.stringify(csfrData);
+        // alert(csfrData);
+        // alert(csrf_name);
+        data_variable = {'start': startDate.format('{yyyy}-{MM}-{dd}'),
+            'end': endDate.format('{yyyy}-{MM}-{dd}'),
+            }
+        data_variable[csrf_name] = csfrData[csrf_name];    
+        $.post(admin_baseurl+'dashboard/get_chart_data', 
+            data_variable , function(data) {
             if ((data.indexOf("No record found") > -1) || (data.indexOf("Date must be selected.") > -1)) {
                 $('#msg').html('<span style="color:red;">' + data + '</span>');
                 $('#placeholder').hide();
