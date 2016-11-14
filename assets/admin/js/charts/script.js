@@ -112,7 +112,7 @@ $(function() {
         data_variable[csrf_name] = csfrData[csrf_name];    
         $.post(admin_baseurl+'dashboard/get_chart_data', 
             data_variable , function(data) {
-            if ((data.indexOf("No record found") > -1) || (data.indexOf("Date must be selected.") > -1)) {
+            if ((data.indexOf("No data avaliable) > -1) || (data.indexOf("Date must be selected.") > -1)) {
                 $('#msg').html('<span class="alert_msg_chart" style="color:red;">' + data + '</span>');
                 $('#placeholder').hide();
                 chart.setData({
