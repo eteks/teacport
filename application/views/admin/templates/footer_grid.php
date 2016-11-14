@@ -5,6 +5,13 @@
                 <span class="go-top"><i class="icon-arrow-up"></i></span>
             </div>
         </div>
+        <script>
+            var csfrData = {};
+            csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
+                       = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var admin_baseurl = "<?php echo base_url(); ?>admin/";
+            var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
+        </script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
         <!-- Load javascripts at bottom, this will reduce page load time -->
@@ -45,35 +52,31 @@
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->  
         <script>
-           jQuery(document).ready(function() {
-              $('.admin_table').dataTable({
-                "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
-                ],
-                // set the initial value
-                "iDisplayLength": 5,
-                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-                "sPaginationType": "bootstrap",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ records per page",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
-                    }
-                },
-                "aoColumnDefs": [{
-                        'bSortable': false,
-                        'aTargets': [0]
-                    }
-                ]
-            });
-           });
-        </script>        
-        <script>
-            var admin_baseurl = "<?php echo base_url(); ?>admin/";
+           // jQuery(document).ready(function() {
+              // $('.admin_table').dataTable({
+                // "aLengthMenu": [
+                    // [5, 15, 20, -1],
+                    // [5, 15, 20, "All"] // change per page values here
+                // ],
+                // // set the initial value
+                // "iDisplayLength": 5,
+                // "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                // "sPaginationType": "bootstrap",
+                // "oLanguage": {
+                    // "sLengthMenu": "_MENU_ records per page",
+                    // "oPaginate": {
+                        // "sPrevious": "Prev",
+                        // "sNext": "Next"
+                    // }
+                // },
+                // "aoColumnDefs": [{
+                        // 'bSortable': false,
+                        // 'aTargets': [0]
+                    // }
+                // ]
+            // });
+           // });
         </script>
-        
         <!-- <script>
             jQuery(document).ready(function() {
                 // initiate layout and plugins
@@ -84,7 +87,7 @@
         <script>
            jQuery(document).ready(function() {
                App.init();
-               TableEditable.init();
+               // TableEditable.init();
            });
         </script>
         

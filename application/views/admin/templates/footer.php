@@ -55,7 +55,7 @@
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/sugar.min.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/xcharts.min.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/script.js'></script>
-        <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script> -->
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script>
 
         <script>
             jQuery(document).ready(function() {
@@ -112,7 +112,7 @@
                         'bSortable': false,
                         'aTargets': [0]
                     }
-                ]
+                ]               
             });
            });
         </script>

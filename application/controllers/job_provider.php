@@ -135,6 +135,7 @@ class Job_provider extends CI_Controller {
 				
 			}
 		}
+
 	}
 	public function reload_captcha()
 	{
@@ -143,6 +144,7 @@ class Job_provider extends CI_Controller {
 		$this->session->set_userdata('captcha_info', $data);
 		echo $data_value;
 	}
+
 	public function dashboard()
     {
     	$session_data = $this->session->all_userdata();
@@ -154,4 +156,20 @@ class Job_provider extends CI_Controller {
 		$this->session->sess_destroy();
     	redirect('/','refresh');
 	}
+	
+	
+	//Akila created
+	
+	public function companydbd_editprofile(){
+		$this->load->view('company-dashboard-edit-profile');
+	}
+	public function companydbd_browsejobs(){
+		$this->load->view('company-dashboard-browse-jobs');
+	}
+	
+	public function companydbd_postjobs(){
+		$this->load->view('company-dashboard-post-jobs');
+	}
+	
+	
 }

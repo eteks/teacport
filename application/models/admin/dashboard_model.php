@@ -129,6 +129,8 @@ class Dashboard_model extends CI_Model {
       $this->db->where($condition);
       $this->db->order_by('organization_id','desc');
       $query = $this->db->get()->result_array();
+
+      // echo $this->db->last_query();
       // echo "organization";
       // print_r($query);
       return $query;
@@ -193,7 +195,43 @@ class Dashboard_model extends CI_Model {
       // print_r($query);
       return $query;
   }
-  
+  public function latest_job_providers(){
+      $condition = "org.organization_status = 1";
+      $this->db->select('*');
+      $this->db->from('tr_organization_profile AS org');
+      $this->db->where($condition);
+      $this->db->limit(5);
+      $this->db->order_by('organization_id','desc');
+      $query = $this->db->get()->result_array();
+      return $query;
+  }
+  public function latest_vacancy_jobs(){
+      $condition = "vac.vacancies_status = 1";
+      $this->db->select('*');
+      $this->db->from('tr_organization_vacancies AS vac');
+      $this->db->join('tr_organization_profile AS org', 'org.organization_id = vac.vacancies_organization_id', 'inner');
+      $this->db->join('tr_district AS dist', 'dist.district_id = org.organization_district_id', 'inner');
+      $this->db->where($condition);
+      $this->db->limit(5);
+      $this->db->order_by('vacancies_id','desc');
+      $query = $this->db->get()->result_array();
+      // echo "latest_jobs";
+      // echo $this->db->last_query();
+      // echo "organization";
+      // print_r($query);
+      return $query;
+  }
+  public function page_high_count_visits(){
+      $this->db->select('SUM(count) as count_vis, page_view');
+      $this->db->from('tr_site_visits AS vis');
+      $this->db->group_by('page_view');
+      $this->db->order_by('SUM(count)','desc');
+      $this->db->limit(8);
+      $query = $this->db->get()->result_array();
+      // echo "page_high_count_visits";
+      // print_r($query);
+      return $query;
+  }
 }
 
 /* End of file Ajax_Model.php */

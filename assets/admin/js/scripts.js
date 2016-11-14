@@ -2200,7 +2200,7 @@ var App = function () {
             handlePopover(); // handles bootstrap popovers
             handleToggleButtons(); // handles form toogle buttons
             handleWysihtml5(); //handles WYSIWYG Editor 
-            handleDateTimePickers(); //handles form timepickers
+            // handleDateTimePickers(); //handles form timepickers
             handleColorPicker(); // handles form color pickers
             handleFancyBox(); // handles fancy box image previews
             handleStyler(); // handles style customer tool
@@ -2307,7 +2307,7 @@ try{
     }});
 }
     catch (e){
-    errorMessage(e);
+    // errorMessage(e);
 }
 
 
