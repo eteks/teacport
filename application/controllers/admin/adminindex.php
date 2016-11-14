@@ -7,9 +7,8 @@ class Adminindex extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/admin_model');
 		$this->load->library('form_validation');
-		$this->load->model('admin/dashboard');
+		$this->load->model('admin/dashboard_model');
 	}
-
 	// Edit unique function - To check the field is already exists or not
 	function edit_unique($value, $params) 
 	{

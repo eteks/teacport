@@ -1,11 +1,11 @@
 <?php include "templates/header.php" ?>
-	<!-- BEGIN CONTAINER -->
-	<div id="container" class="row-fluid">
-		<!-- BEGIN PAGE -->
-		<div id="main-content">
-			<!-- BEGIN PAGE CONTAINER-->
-			<div class="container-fluid">
-				<!-- BEGIN PAGE HEADER-->
+    <!-- BEGIN CONTAINER -->
+    <div id="container" class="row-fluid">
+        <!-- BEGIN PAGE -->
+        <div id="main-content">
+            <!-- BEGIN PAGE CONTAINER-->
+            <div class="container-fluid">
+                <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
                         <!-- BEGIN THEME CUSTOMIZER-->
@@ -48,8 +48,8 @@
                     </div>
                 </div>
                 <!-- END PAGE HEADER-->
-				<!-- BEGIN PAGE CONTENT-->
-				<div id="page" class="dashboard">
+                <!-- BEGIN PAGE CONTENT-->
+                <div id="page" class="dashboard">
                     <!--BEGIN NOTIFICATION-->
                     <div class="alert alert-info">
                         <button data-dismiss="alert" class="close">×</button>
@@ -64,7 +64,7 @@
                                     <i class="icon-hand-up"></i>
                                 </div>
                                 <p>
-                                    <strong>30</strong>
+                                    <strong><?php echo $overall_vacancies[0]['count_vac']; ?></strong>
                                     Jobs
                                 </p>
                             </div>
@@ -75,7 +75,7 @@
                                     <i class="icon-search"></i>
                                 </div>
                                 <p>
-                                    <strong>970</strong>
+                                    <strong><?php echo $jobseekers_count[0]['count_cand']; ?></strong>
                                     Job Seekers
                                 </p>
                             </div>
@@ -86,7 +86,7 @@
                                     <i class="icon-user"></i>
                                 </div>
                                 <p>
-                                    <strong>320</strong>
+                                    <strong><?php echo $jobproviders_count[0]['count_org']; ?></strong>
                                     Job Providers
                                 </p>
                             </div>
@@ -97,7 +97,7 @@
                                     <i class="icon-envelope"></i>
                                 </div>
                                 <p>
-                                    <strong>530</strong>
+                                    <strong><?php echo $overall_job[0]['count_job']; ?></strong>
                                     Job Applications
                                 </p>
                             </div>
@@ -108,7 +108,7 @@
                                     <i class="icon-eye-open"></i>
                                 </div>
                                 <p>
-                                    <strong>430</strong>
+                                    <strong><?php echo $unique_visitors_count[0]['count_vis']; ?></strong>
                                     Unique Visitor
                                 </p>
                             </div>
@@ -119,7 +119,7 @@
                                     <i class="icon-bar-chart"></i>
                                 </div>
                                 <p>
-                                    <strong>230</strong>
+                                    <strong><?php echo $visitors_count[0]['count_vis']; ?></strong>
                                     Page Visits
                                 </p>
                             </div>
@@ -134,7 +134,7 @@
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                <h4><i class="icon-envelope"></i> Vacancies By</h4>
+                                <h4><i class="icon-user"></i> Filter Vacancies By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                         <select class="select_by" data-placeholder="Select an option">
@@ -144,147 +144,57 @@
 								            <option value="2">Institution Type</option>
 								        </select>
                                     </div>                                    
-                                    <div class="btn-group prev_next_opt">
+                                    <!-- <div class="btn-group prev_next_opt">
                                         <a class="btn btn-small element" data-original-title="Prev" href="index.php#" data-toggle="tooltip" data-placement="top">
                                             <i class="icon-chevron-left">
                                             </i>
                                         </a>
                                         <a class="btn btn-small element" data-original-title="Next" href="index.php#" data-toggle="tooltip" data-placement="top">
-                                            <i class="icon-chevron-right">
-                                            </i>
+                                            <i class="icon-chevron-right"></i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                                 <div class="widget-body">
-                                <table class="table table-condensed table-striped table-hover no-margin">
+                                <table class="table table-condensed table-striped table-hover no-margin dash_table">
                                     <thead>
                                     <tr>
-                                        <th style="width:3%">
-                                            <input type="checkbox" class="no-margin">
-                                        </th>
                                         <th style="width:17%">
-                                            Sent by
+                                            State Name
                                         </th>
                                         <th class="hidden-phone" style="width:55%">
-                                            Subject
+                                            Count
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Dulal khan
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Zoology Teacher
-                                            </strong>
-                                            <small class="info-fade">
-                                                Vidhayaarambam vidyalaya
-                                            </small>
-                                        </td>
+                                        <td>Tamil Nadu</td>
+                                        <td class="hidden-phone">50</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Mosaddek Hossain
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Librarian
-                                            </strong>
-                                            <small class="info-fade">
-                                                Mirapolis International
-                                            </small>
-                                        </td>
+                                        <td>Kerala</td>
+                                        <td class="hidden-phone">30</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Sumon Ahmed
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Dance Teachers
-                                            </strong>
-
-                                            <small class="info-fade">
-                                                ABC International
-                                            </small>
-                                        </td>
+                                    	<td>Andhra</td>
+                                        <td class="hidden-phone">20</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Rafiqul Islam
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Openings for Counsellor
-                                            </strong>
-
-                                            <small class="info-fade">
-                                                Little Flowers Primary School, Salem
-                                            </small>
-                                        </td>
+                                        <td>Delhi</td>
+                                        <td class="hidden-phone">40</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Dkmosa
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Looking For Science lab assistant
-                                            </strong>
-                                            <small class="info-fade">
-                                                Amalorpavam Matric school, Pondicherry
-                                            </small>
-                                        </td>
+                                        <td>Karnataka</td>
+                                        <td class="hidden-phone">50</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Mosaddek
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Wanted Office Assistant
-                                            </strong>
-                                            <small class="info-fade">
-                                                Mahendragiri Public school
-                                            </small>
-                                        </td>
+                                        <td>Puducherry</td>
+                                        <td class="hidden-phone">10</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Dulal khan
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Looking for science Lab Assistant
-                                            </strong>
-                                            <small class="info-fade">
-                                                Amalorpavan School
-                                            </small>
-                                        </td>
+                                        <td>Jammu</td>
+                                        <td class="hidden-phone">30</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -296,7 +206,7 @@
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                <h4><i class="icon-envelope"></i> Job Provided By</h4>
+                                <h4><i class="icon-user"></i> Filter Job Providers By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                          <select class="select_by" data-placeholder="Select an option">
@@ -304,7 +214,7 @@
 								            <option value="2">District Name</option>
 								        </select>
                                     </div>                                    
-                                    <div class="btn-group prev_next_opt">
+                                    <!-- <div class="btn-group prev_next_opt">
                                         <a class="btn btn-small element" data-original-title="Prev" href="index.php#" data-toggle="tooltip" data-placement="top">
                                             <i class="icon-chevron-left">
                                             </i>
@@ -313,138 +223,49 @@
                                             <i class="icon-chevron-right">
                                             </i>
                                         </a>
-                                    </div>
+                                    </div> -->
                                 </div>
-                            </div>
+                                </div>
                                 <div class="widget-body">
-                                <table class="table table-condensed table-striped table-hover no-margin">
+                                <table class="table table-condensed table-striped table-hover no-margin dash_table">
                                     <thead>
                                     <tr>
-                                        <th style="width:3%">
-                                            <input type="checkbox" class="no-margin">
-                                        </th>
                                         <th style="width:17%">
-                                            Sent by
+                                            State Name
                                         </th>
                                         <th class="hidden-phone" style="width:55%">
-                                            Subject
+                                            Count
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Dulal khan
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Zoology Teacher
-                                            </strong>
-                                            <small class="info-fade">
-                                                Vidhayaarambam vidyalaya
-                                            </small>
-                                        </td>
+                                        <td>Tamil Nadu</td>
+                                        <td class="hidden-phone">50</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Mosaddek Hossain
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Librarian
-                                            </strong>
-                                            <small class="info-fade">
-                                                Mirapolis International
-                                            </small>
-                                        </td>
+                                        <td>Kerala</td>
+                                        <td class="hidden-phone">30</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Sumon Ahmed
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Dance Teachers
-                                            </strong>
-
-                                            <small class="info-fade">
-                                                ABC International
-                                            </small>
-                                        </td>
+                                    	<td>Andhra</td>
+                                        <td class="hidden-phone">20</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Rafiqul Islam
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Openings for Counsellor
-                                            </strong>
-
-                                            <small class="info-fade">
-                                                Little Flowers Primary School, Salem
-                                            </small>
-                                        </td>
+                                        <td>Delhi</td>
+                                        <td class="hidden-phone">40</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Dkmosa
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Looking For Science lab assistant
-                                            </strong>
-                                            <small class="info-fade">
-                                                Amalorpavam Matric school, Pondicherry
-                                            </small>
-                                        </td>
+                                        <td>Karnataka</td>
+                                        <td class="hidden-phone">50</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Mosaddek
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Wanted Office Assistant
-                                            </strong>
-                                            <small class="info-fade">
-                                                Mahendragiri Public school
-                                            </small>
-                                        </td>
+                                        <td>Puducherry</td>
+                                        <td class="hidden-phone">10</td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <input type="checkbox" class="no-margin">
-                                        </td>
-                                        <td>
-                                            Dulal khan
-                                        </td>
-                                        <td class="hidden-phone">
-                                            <strong>
-                                                Looking for science Lab Assistant
-                                            </strong>
-                                            <small class="info-fade">
-                                                Amalorpavan School
-                                            </small>
-                                        </td>
+                                        <td>Jammu</td>
+                                        <td class="hidden-phone">30</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -454,7 +275,7 @@
                         </div>
                     </div>
                     <!-- BEGIN OVERVIEW STATISTIC BARS-->
-                    <div class="row-fluid metro-overview-cont">
+                    <!-- <div class="row-fluid metro-overview-cont">
                         <div data-desktop="span2" data-tablet="span4" class="span2 responsive">
                             <div class="metro-overview turquoise-color clearfix">
                                 <div class="display">
@@ -545,30 +366,40 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <!-- END OVERVIEW STATISTIC BARS-->
-					<div class="row-fluid">
-						<div class="span8">
-							<!-- BEGIN SITE VISITS PORTLET-->
-							<div class="widget">
-								<div class="widget-title">
-									<h4><i class="icon-bar-chart"></i> Line Chart</h4>
-									<span class="tools">
-									<a href="javascript:;" class="icon-chevron-down"></a>
-									<a href="javascript:;" class="icon-remove"></a>
-									</span>
-								</div>
-								<div class="widget-body">
-									<div id="site_statistics_loading">
-										<img src="<?php echo base_url(); ?>assets/admin/img/loading.gif" alt="loading" />
-									</div>
-									<div id="site_statistics_content" class="hide">
-										<div id="site_statistics" class="chart"></div>
-									</div>
-								</div>
-							</div>
-							<!-- END SITE VISITS PORTLET-->
-						</div>
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <!-- BEGIN SITE VISITS PORTLET-->
+                            <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-bar-chart"></i> Site Visits</h4>
+                                    <span class="tools">
+                                    <a href="javascript:;" class="icon-chevron-down"></a>
+                                    <a href="javascript:;" class="icon-remove"></a>
+                                    </span>
+                                </div>
+                                <!-- <div class="widget-body">
+                                    <div id="site_statistics_loading">
+                                        <img src="<?php echo base_url(); ?>assets/admin/img/loading.gif" alt="loading" />
+                                    </div>
+                                    <div id="site_statistics_content" class="hide">
+                                        <div id="site_statistics" class="chart"></div>
+                                    </div>
+                                </div> -->
+                                <form class="form-horizontal">
+                                    <div class="input-prepend">
+                                        <span class="add-on"><i class="icon-calendar"></i></span>
+                                        <input type="text" name="range" id="range" />
+                                    </div>
+                                </form>
+                                <div id="msg"></div>
+                                <div id="placeholder">
+                                    <figure id="chart"></figure>
+                                </div>
+                            </div>
+                            <!-- END SITE VISITS PORTLET-->
+                        </div>
                         <div class="span4">
                             <div class="widget">
                                 <div class="widget-title">
@@ -618,16 +449,16 @@
                         </div>
                     </div>
 
-					<div class="row-fluid">
+                    <div class="row-fluid">
                         <div class="span12">
                             <!-- BEGIN SERVER LOAD PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
                                     <h4><i class="icon-umbrella"></i> Live Chart</h4>
-									<span class="tools">
-									<a href="javascript:;" class="icon-chevron-down"></a>
-									<a href="javascript:;" class="icon-remove"></a>
-									</span>
+                                    <span class="tools">
+                                    <a href="javascript:;" class="icon-chevron-down"></a>
+                                    <a href="javascript:;" class="icon-remove"></a>
+                                    </span>
                                 </div>
                                 <div class="widget-body">
                                     <div id="load_statistics_loading">
@@ -651,7 +482,7 @@
                             </div>
                             <!-- END SERVER LOAD PORTLET-->
                         </div>
-					</div>
+                    </div>
 
                     <div class="row-fluid">
                         <div class="span12">
@@ -783,23 +614,23 @@
                     <button class="btn btn-primary latest_align_center" type="button">View All Jobs</button>
 
 
-					<!-- <div class="row-fluid"> -->
-						<!-- <div class="span7 responsive" data-tablet="span7 fix-margin" data-desktop="span7"> -->
-							<!-- BEGIN CALENDAR PORTLET-->
-							<!-- <div class="widget">
-								<div class="widget-title">
-									<h4><i class="icon-calendar"></i> Calendar</h4>
-									<span class="tools">
-									<a href="javascript:;" class="icon-chevron-down"></a>
-									<a href="javascript:;" class="icon-remove"></a>
-									</span>
-								</div>
-								<div class="widget-body">
-									<div id="calendar" class="has-toolbar"></div>
-								</div>
-							</div> -->
-							<!-- END CALENDAR PORTLET-->
-						<!-- </div> -->
+                    <!-- <div class="row-fluid"> -->
+                        <!-- <div class="span7 responsive" data-tablet="span7 fix-margin" data-desktop="span7"> -->
+                            <!-- BEGIN CALENDAR PORTLET-->
+                            <!-- <div class="widget">
+                                <div class="widget-title">
+                                    <h4><i class="icon-calendar"></i> Calendar</h4>
+                                    <span class="tools">
+                                    <a href="javascript:;" class="icon-chevron-down"></a>
+                                    <a href="javascript:;" class="icon-remove"></a>
+                                    </span>
+                                </div>
+                                <div class="widget-body">
+                                    <div id="calendar" class="has-toolbar"></div>
+                                </div>
+                            </div> -->
+                            <!-- END CALENDAR PORTLET-->
+                        <!-- </div> -->
                         <!-- <div class="span5"> -->
                             <!-- BEGIN PROGRESS BARS PORTLET-->
                             <!-- <div class="widget">
@@ -832,10 +663,10 @@
                            <!--  <div class="widget">
                                 <div class="widget-title">
                                     <h4><i class="icon-bell-alt"></i> Alerts</h4>
-									<span class="tools">
-									<a href="javascript:;" class="icon-chevron-down"></a>
-									<a href="javascript:;" class="icon-remove"></a>
-									</span>
+                                    <span class="tools">
+                                    <a href="javascript:;" class="icon-chevron-down"></a>
+                                    <a href="javascript:;" class="icon-remove"></a>
+                                    </span>
                                 </div>
                                 <div class="widget-body">
                                     <div class="alert">
@@ -858,13 +689,13 @@
                             </div> -->
                             <!-- END ALERTS PORTLET-->
                         <!-- </div> -->
-					<!-- </div> -->
-				</div>
-				<!-- END PAGE CONTENT-->
-			</div>
-			<!-- END PAGE CONTAINER-->
-		</div>
-		<!-- END PAGE -->
-	    </div>
-	<!-- END CONTAINER -->
+                    <!-- </div> -->
+                </div>
+                <!-- END PAGE CONTENT-->
+            </div>
+            <!-- END PAGE CONTAINER-->
+        </div>
+        <!-- END PAGE -->
+        </div>
+    <!-- END CONTAINER -->
 <?php include "templates/footer.php" ?>

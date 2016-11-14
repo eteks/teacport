@@ -1841,7 +1841,6 @@ var App = function () {
     }
 
     var handleDateTimePickers = function () {
-
         if (!jQuery().daterangepicker) {
             return;
         }
@@ -2174,8 +2173,8 @@ var App = function () {
             handleChoosenSelect(); // handles bootstrap chosen dropdowns
 
             if (isMainPage) {
-                handleDashboardCharts(); // handles plot charts for main page
-                handleJQVMAP(); // handles vector maps for home page
+                // handleDashboardCharts(); // handles plot charts for main page
+                // handleJQVMAP(); // handles vector maps for home page
                 handleDashboardCalendar(); // handles full calendar for main page
                 handleChat() // handles dashboard chat
             } else {
@@ -2314,7 +2313,7 @@ try{
 
 //knob
 
-$(".knob").knob();
+// $(".knob").knob();
 
 
 

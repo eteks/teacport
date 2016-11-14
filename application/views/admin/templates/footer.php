@@ -6,7 +6,12 @@
             </div>
         </div>
         <!-- CSRF TOKEN -->
-        
+        <script>
+            var csfrData = {};
+            csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
+                       = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";     
+        </script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
         <!-- Load javascripts at bottom, this will reduce page load time -->
@@ -22,7 +27,7 @@
         <script src="js/excanvas.js"></script>
         <script src="js/respond.js"></script>
         <![endif]-->
-        <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.europe.js" type="text/javascript"></script>
@@ -35,15 +40,56 @@
 
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.pie.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.stack.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.crosshair.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/flot/jquery.flot.crosshair.js"></script> -->
 
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.peity.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/uniform/jquery.uniform.min.js"></script>
-       <!--  <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script> -->
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script>
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+
+        <!-- JS import link for charts -->
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/d3.v2.js'></script>
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/sugar.min.js'></script>
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/xcharts.min.js'></script>
+        <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/script.js'></script>
+        <!-- <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script> -->
+
+        <script>
+            jQuery(document).ready(function() {
+                // initiate layout and plugins
+                App.setMainPage(true);
+                App.init();
+            });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.dash_table').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<''l><''f>r>t<'row-fluid'<''i><''p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "bFilter" : false,
+                 "aLengthMenu": false,
+                 "bLengthChange": false,                 
+                  "searching": false,
+                  'bSortable': false,                
+            });
+           });
+        </script> 
         <script>
            jQuery(document).ready(function() {
               $('.admin_table').dataTable({
@@ -69,13 +115,6 @@
                 ]
             });
            });
-        </script>
-        <script>
-            jQuery(document).ready(function() {
-                // initiate layout and plugins
-                App.setMainPage(true);
-                App.init();
-            });
         </script>
         <script>
             var admin_baseurl = "<?php echo base_url(); ?>admin/";

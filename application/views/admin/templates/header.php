@@ -28,6 +28,12 @@ Website: http://thevectorlab.net/
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />    
 
+    <!-- Css import link for charts -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/chart.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/xcharts.min.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/daterangepicker.css">
+
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->

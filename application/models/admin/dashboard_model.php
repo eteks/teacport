@@ -1,12 +1,29 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Dashboard extends CI_Model {
+class Dashboard_model extends CI_Model {
+
+  private $site_log = 'tr_site_visits';
 
 	public function __construct()
   {
-    $this->load->database();
   }
-
+  public function get_chart_data_for_visits($start_date, $end_date) {
+      $sql = 'SELECT SUM(count) total_visits, DATE(created_date) day_date
+      FROM ' . $this->site_log . '
+      WHERE DATE(created_date) >= ' . $this->db->escape($start_date) . '
+      AND DATE(created_date) <= ' . $this->db->escape($end_date) . '
+      GROUP BY DATE(created_date) ORDER BY DATE(created_date) DESC';
+      $query = $this->db->query($sql);
+      if ($query->num_rows() > 0) {
+        $data = array();
+        foreach ($query->result_array() as $key => $value) {
+          $data[$key]['label'] = $value['day_date'];
+          $data[$key]['value'] = $value['total_visits'];
+        }
+        return $data;
+      }
+      return NULL;
+  }
   public function count_vacancies_by_district(){
       //Get vacancies by district wise to combine the table of Vacancies, Organization and District
       $condition = "vac.vacancies_status = 1 AND org.organization_status=1 AND dist.  district_status=1";
