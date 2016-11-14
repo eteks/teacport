@@ -26,7 +26,6 @@ class Dashboardpage extends CI_Controller {
 		$this->load->view('admin/index',$data);
 	}
 	public function get_chart_data() {
-		echo "get_chart_data";
 		if (isset($_POST['start']) AND isset($_POST['end'])) {
 			$start_date = $_POST['start'];
 			$end_date = $_POST['end'];
