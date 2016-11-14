@@ -134,7 +134,7 @@
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                <h4><i class="icon-user"></i> Vacancies By</h4>
+                                <h4><i class="icon-user"></i> Filter Vacancies By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                         <select class="select_by" data-placeholder="Select an option">
@@ -206,7 +206,7 @@
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                <h4><i class="icon-user"></i> Job Provided By</h4>
+                                <h4><i class="icon-user"></i> Filter Job Providers By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                          <select class="select_by" data-placeholder="Select an option">

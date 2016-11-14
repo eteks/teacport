@@ -65,6 +65,7 @@ $route['contactus'] = 'home/contactus';
 //Route url for admin
 $route['admin'] = 'admin/login/index_login';
 $route['admin/dashboard'] = 'admin/dashboardpage/dashboard';
+$route['admin/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
 $route['admin/state'] = 'admin/adminindex/state';
 $route['admin/district'] = 'admin/adminindex/district';
 $route['admin/institution_types'] = 'admin/adminindex/institution_types';
@@ -74,7 +75,7 @@ $route['admin/qualification'] = 'admin/adminindex/qualification';
 $route['admin/class_level'] = 'admin/adminindex/class_level';
 $route['admin/departments'] = 'admin/adminindex/departments';
 $route['admin/subject'] = 'admin/adminindex/subject';
-$route['admin/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

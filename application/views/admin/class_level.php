@@ -1,3 +1,4 @@
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -73,74 +74,66 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" action="adminindex/class_level" class="admin_module_form" id="class_level_form">
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <?php } ?>
+                                  <?php
+                                  if(!empty($status)) :
+                                    echo "<p class='db_status'> $status </p>";
+                                  endif;
+                                  ?> 
+                                  <p class='val_error'> <p>
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
-                                    <tr class="ajaxTitle">
-                                        <th>Class Level</th>
-                                        <th>Institution Type</th>
-                                        <th>Status</th>
-                                        <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                    </tr>
+                                      <tr class="ajaxTitle">
+                                          <th>Class Level</th>
+                                          <th>Institution Type</th>
+                                          <th>Status</th>
+                                          <th>Created Date</th>
+                                          <th>Edit</th>
+                                          <th>Delete</th>
+                                      </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="class_level_name">Primary</td>
-                                        <td class="institution_type">Schools</td>
-                                        <td class="class_level_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                      <?php
+                                      if(!empty($class_level_values)) :
+                                      foreach ($class_level_values as $cla_val) :
+                                      ?>
+                                      <tr class="parents_tr" id="column<?php echo $cla_val['class_level_id']; ?>">
+                                        <td class="class_level"> 
+                                          <?php echo $cla_val['class_level']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="class_level_name">Secondary</td>
-                                        <td class="institution_type">Schools</td>
-                                        <td class="class_level_status">Inactive</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        <td class="class_level_inst_type_id"> 
+                                          <?php echo $cla_val['institution_type_name']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="class_level_name">Higher Secondary</td>
-                                        <td class="institution_type">Schools</td>
-                                        <td class="class_level_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        <td class="class_level_status"> 
+                                          <?php 
+                                          if ($cla_val['class_level_status'] == 1) 
+                                            echo "Active";
+                                          else
+                                            echo "Inactive";
+                                          ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <!-- <tr class="">
-                                        <td>vectorlab</td>
-                                        <td>dk mosa</td>
-                                        <td>132</td>
-                                        <td class="center">elite user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Admin</td>
-                                        <td> Admin lab</td>
-                                        <td>462</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Rafiqul</td>
-                                        <td>Rafiqul dulal</td>
-                                        <td>62</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr> -->
+                                        <td class="created_date"> 
+                                          <?php echo $cla_val['class_level_created_date']; ?>
+                                        </td>
+                                        <td class="edit_section">
+                                          <a class="ajaxEdit" id="column<?php echo $cla_val['class_level_id']; ?>" href="javascript:;" data-id="<?php echo $cla_val['class_level_id']; ?>">
+                                            Edit
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $cla_val['class_level_id']; ?>">
+                                            Delete
+                                          </a>
+                                        </td>  
+                                      </tr>
+                                      <?php
+                                      endforeach;
+                                      endif;
+                                      ?>
                                     </tbody>
-                                </table>
+                                  </table>
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -160,12 +153,23 @@
     <script>
     // Define default values
     var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("class_level_name","institution_type","class_level_status"); // Set name of input types
-    var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
+    var columns = new Array("class_level","class_level_inst_type_id","class_level_status"); // Set name of input types
+    var placeholder = new Array("Enter Class Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var institution_type_option = new Array("Schools","Engineering"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var institution_type_value = new Array("1","0");
-    var class_level_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var class_level_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var class_level_inst_type_id_option = new Array("Please select institution");
+    var class_level_inst_type_id_value = new Array("");
+    <?php
+    if(!empty($institution_types)) :
+    foreach ($institution_types as $ins_val) :
+    ?>
+      class_level_inst_type_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      class_level_inst_type_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
+    var class_level_status_option = new Array("Active","Inactive"); 
+    var class_level_status_value = new Array("1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>

@@ -145,8 +145,6 @@
                                     ?>
                                   </tbody>
                                 </table>
-                                <input type="hidden" name="<?php echo $this->security->get_csrf_token_name();?>" value="<?php echo $this->security->get_csrf_hash();?>" class="csrf_token">
-
                                 <?php if(!$this->input->is_ajax_request()) { ?>
                                 </form>
                             </div>

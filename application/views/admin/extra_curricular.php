@@ -1,3 +1,4 @@
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -73,89 +74,89 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" action="adminindex/extra_curricular" class="admin_module_form" id="extra_curricular_form">
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <?php } ?>
+                                  <?php
+                                  if(!empty($status)) :
+                                    echo "<p class='db_status'> $status </p>";
+                                  endif;
+                                  ?> 
+                                  <p class='val_error'> <p>
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
-                                    <tr class="ajaxTitle">
+                                      <tr class="ajaxTitle">
                                         <th>Extra Curricular</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
-                                    </tr>
+                                      </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="extra_curricular">Cricket</td>
-                                        <td class="extra_curricular_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                      <?php
+                                      if(!empty($extra_curricular_values)) :
+                                      foreach ($extra_curricular_values as $exac_val) :
+                                      ?>
+                                      <tr class="parents_tr" id="column<?php echo $exac_val['extra_curricular_id']; ?>">
+                                        <td class="extra_curricular"> 
+                                          <?php echo $exac_val['extra_curricular']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="extra_curricular">Football</td>
-                                        <td class="extra_curricular_status">Inactive</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        <td class="extra_curricular_status"> 
+                                          <?php 
+                                          if ($exac_val['extra_curricular_status'] == 1) 
+                                            echo "Active";
+                                          else
+                                            echo "Inactive";
+                                          ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="extra_curricular">Tennis</td>
-                                        <td class="extra_curricular_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        <td class="created_date">
+                                          <?php echo $exac_val['extra_curricular_created_date']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <!-- <tr class="">
-                                        <td>vectorlab</td>
-                                        <td>dk mosa</td>
-                                        <td>132</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Admin</td>
-                                        <td> Admin lab</td>
-                                        <td>462</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Rafiqul</td>
-                                        <td>Rafiqul dulal</td>
-                                        <td>62</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr> -->
+                                        <td class="edit_section">
+                                          <a class="ajaxEdit" id="column<?php echo $exac_val['extra_curricular_id']; ?>" href="javascript:;" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
+                                            Edit
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
+                                            Delete
+                                          </a>
+                                        </td>
+                                      </tr>
+                                      <?php
+                                      endforeach;
+                                      endif;
+                                      ?>
                                     </tbody>
-                                </table>
+                                  </table>
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
+                              </div>
                             </div>
-                        </div>
+                          </div>
+                          <!-- END EXAMPLE TABLE widget-->
+                      </div>
                     </div>
-                    <!-- END EXAMPLE TABLE widget-->
+                    <!-- END ADVANCED TABLE widget-->
+                    <!-- END PAGE CONTENT-->
+                  </div>
+                  <!-- END PAGE CONTAINER-->
                 </div>
-            </div>
-            <!-- END ADVANCED TABLE widget-->
-            <!-- END PAGE CONTENT-->
-         </div>
-         <!-- END PAGE CONTAINER-->
-      </div>
-      <!-- END PAGE -->
-   </div>
-   <!-- END CONTAINER -->
-   <script>
+                <!-- END PAGE -->
+              </div>
+              <!-- END CONTAINER -->
+
+
+
+
+  <script>
     // Define default values
     var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("extra_curricular","extra_curricular_status"); // Set name of input types
     var placeholder = new Array("Enter Extra-Curricular Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var extra_curricular_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var extra_curricular_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var extra_curricular_status_option = new Array("Please select status","Active","Inactive"); 
+    var extra_curricular_status_value = new Array("","1","0"); 
   </script>
-   
+  
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>

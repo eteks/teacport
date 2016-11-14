@@ -24,6 +24,26 @@ class Adminindex extends CI_Controller {
 	          return FALSE;
 	      }
 	}
+
+	public function dashboard()
+	{	
+		$this->dashboard->count_vacancies_by_district();
+		$this->dashboard->count_vacancies_by_state();
+		$this->dashboard->count_vacancies_by_qualification();
+		$this->dashboard->count_vacancies_by_institution();
+		$this->dashboard->count_overall_vacancies();
+		$this->dashboard->count_overall_job_applied();
+		$this->dashboard->count_overall_job_seekers();
+		$this->dashboard->count_overall_job_providers();
+		$this->dashboard->count_unique_visitors();
+		$this->dashboard->paid_job_providers();
+		$this->dashboard->paid_job_providers_by_district();
+		$this->dashboard->free_job_providers_by_district();
+		
+		$this->load->view('admin/index');
+	}
+
+	// State - Add Edit Delete View
 	public function state()
 	{	
 		// Update data
@@ -99,7 +119,7 @@ class Adminindex extends CI_Controller {
     	}
 
     	// Delete data
-    	else if($this->input->post('action')=='delete') {
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
       		$data_values = $this->admin_model->state('delete'); 	
       		$data['error'] = $data_values['error'];
 		    $data['status'] = $data_values['status'];
@@ -127,10 +147,8 @@ class Adminindex extends CI_Controller {
 			$this->load->view('admin/state',$data);
 		}
 	}
-	public function district()
-	{	
-			$this->load->view('admin/district');
-	}
+
+	// Institution Type - Add Edit View Delete
 	public function institution_types()
 	{	
 		// Update data
@@ -206,7 +224,7 @@ class Adminindex extends CI_Controller {
     	}
 
     	// Delete data
-    	else if($this->input->post('action')=='delete') {
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
       		$data_values = $this->admin_model->institution_type('delete'); 	
       		$data['error'] = $data_values['error'];
 		    $data['status'] = $data_values['status'];
@@ -235,22 +253,367 @@ class Adminindex extends CI_Controller {
 		}
 
 	}
+
+	// Qualification - Add Edit View Delete
+	public function qualification()
+	{	
+		$data['institution_types'] = $this->admin_model->get_institution_type(); 
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	  		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'educational_qualification',
+		                              'label'   => 'Educational Qualification',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'educational_qualification_course_type',
+		                                 'label'   => 'Educational Qualification Course Type',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'educational_qualifcation_inst_type_id',
+		                                 'label'   => 'Educational Qualifcation Institution Type',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'educational_qualification_status',
+		                                 'label'   => 'Educational Qualification Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->qualification_type('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'educational_qualification',
+		                              'label'   => 'Educational Qualification',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'educational_qualification_course_type',
+		                                 'label'   => 'Educational Qualification Course Type',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'educational_qualifcation_inst_type_id',
+		                                 'label'   => 'Educational Qualifcation Institution Type',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'educational_qualification_status',
+		                                 'label'   => 'Educational Qualification Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->qualification_type('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->qualification_type('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->qualification_type('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['qualification_type_values'] = $data_values['qualification_type_values'];
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/qualification',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['qualification_type_values'] = $data_values['qualification_type_values'];
+			$this->load->view('admin/qualification',$data);
+		}
+
+	}
+
+	// Extra Curricular - Add Edit View Delete
 	public function extra_curricular()
 	{	
-			$this->load->view('admin/extra_curricular');
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	  		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'extra_curricular',
+		                              'label'   => 'Extra Curricular Name',
+		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_extra_curricular.extra_curricular_id.extra_curricular.'.$id.']'
+		                            ),
+		                            array(
+		                                 'field'   => 'extra_curricular_status',
+		                                 'label'   => 'Extra Curricular Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->extra_curricular('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+            			          	array(
+                        		      'field'   => 'extra_curricular',
+		                              'label'   => 'Extra Curricular Name',
+		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_extra_curricular.extra_curricular]'
+		                            ),
+		                            array(
+		                                 'field'   => 'extra_curricular_status',
+		                                 'label'   => 'Extra Curricular Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->extra_curricular('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->extra_curricular('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->extra_curricular('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['extra_curricular_values'] = $data_values['extra_curricular_values'];
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/extra_curricular',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['extra_curricular_values'] = $data_values['extra_curricular_values'];
+			$this->load->view('admin/extra_curricular',$data);
+		}
 	}
+
+	// Class Level - Add Edit View Delete
+	public function class_level()
+	{	
+		$data['institution_types'] = $this->admin_model->get_institution_type(); 
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'class_level',
+		                              'label'   => 'Class Level',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'class_level_inst_type_id',
+		                              'label'   => 'Institution Type Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'class_level_status',
+		                                 'label'   => 'Class Level Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->class_level('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'class_level',
+		                              'label'   => 'Class Level',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'class_level_inst_type_id',
+		                              'label'   => 'Institution Type Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'class_level_status',
+		                                 'label'   => 'Class Level Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->class_level('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->class_level('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->class_level('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['class_level_values'] = $data_values['class_level_values'];
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/class_level',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['class_level_values'] = $data_values['class_level_values'];
+			$this->load->view('admin/class_level',$data);
+		}
+	}
+
+	public function district()
+	{	
+			$this->load->view('admin/district');
+	}
+
 	public function languages()
 	{	
 			$this->load->view('admin/languages');
 	}
-	public function qualification()
-	{	
-			$this->load->view('admin/qualification');
-	}
-	public function class_level()
-	{	
-			$this->load->view('admin/class_level');
-	}
+
 	public function departments()
 	{	
 			$this->load->view('admin/departments');

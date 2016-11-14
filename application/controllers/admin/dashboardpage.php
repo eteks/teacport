@@ -25,7 +25,7 @@ class Dashboardpage extends CI_Controller {
 		$data['free_jobseekers_districtwise'] = $this->dashboard_model->free_job_providers_by_district();	
 		$this->load->view('admin/index',$data);
 	}
-	function get_chart_data() {
+	public function get_chart_data() {
 		if (isset($_POST['start']) AND isset($_POST['end'])) {
 			$start_date = $_POST['start'];
 			$end_date = $_POST['end'];
