@@ -63,15 +63,15 @@ class Iptracker{
     }
     $current_date = date("Y-m-d h:i:s");
     $data = array(
-      'ip'            => $ip,
-      'page_view'     => $page,
-      'user_agent'    => $agent,
+      'ip_address'            => $ip,
+      'page_view'             => $page,
+      'user_agent'            => $agent,
       'user_id'       => $user_id,
-      'count'         => '1',
-      'created_date'  => $current_date
+      'count'                 => '1',
+      'created_date'          => $current_date
 
     );
-    $data_count_where = '(ip="'.$ip.'" and page_view="'.$page.'" and user_id="'.$user_id.'")';
+    $data_count_where = '(ip_address="'.$ip.'" and page_view="'.$page.'" and user_id="'.$user_id.'")';
     $data_count = $this->sys->db->get_where('site_visits',$data_count_where);
     if($data_count->num_rows() > 0) {
       $create_date_query = $data_count->row_array();
@@ -85,11 +85,11 @@ class Iptracker{
                       );
         $this->sys->db->set($update_data);
         $this->sys->db->where($data_count_where);
-        $this->sys->db->update('site_visits'); 
+        $this->sys->db->update('tr_site_visits'); 
       }
     }
     else {
-      $this->sys->db->insert('site_visits', $data);     
+      $this->sys->db->insert('tr_site_visits', $data);     
     }
     echo $_SERVER['REMOTE_ADDR'];  
 
