@@ -61,7 +61,7 @@
                         <div class="span2 responsive clearfix" data-tablet="span3" data-desktop="span2">
                             <div class="circle-wrap">
                                 <div class="stats-circle turquoise-color">
-                                    <i class="icon-hand-up"></i>
+                                    <i class="icon-globe"></i>
                                 </div>
                                 <p>
                                     <strong><?php echo $overall_vacancies[0]['count_vac']; ?></strong>
@@ -83,7 +83,7 @@
                         <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
                             <div class="circle-wrap">
                                 <div class="stats-circle green-color">
-                                    <i class="icon-user"></i>
+                                    <i class="icon-sitemap"></i>
                                 </div>
                                 <p>
                                     <strong><?php echo $jobproviders_count[0]['count_org']; ?></strong>
@@ -94,7 +94,7 @@
                         <div class="span2 responsive" data-tablet="span3" data-desktop="span2">
                             <div class="circle-wrap">
                                 <div class="stats-circle gray-color">
-                                    <i class="icon-envelope"></i>
+                                    <i class="icon-paste"></i>
                                 </div>
                                 <p>
                                     <strong><?php echo $overall_job[0]['count_job']; ?></strong>
@@ -134,7 +134,7 @@
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                <h4><i class="icon-user"></i> Filter Vacancies By</h4>
+                                <h4><i class="icon-filter"></i> Filter Vacancies By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                         <select class="select_by" data-placeholder="Select an option">
@@ -206,7 +206,7 @@
                             <!-- BEGIN MAILBOX PORTLET-->
                             <div class="widget">
                                 <div class="widget-title">
-                                <h4><i class="icon-user"></i> Filter Job Providers By</h4>
+                                <h4><i class="icon-filter"></i> Filter Job Providers By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                          <select class="select_by" data-placeholder="Select an option">

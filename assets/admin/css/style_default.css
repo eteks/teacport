@@ -208,3 +208,10 @@ tr select {
     max-width: 150px !important;
     min-width: 150px !important;
 }
+/*.alert_msg_chart{
+	min-height: 300px !important;
+}*/
+.alert_msg_chart{
+	color: #FF0000;
+	margin-left: 15px !important
+}

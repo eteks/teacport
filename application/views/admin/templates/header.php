@@ -273,7 +273,7 @@ Website: http://thevectorlab.net/
                 </li> -->
                <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-book"></i></span> Jobs
+                        <span class="icon-box"> <i class="icon-globe"></i></span> Jobs
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
