@@ -200,9 +200,9 @@ tr select {
 .widget-title .prev_next_opt{
 	margin-top: -17px !important;
 }
-.input-prepend {
-    margin-left: 15px;
-    margin-top: 5px;
+.cal_graph_range {
+    margin-left: 55px !important;
+    margin-top: 5px !important;
 }
 .count_values {
     max-width: 100px !important;
@@ -216,6 +216,9 @@ tr select {
 	margin-left: 15px !important
 }
 #chart svg {
-    margin-left: -31px;
+    margin-left: -20px;
     margin-top: -15px;
+}
+.site_visites_cont{
+	padding: 15px 15px 8px !important;
 }
