@@ -3,7 +3,7 @@
                 <ul class="menu-logo">
                     <li>
                         <a href="index.html"> 
-                        	<h4 style="color: #2ae;">TEACHER RECRUIT</h4>
+                        	<h4 style="color: #2ae;"><strong>TEACHERS RECRUIT</strong></h4>
                         	<!-- <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> --> </a>
                     </li>
                 </ul>
