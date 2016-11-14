@@ -162,7 +162,7 @@
                                         <th style="width:17%">
                                             State Name
                                         </th>
-                                        <th class="hidden-phone" style="width:55%">
+                                        <th class="hidden-phone count_values" style="width:55%">
                                             Count
                                         </th>
                                     </tr>
@@ -233,7 +233,7 @@
                                         <th style="width:17%">
                                             State Name
                                         </th>
-                                        <th class="hidden-phone" style="width:55%">
+                                        <th class="hidden-phone count_values" style="width:55%">
                                             Count
                                         </th>
                                     </tr>

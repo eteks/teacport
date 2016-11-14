@@ -253,7 +253,7 @@ Website: http://thevectorlab.net/
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-book"></i></span> Users
+                        <span class="icon-box"> <i class="icon-user"></i></span> Users
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -266,17 +266,11 @@ Website: http://thevectorlab.net/
                         <li><a class="" href="nestable.php">Nestable List</a></li> -->
                     </ul>
                 </li>
-                <li class="has-sub">
+                <!-- <li class="has-sub">
                     <a href="<?php echo base_url(); ?>admin/dashboard" class="">
-                        <span class="icon-box"> <i class="icon-dashboard"></i></span> Institution
-                        <!-- <span class="arrow"></span> -->
-                    </a>
-                    <!-- <ul class="sub">
-                        <li><a class="" href="index.php">Dashboard 1</a></li>
-                        <li class="active"><a class="" href="index.php">Dashboard 2</a></li>
-
-                    </ul> -->
-                </li>
+                        <span class="icon-box"> <i class="icon-dashboard"></i></span> Institution                        
+                    </a>                    
+                </li> -->
                <li class="has-sub">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-book"></i></span> Jobs
@@ -292,21 +286,16 @@ Website: http://thevectorlab.net/
                         <li><a class="" href="nestable.php">Nestable List</a></li> -->
                     </ul>
                 </li>
-                <li class="has-sub">
+                <!-- <li class="has-sub">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-book"></i></span> Location
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
                         <li><a class="" href="ui_elements_general.php">State</a></li>
-                        <li><a class="" href="ui_elements_buttons.php">District</a></li>
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
+                        <li><a class="" href="ui_elements_buttons.php">District</a></li>                        
                     </ul>
-                </li>
+                </li> -->
                 <li class="has-sub">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-tasks"></i></span> Statistics
@@ -323,7 +312,7 @@ Website: http://thevectorlab.net/
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-book"></i></span> Master Data
+                        <span class="icon-box"> <i class="icon-th"></i></span> Master Data
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">

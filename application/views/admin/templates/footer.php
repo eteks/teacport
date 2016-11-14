@@ -111,7 +111,7 @@
                         'bSortable': false,
                         'aTargets': [0]
                     }
-                ]
+                ]               
             });
            });
         </script>
