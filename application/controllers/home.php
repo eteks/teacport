@@ -29,6 +29,24 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('contactus');
 	}
+	
+	
+	//Akila Created
+	public function pricing(){
+		$this->load->view('pricing');
+	}
+	public function faq(){
+		$this->load->view('faq');
+	}
+	public function allinstitutions(){
+		$this->load->view('all-institutions');
+	}
+	public function vacancies(){
+		$this->load->view('vacancies');
+	}
+	
+	
+	
 }
 
 /* End of file welcome.php */

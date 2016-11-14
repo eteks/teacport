@@ -2,7 +2,9 @@
             <section class="menu-list-items">
                 <ul class="menu-logo">
                     <li>
-                        <a href="index.html"> <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> </a>
+                        <a href="index.html"> 
+                        	<h4 style="color: #2ae;">TEACHER RECRUIT</h4>
+                        	<!-- <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> --> </a>
                     </li>
                 </ul>
                 <ul class="menu-links pull-right">
@@ -12,18 +14,18 @@
                     <ul class="drop-down-multilevel">
                     	<li><a href="<?php echo base_url();?>login/provider">Sign In</a></li>
                         <li><a href="<?php echo base_url();?>signup/provider">Sign Up</a></li>
-                        <li><a href="">Pricing</a></li>
+                        <li><a href="<?php echo base_url();?>pricing">Pricing</a></li>
                      </ul>
                   </li>
                   <li><a href="javascript:void(0)"> Job Seekers <i class="fa fa-angle-down fa-indicator"></i></a> 
                     <ul class="drop-down-multilevel">
                     	<li><a href="<?php echo base_url();?>login/seeker">Sign In</a></li>
                         <li><a href="<?php echo base_url();?>signup/seeker">Sign Up</a></li>
-                        <li><a href="faq.html">FAQ's</a></li>
+                        <li><a href="<?php echo base_url(); ?>faq">FAQ's</a></li>
                      </ul>
                   </li>
-                  <li> <a href="all-institutions.html"> Institutions </a> </li>
-                  <li> <a href="vacancies.html"> Vacancies </a> </li>
+                  <li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
+                  <li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
                   <li> <a href="<?php echo base_url();?>contactus"> Contact Us </a> </li>
                   <?php if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ ?>
                   <li class="no-bg"><a href="company-dashboard-active-jobs.html" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
