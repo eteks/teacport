@@ -75,6 +75,9 @@ $route['admin/qualification'] = 'admin/adminindex/qualification';
 $route['admin/class_level'] = 'admin/adminindex/class_level';
 $route['admin/departments'] = 'admin/adminindex/departments';
 $route['admin/subject'] = 'admin/adminindex/subject';
+$route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
+$route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
+
 
 
 /* End of file routes.php */

@@ -137,11 +137,11 @@
                                 <h4><i class="icon-user"></i> Filter Vacancies By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
-                                        <select class="select_by" data-placeholder="Select an option">
-								            <option value="1">State</option>
-								            <option value="2">District</option>
-								            <option value="2">Qualification</option>
-								            <option value="2">Institution Type</option>
+                                        <select class="select_by filter_vacancy" data-placeholder="Select an option">
+								            <option value="state">State</option>
+								            <option value="district">District</option>
+								            <option value="qualification">Qualification</option>
+								            <option value="inst_type">Institution Type</option>
 								        </select>
                                     </div>                                    
                                     <!-- <div class="btn-group prev_next_opt">
@@ -156,10 +156,10 @@
                                 </div>
                             </div>
                                 <div class="widget-body">
-                                <table class="table table-condensed table-striped table-hover no-margin dash_table">
+                                <table class="table table-condensed table-striped table-hover no-margin dash_table" id="filter_vacancy_table">
                                     <thead>
                                     <tr>
-                                        <th style="width:17%">
+                                        <th style="width:17%" class="vacancy_header">
                                             State Name
                                         </th>
                                         <th class="hidden-phone" style="width:55%">
@@ -168,34 +168,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        if(!empty($state_vacancies)) :
+                                        foreach ($state_vacancies as $sta_vac) :
+                                    ?>
                                     <tr>
-                                        <td>Tamil Nadu</td>
-                                        <td class="hidden-phone">50</td>
+                                        <td><?php echo $sta_vac['state_name']; ?></td>
+                                        <td class="hidden-phone"><?php echo $sta_vac['count_st']; ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>Kerala</td>
-                                        <td class="hidden-phone">30</td>
-                                    </tr>
-                                    <tr>
-                                    	<td>Andhra</td>
-                                        <td class="hidden-phone">20</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Delhi</td>
-                                        <td class="hidden-phone">40</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Karnataka</td>
-                                        <td class="hidden-phone">50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Puducherry</td>
-                                        <td class="hidden-phone">10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jammu</td>
-                                        <td class="hidden-phone">30</td>
-                                    </tr>
+                                    <?php
+                                        endforeach;
+                                        endif;
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -209,9 +193,10 @@
                                 <h4><i class="icon-user"></i> Filter Job Providers By</h4>
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
-                                         <select class="select_by" data-placeholder="Select an option">
-								            <option value="1">Paid</option>
-								            <option value="2">District Name</option>
+                                         <select class="select_by filter_provider" data-placeholder="Select an option">
+								            <option value="paid_provider">Paid</option>
+								            <option value="paid_provider_district">Paid Provider District Wise</option>
+                                            <option value="free_provider_district">Free Provider District Wise</option>
 								        </select>
                                     </div>                                    
                                     <!-- <div class="btn-group prev_next_opt">
@@ -227,11 +212,11 @@
                                 </div>
                                 </div>
                                 <div class="widget-body">
-                                <table class="table table-condensed table-striped table-hover no-margin dash_table">
+                                <table class="table table-condensed table-striped table-hover no-margin dash_table" id="filter_provider_table">
                                     <thead>
                                     <tr>
-                                        <th style="width:17%">
-                                            State Name
+                                        <th style="width:17%" class="vacancy_header">
+                                            Plan
                                         </th>
                                         <th class="hidden-phone" style="width:55%">
                                             Count
@@ -239,34 +224,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        if(!empty($paid_jobprovider_count)) :
+                                        foreach ($paid_jobprovider_count as $provider) :
+                                    ?>
                                     <tr>
-                                        <td>Tamil Nadu</td>
-                                        <td class="hidden-phone">50</td>
+                                        <td><?php echo $provider['subscription_plan']; ?></td>
+                                        <td class="hidden-phone"><?php echo $provider['count_plan']; ?></td>
                                     </tr>
-                                    <tr>
-                                        <td>Kerala</td>
-                                        <td class="hidden-phone">30</td>
-                                    </tr>
-                                    <tr>
-                                    	<td>Andhra</td>
-                                        <td class="hidden-phone">20</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Delhi</td>
-                                        <td class="hidden-phone">40</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Karnataka</td>
-                                        <td class="hidden-phone">50</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Puducherry</td>
-                                        <td class="hidden-phone">10</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jammu</td>
-                                        <td class="hidden-phone">30</td>
-                                    </tr>
+                                    <?php
+                                        endforeach;
+                                        endif;
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -453,7 +422,7 @@
                         <div class="span12">
                             <!-- BEGIN SERVER LOAD PORTLET-->
                             <div class="widget">
-                                <div class="widget-title">
+                                <!-- <div class="widget-title">
                                     <h4><i class="icon-umbrella"></i> Live Chart</h4>
                                     <span class="tools">
                                     <a href="javascript:;" class="icon-chevron-down"></a>
@@ -478,7 +447,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <!-- END SERVER LOAD PORTLET-->
                         </div>
@@ -502,46 +471,26 @@
                                     <!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
                                     <th>Username</th>
                                     <th class="hidden-phone">Email</th>
-                                    <th class="hidden-phone">Institution</th>
+                                    <th class="hidden-phone">Institution Name</th>
                                     <th class="hidden-phone">Joined</th>
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    if(!empty($latest_job_providers)) :
+                                    foreach ($latest_job_providers as $jobprovider) :
+                                ?>
                                 <tr class="odd gradeX">
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
-                                    <td>Jhone doe</td>
-                                    <td class="hidden-phone"><a href="mailto:jhone-doe@gmail.com">jhone-doe@gmail.com</a></td>
-                                    <td class="hidden-phone">10</td>
-                                    <td class="center hidden-phone">02.03.2013</td>
+                                    <td><?php echo $jobprovider['organization_name'] ?></td>
+                                    <td class="hidden-phone"><a href="mailto:jhone-doe@gmail.com"><?php echo $jobprovider['registrant_email_id'] ?></a></td>
+                                    <td class="hidden-phone"><?php echo $jobprovider['registrant_name'] ?></td>
+                                    <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobprovider['organization_created_date'])); ?></td>
                                 </tr>
-                                <tr class="odd gradeX">
-                                   
-                                    <td>gada</td>
-                                    <td class="hidden-phone"><a href="mailto:gada-lal@gmail.com">gada-lal@gmail.com</a></td>
-                                    <td class="hidden-phone">34</td>
-                                    <td class="center hidden-phone">08.03.2013</td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    
-                                    <td>soa bal</td>
-                                    <td class="hidden-phone"><a href="mailto:soa bal@yahoo.com">soa bal@yahoo.com</a></td>
-                                    <td class="hidden-phone">33</td>
-                                    <td class="center hidden-phone">1.12.2013</td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    
-                                    <td>ram sag</td>
-                                    <td class="hidden-phone"><a href="mailto:soa bal@gmail.com">soa bal@gmail.com</a></td>
-                                    <td class="hidden-phone">33</td>
-                                    <td class="center hidden-phone">7.2.2013</td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    
-                                    <td>durlab</td>
-                                    <td class="hidden-phone"><a href="mailto:soa bal@gmail.com">test@gmail.com</a></td>
-                                    <td class="hidden-phone">33</td>
-                                    <td class="center hidden-phone">03.07.2013</td>
-                                </tr>
+                                <?php
+                                    endforeach;
+                                    endif;
+                                ?>
                                 </tbody>
                                 </table>
                                 </div>
@@ -573,37 +522,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                <?php
+                                    if(!empty($latest_vacancy_jobs)) :
+                                    foreach ($latest_vacancy_jobs as $jobs) :
+                                ?>
                                 <tr class="odd gradeX">
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
-                                    <td class="hidden-phone">Zoology Teacher</td>
-                                    <td class="hidden-phone">Vidhayaarambam vidyalaya </td>
-                                    <td class="center hidden-phone">Salem</td>
-                                    <td class="hidden-phone"><span class="label label-success">Approved</span></td>
+                                    <td><?php echo $jobs['vacancies_job_title'] ?></td>
+                                    <td class="hidden-phone"><?php echo $jobs['registrant_name'] ?></td>
+                                    <td class="hidden-phone"><?php echo $jobs['registrant_name'] ?></td>
+                                    <td class="hidden-phone"><?php echo $jobs['district_name'] ?></td>
+                                    <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobprovider['organization_created_date'])); ?></td>
+                                    <td class="hidden-phone"><span class="label label-success"><?php if($jobs['vacancies_status'] == 1) echo "Approved"; else "Waiting for Approve" ?></span></td>
+                                    <!-- <td class="hidden-phone"><span class="label label-inverse">Blocked</span></td> -->
                                 </tr>
-                                <tr class="odd gradeX">
-                                    <td class="hidden-phone">Librarian</td>
-                                    <td class="hidden-phone">Mirapolis International</td>
-                                    <td class="center hidden-phone">Tamilnadu</td>
-                                    <td class="hidden-phone"><span class="label label-inverse">Blocked</span></td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td class="hidden-phone">Dance Teachers</td>
-                                    <td class="hidden-phone">ABC International</td>
-                                    <td class="center hidden-phone">Dindugal</td>
-                                    <td class="hidden-phone"><span class="label label-success">Approved</span></td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td class="hidden-phone">Openings for Counsellor</td>
-                                    <td class="hidden-phone">Little Flowers Primary School, Salem </td>
-                                    <td class="center hidden-phone">Thanjavur</td>
-                                    <td class="hidden-phone"><span class="label label-success">Approved</span></td>
-                                </tr>
-                                <tr class="odd gradeX">
-                                    <td class="hidden-phone">Wanted Office Assistant</td>
-                                    <td class="hidden-phone">Mahendragiri Public school </td>
-                                    <td class="center hidden-phone">Trivandram</td>
-                                    <td class="hidden-phone"><span class="label label-success">Approved</span></td>
-                                </tr>
+                                <?php
+                                    endforeach;
+                                    endif;
+                                ?>
                                 </tbody>
                                 </table>
                                 </div>

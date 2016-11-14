@@ -239,6 +239,48 @@ $(document).ready(function(){
         editing = 0;
         ready_save = 0;
     });
+
+    $(document).on("change",".filter_vacancy",function(){
+        selected_value = $(this).find('option:selected').val();
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+'dashboard_filter_vacancy',
+            dataType : 'json',
+            data : 'filter_option='+ selected_value+'&'+csrf_name+'='+ csfrData[csrf_name],
+            success: function(res) {
+                filter_tag = '';
+                if(res!=0){ 
+                  $.each(res, function(i){
+                    filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                    $('#filter_vacancy_table').find('.vacancy_header').text(res[i].label_name);
+                  });  
+                }   
+                $('#filter_vacancy_table').find('tbody').html(filter_tag);
+            }
+        });
+    });
+    $(document).on("change",".filter_provider",function(){
+        selected_value = $(this).find('option:selected').val();
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+'dashboard_filter_provider',
+            dataType : 'json',
+            data : 'filter_option='+ selected_value+'&'+csrf_name+'='+ csfrData[csrf_name],
+            success: function(res) {
+                filter_tag = '';
+                if(res!=0){ 
+                  $.each(res, function(i){
+                    filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                    $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
+                  });  
+                }   
+                else{
+                    alert("No record found");
+                }
+                $('#filter_provider_table').find('tbody').html(filter_tag);
+            }
+        });
+    });
 });
 
 
