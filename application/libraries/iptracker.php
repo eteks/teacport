@@ -53,26 +53,37 @@ class Iptracker{
     $seg  = explode("-", $page);
     
         //Uncomment the IF Statement if you do not want your own admin pages to be tracked. Change the value of the needle ('admin) to the segments (URI) found in your admin pages.
-    //if(!in_array('admin', $seg)){    
+    //if(!in_array('admin', $seg)){  
+    $can_id = 0;
+    $org_id = 0;  
     if(!empty($this->sys->session->userdata("login_status"))) {
       $session_data = $this->sys->session->userdata("login_session");
-      $user_id = $session_data['user_id'];
+      if(!empty($session_data['candidate_id'])) {
+        $can_id = $session_data['candidate_id'];
+        $org_id = 0;
+      }
+      else if(!empty($session_data['organization_id'])) {
+        $can_id = 0;
+        $org_id = $session_data['organization_id'];
+      }
     }
-    else {
-      $user_id = 0;
-    }
+
+
+
+
     $current_date = date("Y-m-d h:i:s");
     $data = array(
       'ip_address'            => $ip,
       'page_view'             => $page,
       'user_agent'            => $agent,
-      'user_id'       => $user_id,
+      'candidate_id'          => $can_id,
+      'organization_id'       => $org_id,
       'count'                 => '1',
       'created_date'          => $current_date
 
     );
-    $data_count_where = '(ip_address="'.$ip.'" and page_view="'.$page.'" and user_id="'.$user_id.'")';
-    $data_count = $this->sys->db->get_where('site_visits',$data_count_where);
+    $data_count_where = '(ip_address="'.$ip.'" and page_view="'.$page.'" and candidate_id="'.$can_id.'" and organization_id="'.$org_id.'")';
+    $data_count = $this->sys->db->get_where('tr_site_visits',$data_count_where);
     if($data_count->num_rows() > 0) {
       $create_date_query = $data_count->row_array();
       $count = $create_date_query['count'] + 1;
@@ -91,7 +102,7 @@ class Iptracker{
     else {
       $this->sys->db->insert('tr_site_visits', $data);     
     }
-    echo $_SERVER['REMOTE_ADDR'];  
+    // echo $_SERVER['REMOTE_ADDR'];  
 
     //}
   }

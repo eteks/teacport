@@ -221,7 +221,17 @@ class Dashboard_model extends CI_Model {
       // print_r($query);
       return $query;
   }
-  
+  public function page_high_count_visits(){
+      $this->db->select('SUM(count) as count_vis, page_view');
+      $this->db->from('tr_site_visits AS vis');
+      $this->db->group_by('page_view');
+      $this->db->order_by('SUM(count)','desc');
+      $this->db->limit(8);
+      $query = $this->db->get()->result_array();
+      // echo "page_high_count_visits";
+      // print_r($query);
+      return $query;
+  }
 }
 
 /* End of file Ajax_Model.php */
