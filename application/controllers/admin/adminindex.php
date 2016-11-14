@@ -8,7 +8,10 @@ class Adminindex extends CI_Controller {
 		$this->load->model('admin/admin_model');
 		$this->load->library('form_validation');
 		$this->load->model('admin/dashboard_model');
+		$this->load->helper('custom');
+
 	}
+
 	// Edit unique function - To check the field is already exists or not
 	function edit_unique($value, $params) 
 	{
@@ -604,6 +607,128 @@ class Adminindex extends CI_Controller {
 		}
 	}
 
+	// Departments - Add Edit Delete View
+	public function departments()
+	{	
+		$data['qualification_list'] = $this->admin_model->get_qualification_list(); 
+
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'departments_name',
+		                              'label'   => 'Departments Name',
+		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_departments.departments_id.departments_name.'.$id.']'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'department_educational_qualification_id',
+		                              'label'   => 'Qualification Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'departments_status',
+		                                 'label'   => 'Departments Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->departments('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'departments_name',
+		                              'label'   => 'Departments Name',
+		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_departments.departments_name]'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'department_educational_qualification_id',
+		                              'label'   => 'Qualification Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'departments_status',
+		                                 'label'   => 'Departments Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->departments('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->departments('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->departments('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$departments_values = $data_values['departments_values'];
+			$data_ajax['departments_values'] = get_qualication_by_dept($departments_values);
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/departments',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$departments_values = $data_values['departments_values'];
+			$data['departments_values'] = get_qualication_by_dept($departments_values);
+			$this->load->view('admin/departments',$data);
+		}
+
+	}
 	public function district()
 	{	
 			$this->load->view('admin/district');
@@ -614,10 +739,6 @@ class Adminindex extends CI_Controller {
 			$this->load->view('admin/languages');
 	}
 
-	public function departments()
-	{	
-			$this->load->view('admin/departments');
-	}
 	public function subject()
 	{	
 			$this->load->view('admin/subject');
