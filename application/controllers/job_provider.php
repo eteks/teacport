@@ -62,6 +62,9 @@ class Job_provider extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
+		$data['captcha'] = $this->captcha->main();
+		$this->session->set_userdata('captcha_info', $data['captcha']);
+
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['fbloginurl'] = $common->facebookloginurl();
@@ -132,6 +135,13 @@ class Job_provider extends CI_Controller {
 				
 			}
 		}
+	}
+	public function reload_captcha()
+	{
+		$data = $this->captcha->main();
+		$data_value = $data['image_src'];
+		$this->session->set_userdata('captcha_info', $data);
+		echo $data_value;
 	}
 	public function dashboard()
     {

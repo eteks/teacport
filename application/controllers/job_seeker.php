@@ -66,6 +66,8 @@ class Job_seeker extends CI_Controller {
 		if(!$_POST){
 			$data['fbloginurl'] = $common->facebookloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
+			$data['captcha'] = $this->captcha->main();
+			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$this->load->view('register-job-seekers',$data);
 		}
 		/* Registration page loading with posted data */
@@ -132,6 +134,13 @@ class Job_seeker extends CI_Controller {
 				
 			}
 		}
+	}
+	public function reload_captcha()
+	{
+		$data = $this->captcha->main();
+		$data_value = $data['image_src'];
+		$this->session->set_userdata('captcha_info', $data);
+		echo $data_value;
 	}
 	public function dashboard()
     {
