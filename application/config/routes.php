@@ -48,19 +48,31 @@ $route['login/facebook'] = 'social/facebook';
 $route['login/facebookverify'] = 'social/facebookverify';
 $route['login/twitter'] = 'social/twitter';
 $route['login/linkedin'] = 'social/linkedin';
-
+//SIGN UP
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
-
+//JOB PROVIDER
 $route['provider/dashboard'] = 'job_provider/dashboard';
 $route['provider/logout'] = 'job_provider/provider_logout';
-
+//JOB SEEKER
 $route['seeker/dashboard'] = 'job_seeker/dashboard';
 $route['seeker/logout'] = 'job_seeker/seeker_logout';
 
-
+//OTHER PAGES
 $route['aboutus'] = 'home/aboutus';
 $route['contactus'] = 'home/contactus';
+
+//Akila created
+$route['provider/editprofile'] = 'job_provider/companydbd_editprofile';
+$route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
+$route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
+$route['pricing'] = 'home/pricing';
+$route['faq'] = 'home/faq';
+$route['allinstitutions'] = 'home/allinstitutions';
+$route['vacancies'] = 'home/vacancies';
+
+
+
 
 //Route url for admin
 $route['admin'] = 'admin/login/index_login';

@@ -33,7 +33,7 @@
     <!--Custom CSS-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
     
-     <!-- FOR JOBPOST PAGE ONLY -->
+     <!-- FOR POST-JOB PAGES ONLY -->
     <link href="css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/jquery.tagsinput.min.css">
 
