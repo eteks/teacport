@@ -36,6 +36,15 @@ define('FOPEN_READ_WRITE_CREATE',				'a+b');
 define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
+//array to get course type 
+define('COURSE_TYPE',serialize(array("UG"=>"Under Graduate",
+        "PG"=>"Post Graduate")));
+
+//array to get status
+define('STATUS',serialize(array("0"=>"Active",
+        "1"=>"Inactive")));
+
+
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

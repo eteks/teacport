@@ -1,3 +1,4 @@
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -73,9 +74,16 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" action="adminindex/qualification" class="admin_module_form" id="qualification_form">
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <?php } ?>
+                                  <?php
+                                  if(!empty($status)) :
+                                    echo "<p class='db_status'> $status </p>";
+                                  endif;
+                                  ?> 
+                                  <p class='val_error'> <p>
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
-                                    <tr class="ajaxTitle">
+                                      <tr class="ajaxTitle">
                                         <th>Qualification</th>
                                         <th>Course Type</th>
                                         <th>Institution Type</th>
@@ -83,68 +91,58 @@
                                         <th>Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
-                                    </tr>
+                                      </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="qualification">B.E</td>
-                                        <td class="course_type">UG</td>
-                                        <td class="institution_type">Engineering</td>
-                                        <td class="qualification_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                    <?php
+                                    if(!empty($qualification_type_values)) :
+                                    foreach ($qualification_type_values as $qua_val) :
+                                    ?>
+                                      <tr class="parents_tr" id="column<?php echo $qua_val['educational_qualification_id']; ?>">
+
+                                        <td class="educational_qualification">
+                                          <?php echo $qua_val['educational_qualification']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="qualification">M.A</td>
-                                        <td class="course_type">PG</td>
-                                        <td class="institution_type">Arts & Science</td>
-                                        <td class="qualification_status">Inactive</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        <td class="educational_qualification_course_type">
+                                          <?php 
+                                          $course_type = unserialize(COURSE_TYPE);
+                                          echo $course_type[$qua_val['educational_qualification_course_type']];
+                                          ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="qualification">B.Sc</td>
-                                        <td class="course_type">UG</td>
-                                        <td class="institution_type">Arts & Science</td>
-                                        <td class="qualification_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        <td class="educational_qualifcation_inst_type_id">
+                                          <?php echo $qua_val['institution_type_name']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <!-- <tr class="">
-                                        <td>vectorlab</td>
-                                        <td>dk mosa</td>
-                                        <td>132</td>
-                                        <td class="center">elite user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Admin</td>
-                                        <td> Admin lab</td>
-                                        <td>462</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Rafiqul</td>
-                                        <td>Rafiqul dulal</td>
-                                        <td>62</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr> -->
+                                        <td class=" educational_qualification_status"> 
+                                          <?php 
+                                          if ($qua_val['educational_qualification_status'] == 1) 
+                                            echo "Active";
+                                          else
+                                            echo "Inactive";
+                                          ?>
+                                        </td>
+                                        <td class="educational_qualification_created_date">
+                                          <?php echo $qua_val['educational_qualification_created_date']; ?>
+                                        </td>
+
+                                        <td class="edit_section">
+                                          <a class="ajaxEdit" id="column<?php echo $qua_val['educational_qualification_id']; ?>" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
+                                              Edit
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
+                                            Delete
+                                          </a>
+                                        </td>
+                                      </tr>
+                                      <?php
+                                      endforeach;
+                                      endif;
+                                      ?>
                                     </tbody>
-                                </table>
+                                  </table>
+                                <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -160,18 +158,33 @@
       </div>
       <!-- END PAGE -->
    </div>
-   <!-- END CONTAINER -->
-   <script>
+    <!-- END CONTAINER -->
+  <script>
     // Define default values
     var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("qualification","course_type","institution_type","qualification_status"); // Set name of input types
-    var placeholder = new Array("Enter Qualification",""); // Set placeholder of input types
+    var columns = new Array("educational_qualification","educational_qualification_course_type","educational_qualifcation_inst_type_id","educational_qualification_status"); // Set name of input types
+    var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var course_type_option = new Array("UG","PG"); 
-    var course_type_value = new Array("1","0");
-    var institution_type_option = new Array("Engineering","Arts & Science"); 
-    var institution_type_value = new Array("1","0");
-    var qualification_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var qualification_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var educational_qualification_course_type_option = new Array("Please select course"); 
+    var educational_qualification_course_type_value = new Array("");
+    <?php foreach (unserialize(COURSE_TYPE) as $key => $value): ?>
+      educational_qualification_course_type_option.push("<?php echo $value; ?>");
+      educational_qualification_course_type_value.push("<?php echo $key; ?>");
+    <?php endforeach; ?>
+    var educational_qualifcation_inst_type_id_option = new Array("Please select institution");
+    var educational_qualifcation_inst_type_id_value = new Array("");
+    <?php
+    if(!empty($institution_types)) :
+    foreach ($institution_types as $ins_val) :
+    ?>
+      educational_qualifcation_inst_type_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      educational_qualifcation_inst_type_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
+    var educational_qualification_status_option = new Array("Please select status","Active","Inactive"); 
+    var educational_qualification_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>

@@ -6,11 +6,7 @@
             </div>
         </div>
         <!-- CSRF TOKEN -->
-        <script>
-            var csfrData = {};
-            csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
-                       = '<?php echo $this->security->get_csrf_hash(); ?>';
-        </script>
+        
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
         <!-- Load javascripts at bottom, this will reduce page load time -->
