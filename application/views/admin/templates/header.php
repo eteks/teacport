@@ -213,7 +213,7 @@ Website: http://thevectorlab.net/
                                 <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-tasks"></i> My Tasks</a></li>
                                 <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-calendar"></i> Calendar</a></li>
                                 <li class="divider"></li>
-                                <li><a href="login.php"><i class="icon-key"></i> Log Out</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/login/index_login"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->
@@ -257,8 +257,8 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="ui_elements_general.php">Job Seeker</a></li>
-                        <li><a class="" href="ui_elements_buttons.php">Job Provider</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Seeker</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Provider</a></li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
@@ -277,8 +277,8 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="ui_elements_general.php">Job Ads</a></li>
-                        <li><a class="" href="ui_elements_buttons.php">Job Applications</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
@@ -302,7 +302,7 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Reports</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Reports</a></li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>

@@ -168,8 +168,8 @@
     endforeach;
     endif;
     ?>
-    var class_level_status_option = new Array("Active","Inactive"); 
-    var class_level_status_value = new Array("1","0"); 
+    var class_level_status_option = new Array("Please select status","Active","Inactive"); 
+    var class_level_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

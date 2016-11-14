@@ -55,6 +55,74 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Districts - Add Edit Delete View
+  public function districts($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $district_get_where = "district_name =" . "'" . $this->input->post('district_name') . "' AND district_state_id =" . "'" . $this->input->post('district_state_id') . "' AND district_id NOT IN (". $this->input->post('rid').")";
+      $district_get = $this->db->get_where('tr_district',$district_get_where);
+
+      if($district_get -> num_rows() > 0) {
+        $model_data['status'] = "District Name is already exist for choosen state";
+        $model_data['error'] = 1;     
+      }
+      else {
+        $district_update_data = array( 
+                                    'district_name' => $this->input->post('district_name'),
+                                    'district_state_id' => $this->input->post('district_state_id'),
+                                    'district_status' => $this->input->post('district_status'),
+                                  );
+        $district_update_where = '(district_id="'.$this->input->post('rid').'")'; 
+        $this->db->set($district_update_data); 
+        $this->db->where($district_update_where);
+        $this->db->update("tr_district", $district_update_data); 
+        $model_data['status'] = "Updated Successfully";
+        $model_data['error'] = 2;
+      }
+    }
+
+    // Save data
+    else if($status=='save') {
+      $district_get_where = '(district_name="'.$this->input->post('district_name').'" and district_state_id="'.$this->input->post('district_state_id').'")';
+      $district_get = $this->db->get_where('tr_district',$district_get_where);
+
+      if($district_get -> num_rows() > 0) {
+        $model_data['status'] = "District Name is already exist for choosen state";
+        $model_data['error'] = 1;     
+      }
+      else {
+        $district_insert_data = array( 
+                                      'district_name' => $this->input->post('district_name'),
+                                      'district_state_id' => $this->input->post('district_state_id'),
+                                      'district_status' => $this->input->post('district_status'),
+                                  );
+        $this->db->insert("tr_district", $district_insert_data); 
+        $model_data['status'] = "Inserted Successfully";
+        $model_data['error'] = 2;
+      }
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $state_delete_where = '(district_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_district", $state_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $this->db->select('*');
+    $this->db->from('tr_district d');
+    $this->db->join('tr_state s','d.district_state_id=s.state_id','inner');
+    $model_data['districts_values'] = $this->db->get()->result_array();
+
+    return $model_data;
+  }
+
   // Institution Type - Add Edit Delete View
   public function institution_type($status)
   {
@@ -331,6 +399,53 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Subjects - Add Edit Delete View
+  public function subjects($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $subjects_update_data = array( 
+                              'subject_name' => $this->input->post('subject_name'),
+                              'subject_institution_id' => $this->input->post('subject_institution_id'),
+                              'subject_status' => $this->input->post('subject_status'),
+                            );
+      $subjects_update_where = '(subject_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($subjects_update_data); 
+      $this->db->where($subjects_update_where);
+      $this->db->update("tr_subject", $subjects_update_data); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $subjects_insert_data = array( 
+                            'subject_name' => $this->input->post('subject_name'),
+                            'subject_institution_id' => $this->input->post('subject_institution_id'),
+                            'subject_status' => $this->input->post('subject_status'),
+                          );
+      $this->db->insert("tr_subject", $subjects_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $state_delete_where = '(subject_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_subject", $state_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $subjects_list_query = $this->db->query("SELECT * FROM tr_institution_type AS c INNER JOIN ( SELECT subject_id,subject_name,subject_status,subject_create_date, SUBSTRING_INDEX( SUBSTRING_INDEX( t.subject_institution_id, ',', n.n ) , ',', -1 ) value FROM tr_subject t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.subject_institution_id ) - LENGTH( REPLACE( t.subject_institution_id, ',', ''))) ) AS a ON a.value = c.institution_type_id order by (a.subject_id)");
+    $model_data['subject_values'] = $subjects_list_query->result_array();  
+    return $model_data;
+  }
+
   // Get Institution Type list
   public function get_institution_type()
   {
@@ -344,6 +459,14 @@ class Admin_Model extends CI_Model {
   {
     $qualification_get_where = '(educational_qualification_status=1)'; 
     $model_data = $this->db->get_where("tr_educational_qualification", $qualification_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get state values
+  public function get_state_values()
+  {
+    $state_get_where = '(state_status=1)'; 
+    $model_data = $this->db->get_where("tr_state", $state_get_where)->result_array(); 
     return $model_data;
   }
   

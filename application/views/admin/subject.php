@@ -1,3 +1,4 @@
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -73,74 +74,73 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <?php } ?>
+                                  <?php
+                                  if(!empty($status)) :
+                                    echo "<p class='db_status'> $status </p>";
+                                  endif;
+                                  ?> 
+                                  <p class='val_error'> <p>
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
-                                    <tr class="ajaxTitle">
+                                      <tr class="ajaxTitle">
                                         <th>Subject</th>
                                         <th>Institution</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
-                                    </tr>
+                                      </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="subject_name">Maths</td>
-                                        <td class="subject_institution_id">Schools</td>
-                                        <td class="subject_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                      <?php
+                                      if(!empty($subject_values)) :
+                                      foreach ($subject_values as $sub_key => $sub_val) :
+                                      ?>
+                                      <tr class="parents_tr" id="column<?php echo $sub_key; ?>">
+                                        <td class="subject_name"> 
+                                          <?php echo $sub_val['subject_name']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="subject_name">Computer Science</td>
-                                        <td class="subject_institution_id">Engineering</td>
-                                        <td class="subject_status">Inactive</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        <td class="subject_institution_id"> 
+                                          <?php
+                                          foreach ($sub_val['institution_type_id'] as $ins_key => $ins_val) :
+                                          ?>
+                                            <span data-id="<?php echo $ins_key; ?>"> 
+                                              <?php echo $ins_val; ?>
+                                            </span>
+                                            <br>
+                                          <?php
+                                          endforeach;
+                                          ?>  
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="subject_name">History</td>
-                                        <td class="subject_institution_id">Arts & Science</td>
-                                        <td class="subject_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        <td class="subject_status"> 
+                                          <?php 
+                                          if ($sub_val['subject_status'] == 1) 
+                                            echo "Active";
+                                          else
+                                            echo "Inactive";
+                                          ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <!-- <tr class="">
-                                        <td>vectorlab</td>
-                                        <td>dk mosa</td>
-                                        <td>132</td>
-                                        <td class="center">elite user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Admin</td>
-                                        <td> Admin lab</td>
-                                        <td>462</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Rafiqul</td>
-                                        <td>Rafiqul dulal</td>
-                                        <td>62</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr> -->
+                                        <td class="created_date">
+                                          <?php echo $sub_val['subject_create_date']; ?>
+                                        </td>
+                                        <td class="edit_section">
+                                          <a class="ajaxEdit" id="column<?php echo $sub_key; ?>" href="javascript:;" data-id="<?php echo $sub_key; ?>">
+                                            Edit
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $sub_key; ?>">Delete</a>
+                                        </td>
+                                      </tr>
+                                      <?php
+                                      endforeach;
+                                      endif;
+                                      ?>
                                     </tbody>
-                                </table>
+                                  </table>
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -158,13 +158,24 @@
    <!-- END CONTAINER -->
    <script>
     // Define default values
-    var inputType = new Array("text","list","select"); // Set type of input which are you have used like text, select,textarea.
+    var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("subject_name","subject_institution_id","subject_status"); // Set name of input types
-    var placeholder = new Array("Enter Department Name",""); // Set placeholder of input types
+    var placeholder = new Array("Enter Subject Name","Please select institution"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var list_option = new Array("Schools","Engineering","Arts & Science"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    // var qualification_value = new Array("1","0");
-    var subject_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var subject_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var subject_institution_id_option = new Array();
+    var subject_institution_id_value = new Array();
+    <?php
+    if(!empty($institution_types)) :
+    foreach ($institution_types as $ins_val) :
+    ?>
+      subject_institution_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      subject_institution_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
+    var subject_status_option = new Array("Please select status","Active","Inactive"); 
+    var subject_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>

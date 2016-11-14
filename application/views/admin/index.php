@@ -357,7 +357,7 @@
                                     </div>
                                 </div> -->
                                 <form class="form-horizontal">
-                                    <div class="input-prepend">
+                                    <div class="input-prepend cal_graph_range">
                                         <span class="add-on"><i class="icon-calendar"></i></span>
                                         <input type="text" name="range" id="range" />
                                     </div>
@@ -378,7 +378,7 @@
                                     <a href="javascript:;" class="icon-remove"></a>
                                     </span>
                                 </div>
-                                <div class="widget-body">
+                                <div class="widget-body site_visites_cont">
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>
@@ -406,10 +406,10 @@
                         </div>
                     </div>
 
-                    <div class="row-fluid">
-                        <div class="span12">
+                    <!-- <div class="row-fluid">
+                        <div class="span12"> -->
                             <!-- BEGIN SERVER LOAD PORTLET-->
-                            <div class="widget">
+                            <!-- <div class="widget"> -->
                                 <!-- <div class="widget-title">
                                     <h4><i class="icon-umbrella"></i> Live Chart</h4>
                                     <span class="tools">
@@ -438,8 +438,8 @@
                                 </div> -->
                             </div>
                             <!-- END SERVER LOAD PORTLET-->
-                        </div>
-                    </div>
+                        <!-- </div>
+                    </div> -->
 
                     <div class="row-fluid">
                         <div class="span12">
