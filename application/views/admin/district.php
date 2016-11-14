@@ -1,3 +1,4 @@
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -73,76 +74,66 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" action="adminindex/district" class="admin_module_form" id="district_form">
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <?php } ?>
+                                  <?php
+                                  if(!empty($status)) :
+                                    echo "<p class='db_status'> $status </p>";
+                                  endif;
+                                  ?> 
+                                  <p class='val_error'> <p>
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
-                                    <tr class="ajaxTitle">
+                                      <tr class="ajaxTitle">
                                         <th>District Name</th>
                                         <th>State</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
-                                    </tr>
+                                      </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="district_name">Chennai</td>
-                                        <td class="state_name">Tamil Nadu</td>
-                                        <td class="district_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                      <?php
+                                      if(!empty($districts_values)) :
+                                      foreach ($districts_values as $dis_val) :
+                                      ?>
+                                      <tr class="parents_tr" id="column<?php echo $dis_val['district_id']; ?>">
+                                        <td class="district_name"> 
+                                          <?php echo $dis_val['district_name']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="district_name">Puducherry</td>
-                                        <td class="state_name">Puducherry</td>
-                                        <td class="district_status">Inactive</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        <td class="district_state_id"> 
+                                          <?php echo $dis_val['state_name']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="district_name">Kerala</td>
-                                        <td class="state_name">Kerala</td>
-                                        <td class="district_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        <td class="district_status"> 
+                                          <?php 
+                                          if ($dis_val['district_status'] == 1) 
+                                            echo "Active";
+                                          else
+                                            echo "Inactive";
+                                          ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column4">
-                                        <td class="district_name">Madurai</td>
-                                        <td class="state_name">Tamil Nadu</td>
-                                        <td class="district_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column4" href="javascript:;">Edit</a>
+                                        <td class="created_date">
+                                          <?php echo $dis_val['district_create_date']; ?>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column4" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <!-- <tr class="">
-                                        <td>Admin</td>
-                                        <td> Admin lab</td>
-                                        <td>462</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr>
-                                    <tr class="">
-                                        <td>Rafiqul</td>
-                                        <td>Rafiqul dulal</td>
-                                        <td>62</td>
-                                        <td class="center">new user</td>
-                                        <td><a class="edit" href="javascript:;">Edit</a></td>
-                                        <td><a class="delete" href="javascript:;">Delete</a></td>
-                                    </tr> -->
-                                    </tbody>
-                                </table>
+                                        <td class="edit_section">
+                                          <a class="ajaxEdit" id="column<?php echo $dis_val['district_id']; ?>" href="javascript:;" data-id="<?php echo $dis_val['district_id']; ?>">
+                                            Edit
+                                          </a>
+                                        </td>
+                                        <td>
+                                          <a class="ajaxDelete" id="column1" href="javascript:;" data-id="<?php echo $dis_val['district_id']; ?>">
+                                            Delete
+                                          </a>
+                                        </td>
+                                      </tr>
+                                      <?php
+                                      endforeach;
+                                      endif;
+                                      ?>
+                                      </tbody>
+                                  </table>
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -160,15 +151,26 @@
    </div>
    <!-- END CONTAINER -->
    
-   <script>
+    <script>
     // Define default values
     var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("district_name","state_name","district_status"); // Set name of input types
+    var columns = new Array("district_name","district_state_id","district_status"); // Set name of input types
     var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var state_name_option = new Array("Tamilnadu","Kerala");
-    var state_name_value = new Array("1","0");
-    var district_status_option = new Array("Active","Inactive");
-    var district_status_value = new Array("1","0"); 
+    var district_state_id_option = new Array("Please select state");
+    var district_state_id_value = new Array("");
+    <?php
+    if(!empty($state_values)) :
+    foreach ($state_values as $sta_val) :
+    ?>
+      district_state_id_option.push("<?php echo $sta_val['state_name']; ?>");
+      district_state_id_value.push("<?php echo $sta_val['state_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
+    var district_status_option = new Array("Please select status","Active","Inactive"); 
+    var district_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>

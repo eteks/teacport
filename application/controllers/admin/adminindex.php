@@ -729,19 +729,249 @@ class Adminindex extends CI_Controller {
 		}
 
 	}
+
+	// Subject - Add Edit View Delete
+	public function subject()
+	{	
+		$data['institution_types'] = $this->admin_model->get_institution_type(); 
+
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'subject_name',
+		                              'label'   => 'Subject Name',
+		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_subject.subject_id.subject_name.'.$id.']'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'subject_institution_id',
+		                              'label'   => 'Institution Type',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'subject_status',
+		                                 'label'   => 'Subject Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->subjects('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'subject_name',
+		                              'label'   => 'Subject Name',
+		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_subject.subject_name]'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'subject_institution_id',
+		                              'label'   => 'Institution Type',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'subject_status',
+		                                 'label'   => 'Subject Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->subjects('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->subjects('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->subjects('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$subject_values = $data_values['subject_values'];
+			$data_ajax['subject_values'] = get_institution_by_dept($subject_values);
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/subject',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$subject_values = $data_values['subject_values'];
+			$data['subject_values'] = get_institution_by_dept($subject_values);
+			$this->load->view('admin/subject',$data);
+		}
+	}
+
 	public function district()
 	{	
-			$this->load->view('admin/district');
+		$data['state_values'] = $this->admin_model->get_state_values(); 
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'district_name',
+		                              'label'   => 'District Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'district_state_id',
+		                              'label'   => 'State Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'district_status',
+		                                 'label'   => 'District Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->districts('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'district_name',
+		                              'label'   => 'District Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'district_state_id',
+		                              'label'   => 'State Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'district_status',
+		                                 'label'   => 'District Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->districts('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->districts('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->districts('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['districts_values'] = $data_values['districts_values'];
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/district',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['districts_values'] = $data_values['districts_values'];
+			$this->load->view('admin/district',$data);
+		}
 	}
 
 	public function languages()
 	{	
 			$this->load->view('admin/languages');
-	}
-
-	public function subject()
-	{	
-			$this->load->view('admin/subject');
 	}
 }
 /* End of file welcome.php */ 
