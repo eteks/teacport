@@ -29,9 +29,9 @@
     * along with this script.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
     */
 
-$( document ).ajaxError(function() {
-    window.location.href = admin_baseurl;
-});
+// $( document ).ajaxError(function() {
+//     window.location.href = admin_baseurl;
+// });
 
 // Set button class names 
 var savebutton = "ajaxSave";
@@ -41,7 +41,7 @@ var updatebutton = "ajaxUpdate";
 var cancelbutton = "cancel";
 
 // Init variables
-var inputs = ':checked,:selected,:text,textarea,select';
+var inputs = 'input,select';
 var trcopy;
 // var editing=0;
 
@@ -96,17 +96,39 @@ createInput = function(i,str){
         input += '</select>';
         //console.log(str);
     }
+    else if(inputType[i] == "multiselect"){
+        input = '<select data-placeholder="'+placeholder[i]+'" name="'+columns[i]+'" class="chosen span6" multiple="multiple" >';
+        var select_option = eval(columns[i]+'_option');
+        var select_value = eval(columns[i]+'_value');
+
+        for(i=0;i<select_option.length;i++){
+            //console.log(select_option[i]);
+            selected = "";
+            // var html = $(str);              
+            // var multi_value = html.find('span').data('id');
+            // alert(multi_value);
+            if(str == select_value[i])
+            {
+                selected = "selected";
+            }
+            input += '<option value="'+select_value[i]+'" '+selected+'>'+select_option[i]+'</option>';
+        }
+        input += '</select>';
+        //console.log(str);
+    }
     return input;
 }
 
 ajax = function (params,action,form_id){
     var form = $('#'+form_id);
     var this_table = $('#'+form_id).find('table');
+    params['action'] = action;
+    params[csrf_name] = csfrData[csrf_name];
     $.ajax({
         type : "POST",
         url : admin_baseurl+form.attr('action'),
         dataType : 'json',
-        data : params + '&action=' + action+'&'+csrf_name+'='+ csfrData[csrf_name],
+        data : params ,
         success: function(res) {
             if(res.error==1) {
                 $('.val_error').html(res.status);
@@ -139,8 +161,9 @@ $(document).ready(function(){
     $(document).on("click","."+savebutton,function(){
         var validation = 1;
         var form_id = $(this).parents('form').attr('id');
-        var $inputs =
-        $(document).find("."+table).find(inputs).filter(function() {
+
+        var ajax_data = {};
+        $("."+table).find(inputs).each(function() {
             // check if input element is blank ??
             // if($.trim( this.value ) == ""){
             //     $(this).addClass("error");
@@ -149,18 +172,22 @@ $(document).ready(function(){
             //     $(this).removeClass("error");
             //     $(this).addClass("success");
             // }
-            return $.trim( this.value );
+            var value = $(this).val();
+            if($.isArray(value)) {
+                value = value.toString();
+            }
+            ajax_data[$(this).attr('name')] = value;
         });
 
-        var array = $inputs.map(function(){
-            //console.log(this.value);
-            //console.log(this);
-            return this.value;
-        }).get();
+        // var array = $inputs.map(function(){
+        //     //console.log(this.value);
+        //     //console.log(this);
+        //     return this.value;
+        // }).get();
         if(!$('input, select').hasClass('error')) {
-            var serialized = $inputs.serialize();
+            // var serialized = $inputs.serialize();
             if(validation == 1){
-                ajax(serialized,"save",form_id);
+                ajax(ajax_data,"save",form_id);
             }
             else {
                 alert("Unable to process");
@@ -180,9 +207,11 @@ $(document).ready(function(){
     $(document).on("click","."+deletebutton,function(){
         var id = $(this).data("id");
         var form_id = $(this).parents('form').attr('id');
+        var ajax_data = {};
+        ajax_data['rid'] = id;
         if(id){
             if(confirm("Do you really want to delete record ?"))
-                ajax("rid="+id,"delete",form_id);
+                ajax(ajax_data,"delete",form_id);
         }
         else {
             alert("Unable to process");
@@ -232,12 +261,70 @@ $(document).ready(function(){
         id = $(this).attr("id");
         var update_id = $(this).data("id");
         var form_id = $(this).parents('form').attr('id');
-        serialized = $("."+table+" tr[id='"+id+"']").find(inputs).serialize();
-        ajax(serialized+"&rid="+update_id,"update",form_id);
+        var ajax_data = {};
+        $("."+table).find(inputs).each(function() {
+            // check if input element is blank ??
+            // if($.trim( this.value ) == ""){
+            //     $(this).addClass("error");
+            //     validation = 0;
+            // }else{
+            //     $(this).removeClass("error");
+            //     $(this).addClass("success");
+            // }
+            var value = $(this).val();
+            if($.isArray(value)) {
+                value = value.toString();
+            }
+            ajax_data[$(this).attr('name')] = value;
+        });
+        ajax_data['rid'] = update_id;
+        ajax(ajax_data,"update",form_id);
         return;
         // clear editing flag
         editing = 0;
         ready_save = 0;
+    });
+
+    $(document).on("change",".filter_vacancy",function(){
+        selected_value = $(this).find('option:selected').val();
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+'dashboard_filter_vacancy',
+            dataType : 'json',
+            data : 'filter_option='+ selected_value+'&'+csrf_name+'='+ csfrData[csrf_name],
+            success: function(res) {
+                filter_tag = '';
+                if(res!=0){ 
+                  $.each(res, function(i){
+                    filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                    $('#filter_vacancy_table').find('.vacancy_header').text(res[i].label_name);
+                  });  
+                }   
+                $('#filter_vacancy_table').find('tbody').html(filter_tag);
+            }
+        });
+    });
+    $(document).on("change",".filter_provider",function(){
+        selected_value = $(this).find('option:selected').val();
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+'dashboard_filter_provider',
+            dataType : 'json',
+            data : 'filter_option='+ selected_value+'&'+csrf_name+'='+ csfrData[csrf_name],
+            success: function(res) {
+                filter_tag = '';
+                if(res!=0){ 
+                  $.each(res, function(i){
+                    filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                    $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
+                  });  
+                }   
+                else{
+                    alert("No record found");
+                }
+                $('#filter_provider_table').find('tbody').html(filter_tag);
+            }
+        });
     });
 });
 

@@ -284,11 +284,66 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Departments - Add Edit Delete View
+  public function departments($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $departments_update_data = array( 
+                              'departments_name' => $this->input->post('departments_name'),
+                              'department_educational_qualification_id' => $this->input->post('department_educational_qualification_id'),
+                              'departments_status' => $this->input->post('departments_status'),
+                            );
+      $departments_update_where = '(departments_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($departments_update_data); 
+      $this->db->where($departments_update_where);
+      $this->db->update("tr_departments", $departments_update_data); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $departments_insert_data = array( 
+                            'departments_name' => $this->input->post('departments_name'),
+                            'department_educational_qualification_id' => $this->input->post('department_educational_qualification_id'),
+                            'departments_status' => $this->input->post('departments_status'),
+                          );
+      $this->db->insert("tr_departments", $departments_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $state_delete_where = '(departments_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_departments", $state_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $departments_list_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT departments_id,departments_name,departments_status,departments_created_date, SUBSTRING_INDEX( SUBSTRING_INDEX( t.department_educational_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_departments t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.department_educational_qualification_id ) - LENGTH( REPLACE( t.department_educational_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id order by (a.departments_id)");
+    $model_data['departments_values'] = $departments_list_query->result_array();  
+    return $model_data;
+  }
+
   // Get Institution Type list
   public function get_institution_type()
   {
     $institution_get_where = '(institution_type_status=1)'; 
     $model_data = $this->db->get_where("tr_institution_type", $institution_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get Qualification list
+  public function get_qualification_list()
+  {
+    $qualification_get_where = '(educational_qualification_status=1)'; 
+    $model_data = $this->db->get_where("tr_educational_qualification", $qualification_get_where)->result_array(); 
     return $model_data;
   }
   

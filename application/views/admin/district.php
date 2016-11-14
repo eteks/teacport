@@ -166,9 +166,9 @@
     var columns = new Array("district_name","state_name","district_status"); // Set name of input types
     var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var state_name_option = new Array("Tamilnadu","Kerala"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
+    var state_name_option = new Array("Tamilnadu","Kerala");
     var state_name_value = new Array("1","0");
-    var district_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var district_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var district_status_option = new Array("Active","Inactive");
+    var district_status_value = new Array("1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
