@@ -24,7 +24,8 @@ class Dashboardpage extends CI_Controller {
 		$data['paid_jobprovider_districtwise'] = $this->dashboard_model->paid_job_providers_by_district();
 		$data['free_jobprovider_districtwise'] = $this->dashboard_model->free_job_providers_by_district();	
 		$data['latest_job_providers'] = $this->dashboard_model->latest_job_providers();	
-		$data['latest_vacancy_jobs'] = $this->dashboard_model->latest_vacancy_jobs();	
+		$data['latest_vacancy_jobs'] = $this->dashboard_model->latest_vacancy_jobs();
+		$data['page_high_count_visits'] = $this->dashboard_model->page_high_count_visits();	
 		$this->load->view('admin/index',$data);
 	}
 	public function get_chart_data() {

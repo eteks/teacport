@@ -372,7 +372,7 @@
                         <div class="span4">
                             <div class="widget">
                                 <div class="widget-title">
-                                    <h4><i class="icon-book"></i> Active Pages</h4>
+                                    <h4><i class="icon-book"></i> Page High Count Visits</h4>
                                     <span class="tools">
                                     <a href="javascript:;" class="icon-chevron-down"></a>
                                     <a href="javascript:;" class="icon-remove"></a>
@@ -387,30 +387,18 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <?php
+                                            if(!empty($page_high_count_visits)) :
+                                            foreach ($page_high_count_visits as $high_count) :
+                                        ?>
                                         <tr>
-                                            <td>Jobs</td>
-                                            <td><strong>8790</strong></td>
+                                            <td><?php echo $high_count['page_view'] ?></td>
+                                            <td><strong><?php echo $high_count['count_vis'] ?></strong></td>
                                         </tr>
-                                        <tr>
-                                            <td>Job By Categories</td>
-                                            <td><strong>7052</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>About</td>
-                                            <td><strong>6577</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Contact Us</td>
-                                            <td><strong>5760</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Subscription Pricing</td>
-                                            <td><strong>4876</strong></td>
-                                        </tr>
-                                        <tr>
-                                            <td>Blog</td>
-                                            <td><strong>3866</strong></td>
-                                        </tr>
+                                        <?php
+                                            endforeach;
+                                            endif;
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -483,7 +471,7 @@
                                 <tr class="odd gradeX">
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
                                     <td><?php echo $jobprovider['organization_name'] ?></td>
-                                    <td class="hidden-phone"><a href="mailto:jhone-doe@gmail.com"><?php echo $jobprovider['registrant_email_id'] ?></a></td>
+                                    <td class="hidden-phone"><a href="mailto:<?php echo $jobprovider['registrant_email_id'] ?>"><?php echo $jobprovider['registrant_email_id'] ?></a></td>
                                     <td class="hidden-phone"><?php echo $jobprovider['registrant_name'] ?></td>
                                     <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobprovider['organization_created_date'])); ?></td>
                                 </tr>
@@ -518,6 +506,7 @@
                                     <th class="hidden-phone">Job Title</th>
                                     <th class="hidden-phone">Institution</th>
                                     <th class="hidden-phone">District</th>
+                                    <th class="hidden-phone">Job Posted Date</th>
                                     <th class="hidden-phone">Status</th>
                                 </tr>
                                 </thead>
@@ -530,9 +519,8 @@
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
                                     <td><?php echo $jobs['vacancies_job_title'] ?></td>
                                     <td class="hidden-phone"><?php echo $jobs['registrant_name'] ?></td>
-                                    <td class="hidden-phone"><?php echo $jobs['registrant_name'] ?></td>
                                     <td class="hidden-phone"><?php echo $jobs['district_name'] ?></td>
-                                    <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobprovider['organization_created_date'])); ?></td>
+                                    <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobs['vacancies_created_date'])); ?></td>
                                     <td class="hidden-phone"><span class="label label-success"><?php if($jobs['vacancies_status'] == 1) echo "Approved"; else "Waiting for Approve" ?></span></td>
                                     <!-- <td class="hidden-phone"><span class="label label-inverse">Blocked</span></td> -->
                                 </tr>
