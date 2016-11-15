@@ -16,7 +16,7 @@
                                 <li> <a href="<?php echo base_url();?>aboutus">About Us</a> </li>
                                 <li> <a href="<?php echo base_url();?>">Information</a> </li>
                                 <li> <a href="<?php echo base_url();?>contactus">Contact Us</a> </li>
-                                <li> <a href="<?php echo base_url();?>">Term &amp; Conditions</a> </li>
+                                <li> <a href="<?php echo base_url();?>">Terms &amp; Conditions</a> </li>
                             </ul>
                         </div>
                     </div>
