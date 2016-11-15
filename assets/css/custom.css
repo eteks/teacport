@@ -4,7 +4,34 @@
 .slide-featured-jobs {
 	padding: 10px;
 }	
+/* Pricing --Features */
+.all-jobs-list-box2 .fa{
+	color: #777;
+	font-size: 22px;
+}
+/*Added by thangam*/
+/*css for login and registrartion start*/
 
+.registration_status {
+	color: #c24641;
+	display: none;
+	margin: 10px 0;
+	text-align: center;
+}
+.loading {
+	height: 28px;
+    width: 28px;
+}
+#captcha_img{
+	width: 106px;
+}
+/*css for login and registrartion end*/
+/*Ended by thangam*/
+.registration_server_msg{
+	color: #c24641;
+	margin: 10px 0;
+	text-align: center;
+}
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -46,35 +73,6 @@
 	
 }
 /* END OF JOB SEEKER DASHBOARD */
-
-/* Pricing --Features */
-.all-jobs-list-box2 .fa{
-	color: #777;
-	font-size: 22px;
-}
-/*Added by thangam*/
-/*css for login and registrartion start*/
-
-.registration_status {
-	color: #c24641;
-	display: none;
-	margin: 10px 0;
-	text-align: center;
-}
-.loading {
-	height: 28px;
-    width: 28px;
-}
-#captcha_img{
-	width: 106px;
-}
-/*css for login and registrartion end*/
-/*Ended by thangam*/
-.registration_server_msg{
-	color: #c24641;
-	margin: 10px 0;
-	text-align: center;
-}
 /* COMPANY DASHBOARD */
 #company-browse-candidate .all-jobs-list-box2 {
 	position: relative;
@@ -82,3 +80,15 @@
 }
 
 /* END OF COMPANY DASHBOARD */
+
+/* DASHBOARD -both for providers & Seekers */
+#provider-profilebar .progress, #seeker-profilebar .progress {
+    border-radius: 15px;
+    box-shadow: none;
+    height: 22px;
+    position: relative;
+}
+
+.provider-jobs li {
+	margin-left: 35px;
+}
