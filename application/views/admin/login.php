@@ -90,7 +90,7 @@ Website: http://thevectorlab.net/
   <!-- END LOGIN -->
   <!-- BEGIN COPYRIGHT -->
   <div id="login-copyright">
-      2013 &copy; Admin Lab Dashboard.
+      2016 &copy; Teacher Recruit.
   </div>
   <!-- END COPYRIGHT -->
   <!-- BEGIN JAVASCRIPTS -->
