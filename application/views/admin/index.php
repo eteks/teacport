@@ -1,3 +1,6 @@
+<?php
+if(!empty($this->session->userdata("login_status"))): 
+?>
 <?php include "templates/header.php" ?>
     <!-- BEGIN CONTAINER -->
     <div id="container" class="row-fluid">
@@ -623,3 +626,8 @@
         </div>
     <!-- END CONTAINER -->
 <?php include "templates/footer.php" ?>
+<?php
+else :
+redirect(base_url().'admin');
+endif;
+?>

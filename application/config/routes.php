@@ -75,7 +75,7 @@ $route['vacancies'] = 'home/vacancies';
 
 
 //Route url for admin
-$route['admin'] = 'admin/login/index_login';
+$route['admin'] = 'admin/admin_login/teac_admin_login';
 $route['admin/dashboard'] = 'admin/dashboardpage/dashboard';
 $route['admin/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
 $route['admin/state'] = 'admin/adminindex/state';
@@ -87,6 +87,9 @@ $route['admin/qualification'] = 'admin/adminindex/qualification';
 $route['admin/class_level'] = 'admin/adminindex/class_level';
 $route['admin/departments'] = 'admin/adminindex/departments';
 $route['admin/subject'] = 'admin/adminindex/subject';
+$route['admin/university'] = 'admin/adminindex/university';
+$route['admin/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
+$route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 

@@ -38,7 +38,7 @@ if(!empty($this->session->userdata("login_status"))):
                        <li>
                            <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/extra_curricular">Extra Curricular</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/subject">University</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -76,7 +76,7 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/extra_curricular" class="admin_module_form" id="extra_curricular_form">
+                                <form method="post" action="adminindex/university" class="admin_module_form" id="subject_form">
                                   <?php } ?>
                                   <?php
                                   if(!empty($status)) :
@@ -87,8 +87,9 @@ if(!empty($this->session->userdata("login_status"))):
                                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th>Extra Curricular</th>
-                                        <th>Status</th>
+                                        <th>University Board Name</th>
+                                        <th>University Class Level</th>
+                                        <th>University Board Status</th>
                                         <th>Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -96,33 +97,43 @@ if(!empty($this->session->userdata("login_status"))):
                                     </thead>
                                     <tbody>
                                       <?php
-                                      if(!empty($extra_curricular_values)) :
-                                      foreach ($extra_curricular_values as $exac_val) :
+                                      if(!empty($universities_values)) :
+                                      foreach ($universities_values as $unv_key => $unv_val) :
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $exac_val['extra_curricular_id']; ?>">
-                                        <td class="extra_curricular"> 
-                                          <?php echo $exac_val['extra_curricular']; ?>
+                                      <tr class="parents_tr" id="column<?php echo $unv_key; ?>">
+                                        <td class="university_board_name"> 
+                                          <?php echo $unv_val['university_board_name']; ?>
                                         </td>
-                                        <td class="extra_curricular_status"> 
+                                        <td class="university_class_level_id"> 
+                                          <?php
+                                          foreach ($unv_val['class_level_id'] as $cls_key => $cls_val) :
+                                          ?>
+                                            <span data-id="<?php echo $cls_key; ?>"> 
+                                              <?php echo $cls_val; ?>
+                                            </span>
+                                            <br>
+                                          <?php
+                                          endforeach;
+                                          ?>  
+                                        </td>
+                                        <td class="university_board_status"> 
                                           <?php 
-                                          if ($exac_val['extra_curricular_status'] == 1) 
+                                          if ($unv_val['university_board_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
                                         </td>
                                         <td class="created_date">
-                                          <?php echo $exac_val['extra_curricular_created_date']; ?>
+                                          <?php echo $unv_val['university_board_created_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $exac_val['extra_curricular_id']; ?>" href="javascript:;" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
+                                          <a class="ajaxEdit" id="column<?php echo $unv_key; ?>" href="javascript:;" data-id="<?php echo $unv_key; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
-                                            Delete
-                                          </a>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $unv_key; ?>">Delete</a>
                                         </td>
                                       </tr>
                                       <?php
@@ -133,34 +144,42 @@ if(!empty($this->session->userdata("login_status"))):
                                   </table>
                                   <?php if(!$this->input->is_ajax_request()) { ?>
                                 </form>
-                              </div>
                             </div>
-                          </div>
-                          <!-- END EXAMPLE TABLE widget-->
-                      </div>
+                        </div>
                     </div>
-                    <!-- END ADVANCED TABLE widget-->
-                    <!-- END PAGE CONTENT-->
-                  </div>
-                  <!-- END PAGE CONTAINER-->
+                    <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <!-- END PAGE -->
-              </div>
-              <!-- END CONTAINER -->
+            </div>
+            <!-- END ADVANCED TABLE widget-->
 
-
-
-
-  <script>
+            <!-- END PAGE CONTENT-->
+         </div>
+         <!-- END PAGE CONTAINER-->
+      </div>
+      <!-- END PAGE -->
+   </div>
+   <!-- END CONTAINER -->
+   <script>
     // Define default values
-    var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("extra_curricular","extra_curricular_status"); // Set name of input types
-    var placeholder = new Array("Enter Extra-Curricular Name",""); // Set placeholder of input types
+    var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("university_board_name","university_class_level_id","university_board_status"); // Set name of input types
+    var placeholder = new Array("Enter University Board Name","Please select class level"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var extra_curricular_status_option = new Array("Please select status","Active","Inactive"); 
-    var extra_curricular_status_value = new Array("","1","0"); 
+    var university_class_level_id_option = new Array();
+    var university_class_level_id_value = new Array();
+    <?php
+    if(!empty($class_level_values)) :
+    foreach ($class_level_values as $cls_val) :
+    ?>
+      university_class_level_id_option.push("<?php echo $cls_val['class_level']; ?>");
+      university_class_level_id_value.push("<?php echo $cls_val['class_level_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
+    var university_board_status_option = new Array("Please select status","Active","Inactive"); 
+    var university_board_status_value = new Array("","1","0");
   </script>
-  
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>
 <?php

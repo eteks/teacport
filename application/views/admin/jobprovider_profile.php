@@ -75,11 +75,11 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <div class="btn-group">
+                                    <!-- <div class="btn-group">
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
@@ -103,49 +103,89 @@ if(!empty($this->session->userdata("login_status"))):
                                 <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                   <thead>
                                     <tr class="ajaxTitle">
-                                        <th>Statename</th>
-                                        <th>Status</th>
-                                        <th>Created date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                      <th> Organization Name </th>
+                                      <th> organization_logo </th>
+                                      <th> organization_address1 </th>
+                                      <th> organization_address2 </th>
+                                      <th> organization_address3 </th>
+                                      <th> organization district </th>
+                                      <th> organization institution </th>
+                                      <th> register type </th>
+                                      <th> registrant name </th>
+                                      <th> registrant designation </th>
+                                      <th> registrant data of birth </th>
+                                      <th> email </th>
+                                      <th> mobile </th>
+                                      <th> sms verified </th>
+                                      <th> transaction id </th>
+                                      <th> subcription id </th>
+                                      <th> profile completeness </th>
+                                      <th> sms count </th>
+                                      <th> resume download count </th>
+                                      <th> sms_remaining_count </th>
+                                      <th> remaining_resume_download_count </th>
+                                      <th> organization_status </th>
+                                      <th> edit </th>
+                                      <th> delete </th>
                                     </tr>
                                   </thead>
                                   <tbody>                                   
-                                    <?php
-                                    if(!empty($state_values)) :
-                                    foreach ($state_values as $sta_val) :
-                                    ?>
-                                    <tr class="parents_tr" id="column<?php echo $sta_val['state_id']; ?>">
+                                    <tr class="parents_tr" id="column">
                                       <td class="state_name"> 
-                                        <?php echo $sta_val['state_name']; ?>
                                       </td>
-                                      <td class="state_status"> 
-                                        <?php 
-                                        if ($sta_val['state_status'] == 1) 
-                                          echo "Active";
-                                        else
-                                          echo "Inactive";
-                                        ?>
+                                      <td class="state_name"> 
                                       </td>
-                                        <td class="created_date"> 
-                                          <?php echo $sta_val['state_created_date']; ?> 
-                                        </td>
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $sta_val['state_id']; ?>" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
-                                            Edit
-                                          </a>
-                                        </td>
-                                        <td>
-                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
-                                            Delete
-                                          </a>
-                                        </td>
-                                     </tr>
-
-                                    <?php
-                                    endforeach;
-                                    endif;
-                                    ?>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="edit_section">
+                                        <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
+                                          Edit
+                                        </a>
+                                      </td>
+                                      <td>
+                                        <a class="ajaxDelete" href="javascript:;" data-id="">
+                                          Delete
+                                        </a>
+                                      </td>
+                                    </tr>
                                   </tbody>
                                 </table>
                                 <?php if(!$this->input->is_ajax_request()) { ?>

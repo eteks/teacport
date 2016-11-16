@@ -1,3 +1,6 @@
+<?php
+if(!$this->session->userdata("login_status")): 
+?>
 <!DOCTYPE html>
 <!--
 Template Name: Admin Lab Dashboard build with Bootstrap v2.3.1
@@ -36,54 +39,62 @@ Website: http://thevectorlab.net/
   <!-- BEGIN LOGIN -->
   <div id="login">
     <!-- BEGIN LOGIN FORM -->
-    <form id="loginform" class="form-vertical no-padding no-margin" action="<?php echo base_url(); ?>admin/dashboard">
+    <form id="admin_login_form" class="form-vertical no-padding no-margin admin_login_form" action="admin_login">
       <div class="lock">
           <i class="icon-lock"></i>
       </div>
       <div class="control-wrap">
           <h4>User Login</h4>
+          <p class="admin_status"></p>
           <div class="control-group">
               <div class="controls">
                   <div class="input-prepend">
-                      <span class="add-on"><i class="icon-user"></i></span><input id="input-username" type="text" placeholder="Username" />
+                      <span class="add-on">
+                        <i class="icon-user"></i>
+                      </span>
+                      <input id="input-username" type="text" name="username" value="<?php if(!empty($remember_value)) echo $remember_value; ?>" placeholder="Username" />
                   </div>
               </div>
           </div>
           <div class="control-group">
               <div class="controls">
                   <div class="input-prepend">
-                      <span class="add-on"><i class="icon-key"></i></span><input id="input-password" type="password" placeholder="Password" />
+                      <span class="add-on">
+                        <i class="icon-key"></i>
+                      </span>
+                      <input id="input-password" type="password" name="password" placeholder="Password" />
                   </div>
                   <div class="mtop10">
                       <div class="block-hint pull-left small">
-                          <input type="checkbox" id=""> Remember Me
+                          <input type="checkbox" id="" name="remember_me"> Remember Me
                       </div>
                       <div class="block-hint pull-right">
-                          <a href="javascript:;" class="" id="forget-password">Forgot Password?</a>
+                        <a href="javascript:;" class="" id="forget-password">Forgot Password?</a>
                       </div>
                   </div>
-
                   <div class="clearfix space5"></div>
               </div>
-
           </div>
       </div>
-
       <input type="submit" id="login-btn" class="btn btn-block login-btn" value="Login" />
     </form>
     <!-- END LOGIN FORM -->        
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form id="forgotform" class="form-vertical no-padding no-margin hide" action="<?php echo base_url(); ?>admin/dashboard">
+    <form id="forgotform" class="form-vertical no-padding no-margin hide admin_login_form" action="admin_login/admin_forget">
       <p class="center">Enter your e-mail address below to reset your password.</p>
       <div class="control-group">
+        <p class="admin_status"></p>
         <div class="controls">
           <div class="input-prepend">
-            <span class="add-on"><i class="icon-envelope"></i></span><input id="input-email" type="text" placeholder="Email"  />
+            <span class="add-on">
+              <i class="icon-envelope"></i>
+            </span>
+            <input id="input-email" type="text" name="useremail" placeholder="Email"  />
           </div>
         </div>
         <div class="space20"></div>
       </div>
-      <input type="button" id="forget-btn" class="btn btn-block login-btn" value="Submit" />
+      <input type="submit" id="forget-btn" class="btn btn-block login-btn" value="Submit" />
     </form>
     <!-- END FORGOT PASSWORD FORM -->
   </div>
@@ -98,6 +109,14 @@ Website: http://thevectorlab.net/
   <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="<?php echo base_url(); ?>assets/admin/js/jquery.blockui.js"></script>
   <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
+  <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script> 
+  <script>
+    var csfrData = {};
+    csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo $this->security->get_csrf_hash(); ?>';
+    var admin_baseurl = "<?php echo base_url(); ?>admin/";
+    var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
+  </script>
+
   <script>
     jQuery(document).ready(function() {     
       App.initLogin();
@@ -107,3 +126,8 @@ Website: http://thevectorlab.net/
 </body>
 <!-- END BODY -->
 </html>
+<?php
+else :
+redirect(base_url().'admin/dashboard');
+endif;
+?>
