@@ -153,6 +153,15 @@ class Job_seeker extends CI_Controller {
 		$this->session->set_userdata('captcha_info', $data);
 		echo $data_value;
 	}
+	public function validate_captcha(){
+    if($this->input->post('captcha_value') != $this->session->userdata['captcha_config'])
+    {
+        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
+        return false;
+    }else{
+        return true;
+    }
+}
 	public function dashboard()
     {
     	$session_data = $this->session->all_userdata();
