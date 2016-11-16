@@ -48,3 +48,25 @@ if ( ! function_exists('get_institution_by_dept')){
 		return $out;
 	}
 }
+
+if ( ! function_exists('get_class_level_by_dept')){
+	// Get institution type by subject
+	function get_class_level_by_dept($value) 
+	{
+		$out = array();
+		if(!empty($value)) {
+			foreach ($value as $key => $row) {
+				foreach ($row as $k => $r) {
+					if(!isset($out[$row['education_board_id']][$row['class_level_id']]))
+					{
+						$out[$row['education_board_id']]['class_level_id'][$row['class_level_id']] = $row['class_level'];
+				   	}
+				   	if($k == 'university_board_name' || $k == 'university_board_status' || $k == 'university_board_created_date' ) {
+	     				$out[$row['education_board_id']][$k] = $row[$k];
+	     			}
+			    }
+			}
+		}
+		return $out;
+	}
+}

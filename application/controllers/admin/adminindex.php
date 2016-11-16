@@ -969,6 +969,128 @@ class Adminindex extends CI_Controller {
 		}
 	}
 
+	// University - Add Edit View Delete
+	public function university()
+	{	
+		$data['class_level_values'] = $this->admin_model->get_class_levels(); 
+
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'university_board_name',
+		                              'label'   => 'University Board Name',
+		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_university_board.education_board_id.university_board_name.'.$id.']'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'university_class_level_id',
+		                              'label'   => 'University Class Level Type',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'university_board_status',
+		                                 'label'   => 'University Board Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->universities('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'university_board_name',
+		                              'label'   => 'University Board Name',
+		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_university_board.university_board_name]'
+
+		                            ),
+		                           	array(
+		                              'field'   => 'university_class_level_id',
+		                              'label'   => 'University Class Level Type',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'university_board_status',
+		                                 'label'   => 'University Board Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->universities('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->universities('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->universities('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$universities_values = $data_values['universities_values'];
+			$data_ajax['universities_values'] = get_class_level_by_dept($universities_values);
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/university',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$universities_values = $data_values['universities_values'];
+			$data['universities_values'] = get_class_level_by_dept($universities_values);
+			$this->load->view('admin/university',$data);
+		}
+	}
+
 	public function languages()
 	{	
 			$this->load->view('admin/languages');

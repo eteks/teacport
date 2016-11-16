@@ -38,7 +38,7 @@ if(!empty($this->session->userdata("login_status"))):
                        <li>
                            <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/departments">Department</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/subject">University</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -76,64 +76,64 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/departments" class="admin_module_form" id="departments_form">
+                                <form method="post" action="adminindex/university" class="admin_module_form" id="subject_form">
                                   <?php } ?>
                                   <?php
                                   if(!empty($status)) :
-                                    echo "<p class='db_status update_success_md'> $status </p>";
+                                    echo "<p class='db_status'> $status </p>";
                                   endif;
                                   ?> 
-                                  <p class='val_error error_msg_md'> <p>
+                                  <p class='val_error'> <p>
                                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                          <th>Department</th>
-                                          <th>Qualification</th>
-                                          <th>Status</th>
-                                          <th>Created Date</th>
-                                          <th>Edit</th>
-                                          <th>Delete</th>
+                                        <th>University Board Name</th>
+                                        <th>University Class Level</th>
+                                        <th>University Board Status</th>
+                                        <th>Created Date</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <?php
-                                      if(!empty($departments_values)) :
-                                      foreach ($departments_values as $dep_key => $dep_val) :
+                                      if(!empty($universities_values)) :
+                                      foreach ($universities_values as $unv_key => $unv_val) :
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $dep_key; ?>">
-                                        <td class="departments_name"> 
-                                          <?php echo $dep_val['departments_name']; ?>
+                                      <tr class="parents_tr" id="column<?php echo $unv_key; ?>">
+                                        <td class="university_board_name"> 
+                                          <?php echo $unv_val['university_board_name']; ?>
                                         </td>
-                                        <td class="department_educational_qualification_id"> 
-                                        <?php
-                                        foreach ($dep_val['educational_qualification_id'] as $edu_key => $edu_val) :
-                                        ?>
-                                          <span data-id="<?php echo $edu_key; ?>"> 
-                                            <?php echo $edu_val; ?>
-                                          </span>
-                                          <br>
-                                        <?php
-                                        endforeach;
-                                        ?>
+                                        <td class="university_class_level_id"> 
+                                          <?php
+                                          foreach ($unv_val['class_level_id'] as $cls_key => $cls_val) :
+                                          ?>
+                                            <span data-id="<?php echo $cls_key; ?>"> 
+                                              <?php echo $cls_val; ?>
+                                            </span>
+                                            <br>
+                                          <?php
+                                          endforeach;
+                                          ?>  
                                         </td>
-                                        <td class="departments_status"> 
+                                        <td class="university_board_status"> 
                                           <?php 
-                                          if ($dep_val['departments_status'] == 1) 
+                                          if ($unv_val['university_board_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
                                         </td>
                                         <td class="created_date">
-                                          <?php echo $dep_val['departments_created_date']; ?>
-                                        </td>          
+                                          <?php echo $unv_val['university_board_created_date']; ?>
+                                        </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $dep_key; ?>" href="javascript:;" data-id="<?php echo $dep_key; ?>">
+                                          <a class="ajaxEdit" id="column<?php echo $unv_key; ?>" href="javascript:;" data-id="<?php echo $unv_key; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $dep_key; ?>">Delete</a>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $unv_key; ?>">Delete</a>
                                         </td>
                                       </tr>
                                       <?php
@@ -149,27 +149,7 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
 
             <!-- END PAGE CONTENT-->
@@ -182,23 +162,23 @@ if(!empty($this->session->userdata("login_status"))):
    <script>
     // Define default values
     var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("departments_name","department_educational_qualification_id","departments_status"); // Set name of input types
-    var placeholder = new Array("Enter Department Name","Please select qualification",""); // Set placeholder of input types
+    var columns = new Array("university_board_name","university_class_level_id","university_board_status"); // Set name of input types
+    var placeholder = new Array("Enter University Board Name","Please select class level"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var department_educational_qualification_id_option = new Array();
-    var department_educational_qualification_id_value = new Array();
+    var university_class_level_id_option = new Array();
+    var university_class_level_id_value = new Array();
     <?php
-    if(!empty($qualification_list)) :
-    foreach ($qualification_list as $qua_val) :
+    if(!empty($class_level_values)) :
+    foreach ($class_level_values as $cls_val) :
     ?>
-      department_educational_qualification_id_option.push("<?php echo $qua_val['educational_qualification']; ?>");
-      department_educational_qualification_id_value.push("<?php echo $qua_val['educational_qualification_id']; ?>");
+      university_class_level_id_option.push("<?php echo $cls_val['class_level']; ?>");
+      university_class_level_id_value.push("<?php echo $cls_val['class_level_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var departments_status_option = new Array("Please select status","Active","Inactive"); 
-    var departments_status_value = new Array("","1","0"); 
+    var university_board_status_option = new Array("Please select status","Active","Inactive"); 
+    var university_board_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

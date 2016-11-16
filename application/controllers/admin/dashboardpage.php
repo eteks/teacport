@@ -34,7 +34,7 @@ class Dashboardpage extends CI_Controller {
 			$end_date = $_POST['end'];
 			$results = $this->dashboard_model->get_chart_data_for_visits($start_date, $end_date);
 			if ($results === NULL) {
-				echo json_encode('No record found');
+				echo json_encode('No data avaliable');
 			} else {
 				echo json_encode($results);
 			}
