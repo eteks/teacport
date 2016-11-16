@@ -12,11 +12,11 @@
                         <div class="footer_block">
                             <h4>Useful Links</h4>
                             <ul class="footer-links">
-                                <li> <a href="index.html#">Home</a> </li>
-                                <li> <a href="index.html#">About Us</a> </li>
-                                <li> <a href="index.html#">Information</a> </li>
-                                <li> <a href="index.html#">Contact Us</a> </li>
-                                <li> <a href="index.html#">Term &amp; Conditions</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
+                                <li> <a href="<?php echo base_url();?>aboutus">About Us</a> </li>
+                                <li> <a href="<?php echo base_url();?>">Information</a> </li>
+                                <li> <a href="<?php echo base_url();?>contactus">Contact Us</a> </li>
+                                <li> <a href="<?php echo base_url();?>">Terms &amp; Conditions</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -24,10 +24,10 @@
                         <div class="footer_block dark_gry">
                             <h4>Jobs by Category</h4>
                             <ul class="recentpost">
-                                <li><a href="index.html#">Teacher Jobs</a> </li>
-                                <li><a href="index.html#">Office Admin Jobs </a></li>                      
-                                <li><a href="index.html#">Hindi Teacher Jobs</a></li>
-                                <li><a href="index.html#">View all jobs</a></li>
+                                <li><a href="<?php echo base_url();?>">Teacher Jobs</a> </li>
+                                <li><a href="<?php echo base_url();?>">Office Admin Jobs </a></li>                      
+                                <li><a href="<?php echo base_url();?>">Hindi Teacher Jobs</a></li>
+                                <li><a href="<?php echo base_url();?>">View all jobs</a></li>
                             </ul>
                         </div>
                     </div>
@@ -53,14 +53,14 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <p>Copyright ©2016 - Teachers Recruit All rights Reserved.<br> Design and Developed By <a href="http://themeforest.net/user/scriptsbundle">Etekchnoservices Pvt Ltd </a></p>
+                                        <p>Copyright ©2016 - Teachers Recruit All rights Reserved.<br> Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12">
                                         <ul class="social-network social-circle onwhite">
-                                            <li><a href="footer-small.html#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="footer-small.html#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="footer-small.html#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="footer-small.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+                                            <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="http://www.googleplus.com" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                         </ul>
                                     </div>
                                 </div>

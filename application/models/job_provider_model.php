@@ -43,5 +43,4 @@ class Job_provider_model extends CI_Model {
 		}
 	}
 	
-	
 }

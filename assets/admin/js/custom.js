@@ -320,7 +320,7 @@ $(document).ready(function(){
                   });  
                 }   
                 else{
-                    alert("No record found");
+                    alert("No data available");
                 }
                 $('#filter_provider_table').find('tbody').html(filter_tag);
             }
