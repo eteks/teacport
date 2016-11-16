@@ -185,7 +185,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 	border: 1px solid #ff0000 !important;
 }
 tr select {
-    max-width: 150px !important;
+    max-width: 175px !important;
     min-width: 150px !important;
 }
 .select_by {
@@ -221,4 +221,17 @@ tr select {
 }
 .site_visites_cont{
 	padding: 15px 15px 8px !important;
+}
+#footer > span {
+    margin-left: 75px;
+}
+.error_msg_md{
+	color: #ff0000 !important;
+	font-size: 14px !important;
+	font-weight:500;
+}
+.update_success_md{
+	color: #2c6700 !important;
+	font-size: 14px !important;
+	font-weight: 600;
 }

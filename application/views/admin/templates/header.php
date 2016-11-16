@@ -21,6 +21,7 @@ Website: http://thevectorlab.net/
 	<link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style_responsive.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style_default.css" rel="stylesheet" id="style_color" />
+	<!-- <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-multiselect/bootstrap-multiselect.css"></script> -->
 	<link href="<?php echo base_url(); ?>assets/admin/assets/chosen-bootstrap/chosen/chosen.css" rel="stylesheet" type="text/css" />
 
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
@@ -213,7 +214,7 @@ Website: http://thevectorlab.net/
                                 <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-tasks"></i> My Tasks</a></li>
                                 <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-calendar"></i> Calendar</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?php echo base_url(); ?>admin/login/index_login"><i class="icon-key"></i> Log Out</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/admin_login/teac_admin_logout"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->
@@ -259,6 +260,29 @@ Website: http://thevectorlab.net/
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Seeker</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Provider</a></li>
+                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
+                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
+                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
+                        <li><a class="" href="tree_view.php">Tree View</a></li>
+                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <span class="icon-box"> <i class="icon-user"></i></span> Job Providers
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">Job  
+                                Provider profile
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
+                                Job Vacancies
+                            </a>
+                        </li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
@@ -325,6 +349,7 @@ Website: http://thevectorlab.net/
                         <li><a class="" href="<?php echo base_url(); ?>admin/class_level">Class Level</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/departments">Department</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/subject">Subject</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/university">University</a></li>
                     </ul>
                 </li>
                <!--  <li class="has-sub">

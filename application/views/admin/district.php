@@ -1,3 +1,6 @@
+<?php
+if(!empty($this->session->userdata("login_status"))): 
+?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
@@ -77,10 +80,10 @@
                                   <?php } ?>
                                   <?php
                                   if(!empty($status)) :
-                                    echo "<p class='db_status'> $status </p>";
+                                    echo "<p class='db_status update_success_md'> $status </p>";
                                   endif;
                                   ?> 
-                                  <p class='val_error'> <p>
+                                  <p class='val_error error_msg_md'> <p>
                                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
@@ -121,7 +124,7 @@
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" id="column1" href="javascript:;" data-id="<?php echo $dis_val['district_id']; ?>">
+                                          <a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal" data-id="<?php echo $dis_val['district_id']; ?>">
                                             Delete
                                           </a>
                                         </td>
@@ -139,6 +142,25 @@
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body delete_message_style">
+								<input type="hidden" name="delete" id="vId" value=""/>
+								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<center class="popup_tx">
+									<h5>Are you sure you want to delete this item? </h5>
+								</center>
+							</div>
+							<div id="delete_btn" class="modal-footer footer_model_button" >
+								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
+								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
+							</div>
+				   		 </div><!--/row-->
+				    </div>
+    			</div>
             </div>
 
             <!-- END ADVANCED TABLE widget-->
@@ -174,3 +196,8 @@
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>
+<?php
+else :
+redirect(base_url().'admin');
+endif;
+?>

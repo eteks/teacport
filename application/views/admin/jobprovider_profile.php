@@ -75,11 +75,11 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <div class="btn-group">
+                                    <!-- <div class="btn-group">
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
@@ -96,56 +96,96 @@ if(!empty($this->session->userdata("login_status"))):
                                 <?php } ?>
                                 <?php
                                 if(!empty($status)) :
-                                  echo "<p class='db_status update_success_md'> $status </p>";
+                                  echo "<p class='db_status'> $status </p>";
                                 endif;
                                 ?> 
-                                <p class='val_error error_msg_md'> <p>
+                                <p class='val_error'> <p>
                                 <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                   <thead>
                                     <tr class="ajaxTitle">
-                                        <th>Statename</th>
-                                        <th>Status</th>
-                                        <th>Created date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                      <th> Organization Name </th>
+                                      <th> organization_logo </th>
+                                      <th> organization_address1 </th>
+                                      <th> organization_address2 </th>
+                                      <th> organization_address3 </th>
+                                      <th> organization district </th>
+                                      <th> organization institution </th>
+                                      <th> register type </th>
+                                      <th> registrant name </th>
+                                      <th> registrant designation </th>
+                                      <th> registrant data of birth </th>
+                                      <th> email </th>
+                                      <th> mobile </th>
+                                      <th> sms verified </th>
+                                      <th> transaction id </th>
+                                      <th> subcription id </th>
+                                      <th> profile completeness </th>
+                                      <th> sms count </th>
+                                      <th> resume download count </th>
+                                      <th> sms_remaining_count </th>
+                                      <th> remaining_resume_download_count </th>
+                                      <th> organization_status </th>
+                                      <th> edit </th>
+                                      <th> delete </th>
                                     </tr>
                                   </thead>
                                   <tbody>                                   
-                                    <?php
-                                    if(!empty($state_values)) :
-                                    foreach ($state_values as $sta_val) :
-                                    ?>
-                                    <tr class="parents_tr" id="column<?php echo $sta_val['state_id']; ?>">
+                                    <tr class="parents_tr" id="column">
                                       <td class="state_name"> 
-                                        <?php echo $sta_val['state_name']; ?>
                                       </td>
-                                      <td class="state_status"> 
-                                        <?php 
-                                        if ($sta_val['state_status'] == 1) 
-                                          echo "Active";
-                                        else
-                                          echo "Inactive";
-                                        ?>
+                                      <td class="state_name"> 
                                       </td>
-                                        <td class="created_date"> 
-                                          <?php echo $sta_val['state_created_date']; ?> 
-                                        </td>
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $sta_val['state_id']; ?>" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
-                                            Edit
-                                          </a>
-                                        </td>
-                                        <td>
-                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $sta_val['state_id']; ?>">
-                                            Delete
-                                          </a>
-                                        </td>
-                                     </tr>
-
-                                    <?php
-                                    endforeach;
-                                    endif;
-                                    ?>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="state_name"> 
+                                      </td>
+                                      <td class="edit_section">
+                                        <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
+                                          Edit
+                                        </a>
+                                      </td>
+                                      <td>
+                                        <a class="ajaxDelete" href="javascript:;" data-id="">
+                                          Delete
+                                        </a>
+                                      </td>
+                                    </tr>
                                   </tbody>
                                 </table>
                                 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -155,25 +195,6 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
 
             <!-- END ADVANCED TABLE widget-->
