@@ -92,3 +92,7 @@
 .provider-jobs li {
 	margin-left: 35px;
 }
+.error{
+color: red;
+font-size: 13px;
+}
