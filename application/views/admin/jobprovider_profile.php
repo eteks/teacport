@@ -633,8 +633,20 @@ if(!empty($this->session->userdata("login_status"))):
     var columns = new Array("state_name","state_status"); // Set name of input types
     var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var state_status_option = new Array("Please select status","Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var state_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var organization_institution_type_id_option = new Array("Please select institution");
+    var organization_institution_type_id_value = new Array("");
+    <?php foreach ($variable as $key => $value): ?>
+      
+    <?php endforeach ?>
+
+
+
+
+
+
+
+    var state_status_option = new Array("Please select status","Active","Inactive"); 
+    var state_status_value = new Array("","1","0");
   </script>
 
 <?php include "templates/footer_grid.php" ?>
