@@ -66,7 +66,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Editable Table</h4>
+                            <h4><i class="icon-reorder"></i>Job Provider Profile </h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -209,11 +209,10 @@ if(!empty($this->session->userdata("login_status"))):
                                     <div class="span6 control-group">
                                        <label class="control-label">Institution Type</label>
                                        <div class="controls input_field_width">
-                                           <select>
-											  <option>Volvo</option>
-											  <option>Saab</option>
-											  <option>Mercedes</option>
-											  <option>Audi</option>
+                                           <select class="popup_select">
+											  <option>Schools</option>
+											  <option>Engineering</option>
+											  <option>Arts & Science</option>
 											</select> 
                                        </div>
                                     </div>
@@ -221,19 +220,30 @@ if(!empty($this->session->userdata("login_status"))):
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address1</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Organization Status</label>
-                                       <div class="controls input_field_width">
-                                          <select>
+                                       	<label class="control-label">Organization Status</label>
+                                          <select class="popup_select">
 											  <option>Active</option>
 											  <option>Inactive</option>
 											</select>
                                        </div>
                                     </div>
+                                    <div class="span6 control-group">
+                                    <label class="control-label">Organization Logo</label>
+                                    <div class="controls">
+                                        <div class="fileupload fileupload-new" data-provides="fileupload">
+                                            <div class="fileupload-new thumbnail uploaded_img">
+                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                                            </div>
+                                            <div class="fileupload-preview fileupload-exists thumbnail uploaded_img_preview"></div>
+                                            <div class="select_chng_rmv">
+                                       <span class="btn btn-file"><span class="fileupload-new">Select image</span>
+                                       <span class="fileupload-exists">Change</span>
+                                       <input type="file" class="default" /></span>
+                                                <a href="form_component.html#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                    </div>                                   
                                  </div>
                                  <div class="tab-pane" id="tab2">
@@ -262,7 +272,7 @@ if(!empty($this->session->userdata("login_status"))):
                                     <div class="span6 control-group">
                                        <label class="control-label">District Name</label>
                                        <div class="controls input_field_width">
-                                         <select>
+                                         <select class="popup_select">
 											  <option>Madurai</option>
 											  <option>Chennai</option>
 											  <option>Puducherry</option>
@@ -272,28 +282,6 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                    </div>                                   
                                  </div>
-                                 <!-- <div class="tab-pane" id="tab3">
-                                    <h4>Fill up step 3</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">Text Input</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline"></span>
-                                       </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                       <label class="control-label">Checkbox and radio Options</label>
-                                       <div class="controls">
-                                          <label class="checkbox line">
-                                          <input type="checkbox" value="" /> Lorem ipsum dolor imti
-                                          </label>
-                                          <label class="radio line">
-                                          <input type="radio" value="" /> Duis autem vel eum iriure dolor in hendrerit
-                                          </label>
-                                       </div>
-                                    </div>
-                                 </div> -->
                                  <div class="tab-pane" id="tab3">
                                     <h4>Registrant Details</h4>
                                     <div class="span12">
@@ -314,7 +302,7 @@ if(!empty($this->session->userdata("login_status"))):
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Date Of Birth</label>
-                                          <input type="text" class="span6" />
+                                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
@@ -386,12 +374,6 @@ if(!empty($this->session->userdata("login_status"))):
                                           <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
                                           </a>
                                        </li>
-                                       <!-- <li class="span3">
-                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
-                                          <span class="number">4</span>
-                                          <span class="desc"><i class="icon-ok"></i> Final Step</span>
-                                          </a> 
-                                       </li> -->
                                     </ul>
                                  </div>
                               </div>
@@ -405,56 +387,40 @@ if(!empty($this->session->userdata("login_status"))):
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Organization Name</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Organization Logo</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Organization Address1</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Organization Address2</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Organization Address3</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">District Name</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Institution Type</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Organization Status</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                  </div>
@@ -464,116 +430,69 @@ if(!empty($this->session->userdata("login_status"))):
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Registrant Name</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Register Type</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Designation</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Date Of Birth</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Email ID</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Mobile No</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                  </div>
-                                 <!-- <div class="tab-pane" id="tab3">
-                                    <h4>Fill up step 3</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">Text Input</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline"></span>
-                                       </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                       <label class="control-label">Checkbox and radio Options</label>
-                                       <div class="controls">
-                                          <label class="checkbox line">
-                                          <input type="checkbox" value="" /> Lorem ipsum dolor imti
-                                          </label>
-                                          <label class="radio line">
-                                          <input type="radio" value="" /> Duis autem vel eum iriure dolor in hendrerit
-                                          </label>
-                                       </div>
-                                    </div>
-                                 </div> -->
                                  <div class="tab-pane" id="tab3">
                                     <h4>Addtional Details</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Is SMS Verified</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Transcation ID</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Subcription Plan</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Total SMS Count</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Remaining SMS Count</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Total Resume Count</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Remaining Resume Count</label>
-                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
                                    </div>
@@ -594,9 +513,9 @@ if(!empty($this->session->userdata("login_status"))):
                            </div>
                         </form>
                      </div>
-                  </div>
 				 <p><a data-popup-close-sec="popup-1" href="#">Close</a></p>
            <a class="popup-close-sec" data-popup-close-sec="popup-1" href="#">x</a>
+            </div>
            </div>
        </div>       
        <!-- Delete Popup -->       
