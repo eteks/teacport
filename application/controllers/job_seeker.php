@@ -153,4 +153,16 @@ class Job_seeker extends CI_Controller {
 		$this->session->sess_destroy();
     	redirect('/','refresh');
 	}
+
+    // Akila Created
+    
+    public function seekerdbd_editprofile()
+	{
+		$this->load->view('user-edit-profile');
+	}
+	
+	
+	
+
+    
 }

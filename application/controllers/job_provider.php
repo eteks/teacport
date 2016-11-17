@@ -186,6 +186,9 @@ class Job_provider extends CI_Controller {
 	public function companydbd_postjobs(){
 		$this->load->view('company-dashboard-post-jobs');
 	}
+	public function companydbd_resume(){
+		$this->load->view('company-dashboard-resume');
+	}
 	
 	
 }
