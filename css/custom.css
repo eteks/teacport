@@ -1,4 +1,17 @@
 /* Custom Code */
+
+/* Featured Jobs Slider */
+.slide-featured-jobs {
+	padding: 10px;
+}	
+/* Pricing --Features */
+.all-jobs-list-box2 .fa{
+	color: #777;
+	font-size: 22px;
+}
+
+/* JOB SEEKER DASHBOARD */
+/* Candidate register form */
 #candidate-form h3 {
     background-color: #29aafe !important;
     color: #fff;
@@ -7,29 +20,24 @@
 #candidate-form .fa-pencil{
 	font-size: 20px;
  }	
-
 .style-btn-info {
 	margin: 10px 0;
 }
-.slide-featured-jobs {
-	padding: 10px;
-}	
 .inline-checkbox li{
- display: inline-block;
- padding: 0 5px;
+	display: inline-block;
+	padding: 0 5px;
 }
 .inline-checkbox  input[type="checkbox"]{
- margin: 0 5px;
+	margin: 0 5px;
 }
 #candidate-form select{
- padding: 5px !important;
-}
+	padding: 5px !important;
+}	
 .alert {
     color: #ff0030;
     font-family: Tahoma;
     font-size: 10px;
 } 
-
 /*personal Profile */
 .ppform{
 	margin: 5px 0 15px;
@@ -42,19 +50,59 @@
 	padding: 0 0 10px; 
 	
 }
-/* Pricing --Features */
-.all-jobs-list-box2 .fa{
-	color: #777;
-	font-size: 22px;
+/* END OF JOB SEEKER DASHBOARD */
+
+/* COMPANY DASHBOARD */
+#company-browse-candidate .all-jobs-list-box2 {
+	position: relative;
+	margin: 30px 0;
 }
-/* footer */
-.footer_block .recentpost li {
-	border-bottom: 1px dotted #000;
+.provider-jobs ul li {
+	padding: 10px 15px;
+	text-align: center;
+	line-height: 30px;
 }
-/* Company Dashboard */
-.txtbox-height input[type="text"] {
-	height: 45px !important;
-	padding: 20px;
-	line-height: 40px;
+.provider-jobs ul li a{
+	padding: 15px 100px;
 }
+.dashboard-body .profile-nav .provider-jobs ul > li > a:hover, .dashboard-body .profile-nav .provider-jobs ul > li > a:focus, .dashboard-body .profile-nav .provider-jobs ul li.active a {
+	background: #29aafe;
+	border-left: 5px solid #2088cb;
+	color: #FFF !important;
+}
+
+#imagepreview_act {
+    width: 490px;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+}
+/*.select-salary select option:first{
+	color: #999;
+}*/
+select:invalid { color: gray; }
+
+ .advanced_search {
+ 	margin: 10px;
+ }
+ 
+ #advancedsearch_act {
+ 	margin: 10px 0;
+ }
+
+
+/* END OF COMPANY DASHBOARD */
+
+/* PROVIDERS & SEEKERS DASHBOARD */
+#provider-profilebar .progress, #seeker-profilebar .progress {
+    border-radius: 15px;
+    box-shadow: none;
+    height: 22px;
+    position: relative;
+}
+
+
 
