@@ -250,14 +250,14 @@ $(document).ready(function(){
             // Before replacing the TR contents, make a copy so when user clicks on 
             trcopy = $("."+table+" tr[id="+id+"]").html();
             $("."+table+" tr[id="+id+"]").html(html);  
-             $("."+table+" tr[id="+id+"]").fadeOut(500, function() {
-             $(this).html(html).fadeIn(500);
-             }); 
+             // $("."+table+" tr[id="+id+"]").fadeOut(500, function() {
+             // $(this).html(html).fadeIn(500);
+             // }); 
             handleChoosenSelect();
             // set editing flag
             editing = 1;
             ready_save= 1;
-        }pause(500).fadeIn(500);
+        }
 
     });   
 
@@ -342,7 +342,49 @@ $(document).ready(function(){
                 $('#filter_provider_table').find('tbody').html(filter_tag);
             }
         });
+    });  
+    
+    $(function() {
+    //----- OPEN
+    
+    $('[data-popup-open]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+ 
+        e.preventDefault();
+    });   
+    
+     $('[data-popup-open-sec]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-open-sec');
+        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeIn(350);
+ 
+        e.preventDefault();
     });
+ 
+    //----- CLOSE
+    $('[data-popup-close]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+ 
+        e.preventDefault();
+    });
+    
+    $('[data-popup-close-sec]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close-sec');
+        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeOut(350);
+ 
+        e.preventDefault();
+    });
+});
+  
+    // $(".tabs-menu a").click(function(event) {
+        // event.preventDefault();
+        // $(this).parent().addClass("current");
+        // $(this).parent().siblings().removeClass("current");
+        // var tab = $(this).attr("href");
+        // $(".tab-content").not(tab).css("display", "none");
+        // $(tab).fadeIn();
+    // });
 
 });
 

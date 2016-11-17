@@ -269,7 +269,7 @@ Website: http://thevectorlab.net/
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-user"></i></span> Job Providers
+                        <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -303,6 +303,9 @@ Website: http://thevectorlab.net/
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>                        
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
