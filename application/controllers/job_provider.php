@@ -5,9 +5,9 @@ class Job_provider extends CI_Controller {
     {
     	
         parent::__construct();
-        $this->load->library(array('form_validation','session','captcha','HybridAuthLib')); 
+        $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_provider_model','common_model'));
-		// session_start();
+		 session_start();
     }
 	public function index()
 	{
@@ -16,24 +16,7 @@ class Job_provider extends CI_Controller {
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
-			require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $data['authUrl'] = $authUrl;
+			$data['glogin_url'] = $common->googleloginurl();
 			$this->load->view('job-providers-login',$data);
 		}
 		else {
@@ -50,6 +33,7 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
+   				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('job-providers-login',$fb);
 			}
 			else{
@@ -80,33 +64,16 @@ class Job_provider extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
-		// $data['captcha'] = $this->captcha->main();
-		// $this->session->set_userdata('captcha_info', $data['captcha']);
+		$data['captcha'] = $this->captcha->main();
+		$this->session->set_userdata('captcha_info', $data['captcha']);
 
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$data['fbloginurl'] = $common->facebookloginurl();
+			$data['glogin_url'] = $common->googleloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
-			require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $data['authUrl'] = $authUrl;
 			$this->load->view('register-job-providers',$data);
 		}
 		/* Registration page loading with posted data */
@@ -127,26 +94,9 @@ class Job_provider extends CI_Controller {
 	       		$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);	
 	       		$fb['fbloginurl'] = $common->facebookloginurl();
+	       		$fb['glogin_url'] = $common->googleloginurl();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
-				require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-				$authUrl = $client->createAuthUrl();
-        		$fb['authUrl'] = $authUrl;
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$this->load->view('register-job-providers',$fb);	
 	        }
@@ -181,6 +131,7 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
+	       				$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
@@ -189,6 +140,7 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
+	       				$fb['glogin_url'] = $common->googleloginurl();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('register-job-providers',$fb);
 					}
@@ -199,6 +151,7 @@ class Job_provider extends CI_Controller {
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);	
        				$fb['fbloginurl'] = $common->facebookloginurl();
+       				$fb['glogin_url'] = $common->googleloginurl();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('register-job-providers',$fb);
 				}

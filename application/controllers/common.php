@@ -1,7 +1,15 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Common {
+
+class Common extends CI_Controller {
 	
+	public function __construct()
+    {
+        parent::__construct();
+         $this->load->helper('url');
+        // session_start();
+    }
+
 	public function facebookloginurl(){
 		/* Load custom facebook library file and return login url(using email permission) */
 		$CI =& get_instance();
@@ -50,5 +58,48 @@ class Common {
 		}
 		$dash_str .= $password;
 		return $dash_str;
+	}
+	public function googleloginurl()
+	{
+		// $index= $this->home('index');
+		include_once APPPATH."libraries/google/Google_Client.php";
+        include_once APPPATH."libraries/google/contrib/Google_Oauth2Service.php";
+        
+        // Google Project API Credentials
+        $clientId = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
+        $clientSecret = 'aXDIRy_cJIZw80-uP_oieYA3';
+        $redirectUrl = 'http://localhost/teacport/signup/provider';
+        // $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
+        
+        // Google Client Configuration
+        $gClient = new Google_Client();
+        $gClient->setApplicationName('Teacport');
+        $gClient->setClientId($clientId);
+        $gClient->setClientSecret($clientSecret);
+        $gClient->setRedirectUri($redirectUrl);
+        $google_oauthV2 = new Google_Oauth2Service($gClient);
+
+        if (isset($_REQUEST['code'])) {
+            $gClient->authenticate();
+            $this->session->set_userdata('token', $gClient->getAccessToken());
+            redirect($redirectUrl);
+        }
+
+        $token = $this->session->userdata('token');
+        if (!empty($token)) {
+            $gClient->setAccessToken($token);
+        }
+
+        if ($gClient->getAccessToken()) {
+            $userProfile = $google_oauthV2->userinfo->get();
+            print_r($userProfile);
+            // Preparing data for database insertion
+         
+        } 
+        else {
+            $data['status'] = 1;
+            $data['glogin_url'] = $gClient->createAuthUrl(); 
+        }
+        return $data['glogin_url'];
 	}
 }
