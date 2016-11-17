@@ -117,51 +117,6 @@ if(!empty($this->session->userdata("login_status"))):
                                   </thead>
                                   <tbody>                                   
                                     <tr class="parents_tr" id="column">
-<<<<<<< HEAD
-                                      <td class="organization_name"> 
-                                      </td>
-                                      <td class="organization_logo"> 
-                                      </td>
-                                      <td class="organization_address_1"> 
-                                      </td>
-                                      <td class="organization_address_2"> 
-                                      </td>
-                                      <td class="organization_address_3"> 
-                                      </td>
-                                      <td class="organization_district_id"> 
-                                      </td>
-                                      <td class="organization_institution_type_id"> 
-                                      </td>
-                                      <td class="registrant_register_type"> 
-                                      </td>
-                                      <td class="registrant_name"> 
-                                      </td>
-                                      <td class="registrant_designation"> 
-                                      </td>
-                                      <td class="registrant_date_of_birth"> 
-                                      </td>
-                                      <td class="registrant_email_id"> 
-                                      </td>
-                                      <td class="registrant_mobile_no"> 
-                                      </td>
-                                      <td class="is_sms_verified"> 
-                                      </td>
-                                      <td class="transcation_id"> 
-                                      </td>
-                                      <td class="subcription_id"> 
-                                      </td>
-                                      <td class="organization_profile_completeness"> 
-                                      </td>
-                                      <td class="organization_sms_count"> 
-                                      </td>
-                                      <td class="organization_resume_download_count"> 
-                                      </td>
-                                      <td class="organization_sms_remaining_count"> 
-                                      </td>
-                                      <td class="organization_remaining_resume_download_count"> 
-                                      </td>
-                                      <td class="organization_status"> 
-=======
                                       <td class=""> Organization 
                                       </td>
                                       <td class="">Name1 
@@ -173,7 +128,6 @@ if(!empty($this->session->userdata("login_status"))):
                                       <td class="">3333
                                       </td>
                                       <td class="">Active 
->>>>>>> 452ab8bfe66b0cc392ecd583b37ce2487606bc04
                                       </td>
                                       <td class=""> 00-00-0000
                                       </td>                                      
