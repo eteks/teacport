@@ -7,7 +7,7 @@ class Job_provider extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_provider_model','common_model'));
-		session_start();
+		 session_start();
     }
 	public function index()
 	{
@@ -16,6 +16,7 @@ class Job_provider extends CI_Controller {
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
+			$data['glogin_url'] = $common->googleloginurl();
 			$this->load->view('job-providers-login',$data);
 		}
 		else {
@@ -27,11 +28,13 @@ class Job_provider extends CI_Controller {
 			}else if(!preg_match($mobileval,$this->input->post('registrant_email_id'))){
 				$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean');
 			}
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			$this->form_validation->set_rules('registrant_password', 'Password', 'trim|required|xss_clean');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
+   				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('job-providers-login',$fb);
 			}
 			else{
@@ -62,14 +65,12 @@ class Job_provider extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
-		// $data['captcha'] = $this->captcha->main();
-		// $this->session->set_userdata('captcha_info', $data['captcha']);
-
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$data['fbloginurl'] = $common->facebookloginurl();
+			$data['glogin_url'] = $common->googleloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$this->load->view('register-job-providers',$data);
 		}
@@ -78,7 +79,7 @@ class Job_provider extends CI_Controller {
 			/* Set validate condition for registration form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 
-			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
 			$this->form_validation->set_rules('registrant_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
@@ -91,6 +92,7 @@ class Job_provider extends CI_Controller {
 	       		$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);	
 	       		$fb['fbloginurl'] = $common->facebookloginurl();
+	       		$fb['glogin_url'] = $common->googleloginurl();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
@@ -127,6 +129,7 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
+	       				$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
@@ -135,6 +138,7 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
+	       				$fb['glogin_url'] = $common->googleloginurl();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('register-job-providers',$fb);
 					}
@@ -145,6 +149,7 @@ class Job_provider extends CI_Controller {
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);	
        				$fb['fbloginurl'] = $common->facebookloginurl();
+       				$fb['glogin_url'] = $common->googleloginurl();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('register-job-providers',$fb);
 				}
@@ -160,6 +165,18 @@ class Job_provider extends CI_Controller {
 		$this->session->set_userdata('captcha_info', $data);
 		echo $data_value;
 	}
+	public function validate_captcha(){
+		$data = $this->captcha->main();
+		$data_value = $data['image_src'];
+		$this->session->set_userdata('captcha_info', $data);
+    if($this->input->post('captcha_value') != $this->session->userdata['captcha_info'])
+    {
+        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
+        return false;
+    }else{
+        return true;
+    }
+}
 
 	public function dashboard()
     {

@@ -68,6 +68,15 @@ function add_new_record() {
     $("."+table).prepend(blankrow);
 }
 
+var handleChoosenSelect = function () {
+        if (!jQuery().chosen) {
+            return;
+        }
+        $(".chosen").chosen();
+        $(".chosen-with-diselect").chosen({
+            allow_single_deselect: true
+        });
+   },
 // Create Input
 createInput = function(i,str){
     // alert(str);
@@ -114,10 +123,10 @@ createInput = function(i,str){
             input += '<option value="'+select_value[i]+'" '+selected+'>'+select_option[i]+'</option>';
         }
         input += '</select>';
-        //console.log(str);
+        //console.log(str);        
     }
     return input;
-}
+};
 
 ajax = function (params,action,form_id){
     var form = $('#'+form_id);
@@ -144,15 +153,16 @@ ajax = function (params,action,form_id){
             }
         }
     });
-}
+};
 
 $(document).ready(function(){
     default_credentials();
 
     // Add - New record
     $(document).on('click','.add_new',function() {
-        if(editing==0 && ready_save==0) {
-            add_new_record();
+        if(editing==0 && ready_save==0) {        	      	 
+            add_new_record();            
+            handleChoosenSelect();
             ready_save=1;
         }
     });
@@ -204,19 +214,19 @@ $(document).ready(function(){
     });
 
     // Delete - Old record
-    $(document).on("click","."+deletebutton,function(){
-        var id = $(this).data("id");
-        var form_id = $(this).parents('form').attr('id');
-        var ajax_data = {};
-        ajax_data['rid'] = id;
-        if(id){
-            if(confirm("Do you really want to delete record ?"))
-                ajax(ajax_data,"delete",form_id);
-        }
-        else {
-            alert("Unable to process");
-        }
-    });
+    // $(document).on("click","."+deletebutton,function(){
+        // var id = $(this).data("id");
+        // var form_id = $(this).parents('form').attr('id');
+        // var ajax_data = {};
+        // ajax_data['rid'] = id;
+        // if(id){
+            // if(confirm("Do you really want to delete record ?"))
+                // ajax(ajax_data,"delete",form_id);
+        // }
+        // else {
+            // alert("Unable to process");
+        // }
+    // });
 
     
     // Edit - Old record
@@ -239,19 +249,26 @@ $(document).ready(function(){
             
             // Before replacing the TR contents, make a copy so when user clicks on 
             trcopy = $("."+table+" tr[id="+id+"]").html();
-            $("."+table+" tr[id="+id+"]").html(html);   
-            
+            $("."+table+" tr[id="+id+"]").html(html);  
+             // $("."+table+" tr[id="+id+"]").fadeOut(500, function() {
+             // $(this).html(html).fadeIn(500);
+             // }); 
+            handleChoosenSelect();
             // set editing flag
             editing = 1;
             ready_save= 1;
         }
-    });
+
+    });   
+
 
     // Cancel - Old record
     $(document).on("click","."+cancelbutton,function(){
-        var id = $(this).attr("id");
-        $("."+table+" tr[id='"+id+"']").html(trcopy);
-        $("."+table+" tr:last-child").fadeIn("fast");
+        var id = $(this).attr("id");       
+        // $("."+table+" tr:last-child").fadeIn('fast');   
+        $("."+table+" tr[id="+id+"]").fadeOut(500, function() {
+              $(this).html(trcopy).fadeIn(500);
+             });  
         editing = 0;
         ready_save = 0;
     });
@@ -325,7 +342,35 @@ $(document).ready(function(){
                 $('#filter_provider_table').find('tbody').html(filter_tag);
             }
         });
+    });  
+    
+    $(function() {
+  
+    //----- CLOSE
+    $('[data-popup-close]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+ 
+        e.preventDefault();
     });
+    
+    $('[data-popup-close-sec]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close-sec');
+        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeOut(350);
+ 
+        e.preventDefault();
+    });
+});
+  
+    // $(".tabs-menu a").click(function(event) {
+        // event.preventDefault();
+        // $(this).parent().addClass("current");
+        // $(this).parent().siblings().removeClass("current");
+        // var tab = $(this).attr("href");
+        // $(".tab-content").not(tab).css("display", "none");
+        // $(tab).fadeIn();
+    // });
+
 });
 
 

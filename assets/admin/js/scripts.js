@@ -2073,7 +2073,6 @@ var App = function () {
                 });
             }
         });
-
         $('#form_wizard_1').find('.button-previous').hide();
         $('#form_wizard_1 .button-submit').click(function () {
             alert('Finished!');
@@ -2163,7 +2162,7 @@ var App = function () {
 
         //main function to initiate template pages
         init: function () {
-
+			$('.date-picker').datepicker();
             if (jQuery.browser.msie && jQuery.browser.version.substr(0, 1) == 8) {
                 isIE8 = true; // checkes for IE8 browser version
                 $('.visible-ie8').show();
@@ -2208,7 +2207,7 @@ var App = function () {
             handleFixInputPlaceholderForIE(); // fixes/enables html5 placeholder attribute for IE9, IE8
             handleGoTop(); //handles scroll to top functionality in the footer
             handleAccordions();
-            handleFormWizards();
+            // handleFormWizards();
             handleSidebarToggler();
 
             if (isMainPage) { // this is for demo purpose. you may remove handleIntro function for your project

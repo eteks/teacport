@@ -59,7 +59,7 @@
                                         <ul class="social-network social-circle onwhite">
                                             <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                                             <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="http://www.googleplus.com" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                            <li><a href="https://plus.google.com/" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                                             <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                         </ul>
                                     </div>

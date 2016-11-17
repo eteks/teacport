@@ -108,8 +108,8 @@ class Admin_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $state_delete_where = '(district_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_district", $state_delete_where); 
+      $district_delete_data = '(district_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_district", $district_delete_data); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
@@ -156,8 +156,8 @@ class Admin_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $state_delete_where = '(institution_type_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_institution_type", $state_delete_where); 
+      $institution_delete_where = '(institution_type_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_institution_type", $institution_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
@@ -225,8 +225,8 @@ class Admin_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $state_delete_where = '(educational_qualification_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_educational_qualification", $state_delete_where); 
+      $qualification_delete_where = '(educational_qualification_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_educational_qualification", $qualification_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
@@ -337,8 +337,8 @@ class Admin_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $state_delete_where = '(class_level_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_class_level", $state_delete_where); 
+      $class_level_delete_where = '(class_level_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_class_level", $class_level_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
@@ -387,8 +387,8 @@ class Admin_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $state_delete_where = '(departments_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_departments", $state_delete_where); 
+      $departments_delete_where = '(departments_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_departments", $departments_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
@@ -434,8 +434,8 @@ class Admin_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $state_delete_where = '(subject_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_subject", $state_delete_where); 
+      $subjects_delete_where = '(subject_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_subject", $subjects_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
@@ -443,6 +443,53 @@ class Admin_Model extends CI_Model {
     // View
     $subjects_list_query = $this->db->query("SELECT * FROM tr_institution_type AS c INNER JOIN ( SELECT subject_id,subject_name,subject_status,subject_create_date, SUBSTRING_INDEX( SUBSTRING_INDEX( t.subject_institution_id, ',', n.n ) , ',', -1 ) value FROM tr_subject t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.subject_institution_id ) - LENGTH( REPLACE( t.subject_institution_id, ',', ''))) ) AS a ON a.value = c.institution_type_id order by (a.subject_id)");
     $model_data['subject_values'] = $subjects_list_query->result_array();  
+    return $model_data;
+  }
+
+  // Universities - Add Edit Delete View
+  public function universities($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $universities_update_data = array( 
+                              'university_board_name' => $this->input->post('university_board_name'),
+                              'university_class_level_id' => $this->input->post('university_class_level_id'),
+                              'university_board_status' => $this->input->post('university_board_status'),
+                            );
+      $universities_update_where = '(education_board_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($universities_update_data); 
+      $this->db->where($universities_update_where);
+      $this->db->update("tr_university_board", $universities_update_data); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $universities_insert_data = array( 
+                            'university_board_name' => $this->input->post('university_board_name'),
+                            'university_class_level_id' => $this->input->post('university_class_level_id'),
+                            'university_board_status' => $this->input->post('university_board_status'),
+                          );
+      $this->db->insert("tr_university_board", $universities_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $universities_delete_data = '(education_board_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_university_board", $universities_delete_data); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $universities_list_query = $this->db->query("SELECT * FROM tr_class_level AS c INNER JOIN ( SELECT education_board_id,university_board_name,university_board_status,university_board_created_date, SUBSTRING_INDEX( SUBSTRING_INDEX( t.university_class_level_id, ',', n.n ) , ',', -1 ) value FROM tr_university_board t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.university_class_level_id ) - LENGTH( REPLACE( t.university_class_level_id, ',', ''))) ) AS a ON a.value = c.class_level_id order by (a.education_board_id)");
+    $model_data['universities_values'] = $universities_list_query->result_array();  
     return $model_data;
   }
 
@@ -467,6 +514,30 @@ class Admin_Model extends CI_Model {
   {
     $state_get_where = '(state_status=1)'; 
     $model_data = $this->db->get_where("tr_state", $state_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get class level values
+  public function get_class_levels()
+  {
+    $class_level_get_where = '(class_level_status=1)'; 
+    $model_data = $this->db->get_where("tr_class_level", $class_level_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get district values
+  public function get_district_values()
+  {
+    $district_get_where = '(district_status=1)'; 
+    $model_data = $this->db->get_where("tr_district", $district_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get subscription values
+  public function get_subscription_values()
+  {
+    $subscription_get_where = '(subscription_status=1)'; 
+    $model_data = $this->db->get_where("tr_subscription", $subscription_get_where)->result_array(); 
     return $model_data;
   }
   

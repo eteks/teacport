@@ -67,6 +67,9 @@ $config['uri_protocol']	= 'AUTO';
 
 $config['url_suffix'] = '';
 
+// $config['google_id'] = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
+// $config['google_secret_key'] = 'aXDIRy_cJIZw80-uP_oieYA3';
+
 /*
 |--------------------------------------------------------------------------
 | Default Language
@@ -253,14 +256,14 @@ $config['encryption_key'] = 'TeChPoRt';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 7200;
-$config['sess_expire_on_close']	= FALSE;
+$config['sess_expiration']		= 300; // 5 mins
+$config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= FALSE;
 $config['sess_table_name']		= 'ci_sessions';
 $config['sess_match_ip']		= FALSE;
 $config['sess_match_useragent']	= TRUE;
-$config['sess_time_to_update']	= 300;
+$config['sess_time_to_update']	= 60; // 60 seconds
 
 /*
 |--------------------------------------------------------------------------
