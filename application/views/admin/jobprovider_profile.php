@@ -178,15 +178,9 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->    
                 </div>                
-<<<<<<< HEAD
-            </div>
-            <!---Full edit popup -->
-          <div class="popup-sec" data-popup-sec="popup-1">
-=======
             </div>            
             <!-- Edit Popup-->
             <div class="popup" data-popup="popup-1">
->>>>>>> a88bd40644d1b382b4fca9ca610e1a49c9c6c6cb
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
                      <div class="widget-title">
@@ -381,7 +375,7 @@ if(!empty($this->session->userdata("login_status"))):
            <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
            </div>
        </div>
-            <!---Full edit popup --->
+            <!---Full edit popup -->
           <div class="popup-sec" data-popup-sec="popup-1">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
