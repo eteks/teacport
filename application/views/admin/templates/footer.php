@@ -1,6 +1,6 @@
 	<!-- BEGIN FOOTER -->
         <div id="footer">
-            2013 &copy; Admin Lab Dashboard.
+            <span>2016 &copy; Teacher Recruit.</span>
             <div class="span pull-right">
                 <span class="go-top"><i class="icon-arrow-up"></i></span>
             </div>
@@ -20,6 +20,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-multiselect/bootstrap-multiselect.js"></script> -->
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.blockui.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.cookie.js"></script>
         <!-- ie8 fixes -->
@@ -110,7 +111,8 @@
                 },
                 "aoColumnDefs": [{
                         'bSortable': false,
-                        'aTargets': [0]
+                        'aTargets': [0],
+                        "bProcessing": true
                     }
                 ]               
             });

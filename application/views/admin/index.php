@@ -35,9 +35,9 @@ if(!empty($this->session->userdata("login_status"))):
                                 <a href="index.php#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                             </li>
                             <li>
-                                <a href="index.php#">Hunt Teachers Admin</a> <span class="divider">&nbsp;</span>
+                                <a href="<?php echo base_url(); ?>admin/dashboard">Teacher Recruit</a> <span class="divider">&nbsp;</span>
                             </li>
-                            <li><a href="index.php#">Dashboard</a><span class="divider-last">&nbsp;</span></li>
+                            <li><a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a><span class="divider-last">&nbsp;</span></li>
                             <li class="pull-right search-wrap">
                                 <form class="hidden-phone" action="search_result.php">
                                     <div class="search-input-area">
@@ -56,7 +56,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!--BEGIN NOTIFICATION-->
                     <div class="alert alert-info">
                         <button data-dismiss="alert" class="close">×</button>
-                         Welcome to the <strong>Hunt Teachers Admin</strong>. Please don't forget to check all the pages!
+                         Welcome to the <strong>Teacher Recruit</strong>. Please don't forget to check all the pages!
                     </div>
                     <!--END NOTIFICATION-->
                     <!-- BEGIN OVERVIEW STATISTIC BARS-->
