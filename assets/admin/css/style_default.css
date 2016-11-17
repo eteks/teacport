@@ -313,11 +313,11 @@ tr select {
  
 /* Inner */
 .popup-inner {
-    max-width:700px;
+    max-width:870px;
     width:90%;
-    padding:40px;
+    padding:10px 40px;
     position: fixed;
-    top:53%;
+    top:55%;
     left:50%;
     -webkit-transform:translate(-50%, -50%);
     transform:translate(-50%, -50%);
@@ -345,8 +345,7 @@ tr select {
     text-align:center;
     line-height:100%;
     color:#fff;
-}
- 
+} 
 .popup-close:hover {
     -webkit-transform:translate(50%, -50%) rotate(180deg);
     transform:translate(50%, -50%) rotate(180deg);
@@ -371,11 +370,13 @@ tr select {
     text-align:center;
     line-height:100%;
     color:#fff;
-}
- 
+} 
 .popup-close-sec:hover {
     -webkit-transform:translate(50%, -50%) rotate(180deg);
     transform:translate(50%, -50%) rotate(180deg);
     background:rgba(0,0,0,1);
     text-decoration:none;
+}
+.input_field_width{
+	margin-left: 0px !important;
 }

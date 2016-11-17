@@ -178,8 +178,210 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->    
                 </div>                
+<<<<<<< HEAD
             </div>
             <!---Full edit popup -->
+          <div class="popup-sec" data-popup-sec="popup-1">
+=======
+            </div>            
+            <!-- Edit Popup-->
+            <div class="popup" data-popup="popup-1">
+>>>>>>> a88bd40644d1b382b4fca9ca610e1a49c9c6c6cb
+                 <div class="popup-inner">				
+				<div class="widget box blue" id="form_wizard_1">
+                     <div class="widget-title">
+                        <h4>
+                           <i class="icon-reorder"></i> Job Provider Profile
+                        </h4>                        
+                     </div>
+                     <div class="widget-body form">
+                        <form action="form_wizard.html#" class="form-horizontal">
+                           <div class="form-wizard">
+                              <div class="navbar steps">
+                                 <div class="navbar-inner">
+                                    <ul class="row-fluid">
+                                       <li class="span4">
+                                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
+                                          <span class="number">1</span>
+                                          <span class="desc"><i class="icon-ok"></i>Organization Details</span>
+                                          </a>
+                                       </li>
+                                       <li class="span4">
+                                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
+                                          <span class="number">2</span>
+                                          <span class="desc"><i class="icon-ok"></i> Organization Address</span>
+                                          </a>
+                                       </li>
+                                       <li class="span4">
+                                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
+                                          <span class="number">3</span>
+                                          <span class="desc"><i class="icon-ok"></i> Registrant Details</span>
+                                          </a>
+                                       </li>
+                                    </ul>
+                                 </div>
+                              </div>
+                              <div id="bar" class="progress progress-striped">
+                                 <div class="bar"></div>
+                              </div>
+                              <div class="tab-content">
+                                 <div class="tab-pane active" id="tab1">
+                                    <h4>Organization Details</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Name</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Institution Type</label>
+                                       <div class="controls input_field_width">
+                                           <select>
+											  <option>Volvo</option>
+											  <option>Saab</option>
+											  <option>Mercedes</option>
+											  <option>Audi</option>
+											</select> 
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Address1</label>
+                                          <!-- <input type="text" class="span6" /> -->
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Organization Status</label>
+                                       <div class="controls input_field_width">
+                                          <select>
+											  <option>Active</option>
+											  <option>Inactive</option>
+											</select>
+                                       </div>
+                                    </div>
+                                   </div>                                   
+                                 </div>
+                                 <div class="tab-pane" id="tab2">
+                                    <h4>Organization Address</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Address1</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Organization Address2</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Address3</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">District Name</label>
+                                       <div class="controls input_field_width">
+                                         <select>
+											  <option>Madurai</option>
+											  <option>Chennai</option>
+											  <option>Puducherry</option>
+											  <option>Trichy</option>
+											</select> 
+                                       </div>
+                                    </div>
+                                   </div>                                   
+                                 </div>
+                                 <!-- <div class="tab-pane" id="tab3">
+                                    <h4>Fill up step 3</h4>
+                                    <div class="control-group">
+                                       <label class="control-label">Text Input</label>
+                                       <div class="controls">
+                                          <input type="text" class="span6" />
+                                          <span class="help-inline"></span>
+                                       </div>
+                                    </div>
+
+                                    <div class="control-group">
+                                       <label class="control-label">Checkbox and radio Options</label>
+                                       <div class="controls">
+                                          <label class="checkbox line">
+                                          <input type="checkbox" value="" /> Lorem ipsum dolor imti
+                                          </label>
+                                          <label class="radio line">
+                                          <input type="radio" value="" /> Duis autem vel eum iriure dolor in hendrerit
+                                          </label>
+                                       </div>
+                                    </div>
+                                 </div> -->
+                                 <div class="tab-pane" id="tab3">
+                                    <h4>Registrant Details</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Registrant Name</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Designation</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Date Of Birth</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Email ID</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Mobile No</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 </div>
+                              <div class="form-actions clearfix">
+                                 <a href="javascript:;" class="btn button-previous">
+                                 <i class="icon-angle-left"></i> Back 
+                                 </a>
+                                 <a href="javascript:;" class="btn btn-primary blue button-next">
+                                 Continue <i class="icon-angle-right"></i>
+                                 </a>
+                                 <a href="javascript:;" class="btn btn-success button-submit">
+                                 Submit <i class="icon-ok"></i>
+                                 </a>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+				 <p><a data-popup-close="popup-1" href="#">Close</a></p>
+           <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+           </div>
+       </div>
+            <!---Full edit popup --->
           <div class="popup-sec" data-popup-sec="popup-1">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
@@ -226,45 +428,108 @@ if(!empty($this->session->userdata("login_status"))):
                               </div>
                               <div class="tab-content">
                                  <div class="tab-pane active" id="tab1">
-                                    <h3>Fill up step 1</h3>
-                                    <div class="control-group">
-                                       <label class="control-label">Username</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your username</span>
+                                    <h4>Organization Details</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Name</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Email</label>
-                                       <div class="controls">
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Organization Logo</label>
+                                       <!-- <div class="controls input_field_width">
                                           <input type="password" class="span6" />
-                                          <span class="help-inline">Give your Email</span>
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Address1</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Organization Address2</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Organization Address3</label>
+                                          <!-- <input type="text" class="span6" /> -->
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">District Name</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Institution Type</label>
+                                          <!-- <input type="text" class="span6" /> -->
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Organization Status</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
                                  </div>
                                  <div class="tab-pane" id="tab2">
-                                    <h4>Fill up step 2</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">First Name</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your First Name</span>
+                                    <h4>Registrant Details</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Registrant Name</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Last Name</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your Last Name</span>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Register Type</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Designation</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Phone Number</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your phone number</span>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Date Of Birth</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Email ID</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Mobile No</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
                                  </div>
                                  <!-- <div class="tab-pane" id="tab3">
                                     <h4>Fill up step 3</h4>
@@ -289,33 +554,58 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                  </div> -->
                                  <div class="tab-pane" id="tab3">
-                                    <h4>Final step</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">Fullname:</label>
-                                       <div class="controls">
-                                          <span class="text">Mosaddek Hossain</span>
+                                    <h4>Addtional Details</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Is SMS Verified</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Email:</label>
-                                       <div class="controls">
-                                          <span class="text">dkmosa@gmail.com</span>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Transcation ID</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Subcription Plan</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Phone:</label>
-                                       <div class="controls">
-                                          <span class="text">123456789</span>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Total SMS Count</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Remaining SMS Count</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
-                                    <div class="control-group">
-                                       <label class="control-label"></label>
-                                       <div class="controls">
-                                          <label class="checkbox">
-                                          <input type="checkbox" value="" /> I confirm my steps
-                                          </label>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Total Resume Count</label>
+                                       <!-- <div class="controls input_field_width">
+                                          <input type="password" class="span6" />
+                                       </div> -->
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Remaining Resume Count</label>
+                                          <!-- <input type="text" class="span6" /> -->
                                        </div>
                                     </div>
+                                   </div>
+                                 </div>
                                  </div>
                               </div>
                               <div class="form-actions clearfix">
@@ -335,164 +625,6 @@ if(!empty($this->session->userdata("login_status"))):
                   </div>
 				 <p><a data-popup-close-sec="popup-1" href="#">Close</a></p>
            <a class="popup-close-sec" data-popup-close-sec="popup-1" href="#">x</a>
-           </div>
-       </div>
-            <!-- Edit Popup-->
-            <div class="popup" data-popup="popup-1">
-                 <div class="popup-inner">				
-				<div class="widget box blue" id="form_wizard_1">
-                     <div class="widget-title">
-                        <h4>
-                           <i class="icon-reorder"></i> Job Provider Profile
-                        </h4>                        
-                     </div>
-                     <div class="widget-body form">
-                        <form action="form_wizard.html#" class="form-horizontal">
-                           <div class="form-wizard">
-                              <div class="navbar steps">
-                                 <div class="navbar-inner">
-                                    <ul class="row-fluid">
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                                          <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i> Step 1</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                                          <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i> Step 2</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                          <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i> Step 3</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
-                                          <span class="number">4</span>
-                                          <span class="desc"><i class="icon-ok"></i> Final Step</span>
-                                          </a> 
-                                       </li>
-                                    </ul>
-                                 </div>
-                              </div>
-                              <div id="bar" class="progress progress-striped">
-                                 <div class="bar"></div>
-                              </div>
-                              <div class="tab-content">
-                                 <div class="tab-pane active" id="tab1">
-                                    <h3>Fill up step 1</h3>
-                                    <div class="control-group">
-                                       <label class="control-label">Username</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your username</span>
-                                       </div>
-                                    </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Email</label>
-                                       <div class="controls">
-                                          <input type="password" class="span6" />
-                                          <span class="help-inline">Give your Email</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab2">
-                                    <h4>Fill up step 2</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">First Name</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your First Name</span>
-                                       </div>
-                                    </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Last Name</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your Last Name</span>
-                                       </div>
-                                    </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Phone Number</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline">Give your phone number</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab3">
-                                    <h4>Fill up step 3</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">Text Input</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline"></span>
-                                       </div>
-                                    </div>
-
-                                    <div class="control-group">
-                                       <label class="control-label">Checkbox and radio Options</label>
-                                       <div class="controls">
-                                          <label class="checkbox line">
-                                          <input type="checkbox" value="" /> Lorem ipsum dolor imti
-                                          </label>
-                                          <label class="radio line">
-                                          <input type="radio" value="" /> Duis autem vel eum iriure dolor in hendrerit
-                                          </label>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab4">
-                                    <h4>Final step</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">Fullname:</label>
-                                       <div class="controls">
-                                          <span class="text">Mosaddek Hossain</span>
-                                       </div>
-                                    </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Email:</label>
-                                       <div class="controls">
-                                          <span class="text">dkmosa@gmail.com</span>
-                                       </div>
-                                    </div>
-                                    <div class="control-group">
-                                       <label class="control-label">Phone:</label>
-                                       <div class="controls">
-                                          <span class="text">123456789</span>
-                                       </div>
-                                    </div>
-                                    <div class="control-group">
-                                       <label class="control-label"></label>
-                                       <div class="controls">
-                                          <label class="checkbox">
-                                          <input type="checkbox" value="" /> I confirm my steps
-                                          </label>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="form-actions clearfix">
-                                 <a href="javascript:;" class="btn button-previous">
-                                 <i class="icon-angle-left"></i> Back 
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-primary blue button-next">
-                                 Continue <i class="icon-angle-right"></i>
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-success button-submit">
-                                 Submit <i class="icon-ok"></i>
-                                 </a>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
-                  </div>
-				 <p><a data-popup-close="popup-1" href="#">Close</a></p>
-           <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
            </div>
        </div>       
        <!-- Delete Popup -->       
