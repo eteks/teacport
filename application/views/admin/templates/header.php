@@ -17,11 +17,12 @@ Website: http://thevectorlab.net/
 	<meta content="" name="author" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
+	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style_responsive.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/css/style_default.css" rel="stylesheet" id="style_color" />
-	<!-- <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-multiselect/bootstrap-multiselect.css"></script> -->
 	<link href="<?php echo base_url(); ?>assets/admin/assets/chosen-bootstrap/chosen/chosen.css" rel="stylesheet" type="text/css" />
 
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
@@ -33,7 +34,7 @@ Website: http://thevectorlab.net/
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/chart.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/xcharts.min.css">
     <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/daterangepicker.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/daterangepicker.css">    
 
 </head>
 <!-- END HEAD -->
@@ -269,7 +270,7 @@ Website: http://thevectorlab.net/
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-user"></i></span> Job Providers
+                        <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -302,7 +303,7 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>                    
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>

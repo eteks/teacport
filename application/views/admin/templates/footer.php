@@ -11,6 +11,7 @@
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
                        = '<?php echo $this->security->get_csrf_hash(); ?>';
             var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";     
+            var admin_baseurl = "<?php echo base_url(); ?>admin/";
         </script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
@@ -117,10 +118,7 @@
                 ]               
             });
            });
-        </script>
-        <script>
-            var admin_baseurl = "<?php echo base_url(); ?>admin/";
-        </script>    
+        </script>   
         <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->
