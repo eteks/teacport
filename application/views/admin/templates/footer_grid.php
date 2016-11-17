@@ -50,8 +50,7 @@
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>   
-        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-daterangepicker/date.js"></script>       
+        <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap-fileupload.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>   
