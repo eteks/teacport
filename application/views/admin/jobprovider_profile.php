@@ -1,7 +1,6 @@
 <?php
 if(!empty($this->session->userdata("login_status"))): 
 ?>
-<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -92,14 +91,6 @@ if(!empty($this->session->userdata("login_status"))):
                                 </div>
                                 <div class="space15"></div>
 
-                                <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
-                                <?php } ?>
-                                <?php
-                                if(!empty($status)) :
-                                  echo "<p class='db_status'> $status </p>";
-                                endif;
-                                ?> 
-                                <p class='val_error'> <p>
                                 <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                   <thead>
                                     <tr class="ajaxTitle">
@@ -112,27 +103,56 @@ if(!empty($this->session->userdata("login_status"))):
                                       <th> Created Date</th>
                                       <th> Edit </th>
                                       <th> Delete </th>
-                                      <th> Full View Details </th>
+                                      <th> Full Details </th>
                                     </tr>
                                   </thead>
-                                  <tbody>                                   
-                                    <tr class="parents_tr" id="column">
-                                      <td class=""> Organization 
+                                  <tbody>
+                                    <?php
+                                    if(!empty($provider_profile))  :
+                                    foreach ($provider_profile as $pro_val) :
+                                    ?>                               
+                                    <tr class="parents_tr">
+                                      <td class="">
+                                        <?php echo $pro_val['organization_name']; ?>
                                       </td>
-                                      <td class="">Name1 
+                                      <td class="">
+                                        <?php echo $pro_val['registrant_name']; ?> 
                                       </td>
-                                      <td class="">100%
+                                      <td class="">
+                                        <?php echo $pro_val['organization_profile_completeness']." %"; ?>      
                                       </td>
-                                      <td class="">1234
+                                      <td class="">
+                                        <?php 
+                                        if(!empty($pro_val['transcation_id'])) :
+                                          echo $pro_val['transcation_id'];
+                                        else :
+                                          echo "Null";
+                                        endif;
+                                        ?>   
                                       </td>
-                                      <td class="">3333
+                                      <td class="">
+                                        <?php 
+                                        if(!empty($pro_val['subscription_plan'])) :
+                                          echo $pro_val['subscription_plan'];
+                                        else :
+                                          echo "Null";
+                                        endif;
+                                        ?>   
                                       </td>
-                                      <td class="">Active 
+                                      <td class="">
+                                        <?php 
+                                        if($pro_val['organization_status']==1) :
+                                          echo "Active";
+                                        else :
+                                          echo "Inactive";
+                                        endif;
+                                        ?> 
                                       </td>
-                                      <td class=""> 00-00-0000
+                                      <td class=""> 
+                                        <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
                                       </td>                                      
                                       <td class="edit_section">
-                                        <a class="job_edit" data-popup-open="popup-1">
+                                        <a class="job_edit popup_fields" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup-1">
                                           Edit
                                         </a>
                                       </td>
@@ -142,22 +162,24 @@ if(!empty($this->session->userdata("login_status"))):
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_full_view" data-popup-open-sec="popup-1">
+                                        <a class="job_full_view popup_fields" data-href="job_provider/teacport_job_provider_profile_ajax"  data-model="full_view"  data-popup-open-sec="popup-1">
                                           Full View
                                         </a>
                                       </td>
                                     </tr>
+                                    <?php
+                                    endforeach;
+                                    endif;
+                                    ?>
                                   </tbody>
                                 </table>
-                                <?php if(!$this->input->is_ajax_request()) { ?>
-                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->    
                 </div>                
             </div>
-            <!---Full edit popup --->
+            <!---Full edit popup -->
           <div class="popup-sec" data-popup-sec="popup-1">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
@@ -501,30 +523,7 @@ if(!empty($this->session->userdata("login_status"))):
       </div>
       <!-- END PAGE -->
   </div>
-  <script>
-    // Define default values
-    var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("state_name","state_status"); // Set name of input types
-    var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
-    var table = "admin_table"; // Set classname of table
-    var organization_institution_type_id_option = new Array("Please select institution");
-    var organization_institution_type_id_value = new Array("");
-    <?php foreach ($variable as $key => $value): ?>
-      
-    <?php endforeach ?>
-
-
-
-
-
-
-
-    var state_status_option = new Array("Please select status","Active","Inactive"); 
-    var state_status_value = new Array("","1","0");
-  </script>
-
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');

@@ -51,6 +51,7 @@
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->  
         <script>

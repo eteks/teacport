@@ -15,14 +15,16 @@ class Job_Provider extends CI_Controller {
 	public function teacport_job_provider_profile()
 	{
 		$data['instution_values'] = $this->admin_model->get_institution_type();
+		$data['provider_profile'] = $this->job_providermodel->get_provider_profile();
+		$this->load->view('admin/jobprovider_profile',$data);
+	}
 
-		
-
-
-
-
-		$this->load->view('admin/jobprovider_profile');
-
+	// Job provider profile - Ajax
+	public function teacport_job_provider_profile_ajax()
+	{
+		$data['instution_values'] = $this->admin_model->get_institution_type();
+		$data['provider_full_profile'] = $this->job_providermodel->get_full_provider_profile();
+		$this->load->view('admin/jobprovider_profile',$data);
 	}
 
 	// Job provider vacancy

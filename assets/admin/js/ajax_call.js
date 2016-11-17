@@ -17,6 +17,22 @@ $(document).ready(function(){
             }
         });
     });
+
+    // Edit and Full view option
+    $(document).on('click','.popup_fields',function() {
+        alert("tst");
+        var action_data = $(this).data('mode');
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('href'),
+            data : action_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
+            success: function(res) {
+                if(res) {
+                   alert("test");
+                }
+            }
+        });
+    });
     
 
 
