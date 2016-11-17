@@ -2811,7 +2811,7 @@ div.tagsinput .not_valid {
 /*Form wizard*/
 
 .form-wizard .progress {
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 
 .form-wizard .steps {
