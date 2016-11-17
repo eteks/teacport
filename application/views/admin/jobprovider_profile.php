@@ -131,49 +131,49 @@ if(!empty($this->session->userdata("login_status"))):
                                   </thead>
                                   <tbody>                                   
                                     <tr class="parents_tr" id="column">
-                                      <td class="state_name"> 
+                                      <td class="organization_name"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_logo"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_address_1"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_address_2"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_address_3"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_district_id"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_institution_type_id"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="registrant_register_type"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="registrant_name"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="registrant_designation"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="registrant_date_of_birth"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="registrant_email_id"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="registrant_mobile_no"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="is_sms_verified"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="transcation_id"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="subcription_id"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_profile_completeness"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_sms_count"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_resume_download_count"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_sms_remaining_count"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_remaining_resume_download_count"> 
                                       </td>
-                                      <td class="state_name"> 
+                                      <td class="organization_status"> 
                                       </td>
                                       <td class="edit_section">
                                         <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
@@ -211,8 +211,20 @@ if(!empty($this->session->userdata("login_status"))):
     var columns = new Array("state_name","state_status"); // Set name of input types
     var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var state_status_option = new Array("Please select status","Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var state_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var organization_institution_type_id_option = new Array("Please select institution");
+    var organization_institution_type_id_value = new Array("");
+    <?php foreach ($variable as $key => $value): ?>
+      
+    <?php endforeach ?>
+
+
+
+
+
+
+
+    var state_status_option = new Array("Please select status","Active","Inactive"); 
+    var state_status_value = new Array("","1","0");
   </script>
 
 <?php include "templates/footer_grid.php" ?>

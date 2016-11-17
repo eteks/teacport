@@ -6,6 +6,7 @@ class Job_Provider extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('admin/job_providermodel');
+		$this->load->model('admin/admin_model');
 		$this->load->library('form_validation');
 
 	}
@@ -13,6 +14,13 @@ class Job_Provider extends CI_Controller {
 	// Job provider profile
 	public function teacport_job_provider_profile()
 	{
+		$data['instution_values'] = $this->admin_model->get_institution_type();
+
+		
+
+
+
+
 		$this->load->view('admin/jobprovider_profile');
 
 	}
@@ -21,7 +29,6 @@ class Job_Provider extends CI_Controller {
 	public function teacport_job_provider_vacancies()
 	{
 		$this->load->view('admin/jobprovider_vacancy');
-
 	}
 
 
