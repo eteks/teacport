@@ -1,15 +1,8 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 
-class Common extends CI_Controller {
+class Common {
 	
-	public function __construct()
-    {
-        parent::__construct();
-         $this->load->helper('url');
-        // session_start();
-    }
-
 	public function facebookloginurl(){
 		/* Load custom facebook library file and return login url(using email permission) */
 		$CI =& get_instance();
@@ -59,9 +52,10 @@ class Common extends CI_Controller {
 		$dash_str .= $password;
 		return $dash_str;
 	}
+	/*Google Login*/
 	public function googleloginurl()
 	{
-		// $index= $this->home('index');
+		$CI =& get_instance();
 		include_once APPPATH."libraries/google/Google_Client.php";
         include_once APPPATH."libraries/google/contrib/Google_Oauth2Service.php";
         
@@ -80,12 +74,13 @@ class Common extends CI_Controller {
         $google_oauthV2 = new Google_Oauth2Service($gClient);
 
         if (isset($_REQUEST['code'])) {
+        	$CI =& get_instance();
             $gClient->authenticate();
-            $this->session->set_userdata('token', $gClient->getAccessToken());
+            $CI->session->set_userdata('token', $gClient->getAccessToken());
             redirect($redirectUrl);
         }
 
-        $token = $this->session->userdata('token');
+        $token = $CI->session->userdata('token');
         if (!empty($token)) {
             $gClient->setAccessToken($token);
         }
@@ -97,9 +92,12 @@ class Common extends CI_Controller {
          
         } 
         else {
+        	
             $data['status'] = 1;
             $data['glogin_url'] = $gClient->createAuthUrl(); 
+            $data = $data['glogin_url'];
         }
-        return $data['glogin_url'];
+        return $data;
 	}
+
 }

@@ -13,7 +13,7 @@
 
 // // alert(test);
 
-
+/*Added by thangam*/
 // 	// Registeration
 // 	$('#provider_register_form').on('submit',function(e) {
 // 		e.preventDefault();
@@ -103,6 +103,8 @@
 //             }
 //         });
 //     });
+/*Ended by thangam*/
+
 //     // Forgetten password
 //     // $('#forgetten_password').on('submit',function(e) {
 //     //     e.preventDefault();

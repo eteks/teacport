@@ -28,6 +28,7 @@ class Job_provider extends CI_Controller {
 			}else if(!preg_match($mobileval,$this->input->post('registrant_email_id'))){
 				$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean');
 			}
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			$this->form_validation->set_rules('registrant_password', 'Password', 'trim|required|xss_clean');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE){
@@ -64,9 +65,6 @@ class Job_provider extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
-		$data['captcha'] = $this->captcha->main();
-		$this->session->set_userdata('captcha_info', $data['captcha']);
-
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['captcha'] = $this->captcha->main();
@@ -171,7 +169,7 @@ class Job_provider extends CI_Controller {
 		$data = $this->captcha->main();
 		$data_value = $data['image_src'];
 		$this->session->set_userdata('captcha_info', $data);
-    if($this->input->post('captcha_value') != $this->session->userdata['captcha_config'])
+    if($this->input->post('captcha_value') != $this->session->userdata['captcha_info'])
     {
         $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
         return false;
@@ -179,7 +177,6 @@ class Job_provider extends CI_Controller {
         return true;
     }
 }
-
 
 	public function dashboard()
     {
