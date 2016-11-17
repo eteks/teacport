@@ -345,35 +345,21 @@ $(document).ready(function(){
     });  
     
     $(function() {
-    //----- OPEN
+  
+    //----- CLOSE
+    $('[data-popup-close]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+ 
+        e.preventDefault();
+    });
     
-    // $('[data-popup-open]').on('click', function(e)  {
-    //     var targeted_popup_class = jQuery(this).attr('data-popup-open');
-    //     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-    //      e.preventDefault();
-    // });   
-    
-    // $('[data-popup-open-sec]').on('click', function(e)  {
-    //     var targeted_popup_class = jQuery(this).attr('data-popup-open-sec');
-    //     $('[data-popup-sec="' + targeted_popup_class + '"]').fadeIn(350);
+    $('[data-popup-close-sec]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close-sec');
+        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeOut(350);
  
-    //     e.preventDefault();
-    // });
- 
-    // //----- CLOSE
-    // $('[data-popup-close]').on('click', function(e)  {
-    //     var targeted_popup_class = jQuery(this).attr('data-popup-close');
-    //     $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
- 
-    //     e.preventDefault();
-    // });
-    
-    // $('[data-popup-close-sec]').on('click', function(e)  {
-    //     var targeted_popup_class = jQuery(this).attr('data-popup-close-sec');
-    //     $('[data-popup-sec="' + targeted_popup_class + '"]').fadeOut(350);
- 
-    //     e.preventDefault();
-    // });
+        e.preventDefault();
+    });
 });
   
     // $(".tabs-menu a").click(function(event) {

@@ -524,6 +524,22 @@ class Admin_Model extends CI_Model {
     $model_data = $this->db->get_where("tr_class_level", $class_level_get_where)->result_array(); 
     return $model_data;
   }
+
+  // Get district values
+  public function get_district_values()
+  {
+    $district_get_where = '(district_status=1)'; 
+    $model_data = $this->db->get_where("tr_district", $district_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get subscription values
+  public function get_subscription_values()
+  {
+    $subscription_get_where = '(subscription_status=1)'; 
+    $model_data = $this->db->get_where("tr_subscription", $subscription_get_where)->result_array(); 
+    return $model_data;
+  }
   
 }
 

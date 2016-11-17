@@ -1,6 +1,7 @@
 <?php
 if(!empty($this->session->userdata("login_status"))): 
 ?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -152,17 +153,17 @@ if(!empty($this->session->userdata("login_status"))):
                                         <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
                                       </td>                                      
                                       <td class="edit_section">
-                                        <a class="job_edit popup_fields" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup-1">
+                                        <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup-1">
                                           Edit
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_delete" href="#myModal1" data-toggle="modal">
+                                        <a class="job_delete" data-id="<?php echo $pro_val['organization_id']; ?>" href="#myModal1" data-toggle="modal">
                                           Delete
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_full_view popup_fields" data-href="job_provider/teacport_job_provider_profile_ajax"  data-model="full_view"  data-popup-open-sec="popup-1">
+                                        <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup-1">
                                           Full View
                                         </a>
                                       </td>
@@ -180,7 +181,7 @@ if(!empty($this->session->userdata("login_status"))):
                 </div>                
             </div>            
             <!-- Edit Popup-->
-            <div class="popup" data-popup="popup-1">
+            <!-- <div class="popup" data-popup="popup-1">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
                      <div class="widget-title">
@@ -244,8 +245,8 @@ if(!empty($this->session->userdata("login_status"))):
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Organization Address1</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
+                                          <!- <input type="text" class="span6" /> -->
+                                     <!--   </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Organization Status</label>
@@ -293,7 +294,7 @@ if(!empty($this->session->userdata("login_status"))):
                                        </div>
                                     </div>
                                    </div>                                   
-                                 </div>
+                                 </div> -->
                                  <!-- <div class="tab-pane" id="tab3">
                                     <h4>Fill up step 3</h4>
                                     <div class="control-group">
@@ -316,7 +317,7 @@ if(!empty($this->session->userdata("login_status"))):
                                        </div>
                                     </div>
                                  </div> -->
-                                 <div class="tab-pane" id="tab3">
+                                <!--  <div class="tab-pane" id="tab3">
                                     <h4>Registrant Details</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
@@ -374,254 +375,396 @@ if(!empty($this->session->userdata("login_status"))):
 				 <p><a data-popup-close="popup-1" href="#">Close</a></p>
            <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
            </div>
-       </div>
-            <!---Full edit popup -->
-          <div class="popup-sec" data-popup-sec="popup-1">
-                 <div class="popup-inner">				
-				<div class="widget box blue" id="form_wizard_1">
-                     <div class="widget-title">
-                        <h4>
-                           <i class="icon-reorder"></i> Job Providers Profile
-                        </h4>                        
-                     </div>
-                     <div class="widget-body form">
-                        <form action="form_wizard.html#" class="form-horizontal">
-                           <div class="form-wizard">
-                              <div class="navbar steps">
-                                 <div class="navbar-inner">
-                                    <ul class="row-fluid">
-                                       <li class="span4">
-                                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                                          <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i>Organization Details</span>
-                                          </a>
-                                       </li>
-                                       <li class="span4">
-                                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                                          <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i>Registrant Details</span>
-                                          </a>
-                                       </li>
-                                       <li class="span4">
-                                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                          <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
-                                          </a>
-                                       </li>
-                                       <!-- <li class="span3">
-                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
-                                          <span class="number">4</span>
-                                          <span class="desc"><i class="icon-ok"></i> Final Step</span>
-                                          </a> 
-                                       </li> -->
-                                    </ul>
-                                 </div>
-                              </div>
-                              <div id="bar" class="progress progress-striped">
-                                 <div class="bar"></div>
-                              </div>
-                              <div class="tab-content">
-                                 <div class="tab-pane active" id="tab1">
-                                    <h4>Organization Details</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Name</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Organization Logo</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address1</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Organization Address2</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address3</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">District Name</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Institution Type</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Organization Status</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab2">
-                                    <h4>Registrant Details</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Registrant Name</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Register Type</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Designation</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Date Of Birth</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Email ID</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Mobile No</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <!-- <div class="tab-pane" id="tab3">
-                                    <h4>Fill up step 3</h4>
-                                    <div class="control-group">
-                                       <label class="control-label">Text Input</label>
-                                       <div class="controls">
-                                          <input type="text" class="span6" />
-                                          <span class="help-inline"></span>
-                                       </div>
-                                    </div>
+       </div>  -->
 
-                                    <div class="control-group">
-                                       <label class="control-label">Checkbox and radio Options</label>
-                                       <div class="controls">
-                                          <label class="checkbox line">
-                                          <input type="checkbox" value="" /> Lorem ipsum dolor imti
-                                          </label>
-                                          <label class="radio line">
-                                          <input type="radio" value="" /> Duis autem vel eum iriure dolor in hendrerit
-                                          </label>
-                                       </div>
-                                    </div>
-                                 </div> -->
-                                 <div class="tab-pane" id="tab3">
-                                    <h4>Addtional Details</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Is SMS Verified</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Transcation ID</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Subcription Plan</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Total SMS Count</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Remaining SMS Count</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Total Resume Count</label>
-                                       <!-- <div class="controls input_field_width">
-                                          <input type="password" class="span6" />
-                                       </div> -->
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Remaining Resume Count</label>
-                                          <!-- <input type="text" class="span6" /> -->
-                                       </div>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 </div>
-                              </div>
-                              <div class="form-actions clearfix">
-                                 <a href="javascript:;" class="btn button-previous">
-                                 <i class="icon-angle-left"></i> Back 
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-primary blue button-next">
-                                 Continue <i class="icon-angle-right"></i>
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-success button-submit">
-                                 Submit <i class="icon-ok"></i>
-                                 </a>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
+
+
+
+
+
+
+
+
+
+      <!---Full edit popup -->
+      <div class="popup" data-popup="popup-1">
+        <div class="popup-inner">
+				  <div class="widget box blue" id="popup_wizard_section">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Job Providers Profile
+              </h4>                        
+            </div>
+            <div class="widget-body form pop_details_section">
+              <?php } ?>
+              <?php
+              if(!empty($provider_full_profile)) :
+              ?>
+              <form action="form_wizard.html#" class="form-horizontal">
+                <div class="form-wizard">
+                  <div class="navbar steps">
+                    <div class="navbar-inner">
+                      <ul class="row-fluid">
+                        <li class="span4">
+                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
+                            <span class="number">1</span>
+                            <span class="desc">
+                              <i class="icon-ok"></i>Organization Details
+                            </span>
+                          </a>
+                        </li>
+                        <li class="span4">
+                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
+                            <span class="number">2</span>
+                            <span class="desc">
+                              <i class="icon-ok"></i>Registrant Details</span>
+                          </a>
+                        </li>
+                        <?php
+                        if(!empty($mode) && $mode=="full_view") :
+                        ?>
+                        <li class="span4">
+                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
+                            <span class="number">3</span>
+                            <span class="desc">
+                              <i class="icon-ok"></i>Payment Details</span>
+                          </a>
+                        </li>
+                        <li class="span4">
+                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
+                            <span class="number">4</span>
+                            <span class="desc">
+                              <i class="icon-ok"></i>Addtional Details</span>
+                          </a>
+                        </li>
+                        <?php
+                        else :
+                        ?>
+                        <li class="span4">
+                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
+                            <span class="number">3</span>
+                            <span class="desc">
+                              <i class="icon-ok"></i>Addtional Details
+                            </span>
+                          </a>
+                        </li>
+                        <?php
+                        endif;
+                        ?>
+                      </ul>
+                    </div>
                   </div>
-				 <p><a data-popup-close-sec="popup-1" href="#">Close</a></p>
-           <a class="popup-close-sec" data-popup-close-sec="popup-1" href="#">x</a>
-           </div>
-       </div>       
-       <!-- Delete Popup -->       
+                  <div id="bar" class="progress progress-striped">
+                    <div class="bar"></div>
+                  </div>
+                  <div class="tab-content">
+                    <?php
+                    if(!empty($mode) && $mode=="full_view") :
+                    ?>
+                    <div class="tab-pane active" id="tab1">
+                      <h4>Organization Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                         	<label class="control-label">Organization Name</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_name']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Organization Logo</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_logo']; ?>
+                          </span>
+                          <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" />
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Organization Address1</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_address_1']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Organization Address2</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_address_2']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                         	<label class="control-label">Organization Address3</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_address_3']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">District Name</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['district_name']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                         	<label class="control-label">Institution Type</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['institution_type_name']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Organization Status</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['organization_status']==1) :
+                              echo "Active";
+                            else :
+                              echo "Inactive";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="tab2">
+                      <h4>Registrant Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                         	<label class="control-label">Registrant Name</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['registrant_name']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Register Type</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['registrant_register_type']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                         	<label class="control-label">Designation</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['registrant_designation']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Date Of Birth</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['registrant_date_of_birth']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                        	<label class="control-label">Email ID</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['registrant_email_id']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Mobile No</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['registrant_mobile_no']; ?>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="tab3">
+                      <h4>Payment Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Subscription Plan</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['subscription_plan']; ?>
+                          </span>                         
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Subscription Price</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['subscription_price']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Subcription Features</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['subscription_features']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Subcription Validitity</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['subcription_valid_upto']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">
+                          <label class="control-label">Transcation Id</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['transcation_id']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Subcription Status</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['subscription_status']==1) :
+                              echo "Active";
+                            else :
+                              echo "Inactive";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="tab4">
+                      <h4>Addtional Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                        	<label class="control-label">Is SMS Verified</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['is_sms_verified']==1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Total SMS Count</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_sms_count']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Used SMS Count</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Remaining SMS Count</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_sms_remaining_count']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Total Resume Count</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_resume_download_count']; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Used Resume Count</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count']; ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                         	<label class="control-label">Remaining Resume Count</label>
+                          <span class="dynamic_data"> 
+                            <?php echo $provider_full_profile['organization_remaining_resume_download_count']; ?>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <?php
+                    else :
+                    ?>
+                    <div class="tab-pane active" id="tab1">
+                      <h4>Organization Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Organization Name</label>
+                          <div class="controls input_field_width">
+                            <input type="text" class="span6" value="<?php echo $provider_full_profile['organization_name']; ?>" />
+                          </div>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Institution Type</label>
+                          <div class="controls input_field_width">
+                            <select>
+                              <?php
+                              if(!empty($instution_values)) :
+                              foreach ($instution_values as $ins_val) :
+                              ?>
+                                <?php
+                                if($ins_val['institution_type_id']==$provider_full_profile['organization_institution_type_id']) {
+                                  echo '<option value="'.$ins_val['institution_type_id'].'" selected> "'.$ins_val['institution_type_name'].'" </option>';
+                                }
+                                else {
+                                  echo '<option value="'.$ins_val['institution_type_id'].'"> "'.$ins_val['institution_type_name'].'" </option>';
+                                }
+                              endforeach;
+                              else :
+                                echo '<option value="'.$provider_full_profile['institution_type_id'].'"> "'.$provider_full_profile['institution_type_name'].'" </option>';
+                              endif;
+                                ?>
+                            </select> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              
+
+
+
+                    <?php
+                    endif;
+                    ?>
+                  </div>
+                </div>
+                <div class="form-actions clearfix">
+                  <a href="javascript:;" class="btn button-previous">
+                    <i class="icon-angle-left"></i> Back 
+                  </a>
+                  <a href="javascript:;" class="btn btn-primary blue button-next">
+                    Continue 
+                    <i class="icon-angle-right"></i>
+                  </a>
+                  <a href="javascript:;" class="btn btn-success button-submit">
+                    Submit 
+                    <i class="icon-ok"></i>
+                  </a>
+                </div>
+              </form>
+              <?php
+              else :
+                echo "<p> No content found </p>";
+              endif;
+              ?>
+              <?php if(!$this->input->is_ajax_request()) { ?>
+            </div>
+          </div>
+    		  <p>
+            <a data-popup-close="popup-1" href="#">Close</a>
+          </p>
+          <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+        </div>
+      </div>      
+
+
+
+
+
+
+
+
+      <!-- Delete Popup -->       
        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -650,6 +793,7 @@ if(!empty($this->session->userdata("login_status"))):
       <!-- END PAGE -->
   </div>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');

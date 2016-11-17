@@ -2073,7 +2073,6 @@ var App = function () {
                 });
             }
         });
-
         $('#form_wizard_1').find('.button-previous').hide();
         $('#form_wizard_1 .button-submit').click(function () {
             alert('Finished!');
@@ -2208,7 +2207,7 @@ var App = function () {
             handleFixInputPlaceholderForIE(); // fixes/enables html5 placeholder attribute for IE9, IE8
             handleGoTop(); //handles scroll to top functionality in the footer
             handleAccordions();
-            handleFormWizards();
+            // handleFormWizards();
             handleSidebarToggler();
 
             if (isMainPage) { // this is for demo purpose. you may remove handleIntro function for your project
