@@ -276,7 +276,7 @@ Website: http://thevectorlab.net/
                     <ul class="sub">
                         <li>
                             <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">Job  
-                                Provider profile
+                                Provider Profile
                             </a>
                         </li>
                         <li>

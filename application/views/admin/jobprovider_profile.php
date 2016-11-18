@@ -200,7 +200,7 @@ if(!empty($this->session->userdata("login_status"))):
                   <div class="navbar steps">
                     <div class="navbar-inner">
                       <ul class="row-fluid">
-                        <li class="span4">
+                        <li class="span3">
                           <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
                             <span class="number">1</span>
                             <span class="desc">
@@ -208,7 +208,7 @@ if(!empty($this->session->userdata("login_status"))):
                             </span>
                           </a>
                         </li>
-                        <li class="span4">
+                        <li class="span3">
                           <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
                             <span class="number">2</span>
                             <span class="desc">
@@ -218,14 +218,14 @@ if(!empty($this->session->userdata("login_status"))):
                         <?php
                         if(!empty($mode) && $mode=="full_view") :
                         ?>
-                        <li class="span4">
+                        <li class="span3">
                           <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
                             <span class="number">3</span>
                             <span class="desc">
                               <i class="icon-ok"></i>Payment Details</span>
                           </a>
                         </li>
-                        <li class="span4">
+                        <li class="span3">
                           <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
                             <span class="number">4</span>
                             <span class="desc">
@@ -257,18 +257,18 @@ if(!empty($this->session->userdata("login_status"))):
                     if(!empty($mode) && $mode=="full_view") :
                     ?>
                     <div class="tab-pane active" id="tab1">
-                      <h4>Organization Details</h4>
+                      <h4><!-- Organization Details --></h4>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                          	<label class="control-label">Organization Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_name']; ?>
+                            : <?php echo $provider_full_profile['organization_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Organization Logo</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_logo']; ?>
+                            : <?php echo $provider_full_profile['organization_logo']; ?>
                           </span>
                           <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" />
                         </div>
@@ -277,13 +277,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Address1</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_address_1']; ?>
+                            : <?php echo $provider_full_profile['organization_address_1']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Organization Address2</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_address_2']; ?>
+                            : <?php echo $provider_full_profile['organization_address_2']; ?>
                           </span>
                         </div>
                       </div>
@@ -291,13 +291,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                          	<label class="control-label">Organization Address3</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_address_3']; ?>
+                            : <?php echo $provider_full_profile['organization_address_3']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">District Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['district_name']; ?>
+                            : <?php echo $provider_full_profile['district_name']; ?>
                           </span>
                         </div>
                       </div>
@@ -305,13 +305,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                          	<label class="control-label">Institution Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['institution_type_name']; ?>
+                            : <?php echo $provider_full_profile['institution_type_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Organization Status</label>
                           <span class="dynamic_data"> 
-                            <?php 
+                            : <?php 
                             if($provider_full_profile['organization_status']==1) :
                               echo "Active";
                             else :
@@ -323,18 +323,18 @@ if(!empty($this->session->userdata("login_status"))):
                       </div>
                     </div>
                     <div class="tab-pane" id="tab2">
-                      <h4>Registrant Details</h4>
+                      <h4><!-- Registrant Details --></h4>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                          	<label class="control-label">Registrant Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_name']; ?>
+                            : <?php echo $provider_full_profile['registrant_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Register Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_register_type']; ?>
+                            : <?php echo $provider_full_profile['registrant_register_type']; ?>
                           </span>
                         </div>
                       </div>
@@ -342,13 +342,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                          	<label class="control-label">Designation</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_designation']; ?>
+                            : <?php echo $provider_full_profile['registrant_designation']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Date Of Birth</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_date_of_birth']; ?>
+                            : <?php echo $provider_full_profile['registrant_date_of_birth']; ?>
                           </span>
                         </div>
                       </div>
@@ -356,30 +356,30 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                         	<label class="control-label">Email ID</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_email_id']; ?>
+                            : <?php echo $provider_full_profile['registrant_email_id']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Mobile No</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_mobile_no']; ?>
+                            : <?php echo $provider_full_profile['registrant_mobile_no']; ?>
                           </span>
                         </div>
                       </div>
                     </div>
                     <div class="tab-pane" id="tab3">
-                      <h4>Payment Details</h4>
+                      <h4><!-- Payment Details --></h4>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Subscription Plan</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['subscription_plan']; ?>
+                            : <?php echo $provider_full_profile['subscription_plan']; ?>
                           </span>                         
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Subscription Price</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['subscription_price']; ?>
+                            : <?php echo $provider_full_profile['subscription_price']; ?>
                           </span>
                         </div>
                       </div>
@@ -387,13 +387,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Subcription Features</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['subscription_features']; ?>
+                            : <?php echo $provider_full_profile['subscription_features']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Subcription Validitity</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['subcription_valid_upto']; ?>
+                            : <?php echo $provider_full_profile['subcription_valid_upto']; ?>
                           </span>
                         </div>
                       </div>
@@ -401,13 +401,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Transcation Id</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['transcation_id']; ?>
+                            : <?php echo $provider_full_profile['transcation_id']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Subcription Status</label>
                           <span class="dynamic_data"> 
-                            <?php 
+                            : <?php 
                             if($provider_full_profile['subscription_status']==1) :
                               echo "Active";
                             else :
@@ -419,12 +419,12 @@ if(!empty($this->session->userdata("login_status"))):
                       </div>
                     </div>
                     <div class="tab-pane" id="tab4">
-                      <h4>Addtional Details</h4>
+                      <h4><!-- Addtional Details --></h4>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                         	<label class="control-label">Is SMS Verified</label>
                           <span class="dynamic_data"> 
-                            <?php 
+                            : <?php 
                             if($provider_full_profile['is_sms_verified']==1) :
                               echo "Yes";
                             else :
@@ -436,7 +436,7 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Total SMS Count</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_sms_count']; ?>
+                            : <?php echo $provider_full_profile['organization_sms_count']; ?>
                           </span>
                         </div>
                       </div>
@@ -444,13 +444,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Used SMS Count</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count']; ?>
+                            : <?php echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Remaining SMS Count</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_sms_remaining_count']; ?>
+                            : <?php echo $provider_full_profile['organization_sms_remaining_count']; ?>
                           </span>
                         </div>
                       </div>
@@ -458,13 +458,13 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Total Resume Count</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_resume_download_count']; ?>
+                            : <?php echo $provider_full_profile['organization_resume_download_count']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Used Resume Count</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count']; ?>
+                            : <?php echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count']; ?>
                           </span>
                         </div>
                       </div>
@@ -472,7 +472,7 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="span6 control-group">                                       
                          	<label class="control-label">Remaining Resume Count</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_remaining_resume_download_count']; ?>
+                            : <?php echo $provider_full_profile['organization_remaining_resume_download_count']; ?>
                           </span>
                         </div>
                       </div>
@@ -481,7 +481,7 @@ if(!empty($this->session->userdata("login_status"))):
                     else :
                     ?>
                     <div class="tab-pane active" id="tab1">
-                      <h4>Organization Details</h4>
+                      <h4><!-- Organization Details --></h4>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Name</label>

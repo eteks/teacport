@@ -400,3 +400,14 @@ tr select {
 .dp_width{
 	width: 185px !important;
 }
+.form-horizontal .control-label{
+	padding-top: 0px !important;
+	width: 170px !important;
+	font-weight: 600 !important;
+	font-size: 13px;
+}
+.dynamic_data {
+    font-size: 13px;
+    font-weight: lighter !important;
+    text-transform: capitalize;
+}
