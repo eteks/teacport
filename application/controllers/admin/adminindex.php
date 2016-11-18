@@ -1095,6 +1095,10 @@ class Adminindex extends CI_Controller {
 	{	
 			$this->load->view('admin/languages');
 	}
+	public function user_groups()
+	{	
+			$this->load->view('admin/user_groups');
+	}
 }
 /* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */
