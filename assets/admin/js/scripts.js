@@ -2162,7 +2162,7 @@ var App = function () {
 
         //main function to initiate template pages
         init: function () {
-
+			$('.date-picker').datepicker();
             if (jQuery.browser.msie && jQuery.browser.version.substr(0, 1) == 8) {
                 isIE8 = true; // checkes for IE8 browser version
                 $('.visible-ie8').show();

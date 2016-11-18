@@ -67,6 +67,9 @@ $config['uri_protocol']	= 'AUTO';
 
 $config['url_suffix'] = '';
 
+// $config['google_id'] = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
+// $config['google_secret_key'] = 'aXDIRy_cJIZw80-uP_oieYA3';
+
 /*
 |--------------------------------------------------------------------------
 | Default Language

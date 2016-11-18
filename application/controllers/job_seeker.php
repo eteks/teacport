@@ -16,24 +16,7 @@ class Job_seeker extends CI_Controller {
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
-			require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $data['authUrl'] = $authUrl;
+			$data['glogin_url'] = $common->googleloginurl();
 			$this->load->view('job-seekers-login',$data);
 		}
 		else {
@@ -50,24 +33,7 @@ class Job_seeker extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
-   				require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $fb['authUrl'] = $authUrl;
+   				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('job-seekers-login',$fb);
 			}
 			else{
@@ -84,6 +50,7 @@ class Job_seeker extends CI_Controller {
 				else{
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    					$fb['fbloginurl'] = $common->facebookloginurl();
+   					$fb['glogin_url'] = $common->googleloginurl();
 					$this->load->view('job-seekers-login',$fb);
 				}
 			}
@@ -101,24 +68,7 @@ class Job_seeker extends CI_Controller {
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['fbloginurl'] = $common->facebookloginurl();
-			require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $data['authUrl'] = $authUrl;
+			$data['glogin_url'] = $common->googleloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
@@ -142,24 +92,7 @@ class Job_seeker extends CI_Controller {
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $fb['authUrl'] = $authUrl;
+				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('register-job-seekers',$fb);	
 	        }
 			else
@@ -193,24 +126,7 @@ class Job_seeker extends CI_Controller {
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
 	       				$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $fb['authUrl'] = $authUrl;
+						$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-seekers-login',$fb);
 					}
 					else{
@@ -220,24 +136,7 @@ class Job_seeker extends CI_Controller {
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $fb['authUrl'] = $authUrl;
+						
 						$this->load->view('register-job-seekers',$fb);
 					}
 				}
@@ -248,24 +147,7 @@ class Job_seeker extends CI_Controller {
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					require_once APPPATH . "libraries/google-api-php-client-master/src/Google/autoload.php";
-
-        // Store values in variables from project created in Google Developer Console
-        $client_id = '881163754380-inbtkd7iqm490en3v2ct4j3m639dd1vs.apps.googleusercontent.com';
-        $client_secret = 'aXDIRy_cJIZw80-uP_oieYA3';
-        $redirect_uri = 'https://www.etekchnoservices.com';
-        $simple_api_key = 'AIzaSyCTOjoAiuhpE8scnTamgbpo-agSc-CiU_0';
-
-        // Create Client Request to access Google API
-        $client = new Google_Client();
-        $client->setApplicationName("Teacport");
-        $client->setClientId($client_id);
-        $client->setClientSecret($client_secret);
-        $client->setRedirectUri($redirect_uri);
-        $client->setDeveloperKey($simple_api_key);
-        $client->addScope("https://www.googleapis.com/auth/userinfo.email");
-        $authUrl = $client->createAuthUrl();
-        $fb['authUrl'] = $authUrl;
+					$fb['glogin_url'] = $common->googleloginurl();
 					$this->load->view('register-job-seekers',$fb);
 				}
 				
@@ -302,4 +184,16 @@ class Job_seeker extends CI_Controller {
 		$this->session->sess_destroy();
     	redirect('/','refresh');
 	}
+
+    // Akila Created
+    
+    public function seekerdbd_editprofile()
+	{
+		$this->load->view('user-edit-profile');
+	}
+	
+	
+	
+
+    
 }

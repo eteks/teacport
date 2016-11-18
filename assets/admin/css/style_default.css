@@ -317,7 +317,7 @@ tr select {
     width:90%;
     padding:10px 40px;
     position: fixed;
-    top:55%;
+    top:57%;
     left:50%;
     -webkit-transform:translate(-50%, -50%);
     transform:translate(-50%, -50%);
@@ -379,4 +379,35 @@ tr select {
 }
 .input_field_width{
 	margin-left: 0px !important;
+}
+.uploaded_img{
+	height: 100px;
+	width: 150px;
+	margin-left: -30px;
+}
+.uploaded_img_preview{
+	 max-width: 200px; 
+	 max-height: 150px; 
+	 line-height: 20px;
+	 margin-left: -20px;
+}
+.select_chng_rmv{
+	margin-left: -20px;
+}
+.popup_select{
+	width: 200px !important;
+}
+.dp_width{
+	width: 185px !important;
+}
+.form-horizontal .control-label{
+	padding-top: 0px !important;
+	width: 170px !important;
+	font-weight: 600 !important;
+	font-size: 13px;
+}
+.dynamic_data {
+    font-size: 13px;
+    font-weight: lighter !important;
+    text-transform: capitalize;
 }
