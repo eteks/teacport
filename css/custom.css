@@ -57,22 +57,29 @@
 	position: relative;
 	margin: 30px 0;
 }
-.provider-jobs ul li {
+.provider-jobs li {
 	padding: 10px 15px;
 	text-align: center;
 	line-height: 30px;
 }
-.provider-jobs ul li a{
-	padding: 15px 100px;
+.provider-jobs li, .provider-jobs li:hover {
+	color: #FFF !important;
+	cursor: pointer;
 }
-.dashboard-body .profile-nav .provider-jobs ul > li > a:hover, .dashboard-body .profile-nav .provider-jobs ul > li > a:focus, .dashboard-body .profile-nav .provider-jobs ul li.active a {
+.dashboard-body .profile-nav .provider-jobs ul > li:hover, .dashboard-body .profile-nav .provider-jobs ul > li:focus, .dashboard-body .profile-nav .provider-jobs ul li.active  {
 	background: #29aafe;
 	border-left: 5px solid #2088cb;
 	color: #FFF !important;
 }
-
+.dashboard-body .profile-nav .provider-jobs ul li > a{
+	border: none;
+	
+}
+.dashboard-body .profile-nav .provider-jobs ul li > a:hover{
+	color: #FFF !important;
+}
 #imagepreview_act {
-    width: 490px;
+    /*width: 490px;*/
     height: 200px;
     background-position: center center;
     background-size: cover;
@@ -88,11 +95,13 @@ select:invalid { color: gray; }
  .advanced_search {
  	margin: 10px;
  }
- 
  #advancedsearch_act {
  	margin: 10px 0;
  }
-
+.info {
+	color: #ff0030;
+	font-size: 15px;
+}
 
 /* END OF COMPANY DASHBOARD */
 

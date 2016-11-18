@@ -1,6 +1,7 @@
 //Job Provider and Job seeker Dashboard Popup
 	 $(window).load(function()
 	{
+		$('#dashboard_popup_act').modal({ backdrop: 'static',keyboard: false })
 	    $('#dashboard_popup_act').modal('show');
 	}); 
 
@@ -22,17 +23,6 @@
 	    });
 	});
 
-$(document).ready(function() {
-	
-	// DATE-PICKER
-    $('input.datepicker').Zebra_DatePicker();
-      $('.pickdate_act').Zebra_DatePicker();
- 
-	
-});
-
-
-
 
 //Normal & Advanced Search
   $('#btn_advanced_act').click(function() {
@@ -45,5 +35,39 @@ $(document).ready(function() {
   	$('#advancedsearch_act').hide();
   	$('#normalsearch_act').show();
   }); 
+
+
+$(document).ready(function() {
+	
+	// DATE-PICKER
+    // $('input.datepicker').Zebra_DatePicker();
+      // $('.pickdate_act').Zebra_DatePicker();
+ 
+  // Display Subscription option based on Plan Select for Company Dashboard  
+	  $("select").change(function(){
+	  	alert('hi');
+	  	$(this).find("option:selected").each(function(){
+	  		alert('this');
+	  		if($(this).attr("value") == "basic"){
+	  			 $(".subplan_act").not(".basic").hide();
+	  			$("#basic_plan_act").show();
+	  		}
+	  		else if ($(this).attr("value") == "premium"){
+	  			 $(".subplan_act").not(".premium").hide();
+	  			$("#premium_plan_act").show();
+	  		}
+	  		else if ($(this).attr("value") == "standard"){
+	  			 $(".subplan_act").not(".standard").hide();
+	  			$("#standard_plan_act").show();
+	  		}
+	  		else {
+	  			$(".subplan_act").hide();
+	  		}
+	    });
+	     	
+	  }).change();
+ 
+	
+});  //end document 
 
 
