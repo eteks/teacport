@@ -78,12 +78,11 @@ class Job_provider extends CI_Controller {
 		else{
 			/* Set validate condition for registration form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
 			$this->form_validation->set_rules('registrant_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
-            $this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
+            $this->form_validation->set_rules('captcha_value', 'Captcha', 'callback_validate_captcha');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE)
 	       	{
@@ -94,8 +93,6 @@ class Job_provider extends CI_Controller {
 	       		$fb['fbloginurl'] = $common->facebookloginurl();
 	       		$fb['glogin_url'] = $common->googleloginurl();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
-				$fb['captcha'] = $this->captcha->main();
-				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$this->load->view('register-job-providers',$fb);	
 	        }
 			else
@@ -107,8 +104,8 @@ class Job_provider extends CI_Controller {
 					'registrant_name' => $this->input->post('registrant_name'),
 					'registrant_email_id' => $this->input->post('registrant_email_id'),
 					'registrant_mobile_no' => $this->input->post('registrant_mobile_no'),
-					'captcha_value' => $this->input->post('captcha_value'),
-					'registrant_password' => $common->generateStrongPassword()
+					'registrant_password' => $common->generateStrongPassword(),
+					'registrant_register_type' => 'teacherrecruite'
 				);
 			 	/* Check whether data exist or not.exist or not condition handled in job_provider_model.php */
 				if($this->job_provider_model->create_job_provider($data) === 'inserted'){
@@ -126,8 +123,6 @@ class Job_provider extends CI_Controller {
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Resitration Successful!. Check your email address!!';	
-						$fb['captcha'] = $this->captcha->main();
-						$this->session->set_userdata('captcha_info', $fb['captcha']);
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
 	       				$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-providers-login',$fb);
@@ -166,22 +161,30 @@ class Job_provider extends CI_Controller {
 		echo $data_value;
 	}
 	public function validate_captcha(){
-		$data = $this->captcha->main();
-		$data_value = $data['image_src'];
-		$this->session->set_userdata('captcha_info', $data);
-    if($this->input->post('captcha_value') != $this->session->userdata['captcha_info'])
-    {
-        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
-        return false;
-    }else{
-        return true;
-    }
-}
+		$entereddata = $this->input->post('captcha_value');
+		$session_captcha = $this->session->userdata['captcha_info'];
+	    if($entereddata != $session_captcha['code'])
+	    {
+	        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
+	        return FALSE;
+			
+	    }else{
+	        return TRUE;
+	    }
+	}
 
 	public function dashboard()
     {
     	$session_data = $this->session->all_userdata();
-        $this->load->view('company-dashboard');
+		$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
+		if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
+			$data['initial_data'] = 'show_popup';
+		}
+		else{
+			$data['initial_data'] = 'hide_popup';
+		}
+		$data['user_data'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+        $this->load->view('company-dashboard',$data);
     }
 	public function provider_logout(){
 		$this->session->set_userdata('login_status', FALSE);

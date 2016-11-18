@@ -8,29 +8,11 @@
                     </li>
                 </ul>
                 <ul class="menu-links pull-right">
-                    <li> <a href="<?php echo base_url();?>"> Home </a> </li>
-                <li> <a href="<?php echo base_url();?>aboutus"> About Us </a> </li>
-                <li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
-                    <ul class="drop-down-multilevel">
-                    	<li><a href="<?php echo base_url();?>login/provider">Sign In</a></li>
-                        <li><a href="<?php echo base_url();?>signup/provider">Sign Up</a></li>
-                        <li><a href="<?php echo base_url();?>pricing">Pricing</a></li>
-                     </ul>
-                  </li>
-                  <li><a href="javascript:void(0)"> Job Seekers <i class="fa fa-angle-down fa-indicator"></i></a> 
-                    <ul class="drop-down-multilevel">
-                    	<li><a href="<?php echo base_url();?>login/seeker">Sign In</a></li>
-                        <li><a href="<?php echo base_url();?>signup/seeker">Sign Up</a></li>
-                        <li><a href="<?php echo base_url(); ?>faq">FAQ's</a></li>
-                     </ul>
-                  </li>
-                  <li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
-                  <li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
-                  <li> <a href="<?php echo base_url();?>contactus"> Contact Us </a> </li>
+                    
                   <?php if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ ?>
-                  <li class="no-bg"><a href="company-dashboard-active-jobs.html" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
-                  <li class="profile-pic">
-                        <a href="javascript:void(0)"> <img src="<?php echo base_url(); ?>assets/images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>
+                  	<li class="no-bg"><a href="company-dashboard-active-jobs.html" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
+                  	<li class="profile-pic">
+                        <a href="javascript:void(0)"> <img src="<?php echo $user_data['organization_logo']; ?>" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm"><?php echo $user_data['registrant_name']; ?> </span><i class="fa fa-angle-down fa-indicator"></i> </a>
                         <ul class="drop-down-multilevel left-side">
                             <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-user"></i> My Profile</a></li>
                             <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-mail-forward"></i> Inbox</a></li>
@@ -38,7 +20,27 @@
                             <li><a href="<?php echo base_url();?>provider/logout"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                     </li>
-                    <?php } ?>
+                   <?php } else { ?>
+                   	<li> <a href="<?php echo base_url();?>"> Home </a> </li>
+                	<li> <a href="<?php echo base_url();?>aboutus"> About Us </a> </li>
+                	<li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
+                    	<ul class="drop-down-multilevel">
+	                    	<li><a href="<?php echo base_url();?>login/provider">Sign In</a></li>
+	                        <li><a href="<?php echo base_url();?>signup/provider">Sign Up</a></li>
+	                        <li><a href="<?php echo base_url();?>pricing">Pricing</a></li>
+                     	</ul>
+                  	</li>
+                  	<li><a href="javascript:void(0)"> Job Seekers <i class="fa fa-angle-down fa-indicator"></i></a> 
+                    	<ul class="drop-down-multilevel">
+	                    	<li><a href="<?php echo base_url();?>login/seeker">Sign In</a></li>
+	                        <li><a href="<?php echo base_url();?>signup/seeker">Sign Up</a></li>
+	                        <li><a href="<?php echo base_url(); ?>faq">FAQ's</a></li>
+                     	</ul>
+                  	</li>
+                  	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
+                  	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
+                  	<li> <a href="<?php echo base_url();?>contactus"> Contact Us </a> </li>
+                   <?php } ?>
 
                 </ul>
             </section>
