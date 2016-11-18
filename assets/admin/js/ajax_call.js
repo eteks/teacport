@@ -35,7 +35,7 @@ $(document).ready(function(){
                     this_ajax_section.html(res);
                     handleFormWizards();
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-                    e.preventDefault();
+                    // e.preventDefault();
                 }
             }
         });
@@ -50,7 +50,7 @@ $(document).ready(function(){
 
 // Popup with tab menu
 
-var handleFormWizards = function () {
+function handleFormWizards() {
         if (!jQuery().bootstrapWizard) {
             return;
         }

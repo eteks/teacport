@@ -525,11 +525,16 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
-  // Get district values
+  // Get district values not based status
   public function get_district_values()
   {
-    $district_get_where = '(district_status=1)'; 
-    $model_data = $this->db->get_where("tr_district", $district_get_where)->result_array(); 
+    $model_data = $this->db->get("tr_district")->result_array(); 
+    return $model_data;
+  }
+  // Get Institution Type list not based status
+  public function get_institution_type_list()
+  {
+    $model_data = $this->db->get("tr_institution_type")->result_array(); 
     return $model_data;
   }
 
