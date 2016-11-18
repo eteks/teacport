@@ -317,7 +317,7 @@ tr select {
     width:90%;
     padding:10px 40px;
     position: fixed;
-    top:57%;
+    top:55%;
     left:50%;
     -webkit-transform:translate(-50%, -50%);
     transform:translate(-50%, -50%);
@@ -410,4 +410,9 @@ tr select {
     font-size: 13px;
     font-weight: lighter !important;
     text-transform: capitalize;
+}
+.parents_tr td textarea{
+	min-height:20px !important;
+	max-height:40px !important;
+	overflow: auto !important;
 }
