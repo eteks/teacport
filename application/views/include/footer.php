@@ -9,7 +9,7 @@
 
 			<!-- BOOTSTRAP CORE JS -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-
+			
 			<!-- JQUERY SELECT -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/select2.min.js"></script>
 
@@ -18,6 +18,16 @@
 
 			<!-- JQUERY EASING -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/easing.js"></script>
+			
+			<!--datepicker-->
+			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/zebra_datepicker.js"></script>
+			
+			<!--Experience Range-->
+			<script src="<?php echo base_url(); ?>assets/js/range/res/Obj.min.js"></script>
+			<script src="<?php echo base_url(); ?>assets/js/range/res/addSlider.js"></script>
+			
+			<!--Multipleselect-->
+			<!-- <script src="<?php echo base_url(); ?>assets/js/jquery.multiselect.js"></script> -->
 
 			<!-- JQUERY COUNTERUP -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/counterup.js"></script>
@@ -27,7 +37,7 @@
 
 			<!-- JQUERY REVEAL -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/footer-reveal.min.js"></script>
-
+			
 			<!-- Owl Carousel -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/owl-carousel.js"></script>
 			

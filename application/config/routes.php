@@ -66,11 +66,13 @@ $route['contactus'] = 'home/contactus';
 //Akila created
 $route['provider/editprofile'] = 'job_provider/companydbd_editprofile';
 $route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
+$route['provider/resume'] = 'job_provider/companydbd_resume';
 $route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
 $route['pricing'] = 'home/pricing';
 $route['faq'] = 'home/faq';
 $route['allinstitutions'] = 'home/allinstitutions';
 $route['vacancies'] = 'home/vacancies';
+$route['seeker/editprofile'] = 'job_seeker/seekerdbd_editprofile';
 
 
 

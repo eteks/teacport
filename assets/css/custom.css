@@ -9,29 +9,7 @@
 	color: #777;
 	font-size: 22px;
 }
-/*Added by thangam*/
-/*css for login and registrartion start*/
 
-.registration_status {
-	color: #c24641;
-	display: none;
-	margin: 10px 0;
-	text-align: center;
-}
-.loading {
-	height: 28px;
-    width: 28px;
-}
-#captcha_img{
-	width: 106px;
-}
-/*css for login and registrartion end*/
-/*Ended by thangam*/
-.registration_server_msg{
-	color: #c24641;
-	margin: 10px 0;
-	text-align: center;
-}
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -73,15 +51,52 @@
 	
 }
 /* END OF JOB SEEKER DASHBOARD */
+
 /* COMPANY DASHBOARD */
 #company-browse-candidate .all-jobs-list-box2 {
 	position: relative;
 	margin: 30px 0;
 }
+.provider-jobs ul li {
+	padding: 10px 15px;
+	text-align: center;
+	line-height: 30px;
+}
+.provider-jobs ul li a{
+	padding: 15px 100px;
+}
+.dashboard-body .profile-nav .provider-jobs ul > li > a:hover, .dashboard-body .profile-nav .provider-jobs ul > li > a:focus, .dashboard-body .profile-nav .provider-jobs ul li.active a {
+	background: #29aafe;
+	border-left: 5px solid #2088cb;
+	color: #FFF !important;
+}
+
+#imagepreview_act {
+    width: 490px;
+    height: 200px;
+    background-position: center center;
+    background-size: cover;
+    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+}
+/*.select-salary select option:first{
+	color: #999;
+}*/
+select:invalid { color: gray; }
+
+ .advanced_search {
+ 	margin: 10px;
+ }
+ 
+ #advancedsearch_act {
+ 	margin: 10px 0;
+ }
+
 
 /* END OF COMPANY DASHBOARD */
 
-/* DASHBOARD -both for providers & Seekers */
+/* PROVIDERS & SEEKERS DASHBOARD */
 #provider-profilebar .progress, #seeker-profilebar .progress {
     border-radius: 15px;
     box-shadow: none;
@@ -89,9 +104,32 @@
     position: relative;
 }
 
-.provider-jobs li {
-	margin-left: 35px;
+
+/*Added by thangam*/
+/*css for login and registrartion start*/
+
+.registration_status {
+	color: #c24641;
+	display: none;
+	margin: 10px 0;
+	text-align: center;
 }
+.loading {
+	height: 28px;
+    width: 28px;
+}
+#captcha_img{
+	width: 106px;
+}
+/*css for login and registrartion end*/
+/*Ended by thangam*/
+
+.registration_server_msg{
+	color: #c24641;
+	margin: 10px 0;
+	text-align: center;
+}
+
 .error{
 color: red;
 font-size: 13px;

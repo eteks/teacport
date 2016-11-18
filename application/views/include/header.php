@@ -14,7 +14,7 @@
 
     <!-- BOOTSTRAPE STYLESHEET CSS FILES -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">
-
+    
     <!-- JQUERY SELECT -->
     <link href="<?php echo base_url(); ?>assets/css/select2.min.css" rel="stylesheet" />
 
@@ -30,17 +30,25 @@
 
     <!-- TEMPLATE CORE CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
+    
+    <!-- FOR POST-JOB PAGES ONLY -->
+    <link href="css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="css/jquery.tagsinput.min.css">
+    
     <!--Custom CSS-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
     
-     <!-- FOR POST-JOB PAGES ONLY -->
-    <link href="css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="css/jquery.tagsinput.min.css">
+    <!--Datepicker-->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/default.css" type="text/css">
+    
+    <!--Salary range-->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/range/addSlider.css">
+    
 
     <!-- FONT AWESOME -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/et-line-fonts.css" type="text/css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/slideshowstyle.css" type="text/css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/slideshowstyle.css" type="text/css"> -->
 
     <!-- Google Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900,300" rel="stylesheet" type="text/css">
