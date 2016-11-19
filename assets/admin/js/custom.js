@@ -41,7 +41,7 @@ var updatebutton = "ajaxUpdate";
 var cancelbutton = "cancel";
 
 // Init variables
-var inputs = 'input,select';
+var inputs = 'input,select,textarea';
 var trcopy;
 // var editing=0;
 

@@ -73,23 +73,33 @@ class Social extends CI_Controller {
 				redirect('login/seeker');
 				exit;
 			}
-			print_r($profile);
-			// $check1 = mysqli_query($connection,"select * from stork_users where social_id='".$profile['id']."' and user_status = '1'");
-			// $check = mysqli_num_rows($check1);
-			// if ($check == 0) { // if new user . Insert a new record		
-// 			
-				// $query = "INSERT INTO stork_users (social_id,username,password,first_name,last_name,user_type,user_email,user_dob,line1,line2,user_mobile,user_access_type,user_status) VALUES ('".$profile['id']."','".$profile['email']."','".$profile['first_name']."','".$profile['first_name']."','".$profile['last_name']."','fb','".$profile['email']."','fb','fb','fb','fb','2','1')";
-				// mysqli_query($connection,$query);
-				// $user_id = mysqli_insert_id($connection);
-				// $_SESSION['login_status'] = 1;
-				// $_SESSION['user_id'] = $user_id;
-			// } else {   // If Returned user . update the user record	
-				// $user_id_data= mysqli_fetch_array($check1);
-				// $query = "UPDATE stork_users SET first_name='$ffname', user_email='$femail' where Fuid='$fuid'";
-				// mysqli_query($connection,$query);
-				// $_SESSION['login_status'] = 1;
-				// $_SESSION['user_id'] = $user_id_data['user_id'];
-			// }
+			$fbdata = array(
+				'registrant_email_id' => $profile['email'],
+				'registrant_name' => $profile['name'],
+				'organization_logo' => $profile['picture']['url'],
+				'registrant_register_type' => 'facebook'
+			);
+			if($this->job_provider_model->social_authendication_registration($fbdata) === 'inserted')
+			{
+				$fbdata['user_type'] = 'provider';
+				$fbdata['login_type'] = 'facebook';
+				$this->session->set_userdata("login_status", TRUE);
+				$this->session->set_userdata("login_session",$fbdata);
+				redirect('provider/dashboard');
+			}
+			else{
+				$checkvaliduser = $this->job_provider_model->social_valid_provider_login($fbdata);
+				if($checkvaliduser['valid_status'] === 'valid'){
+					$this->session->set_userdata("login_status", TRUE);
+					$this->session->set_userdata("login_session",$checkvaliduser);
+					redirect('provider/dashboard');
+				}
+				else{
+					$fb['reg_server_msg'] = 'Your Facebook account does not associate with Teacher recruit!';	
+   					$fb['fbloginurl'] = $common->facebookloginurl();
+					$this->load->view('job-providers-login',$fb);
+				}
+			}
 		}
 	}
 	public function twitter(){
@@ -113,9 +123,7 @@ class Social extends CI_Controller {
 		
 		$user_profile = $this->twconnect->tw_user_info;
 		
-		$this->session->set_userdata('login',true);
-		
-		$arr = array(
+		$profile = array(
 			'id' => $user_profile->id,
 			'name' => $user_profile->name,
 			'screen_name' => $user_profile->screen_name,
@@ -124,18 +132,40 @@ class Social extends CI_Controller {
 			'profile_image_url' => $user_profile->profile_image_url,
 		);
 		
-		$this->session->set_userdata('user_profile',$arr);
-		
-		print_r($arr);
+		// print_r($arr);
+		$twdata = array(
+			'registrant_email_id' => $profile['screen_name'].'@twitter.com',
+			'registrant_name' => $profile['name'],
+			'organization_logo' => $profile['profile_image_url'],
+			'registrant_register_type' => 'twitter'
+		);
+		if($this->job_provider_model->social_authendication_registration($twdata) === 'inserted')
+		{
+			$twdata['user_type'] = 'provider';
+			$twdata['login_type'] = 'twitter';
+			$this->session->set_userdata("login_status", TRUE);
+			$this->session->set_userdata("login_session",$twdata);
+			redirect('provider/dashboard');
+		}
+		else{
+			$checkvaliduser = $this->job_provider_model->social_valid_provider_login($twdata);
+			if($checkvaliduser['valid_status'] === 'valid'){
+				$this->session->set_userdata("login_status", TRUE);
+				$this->session->set_userdata("login_session",$checkvaliduser);
+				redirect('provider/dashboard');
+			}
+			else{
+				$tw['reg_server_msg'] = 'Your Twitter account does not associate with Teacher recruit!';	
+				$tw['fbloginurl'] = $common->facebookloginurl();
+				$this->load->view('job-providers-login',$tw);
+			}
+		}
 		
 	}
 	public function twitterfailure() {
 		if($this->session->userdata('login') == true){
-			redirect('welcome/profile');
+			redirect('/');
 		}
-		
-		echo '<p>Twitter connect failed</p>';
-		echo '<p><a href="' . base_url() . 'welcome/logout">Try again!</a></p>';
 	}
 	public function linkedin() {
 		$ci =& get_instance();
@@ -181,10 +211,37 @@ class Social extends CI_Controller {
 			//redirect("login/seeker"); exit;
 		 }
 		if ($success) {
-			$_SESSION['loggedin_user_id'] = $user_id;
-			$_SESSION['user'] = $user;
+			if(isset($user)){
+				$lidata = array(
+					'registrant_email_id' => $user->emailAddress,
+					'registrant_name' => $user->firstName,
+					'organization_logo' => $user->pictureUrl,
+					'registrant_register_type' => 'linkedin'
+				);
+				if($this->job_provider_model->social_authendication_registration($lidata) === 'inserted')
+				{
+					$lidata['user_type'] = 'provider';
+					$lidata['login_type'] = 'linkedin';
+					$this->session->set_userdata("login_status", TRUE);
+					$this->session->set_userdata("login_session",$lidata);
+					redirect('provider/dashboard');
+				}
+				else{
+					$checkvaliduser = $this->job_provider_model->social_valid_provider_login($lidata);
+					if($checkvaliduser['valid_status'] === 'valid'){
+						$this->session->set_userdata("login_status", TRUE);
+						$this->session->set_userdata("login_session",$checkvaliduser);
+						redirect('provider/dashboard');
+					}
+					else{
+						$li['reg_server_msg'] = 'Your Twitter account does not associate with Teacher recruit!';	
+						$li['fbloginurl'] = $common->facebookloginurl();
+						$this->load->view('job-providers-login',$li);
+					}
+				}
+			}
 		} else {
-		 	 $_SESSION["err_msg"] = $client->error;
+		 redirect("/"); 
 		}
 	}
 	

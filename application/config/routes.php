@@ -64,14 +64,18 @@ $route['aboutus'] = 'home/aboutus';
 $route['contactus'] = 'home/contactus';
 
 //Akila created
-$route['provider/editprofile'] = 'job_provider/companydbd_editprofile';
-$route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
-$route['provider/resume'] = 'job_provider/companydbd_resume';
-$route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
 $route['pricing'] = 'home/pricing';
 $route['faq'] = 'home/faq';
 $route['allinstitutions'] = 'home/allinstitutions';
 $route['vacancies'] = 'home/vacancies';
+$route['provider/editprofile'] = 'job_provider/companydbd_editprofile';
+$route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
+$route['provider/resume'] = 'job_provider/companydbd_resume';
+$route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
+$route['provider/postedjobs'] = 'job_provider/companydbd_postedjobs';
+$route['provider/subscription'] = 'job_provider/companydbd_subscription';
+$route['provider/feedback'] = 'job_provider/companydbd_feedback';
+$route['provider/changepwd'] = 'job_provider/companydbd_changepwd';
 $route['seeker/editprofile'] = 'job_seeker/seekerdbd_editprofile';
 
 
@@ -98,6 +102,8 @@ $route['admin/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads'
 $route['admin/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
+
+$route['admin/user_groups'] = 'admin/admin_users/user_groups';
 
 
 
