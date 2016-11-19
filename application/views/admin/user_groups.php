@@ -112,9 +112,9 @@ if(!empty($this->session->userdata("login_status"))):
                                         ?></td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($grp_val["user_group_created_date"])); ?></td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                          <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
+                                        <td><a class="ajaxDelete" id="column<?php echo $i; ?>" href="#myModal1" data-toggle="modal" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
                                     </tr>
                                     <?php
                                       $i++;
