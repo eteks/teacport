@@ -248,65 +248,43 @@ class Admin_Model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $language_get_where = '(language_name="'.$this->input->post('language_name').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'")';
-  
-        $qualification_get = $this->db->get_where('tr_educational_qualification',$language_get_where);
-
-      if($qualification_get -> num_rows() > 0) {
-        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
-        $model_data['error'] = 1;     
-      }
-      else {
-        $qualification_update_data = array( 
-                                    'educational_qualification' => $this->input->post('educational_qualification'),
-                                    'educational_qualification_course_type' => $this->input->post('educational_qualification_course_type'),
-                                    'educational_qualifcation_inst_type_id' => $this->input->post('educational_qualifcation_inst_type_id'),
-                                    'educational_qualification_status' => $this->input->post('educational_qualification_status'),
+      $language_update_data = array( 
+                                    'language_name' => $this->input->post('language_name'),
+                                    'is_mother_tangue' => $this->input->post('is_mother_tangue'),
+                                    'is_medium_of_instruction' => $this->input->post('is_medium_of_instruction'),
+                                    'language_status' => $this->input->post('language_status'),
                                   );
-        $qualification_update_where = '(educational_qualification_id="'.$this->input->post('rid').'")'; 
-        $this->db->set($qualification_update_data); 
-        $this->db->where($qualification_update_where);
-        $this->db->update("tr_educational_qualification", $qualification_update_data); 
-        $model_data['status'] = "Updated Successfully";
-        $model_data['error'] = 2;
-      }
+      $language_update_where = '(language_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($language_update_data); 
+      $this->db->where($language_update_where);
+      $this->db->update("tr_languages", $language_update_data); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
     }
 
     // Save data
     else if($status=='save') {
-      $qualification_get_where = '(educational_qualification="'.$this->input->post('educational_qualification').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'" and educational_qualifcation_inst_type_id="'.$this->input->post('educational_qualifcation_inst_type_id').'")';
-      $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);
-
-      if($qualification_get -> num_rows() > 0) {
-        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
-        $model_data['error'] = 1;     
-      }
-      else {
-        $qualification_insert_data = array( 
-                                      'educational_qualification' => $this->input->post('educational_qualification'),
-                                      'educational_qualification_course_type' => $this->input->post('educational_qualification_course_type'),
-                                      'educational_qualifcation_inst_type_id' => $this->input->post('educational_qualifcation_inst_type_id'),
-                                      'educational_qualification_status' => $this->input->post('educational_qualification_status'),
+      $language_insert_data = array( 
+                                      'language_name' => $this->input->post('language_name'),
+                                      'is_mother_tangue' => $this->input->post('is_mother_tangue'),
+                                      'is_medium_of_instruction' => $this->input->post('is_medium_of_instruction'),
+                                      'language_status' => $this->input->post('language_status'),
                                     );
-        $this->db->insert("tr_educational_qualification", $qualification_insert_data); 
-        $model_data['status'] = "Inserted Successfully";
-        $model_data['error'] = 2;
-      }
+      $this->db->insert("tr_languages", $language_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
     }
 
     // Delete data
     else if($status =='delete') {
-      $qualification_delete_where = '(educational_qualification_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_educational_qualification", $qualification_delete_where); 
+      $language_delete_where = '(language_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_languages", $language_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
 
     // View
-    $this->db->select('*');
-    $this->db->from('tr_educational_qualification eq');
-    $this->db->join('tr_institution_type it','eq.educational_qualifcation_inst_type_id=it.institution_type_id','inner');
-    $model_data['qualification_type_values'] = $this->db->get()->result_array();
+    $model_data['language_values'] = $this->db->get('tr_languages')->result_array();
 
     return $model_data;
   }
@@ -564,6 +542,56 @@ class Admin_Model extends CI_Model {
     $universities_list_query = $this->db->query("SELECT * FROM tr_class_level AS c INNER JOIN ( SELECT education_board_id,university_board_name,university_board_status,university_board_created_date, SUBSTRING_INDEX( SUBSTRING_INDEX( t.university_class_level_id, ',', n.n ) , ',', -1 ) value FROM tr_university_board t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.university_class_level_id ) - LENGTH( REPLACE( t.university_class_level_id, ',', ''))) ) AS a ON a.value = c.class_level_id order by (a.education_board_id)");
     $model_data['universities_values'] = $universities_list_query->result_array();  
     return $model_data;
+  }
+
+  // Postings - Add Edit Delete View
+  public function postings($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $postings_update_data = array( 
+                              'posting_name' => $this->input->post('posting_name'),
+                              'posting_institution_id' => $this->input->post('posting_institution_id'),
+                              'posting_status' => $this->input->post('posting_status'),
+                            );
+      $postings_update_where = '(posting_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($postings_update_data); 
+      $this->db->where($universities_update_where);
+      $this->db->update("tr_applicable_posting", $postings_update_where); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $postings_insert_data = array( 
+                            'posting_name' => $this->input->post('posting_name'),
+                            'posting_institution_id' => $this->input->post('posting_institution_id'),
+                            'posting_status' => $this->input->post('posting_status'),
+                          );
+      $this->db->insert("tr_applicable_posting", $postings_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $postings_delete_data = '(posting_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_applicable_posting", $postings_delete_data); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $postings_list_query = $this->db->query("SELECT * FROM tr_institution_type AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.posting_institution_id, ',', n.n ) , ',', -1 ) value FROM tr_applicable_posting t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.posting_institution_id ) - LENGTH( REPLACE( t.posting_institution_id, ',', ''))) ) AS a ON a.value = c.institution_type_id order by (a.posting_id)");
+    $model_data['postings_values'] = $postings_list_query->result_array();  
+    return $model_data;
+
+
+
   }
 
   // Get Institution Type list

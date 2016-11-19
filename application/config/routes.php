@@ -95,6 +95,7 @@ $route['admin/class_level'] = 'admin/adminindex/class_level';
 $route['admin/departments'] = 'admin/adminindex/departments';
 $route['admin/subject'] = 'admin/adminindex/subject';
 $route['admin/university'] = 'admin/adminindex/university';
+$route['admin/postings'] = 'admin/adminindex/posting';
 $route['admin/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
 $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
 $route['admin/subscription_plans'] = 'admin/subscription_plan/teacport_subscription_plans';

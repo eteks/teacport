@@ -43,7 +43,7 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
 }
 
 #sidebar > ul > li.active > a{
-    background: url("../img/side-bar-list-bg.png");
+    background: rgba(0, 0, 0, 0.10) url("../img/side-bar-list-bg.png");
 }
 
 #sidebar > ul > li > ul.sub > li > a {
