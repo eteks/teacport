@@ -28,24 +28,6 @@ class Adminindex extends CI_Controller {
 	      }
 	}
 
-	public function dashboard()
-	{	
-		$this->dashboard->count_vacancies_by_district();
-		$this->dashboard->count_vacancies_by_state();
-		$this->dashboard->count_vacancies_by_qualification();
-		$this->dashboard->count_vacancies_by_institution();
-		$this->dashboard->count_overall_vacancies();
-		$this->dashboard->count_overall_job_applied();
-		$this->dashboard->count_overall_job_seekers();
-		$this->dashboard->count_overall_job_providers();
-		$this->dashboard->count_unique_visitors();
-		$this->dashboard->paid_job_providers();
-		$this->dashboard->paid_job_providers_by_district();
-		$this->dashboard->free_job_providers_by_district();
-		
-		$this->load->view('admin/index');
-	}
-
 	// State - Add Edit Delete View
 	public function state()
 	{	
@@ -610,7 +592,7 @@ class Adminindex extends CI_Controller {
 	// Departments - Add Edit Delete View
 	public function departments()
 	{	
-		$data['qualification_list'] = $this->admin_model->get_qualification_list(); 
+		$data['qualification_list'] = $this->admin_model->get_qualification_values(); 
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
@@ -1094,19 +1076,8 @@ class Adminindex extends CI_Controller {
 	public function languages()
 	{	
 			$this->load->view('admin/languages');
-	}
-	public function user_groups()
-	{	
-			$this->load->view('admin/user_groups');
-	}
-	public function user_accounts()
-	{	
-			$this->load->view('admin/user_accounts');
-	}
-	public function privileges()
-	{	
-			$this->load->view('admin/privileges');
-	}
+	}	
+
 }
 /* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */

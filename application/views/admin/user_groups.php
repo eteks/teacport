@@ -1,3 +1,7 @@
+<?php
+if(!empty($this->session->userdata("login_status"))): 
+?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -72,7 +76,14 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/users_group" class="admin_module_form" id="users_group_form">
+                                <form method="post" action="user_groups" class="admin_module_form" id="users_group_form">
+                                <?php } ?>
+                                <?php
+                                if(!empty($status)) :
+                                  echo "<p class='db_status update_success_md'> $status </p>";
+                                endif;
+                                ?> 
+                                <p class='val_error error_msg_md'> <p>
                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
@@ -85,62 +96,59 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="user_group_name">Group1</td>
-                                        <td class="user_group_description">Content 1</td>
-                                        <td class="user_group_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
+                                    <?php
+                                      if(!empty($group_values)) :
+                                      $i=1;
+                                      foreach ($group_values as $grp_val) :
+                                    ?>
+                                    <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="user_group_name"><?php echo $grp_val['user_group_name']; ?></td>
+                                        <td class="user_group_description"><?php echo $grp_val['user_group_description']; ?></td>
+                                        <td class="user_group_status"><?php 
+                                        if ($grp_val['user_group_status'] == 1) 
+                                          echo "Active";
+                                        else
+                                          echo "Inactive";
+                                        ?></td>
+                                        <td class="created_date"><?php echo date("d/m/Y", strtotime($grp_val["user_group_created_date"])); ?></td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                          <a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
                                         </td>
                                         <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
                                     </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="user_group_name">Group2</td>
-                                        <td class="user_group_description">Content 2</td>
-                                        <td class="user_group_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column2" href="#myModal1" data-toggle="modal">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="user_group_name">Group3</td>
-                                        <td class="user_group_description">Content 3</td>
-                                        <td class="user_group_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column3" href="#myModal1" data-toggle="modal">Delete</a></td>
-                                    </tr>
+                                    <?php
+                                      $i++;
+                                      endforeach;
+                                      endif;
+                                    ?>
                                     </tbody>
                                 </table>
+                                <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
                 <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-body delete_message_style">
+                <input type="hidden" name="delete" id="vId" value=""/>
+                <button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
+                  &times;
+                </button>
+                <center class="popup_tx">
+                  <h5>Are you sure you want to delete this item? </h5>
+                </center>
+              </div>
+              <div id="delete_btn" class="modal-footer footer_model_button" >
+                <a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
+                <button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
+              </div>
+               </div><!--/row-->
+            </div>
+          </div>
             </div>
 
             <!-- END ADVANCED TABLE widget-->
@@ -156,9 +164,15 @@
     // Define default values
     var inputType = new Array("text","textarea","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("user_group_name","user_group_description","user_group_status"); // Set name of input types
-    var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
+    var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table    
-    var user_group_status_option = new Array("Active","Inactive"); 
-    var user_group_status_value = new Array("1","0"); 
+    var user_group_status_option = new Array("Please select status","Active","Inactive"); 
+    var user_group_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
+<?php
+else :
+redirect(base_url().'admin');
+endif;
+?>

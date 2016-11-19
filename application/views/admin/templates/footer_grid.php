@@ -18,8 +18,9 @@
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery-1.8.3.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>        
-        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>        
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-multiselect/bootstrap-multiselect.js"></script> -->
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.blockui.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.cookie.js"></script>
         <!-- ie8 fixes -->
@@ -52,10 +53,6 @@
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap-fileupload.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>   
-        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-daterangepicker/date.js"></script>
-                
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->  
         <script>
            // jQuery(document).ready(function() {
