@@ -284,12 +284,23 @@ Website: http://thevectorlab.net/
                                 Job Vacancies
                             </a>
                         </li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_activities">
+                                Job Activities
+                            </a>
+                        </li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
                         <li><a class="" href="tree_view.php">Tree View</a></li>
                         <li><a class="" href="nestable.php">Nestable List</a></li> -->
                     </ul>
+                </li>
+                <li class="has-sub">
+                    <a class="" href="<?php echo base_url(); ?>admin/subscription_plans">
+                        <span class="icon-box"> <i class="icon-hand-right"></i></span>
+                        Subscription Plan
+                    </a>
                 </li>
                 <!-- <li class="has-sub">
                     <a href="<?php echo base_url(); ?>admin/dashboard" class="">
@@ -302,7 +313,7 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/jobprovider_ads">Job Ads</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>                    
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>

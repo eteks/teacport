@@ -105,6 +105,12 @@ createInput = function(i,str){
         input += '</select>';
         //console.log(str);
     }
+    else if(inputType[i] == "on_off"){
+        input = '<ul class="on_off_button on_off_button_j">';
+        input += '<li data-value="1" class="on"><a href="#">Yes</a></li> <li data-value="0"><a href="#">No</a></li>';
+        input += '</ul>';
+        input += '<input type="hidden" value="" class="verification" name="'+columns[i]+'" />';
+    }
     else if(inputType[i] == "multiselect"){
         input = '<select data-placeholder="'+placeholder[i]+'" name="'+columns[i]+'" class="chosen span6" multiple="multiple" >';
         var select_option = eval(columns[i]+'_option');
@@ -245,7 +251,12 @@ $(document).ready(function(){
                 input = createInput(i,$.trim(val));
                 html +='<td>'+input+'</td>';
             }
-            html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" id="'+id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" id="'+id+'" class="'+cancelbutton+'">Cancel</a></td>';
+            if(typeof is_created != "undefined" && is_created=="no") {
+                html += '<td><a href="javascript:;" data-id="'+update_id+'" id="'+id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" id="'+id+'" class="'+cancelbutton+'">Cancel</a></td>';
+            }
+            else {
+                html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" id="'+id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" id="'+id+'" class="'+cancelbutton+'">Cancel</a></td>';
+            }
             
             // Before replacing the TR contents, make a copy so when user clicks on 
             trcopy = $("."+table+" tr[id="+id+"]").html();
@@ -361,7 +372,59 @@ $(document).ready(function(){
         e.preventDefault();
     });
 });
-  
+    
+
+    // popup for subscription and ads
+    $('.add_option,.edit_option').on('click', function(e)  {
+        var targeted_popup_class = $(this).data('open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+         e.preventDefault();
+    });
+    
+    $('.close_trig').on('click', function(e)  {
+        var targeted_popup_class = $(this).data('open');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+        e.preventDefault();
+    });
+
+    // Upload click instead of using file input
+    $('.upload_option').on('click', function()  {
+        $(this).prev().click();
+    });
+
+    // Upload preview
+    $('.image_upload').on('change', function()  {
+        
+        var file = $(this).val();
+        var ext = file.substr((file.lastIndexOf('.') + 1));
+        if (ext == "jpg" || ext == "png" || ext == "JPG" || ext == "jpeg") {
+            if (this.files && this.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {           
+                    $('.preview_images').attr('src', e.target.result);
+                }
+                reader.readAsDataURL(this.files[0]);
+            }
+        }
+        else {
+            alert("Invalid file only files with extension. Jpeg,. Jpg or. Png are accepted.");
+            return false;
+        }
+    });
+
+    // On off button
+    $(document).on("click",".on_off_button_j li",function(){
+        $(this).parents('.on_off_button').find('li').removeClass("on");
+        $(this).addClass("on");
+        $(this).parent().siblings('.verification').val($(this).data('value'));
+    });
+
+
+
+
+
+
+
     // $(".tabs-menu a").click(function(event) {
         // event.preventDefault();
         // $(this).parent().addClass("current");

@@ -93,6 +93,9 @@ $route['admin/subject'] = 'admin/adminindex/subject';
 $route['admin/university'] = 'admin/adminindex/university';
 $route['admin/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
 $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
+$route['admin/subscription_plans'] = 'admin/subscription_plan/teacport_subscription_plans';
+$route['admin/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
+$route['admin/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
