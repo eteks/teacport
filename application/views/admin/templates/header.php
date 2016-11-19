@@ -259,47 +259,6 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Seeker</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Provider</a></li>
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-globe"></i></span> Jobs
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>                    
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
-                    </ul>
-                </li>
-                <!-- <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-book"></i></span> Location
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="ui_elements_general.php">State</a></li>
-                        <li><a class="" href="ui_elements_buttons.php">District</a></li>                        
-                    </ul>
-                </li> -->
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-tasks"></i></span> Statistics
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Reports</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/user_groups">User Groups</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/user_accounts">User Accounts</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Modules</a></li>
@@ -360,7 +319,7 @@ Website: http://thevectorlab.net/
                         </li>
                     </ul>
                 </li>
-               <li class="has-sub">
+                <li class="has-sub">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-search"></i></span> Job Seekers
                         <span class="arrow"></span>
