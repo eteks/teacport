@@ -1076,7 +1076,6 @@ class Adminindex extends CI_Controller {
 	// Languages - Add Edit View Delete
 	public function languages()
 	{	
-
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
@@ -1198,10 +1197,7 @@ class Adminindex extends CI_Controller {
 			$data['language_values'] = $data_values['language_values'];
 			$this->load->view('admin/languages',$data);
 		}
-	}
-
-
-
+	}	
 
 }
 /* End of file Adminindex.php */ 

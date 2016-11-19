@@ -260,9 +260,9 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/user_groups">User Groups</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">User Accounts</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/user_accounts">User Accounts</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Modules</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Privileges</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/privileges">Privileges</a></li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
@@ -325,7 +325,7 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Profile</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile">Profile</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Perferences</a></li>                    
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applied</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a></li> 

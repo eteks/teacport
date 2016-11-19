@@ -104,6 +104,12 @@ $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
 $route['admin/user_groups'] = 'admin/admin_users/user_groups';
+$route['admin/user_accounts'] = 'admin/admin_users/user_accounts';
+$route['admin/privileges'] = 'admin/admin_users/privileges';
+
+$route['admin/job_seeker_profile'] = 'admin/job_seeker/job_seeker_profile';
+
+
 
 
 
