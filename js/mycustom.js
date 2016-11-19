@@ -5,10 +5,11 @@
 	    $('#dashboard_popup_act').modal('show');
 	}); 
 
-//Image Thumbnail Preview
+//Image Thumbnail Preview for company dashboard
 	 $(function() {
-	    $("#uploadfile_act").on("change", function()
+	    $(".uploadimage_act").on("change", function()
 	    {
+	    	var thisvalue = $(this);
 	        var files = !!this.files ? this.files : [];
 	        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
 	
@@ -17,7 +18,7 @@
 	            reader.readAsDataURL(files[0]); // read the local file
 	
 	            reader.onloadend = function(){ // set image data as background of div
-	                $("#imagepreview_act").css("background-image", "url("+this.result+")");
+	                thisvalue.next().css("background-image", "url("+this.result+")");
 	            }
 	        }
 	    });
@@ -45,9 +46,7 @@ $(document).ready(function() {
  
   // Display Subscription option based on Plan Select for Company Dashboard  
 	  $("select").change(function(){
-	  	alert('hi');
-	  	$(this).find("option:selected").each(function(){
-	  		alert('this');
+	  		$(this).find("option:selected").each(function(){
 	  		if($(this).attr("value") == "basic"){
 	  			 $(".subplan_act").not(".basic").hide();
 	  			$("#basic_plan_act").show();
