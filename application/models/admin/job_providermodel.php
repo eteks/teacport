@@ -18,7 +18,7 @@ class Job_Providermodel extends CI_Model {
 
   // Job provider profile - ajax
   public function get_full_provider_profile($value) {
-    $provider_profile_where = '(op.organization_id="'.$value.'" and op.organization_status=1)';
+    $provider_profile_where = '(op.organization_id="'.$value.'")';
     $this->db->select('*');
     $this->db->from('tr_organization_profile op');
     $this->db->join('tr_subscription s','op.subcription_id=s.subscription_id','inner');

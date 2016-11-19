@@ -30,9 +30,8 @@ class Job_Provider extends CI_Controller {
 	{
 		if($this->input->post('action') && $this->input->post('value')) {
 			$value = $this->input->post('value');
-			$data['instution_values'] = $this->admin_model->get_institution_type();
+			$data['instution_values'] = $this->admin_model->get_institution_type_list();
 			$data['district_values'] = $this->admin_model->get_district_values();
-			$data['subscription_values'] = $this->admin_model->get_subscription_values();
 			$data['provider_full_profile'] = $this->job_providermodel->get_full_provider_profile($value);
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/jobprovider_profile',$data);

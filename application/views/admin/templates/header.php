@@ -255,79 +255,14 @@ Website: http://thevectorlab.net/
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-user"></i></span> Users
+                        <span class="icon-box"> <i class="icon-user"></i></span> Admin Users
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Seeker</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Provider</a></li>
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">Job  
-                                Provider profile
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
-                                Job Vacancies
-                            </a>
-                        </li>
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
-                    </ul>
-                </li>
-                <!-- <li class="has-sub">
-                    <a href="<?php echo base_url(); ?>admin/dashboard" class="">
-                        <span class="icon-box"> <i class="icon-dashboard"></i></span> Institution                        
-                    </a>                    
-                </li> -->
-               <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-globe"></i></span> Jobs
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>                    
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
-                    </ul>
-                </li>
-                <!-- <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-book"></i></span> Location
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="ui_elements_general.php">State</a></li>
-                        <li><a class="" href="ui_elements_buttons.php">District</a></li>                        
-                    </ul>
-                </li> -->
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-tasks"></i></span> Statistics
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Reports</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/user_groups">User Groups</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">User Accounts</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Modules</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Privileges</a></li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
@@ -350,111 +285,77 @@ Website: http://thevectorlab.net/
                         <li><a class="" href="<?php echo base_url(); ?>admin/class_level">Class Level</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/departments">Department</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/subject">Subject</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/university">University</a></li>
-                    </ul>
-                </li>
-               <!--  <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-cogs"></i></span> Components
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="calendar.php">Calendar</a></li>
-                        <li><a class="" href="grids.php">Grids</a></li>
-                        <li><a class="" href="charts.php">Visual Charts</a></li>
-                        <li><a class="" href="messengers.php">Conversations</a></li>
-                        <li><a class="" href="gallery.php"> Gallery</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/university">Job Posting Details</a></li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-tasks"></i></span> Form Stuff
+                        <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="form_layout.php">Form Layouts</a></li>
-                        <li><a class="" href="form_component.php">Form Components</a></li>
-                        <li><a class="" href="form_wizard.php">Form Wizard</a></li>
-                        <li><a class="" href="form_validation.php">Form Validation</a></li>
-                        <li><a class="" href="dropzone.php">Dropzone File Upload </a></li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">Profile</a>
+                        </li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">Vacancies Posted</a>
+                        </li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/dashboard">Organization Activities</a>
+                        </li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a>
+                        </li>
+                        <li>
+                            <a class="" href="<?php echo base_url(); ?>admin/dashboard">Ads Posted</a>
+                        </li>
+                    </ul>
+                </li>
+               <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <span class="icon-box"> <i class="icon-search"></i></span> Job Seekers
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Profile</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Perferences</a></li>                    
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applied</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a></li> 
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-th"></i></span> Data Tables
+                        <span class="icon-box"> <i class="icon-wrench"></i></span> Plan Settings
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="basic_table.php">Basic Table</a></li>
-                        <li><a class="" href="managed_table.php">Managed Table</a></li>
-                        <li><a class="" href="editable_table.php">Editable Table</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Plan Creation & Maintanence</a></li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"><i class=" icon-qrcode"></i></span> Portlets
+                        <span class="icon-box"> <i class="icon-cogs"></i></span> Settings
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="general_portlet.php">General Portlets</a></li>
-                        <li><a class="" href="draggable_portlet.php">Draggable Portlets</a></li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-fire"></i></span> Icons
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="font_awesome.php">Font Awesome</a></li>
-                        <li><a class="" href="glyphicons.php">Glyphicons</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Payment Gateway Setting</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">SMS Gateway Setting</a></li>                    
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Configuration Option</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Template Logo</a></li> 
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-map-marker"></i></span> Maps
+                        <span class="icon-box"> <i class="icon-tasks"></i></span> Others
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="maps_google.php"> Google Maps</a></li>
-                        <li><a class="" href="maps_vector.php"> Vector Maps</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Feedback Form</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Site Visits Tracking</a></li>                    
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Logs</a></li>
                     </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-file-alt"></i></span> Sample Pages
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="blank.php">Blank Page</a></li>
-                        <li><a class="" href="sidebar_closed.php">Sidebar Closed Page</a></li>
-                        <li><a class="" href="coming_soon.php">Coming Soon</a></li>
-                        <li><a class="" href="blog.php">Blog</a></li>
-                        <li><a class="" href="news.php">News</a></li>
-                        <li><a class="" href="about_us.php">About Us</a></li>
-                        <li><a class="" href="contact_us.php">Contact Us</a></li>
-                        <li><a class="" href="email_templates.php">Email Templates</a></li>
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"><i class="icon-glass"></i></span> Extra
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="" href="lock.php">Lock Screen</a></li>
-                        <li><a class="" href="profile.php">Profile</a></li>
-                        <li><a class="" href="invoice.php">Invoice</a></li>
-                        <li><a class="" href="pricing_tables.php">Pricing Tables</a></li>
-                        <li><a class="" href="inbox.php">Inbox</a></li>
-                        <li><a class="" href="search_result.php">Search Result</a></li>
-                        <li><a class="" href="faq.php">FAQ</a></li>
-                        <li><a class="" href="404.php">404 Error</a></li>
-                        <li><a class="" href="500.php">500 Error</a></li>
-                    </ul>
-                </li>
-                <li><a class="" href="login.php"><span class="icon-box"><i class="icon-user"></i></span> Login Page</a></li>  -->
+                </li>            
+               
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

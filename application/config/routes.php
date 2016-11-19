@@ -100,6 +100,8 @@ $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provid
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
+$route['admin/user_groups'] = 'admin/admin_users/user_groups';
+
 
 
 /* End of file routes.php */
