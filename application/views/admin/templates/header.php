@@ -270,39 +270,11 @@ Website: http://thevectorlab.net/
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">Job  
-                                Provider Profile
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
-                                Job Vacancies
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_activities">
-                                Job Activities
-                            </a>
-                        </li>
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-globe"></i></span> Jobs
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/jobprovider_ads">Job Ads</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Ads</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applications</a></li>                    
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
@@ -364,19 +336,27 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">Profile</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">
+                                Profile
+                            </a>
                         </li>
                         <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">Vacancies Posted</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
+                                Vacancies Posted
+                            </a>
                         </li>
                         <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/dashboard">Organization Activities</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_activities">
+                                Organization Activities
+                            </a>
                         </li>
                         <li>
                             <a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a>
                         </li>
                         <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/dashboard">Ads Posted</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_ads">
+                                Ads Posted
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -400,9 +380,6 @@ Website: http://thevectorlab.net/
                     <ul class="sub">
                         <li>
                             <a class="" href="<?php echo base_url(); ?>admin/subscription_plans">
-                                <span class="icon-box"> 
-                                    <i class="icon-hand-right"></i>
-                                </span>
                                 Plan Creation & Maintanence
                             </a>
                         </li>
