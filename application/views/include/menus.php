@@ -28,14 +28,13 @@
                   <li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
                   <li> <a href="<?php echo base_url();?>contactus"> Contact Us </a> </li>
                   <?php if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ ?>
-                  <li class="no-bg"><a href="company-dashboard-active-jobs.html" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
+                  <li class="no-bg"><a href="<?php echo base_url(); ?>job_provider/companydbd_postjobs" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
                   <li class="profile-pic">
                         <a href="javascript:void(0)"> <img src="<?php echo base_url(); ?>assets/images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>
                         <ul class="drop-down-multilevel left-side">
-                            <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-user"></i> My Profile</a></li>
-                            <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-mail-forward"></i> Inbox</a></li>
-                            <li><a href="company-dashboard-active-jobs.html#"><i class="fa fa-gear"></i> Account Setting</a></li>
-                            <li><a href="<?php echo base_url();?>provider/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+                            <li><a href="<?php echo base_url(); ?>job_provider/dashboard"><i class="fa fa-user"></i> My Profile</a></li>
+                            <li><a href="<?php echo base_url(); ?>job_provider/companydbd_editprofile"><i class="fa fa-gear"></i> Edit Profile</a></li>
+                            <li><a href="<?php echo base_url(); ?>index"></i> Logout</a></li>
                         </ul>
                     </li>
                     <?php } ?>

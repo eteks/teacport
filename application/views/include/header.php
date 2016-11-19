@@ -48,7 +48,8 @@
     <!-- FONT AWESOME -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/et-line-fonts.css" type="text/css">
-    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/slideshowstyle.css" type="text/css"> -->
+    <!--Home Page Slideshow-->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/slideshowstyle.css" type="text/css">
 
     <!-- Google Fonts -->
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900,300" rel="stylesheet" type="text/css">

@@ -192,7 +192,6 @@ class Job_provider extends CI_Controller {
 	
 	
 	//Akila created
-	
 	public function companydbd_editprofile(){
 		$this->load->view('company-dashboard-edit-profile');
 	}
@@ -205,6 +204,22 @@ class Job_provider extends CI_Controller {
 	}
 	public function companydbd_resume(){
 		$this->load->view('company-dashboard-resume');
+	}
+	
+	public function companydbd_postedjobs(){
+		$this->load->view('company-dashboard-posted-jobs');
+	}
+    public function companydbd_postadds(){
+		$this->load->view('company-dashboard-post-adds');
+	}
+	public function companydbd_subscription(){
+		$this->load->view('company-dashboard-subscription');
+	}
+	public function companydbd_feedback(){
+		$this->load->view('company-dashboard-feedback');
+	}
+	public function companydbd_changepwd(){
+		$this->load->view('company-dashboard-changepwd');
 	}
 	
 	
