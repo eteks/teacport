@@ -501,11 +501,18 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
-  // Get Qualification list
-  public function get_qualification_list()
+  // Get Qualification values
+  public function get_qualification_values()
   {
     $qualification_get_where = '(educational_qualification_status=1)'; 
     $model_data = $this->db->get_where("tr_educational_qualification", $qualification_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get Qualification list not based status
+  public function get_qualification_list()
+  {
+    $model_data = $this->db->get_where("tr_educational_qualification")->result_array(); 
     return $model_data;
   }
 
@@ -525,16 +532,38 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Get class level not based status
+  public function get_class_levels_list()
+  {
+    $model_data = $this->db->get_where("tr_class_level")->result_array(); 
+    return $model_data;
+  }
+
   // Get district values not based status
   public function get_district_values()
   {
     $model_data = $this->db->get("tr_district")->result_array(); 
     return $model_data;
   }
+
   // Get Institution Type list not based status
   public function get_institution_type_list()
   {
     $model_data = $this->db->get("tr_institution_type")->result_array(); 
+    return $model_data;
+  }
+
+  // Get university not based status
+  public function get_university_list()
+  {
+    $model_data = $this->db->get("tr_university_board")->result_array(); 
+    return $model_data;
+  }
+
+  // Get university not based status
+  public function get_subjects_list()
+  {
+    $model_data = $this->db->get("tr_subject")->result_array(); 
     return $model_data;
   }
 

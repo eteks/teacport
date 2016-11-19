@@ -106,6 +106,14 @@ class Admin_users extends CI_Controller {
 			$this->load->view('admin/user_groups',$data);
 		}
 	}
+    public function user_accounts()
+	{	
+			$this->load->view('admin/user_accounts');
+	}
+	public function privileges()
+	{	
+			$this->load->view('admin/privileges');
+	}
 }
 /* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */

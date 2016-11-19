@@ -592,7 +592,7 @@ class Adminindex extends CI_Controller {
 	// Departments - Add Edit Delete View
 	public function departments()
 	{	
-		$data['qualification_list'] = $this->admin_model->get_qualification_list(); 
+		$data['qualification_list'] = $this->admin_model->get_qualification_values(); 
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
@@ -1076,7 +1076,8 @@ class Adminindex extends CI_Controller {
 	public function languages()
 	{	
 			$this->load->view('admin/languages');
-	}
+	}	
+
 }
 /* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */

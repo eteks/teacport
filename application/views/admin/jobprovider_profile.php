@@ -198,7 +198,7 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="navbar steps">
                           <div class="navbar-inner">
                             <ul class="row-fluid">
-                              <li class="span4">
+                              <li class="span3">
                                 <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
                                   <span class="number">1</span>
                                   <span class="desc">
@@ -206,7 +206,7 @@ if(!empty($this->session->userdata("login_status"))):
                                   </span>
                                 </a>
                               </li>
-                              <li class="span4">
+                              <li class="span3">
                                 <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
                                   <span class="number">2</span>
                                   <span class="desc">
@@ -216,14 +216,14 @@ if(!empty($this->session->userdata("login_status"))):
                               <?php
                               if(!empty($mode) && $mode=="full_view") :
                               ?>
-                              <li class="span4">
+                              <li class="span3">
                                 <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
                                   <span class="number">3</span>
                                   <span class="desc">
                                     <i class="icon-ok"></i>Payment Details</span>
                                 </a>
                               </li>
-                              <li class="span4">
+                              <li class="span3">
                                 <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
                                   <span class="number">4</span>
                                   <span class="desc">
