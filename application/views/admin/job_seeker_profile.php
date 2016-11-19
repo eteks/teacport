@@ -153,7 +153,7 @@
 				<div class="widget box blue" id="form_wizard_1">
                      <div class="widget-title">
                         <h4>
-                           <i class="icon-reorder"></i> Job Provider Profile
+                           <i class="icon-reorder"></i> Job Provider Profile 
                         </h4>                        
                      </div>
                      <div class="widget-body form">
