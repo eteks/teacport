@@ -1099,6 +1099,14 @@ class Adminindex extends CI_Controller {
 	{	
 			$this->load->view('admin/user_groups');
 	}
+	public function user_accounts()
+	{	
+			$this->load->view('admin/user_accounts');
+	}
+	public function privileges()
+	{	
+			$this->load->view('admin/privileges');
+	}
 }
 /* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */
