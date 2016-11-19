@@ -240,6 +240,79 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Languages - Add Edit Delete View
+  public function languages($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $language_get_where = '(language_name="'.$this->input->post('language_name').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'")';
+  
+        $qualification_get = $this->db->get_where('tr_educational_qualification',$language_get_where);
+
+      if($qualification_get -> num_rows() > 0) {
+        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
+        $model_data['error'] = 1;     
+      }
+      else {
+        $qualification_update_data = array( 
+                                    'educational_qualification' => $this->input->post('educational_qualification'),
+                                    'educational_qualification_course_type' => $this->input->post('educational_qualification_course_type'),
+                                    'educational_qualifcation_inst_type_id' => $this->input->post('educational_qualifcation_inst_type_id'),
+                                    'educational_qualification_status' => $this->input->post('educational_qualification_status'),
+                                  );
+        $qualification_update_where = '(educational_qualification_id="'.$this->input->post('rid').'")'; 
+        $this->db->set($qualification_update_data); 
+        $this->db->where($qualification_update_where);
+        $this->db->update("tr_educational_qualification", $qualification_update_data); 
+        $model_data['status'] = "Updated Successfully";
+        $model_data['error'] = 2;
+      }
+    }
+
+    // Save data
+    else if($status=='save') {
+      $qualification_get_where = '(educational_qualification="'.$this->input->post('educational_qualification').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'" and educational_qualifcation_inst_type_id="'.$this->input->post('educational_qualifcation_inst_type_id').'")';
+      $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);
+
+      if($qualification_get -> num_rows() > 0) {
+        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
+        $model_data['error'] = 1;     
+      }
+      else {
+        $qualification_insert_data = array( 
+                                      'educational_qualification' => $this->input->post('educational_qualification'),
+                                      'educational_qualification_course_type' => $this->input->post('educational_qualification_course_type'),
+                                      'educational_qualifcation_inst_type_id' => $this->input->post('educational_qualifcation_inst_type_id'),
+                                      'educational_qualification_status' => $this->input->post('educational_qualification_status'),
+                                    );
+        $this->db->insert("tr_educational_qualification", $qualification_insert_data); 
+        $model_data['status'] = "Inserted Successfully";
+        $model_data['error'] = 2;
+      }
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $qualification_delete_where = '(educational_qualification_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_educational_qualification", $qualification_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $this->db->select('*');
+    $this->db->from('tr_educational_qualification eq');
+    $this->db->join('tr_institution_type it','eq.educational_qualifcation_inst_type_id=it.institution_type_id','inner');
+    $model_data['qualification_type_values'] = $this->db->get()->result_array();
+
+    return $model_data;
+  }
+
+
+
   // Extra Curricular - Add Edit Delete View
   public function extra_curricular($status)
   {
