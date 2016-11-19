@@ -102,6 +102,21 @@ select:invalid { color: gray; }
 	color: #ff0030;
 	font-size: 15px;
 }
+#applicant_msg_act .modal-dialog {
+	border: 1px solid #fff;
+	border-radius: 5px;
+	
+}
+#applicant_msg_act .modal-content, #applicant_msg_act .modal-dialog .modal-content .inbox_msg {
+	color:  #fff !important;
+	background-color: #29aafe;
+}
+#applicant_msg_act .modal-header .close{
+	color: #fff !important;
+	font-size: 30px;
+	opacity: 1;
+}
+
 
 /* END OF COMPANY DASHBOARD */
 
