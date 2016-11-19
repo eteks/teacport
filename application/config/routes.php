@@ -73,6 +73,7 @@ $route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
 $route['provider/resume'] = 'job_provider/companydbd_resume';
 $route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
 $route['provider/postedjobs'] = 'job_provider/companydbd_postedjobs';
+$route['provider/postadds'] = 'job_provider/companydbd_postadds';
 $route['provider/subscription'] = 'job_provider/companydbd_subscription';
 $route['provider/feedback'] = 'job_provider/companydbd_feedback';
 $route['provider/changepwd'] = 'job_provider/companydbd_changepwd';
