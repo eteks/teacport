@@ -93,11 +93,13 @@
                                 <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                   <thead>
                                     <tr class="ajaxTitle">
-                                      <th> Organization Name </th>
-                                      <th> Registrant Name </th>
-                                      <th> Profile Completeness </th>
-                                      <th> Transaction ID </th>
-                                      <th> Subcription Plan </th>
+                                      <th> Candidate Name </th>
+                                      <th> Mother Tongue </th>
+                                      <th> Is Fresher </th>
+                                      <th> Live District </th>
+                                      <th> Email </th>
+                                      <th> Mobile No </th>
+                                      <th> Resume Upload Path</th>
                                       <th> Status </th>
                                       <th> Created Date</th>
                                       <th> Edit </th>
@@ -107,15 +109,19 @@
                                   </thead>
                                   <tbody>                                   
                                     <tr class="parents_tr" id="column">
-                                      <td class=""> Organization 
+                                      <td class=""> <label>Thiru</label> 
                                       </td>
-                                      <td class="">Name1 
+                                      <td class=""> <label>English</label> 
                                       </td>
-                                      <td class="">100%
+                                      <td class=""> <label>Yes</label>
                                       </td>
-                                      <td class="">1234
+                                      <td class=""> <label>Chennai</label>
                                       </td>
-                                      <td class="">3333
+                                      <td class=""> <label>admin@gmail.com</label>
+                                      </td>
+                                      <td class=""> <label>1234567890</label>
+                                      </td>
+                                      <td class=""> <label>Path</label>
                                       </td>
                                       <td class="">Active 
                                       </td>
@@ -146,14 +152,14 @@
                     </div>
                     <!-- END EXAMPLE TABLE widget-->    
                 </div>                
-            </div>            
+            </div>
             <!-- Edit Popup-->
             <div class="popup" data-popup="popup-1">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
                      <div class="widget-title">
                         <h4>
-                           <i class="icon-reorder"></i> Job Provider Profile 
+                           <i class="icon-reorder"></i> Candidate Profile
                         </h4>                        
                      </div>
                      <div class="widget-body form">
@@ -162,22 +168,40 @@
                               <div class="navbar steps">
                                  <div class="navbar-inner">
                                     <ul class="row-fluid">
-                                       <li class="span4">
+                                       <li class="span3">
                                           <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
                                           <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i>Organization Details</span>
+                                          <span class="desc"><i class="icon-ok"></i>Basic Info-1</span>
                                           </a>
                                        </li>
-                                       <li class="span4">
+                                       <li class="span3">
                                           <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
                                           <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i> Organization Address</span>
+                                          <span class="desc"><i class="icon-ok"></i> Basic Info-2</span>
                                           </a>
                                        </li>
-                                       <li class="span4">
+                                       <li class="span3">
                                           <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
                                           <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i> Registrant Details</span>
+                                          <span class="desc"><i class="icon-ok"></i> Contact Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span3">
+                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
+                                          <span class="number">4</span>
+                                          <span class="desc"><i class="icon-ok"></i> Educational Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span3">
+                                          <a href="form_wizard.html#tab5" data-toggle="tab" class="step">
+                                          <span class="number">5</span>
+                                          <span class="desc"><i class="icon-ok"></i> Experience Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span3">
+                                          <a href="form_wizard.html#tab6" data-toggle="tab" class="step">
+                                          <span class="number">6</span>
+                                          <span class="desc"><i class="icon-ok"></i> Professional Info</span>
                                           </a>
                                        </li>
                                     </ul>
@@ -188,21 +212,20 @@
                               </div>
                               <div class="tab-content">
                                  <div class="tab-pane active" id="tab1">
-                                    <h4>Organization Details</h4>
+                                    <h4>Candidate Basic Info-1</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Name</label>
+                                       	<label class="control-label">Candidate Name</label>
                                           <input type="text" class="span6" />
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Institution Type</label>
+                                       <label class="control-label">Gender</label>
                                        <div class="controls input_field_width">
                                            <select class="popup_select">
-											  <option>Schools</option>
-											  <option>Engineering</option>
-											  <option>Arts & Science</option>
+											  <option>Male</option>
+											  <option>Female</option>
 											</select> 
                                        </div>
                                     </div>
@@ -210,43 +233,273 @@
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Status</label>
+                                       	<label class="control-label">Father Name</label>
+                                       	 <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Date Of Birth</label>
+                                       <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
+                                   </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Marital Status</label>
+                                       	 <div class="controls">
+			                                 <label class="radio">
+			                                 <input type="radio" name="optionsRadios1" value="option1" />
+			                                 Single
+			                                 </label>
+			                                 <label class="radio">
+			                                 <input type="radio" name="optionsRadios1" value="option2" checked />
+			                                 Married
+			                                 </label> 
+			                             </div>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Mother Tongue</label>
+                                        <select class="popup_select">
+											  <option>English</option>
+											  <option>Tamil</option>
+										</select>
+                                   </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Languages Known</label>
+                                       	 <div class="controls">
+			                                 <label class="checkbox">
+			                                 	<input type="checkbox" value="" /> English
+			                                 </label>
+			                                 <label class="checkbox">
+			                                 	<input type="checkbox" value="" /> Tamil
+			                                 </label>
+			                             </div>
+                                       </div>
+                                    </div>
+                                   </div>                                   
+                               </div>
+                                 <div class="tab-pane" id="tab2">
+                                    <h4>Candidate Basic Info-2</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Nationality</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Religion</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Community</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Is Physically Challenged</label>
+                                       <div class="controls input_field_width">
+                                       	   <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Image Path</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Status</label>
+                                       <div class="controls input_field_width">
+                                       	   <select class="popup_select">
+											  <option>Active</option>
+											  <option>Inactive</option>
+											</select>
+                                       </div>
+                                    </div>
+                                   </div>                                    
+                                 </div>
+                                 <div class="tab-pane" id="tab3">
+                                    <h4>Candidate Contact info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Email</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Mobile No</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">District Name</label>
+                                          <select class="popup_select">
+											  <option>Puducherry</option>
+											  <option>Chennai</option>
+											  <option>Karaikal</option>
+											</select>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Address 1</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Address 2</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Live District Name</label>
+                                       <div class="controls input_field_width">
+                                          <select class="popup_select">
+											  <option>Puducherry</option>
+											  <option>Chennai</option>
+											  <option>Karaikal</option>
+											</select>
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Pincode</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab4">
+                                    <h4>Candidate Educational info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Profile ID</label>
+                                           <select class="popup_select">
+											  <option>Profile</option>
+											  <option>Profile</option>
+											  <option>Profile</option>
+											</select>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Qualification Name</label>
+                                       <div class="controls input_field_width">
+                                          <select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
+			                                       <option>B.E</option>
+			                                       <option>B.Sc</option>
+			                                       <option>B.A</option>
+			                                       <option>B.Com</option>
+			                                </select>
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Education YOP</label>
+                                            <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Medium Of Inst Name</label>
+                                       <div class="controls input_field_width">
+                                          <select class="popup_select">
+											  <option>English</option>
+											  <option>Tamil</option>
+											</select>
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Subject</label>
+                                          <select class="popup_select">
+											  <option>Maths</option>
+											  <option>Physics</option>
+											</select>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Percentage</label>
+                                       <div class="controls input_field_width">
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Education Board</label>
+                                          <input type="text" class="span6" />
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Status</label>
+                                       <div class="controls input_field_width">
                                           <select class="popup_select">
 											  <option>Active</option>
 											  <option>Inactive</option>
 											</select>
                                        </div>
                                     </div>
-                                    <div class="span6 control-group">
-                                    <label class="control-label">Organization Logo</label>
-                                    <div class="controls">
-                                        <div class="fileupload fileupload-new" data-provides="fileupload">
-                                            <div class="fileupload-new thumbnail uploaded_img">
-                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
-                                            </div>
-                                            <div class="fileupload-preview fileupload-exists thumbnail uploaded_img_preview"></div>
-                                            <div class="select_chng_rmv">
-                                       <span class="btn btn-file"><span class="fileupload-new">Select image</span>
-                                       <span class="fileupload-exists">Change</span>
-                                       <input type="file" class="default" /></span>
-                                                <a href="form_component.html#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                   </div>                                   
+                                   </div>
                                  </div>
-                                 <div class="tab-pane" id="tab2">
-                                    <h4>Organization Address</h4>
+                                 <div class="tab-pane" id="tab5">
+                                    <h4>Candidate Experience info</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address1</label>
+                                       	<label class="control-label">Profile Name</label>
+                                          <select class="popup_select">
+											  <option>Profile</option>
+											  <option>Profile</option>
+											  <option>Profile</option>
+											</select>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Class Level</label>
+                                       <div class="controls input_field_width">
+                                          <select class="popup_select">
+											  <option>Primary</option>
+											  <option>Secondary</option>
+											</select>
+                                       </div>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Experience Year</label>
                                           <input type="text" class="span6" />
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Organization Address2</label>
+                                       <label class="control-label">Experience Board</label>
                                        <div class="controls input_field_width">
                                           <input type="text" class="span6" />
                                        </div>
@@ -255,58 +508,67 @@
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address3</label>
-                                          <input type="text" class="span6" />
+                                       	<label class="control-label">Status</label>
+                                           <select class="popup_select">
+											  <option>Active</option>
+											  <option>Inactive</option>
+											</select>
                                        </div>
                                     </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">District Name</label>
-                                       <div class="controls input_field_width">
-                                         <select class="popup_select">
-											  <option>Madurai</option>
-											  <option>Chennai</option>
-											  <option>Puducherry</option>
-											  <option>Trichy</option>
-											</select> 
-                                       </div>
-                                    </div>
-                                   </div>                                   
                                  </div>
-                                 <div class="tab-pane" id="tab3">
-                                    <h4>Registrant Details</h4>
+                                 </div>
+                                 <div class="tab-pane" id="tab6">
+                                    <h4>Candidate Professional Info</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Registrant Name</label>
-                                          <input type="text" class="span6" />
+                                       	<label class="control-label">Institution Type</label>
+                                          <select class="popup_select">
+											  <option>Engineering</option>
+											  <option>Arts & Science</option>
+											  <option>Schools</option>
+											</select>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Designation</label>
+                                       <label class="control-label">TET Exam Status</label>
                                        <div class="controls input_field_width">
-                                          <input type="text" class="span6" />
+                                          <select class="popup_select">
+											  <option>% Percentage</option>
+											  <option>Not Attended</option>
+											</select>
                                        </div>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Date Of Birth</label>
-                                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
+                                       	<label class="control-label">Interest Subject</label>
+                                          <select class="popup_select">
+											  <option>Physics</option>
+											  <option>Maths</option>
+											</select>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Email ID</label>
+                                       <label class="control-label">Extra Curricular</label>
                                        <div class="controls input_field_width">
-                                          <input type="text" class="span6" />
+                                          <select class="popup_select">
+											  <option>Football</option>
+											  <option>Cricket</option>
+											  <option>Tennis</option>
+											</select>
                                        </div>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Mobile No</label>
-                                          <input type="text" class="span6" />
+                                       	<label class="control-label">Is Fresher</label>
+                                          <select class="popup_select">
+											  <option>Yes</option>
+											  <option>No</option>
+											</select>
                                        </div>
                                     </div>
                                    </div>
@@ -330,14 +592,14 @@
 				 <p><a data-popup-close="popup-1" href="#">Close</a></p>
            <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
            </div>
-       </div>
+        </div>                   
             <!---Full edit popup --->
           <div class="popup-sec" data-popup-sec="popup-1">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="form_wizard_1">
                      <div class="widget-title">
                         <h4>
-                           <i class="icon-reorder"></i> Job Providers Profile
+                           <i class="icon-reorder"></i> Candidate Profile
                         </h4>                        
                      </div>
                      <div class="widget-body form">
@@ -346,22 +608,40 @@
                               <div class="navbar steps">
                                  <div class="navbar-inner">
                                     <ul class="row-fluid">
-                                       <li class="span4">
+                                       <li class="span3">
                                           <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
                                           <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i>Organization Details</span>
+                                          <span class="desc"><i class="icon-ok"></i>Basic Info-1</span>
                                           </a>
                                        </li>
-                                       <li class="span4">
+                                       <li class="span3">
                                           <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
                                           <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i>Registrant Details</span>
+                                          <span class="desc"><i class="icon-ok"></i>Basic Info-2</span>
                                           </a>
                                        </li>
-                                       <li class="span4">
+                                       <li class="span3">
                                           <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
                                           <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
+                                          <span class="desc"><i class="icon-ok"></i>Contact Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span3">
+                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
+                                          <span class="number">4</span>
+                                          <span class="desc"><i class="icon-ok"></i>Educational Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span3">
+                                          <a href="form_wizard.html#tab5" data-toggle="tab" class="step">
+                                          <span class="number">5</span>
+                                          <span class="desc"><i class="icon-ok"></i>Experience Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span3">
+                                          <a href="form_wizard.html#tab6" data-toggle="tab" class="step">
+                                          <span class="number">6</span>
+                                          <span class="desc"><i class="icon-ok"></i>Professional Info</span>
                                           </a>
                                        </li>
                                     </ul>
@@ -372,111 +652,135 @@
                               </div>
                               <div class="tab-content">
                                  <div class="tab-pane active" id="tab1">
-                                    <h4>Organization Details</h4>
+                                    <h4>Candidate Basic Info-1</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Name</label>
+                                       	<label class="control-label">Candidate Name</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Organization Logo</label>
+                                       <label class="control-label">Gender</label>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address1</label>
+                                       	<label class="control-label">Father Initial</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Organization Address2</label>
+                                       <label class="control-label">Father Name</label>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Organization Address3</label>
+                                       	<label class="control-label">Date Of Birth</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">District Name</label>
+                                       <label class="control-label">Marital Status</label>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Institution Type</label>
+                                       	<label class="control-label">Mother Tongue</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Organization Status</label>
+                                       <label class="control-label">Language Known</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Nationality</label>
+                                       </div>
                                     </div>
                                    </div>
                                  </div>
                                  <div class="tab-pane" id="tab2">
-                                    <h4>Registrant Details</h4>
+                                    <h4>Candidate Basic Info-2</h4>
                                     <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Registrant Name</label>
+                                       	<label class="control-label">Religion</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Register Type</label>
+                                       <label class="control-label">Community</label>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Designation</label>
+                                       	<label class="control-label">Is Physically Challenged</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Date Of Birth</label>
+                                       <label class="control-label">Registration Type</label>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Email ID</label>
+                                       	<label class="control-label">Image Path</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Facebook url</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Google Plus url</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Linkedin url</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Status</label>
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab3">
+                                    <h4>Candidate Contact Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Email</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Mobile No</label>
                                     </div>
                                    </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab3">
-                                    <h4>Addtional Details</h4>
-                                    <div class="span12">
+                                   <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Is SMS Verified</label>
+                                       	<label class="control-label">District Name</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Transcation ID</label>
+                                       <label class="control-label">Address 1</label>
                                     </div>
                                    </div>
                                    <div class="span12">
                                     <div class="span6 control-group">                                       
                                        <div class="controls input_field_width">
-                                       	<label class="control-label">Subcription Plan</label>
+                                       	<label class="control-label">Address 2</label>
                                        </div>
                                     </div>
                                     <div class="span6 control-group">
-                                       <label class="control-label">Total SMS Count</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Remaining SMS Count</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Total Resume Count</label>
+                                       <label class="control-label">Live District Name</label>
                                     </div>
                                    </div>
                                    <div class="span12">
@@ -484,6 +788,122 @@
                                        <div class="controls input_field_width">
                                        	<label class="control-label">Remaining Resume Count</label>
                                        </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab4">
+                                    <h4>Candidate Educational Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Candidate Profile</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Qualification Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Education Yop</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Medium Of Inst Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Subject</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Percentage</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Education Board</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Status</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Created Date</label>
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab5">
+                                    <h4>Candidate Experience Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Profile Name</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Class Level</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Experience Year</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Experience Board</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Status</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Created Date</label>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab6">
+                                    <h4>Candidate Prefessional Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Institution Type</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">TET Exam Status</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Interest Subject</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Extra Curricular</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Is Fresher</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Resume Upload Path</label>
                                     </div>
                                    </div>
                                  </div>
@@ -507,7 +927,8 @@
            <a class="popup-close-sec" data-popup-close-sec="popup-1" href="#">x</a>
             </div>
            </div>
-       </div>       
+       </div>            
+                  
        <!-- Delete Popup -->       
        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
