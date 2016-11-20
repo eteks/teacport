@@ -3947,8 +3947,9 @@ ul li:last-child{
 .center_align {
     text-align: center !important;
 }
-
-
-
+#sidebar > ul > li > ul.sub > li.active_sidebar {
+    background-color: rgba(0,0,0,0.40) !important ;   
+    color: #fff !important;
+} 
 
 /* Ended by siva */

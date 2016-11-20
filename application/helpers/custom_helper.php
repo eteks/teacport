@@ -71,6 +71,29 @@ if ( ! function_exists('get_class_level_by_dept')){
 	}
 }
 
+// Split institution type for postings
+if ( ! function_exists('get_institution_by_postname')){
+	// Get institution type by subject
+	function get_institution_by_postname($value) 
+	{
+		$out = array();
+		if(!empty($value)) {
+			foreach ($value as $key => $row) {
+				foreach ($row as $k => $r) {
+					if(!isset($out[$row['posting_id']][$row['institution_type_id']]))
+					{
+						$out[$row['posting_id']]['institution_type_id'][$row['institution_type_id']] = $row['institution_type_name'];
+				   	}
+				   	if($k == 'posting_name' || $k == 'posting_status' || $k == 'posting_created_date' ) {
+	     				$out[$row['posting_id']][$k] = $row[$k];
+	     			}
+			    }
+			}
+		}
+		return $out;
+	}
+}
+
 if ( ! function_exists('get_provider_vacancy_by_qua')){
 	// Get institution type by subject
 	function get_provider_vacancy_by_qua($value) 

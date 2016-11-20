@@ -164,6 +164,14 @@ ajax = function (params,action,form_id){
 $(document).ready(function(){
     default_credentials();
 
+    if($('.has-sub').length > 0) {
+        $('.has-sub').each(function(){
+            if($(this).hasClass('open')) {
+                $(this).find('ul').slideDown();
+            }
+        });
+    }
+
     // Add - New record
     $(document).on('click','.add_new',function() {
         if(editing==0 && ready_save==0) {        	      	 
