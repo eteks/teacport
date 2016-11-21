@@ -57,6 +57,7 @@
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/sugar.min.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/xcharts.min.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/script.js'></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script>
 
         <script>
