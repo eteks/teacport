@@ -244,5 +244,61 @@ class Social extends CI_Controller {
 		 redirect("/"); 
 		}
 	}
+	public function google()
+	{
+		$CI =& get_instance();
+		include_once APPPATH."libraries/google/Google_Client.php";
+        include_once APPPATH."libraries/google/contrib/Google_Oauth2Service.php"; 
+        // Google Client Configuration
+        $gClient = new Google_Client();
+        $gClient->setApplicationName(GOOGLEAPPNAME);
+        $gClient->setClientId(GOOGLECLIENTID);
+        $gClient->setClientSecret(GOOGLECLIENTSECRET);
+        $gClient->setRedirectUri(GOOGLEREDIRECTURL);
+        $google_oauthV2 = new Google_Oauth2Service($gClient);
+        if (isset($_REQUEST['code'])) {
+        	$CI =& get_instance();
+            $gClient->authenticate();
+            $CI->session->set_userdata('token', $gClient->getAccessToken());
+            redirect(filter_var($redirectUrl, FILTER_SANITIZE_URL));
+        }
+        $token = $CI->session->userdata('token');
+        if (!empty($token)) {
+            $gClient->setAccessToken($token);
+        }
+        if ($gClient->getAccessToken()) {
+            $profile = $google_oauthV2->userinfo->get();
+            $godata = array(
+				'registrant_email_id' => $profile['email'],
+				'registrant_name' => $profile['given_name'],
+				'organization_logo' => $profile['picture'],
+				'registrant_register_type' => 'google'
+			);
+			if($this->job_provider_model->social_authendication_registration($godata) === 'inserted')
+			{
+				$godata['user_type'] = 'provider';
+				$godata['login_type'] = 'google';
+				$this->session->set_userdata("login_status", TRUE);
+				$this->session->set_userdata("login_session",$godata);
+				redirect('provider/dashboard');
+			}
+			else{
+				$checkvaliduser = $this->job_provider_model->social_valid_provider_login($godata);
+				if($checkvaliduser['valid_status'] === 'valid'){
+					$this->session->set_userdata("login_status", TRUE);
+					$this->session->set_userdata("login_session",$checkvaliduser);
+					redirect('provider/dashboard');
+				}
+				else{
+					$go['reg_server_msg'] = 'Your Google account does not associate with Teacher recruit!';	
+					$go['fbloginurl'] = $common->facebookloginurl();
+					$this->load->view('job-providers-login',$go);
+				}
+			}
+        } 
+        else {
+        	redirect($gClient->createAuthUrl());
+        }
+	}
 	
 }

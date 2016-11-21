@@ -48,10 +48,10 @@ $route['login/facebook'] = 'social/facebook';
 $route['login/facebookverify'] = 'social/facebookverify';
 $route['login/twitter'] = 'social/twitter';
 $route['login/linkedin'] = 'social/linkedin';
+$route['login/google'] = 'social/google';
 //SIGN UP
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
-$route['signup/provider_val'] = 'job_provider_val/index';
 //JOB PROVIDER
 $route['provider/dashboard'] = 'job_provider/dashboard';
 $route['provider/logout'] = 'job_provider/provider_logout';
