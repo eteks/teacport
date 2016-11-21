@@ -1,7 +1,6 @@
 <?php
 if(!empty($this->session->userdata("login_status"))): 
 ?>
-<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -32,16 +31,13 @@ if(!empty($this->session->userdata("login_status"))):
                      <small>Editable Table Sample</small>
                   </h3>
                    <ul class="breadcrumb">
-                      <li>
-                        <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                       <li>
+                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
-                      <li>
-                        <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
-                      </li>
-                      <li>
-                        <a href="<?php echo base_url(); ?>admin/postings">Postings</a>
-                        <span class="divider-last">&nbsp;</span>
-                      </li>
+                       <li>
+                           <a href="#">Job Prvider</a> <span class="divider">&nbsp;</span>
+                       </li>
+                       <li><a href="<?php echo base_url(); ?>admin/jobprovider_activities">Job Activities</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -63,11 +59,11 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <div class="btn-group">
+                                    <!-- <div class="btn-group">
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
@@ -79,81 +75,83 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/posting" class="admin_module_form" id="subject_form">
-                                  <?php } ?>
+                                <!-- <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">
                                   <?php
-                                  if(!empty($status)) :
-                                    echo "<p class='db_status'> $status </p>";
-                                  endif;
+                                  // if(!empty($status)) :
+                                  //   echo "<p class='db_status update_success_md'> $status </p>";
+                                  // endif;
                                   ?> 
-                                  <p class='val_error'> <p>
-                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <p class='val_error error_msg_md'> <p> -->
+                                  <table class="table table-striped job_activities table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th>Posting Name</th>
-                                        <th>Posting Institution Name</th>
-                                        <th>Posting Status</th>
-                                        <th>Posting Created Date</th>
-                                        <th>Edit</th>
+                                        <th> Organization Name </th>
+                                        <th> Candidate Name </th>
+                                        <th> Sms Sent </th>
+                                        <th> Mail Sent </th>
+                                        <th> Resume Downloaded </th>
+                                        <th style="display: none;"> </th>
+                                        <th >Edit</th>
                                         <th>Delete</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <?php
-                                      if(!empty($postings_values)) :
-                                      foreach ($postings_values as $pos_key => $pos_val) :
-                                      ?>
-                                      <tr class="parents_tr" id="column<?php echo $pos_key; ?>">
-                                        <td class="posting_name"> 
-                                          <?php echo $pos_val['posting_name']; ?>
+                                      <tr class="parents_tr" id="column">
+                                        <td class="activity_organization_id"> 
+                                          test
                                         </td>
-                                        <td class="posting_institution_id"> 
-                                          <?php
-                                          foreach ($pos_val['institution_type_id'] as $ins_key => $ins_val) :
-                                          ?>
-                                            <span data-id="<?php echo $ins_key; ?>"> 
-                                              <?php echo $ins_val; ?>
-                                            </span>
-                                            <br>
-                                          <?php
-                                          endforeach;
-                                          ?>  
+                                        <td class="activity_candidate_id"> 
+                                          test 
                                         </td>
-                                        <td class="posting_status"> 
-                                          <?php 
-                                          if ($pos_val['posting_status'] == 1) 
-                                            echo "Active";
-                                          else
-                                            echo "Inactive";
-                                          ?>
+                                        <td class="is_sms_sent center_align"> 
+                                          <span class="icon-ok"> </span>
                                         </td>
-                                        <td class="created_date">
-                                          <?php echo $pos_val['posting_created_date']; ?>
+                                        <td class="is_email_sent center_align">
+                                          <span class="icon-remove"> </span>
                                         </td>
+                                        <td class="is_resume_downloaded center_align">
+                                          <span class="icon-ok"> </span>
+                                        </td>  
+                                        <td style="display: none;"> </td>                                    
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $pos_key; ?>" href="javascript:;" data-id="<?php echo $pos_key; ?>">
+                                          <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $pos_key; ?>">Delete</a>
+                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="">Delete</a>
                                         </td>
                                       </tr>
-                                      <?php
-                                      endforeach;
-                                      endif;
-                                      ?>
                                     </tbody>
                                   </table>
-                                  <?php if(!$this->input->is_ajax_request()) { ?>
-                                </form>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
+                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-body delete_message_style">
+								<input type="hidden" name="delete" id="vId" value=""/>
+								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
+									&times;
+								</button>
+								<center class="popup_tx">
+									<h5>Are you sure you want to delete this item? </h5>
+								</center>
+							</div>
+							<div id="delete_btn" class="modal-footer footer_model_button" >
+								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
+								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
+							</div>
+				   		 </div><!--/row-->
+				    </div>
+    			</div>
             </div>
             <!-- END ADVANCED TABLE widget-->
+
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -163,27 +161,17 @@ if(!empty($this->session->userdata("login_status"))):
    <!-- END CONTAINER -->
    <script>
     // Define default values
-    var inputType = new Array("text","multiselect","select"); 
-    var columns = new Array("posting_name","posting_institution_id","posting_status"); 
-    var placeholder = new Array("Enter Posting Name","Please select institution"); 
-    var table = "admin_table"; 
-    var posting_institution_id_option = new Array();
-    var posting_institution_id_value = new Array();
-    <?php
-    if(!empty($institution_values)) :
-    foreach ($institution_values as $ins_val) :
-    ?>
-      posting_institution_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
-      posting_institution_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
-    <?php
-    endforeach;
-    endif;
-    ?>
-    var posting_status_option = new Array("Please select status","Active","Inactive"); 
-    var posting_status_value = new Array("","1","0");
+    var inputType = new Array("select","select","on_off","on_off","on_off"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("activity_organization_id","activity_candidate_id","is_sms_sent","is_email_sent","is_resume_downloaded"); // Set name of input types
+    var placeholder = new Array(""); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table
+    var activity_organization_id_option = new Array("Select","Ets","Esourceit");
+    var activity_organization_id_value = new Array("","1","3");
+    var activity_candidate_id_option = new Array("Select","Siva","Kannan");
+    var activity_candidate_id_value = new Array("","3","5");
+    var is_created ="no";
   </script>
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');
