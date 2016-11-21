@@ -3949,6 +3949,7 @@ ul li:last-child{
 }
 #sidebar > ul > li > ul.sub > li.active_sidebar {
     background-color: rgba(0,0,0,0.40) !important ;   
+    /*background-color: rgba(50,50,50,0.70) !important ;*/
     color: #fff !important;
 }
 .tab-content label {

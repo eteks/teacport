@@ -32,9 +32,9 @@
                            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="#">Job Seeker</a> <span class="divider">&nbsp;</span>
+                           <a href="<?php echo base_url(); ?>admin/job_seeker_applied">Job Seeker</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/languages">Applaied</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/job_seeker_applied"> Job Applaied</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -72,113 +72,50 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-
-                                 
-    
-                                    <?php
-                                    if(!empty($qualification_type_values)) :
-                                    foreach ($qualification_type_values as $qua_val) :
-                                    ?>
-                                      <tr class="parents_tr" id="column<?php echo $qua_val['educational_qualification_id']; ?>">
-
-                                        <td class="educational_qualification">
-                                          <?php echo $qua_val['educational_qualification']; ?>
-                                        </td>
-                                        <td class="educational_qualification_course_type">
-                                          <?php 
-                                          $course_type = unserialize(COURSE_TYPE);
-                                          echo $course_type[$qua_val['educational_qualification_course_type']];
-                                          ?>
-                                        </td>
-                                        <td class="educational_qualifcation_inst_type_id">
-                                          <?php echo $qua_val['institution_type_name']; ?>
-                                        </td>
-                                        <td class=" educational_qualification_status"> 
-                                          <?php 
-                                          if ($qua_val['educational_qualification_status'] == 1) 
-                                            echo "Active";
-                                          else
-                                            echo "Inactive";
-                                          ?>
-                                        </td>
-                                        <td class="educational_qualification_created_date">
-                                          <?php echo $qua_val['educational_qualification_created_date']; ?>
-                                        </td>
-
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $qua_val['educational_qualification_id']; ?>" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
-                                              Edit
-                                          </a>
-                                        </td>
-                                        <td>
-                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
-                                            Delete
-                                          </a>
-                                        </td>
-                                      </tr>
-                                      <?php
-                                      endforeach;
-                                      endif;
-                                      ?>
-                                    </tbody>
-                                  </table>
-                                <?php if(!$this->input->is_ajax_request()) { ?>
-                                </form>
-
-
-
-                              <form method="post" action="adminindex/languages" class="admin_module_form" id="languages_form">
-                              <?php } ?>
-                              <?php
-                              if(!empty($status)) :
-                                echo "<p class='db_status update_success_md'> $status </p>";
-                              endif;
-                              ?> 
-                              <!-- <p class='val_error error_msg_md'> <p> -->
-                              <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
-                                <thead>
-                                  <tr class="ajaxTitle">
-                                    <th>Job Vacancies</th>
-                                    <th>Candidate</th>
-                                    <th>Status</th>
-                                    <th>Created Date</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  <tr class="parents_tr" id="column1">
-                                        <td class="applied_job_vacancies_id">10</td>
-                                        <td class="applied_job_candidate_id">Candidate Name1</td>
-                                        <td class="applied_job_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="applied_job_vacancies_id">20</td>
-                                        <td class="applied_job_candidate_id">Candidate Name2</td>
-                                        <td class="applied_job_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="applied_job_vacancies_id">30</td>
-                                        <td class="applied_job_candidate_id">Candidate Name3</td>
-                                        <td class="applied_job_status">Inactive</td>
-                                        <td class="created_date">01-01-2000</td>
-                                        <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+	                                <thead>
+	                                  <tr class="ajaxTitle">
+	                                    <th>Job Vacancies</th>
+	                                    <th>Candidate</th>
+	                                    <th>Status</th>
+	                                    <th>Created Date</th>
+	                                    <th>Edit</th>
+	                                    <th>Delete</th>
+	                                  </tr>
+	                                </thead>
+	                                <tbody>
+	                                  <tr class="parents_tr" id="column1">
+	                                        <td class="applied_job_vacancies_id">10</td>
+	                                        <td class="applied_job_candidate_id">Candidate Name1</td>
+	                                        <td class="applied_job_status">Active</td>
+	                                        <td class="created_date">01-01-2000</td>
+	                                        <td class="edit_section">
+	                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+	                                        </td>
+	                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
+	                                    </tr>
+	                                    <tr class="parents_tr" id="column2">
+	                                        <td class="applied_job_vacancies_id">20</td>
+	                                        <td class="applied_job_candidate_id">Candidate Name2</td>
+	                                        <td class="applied_job_status">Active</td>
+	                                        <td class="created_date">01-01-2000</td>
+	                                        <td class="edit_section">
+	                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+	                                        </td>
+	                                        <td><a class="ajaxDelete" id="column2" href="#myModal1" data-toggle="modal">Delete</a></td>
+	                                    </tr>
+	                                    <tr class="parents_tr" id="column3">
+	                                        <td class="applied_job_vacancies_id">30</td>
+	                                        <td class="applied_job_candidate_id">Candidate Name3</td>
+	                                        <td class="applied_job_status">Inactive</td>
+	                                        <td class="created_date">01-01-2000</td>
+	                                        <td class="edit_section">
+	                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+	                                        </td>
+	                                        <td><a class="ajaxDelete" id="column3" href="#myModal1" data-toggle="modal">Delete</a></td>
+	                                    </tr>
+	                                    </tbody>
+                                 </table>
                             </div>
                         </div>
                     </div>
