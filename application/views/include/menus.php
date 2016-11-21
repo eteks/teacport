@@ -2,9 +2,10 @@
             <section class="menu-list-items">
                 <ul class="menu-logo">
                     <li>
-                        <a href="<?php echo base_url(); ?>"> 
-                        	<h4 style="color: #2ae;"><strong>TEACHERS RECRUIT</strong></h4>
-                        	<!-- <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> --> </a>
+                        <a href="<?php echo base_url(); ?>" id="webpage_title"> 
+                        	<h4><strong style="color: #2ae; font-size: 30px; font-family: 'Kaushan Script', cursive;">Teachers Recruit</strong></h4>
+                        	<!-- <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> --> 
+                        </a>
                     </li>
                 </ul>
                 <ul class="menu-links pull-right">

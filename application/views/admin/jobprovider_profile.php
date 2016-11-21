@@ -190,56 +190,35 @@ if(!empty($this->session->userdata("login_status"))):
                   </div>
                   <div class="widget-body form pop_details_section">
                     <?php } ?>
+                    <form class="tab_form" action="job_provider/teacport_job_provider_profile" data-index="" method="POST" data-mode="update">
                     <?php
                     if(!empty($provider_full_profile)) :
                     ?>
-                    <form action="form_wizard.html#" class="form-horizontal">
-                      <div class="form-wizard">
-                        <div class="navbar steps">
-                          <div class="navbar-inner">
-                            <ul class="row-fluid">
-                              <li class="span3">
-                                <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                                  <span class="number">1</span>
-                                  <span class="desc">
-                                    <i class="icon-ok"></i>Organization Details
-                                  </span>
-                                </a>
+                    <div id="rootwizard">
+                      <div class="navbar">
+                        <div class="navbar-inner">
+                          <div class="container">
+                            <ul>
+                              <li>
+                                <a href="#tab1" data-toggle="tab">Organization Details</a>
                               </li>
-                              <li class="span3">
-                                <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                                  <span class="number">2</span>
-                                  <span class="desc">
-                                    <i class="icon-ok"></i>Registrant Details</span>
-                                </a>
+                              <li>
+                                <a href="#tab2" data-toggle="tab">Registrant Details</a>
                               </li>
                               <?php
                               if(!empty($mode) && $mode=="full_view") :
                               ?>
-                              <li class="span3">
-                                <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                  <span class="number">3</span>
-                                  <span class="desc">
-                                    <i class="icon-ok"></i>Payment Details</span>
-                                </a>
+                              <li>
+                                <a href="#tab3" data-toggle="tab">Payment Details</a>
                               </li>
-                              <li class="span3">
-                                <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
-                                  <span class="number">4</span>
-                                  <span class="desc">
-                                    <i class="icon-ok"></i>Addtional Details</span>
-                                </a>
+                              <li>
+                                <a href="#tab4" data-toggle="tab">Addtional Details</a>
                               </li>
                               <?php
                               else :
                               ?>
-                              <li class="span4">
-                                <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                  <span class="number">3</span>
-                                  <span class="desc">
-                                    <i class="icon-ok"></i>Addtional Details
-                                  </span>
-                                </a>
+                              <li>
+                                <a href="#tab3" data-toggle="tab">Addtional Details</a>
                               </li>
                               <?php
                               endif;
@@ -247,412 +226,415 @@ if(!empty($this->session->userdata("login_status"))):
                             </ul>
                           </div>
                         </div>
-                        <div id="bar" class="progress progress-striped">
-                          <div class="bar"></div>
-                        </div>
-                        <div class="tab-content">
-                          <?php
-                          if(!empty($mode) && $mode=="full_view") :
-                          ?>
-                          <div class="tab-pane active" id="tab1">
-                            <h4>Organization Details</h4>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                               	<label class="control-label">Organization Name</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_name']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Organization Logo</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_logo']; ?>
-                                </span>
+                      </div>
+                      <div id="bar" class="progress progress-striped active">
+                        <div class="bar"></div>
+                      </div>
+                      <div class="tab-content">
+                        <?php
+                        if(!empty($mode) && $mode=="full_view") :
+                        ?>
+                        <div class="tab-pane" id="tab1">
+                          <h4>Organization Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Name</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_name']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Organization Logo</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_logo']; ?>
                                 <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" />
-                              </div>
-                            </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                                <label class="control-label">Organization Address1</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_address_1']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Organization Address2</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_address_2']; ?>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                               	<label class="control-label">Organization Address3</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_address_3']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">District Name</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['district_name']; ?>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                               	<label class="control-label">Institution Type</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['institution_type_name']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Organization Status</label>
-                                <span class="dynamic_data"> 
-                                  <?php 
-                                  if($provider_full_profile['organization_status']==1) :
-                                    echo "Active";
-                                  else :
-                                    echo "Inactive";
-                                  endif;
-                                  ?>
-                                </span>
-                              </div>
+                              </span>
                             </div>
                           </div>
-                          <div class="tab-pane" id="tab2">
-                            <h4>Registrant Details</h4>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                               	<label class="control-label">Registrant Name</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['registrant_name']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Register Type</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['registrant_register_type']; ?>
-                                </span>
-                              </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Address1</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_address_1']; ?>
+                              </span>
                             </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                               	<label class="control-label">Designation</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['registrant_designation']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Date Of Birth</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['registrant_date_of_birth']; ?>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                              	<label class="control-label">Email ID</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['registrant_email_id']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Mobile No</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['registrant_mobile_no']; ?>
-                                </span>
-                              </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Organization Address2</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_address_2']; ?>
+                              </span>
                             </div>
                           </div>
-                          <div class="tab-pane" id="tab3">
-                            <h4>Payment Details</h4>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                                <label class="control-label">Subscription Plan</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['subscription_plan']; ?>
-                                </span>                         
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Subscription Price</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['subscription_price']; ?>
-                                </span>
-                              </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Address3</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_address_3']; ?>
+                              </span>
                             </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                                <label class="control-label">Subcription Features</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['subscription_features']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Subcription Validitity</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['subcription_valid_upto']; ?>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="span12">
-                              <div class="span6 control-group">
-                                <label class="control-label">Transcation Id</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['transcation_id']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Subcription Status</label>
-                                <span class="dynamic_data"> 
-                                  <?php 
-                                  if($provider_full_profile['subscription_status']==1) :
-                                    echo "Active";
-                                  else :
-                                    echo "Inactive";
-                                  endif;
-                                  ?>
-                                </span>
-                              </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">District Name</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['district_name']; ?>
+                              </span>
                             </div>
                           </div>
-                          <div class="tab-pane" id="tab4">
-                            <h4>Addtional Details</h4>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                              	<label class="control-label">Is SMS Verified</label>
-                                <span class="dynamic_data"> 
-                                  <?php 
-                                  if($provider_full_profile['is_sms_verified']==1) :
-                                    echo "Yes";
-                                  else :
-                                    echo "No";
-                                  endif;
-                                  ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Total SMS Count</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_sms_count']; ?>
-                                </span>
-                              </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Institution Type</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['institution_type_name']; ?>
+                              </span>
                             </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                                <label class="control-label">Used SMS Count</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Remaining SMS Count</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_sms_remaining_count']; ?>
-                                </span>
-                              </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Organization Status</label>
+                              <span class="dynamic_data"> 
+                                <?php 
+                                if($provider_full_profile['organization_status']==1) :
+                                  echo "Active";
+                                else :
+                                  echo "Inactive";
+                                endif;
+                                ?>
+                              </span>
                             </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                                <label class="control-label">Total Resume Count</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_resume_download_count']; ?>
-                                </span>
-                              </div>
-                              <div class="span6 control-group">
-                                <label class="control-label">Used Resume Count</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count']; ?>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="span12">
-                              <div class="span6 control-group">                                       
-                               	<label class="control-label">Remaining Resume Count</label>
-                                <span class="dynamic_data"> 
-                                  <?php echo $provider_full_profile['organization_remaining_resume_download_count']; ?>
-                                </span>
-                              </div>
-                            </div>
-                          </div>
-                          <?php
-                          else :
-                          ?>
-                            <div class="tab-pane active" id="tab1">
-                              <h4>Organization Details</h4>
-                              <div class="span12">
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Organization Name</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['organization_name']; ?>" />
-                                  </div>
-                                </div>
-                                <div class="span6 control-group">
-                                  <label class="control-label">Organization Logo</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" value="<?php echo $provider_full_profile['organization_logo']; ?>" readonly />
-                                    <input type="file" />
-                                    <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="span12">
-                                <div class="span6 control-group">
-                                  <label class="control-label">Institution Type</label>
-                                  <div class="controls input_field_width">
-                                    <select>
-                                      <option> Please select institution type </option>
-                                      <?php
-                                      if(!empty($instution_values)) :
-                                      foreach ($instution_values as $ins_val) :
-                                      ?>
-                                        <?php
-                                        if($ins_val['institution_type_id']==$provider_full_profile['organization_institution_type_id']) {
-                                          echo '<option value='.$ins_val["institution_type_id"].' selected> '.$ins_val["institution_type_name"].' </option>';
-                                        }
-                                        else if($ins_val['institution_type_status']==1){
-                                          echo '<option value='.$ins_val["institution_type_id"].'> '.$ins_val["institution_type_name"].' </option>';
-                                        }
-                                      endforeach;
-                                      else :
-                                        echo '<option value='.$provider_full_profile['institution_type_id'].' selected> "'.$provider_full_profile['institution_type_name'].'" </option>';
-                                      endif;
-                                        ?>
-                                    </select> 
-                                  </div>
-                                </div>
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Organization Status</label>
-                                  <div class="controls input_field_width">
-                                    <select>
-                                      <option value="1" <?php if($provider_full_profile['organization_status']==1) echo "selected"; ?>> Active </option>
-                                      <option value="0" <?php if($provider_full_profile['organization_status']==0) echo "selected"; ?>> Inactive </option>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="tab-pane active" id="tab2">
-                              <h4>Organization Address</h4>
-                              <div class="span12">
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Organization Address1</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['organization_address_1']; ?>" />
-                                  </div>
-                                </div>
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Organization Address2</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['organization_address_2']; ?>" />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="span12">
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Organization Address3</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['organization_address_3']; ?>" />
-                                  </div>
-                                </div>
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Organization District</label>
-                                  <div class="controls input_field_width">
-                                    <select>
-                                      <option> Please select district </option>
-                                      <?php
-                                      if(!empty($district_values)) :
-                                      foreach ($district_values as $dis_val) :
-                                      ?>
-                                        <?php
-                                        if($dis_val['district_id']==$provider_full_profile['organization_district_id']) {
-                                          echo '<option value='.$dis_val["district_id"].' selected> '.$dis_val["district_name"].' </option>';
-                                        }
-                                        else if($dis_val['district_status']==1){
-                                          echo '<option value='.$dis_val["district_id"].'> '.$dis_val["district_name"].' </option>';
-                                        }
-                                      endforeach;
-                                      else :
-                                        echo '<option value='.$provider_full_profile['organization_district_id'].' selected> "'.$provider_full_profile['district_name'].'" </option>';
-                                      endif;
-                                        ?>
-                                    </select>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="tab-pane active" id="tab3">
-                              <h4>Registrant Details</h4>
-                              <div class="span12">
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Registrant Name</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['registrant_name']; ?>" />
-                                  </div>
-                                </div>
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Registrant Designation</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['registrant_designation']; ?>" />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="span12">
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Registrant DOB</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6 m-ctrl-medium date-picker" value="<?php echo $provider_full_profile['registrant_date_of_birth']; ?>" />
-                                  </div>
-                                </div>
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Registrant Email</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['registrant_email_id']; ?>" />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class="span12">
-                                <div class="span6 control-group">                                       
-                                  <label class="control-label">Registrant Mobile</label>
-                                  <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                            <?php
-                            endif;
-                            ?>
                           </div>
                         </div>
-                        <div class="form-actions clearfix">
-                          <a href="javascript:;" class="btn button-previous">
-                            <i class="icon-angle-left"></i> Back 
-                          </a>
-                          <a href="javascript:;" class="btn btn-primary blue button-next">
-                            Continue 
-                            <i class="icon-angle-right"></i>
-                          </a>
-                          <a href="javascript:;" class="btn btn-success button-submit">
-                            Submit 
-                            <i class="icon-ok"></i>
-                          </a>
+                        <div class="tab-pane" id="tab2">
+                          <h4>Registrant Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Registrant Name</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['registrant_name']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Register Type</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['registrant_register_type']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Designation</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['registrant_designation']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Date Of Birth</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['registrant_date_of_birth']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Email ID</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['registrant_email_id']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Mobile No</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['registrant_mobile_no']; ?>
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                      </form>
-                      <?php
-                      else :
-                        echo "<p> No content found </p>";
-                      endif;
-                      ?>
-                      <?php if(!$this->input->is_ajax_request()) { ?>
+                        <div class="tab-pane" id="tab3">
+                          <h4>Payment Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Subscription Plan</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['subscription_plan']; ?>
+                              </span>                         
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Subscription Price</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['subscription_price']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Subcription Features</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['subscription_features']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Subcription Validitity</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['subcription_valid_upto']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label">Transcation Id</label>
+                              <span class="dynamic_data"> 
+                                <?php 
+                                if(!empty($provider_full_profile['transcation_id'])) :
+                                  echo $provider_full_profile['transcation_id'];
+                                else :
+                                  echo "Null";
+                                endif;
+                                ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Subcription Status</label>
+                              <span class="dynamic_data"> 
+                                <?php 
+                                if($provider_full_profile['subscription_status']==1) :
+                                  echo "Active";
+                                else :
+                                  echo "Inactive";
+                                endif;
+                                ?>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab4">
+                          <h4>Addtional Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Is SMS Verified</label>
+                              <span class="dynamic_data"> 
+                                <?php 
+                                if($provider_full_profile['is_sms_verified']==1) :
+                                  echo "Yes";
+                                else :
+                                  echo "No";
+                                endif;
+                                ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Total SMS Count</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_sms_count']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Used SMS Count</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Remaining SMS Count</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_sms_remaining_count']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Total Resume Count</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_resume_download_count']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Used Resume Count</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Remaining Resume Count</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['organization_remaining_resume_download_count']; ?>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <?php
+                        else :
+                        ?>
+                        <p class="val_error"> </p>
+                        <div class="tab-pane" id="tab1">
+                          <h4>Organization Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Name</label>
+                              <span>
+                                <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $provider_full_profile['organization_name']; ?>" name="organization_name" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Organization Logo</label>
+                              <span>
+                                <a class="btn upload_option"> Upload </a>
+                                <input class="form-control hidden_upload" type="file" >
+                                <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview">
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label">Institution Type</label>
+                              <span>
+                                <select name="institution_type" class="tabfield1 tabfield">
+                                  <option value=""> Please select institution type </option>
+                                  <?php
+                                  if(!empty($instution_values)) :
+                                  foreach ($instution_values as $ins_val) :
+                                  ?>
+                                    <?php
+                                    if($ins_val['institution_type_id']==$provider_full_profile['organization_institution_type_id']) {
+                                      echo '<option value='.$ins_val["institution_type_id"].' selected> '.$ins_val["institution_type_name"].' </option>';
+                                    }
+                                    else if($ins_val['institution_type_status']==1){
+                                      echo '<option value='.$ins_val["institution_type_id"].'> '.$ins_val["institution_type_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$provider_full_profile['institution_type_id'].' selected> "'.$provider_full_profile['institution_type_name'].'" </option>';
+                                  endif;
+                                    ?>
+                                </select> 
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Status</label>
+                              <span>
+                                <select name="organization_status" class="tabfield1 tabfield">
+                                  <option value=""> Please select status </option>
+                                  <option value="1" <?php if($provider_full_profile['organization_status']==1) echo "selected"; ?>> Active </option>
+                                  <option value="0" <?php if($provider_full_profile['organization_status']==0) echo "selected"; ?>> Inactive </option>
+                                </select>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                          <h4>Organization Address</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Address1</label>
+                              <span>
+                                <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_1']; ?>" name="org_addr_1" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Address2</label>
+                              <span>
+                                <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_2']; ?>" name="org_addr_2" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization Address3</label>
+                              <span>
+                                <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_3']; ?>" name="org_addr_3" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Organization District</label>
+                              <span>
+                                <select class="tabfield2 tabfield" name="organization_district">
+                                  <option value=""> Please select district </option>
+                                  <?php
+                                  if(!empty($district_values)) :
+                                  foreach ($district_values as $dis_val) :
+                                  ?>
+                                    <?php
+                                    if($dis_val['district_id']==$provider_full_profile['organization_district_id']) {
+                                      echo '<option value='.$dis_val["district_id"].' selected> '.$dis_val["district_name"].' </option>';
+                                    }
+                                    else if($dis_val['district_status']==1){
+                                      echo '<option value='.$dis_val["district_id"].'> '.$dis_val["district_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$provider_full_profile['organization_district_id'].' selected> "'.$provider_full_profile['district_name'].'" </option>';
+                                  endif;
+                                    ?>
+                                </select>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                          <h4>Registrant Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Registrant Name</label>
+                              <span>
+                                <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_name']; ?>" name="registrant_name" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Registrant Designation</label>
+                              <span>
+                                <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_designation']; ?>" name="registrant_designation" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Registrant DOB</label>
+                              <span>
+                                <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_date_of_birth']; ?>" name="registrant_dob" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Registrant Email</label>
+                              <span>
+                                <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_email_id']; ?>" name="registrant_email" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Registrant Mobile</label>
+                              <span>
+                                <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" />
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <?php
+                        endif;
+                        ?>
+                        <ul class="pager wizard">
+                          <li class="previous"><a href="#">Previous</a></li>
+                          <li class="next"><a href="#">Next</a></li>
+                          <li class="finish disabled"><a href="#">Finish</a></li>
+                        </ul>
+                      </div>  
                     </div>
+                    <input type="hidden" class="hidden_id" value="<?php echo $provider_full_profile['organization_id']; ?>" />
+                    <?php
+                    else :
+                      echo "<p> No content found </p>";
+                    endif;
+                    ?>
+                    </form>
+                    <?php if(!$this->input->is_ajax_request()) { ?>
                   </div>
-            		  <p>
-                    <a data-popup-close="popup-1" href="#">Close</a>
-                  </p>
-                  <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
                 </div>
-              </div>      
+            		<p>
+                  <a data-popup-close="popup-1" href="#">Close</a>
+                </p>
+                <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+              </div>
+            </div>
+
               <!-- Delete Popup -->       
               <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         			  <div class="modal-dialog">
@@ -661,7 +643,7 @@ if(!empty($this->session->userdata("login_status"))):
         							<input type="hidden" name="delete" id="vId" value=""/>
         							<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true"> &times; </button>
         							<center class="popup_tx">
-        								<h5>Are you sure you want to delete this item? </h5>
+        								<h5> Are you sure you want to delete this item? </h5>
         							</center>
         						</div>
         						<div id="delete_btn" class="modal-footer footer_model_button" >

@@ -3875,7 +3875,7 @@ jQuery UI Datepicker(new in v1.2.2)
 .ads_table input {
     width: 100px;
 }
-.image_upload {
+.hidden_upload {
     display: none !important;
     opacity: 0;
 }
@@ -3951,6 +3951,29 @@ ul li:last-child{
     /*background-color: rgba(0,0,0,0.40) !important ;   */
     background-color: rgba(50,50,50,0.70) !important ;
     color: #fff !important;
-} 
+}
+.tab-content label {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 50%;
+    float: left;
+}
+.tab-content span {
+    display: inline-block;
+    margin-bottom: 5px;
+    width: 50%;
+}
+.tab-content span input, .tab-content span select {
+    max-width: 100%;
+    width: 96% !important;
+}
+
+.span12 {
+    margin-left: 5px !important;
+}
+.popup_preview {
+    height: 30px;
+    width: 40px;
+}
 
 /* Ended by siva */

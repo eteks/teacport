@@ -256,7 +256,7 @@ $config['encryption_key'] = 'TeChPoRt';
 |
 */
 $config['sess_cookie_name']		= 'ci_session';
-$config['sess_expiration']		= 28800; // 5 mins
+$config['sess_expiration']		= 28800; // 8 hrs
 $config['sess_expire_on_close']	= TRUE;
 $config['sess_encrypt_cookie']	= FALSE;
 $config['sess_use_database']	= FALSE;

@@ -55,6 +55,9 @@
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900,300" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Arizonia" rel="stylesheet"> 
+    <!--My custom Fonts--> 
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+   
 
     <!-- JavaScripts -->
     <script src="<?php echo base_url(); ?>assets/js/modernizr.js"></script>
