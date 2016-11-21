@@ -1,7 +1,6 @@
 <?php
 if(!empty($this->session->userdata("login_status"))): 
 ?>
-<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -36,9 +35,9 @@ if(!empty($this->session->userdata("login_status"))):
                            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
+                           <a href="#">Job Prvider</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/qualification">Qualification</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/jobprovider_activities">Job Activities</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -60,11 +59,11 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <div class="btn-group">
+                                    <!-- <div class="btn-group">
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
+                                    </div> -->
                                     <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
@@ -76,75 +75,56 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/qualification" class="admin_module_form" id="qualification_form">
-                                  <?php } ?>
+                                <!-- <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">
                                   <?php
-                                  if(!empty($status)) :
-                                    echo "<p class='db_status update_success_md'> $status </p>";
-                                  endif;
+                                  // if(!empty($status)) :
+                                  //   echo "<p class='db_status update_success_md'> $status </p>";
+                                  // endif;
                                   ?> 
-                                  <p class='val_error error_msg_md'> <p>
-                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <p class='val_error error_msg_md'> <p> -->
+                                  <table class="table table-striped job_activities table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th>Qualification</th>
-                                        <th>Course Type</th>
-                                        <th>Institution Type</th>
-                                        <th>Status</th>
-                                        <th>Created Date</th>
-                                        <th>Edit</th>
+                                        <th> Organization Name </th>
+                                        <th> Candidate Name </th>
+                                        <th> Sms Sent </th>
+                                        <th> Mail Sent </th>
+                                        <th> Resume Downloaded </th>
+                                        <th style="display: none;"> </th>
+                                        <th >Edit</th>
                                         <th>Delete</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                    <?php
-                                    if(!empty($qualification_type_values)) :
-                                    foreach ($qualification_type_values as $qua_val) :
-                                    ?>
-                                      <tr class="parents_tr" id="column<?php echo $qua_val['educational_qualification_id']; ?>">
-
-                                        <td class="educational_qualification">
-                                          <?php echo $qua_val['educational_qualification']; ?>
+                                      <tr class="parents_tr" id="column">
+                                        <td class="activity_organization_id"> 
+                                          test
                                         </td>
-                                        <td class="educational_qualification_course_type">
-                                          <?php 
-                                          $course_type = unserialize(COURSE_TYPE);
-                                          echo $course_type[$qua_val['educational_qualification_course_type']];
-                                          ?>
+                                        <td class="activity_candidate_id"> 
+                                          test 
                                         </td>
-                                        <td class="educational_qualifcation_inst_type_id">
-                                          <?php echo $qua_val['institution_type_name']; ?>
+                                        <td class="is_sms_sent center_align"> 
+                                          <span class="icon-ok"> </span>
                                         </td>
-                                        <td class=" educational_qualification_status"> 
-                                          <?php 
-                                          if ($qua_val['educational_qualification_status'] == 1) 
-                                            echo "Active";
-                                          else
-                                            echo "Inactive";
-                                          ?>
+                                        <td class="is_email_sent center_align">
+                                          <span class="icon-remove"> </span>
                                         </td>
-                                        <td class="educational_qualification_created_date">
-                                          <?php echo $qua_val['educational_qualification_created_date']; ?>
-                                        </td>
+                                        <td class="is_resume_downloaded center_align">
+                                          <span class="icon-ok"> </span>
+                                        </td>  
+                                        <td style="display: none;"> </td>                                    
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $qua_val['educational_qualification_id']; ?>" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
-                                              Edit
+                                          <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
+                                            Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
-                                            Delete
-                                          </a>
+                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="">Delete</a>
                                         </td>
                                       </tr>
-                                      <?php
-                                      endforeach;
-                                      endif;
-                                      ?>
                                     </tbody>
                                   </table>
-                                <?php if(!$this->input->is_ajax_request()) { ?>
-                                </form>
+                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
@@ -170,7 +150,6 @@ if(!empty($this->session->userdata("login_status"))):
 				    </div>
     			</div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
 
             <!-- END PAGE CONTENT-->
@@ -179,37 +158,20 @@ if(!empty($this->session->userdata("login_status"))):
       </div>
       <!-- END PAGE -->
    </div>
-    <!-- END CONTAINER -->
-    
-  <script>
+   <!-- END CONTAINER -->
+   <script>
     // Define default values
-    var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("educational_qualification","educational_qualification_course_type","educational_qualifcation_inst_type_id","educational_qualification_status"); // Set name of input types
-    var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
+    var inputType = new Array("select","select","on_off","on_off","on_off"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("activity_organization_id","activity_candidate_id","is_sms_sent","is_email_sent","is_resume_downloaded"); // Set name of input types
+    var placeholder = new Array(""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var educational_qualification_course_type_option = new Array("Please select course"); 
-    var educational_qualification_course_type_value = new Array("");
-    <?php foreach (unserialize(COURSE_TYPE) as $key => $value): ?>
-      educational_qualification_course_type_option.push("<?php echo $value; ?>");
-      educational_qualification_course_type_value.push("<?php echo $key; ?>");
-    <?php endforeach; ?>
-    var educational_qualifcation_inst_type_id_option = new Array("Please select institution");
-    var educational_qualifcation_inst_type_id_value = new Array("");
-    <?php
-    if(!empty($institution_types)) :
-    foreach ($institution_types as $ins_val) :
-    ?>
-      educational_qualifcation_inst_type_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
-      educational_qualifcation_inst_type_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
-    <?php
-    endforeach;
-    endif;
-    ?>
-    var educational_qualification_status_option = new Array("Please select status","Active","Inactive"); 
-    var educational_qualification_status_value = new Array("","1","0");
+    var activity_organization_id_option = new Array("Select","Ets","Esourceit");
+    var activity_organization_id_value = new Array("","1","3");
+    var activity_candidate_id_option = new Array("Select","Siva","Kannan");
+    var activity_candidate_id_value = new Array("","3","5");
+    var is_created ="no";
   </script>
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');

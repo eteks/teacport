@@ -23,7 +23,7 @@ $(document).ready(function(){
     	// handleFormWizards();
         var action_data ={};
         var this_ajax_section = $(this).parents('#main-content').find('.pop_details_section');
-        var targeted_popup_class = jQuery(this).attr('data-popup-open');
+        var targeted_popup_class = $(this).attr('data-popup-open');
         action_data['action'] = $(this).data('mode');
         action_data['value'] = $(this).data('id');
         action_data[csrf_name] = csfrData[csrf_name];        
@@ -36,6 +36,7 @@ $(document).ready(function(){
                     this_ajax_section.html(res);
                     handleFormWizards();
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+                    handleChoosenSelect();
                     // e.preventDefault();
                 }
             }
@@ -114,7 +115,7 @@ function handleFormWizards() {
                 } else {
                     $('#popup_wizard_section').find('.button-next').show();
                     $('#popup_wizard_section').find('.button-submit').hide();
-                }
+                }            
 
                 App.scrollTo($('.page-title'));
             },

@@ -43,7 +43,7 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
 }
 
 #sidebar > ul > li.active > a{
-    background: url("../img/side-bar-list-bg.png");
+    background: rgba(0, 0, 0, 0.10) url("../img/side-bar-list-bg.png");
 }
 
 #sidebar > ul > li > ul.sub > li > a {
@@ -415,4 +415,27 @@ tr select {
 	min-height:20px !important;
 	max-height:40px !important;
 	overflow: auto !important;
+	max-width: 145px !important;    
+    min-width: 100px !important;
+}
+.user_accts_table td input {
+    max-width: 127px !important;
+    min-width: 125px !important;
+}
+.user_accts_table td select {
+    max-width: 135px !important;
+    min-width: 125px !important;
+}
+.admin_module_form {
+    /*border-right: 1px solid #868686;*/
+    max-width: 1066px !important;
+    min-width: 800px !important;
+    /*min-height:1000px !important;*/
+    max-height:700px !important;
+    overflow: auto;
+}
+.main_module{
+	font-size: 13px;
+	font-weight:600;
+	color: #555;
 }

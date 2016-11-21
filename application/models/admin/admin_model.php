@@ -240,6 +240,57 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Languages - Add Edit Delete View
+  public function languages($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $language_update_data = array( 
+                                    'language_name' => $this->input->post('language_name'),
+                                    'is_mother_tangue' => $this->input->post('is_mother_tangue'),
+                                    'is_medium_of_instruction' => $this->input->post('is_medium_of_instruction'),
+                                    'language_status' => $this->input->post('language_status'),
+                                  );
+      $language_update_where = '(language_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($language_update_data); 
+      $this->db->where($language_update_where);
+      $this->db->update("tr_languages", $language_update_data); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $language_insert_data = array( 
+                                      'language_name' => $this->input->post('language_name'),
+                                      'is_mother_tangue' => $this->input->post('is_mother_tangue'),
+                                      'is_medium_of_instruction' => $this->input->post('is_medium_of_instruction'),
+                                      'language_status' => $this->input->post('language_status'),
+                                    );
+      $this->db->insert("tr_languages", $language_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $language_delete_where = '(language_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_languages", $language_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $model_data['language_values'] = $this->db->get('tr_languages')->result_array();
+
+    return $model_data;
+  }
+
+
+
   // Extra Curricular - Add Edit Delete View
   public function extra_curricular($status)
   {
@@ -493,6 +544,56 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Postings - Add Edit Delete View
+  public function postings($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $postings_update_data = array( 
+                              'posting_name' => $this->input->post('posting_name'),
+                              'posting_institution_id' => $this->input->post('posting_institution_id'),
+                              'posting_status' => $this->input->post('posting_status'),
+                            );
+      $postings_update_where = '(posting_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($postings_update_data); 
+      $this->db->where($universities_update_where);
+      $this->db->update("tr_applicable_posting", $postings_update_where); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $postings_insert_data = array( 
+                            'posting_name' => $this->input->post('posting_name'),
+                            'posting_institution_id' => $this->input->post('posting_institution_id'),
+                            'posting_status' => $this->input->post('posting_status'),
+                          );
+      $this->db->insert("tr_applicable_posting", $postings_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $postings_delete_data = '(posting_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_applicable_posting", $postings_delete_data); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $postings_list_query = $this->db->query("SELECT * FROM tr_institution_type AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.posting_institution_id, ',', n.n ) , ',', -1 ) value FROM tr_applicable_posting t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.posting_institution_id ) - LENGTH( REPLACE( t.posting_institution_id, ',', ''))) ) AS a ON a.value = c.institution_type_id order by (a.posting_id)");
+    $model_data['postings_values'] = $postings_list_query->result_array();  
+    return $model_data;
+
+
+
+  }
+
   // Get Institution Type list
   public function get_institution_type()
   {
@@ -501,11 +602,18 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
-  // Get Qualification list
-  public function get_qualification_list()
+  // Get Qualification values
+  public function get_qualification_values()
   {
     $qualification_get_where = '(educational_qualification_status=1)'; 
     $model_data = $this->db->get_where("tr_educational_qualification", $qualification_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get Qualification list not based status
+  public function get_qualification_list()
+  {
+    $model_data = $this->db->get_where("tr_educational_qualification")->result_array(); 
     return $model_data;
   }
 
@@ -525,16 +633,38 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Get class level not based status
+  public function get_class_levels_list()
+  {
+    $model_data = $this->db->get_where("tr_class_level")->result_array(); 
+    return $model_data;
+  }
+
   // Get district values not based status
   public function get_district_values()
   {
     $model_data = $this->db->get("tr_district")->result_array(); 
     return $model_data;
   }
+
   // Get Institution Type list not based status
   public function get_institution_type_list()
   {
     $model_data = $this->db->get("tr_institution_type")->result_array(); 
+    return $model_data;
+  }
+
+  // Get university not based status
+  public function get_university_list()
+  {
+    $model_data = $this->db->get("tr_university_board")->result_array(); 
+    return $model_data;
+  }
+
+  // Get university not based status
+  public function get_subjects_list()
+  {
+    $model_data = $this->db->get("tr_subject")->result_array(); 
     return $model_data;
   }
 

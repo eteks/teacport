@@ -1995,7 +1995,7 @@ var App = function () {
                 disableFadeOut: true
             });
         });
-    }
+    };
 
     var handleFormWizards = function () {
         if (!jQuery().bootstrapWizard) {
@@ -2077,7 +2077,7 @@ var App = function () {
         $('#form_wizard_1 .button-submit').click(function () {
             alert('Finished!');
         }).hide();
-    }
+    };
 
     var handleTagsInput = function () {
         if (!jQuery().tagsInput) {
