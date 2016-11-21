@@ -52,30 +52,6 @@ $(document).ready(function(){
 
 // Popup with tab menu
 function handleFormWizards() {
-<<<<<<< HEAD
-        if (!jQuery().bootstrapWizard) {
-            return;
-        }
-        $('.date-picker').datepicker();
-        $('#popup_wizard_section').bootstrapWizard({
-            'nextSelector': '.button-next',
-            'previousSelector': '.button-previous',
-            onTabClick: function (tab, navigation, index) {
-                 error_popup('on tab click disabled');
-                return false;
-            },
-            onNext: function (tab, navigation, index) {
-                var total = navigation.find('li').length;
-                var current = index + 1;
-                // set wizard title
-                $('.step-title', $('#popup_wizard_section')).text('Step ' + (index + 1) + ' of ' + total);
-                // set done steps
-                jQuery('li', $('#popup_wizard_section')).removeClass("done");
-                var li_list = navigation.find('li');
-                for (var i = 0; i < index; i++) {
-                    jQuery(li_list[i]).addClass("done");
-                }
-=======
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
                         var $total = navigation.find('li').length;
@@ -92,8 +68,6 @@ function handleFormWizards() {
                             $('#rootwizard').find('.pager .next').show();
                             $('#rootwizard').find('.pager .finish').hide();
                         }
->>>>>>> 0289f87411ca3a311d9e834d3bb5e82bbe7e0a65
-
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
@@ -187,32 +161,32 @@ function tabmenu_ci_validation(value) {
     return return_val;
 }
 
- function error_popup(message){
-	$('.error_popup_msg .success-alert span').text(message);
-	$('.popup_fade').show();
-	$('.error_popup_msg').show();
-	document.body.style.overflow = 'hidden';
-}
-    
-// error popup message center alignment
-var height=$('.error_popup_msg').height();
-var width=$('.error_popup_msg').width();
-$('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
-    
-// close error popup when click ok button or popupfade
-	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
-	  	$('.error_popup_msg').hide();
-	  	$('.popup_fade').hide();
-	  	document.body.style.overflow = 'auto';
-	});
-
-// $('#popup_wizard_section .button-submit').click(function () {
-             // error_popup('Finished!');
-        // }).hide();
-    // };
+ // function error_popup(message){
+	// $('.error_popup_msg .success-alert span').text(message);
+	// $('.popup_fade').show();
+	// $('.error_popup_msg').show();
+	// document.body.style.overflow = 'hidden';
+// }
 //     
-    $(".admin_module_form").submit(function(e){
-    e.preventDefault();
-    });
+// // error popup message center alignment
+// var height=$('.error_popup_msg').height();
+// var width=$('.error_popup_msg').width();
+// $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+//     
+// // close error popup when click ok button or popupfade
+	// $(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+	  	// $('.error_popup_msg').hide();
+	  	// $('.popup_fade').hide();
+	  	// document.body.style.overflow = 'auto';
+	// });
+// 
+// // $('#popup_wizard_section .button-submit').click(function () {
+             // // error_popup('Finished!');
+        // // }).hide();
+    // // };
+// //     
+    // $(".admin_module_form").submit(function(e){
+    // e.preventDefault();
+    // });
     
     
