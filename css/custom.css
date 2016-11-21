@@ -87,13 +87,13 @@
 	color: #FFF !important;
 }
 .imagepreview_act {
-    width: 180px;
+    width: 175px;
     height: 180px;
     background-position: center center;
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;
-    margin: 10px 10px 10px 0;
+    margin: 55px 10px 10px 0;
 }
 /*.select-salary select option:first{
 	color: #999;
@@ -124,7 +124,16 @@ select:invalid { color: gray; }
 	font-size: 30px;
 	opacity: 1;
 }
-
+/* Edit profile */
+.profile-edit .input-group-btn {
+    padding-top: 0 !important;
+}
+#provider_upload .input-group {
+	border-collapse: separate;
+    display: table;
+    left: 195px;
+    position: relative;
+}
 /* END OF COMPANY DASHBOARD */
 
 /* PROVIDERS & SEEKERS DASHBOARD */
@@ -136,4 +145,35 @@ select:invalid { color: gray; }
 }
 
 
+
+
+
+
+
+
+/* ---------For Responsive---------- */
+@media (min-width: 320px) and (max-width: 767px) {
+	
+	#provider_upload .input-group {
+		position: relative;
+		left: 0px;
+	}
+	
+}
+@media (min-width: 768px) and (max-width: 991px) {
+
+	#provider_upload .input-group {
+		position: relative;
+		left: 125px;
+	}
+
+}	
+@media (min-width: 992px) and (max-width: 1199px) {
+
+	#provider_upload .input-group {
+		position: relative;
+		left: 160px;
+	}
+
+}	
 
