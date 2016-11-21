@@ -21,6 +21,7 @@ $(document).ready(function(){
     // Edit and Full view option
     $(document).on('click','.popup_fields',function(e) {
     	// handleFormWizards();
+    	$('.date-picker').datepicker();
         var action_data ={};
         var this_ajax_section = $(this).parents('#main-content').find('.pop_details_section');
         var targeted_popup_class = $(this).attr('data-popup-open');
@@ -45,7 +46,6 @@ $(document).ready(function(){
     
 
 
-
 }); // End document
 
 
@@ -56,12 +56,12 @@ function handleFormWizards() {
         if (!jQuery().bootstrapWizard) {
             return;
         }
-        
+        $('.date-picker').datepicker();
         $('#popup_wizard_section').bootstrapWizard({
             'nextSelector': '.button-next',
             'previousSelector': '.button-previous',
             onTabClick: function (tab, navigation, index) {
-                alert('on tab click disabled');
+                 error_popup('on tab click disabled');
                 return false;
             },
             onNext: function (tab, navigation, index) {
@@ -130,7 +130,30 @@ function handleFormWizards() {
         });
         $('#popup_wizard_section').find('.button-previous').hide();
         $('#popup_wizard_section .button-submit').click(function () {
-            alert('Finished!');
+             error_popup('Finished!');
         }).hide();
     };
+    
+    $(".admin_module_form").submit(function(e){
+    e.preventDefault();
+    });
 
+     
+    function error_popup(message){
+	$('.error_popup_msg .success-alert span').text(message);
+	$('.popup_fade').show();
+	$('.error_popup_msg').show();
+	document.body.style.overflow = 'hidden';
+    }
+    
+    // error popup message center alignment
+	var height=$('.error_popup_msg').height();
+    var width=$('.error_popup_msg').width();
+    $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+    
+    // close error popup when click ok button or popupfade
+	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+	  	$('.error_popup_msg').hide();
+	  	$('.popup_fade').hide();
+	  	document.body.style.overflow = 'auto';
+	});
