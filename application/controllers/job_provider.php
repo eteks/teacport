@@ -16,7 +16,6 @@ class Job_provider extends CI_Controller {
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
-			$data['glogin_url'] = $common->googleloginurl();
 			$this->load->view('job-providers-login',$data);
 		}
 		else {
@@ -34,7 +33,6 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
-   				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('job-providers-login',$fb);
 			}
 			else{
@@ -70,7 +68,6 @@ class Job_provider extends CI_Controller {
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$data['fbloginurl'] = $common->facebookloginurl();
-			$data['glogin_url'] = $common->googleloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$this->load->view('register-job-providers',$data);
 		}
@@ -91,7 +88,6 @@ class Job_provider extends CI_Controller {
 	       		$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);	
 	       		$fb['fbloginurl'] = $common->facebookloginurl();
-	       		$fb['glogin_url'] = $common->googleloginurl();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('register-job-providers',$fb);	
 	        }
@@ -124,7 +120,6 @@ class Job_provider extends CI_Controller {
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Resitration Successful!. Check your email address!!';	
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
-	       				$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
@@ -133,7 +128,6 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
-	       				$fb['glogin_url'] = $common->googleloginurl();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('register-job-providers',$fb);
 					}
@@ -144,7 +138,6 @@ class Job_provider extends CI_Controller {
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);	
        				$fb['fbloginurl'] = $common->facebookloginurl();
-       				$fb['glogin_url'] = $common->googleloginurl();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('register-job-providers',$fb);
 				}
@@ -188,13 +181,13 @@ class Job_provider extends CI_Controller {
     }
 	public function provider_logout(){
 		$this->session->set_userdata('login_status', FALSE);
+		$this->session->unset_userdata('token');
+		$this->session->unset_userdata('userData');
 		$this->session->unset_userdata('login_session');
 		$this->session->sess_destroy();
     	redirect('/','refresh');
 	}
 	
-	
-	//Akila created
 	public function companydbd_editprofile(){
 		$this->load->view('company-dashboard-edit-profile');
 	}
