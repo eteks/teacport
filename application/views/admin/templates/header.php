@@ -207,12 +207,15 @@ Website: http://thevectorlab.net/
                         <li class="dropdown">
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
-                                <span class="username">Administrator</span>
+                                <?php
+                                    $session_data = $this->session->userdata("login_session");
+                                ?>
+                                <span class="username"> <?php echo $session_data['admin_user_name']; ?></span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-user"></i> My Profile</a></li>
-                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-tasks"></i> My Tasks</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-user"></i>  My profile </a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-tasks"></i>  Change password </a></li>
                                 <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-calendar"></i> Calendar</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?php echo base_url(); ?>admin/admin_login/teac_admin_logout"><i class="icon-key"></i> Log Out</a></li>
