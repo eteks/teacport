@@ -12,6 +12,16 @@ class Job_Seeker extends CI_Controller {
 		$this->load->view('admin/job_seeker_profile');
 
 	}
+	public function job_seeker_preference()
+	{
+		$this->load->view('admin/job_seeker_preference');
+
+	}
+	public function job_seeker_applied()
+	{
+		$this->load->view('admin/job_seeker_applied');
+
+	}
 
 	
 }

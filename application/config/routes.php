@@ -111,6 +111,8 @@ $route['admin/user_accounts'] = 'admin/admin_users/user_accounts';
 $route['admin/privileges'] = 'admin/admin_users/privileges';
 
 $route['admin/job_seeker_profile'] = 'admin/job_seeker/job_seeker_profile';
+$route['admin/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
+$route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 
 
 

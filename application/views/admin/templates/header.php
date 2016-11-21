@@ -371,8 +371,8 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile">Profile</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Perferences</a></li>                    
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applied</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference">Job Preferences</a></li>                    
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied">Job Applied</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a></li> 
                     </ul>
                 </li>
