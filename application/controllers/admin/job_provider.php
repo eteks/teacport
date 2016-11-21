@@ -99,6 +99,13 @@ class Job_Provider extends CI_Controller {
 		$this->load->view('admin/jobprovider_activities');
 	}
 
+	// Job provider mail details and status 
+	public function teacport_jobprovider_mailstatus()
+	{
+		$this->load->view('admin/jobprovider_mailstatus');
+	}
+
+
 
 
 	

@@ -102,6 +102,7 @@ $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provid
 $route['admin/subscription_plans'] = 'admin/subscription_plan/teacport_subscription_plans';
 $route['admin/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
 $route['admin/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
+$route['admin/jobprovider_mailstatus'] = 'admin/job_provider/teacport_jobprovider_mailstatus';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
