@@ -3,6 +3,14 @@
 /* Featured Jobs Slider */
 .slide-featured-jobs {
 	padding: 10px;
+}
+/* Premium Adds */
+#premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
+	border-radius: 0 !important;
+	display: block;
+	height: 400px;
+	width: 320px;
+	margin: auto;
 }	
 /* Pricing --Features */
 .all-jobs-list-box2 .fa{
@@ -78,9 +86,9 @@
 .dashboard-body .profile-nav .provider-jobs ul li > a:hover{
 	color: #FFF !important;
 }
-#imagepreview_act {
-    /*width: 490px;*/
-    height: 200px;
+.imagepreview_act {
+    width: 180px;
+    height: 180px;
     background-position: center center;
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
@@ -153,7 +161,6 @@ select:invalid { color: gray; }
 	margin: 10px 0;
 	text-align: center;
 }
-
 .error{
 color: red;
 font-size: 13px;

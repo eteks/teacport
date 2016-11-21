@@ -1199,6 +1199,126 @@ class Adminindex extends CI_Controller {
 		}
 	}	
 
+	// Posting - Add Edit View Delete
+	public function posting()
+	{	
+		$data['institution_values'] = $this->admin_model->get_institution_type_list();
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	  		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'posting_name',
+		                              'label'   => 'Posting Name',
+		                              'rules'   => 'trim|required|xss_clean|edit_unique[tr_languages.language_id.language_name.'.$id.']'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'posting_institution_id',
+		                                 'label'   => 'Posting Institution Name',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'posting_status',
+		                                 'label'   => 'Posting Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->postings('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+	   	// Save data
+    	else if($this->input->post('action')=='save') {
+      		$validation_rules = array(
+		                            array(
+		                              'field'   => 'posting_name',
+		                              'label'   => 'Posting Name',
+		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_languages.language_name]'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'posting_institution_id',
+		                                 'label'   => 'Posting Institution Name',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'posting_status',
+		                                 'label'   => 'Posting Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+      		$this->form_validation->set_rules($validation_rules);
+	      	if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['error'] = 1;
+		            $data['status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+	      	}
+      		else {
+	    		$data_values = $this->admin_model->postings('save'); 
+	    		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];	
+      		}
+    	}
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->admin_model->postings('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->admin_model->postings('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$postings_values = $data_values['postings_values'];
+			$data_ajax['postings_values'] = get_institution_by_postname($postings_values);
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/postings',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$postings_values = $data_values['postings_values'];
+			$data['postings_values'] = get_institution_by_postname($postings_values);
+			$this->load->view('admin/postings',$data);
+		}
+	}
+
+
 }
 /* End of file Adminindex.php */ 
 /* Location: ./application/controllers/Adminindex.php */

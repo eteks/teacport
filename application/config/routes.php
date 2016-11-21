@@ -48,10 +48,10 @@ $route['login/facebook'] = 'social/facebook';
 $route['login/facebookverify'] = 'social/facebookverify';
 $route['login/twitter'] = 'social/twitter';
 $route['login/linkedin'] = 'social/linkedin';
+$route['login/google'] = 'social/google';
 //SIGN UP
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
-$route['signup/provider_val'] = 'job_provider_val/index';
 //JOB PROVIDER
 $route['provider/dashboard'] = 'job_provider/dashboard';
 $route['provider/logout'] = 'job_provider/provider_logout';
@@ -73,6 +73,7 @@ $route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
 $route['provider/resume'] = 'job_provider/companydbd_resume';
 $route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
 $route['provider/postedjobs'] = 'job_provider/companydbd_postedjobs';
+$route['provider/postadds'] = 'job_provider/companydbd_postadds';
 $route['provider/subscription'] = 'job_provider/companydbd_subscription';
 $route['provider/feedback'] = 'job_provider/companydbd_feedback';
 $route['provider/changepwd'] = 'job_provider/companydbd_changepwd';
@@ -95,6 +96,7 @@ $route['admin/class_level'] = 'admin/adminindex/class_level';
 $route['admin/departments'] = 'admin/adminindex/departments';
 $route['admin/subject'] = 'admin/adminindex/subject';
 $route['admin/university'] = 'admin/adminindex/university';
+$route['admin/postings'] = 'admin/adminindex/posting';
 $route['admin/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
 $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
 $route['admin/subscription_plans'] = 'admin/subscription_plan/teacport_subscription_plans';
@@ -108,6 +110,8 @@ $route['admin/user_accounts'] = 'admin/admin_users/user_accounts';
 $route['admin/privileges'] = 'admin/admin_users/privileges';
 
 $route['admin/job_seeker_profile'] = 'admin/job_seeker/job_seeker_profile';
+$route['admin/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
+$route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 
 
 

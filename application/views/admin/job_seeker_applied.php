@@ -1,7 +1,3 @@
-<?php
-if(!empty($this->session->userdata("login_status"))): 
-?>
-<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -36,9 +32,9 @@ if(!empty($this->session->userdata("login_status"))):
                            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
+                           <a href="#">Job Seeker</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/qualification">Qualification</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/languages">Applaied</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -76,27 +72,9 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/qualification" class="admin_module_form" id="qualification_form">
-                                  <?php } ?>
-                                  <?php
-                                  if(!empty($status)) :
-                                    echo "<p class='db_status update_success_md'> $status </p>";
-                                  endif;
-                                  ?> 
-                                  <p class='val_error error_msg_md'> <p>
-                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
-                                    <thead>
-                                      <tr class="ajaxTitle">
-                                        <th>Qualification</th>
-                                        <th>Course Type</th>
-                                        <th>Institution Type</th>
-                                        <th>Status</th>
-                                        <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
+
+                                 
+    
                                     <?php
                                     if(!empty($qualification_type_values)) :
                                     foreach ($qualification_type_values as $qua_val) :
@@ -126,6 +104,7 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="educational_qualification_created_date">
                                           <?php echo $qua_val['educational_qualification_created_date']; ?>
                                         </td>
+
                                         <td class="edit_section">
                                           <a class="ajaxEdit" id="column<?php echo $qua_val['educational_qualification_id']; ?>" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
                                               Edit
@@ -145,6 +124,61 @@ if(!empty($this->session->userdata("login_status"))):
                                   </table>
                                 <?php if(!$this->input->is_ajax_request()) { ?>
                                 </form>
+
+
+
+                              <form method="post" action="adminindex/languages" class="admin_module_form" id="languages_form">
+                              <?php } ?>
+                              <?php
+                              if(!empty($status)) :
+                                echo "<p class='db_status update_success_md'> $status </p>";
+                              endif;
+                              ?> 
+                              <!-- <p class='val_error error_msg_md'> <p> -->
+                              <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                <thead>
+                                  <tr class="ajaxTitle">
+                                    <th>Job Vacancies</th>
+                                    <th>Candidate</th>
+                                    <th>Status</th>
+                                    <th>Created Date</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr class="parents_tr" id="column1">
+                                        <td class="applied_job_vacancies_id">10</td>
+                                        <td class="applied_job_candidate_id">Candidate Name1</td>
+                                        <td class="applied_job_status">Active</td>
+                                        <td class="created_date">01-01-2000</td>
+                                        <td class="edit_section">
+                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                        </td>
+                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
+                                    </tr>
+                                    <tr class="parents_tr" id="column1">
+                                        <td class="applied_job_vacancies_id">20</td>
+                                        <td class="applied_job_candidate_id">Candidate Name2</td>
+                                        <td class="applied_job_status">Active</td>
+                                        <td class="created_date">01-01-2000</td>
+                                        <td class="edit_section">
+                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                        </td>
+                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
+                                    </tr>
+                                    <tr class="parents_tr" id="column1">
+                                        <td class="applied_job_vacancies_id">30</td>
+                                        <td class="applied_job_candidate_id">Candidate Name3</td>
+                                        <td class="applied_job_status">Inactive</td>
+                                        <td class="created_date">01-01-2000</td>
+                                        <td class="edit_section">
+                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                        </td>
+                                        <td><a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal">Delete</a></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
@@ -179,39 +213,18 @@ if(!empty($this->session->userdata("login_status"))):
       </div>
       <!-- END PAGE -->
    </div>
-    <!-- END CONTAINER -->
-    
-  <script>
+   <!-- END CONTAINER -->
+    <script>
     // Define default values
-    var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("educational_qualification","educational_qualification_course_type","educational_qualifcation_inst_type_id","educational_qualification_status"); // Set name of input types
-    var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
+    var inputType = new Array("select","select","select","text"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("applied_job_vacancies_id","applied_job_candidate_id","applied_job_status"); // Set name of input types
+    var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var educational_qualification_course_type_option = new Array("Please select course"); 
-    var educational_qualification_course_type_value = new Array("");
-    <?php foreach (unserialize(COURSE_TYPE) as $key => $value): ?>
-      educational_qualification_course_type_option.push("<?php echo $value; ?>");
-      educational_qualification_course_type_value.push("<?php echo $key; ?>");
-    <?php endforeach; ?>
-    var educational_qualifcation_inst_type_id_option = new Array("Please select institution");
-    var educational_qualifcation_inst_type_id_value = new Array("");
-    <?php
-    if(!empty($institution_types)) :
-    foreach ($institution_types as $ins_val) :
-    ?>
-      educational_qualifcation_inst_type_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
-      educational_qualifcation_inst_type_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
-    <?php
-    endforeach;
-    endif;
-    ?>
-    var educational_qualification_status_option = new Array("Please select status","Active","Inactive"); 
-    var educational_qualification_status_value = new Array("","1","0");
+    var applied_job_vacancies_id_option = new Array("20","30"); 
+    var applied_job_vacancies_id_value = new Array("1","0");
+    var applied_job_candidate_id_option = new Array("Candidate Name1","Candidate Name2","Candidate Name3"); 
+    var applied_job_candidate_id_value = new Array("1","0");
+    var applied_job_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
+    var applied_job_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
   </script>
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
-<?php
-else :
-redirect(base_url().'admin');
-endif;
-?>

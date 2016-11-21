@@ -242,16 +242,21 @@ Website: http://thevectorlab.net/
             <!-- END RESPONSIVE QUICK SEARCH FORM -->
             <!-- BEGIN SIDEBAR MENU -->
             <ul class="sidebar-menu">
+                <?php
+                if($this->uri->segment(2) == 'dashboard' ) :
+                ?>
                 <li class="has-sub active">
+                <?php
+                else :
+                ?>     
+                <li class="has-sub">
+                <?php
+                endif;
+                ?>  
                     <a href="<?php echo base_url(); ?>admin/dashboard" class="">
                         <span class="icon-box"> <i class="icon-dashboard"></i></span> Dashboard
                         <!-- <span class="arrow"></span> -->
                     </a>
-                    <!-- <ul class="sub">
-                        <li><a class="" href="index.php">Dashboard 1</a></li>
-                        <li class="active"><a class="" href="index.php">Dashboard 2</a></li>
-
-                    </ul> -->
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
@@ -270,49 +275,89 @@ Website: http://thevectorlab.net/
                         <li><a class="" href="nestable.php">Nestable List</a></li> -->
                     </ul>
                 </li>
+                <?php
+                if($this->uri->segment(2) == 'state' || $this->uri->segment(2) == 'district' || $this->uri->segment(2) == 'institution_types' || $this->uri->segment(2) == 'extra_curricular' || $this->uri->segment(2) == 'languages' || $this->uri->segment(2) == 'qualification' || $this->uri->segment(2) == 'class_level' || $this->uri->segment(2) == 'departments' || $this->uri->segment(2) == 'subject' || $this->uri->segment(2) == 'postings') :
+                ?>
+                <li class="has-sub open active">
+                <?php
+                else :
+                ?>     
                 <li class="has-sub">
+                <?php
+                endif;
+                ?>
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-th"></i></span> Master Data
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/state">State</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/district">District</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/institution_types">Institution Type</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/extra_curricular">Extra-Curricular</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/languages">Languages</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/qualification">Qualification</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/class_level">Class Level</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/departments">Department</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/subject">Subject</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/university">Job Posting Details</a></li>
+                        <li <?php if($this->uri->segment(2) == 'state') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/state">State</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'district') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/district">District</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'institution_types') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/institution_types">Institution Type</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'extra_curricular') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/extra_curricular">Extra-Curricular</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'languages') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/languages">Languages</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'qualification') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/qualification">Qualification</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'class_level') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/class_level">Class Level</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'departments') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/departments">Department</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'subject') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/subject">Subject</a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'postings') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/postings">Job Posting Details</a>
+                        </li>
                     </ul>
                 </li>
+                <?php
+                if($this->uri->segment(2) == 'job_provider_profile' || $this->uri->segment(2) == 'job_provider_vacancies' || $this->uri->segment(2) == 'jobprovider_activities' || $this->uri->segment(2) == 'jobprovider_activities' || $this->uri->segment(2) == 'jobprovider_mailstatus' || $this->uri->segment(2) == 'jobprovider_ads' ) :
+                ?>
+                <li class="has-sub open active">
+                <?php
+                else :
+                ?>     
                 <li class="has-sub">
+                <?php
+                endif;
+                ?>    
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li>
+                        <li <?php if($this->uri->segment(2) == 'job_provider_profile') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">
                                 Profile
                             </a>
                         </li>
-                        <li>
+                        <li <?php if($this->uri->segment(2) == 'job_provider_vacancies') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
                                 Vacancies Posted
                             </a>
                         </li>
-                        <li>
+                        <li <?php if($this->uri->segment(2) == 'jobprovider_activities') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/jobprovider_activities">
                                 Organization Activities
                             </a>
                         </li>
-                        <li>
-                            <a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a>
+                        <li <?php if($this->uri->segment(2) == 'jobprovider_mailstatus') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_mailstatus">Mail Details & Status</a>
                         </li>
-                        <li>
+                        <li <?php if($this->uri->segment(2) == 'jobprovider_ads') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/jobprovider_ads">
                                 Ads Posted
                             </a>
@@ -326,8 +371,8 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile">Profile</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Perferences</a></li>                    
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Job Applied</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference">Job Preferences</a></li>                    
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied">Job Applied</a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a></li> 
                     </ul>
                 </li>
