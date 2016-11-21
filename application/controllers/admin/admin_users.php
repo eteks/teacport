@@ -114,6 +114,14 @@ class Admin_users extends CI_Controller {
 	{	
 			$this->load->view('admin/privileges');
 	}
+	public function edit_profile()
+	{	
+			$this->load->view('admin/edit_profile');
+	}
+	public function change_password()
+	{	
+			$this->load->view('admin/change_password');
+	}
 }
 /* End of file welcome.php */ 
 /* Location: ./application/controllers/welcome.php */

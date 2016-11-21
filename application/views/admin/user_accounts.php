@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/users_accounts" class="admin_module_form" id="users_accounts_form">
+                                <form method="post" action="adminindex/users_accounts" class="admin_module_form form_table_scl" id="users_accounts_form">
                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">

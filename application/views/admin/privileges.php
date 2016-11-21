@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" class="admin_module_form" action="adminindex/privileges" id="privileges_form"> <!-- class="admin_module_form" -->
+                                <form method="post" class="admin_module_form form_table_scl" action="admin/privileges" id="privileges_form"> <!-- class="admin_module_form" -->
                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
@@ -343,6 +343,11 @@
                                     </tr>                                   
                                     </tbody>
                                 </table>
+                                <div class="form-actions">
+	                              <button type="submit" class="btn btn-success">Update</button>
+	                              <!-- <button type="button" class="btn">Cancel</button> -->
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>

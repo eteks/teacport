@@ -601,7 +601,7 @@ if(!empty($this->session->userdata("login_status"))):
                                 <div class="span6 control-group">                                       
                                   <label class="control-label">Registrant DOB</label>
                                   <div class="controls input_field_width">
-                                    <input type="text" class="span6" value="<?php echo $provider_full_profile['registrant_date_of_birth']; ?>" />
+                                    <input type="text" class="span6 m-ctrl-medium date-picker" value="<?php echo $provider_full_profile['registrant_date_of_birth']; ?>" />
                                   </div>
                                 </div>
                                 <div class="span6 control-group">                                       
