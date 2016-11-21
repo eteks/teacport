@@ -174,7 +174,7 @@ if(!empty($this->session->userdata("login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label">Ads Image Upload </label>
                         <span class="dynamic_data"> 
-                          <input type="file" class="form-control image_upload" />
+                          <input type="file" class="form-control hidden_upload" />
                           <a class="btn upload_option"> Upload </a>
                           <img src ="<?php echo base_url(); ?>assets/logo/logo1.png" class="preview_images" />
                         </span>

@@ -413,20 +413,29 @@ $(document).ready(function(){
     });
 
     // Upload click instead of using file input
-    $('.upload_option').on('click', function()  {
-        $(this).prev().click();
+    $(document).on('click','.upload_option', function()  {
+        $(this).next().click();
     });
 
+    // Tab menu sumission
+    $(document).on('click','#rootwizard .finish',function() {
+        var test = tabmenu_ci_validation('end');
+    });
+
+
+
     // Upload preview
-    $('.image_upload').on('change', function()  {
+    $(document).on('change','.hidden_upload',function()  {
         
+        alert("test");
         var file = $(this).val();
+        var img_view = $(this).next();
         var ext = file.substr((file.lastIndexOf('.') + 1));
         if (ext == "jpg" || ext == "png" || ext == "JPG" || ext == "jpeg") {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {           
-                    $('.preview_images').attr('src', e.target.result);
+                    img_view.attr('src', e.target.result);
                 }
                 reader.readAsDataURL(this.files[0]);
             }

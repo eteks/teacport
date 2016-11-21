@@ -62,11 +62,11 @@ Website: http://thevectorlab.net/
                     <!-- BEGIN NOTIFICATION -->
                     <ul class="nav top-menu">
                         <!-- BEGIN SETTINGS -->
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                             <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Settings">
                                 <i class="icon-cog"></i>
                             </a>
-                        </li>
+                        </li> -->
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
@@ -207,13 +207,15 @@ Website: http://thevectorlab.net/
                         <li class="dropdown">
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
-                                <span class="username">Administrator</span>
+                                <?php
+                                    $session_data = $this->session->userdata("login_session");
+                                ?>
+                                <span class="username"> <?php echo $session_data['admin_user_name']; ?></span>
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-user"></i> My Profile</a></li>
-                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-tasks"></i> My Tasks</a></li>
-                                <li><a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-calendar"></i> Calendar</a></li>
+                               <li><a href="<?php echo base_url(); ?>admin/edit_profile"><i class="icon-edit"></i>  Edit Profile</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/change_password"><i class="icon-exchange"></i>  Change Password</a></li>
                                 <li class="divider"></li>
                                 <li><a href="<?php echo base_url(); ?>admin/admin_login/teac_admin_logout"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
@@ -325,6 +327,9 @@ Website: http://thevectorlab.net/
                         </li>
                         <li <?php if($this->uri->segment(2) == 'subject') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/subject"><span class="sub_module_data">Subject</span></a>
+                        </li>
+                        <li <?php if($this->uri->segment(2) == 'university') echo "class='active_sidebar'"; ?>>
+                            <a class="" href="<?php echo base_url(); ?>admin/university">University / Board</a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'postings') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/postings">Job <span class="sub_module_data">Posting Details</span></a>
