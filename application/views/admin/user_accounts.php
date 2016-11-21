@@ -114,7 +114,7 @@ if(!empty($this->session->userdata("login_status"))):
                                         else
                                           echo "Inactive";
                                         ?></td>
-                                        <td class="created_date">01-01-2000</td>
+                                        <td class="created_date"><?php echo date("d/m/Y", strtotime($usr_det["admin_user_created_date"])); ?></td>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $usr_det['admin_user_id']; ?>">Edit</a>
                                         </td>
@@ -168,11 +168,11 @@ if(!empty($this->session->userdata("login_status"))):
     // Define default values
     var inputType = new Array("text","text","text","select","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("admin_user_name","admin_user_password","admin_user_email","admin_user_group","admin_user_status"); // Set name of input types
-    var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
+    var placeholder = new Array("Enter User Name","Enter Password","Enter Email","Select User Group","Select Status"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table    
-    var admin_user_group_option = new Array("Super Admin","Moderate Admin"); 
+    var admin_user_group_option = new Array("Select User Group","Super Admin","Moderate Admin"); 
     var admin_user_group_value = new Array("1","0"); 
-    var admin_user_status_option = new Array("Active","Inactive"); 
+    var admin_user_status_option = new Array("Select Status","Active","Inactive"); 
     var admin_user_status_value = new Array("1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>

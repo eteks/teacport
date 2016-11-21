@@ -9,6 +9,24 @@ class Admin_users extends CI_Controller {
 		$this->load->library('form_validation');
 	}
 
+	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2)
+	{
+	    $ret = array();
+	    foreach($array as $arr)
+	    {
+	        foreach($arr as $k => $v)
+	        {
+	            if($arr[$key2] == $v2)
+	            {
+	                if($k == $key)
+	                    $ret[] = $v;   
+	            }
+	        }
+	    }
+	    $u = array_unique($ret);
+	    return (sizeof($u) == 1) ? $u[0] : $u;
+	}
+
 	// State - Add Edit Delete View
 	public function user_groups()
 	{	
@@ -224,7 +242,31 @@ class Admin_users extends CI_Controller {
 	}
 	public function privileges()
 	{	
-			$this->load->view('admin/privileges');
+			$admin_modules = $this->admin_users_model->get_all_modules();
+			$res = array();
+			foreach($admin_modules as $arr)
+			{
+			    foreach($arr as $k => $v)
+			    {
+			        if($k == 'sub_module')
+			            $res[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_modules, $k, 'main_module', $arr['main_module']);
+			        else if($k == 'module_id')
+			            $res[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_modules, $k, 'main_module', $arr['main_module']);
+			        else
+			            $res[$arr['main_module']][$k] = $v;
+			    }
+			}
+			//To pass all the admin modules for setting priveleges
+			$data['admin_modules'] = $res;
+			//To pass all the group type for setting priveleges
+			$data['admin_group'] = $this->admin_users_model->get_admin_groups();
+			// print_r($data['admin_group']);
+			$this->load->view('admin/privileges',$data);
+	}
+	//Function to store all the admin menus to assign rights for each admin uses
+	public function admin_modules()
+	{	
+			$this->admin_users_model->insert_modules($_POST['module_data']);
 	}
 }
 /* End of file welcome.php */ 

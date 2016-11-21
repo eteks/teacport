@@ -253,21 +253,29 @@ Website: http://thevectorlab.net/
                 <?php
                 endif;
                 ?>  
-                    <a href="<?php echo base_url(); ?>admin/dashboard" class="">
-                        <span class="icon-box"> <i class="icon-dashboard"></i></span> Dashboard
-                        <!-- <span class="arrow"></span> -->
-                    </a>
-                </li>
-                <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-user"></i></span> Admin Users
+                        <span class="icon-box"> <i class="icon-home"></i></span> <span class="main_module_data"><?php echo strtoupper("home");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/user_groups">User Groups</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/user_accounts">User Accounts</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Modules</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/privileges">Privileges</a></li>
+                        <li <?php if($this->uri->segment(2) == 'dashboard') echo "class='active_sidebar'"; ?>>
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="">
+                                <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data">Dashboard</span>
+                            <!-- <span class="arrow"></span> -->
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="has-sub">
+                    <a href="javascript:;" class="">
+                        <span class="icon-box"> <i class="icon-user"></i></span> <span class="main_module_data"><?php echo strtoupper("admin users");?></span>
+                        <span class="arrow"></span>
+                    </a>
+                    <ul class="sub">
+                        <li><a class="" href="<?php echo base_url(); ?>admin/user_groups"><span class="sub_module_data">User Groups</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/user_accounts"><span class="sub_module_data">User Accounts</span></a></li>
+                       <!--  <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Modules</span></a></li> -->
+                        <li><a class="" href="<?php echo base_url(); ?>admin/privileges"><span class="sub_module_data">Privileges</span></a></li>
                         <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
                         <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
                         <li><a class="" href="ui_elements_typography.php">Typography</a></li>
@@ -287,39 +295,39 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-th"></i></span> Master Data
+                        <span class="icon-box"> <i class="icon-th"></i></span> <span class="main_module_data"><?php echo strtoupper("master data");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
                         <li <?php if($this->uri->segment(2) == 'state') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/state">State</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/state"><span class="sub_module_data">State</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'district') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/district">District</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/district"><span class="sub_module_data">District</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'institution_types') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/institution_types">Institution Type</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/institution_types"><span class="sub_module_data">Institution Type</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'extra_curricular') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/extra_curricular">Extra-Curricular</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/extra_curricular"><span class="sub_module_data">Extra-Curricular</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'languages') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/languages">Languages</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/languages"><span class="sub_module_data">Languages</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'qualification') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/qualification">Qualification</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/qualification"><span class="sub_module_data">Qualification</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'class_level') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/class_level">Class Level</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/class_level"><span class="sub_module_data">Class Level</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'departments') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/departments">Department</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/departments"><span class="sub_module_data">Department</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'subject') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/subject">Subject</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/subject"><span class="sub_module_data">Subject</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'postings') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/postings">Job Posting Details</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/postings">Job <span class="sub_module_data">Posting Details</span></a>
                         </li>
                     </ul>
                 </li>
@@ -335,84 +343,83 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>    
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-sitemap"></i></span> Job Providers
+                        <span class="icon-box"> <i class="icon-sitemap"></i></span> <span class="main_module_data"><?php echo strtoupper("job providers");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
                         <li <?php if($this->uri->segment(2) == 'job_provider_profile') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">
-                                Profile
+                                <span class="sub_module_data">Profile</span>
                             </a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'job_provider_vacancies') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
-                                Vacancies Posted
+                                <span class="sub_module_data">Vacancies Posted</span>
                             </a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'jobprovider_activities') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/jobprovider_activities">
-                                Organization Activities
+                                <span class="sub_module_data">Organization Activities</span>
                             </a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'jobprovider_mailstatus') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_mailstatus">Mail Details & Status</a>
+                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_mailstatus"><span class="sub_module_data">Approved Job Mail Status</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'jobprovider_ads') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/jobprovider_ads">
-                                Ads Posted
+                                <span class="sub_module_data">Ads Posted</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-search"></i></span> Job Seekers
+                        <span class="icon-box"> <i class="icon-search"></i></span> <span class="main_module_data"><?php echo strtoupper("job seekers");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile">Profile</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference">Job Preferences</a></li>                    
-                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied">Job Applied</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Mail Details & Status</a></li> 
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile"><span class="sub_module_data">Profile</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference"><span class="sub_module_data">Job Preferences</span></a></li>                    
+                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied"><span class="sub_module_data">Job Applied</span></a></li>
+                        <!-- <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Mail Details & Status</span></a></li>  -->
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-wrench"></i></span> Plan Settings
+                        <span class="icon-box"> <i class="icon-wrench"></i></span> <span class="main_module_data"><?php echo strtoupper("plan settings");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
                         <li>
                             <a class="" href="<?php echo base_url(); ?>admin/subscription_plans">
-                                Plan Creation & Maintanence
+                                <span class="sub_module_data">Plan Creation & Maintanence</span>
                             </a>
                         </li>
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-cogs"></i></span> Settings
+                        <span class="icon-box"> <i class="icon-cogs"></i></span> <span class="main_module_data"><?php echo strtoupper("settings");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Payment Gateway Setting</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">SMS Gateway Setting</a></li>                    
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Configuration Option</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Template Logo</a></li> 
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Payment Gateway Setting</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">SMS Gateway Setting</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Configuration Option</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Template Logo</span></a></li> 
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-tasks"></i></span> Others
+                        <span class="icon-box"> <i class="icon-tasks"></i></span> <span class="main_module_data"><?php echo strtoupper("others");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Feedback Form</a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Site Visits Tracking</a></li>                    
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard">Logs</a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Feedback Form</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Site Visits Tracking</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li>
                     </ul>
                 </li>            
-               
             </ul>
             <!-- END SIDEBAR MENU -->
         </div>

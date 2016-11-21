@@ -73,23 +73,38 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" class="admin_module_form" action="adminindex/privileges" id="privileges_form"> <!-- class="admin_module_form" -->
+                                <?php 
+                                // echo sizeof($admin_modules)."<br>";
+                                // echo "<pre>";
+                                // print_r($admin_modules); 
+                                // echo "</pre>";
+                                ?>
                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Module Name</th>
-                                        <th>Super Admin</th>
-                                        <th>Moderate Admin</th>
+                                        <?php foreach ($admin_group as $group) : ?>
+                                            <th><?php echo ucwords($group['user_group_name']); ?></th>
+                                        <?php endforeach ?>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                        if(!empty($admin_modules)) :
+                                        foreach ($admin_modules as $mod) :
+                                    ?>
                                     <!--- First Module Description -->
                                     <tr class="parents_tr" id="column1">
-                                        <td class="main_module">Admin Users</td>
+                                        <td class="main_module"><?php echo strtoupper($mod['main_module']); ?></td>
                                         <td class=""></td>
                                         <td class=""></td>
                                     </tr>
+                                    <?php
+                                        $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
+                                        foreach ($mod['sub_module'] as $sub) :
+                                    ?>
                                     <tr class="parents_tr" id="column2">
-                                        <td class="sub_module"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User Groups</td>
+                                        <td class="sub_module"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo ucwords($sub); ?></td>
                                         <td class="admin_options">
                                         	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
 			                                       <option>Add</option>
@@ -107,240 +122,11 @@
 			                                </select>
 										</td>
                                     </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; User Accounts</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Modules</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Privileges</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr> 
-                                    <!--- End first Module Description -->
-                                    <!--- Second Module Description -->
-                                    <tr class="parents_tr" id="column1">
-                                        <td class="main_module">Master Data</td>
-                                        <td class=""></td>
-                                        <td class=""></td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="sub_module"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; State</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; District</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Institution Type</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Extra-Curricular</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr> 
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Languages</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr> <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Qualification</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr> 
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Class Level</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr> 
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Department</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr> 
-                                    <tr class="parents_tr" id="column3">
-                                        <td class="sub_module">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Subject</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>                                   
+                                    <?php
+                                    endforeach;
+                                    endforeach;
+                                    endif;
+                                    ?>                            
                                     </tbody>
                                 </table>
                             </div>

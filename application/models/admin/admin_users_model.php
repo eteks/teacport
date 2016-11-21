@@ -103,6 +103,41 @@ class Admin_users_model extends CI_Model {
     $model_data['user_details'] = $this->db->get()->result_array();
     return $model_data;
   }
+    //Admin modules to store in database
+    public function insert_modules($data){
+        $data = json_decode($data, true);
+        $full_map_array = array();
+        foreach($data as $data_value) {
+          foreach ($data_value as $key => $value) {
+            $array = array();
+            foreach ($value as $record) {
+              $array['main_module'] = $key;
+              $array['sub_module'] = $record;
+              array_push($full_map_array, $array);
+            }
+          }
+        }
+
+        //Here insert_batch is a inbuilt function to store the set of records into database in a single query at the same time
+        // $this->db->insert_batch('tr_admin_modules', $full_map_array);
+
+        //Here insert_on_duplicate_update_batch is also a inbuilt function, it ignores the insertion when duplicate record found. To use this function we have to download two files MY_Loader.php and MY_DB_mysql_driver.php and place in folder application/core
+        $this->db->insert_on_duplicate_update_batch('tr_admin_modules', $full_map_array);
+    }
+    //Get all the admin modules to assign priveleges for each user
+    public function get_all_modules(){
+        $this->db->select('*');
+        $this->db->from('tr_admin_modules');
+        $query = $this->db->get()->result_array();
+        return $query;
+    }
+    //Get all the admin groups to assign priveleges for that group user
+    public function get_admin_groups(){
+        $this->db->select('*');
+        $this->db->from('tr_admin_user_groups');
+        $query = $this->db->get()->result_array();
+        return $query;
+    }
 }
 
 /* End of file Admin_users_model.php */

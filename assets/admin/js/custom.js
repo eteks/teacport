@@ -444,6 +444,27 @@ $(document).ready(function(){
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
 
+    // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
+    // ********* Start line of the code **********
+    var module_array = new Array();
+    $('.main_module_data').each(function(){
+        var $this = $(this);
+        main_module_data = $this.text().toLowerCase();
+        module_array[main_module_data] = [];
+        $this.parents('.has-sub').find(".sub_module_data").each(function(){
+            module_array[main_module_data].push($(this).text().toLowerCase());
+        });
+        module_array.push({[main_module_data]:module_array[main_module_data]}); //[main_module_data] is key and module_array[main_module_data] is array value
+    });
+    var module_params = {};
+    module_params[csrf_name] = csfrData[csrf_name];
+    module_params['module_data'] = JSON.stringify(module_array);
+    $.ajax({
+        type : "POST",
+        url : admin_baseurl+"admin_modules",
+        data : module_params,
+    });
+    // ********** End of the code ***********
 
 });
 
