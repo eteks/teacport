@@ -1,5 +1,4 @@
 /* Custom Code */
-
 /* Featured Jobs Slider */
 .slide-featured-jobs {
 	padding: 10px;
@@ -125,6 +124,16 @@ select:invalid { color: gray; }
 	font-size: 30px;
 	opacity: 1;
 }
+/* Edit profile */
+.profile-edit .input-group-btn {
+    padding-top: 0 !important;
+}
+#provider_upload .input-group {
+	border-collapse: separate;
+    display: table;
+    left: 195px;
+    position: relative;
+}
 
 /* END OF COMPANY DASHBOARD */
 
@@ -165,3 +174,38 @@ select:invalid { color: gray; }
 color: red;
 font-size: 13px;
 }
+
+
+
+
+
+
+
+
+
+
+/* ---------For Responsive---------- */
+@media (min-width: 320px) and (max-width: 767px) {
+	
+	#provider_upload .input-group {
+		position: relative;
+		left: 0px;
+	}
+	
+}
+@media (min-width: 768px) and (max-width: 991px) {
+
+	#provider_upload .input-group {
+		position: relative;
+		left: 125px;
+	}
+
+}	
+@media (min-width: 992px) and (max-width: 1199px) {
+
+	#provider_upload .input-group {
+		position: relative;
+		left: 160px;
+	}
+
+}	
