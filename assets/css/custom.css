@@ -1,5 +1,4 @@
 /* Custom Code */
-
 /* Featured Jobs Slider */
 .slide-featured-jobs {
 	padding: 10px;
@@ -125,6 +124,17 @@ select:invalid { color: gray; }
 	font-size: 30px;
 	opacity: 1;
 }
+/* Edit profile */
+.profile-edit .input-group-btn {
+    padding-top: 0 !important;
+}
+#provider_upload .input-group {
+	border-collapse: separate;
+    display: table;
+    left: 195px;
+    position: relative;
+    width: 60% !important;
+}
 
 /* END OF COMPANY DASHBOARD */
 
@@ -178,3 +188,56 @@ font-size: 13px;
   	margin: 5px 1px 3px 0px;
   	border: 1px solid #ff0000;
 }
+.error_test {
+  color :red ;
+  font-size : 12px; 
+  display : none;
+}
+.error_mobile {
+  color :red ;
+  font-size : 12px; 
+  display : none;
+}
+.error_input_field {
+  /*background: #ffebeb !important;*/
+    border: 1px solid #cb1d1d  !important;  
+}
+.error_input_field_mobile {
+   border:1px solid red !important;
+}
+.error_image,.error_extension  {
+  color :red ;
+  font-size : 12px;
+  display : none;
+}
+#image_upload_preview{
+  height: 100px;
+    width: 100px;
+
+}
+#image_upload_preview1{
+  height: 100px;
+    width: 100px;
+
+}
+/* ---------For Responsive---------- */
+@media (min-width: 320px) and (max-width: 767px) {	
+	#provider_upload .input-group {
+		position: relative;
+		left: 0px;
+	}	
+}
+@media (min-width: 768px) and (max-width: 991px) {
+	#provider_upload .input-group {
+		position: relative;
+		left: 125px;
+	}
+}	
+@media (min-width: 992px) and (max-width: 1199px) {
+	#provider_upload .input-group {
+		position: relative;
+		left: 160px;
+	}
+
+}	
+

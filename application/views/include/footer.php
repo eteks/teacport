@@ -51,8 +51,7 @@
 			  var baseurl = "<?php echo base_url(); ?>";
 			</script>			
 			<script src="<?php echo base_url(); ?>assets/js/ajax-call.js"></script>
-			
-			
+			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fine-uploader.min.js"></script>			
 		</div>
 	</body>
 </html>

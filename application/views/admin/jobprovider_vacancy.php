@@ -162,686 +162,477 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
-            <!-- Edit Popup-->
-          <!--   <div class="popup" data-popup="popup-1">
-                 <div class="popup-inner">				
-				<div class="widget box blue" id="form_wizard_1">
-                     <div class="widget-title">
-                        <h4>
-                           <i class="icon-reorder"></i> Job Provider Vacancies
-                        </h4>                        
-                     </div>
-                     <div class="widget-body form">
-                        <form action="form_wizard.html#" class="form-horizontal">
-                           <div class="form-wizard">
-                              <div class="navbar steps">
-                                 <div class="navbar-inner">
-                                    <ul class="row-fluid">
-                                       <li class="span4">
-                                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                                          <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i>Vacancies Details</span>
-                                          </a>
-                                       </li>
-                                       <li class="span4">
-                                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                                          <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i> Vacancies Pre-Requisite</span>
-                                          </a>
-                                       </li>
-                                       <li class="span4">
-                                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                          <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i> Vacancies Instructions</span>
-                                          </a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                              </div>
-                              <div id="bar" class="progress progress-striped">
-                                 <div class="bar"></div>
-                              </div>
-                              <div class="tab-content">
-                                 <div class="tab-pane active" id="tab1">
-                                    <h4>Vacancies Details</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Job Title</label>
-                                          <input type="text" class="span6" />
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Organization Name</label>
-                                       <div class="controls input_field_width">
-                                           <select class="popup_select">
-											  <option>Company1</option>
-											  <option>Company2</option>
-											  <option>Company3</option>
-											</select> 
-                                       </div>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Available</label>
-                                          <input type="text" class="span6" />
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                    <label class="control-label">Open Date</label>
-                                       <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">
-                                    <label class="control-label">Close Date</label>
-                                       <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
-                                    </div>
-                                    <div class="span6 control-group">
-                                    <label class="control-label">Start Salary</label>
-                                       <input type="text" class="span6" />
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">End Salary</label>
-                                          <input type="text" class="span6" />
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                    <label class="control-label">Status</label>
-                                       <select class="popup_select">
-											  <option>Active</option>
-											  <option>Inactive</option>
-									  </select>
-                                    </div>
-                                   </div>                                   
-                                 </div>
-                                 <div class="tab-pane" id="tab2">
-                                    <h4>Vacancies Pre-Requisite</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Qualification ID</label>
-                                          <select data-placeholder="Your Favorite Teams" class="chosen span6 popup_select" multiple="multiple" tabindex="6">
-			                                    <option value=""></option>
-			                                       <option>B.E</option>
-			                                       <option>B.Sc</option>
-			                                       <option>M.A</option>
-			                                       <option>M.B.A</option>                              
-			                                 </select>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Experience</label>
-                                       <div class="controls input_field_width">
-                                          <input type="text" class="span6" />
-                                       </div>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Class Level</label>
-                                          <select class="popup_select">
-											  <option>Primary</option>
-											  <option>Secondary</option>
-									  </select>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">University Board </label>
-                                       <div class="controls input_field_width">
-                                         <select class="popup_select">
-											  <option>University1</option>
-											  <option>University2</option>
-											</select> 
-                                       </div>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Subject</label>
-                                          <select class="popup_select">
-											  <option>Maths</option>
-											  <option>English</option>
-									  </select>
-                                       </div>
-                                    </div>
-                                   </div>                                    
-                                 </div>
-                                 <div class="tab-pane" id="tab3">
-                                    <h4>Vacancies Instructions</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Vacancies Medium</label>
-                                          <input type="text" class="span6" />
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Accommodation Info</label>
-                                       <div class="controls input_field_width">
-                                          <input type="text" class="span6" />
-                                       </div>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Instruction</label>
-                                          <textarea class="span6 " rows="3"></textarea>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Interview Start Date</label>
-                                       <div class="controls input_field_width">
-                                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
-                                       </div>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Interview Start Date</label>
-                                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
-                                       </div>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 </div>
-                              <div class="form-actions clearfix">
-                                 <a href="javascript:;" class="btn button-previous">
-                                 <i class="icon-angle-left"></i> Back 
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-primary blue button-next">
-                                 Continue <i class="icon-angle-right"></i>
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-success button-submit">
-                                 Submit <i class="icon-ok"></i>
-                                 </a>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
+            
+            <!---Full edit popup -->
+            <div class="popup" data-popup="popup-1">
+              <div class="popup-inner">
+                <div class="widget box blue" id="popup_wizard_section">
+                  <div class="widget-title">
+                    <h4>
+                      <i class="icon-reorder"></i> Job Providers Vacancies
+                    </h4>                        
                   </div>
-				 <p><a data-popup-close="popup-1" href="#">Close</a></p>
-           <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
-           </div>
-       </div>            
-    </div>
- -->
-
-
-
-
-
-    <!---Full edit popup -->
-    <div class="popup" data-popup="popup-1">
-      <div class="popup-inner">				
-			  <div class="widget box blue" id="popup_wizard_section">
-          <div class="widget-title">
-            <h4>
-              <i class="icon-reorder"></i> Job Providers Vacancies
-            </h4>                        
-          </div>
-          <div class="widget-body form pop_details_section">
-            <?php } ?>  
-            <?php
-            if(!empty($provider_full_vacancies)) :
-            ?>    
-            <form action="form_wizard.html#" class="form-horizontal">
-              <div class="form-wizard">
-                <div class="navbar steps">
-                  <div class="navbar-inner">
-                    <ul class="row-fluid">
-                      <li class="span4">
-                        <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                          <span class="number">1</span>
-                          <span class="desc"><i class="icon-ok"></i>Vacancies Details</span>
-                        </a>
-                      </li>
-                      <li class="span4">
-                        <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                          <span class="number">2</span>
-                          <span class="desc"><i class="icon-ok"></i>Vacancies Pre-Requisite</span>
-                        </a>
-                      </li>
-                      <li class="span4">
-                        <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                          <span class="number">3</span>
-                          <span class="desc"><i class="icon-ok"></i>Vacancies Instructions</span>
-                        </a>
-                      </li>
-                    </ul>
+                  <div class="widget-body form pop_details_section">
+                    <?php } ?>
+                    <form class="tab_form" action="job_provider/teacport_job_provider_vacancies" data-index="" method="POST" data-mode="update">
+                    <?php
+                    if(!empty($provider_full_vacancies)) :
+                    ?>
+                    <div id="rootwizard">
+                      <div class="navbar">
+                        <div class="navbar-inner">
+                          <div class="container">
+                            <ul>
+                              <li>
+                                <a href="#tab1" data-toggle="tab">Vacancies Details</a>
+                              </li>
+                              <li>
+                                <a href="#tab2" data-toggle="tab">Vacancies Pre-Requisite</a>
+                              </li>
+                              <li>
+                                <a href="#tab4" data-toggle="tab">Vacancies Instructions</a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="bar" class="progress progress-striped active">
+                        <div class="bar"></div>
+                      </div>
+                      <div class="tab-content">
+                        <?php
+                        if(!empty($mode) && $mode=="full_view") :
+                        ?>
+                        <?php
+                        foreach ($provider_full_vacancies as $vac_val) :
+                        ?>
+                        <input type="hidden" value="view" id="popup_mode" />
+                        <div class="tab-pane" id="tab1">
+                          <h4>Vacancies Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Vacancies Job Title</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_job_title']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Organization Name</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['organization_name']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> Available </label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_available']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label"> Open Date </label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_open_date']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> Close Date </label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_close_date']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label"> Start Salary </label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_end_salary']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> Status </label>
+                              <span class="dynamic_data"> 
+                                <?php 
+                                if($vac_val['vacancies_status']==1) :
+                                  echo "Active";
+                                else :
+                                  echo "Inactive";
+                                endif;
+                                ?>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                          <h4>Vacancies Pre-Requisite</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Qualification Name</label>
+                              <span class="dynamic_data"> 
+                                <?php
+                                foreach ($vac_val['educational_qualification_id'] as $qua_val) :
+                                  echo $qua_val;
+                                  echo " ";
+                                endforeach;
+                                ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Experience</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_experience']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Class Level</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['class_level']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">University Board Name</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['university_board_name']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Subject Name</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_medium']; ?>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                          <h4>Vacancies Instructions</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Vacancies Medium</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['subscription_plan']; ?>
+                              </span>                         
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Accommodation Info</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_accommodation_info']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Subcription Features</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $provider_full_profile['subscription_features']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Instruction</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_instruction']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label">Interview Start Date</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_interview_start_date']; ?>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Interview End Date</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_end_date']; ?>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <?php
+                        endforeach;
+                        ?>
+                        <?php
+                        else :
+                        ?>
+                        <?php
+                        foreach ($provider_full_vacancies as $vac_key => $vac_val) :
+                        ?>
+                        <input type="hidden" value="edit" id="popup_mode" />
+                        <p class="val_error"> </p>
+                        <div class="tab-pane" id="tab1">
+                          <h4>Vacancies Details</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Vacancies Job Title</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_job_title']; ?>" name="job_title" class="span6 tabfield1 tabfield" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">
+                              <label class="control-label">Organization Name</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['organization_name']; ?>" name="org_name" class="span6 tabfield1 tabfield" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label">Available</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>"  name="vac_available" class="span6 tabfield1 tabfield" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Open Date</label>
+                              <span>
+                                <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_open_date']; ?>" name="vac_open_date" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Close Date</label>
+                              <span>
+                                <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_close_date']; ?>" name="vac_end_date" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Start Salary</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" name="job_min_salary" class="span6 tabfield1 tabfield" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> End Salary</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>"  name="job_max_salary" class="span6 tabfield1 tabfield" />
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> Status </label>
+                              <span>
+                                <select name="vac_status" class="tabfield1 tabfield">
+                                  <option> Please select status </option>
+                                  <option value="1" <?php if($vac_val['vacancies_status']==1) echo "selected"; ?>> Active </option>
+                                  <option value="0" <?php if($vac_val['vacancies_status']==0) echo "selected"; ?>> Inactive </option>
+                                </select>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                          <h4>Vacancies Pre-Requisite</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Qualification Name</label>
+                              <span>
+                                <?php
+                                $qua_array = array();
+                                foreach ($vac_val['educational_qualification_id'] as $qua_key => $qua_val) :
+                                  $qua_array[] = $qua_key;
+                                endforeach;
+                                ?>
+                                <select data-placeholder="select" name="qualification_name" class="chosen span6 tabfield2 tabfield" multiple="multiple" >
+                                  <?php
+                                  if(!empty($qualification_values)) :
+                                  foreach ($qualification_values as $qua_val) :
+                                  ?>
+                                  <?php
+                                    if(in_array($qua_val['educational_qualification_id'], $qua_array)) {
+                                      echo '<option value='.$qua_val["educational_qualification_id"].' selected> '.$qua_val["educational_qualification"].' </option>';
+                                    }
+                                    else if($qua_val['educational_qualification_status']==1){
+                                      echo '<option value='.$qua_val["educational_qualification_id"].'> '.$qua_val["educational_qualification"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    foreach ($vac_val['educational_qualification_id'] as $qua_key => $qua_val) :
+                                      echo '<option value='.$qua_key.' selected> "'.$qua_val.'" </option>';
+                                    endforeach;  
+                                  endif;
+                                  ?>
+                                </select>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Experience</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_experience']; ?>"  name="vac_experience" class="span6 tabfield2 tabfield" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Class Level</label>
+                              <span>
+                                <select name="vac_class" class="span6 tabfield2 tabfield">
+                                <option> Please select class level </option>
+                                <?php
+                                if(!empty($class_levels)) :
+                                foreach ($class_levels as $cls_val) :
+                                ?>
+                                <?php
+                                  if($cls_val['class_level_id']==$vac_val['vacancies_class_level_id']) {
+                                    echo '<option value='.$cls_val["class_level_id"].' selected> '.$cls_val["class_level"].' </option>';
+                                  }
+                                  else if($cls_val['class_level_status']==1){
+                                    echo '<option value='.$cls_val["class_level_id"].'> '.$cls_val["class_level"].' </option>';
+                                            }
+                                endforeach;
+                                else :
+                                  echo '<option value='.$vac_val['vacancies_class_level_id'].' selected> "'.$vac_val['class_level'].'" </option>';
+                                endif;
+                                ?>
+                                </select>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">University Board Name</label>
+                              <span>
+                                <select name="vac_univ_name" class="span6 tabfield2 tabfield">
+                                  <option> Please select University </option>
+                                  <?php
+                                  if(!empty($university_values)) :
+                                  foreach ($university_values as $unv_val) :
+                                  ?>
+                                  <?php
+                                    if($unv_val['education_board_id']==$vac_val['vacancies_university_board_id']) {
+                                      echo '<option value='.$unv_val["education_board_id"].' selected> '.$unv_val["university_board_name"].' </option>';
+                                    }
+                                    else if($unv_val['university_board_status']==1){
+                                      echo '<option value='.$unv_val["education_board_id"].'> '.$unv_val["university_board_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$vac_val['vacancies_university_board_id'].' selected> "'.$vac_val['university_board_name'].'" </option>';
+                                  endif;
+                                  ?>
+                                </select>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Subject Name</label>
+                              <span>
+                                <select name="vac_sub_name" class="span6 tabfield2 tabfield">
+                                  <option> Please select Subject </option>
+                                  <?php
+                                  if(!empty($subject_values)) :
+                                  foreach ($subject_values as $sub_val) :
+                                  ?>
+                                  <?php
+                                    if($sub_val['subject_id']==$vac_val['vacancies_subject_id']) {
+                                      echo '<option value='.$sub_val["subject_id"].' selected> '.$sub_val["subject_name"].' </option>';
+                                    }
+                                    else if($sub_val['subject_status']==1){
+                                      echo '<option value='.$sub_val["subject_id"].'> '.$sub_val["subject_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$vac_val['vacancies_subject_id'].' selected> "'.$vac_val['subject_name'].'" </option>';
+                                  endif;
+                                  ?>
+                                </select>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="tab-pane" id="tab3">
+                          <h4>Vacancies Instructions</h4>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Vacancies Medium</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_medium']; ?>" name="vac_medium" class="span6 tabfield3 tabfield" /> 
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Accommodation Info</label>
+                              <span>
+                                <input type="text" value="<?php echo $vac_val['vacancies_accommodation_info']; ?>" name="vac_accom" class="span6 tabfield3 tabfield" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Instruction</label>
+                              <span>
+                                <textarea name="vac_instruction" class="span6 tabfield3 tabfield"> <?php echo $vac_val['vacancies_instruction']; ?> </textarea>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Interview Start Date</label>
+                              <span>
+                                <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_interview_start_date']; ?>" name="vac_inter_sdate" />
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Interview End Date</label>
+                              <span>
+                                <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_end_date']; ?>" name="vac_inter_edate"/>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                        <input type="hidden" class="hidden_id" value="<?php echo $vac_key; ?>" />
+                        <?php
+                        endforeach;
+                        ?>
+                        <?php
+                        endif;
+                        ?>
+                        <ul class="pager wizard">
+                          <li class="previous"><a href="#">Previous</a></li>
+                          <li class="next"><a href="#">Next</a></li>
+                          <li class="finish disabled"><a href="#">Finish</a></li>
+                        </ul>
+                      </div>  
+                    </div>
+                    <?php
+                    else :
+                      echo "<p> No content found </p>";
+                    endif;
+                    ?>
+                    </form>
+                    <?php if(!$this->input->is_ajax_request()) { ?>
                   </div>
                 </div>
-                <div id="bar" class="progress progress-striped">
-                  <div class="bar"></div>
-                </div>
-                <div class="tab-content">
-                  <?php
-                  if(!empty($mode) && $mode=="full_view") :
-                  ?>
-
-                  <?php
-                  foreach ($provider_full_vacancies as $vac_val) :
-                  ?>
-                  <div class="tab-pane active" id="tab1">
-                    <h4>Vacancies Details</h4>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                       	<label class="control-label">Vacancies Job Title</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_job_title']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Organization Name</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['organization_name']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                      	<label class="control-label"> Available</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_available']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Open Date</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_open_date']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                       	<label class="control-label">Close Date</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_close_date']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label"> Start Salary</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_start_salary']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                      	<label class="control-label"> End Salary</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_end_salary']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Status</label>
-                        <span class="dynamic_data"> 
-                          <?php 
-                          if($vac_val['vacancies_status']==1) :
-                            echo "Active";
-                          else :
-                            echo "Inactive";
-                          endif;
-                          ?>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab2">
-                    <h4>Vacancies Pre-Requisite</h4>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                      	<label class="control-label">Qualification Name</label>
-                        <span class="dynamic_data"> 
-                          <?php
-                          foreach ($vac_val['educational_qualification_id'] as $qua_val) :
-                            echo $qua_val;
-                            echo " ";
-                          endforeach;
-                          ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Experience</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_experience']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">
-                      	<label class="control-label">Class Level</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['class_level']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">University Board Name</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['university_board_name']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                       	<label class="control-label">Subject Name</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['subject_name']; ?>
-                        </span>
-                      </div>
-                    </div>
-                  </div>                                 
-                  <div class="tab-pane" id="tab3">
-                    <h4>Vacancies Instructions</h4>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Vacancies Medium</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_medium']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Accommodation Info</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_accommodation_info']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                       	<label class="control-label">Instruction</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_instruction']; ?>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Interview Start Date</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_interview_start_date']; ?>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                      	<label class="control-label">End Date</label>
-                        <span class="dynamic_data"> 
-                          <?php echo $vac_val['vacancies_end_date']; ?>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <?php
-                  endforeach;
-                  ?>
-                  <?php
-                  else :
-                  ?>
-                  <?php
-                  foreach ($provider_full_vacancies as $vac_val) :
-                  ?>
-                  <div class="tab-pane active" id="tab1">
-                    <h4>Vacancies Details</h4>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Vacancies Job Title</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_job_title']; ?>" />
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Organization Name</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['organization_name']; ?>" />
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label"> Available</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>" />
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Open Date</label>
-                        <span class="dynamic_data"> 
-                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_open_date']; ?>" />
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Close Date</label>
-                        <span class="dynamic_data"> 
-                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_close_date']; ?>" />
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label"> Start Salary</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" />
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label"> End Salary</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>" /> 
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Status</label>
-                        <span class="dynamic_data"> 
-                          <select>
-                            <option> Please select status </option>
-                            <option value="1" <?php if($vac_val['vacancies_status']==1) echo "selected"; ?>> Active </option>
-                            <option value="0" <?php if($vac_val['vacancies_status']==0) echo "selected"; ?>> Inactive </option>
-                          </select>
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="tab-pane" id="tab2">
-                    <h4>Vacancies Pre-Requisite</h4>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Qualification Name</label>
-                        <span class="dynamic_data"> 
-                          <?php
-                          $qua_array = array();
-                          foreach ($vac_val['educational_qualification_id'] as $qua_key => $qua_val) :
-                            $qua_array[] = $qua_key;
-                          endforeach;
-                          ?>
-                          <select data-placeholder="select" name="qualification_value" class="chosen span6" multiple="multiple" >
-                            <?php
-                            if(!empty($qualification_values)) :
-                            foreach ($qualification_values as $qua_val) :
-                            ?>
-                            <?php
-                              if(in_array($qua_val['educational_qualification_id'], $qua_array)) {
-                                echo '<option value='.$qua_val["educational_qualification_id"].' selected> '.$qua_val["educational_qualification"].' </option>';
-                              }
-                              else if($qua_val['educational_qualification_status']==1){
-                                echo '<option value='.$qua_val["educational_qualification_id"].'> '.$qua_val["educational_qualification"].' </option>';
-                              }
-                            endforeach;
-                            else :
-                              foreach ($vac_val['educational_qualification_id'] as $qua_key => $qua_val) :
-                                echo '<option value='.$qua_key.' selected> "'.$qua_val.'" </option>';
-                              endforeach;  
-                            endif;
-                            ?>
-                          </select>                         
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Experience</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_experience']; ?>" />
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">
-                        <label class="control-label">Class Level</label>
-                        <span class="dynamic_data"> 
-                          <select>
-                            <option> Please select class level </option>
-                            <?php
-                            if(!empty($class_levels)) :
-                            foreach ($class_levels as $cls_val) :
-                            ?>
-                            <?php
-                              if($cls_val['class_level_id']==$vac_val['vacancies_class_level_id']) {
-                                echo '<option value='.$cls_val["class_level_id"].' selected> '.$cls_val["class_level"].' </option>';
-                              }
-                              else if($cls_val['class_level_status']==1){
-                                echo '<option value='.$cls_val["class_level_id"].'> '.$cls_val["class_level"].' </option>';
-                                        }
-                            endforeach;
-                            else :
-                              echo '<option value='.$vac_val['vacancies_class_level_id'].' selected> "'.$vac_val['class_level'].'" </option>';
-                            endif;
-                            ?>
-                          </select> 
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">University Board Name</label>
-                        <span class="dynamic_data"> 
-                          <select>
-                            <option> Please select University </option>
-                            <?php
-                            if(!empty($university_values)) :
-                            foreach ($university_values as $unv_val) :
-                            ?>
-                            <?php
-                              if($unv_val['education_board_id']==$vac_val['vacancies_university_board_id']) {
-                                echo '<option value='.$unv_val["education_board_id"].' selected> '.$unv_val["university_board_name"].' </option>';
-                              }
-                              else if($unv_val['university_board_status']==1){
-                                echo '<option value='.$unv_val["education_board_id"].'> '.$unv_val["university_board_name"].' </option>';
-                              }
-                            endforeach;
-                            else :
-                              echo '<option value='.$vac_val['vacancies_university_board_id'].' selected> "'.$vac_val['university_board_name'].'" </option>';
-                            endif;
-                            ?>
-                          </select>
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Subject Name</label>
-                        <span class="dynamic_data"> 
-                          <select>
-                            <option> Please select Subject </option>
-                            <?php
-                            if(!empty($subject_values)) :
-                            foreach ($subject_values as $sub_val) :
-                            ?>
-                            <?php
-                              if($sub_val['subject_id']==$vac_val['vacancies_subject_id']) {
-                                echo '<option value='.$sub_val["subject_id"].' selected> '.$sub_val["subject_name"].' </option>';
-                              }
-                              else if($sub_val['subject_status']==1){
-                                echo '<option value='.$sub_val["subject_id"].'> '.$sub_val["subject_name"].' </option>';
-                              }
-                            endforeach;
-                            else :
-                              echo '<option value='.$vac_val['vacancies_subject_id'].' selected> "'.$vac_val['subject_name'].'" </option>';
-                            endif;
-                            ?>
-                          </select>
-                        </span>
-                      </div>
-                    </div>
-                  </div>     
-                  <div class="tab-pane" id="tab3">
-                    <h4>Vacancies Instructions</h4>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Vacancies Medium</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_medium']; ?>" /> 
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Accommodation Info</label>
-                        <span class="dynamic_data"> 
-                          <input type="text" value="<?php echo $vac_val['vacancies_accommodation_info']; ?>" /> 
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">Instruction</label>
-                        <span class="dynamic_data"> 
-                          <textarea> <?php echo $vac_val['vacancies_instruction']; ?> </textarea>
-                        </span>
-                      </div>
-                      <div class="span6 control-group">
-                        <label class="control-label">Interview Start Date</label>
-                        <span class="dynamic_data"> 
-                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_interview_start_date']; ?>" />
-                        </span>
-                      </div>
-                    </div>
-                    <div class="span12">
-                      <div class="span6 control-group">                                       
-                        <label class="control-label">End Date</label>
-                        <span class="dynamic_data"> 
-                          <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_end_date']; ?>" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                  <?php
-                  endforeach;
-                  ?>
-                  <?php
-                  endif;
-                  ?>
-                </div>
+                <p>
+                  <a data-popup-close="popup-1" href="#">Close</a>
+                </p>
+                <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
               </div>
-              <div class="form-actions clearfix">
-                <a href="javascript:;" class="btn button-previous">
-                  <i class="icon-angle-left"></i> Back 
-                </a>
-                <a href="javascript:;" class="btn btn-primary blue button-next">
-                  Continue <i class="icon-angle-right"></i>
-                </a>
-                <a href="javascript:;" class="btn btn-success button-submit">
-                  Submit <i class="icon-ok"></i>
-                </a>
-              </div>
-            </form>
-            <?php
-            else :
-              echo "<p> No content found </p>";
-            endif;
-            ?>
-            <?php if(!$this->input->is_ajax_request()) { ?>
-          </div>  
-        </div>                
-			<p>
-        <a data-popup-close="popup-1" href="#">Close</a>
-      </p>
-      <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
-    </div>
-  </div> 
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
        <!-- Delete Popup -->       
        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-dialog">

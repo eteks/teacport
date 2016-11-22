@@ -12,11 +12,133 @@ class Job_Provider extends CI_Controller {
 
 	}
 
+	// Edit unique function - To check the field is already exists or not
+	function edit_unique($value, $params) 
+	{
+		//get main CodeIgniter object
+	      $CI =& get_instance();
+	      //load database library
+	      $CI->load->database();    
+	      $CI->form_validation->set_message('edit_unique', "Sorry, that %s is already being used.");
+	      list($table, $id, $field, $current_id) = explode(".", $params);    
+	      $query = $CI->db->select()->from($table)->where($field, $value)->limit(1)->get();    
+	      if ($query->row() && $query->row()->$id != $current_id)
+	      {
+	          return FALSE;
+	      }
+	}
+
 	// Job provider profile
 	public function teacport_job_provider_profile()
 	{
-		$data['provider_profile'] = $this->job_providermodel->get_provider_profile();
-		$this->load->view('admin/jobprovider_profile',$data);
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$validation_rules = array();	
+	  		$id = $this->input->post('rid');
+	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
+	  			$validation_rules[] =  	array(
+			                              'field'   => 'organization_name',
+			                              'label'   => 'Organization Name',
+			                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']'
+			                            );
+			    $validation_rules[] =   array(
+			                            	'field'   => 'institution_type',
+			                                'label'   => 'Institution Type',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'organization_status',
+			                                'label'   => 'Organization Status',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			                        
+	   		}
+	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
+	   			$validation_rules[] =	array(
+			                              'field'   => 'org_addr_1',
+			                              'label'   => 'Organization Address',
+			                              'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'organization_district',
+			                                'label'   => 'Organization District',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   		}
+	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
+	   			$validation_rules[] =	array(
+			                              'field'   => 'registrant_name',
+			                              'label'   => 'Registrant Name',
+			                              'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_dob',
+			                                'label'   => 'Registrant DOB',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_designation',
+			                                'label'   => 'Registrant Designation',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_email',
+			                                'label'   => 'Organization District',
+			                                'rules'   => 'trim|required|xss_clean|valid_email|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_mobile',
+			                                'label'   => 'Registrant Mobile',
+			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|'
+			                            );			                       
+	   		}
+	   		$this->form_validation->set_rules($validation_rules);
+			if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+					$field = $row['field'];         //getting field name
+			        $error = form_error($field);    //getting error for field name
+			        if($error){
+			        	$data['status'] = strip_tags($error);
+			            $data['error'] = 1;
+			            break;
+			        }
+			    }
+		  	}
+      		else {
+      			if($this->input->post('index')=="end") {
+      				$data_values = $this->job_providermodel->get_provider_profile('update');
+         			$data['error'] = $data_values['error'];
+		        	$data['status'] = $data_values['status'];
+		        }
+		        else {
+		        	$data['error'] = 1;
+					$data['status'] = "valid";
+		        }
+     		}
+	    }
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->job_providermodel->get_provider_profile('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->job_providermodel->get_provider_profile('init'); 	
+      	}
+
+		if($data['error']==1 || $data['error']==2) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else {
+			$data['provider_profile'] = $data_values['provider_profile'];
+			$this->load->view('admin/jobprovider_profile',$data);
+		}
 	}
 
 	// Job provider profile - Ajax
@@ -38,7 +160,171 @@ class Job_Provider extends CI_Controller {
 	// Job provider vacancy
 	public function teacport_job_provider_vacancies()
 	{
-		$data['provider_vacancy'] = $this->job_providermodel->get_provider_vacancy();
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	   		$validation_rules = array();	
+	  		$id = $this->input->post('rid');
+	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
+	  			$validation_rules[] =  	array(
+			                              'field'   => 'job_title',
+			                              'label'   => 'Job Title',
+			                              'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                            	'field'   => 'org_name',
+			                                'label'   => 'Organization Name',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'vac_available',
+			                                'label'   => 'Vacancy Available',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'vac_open_date',
+			                                'label'   => 'Vacancy Open Date',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'vac_end_date',
+			                                'label'   => 'Vacancy End Date',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'job_min_salary',
+			                                'label'   => 'Start Salary',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'job_max_salary',
+			                                'label'   => 'End Salary',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =   array(
+			                                'field'   => 'vac_status',
+			                                'label'   => 'Vacancy Status',
+			                                'rules'   => 'trim|required|xss_clean|'
+			   		                    );                        
+	   		}
+	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
+
+
+
+
+
+
+	   			// $validation_rules[] =	array(
+			    //                           'field'   => 'qualification_name',
+			    //                           'label'   => 'Qualification Name',
+			    //                           'rules'   => 'trim|required|xss_clean|'
+			    //                         );
+	   			// $validation_rules[] =	array(
+			    //                             'field'   => 'vac_experience',
+			    //                             'label'   => 'Vacancy Experience',
+			    //                             'rules'   => 'trim|required|xss_clean|'
+			    //                         );
+	   			// $validation_rules[] =	array(
+			    //                             'field'   => 'vac_class',
+			    //                             'label'   => 'Vacancy Class',
+			    //                             'rules'   => 'trim|required|xss_clean|'
+			    //                         );
+	   			// $validation_rules[] =	array(
+			    //                             'field'   => 'vac_univ_name',
+			    //                             'label'   => 'Vacancy University',
+			    //                             'rules'   => 'trim|required|xss_clean|'
+			    //                         );
+	   			// $validation_rules[] =	array(
+			    //                             'field'   => 'vac_experience',
+			    //                             'label'   => 'Vacancy Experience',
+			    //                             'rules'   => 'trim|required|xss_clean|'
+			    //                         );
+
+
+
+
+
+
+
+
+
+
+	   		}
+	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
+	   			$validation_rules[] =	array(
+			                              'field'   => 'registrant_name',
+			                              'label'   => 'Registrant Name',
+			                              'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_dob',
+			                                'label'   => 'Registrant DOB',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_designation',
+			                                'label'   => 'Registrant Designation',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_email',
+			                                'label'   => 'Organization District',
+			                                'rules'   => 'trim|required|xss_clean|valid_email|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'registrant_mobile',
+			                                'label'   => 'Registrant Mobile',
+			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|'
+			                            );			                       
+	   		}
+	   		$this->form_validation->set_rules($validation_rules);
+			if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+					$field = $row['field'];         //getting field name
+			        $error = form_error($field);    //getting error for field name
+			        if($error){
+			        	$data['status'] = strip_tags($error);
+			            $data['error'] = 1;
+			            break;
+			        }
+			    }
+		  	}
+      		else {
+      			if($this->input->post('index')=="end") {
+      				$data_values = $this->job_providermodel->get_provider_vacancy('update');
+         			$data['error'] = $data_values['error'];
+		        	$data['status'] = $data_values['status'];
+		        }
+		        else {
+		        	$data['error'] = 1;
+					$data['status'] = "valid";
+		        }
+     		}
+	    }
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->job_providermodel->get_provider_vacancy('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->job_providermodel->get_provider_vacancy('init'); 	
+      	}
+
+		if($data['error']==1 || $data['error']==2) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else {
+			$data['provider_vacancy'] = $data_values['provider_vacancy'];
+			$this->load->view('admin/jobprovider_vacancy',$data);
+		}
+
+
 
 
 		// $data_val = $this->job_providermodel->get_full_provider_vacancy(1);
@@ -52,12 +338,6 @@ class Job_Provider extends CI_Controller {
 		// print_r($data['provider_full_vacancies']);
 
 		// echo "</pre>";
-
-
-
-
-
-		$this->load->view('admin/jobprovider_vacancy',$data);
 	}
 
 
@@ -98,6 +378,13 @@ class Job_Provider extends CI_Controller {
 	{
 		$this->load->view('admin/jobprovider_activities');
 	}
+
+	// Job provider mail details and status 
+	public function teacport_jobprovider_mailstatus()
+	{
+		$this->load->view('admin/jobprovider_mailstatus');
+	}
+
 
 
 

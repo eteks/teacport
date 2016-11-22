@@ -83,7 +83,7 @@ createInput = function(i,str){
     str = typeof str !== 'undefined' ? str : null;
     //alert(str);
     if(inputType[i] == "text"){
-        input = '<input type='+inputType[i]+' name='+columns[i]+' placeholder="'+placeholder[i]+'" value='+str+' >';
+        input = '<input type='+inputType[i]+' name='+columns[i]+' placeholder="'+placeholder[i]+'" value="'+str+'" >';
     }
     else if(inputType[i] == "textarea"){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
@@ -245,6 +245,7 @@ $(document).ready(function(){
     
     // Edit - Old record
     $(document).on("click","."+editbutton,function(){
+    	
         var id = $(this).attr("id");
         var update_id = $(this).data("id");
 
@@ -413,21 +414,30 @@ $(document).ready(function(){
     });
 
     // Upload click instead of using file input
-    $('.upload_option').on('click', function()  {
-        $(this).prev().click();
+    $(document).on('click','.upload_option', function()  {
+        $(this).next().click();
     });
 
+    // Tab menu sumission
+    $(document).on('click','#rootwizard .finish',function() {
+        var test = tabmenu_ci_validation('end');
+    });
+
+
+
     // Upload preview
-    $('.image_upload').on('change', function()  {
+    $(document).on('change','.hidden_upload',function()  {
         
+        alert("test");
         var file = $(this).val();
+        var img_view = $(this).next();
         var ext = file.substr((file.lastIndexOf('.') + 1));
         if (ext == "jpg" || ext == "png" || ext == "JPG" || ext == "jpeg") {
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {           
-                    $('.preview_images').attr('src', e.target.result);
-                }
+                   img_view.attr('src', e.target.result);
+                };
                 reader.readAsDataURL(this.files[0]);
             }
         }
@@ -443,7 +453,55 @@ $(document).ready(function(){
         $(this).addClass("on");
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
+    
+    function error_popup(message){
+	$('.error_popup_msg .success-alert span').text(message);
+	$('.popup_fade').show();
+	$('.error_popup_msg').show();
+	document.body.style.overflow = 'hidden';
+}
+    
+// error popup message center alignment
+var height=$('.error_popup_msg').height();
+var width=$('.error_popup_msg').width();
+$('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+    
+// close error popup when click ok button or popupfade
+	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+	  	$('.error_popup_msg').hide();
+	  	$('.popup_fade').hide();
+	  	document.body.style.overflow = 'auto';
+	});
 
+// $('#popup_wizard_section .button-submit').click(function () {
+             // error_popup('Finished!');
+        // }).hide();
+    // };
+//     
+    $(".admin_module_form").submit(function(e){
+    e.preventDefault();
+    });
+    // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
+    // ********* Start line of the code **********
+    var module_array = new Array();
+    $('.main_module_data').each(function(){
+        var $this = $(this);
+        main_module_data = $this.text().toLowerCase();
+        module_array[main_module_data] = [];
+        $this.parents('.has-sub').find(".sub_module_data").each(function(){
+            module_array[main_module_data].push($(this).text().toLowerCase());
+        });
+        module_array.push({[main_module_data]:module_array[main_module_data]}); //[main_module_data] is key and module_array[main_module_data] is array value
+    });
+    var module_params = {};
+    module_params[csrf_name] = csfrData[csrf_name];
+    module_params['module_data'] = JSON.stringify(module_array);
+    $.ajax({
+        type : "POST",
+        url : admin_baseurl+"admin_modules",
+        data : module_params,
+    });
+    // ********** End of the code ***********
 
 });
 
