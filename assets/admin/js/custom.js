@@ -435,8 +435,8 @@ $(document).ready(function(){
             if (this.files && this.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function (e) {           
-                    img_view.attr('src', e.target.result);
-                }
+                   img_view.attr('src', e.target.result);
+                };
                 reader.readAsDataURL(this.files[0]);
             }
         }
@@ -452,7 +452,55 @@ $(document).ready(function(){
         $(this).addClass("on");
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
+    
+    function error_popup(message){
+	$('.error_popup_msg .success-alert span').text(message);
+	$('.popup_fade').show();
+	$('.error_popup_msg').show();
+	document.body.style.overflow = 'hidden';
+}
+    
+// error popup message center alignment
+var height=$('.error_popup_msg').height();
+var width=$('.error_popup_msg').width();
+$('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+    
+// close error popup when click ok button or popupfade
+	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+	  	$('.error_popup_msg').hide();
+	  	$('.popup_fade').hide();
+	  	document.body.style.overflow = 'auto';
+	});
 
+// $('#popup_wizard_section .button-submit').click(function () {
+             // error_popup('Finished!');
+        // }).hide();
+    // };
+//     
+    $(".admin_module_form").submit(function(e){
+    e.preventDefault();
+    });
+    // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
+    // ********* Start line of the code **********
+    var module_array = new Array();
+    $('.main_module_data').each(function(){
+        var $this = $(this);
+        main_module_data = $this.text().toLowerCase();
+        module_array[main_module_data] = [];
+        $this.parents('.has-sub').find(".sub_module_data").each(function(){
+            module_array[main_module_data].push($(this).text().toLowerCase());
+        });
+        module_array.push({[main_module_data]:module_array[main_module_data]}); //[main_module_data] is key and module_array[main_module_data] is array value
+    });
+    var module_params = {};
+    module_params[csrf_name] = csfrData[csrf_name];
+    module_params['module_data'] = JSON.stringify(module_array);
+    $.ajax({
+        type : "POST",
+        url : admin_baseurl+"admin_modules",
+        data : module_params,
+    });
+    // ********** End of the code ***********
 
 });
 

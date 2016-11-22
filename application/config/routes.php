@@ -113,6 +113,7 @@ $route['admin/privileges'] = 'admin/admin_users/privileges';
 $route['admin/job_seeker_profile'] = 'admin/job_seeker/job_seeker_profile';
 $route['admin/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
 $route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
+$route['admin/admin_modules'] = 'admin/admin_users/admin_modules';
 
 $route['admin/edit_profile'] = 'admin/admin_users/edit_profile';
 $route['admin/change_password'] = 'admin/admin_users/change_password';
