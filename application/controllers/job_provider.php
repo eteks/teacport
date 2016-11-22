@@ -189,7 +189,9 @@ class Job_provider extends CI_Controller {
 	}
 	
 	public function companydbd_editprofile(){
-		$this->load->view('company-dashboard-edit-profile');
+		$session_data = $this->session->all_userdata();
+		$data['user_data'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$this->load->view('company-dashboard-edit-profile',$data);
 	}
 	public function companydbd_browsejobs(){
 		$this->load->view('company-dashboard-browse-jobs');

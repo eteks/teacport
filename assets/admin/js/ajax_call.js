@@ -62,8 +62,10 @@ function handleFormWizards() {
                         // If it's the last tab then hide the last button and show the finish instead
                         if($current >= $total) {
                             $('#rootwizard').find('.pager .next').hide();
-                            $('#rootwizard').find('.pager .finish').show();
-                            $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                            if($('#rootwizard').find('#popup_mode').val() != 'view')  {
+                                $('#rootwizard').find('.pager .finish').show();
+                                $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                            }
                         } 
                         else {
                             $('#rootwizard').find('.pager .next').show();
@@ -72,8 +74,13 @@ function handleFormWizards() {
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
-                    var this_form = $('#rootwizard').parents('form');                
-                    var return_val = tabmenu_ci_validation('next');
+                    var this_form = $('#rootwizard').parents('form');  
+                    if($('#rootwizard').find('#popup_mode').val() == 'view')  {
+                        var return_val = 1;
+                    }
+                    else {
+                        var return_val = tabmenu_ci_validation('next');
+                    }           
                     if(return_val == 0) {
                         return false;
                     }
