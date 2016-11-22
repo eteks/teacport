@@ -234,6 +234,7 @@ if(!empty($this->session->userdata("login_status"))):
                         <?php
                         if(!empty($mode) && $mode=="full_view") :
                         ?>
+                        <input type="hidden" value="view" id="popup_mode" />
                         <div class="tab-pane" id="tab1">
                           <h4>Organization Details</h4>
                           <div class="span12">
@@ -464,6 +465,7 @@ if(!empty($this->session->userdata("login_status"))):
                         <?php
                         else :
                         ?>
+                        <input type="hidden" value="edit" id="popup_mode" />
                         <p class="val_error"> </p>
                         <div class="tab-pane" id="tab1">
                           <h4>Organization Details</h4>

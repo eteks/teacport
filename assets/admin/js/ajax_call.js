@@ -52,6 +52,7 @@ $(document).ready(function(){
 
 // Popup with tab menu
 function handleFormWizards() {
+	$('.date-picker').datepicker();
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
                         var $total = navigation.find('li').length;
@@ -61,8 +62,10 @@ function handleFormWizards() {
                         // If it's the last tab then hide the last button and show the finish instead
                         if($current >= $total) {
                             $('#rootwizard').find('.pager .next').hide();
-                            $('#rootwizard').find('.pager .finish').show();
-                            $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                            if($('#rootwizard').find('#popup_mode').val() != 'view')  {
+                                $('#rootwizard').find('.pager .finish').show();
+                                $('#rootwizard').find('.pager .finish').removeClass('disabled');
+                            }
                         } 
                         else {
                             $('#rootwizard').find('.pager .next').show();
@@ -71,8 +74,13 @@ function handleFormWizards() {
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
-                    var this_form = $('#rootwizard').parents('form');                
-                    var return_val = tabmenu_ci_validation('next');
+                    var this_form = $('#rootwizard').parents('form');  
+                    if($('#rootwizard').find('#popup_mode').val() == 'view')  {
+                        var return_val = 1;
+                    }
+                    else {
+                        var return_val = tabmenu_ci_validation('next');
+                    }           
                     if(return_val == 0) {
                         return false;
                     }
@@ -107,15 +115,12 @@ function handleFormWizards() {
                 // App.scrollTo($('.page-title'));
                 },
         onTabClick: function(tab, navigation, index) {
-                        alert('on tab click disabled');
+                        error_popup('on tab click disabled');
                         return false;
                     }
 
     });
 }
-
-
-
 
 function tabmenu_ci_validation(value) {
     var this_form = $('.tab_form');
@@ -160,33 +165,26 @@ function tabmenu_ci_validation(value) {
     });
     return return_val;
 }
-
- // function error_popup(message){
-	// $('.error_popup_msg .success-alert span').text(message);
-	// $('.popup_fade').show();
-	// $('.error_popup_msg').show();
-	// document.body.style.overflow = 'hidden';
-// }
-//     
-// // error popup message center alignment
-// var height=$('.error_popup_msg').height();
-// var width=$('.error_popup_msg').width();
-// $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
-//     
-// // close error popup when click ok button or popupfade
-	// $(document).on('click','.alert_btn_popup,.cancel_btn',function(){
-	  	// $('.error_popup_msg').hide();
-	  	// $('.popup_fade').hide();
-	  	// document.body.style.overflow = 'auto';
-	// });
-// 
-// // $('#popup_wizard_section .button-submit').click(function () {
-             // // error_popup('Finished!');
-        // // }).hide();
-    // // };
-// //     
-    // $(".admin_module_form").submit(function(e){
-    // e.preventDefault();
-    // });
+   function error_popup(message){
+	$('.error_popup_msg .success-alert span').text(message);
+	$('.popup_fade').show();
+	$('.error_popup_msg').show();
+	document.body.style.overflow = 'hidden';
+}
+    
+// error popup message center alignment
+var height=$('.error_popup_msg').height();
+var width=$('.error_popup_msg').width();
+$('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+    
+// close error popup when click ok button or popupfade
+	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+	  	$('.error_popup_msg').hide();
+	  	$('.popup_fade').hide();
+	  	document.body.style.overflow = 'auto';
+	});
+    $(".admin_module_form").submit(function(e){
+    e.preventDefault();
+   });
     
     

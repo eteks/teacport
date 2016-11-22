@@ -35,9 +35,9 @@ if(!empty($this->session->userdata("login_status"))):
                            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="#">Job Prvider</a> <span class="divider">&nbsp;</span>
+                           <a href="#">Job Provider</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/jobprovider_activities">Job Activities</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/jobprovider_mailstatus">Job Mail Status</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -85,41 +85,70 @@ if(!empty($this->session->userdata("login_status"))):
                                   <table class="table table-striped job_activities table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th> Organization Name </th>
+                                        <th> Inbox Message </th>
                                         <th> Candidate Name </th>
-                                        <th> Sms Sent </th>
-                                        <th> Mail Sent </th>
-                                        <th> Resume Downloaded </th>
+                                        <th> Email </th>
+                                        <th> Phone No </th>
+                                        <th> Vacancies Available </th>
+                                        <th> Is Viewed </th>
+                                        <th> Status </th>
+                                        <th> Created Date </th>
                                         <th style="display: none;"> </th>
-                                        <th >Edit</th>
-                                        <th>Delete</th>
+                                        <!-- <th >Edit</th>
+                                        <th>Delete</th> -->
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <tr class="parents_tr" id="column">
-                                        <td class="activity_organization_id"> 
-                                          test
+                                        <td class="inbox_messge"> 
+                                          Message 1
                                         </td>
-                                        <td class="activity_candidate_id"> 
-                                          test 
+                                        <td class="inbox_candidate_id"> 
+                                          Candidate Name 
                                         </td>
-                                        <td class="is_sms_sent center_align"> 
+                                        <td class="inbox_candidate_id"> 
+                                          admin@gmail.com 
+                                        </td>
+                                        <td class="inbox_candidate_id"> 
+                                          9876543210 
+                                        </td>
+                                        <td class="inbox_vacancy_id"> 
+                                          100 
+                                        </td>
+                                        <td class="is_viewed center_align"> 
                                           <span class="icon-ok"> </span>
                                         </td>
-                                        <td class="is_email_sent center_align">
+                                        <td class="inbox_status"> 
+                                          Active 
+                                        </td>
+                                        <td class="inbox_created_date"> 
+                                          00-00-0000 
+                                        </td>
+                                      </tr>
+                                      <tr class="parents_tr" id="column">
+                                        <td class="inbox_messge"> 
+                                          Message 2
+                                        </td>
+                                        <td class="inbox_candidate_id"> 
+                                          Admin
+                                        </td>
+                                        <td class="inbox_candidate_id"> 
+                                          admin@gmail.com 
+                                        </td>
+                                        <td class="inbox_candidate_id"> 
+                                          0076543210 
+                                        </td>
+                                        <td class="inbox_vacancy_id"> 
+                                          50 
+                                        </td>
+                                        <td class="is_viewed center_align"> 
                                           <span class="icon-remove"> </span>
                                         </td>
-                                        <td class="is_resume_downloaded center_align">
-                                          <span class="icon-ok"> </span>
-                                        </td>  
-                                        <td style="display: none;"> </td>                                    
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
-                                            Edit
-                                          </a>
+                                        <td class="inbox_status"> 
+                                          Inactive 
                                         </td>
-                                        <td>
-                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="">Delete</a>
+                                        <td class="inbox_created_date"> 
+                                          00-00-0000 
                                         </td>
                                       </tr>
                                     </tbody>
@@ -159,7 +188,7 @@ if(!empty($this->session->userdata("login_status"))):
       <!-- END PAGE -->
    </div>
    <!-- END CONTAINER -->
-   <script>
+   <!-- <script>
     // Define default values
     var inputType = new Array("select","select","on_off","on_off","on_off"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("activity_organization_id","activity_candidate_id","is_sms_sent","is_email_sent","is_resume_downloaded"); // Set name of input types
@@ -170,7 +199,7 @@ if(!empty($this->session->userdata("login_status"))):
     var activity_candidate_id_option = new Array("Select","Siva","Kannan");
     var activity_candidate_id_value = new Array("","3","5");
     var is_created ="no";
-  </script>
+  </script> -->
 <?php include "templates/footer_grid.php" ?>
 <?php
 else :

@@ -437,3 +437,8 @@ tr select {
 .alert_btn_popup:hover{
 	background-color: #2cc1cc !important;
 }
+.val_error{
+    color: #ff0000 !important;
+	font-size: 13px !important;
+	font-weight: 600;
+}
