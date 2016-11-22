@@ -83,7 +83,7 @@ createInput = function(i,str){
     str = typeof str !== 'undefined' ? str : null;
     //alert(str);
     if(inputType[i] == "text"){
-        input = '<input type='+inputType[i]+' name='+columns[i]+' placeholder="'+placeholder[i]+'" value='+str+' >';
+        input = '<input type='+inputType[i]+' name='+columns[i]+' placeholder="'+placeholder[i]+'" value="'+str+'" >';
     }
     else if(inputType[i] == "textarea"){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
@@ -245,6 +245,7 @@ $(document).ready(function(){
     
     // Edit - Old record
     $(document).on("click","."+editbutton,function(){
+    	
         var id = $(this).attr("id");
         var update_id = $(this).data("id");
 
