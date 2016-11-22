@@ -165,3 +165,16 @@ select:invalid { color: gray; }
 color: red;
 font-size: 13px;
 }
+.provider-profile-edit input.form-control, select.form-control {
+    border-radius: 0;
+    height: 45px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    width: 100% !important;
+}
+.error_box_shadow{
+	box-shadow: 0 0 5px #ff0000;
+	padding: 3px 0px 3px 3px;
+  	margin: 5px 1px 3px 0px;
+  	border: 1px solid #ff0000;
+}
