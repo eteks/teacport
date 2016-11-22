@@ -37,6 +37,8 @@ class Admin_users extends CI_Controller {
 	    {
 	        return FALSE;
 	    }
+	}
+
 	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2)
 	{
 	    $ret = array();
@@ -268,6 +270,7 @@ class Admin_users extends CI_Controller {
 		}	
 			// $this->load->view('admin/user_accounts');
 	}
+
 	public function privileges()
 	{	
 			$admin_modules = $this->admin_users_model->get_all_modules();
@@ -286,16 +289,39 @@ class Admin_users extends CI_Controller {
 			}
 			//To pass all the admin modules for setting priveleges
 			$data['admin_modules'] = $res;
+			
 			//To pass all the group type for setting priveleges
-			$data['admin_group'] = $this->admin_users_model->get_admin_groups();
+			$admin_group = $this->admin_users_model->get_admin_groups();
+			$res_group = array();
+			foreach($admin_group as $arr)
+			{
+			    foreach($arr as $k => $v)
+			    {
+			        if($k == 'access_module_id')
+			            $res_group[$arr['user_group_id']][$k] = $this->get_arrayvalues_bykeyvalue($admin_group, $k, 'user_group_id', $arr['user_group_id']);
+			        else if($k == 'access_permission')
+			            $res_group[$arr['user_group_id']][$k] = $this->get_arrayvalues_bykeyvalue($admin_group, $k, 'user_group_id', $arr['user_group_id']);
+			        else
+			            $res_group[$arr['user_group_id']][$k] = $v;
+			    }
+			}
+			$data['admin_group'] = $res_group;
+
+			// echo "<pre>";
 			// print_r($data['admin_group']);
+			// echo "</pre>";
+			if($this->input->is_ajax_request()) {
+				$this->admin_users_model->insert_update_admin_prvileges($_POST['module_data']);
+			}
 			$this->load->view('admin/privileges',$data);
 	}
+
 	//Function to store all the admin menus to assign rights for each admin uses
 	public function admin_modules()
 	{	
 			$this->admin_users_model->insert_modules($_POST['module_data']);
 	}
+	
 	public function edit_profile()
 	{	
 		$data['admin_values'] = $this->admin_users_model->teac_admin_edit_profile('init');

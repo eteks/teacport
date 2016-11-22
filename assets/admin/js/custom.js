@@ -503,6 +503,35 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
     });
     // ********** End of the code ***********
 
+    //Store the access privileges of each admin user into database via ajax
+    // ********* Start line of the code **********
+    $(document).delegate('.privilege_form','submit',function(e){   
+        $this = $(this);
+        $full_module = []; 
+        $this.find('.module_data').each(function(){ 
+            $inner_this = $(this);
+            module_id = $inner_this.find('.module_id').val();
+            $inner_this.find('.module_inner_data').each(function(){
+                group_id = $(this).find('.group_id').val();
+                access_operation = $.map($(this).find(".access_operation option:selected"), function(elem){
+                    return $(elem).text().toLowerCase();
+                });
+                if($.makeArray(access_operation).length != 0)
+                    $full_module.push({'access_module_id':module_id,'access_group_id':group_id,'access_permission':access_operation.join(',')});
+            });
+        }); 
+        // alert(JSON.stringify($full_module));
+        var module_params = {};
+        module_params[csrf_name] = csfrData[csrf_name];
+        module_params['module_data'] = JSON.stringify($full_module);
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+"privileges",
+            data : module_params,
+        });
+    });   
+    // ********** End of the code ***********
+
 });
 
 
