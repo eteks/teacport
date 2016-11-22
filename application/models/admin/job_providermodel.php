@@ -66,7 +66,7 @@ class Job_Providermodel extends CI_Model {
   }
 
   // Job provider profile
-  public function get_provider_vacancy() {
+  public function get_provider_vacancy($status) {
     $this->db->select('*');
     $this->db->from('tr_organization_vacancies ov');
     $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
@@ -74,8 +74,8 @@ class Job_Providermodel extends CI_Model {
     $this->db->join('tr_class_level cl','ov.vacancies_class_level_id=cl.class_level_id','inner');
     $this->db->join('tr_university_board ub','ov.vacancies_university_board_id=ub.education_board_id','inner');
     $this->db->join('tr_subject s','ov.vacancies_subject_id=s.subject_id','inner');
-    $provider_vacancy = $this->db->get()->result_array();
-    return $provider_vacancy;
+    $model_data['provider_vacancy'] = $this->db->get()->result_array();
+    return $model_data;
   }
 
   // Job provider profile - ajax
