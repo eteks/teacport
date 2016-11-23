@@ -281,6 +281,8 @@ class Social extends CI_Controller {
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$godata);
 				redirect('provider/dashboard');
+			}elseif ($this->job_seeker_model->social_authendication_registration($godata) === 'inserted') {
+				# code...
 			}
 			else{
 				$checkvaliduser = $this->job_provider_model->social_valid_provider_login($godata);

@@ -83,30 +83,34 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                       <?php
                                       if(!empty($extra_curricular_values)) :
+                                      $i=0;
                                       foreach ($extra_curricular_values as $exac_val) :
+                                      $i++;
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $exac_val['extra_curricular_id']; ?>">
-                                        <td class="extra_curricular"> 
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="e_name"> 
                                           <?php echo $exac_val['extra_curricular']; ?>
                                         </td>
-                                        <td class="extra_curricular_status"> 
+                                        <td class="e_status"> 
                                           <?php 
                                           if ($exac_val['extra_curricular_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $exac_val['extra_curricular_status']; ?>" />
                                         </td>
                                         <td class="created_date">
                                           <?php echo $exac_val['extra_curricular_created_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $exac_val['extra_curricular_id']; ?>" href="javascript:;" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
+                                          <a class="ajaxDelete" data-id="<?php echo $exac_val['extra_curricular_id']; ?>">
+                                          <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $exac_val['extra_curricular_id']; ?>"> -->
                                             Delete
                                           </a>
                                         </td>
@@ -133,18 +137,14 @@ if(!empty($this->session->userdata("login_status"))):
                 <!-- END PAGE -->
               </div>
               <!-- END CONTAINER -->
-
-
-
-
   <script>
     // Define default values
     var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("extra_curricular","extra_curricular_status"); // Set name of input types
+    var columns = new Array("e_name","e_status"); // Set name of input types
     var placeholder = new Array("Enter Extra-Curricular Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var extra_curricular_status_option = new Array("Please select status","Active","Inactive"); 
-    var extra_curricular_status_value = new Array("","1","0"); 
+    var e_status_option = new Array("Please select status","Active","Inactive"); 
+    var e_status_value = new Array("","1","0"); 
   </script>
   
 <?php include "templates/footer_grid.php" ?>

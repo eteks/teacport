@@ -83,30 +83,34 @@ if(!empty($this->session->userdata("login_status"))):
                                       <tbody>
                                         <?php
                                         if(!empty($institution_type_values)) :
+                                        $i=0;
                                         foreach ($institution_type_values as $ins_val) :
+                                        $i++;
                                         ?>
-                                        <tr class="parents_tr" id="column<?php echo $ins_val['institution_type_id']; ?>">
-                                          <td class="institution_type_name"> 
+                                        <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                          <td class="i_name"> 
                                             <?php echo $ins_val['institution_type_name']; ?>
                                           </td>
-                                          <td class="institution_type_status"> 
+                                          <td class="i_status"> 
                                             <?php 
                                             if ($ins_val['institution_type_status'] == 1) 
                                               echo "Active";
                                             else
                                               echo "Inactive";
                                             ?>
+                                            <input type="hidden" value="<?php echo $ins_val['institution_type_status']; ?>" />
                                           </td>
                                           <td class="created_date"> 
                                             <?php echo $ins_val['institution_type_created_date']; ?> 
                                           </td>
                                           <td class="edit_section">
-                                              <a class="ajaxEdit" id="column<?php echo $ins_val['institution_type_id']; ?>" href="javascript:;" data-id="<?php echo $ins_val['institution_type_id']; ?>">
+                                              <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $ins_val['institution_type_id']; ?>">
                                                 Edit
                                               </a>
                                           </td>
                                           <td>
-                                            <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $ins_val['institution_type_id']; ?>">
+                                            <a class="ajaxDelete" data-id="<?php echo $ins_val['institution_type_id']; ?>">
+                                            <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $ins_val['institution_type_id']; ?>"> -->
                                               Delete
                                             </a>
                                           </td>
@@ -125,9 +129,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -138,12 +140,12 @@ if(!empty($this->session->userdata("login_status"))):
    
    <script>
     // Define default values
-    var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("institution_type_name"," institution_type_status"); // Set name of input types
-    var placeholder = new Array("Enter Institution Type Name",""); // Set placeholder of input types
+    var inputType = new Array("text","select"); 
+    var columns = new Array("i_name"," i_status"); 
+    var placeholder = new Array("Enter Institution Type Name","");
     var table = "admin_table"; // Set classname of table
-    var institution_type_status_option = new Array("Please select status","Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var institution_type_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var i_status_option = new Array("Please select status","Active","Inactive"); 
+    var i_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

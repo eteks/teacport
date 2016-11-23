@@ -21,10 +21,97 @@ $(document).ready(function(){
         });
     });
 
+    // // Admin Form
+    // $('.admin_form').on('submit',function(e) {
+    //     e.preventDefault();
+    //     var form_data = $(this).serialize();
+    //     var this_status = $(this).find('.admin_status');
+    //     var action = $(this).data('mode');
+    //     $.ajax({
+    //         type : "POST",
+    //         url : admin_baseurl+$(this).attr('action'),
+    //         dataType : 'json',
+    //         data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
+    //         success: function(res) {
+    //             if(res.error == 1) {
+    //                this_status.html(res.status);
+    //             }
+    //             else if(res.error == 2) {
+    //                this_status.html(res.status);
+    //                setTimeout(function()
+    //                {
+    //                     location.reload();
+    //                },3000);
+    //             }
+    //         }
+    //     });
+    // });
+
+    // Admin Form
+    $('.admin_form').on('submit',function(e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var this_status = $(this).find('.admin_status');
+        var this_popup = $(this).parents('.popup').data('popup');
+        var this_table_content = $(this).parents('#main-content').find('.table_content_section');
+        var this_popup_content = $(this).find('.tab-content');
+        var action = $(this).data('mode');
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('action'),
+            dataType : 'json',
+            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
+            success: function(res) {
+                if(res.error == 1) {
+                    this_status.html(res.status);
+                    this_status.fadeIn(1000);
+                    this_status.fadeOut(3000);
+                }
+                else if(res.error == 2) {
+                    this_status.html(res.status);
+                    this_status.fadeIn(1000);
+                    this_status.fadeOut(3000);
+
+                    setTimeout(function()
+                    {
+                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
+                        this_table_content.html(res.output);
+                        this_popup_content.remove();
+                    },5000);
+                }
+            }
+        });
+    });
+
+    // Admin Delete
+    $('.pop_delete_action').on('click',function(e) {
+        $id = $(this).data('id');
+
+        var this_status = $(this).find('.admin_status');
+        var action = $(this).data('mode');
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('action'),
+            dataType : 'json',
+            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
+            success: function(res) {
+                if(res.error == 1) {
+                   this_status.html(res.status);
+                }
+                else if(res.error == 2) {
+                   this_status.html(res.status);
+                   setTimeout(function()
+                   {
+                        location.reload();
+                   },3000);
+                }
+            }
+        });
+    });
+
     // Edit and Full view option
     $(document).on('click','.popup_fields',function(e) {
     	// handleFormWizards();
-    	$('.date-picker').datepicker();
         var action_data ={};
         var this_ajax_section = $(this).parents('#main-content').find('.pop_details_section');
         var targeted_popup_class = $(this).attr('data-popup-open');
@@ -46,6 +133,7 @@ $(document).ready(function(){
             }
         });
     });  
+
 
 }); // End document
 
@@ -70,6 +158,7 @@ function handleFormWizards() {
                             $('#rootwizard').find('.pager .next').show();
                             $('#rootwizard').find('.pager .finish').hide();
                         }
+
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
@@ -146,23 +235,40 @@ function handleFormWizards() {
 function tabmenu_ci_validation(value) {
     var this_form = $('.tab_form');
     var this_mode = this_form.data('mode');
+    var rid = this_form.find('.hidden_id').val();
     if(value == 'next') {
         var this_index = this_form.data('index');
-        var form_data = this_form.find('.tabfield'+this_form.data('index')).serialize();
+        var form_data = new FormData();
+        this_form.find('.tabfield'+this_index).each(function() {
+            if($(this).attr('type') == 'file') {
+                form_data.append($(this).attr('name'),$(this)[0].files[0]); 
+            }
+            else {
+                form_data.append($(this).attr('name'),$(this).val());
+            }
+        });
     }
     else {
         var this_index = "end";  
         var form_data = this_form.find('.tabfield').serialize();
-
     }
-    var rid = this_form.find('.hidden_id').val();
+    form_data.append(csrf_name,csfrData[csrf_name]);
+    form_data.append('action',this_mode);
+    form_data.append('index',this_index);
+    form_data.append('rid',rid);
+
+    // alert(form_data);
+
     var return_val = "" ;
     $.ajax({
         async: false,
         type : "POST",
         url : admin_baseurl+this_form.attr('action'),
         dataType : 'json',
-        data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+this_mode+'&index='+this_index+'&rid='+rid ,
+        contentType: false,       // The content type used when sending data to the server.
+        cache: false,             // To unable request pages to be cached
+        processData:false, 
+        data : form_data,
         success: function(res) {
             if(res.error==1 && res.status!='valid') {
                 $('.val_error').html(res.status);
@@ -186,7 +292,8 @@ function tabmenu_ci_validation(value) {
     });
     return return_val;
 }
-   function error_popup(message){
+
+function error_popup(message){
 	$('.error_popup_msg .success-alert span').text(message);
 	$('.popup_fade').show();
 	$('.error_popup_msg').show();

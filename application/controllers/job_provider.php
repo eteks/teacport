@@ -101,6 +101,7 @@ class Job_provider extends CI_Controller {
 					'registrant_email_id' => $this->input->post('registrant_email_id'),
 					'registrant_mobile_no' => $this->input->post('registrant_mobile_no'),
 					'registrant_password' => $common->generateStrongPassword(),
+					'organization_profile_completeness' => 33,
 					'registrant_register_type' => 'teacherrecruite'
 				);
 			 	/* Check whether data exist or not.exist or not condition handled in job_provider_model.php */
@@ -192,16 +193,19 @@ class Job_provider extends CI_Controller {
     	redirect('/','refresh');
 	}
 	public function editprofile(){
+		$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha|min_length[3]|xss_clean');
 		$session_data = $this->session->all_userdata();
 		$data['user_data'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['district'] = $this->common_model->get_all_district();
 		if(!$_POST){
+			
 			$this->load->view('company-dashboard-edit-profile',$data);
+			$this->session->unset_userdata('upload_provider_logo_error');
 		}
 		else{
 			/* Set validate condition for profile update form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha|min_length[3]|xss_clean');
+			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha_numeric_spaces|min_length[3]|xss_clean');
 			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'callback_organization_logo_validation');
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
@@ -212,13 +216,18 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|alpha_numeric|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date');
 			$this->form_validation->set_rules('declar_accept', 'Declaration', 'callback_form_declaration');
-			/* check forms data are valid are not */
+			// /* check forms data are valid are not */
 			if ($this->form_validation->run())
 		    {
+		    	echo "<pre>";	
+		    	print_r($_POST);
+				print_r($_FILES);
+				echo "</pre>";
 		    	$provider_logo_file_name = '';
+				$profile_completeness = 0;
 		    	if (!empty($_FILES['provider_logo']['name']))
 				{
-					$personnal_logo['upload_path'] 			= './uploads/jobprovider/personnal';
+					$personnal_logo['upload_path'] 			= './uploads/jobprovider';
 					$personnal_logo['allowed_types'] 		= 'jpg|png|jpeg';
 					$personnal_logo['max_size']     		= '2048';
 					$personnal_logo['max_width'] 			= '1024';
@@ -226,37 +235,43 @@ class Job_provider extends CI_Controller {
 					$personnal_logo['encrypt_name'] 		= TRUE;
 					$personnal_logo['file_ext_tolower'] 	= TRUE;
 					$this->load->library('upload', $personnal_logo);
+					$this->upload->initialize($personnal_logo);
 					if ( ! $this->upload->do_upload('provider_logo'))
 					{
 	                    $data['upload_provider_logo_error'] = $this->upload->display_errors();
 						$provider_logo_file_name = '';
+						$profile_completeness = 0;
 	                }
 	                else
 	                {
-	                    $uploaddata = $this->upload->data();
-						$provider_logo_file_name = $uploaddata['file_name'];
+	                    $provideruploaddata = $this->upload->data();
+						$provider_logo_file_name = $provideruploaddata['file_name'];
+						$profile_completeness = 10;
 	                }
 					
 				}
-		        $organization_logo['upload_path'] 		= './uploads/jobprovider/organization';
-				$organization_logo['allowed_types'] 	= 'jpg|png|jpeg';
-				$organization_logo['max_size']     		= '2048';
-				$organization_logo['max_width'] 		= '1024';
-				$organization_logo['max_height'] 		= '768';
-				$organization_logo['encrypt_name'] 		= TRUE;
-				$organization_logo['file_ext_tolower'] 	= TRUE;
-				
-				$this->load->library('upload', $organization_logo);
-				if ( ! $this->upload->do_upload('organization_logo'))
-				{
-                    $data['upload_provider_logo_error'] = $this->upload->display_errors();
-					$organization_logo_file_name = '';
-					
-                }
-                else
-                {
-                    $uploaddata = $this->upload->data();
-					$organization_logo_file_name = $uploaddata['file_name'];
+				if (!empty($_FILES['organization_logo']['name'])){
+			        $organization_logo['upload_path'] 		= './uploads/jobprovider';
+					$organization_logo['allowed_types'] 	= 'jpg|png|jpeg';
+					$organization_logo['max_size']     		= '2048';
+					$organization_logo['max_width'] 		= '1024';
+					$organization_logo['max_height'] 		= '768';
+					$organization_logo['encrypt_name'] 		= TRUE;
+					$organization_logo['file_ext_tolower'] 	= TRUE;
+					$this->load->library('upload', $organization_logo);
+					$this->upload->initialize($organization_logo);
+					if ( ! $this->upload->do_upload('organization_logo'))
+					{
+	                    //$data['upload_provider_logo_error'] = $this->upload->display_errors();
+						$this->session->set_userdata('upload_provider_logo_error', $this->upload->display_errors());
+						$organization_logo_file_name = '';
+						
+	                }
+	                else
+	                {
+	                    $organizationuploaddata = $this->upload->data();
+						$organization_logo_file_name = $organizationuploaddata['file_name'];
+	                }
                 }
 				$dob_split = explode('/', $this->input->post('provider_dob'));
 				$edit_profile_data = array(
@@ -269,7 +284,8 @@ class Job_provider extends CI_Controller {
 					'registrant_name' 			=> $this->input->post('provider_name'),
 					'registrant_designation' 	=> $this->input->post('provider_designation'),
 					'registrant_date_of_birth' 	=> $dob_split[2].'-'.$dob_split[1].'-'.$dob_split[0],
-					'registrant_logo'			=> $provider_logo_file_name
+					'registrant_logo'			=> $provider_logo_file_name,
+					'organization_profile_completeness' => 90+$profile_completeness,
 				);
 				if($this->job_provider_model->job_provider_update_profile($data['user_data']['organization_id'],$edit_profile_data)=='updated')
 				{
@@ -280,7 +296,7 @@ class Job_provider extends CI_Controller {
 		    {
 		    	$this->load->view('company-dashboard-edit-profile',$data);
 		    }
-			
+// 			
 		}
 		
 	}
@@ -293,7 +309,8 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run()){
 				$initial_data_profile = array(
 					'registrant_password'	=> $this->input->post('providerpassword'),
-					'registrant_mobile_no'	=> $this->input->post('provider_mobile_no')
+					'registrant_mobile_no'	=> $this->input->post('provider_mobile_no'),
+					'organization_profile_completeness' => 40
 				);
 				if($this->job_provider_model->job_provider_update_profile($this->input->post('organizationid'),$initial_data_profile)=='updated')
 				{
@@ -329,6 +346,10 @@ class Job_provider extends CI_Controller {
 			}
 		}
 	}
+
+	public function inbox(){
+		$this->load->view('company-dashboard-resume');
+	}
 	public function companydbd_browsejobs(){
 		$this->load->view('company-dashboard-browse-jobs');
 	}
@@ -338,9 +359,7 @@ class Job_provider extends CI_Controller {
 		$data['user_data'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$this->load->view('company-dashboard-post-jobs',$data);
 	}
-	public function companydbd_resume(){
-		$this->load->view('company-dashboard-resume');
-	}
+	
 	
 	public function companydbd_postedjobs(){
 		$this->load->view('company-dashboard-posted-jobs');

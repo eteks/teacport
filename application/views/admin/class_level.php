@@ -84,33 +84,38 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                       <?php
                                       if(!empty($class_level_values)) :
+                                      $i=0;
                                       foreach ($class_level_values as $cla_val) :
+                                      $i++;
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $cla_val['class_level_id']; ?>">
-                                        <td class="class_level"> 
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="c_name"> 
                                           <?php echo $cla_val['class_level']; ?>
                                         </td>
-                                        <td class="class_level_inst_type_id"> 
+                                        <td class="c_inst_type"> 
                                           <?php echo $cla_val['institution_type_name']; ?>
+                                          <input type="hidden" value="<?php echo $cla_val['institution_type_id']; ?>" />
                                         </td>
-                                        <td class="class_level_status"> 
+                                        <td class="c_status"> 
                                           <?php 
                                           if ($cla_val['class_level_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $cla_val['class_level_status']; ?>" />
                                         </td>
                                         <td class="created_date"> 
                                           <?php echo $cla_val['class_level_created_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $cla_val['class_level_id']; ?>" href="javascript:;" data-id="<?php echo $cla_val['class_level_id']; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $cla_val['class_level_id']; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $cla_val['class_level_id']; ?>">
+                                          <a class="ajaxDelete" data-id="<?php echo $cla_val['class_level_id']; ?>">
+                                          <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $cla_val['class_level_id']; ?>"> -->
                                             Delete
                                           </a>
                                         </td>  
@@ -129,9 +134,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -142,23 +145,23 @@ if(!empty($this->session->userdata("login_status"))):
     <script>
     // Define default values
     var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("class_level","class_level_inst_type_id","class_level_status"); // Set name of input types
+    var columns = new Array("c_name","c_inst_type","c_status"); // Set name of input types
     var placeholder = new Array("Enter Class Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var class_level_inst_type_id_option = new Array("Please select institution");
-    var class_level_inst_type_id_value = new Array("");
+    var c_inst_type_option = new Array("Please select institution");
+    var c_inst_type_value = new Array("");
     <?php
     if(!empty($institution_types)) :
     foreach ($institution_types as $ins_val) :
     ?>
-      class_level_inst_type_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
-      class_level_inst_type_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
+      c_inst_type_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      c_inst_type_value.push("<?php echo $ins_val['institution_type_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var class_level_status_option = new Array("Please select status","Active","Inactive"); 
-    var class_level_status_value = new Array("","1","0"); 
+    var c_status_option = new Array("Please select status","Active","Inactive"); 
+    var c_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

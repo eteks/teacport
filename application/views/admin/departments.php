@@ -84,13 +84,15 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                       <?php
                                       if(!empty($departments_values)) :
+                                      $i=0;
                                       foreach ($departments_values as $dep_key => $dep_val) :
+                                      $i++;
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $dep_key; ?>">
-                                        <td class="departments_name"> 
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="d_name"> 
                                           <?php echo $dep_val['departments_name']; ?>
                                         </td>
-                                        <td class="department_educational_qualification_id"> 
+                                        <td class="d_qualification"> 
                                         <?php
                                         foreach ($dep_val['educational_qualification_id'] as $edu_key => $edu_val) :
                                         ?>
@@ -101,25 +103,28 @@ if(!empty($this->session->userdata("login_status"))):
                                         <?php
                                         endforeach;
                                         ?>
+                                        <input type="hidden" value="<?php echo $dep_val['department_educational_qualification_id']; ?>" />
                                         </td>
-                                        <td class="departments_status"> 
+                                        <td class="d_status"> 
                                           <?php 
                                           if ($dep_val['departments_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $dep_val['departments_status']; ?>" />
                                         </td>
                                         <td class="created_date">
                                           <?php echo $dep_val['departments_created_date']; ?>
                                         </td>          
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $dep_key; ?>" href="javascript:;" data-id="<?php echo $dep_key; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $dep_key; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $dep_key; ?>">Delete</a>
+                                          <a class="ajaxDelete" data-id="<?php echo $dep_key; ?>">Delete</a>
+                                          <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $dep_key; ?>">Delete</a> -->
                                         </td>
                                       </tr>
                                       <?php
@@ -136,9 +141,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -149,23 +152,23 @@ if(!empty($this->session->userdata("login_status"))):
    <script>
     // Define default values
     var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("departments_name","department_educational_qualification_id","departments_status"); // Set name of input types
+    var columns = new Array("d_name","d_qualification","d_status"); // Set name of input types
     var placeholder = new Array("Enter Department Name","Please select qualification",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var department_educational_qualification_id_option = new Array();
-    var department_educational_qualification_id_value = new Array();
+    var d_qualification_option = new Array();
+    var d_qualification_value = new Array();
     <?php
     if(!empty($qualification_list)) :
     foreach ($qualification_list as $qua_val) :
     ?>
-      department_educational_qualification_id_option.push("<?php echo $qua_val['educational_qualification']; ?>");
-      department_educational_qualification_id_value.push("<?php echo $qua_val['educational_qualification_id']; ?>");
+      d_qualification_option.push("<?php echo $qua_val['educational_qualification']; ?>");
+      d_qualification_value.push("<?php echo $qua_val['educational_qualification_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var departments_status_option = new Array("Please select status","Active","Inactive"); 
-    var departments_status_value = new Array("","1","0"); 
+    var d_status_option = new Array("Please select status","Active","Inactive"); 
+    var d_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

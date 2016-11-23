@@ -1,44 +1,19 @@
     /*
     * Add edit delete rows dynamically using jquery and php
-    * http://www.amitpatil.me/
-    *
-    * @version
-    * 2.0 (4/19/2014)
-    * 
-    * @copyright
-    * Copyright (C) 2014-2015 
-    *
-    * @Auther
-    * Amit Patil
-    * Maharashtra (India)
-    *
-    * @license
-    * This file is part of Add edit delete rows dynamically using jquery and php.
-    * 
-    * Add edit delete rows dynamically using jquery and php is freeware script. you can redistribute it and/or 
-    * modify it under the terms of the GNU Lesser General Public License as published by
-    * the Free Software Foundation, either version 3 of the License, or
-    * (at your option) any later version.
-    * 
-    * Add edit delete rows dynamically using jquery and php is distributed in the hope that it will be useful,
-    * but WITHOUT ANY WARRANTY; without even the implied warranty of
-    * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    * GNU General Public License for more details.
-    * 
-    * You should have received a copy of the GNU General Public License
-    * along with this script.  If not, see <http://www.gnu.org/copyleft/lesser.html>.
     */
 
 // $( document ).ajaxError(function() {
 //     window.location.href = admin_baseurl;
 // });
 
+/* Added by siva */
 // Set button class names 
 var savebutton = "ajaxSave";
 var deletebutton = "ajaxDelete";
 var editbutton = "ajaxEdit";
 var updatebutton = "ajaxUpdate";
 var cancelbutton = "cancel";
+var removebutton = "new_remove";
 
 // Init variables
 var inputs = 'input,select,textarea';
@@ -63,7 +38,7 @@ function add_new_record() {
         input = createInput(i,'');
         blankrow += '<td class="ajaxReq">'+input+'</td>';
     }
-    blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="new_remove">Remove</a></td></tr>';
+    blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
     // prepand blank row at the end of table
     $("."+table).prepend(blankrow);
 }
@@ -96,7 +71,7 @@ createInput = function(i,str){
         for(i=0;i<select_option.length;i++){
             //console.log(select_option[i]);
             selected = "";
-            if(str == select_option[i])
+            if(str == select_value[i])
             {
                 selected = "selected";
             }
@@ -107,22 +82,26 @@ createInput = function(i,str){
     }
     else if(inputType[i] == "on_off"){
         input = '<ul class="on_off_button on_off_button_j">';
-        input += '<li data-value="1" class="on"><a href="#">Yes</a></li> <li data-value="0"><a href="#">No</a></li>';
+        if(str == 1) {
+            input += '<li data-value="1" class="on"><a>Yes</a></li> <li data-value="0"><a>No</a></li>';
+        }
+        else {
+            input += '<li data-value="1"><a>Yes</a></li> <li data-value="0" class="on"><a>No</a></li>'; 
+        }
         input += '</ul>';
-        input += '<input type="hidden" value="" class="verification" name="'+columns[i]+'" />';
+        input += '<input type="hidden" value="'+str+'" class="verification" name="'+columns[i]+'" />';
     }
     else if(inputType[i] == "multiselect"){
         input = '<select data-placeholder="'+placeholder[i]+'" name="'+columns[i]+'" class="chosen span6" multiple="multiple" >';
         var select_option = eval(columns[i]+'_option');
         var select_value = eval(columns[i]+'_value');
+        var selected_value = new Array();
+        selected_value = str.split(',');
 
         for(i=0;i<select_option.length;i++){
             //console.log(select_option[i]);
             selected = "";
-            // var html = $(str);              
-            // var multi_value = html.find('span').data('id');
-            // alert(multi_value);
-            if(str == select_value[i])
+            if($.inArray(select_value[i],selected_value) !== -1 )
             {
                 selected = "selected";
             }
@@ -227,49 +206,52 @@ $(document).ready(function(){
         }
     });
 
-    //Delete - Old record
-    // $(document).on("click","."+deletebutton,function(){
-        // var id = $(this).data("id");
-        // var form_id = $(this).parents('form').attr('id');
-        // var ajax_data = {};
-        // ajax_data['rid'] = id;
-        // if(id){
-            // if(confirm("Do you really want to delete record ?"))
-                // ajax(ajax_data,"delete",form_id);
-        // }
-        // else {
-            // alert("Unable to process");
-        // }
-    // });
-       
-   
+    // Delete - Old record
+    $(document).on("click","."+deletebutton,function(){
+        var id = $(this).data("id");
+        var form_id = $(this).parents('form').attr('id');
+        var ajax_data = {};
+        ajax_data['rid'] = id;
+        if(id){
+            if(confirm("Do you really want to delete record ?"))
+                ajax(ajax_data,"delete",form_id);
+        }
+        else {
+            alert("Unable to process");
+        }
+    });
+
     // Edit - Old record
     $(document).on("click","."+editbutton,function(){
-    	
-        var id = $(this).attr("id");
         var update_id = $(this).data("id");
+        var this_row = $(this).parents("tr").attr('id');
 
-        if(id && editing == 0 && tdediting == 0 && ready_save==0) {
+        if(update_id && editing == 0 && tdediting == 0 && ready_save==0) {
             // hide editing row, for the time being
             // $("."+table+" tbody tr:last-child").fadeOut("fast");
                         
             var html;
             for(i=0;i<columns.length;i++){
                 // fetch value inside the TD and place as VALUE in input field
-                var val = $(document).find("."+table+" tr[id="+id+"] td[class="+columns[i]+"]").html();
+                if(inputType[i]=='text') {
+                    var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+"").html();
+                }
+                else {
+                   var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").val(); 
+                }
                 input = createInput(i,$.trim(val));
                 html +='<td>'+input+'</td>';
             }
             if(typeof is_created != "undefined" && is_created=="no") {
-                html += '<td><a href="javascript:;" data-id="'+update_id+'" id="'+id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" id="'+id+'" class="'+cancelbutton+'">Cancel</a></td>';
+                html += '<td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" class="'+cancelbutton+'">Cancel</a></td>';
             }
             else {
-                html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" id="'+id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" id="'+id+'" class="'+cancelbutton+'">Cancel</a></td>';
+                html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" class="'+cancelbutton+'">Cancel</a></td>';
             }
             
             // Before replacing the TR contents, make a copy so when user clicks on 
-            trcopy = $("."+table+" tr[id="+id+"]").html();
-            $("."+table+" tr[id="+id+"]").html(html);  
+            trcopy = $("."+table+" #"+this_row+" ").html();
+            $("."+table+" #"+this_row+" ").html(html);  
              // $("."+table+" tr[id="+id+"]").fadeOut(500, function() {
              // $(this).html(html).fadeIn(500);
              // }); 
@@ -284,9 +266,9 @@ $(document).ready(function(){
 
     // Cancel - Old record
     $(document).on("click","."+cancelbutton,function(){
-        var id = $(this).attr("id");       
+        var this_row = $(this).parents("tr").attr('id');         
         // $("."+table+" tr:last-child").fadeIn('fast');   
-        $("."+table+" tr[id="+id+"]").fadeOut(500, function() {
+        $("."+table+" #"+this_row+"").fadeOut(500, function() {
               $(this).html(trcopy).fadeIn(500);
              });  
         editing = 0;
@@ -321,6 +303,8 @@ $(document).ready(function(){
         editing = 0;
         ready_save = 0;
     });
+
+    /* Ended by siva */
 
     $(document).on("change",".filter_vacancy",function(){
         selected_value = $(this).find('option:selected').val();

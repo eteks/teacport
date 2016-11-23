@@ -9,7 +9,36 @@ class Job_Provider extends CI_Controller {
 		$this->load->model('admin/admin_model');
 		$this->load->library('form_validation');
 		$this->load->helper('custom');
+		$this->load->library('upload');
 
+	}
+
+	// Edit unique function - To check the field is already exists or not
+	function validate_image() 
+	{
+		$config['upload_path']   = base_url("assets/admin/uploads");
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size']      = '1000';
+		$config['max_width']     = '1024';
+		$config['max_height']    = '768';
+		$config['file_name'] = $_FILES['organization_logo']['name'];
+		
+		$this->upload->initialize($config);
+		if (!$this->upload->do_upload('product_image'))
+	    {
+	        $this->form_validation->set_message('validate_image',$this->upload->display_errors());
+	        return false;
+	    } else {
+	        return true;
+	    }
+		// $this->form_validation->set_message('validate_image', 'Please select file.');
+  //   if (empty($_FILES['organization_logo']['name'])) {
+  //           return false;
+  //       }else{
+  //           return true;
+  //       }
+
+		
 	}
 
 	// Edit unique function - To check the field is already exists or not
@@ -51,7 +80,12 @@ class Job_Provider extends CI_Controller {
 			                                'label'   => 'Organization Status',
 			                                'rules'   => 'trim|required|xss_clean|'
 			                            );
-			                        
+			   	$validation_rules[] =   array(
+			                                'field'   => 'organization_logo',
+			                                'label'   => 'Organization Logo',
+			                                'rules'   => 'callback_validate_image'
+			                            );
+	                        
 	   		}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array(
@@ -368,15 +402,74 @@ class Job_Provider extends CI_Controller {
 	}
 
 	// Job provider ads 
-	public function teacport_job_provider_ads()
-	{
-		$this->load->view('admin/jobprovider_ads');
-	}
-
-	// Job provider ads 
 	public function teacport_job_provider_activities()
 	{
-		$this->load->view('admin/jobprovider_activities');
+		$data['organization_values'] = $this->admin_model->get_organization_values();
+		$data['candidate_values'] = $this->admin_model->get_candidate_values();
+
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	  		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'act_org_name',
+		                              'label'   => 'Organization Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'act_cand_name',
+		                                 'label'   => 'Candidate Name',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->job_providermodel->teacport_organization_activities('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->job_providermodel->teacport_organization_activities('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->job_providermodel->teacport_organization_activities('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['pro_activities'] = $data_values['pro_activities'];
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/jobprovider_activities',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['pro_activities'] = $data_values['pro_activities'];
+			$this->load->view('admin/jobprovider_activities',$data);
+		}	
 	}
 
 	// Job provider mail details and status 
@@ -385,10 +478,99 @@ class Job_Provider extends CI_Controller {
 		$this->load->view('admin/jobprovider_mailstatus');
 	}
 
+	// Job provider ads 
+	public function teacport_job_provider_ads()
+	{
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	  		$id = $this->input->post('rid');
+  			$validation_rules = array(
+  									array(
+		                              'field'   => 'ads_name',
+		                              'label'   => 'Premium Ads Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+		                            ),
+			    					array(
+		                              'field'   => 'ads_days',
+		                              'label'   => 'Premium Visible Days',
+		                              'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                              'field'   => 'org_name',
+		                              'label'   => 'Organization Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                              'field'   => 'ads_status',
+		                              'label'   => 'Premium Visible Status',
+		                              'rules'   => 'trim|required|xss_clean|'
+		                            )
+			                    );
+	   		$this->form_validation->set_rules($validation_rules);
+			if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+					$field = $row['field'];         //getting field name
+			        $error = form_error($field);    //getting error for field name
+			        if($error){
+			        	$data['status'] = strip_tags($error);
+			            $data['error'] = 1;
+			            break;
+			        }
+			    }
+		  	}
+      		else {
+  				$data_values = $this->job_providermodel->get_provider_ads('update');
+       			$data['error'] = $data_values['error'];
+	        	$data['status'] = $data_values['status'];
+	        }
+	    }
 
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->job_providermodel->get_provider_ads('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->job_providermodel->get_provider_ads('init'); 	
+      	}
 
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$output['provider_ads'] = $data_values['provider_ads'];
+			$result['output'] = $this->load->view('admin/jobprovider_ads',$output,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['provider_ads'] = $data_values['provider_ads'];
+			$this->load->view('admin/jobprovider_ads',$data);
+		}
+	}
 
-	
+	// Job provider ads - ajax
+	public function teacport_job_provider_ads_ajax()
+	{
+		if($this->input->post('action') && $this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['org_values'] = $this->admin_model->get_organization_values();
+			$data['activities_details'] = $this->job_providermodel->get_full_provider_ads($value);
+			$data['mode'] = $this->input->post('action');
+			$this->load->view('admin/jobprovider_ads',$data);
+		}
+		else {
+			redirect(base_url().'admin/admin_error');
+		}
+	}
+
+		
 
 	
 

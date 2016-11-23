@@ -1,6 +1,7 @@
 <?php
 if(!empty($this->session->userdata("login_status"))): 
 ?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -45,11 +46,6 @@ if(!empty($this->session->userdata("login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <!-- <div class="btn-group">
-                                        <button id="sample_editable_1_new" class="btn green add_new">
-                                            Add New <i class="icon-plus"></i>
-                                        </button>
-                                    </div> -->
                                     <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
@@ -61,13 +57,14 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <!-- <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">
+                                <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
+                                  <?php } ?> 
                                   <?php
-                                  // if(!empty($status)) :
-                                  //   echo "<p class='db_status update_success_md'> $status </p>";
-                                  // endif;
+                                  if(!empty($status)) :
+                                    echo "<p class='db_status update_success_md'> $status </p>";
+                                  endif;
                                   ?> 
-                                  <p class='val_error error_msg_md'> <p> -->
+                                  <p class='val_error error_msg_md'> <p>
                                   <table class="table table-striped job_activities table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
@@ -82,43 +79,74 @@ if(!empty($this->session->userdata("login_status"))):
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr class="parents_tr" id="column">
-                                        <td class="activity_organization_id"> 
-                                          test
+                                      <?php
+                                      if(!empty($pro_activities)) :
+                                      $i=0;
+                                      foreach ($pro_activities as $act_val) :
+                                      $i++;
+                                      ?>                                  
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="act_org_name"> 
+                                          <?php echo $act_val['organization_name']; ?>
+                                          <input type="hidden" value="<?php echo $act_val['activity_organization_id']; ?>" />
                                         </td>
-                                        <td class="activity_candidate_id"> 
-                                          test 
+                                        <td class="act_cand_name"> 
+                                          <?php echo $act_val['candidate_name']; ?>
+                                          <input type="hidden" value="<?php echo $act_val['activity_candidate_id']; ?>" />
                                         </td>
-                                        <td class="is_sms_sent center_align"> 
-                                          <span class="icon-ok"> </span>
+                                        <td class="act_sms">
+                                          <?php 
+                                          if ($act_val['is_sms_sent'] == 1) 
+                                            echo "<span class='icon-ok'> </span>";
+                                          else
+                                            echo "<span class='icon-remove'> </span>";
+                                          ?>                               
+                                          <input type="hidden" value="<?php echo $act_val['is_sms_sent']; ?>" />
                                         </td>
-                                        <td class="is_email_sent center_align">
-                                          <span class="icon-remove"> </span>
+                                        <td class="act_email">
+                                          <?php 
+                                          if ($act_val['is_email_sent'] == 1) 
+                                            echo "<span class='icon-ok'> </span>";
+                                          else
+                                            echo "<span class='icon-remove'> </span>";
+                                          ?>                               
+                                          <input type="hidden" value="<?php echo $act_val['is_email_sent']; ?>" />
                                         </td>
-                                        <td class="is_resume_downloaded center_align">
-                                          <span class="icon-ok"> </span>
+                                        <td class="act_resume">
+                                          <?php 
+                                          if ($act_val['is_resume_downloaded'] == 1) 
+                                            echo "<span class='icon-ok'> </span>";
+                                          else
+                                            echo "<span class='icon-remove'> </span>";
+                                          ?>                               
+                                          <input type="hidden" value="<?php echo $act_val['is_resume_downloaded']; ?>" />
                                         </td>  
-                                        <td style="display: none;"> </td>                                    
+                                        <td style="display: none;"> </td>                               
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column" href="javascript:;" data-id="">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $act_val['activity_id']; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="">Delete</a>
+                                          <a class="ajaxDelete" data-id="<?php echo $act_val['activity_id']; ?>">Delete</a>
+                                          <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="">Delete</a> -->
                                         </td>
                                       </tr>
+                                      <?php
+                                      endforeach;
+                                      endif;
+                                      ?>
                                     </tbody>
                                   </table>
-                                <!-- </form> -->
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
+                                </form>
                             </div>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-            </div>
+              </div>
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -128,17 +156,38 @@ if(!empty($this->session->userdata("login_status"))):
    <!-- END CONTAINER -->
    <script>
     // Define default values
-    var inputType = new Array("select","select","on_off","on_off","on_off"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("activity_organization_id","activity_candidate_id","is_sms_sent","is_email_sent","is_resume_downloaded"); // Set name of input types
+    var inputType = new Array("select","select","on_off","on_off","on_off");
+    var columns = new Array("act_org_name","act_cand_name","act_sms","act_email","act_resume");
     var placeholder = new Array(""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var activity_organization_id_option = new Array("Select","Ets","Esourceit");
-    var activity_organization_id_value = new Array("","1","3");
-    var activity_candidate_id_option = new Array("Select","Siva","Kannan");
-    var activity_candidate_id_value = new Array("","3","5");
+    var act_org_name_option = new Array("Select");
+    var act_org_name_value = new Array("");
+    <?php
+    if(!empty($organization_values)) :
+    foreach ($organization_values as $org_val) :
+    ?>
+      act_org_name_option.push("<?php echo $org_val['organization_name']; ?>");
+      act_org_name_value.push("<?php echo $org_val['organization_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
+    var act_cand_name_option = new Array("Select");
+    var act_cand_name_value = new Array("");
+    <?php
+    if(!empty($candidate_values)) :
+    foreach ($candidate_values as $cand_val) :
+    ?>
+      act_cand_name_option.push("<?php echo $cand_val['candidate_name']; ?>");
+      act_cand_name_value.push("<?php echo $cand_val['candidate_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>
     var is_created ="no";
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');

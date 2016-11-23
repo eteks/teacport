@@ -85,40 +85,46 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                     <?php
                                     if(!empty($qualification_type_values)) :
+                                    $i=0;
                                     foreach ($qualification_type_values as $qua_val) :
+                                    $i++;
                                     ?>
-                                      <tr class="parents_tr" id="column<?php echo $qua_val['educational_qualification_id']; ?>">
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
 
-                                        <td class="educational_qualification">
+                                        <td class="q_name">
                                           <?php echo $qua_val['educational_qualification']; ?>
                                         </td>
-                                        <td class="educational_qualification_course_type">
+                                        <td class="q_course_type">
                                           <?php 
                                           $course_type = unserialize(COURSE_TYPE);
                                           echo $course_type[$qua_val['educational_qualification_course_type']];
                                           ?>
+                                          <input type="hidden" value="<?php echo $qua_val['educational_qualification_course_type']; ?>" />
                                         </td>
-                                        <td class="educational_qualifcation_inst_type_id">
+                                        <td class="q_inst_type">
                                           <?php echo $qua_val['institution_type_name']; ?>
+                                          <input type="hidden" value="<?php echo $qua_val['institution_type_id']; ?>" />
                                         </td>
-                                        <td class=" educational_qualification_status"> 
+                                        <td class="q_status"> 
                                           <?php 
                                           if ($qua_val['educational_qualification_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $qua_val['educational_qualification_status']; ?>" />
                                         </td>
                                         <td class="educational_qualification_created_date">
                                           <?php echo $qua_val['educational_qualification_created_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $qua_val['educational_qualification_id']; ?>" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
                                               Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
+                                          <a class="ajaxDelete" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
+                                          <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $qua_val['educational_qualification_id']; ?>"> -->
                                             Delete
                                           </a>
                                         </td>
@@ -136,10 +142,8 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-            </div>
-
+             </div>
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -151,29 +155,29 @@ if(!empty($this->session->userdata("login_status"))):
   <script>
     // Define default values
     var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("educational_qualification","educational_qualification_course_type","educational_qualifcation_inst_type_id","educational_qualification_status"); // Set name of input types
+    var columns = new Array("q_name","q_course_type","q_inst_type","q_status"); // Set name of input types
     var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var educational_qualification_course_type_option = new Array("Please select course"); 
-    var educational_qualification_course_type_value = new Array("");
+    var q_course_type_option = new Array("Please select course"); 
+    var q_course_type_value = new Array("");
     <?php foreach (unserialize(COURSE_TYPE) as $key => $value): ?>
-      educational_qualification_course_type_option.push("<?php echo $value; ?>");
-      educational_qualification_course_type_value.push("<?php echo $key; ?>");
+      q_course_type_option.push("<?php echo $value; ?>");
+      q_course_type_value.push("<?php echo $key; ?>");
     <?php endforeach; ?>
-    var educational_qualifcation_inst_type_id_option = new Array("Please select institution");
-    var educational_qualifcation_inst_type_id_value = new Array("");
+    var q_inst_type_option = new Array("Please select institution");
+    var q_inst_type_value = new Array("");
     <?php
     if(!empty($institution_types)) :
     foreach ($institution_types as $ins_val) :
     ?>
-      educational_qualifcation_inst_type_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
-      educational_qualifcation_inst_type_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
+      q_inst_type_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      q_inst_type_value.push("<?php echo $ins_val['institution_type_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var educational_qualification_status_option = new Array("Please select status","Active","Inactive"); 
-    var educational_qualification_status_value = new Array("","1","0");
+    var q_status_option = new Array("Please select status","Active","Inactive"); 
+    var q_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>
