@@ -175,6 +175,19 @@ select:invalid { color: gray; }
 color: red;
 font-size: 13px;
 }
+.provider-profile-edit input.form-control, select.form-control {
+    border-radius: 0;
+    height: 45px;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    width: 100% !important;
+}
+.error_box_shadow{
+	box-shadow: 0 0 5px #ff0000;
+	padding: 3px 0px 3px 3px;
+  	margin: 5px 1px 3px 0px;
+  	border: 1px solid #ff0000;
+}
 .error_test {
   color :red ;
   font-size : 12px; 
@@ -206,37 +219,24 @@ font-size: 13px;
   height: 100px;
     width: 100px;
 }
-
-
-
-
-
-
-
-
-
 /* ---------For Responsive---------- */
-@media (min-width: 320px) and (max-width: 767px) {
-	
+@media (min-width: 320px) and (max-width: 767px) {	
 	#provider_upload .input-group {
 		position: relative;
 		left: 0px;
-	}
-	
+	}	
 }
 @media (min-width: 768px) and (max-width: 991px) {
-
 	#provider_upload .input-group {
 		position: relative;
 		left: 125px;
 	}
-
 }	
 @media (min-width: 992px) and (max-width: 1199px) {
-
 	#provider_upload .input-group {
 		position: relative;
 		left: 160px;
 	}
 
 }	
+

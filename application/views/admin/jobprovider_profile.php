@@ -15,9 +15,6 @@ if(!empty($this->session->userdata("login_status"))):
             </form>
          </div>
          <!-- END RESPONSIVE QUICK SEARCH FORM -->
-         <!-- BEGIN SIDEBAR MENU -->
-          
-         <!-- END SIDEBAR MENU -->
       </div>
       <!-- END SIDEBAR -->
       <!-- BEGIN PAGE -->
@@ -27,24 +24,10 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
-                   <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
-                       <i class="icon-cogs"></i>
-                        <span class="settings">
-                            <span class="text">Theme:</span>
-                            <span class="colors">
-                                <span class="color-default" data-style="default"></span>
-                                <span class="color-gray" data-style="gray"></span>
-                                <span class="color-purple" data-style="purple"></span>
-                                <span class="color-navy-blue" data-style="navy-blue"></span>
-                            </span>
-                        </span>
-                   </div>
-                   <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Editable Table
-                     <small>Editable Table Sample</small>
+                     Teachers Recruit
+                     <small>Job Provider</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
@@ -194,31 +177,46 @@ if(!empty($this->session->userdata("login_status"))):
                     <?php
                     if(!empty($provider_full_profile)) :
                     ?>
-                    <div id="rootwizard">
-                      <div class="navbar">
+                    <div id="rootwizard" class="form-wizard">
+                      <div class="navbar steps">
                         <div class="navbar-inner">
                           <div class="container">
-                            <ul>
-                              <li>
-                                <a href="#tab1" data-toggle="tab">Organization Details</a>
+                            <ul  class="row-fluid nav nav-pills">
+                              <li class="span3">
+                                <a href="#tab1" data-toggle="tab" class="step active">
+                                	<span class="number">1</span>
+                                    <span class="desc"><i class="icon-ok"></i>Organization Detail</span>
+                                </a>
                               </li>
-                              <li>
-                                <a href="#tab2" data-toggle="tab">Registrant Details</a>
+                              <li class="span3">
+                                <a href="#tab2" data-toggle="tab" class="step">
+                                	<span class="number">2</span>
+                                    <span class="desc"><i class="icon-ok"></i>Registrant Details</span>
+                                </a>
                               </li>
                               <?php
                               if(!empty($mode) && $mode=="full_view") :
                               ?>
-                              <li>
-                                <a href="#tab3" data-toggle="tab">Payment Details</a>
+                              <li class="span3">
+                                <a href="#tab3" data-toggle="tab" class="step">
+                                	<span class="number">3</span>
+                                    <span class="desc"><i class="icon-ok"></i>Payment Details</span>
+                                </a>
                               </li>
-                              <li>
-                                <a href="#tab4" data-toggle="tab">Addtional Details</a>
+                              <li class="span3">
+                                <a href="#tab4" data-toggle="tab" class="step">
+                                	<span class="number">4</span>
+                                    <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
+                                </a>
                               </li>
                               <?php
                               else :
                               ?>
-                              <li>
-                                <a href="#tab3" data-toggle="tab">Addtional Details</a>
+                              <li class="span3">
+                                <a href="#tab3" data-toggle="tab" class="step">
+                                	<span class="number">3</span>
+                                    <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
+                                </a>
                               </li>
                               <?php
                               endif;
@@ -614,9 +612,9 @@ if(!empty($this->session->userdata("login_status"))):
                         endif;
                         ?>
                         <ul class="pager wizard">
-                          <li class="previous"><a href="#">Previous</a></li>
-                          <li class="next"><a href="#">Next</a></li>
-                          <li class="finish disabled"><a href="#">Finish</a></li>
+                          <li class="previous"><a href="#"><i class="icon-angle-left"></i>Previous</a></li>
+                          <li class="next"><a href="#">Next<i class="icon-angle-right"></i></a></li>
+                          <li class="finish disabled"><a href="#">Finish<i class="icon-ok"></i></a></li>
                         </ul>
                       </div>  
                     </div>

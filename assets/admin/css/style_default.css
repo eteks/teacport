@@ -229,6 +229,10 @@ tr select {
 	color: #ff0000 !important;
 	font-size: 14px !important;
 	font-weight:500;
+	/*background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+    padding: 8px 35px 8px 14px !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;*/
 }
 .update_success_md{
 	color: #2c6700 !important;
@@ -441,4 +445,37 @@ tr select {
     color: #ff0000 !important;
 	font-size: 13px !important;
 	font-weight: 600;
+	background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+    padding: 8px 35px 8px 14px !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    display:none;
+}
+.db_status{
+	background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+    padding: 8px 35px 8px 14px !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+.main_module_name {
+    font-family: Helvetica;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+ }
+.tab-pane > h4 {
+    margin-bottom: 25px !important;
+}
+.pager .next > a, .pager .next > span{
+    background: #2fade7 none repeat scroll 0 0 !important;
+    color: #fff !important;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+}
+.finish > a {
+    background: #87bb33 none repeat scroll 0 0 !important;
+    color: #fff !important;
+}
+.pager .previous > a, .pager .previous > span{
+	background: #e8e8e8 none repeat scroll 0 0 !important;
+    color: #333 !important;	
 }

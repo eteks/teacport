@@ -13,7 +13,7 @@ if(!empty($this->session->userdata("login_status"))):
             <div class="row-fluid">
                <div class="span12">
                    <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
+                   <!-- <div id="theme-change" class="hidden-phone">
                        <i class="icon-cogs"></i>
                         <span class="settings">
                             <span class="text">Theme:</span>
@@ -24,12 +24,12 @@ if(!empty($this->session->userdata("login_status"))):
                                 <span class="color-navy-blue" data-style="navy-blue"></span>
                             </span>
                         </span>
-                   </div>
+                   </div> -->
                    <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Editable Table
-                     <small>Editable Table Sample</small>
+                     Teachers Recruit
+                     <small>Admin Users</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>

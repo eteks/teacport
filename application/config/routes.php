@@ -54,6 +54,8 @@ $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
 //JOB PROVIDER
 $route['provider/dashboard'] = 'job_provider/dashboard';
+$route['provider/initialdata'] = 'job_provider/initialdata';
+$route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
 $route['provider/logout'] = 'job_provider/provider_logout';
 //JOB SEEKER
 $route['seeker/dashboard'] = 'job_seeker/dashboard';
@@ -117,6 +119,12 @@ $route['admin/admin_modules'] = 'admin/admin_users/admin_modules';
 
 $route['admin/edit_profile'] = 'admin/admin_users/edit_profile';
 $route['admin/change_password'] = 'admin/admin_users/change_password';
+
+$route['admin/payment_gateway'] = 'admin/setting/payment_gateway';
+$route['admin/sms_gateway'] = 'admin/setting/sms_gateway';
+$route['admin/configuration_option'] = 'admin/setting/configuration_option';
+$route['admin/template_logo'] = 'admin/setting/template_logo';
+
 
 
 
