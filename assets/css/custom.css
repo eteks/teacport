@@ -171,7 +171,7 @@ select:invalid { color: gray; }
 	margin: 10px 0;
 	text-align: center;
 }
-.error{
+.error, .uploaderror p{
 color: red;
 font-size: 13px;
 }
@@ -179,7 +179,6 @@ font-size: 13px;
     border-radius: 0;
     height: 45px;
     letter-spacing: 1px;
-    text-transform: capitalize;
     width: 100% !important;
 }
 .error_box_shadow{
