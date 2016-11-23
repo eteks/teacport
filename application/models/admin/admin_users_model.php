@@ -174,9 +174,15 @@ class Admin_users_model extends CI_Model {
     //Get all the admin groups to assign priveleges for that group user
     public function get_admin_groups(){
         $this->db->select('*');
-        $this->db->from('tr_admin_user_groups');
+        $this->db->from('tr_admin_user_groups grp');
+        $this->db->join('tr_admin_access_control acc','grp.user_group_id=acc.access_group_id','inner');
         $query = $this->db->get()->result_array();
         return $query;
+    }
+    //Store the admin privileges by group id
+    public function insert_update_admin_prvileges($data){
+        $data = json_decode($data, true);
+        $this->db->insert_on_duplicate_update_batch('tr_admin_access_control',$data);
     }
 }
 

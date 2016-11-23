@@ -54,6 +54,8 @@ $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';
 //JOB PROVIDER
 $route['provider/dashboard'] = 'job_provider/dashboard';
+$route['provider/initialdata'] = 'job_provider/initialdata';
+$route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
 $route['provider/logout'] = 'job_provider/provider_logout';
 //JOB SEEKER
 $route['seeker/dashboard'] = 'job_seeker/dashboard';

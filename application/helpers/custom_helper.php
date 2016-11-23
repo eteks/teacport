@@ -8,7 +8,7 @@ if ( ! function_exists('get_user_details')){
 if ( ! function_exists('get_qualication_by_dept')){
 	// Get qualification by department
 	function get_qualication_by_dept($value) 
-	{
+	{	
 		$out = array();
 		if(!empty($value)) {
 			foreach ($value as $key => $row) {

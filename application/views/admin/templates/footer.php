@@ -51,6 +51,7 @@
         
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/js/action.js"></script>
 
         <!-- JS import link for charts -->
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/d3.v2.js'></script>

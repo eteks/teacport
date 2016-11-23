@@ -76,7 +76,7 @@ class Social extends CI_Controller {
 			$fbdata = array(
 				'registrant_email_id' => $profile['email'],
 				'registrant_name' => $profile['name'],
-				'organization_logo' => $profile['picture']['url'],
+				'registrant_logo' => $profile['picture']['url'],
 				'registrant_register_type' => 'facebook'
 			);
 			if($this->job_provider_model->social_authendication_registration($fbdata) === 'inserted')
@@ -136,7 +136,7 @@ class Social extends CI_Controller {
 		$twdata = array(
 			'registrant_email_id' => $profile['screen_name'].'@twitter.com',
 			'registrant_name' => $profile['name'],
-			'organization_logo' => $profile['profile_image_url'],
+			'registrant_logo' => $profile['profile_image_url'],
 			'registrant_register_type' => 'twitter'
 		);
 		if($this->job_provider_model->social_authendication_registration($twdata) === 'inserted')
@@ -215,7 +215,7 @@ class Social extends CI_Controller {
 				$lidata = array(
 					'registrant_email_id' => $user->emailAddress,
 					'registrant_name' => $user->firstName,
-					'organization_logo' => $user->pictureUrl,
+					'registrant_logo' => $user->pictureUrl,
 					'registrant_register_type' => 'linkedin'
 				);
 				if($this->job_provider_model->social_authendication_registration($lidata) === 'inserted')
@@ -271,7 +271,7 @@ class Social extends CI_Controller {
             $godata = array(
 				'registrant_email_id' => $profile['email'],
 				'registrant_name' => $profile['given_name'],
-				'organization_logo' => $profile['picture'],
+				'registrant_logo' => $profile['picture'],
 				'registrant_register_type' => 'google'
 			);
 			if($this->job_provider_model->social_authendication_registration($godata) === 'inserted')
