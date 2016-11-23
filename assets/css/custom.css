@@ -131,7 +131,6 @@ select:invalid { color: gray; }
 #provider_upload .input-group {
 	border-collapse: separate;
     display: table;
-    left: 195px;
     position: relative;
     width: 60% !important;
 }
@@ -175,13 +174,6 @@ select:invalid { color: gray; }
 color: red;
 font-size: 13px;
 }
-.provider-profile-edit input.form-control, select.form-control {
-    border-radius: 0;
-    height: 45px;
-    letter-spacing: 1px;
-    text-transform: capitalize;
-    width: 100% !important;
-}
 .error_box_shadow{
 	box-shadow: 0 0 5px #ff0000;
 	padding: 3px 0px 3px 3px;
@@ -200,7 +192,10 @@ font-size: 13px;
 }
 .error_input_field {
   /*background: #ffebeb !important;*/
-    border: 1px solid #cb1d1d  !important;  
+    box-shadow: 0 0 5px #ff0000;
+	padding: 3px 0px 3px 3px;
+  	margin: 5px 1px 3px 0px;
+  	border: 1px solid #ff0000;  
 }
 .error_input_field_mobile {
    border:1px solid red !important;
@@ -211,9 +206,13 @@ font-size: 13px;
   display : none;
 }
 #image_upload_profile_preview{
-  height: 100px;
-    width: 100px;
-
+  position: absolute;
+  height: 80px;
+  width: 80px;
+}
+.image_upload_profile{
+	bottom: 0;
+    left: 500px;
 }
 #image_upload_logo_preview{
   height: 100px;
