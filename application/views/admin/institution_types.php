@@ -12,24 +12,10 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
-                   <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
-                       <i class="icon-cogs"></i>
-                        <span class="settings">
-                            <span class="text">Theme:</span>
-                            <span class="colors">
-                                <span class="color-default" data-style="default"></span>
-                                <span class="color-gray" data-style="gray"></span>
-                                <span class="color-purple" data-style="purple"></span>
-                                <span class="color-navy-blue" data-style="navy-blue"></span>
-                            </span>
-                        </span>
-                   </div>
-                   <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Editable Table
-                     <small>Editable Table Sample</small>
+                     Teachers Recruit
+                     <small>Master Data</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
@@ -51,7 +37,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Editable Table</h4>
+                            <h4><i class="icon-reorder"></i>Institution Type</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -97,30 +83,34 @@ if(!empty($this->session->userdata("login_status"))):
                                       <tbody>
                                         <?php
                                         if(!empty($institution_type_values)) :
+                                        $i=0;
                                         foreach ($institution_type_values as $ins_val) :
+                                        $i++;
                                         ?>
-                                        <tr class="parents_tr" id="column<?php echo $ins_val['institution_type_id']; ?>">
-                                          <td class="institution_type_name"> 
+                                        <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                          <td class="i_name"> 
                                             <?php echo $ins_val['institution_type_name']; ?>
                                           </td>
-                                          <td class="institution_type_status"> 
+                                          <td class="i_status"> 
                                             <?php 
                                             if ($ins_val['institution_type_status'] == 1) 
                                               echo "Active";
                                             else
                                               echo "Inactive";
                                             ?>
+                                            <input type="hidden" value="<?php echo $ins_val['institution_type_status']; ?>" />
                                           </td>
                                           <td class="created_date"> 
                                             <?php echo $ins_val['institution_type_created_date']; ?> 
                                           </td>
                                           <td class="edit_section">
-                                              <a class="ajaxEdit" id="column<?php echo $ins_val['institution_type_id']; ?>" href="javascript:;" data-id="<?php echo $ins_val['institution_type_id']; ?>">
+                                              <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $ins_val['institution_type_id']; ?>">
                                                 Edit
                                               </a>
                                           </td>
                                           <td>
-                                            <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $ins_val['institution_type_id']; ?>">
+                                            <a class="ajaxDelete" data-id="<?php echo $ins_val['institution_type_id']; ?>">
+                                            <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $ins_val['institution_type_id']; ?>"> -->
                                               Delete
                                             </a>
                                           </td>
@@ -138,29 +128,8 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -171,12 +140,12 @@ if(!empty($this->session->userdata("login_status"))):
    
    <script>
     // Define default values
-    var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("institution_type_name"," institution_type_status"); // Set name of input types
-    var placeholder = new Array("Enter Institution Type Name",""); // Set placeholder of input types
+    var inputType = new Array("text","select"); 
+    var columns = new Array("i_name"," i_status"); 
+    var placeholder = new Array("Enter Institution Type Name","");
     var table = "admin_table"; // Set classname of table
-    var institution_type_status_option = new Array("Please select status","Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var institution_type_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var i_status_option = new Array("Please select status","Active","Inactive"); 
+    var i_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

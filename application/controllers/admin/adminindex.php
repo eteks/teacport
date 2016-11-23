@@ -36,13 +36,13 @@ class Adminindex extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'state_name',
+		                              'field'   => 's_name',
 		                              'label'   => 'State Name',
 		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_state.state_id.state_name.'.$id.']'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'state_status',
+		                                 'field'   => 's_status',
 		                                 'label'   => 'State Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -72,12 +72,12 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
             			          	array(
-                        		      'field'   => 'state_name',
+                        		      'field'   => 's_name',
 		                              'label'   => 'State Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_state.state_name]'
 		                            ),
 		                            array(
-		                                 'field'   => 'state_status',
+		                                 'field'   => 's_status',
 		                                 'label'   => 'State Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -141,13 +141,13 @@ class Adminindex extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'institution_type_name',
+		                              'field'   => 'i_name',
 		                              'label'   => 'Institution Type Name',
 		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_institution_type.institution_type_id.institution_type_name.'.$id.']'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'institution_type_status',
+		                                 'field'   => 'i_status',
 		                                 'label'   => 'Institution Type Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -177,12 +177,12 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
             			          	array(
-                        		      'field'   => 'institution_type_name',
+                        		      'field'   => 'i_name',
 		                              'label'   => 'Institution Type Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_institution_type.institution_type_name]'
 		                            ),
 		                            array(
-		                                 'field'   => 'institution_type_status',
+		                                 'field'   => 'i_status',
 		                                 'label'   => 'Institution Type Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -248,23 +248,23 @@ class Adminindex extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'educational_qualification',
+		                              'field'   => 'q_name',
 		                              'label'   => 'Educational Qualification',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'educational_qualification_course_type',
+		                                 'field'   => 'q_course_type',
 		                                 'label'   => 'Educational Qualification Course Type',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'educational_qualifcation_inst_type_id',
+		                                 'field'   => 'q_inst_type',
 		                                 'label'   => 'Educational Qualifcation Institution Type',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'educational_qualification_status',
+		                                 'field'   => 'q_status',
 		                                 'label'   => 'Educational Qualification Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -294,23 +294,23 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'educational_qualification',
+		                              'field'   => 'q_name',
 		                              'label'   => 'Educational Qualification',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'educational_qualification_course_type',
+		                                 'field'   => 'q_course_type',
 		                                 'label'   => 'Educational Qualification Course Type',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'educational_qualifcation_inst_type_id',
+		                                 'field'   => 'q_inst_type',
 		                                 'label'   => 'Educational Qualifcation Institution Type',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'educational_qualification_status',
+		                                 'field'   => 'q_status',
 		                                 'label'   => 'Educational Qualification Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -345,7 +345,7 @@ class Adminindex extends CI_Controller {
       	else {
       		$data['error'] = 0;
 		    $data['status'] = 0;
-      		$data_values = $this->admin_model->qualification_type('init');
+      		$data_values = $this->admin_model->qualification_typ('init');
       	}
 
 		if($data['error']==1) {
@@ -375,12 +375,12 @@ class Adminindex extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'extra_curricular',
+		                              'field'   => 'e_name',
 		                              'label'   => 'Extra Curricular Name',
 		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_extra_curricular.extra_curricular_id.extra_curricular.'.$id.']'
 		                            ),
 		                            array(
-		                                 'field'   => 'extra_curricular_status',
+		                                 'field'   => 'e_status',
 		                                 'label'   => 'Extra Curricular Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -410,12 +410,12 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
             			          	array(
-                        		      'field'   => 'extra_curricular',
+                        		      'field'   => 'e_name',
 		                              'label'   => 'Extra Curricular Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_extra_curricular.extra_curricular]'
 		                            ),
 		                            array(
-		                                 'field'   => 'extra_curricular_status',
+		                                 'field'   => 'e_status',
 		                                 'label'   => 'Extra Curricular Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -479,19 +479,19 @@ class Adminindex extends CI_Controller {
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'class_level',
+		                              'field'   => 'c_name',
 		                              'label'   => 'Class Level',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'class_level_inst_type_id',
+		                              'field'   => 'c_inst_type',
 		                              'label'   => 'Institution Type Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'class_level_status',
+		                                 'field'   => 'c_status',
 		                                 'label'   => 'Class Level Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -521,19 +521,19 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'class_level',
+		                              'field'   => 'c_name',
 		                              'label'   => 'Class Level',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'class_level_inst_type_id',
+		                              'field'   => 'c_inst_type',
 		                              'label'   => 'Institution Type Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'class_level_status',
+		                                 'field'   => 'c_status',
 		                                 'label'   => 'Class Level Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -599,19 +599,19 @@ class Adminindex extends CI_Controller {
 	   		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'departments_name',
+		                              'field'   => 'd_name',
 		                              'label'   => 'Departments Name',
 		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_departments.departments_id.departments_name.'.$id.']'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'department_educational_qualification_id',
+		                              'field'   => 'd_qualification',
 		                              'label'   => 'Qualification Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'departments_status',
+		                                 'field'   => 'd_status',
 		                                 'label'   => 'Departments Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -641,19 +641,19 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'departments_name',
+		                              'field'   => 'd_name',
 		                              'label'   => 'Departments Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_departments.departments_name]'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'department_educational_qualification_id',
+		                              'field'   => 'd_qualification',
 		                              'label'   => 'Qualification Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'departments_status',
+		                                 'field'   => 'd_status',
 		                                 'label'   => 'Departments Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -722,19 +722,19 @@ class Adminindex extends CI_Controller {
 	   		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'subject_name',
+		                              'field'   => 's_name',
 		                              'label'   => 'Subject Name',
 		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_subject.subject_id.subject_name.'.$id.']'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'subject_institution_id',
+		                              'field'   => 's_inst_type',
 		                              'label'   => 'Institution Type',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'subject_status',
+		                                 'field'   => 's_status',
 		                                 'label'   => 'Subject Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -764,19 +764,19 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'subject_name',
+		                              'field'   => 's_name',
 		                              'label'   => 'Subject Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_subject.subject_name]'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'subject_institution_id',
+		                              'field'   => 's_inst_type',
 		                              'label'   => 'Institution Type',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'subject_status',
+		                                 'field'   => 's_status',
 		                                 'label'   => 'Subject Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -841,19 +841,19 @@ class Adminindex extends CI_Controller {
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'district_name',
+		                              'field'   => 'd_name',
 		                              'label'   => 'District Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'district_state_id',
+		                              'field'   => 'd_state_name',
 		                              'label'   => 'State Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'district_status',
+		                                 'field'   => 'd_status',
 		                                 'label'   => 'District Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -883,19 +883,19 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'district_name',
+		                              'field'   => 'd_name',
 		                              'label'   => 'District Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'district_state_id',
+		                              'field'   => 'd_state_name',
 		                              'label'   => 'State Name',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'district_status',
+		                                 'field'   => 'd_status',
 		                                 'label'   => 'District Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -961,19 +961,19 @@ class Adminindex extends CI_Controller {
 	   		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'university_board_name',
+		                              'field'   => 'u_name',
 		                              'label'   => 'University Board Name',
 		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_university_board.education_board_id.university_board_name.'.$id.']'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'university_class_level_id',
+		                              'field'   => 'u_class_level',
 		                              'label'   => 'University Class Level Type',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'university_board_status',
+		                                 'field'   => 'u_status',
 		                                 'label'   => 'University Board Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -1003,19 +1003,19 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'university_board_name',
+		                              'field'   => 'u_name',
 		                              'label'   => 'University Board Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_university_board.university_board_name]'
 
 		                            ),
 		                           	array(
-		                              'field'   => 'university_class_level_id',
+		                              'field'   => 'u_class_level',
 		                              'label'   => 'University Class Level Type',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'university_board_status',
+		                                 'field'   => 'u_status',
 		                                 'label'   => 'University Board Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -1081,23 +1081,23 @@ class Adminindex extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'language_name',
+		                              'field'   => 'l_name',
 		                              'label'   => 'Language Name',
 		                              'rules'   => 'trim|required|xss_clean|edit_unique[tr_languages.language_id.language_name.'.$id.']'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'is_mother_tangue',
+		                                 'field'   => 'l_mother_tongue',
 		                                 'label'   => 'Mother Tongue',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'is_medium_of_instruction',
+		                                 'field'   => 'l_instruction',
 		                                 'label'   => 'Medium of Instruction',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'language_status',
+		                                 'field'   => 'l_status',
 		                                 'label'   => 'Language Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -1127,23 +1127,23 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'language_name',
+		                              'field'   => 'l_name',
 		                              'label'   => 'Language Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_languages.language_name]'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'is_mother_tangue',
+		                                 'field'   => 'l_mother_tongue',
 		                                 'label'   => 'Mother Tongue',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'is_medium_of_instruction',
+		                                 'field'   => 'l_instruction',
 		                                 'label'   => 'Medium of Instruction',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'language_status',
+		                                 'field'   => 'l_status',
 		                                 'label'   => 'Language Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -1208,18 +1208,18 @@ class Adminindex extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'posting_name',
+		                              'field'   => 'p_name',
 		                              'label'   => 'Posting Name',
 		                              'rules'   => 'trim|required|xss_clean|edit_unique[tr_languages.language_id.language_name.'.$id.']'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'posting_institution_id',
+		                                 'field'   => 'p_inst_type',
 		                                 'label'   => 'Posting Institution Name',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'posting_status',
+		                                 'field'   => 'p_status',
 		                                 'label'   => 'Posting Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -1249,18 +1249,18 @@ class Adminindex extends CI_Controller {
     	else if($this->input->post('action')=='save') {
       		$validation_rules = array(
 		                            array(
-		                              'field'   => 'posting_name',
+		                              'field'   => 'p_name',
 		                              'label'   => 'Posting Name',
 		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_languages.language_name]'
 
 		                            ),
 		                            array(
-		                                 'field'   => 'posting_institution_id',
+		                                 'field'   => 'p_inst_type',
 		                                 'label'   => 'Posting Institution Name',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
-		                                 'field'   => 'posting_status',
+		                                 'field'   => 'p_status',
 		                                 'label'   => 'Posting Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),

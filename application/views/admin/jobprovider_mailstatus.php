@@ -11,33 +11,19 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
-                   <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
-                       <i class="icon-cogs"></i>
-                        <span class="settings">
-                            <span class="text">Theme:</span>
-                            <span class="colors">
-                                <span class="color-default" data-style="default"></span>
-                                <span class="color-gray" data-style="gray"></span>
-                                <span class="color-purple" data-style="purple"></span>
-                                <span class="color-navy-blue" data-style="navy-blue"></span>
-                            </span>
-                        </span>
-                   </div>
-                   <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Editable Table
-                     <small>Editable Table Sample</small>
+                     Teachers Recruit
+                     <small>Job Providers</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
                            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="#">Job Provider</a> <span class="divider">&nbsp;</span>
+                           <a href="#">Job Providers</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/jobprovider_mailstatus">Job Mail Status</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/jobprovider_mailstatus">Job Mail Provider Status</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -50,7 +36,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Editable Table</h4>
+                            <h4><i class="icon-reorder"></i>Job Provider Mail Status</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -159,25 +145,6 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
             <!-- END ADVANCED TABLE widget-->
 

@@ -16,7 +16,6 @@ class Job_seeker extends CI_Controller {
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
-			$data['glogin_url'] = $common->googleloginurl();
 			$this->load->view('job-seekers-login',$data);
 		}
 		else {
@@ -33,7 +32,6 @@ class Job_seeker extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
-   				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('job-seekers-login',$fb);
 			}
 			else{
@@ -50,7 +48,6 @@ class Job_seeker extends CI_Controller {
 				else{
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    					$fb['fbloginurl'] = $common->facebookloginurl();
-   					$fb['glogin_url'] = $common->googleloginurl();
 					$this->load->view('job-seekers-login',$fb);
 				}
 			}
@@ -68,7 +65,6 @@ class Job_seeker extends CI_Controller {
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['fbloginurl'] = $common->facebookloginurl();
-			$data['glogin_url'] = $common->googleloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
@@ -92,7 +88,6 @@ class Job_seeker extends CI_Controller {
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('register-job-seekers',$fb);	
 	        }
 			else
@@ -126,7 +121,6 @@ class Job_seeker extends CI_Controller {
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
 	       				$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-seekers-login',$fb);
 					}
 					else{
@@ -147,7 +141,6 @@ class Job_seeker extends CI_Controller {
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['glogin_url'] = $common->googleloginurl();
 					$this->load->view('register-job-seekers',$fb);
 				}
 				
