@@ -615,7 +615,7 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
-      </div>
+      </div> 
       <!-- END PAGE -->
   </div>
 <?php include "templates/footer_grid.php" ?>
