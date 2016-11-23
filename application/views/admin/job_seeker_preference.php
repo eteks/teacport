@@ -78,7 +78,9 @@
                                         <td class="candidate_inbox_message">Empty</td>
                                         <td class="candidate_organization_id">Company Name1</td>
                                         <td class="candidate_vacancy_id">4</td>
-                                        <td class="is_viewed">Yes</td>
+                                        <td class="is_viewed center_align">
+                                        	<span class="icon-ok"> </span>
+                                        </td>
                                         <td class="candidate_inbox_status">Active</td>
                                         <td class="created_date">01-01-2000</td>
                                         <td class="edit_section">
@@ -90,7 +92,9 @@
                                         <td class="candidate_inbox_message">Empty</td>
                                         <td class="candidate_organization_id">Company Name2</td>
                                         <td class="candidate_vacancy_id">15</td>
-                                        <td class="is_viewed">No</td>
+                                        <td class="is_viewed center_align">
+                                        	<span class="icon-remove"> </span>
+                                        </td>
                                         <td class="candidate_inbox_status">Active</td>
                                         <td class="created_date">01-01-2000</td>
                                         <td class="edit_section">
@@ -102,7 +106,9 @@
                                         <td class="candidate_inbox_message">Empty</td>
                                         <td class="candidate_organization_id">Company Name3</td>
                                         <td class="candidate_vacancy_id">10</td>
-                                        <td class="is_viewed">Yes</td>
+                                        <td class="is_viewed center_align">
+                                        	<span class="icon-ok"> </span>
+                                        </td>
                                         <td class="candidate_inbox_status">Active</td>
                                         <td class="created_date">01-01-2000</td>
                                         <td class="edit_section">

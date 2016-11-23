@@ -420,8 +420,8 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Feedback Form</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Site Visits Tracking</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/feedback_form"><span class="sub_module_data">Feedback Form</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/site_visit_tracking"><span class="sub_module_data">Site Visits Tracking</span></a></li>
                         <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li>
                     </ul>
                 </li>            

@@ -13,14 +13,14 @@
 				 	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
 			 </div><!--success_msg-->
 			 
-                                    	<div id="dialog-overlay"></div>
-										<div id="dialog-box">
-										    <div>
-										        <div id="dialog-box-head"></div>
-										        <div id="dialog-box-body"></div>
-										        <div id="dialog-box-foot"></div>
-										    </div>
-										</div> 
+             <div id="dialog-overlay"></div>
+				<div id="dialog-box">
+					<div>
+					  <div id="dialog-box-head"></div>
+					  <div id="dialog-box-body"></div>
+					  <div id="dialog-box-foot"></div>
+					</div>
+				</div> 
 		<script>								 	
             var csfrData = {};
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
@@ -72,30 +72,37 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->  
         <script>
-           // jQuery(document).ready(function() {
-              // $('.admin_table').dataTable({
-                // "aLengthMenu": [
-                    // [5, 15, 20, -1],
-                    // [5, 15, 20, "All"] // change per page values here
-                // ],
-                // // set the initial value
-                // "iDisplayLength": 5,
-                // "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-                // "sPaginationType": "bootstrap",
-                // "oLanguage": {
-                    // "sLengthMenu": "_MENU_ records per page",
-                    // "oPaginate": {
-                        // "sPrevious": "Prev",
-                        // "sNext": "Next"
-                    // }
-                // },
-                // "aoColumnDefs": [{
-                        // 'bSortable': false,
-                        // 'aTargets': [0]
-                    // }
-                // ]
-            // });
-           // });
+           jQuery(document).ready(function() {
+              $('.admin_table').dataTable({
+                "aLengthMenu": [
+                    [5, 15, 20, -1],
+                    [5, 15, 20, "All"] // change per page values here
+                ],
+                // set the initial value
+                "iDisplayLength": 5,
+                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
+                "sPaginationType": "bootstrap",
+                "oLanguage": {
+                    "sLengthMenu": "_MENU_ records per page",
+                    "oPaginate": {
+                        "sPrevious": "Prev",
+                        "sNext": "Next"
+                    }
+                },
+                "aoColumnDefs": [{
+                        'bSortable': false,
+                        'aTargets': [0]
+                    }
+                ]
+            });
+           });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.privileges_table').dataTable({
+                "bPaginate": false
+            });
+           });
         </script>
         <!-- <script>
             jQuery(document).ready(function() {

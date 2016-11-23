@@ -59,7 +59,7 @@
                                 </div>
                                 <div class="space15"></div>
                                 <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> <!-- class="admin_module_form" -->
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                <table class="table table-striped table-hover table-bordered privileges_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Module Name</th>
