@@ -11,13 +11,17 @@
 				 		<span></span>
 				 	</div><!--- --->
 				 	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
-			 </div><!--success_msg-->	
-				<div id="confirmBox">
-				  <div class="message"></div>
-				  <span class="button yes">Yes</span>
-				  <span class="button no">No</span>
-				</div>	 
-        <script>
+			 </div><!--success_msg-->
+			 
+                                    	<div id="dialog-overlay"></div>
+										<div id="dialog-box">
+										    <div>
+										        <div id="dialog-box-head"></div>
+										        <div id="dialog-box-body"></div>
+										        <div id="dialog-box-foot"></div>
+										    </div>
+										</div> 
+		<script>								 	
             var csfrData = {};
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
                        = '<?php echo $this->security->get_csrf_hash(); ?>';

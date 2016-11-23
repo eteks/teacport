@@ -24,7 +24,7 @@ if(!empty($this->session->userdata("login_status"))):
                        <li>
                            <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/languages">Language</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/languages">Languages</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -37,7 +37,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i> Language</h4>
+                            <h4><i class="icon-reorder"></i> Languages</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -123,8 +123,8 @@ if(!empty($this->session->userdata("login_status"))):
                                         Edit
                                       </a>
                                     </td>
-                                    <td>                                    	
-                                      <a class="ajaxDelete" data-id="<?php echo $lan_val['language_id']; ?>">
+                                    <td>                               	
+                                      <a class="ajaxDelete" onclick="Confirm.show()" data-id="<?php echo $lan_val['language_id']; ?>">
                                         Delete
                                       </a>
                                     </td>

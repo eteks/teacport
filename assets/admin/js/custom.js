@@ -479,6 +479,45 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
    	   $("#forgotform").show();
    });
    
+   function deletePost(id) {
+    var db_id = id.replace("post_", "");
+    // Run Ajax request here to delete post from database
+    document.body.removeChild(document.getElementById(id));
+}
+
+function CustomConfirm() {
+    this.show = function (dialog, op, id) {
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogOverlay = document.getElementById('dialog-overlay');
+        var dialogBox = document.getElementById('dialog-box');
+
+        dialogOverlay.style.display = "block";
+        dialogOverlay.style.height = winH + "px";
+        dialogBox.style.left = ((winW / 2) - (550 / 2)) + "px";
+        dialogBox.style.top = "200px";
+        dialogBox.style.display = "block";
+
+        document.getElementById('dialog-box-head').innerHTML = "Are you want to Delete?";
+        // document.getElementById('dialog-box-body').innerHTML = dialog;
+        document.getElementById('dialog-box-foot').innerHTML =
+            '<button onclick="Confirm.yes(\'' + op + '\',\'' + id + '\')">Yes</button> <button onclick="Confirm.no()">No</button>';
+    };
+    this.no = function () {
+        this.hide();
+    };
+    this.yes = function (op, id) {
+        if (op == "delete_post") {
+            deletePost(id);
+        }
+        this.hide();
+    };
+    this.hide = function () {
+        document.getElementById('dialog-box').style.display = "none";
+        document.getElementById('dialog-overlay').style.display = "none";
+    };
+}
+var Confirm = new CustomConfirm();   
     
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********

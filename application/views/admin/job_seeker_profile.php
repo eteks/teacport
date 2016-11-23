@@ -26,7 +26,7 @@
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
                      Teachers Recruit
-                     <small>Job Seeker</small>
+                     <small>Job Seekers</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
@@ -119,7 +119,7 @@
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_delete" href="#myModal1" data-toggle="modal">
+                                        <a class="job_delete" onclick="Confirm.show()">
                                           Delete
                                         </a>
                                       </td>
@@ -913,28 +913,7 @@
            <a class="popup-close-sec" data-popup-close-sec="popup-1" href="#">x</a>
             </div>
            </div>
-       </div>            
-                  
-       <!-- Delete Popup -->       
-       <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    	</div>    	
+       </div>  	
             <!-- END ADVANCED TABLE widget-->
 
             <!-- END PAGE CONTENT-->
