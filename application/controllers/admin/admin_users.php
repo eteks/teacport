@@ -37,6 +37,7 @@ class Admin_users extends CI_Controller {
 	    {
 	        return FALSE;
 	    }
+	}
 	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2)
 	{
 	    $ret = array();

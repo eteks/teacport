@@ -76,10 +76,20 @@ function handleFormWizards() {
         onNext: function (tab, navigation, index) {
                     var this_form = $('#rootwizard').parents('form');  
                     if($('#rootwizard').find('#popup_mode').val() == 'view')  {
+                    	jQuery('li', $('#popup_wizard_section')).removeClass("done");
+		                var li_list = navigation.find('li');
+		                for (var i = 0; i < index; i++) {
+		                    jQuery(li_list[i]).addClass("done");
+		                } 
                         var return_val = 1;
                     }
                     else {
                         var return_val = tabmenu_ci_validation('next');
+                         jQuery('li', $('#popup_wizard_section')).removeClass("done");
+		                var li_list = navigation.find('li');
+		                for (var i = 0; i < index; i++) {
+		                    jQuery(li_list[i]).addClass("done");
+		                }                        
                     }           
                     if(return_val == 0) {
                         return false;
@@ -106,14 +116,26 @@ function handleFormWizards() {
                 // }
 
                 // if (current >= total) {
-                //     $('#popup_wizard_section').find('.button-next').hide();
-                //     $('#popup_wizard_section').find('.button-submit').show();
+                    // $('#popup_wizard_section').find('.button-next').hide();
+                    // $('#popup_wizard_section').find('.button-submit').show();
                 // } else {
-                //     $('#popup_wizard_section').find('.button-next').show();
-                //     $('#popup_wizard_section').find('.button-submit').hide();
+                    // $('#popup_wizard_section').find('.button-next').show();
+                    // $('#popup_wizard_section').find('.button-submit').hide();
                 // }
                 // App.scrollTo($('.page-title'));
                 },
+                onPrevious: function (tab, navigation, index) {
+                var total = navigation.find('li').length;
+                var current = index + 1;
+                // set wizard title
+                $('.step-title', $('#rootwizard')).text('Step ' + (index + 1) + ' of ' + total);
+                // set done steps
+                jQuery('li', $('#rootwizard')).removeClass("done");
+                var li_list = navigation.find('li');
+                for (var i = 0; i < index; i++) {
+                    jQuery(li_list[i]).addClass("done");
+                }
+            },
         onTabClick: function(tab, navigation, index) {
                         error_popup('on tab click disabled');
                         return false;
@@ -185,6 +207,10 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
 	});
     $(".admin_module_form").submit(function(e){
     e.preventDefault();
+  });
+  
+   $('#forget-password').on("click", function(){
+   	   $("#admin_login_form").hide();
+   	   $("#forgotform").show();
    });
-    
-    
+  

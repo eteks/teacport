@@ -118,6 +118,12 @@ $route['admin/admin_modules'] = 'admin/admin_users/admin_modules';
 $route['admin/edit_profile'] = 'admin/admin_users/edit_profile';
 $route['admin/change_password'] = 'admin/admin_users/change_password';
 
+$route['admin/payment_gateway'] = 'admin/setting/payment_gateway';
+$route['admin/sms_gateway'] = 'admin/setting/sms_gateway';
+$route['admin/configuration_option'] = 'admin/setting/configuration_option';
+$route['admin/template_logo'] = 'admin/setting/template_logo';
+
+
 
 
 

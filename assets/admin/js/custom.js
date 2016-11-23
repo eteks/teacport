@@ -227,7 +227,7 @@ $(document).ready(function(){
         }
     });
 
-    // Delete - Old record
+    //Delete - Old record
     // $(document).on("click","."+deletebutton,function(){
         // var id = $(this).data("id");
         // var form_id = $(this).parents('form').attr('id');
@@ -241,8 +241,8 @@ $(document).ready(function(){
             // alert("Unable to process");
         // }
     // });
-
-    
+       
+   
     // Edit - Old record
     $(document).on("click","."+editbutton,function(){
     	
@@ -423,12 +423,8 @@ $(document).ready(function(){
         var test = tabmenu_ci_validation('end');
     });
 
-
-
     // Upload preview
     $(document).on('change','.hidden_upload',function()  {
-        
-        alert("test");
         var file = $(this).val();
         var img_view = $(this).next();
         var ext = file.substr((file.lastIndexOf('.') + 1));
@@ -473,14 +469,17 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
 	  	document.body.style.overflow = 'auto';
 	});
 
-// $('#popup_wizard_section .button-submit').click(function () {
-             // error_popup('Finished!');
-        // }).hide();
-    // };
-//     
     $(".admin_module_form").submit(function(e){
     e.preventDefault();
     });
+    
+ //Forgot password
+   $('#forget-password').on("click", function(){
+   	   $("#admin_login_form").hide();
+   	   $("#forgotform").show();
+   });
+   
+    
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********
     var module_array = new Array();
