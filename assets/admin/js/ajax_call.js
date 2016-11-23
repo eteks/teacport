@@ -140,6 +140,7 @@ $(document).ready(function(){
 
 // Popup with tab menu
 function handleFormWizards() {
+	$('.date-picker').datepicker();
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
                         var $total = navigation.find('li').length;
@@ -164,10 +165,20 @@ function handleFormWizards() {
         onNext: function (tab, navigation, index) {
                     var this_form = $('#rootwizard').parents('form');  
                     if($('#rootwizard').find('#popup_mode').val() == 'view')  {
+                    	jQuery('li', $('#popup_wizard_section')).removeClass("done");
+		                var li_list = navigation.find('li');
+		                for (var i = 0; i < index; i++) {
+		                    jQuery(li_list[i]).addClass("done");
+		                } 
                         var return_val = 1;
                     }
                     else {
                         var return_val = tabmenu_ci_validation('next');
+                         jQuery('li', $('#popup_wizard_section')).removeClass("done");
+		                var li_list = navigation.find('li');
+		                for (var i = 0; i < index; i++) {
+		                    jQuery(li_list[i]).addClass("done");
+		                }                        
                     }           
                     if(return_val == 0) {
                         return false;
@@ -194,24 +205,33 @@ function handleFormWizards() {
                 // }
 
                 // if (current >= total) {
-                //     $('#popup_wizard_section').find('.button-next').hide();
-                //     $('#popup_wizard_section').find('.button-submit').show();
+                    // $('#popup_wizard_section').find('.button-next').hide();
+                    // $('#popup_wizard_section').find('.button-submit').show();
                 // } else {
-                //     $('#popup_wizard_section').find('.button-next').show();
-                //     $('#popup_wizard_section').find('.button-submit').hide();
+                    // $('#popup_wizard_section').find('.button-next').show();
+                    // $('#popup_wizard_section').find('.button-submit').hide();
                 // }
                 // App.scrollTo($('.page-title'));
                 },
+                onPrevious: function (tab, navigation, index) {
+                var total = navigation.find('li').length;
+                var current = index + 1;
+                // set wizard title
+                $('.step-title', $('#rootwizard')).text('Step ' + (index + 1) + ' of ' + total);
+                // set done steps
+                jQuery('li', $('#rootwizard')).removeClass("done");
+                var li_list = navigation.find('li');
+                for (var i = 0; i < index; i++) {
+                    jQuery(li_list[i]).addClass("done");
+                }
+            },
         onTabClick: function(tab, navigation, index) {
-                        alert('on tab click disabled');
+                        error_popup('on tab click disabled');
                         return false;
                     }
 
     });
 }
-
-
-
 
 function tabmenu_ci_validation(value) {
     var this_form = $('.tab_form');
@@ -273,3 +293,70 @@ function tabmenu_ci_validation(value) {
     });
     return return_val;
 }
+
+function error_popup(message){
+	$('.error_popup_msg .success-alert span').text(message);
+	$('.popup_fade').show();
+	$('.error_popup_msg').show();
+	document.body.style.overflow = 'hidden';
+}
+    
+// error popup message center alignment
+var height=$('.error_popup_msg').height();
+var width=$('.error_popup_msg').width();
+$('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+    
+// close error popup when click ok button or popupfade
+	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+	  	$('.error_popup_msg').hide();
+	  	$('.popup_fade').hide();
+	  	document.body.style.overflow = 'auto';
+	});
+    $(".admin_module_form").submit(function(e){
+    e.preventDefault();
+  });
+  
+   $('#forget-password').on("click", function(){
+   	   $("#admin_login_form").hide();
+   	   $("#forgotform").show();
+   });
+  function deletePost(id) {
+    var db_id = id.replace("post_", "");
+    // Run Ajax request here to delete post from database
+    document.body.removeChild(document.getElementById(id));
+}
+
+function CustomConfirm() {
+    this.show = function (dialog, op, id) {
+        var winW = window.innerWidth;
+        var winH = window.innerHeight;
+        var dialogOverlay = document.getElementById('dialog-overlay');
+        var dialogBox = document.getElementById('dialog-box');
+
+        dialogOverlay.style.display = "block";
+        dialogOverlay.style.height = winH + "px";
+        dialogBox.style.left = ((winW / 2) - (550 / 2)) + "px";
+        dialogBox.style.top = "100px";
+        dialogBox.style.display = "block";
+
+        document.getElementById('dialog-box-head').innerHTML = "Are you want to Delete?";
+        // document.getElementById('dialog-box-body').innerHTML = dialog;
+        document.getElementById('dialog-box-foot').innerHTML =
+            '<button class="del_yes" onclick="Confirm.yes(\'' + op + '\',\'' + id + '\')">Yes</button> <button class="del_no" onclick="Confirm.no()">No</button>';
+    };
+    this.no = function () {
+        this.hide();
+    };
+    this.yes = function (op, id) {
+        if (op == "delete_post") {
+            deletePost(id);
+        }
+        this.hide();
+    };
+    this.hide = function () {
+        document.getElementById('dialog-box').style.display = "none";
+        document.getElementById('dialog-overlay').style.display = "none";
+    };
+}
+
+var Confirm = new CustomConfirm();

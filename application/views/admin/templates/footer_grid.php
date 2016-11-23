@@ -4,15 +4,23 @@
             <div class="span pull-right">
                 <span class="go-top"><i class="icon-arrow-up"></i></span>
             </div>
-        </div>
-        <div class="popup_fade cancel_btn"></div> 
-		 <div class="error_popup_msg">
-			 	<div class="success-alert">
+        </div>        
+	        <div class="popup_fade cancel_btn"></div> 
+			<div class="error_popup_msg">
+				<div class="success-alert">
 			 		<span></span>
 			 	</div><!--- -->
 			 	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
-		 </div><!--success_msg-->
-        <script>
+			</div><!--success_msg-->
+			<div id="dialog-overlay"></div>
+		    <div id="dialog-box">
+			    <div>
+				    <div id="dialog-box-head"></div>
+					<div id="dialog-box-body"></div>
+					<div id="dialog-box-foot"></div>
+				</div>
+			</div> 
+		<script>								 	
             var csfrData = {};
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
                        = '<?php echo $this->security->get_csrf_hash(); ?>';

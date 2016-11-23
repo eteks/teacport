@@ -262,7 +262,7 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>  
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-home"></i></span> <span class="main_module_data"><?php echo strtoupper("home");?></span>
+                        <span class="icon-box"> <i class="icon-home"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("home");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -287,7 +287,7 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-user"></i></span> <span class="main_module_data"><?php echo strtoupper("admin users");?></span>
+                        <span class="icon-box"> <i class="icon-user"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("admin users");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -309,7 +309,7 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-th"></i></span> <span class="main_module_data"><?php echo strtoupper("master data");?></span>
+                        <span class="icon-box"> <i class="icon-th"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("master data");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -361,7 +361,7 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>    
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-sitemap"></i></span> <span class="main_module_data"><?php echo strtoupper("job providers");?></span>
+                        <span class="icon-box"> <i class="icon-sitemap"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("job providers");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -403,7 +403,7 @@ Website: http://thevectorlab.net/
                 endif;
                 ?>   
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-search"></i></span> <span class="main_module_data"><?php echo strtoupper("job seekers");?></span>
+                        <span class="icon-box"> <i class="icon-search"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("job seekers");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -425,7 +425,7 @@ Website: http://thevectorlab.net/
                 endif;
                 ?> 
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-wrench"></i></span> <span class="main_module_data"><?php echo strtoupper("plan settings");?></span>
+                        <span class="icon-box"> <i class="icon-wrench"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("plan settings");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
@@ -439,19 +439,19 @@ Website: http://thevectorlab.net/
                 
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-cogs"></i></span> <span class="main_module_data"><?php echo strtoupper("settings");?></span>
+                        <span class="icon-box"> <i class="icon-cogs"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("settings");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Payment Gateway Setting</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">SMS Gateway Setting</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Configuration Option</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Template Logo</span></a></li> 
+                        <li><a class="" href="<?php echo base_url(); ?>admin/payment_gateway"><span class="sub_module_data">Payment Gateway Setting</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/sms_gateway"><span class="sub_module_data">SMS Gateway Setting</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/configuration_option"><span class="sub_module_data">Configuration Option</span></a></li>
+                        <li><a class="" href="<?php echo base_url(); ?>admin/template_logo"><span class="sub_module_data">Template Logo</span></a></li> 
                     </ul>
                 </li>
                 <li class="has-sub">
                     <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-tasks"></i></span> <span class="main_module_data"><?php echo strtoupper("others");?></span>
+                        <span class="icon-box"> <i class="icon-tasks"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("others");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">

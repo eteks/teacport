@@ -109,4 +109,17 @@ class Job_provider_model extends CI_Model {
 		$user_data = $existuser->row_array();
 		return $user_data; 
 	} 
+	public function edit_profile_completeness($id)
+	{
+		$where = "(organization_id='".$id."' AND ((organization_logo IS NULL OR organization_logo ='') OR (organization_address_1 IS NULL OR organization_address_1 ='') OR (organization_address_2 IS NULL OR organization_address_2 ='') OR (organization_address_3 IS NULL OR organization_address_3 ='') OR (organization_district_id IS NULL OR organization_district_id ='') OR (organization_district_id IS NULL OR organization_district_id ='') OR (registrant_name IS NULL OR registrant_name ='') OR (registrant_designation IS NULL OR registrant_designation ='') OR (registrant_date_of_birth IS NULL OR registrant_date_of_birth ='')) AND organization_status='1')";
+		$check_completeness = $this->db->get_where('tr_organization_profile',$where);
+		
+	}
+	 public function job_provider_update_profile($id,$profile)
+	 {
+	 	$this->db->where('organization_id', $id);
+		$this->db->update('tr_organization_profile', $profile);
+		return 'updated';
+	 }
+	
 }

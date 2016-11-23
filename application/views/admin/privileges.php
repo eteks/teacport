@@ -8,24 +8,10 @@
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
-                   <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
-                       <i class="icon-cogs"></i>
-                        <span class="settings">
-                            <span class="text">Theme:</span>
-                            <span class="colors">
-                                <span class="color-default" data-style="default"></span>
-                                <span class="color-gray" data-style="gray"></span>
-                                <span class="color-purple" data-style="purple"></span>
-                                <span class="color-navy-blue" data-style="navy-blue"></span>
-                            </span>
-                        </span>
-                   </div>
-                   <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Editable Table
-                     <small>Editable Table Sample</small>
+                     Teachers Recruit
+                     <small>Admin Users</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
@@ -72,20 +58,33 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" class="admin_module_form form_table_scl" action="admin/privileges" id="privileges_form"> <!-- class="admin_module_form" -->
+                                <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> <!-- class="admin_module_form" -->
                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Module Name</th>
-                                        <?php foreach ($admin_group as $group) : ?>
-                                            <th><?php echo ucwords($group['user_group_name']); ?></th>
-                                        <?php endforeach ?>
+                                        <?php 
+                                        foreach ($admin_group as $group) : ?>
+                                            <th> 
+                                            <?php echo ucwords($group['user_group_name']); ?>
+                                            </th>
+                                        <?php 
+                                        endforeach ?>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
+                                        // echo "<pre>";
+                                        // print_r($admin_modules);
+                                        // echo "</pre>";
                                         if(!empty($admin_modules)) :
                                         foreach ($admin_modules as $mod) :
+                                        $mod['module_id'] = is_array($mod['module_id'])?$mod['module_id']:(array)$mod['module_id'];  
+                                        $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
+                                        // echo "<pre>";
+                                        // print_r(array_map(null,$mod['module_id'], $mod['sub_module']));
+                                        // echo "</pre>";
+                                        $sub_module_data = array_map(null,$mod['module_id'], $mod['sub_module']);
                                     ?>
                                     <!--- First Module Description -->
                                     <tr class="parents_tr" id="column1">
@@ -93,33 +92,42 @@
                                         <td class=""></td>
                                         <td class=""></td>
                                     </tr>
-                                    <?php
-                                        $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
-                                        foreach ($mod['sub_module'] as $sub) :
+                                    <?php  
+                                        foreach ($sub_module_data as $sub) :
                                     ?>
-                                    <tr class="parents_tr" id="column2">
-                                        <td class="sub_module"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo ucwords($sub); ?></td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                        <td class="admin_options">
-                                        	<select data-placeholder="Select Options" class="chosen span6" multiple="multiple" tabindex="6">
-			                                       <option>Add</option>
-			                                       <option>Edit</option>
-			                                       <option>View</option>
-			                                       <option>Delete</option>
-			                                </select>
-										</td>
-                                    </tr>
+                                        <tr class="parents_tr module_data" id="column2">
+                                            <td class="sub_module"> <input type="hidden" name="module_id" class="module_id" value="<?php echo $sub[0] ?>"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo ucwords($sub[1]); ?></td>
+                                            <?php 
+                                              foreach ($admin_group as $group) : 
+                                              $group['access_module_id'] = is_array($group['access_module_id'])?$group['access_module_id']:(array)$group['access_module_id'];  
+                                              $group['access_permission'] = is_array($group['access_permission'])?$group['access_permission']:(array)$group['access_permission'];
+                                              $mapped_privileges = array_map(null,$group['access_module_id'], $group['access_permission']);
+                                              
+                                              $group_id = $group['user_group_id'];
+                                              $module_id = $sub[0];
+                                              // array_push($mapped_privileges,$group_id);
+                                              // echo "<pre>";
+                                              // print_r($mapped_privileges);
+                                              // echo "</pre>";
+
+                                            ?>
+                                                <td class="admin_options module_inner_data">
+                                                  <input type="hidden" name="group_id" class="group_id" value="<?php echo $group['user_group_id']?>">
+                                                	<select data-placeholder="Select Options" class="chosen span6 access_operation" multiple="multiple" tabindex="6" name="access_operation[]">
+        			                                       <option value="add">Add</option>
+        			                                       <option value="edit">Edit</option>
+                                                     <option value="delete">Delete</option>
+        			                                       <option value="view">View</option>
+        			                                     </select>
+        										                    </td>
+                                            <?php 
+                                              endforeach; 
+                                            ?>
+                                        </tr>
                                     <?php
-                                    endforeach;
-                                    endforeach;
-                                    endif;
+                                        endforeach;
+                                        endforeach;
+                                        endif;
                                     ?>                            
                                     </tbody>
                                 </table>
