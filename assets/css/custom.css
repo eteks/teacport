@@ -197,15 +197,14 @@ font-size: 13px;
   font-size : 12px;
   display : none;
 }
-#image_upload_preview{
+#image_upload_profile_preview{
   height: 100px;
     width: 100px;
 
 }
-#image_upload_preview1{
+#image_upload_logo_preview{
   height: 100px;
     width: 100px;
-
 }
 
 
