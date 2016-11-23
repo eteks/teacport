@@ -28,7 +28,12 @@ Website: http://thevectorlab.net/
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/admin/assets/uniform/css/uniform.default.css" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-	<link href="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />    
+	<link href="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" />
+
+     
+    <link href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" media="screen" rel="stylesheet" type="text/css" /> 
+    <link href=" https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css " media="screen" rel="stylesheet" type="text/css" /> 
+     
 
     <!-- Css import link for charts -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/chart.css">
@@ -244,10 +249,11 @@ Website: http://thevectorlab.net/
             <!-- END RESPONSIVE QUICK SEARCH FORM -->
             <!-- BEGIN SIDEBAR MENU -->
             <ul class="sidebar-menu">
+
                 <?php
                 if($this->uri->segment(2) == 'dashboard' ) :
                 ?>
-                <li class="has-sub active">
+                <li class="has-sub active open">
                 <?php
                 else :
                 ?>     
@@ -268,25 +274,31 @@ Website: http://thevectorlab.net/
                         </li>
                     </ul>
                 </li>
+
+                <?php
+                if($this->uri->segment(2) == 'user_groups' || $this->uri->segment(2) == 'user_accounts' || $this->uri->segment(2) == 'privileges' ) :
+                ?>
+                <li class="has-sub active open">
+                <?php
+                else :
+                ?>     
                 <li class="has-sub">
+                <?php
+                endif;
+                ?>
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-user"></i></span> <span class="main_module_data"><?php echo strtoupper("admin users");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/user_groups"><span class="sub_module_data">User Groups</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/user_accounts"><span class="sub_module_data">User Accounts</span></a></li>
-                       <!--  <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Modules</span></a></li> -->
-                        <li><a class="" href="<?php echo base_url(); ?>admin/privileges"><span class="sub_module_data">Privileges</span></a></li>
-                        <!-- <li><a class="" href="jquery_ui.php">jQuery UI Component</a></li>
-                        <li><a class="" href="ui_elements_tabs_accordions.php">Tabs & Accordions</a></li>
-                        <li><a class="" href="ui_elements_typography.php">Typography</a></li>
-                        <li><a class="" href="tree_view.php">Tree View</a></li>
-                        <li><a class="" href="nestable.php">Nestable List</a></li> -->
+                        <li <?php if($this->uri->segment(2) == 'user_groups') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/user_groups"><span class="sub_module_data">User Groups</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'user_accounts') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/user_accounts"><span class="sub_module_data">User Accounts</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'privileges') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/privileges"><span class="sub_module_data">Privileges</span></a></li>
                     </ul>
                 </li>
+
                 <?php
-                if($this->uri->segment(2) == 'state' || $this->uri->segment(2) == 'district' || $this->uri->segment(2) == 'institution_types' || $this->uri->segment(2) == 'extra_curricular' || $this->uri->segment(2) == 'languages' || $this->uri->segment(2) == 'qualification' || $this->uri->segment(2) == 'class_level' || $this->uri->segment(2) == 'departments' || $this->uri->segment(2) == 'subject' || $this->uri->segment(2) == 'postings') :
+                if($this->uri->segment(2) == 'state' || $this->uri->segment(2) == 'district' || $this->uri->segment(2) == 'institution_types' || $this->uri->segment(2) == 'extra_curricular' || $this->uri->segment(2) == 'languages' || $this->uri->segment(2) == 'qualification' || $this->uri->segment(2) == 'class_level' || $this->uri->segment(2) == 'departments' || $this->uri->segment(2) == 'subject' || $this->uri->segment(2) == 'university' || $this->uri->segment(2) == 'postings') :
                 ?>
                 <li class="has-sub open active">
                 <?php
@@ -336,6 +348,7 @@ Website: http://thevectorlab.net/
                         </li>
                     </ul>
                 </li>
+
                 <?php
                 if($this->uri->segment(2) == 'job_provider_profile' || $this->uri->segment(2) == 'job_provider_vacancies' || $this->uri->segment(2) == 'jobprovider_activities' || $this->uri->segment(2) == 'jobprovider_activities' || $this->uri->segment(2) == 'jobprovider_mailstatus' || $this->uri->segment(2) == 'jobprovider_ads' ) :
                 ?>
@@ -377,31 +390,53 @@ Website: http://thevectorlab.net/
                         </li>
                     </ul>
                 </li>
+
+                <?php
+                if($this->uri->segment(2) == 'job_seeker_profile' || $this->uri->segment(2) == 'job_seeker_preference' || $this->uri->segment(2) == 'job_seeker_applied') :
+                ?>
+                <li class="has-sub open active">
+                <?php
+                else :
+                ?>     
                 <li class="has-sub">
+                <?php
+                endif;
+                ?>   
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-search"></i></span> <span class="main_module_data"><?php echo strtoupper("job seekers");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile"><span class="sub_module_data">Profile</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference"><span class="sub_module_data">Job Preferences</span></a></li>                    
-                        <li><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied"><span class="sub_module_data">Job Applied</span></a></li>
-                        <!-- <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Mail Details & Status</span></a></li>  -->
+                        <li <?php if($this->uri->segment(2) == 'job_seeker_profile') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile"><span class="sub_module_data">Profile</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'job_seeker_preference') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference"><span class="sub_module_data">Job Preferences</span></a></li>                    
+                        <li <?php if($this->uri->segment(2) == 'job_seeker_applied') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied"><span class="sub_module_data">Job Applied</span></a></li>
                     </ul>
                 </li>
+
+                <?php
+                if($this->uri->segment(2) == 'subscription_plans') :
+                ?>
+                <li class="has-sub open active">
+                <?php
+                else :
+                ?>     
                 <li class="has-sub">
+                <?php
+                endif;
+                ?> 
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-wrench"></i></span> <span class="main_module_data"><?php echo strtoupper("plan settings");?></span>
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li>
+                        <li <?php if($this->uri->segment(2) == 'subscription_plans') echo "class='active_sidebar'"; ?>>
                             <a class="" href="<?php echo base_url(); ?>admin/subscription_plans">
                                 <span class="sub_module_data">Plan Creation & Maintanence</span>
                             </a>
                         </li>
                     </ul>
                 </li>
+                
                 <li class="has-sub">
                     <a href="javascript:;" class="">
                         <span class="icon-box"> <i class="icon-cogs"></i></span> <span class="main_module_data"><?php echo strtoupper("settings");?></span>

@@ -99,46 +99,51 @@ if(!empty($this->session->userdata("login_status"))):
                                 <tbody>
                                   <?php
                                   if(!empty($language_values)) :
+                                  $i=0;
                                   foreach ($language_values as $lan_val) :
+                                  $i++;
                                   ?>
-                                  <tr class="parents_tr" id="column<?php echo $lan_val['language_id']; ?>">
-                                    <td class="language_name">
+                                  <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                    <td class="l_name">
                                       <?php echo $lan_val['language_name']; ?>
                                     </td>
-                                    <td class="is_mother_tangue">
+                                    <td class="l_mother_tongue">
                                       <?php 
                                       if ($lan_val['is_mother_tangue'] == 1) 
                                         echo "Yes";
                                       else
                                         echo "No";
                                       ?>
+                                      <input type="hidden" value="<?php echo $lan_val['is_mother_tangue']; ?>" />
                                     </td>
-                                    <td class="is_medium_of_instruction">
+                                    <td class="l_instruction">
                                       <?php 
                                       if ($lan_val['is_medium_of_instruction'] == 1) 
                                         echo "Yes";
                                       else
                                         echo "No";
                                       ?>
+                                      <input type="hidden" value="<?php echo $lan_val['is_medium_of_instruction']; ?>" />
                                     </td>
-                                    <td class="language_status">
+                                    <td class="l_status">
                                       <?php 
                                       if ($lan_val['language_status'] == 1) 
                                         echo "Active";
                                       else
                                         echo "Inactive";
                                       ?>
+                                      <input type="hidden" value="<?php echo $lan_val['language_status']; ?>" />
                                     </td>
                                     <td class="language_created_date">
                                       <?php echo $lan_val['language_created_date']; ?>
                                     </td>
                                     <td class="edit_section">
-                                      <a class="ajaxEdit" id="column<?php echo $lan_val['language_id']; ?>" href="javascript:;" data-id="<?php echo $lan_val['language_id']; ?>">
+                                      <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $lan_val['language_id']; ?>">
                                         Edit
                                       </a>
                                     </td>
                                     <td>
-                                      <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $lan_val['language_id']; ?>">
+                                      <a class="ajaxDelete" data-id="<?php echo $lan_val['language_id']; ?>">
                                         Delete
                                       </a>
                                     </td>
@@ -156,29 +161,8 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -189,15 +173,15 @@ if(!empty($this->session->userdata("login_status"))):
     <script>
     // Define default values
     var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("language_name","is_mother_tangue","is_medium_of_instruction","language_status"); // Set name of input types
+    var columns = new Array("l_name","l_mother_tongue","l_instruction","l_status"); // Set name of input types
     var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var is_mother_tangue_option = new Array("select","Yes","No"); 
-    var is_mother_tangue_value = new Array("","1","0");
-    var is_medium_of_instruction_option = new Array("select","Yes","No"); 
-    var is_medium_of_instruction_value = new Array("","1","0");
-    var language_status_option = new Array("select","Active","Inactive"); 
-    var language_status_value = new Array("","1","0"); 
+    var l_mother_tongue_option = new Array("select","Yes","No"); 
+    var l_mother_tongue_value = new Array("","1","0");
+    var l_instruction_option = new Array("select","Yes","No"); 
+    var l_instruction_value = new Array("","1","0");
+    var l_status_option = new Array("select","Active","Inactive"); 
+    var l_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

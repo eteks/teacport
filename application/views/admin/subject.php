@@ -98,13 +98,15 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                       <?php
                                       if(!empty($subject_values)) :
+                                      $i=0;
                                       foreach ($subject_values as $sub_key => $sub_val) :
+                                      $i++;
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $sub_key; ?>">
-                                        <td class="subject_name"> 
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="s_name"> 
                                           <?php echo $sub_val['subject_name']; ?>
                                         </td>
-                                        <td class="subject_institution_id"> 
+                                        <td class="s_inst_type"> 
                                           <?php
                                           foreach ($sub_val['institution_type_id'] as $ins_key => $ins_val) :
                                           ?>
@@ -115,25 +117,27 @@ if(!empty($this->session->userdata("login_status"))):
                                           <?php
                                           endforeach;
                                           ?>  
+                                          <input type="hidden" value="<?php echo $sub_val['subject_institution_id']; ?>" />
                                         </td>
-                                        <td class="subject_status"> 
+                                        <td class="s_status"> 
                                           <?php 
                                           if ($sub_val['subject_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $sub_val['subject_status']; ?>" />
                                         </td>
                                         <td class="created_date">
                                           <?php echo $sub_val['subject_create_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $sub_key; ?>" href="javascript:;" data-id="<?php echo $sub_key; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $sub_key; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" href="#myModal1" data-toggle="modal" data-id="<?php echo $sub_key; ?>">Delete</a>
+                                          <a class="ajaxDelete" data-id="<?php echo $sub_key; ?>">Delete</a>
                                         </td>
                                       </tr>
                                       <?php
@@ -149,28 +153,8 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -181,23 +165,23 @@ if(!empty($this->session->userdata("login_status"))):
    <script>
     // Define default values
     var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("subject_name","subject_institution_id","subject_status"); // Set name of input types
+    var columns = new Array("s_name","s_inst_type","s_status"); // Set name of input types
     var placeholder = new Array("Enter Subject Name","Please select institution"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var subject_institution_id_option = new Array();
-    var subject_institution_id_value = new Array();
+    var s_inst_type_option = new Array();
+    var s_inst_type_value = new Array();
     <?php
     if(!empty($institution_types)) :
     foreach ($institution_types as $ins_val) :
     ?>
-      subject_institution_id_option.push("<?php echo $ins_val['institution_type_name']; ?>");
-      subject_institution_id_value.push("<?php echo $ins_val['institution_type_id']; ?>");
+      s_inst_type_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      s_inst_type_value.push("<?php echo $ins_val['institution_type_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var subject_status_option = new Array("Please select status","Active","Inactive"); 
-    var subject_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var s_status_option = new Array("Please select status","Active","Inactive"); 
+    var s_status_value = new Array("","1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

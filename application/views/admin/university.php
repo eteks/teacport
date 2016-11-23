@@ -98,13 +98,15 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                       <?php
                                       if(!empty($universities_values)) :
+                                      $i=0;
                                       foreach ($universities_values as $unv_key => $unv_val) :
+                                      $i++;
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $unv_key; ?>">
-                                        <td class="university_board_name"> 
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="u_name"> 
                                           <?php echo $unv_val['university_board_name']; ?>
                                         </td>
-                                        <td class="university_class_level_id"> 
+                                        <td class="u_class_level"> 
                                           <?php
                                           foreach ($unv_val['class_level_id'] as $cls_key => $cls_val) :
                                           ?>
@@ -114,21 +116,23 @@ if(!empty($this->session->userdata("login_status"))):
                                             <br>
                                           <?php
                                           endforeach;
-                                          ?>  
+                                          ?>
+                                          <input type="hidden" value="<?php echo $unv_val['university_class_level_id']; ?>">  
                                         </td>
-                                        <td class="university_board_status"> 
+                                        <td class="u_status"> 
                                           <?php 
                                           if ($unv_val['university_board_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $unv_val['university_board_status']; ?>"> 
                                         </td>
                                         <td class="created_date">
                                           <?php echo $unv_val['university_board_created_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $unv_key; ?>" href="javascript:;" data-id="<?php echo $unv_key; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $unv_key; ?>">
                                             Edit
                                           </a>
                                         </td>
@@ -162,23 +166,23 @@ if(!empty($this->session->userdata("login_status"))):
    <script>
     // Define default values
     var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("university_board_name","university_class_level_id","university_board_status"); // Set name of input types
+    var columns = new Array("u_name","u_class_level","u_status"); // Set name of input types
     var placeholder = new Array("Enter University Board Name","Please select class level"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var university_class_level_id_option = new Array();
-    var university_class_level_id_value = new Array();
+    var u_class_level_option = new Array();
+    var u_class_level_value = new Array();
     <?php
     if(!empty($class_level_values)) :
     foreach ($class_level_values as $cls_val) :
     ?>
-      university_class_level_id_option.push("<?php echo $cls_val['class_level']; ?>");
-      university_class_level_id_value.push("<?php echo $cls_val['class_level_id']; ?>");
+      u_class_level_option.push("<?php echo $cls_val['class_level']; ?>");
+      u_class_level_value.push("<?php echo $cls_val['class_level_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var university_board_status_option = new Array("Please select status","Active","Inactive"); 
-    var university_board_status_value = new Array("","1","0");
+    var u_status_option = new Array("Please select status","Active","Inactive"); 
+    var u_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

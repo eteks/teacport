@@ -98,33 +98,37 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tbody>
                                       <?php
                                       if(!empty($districts_values)) :
+                                      $i=0;
                                       foreach ($districts_values as $dis_val) :
+                                      $i++;
                                       ?>
-                                      <tr class="parents_tr" id="column<?php echo $dis_val['district_id']; ?>">
-                                        <td class="district_name"> 
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
+                                        <td class="d_name"> 
                                           <?php echo $dis_val['district_name']; ?>
                                         </td>
-                                        <td class="district_state_id"> 
+                                        <td class="d_state_name"> 
                                           <?php echo $dis_val['state_name']; ?>
+                                          <input type="hidden" value="<?php echo $dis_val['state_id']; ?>" />
                                         </td>
-                                        <td class="district_status"> 
+                                        <td class="d_status"> 
                                           <?php 
                                           if ($dis_val['district_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $dis_val['district_status']; ?>" />
                                         </td>
                                         <td class="created_date">
                                           <?php echo $dis_val['district_create_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $dis_val['district_id']; ?>" href="javascript:;" data-id="<?php echo $dis_val['district_id']; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $dis_val['district_id']; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" id="column1" href="#myModal1" data-toggle="modal" data-id="<?php echo $dis_val['district_id']; ?>">
+                                          <a class="ajaxDelete" data-id="<?php echo $dis_val['district_id']; ?>">
                                             Delete
                                           </a>
                                         </td>
@@ -142,29 +146,8 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-                <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body delete_message_style">
-								<input type="hidden" name="delete" id="vId" value=""/>
-								<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true">
-									&times;
-								</button>
-								<center class="popup_tx">
-									<h5>Are you sure you want to delete this item? </h5>
-								</center>
-							</div>
-							<div id="delete_btn" class="modal-footer footer_model_button" >
-								<a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-								<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-							</div>
-				   		 </div><!--/row-->
-				    </div>
-    			</div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -176,23 +159,23 @@ if(!empty($this->session->userdata("login_status"))):
     <script>
     // Define default values
     var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("district_name","district_state_id","district_status"); // Set name of input types
+    var columns = new Array("d_name","d_state_name","d_status"); // Set name of input types
     var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var district_state_id_option = new Array("Please select state");
-    var district_state_id_value = new Array("");
+    var d_state_name_option = new Array("Please select state");
+    var d_state_name_value = new Array("");
     <?php
     if(!empty($state_values)) :
     foreach ($state_values as $sta_val) :
     ?>
-      district_state_id_option.push("<?php echo $sta_val['state_name']; ?>");
-      district_state_id_value.push("<?php echo $sta_val['state_id']; ?>");
+      d_state_name_option.push("<?php echo $sta_val['state_name']; ?>");
+      d_state_name_value.push("<?php echo $sta_val['state_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var district_status_option = new Array("Please select status","Active","Inactive"); 
-    var district_status_value = new Array("","1","0"); 
+    var d_status_option = new Array("Please select status","Active","Inactive"); 
+    var d_status_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

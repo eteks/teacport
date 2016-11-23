@@ -85,9 +85,109 @@ class Job_Providermodel extends CI_Model {
     return $provider_vacancy;
   }
 
+  // Organization_activity - Add Edit Delete View
+  public function teacport_organization_activities($status)
+  {
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
 
+    // Update data
+    if($status=='update') {
+      $activity_get_where = "activity_organization_id =" . "'" . $this->input->post('act_org_name') . "' AND activity_candidate_id =" . "'" . $this->input->post('act_cand_name') . "' AND activity_id NOT IN (". $this->input->post('rid').")";
+      $activity_get = $this->db->get_where('tr_organization_activity',$activity_get_where);
 
+      if($activity_get -> num_rows() > 0) {
+        $model_data['status'] = "Already exist";
+        $model_data['error'] = 1;     
+      }
+      else {
+        $activity_update_data = array( 
+                                    'activity_organization_id' => $this->input->post('act_org_name'),
+                                    'activity_candidate_id' => $this->input->post('act_cand_name'),
+                                    'is_sms_sent' => $this->input->post('act_sms'),
+                                    'is_email_sent' => $this->input->post('act_email'),
+                                    'is_resume_downloaded' => $this->input->post('act_resume')
+                                  );
+        $activity_update_where = '(activity_id="'.$this->input->post('rid').'")'; 
+        $this->db->set($activity_update_data); 
+        $this->db->where($activity_update_where);
+        $this->db->update("tr_organization_activity", $activity_update_data); 
+        $model_data['status'] = "Updated Successfully";
+        $model_data['error'] = 2;
+      }
+    }
 
+    // Delete data
+    else if($status =='delete') {
+      $district_delete_data = '(activity_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_organization_activity", $district_delete_data); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $this->db->select('*');
+    $this->db->from('tr_organization_activity oa');
+    $this->db->join('tr_candidate_profile cp','oa.activity_candidate_id=cp.candidate_id','inner');
+    $this->db->join('tr_organization_profile op','oa.activity_organization_id=op.organization_id','inner');
+    $this->db->order_by('oa.activity_id','desc');
+    $model_data['pro_activities'] = $this->db->get()->result_array();
+    return $model_data;
+  }
+
+  // Job provider ads
+  public function get_provider_ads($status) {
+
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $ads_get_where = "premium_ads_name =" . "'" . $this->input->post('ads_name') . "' AND organization_id =" . "'" . $this->input->post('org_name') . "' AND premium_ads_id NOT IN (". $this->input->post('rid').")";
+      $ads_get = $this->db->get_where('tr_premium_ads',$ads_get_where);
+      if($ads_get->num_rows() > 0) {
+        $model_data['error'] = 1;
+        $model_data['status'] = "Already exists";
+      }
+      else {
+        $ads_update_data = array( 
+                                'premium_ads_name' => $this->input->post('ads_name'),
+                                'organization_id' => $this->input->post('org_name'),
+                                'ad_visible_days' => $this->input->post('ads_days'),
+                                'is_admin_verified' => $this->input->post('admin_verify'),
+                                'premium_ads_status' => $this->input->post('ads_status')
+                              );
+        $ads_update_where = '( premium_ads_id="'.$this->input->post('rid').'")'; 
+        $this->db->set($ads_update_data); 
+        $this->db->where($ads_update_where);
+        $this->db->update("tr_premium_ads", $ads_update_data); 
+        $model_data['status'] = "Updated Successfully";
+        $model_data['error'] = 2; 
+      }  
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $ads_delete_where = '(premium_ads_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_premium_ads", $ads_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $this->db->select('*');
+    $this->db->from('tr_premium_ads pa');
+    $this->db->join('tr_organization_profile op','pa.organization_id=op.organization_id','inner');
+    $model_data['provider_ads'] = $this->db->order_by('pa.premium_ads_id','desc')->get()->result_array();
+    return $model_data;
+  }
+
+  // Job provider profile - ajax
+  public function get_full_provider_ads($value) {
+    $ads_where = '(premium_ads_id="'.$value.'")';
+    $model_data = $this->db->get_where('tr_premium_ads',$ads_where)->row_array();
+    return $model_data;
+  }
   
 }
 
