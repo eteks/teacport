@@ -212,6 +212,10 @@
                             <div class="heading-inner first-heading">
                                 <p class="title">Edit Profile</p>
                             </div>
+                            <div class="container">
+                                    <span class="error_test"> Please fill all required(*) fields </span>
+                                    <span class="error_mobile"> Please Enter Valid mobile number </span>
+                            </div>
                             <div class="profile-edit">
                             <form id="candidate-form" class="form-horizontal" action="" name="" autocomplete="false" method="post" accept-charset="utf-8">
                 	           <div class="row-form"> 
@@ -385,7 +389,7 @@
 									<div class="form-group">
 										<label class="col-sm-4">Native District<span class="alert">*</span></label>
 										<div class="col-sm-3">
-											<select id="txtdistrict" name="txtdistrict" onchange="native_enable();">
+											<select id="txtdistrict" name="txtdistrict">
 											<option selected="selected" value=""> Select District </option>
 											<option value="0">Other than Tamilnadu</option>
 											<option value="1">Chennai</option>
@@ -430,7 +434,7 @@
 									<div class="form-group">
 										<label class="col-sm-4">Mother Tongue<span class="alert">*</span></label>
 										<div class="col-sm-3">
-											<select id="txtmtongue" name="txtmtongue" onchange="mothtongue_other()">
+											<select id="txtmtongue" name="txtmtongue">
 												<option selected="selected" value=""> Select </option>
 												<option value="0">Tamil</option>
 												<option value="1">Telugu</option>
@@ -472,7 +476,7 @@
 									 <div class="form-group">
 										<label class="col-sm-4">Religion<span class="alert">*</span></label>
 										<div class="col-sm-3">
-											<select id="txtregl" name="txtregl" onchange="religion_other()">
+											<select id="txtregl" name="txtregl">
 											<option selected="selected" value=""> Select </option>
 											<option value="1">Hindu</option>
 											<option value="2">Muslim</option>
@@ -551,7 +555,7 @@
 									 <div class="form-group">
 										<label class="col-sm-4">I wish to work<span class="alert">*</span></label>
 										<div class="col-sm-4">
-											<select id="postpref" name="postpref" onchange="postpref_other();">
+											<select id="postpref" name="postpref">
 											<option selected="selected" value="">Select</option>
 											<option value="0">Outside Tamilnadu</option>
 											<option value="1">Anywhere in Tamilnadu</option>
@@ -1763,7 +1767,7 @@
             				<div class="form-group">
 								<label class="col-sm-2">District<span class="alert">*</span> </label>
 								<div class="col-sm-3">
-									<select id="add_district" name="add_district" onchange="add_distr_other()">
+									<select id="add_district" name="add_district">
 									<option selected="selected" value=""> Select District </option>
 									<option value="0">Other than Tamilnadu</option>
 									<option value="1">Chennai</option>
@@ -1916,10 +1920,8 @@
 								</div>
 						    <!--button-submit -->
 		                      <div class="loginbox-submit">
-		                      	<a href="<?php echo base_url(); ?>userdashboard/">
-		                          <input type="button" class="btn btn-default btn-medium pull-right" value="Submit & Next">
-		                        </a>  
-		                      </div>
+                                  <input type="submit" class="btn btn-default btn-medium pull-right" value="Submit & Next">
+                              </div>
 		                  </div>   
                        </form>  
                        </div> <!--.profile edit-->
@@ -2044,8 +2046,7 @@
         <script type="text/javascript" src="js/custom.js"></script>
         <!--Mycustom JS code -->
         <script type="text/javascript" src="js/mycustom.js"></script>
-
-    </div>
+        <script type="text/javascript" src="js/fine-uploader.min.js"></script>    </div>
 </body>
 
 </html>
