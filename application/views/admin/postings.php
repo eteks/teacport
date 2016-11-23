@@ -12,19 +12,36 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
+                   <!-- BEGIN THEME CUSTOMIZER-->
+                   <div id="theme-change" class="hidden-phone">
+                       <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                   </div>
+                   <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Teachers Recruit
-                     <small>Master Data</small>
+                     Editable Table
+                     <small>Editable Table Sample</small>
                   </h3>
                    <ul class="breadcrumb">
-                       <li>
-                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                      <li>
+                        <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
-                       <li>
-                           <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
-                       </li>
-                       <li><a href="<?php echo base_url(); ?>admin/district">District</a><span class="divider-last">&nbsp;</span></li>
+                      <li>
+                        <a href="#">Master Data</a> <span class="divider">&nbsp;</span>
+                      </li>
+                      <li>
+                        <a href="<?php echo base_url(); ?>admin/postings">Postings</a>
+                        <span class="divider-last">&nbsp;</span>
+                      </li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -37,7 +54,7 @@ if(!empty($this->session->userdata("login_status"))):
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i> District</h4>
+                            <h4><i class="icon-reorder"></i>Editable Table</h4>
                             <span class="tools">
                                 <a href="javascript:;" class="icon-chevron-down"></a>
                                 <a href="javascript:;" class="icon-remove"></a>
@@ -62,69 +79,75 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 <div class="space15"></div>
-                                <form method="post" action="adminindex/district" class="admin_module_form" id="district_form">
+                                <form method="post" action="adminindex/posting" class="admin_module_form" id="subject_form">
                                   <?php } ?>
                                   <?php
                                   if(!empty($status)) :
-                                    echo "<p class='db_status update_success_md'> $status </p>";
+                                    echo "<p class='db_status'> $status </p>";
                                   endif;
                                   ?> 
-                                  <p class='val_error error_msg_md'> <p>
+                                  <p class='val_error'> <p>
                                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th>District Name</th>
-                                        <th>State</th>
-                                        <th>Status</th>
-                                        <th>Created Date</th>
+                                        <th>Posting Name</th>
+                                        <th>Posting Institution Name</th>
+                                        <th>Posting Status</th>
+                                        <th>Posting Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                       </tr>
                                     </thead>
                                     <tbody>
                                       <?php
-                                      if(!empty($districts_values)) :
+                                      if(!empty($postings_values)) :
                                       $i=0;
-                                      foreach ($districts_values as $dis_val) :
+                                      foreach ($postings_values as $pos_key => $pos_val) :
                                       $i++;
                                       ?>
                                       <tr class="parents_tr" id="column<?php echo $i; ?>">
-                                        <td class="d_name"> 
-                                          <?php echo $dis_val['district_name']; ?>
+                                        <td class="p_name"> 
+                                          <?php echo $pos_val['posting_name']; ?>
                                         </td>
-                                        <td class="d_state_name"> 
-                                          <?php echo $dis_val['state_name']; ?>
-                                          <input type="hidden" value="<?php echo $dis_val['state_id']; ?>" />
+                                        <td class="p_inst_type"> 
+                                          <?php
+                                          foreach ($pos_val['institution_type_id'] as $ins_key => $ins_val) :
+                                          ?>
+                                            <span data-id="<?php echo $ins_key; ?>"> 
+                                              <?php echo $ins_val; ?>
+                                            </span>
+                                            <br>
+                                          <?php
+                                          endforeach;
+                                          ?>  
+                                          <input type="hidden" value="<?php echo $pos_val['posting_institution_id']; ?>" />
                                         </td>
-                                        <td class="d_status"> 
+                                        <td class="p_status"> 
                                           <?php 
-                                          if ($dis_val['district_status'] == 1) 
+                                          if ($pos_val['posting_status'] == 1) 
                                             echo "Active";
                                           else
                                             echo "Inactive";
                                           ?>
-                                          <input type="hidden" value="<?php echo $dis_val['district_status']; ?>" />
+                                          <input type="hidden" value="<?php echo $pos_val['posting_status']; ?>" />
                                         </td>
                                         <td class="created_date">
-                                          <?php echo $dis_val['district_create_date']; ?>
+                                          <?php echo $pos_val['posting_created_date']; ?>
                                         </td>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $dis_val['district_id']; ?>">
+                                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $pos_key; ?>">
                                             Edit
                                           </a>
                                         </td>
                                         <td>
-                                          <a class="ajaxDelete" data-id="<?php echo $dis_val['district_id']; ?>">
-                                          <!-- <a class="ajaxDelete" id="column1" onclick="Confirm.show()" data-id="<?php echo $dis_val['district_id']; ?>"> -->
-                                            Delete
-                                          </a>
+                                          <a class="ajaxDelete" href="javascript:;" data-id="<?php echo $pos_key; ?>">Delete</a>
                                         </td>
                                       </tr>
                                       <?php
                                       endforeach;
                                       endif;
                                       ?>
-                                      </tbody>
+                                    </tbody>
                                   </table>
                                   <?php if(!$this->input->is_ajax_request()) { ?>
                                 </form>
@@ -142,27 +165,26 @@ if(!empty($this->session->userdata("login_status"))):
       <!-- END PAGE -->
    </div>
    <!-- END CONTAINER -->
-   
-    <script>
+   <script>
     // Define default values
-    var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("d_name","d_state_name","d_status"); // Set name of input types
-    var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
-    var table = "admin_table"; // Set classname of table
-    var d_state_name_option = new Array("Please select state");
-    var d_state_name_value = new Array("");
+    var inputType = new Array("text","multiselect","select"); 
+    var columns = new Array("p_name","p_inst_type","p_status"); 
+    var placeholder = new Array("Enter Posting Name","Please select institution"); 
+    var table = "admin_table"; 
+    var p_inst_type_option = new Array();
+    var p_inst_type_value = new Array();
     <?php
-    if(!empty($state_values)) :
-    foreach ($state_values as $sta_val) :
+    if(!empty($institution_values)) :
+    foreach ($institution_values as $ins_val) :
     ?>
-      d_state_name_option.push("<?php echo $sta_val['state_name']; ?>");
-      d_state_name_value.push("<?php echo $sta_val['state_id']; ?>");
+      p_inst_type_option.push("<?php echo $ins_val['institution_type_name']; ?>");
+      p_inst_type_value.push("<?php echo $ins_val['institution_type_id']; ?>");
     <?php
     endforeach;
     endif;
     ?>
-    var d_status_option = new Array("Please select status","Active","Inactive"); 
-    var d_status_value = new Array("","1","0"); 
+    var p_status_option = new Array("Please select status","Active","Inactive"); 
+    var p_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

@@ -27,7 +27,7 @@ if(!empty($this->session->userdata("login_status"))):
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
                      Teachers Recruit
-                     <small>Job Provider</small>
+                     <small>Job Providers</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
@@ -135,17 +135,17 @@ if(!empty($this->session->userdata("login_status"))):
                                         <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
                                       </td>                                      
                                       <td class="edit_section">
-                                        <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup-1">
+                                        <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section">
                                           Edit
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_delete" data-id="<?php echo $pro_val['organization_id']; ?>" href="#myModal1" data-toggle="modal">
+                                        <a class="job_delete" onclick="Confirm.show()" data-id="<?php echo $pro_val['organization_id']; ?>">
                                           Delete
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup-1">
+                                        <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section">
                                           Full View
                                         </a>
                                       </td>
@@ -163,7 +163,7 @@ if(!empty($this->session->userdata("login_status"))):
                 </div>                
             </div>            
             <!---Full View & Edit popup -->
-            <div class="popup" data-popup="popup-1">
+            <div class="popup" data-popup="popup_section">
               <div class="popup-inner">
       				  <div class="widget box blue" id="popup_wizard_section">
                   <div class="widget-title">
@@ -478,7 +478,7 @@ if(!empty($this->session->userdata("login_status"))):
                               <label class="control-label">Organization Logo</label>
                               <span>
                                 <a class="btn upload_option"> Upload </a>
-                                <input class="form-control hidden_upload" type="file" >
+                                <input class="form-control hidden_upload tabfield1 tabfield" name="organization_logo" type="file" >
                                 <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview">
                               </span>
                             </div>
@@ -629,30 +629,11 @@ if(!empty($this->session->userdata("login_status"))):
                   </div>
                 </div>
             		<p>
-                  <a data-popup-close="popup-1" href="#">Close</a>
+                  <a data-popup-close="popup_section" href="#">Close</a>
                 </p>
-                <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+                <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
               </div>
-            </div>
-
-              <!-- Delete Popup -->       
-              <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        			  <div class="modal-dialog">
-        					<div class="modal-content">
-        						<div class="modal-body delete_message_style">
-        							<input type="hidden" name="delete" id="vId" value=""/>
-        							<button type="button" class="close popup_tx" data-dismiss="modal" aria-hidden="true"> &times; </button>
-        							<center class="popup_tx">
-        								<h5> Are you sure you want to delete this item? </h5>
-        							</center>
-        						</div>
-        						<div id="delete_btn" class="modal-footer footer_model_button" >
-        						  <a name="action" class="btn btn-danger popup_btn yes_btn_act" id="popup_btn1" value="Delete">Yes</a>    
-        							<button type="button" class="btn btn-info popup_btn" id="popup_btn" data-dismiss="modal">No</button>
-        						</div>
-        				  </div><!--/row-->
-        				</div>
-            	</div>    	
+            </div>   	
          </div>
          <!-- END PAGE CONTAINER-->
       </div>

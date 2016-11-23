@@ -3975,5 +3975,11 @@ ul li:last-child{
     height: 30px;
     width: 40px;
 }
+#activitties_form .act_email,#activitties_form .act_sms,#activitties_form .act_resume{
+    text-align: center;
+}
+.on_off_button li {
+    cursor: pointer;
+}
 
 /* Ended by siva */
