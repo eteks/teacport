@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6 col-md-3 col-xs-12">
-                        <div class="footer_block"> <a href="index.html" class=""><span style="font-size: 20px;">RECRUIT TEACHERS</span><!-- <img src="images/logo.png" class="img-responsive" alt="logo"> --></a>
+                        <div class="footer_block"> <a href="index.html" class=""><h4><strong style="color: #2ae; font-size: 30px; font-family: 'Kaushan Script', cursive;">Teachers Recruit</strong></h4><!-- <img src="images/logo.png" class="img-responsive" alt="logo"> --></a>
                             <p>Recruit Teachers is a Teaching and Non-Teaching adds and recriutment job portal site for job seekers and job providers.</p>
                         </div>
                     </div>

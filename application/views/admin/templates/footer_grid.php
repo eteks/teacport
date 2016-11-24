@@ -108,7 +108,7 @@
         <script>
            jQuery(document).ready(function() {
               $('.admin_table').dataTable({
-                    // Length of row in grid - row length
+                  // Length of row in grid - row length
                     "lengthMenu": [
                                     [5, 25, 50, -1], 
                                     [5, 25, 50, "All"]
@@ -127,7 +127,6 @@
                             "sNext": "Next" // Change next pagination text
                         }
                     },
-
 
                     // "sScrollX": '100%',
                     // "fixedColumns": true,
@@ -172,8 +171,13 @@
             //     ],
             // select: true
 
-
-
+            });
+           });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.privileges_table').dataTable({
+                "bPaginate": false
             });
            });
         </script>

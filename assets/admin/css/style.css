@@ -688,7 +688,7 @@ form legend {
 }
 
 .widget-body .dataTables_info, .widget-body .dataTables_paginate {
-    margin-top: 5px !important;
+    margin-top: 15px !important;
     padding-bottom: 0px !important;
     margin-bottom: -4px !important;
 }
@@ -3949,7 +3949,9 @@ ul li:last-child{
 }
 #sidebar > ul > li > ul.sub > li.active_sidebar {
     /*background-color: rgba(0,0,0,0.40) !important ;   */
-    background-color: rgba(50,50,50,0.70) !important ;
+    /*background-color: rgba(50,50,50,0.70) !important ;*/
+   background: rgba(0, 0, 0, 0) url("../img/submenu_hover.png") repeat scroll 0 0 !important;
+   border-bottom: 1px solid #3393a2 !important;
     color: #fff !important;
 }
 .tab-content label {
@@ -3983,3 +3985,7 @@ ul li:last-child{
 }
 
 /* Ended by siva */
+
+.sub_module_access{
+    display: none;
+}

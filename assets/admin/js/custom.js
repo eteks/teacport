@@ -341,7 +341,7 @@ $(document).ready(function(){
                   });  
                 }   
                 else{
-                    alert("No data available");
+                    // alert("No data available");
                 }
                 $('#filter_provider_table').find('tbody').html(filter_tag);
             }
@@ -510,10 +510,11 @@ var Confirm = new CustomConfirm();
         var $this = $(this);
         main_module_data = $this.text().toLowerCase();
         module_array[main_module_data] = [];
-        $this.parents('.has-sub').find(".sub_module_data").each(function(){
-            module_array[main_module_data].push($(this).text().toLowerCase());
+        $this.parents('.has-sub').find(".module_details").each(function(){
+            module_array[main_module_data].push({"sub_module":$(this).find('.sub_module_data').text().toLowerCase(),"module_access":$(this).find('.sub_module_access').text().toLowerCase()});
         });
-        module_array.push({[main_module_data]:module_array[main_module_data]}); //[main_module_data] is key and module_array[main_module_data] is array value
+        push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
+        module_array.push(push_data);
     });
     var module_params = {};
     module_params[csrf_name] = csfrData[csrf_name];

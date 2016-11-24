@@ -115,3 +115,16 @@ if ( ! function_exists('get_provider_vacancy_by_qua')){
 		return $out;
 	}
 }
+
+if ( ! function_exists('get_privileges')){
+	function get_privileges($mapped_privileges,$module_id,$operation){
+	  	$results =  array_filter($mapped_privileges,function($value) use($module_id,$operation){
+		    $value[1] = is_array($value[1])?$value[1]:explode(",",$value[1]); 
+		    $value[0] = is_array($value[0])?$value[0]:(array)$value[0];
+		    $result1 = in_array($operation,$value[1]);
+		    $result2 = in_array($module_id,$value[0]); 
+		    return $result1 && $result2;
+		});
+		return $results;
+	}
+}

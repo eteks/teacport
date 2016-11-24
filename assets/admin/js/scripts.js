@@ -1271,8 +1271,8 @@ var App = function () {
 
         jQuery('#forget-btn').click(function () {
 
-            jQuery('#loginform').slideDown(200);
-            jQuery('#forgotform').slideUp(200);
+            // jQuery('#loginform').slideDown(200);
+            // jQuery('#forgotform').slideUp(200);
         });
     }
 

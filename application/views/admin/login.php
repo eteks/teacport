@@ -91,6 +91,11 @@ Website: http://thevectorlab.net/
             </span>
             <input id="input-email" type="text" name="useremail" placeholder="Email"  />
           </div>
+          <div class="">
+               <div class="block-hint pull-right">
+                    <a href="javascript:;" class="" id="cancel">Cancel</a>
+               </div>
+         </div>
         </div>
         <div class="space20"></div>
       </div>

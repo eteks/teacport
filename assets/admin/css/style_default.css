@@ -43,7 +43,7 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
 }
 
 #sidebar > ul > li.active > a{
-    background: rgba(0, 0, 0, 0.10) url("../img/side-bar-list-bg.png");
+    background: rgba(0, 0, 0, 0) url("../img/side-bar-list-bg.png");
 }
 
 #sidebar > ul > li > ul.sub > li > a {
@@ -228,16 +228,16 @@ tr select {
 .error_msg_md{
 	color: #ff0000 !important;
 	font-size: 14px !important;
-	font-weight:500;
+	/*font-weight:500;*/
 	/*background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;*/
 }
 .update_success_md{
-	color: #2c6700 !important;
+	color: #ff0000 !important;
 	font-size: 14px !important;
-	font-weight: 600;
+	/*font-weight: 600;*/
 }
 .popup {
     width:100%;
@@ -388,6 +388,12 @@ tr select {
 }
 .admin_status{
 	color: #ff0000 !important;
+	font-size: 14px !important;
+	background-color: #d9edf7 !important;
+    border-color: #bce8f1 !important;
+    padding: 8px 35px 8px 14px !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    display:none;
 }
 .popup_fade{
 	background: #000000 none repeat scroll 0 0;
@@ -443,8 +449,8 @@ tr select {
 }
 .val_error{
     color: #ff0000 !important;
-	font-size: 13px !important;
-	font-weight: 600;
+	font-size: 14px !important;
+	/*font-weight: 600;*/
 	background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
@@ -536,3 +542,9 @@ tr select {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
     padding: 3px 15px !important;
 }
+.dataTables_length > label {
+    color: #858585 !important;
+    font-size: 13px !important;
+    text-transform: capitalize;
+}
+
