@@ -190,13 +190,13 @@ select:invalid { color: gray; }
 	
 	margin: 5px 10px;
 }
-.footer_section {
+.page_layout .footer_section {
 	width: 450px;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
-.footer{
+.page_layout .footer{
 	background-color: #eee;
 	width: 450px;
 	height: 10px;
