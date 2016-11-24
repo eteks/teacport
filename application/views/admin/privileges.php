@@ -74,16 +74,10 @@
                                     </thead>
                                     <tbody>
                                     <?php
-                                        // echo "<pre>";
-                                        // print_r($admin_modules);
-                                        // echo "</pre>";
                                         if(!empty($admin_modules)) :
                                         foreach ($admin_modules as $mod) :
                                         $mod['module_id'] = is_array($mod['module_id'])?$mod['module_id']:(array)$mod['module_id'];  
                                         $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
-                                        // echo "<pre>";
-                                        // print_r(array_map(null,$mod['module_id'], $mod['sub_module']));
-                                        // echo "</pre>";
                                         $sub_module_data = array_map(null,$mod['module_id'], $mod['sub_module']);
                                     ?>
                                     <!--- First Module Description -->
@@ -102,22 +96,16 @@
                                               $group['access_module_id'] = is_array($group['access_module_id'])?$group['access_module_id']:(array)$group['access_module_id'];  
                                               $group['access_permission'] = is_array($group['access_permission'])?$group['access_permission']:(array)$group['access_permission'];
                                               $mapped_privileges = array_map(null,$group['access_module_id'], $group['access_permission']);
-                                              
                                               $group_id = $group['user_group_id'];
                                               $module_id = $sub[0];
-                                              // array_push($mapped_privileges,$group_id);
-                                              // echo "<pre>";
-                                              // print_r($mapped_privileges);
-                                              // echo "</pre>";
-
                                             ?>
                                                 <td class="admin_options module_inner_data">
                                                   <input type="hidden" name="group_id" class="group_id" value="<?php echo $group['user_group_id']?>">
                                                 	<select data-placeholder="Select Options" class="chosen span6 access_operation" multiple="multiple" tabindex="6" name="access_operation[]">
-        			                                       <option value="add">Add</option>
-        			                                       <option value="edit">Edit</option>
-                                                     <option value="delete">Delete</option>
-        			                                       <option value="view">View</option>
+        			                                       <option value="add" <?php $result = get_privileges($mapped_privileges,$module_id,"add"); if(!empty($result)) echo "selected";?>>Add</option>
+        			                                       <option value="edit" <?php $result = get_privileges($mapped_privileges,$module_id,"edit"); if(!empty($result)) echo "selected";?>>Edit</option>
+                                                     <option value="delete" <?php $result = get_privileges($mapped_privileges,$module_id,"delete"); if(!empty($result)) echo "selected";?>>Delete</option>
+        			                                       <option value="view" <?php $result = get_privileges($mapped_privileges,$module_id,"view"); if(!empty($result)) echo "selected";?>>View</option>
         			                                     </select>
         										                    </td>
                                             <?php 
