@@ -176,7 +176,7 @@ if(!empty($this->session->userdata("login_status"))):
                                 <a href="#tab2" data-toggle="tab">Vacancies Pre-Requisite</a>
                               </li>
                               <li>
-                                <a href="#tab4" data-toggle="tab">Vacancies Instructions</a>
+                                <a href="#tab3" data-toggle="tab">Vacancies Instructions</a>
                               </li>
                             </ul>
                           </div>
@@ -302,27 +302,13 @@ if(!empty($this->session->userdata("login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Vacancies Medium</label>
                               <span class="dynamic_data"> 
-                                <?php echo $provider_full_profile['subscription_plan']; ?>
+                                <?php echo $vac_val['vacancies_medium']; ?>
                               </span>                         
                             </div>
                             <div class="span6 control-group">
                               <label class="control-label">Accommodation Info</label>
                               <span class="dynamic_data"> 
                                 <?php echo $vac_val['vacancies_accommodation_info']; ?>
-                              </span>
-                            </div>
-                          </div>
-                          <div class="span12">
-                            <div class="span6 control-group">                                       
-                              <label class="control-label">Subcription Features</label>
-                              <span class="dynamic_data"> 
-                                <?php echo $provider_full_profile['subscription_features']; ?>
-                              </span>
-                            </div>
-                            <div class="span6 control-group">
-                              <label class="control-label">Instruction</label>
-                              <span class="dynamic_data"> 
-                                <?php echo $vac_val['vacancies_instruction']; ?>
                               </span>
                             </div>
                           </div>
@@ -337,6 +323,14 @@ if(!empty($this->session->userdata("login_status"))):
                               <label class="control-label">Interview End Date</label>
                               <span class="dynamic_data"> 
                                 <?php echo $vac_val['vacancies_end_date']; ?>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label">Instruction</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['vacancies_instruction']; ?>
                               </span>
                             </div>
                           </div>
@@ -364,7 +358,25 @@ if(!empty($this->session->userdata("login_status"))):
                             <div class="span6 control-group">
                               <label class="control-label">Organization Name</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['organization_name']; ?>" name="org_name" class="span6 tabfield1 tabfield" />
+                                <select name="org_name" class="tabfield1 tabfield">
+                                  <option value=""> Please select organization </option>
+                                  <?php
+                                  if(!empty($org_values)) :
+                                  foreach ($org_values as $org_val) :
+                                  ?>
+                                    <?php
+                                    if($org_val['organization_id']==$vac_val['vacancies_organization_id']) {
+                                      echo '<option value='.$org_val["organization_id"].' selected> '.$org_val["organization_name"].' </option>';
+                                    }
+                                    else {
+                                      echo '<option value='.$org_val["organization_id"].'> '.$org_val["organization_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$vac_val['vacancies_organization_id'].' selected> "'.$vac_val['organization_name'].'" </option>';
+                                  endif;
+                                    ?>
+                                </select>   
                               </span>
                             </div>
                           </div>
@@ -461,7 +473,7 @@ if(!empty($this->session->userdata("login_status"))):
                               <label class="control-label">Class Level</label>
                               <span>
                                 <select name="vac_class" class="span6 tabfield2 tabfield">
-                                <option> Please select class level </option>
+                                <option value=""> Please select class level </option>
                                 <?php
                                 if(!empty($class_levels)) :
                                 foreach ($class_levels as $cls_val) :
@@ -485,7 +497,7 @@ if(!empty($this->session->userdata("login_status"))):
                               <label class="control-label">University Board Name</label>
                               <span>
                                 <select name="vac_univ_name" class="span6 tabfield2 tabfield">
-                                  <option> Please select University </option>
+                                  <option value=""> Please select University </option>
                                   <?php
                                   if(!empty($university_values)) :
                                   foreach ($university_values as $unv_val) :
@@ -511,7 +523,7 @@ if(!empty($this->session->userdata("login_status"))):
                               <label class="control-label">Subject Name</label>
                               <span>
                                 <select name="vac_sub_name" class="span6 tabfield2 tabfield">
-                                  <option> Please select Subject </option>
+                                  <option value=""> Please select Subject </option>
                                   <?php
                                   if(!empty($subject_values)) :
                                   foreach ($subject_values as $sub_val) :

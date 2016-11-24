@@ -3975,11 +3975,96 @@ ul li:last-child{
     height: 30px;
     width: 40px;
 }
-#activitties_form .act_email,#activitties_form .act_sms,#activitties_form .act_resume{
-    text-align: center;
-}
+
 .on_off_button li {
     cursor: pointer;
 }
 
-/* Ended by siva */
+/* Datatable Css to add checkbox with columns for columns visibility start */
+
+.dt-button-collection a.buttons-columnVisibility:before,
+.dt-button-collection a.buttons-columnVisibility.active span:before {
+    display:block;
+    position:absolute;
+    top:1.2em;
+    left:0;
+    width:12px;
+    height:12px;
+    box-sizing:border-box;
+}
+
+.dt-button-collection a.buttons-columnVisibility:before {
+    content:' ';
+    margin-top:-6px;
+    margin-left:10px;
+    border:1px solid black;
+    border-radius:3px;
+}
+
+.dt-button-collection a.buttons-columnVisibility.active span:before {
+    content:'\2714';
+    margin-top:-11px;
+    margin-left:12px;
+    text-align:center;
+    text-shadow:1px 1px #DDD, -1px -1px #DDD, 1px -1px #DDD, -1px 1px #DDD;
+}
+
+.dt-button-collection a.buttons-columnVisibility span {
+    margin-left:20px;    
+}
+.export_button {
+    background: #e8e8e8 !important;
+    border-radius: 0 !important;
+    position: absolute !important;
+    top: -40px;
+    margin-left: -30px;
+    margin-left: -30px;
+    padding: 3px 12px !important;
+    right: 0;
+    top: -53px;
+}
+.colvis_button {
+    background: #e8e8e8 !important;
+    border-radius: 0 !important;
+    position: absolute !important;
+    top: -40px;
+    margin-left: -30px;
+    margin-left: -30px;
+    padding: 3px 12px !important;
+    right: 80px;
+    top: -53px;
+}
+.colvis_button:hover  {
+    background: #e8e8e8 !important;
+    border :1px solid #999 !important;
+}
+.export_button:hover {
+    background: #e8e8e8 !important;
+    border :1px solid #999 !important;
+}
+.dt-buttons {
+    float: right !important;
+}
+.export_options {
+    border : none !important;
+    background : none !important;
+}
+.export_options:hover {
+    background: #e8e8e8 !important;
+}
+.dt-button-collection {
+    border-radius: 0 !important;
+}
+.buttons-columnVisibility {
+    background : none !important;
+    border : none !important;
+    box-shadow: none !important;
+}
+.buttons-columnVisibility:hover {
+    background: #e8e8e8 !important;
+}
+/* Datatable Css to add checkbox with columns for columns visibility end */
+
+
+
+/* Ended by siva 

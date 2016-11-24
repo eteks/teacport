@@ -177,7 +177,7 @@ class Admin_Model extends CI_Model {
     // Update data
     if($status=='update') {
       // $qualification_get_where = '(educational_qualification="'.$this->input->post('educational_qualification').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'")';
-      $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualification_course_type =" . "'" . $this->input->post('q_course_type') . "' AND q_inst_type =" . "'" . $this->input->post('educational_qualifcation_inst_type_id') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
+      $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualification_course_type =" . "'" . $this->input->post('q_course_type') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
 
 
       $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);

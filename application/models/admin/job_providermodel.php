@@ -17,6 +17,7 @@ class Job_Providermodel extends CI_Model {
     if($status=='update') {
       $profile_update_data = array( 
                               'organization_name' => $this->input->post('organization_name'),
+                              'organization_logo' => $this->input->post('organization_logo'),
                               'organization_status' => $this->input->post('organization_status'),
                               'registrant_designation' => $this->input->post('registrant_designation'),
                               'registrant_date_of_birth' => $this->input->post('registrant_dob'),
@@ -67,6 +68,57 @@ class Job_Providermodel extends CI_Model {
 
   // Job provider profile
   public function get_provider_vacancy($status) {
+
+
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+    // Update data
+    if($status=='update') {
+      $vacancy_get_where   = "vacancies_organization_id =" . "'" . $this->input->post('org_name') . "' AND vacancies_job_title =" . "'" . $this->input->post('job_title') . "' AND vacancies_id NOT IN (". $this->input->post('rid').")";
+      $vacancy_get = $this->db->get_where('tr_organization_vacancies',$vacancy_get_where);
+      if($vacancy_get -> num_rows() > 0 ) {
+        $model_data['status'] = "Already exists";
+        $model_data['error'] = 1;
+      }
+      else {
+        $vacancy_update_data = array( 
+                                'vacancies_job_title' => $this->input->post('job_title'),
+                                'vacancies_organization_id' => $this->input->post('org_name'),
+                                'vacancies_available' => $this->input->post('vac_available'),
+                                'vacancies_open_date' => $this->input->post('vac_open_date'),
+                                'vacancies_close_date' => $this->input->post('vac_end_date'),
+                                'vacancies_start_salary' => $this->input->post('job_min_salary'),
+                                'vacancies_end_salary' => $this->input->post('job_max_salary'),
+                                'vacancies_status' => $this->input->post('vac_status'),
+                                'vacancies_qualification_id' => $this->input->post('qualification_name'),
+                                'vacancies_experience' => $this->input->post('vac_experience'),
+                                'vacancies_class_level_id' => $this->input->post('vac_class'),
+                                'vacancies_university_board_id' => $this->input->post('vac_univ_name'),
+                                'vacancies_subject_id' => $this->input->post('vac_sub_name'),
+                                'vacancies_medium' => $this->input->post('vac_medium'),
+                                'vacancies_accommodation_info' => $this->input->post('vac_accom'),
+                                'vacancies_instruction' => $this->input->post('vac_instruction'),
+                                'vacancies_interview_start_date' => $this->input->post('vac_inter_sdate'),
+                                'vacancies_end_date' => $this->input->post('vac_inter_edate')
+                              );
+        $vacancy_update_where = '( vacancies_id="'.$this->input->post('rid').'")'; 
+        $this->db->set($vacancy_update_data); 
+        $this->db->where($vacancy_update_where);
+        $this->db->update("tr_organization_vacancies", $vacancy_update_data); 
+        $model_data['status'] = "Updated Successfully";
+        $model_data['error'] = 2;
+      }
+    }
+
+    // Delete data
+    else if($status =='delete') {
+      $vacancy_delete_where = '(vacancies_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_organization_vacancies", $vacancy_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
     $this->db->select('*');
     $this->db->from('tr_organization_vacancies ov');
     $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
@@ -152,6 +204,7 @@ class Job_Providermodel extends CI_Model {
       else {
         $ads_update_data = array( 
                                 'premium_ads_name' => $this->input->post('ads_name'),
+                                'ads_image_path' => $this->input->post('ads_logo'),
                                 'organization_id' => $this->input->post('org_name'),
                                 'ad_visible_days' => $this->input->post('ads_days'),
                                 'is_admin_verified' => $this->input->post('admin_verify'),
@@ -181,6 +234,8 @@ class Job_Providermodel extends CI_Model {
     $model_data['provider_ads'] = $this->db->order_by('pa.premium_ads_id','desc')->get()->result_array();
     return $model_data;
   }
+
+
 
   // Job provider profile - ajax
   public function get_full_provider_ads($value) {

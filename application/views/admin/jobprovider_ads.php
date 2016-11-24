@@ -203,6 +203,7 @@ if(!empty($this->session->userdata("login_status"))):
                               <a class="btn upload_option"> Upload </a>
                               <input class="form-control hidden_upload" name="ads_logo" type="file">
                               <img src="<?php echo base_url().$activities_details['ads_image_path']; ?>" class="popup_preview">
+                              <input type="hidden" value="<?php echo $activities_details['ads_image_path']; ?>" name="old_file_path" />
                             </span>
                           </div>
                         </div>
@@ -254,7 +255,7 @@ if(!empty($this->session->userdata("login_status"))):
                             <label class="control-label"> Premium Status </label>
                             <span class="dynamic_data"> 
                               <select name="ads_status">
-                                <option> Please select status </option>
+                                <option value=""> Please select status </option>
                                 <option value="1" <?php if($activities_details['premium_ads_status']==1) echo "selected"; ?>> Active </option>
                                 <option value="0" <?php if($activities_details['premium_ads_status']==0) echo "selected"; ?>> Inactive </option>
                               </select>

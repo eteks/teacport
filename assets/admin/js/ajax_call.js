@@ -47,17 +47,22 @@ $(document).ready(function(){
     // Admin Form
     $('.admin_form').on('submit',function(e) {
         e.preventDefault();
-        var form_data = $(this).serialize();
+        var form_data = new FormData(this);
         var this_status = $(this).find('.admin_status');
         var this_popup = $(this).parents('.popup').data('popup');
         var this_table_content = $(this).parents('#main-content').find('.table_content_section');
         var this_popup_content = $(this).find('.tab-content');
         var action = $(this).data('mode');
+        form_data.append(csrf_name,csfrData[csrf_name]);
+        form_data.append('action',action);
         $.ajax({
             type : "POST",
             url : admin_baseurl+$(this).attr('action'),
             dataType : 'json',
-            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
+            data : form_data,
+                 contentType: false,       // The content type used when sending data to the server.
+        cache: false,             // To unable request pages to be cached
+        processData:false,
             success: function(res) {
                 if(res.error == 1) {
                     this_status.html(res.status);
@@ -159,7 +164,6 @@ function handleFormWizards() {
                             $('#rootwizard').find('.pager .next').show();
                             $('#rootwizard').find('.pager .finish').hide();
                         }
-
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
@@ -179,41 +183,16 @@ function handleFormWizards() {
 		                for (var i = 0; i < index; i++) {
 		                    jQuery(li_list[i]).addClass("done");
 		                }                        
-                    }           
+                    }  
+
                     if(return_val == 0) {
                         return false;
                     }
                     else {
                         return true;
                     }
-
-                // var total = navigation.find('li').length;
-                // var current = index + 1;
-                // // set wizard title
-                // $('.step-title', $('#popup_wizard_section')).text('Step ' + (index + 1) + ' of ' + total);
-                // // set done steps
-                // jQuery('li', $('#popup_wizard_section')).removeClass("done");
-                // var li_list = navigation.find('li');
-                // for (var i = 0; i < index; i++) {
-                //     jQuery(li_list[i]).addClass("done");
-                // }
-
-                // if (current == 1) {
-                //     $('#popup_wizard_section').find('.button-previous').hide();
-                // } else {
-                //     $('#popup_wizard_section').find('.button-previous').show();
-                // }
-
-                // if (current >= total) {
-                    // $('#popup_wizard_section').find('.button-next').hide();
-                    // $('#popup_wizard_section').find('.button-submit').show();
-                // } else {
-                    // $('#popup_wizard_section').find('.button-next').show();
-                    // $('#popup_wizard_section').find('.button-submit').hide();
-                // }
-                // App.scrollTo($('.page-title'));
                 },
-                onPrevious: function (tab, navigation, index) {
+            onPrevious: function (tab, navigation, index) {
                 var total = navigation.find('li').length;
                 var current = index + 1;
                 // set wizard title
@@ -251,14 +230,20 @@ function tabmenu_ci_validation(value) {
     }
     else {
         var this_index = "end";  
-        var form_data = this_form.find('.tabfield').serialize();
+        var form_data = new FormData();
+        this_form.find('.tabfield').each(function() {
+            if($(this).attr('type') == 'file') {
+                form_data.append($(this).attr('name'),$(this)[0].files[0]); 
+            }
+            else {
+                form_data.append($(this).attr('name'),$(this).val());
+            }
+        });
     }
     form_data.append(csrf_name,csfrData[csrf_name]);
     form_data.append('action',this_mode);
     form_data.append('index',this_index);
     form_data.append('rid',rid);
-
-    // alert(form_data);
 
     var return_val = "" ;
     $.ajax({
