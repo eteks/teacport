@@ -219,7 +219,32 @@ select:invalid { color: gray; }
     height: 22px;
     position: relative;
 }
-
+/*Form validation css for job seeker added by thangam*/
+.error{
+color: red;
+font-size: 13px;
+}
+.error_test {
+  color :red ;
+  font-size : 12px; 
+  display : none;
+}
+.error_mobile {
+  color :red ;
+  font-size : 12px; 
+  display : none;
+}
+.error_input_field {
+  /*background: #ffebeb !important;*/
+    box-shadow: 0 0 5px #ff0000;
+	padding: 3px 0px 3px 3px;
+  	margin: 5px 1px 3px 0px;
+  	border: 1px solid #ff0000;
+}
+.error_input_field_mobile {
+   border:1px solid red !important;
+}
+/*....end....*/
 
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {
