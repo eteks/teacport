@@ -152,17 +152,23 @@ class Admin_users_model extends CI_Model {
             $array = array();
             foreach ($value as $record) {
               $array['main_module'] = $key;
-              $array['sub_module'] = $record;
+              $array['sub_module'] = $record['sub_module'];
+              $array['operation_available'] = $record['module_access'];
               array_push($full_map_array, $array);
             }
           }
         }
-
         //Here insert_batch is a inbuilt function to store the set of records into database in a single query at the same time
         // $this->db->insert_batch('tr_admin_modules', $full_map_array);
 
         //Here insert_on_duplicate_update_batch is also a inbuilt function, it ignores the insertion when duplicate record found. To use this function we have to download two files MY_Loader.php and MY_DB_mysql_driver.php and place in folder application/core
+        $this->db->trans_start();
         $this->db->insert_on_duplicate_update_batch('tr_admin_modules', $full_map_array);
+        $this->db->trans_complete();
+        if($this->db->trans_status() === FALSE)
+          return "failure";
+        else 
+          return "success";
     }
     //Get all the admin modules to assign priveleges for each user
     public function get_all_modules(){
