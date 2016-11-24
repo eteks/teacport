@@ -64,7 +64,7 @@ class Job_provider extends CI_Controller {
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
 		/* Registration page loading with out posted data */
-		if(!$_POST){
+		if(!$_POST){						
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$data['fbloginurl'] = $common->facebookloginurl();
