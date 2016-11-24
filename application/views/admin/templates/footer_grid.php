@@ -62,6 +62,8 @@
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.peity.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/uniform/jquery.uniform.min.js"></script>
 
+
+        <!-- Datatable plugin start -->
         <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script> -->
          <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script>
@@ -75,12 +77,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
 
-
-
-
-
-
-
+        <!-- Datatable plugin end -->
 
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>  
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-daterangepicker/date.js"></script>
@@ -174,7 +171,13 @@
                                             ],
                                 },                         
                             ]
-
+            });
+           });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.privileges_table').dataTable({
+                "bPaginate": false
             });
            });
         </script>

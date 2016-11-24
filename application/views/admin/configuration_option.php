@@ -45,7 +45,7 @@ if(!empty($this->session->userdata("login_status"))):
                         </div>
                         <div class="widget-body form">
                           <form action="admin_users/edit_profile_validation" class="form-horizontal admin_login_form" method="POST">
-                            <!-- <p class="admin_status"> </p> -->
+                            <p class="admin_status"> </p>
 	                          <div class="control-group">
 	                            <label class="control-label">Facebook Page URL</label>
 	                            <div class="controls">
@@ -79,10 +79,10 @@ if(!empty($this->session->userdata("login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Enable Facebook Login</label>
 	                            <div class="controls">
-	                              <select class="span6 " tabindex="1">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                 </select>
+	                              <ul class="on_off_button on_off_button_j">
+	                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
+	                              	<li data-value="0"><a href="#">No</a></li>
+	                              </ul>
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -100,11 +100,11 @@ if(!empty($this->session->userdata("login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Enable Twitter Log In</label>
 	                            <div class="controls">
-	                              <select class="span6 " tabindex="1">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                 </select>
-	                             </div>
+	                              <ul class="on_off_button on_off_button_j">
+	                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
+	                              	<li data-value="0"><a href="#">No</a></li>
+	                              </ul>
+	                            </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Twitter Key</label>
@@ -121,10 +121,10 @@ if(!empty($this->session->userdata("login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Enable LinkedIn Log In</label>
 	                            <div class="controls">
-	                              <select class="span6 " tabindex="1">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                 </select>
+	                              <ul class="on_off_button on_off_button_j">
+	                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
+	                              	<li data-value="0"><a href="#">No</a></li>
+	                              </ul>
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -142,19 +142,19 @@ if(!empty($this->session->userdata("login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Enable ZIP Field</label>
 	                            <div class="controls">
-	                              <select class="span6 " tabindex="1">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                 </select>
+	                              <ul class="on_off_button on_off_button_j">
+	                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
+	                              	<li data-value="0"><a href="#">No</a></li>
+	                              </ul>
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Enable ZIP Distance Search</label>
 	                            <div class="controls">
-	                              <select class="span6 " tabindex="1">
-                                    <option value="Yes">Yes</option>
-                                    <option value="No">No</option>
-                                 </select>
+	                              <ul class="on_off_button on_off_button_j">
+	                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
+	                              	<li data-value="0"><a href="#">No</a></li>
+	                              </ul>
 	                             </div>
 	                          </div>
 	                          <div class="form-actions">

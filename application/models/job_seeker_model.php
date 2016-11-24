@@ -11,7 +11,7 @@ class Job_seeker_model extends CI_Model {
 		$checkquery = $this->db->get_where('tr_candidate_profile', array(
             'candidate_email' => $data['candidate_email'],
         ));
-		$count = $checkquery->num_rows();
+        $count = $checkquery->num_rows();		
 		/*check wheather data exist or not */
 		if ($count === 0) {
 			/* data not exist and insert to database and return verification message */

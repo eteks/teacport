@@ -10,6 +10,9 @@ $(document).ready(function(){
             success: function(res) {
                 if(res != 'login_success') {
                    this_status.html(res);
+                $('.admin_status').html(res.status);
+                $('.admin_status').slideDown(350);
+                $('.admin_status').fadeOut(3000);
                 }
                 else {
                    window.location.href = admin_baseurl+"dashboard";
@@ -134,14 +137,10 @@ $(document).ready(function(){
                 }
             }
         });
-    });
-    
-
+    });  
 
 
 }); // End document
-
-
 
 // Popup with tab menu
 function handleFormWizards() {
@@ -301,10 +300,18 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
     e.preventDefault();
   });
   
+ //Login page
    $('#forget-password').on("click", function(){
    	   $("#admin_login_form").hide();
    	   $("#forgotform").show();
    });
+   
+   $('#cancel').on("click", function(){
+   	   $("#forgotform").hide();
+   	   $("#admin_login_form").show();
+   });
+
+//Delete Popup Function
   function deletePost(id) {
     var db_id = id.replace("post_", "");
     // Run Ajax request here to delete post from database
@@ -345,3 +352,4 @@ function CustomConfirm() {
 }
 
 var Confirm = new CustomConfirm();
+//End of delete popup menu

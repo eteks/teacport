@@ -164,19 +164,28 @@ if(!empty($this->session->userdata("login_status"))):
                     <?php
                     if(!empty($provider_full_vacancies)) :
                     ?>
-                    <div id="rootwizard">
-                      <div class="navbar">
+                    <div id="rootwizard"  class="form-wizard">
+                      <div class="navbar steps">
                         <div class="navbar-inner">
                           <div class="container">
-                            <ul>
-                              <li>
-                                <a href="#tab1" data-toggle="tab">Vacancies Details</a>
+                            <ul class="row-fluid nav nav-pills">
+                              <li class="span4">
+                                <a href="#tab1" data-toggle="tab" class="step active">
+                                	<span class="number">1</span>
+                                    <span class="desc"><i class="icon-ok"></i>Vacancies Details</span>
+                                </a>
                               </li>
-                              <li>
-                                <a href="#tab2" data-toggle="tab">Vacancies Pre-Requisite</a>
+                              <li class="span4">
+                                <a href="#tab2" data-toggle="tab" class="step">
+                                	<span class="number">2</span>
+                                    <span class="desc"><i class="icon-ok"></i>Vacancies Pre-Requisite</span>
+                                </a>
                               </li>
-                              <li>
-                                <a href="#tab3" data-toggle="tab">Vacancies Instructions</a>
+                              <li class="span4">
+                                <a href="#tab3" data-toggle="tab" class="step">
+                                	<span class="number">3</span>
+                                    <span class="desc"><i class="icon-ok"></i>Vacancies Instructions</span>
+                                </a>
                               </li>
                             </ul>
                           </div>
@@ -618,7 +627,7 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
-      </div>
+      </div> 
       <!-- END PAGE -->
   </div>
 <?php include "templates/footer_grid.php" ?>

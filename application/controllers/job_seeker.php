@@ -16,7 +16,6 @@ class Job_seeker extends CI_Controller {
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
-			$data['glogin_url'] = $common->googleloginurl();
 			$this->load->view('job-seekers-login',$data);
 		}
 		else {
@@ -33,7 +32,6 @@ class Job_seeker extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
-   				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('job-seekers-login',$fb);
 			}
 			else{
@@ -50,7 +48,6 @@ class Job_seeker extends CI_Controller {
 				else{
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    					$fb['fbloginurl'] = $common->facebookloginurl();
-   					$fb['glogin_url'] = $common->googleloginurl();
 					$this->load->view('job-seekers-login',$fb);
 				}
 			}
@@ -68,7 +65,6 @@ class Job_seeker extends CI_Controller {
 		/* Registration page loading with out posted data */
 		if(!$_POST){
 			$data['fbloginurl'] = $common->facebookloginurl();
-			$data['glogin_url'] = $common->googleloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
@@ -92,7 +88,6 @@ class Job_seeker extends CI_Controller {
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['glogin_url'] = $common->googleloginurl();
 				$this->load->view('register-job-seekers',$fb);	
 	        }
 			else
@@ -103,10 +98,11 @@ class Job_seeker extends CI_Controller {
 					'candidate_institution_type' => $this->input->post('candidate_institution_type'),
 					'candidate_name' => $this->input->post('candidate_name'),
 					'candidate_email' => $this->input->post('candidate_email'),
-					'candidate_mobile_no' => $this->input->post('candidate_mobile'),
-					'captcha_value' => $this->input->post('captcha_value'),
-					'candidate_password' => $common->generateStrongPassword()
+					'candidate_mobile_no' => $this->input->post('candidate_mobile_no'),
+					'candidate_registration_type' => 'teacherrecruit',
+					'candidate_password' => $common->generateStrongPassword(),
 				);
+				
 			 	/* Check whether data exist or not.exist or not condition handled in job_provider_model.php */
 				if($this->job_seeker_model->create_job_seeker($data) === 'inserted'){
 					/* Data are not exist stage */
@@ -122,11 +118,10 @@ class Job_seeker extends CI_Controller {
 					/* Check whether mail send or not*/
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Resitration Successful!. Check your email address!!';	
+						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
 	       				$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						$fb['glogin_url'] = $common->googleloginurl();
 						$this->load->view('job-seekers-login',$fb);
 					}
 					else{
@@ -147,7 +142,6 @@ class Job_seeker extends CI_Controller {
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['glogin_url'] = $common->googleloginurl();
 					$this->load->view('register-job-seekers',$fb);
 				}
 				
@@ -161,18 +155,20 @@ class Job_seeker extends CI_Controller {
 		$this->session->set_userdata('captcha_info', $data);
 		echo $data_value;
 	}
+
 	public function validate_captcha(){
-		$data = $this->captcha->main();
-		$data_value = $data['image_src'];
-		$this->session->set_userdata('captcha_info', $data);
-    if($this->input->post('captcha_value') != $this->session->userdata['captcha_config'])
-    {
-        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
-        return false;
-    }else{
-        return true;
-    }
-}
+		$entereddata = $this->input->post('captcha_value');
+		$session_captcha = $this->session->userdata['captcha_info'];
+	    if($entereddata != $session_captcha['code'])
+	    {
+	        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
+	        return FALSE;
+			
+	    }else{
+	        return TRUE;
+	    }
+	}
+
 	public function dashboard()
     {
     	$session_data = $this->session->all_userdata();

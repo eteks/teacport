@@ -263,8 +263,8 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li <?php if($this->uri->segment(2) == 'dashboard') echo "class='active_sidebar'"; ?>>
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="">
-                                <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data">Dashboard</span>
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="module_details">
+                                <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data">Dashboard</span><span class="sub_module_access">view</span>
                             <!-- <span class="arrow"></span> -->
                             </a>
                         </li>
@@ -287,9 +287,9 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'user_groups') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/user_groups"><span class="sub_module_data">User Groups</span></a></li>
-                        <li <?php if($this->uri->segment(2) == 'user_accounts') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/user_accounts"><span class="sub_module_data">User Accounts</span></a></li>
-                        <li <?php if($this->uri->segment(2) == 'privileges') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/privileges"><span class="sub_module_data">Privileges</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'user_groups') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/user_groups"><span class="sub_module_data">User Groups</span><span class="sub_module_access">add,edit,delete,view</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'user_accounts') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/user_accounts"><span class="sub_module_data">User Accounts</span><span class="sub_module_access">add,edit,delete,view</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'privileges') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/privileges"><span class="sub_module_data">Privileges</span><span class="sub_module_access">edit,view</span></a></li>
                     </ul>
                 </li>
 
@@ -310,37 +310,37 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li <?php if($this->uri->segment(2) == 'state') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/state"><span class="sub_module_data">State</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/state"><span class="sub_module_data">State</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'district') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/district"><span class="sub_module_data">District</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/district"><span class="sub_module_data">District</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'institution_types') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/institution_types"><span class="sub_module_data">Institution Type</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/institution_types"><span class="sub_module_data">Institution Type</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'extra_curricular') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/extra_curricular"><span class="sub_module_data">Extra-Curricular</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/extra_curricular"><span class="sub_module_data">Extra-Curricular</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'languages') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/languages"><span class="sub_module_data">Languages</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/languages"><span class="sub_module_data">Languages</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'qualification') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/qualification"><span class="sub_module_data">Qualification</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/qualification"><span class="sub_module_data">Qualification</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'class_level') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/class_level"><span class="sub_module_data">Class Level</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/class_level"><span class="sub_module_data">Class Level</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'departments') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/departments"><span class="sub_module_data">Department</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/departments"><span class="sub_module_data">Department</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'subject') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/subject"><span class="sub_module_data">Subject</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/subject"><span class="sub_module_data">Subject</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'university') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/university">University / Board</a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/university"><span class="sub_module_data">University / Board</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'postings') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/postings">Job <span class="sub_module_data">Posting Details</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/postings">Job <span class="sub_module_data">Posting Details</span><span class="sub_module_access">add,edit,delete,view</span></a>
                         </li>
                     </ul>
                 </li>
@@ -362,26 +362,31 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li <?php if($this->uri->segment(2) == 'job_provider_profile') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_profile">
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/job_provider_profile">
                                 <span class="sub_module_data">Profile</span>
+                                <span class="sub_module_access">edit,delete,view</span>
                             </a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'job_provider_vacancies') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
                                 <span class="sub_module_data">Vacancies Posted</span>
+                                <span class="sub_module_access">edit,delete,view</span>
                             </a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'jobprovider_activities') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_activities">
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/jobprovider_activities">
                                 <span class="sub_module_data">Organization Activities</span>
+                                <span class="sub_module_access">edit,delete,view</span>
                             </a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'jobprovider_mailstatus') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_mailstatus"><span class="sub_module_data">Approved Job Mail Status</span></a>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/jobprovider_mailstatus"><span class="sub_module_data">Approved Job Mail Status</span>
+                            <span class="sub_module_access">view</span></a>
                         </li>
                         <li <?php if($this->uri->segment(2) == 'jobprovider_ads') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/jobprovider_ads">
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/jobprovider_ads">
                                 <span class="sub_module_data">Ads Posted</span>
+                                <span class="sub_module_access">edit,delete,view</span>
                             </a>
                         </li>
                     </ul>
@@ -403,9 +408,9 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'job_seeker_profile') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/job_seeker_profile"><span class="sub_module_data">Profile</span></a></li>
-                        <li <?php if($this->uri->segment(2) == 'job_seeker_preference') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/job_seeker_preference"><span class="sub_module_data">Job Preferences</span></a></li>                    
-                        <li <?php if($this->uri->segment(2) == 'job_seeker_applied') echo "class='active_sidebar'"; ?>><a class="" href="<?php echo base_url(); ?>admin/job_seeker_applied"><span class="sub_module_data">Job Applied</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'job_seeker_profile') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/job_seeker_profile"><span class="sub_module_data">Profile</span><span class="sub_module_access">edit,delete,view</span></a></li>
+                        <li <?php if($this->uri->segment(2) == 'job_seeker_preference') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/job_seeker_preference"><span class="sub_module_data">Job Preferences</span><span class="sub_module_access">edit,delete,view</span></a></li>                    
+                        <li <?php if($this->uri->segment(2) == 'job_seeker_applied') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/job_seeker_applied"><span class="sub_module_data">Job Applied</span><span class="sub_module_access">edit,delete,view</span></a></li>
                     </ul>
                 </li>
 
@@ -426,8 +431,8 @@ Website: http://thevectorlab.net/
                     </a>
                     <ul class="sub">
                         <li <?php if($this->uri->segment(2) == 'subscription_plans') echo "class='active_sidebar'"; ?>>
-                            <a class="" href="<?php echo base_url(); ?>admin/subscription_plans">
-                                <span class="sub_module_data">Plan Creation & Maintanence</span>
+                            <a class="module_details" href="<?php echo base_url(); ?>admin/subscription_plans">
+                                <span class="sub_module_data">Plan Creation & Maintanence</span><span class="sub_module_access">add,edit,delete,view</span>
                             </a>
                         </li>
                     </ul>
@@ -439,10 +444,10 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/payment_gateway"><span class="sub_module_data">Payment Gateway Setting</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/sms_gateway"><span class="sub_module_data">SMS Gateway Setting</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/configuration_option"><span class="sub_module_data">Configuration Option</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/template_logo"><span class="sub_module_data">Template Logo</span></a></li> 
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/payment_gateway"><span class="sub_module_data">Payment Gateway Setting</span><span class="sub_module_access">view</span></a></li>
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/sms_gateway"><span class="sub_module_data">SMS Gateway Setting</span><span class="sub_module_access">view</span></a></li>
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/configuration_option"><span class="sub_module_data">Configuration Option</span><span class="sub_module_access">view</span></a></li>
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/template_logo"><span class="sub_module_data">Template Logo</span><span class="sub_module_access">view</span></a></li> 
                     </ul>
                 </li>
                 <li class="has-sub">
@@ -451,9 +456,9 @@ Website: http://thevectorlab.net/
                         <span class="arrow"></span>
                     </a>
                     <ul class="sub">
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Feedback Form</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Site Visits Tracking</span></a></li>
-                        <li><a class="" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li>
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/feedback_form"><span class="sub_module_data">Feedback Form</span><span class="sub_module_access">edit,delete,view</span></a></li>
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/site_visit_tracking"><span class="sub_module_data">Site Visits Tracking</span><span class="sub_module_access">view</span></a></li>
+                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li>
                     </ul>
                 </li>            
             </ul>
