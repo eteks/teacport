@@ -260,6 +260,7 @@ font-size: 13px;
   	margin: 5px 1px 3px 0px;
   	border: 1px solid #ff0000;
 }
+/*Added by thangam*/
 .error_test {
   color :red ;
   font-size : 12px; 
@@ -290,14 +291,28 @@ font-size: 13px;
   height: 80px;
   width: 80px;
 }
+/*#image_preview_clear_your_image{
+  position: absolute;
+  height: 80px;
+  width: 80px;
+}*/
+#image_upload_your_image_preview{
+  position: absolute;
+  height: 80px;
+  width: 80px;
+}
 .image_upload_profile{
 	bottom: 0;
     left: 500px;
 }
 #image_upload_logo_preview{
-  height: 100px;
+	position: absolute;
+	right: 115px;
+	bottom: 0px;
+    height: 100px;
     width: 100px;
 }
+/*Ended by thangam*/
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {	
 	#provider_upload .input-group {
