@@ -134,6 +134,80 @@ select:invalid { color: gray; }
     left: 195px;
     position: relative;
 }
+#provider_add_upload .input-group{
+	border-collapse: separate;
+    display: table;
+    left: 0px;
+    position: relative;
+}
+
+#post_adds .post_adds_fields {
+	border: 1px solid #f1f1f1;
+	padding: 15px;
+}
+/* illustrative page preview */
+
+.page_layout {
+	border: 1px solid #ccc;
+	margin: 15px 0;
+	height: auto;
+	width: 470px;
+	background-color: #E4E4E4;
+}
+.header_part {
+	width: 450px;
+	height: 30px;
+	background-color: #f2f2f2;
+	margin: 5px 10px;
+}
+.home_slider{
+	width: 450px;
+	height: 80px;
+	background-color: #f2f2f2;
+	margin: 5px 10px;
+}
+.featured_jobs_area {
+	margin: 8px;
+	border: 5px solid #f2f2f2;
+}
+.fjob {
+	width: 131px;
+	height: 80px;
+	margin: 5px 8px 0;
+	background-color: #f2f2f2;
+}
+.counter_area {
+	width: 450px;
+	height: 30px;
+	background-color: #f2f2f2;
+	margin: 5px 10px;
+}
+.post_adds_caurosel {
+	border: 5px solid #f2f2f2;
+	width: 450px;
+	height: 100px;
+	background-color: #ccefff;
+	
+	margin: 5px 10px;
+}
+.footer_section {
+	width: 450px;
+	height: 30px;
+	background-color: #f2f2f2;
+	margin: 5px 10px;
+}
+.footer{
+	background-color: #eee;
+	width: 450px;
+	height: 10px;
+	margin: 1px 10px 5px 10px;
+}
+.list-banner li {
+	margin: 10px 0;
+}
+.list-banner .fa-thumb-tack {
+	margin-right: 5px;
+}
 
 /* END OF COMPANY DASHBOARD */
 
