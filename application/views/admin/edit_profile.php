@@ -12,24 +12,10 @@ if(!empty($this->session->userdata("login_status"))):
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
-                   <!-- BEGIN THEME CUSTOMIZER-->
-                   <div id="theme-change" class="hidden-phone">
-                       <i class="icon-cogs"></i>
-                        <span class="settings">
-                            <span class="text">Theme:</span>
-                            <span class="colors">
-                                <span class="color-default" data-style="default"></span>
-                                <span class="color-gray" data-style="gray"></span>
-                                <span class="color-purple" data-style="purple"></span>
-                                <span class="color-navy-blue" data-style="navy-blue"></span>
-                            </span>
-                        </span>
-                   </div>
-                   <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
-                     Editable Table
-                     <small>Editable Table Sample</small>
+                     Teachers Recruit
+                     <small>Edit Profile</small>
                   </h3>
                    <ul class="breadcrumb">
                        <li>
@@ -58,24 +44,25 @@ if(!empty($this->session->userdata("login_status"))):
                             </span>
                         </div>
                         <div class="widget-body form">
-                            <form action="#" class="form-horizontal">
-	                           <div class="control-group">
-	                              <label class="control-label">User Name</label>
-	                              <div class="controls">
-	                                 <input type="text" class="span6 " />
-	                              </div>
-	                           </div>
-	                           <div class="control-group">
-	                              <label class="control-label">Email</label>
-	                              <div class="controls">
-	                                 <input type="text" class="span6 " />
-	                              </div>
-	                           </div>
-	                           <div class="form-actions">
-	                              <button type="submit" class="btn btn-success">Submit</button>
-	                              <!-- <button type="button" class="btn">Cancel</button> -->
-                              </div>
-                             </form>
+                          <form action="admin_users/edit_profile_validation" class="form-horizontal admin_login_form" method="POST">
+                            <p class="admin_status"> </p>
+	                          <div class="control-group">
+	                            <label class="control-label">User Name</label>
+	                            <div class="controls">
+	                              <input type="text" class="span6 " name="user_name" value="<?php if(!empty($admin_values)) echo $admin_values['admin_user_name']; ?>" placeholder="Username" />
+	                            </div>
+	                          </div>
+	                          <div class="control-group">
+	                            <label class="control-label">Email</label>
+	                            <div class="controls">
+	                              <input type="text" class="span6 " name="user_email" value="<?php if(!empty($admin_values)) echo $admin_values['admin_user_email']; ?>" placeholder="Useremail"/>
+	                             </div>
+	                          </div>
+	                          <div class="form-actions">
+	                            <button type="submit" class="btn btn-success">Submit</button>
+	                            <!-- <button type="button" class="btn">Cancel</button> -->
+                            </div>
+                          </form>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->

@@ -11,4 +11,10 @@ class Common_model extends CI_Model {
 		$allinstitutions = $this->db->get_where('tr_institution_type', array('institution_type_status' => '1'))->result_array();
 		return $allinstitutions;
 	}
+	public function get_all_district()
+	{
+		$district = array();
+		$alldistrict = $this->db->get_where('tr_district',array('district_status' => '1'))->result_array();
+		return $alldistrict;
+	}
 }

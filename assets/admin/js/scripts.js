@@ -1271,8 +1271,8 @@ var App = function () {
 
         jQuery('#forget-btn').click(function () {
 
-            jQuery('#loginform').slideDown(200);
-            jQuery('#forgotform').slideUp(200);
+            // jQuery('#loginform').slideDown(200);
+            // jQuery('#forgotform').slideUp(200);
         });
     }
 
@@ -2006,7 +2006,7 @@ var App = function () {
             'nextSelector': '.button-next',
             'previousSelector': '.button-previous',
             onTabClick: function (tab, navigation, index) {
-                alert('on tab click disabled');
+                error_popup('on tab click disabled');
                 return false;
             },
             onNext: function (tab, navigation, index) {
@@ -2162,6 +2162,7 @@ var App = function () {
 
         //main function to initiate template pages
         init: function () {
+        	
 			$('.date-picker').datepicker();
             if (jQuery.browser.msie && jQuery.browser.version.substr(0, 1) == 8) {
                 isIE8 = true; // checkes for IE8 browser version

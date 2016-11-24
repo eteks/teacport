@@ -51,6 +51,46 @@ class Admin_users_model extends CI_Model {
     $model_data['group_values'] = $this->db->get_where('tr_admin_user_groups')->result_array();
     return $model_data;
   }
+
+  // Edit admin profile
+  public function teac_admin_edit_profile($status)
+  {
+    $session_data = $this->session->userdata('login_session');
+    // Update data
+    if($status == 'update') {
+      $update_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
+      $update_data =  array(
+                        'admin_user_name' => $this->input->post('user_name'),
+                        'admin_user_email' => $this->input->post('user_email')              
+                      );
+      $this->db->set($update_data);
+      $this->db->where($update_where);
+      $this->db->update("tr_admin_users", $update_data); 
+      $model_data['status'] = "Updated Successfully";
+    }
+    else if($status = 'init') {
+      $select_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
+      $model_data = $this->db->get_where('tr_admin_users',$select_where)->row_array();
+    }
+    return $model_data;
+  }
+
+  // Change password
+  public function teac_admin_change_password()
+  {
+    $session_data = $this->session->userdata('login_session');
+    // Update data
+    $update_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
+    $update_data =  array(
+                      'admin_user_password' => $this->input->post('new_pass_confirm')            
+                    );
+    $this->db->set($update_data);
+    $this->db->where($update_where);
+    $this->db->update("tr_admin_users", $update_data); 
+    $model_data['status'] = "Updated Successfully";
+    return $model_data;
+  }
+
   // User groups - Add Edit Delete View
   public function user_accounts($status)
   {
@@ -134,9 +174,15 @@ class Admin_users_model extends CI_Model {
     //Get all the admin groups to assign priveleges for that group user
     public function get_admin_groups(){
         $this->db->select('*');
-        $this->db->from('tr_admin_user_groups');
+        $this->db->from('tr_admin_user_groups grp');
+        $this->db->join('tr_admin_access_control acc','grp.user_group_id=acc.access_group_id','inner');
         $query = $this->db->get()->result_array();
         return $query;
+    }
+    //Store the admin privileges by group id
+    public function insert_update_admin_prvileges($data){
+        $data = json_decode($data, true);
+        $this->db->insert_on_duplicate_update_batch('tr_admin_access_control',$data);
     }
 }
 

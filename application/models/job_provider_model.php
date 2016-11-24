@@ -33,6 +33,8 @@ class Job_provider_model extends CI_Model {
 			$user_details['pro_email'] = $user_data['registrant_email_id'];
 			$user_details['pro_userid'] = $user_data['organization_id'];
 			$user_details['pro_mobile'] = $user_data['registrant_mobile_no'];
+			$user_details['registrant_logo'] = (!empty($user_data['registrant_logo'])?base_url().'uploads/jobprovider/'.$user_data['registrant_logo']:base_url().'assets/images/admin.jpg');
+			$user_details['registrant_name'] = $user_data['registrant_name'];
 			$user_details['user_type'] = 'provider';
 			$user_details['valid_status'] = 'valid';
 			$user_detalls['login_type'] = 'teacherrecruit';
@@ -97,16 +99,40 @@ class Job_provider_model extends CI_Model {
 	}
 	public function get_org_data_by_id($id)
 	{
-		$where = "(organization_id='".$id."' AND organization_status='1')";
-		$existuser = $this->db->get_where('tr_organization_profile',$where);
-		$user_data = $existuser->row_array();
-		return $user_data; 
+		
+		$this->db->select('*');    
+		$this->db->from('tr_organization_profile');
+		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
+		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
+		$where = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
+		$this->db->where($where);
+		$existuser = $this->db->get()->row_array();
+		return $existuser; 
 	} 
 	public function get_org_data_by_mail($email)
 	{
-		$where = "(registrant_email_id='".$email."' AND organization_status='1')";
-		$existuser = $this->db->get_where('tr_organization_profile',$where);
-		$user_data = $existuser->row_array();
-		return $user_data; 
+		$this->db->select('*');    
+		$this->db->from('tr_organization_profile');
+		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
+		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
+		$where = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
+		$this->db->where($where);
+		$existuser = $this->db->get()->row_array();
+		return $existuser; 
 	} 
+	public function edit_profile_completeness($id)
+	{
+		$where = "(organization_id='".$id."' AND ((organization_logo IS NULL OR organization_logo ='') OR (organization_address_1 IS NULL OR organization_address_1 ='') OR (organization_address_2 IS NULL OR organization_address_2 ='') OR (organization_address_3 IS NULL OR organization_address_3 ='') OR (organization_district_id IS NULL OR organization_district_id ='') OR (organization_district_id IS NULL OR organization_district_id ='') OR (registrant_name IS NULL OR registrant_name ='') OR (registrant_designation IS NULL OR registrant_designation ='') OR (registrant_date_of_birth IS NULL OR registrant_date_of_birth ='')) AND organization_status='1')";
+		$check_completeness = $this->db->get_where('tr_organization_profile',$where);
+		
+	}
+	 public function job_provider_update_profile($id,$profile)
+	 {
+	 	$this->db->where('organization_id', $id);
+		$this->db->update('tr_organization_profile', $profile);
+		return 'updated';
+	 }
+	
 }

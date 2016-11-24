@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database','session','Facebook/autoload','iptrack
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'file','form');
+$autoload['helper'] = array('url', 'file','form','custom');
 
 
 /*

@@ -8,7 +8,7 @@ if ( ! function_exists('get_user_details')){
 if ( ! function_exists('get_qualication_by_dept')){
 	// Get qualification by department
 	function get_qualication_by_dept($value) 
-	{
+	{	
 		$out = array();
 		if(!empty($value)) {
 			foreach ($value as $key => $row) {
@@ -17,7 +17,7 @@ if ( ! function_exists('get_qualication_by_dept')){
 					{
 						$out[$row['departments_id']]['educational_qualification_id'][$row['educational_qualification_id']] = $row['educational_qualification'];
 				   	}
-				   	if($k == 'departments_name' || $k == 'departments_status' || $k == 'departments_created_date' ) {
+				   	if($k == 'departments_name' || $k == 'departments_status' || $k == 'departments_created_date' || $k == 'department_educational_qualification_id' ) {
 	     				$out[$row['departments_id']][$k] = $row[$k];
 	     			}
 			    }
@@ -39,7 +39,7 @@ if ( ! function_exists('get_institution_by_dept')){
 					{
 						$out[$row['subject_id']]['institution_type_id'][$row['institution_type_id']] = $row['institution_type_name'];
 				   	}
-				   	if($k == 'subject_name' || $k == 'subject_status' || $k == 'subject_create_date' ) {
+				   	if($k == 'subject_name' || $k == 'subject_status' || $k == 'subject_create_date' || $k == 'subject_institution_id' ) {
 	     				$out[$row['subject_id']][$k] = $row[$k];
 	     			}
 			    }
@@ -61,7 +61,7 @@ if ( ! function_exists('get_class_level_by_dept')){
 					{
 						$out[$row['education_board_id']]['class_level_id'][$row['class_level_id']] = $row['class_level'];
 				   	}
-				   	if($k == 'university_board_name' || $k == 'university_board_status' || $k == 'university_board_created_date' ) {
+				   	if($k == 'university_board_name' || $k == 'university_board_status' || $k == 'university_board_created_date' || $k == 'university_class_level_id' ) {
 	     				$out[$row['education_board_id']][$k] = $row[$k];
 	     			}
 			    }
@@ -84,7 +84,7 @@ if ( ! function_exists('get_institution_by_postname')){
 					{
 						$out[$row['posting_id']]['institution_type_id'][$row['institution_type_id']] = $row['institution_type_name'];
 				   	}
-				   	if($k == 'posting_name' || $k == 'posting_status' || $k == 'posting_created_date' ) {
+				   	if($k == 'posting_name' || $k == 'posting_status' || $k == 'posting_created_date' || $k == 'posting_institution_id' ) {
 	     				$out[$row['posting_id']][$k] = $row[$k];
 	     			}
 			    }
@@ -113,5 +113,18 @@ if ( ! function_exists('get_provider_vacancy_by_qua')){
 			}
 		}
 		return $out;
+	}
+}
+
+if ( ! function_exists('get_privileges')){
+	function get_privileges($mapped_privileges,$module_id,$operation){
+	  	$results =  array_filter($mapped_privileges,function($value) use($module_id,$operation){
+		    $value[1] = is_array($value[1])?$value[1]:explode(",",$value[1]); 
+		    $value[0] = is_array($value[0])?$value[0]:(array)$value[0];
+		    $result1 = in_array($operation,$value[1]);
+		    $result2 = in_array($module_id,$value[0]); 
+		    return $result1 && $result2;
+		});
+		return $results;
 	}
 }
