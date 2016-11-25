@@ -92,10 +92,10 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="inbox_candidate_id"> 
                                           Candidate Name 
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_email"> 
                                           admin@gmail.com 
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_phone"> 
                                           9876543210 
                                         </td>
                                         <td class="inbox_vacancy_id"> 
@@ -118,10 +118,10 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="inbox_candidate_id"> 
                                           Admin
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_email"> 
                                           admin@gmail.com 
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_phone"> 
                                           0076543210 
                                         </td>
                                         <td class="inbox_vacancy_id"> 

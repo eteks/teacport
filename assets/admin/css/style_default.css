@@ -542,9 +542,33 @@ tr select {
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
     padding: 3px 15px !important;
 }
-.dataTables_length > label {
+/*.dataTables_length > label {
     color: #858585 !important;
     font-size: 13px !important;
     text-transform: capitalize;
+}*/
+.privileges_table td .chzn-container .chzn-choices{
+	min-width: 255px !important;
+	max-width: 255px !important;
+}
+.admin_table td .chzn-container .chzn-choices{
+	min-width: 150px !important;
+	max-width: 150px !important;
+}
+.form-wizard .step .seeker_tab_num {
+    background-color: #ccc;
+    border-radius: 30px 0 0 30px !important;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 300;
+    margin-right: 10px;
+    padding: 12px 11px !important;
 }
 
+.form-wizard .step .seeker_tab_desc {
+    display: inline-block !important;
+    font-size: 12px !important;
+    font-weight: 300 !important;
+    margin-top: 5px !important;
+    position: absolute !important;
+}

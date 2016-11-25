@@ -158,7 +158,6 @@ function handleFormWizards() {
                             $('#rootwizard').find('.pager .next').show();
                             $('#rootwizard').find('.pager .finish').hide();
                         }
-
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
@@ -368,3 +367,4 @@ function CustomConfirm() {
 
 var Confirm = new CustomConfirm();
 //End of delete popup menu
+

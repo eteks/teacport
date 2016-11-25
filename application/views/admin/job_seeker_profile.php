@@ -95,26 +95,26 @@
                                   </thead>
                                   <tbody>                                   
                                     <tr class="parents_tr" id="column">
-                                      <td class=""> <label>Thiru</label> 
+                                      <td class="">Thiru
                                       </td>
-                                      <td class=""> <label>English</label> 
+                                      <td class="">English 
                                       </td>
-                                      <td class=""> <label>Yes</label>
+                                      <td class="">Yes
                                       </td>
-                                      <td class=""> <label>Chennai</label>
+                                      <td class="">Chennai
                                       </td>
-                                      <td class=""> <label>admin@gmail.com</label>
+                                      <td class="">admin@gmail.com
                                       </td>
-                                      <td class=""> <label>1234567890</label>
+                                      <td class="">1234567890
                                       </td>
-                                      <td class=""> <label>Path</label>
+                                      <td class="">Path
                                       </td>
                                       <td class="">Active 
                                       </td>
                                       <td class=""> 00-00-0000
                                       </td>                                      
                                       <td class="edit_section">
-                                        <a class="job_edit" data-popup-open="popup-1">
+                                        <a class="job_edit" data-popup-open="popup_section_edit">
                                           Edit
                                         </a>
                                       </td>
@@ -124,7 +124,7 @@
                                         </a>
                                       </td>
                                       <td>
-                                        <a class="job_full_view" data-popup-open-sec="popup-1">
+                                        <a class="job_full_view"  data-popup-open="popup_section">
                                           Full View
                                         </a>
                                       </td>
@@ -138,63 +138,398 @@
                     </div>
                     <!-- END EXAMPLE TABLE widget-->    
                 </div>                
-            </div>
-            <!-- Edit Popup-->
-            <div class="popup" data-popup="popup-1">
+            </div>                           
+            <!---Full edit popup --->
+          <div class="popup" data-popup="popup_section">
                  <div class="popup-inner">				
-				<div class="widget box blue" id="form_wizard_1">
+				<div class="widget box blue" id="popup_wizard_section">
                      <div class="widget-title">
                         <h4>
                            <i class="icon-reorder"></i> Candidate Profile
                         </h4>                        
                      </div>
-                     <div class="widget-body form">
-                        <form action="form_wizard.html#" class="form-horizontal">
-                           <div class="form-wizard">
+                     <div class="widget-body form pop_details_section">
+                        <form class="tab_form" data-index="" method="POST" data-mode="update">
+                           <div id="rootwizard" class="form-wizard">
                               <div class="navbar steps">
                                  <div class="navbar-inner">
-                                    <ul class="row-fluid">
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                                          <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i>Basic Info-1</span>
+                                 	<div class="container">
+                                    <ul  class="row-fluid nav nav-pills">
+                                       <li class="span2">
+                                          <a href="#tab1" data-toggle="tab" class="step active">
+                                          <span class="number seeker_tab_num">1</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Basic<br /> Info-1</span>
                                           </a>
                                        </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                                          <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i> Basic Info-2</span>
+                                       <li class="span2">
+                                          <a href="#tab2" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">2</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Basic<br /> Info-2</span>
                                           </a>
                                        </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                          <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i> Contact Info</span>
+                                       <li class="span2">
+                                          <a href="#tab3" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">3</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Contact<br /> Info</span>
                                           </a>
                                        </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
-                                          <span class="number">4</span>
-                                          <span class="desc"><i class="icon-ok"></i> Educational Info</span>
+                                       <li class="span2">
+                                          <a href="#tab4" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">4</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational<br /> Info</span>
                                           </a>
                                        </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab5" data-toggle="tab" class="step">
-                                          <span class="number">5</span>
-                                          <span class="desc"><i class="icon-ok"></i> Experience Info</span>
+                                       <li class="span2">
+                                          <a href="#tab5" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">5</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience<br /> Info</span>
                                           </a>
                                        </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab6" data-toggle="tab" class="step">
-                                          <span class="number">6</span>
-                                          <span class="desc"><i class="icon-ok"></i> Professional Info</span>
+                                       <li class="span2">
+                                          <a href="#tab6" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">6</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Professional<br /> Info</span>
                                           </a>
                                        </li>
                                     </ul>
+                                   </div>
                                  </div>
                               </div>
-                              <div id="bar" class="progress progress-striped">
-                                 <div class="bar"></div>
+                              <div id="bar" class="progress progress-striped active">
+                                <div class="bar"></div>
+                              </div>
+                              <div class="tab-content">
+                              	<input type="hidden" value="view" id="popup_mode" />
+                                 <div class="tab-pane active" id="tab1">
+                                    <h4>Candidate Basic Info-1</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Candidate Name</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Gender</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Father Initial</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Father Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Date Of Birth</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Marital Status</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Mother Tongue</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Language Known</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Nationality</label>
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab2">
+                                    <h4>Candidate Basic Info-2</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Religion</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Community</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Is Physically Challenged</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Registration Type</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Image Path</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Facebook url</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Google Plus url</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Linkedin url</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Status</label>
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab3">
+                                    <h4>Candidate Contact Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Email</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Mobile No</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">District Name</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Address 1</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Address 2</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Live District Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Remaining Resume Count</label>
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab4">
+                                    <h4>Candidate Educational Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Candidate Profile</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Qualification Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Education Yop</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Medium Of Inst Name</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Subject</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Percentage</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Education Board</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Status</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Created Date</label>
+                                       </div>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab5">
+                                    <h4>Candidate Experience Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Profile Name</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Class Level</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Experience Year</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Experience Board</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Status</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Created Date</label>
+                                    </div>
+                                   </div>
+                                 </div>
+                                 <div class="tab-pane" id="tab6">
+                                    <h4>Candidate Prefessional Info</h4>
+                                    <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Institution Type</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">TET Exam Status</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Interest Subject</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Extra Curricular</label>
+                                    </div>
+                                   </div>
+                                   <div class="span12">
+                                    <div class="span6 control-group">                                       
+                                       <div class="controls input_field_width">
+                                       	<label class="control-label">Is Fresher</label>
+                                       </div>
+                                    </div>
+                                    <div class="span6 control-group">
+                                       <label class="control-label">Resume Upload Path</label>
+                                    </div>
+                                   </div>
+                                 </div>
+                                    <ul class="pager wizard">
+			                          <li class="previous"><a href="#"><i class="icon-angle-left"></i>Previous</a></li>
+			                          <li class="next"><a href="#">Next<i class="icon-angle-right"></i></a></li>
+			                          <li class="finish disabled"><a href="#">Finish<i class="icon-ok"></i></a></li>
+			                        </ul>
+                                 </div>
+                              </div>
+                              </form>
+                           </div>
+                     </div>
+				 	<p>
+                  	   <a data-popup-close="popup_section" href="#">Close</a>
+                	</p>
+                	<a class="popup-close" data-popup-close="popup_section" href="#">x</a>
+            </div>
+           </div>
+           <!-- Edit Popup-->
+            <div class="popup" data-popup="popup_section_edit">
+                 <div class="popup-inner">				
+				<div class="widget box blue" id="popup_wizard_section">
+                     <div class="widget-title">
+                        <h4>
+                           <i class="icon-reorder"></i> Candidate Profile
+                        </h4>                        
+                     </div>
+                     <div class="widget-body form pop_details_section">
+                        <form class="tab_form" data-index="" method="POST" data-mode="update">
+                           <div id="rootwizard" class="form-wizard">
+                              <div class="navbar steps">
+                                 <div class="navbar-inner">
+                                 	<div class="container">
+                                    <ul  class="row-fluid nav nav-pills">
+                                       <li class="span2">
+                                          <a href="#tab1" data-toggle="tab" class="step active">
+                                          <span class="number seeker_tab_num">1</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Basic<br /> Info-1</span>
+                                          </a>
+                                       </li>
+                                       <li class="span2">
+                                          <a href="#tab2" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">2</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i> Basic<br /> Info-2</span>
+                                          </a>
+                                       </li>
+                                       <li class="span2">
+                                          <a href="#tab3" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">3</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i> Contact<br /> Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span2">
+                                          <a href="#tab4" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">4</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i> Educational<br /> Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span2">
+                                          <a href="#tab5" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">5</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i> Experience<br /> Info</span>
+                                          </a>
+                                       </li>
+                                       <li class="span2">
+                                          <a href="#tab6" data-toggle="tab" class="step">
+                                          <span class="number seeker_tab_num">6</span>
+                                          <span class="desc seeker_tab_desc"><i class="icon-ok"></i> Professional<br /> Info</span>
+                                          </a>
+                                       </li>
+                                    </ul>
+                                   </div>
+                                 </div>
+                              </div>
+                              <div id="bar" class="progress progress-striped active">
+                                <div class="bar"></div>
                               </div>
                               <div class="tab-content">
                                  <div class="tab-pane active" id="tab1">
@@ -229,21 +564,19 @@
                                    </div>
                                    </div>
                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Marital Status</label>
-                                       	 <div class="controls">
-			                                 <label class="radio">
-			                                 <input type="radio" name="optionsRadios1" value="option1" />
+                                    <div class="span6 control-group">
+			                              <label class="control-label">Marrital Status</label>
+			                              <div class="controls">
+			                                 <label class="radio line">
+			                                 <div class="radio" id="uniform-undefined"><span><input name="optionsRadios2" value="option1" style="opacity: 0;" type="radio"></span></div>
 			                                 Single
 			                                 </label>
-			                                 <label class="radio">
-			                                 <input type="radio" name="optionsRadios1" value="option2" checked />
+			                                 <label class="radio line">
+			                                 <div class="radio" id="uniform-undefined"><span class="checked"><input name="optionsRadios2" value="option2" checked="" style="opacity: 0;" type="radio"></span></div>
 			                                 Married
-			                                 </label> 
-			                             </div>
-                                       </div>
-                                    </div>
+			                                 </label>   
+			                              </div>
+			                           </div>
                                     <div class="span6 control-group">
                                        <label class="control-label">Mother Tongue</label>
                                         <select class="popup_select">
@@ -253,19 +586,17 @@
                                    </div>
                                    </div>
                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Languages Known</label>
-                                       	 <div class="controls">
-			                                 <label class="checkbox">
-			                                 	<input type="checkbox" value="" /> English
+                                    <div class="span6 control-group">
+			                              <label class="control-label">Languages Known</label>
+			                              <div class="controls">
+			                                 <label class="checkbox line">
+			                                 <div class="checker" id="uniform-undefined"><span><input value="" style="opacity: 0;" type="checkbox"></span></div> Tamil
 			                                 </label>
-			                                 <label class="checkbox">
-			                                 	<input type="checkbox" value="" /> Tamil
+			                                 <label class="checkbox line">
+			                                 <div class="checker" id="uniform-undefined"><span><input value="" style="opacity: 0;" type="checkbox"></span></div> English
 			                                 </label>
-			                             </div>
-                                       </div>
-                                    </div>
+			                              </div>
+			                           </div>
                                    </div>                                   
                                </div>
                                  <div class="tab-pane" id="tab2">
@@ -560,360 +891,22 @@
                                    </div>
                                  </div>
                                  </div>
-                              <div class="form-actions clearfix">
-                                 <a href="javascript:;" class="btn button-previous">
-                                 <i class="icon-angle-left"></i> Back 
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-primary blue button-next">
-                                 Continue <i class="icon-angle-right"></i>
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-success button-submit">
-                                 Submit <i class="icon-ok"></i>
-                                 </a>
+                              <ul class="pager wizard">
+			                          <li class="previous"><a href="#"><i class="icon-angle-left"></i>Previous</a></li>
+			                          <li class="next"><a href="#">Next<i class="icon-angle-right"></i></a></li>
+			                          <li class="finish disabled"><a href="#">Finish<i class="icon-ok"></i></a></li>
+			                        </ul>
+                                 </div>
                               </div>
+                              </form>
                            </div>
-                        </form>
                      </div>
-                  </div>
-				 <p><a data-popup-close="popup-1" href="#">Close</a></p>
-           <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
-           </div>
-        </div>                   
-            <!---Full edit popup --->
-          <div class="popup-sec" data-popup-sec="popup-1">
-                 <div class="popup-inner">				
-				<div class="widget box blue" id="form_wizard_1">
-                     <div class="widget-title">
-                        <h4>
-                           <i class="icon-reorder"></i> Candidate Profile
-                        </h4>                        
-                     </div>
-                     <div class="widget-body form">
-                        <form action="form_wizard.html#" class="form-horizontal">
-                           <div class="form-wizard">
-                              <div class="navbar steps">
-                                 <div class="navbar-inner">
-                                    <ul class="row-fluid">
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab1" data-toggle="tab" class="step active">
-                                          <span class="number">1</span>
-                                          <span class="desc"><i class="icon-ok"></i>Basic Info-1</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab2" data-toggle="tab" class="step">
-                                          <span class="number">2</span>
-                                          <span class="desc"><i class="icon-ok"></i>Basic Info-2</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab3" data-toggle="tab" class="step">
-                                          <span class="number">3</span>
-                                          <span class="desc"><i class="icon-ok"></i>Contact Info</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab4" data-toggle="tab" class="step">
-                                          <span class="number">4</span>
-                                          <span class="desc"><i class="icon-ok"></i>Educational Info</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab5" data-toggle="tab" class="step">
-                                          <span class="number">5</span>
-                                          <span class="desc"><i class="icon-ok"></i>Experience Info</span>
-                                          </a>
-                                       </li>
-                                       <li class="span3">
-                                          <a href="form_wizard.html#tab6" data-toggle="tab" class="step">
-                                          <span class="number">6</span>
-                                          <span class="desc"><i class="icon-ok"></i>Professional Info</span>
-                                          </a>
-                                       </li>
-                                    </ul>
-                                 </div>
-                              </div>
-                              <div id="bar" class="progress progress-striped">
-                                 <div class="bar"></div>
-                              </div>
-                              <div class="tab-content">
-                                 <div class="tab-pane active" id="tab1">
-                                    <h4>Candidate Basic Info-1</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Candidate Name</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Gender</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Father Initial</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Father Name</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Date Of Birth</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Marital Status</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Mother Tongue</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Language Known</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Nationality</label>
-                                       </div>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab2">
-                                    <h4>Candidate Basic Info-2</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Religion</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Community</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Is Physically Challenged</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Registration Type</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Image Path</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Facebook url</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Google Plus url</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Linkedin url</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Status</label>
-                                       </div>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab3">
-                                    <h4>Candidate Contact Info</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Email</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Mobile No</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">District Name</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Address 1</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Address 2</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Live District Name</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Remaining Resume Count</label>
-                                       </div>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab4">
-                                    <h4>Candidate Educational Info</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Candidate Profile</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Qualification Name</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Education Yop</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Medium Of Inst Name</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Subject</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Percentage</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Education Board</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Status</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Created Date</label>
-                                       </div>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab5">
-                                    <h4>Candidate Experience Info</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Profile Name</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Class Level</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Experience Year</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Experience Board</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Status</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Created Date</label>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 <div class="tab-pane" id="tab6">
-                                    <h4>Candidate Prefessional Info</h4>
-                                    <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Institution Type</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">TET Exam Status</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Interest Subject</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Extra Curricular</label>
-                                    </div>
-                                   </div>
-                                   <div class="span12">
-                                    <div class="span6 control-group">                                       
-                                       <div class="controls input_field_width">
-                                       	<label class="control-label">Is Fresher</label>
-                                       </div>
-                                    </div>
-                                    <div class="span6 control-group">
-                                       <label class="control-label">Resume Upload Path</label>
-                                    </div>
-                                   </div>
-                                 </div>
-                                 </div>
-                              </div>
-                              <div class="form-actions clearfix">
-                                 <a href="javascript:;" class="btn button-previous">
-                                 <i class="icon-angle-left"></i> Back 
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-primary blue button-next">
-                                 Continue <i class="icon-angle-right"></i>
-                                 </a>
-                                 <a href="javascript:;" class="btn btn-success button-submit">
-                                 Submit <i class="icon-ok"></i>
-                                 </a>
-                              </div>
-                           </div>
-                        </form>
-                     </div>
-				 <p><a data-popup-close-sec="popup-1" href="#">Close</a></p>
-           <a class="popup-close-sec" data-popup-close-sec="popup-1" href="#">x</a>
+				 	<p>
+                  	   <a data-popup-close="popup_section_edit" href="#">Close</a>
+                	</p>
+                	<a class="popup-close" data-popup-close="popup_section_edit" href="#">x</a>
             </div>
-           </div>
-       </div>  	
+           </div> 	
             <!-- END ADVANCED TABLE widget-->
 
             <!-- END PAGE CONTENT-->
@@ -921,7 +914,6 @@
          <!-- END PAGE CONTAINER-->
       </div>
       <!-- END PAGE -->
-  </div>
   <script>
     // Define default values
     var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.

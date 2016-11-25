@@ -141,7 +141,7 @@ if(!empty($this->session->userdata("login_status"))):
    <script>
     // Define default values
     var inputType = new Array("text","select"); 
-    var columns = new Array("i_name"," i_status"); 
+    var columns = new Array("i_name","i_status"); 
     var placeholder = new Array("Enter Institution Type Name","");
     var table = "admin_table"; // Set classname of table
     var i_status_option = new Array("Please select status","Active","Inactive"); 
