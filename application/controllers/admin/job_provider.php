@@ -7,8 +7,6 @@ class Job_Provider extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/job_providermodel');
 		$this->load->model('admin/admin_model');
-		$this->load->library('form_validation');
-		$this->load->helper('custom');
 		$this->load->library('upload');
 
 	}
