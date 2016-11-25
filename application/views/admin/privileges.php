@@ -81,10 +81,11 @@
                                         foreach ($admin_modules as $mod) :
                                         $mod['module_id'] = is_array($mod['module_id'])?$mod['module_id']:(array)$mod['module_id'];  
                                         $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
+                                        $mod['operation_available'] = is_array($mod['operation_available'])?$mod['operation_available']:(array)$mod['operation_available'];
+                                        $sub_module_data = array_map(null,$mod['module_id'], $mod['sub_module'],$mod['operation_available']);
                                         // echo "<pre>";
-                                        // print_r(array_map(null,$mod['module_id'], $mod['sub_module']));
+                                        // print_r($sub_module_data);
                                         // echo "</pre>";
-                                        $sub_module_data = array_map(null,$mod['module_id'], $mod['sub_module']);
                                     ?>
                                     <!--- First Module Description -->
                                     <tr class="parents_tr" id="column1">
@@ -102,23 +103,26 @@
                                               $group['access_module_id'] = is_array($group['access_module_id'])?$group['access_module_id']:(array)$group['access_module_id'];  
                                               $group['access_permission'] = is_array($group['access_permission'])?$group['access_permission']:(array)$group['access_permission'];
                                               $mapped_privileges = array_map(null,$group['access_module_id'], $group['access_permission']);
-                                              
                                               $group_id = $group['user_group_id'];
                                               $module_id = $sub[0];
-                                              // array_push($mapped_privileges,$group_id);
+                                              $access_priveleges = is_array($sub[2])?$sub[2]:explode(",",$sub[2]); 
                                               // echo "<pre>";
-                                              // print_r($mapped_privileges);
+                                              // print_r($access_priveleges);
                                               // echo "</pre>";
-
                                             ?>
                                                 <td class="admin_options module_inner_data">
                                                   <input type="hidden" name="group_id" class="group_id" value="<?php echo $group['user_group_id']?>">
                                                 	<select data-placeholder="Select Options" class="chosen span6 access_operation" multiple="multiple" tabindex="6" name="access_operation[]">
-        			                                       <option value="add">Add</option>
-        			                                       <option value="edit">Edit</option>
-                                                     <option value="delete">Delete</option>
-        			                                       <option value="view">View</option>
-        			                                     </select>
+                                                  <?php 
+                                                  $operation_array = array('add'=>'Add','edit'=>'Edit','view'=>'View','delete'=>'Delete');
+                                                foreach($operation_array as $key => $value):
+                                                    if(in_array($key, $access_priveleges)): ?>
+                                                      <option value="<?php echo $key; ?>" <?php $result = get_privileges($mapped_privileges,$module_id,$key); if(!empty($result)) echo "selected";?>><?php echo $value; ?></option>
+                                                <?php 
+                                                  endif;
+                                                  endforeach;
+                                                ?>
+        			                                   </select>
         										                    </td>
                                             <?php 
                                               endforeach; 

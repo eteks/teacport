@@ -480,6 +480,7 @@ if(!empty($this->session->userdata("login_status"))):
                                 <a class="btn upload_option"> Upload </a>
                                 <input class="form-control hidden_upload tabfield1 tabfield" name="organization_logo" type="file" >
                                 <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview">
+                                <input type="hidden" value="<?php echo $provider_full_profile['organization_logo']; ?>" class="tabfield1 tabfield" name="old_file_path" />
                               </span>
                             </div>
                           </div>
@@ -633,7 +634,11 @@ if(!empty($this->session->userdata("login_status"))):
                 </p>
                 <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
               </div>
-            </div>   	
+            </div>
+
+
+
+               	
          </div>
          <!-- END PAGE CONTAINER-->
       </div>
