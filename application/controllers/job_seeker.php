@@ -187,6 +187,42 @@ class Job_seeker extends CI_Controller {
 	{
 		$this->load->view('user-edit-profile');
 	}
+	public function forgot_password()
+	{
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+			/* Check whether registration form server side validation are valid or not */
+			if ($this->form_validation->run() == FALSE){
+				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+				$this->load->view('forgot-password-seeker');
+			}
+			else{
+
+            $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
+      		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
+          	if(count($forget_query) != 0) {
+            $config['protocol'] = 'smtp';
+            $config['smtp_host'] = 'smtp.googlemail.com';
+            $config['smtp_port'] = 25;
+            $config['smtp_user'] = $forget_query['registrant_email_id'];
+            $config['smtp_pass'] = '********';          
+            $this->load->library('email', $config);   
+            $this->email->from('thangamgold45@gmail.com', 'Thangam');
+            $this->email->to($config['smtp_user']);           
+            $this->email->subject('Get your forgotten Password');
+            $this->email->message("Your registered password is ".$forget_query['registrant_password']);
+            $this->email->send();
+            $data['reg_server_msg'] = "Mail has sent successfully";
+            $this->load->view('forgot-password-seeker',$data);
+          }
+				else{
+					$data['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$this->load->view('forgot-password-seeker',$data);
+				}
+			}    
+        	
+		
+		}
 	
 	
 	

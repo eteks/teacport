@@ -133,6 +133,5 @@ class Job_provider_model extends CI_Model {
 	 	$this->db->where('organization_id', $id);
 		$this->db->update('tr_organization_profile', $profile);
 		return 'updated';
-	 }
-	
+	 }	
 }
