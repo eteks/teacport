@@ -58,6 +58,7 @@
                                     </div>
                                 </div>
                                 <div class="space15"></div>
+                                <form method="post" action="job_seeker/job_seeker_applied" class="admin_module_form" id="job_seeker_applied_form">
                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
 	                                <thead>
 	                                  <tr class="ajaxTitle">
@@ -76,7 +77,7 @@
 	                                        <td class="applied_job_status">Active</td>
 	                                        <td class="created_date">01-01-2000</td>
 	                                        <td class="edit_section">
-	                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+	                                        	<a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
 	                                        </td>
 	                                        <td><a class="ajaxDelete" id="column1" onclick="Confirm.show()">Delete</a></td>
 	                                    </tr>
@@ -86,7 +87,7 @@
 	                                        <td class="applied_job_status">Active</td>
 	                                        <td class="created_date">01-01-2000</td>
 	                                        <td class="edit_section">
-	                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+	                                        	<a class="ajaxEdit" id="column2" href="javascript:;" data-id="column2">Edit</a>
 	                                        </td>
 	                                        <td><a class="ajaxDelete" id="column2" onclick="Confirm.show()">Delete</a></td>
 	                                    </tr>
@@ -96,27 +97,26 @@
 	                                        <td class="applied_job_status">Inactive</td>
 	                                        <td class="created_date">01-01-2000</td>
 	                                        <td class="edit_section">
-	                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+	                                        	<a class="ajaxEdit" id="column3" href="javascript:;" data-id="column3">Edit</a>
 	                                        </td>
 	                                        <td><a class="ajaxDelete" id="column3" onclick="Confirm.show()">Delete</a></td>
 	                                    </tr>
 	                                    </tbody>
                                  </table>
+                                 </form>
                             </div>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-            </div>
-
+             </div>
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
-         </div>
+          </div>
          <!-- END PAGE CONTAINER-->
-      </div>
+       </div>
       <!-- END PAGE -->
-   </div>
+    </div>
    <!-- END CONTAINER -->
     <script>
     // Define default values

@@ -345,7 +345,7 @@ class Adminindex extends CI_Controller {
       	else {
       		$data['error'] = 0;
 		    $data['status'] = 0;
-      		$data_values = $this->admin_model->qualification_typ('init');
+      		$data_values = $this->admin_model->qualification_type('init');
       	}
 
 		if($data['error']==1) {

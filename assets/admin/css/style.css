@@ -688,7 +688,7 @@ form legend {
 }
 
 .widget-body .dataTables_info, .widget-body .dataTables_paginate {
-    margin-top: 15px !important;
+    margin-top: 0px !important;
     padding-bottom: 0px !important;
     margin-bottom: -4px !important;
 }
@@ -1607,7 +1607,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     display: block;
     padding: 0 !important;
     margin: 0 !important;
-    margin-top: 5px !important;
+    margin-top: 3px !important;
 }
 
 .controls .text {
@@ -3926,7 +3926,7 @@ ul li:last-child{
 }
 
 .on{
-    background: #0088cc !important;
+    background: #1a94af !important;
     background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#0088cc));
     text-shadow:0 -1px 0 #444, 0 0 7px #9AE658;
     border-right:1px solid #444;
@@ -3977,12 +3977,118 @@ ul li:last-child{
     height: 30px;
     width: 40px;
 }
-#activitties_form .act_email,#activitties_form .act_sms,#activitties_form .act_resume{
-    text-align: center;
-}
+
 .on_off_button li {
     cursor: pointer;
 }
+table thead .sorting {
+    background-image: url("../img/sort_both.png");   
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+table thead .sorting_asc {
+    background-image: url("../img/sort_asc.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+table thead .sorting_desc {
+    background-image: url("../img/sort_desc.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+/* Datatable Css to add checkbox with columns for columns visibility start */
+
+.dt-button-collection a.buttons-columnVisibility:before,
+.dt-button-collection a.buttons-columnVisibility.active span:before {
+    display:block;
+    position:absolute;
+    top:1.2em;
+    left:0;
+    width:12px;
+    height:12px;
+    box-sizing:border-box;
+}
+
+.dt-button-collection a.buttons-columnVisibility:before {
+    content:' ';
+    margin-top:-6px;
+    margin-left:10px;
+    border:1px solid black;
+    border-radius:3px;
+}
+
+.dt-button-collection a.buttons-columnVisibility.active span:before {
+    content:'\2714';
+    margin-top:-11px;
+    margin-left:12px;
+    text-align:center;
+    text-shadow:1px 1px #DDD, -1px -1px #DDD, 1px -1px #DDD, -1px 1px #DDD;
+}
+
+.dt-button-collection a.buttons-columnVisibility span {
+    margin-left:20px;    
+}
+.export_button {
+    background: #e8e8e8 !important;
+    border-radius: 0 !important;
+    position: absolute !important;
+    top: -40px;
+    margin-left: -30px;
+    margin-left: -30px;
+    padding: 3px 12px !important;
+    right: 0;
+    top: -53px;
+}
+.colvis_button {
+    background: #e8e8e8 !important;
+    border-radius: 0 !important;
+    position: absolute !important;
+    top: -40px;
+    margin-left: -30px;
+    margin-left: -30px;
+    padding: 3px 12px !important;
+    right: 80px;
+    top: -53px;
+}
+.colvis_button:hover  {
+    background: #e8e8e8 !important;
+    border :1px solid #999 !important;
+}
+.export_button:hover {
+    background: #e8e8e8 !important;
+    border :1px solid #999 !important;
+}
+.dt-buttons {
+    float: right !important;
+}
+.export_options {
+    border : none !important;
+    background : none !important;
+}
+.export_options:hover {
+    background: #e8e8e8 !important;
+}
+.dt-button-collection {
+    border-radius: 0 !important;
+}
+.buttons-columnVisibility {
+    background : none !important;
+    border : none !important;
+    box-shadow: none !important;
+}
+.buttons-columnVisibility:hover {
+    background: #e8e8e8 !important;
+}
+.dt-button-background {
+    display: none !important;
+}   
+
+/* Datatable Css to add checkbox with columns for columns visibility end */
+
+
 
 /* Ended by siva */
 
