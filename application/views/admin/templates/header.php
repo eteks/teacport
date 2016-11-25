@@ -462,7 +462,7 @@ Website: http://thevectorlab.net/
                     <ul class="sub">
                         <li><a class="module_details" href="<?php echo base_url(); ?>admin/feedback_form"><span class="sub_module_data">Feedback Form</span><span class="sub_module_access">edit,delete,view</span></a></li>
                         <li><a class="module_details" href="<?php echo base_url(); ?>admin/site_visit_tracking"><span class="sub_module_data">Site Visits Tracking</span><span class="sub_module_access">view</span></a></li>
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li>
+                        <!-- <li><a class="module_details" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li> -->
                     </ul>
                 </li>            
             </ul>

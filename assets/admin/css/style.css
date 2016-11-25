@@ -1607,7 +1607,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     display: block;
     padding: 0 !important;
     margin: 0 !important;
-    margin-top: 5px !important;
+    margin-top: 3px !important;
 }
 
 .controls .text {
@@ -3926,7 +3926,7 @@ ul li:last-child{
 }
 
 .on{
-    background: #0088cc !important;
+    background: #1a94af !important;
     background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#777), to(#0088cc));
     text-shadow:0 -1px 0 #444, 0 0 7px #9AE658;
     border-right:1px solid #444;

@@ -376,13 +376,14 @@ $(document).ready(function(){
     $(function() {
     //----- OPEN
     $('[data-popup-open]').on('click', function(e)  {
+    	handleFormWizards();
         var targeted_popup_class = jQuery(this).attr('data-popup-open');
         $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
  
         e.preventDefault();
     });   
     
-     $('[data-popup-open-sec]').on('click', function(e)  {
+     $('[data-popup-open-edit]').on('click', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-open-sec');
         $('[data-popup-sec="' + targeted_popup_class + '"]').fadeIn(350);
  
@@ -400,9 +401,9 @@ $(document).ready(function(){
         e.preventDefault();
     });
     
-    $('[data-popup-close-sec]').on('click', function(e)  {
-        var targeted_popup_class = jQuery(this).attr('data-popup-close-sec');
-        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeOut(350);
+    $('[data-popup-close-edit]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close-edit');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
  
         e.preventDefault();
     });
@@ -459,6 +460,7 @@ $(document).ready(function(){
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
     
+ // error popup alert box  
     function error_popup(message){
 	$('.error_popup_msg .success-alert span').text(message);
 	$('.popup_fade').show();
