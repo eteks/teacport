@@ -181,7 +181,7 @@ class Admin_users_model extends CI_Model {
     public function get_admin_groups(){
         $this->db->select('*');
         $this->db->from('tr_admin_user_groups grp');
-        $this->db->join('tr_admin_access_control acc','grp.user_group_id=acc.access_group_id','inner');
+        $this->db->join('tr_admin_access_control acc','grp.user_group_id=acc.access_group_id','left');
         $query = $this->db->get()->result_array();
         return $query;
     }
@@ -189,6 +189,17 @@ class Admin_users_model extends CI_Model {
     public function insert_update_admin_prvileges($data){
         $data = json_decode($data, true);
         $this->db->insert_on_duplicate_update_batch('tr_admin_access_control',$data);
+    }
+    //Get every access rights of each module by group id
+    public function get_admin_rights_by_group(){
+        // $users_group_where = '(access_group_id="'.$this->input->post('rid').'")';
+        $users_group_where = '(access_group_id=1)';
+        $this->db->select('am.main_module,am.sub_module,am.operation_available,aac.access_permission');
+        $this->db->from('tr_admin_access_control aac');
+        $this->db->join('tr_admin_modules am','aac.access_module_id=am.module_id','inner');
+        $this->db->where($users_group_where);
+        $query = $this->db->get()->result_array();
+        return $query;
     }
 }
 

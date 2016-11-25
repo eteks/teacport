@@ -7,6 +7,8 @@ class Dashboardpage extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/admin_model');
 		$this->load->model('admin/dashboard_model');
+		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function
+		$this->config->load('admin_modules');
 	}
 	public function dashboard()
 	{	
