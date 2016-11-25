@@ -688,7 +688,7 @@ form legend {
 }
 
 .widget-body .dataTables_info, .widget-body .dataTables_paginate {
-    margin-top: 15px !important;
+    margin-top: 0px !important;
     padding-bottom: 0px !important;
     margin-bottom: -4px !important;
 }
@@ -3981,6 +3981,23 @@ ul li:last-child{
 .on_off_button li {
     cursor: pointer;
 }
+table thead .sorting {
+    background-image: url("../img/sort_both.png");   
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+table thead .sorting_asc {
+    background-image: url("../img/sort_asc.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+table thead .sorting_desc {
+    background-image: url("../img/sort_desc.png");
+    background-position: right center;
+    background-repeat: no-repeat;
+}
 
 /* Datatable Css to add checkbox with columns for columns visibility start */
 
@@ -4065,6 +4082,10 @@ ul li:last-child{
 .buttons-columnVisibility:hover {
     background: #e8e8e8 !important;
 }
+.dt-button-background {
+    display: none !important;
+}   
+
 /* Datatable Css to add checkbox with columns for columns visibility end */
 
 
