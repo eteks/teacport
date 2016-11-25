@@ -29,7 +29,11 @@ Website: http://thevectorlab.net/
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/admin/assets/uniform/css/uniform.default.css" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jqvmap.css" media="screen" rel="stylesheet" type="text/css" /> 
+
+    <!-- <link href=" https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" media="screen" rel="stylesheet" type="text/css" />  -->
     <link href=" https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css " media="screen" rel="stylesheet" type="text/css" /> 
+
+    
     
     <!-- Css import link for charts -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/chart.css">

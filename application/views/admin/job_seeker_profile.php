@@ -57,12 +57,7 @@
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <!-- <div class="btn-group">
-                                        <button id="sample_editable_1_new" class="btn green add_new">
-                                            Add New <i class="icon-plus"></i>
-                                        </button>
-                                    </div> -->
-                                    <div class="btn-group pull-right">
+                                        <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
                                         </button>
                                         <ul class="dropdown-menu pull-right">
@@ -85,12 +80,11 @@
                                       <th> Live District </th>
                                       <th> Email </th>
                                       <th> Mobile No </th>
-                                      <th> Resume Upload Path</th>
                                       <th> Status </th>
                                       <th> Created Date</th>
                                       <th> Edit </th>
                                       <th> Delete </th>
-                                      <th> Full View Details </th>
+                                      <th> Full View </th>
                                     </tr>
                                   </thead>
                                   <tbody>                                   
@@ -106,8 +100,6 @@
                                       <td class="">admin@gmail.com
                                       </td>
                                       <td class="">1234567890
-                                      </td>
-                                      <td class="">Path
                                       </td>
                                       <td class="">Active 
                                       </td>
