@@ -65,9 +65,21 @@ $(document).ready(function() {
 	    });
 	     	
 	  }).change();
-	  
+	
+	//Seacrch bar 
+	
+	// $("#home_search_bar").mouseover(function(){
+		// (".search-form-contaner").show();
+	// });  
+	// $("#home_search_bar").mouseleave(function(){
+		// (".search-form-contaner").hide();
+	// }); 
 	
 });  //end document 
+
+
+
+
 /*Added by thangam*/
 /*Popup validation for company dashboard*/
 $('#mobile').keypress(function (e) {

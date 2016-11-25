@@ -1,5 +1,19 @@
 /* Custom Code */
-
+.srch_bar {
+	display : none;
+}
+ #home_search_bar:hover .srch_bar{
+   display : block;
+ }
+.slidershow-bg .search-form-contaner {
+	margin-top: 0px;
+	position: relative;
+	top: -25px;
+	overflow: hidden;
+	padding: 0px 20px;
+	/*background-color: rgba(0, 0, 0, 0.2);*/
+	height: 50px;
+}
 /* Featured Jobs Slider */
 .slide-featured-jobs {
 	padding: 10px;
@@ -12,6 +26,16 @@
 	width: 320px;
 	margin: auto;
 }	
+/* Signin & SignUp forms */
+ .loginbox_parallex::before {
+	background: rgba(0, 0, 0, 0.8) !important;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
 /* Pricing --Features */
 .all-jobs-list-box2 .fa{
 	color: #777;
@@ -190,13 +214,13 @@ select:invalid { color: gray; }
 	
 	margin: 5px 10px;
 }
-.footer_section {
+.page_layout .footer_section {
 	width: 450px;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
-.footer{
+.page_layout .footer{
 	background-color: #eee;
 	width: 450px;
 	height: 10px;
@@ -247,6 +271,7 @@ font-size: 13px;
 /*....end....*/
 
 /* ---------For Responsive---------- */
+/* for provider Dashboard upload */
 @media (min-width: 320px) and (max-width: 767px) {
 	
 	#provider_upload .input-group {
@@ -271,4 +296,15 @@ font-size: 13px;
 	}
 
 }	
-
+/* For Home page Search Buttonp */
+@media(min-width: 320px) and (max-width: 767px){
+	.slidershow-bg .search-form-contaner {
+		height: 255px;
+	    margin-top: 0;
+	    overflow: hidden;
+	    padding: 10px 20px;
+	    position: relative;
+	    top: -20px;
+	 }   
+}
+ */
