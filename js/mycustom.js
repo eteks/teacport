@@ -82,7 +82,7 @@ $(document).ready(function() {
 
 /*Added by thangam*/
 /*Popup validation for company dashboard*/
-$('#mobile').keypress(function (e) {
+$('#mobile,#yrs_pr,yrs_kg').keypress(function (e) {
              //if the letter is not digit then display error and don't type anything
              if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
                 //display error message
@@ -90,11 +90,32 @@ $('#mobile').keypress(function (e) {
                 return false;
             }
            });
+$('#sslc_percent,#hsc_percent,#degree_percent,#pgdegree_percent,#mphil_percent,#phd_percent,#dted_percent,#bed_percent,#bed_percent,#med_percent,#med_percent,#mped_percent,#mped_percent').keypress(function (e) {
+             //if the letter is not digit then display error and don't type anything
+             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                //display error message
+                // $("#error_test").html("Digits Only").show().fadeOut("slow");
+                return false;
+            }
+           });
+
+     $('#initial,#firstname,#finitial,#fname,#university,#institution,medium_of_instruction').keydown(function (e) {
+          if (e.ctrlKey || e.altKey) {
+              e.preventDefault();
+          } else {
+              var key = e.keyCode;
+              if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                  e.preventDefault();
+              }
+          }
+      });
     $(document).ready(function() {
         var required_popup = ["username","email","mobile","password","cfpassword"];
         var reg_email=jQuery("#email");
         var personal_profile= ["initial","firstname","finitial","fname","sslc_percent","hsc_percent","degree_percent","pgdegree_percent","mphil_percent","phd_percent","dted_percent","bed_percent","bed_percent","med_percent","med_percent","mped_percent","mped_percent","address-line1","address-line2","postal-code","mail","mobile","passwordInput","confirmPasswordInput","quli_others"];    
         var select_option = ["txtdistrict","txtmtongue","txtregl","txtccategory","expsalary","postpref","sslc_yrs","sslc_medium","hsc_yrs","hsc_medium","hsc_sub","degree_yrs","degree_medium","degree_sub","pgdegree_yrs","pgdegree_medium","pgdegree_sub","mphil_yrs","mphil_medium","mphil_sub","phd_yrs","phd_medium","phd_sub","dted_yrs","dted_medium","bed_yrs","bed_medium","med_yrs","med_medium","bped_yrs","bped_medium","mped_yrs","mped_medium","tet","board_pr","board_pr","board_clg","board_6","add_district","region"];  
+        var feedback = ["subject","feedbck"];
+        var reg_email=jQuery("#mail");
         $("#user_dashboard_form").on('submit',function(e){
                 e.preventDefault();
                 for (var i=0;i<required_popup.length;i++) {
@@ -225,6 +246,38 @@ $('#mobile').keypress(function (e) {
         }
         });
         /*End of Seeker Edit Profile Validation*/
+        /*seeker feedback*/
+        $("#seeker_feedback_form").on('submit',function(e){
+                e.preventDefault();
+                for (var i=0;i<feedback.length;i++) {
+                var input = jQuery('#'+feedback[i]);
+            if ((input.val() == "")) 
+                {
+                    input.addClass("error_input_field");
+                    $('.error_test').css('display','block');  
+                } else {
+                    input.removeClass("error_input_field");
+                    $('.error_test').css('display','none');  
+                }
+            }     
+            if($("#feedbck").val().trim().length < 1)
+			{
+			    alert("Please Enter Your feedback...");
+			    return; 
+			}     
+            //if any inputs on the page have the class 'error_input_field' the form will not submit
+            if (jQuery(":input").hasClass("error_input_field")  ) {
+                $('.error_test').css('display','block');
+                return false;
+            }
+            else {
+                errornotice.hide();
+                $('.error_test').css('display','none');
+                $(this).unbind();
+                $(this).submit();
+            }
+        });
+        /*End*/
         });
         /*Ended by thangam*/
 
