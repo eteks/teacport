@@ -59,7 +59,10 @@ $route['provider/dashboard'] = 'job_provider/dashboard';
 $route['provider/initialdata'] = 'job_provider/initialdata';
 $route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
 $route['provider/inbox'] = 'job_provider/inbox';
+$route['provider/inbox/message'] = 'job_provider/inbox_message';
+$route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
 $route['provider/logout'] = 'job_provider/provider_logout';
+
 //JOB SEEKER
 $route['seeker/dashboard'] = 'job_seeker/dashboard';
 $route['seeker/logout'] = 'job_seeker/seeker_logout';

@@ -348,7 +348,24 @@ class Job_provider extends CI_Controller {
 	}
 
 	public function inbox(){
-		$this->load->view('company-dashboard-resume');
+		$session_data = $this->session->all_userdata();
+		$inboxdata['organization'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$inboxdata['message'] = $this->job_provider_model->job_provider_inbox($session_data['login_session']['pro_userid']);
+		//echo $this->db->last_query();
+		$this->load->view('company-dashboard-inbox',$inboxdata);
+		// echo "<pre>";
+		// print_r($inboxdata['message']);
+		// echo "</pre>";
+	}
+	public function inbox_message(){
+		//echo $this->input->post('orgid');
+		//echo "'test','test','test','test'";
+		//$ar = array('apple', 'orange', 'banana', 'strawberry');
+		echo json_encode($this->job_provider_model->job_provider_inbox_ajax($this->input->post('orgid'),$this->input->post('lastid')));
+		//echo json_encode($ar);
+	}
+	public function inbox_message_count(){
+		echo $this->job_provider_model->job_provider_unread_inbox_count($this->input->post('orgid'));
 	}
 	public function companydbd_browsejobs(){
 		$this->load->view('company-dashboard-browse-jobs');
@@ -376,7 +393,6 @@ class Job_provider extends CI_Controller {
 	public function companydbd_changepwd(){
 		$this->load->view('company-dashboard-changepwd');
 	}
-	
 	/* custom validataion rules */
 	public function valid_date($date)
 	{

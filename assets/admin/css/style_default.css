@@ -477,9 +477,13 @@ tr select {
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
 }
-.finish > a {
+.finish > button {
     background: #87bb33 none repeat scroll 0 0 !important;
     color: #fff !important;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    display: inline-block;
+    padding: 5px 14px;
 }
 .pager .previous > a, .pager .previous > span{
 	background: #e8e8e8 none repeat scroll 0 0 !important;
@@ -533,11 +537,11 @@ tr select {
     margin-right: 20px;
     cursor: pointer;
 }
-/*.dataTables_length > label {
+.dataTables_length > label {
     color: #858585 !important;
     font-size: 13px !important;
     text-transform: capitalize;
-}*/
+}
 .privileges_table td .chzn-container .chzn-choices{
 	min-width: 255px !important;
 	max-width: 255px !important;

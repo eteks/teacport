@@ -312,6 +312,16 @@ font-size: 13px;
     height: 100px;
     width: 100px;
 }
+.map_data{
+	-moz-user-select: text;
+    background-color: white;
+    color: #333;
+    font-family: Roboto,Arial;
+    font-size: 13px;
+     margin-bottom: 0;
+    margin-top: 0;
+    width: 220px;
+}
 /*Ended by thangam*/
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {	
@@ -334,3 +344,16 @@ font-size: 13px;
 
 }	
 
+.inbox_menu{
+	position: relative;
+}
+.button__badge {
+  background-color: #fa3e3e;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+    padding: 0 11px;
+    position: absolute;
+    right: 17px;
+    top: 9px;
+}

@@ -11,7 +11,7 @@ $(document).ready(function(){
                 if(res != 'login_success') {
                    this_status.html(res);
                 $('.admin_status').html(res.status);
-                $('.admin_status').slideDown(350);
+                $('.admin_status').fadeIn(500);
                 $('.admin_status').fadeOut(3000);
                 }
                 else {
@@ -162,7 +162,7 @@ $(document).ready(function(){
 }); // End document
 
 // Popup with tab menu
-function handleFormWizards() {
+function handleFormWizards() {	
 	$('.date-picker').datepicker();
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
@@ -271,7 +271,7 @@ function tabmenu_ci_validation(value,data) {
         success: function(res) {
             if(res.error==1 && res.status!='valid') {
                 $('.val_error').html(res.status);
-                $('.val_error').slideDown(350);
+                $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 return_val = 0;
             }
@@ -280,7 +280,7 @@ function tabmenu_ci_validation(value,data) {
             }
             else if(res.error == 2) {
                 $('.val_error').html(res.status);
-                $('.val_error').slideDown(350);
+                $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 $('.admin_table').dataTable().fnDestroy(); 
                 setTimeout(function()
@@ -328,3 +328,13 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
    	   $("#forgotform").hide();
    	   $("#admin_login_form").show();
    });
+   
+   // $(function () {
+    // var startDate = new Date('1985-01-01'),
+        // endDate = new Date('1995-01-01');
+    // $('#reg_dob').datetimepicker({
+        // //other option
+        // startDate: startDate, //set start date
+        // endDate: endDate //set end date
+    // });
+// });
