@@ -108,12 +108,12 @@ class Admin_login extends CI_Controller {
 		if($data['error']==0) {
 			if($data['status']=='valid') {
 				$user_values = $data_values['user_values'];	
-			 //    $config['protocol'] = 'smtp';
-			 //    $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-    //          	$config['smtp_port'] = 25;
-			 //    $config['smtp_user'] = $user_values['admin_user_email'];
-			 //    $config['smtp_pass'] = '********';          
-		  //       $this->load->library('email', $config);		
+			 	// $config['protocol'] = 'smtp';
+			 	// $config['smtp_host'] = 'ssl://smtp.googlemail.com';
+    			// $config['smtp_port'] = 25;
+			 	// $config['smtp_user'] = $user_values['admin_user_email'];
+			 	// $config['smtp_pass'] = '********';          
+		  		// $this->load->library('email', $config);		
 				// $this->email->from('sivaramakannan05@gmail.com');
 				// $this->email->to($config['smtp_user']);						
 				// $this->email->subject('Get your forgotten Password');

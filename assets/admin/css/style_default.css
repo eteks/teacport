@@ -616,3 +616,9 @@ tr select {
     min-height: auto !important;
     overflow: auto;
 }
+/*.user_acct_tbl {
+    display: block !important;
+    max-width: 1000px !important;
+    min-width: 800px !important;
+    overflow: auto;
+}*/

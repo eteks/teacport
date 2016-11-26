@@ -258,6 +258,16 @@ $(document).ready(function(){
         }
     });
 
+    // Delete - Old record
+    $(document).on("click",".uidelete",function(){
+        doConfirm("Are you sure want to delete?", function yes() {
+            
+        }, function no() {
+                // do nothing
+            });
+    });
+
+
     // Edit - Old record
     $(document).on("click","."+editbutton,function(){
         var update_id = $(this).data("id");
