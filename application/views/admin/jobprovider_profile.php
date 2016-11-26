@@ -63,7 +63,7 @@ if(!empty($this->session->userdata("login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div> 
-                <form action="job_provider/teacport_job_provider_ads">
+                <form action="job_provider/teacport_job_provider_profile">
                   <p class="admin_status"> </p>
                   <div class="table_content_section">
                     <?php } ?>
@@ -111,13 +111,13 @@ if(!empty($this->session->userdata("login_status"))):
                             <?php 
                             if($pro_val['organization_status']==1) :
                               echo "Active";
-                                else :
-                                  echo "Inactive";
-                                endif;
-                                ?> 
-                              </td>
-                              <td class=""> 
-                                <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
+                            else :
+                              echo "Inactive";
+                            endif;
+                            ?> 
+                          </td>
+                          <td class=""> 
+                            <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
                           </td>                                      
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section">
@@ -162,8 +162,8 @@ if(!empty($this->session->userdata("login_status"))):
               </h4>                        
             </div>
             <div class="widget-body form pop_details_section">
-              <?php } ?>
               <form class="tab_form" action="job_provider/teacport_job_provider_profile" data-index="" method="POST" data-mode="update">
+                <?php } ?>
                 <?php
                 if(!empty($provider_full_profile)) :
                 ?>
@@ -613,8 +613,8 @@ if(!empty($this->session->userdata("login_status"))):
                 <?php
                 endif;
                 ?>
+                <?php if(!$this->input->is_ajax_request()) { ?>
               </form>
-              <?php if(!$this->input->is_ajax_request()) { ?>
             </div>
           </div>
         	<p>

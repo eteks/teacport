@@ -6,7 +6,6 @@ class Adminindex extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('admin/admin_model');
-		$this->load->library('form_validation');
 		$this->load->model('admin/dashboard_model');
 		$this->load->helper('custom');
 		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function

@@ -46,10 +46,6 @@ if(!empty($this->session->userdata("login_status"))):
               <h4>
                 <i class="icon-reorder"></i> Job Activities
               </h4>
-              <span class="tools">
-                <a href="javascript:;" class="icon-chevron-down"></a>
-                <a href="javascript:;" class="icon-remove"></a>
-              </span>
             </div>
             <div class="widget-body">
               <div class="portlet-body">

@@ -4393,6 +4393,10 @@ div.dt-button-background {
 .add_section {
     height: 40px;
 }
+.admin_table a {
+    cursor: pointer;
+    text-decoration: none;
+}
 
 /* Datatable Css to add checkbox with columns for columns visibility end */
 
