@@ -507,28 +507,28 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
       
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********
-    var module_array = new Array();
-    $('.main_module_data').each(function(){
-        var $this = $(this);
-        main_module_data = $this.text().toLowerCase();
-        module_array[main_module_data] = [];
-        $this.parents('.has-sub').find(".module_details").each(function(){
-            module_array[main_module_data].push({"sub_module":$(this).find('.sub_module_data').text().toLowerCase(),"module_access":$(this).find('.sub_module_access').text().toLowerCase()});
-        });
-        push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
-        module_array.push(push_data);
-    });
-    var module_params = {};
-    module_params[csrf_name] = csfrData[csrf_name];
-    module_params['module_data'] = JSON.stringify(module_array);
-    $.ajax({
-        type : "POST",
-        url : admin_baseurl+"admin_modules",
-        data : module_params,
-    });
+    // var module_array = new Array();
+    // $('.main_module_data').each(function(){
+    //     var $this = $(this);
+    //     main_module_data = $this.text().toLowerCase();
+    //     module_array[main_module_data] = [];
+    //     $this.parents('.has-sub').find(".module_details").each(function(){
+    //         module_array[main_module_data].push({"sub_module":$(this).find('.sub_module_data').text().toLowerCase(),"module_access":$(this).find('.sub_module_access').text().toLowerCase()});
+    //     });
+    //     push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
+    //     module_array.push(push_data);
+    // });
+    // var module_params = {};
+    // module_params[csrf_name] = csfrData[csrf_name];
+    // module_params['module_data'] = JSON.stringify(module_array);
+    // $.ajax({
+    //     type : "POST",
+    //     url : admin_baseurl+"admin_modules",
+    //     data : module_params,
+    // });
     // ********** End of the code ***********
 
-    //Store the access privileges of each admin user into database via ajax
+    //Store the access privileges of each admin user group into database via ajax
     // ********* Start line of the code **********
     $(document).delegate('.privilege_form','submit',function(e){   
         $this = $(this);
@@ -553,6 +553,13 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
             type : "POST",
             url : admin_baseurl+"privileges",
             data : module_params,
+            success: function(res) {
+                $res = JSON.parse(res);
+                if($res == "success"){
+                    $("html, body").animate({ scrollTop: 800 }, "slow");
+                    $('.privilege_status').text("Updated Successfully").show();
+                }
+            }
         });
     });   
     // ********** End of the code ***********

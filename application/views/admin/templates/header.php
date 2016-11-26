@@ -235,7 +235,8 @@ Website: http://thevectorlab.net/
         // echo "</pre>";
         // echo "<pre>";
         // print_r($this->config->item('current_page_rights'));
-        // echo "<pre>";
+        // echo "</pre>";
+        $is_super_admin = $this->session->userdata("login_session")['is_super_admin'];
     ?>
     <!-- BEGIN SIDEBAR -->
         <div id="sidebar" class="nav-collapse collapse">
@@ -262,7 +263,7 @@ Website: http://thevectorlab.net/
                         });
                         $main_module_exists = in_array($value['main_module'], array_column($admin_operation_rights, 'main_module'));
                         //if currently logged group has privilege access of this module, it will show in dashboard, otherwise won't show
-                        if($main_module_exists):
+                        if($main_module_exists || $is_super_admin):
                             if(in_array($this->uri->segment(2), $result)): ?>
                                 <li class="has-sub active open">
                             <?php
@@ -281,7 +282,7 @@ Website: http://thevectorlab.net/
                                     foreach ($value['sub_module'] as $det): 
                                     //Check loaded sub module access for this user group, here recursiveFind is custom function to search our searched value exists wherever in that mutlidimensional arry
                                     $sub_module_exists = recursiveFind($admin_operation_rights, $det['name']);
-                                    if($sub_module_exists):
+                                    if($sub_module_exists || $is_super_admin):
                                     ?>
                                         <li <?php if($this->uri->segment(2) == $det['name']) echo "class='active_sidebar'"; ?>>
                                             <a href="<?php echo $det['route_url']; ?>" class="module_details">
