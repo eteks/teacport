@@ -72,7 +72,7 @@ if(!empty($this->session->userdata("login_status"))):
                                   </thead>
                                 </tr>
                                 <tbody>
-                                  <tr class="parents_tr" id="column1">
+                                  <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name1</td>
                                         <td class="candidate_posting_applied_for">Teacher</td>
                                         <td class="candidate_expecting_start_salary">10000</td>
@@ -81,11 +81,11 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="candidate_willing_subject_id">Maths</td>
                                         <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
+                                        	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="uidelete" id="">Delete</a></td>
                                     </tr>
-                                    <tr class="parents_tr" id="column2">
+                                    <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name2</td>
                                         <td class="candidate_posting_applied_for">Prof</td>
                                         <td class="candidate_expecting_start_salary">10000</td>
@@ -94,11 +94,11 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="candidate_willing_subject_id">English</td>
                                         <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;" data-id="column2">Edit</a>
+                                        	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="uidelete" id="">Delete</a></td>
                                     </tr>
-                                    <tr class="parents_tr" id="column3">
+                                    <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name3</td>
                                         <td class="candidate_posting_applied_for">Professor</td>
                                         <td class="candidate_expecting_start_salary">10000</td>
@@ -107,9 +107,9 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="candidate_willing_subject_id">Science</td>
                                         <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;" data-id="column3">Edit</a>
+                                        	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="uidelete" id="">Delete</a></td>
                                     </tr>
                                 </tbody>
                               </table>

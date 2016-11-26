@@ -172,8 +172,8 @@ if(!empty($this->session->userdata("login_status"))):
               </h4>                        
             </div>
             <div class="widget-body form pop_details_section">
+              <?php } ?>
               <form class="tab_form" action="job_seeker/teacport_job_seeker_profile" data-index="" method="POST" data-mode="update">
-                <?php } ?>
                 <?php
                 if(!empty($seeker_full_profile)) :
                 ?>
@@ -576,8 +576,8 @@ if(!empty($this->session->userdata("login_status"))):
                 <?php
                 endif;
                 ?>
-                <?php if(!$this->input->is_ajax_request()) { ?>
               </form>                 
+              <?php if(!$this->input->is_ajax_request()) { ?>
             </div>
           </div>
           <p>
