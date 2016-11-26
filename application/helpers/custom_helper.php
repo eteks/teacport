@@ -128,3 +128,19 @@ if ( ! function_exists('get_privileges')){
 		return $results;
 	}
 }
+
+if ( ! function_exists('recursiveFind')){
+	function recursiveFind(array $array, $needle)
+	{
+	    $iterator  = new RecursiveArrayIterator($array);
+	    $recursive = new RecursiveIteratorIterator(
+	        $iterator,
+	        RecursiveIteratorIterator::SELF_FIRST
+	    );
+	    foreach ($recursive as $key => $value) {
+	        if ($value === $needle) {
+	            return true;
+	        }
+	    }
+	}
+}

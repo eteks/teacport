@@ -8,6 +8,8 @@ class Job_Provider extends CI_Controller {
 		$this->load->model('admin/job_providermodel');
 		$this->load->model('admin/admin_model');
 		$this->load->library('upload');
+		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function
+		$this->config->load('admin_modules');
 
 	}
 

@@ -69,10 +69,10 @@
                                     <tbody>
                                     <?php
                                         // echo "<pre>";
-                                        // print_r($admin_modules);
+                                        // print_r($admin_modules_list);
                                         // echo "</pre>";
-                                        if(!empty($admin_modules)) :
-                                        foreach ($admin_modules as $mod) :
+                                        if(!empty($admin_modules_list)) :
+                                        foreach ($admin_modules_list as $mod) :
                                         $mod['module_id'] = is_array($mod['module_id'])?$mod['module_id']:(array)$mod['module_id'];  
                                         $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
                                         $mod['operation_available'] = is_array($mod['operation_available'])?$mod['operation_available']:(array)$mod['operation_available'];
@@ -100,9 +100,6 @@
                                               $group_id = $group['user_group_id'];
                                               $module_id = $sub[0];
                                               $access_priveleges = is_array($sub[2])?$sub[2]:explode(",",$sub[2]); 
-                                              // echo "<pre>";
-                                              // print_r($access_priveleges);
-                                              // echo "</pre>";
                                             ?>
                                                 <td class="admin_options module_inner_data">
                                                   <input type="hidden" name="group_id" class="group_id" value="<?php echo $group['user_group_id']?>">
