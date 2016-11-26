@@ -38,10 +38,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Job Seeker Preference</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -50,9 +46,6 @@ if(!empty($this->session->userdata("login_status"))):
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
-                                    <div class="btn-group pull-right">
-                                        
                                     </div>
                                 </div>
                                 
@@ -64,7 +57,7 @@ if(!empty($this->session->userdata("login_status"))):
                               endif;
                               ?> 
                               <p class='val_error error_msg_md'> <p>
-                              <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                              <table class="table table-striped table-hover table-bordered admin_table job_seeker_table" id="sample_editable_1">
                                <tr class="ajaxTitle">
                                   <thead>
                                     <th>Candidate Name</th>

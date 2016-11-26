@@ -51,9 +51,9 @@ if(!empty($this->session->userdata("login_status"))):
                 <a href="javascript:;" class="icon-remove"></a>
               </span>
             </div>
-            <div class="widget-body">
-              <div class="portlet-body">
-                <div class="clearfix add_section">
+           <div class="widget-body">
+                <div class="portlet-body">
+                  <div class="clearfix add_section">
                 </div>
                 <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
                   <?php } ?> 

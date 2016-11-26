@@ -85,6 +85,9 @@ createInput = function(i,str){
     else if(inputType[i] == "textarea"){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
+    else if(inputType[i] == "label"){
+        input = '<label name='+columns[i]+'>'+str+'</label>';
+    }
     else if(inputType[i] == "select"){
         input = '<select name='+columns[i]+'>';
         var select_option = eval(columns[i]+'_option');
@@ -489,12 +492,19 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
     e.preventDefault();
     });
     
+   	$("ul, .site_visit_btn").on("click", function () {
+           var disabled = $(this).attr("disabled");
+           if (disabled === 'disabled') {
+            return false;
+           }
+           });
+       
  //Forgot password
    $('#forget-password').on("click", function(){
    	   $("#admin_login_form").hide();
    	   $("#forgotform").show();
-   });
-    
+   });    
+      
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********
     // var module_array = new Array();

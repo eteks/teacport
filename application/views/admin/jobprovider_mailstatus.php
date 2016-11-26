@@ -37,10 +37,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Job Provider Mail Status</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -50,9 +46,6 @@ if(!empty($this->session->userdata("login_status"))):
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div> -->
-                                    <div class="btn-group pull-right">
-                                        
-                                    </div>
                                 </div>
                                 
                                 <!-- <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">

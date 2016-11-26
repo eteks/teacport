@@ -296,19 +296,6 @@ function tabmenu_ci_validation(value,data) {
     return return_val;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 function error_popup(message){
 	$('.error_popup_msg .success-alert span').text(message);
 	$('.popup_fade').show();

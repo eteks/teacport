@@ -543,8 +543,48 @@ tr select {
 	max-width: 255px !important;
 }
 .admin_table td .chzn-container .chzn-choices{
-	min-width: 150px !important;
-	max-width: 150px !important;
+	min-width: 170px !important;
+	max-width: 170px !important;
+}
+.admin_table td .chzn-container .chzn-drop {
+   max-height: 100px !important;
+    max-width: 170px !important;
+    min-width: 170px !important;    
+    overflow: auto;
+}
+.admin_table td .chzn-container .chzn-container-multi .chzn-container-active{
+	max-height: 100px !important;
+    max-width: 170px !important;
+    min-width: 170px !important;    
+    overflow: auto;
+}
+.admin_table td .chzn-container-multi .chzn-choices{
+	max-height: 100px !important;
+    max-width: 170px !important;
+    min-width: 170px !important;    
+    overflow: auto;
+}
+.job_seeker_table td .chzn-container .chzn-choices{
+	min-width: 130px !important;
+	max-width: 130px !important;
+}
+.job_seeker_table td .chzn-container .chzn-drop {
+   max-height: 100px !important;
+    max-width: 130px !important;
+    min-width: 130px !important;    
+    overflow: auto;
+}
+.job_seeker_table td .chzn-container .chzn-container-multi .chzn-container-active{
+	max-height: 100px !important;
+    max-width: 130px !important;
+    min-width: 130px !important;    
+    overflow: auto;
+}
+.job_seeker_table td .chzn-container-multi .chzn-choices{
+	max-height: 100px !important;
+    max-width: 130px !important;
+    min-width: 130px !important;    
+    overflow: auto;
 }
 .form-wizard .step .seeker_tab_num {
     background-color: #ccc;
@@ -562,4 +602,13 @@ tr select {
     font-weight: 300 !important;
     margin-top: 5px !important;
     position: absolute !important;
+    text-align: center !important;
+}
+.admin_table td .on_off_button{
+	width: 85px !important;
+}
+#sidebar > ul > li > ul.sub {
+    max-height: 250px !important;
+    min-height: auto !important;
+    overflow: auto;
 }

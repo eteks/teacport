@@ -39,10 +39,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>User Accounts</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -51,9 +47,6 @@ if(!empty($this->session->userdata("login_status"))):
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
-                                    <div class="btn-group pull-right">
-                                        
                                     </div>
                                 </div>
                                 
