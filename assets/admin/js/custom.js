@@ -151,7 +151,7 @@ ajax = function (params,action,form_id){
         success: function(res) {
             if(res.error==1) {
                 $('.val_error').html(res.status);
-                $('.val_error').slideDown(350);
+                $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
             }
             else if(res.error==2) {
@@ -235,7 +235,7 @@ $(document).ready(function(){
     $(document).on('click','.new_remove',function() {
         disable_datatable(1);
         if(editing==0 && ready_save==1) {
-            $(this).parents('tr').remove();
+            $(this).parents('tr').fadeOut(600);
             ready_save=0;
         }
     });
@@ -595,5 +595,12 @@ function disable_datatable($mode) {
 
 
 }
-
-
+// $(document).ready(function(){
+// var startDate = new Date('01-01-1990'),
+        // endDate = new Date('01-01-2000');
+    // $('#regi_dob').datepicker({
+        // format: "dd-mm-yyyy",
+        // startDate: startDate, //set start date
+        // endDate: endDate //set end date
+    // });
+// });

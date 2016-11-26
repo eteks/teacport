@@ -623,11 +623,19 @@ if(!empty($this->session->userdata("login_status"))):
           <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
         </div>
       </div>     	
-    </div>
+    </div><!--Test datepicker -->
+    <!-- <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Registrant DOB</label>
+                          <span>
+                            <input type="text" id="regi_dob" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" />
+                          </span>
+                        </div>
+  </div> --><!--End of datepicker -->
     <!-- END PAGE CONTAINER-->
   </div>
   <!-- END PAGE -->
-</div>
+</div>           
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>
 <?php
