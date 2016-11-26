@@ -57,10 +57,12 @@
     <link href="https://fonts.googleapis.com/css?family=Arizonia" rel="stylesheet"> 
     <!--My custom Fonts--> 
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
-   
+    <!--My data table css--> 
+   	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.dataTables.min.css">
 
     <!-- JavaScripts -->
     <script src="<?php echo base_url(); ?>assets/js/modernizr.js"></script>
+    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

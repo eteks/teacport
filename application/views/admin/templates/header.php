@@ -274,7 +274,7 @@ Website: http://thevectorlab.net/
                             endif;
                             ?>  
                                 <a href="javascript:;" class="">
-                                    <span class="icon-box"> <i class="icon-home"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper($value['main_module']);?></span>
+                                    <span class="icon-box"> <i class="<?php echo $value['icon_name'] ?>"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper($value['main_module']);?></span>
                                     <span class="arrow"></span>
                                 </a>
                                 <ul class="sub">

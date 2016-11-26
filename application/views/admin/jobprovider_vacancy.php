@@ -3,138 +3,154 @@ if(!empty($this->session->userdata("login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
-   <!-- BEGIN CONTAINER -->
-  <div id="container" class="row-fluid">
-      <!-- BEGIN SIDEBAR -->
-      <div id="sidebar" class="nav-collapse collapse">
-         <div class="sidebar-toggler hidden-phone"></div>
-         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-         <div class="navbar-inverse">
-            <form class="navbar-search visible-phone">
-               <input type="text" class="search-query" placeholder="Search" />
-            </form>
-         </div>
-         <!-- END RESPONSIVE QUICK SEARCH FORM -->
-         <!-- BEGIN SIDEBAR MENU -->
-          
-         <!-- END SIDEBAR MENU -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+  <!-- BEGIN SIDEBAR -->
+  <div id="sidebar" class="nav-collapse collapse">
+    <div class="sidebar-toggler hidden-phone"></div>
+    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+    <div class="navbar-inverse">
+      <form class="navbar-search visible-phone">
+        <input type="text" class="search-query" placeholder="Search" />
+      </form>
+    </div>
+    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+    <!-- BEGIN SIDEBAR MENU -->
+  </div>
+  <!-- END SIDEBAR -->
+  <!-- BEGIN PAGE -->
+  <div id="main-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+      <!-- BEGIN PAGE HEADER-->
+      <div class="row-fluid">
+        <div class="span12">
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
+          <h3 class="page-title">
+            Teachers Recruit
+            <small>Job Providers</small>
+          </h3>
+          <ul class="breadcrumb">
+            <li>
+              <a href="<?php echo base_url(); ?>admin/dashboard">
+                <i class="icon-home"></i>
+              </a>
+              <span class="divider">&nbsp;</span>
+            </li>
+            <li>
+              <span>Job Providers</span> 
+              <span class="divider">&nbsp;</span>
+            </li>
+            <li>
+              <a href="<?php echo base_url(); ?>admin/job_provider_vacancies">Job Provider Vacancies</a>
+              <span class="divider-last">&nbsp;</span>
+            </li>
+          </ul>
+          <!-- END PAGE TITLE & BREADCRUMB-->
+        </div>
       </div>
-      <!-- END SIDEBAR -->
-      <!-- BEGIN PAGE -->
-      <div id="main-content">
-         <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
-            <!-- BEGIN PAGE HEADER-->
-            <div class="row-fluid">
-               <div class="span12">
-                  <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-                  <h3 class="page-title">
-                     Teachers Recruit
-                     <small>Job Providers</small>
-                  </h3>
-                   <ul class="breadcrumb">
-                       <li>
-                           <a href="editable_table.html#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
-                       </li>
-                       <li>
-                           <a href="<?php echo base_url(); ?>admin/job_provider_vacancies">Job Providers</a> <span class="divider">&nbsp;</span>
-                       </li>
-                       <li><a href="<?php echo base_url(); ?>admin/job_provider_vacancies">Job Provider Vacancies</a><span class="divider-last">&nbsp;</span></li>
-                   </ul>
-                  <!-- END PAGE TITLE & BREADCRUMB-->
-               </div>
+      <!-- END PAGE HEADER-->
+      <!-- BEGIN ADVANCED TABLE widget-->
+      <div class="row-fluid">
+        <div class="span12">
+          <!-- BEGIN EXAMPLE TABLE widget-->
+          <div class="widget">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i>Job Provider Vacancies
+              </h4>
             </div>
-            <!-- END PAGE HEADER-->
-
-            <!-- BEGIN ADVANCED TABLE widget-->
-            <div class="row-fluid">
-                <div class="span12">
-                    <!-- BEGIN EXAMPLE TABLE widget-->
-                    <div class="widget">
-                        <div class="widget-title">
-                            <h4><i class="icon-reorder"></i>Job Provider Vacancies</h4>
-                        </div>
-                        <div class="widget-body">
-                            <div class="portlet-body">
-                                <div class="clearfix">
-                                </div>
-                                
-                                <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
-                                  <thead>
-                                    <tr class="ajaxTitle">
-                                      <th> Vacancies Job Title </th>
-                                      <th> Organization Name </th>
-                                      <th> Available </th>
-                                      <th> Open Date </th>
-                                      <th> Close Date </th>
-                                      <th> Status </th>
-                                      <th> Created Date</th>
-                                      <th> Edit </th>
-                                      <th> Delete </th>
-                                      <th> Full View </th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <?php
-                                    if(!empty($provider_vacancy))  :
-                                    foreach ($provider_vacancy as $vac_val) :
-                                    ?>                                   
-                                    <tr class="parents_tr" id="column">
-                                      <td class=""> 
-                                        <?php echo $vac_val['vacancies_job_title']; ?>
-                                      </td>
-                                      <td class="">
-                                        <?php echo $vac_val['organization_name']; ?>
-                                      </td>
-                                      <td class=""> 
-                                        <?php echo $vac_val['vacancies_available']; ?>
-                                      </td>
-                                      <td class=""> 
-                                        <?php echo $vac_val['vacancies_open_date']; ?>
-                                      </td>
-                                      <td class=""> 
-                                        <?php echo $vac_val['vacancies_close_date']; ?>
-                                      </td>
-                                      <td class=""> 
-                                        <?php 
-                                        if($vac_val['vacancies_status']==1) :
-                                          echo "Active";
-                                        else :
-                                          echo "Inactive";
-                                        endif;
-                                        ?> 
-                                      </td>
-                                      <td class=""> 
-                                        <?php echo date('d-m-Y',strtotime($vac_val['vacancies_created_date'])); ?>
-                                      </td>     
-                                      <td class="edit_section">
-                                        <a class="job_edit popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax" data-mode="edit" data-popup-open="popup-1">
-                                          Edit
-                                        </a>
-                                      </td>
-                                      <td>
-                                        <a class="job_delete" onclick="Confirm.show()" data-id="<?php echo $vac_val['vacancies_id']; ?>">
-                                          Delete
-                                        </a>
-                                      </td>
-                                      <td>
-                                        <a class="job_full_view popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax"  data-mode="full_view" data-popup-open="popup-1">
-                                          Full View
-                                        </a>
-                                      </td>
-                                    </tr>
-                                    <?php
-                                    endforeach;
-                                    endif;
-                                    ?>
-                                  </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END EXAMPLE TABLE widget-->
+            <div class="widget-body">
+              <div class="portlet-body">
+                <div class="clearfix add_section">
                 </div>
+                <form action="job_provider/teacport_job_provider_vacancies">
+                  <p class="admin_status"> </p>
+                  <div class="table_content_section">
+                    <?php } ?>
+                    <?php
+                    if(!empty($provider_vacancy))  :
+                    ?>
+                    <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                      <thead>
+                        <tr class="ajaxTitle">
+                          <th> Vacancies Job Title </th>
+                          <th> Organization Name </th>
+                          <th> Available </th>
+                          <th> Open Date </th>
+                          <th> Close Date </th>
+                          <th> Status </th>
+                          <th> Created Date</th>
+                          <th class="data_action"> Edit </th>
+                          <th class="data_action"> Delete </th>
+                          <th class="data_action"> Full View </th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        foreach ($provider_vacancy as $vac_val) :
+                        ?>                                   
+                        <tr class="parents_tr" id="column">
+                          <td class=""> 
+                            <?php echo $vac_val['vacancies_job_title']; ?>
+                          </td>
+                          <td class="">
+                            <?php echo $vac_val['organization_name']; ?>
+                          </td>
+                          <td class=""> 
+                            <?php echo $vac_val['vacancies_available']; ?>
+                          </td>
+                          <td class=""> 
+                            <?php echo $vac_val['vacancies_open_date']; ?>
+                          </td>
+                          <td class=""> 
+                            <?php echo $vac_val['vacancies_close_date']; ?>
+                          </td>
+                          <td class=""> 
+                            <?php 
+                            if($vac_val['vacancies_status']==1) :
+                              echo "Active";
+                            else :
+                              echo "Inactive";
+                            endif;
+                            ?> 
+                          </td>
+                          <td class=""> 
+                            <?php echo date('d-m-Y',strtotime($vac_val['vacancies_created_date'])); ?>
+                          </td>     
+                          <td class="edit_section">
+                            <a class="job_edit popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax" data-mode="edit" data-popup-open="popup-1">
+                              Edit
+                            </a>
+                          </td>
+                          <td>
+                            <a class="job_delete pop_delete_action" onclick="Confirm.show()" data-id="<?php echo $vac_val['vacancies_id']; ?>">
+                              Delete
+                            </a>
+                          </td>
+                          <td>
+                            <a class="job_full_view popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax"  data-mode="full_view" data-popup-open="popup-1">
+                              Full View
+                            </a>
+                          </td>
+                        </tr>
+                        <?php
+                        endforeach;
+                        ?>
+                      </tbody>
+                    </table>                  
+                    <?php 
+                    endif;
+                    ?>
+                    <?php if(!$this->input->is_ajax_request()) { ?> 
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
+          <!-- END EXAMPLE TABLE widget-->
+        </div>
+      </div>
             
             <!---Full edit popup -->
             <div class="popup" data-popup="popup-1">
@@ -590,13 +606,11 @@ if(!empty($this->session->userdata("login_status"))):
                         <ul class="pager wizard">
                           <li class="previous"><a href="#">Previous</a></li>
                           <li class="next"><a href="#">Next</a></li>
-                          <li class="finish disabled"><a href="#">Finish</a></li>
+                          <li class="finish disabled"><button type="submit">Finish<i class="icon-ok"></i></button></li>
                         </ul>
                       </div>  
                     </div>
                     <?php
-                    else :
-                      echo "<p> No content found </p>";
                     endif;
                     ?>
                     </form>
