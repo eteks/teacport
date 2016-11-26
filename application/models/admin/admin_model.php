@@ -561,8 +561,8 @@ class Admin_Model extends CI_Model {
                             );
       $postings_update_where = '(posting_id="'.$this->input->post('rid').'")'; 
       $this->db->set($postings_update_data); 
-      $this->db->where($universities_update_where);
-      $this->db->update("tr_applicable_posting", $postings_update_where); 
+      $this->db->where($postings_update_where);
+      $this->db->update("tr_applicable_posting", $postings_update_data); 
       $model_data['status'] = "Updated Successfully";
       $model_data['error'] = 2;
     }

@@ -63,10 +63,8 @@
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/uniform/jquery.uniform.min.js"></script>
 
         <!-- Datatable plugin start -->
-        <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/jquery.dataTables.js"></script> -->
-         <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script>
-
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/data-tables/DT_bootstrap.js"></script>  <!-- Bootstrap design  -->
        
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
         <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
@@ -75,7 +73,6 @@
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
         <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
-
         <!-- Datatable plugin end -->
 
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>  
@@ -89,96 +86,104 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->  
         <script>
-           jQuery(document).ready(function() {
-              $('.admin_table').dataTable({
-                "order": [],
-                    // // Length of row in grid - row length
-                    // "lengthMenu": [
-                    //                 [5, 25, 50, -1], 
-                    //                 [5, 25, 50, "All"]
-                    //               ],
-                    // // Page length
-                    // "pageLength": 5,
-                    // // Scroll option enabled
-                    // "scrollX": true,
-                    // "sScrollX": "100%",
-                    // "sScrollXInner": "99%",
-                    // // Change default text
-                    // "oLanguage": {
-                    //     "sLengthMenu": "_MENU_", // Remove show entries text from entries dropdown like "sLengthMenu": "_MENU_ records per page"
-                    //     "oPaginate": {  // Change pagination text
-                    //         "sPrevious": "Prev", // Change previous pagination text
-                    //         "sNext": "Next" // Change next pagination text
-                    //     }
-                    // },
+            var datatable = "";
+            function datatable_initialization() {
+                $('.admin_table').dataTable({
+                    "order": [],
+                    // Length of row in grid - row length
+                    "lengthMenu" : [
+                                    [5, 25, 50, -1], 
+                                    [5, 25, 50, "All"]
+                                  ],
+
+                    // Page length
+                    "pageLength" : 5,
+                    // Change default text
+                    "language" : {
+                                    "lengthMenu": "_MENU_ records per page", // Remove show entries text from entries dropdown like "sLengthMenu": "_MENU_ records per page"
+                                    "zeroRecords": "Nothing found - sorry", // empty table message
+                                    "info": "Showing _START_ to _END_ of _TOTAL_ entries", // Entries message
+                                    "infoEmpty": "No records available", // No results message
+                                    "infoFiltered": "(filtered from _MAX_ total records)", // After filtering, message
+                                    "search":         "Search:", // Search message
+                                    "paginate": {  // Change pagination text
+                                        "previous": "Prev", // Change previous pagination text
+                                        "next": "Next" // Change next pagination text
+                                    }
+                    },
 
                     // Export option
-                    dom: 'Bfrtip',
-                    buttons: 
+                    "dom": 'lBfrtip',
+                      
+                    "buttons": 
                             [
                                 {
-                                    extend: 'colvis',
-                                    columns: ':not(.data_action)',
-                                    postfixButtons: ['colvisRestore'],
-                                    text : ' Column Visibility <i class="icon-angle-down"></i>',
-                                    className: 'btn dropdown-toggle colvis_button',
+                                    "extend": 'colvis',
+                                    "columns": ':not(.data_action)',
+                                    "postfixButtons": ['colvisRestore'],
+                                    "text" : ' Column Visibility <i class="icon-angle-down"></i>',
+                                    "className": 'btn dropdown-toggle colvis_button',
                                 },
                                 {
-                                    extend: 'collection',
-                                    text : ' Export <i class="icon-angle-down"></i>',
-                                    className: 'btn dropdown-toggle export_button',
-                                    buttons: 
+                                    "extend": 'collection',
+                                    "text" : ' Export <i class="icon-angle-down"></i>',
+                                    "className": 'btn dropdown-toggle export_button',
+                                    "buttons": 
                                             [
                                                 {
-                                                    extend: 'copy',
-                                                    text : "Copy",
-                                                    className : "export_options",
-                                                    exportOptions: {
-                                                        columns : ':visible:not(.data_action)'
+                                                    "extend": 'copy',
+                                                    "text" : "Copy",
+                                                    "className" : "export_options",
+                                                    "exportOptions": {
+                                                        "columns" : ':visible:not(.data_action)'
                                                     },
                                                 },
                                                 {
-                                                    extend: 'pdf',
-                                                    text : "Save as pdf",
-                                                    className : "export_options",
-                                                    exportOptions: {
-                                                        columns : ':visible:not(.data_action)'
+                                                    "extend": 'pdf',
+                                                    "text" : "Save as pdf",
+                                                    "className" : "export_options",
+                                                    "exportOptions": {
+                                                        "columns" : ':visible:not(.data_action)'
                                                     },
                                                 },
                                                 {
-                                                    extend: 'csv',
-                                                    text : "Save as csv",
-                                                    className : "export_options",
-                                                    exportOptions: {
-                                                        columns : ':visible:not(.data_action)'
+                                                    "extend": 'csv',
+                                                    "text" : "Save as csv",
+                                                    "className" : "export_options",
+                                                    "exportOptions": {
+                                                        "columns" : ':visible:not(.data_action)'
                                                     },
                                                 },
                                                 {
-                                                    extend: 'excel',
-                                                    text : "Save as excel",
-                                                    className : "export_options",
-                                                    exportOptions: {
-                                                        columns : ':visible:not(.data_action)'
+                                                    "extend": 'excel',
+                                                    "text" : "Save as excel",
+                                                    "className" : "export_options",
+                                                    "exportOptions": {
+                                                        "columns" : ':visible:not(.data_action)'
                                                     },
                                                 },
                                                 {
-                                                    extend: 'print',
-                                                    text : "Print",
-                                                    className : "export_options",
-                                                    exportOptions: {
-                                                        columns : ':visible:not(.data_action)'
+                                                    "extend": 'print',
+                                                    "text" : "Print",
+                                                    "className" : "export_options",
+                                                    "exportOptions": {
+                                                        "columns" : ':visible:not(.data_action)'
                                                     },
                                                 },
                                             ],
                                 },                         
                             ]
+
+                });
+            }
+            jQuery(document).ready(function() {
+                datatable_initialization();
             });
-           });
         </script>
         <script>
            jQuery(document).ready(function() {
               $('.privileges_table').dataTable({
-                "bPaginate": false
+                "bPaginate": false,
             });
            });
         </script>

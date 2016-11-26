@@ -34,10 +34,6 @@
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Privileges</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -48,16 +44,11 @@
                                         </button>
                                     </div> -->
                                     <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
+                                        
                                     </div>
+                                </div> 
                                 </div>
-                                <div class="space15"></div>
+                                <p class='privilege_status' style="display:none;"></p>
                                 <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> <!-- class="admin_module_form" -->
                                 <table class="table table-striped table-hover table-bordered privileges_table" id="sample_editable_1">
                                     <thead>
@@ -75,10 +66,10 @@
                                     <tbody>
                                     <?php
                                         // echo "<pre>";
-                                        // print_r($admin_modules);
+                                        // print_r($admin_modules_list);
                                         // echo "</pre>";
-                                        if(!empty($admin_modules)) :
-                                        foreach ($admin_modules as $mod) :
+                                        if(!empty($admin_modules_list)) :
+                                        foreach ($admin_modules_list as $mod) :
                                         $mod['module_id'] = is_array($mod['module_id'])?$mod['module_id']:(array)$mod['module_id'];  
                                         $mod['sub_module'] = is_array($mod['sub_module'])?$mod['sub_module']:(array)$mod['sub_module'];
                                         $mod['operation_available'] = is_array($mod['operation_available'])?$mod['operation_available']:(array)$mod['operation_available'];
@@ -106,9 +97,6 @@
                                               $group_id = $group['user_group_id'];
                                               $module_id = $sub[0];
                                               $access_priveleges = is_array($sub[2])?$sub[2]:explode(",",$sub[2]); 
-                                              // echo "<pre>";
-                                              // print_r($access_priveleges);
-                                              // echo "</pre>";
                                             ?>
                                                 <td class="admin_options module_inner_data">
                                                   <input type="hidden" name="group_id" class="group_id" value="<?php echo $group['user_group_id']?>">

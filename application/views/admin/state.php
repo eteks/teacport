@@ -59,10 +59,6 @@ if(!empty($this->session->userdata("login_status"))):
               <h4>
                 <i class="icon-reorder"></i> State
               </h4>
-              <!-- <span class="tools">
-                <a href="javascript:;" class="icon-chevron-down"></a>
-                <a href="javascript:;" class="icon-remove"></a>
-              </span> -->
             </div>
             <div class="widget-body">
               <div class="portlet-body">
@@ -75,7 +71,6 @@ if(!empty($this->session->userdata("login_status"))):
                   <div class="btn-group pull-right">
                   </div>
                 </div>
-                <div class="space15"></div>
                 <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
                   <?php } ?>
                   <?php
