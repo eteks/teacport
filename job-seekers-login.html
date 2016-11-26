@@ -66,7 +66,8 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="login-container">
-                            <div class="loginbox">
+                        	<!--Seeker Signin-->
+                            <div id="seeker-signin" class="loginbox" >
                             	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;">
                             	  Job Seekers Login
                             	  <a class="pull-right" href="index.html"><i class="fa fa-close"></i></a>
@@ -97,10 +98,50 @@
                                     <li><a href="login-4.html#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                                     <li><a href="login-4.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
-                                <div class="loginbox-signup">
-                                    <a href="register-job-seekers.html">Sign Up</a>
+                                <div class="loginbox-signin">New User ? <a class="txt_blue">Sign Up</a>
                                 </div>
                             </div>
+                            <!--Seeker Signup-->
+                            <div id="seeker-signup" class="loginbox" style="display:none;">
+                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;" >
+                            	  Let's Get Started
+                            	  <a class="pull-right" href="index.html"><i class="fa fa-close"></i></a>
+                                </div><br>
+                                <div class="form-group">
+                                    <label>Username: <span class="required">*</span></label>
+                                    <input placeholder="" class="form-control" type="text">
+                                </div>
+                                <div class="form-group">
+                                    <label>Email: <span class="required">*</span></label>
+                                    <input placeholder="" class="form-control" type="email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password: <span class="required">*</span></label>
+                                    <input placeholder="" class="form-control" type="password">
+                                </div>
+                                <div class="form-group">
+                                    <label>Confirm Password: <span class="required">*</span></label>
+                                    <input placeholder="" class="form-control" type="password">
+                                </div>
+                                <div class="loginbox-forgot">
+                                    <input type="checkbox" for="loginbox-forgot"> I accept <a class="txt_blue" href="register-4.html">Terms and conditions?</a>
+                                </div>
+                                <div class="loginbox-submit">
+                                    <a href="user-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Register"></a>
+                                </div>
+                                <div class="loginbox-or">
+                                    <div class="or-line"></div>
+                                    <div class="or">OR</div>
+                                </div>
+                                <div class="loginbox-title">Sign Up using social accounts</div>
+	                                <ul class="social-network social-circle onwhite">
+	                                    <li><a href="register-4.html#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+	                                    <li><a href="register-4.html#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+	                                    <li><a href="register-4.html#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+	                                    <li><a href="register-4.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+	                                </ul>
+                                	<div class="loginbox-signup"> Already have account <a class="txt_blue">Sign in</a> </div>
+                            	</div>
                         </div>
                     </div>
                 </div>
@@ -135,6 +176,8 @@
 
         <!-- CORE JS -->
         <script type="text/javascript" src="js/custom.js"></script>
+        <!-- Custom JS -->
+        <script type="text/javascript" src="js/mycustom.js"></script>
 
         <script type="text/javascript">
             $(".full-page").height($(window).height());

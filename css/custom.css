@@ -1,22 +1,50 @@
 /* Custom Code */
-.srch_bar {
+.txt_blue {
+	color: #29AAFE;
+}
+#srch-strip, .srch_bar {
 	display : none;
 }
- #home_search_bar:hover .srch_bar{
+ .slidershow-bg:hover .srch_bar, .slidershow-bg:hover #srch-strip{
    display : block;
  }
 .slidershow-bg .search-form-contaner {
 	margin-top: 0px;
 	position: relative;
-	top: -25px;
+	top: -55px;
 	overflow: hidden;
-	padding: 0px 20px;
-	/*background-color: rgba(0, 0, 0, 0.2);*/
+	padding: 0px 40px;
 	height: 50px;
+}
+#srch-strip {
+    position: relative;
+    padding: 30px 250px;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+#srch-strip .fa-close {
+    border: 1px solid #000;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 5px;
+    position: absolute;
+    right: -8px;
+    top: -12px;
+}
+#search-icon {
+	background-color: rgba(0, 0, 0, 0.2); 
+	padding: 10px 10px 10px 20px;
+    width: 100%; 
+}
+#search-icon .fa-search{
+	margin: 5px;
+}
+#search-icon .btn-default{
+	margin-top: 0px !important;
 }
 /* Featured Jobs Slider */
 .slide-featured-jobs {
 	padding: 10px;
+	cursor: pointer;
 }	
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
@@ -41,6 +69,20 @@
 	color: #777;
 	font-size: 22px;
 }
+/* Provider- Signup & Signin form */
+.login-container .loginbox-signin {
+	font-size: 14px;
+	color: #242424;
+	margin-top: 20px;
+	float: right;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+.login-container .loginbox-signin a:hover {
+	color: #000;
+}
+
 
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
@@ -131,7 +173,7 @@ select:invalid { color: gray; }
  	margin: 10px 0;
  }
 .info {
-	color: #ff0030;
+	color: #009900;
 	font-size: 15px;
 }
 #applicant_msg_act .modal-dialog {

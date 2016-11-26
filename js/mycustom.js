@@ -38,7 +38,35 @@
   }); 
 
 
+//Provider Signin & SignUp
+  $(".loginbox-signup a").on("click", function() {
+  	$("#provider-signin").hide();
+  	$("#provider-signup").show();
+  });    
+  
+  $('.loginbox-signin a').on("click", function() {
+  	$("#provider-signup").hide();
+   	$("#provider-signin").show();
+  }); 
+  
+//Seeker Signin & SignUp
+  $(".loginbox-signup").on("click", function() {
+  	$("#seeker-signin").hide();
+  	$("#seeker-signup").show();
+  });    
+  
+  $(".loginbox-signin").on("click", function() {
+  	$("#seeker-signup").hide();
+   	$("#seeker-signin").show();
+  });  
+    
+
+
+
 $(document).ready(function() {
+	
+	
+	
 	
 	// DATE-PICKER
     // $('input.datepicker').Zebra_DatePicker();
@@ -75,29 +103,31 @@ $(document).ready(function() {
 		// (".search-form-contaner").hide();
 	// }); 
 	
+	
+	
 });  //end document 
 
 
 
 
 /*Added by thangam*/
-/*Popup validation for company dashboard*/
-$('#mobile,#yrs_pr,yrs_kg').keypress(function (e) {
-             //if the letter is not digit then display error and don't type anything
-             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                //display error message
-                // $("#error_test").html("Digits Only").show().fadeOut("slow");
-                return false;
-            }
-           });
-$('#sslc_percent,#hsc_percent,#degree_percent,#pgdegree_percent,#mphil_percent,#phd_percent,#dted_percent,#bed_percent,#bed_percent,#med_percent,#med_percent,#mped_percent,#mped_percent').keypress(function (e) {
-             //if the letter is not digit then display error and don't type anything
-             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-                //display error message
-                // $("#error_test").html("Digits Only").show().fadeOut("slow");
-                return false;
-            }
-           });
+	/*Popup validation for company dashboard*/
+	$('#mobile,#yrs_pr,yrs_kg').keypress(function (e) {
+	             //if the letter is not digit then display error and don't type anything
+	             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	                //display error message
+	                // $("#error_test").html("Digits Only").show().fadeOut("slow");
+	                return false;
+	            }
+	           });
+	$('#sslc_percent,#hsc_percent,#degree_percent,#pgdegree_percent,#mphil_percent,#phd_percent,#dted_percent,#bed_percent,#bed_percent,#med_percent,#med_percent,#mped_percent,#mped_percent').keypress(function (e) {
+	             //if the letter is not digit then display error and don't type anything
+	             if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+	                //display error message
+	                // $("#error_test").html("Digits Only").show().fadeOut("slow");
+	                return false;
+	            }
+	           });
 
      $('#initial,#firstname,#finitial,#fname,#university,#institution,medium_of_instruction').keydown(function (e) {
           if (e.ctrlKey || e.altKey) {
@@ -279,8 +309,9 @@ $('#sslc_percent,#hsc_percent,#degree_percent,#pgdegree_percent,#mphil_percent,#
         });
         /*End*/
         });
-        /*Ended by thangam*/
+/*Ended by thangam*/
 
 
+	
 
 
