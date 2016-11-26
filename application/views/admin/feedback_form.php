@@ -57,10 +57,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Feedback Form</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -69,15 +65,6 @@ if(!empty($this->session->userdata("login_status"))):
                                         <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
                                     </div>
                                 </div>
                                 <div class="space15"></div>
@@ -118,7 +105,7 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class=""> 
                                           Ets
                                         </td>
-                                        <td class="is_viewed center_align"> 
+                                        <td class="is_viewed is_viewd_onoff center_align"> 
                                           <span class="icon-ok"> </span>
                                         </td>
                                         <td class="feedback_form_status center_align"> 
@@ -153,15 +140,16 @@ if(!empty($this->session->userdata("login_status"))):
       </div>
       <!-- END PAGE -->
   </div>
-  <!-- <script>
+  <script>
     // Define default values
-    var inputType = new Array("select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("feedback_form_status"); // Set name of input types
+    var inputType = new Array("label","label","label","label","label","label","on_off","select","label"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("feedback_form_title","feedback_form_message","is_organization","is_candidate","is_guest_user","candidate_or_organization_id","is_viewed","feedback_form_status","created_date"); // Set name of input types
     var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var feedback_form_status_option = new Array("Please select status","Active","Inactive"); 
-    var feedback_form_status_value = new Array("","1","0"); 
-  </script> -->
+    var is_created ="no";
+    var feedback_form_status_option = new Array("Active","Inactive"); 
+    var feedback_form_status_value = new Array("1","0"); 
+  </script>
 <?php include "templates/footer_grid.php" ?>
 <?php
 else :

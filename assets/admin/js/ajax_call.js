@@ -353,4 +353,3 @@ function CustomConfirm() {
 
 var Confirm = new CustomConfirm();
 //End of delete popup menu
-

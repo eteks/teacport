@@ -57,23 +57,10 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Site Visit Tracking</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                                 <div class="space15"></div>
                                   <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
@@ -110,7 +97,7 @@ if(!empty($this->session->userdata("login_status"))):
                                           40
                                         </td>
                                         <td class="">
-                                          <ul class="on_off_button on_off_button_j">
+                                          <ul class="on_off_button on_off_button_j site_visit_btn" disabled>
 			                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
 			                              	<li data-value="0"><a href="#">No</a></li>
 			                              </ul>
@@ -139,7 +126,7 @@ if(!empty($this->session->userdata("login_status"))):
                                           40
                                         </td>
                                         <td class="">
-                                          <ul class="on_off_button on_off_button_j">
+                                          <ul class="on_off_button on_off_button_j site_visit_btn" disabled>
 			                              	<li data-value="1"><a href="#">Yes</a></li> 
 			                              	<li data-value="0" class="on"><a href="#">No</a></li>
 			                              </ul>

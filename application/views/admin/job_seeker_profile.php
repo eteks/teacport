@@ -49,10 +49,6 @@
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Job Seeker Profile </h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -62,15 +58,6 @@
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div> -->
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
                                 <div class="space15"></div>
 
@@ -143,11 +130,11 @@
           <div class="popup" data-popup="popup_section">
                  <div class="popup-inner">				
 				<div class="widget box blue" id="popup_wizard_section">
-                     <div class="widget-title">
-                        <h4>
-                           <i class="icon-reorder"></i> Candidate Profile
-                        </h4>                        
-                     </div>
+                   <div class="widget-title">
+                      <h4>
+                         <i class="icon-reorder"></i> Candidate Profile
+                      </h4>                        
+                   </div>
                      <div class="widget-body form pop_details_section">
                         <form class="tab_form" data-index="" method="POST" data-mode="update">
                            <div id="rootwizard" class="form-wizard">

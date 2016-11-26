@@ -4046,6 +4046,7 @@ ul li:last-child{
 }
 .dt-buttons {
     float: right !important;
+    /*margin-top: 35px !important;*/
 }
 .export_options {
     border : none !important;
