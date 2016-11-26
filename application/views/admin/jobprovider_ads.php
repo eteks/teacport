@@ -35,7 +35,7 @@ if(!empty($this->session->userdata("login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="#">Job Providers</a>
+              <span>Job Providers</span>
               <span class="divider">&nbsp;</span>
             </li>
             <li>
@@ -65,107 +65,87 @@ if(!empty($this->session->userdata("login_status"))):
             </div>
             <div class="widget-body">
               <div class="portlet-body">
-                <div class="clearfix">
-                  <div class="btn-group">
-                    <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
-                      Add New <i class="icon-plus"></i>
-                    </button>
-                  </div>
-                  <div class="btn-group pull-right">
-                    <button class="btn dropdown-toggle" data-toggle="dropdown">Tools 
-                      <i class="icon-angle-down"></i>
-                    </button>
-                    <ul class="dropdown-menu pull-right">
-                      <li><a href="editable_table.html#">Print</a></li>
-                      <li><a href="editable_table.html#">Save as PDF</a></li>
-                      <li><a href="editable_table.html#">Export to Excel</a></li>
-                    </ul>
-                  </div>
+                <div class="clearfix add_section">
                 </div>
-                <div class="space15"></div>
-                <div class="table_content_section">
-                  <?php } ?>
-                  <?php
-                  if(!empty($provider_ads))  :
-                  ?>
-                  <?php
-                  if(!empty($status))  :
-                    echo "<p class='sucess_meg'> $status; </p>";
-                  endif;
-                  ?>
-                  <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
-                    <thead>
-                      <tr class="ajaxTitle">
-                        <th>Premium Ads Name</th>
-                        <th>Ads Path</th>
-                        <th>Organization Name</th>
-                        <th>Ads Visible Date</th>
-                        <th>Admin Vefied </th>
-                        <th>Ads Status</th>
-                        <th>Ads Created Date</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php
-                      foreach ($provider_ads as $ads_val) :
-                      ?>
-                      <tr class="parents_tr" id="column">
-                        <td> 
-                          <?php echo $ads_val['premium_ads_name']; ?>
-                        </td>
-                        <td> 
-                          <?php echo $ads_val['ads_image_path']; ?>
-                          <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" />
-                        </td>
-                        <td> 
-                          <?php echo $ads_val['organization_name']; ?>
-                        </td>
-                        <td>
-                          <?php echo $ads_val['ad_visible_days']; ?>
-                        </td>
-                        <td class="center_align"> 
-                          <?php 
-                          if ($ads_val['is_admin_verified'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
-                          else
-                            echo "<span class='icon-remove'> </span>";
-                          ?>   
-                        </td>
-                        <td class=""> 
-                          <?php 
-                          if ($ads_val['premium_ads_status'] == 1) 
-                            echo "Active";
-                          else
-                            echo "Inactive";
-                          ?>
-                        </td>
-                        <td class="created_date">
-                          <?php echo $ads_val['premium_ads_created_date']; ?>
-                        </td>
-                        <td class="edit_section">
-                          <a class="job_edit popup_fields" data-id="<?php echo $ads_val['premium_ads_id']; ?>" data-href="job_provider/teacport_job_provider_ads_ajax" data-mode="edit" data-popup-open="popup_section">
-                            Edit
-                          </a>
-                        </td>
-                        <td>
-                          <a class="pop_delete_action" data-id="<?php echo $ads_val['premium_ads_id']; ?>">
-                          <!-- <a class="ajaxDelete" onclick="Confirm.show()" data-id="">Delete</a> -->
-                            Delete
-                          </a>
-                        </td>
-                      </tr>
-                      <?php
-                      endforeach;
-                      ?>
-                    </tbody>
-                  </table>
-                  <?php 
-                  endif;
-                  ?>
-                  <?php if(!$this->input->is_ajax_request()) { ?> 
-                </div>
+                <form action="job_provider/teacport_job_provider_ads">
+                  <p class="admin_status"> </p>
+                  <div class="table_content_section">
+                    <?php } ?>
+                    <?php
+                    if(!empty($provider_ads))  :
+                    ?>
+                    <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
+                      <thead>
+                        <tr class="ajaxTitle">
+                          <th>Premium Ads Name</th>
+                          <th class="not-sort">Ads Image</th>
+                          <th>Organization Name</th>
+                          <th>Ads Visible Date</th>
+                          <th class="not-sort">Admin Vefied </th>
+                          <th>Ads Status</th>
+                          <th>Ads Created Date</th>
+                          <th class="data_action">Edit</th>
+                          <th class="data_action">Delete</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php
+                        foreach ($provider_ads as $ads_val) :
+                        ?>
+                        <tr class="parents_tr" id="column">
+                          <td> 
+                            <?php echo $ads_val['premium_ads_name']; ?>
+                          </td>
+                          <td> 
+                            <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" />
+                          </td>
+                          <td> 
+                            <?php echo $ads_val['organization_name']; ?>
+                          </td>
+                          <td>
+                            <?php echo $ads_val['ad_visible_days']; ?>
+                          </td>
+                          <td class="center_align"> 
+                            <?php 
+                            if ($ads_val['is_admin_verified'] == 1) 
+                              echo "<span class='icon-ok'> </span>";
+                            else
+                              echo "<span class='icon-remove'> </span>";
+                            ?>   
+                          </td>
+                          <td class=""> 
+                            <?php 
+                            if ($ads_val['premium_ads_status'] == 1) 
+                              echo "Active";
+                            else
+                              echo "Inactive";
+                            ?>
+                          </td>
+                          <td class="created_date">
+                            <?php echo date('d-m-Y',strtotime($ads_val['premium_ads_created_date'])); ?>
+                           </td>
+                          <td class="edit_section">
+                            <a class="job_edit popup_fields" data-id="<?php echo $ads_val['premium_ads_id']; ?>" data-href="job_provider/teacport_job_provider_ads_ajax" data-mode="edit" data-popup-open="popup_section">
+                              Edit
+                            </a>
+                          </td>
+                          <td>
+                            <a class="pop_delete_action" data-mode="delete" data-id="<?php echo $ads_val['premium_ads_id']; ?>">
+                              Delete
+                            </a>
+                          </td>
+                        </tr>
+                        <?php
+                        endforeach;
+                        ?>
+                      </tbody>
+                    </table>
+                    <?php 
+                    endif;
+                    ?>
+                    <?php if(!$this->input->is_ajax_request()) { ?> 
+                  </div>
+                </form>
               </div>
             </div>
           </div>

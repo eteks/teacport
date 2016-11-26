@@ -52,16 +52,10 @@ if(!empty($this->session->userdata("login_status"))):
                                         </button>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                               <form method="post" action="job_seeker/job_seeker_preference" class="admin_module_form form_table_scl" id="job_seeker_preference_form">
                               <?php } ?>
                               <?php

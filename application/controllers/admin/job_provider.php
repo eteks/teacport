@@ -146,11 +146,11 @@ class Job_Provider extends CI_Controller {
 			    }
 		  	}
       		else {
-
       			$upload_error = 0;
       			$is_end =0;
       			$upload_path = "assets/admin/uploads/";
-      			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
+
+    			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
         		{	
         			$is_end = 1;   			
            			if($this->upload->do_upload('organization_logo'))
@@ -169,11 +169,16 @@ class Job_Provider extends CI_Controller {
                 	}	
                 }
      			if($is_end == 1 && $upload_error == 0) {
-      				$data_values = $this->job_providermodel->get_provider_profile('update');
+					$data_values = $this->job_providermodel->get_provider_profile('update');
          			$data['error'] = $data_values['error'];
 		        	$data['status'] = $data_values['status'];
 		        }
-		        else if($is_end == 0 && $upload_error == 0){
+		        else if($is_end == 0 && $upload_error == 0 && $this->input->post('index')=="end"){
+		        	$data_values = $this->job_providermodel->get_provider_profile('update');
+         			$data['error'] = $data_values['error'];
+		        	$data['status'] = $data_values['status'];
+		        }
+		        else if($is_end == 0 && $upload_error == 0 ){
 		        	$data['error'] = 1;
 					$data['status'] = "valid";
 		        }
@@ -192,10 +197,16 @@ class Job_Provider extends CI_Controller {
 		    $data['status'] = 0;
       		$data_values = $this->job_providermodel->get_provider_profile('init'); 	
       	}
-
-		if($data['error']==1 || $data['error']==2) {
+		if($data['error']==1) {
 			$result['status'] = $data['status'];
 			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$output['provider_profile'] = $data_values['provider_profile'];
+			$result['output'] = $this->load->view('admin/jobprovider_profile',$output,true);
 			echo json_encode($result);
 		}
 		else {
@@ -395,16 +406,10 @@ class Job_Provider extends CI_Controller {
 		if($this->input->post('action') && $this->input->post('value')) {
 			$value = $this->input->post('value');
 			$data['org_values'] = $this->admin_model->get_organization_values();
-		// 	$data['district_values'] = $this->admin_model->get_district_values();
 			$data['class_levels'] = $this->admin_model->get_class_levels_list();
 			$data['university_values'] = $this->admin_model->get_university_list();
 			$data['subject_values'] = $this->admin_model->get_subjects_list();
 			$data['qualification_values'] = $this->admin_model->get_qualification_list();
-
-
-
-
-			
 			$data_vacancy = $this->job_providermodel->get_full_provider_vacancy($value);
 			$data['provider_full_vacancies'] = get_provider_vacancy_by_qua($data_vacancy);
 			$data['mode'] = $this->input->post('action');
@@ -508,7 +513,7 @@ class Job_Provider extends CI_Controller {
 			    					array(
 		                              'field'   => 'ads_days',
 		                              'label'   => 'Premium Visible Days',
-		                              'rules'   => 'trim|required|xss_clean|'
+		                              'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,15}$/]'
 		                            ),
 		                            array(
 		                              'field'   => 'org_name',

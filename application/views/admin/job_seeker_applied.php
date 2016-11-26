@@ -48,16 +48,10 @@
                                         </button>
                                     </div>
                                     <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
+                                        
                                     </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <form method="post" action="job_seeker/job_seeker_applied" class="admin_module_form" id="job_seeker_applied_form">
                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
 	                                <thead>
