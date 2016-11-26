@@ -2,8 +2,9 @@
                 	 <?php if($initial_data == 'show_popup') {?>					  <div class="modal fade" id="dashboard_popup_act" role="dialog">					    <div class="modal-dialog">					     <!-- Modal content-->					      <div class="modal-content">
 					        <div class="modal-header">
 					          <h4 class="modal-title">You are few steps away.. Kindly fill the deatils.</h4>
-					        </div>					        <?php echo form_open('provider/initialdata'); ?>
-					        <div class="modal-body">
+					        </div>
+					        <?php echo form_open('provider/initialdata'); ?>
+					        <div class="modal-body profile-edit">					        	<form>
 					          		<div class="form-group">
 	                                    <label>Name: <span class="alert">*</span></label>
 	                                    <input placeholder="" name="provider_name" class="form-control" id="username" type="text" value="<?php echo $user_data['registrant_name']; ?>" disabled>
@@ -21,7 +22,7 @@
 	                                </div>
 	                                <div class="form-group">	                                    <label>Confirm Password: <span class="alert">*</span></label>	                                    <?php echo form_error('providerconfirmpassword'); ?>
 	                                    <input placeholder="" name="providerconfirmpassword" class="form-control" id="" type="password">	                                    <input type="hidden" name="organizationid" value="<?php echo $user_data['organization_id']; ?>">
-	                                </div>
+	                                </div>	                             </form>     
 					        </div>
 					        <div class="modal-footer">
 					          <button type="submit" class="btn btn-default btn-block">Proceed</button>

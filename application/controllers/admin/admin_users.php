@@ -7,6 +7,8 @@ class Admin_users extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/admin_users_model');
 		$this->load->library('form_validation');
+		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function
+		$this->config->load('admin_modules');
 	}
 
 	// Edit unique function - To check the field is already exists or not
@@ -39,7 +41,7 @@ class Admin_users extends CI_Controller {
 	    }
 	}
 
-	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2)
+	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2,$is_unique)
 	{
 	    $ret = array();
 	    foreach($array as $arr)
@@ -53,7 +55,10 @@ class Admin_users extends CI_Controller {
 	            }
 	        }
 	    }
-	    $u = array_unique($ret);
+	    if($is_unique)
+	    	$u = array_unique($ret);
+	    else
+	    	$u = $ret;
 	    return (sizeof($u) == 1) ? $u[0] : $u;
 	}
 
@@ -279,16 +284,20 @@ class Admin_users extends CI_Controller {
 			{
 			    foreach($arr as $k => $v)
 			    {
-			        if($k == 'sub_module')
-			            $res[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_modules, $k, 'main_module', $arr['main_module']);
-			        else if($k == 'module_id')
-			            $res[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_modules, $k, 'main_module', $arr['main_module']);
+			        if($k == 'sub_module' || $k == 'module_id')
+			            $res[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_modules, $k, 'main_module', $arr['main_module'],$is_unique = true);
+			        else if($k == 'operation_available')
+			            $res[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_modules, $k, 'main_module', $arr['main_module'],$is_unique = false);
 			        else
 			            $res[$arr['main_module']][$k] = $v;
 			    }
 			}
 			//To pass all the admin modules for setting priveleges
-			$data['admin_modules'] = $res;
+			$data['admin_modules_list'] = $res;
+
+			// echo "<pre>";
+			// print_r($data['admin_modules_list']);
+			// echo "</pre>";
 			
 			//To pass all the group type for setting priveleges
 			$admin_group = $this->admin_users_model->get_admin_groups();
@@ -297,10 +306,8 @@ class Admin_users extends CI_Controller {
 			{
 			    foreach($arr as $k => $v)
 			    {
-			        if($k == 'access_module_id')
-			            $res_group[$arr['user_group_id']][$k] = $this->get_arrayvalues_bykeyvalue($admin_group, $k, 'user_group_id', $arr['user_group_id']);
-			        else if($k == 'access_permission')
-			            $res_group[$arr['user_group_id']][$k] = $this->get_arrayvalues_bykeyvalue($admin_group, $k, 'user_group_id', $arr['user_group_id']);
+			        if($k == 'access_module_id' || $k == 'access_permission')
+			            $res_group[$arr['user_group_id']][$k] = $this->get_arrayvalues_bykeyvalue($admin_group, $k, 'user_group_id', $arr['user_group_id'],$is_unique = false);
 			        else
 			            $res_group[$arr['user_group_id']][$k] = $v;
 			    }
@@ -311,16 +318,19 @@ class Admin_users extends CI_Controller {
 			// print_r($data['admin_group']);
 			// echo "</pre>";
 			if($this->input->is_ajax_request()) {
-				$this->admin_users_model->insert_update_admin_prvileges($_POST['module_data']);
+				$result = $this->admin_users_model->insert_update_admin_prvileges($_POST['module_data']);
+				echo json_encode($result);
 			}
-			$this->load->view('admin/privileges',$data);
+			else
+				$this->load->view('admin/privileges',$data);
 	}
 
 	//Function to store all the admin menus to assign rights for each admin uses
-	public function admin_modules()
-	{	
-			$this->admin_users_model->insert_modules($_POST['module_data']);
-	}
+	// public function admin_modules()
+	// {		
+	// 		$data = $this->admin_users_model->insert_modules($_POST['module_data']);
+	// 		return $data;
+	// }
 	
 	public function edit_profile()
 	{	
@@ -411,6 +421,25 @@ class Admin_users extends CI_Controller {
 		 	$data['status'] = $data_values['status'];
 		}
 		echo $data['status'];
+	}
+	function get_full_array_by_recursive_search(array $array, $needle)
+	{
+	    foreach ($array as $key => $value) {
+	    	if(in_array($needle,$value))
+	    		return $value;
+	    }
+	}
+	public function admin_module_access_privileges(){
+		//To store all the module in database when page loads from hook automatic calling
+		$data = $this->admin_users_model->insert_modules();
+		$admin_operation_rights = $this->admin_users_model->get_admin_rights_by_group();
+		//set values to global array variable 'admin_operation_rights' which is initialized with empty array on config/admin_modules.php file
+		$this->config->set_item('admin_operation_rights',  $admin_operation_rights);
+		$current_url = base_url(uri_string());
+		$current_page_rights = $this->get_full_array_by_recursive_search($admin_operation_rights,$current_url);
+		$this->config->set_item('current_page_rights',  $current_page_rights);
+		$is_super_admin = $this->session->userdata("login_session")['is_super_admin'];
+		$this->config->set_item('is_super_admin',  $is_super_admin);
 	}
 
 

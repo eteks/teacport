@@ -1,4 +1,10 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $current_page_rights = $this->config->item('current_page_rights')['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -52,30 +58,19 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>User Groups</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <button id="sample_editable_1_new" class="btn green add_new">
-                                            Add New <i class="icon-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
+                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
+                                      <button id="sample_editable_1_new" class="btn green add_new">
+                                              Add New <i class="icon-plus"></i>
+                                      </button>
+                                    <?php endif; ?>
                                     </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <form method="post" action="user_groups" class="admin_module_form" id="users_group_form">
                                 <?php } ?>
                                 <?php
@@ -91,8 +86,12 @@ if(!empty($this->session->userdata("login_status"))):
                                         <th>Group Description</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                          <th>Edit</th>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                          <th>Delete</th>
+                                        <?php endif; ?>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -111,10 +110,14 @@ if(!empty($this->session->userdata("login_status"))):
                                           echo "Inactive";
                                         ?></td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($grp_val["user_group_created_date"])); ?></td>
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                          <td class="edit_section">
+                                            <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
+                                          </td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                          <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                     <?php
                                       $i++;

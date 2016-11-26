@@ -57,10 +57,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Feedback Form</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -70,18 +66,10 @@ if(!empty($this->session->userdata("login_status"))):
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                                <div class="space15"></div>
-                                  <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
+                                
+                                <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
                                         <th>Form Title</th>
@@ -90,13 +78,15 @@ if(!empty($this->session->userdata("login_status"))):
                                         <th>Is Candidate?</th>
                                         <th>Is Guest User?</th>
                                         <th>Candidate or Organization</th>
+                                        <th>Is Viewed</th>
+                                        <th>Status</th>
                                         <th>Created Date</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <tr class="parents_tr" id="column">
+                                      <tr class="parents_tr" id="column1">
                                         <td class=""> 
                                           Feedback Form
                                         </td>
@@ -115,11 +105,17 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class=""> 
                                           Ets
                                         </td>
+                                        <td class="is_viewed is_viewd_onoff center_align"> 
+                                          <span class="icon-ok"> </span>
+                                        </td>
+                                        <td class="feedback_form_status center_align"> 
+                                          Active
+                                        </td>
                                         <td class="created_date">
                                           00-00-0000
                                         </td>
                                         <td class="edit_section">
-                                          <a class="edit_option" data-open="popup_section" id="column" href="javascript:;" data-id="">
+                                          <a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">
                                             Edit
                                           </a>
                                         </td>
@@ -135,58 +131,7 @@ if(!empty($this->session->userdata("login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
-
-  <div class="popup" data-popup="popup_section">
-      <div class="popup-inner">       
-        <div class="widget box blue" id="popup_wizard_section">
-          <div class="widget-title">
-            <h4>
-              <i class="icon-reorder"></i> Feedback Form
-            </h4>                        
-          </div>
-          <div class="widget-body form pop_details_section">
-            <form action="form_wizard.html#" class="form-horizontal">
-              <fieldset>
-                <legend> Feedback Form Details:</legend>
-                <div class="form-wizard">
-                  <div class="tab-content">
-                    <div class="col12">
-                      <div class="col6 control-group">                                       
-                        <label class="control-label">Is Viewed</label>
-                        <span class="dynamic_data"> 
-                          <ul class="on_off_button on_off_button_j">
-                            <li data-value="1"><a href="#">Yes</a></li>
-                            <li data-value="0" class="on"><a href="#">No</a></li>
-                          </ul> 
-                          <input type="hidden" value="" class="verification" name="admin_verify" />
-                        </span>
-                      </div>
-                      <div class="col6 control-group">                                       
-                        <label class="control-label">Feedback Form Status</label>
-                        <span class="dynamic_data"> 
-                          <ul class="on_off_button on_off_button_j">
-                            <li data-value="1"><a href="#">Active</a></li>
-                            <li data-value="0" class="on"><a href="#">Inactive</a></li>
-                          </ul> 
-                          <input type="hidden" value="" class="verification" name="admin_verify" />
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-info save_button">Save</button>
-              </fieldset>
-            </form>
-          </div>  
-        </div>                
-      <p>
-        <a data-open="popup_section" class="close_trig" href="#">Close</a>
-      </p>
-      <a class="popup-close close_trig" data-open="popup_section"href="#">x</a>
-    </div>
-  </div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
 
             <!-- END PAGE CONTENT-->
@@ -195,11 +140,16 @@ if(!empty($this->session->userdata("login_status"))):
       </div>
       <!-- END PAGE -->
   </div>
-
-
-
-
-
+  <script>
+    // Define default values
+    var inputType = new Array("label","label","label","label","label","label","on_off","select","label"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("feedback_form_title","feedback_form_message","is_organization","is_candidate","is_guest_user","candidate_or_organization_id","is_viewed","feedback_form_status","created_date"); // Set name of input types
+    var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table
+    var is_created ="no";
+    var feedback_form_status_option = new Array("Active","Inactive"); 
+    var feedback_form_status_value = new Array("1","0"); 
+  </script>
 <?php include "templates/footer_grid.php" ?>
 <?php
 else :

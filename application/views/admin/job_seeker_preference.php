@@ -1,3 +1,7 @@
+<?php
+if(!empty($this->session->userdata("login_status"))): 
+?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -18,9 +22,9 @@
                            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="<?php echo base_url(); ?>admin/job_seeker_profile">Job Seekers</a> <span class="divider">&nbsp;</span>
+                           <a href="#"> Job Seekers</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/job_seeker_profile">Job Seeker Preference</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>admin/languages"> Job Seeker Preference</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -34,10 +38,6 @@
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Job Seeker Preference</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -47,86 +47,81 @@
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                                <div class="space15"></div>                                
-                              <form method="post" action="adminindex/job_seeker_preference" class="admin_module_form form_table_scl" id="languages_form">
+                                
+                              <form method="post" action="job_seeker/job_seeker_preference" class="admin_module_form form_table_scl" id="job_seeker_preference_form">
+                              <?php } ?>
+                              <?php
+                              if(!empty($status)) :
+                                echo "<p class='db_status update_success_md'> $status </p>";
+                              endif;
+                              ?> 
                               <p class='val_error error_msg_md'> <p>
-                              <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
-                                <thead>
-                                  <tr class="ajaxTitle">
-                                    <th>Inbox Message</th>
-                                    <th>Organization</th>
-                                    <th>Vacancy</th>
-                                    <th>Is Viewed</th>
-                                    <th>Status</th>
+                              <table class="table table-striped table-hover table-bordered admin_table job_seeker_table" id="sample_editable_1">
+                               <tr class="ajaxTitle">
+                                  <thead>
+                                    <th>Candidate Name</th>
+                                    <th>Posting Applied</th>
+                                    <th>Start Salary</th>
+                                    <th>End Salary</th>
+                                    <th>Class Level</th>
+                                    <th>Subject</th>
                                     <th>Created Date</th>
                                     <th>Edit</th>
                                     <th>Delete</th>
-                                  </tr>
-                                </thead>
+                                  </thead>
+                                </tr>
                                 <tbody>
                                   <tr class="parents_tr" id="column1">
-                                        <td class="candidate_inbox_message">Empty</td>
-                                        <td class="candidate_organization_id">Company Name1</td>
-                                        <td class="candidate_vacancy_id">4</td>
-                                        <td class="is_viewed center_align">
-                                        	<span class="icon-ok"> </span>
-                                        </td>
-                                        <td class="candidate_inbox_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
+                                        <td class="candidate_profile_id">Name1</td>
+                                        <td class="candidate_posting_applied_for">Teacher</td>
+                                        <td class="candidate_expecting_start_salary">10000</td>
+                                        <td class="candidate_expecting_end_salary">13000</td>
+                                        <td class="candidate_willing_class_level_id">Class1</td>
+                                        <td class="candidate_willing_subject_id">Maths</td>
+                                        <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;">Edit</a>
+                                        	<a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
                                         </td>
                                         <td><a class="ajaxDelete" id="column1" onclick="Confirm.show()">Delete</a></td>
                                     </tr>
                                     <tr class="parents_tr" id="column2">
-                                        <td class="candidate_inbox_message">Empty</td>
-                                        <td class="candidate_organization_id">Company Name2</td>
-                                        <td class="candidate_vacancy_id">15</td>
-                                        <td class="is_viewed center_align">
-                                        	<span class="icon-remove"> </span>
-                                        </td>
-                                        <td class="candidate_inbox_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
+                                        <td class="candidate_profile_id">Name2</td>
+                                        <td class="candidate_posting_applied_for">Prof</td>
+                                        <td class="candidate_expecting_start_salary">10000</td>
+                                        <td class="candidate_expecting_end_salary">13000</td>
+                                        <td class="candidate_willing_class_level_id">Class2</td>
+                                        <td class="candidate_willing_subject_id">English</td>
+                                        <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;">Edit</a>
+                                        	<a class="ajaxEdit" id="column2" href="javascript:;" data-id="column2">Edit</a>
                                         </td>
                                         <td><a class="ajaxDelete" id="column2" onclick="Confirm.show()">Delete</a></td>
                                     </tr>
                                     <tr class="parents_tr" id="column3">
-                                        <td class="candidate_inbox_message">Empty</td>
-                                        <td class="candidate_organization_id">Company Name3</td>
-                                        <td class="candidate_vacancy_id">10</td>
-                                        <td class="is_viewed center_align">
-                                        	<span class="icon-ok"> </span>
-                                        </td>
-                                        <td class="candidate_inbox_status">Active</td>
-                                        <td class="created_date">01-01-2000</td>
+                                        <td class="candidate_profile_id">Name3</td>
+                                        <td class="candidate_posting_applied_for">Professor</td>
+                                        <td class="candidate_expecting_start_salary">10000</td>
+                                        <td class="candidate_expecting_end_salary">13000</td>
+                                        <td class="candidate_willing_class_level_id">Class3</td>
+                                        <td class="candidate_willing_subject_id">Science</td>
+                                        <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;">Edit</a>
+                                        	<a class="ajaxEdit" id="column3" href="javascript:;" data-id="column3">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3"  onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="ajaxDelete" id="column3" onclick="Confirm.show()">Delete</a></td>
                                     </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                                </tbody>
+                              </table>
+                                <?php if(!$this->input->is_ajax_request()) { ?>
+                            </form>
+                          </div>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
-
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->
@@ -136,17 +131,24 @@
    <!-- END CONTAINER -->
     <script>
     // Define default values
-    var inputType = new Array("text","select","select","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("candidate_inbox_message","candidate_organization_id","candidate_vacancy_id","is_viewed","candidate_inbox_status"); // Set name of input types
+    var inputType = new Array("select","multiselect","text","text","multiselect","multiselect"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("candidate_profile_id","candidate_posting_applied_for","candidate_expecting_start_salary","candidate_expecting_end_salary","candidate_willing_class_level_id","candidate_willing_subject_id"); // Set name of input types
     var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var candidate_organization_id_option = new Array("Comany Name1","Comany Name2"); 
-    var candidate_organization_id_value = new Array("1","0");
-    var candidate_vacancy_id_option = new Array("50","20","10"); 
-    var candidate_vacancy_id_value = new Array("1","0");
-    var is_viewed_option = new Array("Yes","No"); 
-    var is_viewed_value = new Array("1","0");
-    var candidate_inbox_status_option = new Array("Active","Inactive"); // Set optiontext for select option which must have name of the select tag with '_option' . ex. select tag name is status means , the variable of the select optiontext should be as 'status_option'
-    var candidate_inbox_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
+    var candidate_profile_id_option = new Array("Name1","Name2"); 
+    var candidate_profile_id_value = new Array("","1","0");
+    var candidate_posting_applied_for_option = new Array("Teacher","Prof","Professor"); 
+    var candidate_posting_applied_for_value = new Array("","1","0");
+    var candidate_willing_class_level_id_option = new Array("Class1","Class2","Class3"); 
+    var candidate_willing_class_level_id_value = new Array("","1","0");
+    var candidate_willing_subject_id_option = new Array("English","Maths","Science"); 
+    var candidate_willing_subject_id_value = new Array("","1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
+<?php
+else :
+redirect(base_url().'admin');
+endif;
+?>
+

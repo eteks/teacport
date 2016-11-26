@@ -9,6 +9,8 @@ class Adminindex extends CI_Controller {
 		$this->load->library('form_validation');
 		$this->load->model('admin/dashboard_model');
 		$this->load->helper('custom');
+		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function
+		$this->config->load('admin_modules');
 
 	}
 
@@ -345,7 +347,7 @@ class Adminindex extends CI_Controller {
       	else {
       		$data['error'] = 0;
 		    $data['status'] = 0;
-      		$data_values = $this->admin_model->qualification_typ('init');
+      		$data_values = $this->admin_model->qualification_type('init');
       	}
 
 		if($data['error']==1) {

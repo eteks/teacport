@@ -64,7 +64,7 @@ class Job_provider extends CI_Controller {
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
 		/* Registration page loading with out posted data */
-		if(!$_POST){
+		if(!$_POST){						
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$data['fbloginurl'] = $common->facebookloginurl();
@@ -443,4 +443,38 @@ class Job_provider extends CI_Controller {
 	        return TRUE;
 	    }
 	}
+	public function forgot_password()
+	{
+			$ci =& get_instance();	
+			$ci->config->load('email', true);
+			$emailsetup = $ci->config->item('email');
+			$this->load->library('email', $emailsetup);
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+			/* Check whether registration form server side validation are valid or not */
+			if ($this->form_validation->run() == FALSE){
+				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+				$this->load->view('forgot-password');
+			}
+			else{
+
+            $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
+      		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
+          	if(count($forget_query) != 0) {
+          	
+			$from_email = $emailsetup['smtp_user'];
+			$this->email->initialize($emailsetup);
+					$this->email->from($from_email, 'Teacher Recruit');
+            $this->email->subject('Get your forgotten Password');
+            $this->email->message("Your registered password is ".$forget_query['registrant_password']);
+            $this->email->send();
+            $data['reg_server_msg'] = "Mail has sent successfully";
+            $this->load->view('forgot-password',$data);
+          }
+				else{
+					$data['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$this->load->view('forgot-password',$data);
+				}
+			}   	
+		}
 }

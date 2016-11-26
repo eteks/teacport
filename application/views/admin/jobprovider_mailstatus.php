@@ -37,10 +37,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Job Provider Mail Status</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -50,17 +46,8 @@ if(!empty($this->session->userdata("login_status"))):
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div> -->
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <!-- <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">
                                   <?php
                                   // if(!empty($status)) :
@@ -92,10 +79,10 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="inbox_candidate_id"> 
                                           Candidate Name 
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_email"> 
                                           admin@gmail.com 
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_phone"> 
                                           9876543210 
                                         </td>
                                         <td class="inbox_vacancy_id"> 
@@ -118,10 +105,10 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="inbox_candidate_id"> 
                                           Admin
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_email"> 
                                           admin@gmail.com 
                                         </td>
-                                        <td class="inbox_candidate_id"> 
+                                        <td class="candidate_phone"> 
                                           0076543210 
                                         </td>
                                         <td class="inbox_vacancy_id"> 

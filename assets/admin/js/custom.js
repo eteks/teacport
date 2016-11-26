@@ -29,7 +29,29 @@ function default_credentials() {
     ready_save = 0;
 }
 
-    
+function doConfirm(msg, yesFn, noFn) {
+    var confirmBox = $("#dialog-box");
+    var overlay = $("#dialog-overlay");
+    confirmBox.find(".message").text(msg);
+    confirmBox.find(".yes,.no").unbind().click(function() {
+        confirmBox.hide();
+        overlay.hide();
+    });
+    confirmBox.find(".yes").click(yesFn);
+    confirmBox.find(".no").click(noFn);
+
+    var winH = $(window).height();
+    var winW = $(window).width();
+    var popupH = confirmBox.height();
+    var popupW = confirmBox.width();
+    var confirmBox_top = ((winH / 2) - (popupH / 2)) + "px";
+    var confirmBox_left = ((winW / 2) - (popupW / 2)) + "px"; 
+    confirmBox.css('top',confirmBox_top);
+    confirmBox.css('left',confirmBox_left);
+    overlay.fadeIn(350);
+    confirmBox.fadeIn(350);
+}
+
 // Init new row
 function add_new_record() {
     blankrow = '<tr valign="top" class="inputform">';
@@ -62,6 +84,9 @@ createInput = function(i,str){
     }
     else if(inputType[i] == "textarea"){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
+    }
+    else if(inputType[i] == "label"){
+        input = '<label name='+columns[i]+'>'+str+'</label>';
     }
     else if(inputType[i] == "select"){
         input = '<select name='+columns[i]+'>';
@@ -126,13 +151,15 @@ ajax = function (params,action,form_id){
         success: function(res) {
             if(res.error==1) {
                 $('.val_error').html(res.status);
-                $('.val_error').slideDown(350);
+                $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
             }
             else if(res.error==2) {
                 $('.val_error').html();
+                $('.admin_table').dataTable().fnDestroy();  
                 form.html(res.output);
                 $('.db_status').fadeOut(3000);
+                setTimeout(function() { datatable_initialization(); }, 3000); 
                 setTimeout(function() { $('.db_status').remove(); }, 5000);
                 default_credentials();
             }
@@ -142,6 +169,11 @@ ajax = function (params,action,form_id){
 
 $(document).ready(function(){
     default_credentials();
+
+    $('#dialog-overlay').on('click',function() {
+        $('#dialog-box').fadeOut(350);
+        $('#dialog-overlay').fadeOut(350);
+    });
 
     if($('.has-sub').length > 0) {
         $('.has-sub').each(function(){
@@ -153,6 +185,7 @@ $(document).ready(function(){
 
     // Add - New record
     $(document).on('click','.add_new',function() {
+        disable_datatable(0);
         if(editing==0 && ready_save==0) {        	      	 
             add_new_record();            
             handleChoosenSelect();
@@ -200,8 +233,9 @@ $(document).ready(function(){
 
     // Remove - New record
     $(document).on('click','.new_remove',function() {
+        disable_datatable(1);
         if(editing==0 && ready_save==1) {
-            $(this).parents('tr').remove();
+            $(this).parents('tr').fadeOut(600);
             ready_save=0;
         }
     });
@@ -213,8 +247,11 @@ $(document).ready(function(){
         var ajax_data = {};
         ajax_data['rid'] = id;
         if(id){
-            if(confirm("Do you really want to delete record ?"))
+            doConfirm("Are you sure want to delete?", function yes() {
                 ajax(ajax_data,"delete",form_id);
+            }, function no() {
+                // do nothing
+            });
         }
         else {
             alert("Unable to process");
@@ -225,7 +262,7 @@ $(document).ready(function(){
     $(document).on("click","."+editbutton,function(){
         var update_id = $(this).data("id");
         var this_row = $(this).parents("tr").attr('id');
-
+        disable_datatable(0);
         if(update_id && editing == 0 && tdediting == 0 && ready_save==0) {
             // hide editing row, for the time being
             // $("."+table+" tbody tr:last-child").fadeOut("fast");
@@ -266,6 +303,7 @@ $(document).ready(function(){
 
     // Cancel - Old record
     $(document).on("click","."+cancelbutton,function(){
+        disable_datatable(1);
         var this_row = $(this).parents("tr").attr('id');         
         // $("."+table+" tr:last-child").fadeIn('fast');   
         $("."+table+" #"+this_row+"").fadeOut(500, function() {
@@ -351,13 +389,14 @@ $(document).ready(function(){
     $(function() {
     //----- OPEN
     $('[data-popup-open]').on('click', function(e)  {
+    	handleFormWizards();
         var targeted_popup_class = jQuery(this).attr('data-popup-open');
         $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
  
         e.preventDefault();
     });   
     
-     $('[data-popup-open-sec]').on('click', function(e)  {
+     $('[data-popup-open-edit]').on('click', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-open-sec');
         $('[data-popup-sec="' + targeted_popup_class + '"]').fadeIn(350);
  
@@ -375,9 +414,9 @@ $(document).ready(function(){
         e.preventDefault();
     });
     
-    $('[data-popup-close-sec]').on('click', function(e)  {
-        var targeted_popup_class = jQuery(this).attr('data-popup-close-sec');
-        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeOut(350);
+    $('[data-popup-close-edit]').on('click', function(e)  {
+        var targeted_popup_class = jQuery(this).attr('data-popup-close-edit');
+        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
  
         e.preventDefault();
     });
@@ -400,11 +439,6 @@ $(document).ready(function(){
     // Upload click instead of using file input
     $(document).on('click','.upload_option', function()  {
         $(this).next().click();
-    });
-
-    // Tab menu sumission
-    $(document).on('click','#rootwizard .finish',function() {
-        var test = tabmenu_ci_validation('end');
     });
 
     // Upload preview
@@ -434,6 +468,7 @@ $(document).ready(function(){
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
     
+ // error popup alert box  
     function error_popup(message){
 	$('.error_popup_msg .success-alert span').text(message);
 	$('.popup_fade').show();
@@ -457,76 +492,43 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
     e.preventDefault();
     });
     
+   	$("ul, .site_visit_btn").on("click", function () {
+           var disabled = $(this).attr("disabled");
+           if (disabled === 'disabled') {
+            return false;
+           }
+           });
+       
  //Forgot password
    $('#forget-password').on("click", function(){
    	   $("#admin_login_form").hide();
    	   $("#forgotform").show();
-   });
-   
-   function deletePost(id) {
-    var db_id = id.replace("post_", "");
-    // Run Ajax request here to delete post from database
-    document.body.removeChild(document.getElementById(id));
-}
-
-function CustomConfirm() {
-    this.show = function (dialog, op, id) {
-        var winW = window.innerWidth;
-        var winH = window.innerHeight;
-        var dialogOverlay = document.getElementById('dialog-overlay');
-        var dialogBox = document.getElementById('dialog-box');
-
-        dialogOverlay.style.display = "block";
-        dialogOverlay.style.height = winH + "px";
-        dialogBox.style.left = ((winW / 2) - (550 / 2)) + "px";
-        dialogBox.style.top = "200px";
-        dialogBox.style.display = "block";
-
-        document.getElementById('dialog-box-head').innerHTML = "Are you want to Delete?";
-        // document.getElementById('dialog-box-body').innerHTML = dialog;
-        document.getElementById('dialog-box-foot').innerHTML =
-            '<button onclick="Confirm.yes(\'' + op + '\',\'' + id + '\')">Yes</button> <button onclick="Confirm.no()">No</button>';
-    };
-    this.no = function () {
-        this.hide();
-    };
-    this.yes = function (op, id) {
-        if (op == "delete_post") {
-            deletePost(id);
-        }
-        this.hide();
-    };
-    this.hide = function () {
-        document.getElementById('dialog-box').style.display = "none";
-        document.getElementById('dialog-overlay').style.display = "none";
-    };
-}
-var Confirm = new CustomConfirm();   
-    
+   });    
+      
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********
-    var module_array = new Array();
-    $('.main_module_data').each(function(){
-        var $this = $(this);
-        main_module_data = $this.text().toLowerCase();
-        module_array[main_module_data] = [];
-        $this.parents('.has-sub').find(".sub_module_data").each(function(){
-            module_array[main_module_data].push($(this).text().toLowerCase());
-        });
-        push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
-        module_array.push(push_data);
-    });
-    var module_params = {};
-    module_params[csrf_name] = csfrData[csrf_name];
-    module_params['module_data'] = JSON.stringify(module_array);
-    $.ajax({
-        type : "POST",
-        url : admin_baseurl+"admin_modules",
-        data : module_params,
-    });
+    // var module_array = new Array();
+    // $('.main_module_data').each(function(){
+    //     var $this = $(this);
+    //     main_module_data = $this.text().toLowerCase();
+    //     module_array[main_module_data] = [];
+    //     $this.parents('.has-sub').find(".module_details").each(function(){
+    //         module_array[main_module_data].push({"sub_module":$(this).find('.sub_module_data').text().toLowerCase(),"module_access":$(this).find('.sub_module_access').text().toLowerCase()});
+    //     });
+    //     push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
+    //     module_array.push(push_data);
+    // });
+    // var module_params = {};
+    // module_params[csrf_name] = csfrData[csrf_name];
+    // module_params['module_data'] = JSON.stringify(module_array);
+    // $.ajax({
+    //     type : "POST",
+    //     url : admin_baseurl+"admin_modules",
+    //     data : module_params,
+    // });
     // ********** End of the code ***********
 
-    //Store the access privileges of each admin user into database via ajax
+    //Store the access privileges of each admin user group into database via ajax
     // ********* Start line of the code **********
     $(document).delegate('.privilege_form','submit',function(e){   
         $this = $(this);
@@ -551,6 +553,13 @@ var Confirm = new CustomConfirm();
             type : "POST",
             url : admin_baseurl+"privileges",
             data : module_params,
+            success: function(res) {
+                $res = JSON.parse(res);
+                if($res == "success"){
+                    $("html, body").animate({ scrollTop: 800 }, "slow");
+                    $('.privilege_status').text("Updated Successfully").show();
+                }
+            }
         });
     });   
     // ********** End of the code ***********
@@ -558,6 +567,47 @@ var Confirm = new CustomConfirm();
 });
 
 
+function disable_datatable($mode) {
+//     // $('.admin_table').dataTable({
+//     //                         "ordering": false,
+//     //                         "paging" : false,
+//     //                         "info" : false   
+//     // });
+//     // get settings object after table is initialized
+//     var oSettings = datatable.fnSettings();
+
+// // // disable sorting on column "1"
+//     oSettings.aoColumns[2].bSortable = false;
+
+//    // datatable.DataTable().destroy();
+
+//     oSettings.bPaginate  = false;
 
 
 
+//    // var oSettings = datatable.fnSettings();
+
+//    //  oSettings.fnSortOnOff( '_all', false );
+    
+    if($mode == 0) {
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').hide();
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','none');
+        $('.admin_table th').addClass('no-sort');
+    }
+    else {
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').show();
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','auto');
+        $('.admin_table th').removeClass('no-sort');
+    }
+
+
+}
+// $(document).ready(function(){
+// var startDate = new Date('01-01-1990'),
+        // endDate = new Date('01-01-2000');
+    // $('#regi_dob').datepicker({
+        // format: "dd-mm-yyyy",
+        // startDate: startDate, //set start date
+        // endDate: endDate //set end date
+    // });
+// });

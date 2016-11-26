@@ -11,7 +11,7 @@ $(document).ready(function(){
                 if(res != 'login_success') {
                    this_status.html(res);
                 $('.admin_status').html(res.status);
-                $('.admin_status').slideDown(350);
+                $('.admin_status').fadeIn(500);
                 $('.admin_status').fadeOut(3000);
                 }
                 else {
@@ -47,20 +47,27 @@ $(document).ready(function(){
     //     });
     // });
 
+    /* Popup module ajax start */
+
     // Admin Form
     $('.admin_form').on('submit',function(e) {
         e.preventDefault();
-        var form_data = $(this).serialize();
+        var form_data = new FormData(this);
         var this_status = $(this).find('.admin_status');
         var this_popup = $(this).parents('.popup').data('popup');
         var this_table_content = $(this).parents('#main-content').find('.table_content_section');
         var this_popup_content = $(this).find('.tab-content');
         var action = $(this).data('mode');
+        form_data.append(csrf_name,csfrData[csrf_name]);
+        form_data.append('action',action);
         $.ajax({
             type : "POST",
             url : admin_baseurl+$(this).attr('action'),
             dataType : 'json',
-            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
+            data : form_data,
+                 contentType: false,       // The content type used when sending data to the server.
+        cache: false,             // To unable request pages to be cached
+        processData:false,
             success: function(res) {
                 if(res.error == 1) {
                     this_status.html(res.status);
@@ -71,11 +78,12 @@ $(document).ready(function(){
                     this_status.html(res.status);
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
-
+                    $('.admin_table').dataTable().fnDestroy();  
                     setTimeout(function()
                     {
                         $('[data-popup="' + this_popup + '"]').fadeOut(350);
                         this_table_content.html(res.output);
+                        datatable_initialization();
                         this_popup_content.remove();
                     },5000);
                 }
@@ -84,29 +92,36 @@ $(document).ready(function(){
     });
 
     // Admin Delete
-    $('.pop_delete_action').on('click',function(e) {
-        $id = $(this).data('id');
+    $(document).on('click','.pop_delete_action',function() {
+        var id = $(this).data('id');
+        var this_status = $(this).parents('form').find('.admin_status');
+        var action_path = $(this).parents('form').attr('action');
+        var this_table_content = $(this).parents('#main-content').find('.table_content_section');
+        var form_data = {};
+        form_data['rid'] = id;
+        form_data[csrf_name] = csfrData[csrf_name];
+        form_data['action'] = "delete";
+        doConfirm("Are you sure want to delete?", function yes() {
+            $.ajax({
+                type : "POST",
+                url : admin_baseurl+action_path,
+                dataType : 'json',
+                data : form_data,
+                success: function(res) {
+                    if(res.error == 2) {
+                        $('.admin_table').dataTable().fnDestroy();
+                        this_table_content.html(res.output);
+                        this_status.html(res.status);
+                        this_status.fadeIn(1000);
+                        this_status.fadeOut(2000);
+                        setTimeout(function() { datatable_initialization(); }, 3000); 
 
-        var this_status = $(this).find('.admin_status');
-        var action = $(this).data('mode');
-        $.ajax({
-            type : "POST",
-            url : admin_baseurl+$(this).attr('action'),
-            dataType : 'json',
-            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
-            success: function(res) {
-                if(res.error == 1) {
-                   this_status.html(res.status);
+                    }
                 }
-                else if(res.error == 2) {
-                   this_status.html(res.status);
-                   setTimeout(function()
-                   {
-                        location.reload();
-                   },3000);
-                }
-            }
-        });
+            });
+            }, function no() {
+                // do nothing
+            });
     });
 
     // Edit and Full view option
@@ -132,13 +147,22 @@ $(document).ready(function(){
                 }
             }
         });
-    });  
+    }); 
+
+    // Tab menu submission
+    $(document).on('submit','.tab_form',function(e) {
+        e.preventDefault();
+        var formdata = new FormData(this);
+        tabmenu_ci_validation('end',formdata);
+    });
+
+    /* Popup module ajax end */ 
 
 
 }); // End document
 
 // Popup with tab menu
-function handleFormWizards() {
+function handleFormWizards() {	
 	$('.date-picker').datepicker();
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
@@ -158,7 +182,6 @@ function handleFormWizards() {
                             $('#rootwizard').find('.pager .next').show();
                             $('#rootwizard').find('.pager .finish').hide();
                         }
-
                         $('#rootwizard').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
@@ -172,47 +195,22 @@ function handleFormWizards() {
                         var return_val = 1;
                     }
                     else {
-                        var return_val = tabmenu_ci_validation('next');
+                        var return_val = tabmenu_ci_validation('next','popup');
                          jQuery('li', $('#popup_wizard_section')).removeClass("done");
 		                var li_list = navigation.find('li');
 		                for (var i = 0; i < index; i++) {
 		                    jQuery(li_list[i]).addClass("done");
 		                }                        
-                    }           
+                    }  
+
                     if(return_val == 0) {
                         return false;
                     }
                     else {
                         return true;
                     }
-
-                // var total = navigation.find('li').length;
-                // var current = index + 1;
-                // // set wizard title
-                // $('.step-title', $('#popup_wizard_section')).text('Step ' + (index + 1) + ' of ' + total);
-                // // set done steps
-                // jQuery('li', $('#popup_wizard_section')).removeClass("done");
-                // var li_list = navigation.find('li');
-                // for (var i = 0; i < index; i++) {
-                //     jQuery(li_list[i]).addClass("done");
-                // }
-
-                // if (current == 1) {
-                //     $('#popup_wizard_section').find('.button-previous').hide();
-                // } else {
-                //     $('#popup_wizard_section').find('.button-previous').show();
-                // }
-
-                // if (current >= total) {
-                    // $('#popup_wizard_section').find('.button-next').hide();
-                    // $('#popup_wizard_section').find('.button-submit').show();
-                // } else {
-                    // $('#popup_wizard_section').find('.button-next').show();
-                    // $('#popup_wizard_section').find('.button-submit').hide();
-                // }
-                // App.scrollTo($('.page-title'));
                 },
-                onPrevious: function (tab, navigation, index) {
+            onPrevious: function (tab, navigation, index) {
                 var total = navigation.find('li').length;
                 var current = index + 1;
                 // set wizard title
@@ -232,10 +230,13 @@ function handleFormWizards() {
     });
 }
 
-function tabmenu_ci_validation(value) {
+function tabmenu_ci_validation(value,data) {
     var this_form = $('.tab_form');
     var this_mode = this_form.data('mode');
     var rid = this_form.find('.hidden_id').val();
+    var this_popup = this_form.parents('.popup').data('popup');
+    var this_table_content = this_form.parents('#main-content').find('.table_content_section');
+    var this_popup_content = this_form.find('.tab-content');
     if(value == 'next') {
         var this_index = this_form.data('index');
         var form_data = new FormData();
@@ -250,14 +251,12 @@ function tabmenu_ci_validation(value) {
     }
     else {
         var this_index = "end";  
-        var form_data = this_form.find('.tabfield').serialize();
+        var form_data = data;
     }
     form_data.append(csrf_name,csfrData[csrf_name]);
     form_data.append('action',this_mode);
     form_data.append('index',this_index);
     form_data.append('rid',rid);
-
-    // alert(form_data);
 
     var return_val = "" ;
     $.ajax({
@@ -272,21 +271,25 @@ function tabmenu_ci_validation(value) {
         success: function(res) {
             if(res.error==1 && res.status!='valid') {
                 $('.val_error').html(res.status);
-                $('.val_error').slideDown(350);
+                $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 return_val = 0;
             }
             else if(res.error==1 && res.status=='valid') {
                 return_val = 1;
             }
-            else if(res.error==2) {
-                location.reload();
-
-                // $('.val_error').html();
-                // form.html(res.output);
-                // $('.db_status').fadeOut(3000);
-                // setTimeout(function() { $('.db_status').remove(); }, 5000);
-                // default_credentials();
+            else if(res.error == 2) {
+                $('.val_error').html(res.status);
+                $('.val_error').fadeIn(500);
+                $('.val_error').fadeOut(3000);
+                $('.admin_table').dataTable().fnDestroy(); 
+                setTimeout(function()
+                    {
+                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
+                        this_table_content.html(res.output);
+                        datatable_initialization();
+                        this_popup_content.remove();
+                    },5000);
             }
         }
     });
@@ -325,46 +328,13 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
    	   $("#forgotform").hide();
    	   $("#admin_login_form").show();
    });
-
-//Delete Popup Function
-  function deletePost(id) {
-    var db_id = id.replace("post_", "");
-    // Run Ajax request here to delete post from database
-    document.body.removeChild(document.getElementById(id));
-}
-
-function CustomConfirm() {
-    this.show = function (dialog, op, id) {
-        var winW = window.innerWidth;
-        var winH = window.innerHeight;
-        var dialogOverlay = document.getElementById('dialog-overlay');
-        var dialogBox = document.getElementById('dialog-box');
-
-        dialogOverlay.style.display = "block";
-        dialogOverlay.style.height = winH + "px";
-        dialogBox.style.left = ((winW / 2) - (550 / 2)) + "px";
-        dialogBox.style.top = "100px";
-        dialogBox.style.display = "block";
-
-        document.getElementById('dialog-box-head').innerHTML = "Are you want to Delete?";
-        // document.getElementById('dialog-box-body').innerHTML = dialog;
-        document.getElementById('dialog-box-foot').innerHTML =
-            '<button class="del_yes" onclick="Confirm.yes(\'' + op + '\',\'' + id + '\')">Yes</button> <button class="del_no" onclick="Confirm.no()">No</button>';
-    };
-    this.no = function () {
-        this.hide();
-    };
-    this.yes = function (op, id) {
-        if (op == "delete_post") {
-            deletePost(id);
-        }
-        this.hide();
-    };
-    this.hide = function () {
-        document.getElementById('dialog-box').style.display = "none";
-        document.getElementById('dialog-overlay').style.display = "none";
-    };
-}
-
-var Confirm = new CustomConfirm();
-//End of delete popup menu
+   
+   // $(function () {
+    // var startDate = new Date('1985-01-01'),
+        // endDate = new Date('1995-01-01');
+    // $('#reg_dob').datetimepicker({
+        // //other option
+        // startDate: startDate, //set start date
+        // endDate: endDate //set end date
+    // });
+// });

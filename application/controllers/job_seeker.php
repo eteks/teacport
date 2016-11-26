@@ -98,10 +98,11 @@ class Job_seeker extends CI_Controller {
 					'candidate_institution_type' => $this->input->post('candidate_institution_type'),
 					'candidate_name' => $this->input->post('candidate_name'),
 					'candidate_email' => $this->input->post('candidate_email'),
-					'candidate_mobile_no' => $this->input->post('candidate_mobile'),
-					'captcha_value' => $this->input->post('captcha_value'),
-					'candidate_password' => $common->generateStrongPassword()
+					'candidate_mobile_no' => $this->input->post('candidate_mobile_no'),
+					'candidate_registration_type' => 'teacherrecruit',
+					'candidate_password' => $common->generateStrongPassword(),
 				);
+				
 			 	/* Check whether data exist or not.exist or not condition handled in job_provider_model.php */
 				if($this->job_seeker_model->create_job_seeker($data) === 'inserted'){
 					/* Data are not exist stage */
@@ -117,7 +118,7 @@ class Job_seeker extends CI_Controller {
 					/* Check whether mail send or not*/
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Resitration Successful!. Check your email address!!';	
+						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
 	       				$fb['fbloginurl'] = $common->facebookloginurl();
 	       				$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
@@ -154,18 +155,20 @@ class Job_seeker extends CI_Controller {
 		$this->session->set_userdata('captcha_info', $data);
 		echo $data_value;
 	}
+
 	public function validate_captcha(){
-		$data = $this->captcha->main();
-		$data_value = $data['image_src'];
-		$this->session->set_userdata('captcha_info', $data);
-    if($this->input->post('captcha_value') != $this->session->userdata['captcha_config'])
-    {
-        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
-        return false;
-    }else{
-        return true;
-    }
-}
+		$entereddata = $this->input->post('captcha_value');
+		$session_captcha = $this->session->userdata['captcha_info'];
+	    if($entereddata != $session_captcha['code'])
+	    {
+	        $this->form_validation->set_message('validate_captcha', 'Wrong captcha code');
+	        return FALSE;
+			
+	    }else{
+	        return TRUE;
+	    }
+	}
+
 	public function dashboard()
     {
     	$session_data = $this->session->all_userdata();
@@ -184,6 +187,42 @@ class Job_seeker extends CI_Controller {
 	{
 		$this->load->view('user-edit-profile');
 	}
+	public function forgot_password()
+	{
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+			/* Check whether registration form server side validation are valid or not */
+			if ($this->form_validation->run() == FALSE){
+				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+				$this->load->view('forgot-password-seeker');
+			}
+			else{
+
+            $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
+      		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
+          	if(count($forget_query) != 0) {
+            $config['protocol'] = 'smtp';
+            $config['smtp_host'] = 'smtp.googlemail.com';
+            $config['smtp_port'] = 25;
+            $config['smtp_user'] = $forget_query['registrant_email_id'];
+            $config['smtp_pass'] = '********';          
+            $this->load->library('email', $config);   
+            $this->email->from('thangamgold45@gmail.com', 'Thangam');
+            $this->email->to($config['smtp_user']);           
+            $this->email->subject('Get your forgotten Password');
+            $this->email->message("Your registered password is ".$forget_query['registrant_password']);
+            $this->email->send();
+            $data['reg_server_msg'] = "Mail has sent successfully";
+            $this->load->view('forgot-password-seeker',$data);
+          }
+				else{
+					$data['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$this->load->view('forgot-password-seeker',$data);
+				}
+			}    
+        	
+		
+		}
 	
 	
 	
