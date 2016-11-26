@@ -180,6 +180,7 @@
         <script>
            jQuery(document).ready(function() {
               $('.privileges_table').dataTable({
+                "order" : [],
                 "bPaginate": false,
             });
            });
