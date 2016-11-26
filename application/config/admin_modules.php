@@ -191,3 +191,7 @@ $config['admin_operation_rights'] = array();
 // print_r($config['admin_modules']);
 // echo "</pre>";
 $config['current_page_rights'] = array();
+
+$config['is_super_admin'] = false;
+
+// $config['access_rights'] = array();

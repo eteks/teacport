@@ -34,10 +34,6 @@
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Privileges</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -50,8 +46,9 @@
                                     <div class="btn-group pull-right">
                                         
                                     </div>
+                                </div> 
                                 </div>
-                                
+                                <p class='privilege_status' style="display:none;"></p>
                                 <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> <!-- class="admin_module_form" -->
                                 <table class="table table-striped table-hover table-bordered privileges_table" id="sample_editable_1">
                                     <thead>

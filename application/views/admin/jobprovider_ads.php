@@ -61,7 +61,7 @@ if(!empty($this->session->userdata("login_status"))):
             </div>
             <div class="widget-body">
               <div class="portlet-body">
-                <div class="clearfix add_section">
+                  <div class="clearfix add_section">
                 </div>
                 <form action="job_provider/teacport_job_provider_ads">
                   <p class="admin_status"> </p>

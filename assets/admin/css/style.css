@@ -4063,6 +4063,7 @@ table thead .sorting_desc {
 }
 .dt-buttons {
     float: right !important;
+    /*margin-top: 35px !important;*/
 }
 .export_options {
     border : none !important;

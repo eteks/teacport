@@ -134,9 +134,9 @@ if(!empty($this->session->userdata("login_status"))):
                 </form>
               </div>
           </div>
-                    </div>
-                    <!-- END EXAMPLE TABLE widget-->
-                </div>
+        </div>
+        <!-- END EXAMPLE TABLE widget-->
+      </div>
 
 
   <!---Full edit popup -->

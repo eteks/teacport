@@ -162,8 +162,6 @@ if(!empty($this->session->userdata("login_status"))):
         </div>                
       </div>         
 
-
-
       <!---Full View & Edit popup -->
       <div class="popup" data-popup="popup_section">
         <div class="popup-inner">
@@ -579,7 +577,7 @@ if(!empty($this->session->userdata("login_status"))):
                 endif;
                 ?>
                 <?php if(!$this->input->is_ajax_request()) { ?>
-              </form>
+              </form>                 
             </div>
           </div>
           <p>

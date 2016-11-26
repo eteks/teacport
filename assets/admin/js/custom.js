@@ -85,6 +85,9 @@ createInput = function(i,str){
     else if(inputType[i] == "textarea"){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
+    else if(inputType[i] == "label"){
+        input = '<label name='+columns[i]+'>'+str+'</label>';
+    }
     else if(inputType[i] == "select"){
         input = '<select name='+columns[i]+'>';
         var select_option = eval(columns[i]+'_option');
@@ -148,7 +151,7 @@ ajax = function (params,action,form_id){
         success: function(res) {
             if(res.error==1) {
                 $('.val_error').html(res.status);
-                $('.val_error').slideDown(350);
+                $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
             }
             else if(res.error==2) {
@@ -232,7 +235,7 @@ $(document).ready(function(){
     $(document).on('click','.new_remove',function() {
         disable_datatable(1);
         if(editing==0 && ready_save==1) {
-            $(this).parents('tr').remove();
+            $(this).parents('tr').fadeOut(600);
             ready_save=0;
         }
     });
@@ -499,36 +502,43 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
     e.preventDefault();
     });
     
+   	$("ul, .site_visit_btn").on("click", function () {
+           var disabled = $(this).attr("disabled");
+           if (disabled === 'disabled') {
+            return false;
+           }
+           });
+       
  //Forgot password
    $('#forget-password').on("click", function(){
    	   $("#admin_login_form").hide();
    	   $("#forgotform").show();
-   });
-    
+   });    
+      
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********
-    var module_array = new Array();
-    $('.main_module_data').each(function(){
-        var $this = $(this);
-        main_module_data = $this.text().toLowerCase();
-        module_array[main_module_data] = [];
-        $this.parents('.has-sub').find(".module_details").each(function(){
-            module_array[main_module_data].push({"sub_module":$(this).find('.sub_module_data').text().toLowerCase(),"module_access":$(this).find('.sub_module_access').text().toLowerCase()});
-        });
-        push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
-        module_array.push(push_data);
-    });
-    var module_params = {};
-    module_params[csrf_name] = csfrData[csrf_name];
-    module_params['module_data'] = JSON.stringify(module_array);
-    $.ajax({
-        type : "POST",
-        url : admin_baseurl+"admin_modules",
-        data : module_params,
-    });
+    // var module_array = new Array();
+    // $('.main_module_data').each(function(){
+    //     var $this = $(this);
+    //     main_module_data = $this.text().toLowerCase();
+    //     module_array[main_module_data] = [];
+    //     $this.parents('.has-sub').find(".module_details").each(function(){
+    //         module_array[main_module_data].push({"sub_module":$(this).find('.sub_module_data').text().toLowerCase(),"module_access":$(this).find('.sub_module_access').text().toLowerCase()});
+    //     });
+    //     push_data = {[main_module_data]:module_array[main_module_data]}; //[main_module_data] is key and module_array[main_module_data] is array value
+    //     module_array.push(push_data);
+    // });
+    // var module_params = {};
+    // module_params[csrf_name] = csfrData[csrf_name];
+    // module_params['module_data'] = JSON.stringify(module_array);
+    // $.ajax({
+    //     type : "POST",
+    //     url : admin_baseurl+"admin_modules",
+    //     data : module_params,
+    // });
     // ********** End of the code ***********
 
-    //Store the access privileges of each admin user into database via ajax
+    //Store the access privileges of each admin user group into database via ajax
     // ********* Start line of the code **********
     $(document).delegate('.privilege_form','submit',function(e){   
         $this = $(this);
@@ -553,6 +563,13 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
             type : "POST",
             url : admin_baseurl+"privileges",
             data : module_params,
+            success: function(res) {
+                $res = JSON.parse(res);
+                if($res == "success"){
+                    $("html, body").animate({ scrollTop: 800 }, "slow");
+                    $('.privilege_status').text("Updated Successfully").show();
+                }
+            }
         });
     });   
     // ********** End of the code ***********
@@ -595,5 +612,12 @@ function disable_datatable($mode) {
 
 
 }
-
-
+// $(document).ready(function(){
+// var startDate = new Date('01-01-1990'),
+        // endDate = new Date('01-01-2000');
+    // $('#regi_dob').datepicker({
+        // format: "dd-mm-yyyy",
+        // startDate: startDate, //set start date
+        // endDate: endDate //set end date
+    // });
+// });

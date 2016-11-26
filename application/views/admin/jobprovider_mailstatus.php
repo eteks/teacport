@@ -46,9 +46,6 @@ if(!empty($this->session->userdata("login_status"))):
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div> -->
-                                    <div class="btn-group pull-right">
-                                        
-                                    </div>
                                 </div>
                                 
                                 <!-- <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">

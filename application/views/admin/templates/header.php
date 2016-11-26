@@ -228,6 +228,16 @@ Website: http://thevectorlab.net/
         <!-- END TOP NAVIGATION BAR -->
     </div>
 	<!-- END HEADER -->
+    <?php 
+        // echo "access_rights";
+        // echo "<pre>";
+        // print_r($this->config->item('admin_operation_rights'));
+        // echo "</pre>";
+        // echo "<pre>";
+        // print_r($this->config->item('current_page_rights'));
+        // echo "</pre>";
+        $is_super_admin = $this->session->userdata("login_session")['is_super_admin'];
+    ?>
     <!-- BEGIN SIDEBAR -->
         <div id="sidebar" class="nav-collapse collapse">
             <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
@@ -243,223 +253,50 @@ Website: http://thevectorlab.net/
             <!-- END RESPONSIVE QUICK SEARCH FORM -->
             <!-- BEGIN SIDEBAR MENU -->
             <ul class="sidebar-menu">
-
-                <?php
-                if($this->uri->segment(2) == 'dashboard' ) :
-                ?>
-                <li class="has-sub active open">
-                <?php
-                else :
-                ?>     
-                <li class="has-sub">
-                <?php
-                endif;
-                ?>  
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-home"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("home");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'dashboard') echo "class='active_sidebar'"; ?>>
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="module_details">
-                                <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data">Dashboard</span><span class="sub_module_access">view</span>
-                            <!-- <span class="arrow"></span> -->
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <?php
-                if($this->uri->segment(2) == 'user_groups' || $this->uri->segment(2) == 'user_accounts' || $this->uri->segment(2) == 'privileges' ) :
-                ?>
-                <li class="has-sub active open">
-                <?php
-                else :
-                ?>     
-                <li class="has-sub">
-                <?php
-                endif;
-                ?>
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-user"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("admin users");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'user_groups') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/user_groups"><span class="sub_module_data">User Groups</span><span class="sub_module_access">add,edit,delete,view</span></a></li>
-                        <li <?php if($this->uri->segment(2) == 'user_accounts') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/user_accounts"><span class="sub_module_data">User Accounts</span><span class="sub_module_access">add,edit,delete,view</span></a></li>
-                        <li <?php if($this->uri->segment(2) == 'privileges') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/privileges"><span class="sub_module_data">Privileges</span><span class="sub_module_access">edit,view</span></a></li>
-                    </ul>
-                </li>
-
-                <?php
-                if($this->uri->segment(2) == 'state' || $this->uri->segment(2) == 'district' || $this->uri->segment(2) == 'institution_types' || $this->uri->segment(2) == 'extra_curricular' || $this->uri->segment(2) == 'languages' || $this->uri->segment(2) == 'qualification' || $this->uri->segment(2) == 'class_level' || $this->uri->segment(2) == 'departments' || $this->uri->segment(2) == 'subject' || $this->uri->segment(2) == 'university' || $this->uri->segment(2) == 'postings') :
-                ?>
-                <li class="has-sub open active">
-                <?php
-                else :
-                ?>     
-                <li class="has-sub">
-                <?php
-                endif;
-                ?>
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-th"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("master data");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'state') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/state"><span class="sub_module_data">State</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'district') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/district"><span class="sub_module_data">District</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'institution_types') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/institution_types"><span class="sub_module_data">Institution Type</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'extra_curricular') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/extra_curricular"><span class="sub_module_data">Extra-Curricular</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'languages') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/languages"><span class="sub_module_data">Languages</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'qualification') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/qualification"><span class="sub_module_data">Qualification</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'class_level') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/class_level"><span class="sub_module_data">Class Level</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'departments') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/departments"><span class="sub_module_data">Department</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'subject') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/subject"><span class="sub_module_data">Subject</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'university') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/university"><span class="sub_module_data">University / Board</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'postings') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/postings">Job <span class="sub_module_data">Posting Details</span><span class="sub_module_access">add,edit,delete,view</span></a>
-                        </li>
-                    </ul>
-                </li>
-
-                <?php
-                if($this->uri->segment(2) == 'job_provider_profile' || $this->uri->segment(2) == 'job_provider_vacancies' || $this->uri->segment(2) == 'jobprovider_activities' || $this->uri->segment(2) == 'jobprovider_activities' || $this->uri->segment(2) == 'jobprovider_mailstatus' || $this->uri->segment(2) == 'jobprovider_ads' ) :
-                ?>
-                <li class="has-sub open active">
-                <?php
-                else :
-                ?>     
-                <li class="has-sub">
-                <?php
-                endif;
-                ?>    
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-sitemap"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("job providers");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'job_provider_profile') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/job_provider_profile">
-                                <span class="sub_module_data">Profile</span>
-                                <span class="sub_module_access">edit,delete,view</span>
-                            </a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'job_provider_vacancies') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/job_provider_vacancies">
-                                <span class="sub_module_data">Vacancies Posted</span>
-                                <span class="sub_module_access">edit,delete,view</span>
-                            </a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'jobprovider_activities') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/jobprovider_activities">
-                                <span class="sub_module_data">Organization Activities</span>
-                                <span class="sub_module_access">edit,delete,view</span>
-                            </a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'jobprovider_mailstatus') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/jobprovider_mailstatus"><span class="sub_module_data">Approved Job Mail Status</span>
-                            <span class="sub_module_access">view</span></a>
-                        </li>
-                        <li <?php if($this->uri->segment(2) == 'jobprovider_ads') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/jobprovider_ads">
-                                <span class="sub_module_data">Ads Posted</span>
-                                <span class="sub_module_access">edit,delete,view</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-
-                <?php
-                if($this->uri->segment(2) == 'job_seeker_profile' || $this->uri->segment(2) == 'job_seeker_preference' || $this->uri->segment(2) == 'job_seeker_applied') :
-                ?>
-                <li class="has-sub open active">
-                <?php
-                else :
-                ?>     
-                <li class="has-sub">
-                <?php
-                endif;
-                ?>   
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-search"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("job seekers");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'job_seeker_profile') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/job_seeker_profile"><span class="sub_module_data">Profile</span><span class="sub_module_access">edit,delete,view</span></a></li>
-                        <li <?php if($this->uri->segment(2) == 'job_seeker_preference') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/job_seeker_preference"><span class="sub_module_data">Job Preferences</span><span class="sub_module_access">edit,delete,view</span></a></li>                    
-                        <li <?php if($this->uri->segment(2) == 'job_seeker_applied') echo "class='active_sidebar'"; ?>><a class="module_details" href="<?php echo base_url(); ?>admin/job_seeker_applied"><span class="sub_module_data">Job Applied</span><span class="sub_module_access">edit,delete,view</span></a></li>
-                    </ul>
-                </li>
-
-                <?php
-                if($this->uri->segment(2) == 'subscription_plans') :
-                ?>
-                <li class="has-sub open active">
-                <?php
-                else :
-                ?>     
-                <li class="has-sub">
-                <?php
-                endif;
-                ?> 
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-wrench"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("plan settings");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li <?php if($this->uri->segment(2) == 'subscription_plans') echo "class='active_sidebar'"; ?>>
-                            <a class="module_details" href="<?php echo base_url(); ?>admin/subscription_plans">
-                                <span class="sub_module_data">Plan Creation & Maintanence</span><span class="sub_module_access">add,edit,delete,view</span>
-                            </a>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-cogs"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("settings");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/payment_gateway"><span class="sub_module_data">Payment Gateway Setting</span><span class="sub_module_access">view</span></a></li>
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/sms_gateway"><span class="sub_module_data">SMS Gateway Setting</span><span class="sub_module_access">view</span></a></li>
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/configuration_option"><span class="sub_module_data">Configuration Option</span><span class="sub_module_access">view</span></a></li>
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/template_logo"><span class="sub_module_data">Template Logo</span><span class="sub_module_access">view</span></a></li> 
-                    </ul>
-                </li>
-                <li class="has-sub">
-                    <a href="javascript:;" class="">
-                        <span class="icon-box"> <i class="icon-tasks"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper("others");?></span>
-                        <span class="arrow"></span>
-                    </a>
-                    <ul class="sub">
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/feedback_form"><span class="sub_module_data">Feedback Form</span><span class="sub_module_access">edit,delete,view</span></a></li>
-                        <li><a class="module_details" href="<?php echo base_url(); ?>admin/site_visit_tracking"><span class="sub_module_data">Site Visits Tracking</span><span class="sub_module_access">view</span></a></li>
-                        <!-- <li><a class="module_details" href="<?php echo base_url(); ?>admin/dashboard"><span class="sub_module_data">Logs</span></a></li> -->
-                    </ul>
-                </li>            
-            </ul>
+                <?php 
+                    $admin_modules = $this->config->item('admin_modules');
+                    $admin_operation_rights = $this->config->item('admin_operation_rights');
+                    foreach ($admin_modules as $key => $value):
+                        $result = array();
+                        array_walk($value['sub_module'], function($v) use(&$result) {
+                            $result[] = $id = substr($v['route_url'], strrpos($v['route_url'], '/') + 1);
+                        });
+                        $main_module_exists = in_array($value['main_module'], array_column($admin_operation_rights, 'main_module'));
+                        //if currently logged group has privilege access of this module, it will show in dashboard, otherwise won't show
+                        if($main_module_exists || $is_super_admin):
+                            if(in_array($this->uri->segment(2), $result)): ?>
+                                <li class="has-sub active open">
+                            <?php
+                            else :
+                            ?>     
+                                <li class="has-sub">
+                            <?php
+                            endif;
+                            ?>  
+                                <a href="javascript:;" class="">
+                                    <span class="icon-box"> <i class="icon-home"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper($value['main_module']);?></span>
+                                    <span class="arrow"></span>
+                                </a>
+                                <ul class="sub">
+                                    <?php 
+                                    foreach ($value['sub_module'] as $det): 
+                                    //Check loaded sub module access for this user group, here recursiveFind is custom function to search our searched value exists wherever in that mutlidimensional arry
+                                    $sub_module_exists = recursiveFind($admin_operation_rights, $det['name']);
+                                    if($sub_module_exists || $is_super_admin):
+                                    ?>
+                                        <li <?php if($this->uri->segment(2) == $det['name']) echo "class='active_sidebar'"; ?>>
+                                            <a href="<?php echo $det['route_url']; ?>" class="module_details">
+                                                <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data"><?php echo ucwords($det['name']); ?></span><span class="sub_module_access"><?php echo $det['access_operation']; ?></span>
+                                            <!-- <span class="arrow"></span> -->
+                                            </a>
+                                        </li>
+                                    <?php 
+                                    endif;
+                                    endforeach; ?>
+                                </ul>
+                            </li>
+                        <?php endif; ?>
+                <?php endforeach; ?>
             <!-- END SIDEBAR MENU -->
         </div>
         <!-- END SIDEBAR -->
