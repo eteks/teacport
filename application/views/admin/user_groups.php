@@ -1,4 +1,7 @@
 <?php
+$current_page_rights = $this->config->item('current_page_rights')['access_permission'];
+$access_rights = explode(',',$current_page_rights);
+// print_r($access_rights);
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -61,9 +64,11 @@ if(!empty($this->session->userdata("login_status"))):
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
+                                      <?php if(recursiveFind($access_rights, "add")): ?>
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
+                                      <?php endif; ?>
                                     </div>
                                     <div class="btn-group pull-right">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
@@ -91,8 +96,12 @@ if(!empty($this->session->userdata("login_status"))):
                                         <th>Group Description</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <?php if(recursiveFind($access_rights, "edit")): ?>
+                                          <th>Edit</th>
+                                        <?php endif; ?>
+                                        <?php if(recursiveFind($access_rights, "delete")): ?>
+                                          <th>Delete</th>
+                                        <?php endif; ?>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -111,10 +120,14 @@ if(!empty($this->session->userdata("login_status"))):
                                           echo "Inactive";
                                         ?></td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($grp_val["user_group_created_date"])); ?></td>
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
-                                        </td>
-                                        <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
+                                        <?php if(recursiveFind($access_rights, "edit")): ?>
+                                          <td class="edit_section">
+                                            <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
+                                          </td>
+                                        <?php endif; ?>
+                                        <?php if(recursiveFind($access_rights, "delete")): ?>
+                                          <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                     <?php
                                       $i++;

@@ -420,22 +420,20 @@ class Admin_users extends CI_Controller {
 		}
 		echo $data['status'];
 	}
-
+	function get_full_array_by_recursive_search(array $array, $needle)
+	{
+	    foreach ($array as $key => $value) {
+	    	if(in_array($needle,$value))
+	    		return $value;
+	    }
+	}
 	public function admin_module_access_privileges(){
 		$admin_operation_rights = $this->admin_users_model->get_admin_rights_by_group();
-		$res_rights = array();
-		foreach($admin_operation_rights as $arr)
-		{
-		    foreach($arr as $k => $v)
-		    {
-		        if($k == 'sub_module' || $k == 'operation_available' || $k == 'access_permission')
-		            $res_rights[$arr['main_module']][$k] = $this->get_arrayvalues_bykeyvalue($admin_operation_rights, $k, 'main_module', $arr['main_module'],$is_unique = false);
-		        else
-		            $res_rights[$arr['main_module']][$k] = $v;
-		    }
-		}
 		//set values to global array variable 'admin_operation_rights' which is initialized with empty array on config/admin_modules.php file
-		$this->config->set_item('admin_operation_rights',  $res_rights);
+		$this->config->set_item('admin_operation_rights',  $admin_operation_rights);
+		$current_url = base_url(uri_string());
+		$current_page_rights = $this->get_full_array_by_recursive_search($admin_operation_rights,$current_url);
+		$this->config->set_item('current_page_rights',  $current_page_rights);
 	}
 
 

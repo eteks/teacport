@@ -190,3 +190,4 @@ $config['admin_operation_rights'] = array();
 // echo "<pre>";
 // print_r($config['admin_modules']);
 // echo "</pre>";
+$config['current_page_rights'] = array();

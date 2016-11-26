@@ -145,18 +145,36 @@ class Admin_users_model extends CI_Model {
   }
     //Admin modules to store in database
     public function insert_modules($data){
-        $data = json_decode($data, true);
+        // echo "<pre>";
+        // print_r($this->config->item('admin_modules'));
+        // echo "</pre>";
+        $data = $this->config->item('admin_modules');
+        // $data = json_decode($data, true);
+        // echo "<pre>";
+        // print_r($data);
+        // echo "</pre>";
+        // $full_map_array = array();
+        // foreach($data as $data_value) {
+        //   foreach ($data_value as $key => $value) {
+        //     $array = array();
+        //     foreach ($value as $record) {
+        //       $array['main_module'] = $key;
+        //       $array['sub_module'] = $record['sub_module'];
+        //       $array['operation_available'] = $record['module_access'];
+        //       array_push($full_map_array, $array);
+        //     }
+        //   }
+        // }
         $full_map_array = array();
-        foreach($data as $data_value) {
-          foreach ($data_value as $key => $value) {
-            $array = array();
-            foreach ($value as $record) {
-              $array['main_module'] = $key;
-              $array['sub_module'] = $record['sub_module'];
-              $array['operation_available'] = $record['module_access'];
-              array_push($full_map_array, $array);
-            }
-          }
+        foreach($data as $key => $value) {      
+            foreach ($value['sub_module'] as $k => $v) {
+                $array = array();
+                $array['main_module'] = $value['main_module'];
+                $array['sub_module'] = $v['name'];
+                $array['operation_available'] = $v['access_operation'];
+                $array['page_url'] = $v['route_url'];
+                array_push($full_map_array, $array);
+            }            
         }
         //Here insert_batch is a inbuilt function to store the set of records into database in a single query at the same time
         // $this->db->insert_batch('tr_admin_modules', $full_map_array);
@@ -194,7 +212,7 @@ class Admin_users_model extends CI_Model {
     public function get_admin_rights_by_group(){
         // $users_group_where = '(access_group_id="'.$this->input->post('rid').'")';
         $users_group_where = '(access_group_id=1)';
-        $this->db->select('am.main_module,am.sub_module,am.operation_available,aac.access_permission');
+        $this->db->select('am.main_module,am.sub_module,am.operation_available,am.page_url,aac.access_permission');
         $this->db->from('tr_admin_access_control aac');
         $this->db->join('tr_admin_modules am','aac.access_module_id=am.module_id','inner');
         $this->db->where($users_group_where);

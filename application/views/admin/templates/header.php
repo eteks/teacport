@@ -239,6 +239,9 @@ Website: http://thevectorlab.net/
         // echo "<pre>";
         // print_r($this->config->item('admin_operation_rights'));
         // echo "</pre>";
+        // echo "<pre>";
+        // print_r($this->config->item('current_page_rights'));
+        // echo "<pre>";
     ?>
     <!-- BEGIN SIDEBAR -->
         <div id="sidebar" class="nav-collapse collapse">
