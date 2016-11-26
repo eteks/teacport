@@ -67,7 +67,7 @@ if(!empty($this->session->userdata("login_status"))):
                                         </button>
                                     </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
                                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>

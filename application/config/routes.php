@@ -49,6 +49,8 @@ $route['login/facebookverify'] = 'social/facebookverify';
 $route['login/twitter'] = 'social/twitter';
 $route['login/linkedin'] = 'social/linkedin';
 $route['login/google'] = 'social/google';
+$route['login/forgotpassword'] = 'job_provider/forgot_password';
+$route['login/forgot-password'] = 'job_seeker/forgot_password';
 //SIGN UP
 $route['signup/seeker'] = 'job_seeker/signup';
 $route['signup/provider'] = 'job_provider/signup';

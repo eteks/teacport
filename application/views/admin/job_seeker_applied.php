@@ -44,7 +44,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <form method="post" action="job_seeker/job_seeker_applied" class="admin_module_form" id="job_seeker_applied_form">
                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
 	                                <thead>

@@ -58,7 +58,7 @@ if(!empty($this->session->userdata("login_status"))):
                   <div class="btn-group pull-right">
                   </div>
                 </div>
-                <div class="space15"></div>
+                
                 <form method="post" action="adminindex/class_level" class="admin_module_form" id="class_level_form">
                   <?php } ?>
                   <?php

@@ -33,8 +33,13 @@ function doConfirm(msg, yesFn, noFn) {
     var confirmBox = $("#dialog-box");
     var overlay = $("#dialog-overlay");
     confirmBox.find(".message").text(msg);
+    confirmBox.find(".yes,.no").unbind().click(function() {
+        confirmBox.hide();
+        overlay.hide();
+    });
     confirmBox.find(".yes").click(yesFn);
     confirmBox.find(".no").click(noFn);
+
     var winH = $(window).height();
     var winW = $(window).width();
     var popupH = confirmBox.height();
@@ -151,8 +156,10 @@ ajax = function (params,action,form_id){
             }
             else if(res.error==2) {
                 $('.val_error').html();
+                $('.admin_table').dataTable().fnDestroy();  
                 form.html(res.output);
                 $('.db_status').fadeOut(3000);
+                setTimeout(function() { datatable_initialization(); }, 3000); 
                 setTimeout(function() { $('.db_status').remove(); }, 5000);
                 default_credentials();
             }
@@ -163,7 +170,7 @@ ajax = function (params,action,form_id){
 $(document).ready(function(){
     default_credentials();
 
-    $('#dialog-overlay,.yes,.no').on('click',function() {
+    $('#dialog-overlay').on('click',function() {
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
     });
@@ -178,6 +185,7 @@ $(document).ready(function(){
 
     // Add - New record
     $(document).on('click','.add_new',function() {
+        disable_datatable(0);
         if(editing==0 && ready_save==0) {        	      	 
             add_new_record();            
             handleChoosenSelect();
@@ -225,6 +233,7 @@ $(document).ready(function(){
 
     // Remove - New record
     $(document).on('click','.new_remove',function() {
+        disable_datatable(1);
         if(editing==0 && ready_save==1) {
             $(this).parents('tr').remove();
             ready_save=0;
@@ -253,7 +262,7 @@ $(document).ready(function(){
     $(document).on("click","."+editbutton,function(){
         var update_id = $(this).data("id");
         var this_row = $(this).parents("tr").attr('id');
-
+        disable_datatable(0);
         if(update_id && editing == 0 && tdediting == 0 && ready_save==0) {
             // hide editing row, for the time being
             // $("."+table+" tbody tr:last-child").fadeOut("fast");
@@ -294,6 +303,7 @@ $(document).ready(function(){
 
     // Cancel - Old record
     $(document).on("click","."+cancelbutton,function(){
+        disable_datatable(1);
         var this_row = $(this).parents("tr").attr('id');         
         // $("."+table+" tr:last-child").fadeIn('fast');   
         $("."+table+" #"+this_row+"").fadeOut(500, function() {
@@ -431,11 +441,6 @@ $(document).ready(function(){
         $(this).next().click();
     });
 
-    // Tab menu sumission
-    $(document).on('click','#rootwizard .finish',function() {
-        var test = tabmenu_ci_validation('end');
-    });
-
     // Upload preview
     $(document).on('change','.hidden_upload',function()  {
         var file = $(this).val();
@@ -555,6 +560,40 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
 });
 
 
+function disable_datatable($mode) {
+//     // $('.admin_table').dataTable({
+//     //                         "ordering": false,
+//     //                         "paging" : false,
+//     //                         "info" : false   
+//     // });
+//     // get settings object after table is initialized
+//     var oSettings = datatable.fnSettings();
 
+// // // disable sorting on column "1"
+//     oSettings.aoColumns[2].bSortable = false;
+
+//    // datatable.DataTable().destroy();
+
+//     oSettings.bPaginate  = false;
+
+
+
+//    // var oSettings = datatable.fnSettings();
+
+//    //  oSettings.fnSortOnOff( '_all', false );
+    
+    if($mode == 0) {
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').hide();
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','none');
+        $('.admin_table th').addClass('no-sort');
+    }
+    else {
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').show();
+        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','auto');
+        $('.admin_table th').removeClass('no-sort');
+    }
+
+
+}
 
 

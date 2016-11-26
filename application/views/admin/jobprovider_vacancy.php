@@ -58,7 +58,7 @@ if(!empty($this->session->userdata("login_status"))):
                             <div class="portlet-body">
                                 <div class="clearfix">
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                   <thead>
                                     <tr class="ajaxTitle">

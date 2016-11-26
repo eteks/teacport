@@ -49,7 +49,7 @@ if(!empty($this->session->userdata("login_status"))):
                                         </button>
                                     </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                                 <form method="post" action="users_accounts" class="admin_module_form" id="users_accounts_form">
                                 <?php } ?>
                                 <?php
