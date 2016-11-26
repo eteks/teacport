@@ -58,7 +58,7 @@ if(!empty($this->session->userdata("login_status"))):
                                 endif;
                                 ?> 
                                 <p class='val_error error_msg_md'> <p>
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                <table class="table table-striped table-hover table-bordered admin_table user_acct_tbl" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>User Name</th>
