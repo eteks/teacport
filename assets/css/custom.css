@@ -245,3 +245,16 @@ font-size: 13px;
 
 }	
 
+.inbox_menu{
+	position: relative;
+}
+.button__badge {
+  background-color: #fa3e3e;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+    padding: 0 11px;
+    position: absolute;
+    right: 17px;
+    top: 9px;
+}
