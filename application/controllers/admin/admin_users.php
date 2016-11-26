@@ -318,17 +318,19 @@ class Admin_users extends CI_Controller {
 			// print_r($data['admin_group']);
 			// echo "</pre>";
 			if($this->input->is_ajax_request()) {
-				$this->admin_users_model->insert_update_admin_prvileges($_POST['module_data']);
+				$result = $this->admin_users_model->insert_update_admin_prvileges($_POST['module_data']);
+				echo json_encode($result);
 			}
-			$this->load->view('admin/privileges',$data);
+			else
+				$this->load->view('admin/privileges',$data);
 	}
 
 	//Function to store all the admin menus to assign rights for each admin uses
-	public function admin_modules()
-	{		
-			$data = $this->admin_users_model->insert_modules($_POST['module_data']);
-			return $data;
-	}
+	// public function admin_modules()
+	// {		
+	// 		$data = $this->admin_users_model->insert_modules($_POST['module_data']);
+	// 		return $data;
+	// }
 	
 	public function edit_profile()
 	{	
@@ -428,12 +430,16 @@ class Admin_users extends CI_Controller {
 	    }
 	}
 	public function admin_module_access_privileges(){
+		//To store all the module in database when page loads from hook automatic calling
+		$data = $this->admin_users_model->insert_modules();
 		$admin_operation_rights = $this->admin_users_model->get_admin_rights_by_group();
 		//set values to global array variable 'admin_operation_rights' which is initialized with empty array on config/admin_modules.php file
 		$this->config->set_item('admin_operation_rights',  $admin_operation_rights);
 		$current_url = base_url(uri_string());
 		$current_page_rights = $this->get_full_array_by_recursive_search($admin_operation_rights,$current_url);
 		$this->config->set_item('current_page_rights',  $current_page_rights);
+		$is_super_admin = $this->session->userdata("login_session")['is_super_admin'];
+		$this->config->set_item('is_super_admin',  $is_super_admin);
 	}
 
 

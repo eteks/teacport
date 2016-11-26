@@ -50,8 +50,8 @@
                                     <div class="btn-group pull-right">
                                         
                                     </div>
-                                </div>
-                                
+                                </div> 
+                                <p class='privilege_status' style="display:none;"></p>
                                 <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> <!-- class="admin_module_form" -->
                                 <table class="table table-striped table-hover table-bordered privileges_table" id="sample_editable_1">
                                     <thead>

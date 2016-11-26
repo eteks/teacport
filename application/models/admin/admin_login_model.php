@@ -14,8 +14,14 @@ class Admin_login_model extends CI_Model {
   {
     $model_data['error'] = 0;
     if($this->input->post('username') && $this->input->post('password')) {
-      $admin_login_where = '(admin_user_name="'.$this->input->post('username').'" and admin_user_password="'.$this->input->post('password').'" and admin_user_status=1)';
-      $admin_login_get = $this->db->get_where('tr_admin_users',$admin_login_where);
+        $admin_login_where = '(admin_user_name="'.$this->input->post('username').'" and admin_user_password="'.$this->input->post('password').'" and admin_user_status=1)';
+        // $admin_login_get = $this->db->get_where('tr_admin_users',$admin_login_where);
+        //Above commented code updated by kalai
+        $this->db->select('au.*,aug.is_super_admin');
+        $this->db->from('tr_admin_users au');
+        $this->db->join('tr_admin_user_groups aug','au.admin_user_group_id=aug.user_group_id','inner');
+        $this->db->where($admin_login_where);
+        $admin_login_get = $this->db->get();
       if($admin_login_get->num_rows() == 1) {
         $model_data['status'] = "login_success";
         $model_data['login_values'] = $admin_login_get->row_array();
