@@ -2,146 +2,141 @@
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php include "templates/header.php" ?>
-   <!-- BEGIN CONTAINER -->
-  <div id="container" class="row-fluid">
-      <!-- BEGIN SIDEBAR -->
-      <div id="sidebar" class="nav-collapse collapse">
-         <div class="sidebar-toggler hidden-phone"></div>
-         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-         <div class="navbar-inverse">
-            <form class="navbar-search visible-phone">
-               <input type="text" class="search-query" placeholder="Search" />
-            </form>
-         </div>
-         <!-- END RESPONSIVE QUICK SEARCH FORM -->
-         <!-- BEGIN SIDEBAR MENU -->
-          
-         <!-- END SIDEBAR MENU -->
+<!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid">
+  <!-- BEGIN SIDEBAR -->
+  <div id="sidebar" class="nav-collapse collapse">
+    <div class="sidebar-toggler hidden-phone"></div>
+    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+    <div class="navbar-inverse">
+      <form class="navbar-search visible-phone">
+        <input type="text" class="search-query" placeholder="Search" />
+      </form>
+    </div>
+    <!-- END RESPONSIVE QUICK SEARCH FORM -->
+    <!-- BEGIN SIDEBAR MENU -->
+    <!-- END SIDEBAR MENU -->
+  </div>
+  <!-- END SIDEBAR -->
+  <!-- BEGIN PAGE -->
+  <div id="main-content">
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+      <!-- BEGIN PAGE HEADER-->
+      <div class="row-fluid">
+        <div class="span12">
+          <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
+          <h3 class="page-title">
+            Teachers Recruit
+            <small>Plan Setting</small>
+          </h3>
+          <ul class="breadcrumb">
+            <li>
+              <a href="<?php echo base_url(); ?>admin/dashboard">
+                <i class="icon-home"></i>
+              </a>
+              <span class="divider">&nbsp;</span>
+            </li>
+            <li>
+              <span> Plan Settings </span>
+              <span class="divider">&nbsp;</span>
+            </li>
+            <li>
+              <a href="<?php echo base_url(); ?>admin/subscription_plans">
+                Subscription Plan
+              </a>
+              <span class="divider-last">&nbsp;</span>
+            </li>
+          </ul>
+          <!-- END PAGE TITLE & BREADCRUMB-->
+        </div>
       </div>
-      <!-- END SIDEBAR -->
-      <!-- BEGIN PAGE -->
-      <div id="main-content">
-         <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
-            <!-- BEGIN PAGE HEADER-->
-            <div class="row-fluid">
-               <div class="span12">
-                  <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-                  <h3 class="page-title">
-                     Teachers Recruit
-                     <small>Plan Setting</small>
-                  </h3>
-                   <ul class="breadcrumb">
-                       <li>
-                          <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
-                       </li>
-                       <li>
-                          <a href="<?php echo base_url(); ?>admin/subscription_plans">
-                            Subscription Plan
-                          </a>
-                          <span class="divider-last">&nbsp;</span>
-                        </li>
-                   </ul>
-                  <!-- END PAGE TITLE & BREADCRUMB-->
-               </div>
+      <!-- END PAGE HEADER-->
+      <!-- BEGIN ADVANCED TABLE widget-->
+      <div class="row-fluid">
+        <div class="span12">
+          <!-- BEGIN EXAMPLE TABLE widget-->
+          <div class="widget">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Subscription Plan
+              </h4>
             </div>
-            <!-- END PAGE HEADER-->
-
-            <!-- BEGIN ADVANCED TABLE widget-->
-            <div class="row-fluid">
-                <div class="span12">
-                    <!-- BEGIN EXAMPLE TABLE widget-->
-                    <div class="widget">
-                        <div class="widget-title">
-                            <h4><i class="icon-reorder"></i> Subscription Plan</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
-                        </div>
-                        <div class="widget-body">
-                            <div class="portlet-body">
-                                <div class="clearfix">
-                                    <div class="btn-group">
-                                        <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
-                                            Add New <i class="icon-plus"></i>
-                                        </button>
-                                    </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="space15"></div>
-                                <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
-                                  <thead>
-                                    <tr class="ajaxTitle">
-                                      <th>Plan</th>
-                                      <th>Price</th>
-                                      <th>Features</th>
-                                      <th>Validitity</th>
-                                      <th>Maximum Posts</th>
-                                      <th>Sms Count</th>
-                                      <th>Resume Download Count</th>
-                                      <th>Status</th>
-                                      <th>Created Date</th>
-                                      <th>Edit</th>
-                                      <th>Delete</th>                                   
-                                    </tr>
-                                  </thead>
-                                  <tbody>                                   
-                                    <tr class="parents_tr" id="column">
-                                      <td class="state_name"> 
-                                        Plan1
-                                      </td>
-                                      <td class="state_name"> 
-                                        100
-                                      </td>
-                                      <td class="state_name"> 
-                                        1.Lorem
-                                        2. Lorem2
-                                      </td>
-                                      <td class="state_name"> 
-                                        08-12-2016
-                                      </td>
-                                      <td class="state_name"> 
-                                        200
-                                      </td>
-                                      <td class="state_name"> 
-                                        100
-                                      </td>
-                                      <td class="state_name"> 
-                                        100
-                                      </td>
-                                      <td class="state_name"> 
-                                        Active
-                                      </td>
-                                      <td class="state_name"> 
-                                        18-12-2016
-                                      </td>
-                                      <td class="edit_section">
-                                        <a class="edit_option" data-open="popup_section" id="column" href="javascript:;" data-id="">
-                                          Edit
-                                        </a>
-                                      </td>
-                                      <td>
-                                        <a class="ajaxDelete" onclick="Confirm.show()" data-id="">
-                                          Delete
-                                        </a>
-                                      </td>
-                                    </tr>
-                                 </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END EXAMPLE TABLE widget-->
+            <div class="widget-body">
+              <div class="portlet-body">
+                <div class="clearfix add_section">
+                  <div class="btn-group">
+                    <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
+                      Add New <i class="icon-plus"></i>
+                    </button>
+                  </div>
                 </div>
+                <form>
+                  <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                    <thead>
+                      <tr class="ajaxTitle">
+                        <th>Plan</th>
+                        <th>Price</th>
+                        <th>Features</th>
+                        <th>Validitity</th>
+                        <th>Maximum Posts</th>
+                        <th>Sms Count</th>
+                        <th>Resume Download Count</th>
+                        <th>Status</th>
+                        <th>Created Date</th>
+                        <th class="data_action">Edit</th>
+                        <th class="data_action">Delete</th>                                   
+                      </tr>
+                    </thead>
+                    <tbody>                                   
+                      <tr class="parents_tr" id="column">
+                        <td class="state_name"> 
+                          Plan1
+                        </td>
+                        <td class="state_name"> 
+                          100
+                        </td>
+                        <td class="state_name"> 
+                          1.Lorem
+                          2. Lorem2
+                        </td>
+                        <td class="state_name"> 
+                          08-12-2016
+                        </td>
+                        <td class="state_name"> 
+                          200
+                        </td>
+                        <td class="state_name"> 
+                          100
+                        </td>
+                        <td class="state_name"> 
+                          100
+                        </td>
+                        <td class="state_name"> 
+                          Active
+                        </td>
+                        <td class="state_name"> 
+                          18-12-2016
+                        </td>
+                        <td class="edit_section">
+                          <a class="edit_option" data-open="popup_section" id="column" href="javascript:;" data-id="">
+                            Edit
+                          </a>
+                        </td>
+                        <td>
+                          <a class="uidelete" data-id="">
+                            Delete
+                          </a>
+                        </td>
+                      </tr>
+                   </tbody>
+                  </table>
+                </form>
+              </div>
+          </div>
+        </div>
+        <!-- END EXAMPLE TABLE widget-->
+      </div>
 
 
   <!---Full edit popup -->
@@ -154,7 +149,7 @@ if(!empty($this->session->userdata("login_status"))):
             </h4>                        
           </div>
           <div class="widget-body form pop_details_section">
-            <form action="form_wizard.html#" class="form-horizontal">
+            <form action="#" class="form-horizontal">
               <fieldset>
                 <legend> Subscription plan details:</legend>
                 <div class="form-wizard">

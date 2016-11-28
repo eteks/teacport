@@ -46,10 +46,6 @@ if(!empty($this->session->userdata("login_status"))):
               <h4>
                 <i class="icon-reorder"></i> District
               </h4>
-              <!-- <span class="tools">
-                  <a href="javascript:;" class="icon-chevron-down"></a>
-                  <a href="javascript:;" class="icon-remove"></a>
-              </span> -->
             </div>
             <div class="widget-body">
               <div class="portlet-body">
@@ -62,7 +58,6 @@ if(!empty($this->session->userdata("login_status"))):
                   <div class="btn-group pull-right">
                   </div>
                 </div>
-                <div class="space15"></div>
                 <form method="post" action="adminindex/district" class="admin_module_form" id="district_form">
                   <?php } ?>
                   <?php

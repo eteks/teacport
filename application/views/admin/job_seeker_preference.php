@@ -38,10 +38,6 @@ if(!empty($this->session->userdata("login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Job Seeker Preference</h4>
-                            <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
-                                <a href="javascript:;" class="icon-remove"></a>
-                            </span>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
@@ -51,17 +47,8 @@ if(!empty($this->session->userdata("login_status"))):
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
-                                    <div class="btn-group pull-right">
-                                        <button class="btn dropdown-toggle" data-toggle="dropdown">Tools <i class="icon-angle-down"></i>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                            <li><a href="editable_table.html#">Print</a></li>
-                                            <li><a href="editable_table.html#">Save as PDF</a></li>
-                                            <li><a href="editable_table.html#">Export to Excel</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                                <div class="space15"></div>
+                                
                               <form method="post" action="job_seeker/job_seeker_preference" class="admin_module_form form_table_scl" id="job_seeker_preference_form">
                               <?php } ?>
                               <?php
@@ -70,7 +57,7 @@ if(!empty($this->session->userdata("login_status"))):
                               endif;
                               ?> 
                               <p class='val_error error_msg_md'> <p>
-                              <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                              <table class="table table-striped table-hover table-bordered admin_table job_seeker_table" id="sample_editable_1">
                                <tr class="ajaxTitle">
                                   <thead>
                                     <th>Candidate Name</th>
@@ -85,7 +72,7 @@ if(!empty($this->session->userdata("login_status"))):
                                   </thead>
                                 </tr>
                                 <tbody>
-                                  <tr class="parents_tr" id="column1">
+                                  <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name1</td>
                                         <td class="candidate_posting_applied_for">Teacher</td>
                                         <td class="candidate_expecting_start_salary">10000</td>
@@ -94,11 +81,11 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="candidate_willing_subject_id">Maths</td>
                                         <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
+                                        	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column1" onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="uidelete" id="">Delete</a></td>
                                     </tr>
-                                    <tr class="parents_tr" id="column2">
+                                    <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name2</td>
                                         <td class="candidate_posting_applied_for">Prof</td>
                                         <td class="candidate_expecting_start_salary">10000</td>
@@ -107,11 +94,11 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="candidate_willing_subject_id">English</td>
                                         <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column2" href="javascript:;" data-id="column2">Edit</a>
+                                        	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column2" onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="uidelete" id="">Delete</a></td>
                                     </tr>
-                                    <tr class="parents_tr" id="column3">
+                                    <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name3</td>
                                         <td class="candidate_posting_applied_for">Professor</td>
                                         <td class="candidate_expecting_start_salary">10000</td>
@@ -120,9 +107,9 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="candidate_willing_subject_id">Science</td>
                                         <td class="created_date">00-00-0000</td>
                                         <td class="edit_section">
-                                        	<a class="ajaxEdit" id="column3" href="javascript:;" data-id="column3">Edit</a>
+                                        	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="ajaxDelete" id="column3" onclick="Confirm.show()">Delete</a></td>
+                                        <td><a class="uidelete" id="">Delete</a></td>
                                     </tr>
                                 </tbody>
                               </table>

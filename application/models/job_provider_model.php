@@ -134,5 +134,38 @@ class Job_provider_model extends CI_Model {
 		$this->db->update('tr_organization_profile', $profile);
 		return 'updated';
 	 }
+	 public function job_provider_inbox($organizationid)
+	 {
+	 	$this->db->select('*');    
+		$this->db->from('tr_organizaion_inbox');
+		$this->db->join('tr_candidate_profile', ' tr_organizaion_inbox.inbox_candidate_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_organization_vacancies', 'tr_organizaion_inbox.inbox_vacancy_id = tr_organization_vacancies.vacancies_id');
+		$where = "(tr_organizaion_inbox.inbox_organization_id='".$organizationid."' AND tr_organizaion_inbox.inbox_status='1')";
+		$this->db->order_by('inbox_id','desc');
+		$this->db->where($where);
+		$inboxdata = $this->db->get();
+		return $inboxdata->result_array(); 
+	 }
+	 public function job_provider_unread_inbox_count($organizationid)
+	 {
+	 	$this->db->select('count(is_viewed) as messagecount');    
+		$this->db->from('tr_organizaion_inbox');
+		$where = "(inbox_organization_id='".$organizationid."' AND inbox_status='1' AND is_viewed ='0')";
+		$this->db->where($where);
+		$inboxcount = $this->db->get()->row_array();
+		return $inboxcount['messagecount']; 
+	 }
+	 public function job_provider_inbox_ajax($organizationid,$lastid)
+	 {
+	 	$this->db->select('*');    
+		$this->db->from('tr_organizaion_inbox');
+		$this->db->join('tr_candidate_profile', ' tr_organizaion_inbox.inbox_candidate_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_organization_vacancies', 'tr_organizaion_inbox.inbox_vacancy_id = tr_organization_vacancies.vacancies_id');
+		$where = "(tr_organizaion_inbox.inbox_organization_id='".$organizationid."' AND tr_organizaion_inbox.inbox_status='1' AND tr_organizaion_inbox.inbox_id > '".$lastid."')";
+		$this->db->order_by('inbox_id','desc');
+		$this->db->where($where);
+		$inboxdata = $this->db->get();
+		return $inboxdata->result_array(); 
+	 }
 	
 }
