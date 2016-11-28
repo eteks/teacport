@@ -1,5 +1,5 @@
 <?php
-if(!$this->session->userdata("login_status")): 
+if(!$this->session->userdata("admin_login_status")): 
 ?>
 <!DOCTYPE html>
 <!--

@@ -125,6 +125,7 @@ $route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 
 $route['admin/edit_profile'] = 'admin/admin_users/edit_profile';
 $route['admin/change_password'] = 'admin/admin_users/change_password';
+$route['admin/logout'] = 'admin/admin_login/teac_admin_logout';
 
 $route['admin/payment_gateway'] = 'admin/setting/payment_gateway';
 $route['admin/sms_gateway'] = 'admin/setting/sms_gateway';
@@ -133,6 +134,7 @@ $route['admin/template_logo'] = 'admin/setting/template_logo';
 
 $route['admin/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['admin/feedback_form'] = 'admin/other_module/feedback_form';
+
 
 
 

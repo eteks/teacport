@@ -341,7 +341,7 @@ class Admin_users extends CI_Controller {
 	public function edit_profile_validation()
 	{	
 		$data['status'] = 0;
-		$session_data = $this->session->userdata('login_session');
+		$session_data = $this->session->userdata('admin_login_session');
 		$id = $session_data['admin_user_id'];
 		$validation_rules = array(
  					          	array(
@@ -385,7 +385,7 @@ class Admin_users extends CI_Controller {
 	public function change_password_validation()
 	{	
 		$data['status'] = 0;
-		$session_data = $this->session->userdata('login_session');
+		$session_data = $this->session->userdata('admin_login_session');
 		$id = $session_data['admin_user_id'];
 		$validation_rules = array(
  					          	array(
@@ -430,19 +430,21 @@ class Admin_users extends CI_Controller {
 	    }
 	}
 	public function admin_module_access_privileges(){
-		//To store all the module in database when page loads from hook automatic calling
-		$data = $this->admin_users_model->insert_modules();
-		$admin_operation_rights = $this->admin_users_model->get_admin_rights_by_group();
-		//set values to global array variable 'admin_operation_rights' which is initialized with empty array on config/admin_modules.php file
-		$this->config->set_item('admin_operation_rights',  $admin_operation_rights);
-		$current_url = base_url(uri_string());
-		$current_page_rights = $this->get_full_array_by_recursive_search($admin_operation_rights,$current_url);
-		$this->config->set_item('current_page_rights',  $current_page_rights);
-		$is_super_admin = $this->session->userdata("login_session")['is_super_admin'];
-		$this->config->set_item('is_super_admin',  $is_super_admin);
+		if($this->session->userdata("admin_login_session")){
+			// print_r($this->session->userdata("admin_login_session"));
+			// echo "if";
+			//To store all the module in database when page loads from hook automatic calling
+			$data = $this->admin_users_model->insert_modules();
+			$admin_operation_rights = $this->admin_users_model->get_admin_rights_by_group();
+			//set values to global array variable 'admin_operation_rights' which is initialized with empty array on config/admin_modules.php file
+			$this->config->set_item('admin_operation_rights',  $admin_operation_rights);
+			$current_url = base_url(uri_string());
+			$current_page_rights = $this->get_full_array_by_recursive_search($admin_operation_rights,$current_url);
+			$this->config->set_item('current_page_rights',  $current_page_rights);
+			$is_super_admin = $this->session->userdata("admin_login_session")['is_super_admin'];
+			$this->config->set_item('is_super_admin',  $is_super_admin);
+		}	
 	}
-
-
 }
 /* End of file Admin_users.php */ 
 /* Location: ./application/controllers/Admin_users.php */

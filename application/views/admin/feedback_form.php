@@ -1,5 +1,5 @@
 <?php
-if(!empty($this->session->userdata("login_status"))): 
+if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->

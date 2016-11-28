@@ -1,5 +1,5 @@
 <?php
-if(!empty($this->session->userdata("login_status"))): 
+if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
