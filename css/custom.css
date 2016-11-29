@@ -22,13 +22,15 @@
     background-color: rgba(0, 0, 0, 0.2);
 }
 #srch-strip .fa-close {
-    border: 1px solid #000;
+    border: 3px solid #fff;
+    color: #FFFFFF;
     border-radius: 20px;
     cursor: pointer;
     padding: 5px;
     position: absolute;
-    right: -8px;
-    top: -12px;
+    right: 7px;
+    top: 15px;
+    z-index: 1;
 }
 #search-icon {
 	background-color: rgba(0, 0, 0, 0.2); 
