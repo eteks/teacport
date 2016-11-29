@@ -25,6 +25,7 @@
 	// });
 
 
+
 //Normal & Advanced Search
   $('#btn_advanced_act').click(function() {
   	$('#normalsearch_act').hide();
@@ -44,18 +45,18 @@
   	$("#provider-signup").show();
   });    
   
-  $('.loginbox-signin a').on("click", function() {
+  $(".loginbox-signin a").on("click", function() {
   	$("#provider-signup").hide();
    	$("#provider-signin").show();
   }); 
   
 //Seeker Signin & SignUp
-  $(".loginbox-signup").on("click", function() {
+  $(".loginbox-signup a").on("click", function() {
   	$("#seeker-signin").hide();
   	$("#seeker-signup").show();
   });    
   
-  $(".loginbox-signin").on("click", function() {
+  $(".loginbox-signin a").on("click", function() {
   	$("#seeker-signup").hide();
    	$("#seeker-signin").show();
   });  
@@ -64,9 +65,6 @@
 
 
 $(document).ready(function() {
-	
-	
-	
 	
 	// DATE-PICKER
     // $('input.datepicker').Zebra_DatePicker();

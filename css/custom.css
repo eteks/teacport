@@ -5,7 +5,7 @@
 #srch-strip, .srch_bar {
 	display : none;
 }
- .slidershow-bg:hover .srch_bar, .slidershow-bg:hover #srch-strip{
+.slidershow-bg:hover #srch-strip, .slidershow-bg:hover .srch_bar {
    display : block;
  }
 .slidershow-bg .search-form-contaner {
@@ -45,7 +45,18 @@
 .slide-featured-jobs {
 	padding: 10px;
 	cursor: pointer;
-}	
+	/* only required rule to the whole div clickable work */
+	position: relative;
+}
+.featured-jobs-grid-link{
+  /* all rules required to make the whole div clickable */ 
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+  z-index: 1;
+  }	
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -68,6 +79,16 @@
 .all-jobs-list-box2 .fa{
 	color: #777;
 	font-size: 22px;
+}
+.pricing-section-1 .drop {
+	position: relative;
+}
+.pricing-section-1 .pricing-selectplan-link{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
 }
 /* Provider- Signup & Signin form */
 .login-container .loginbox-signin {
@@ -181,14 +202,20 @@ select:invalid { color: gray; }
 	border-radius: 5px;
 	
 }
-#applicant_msg_act .modal-content, #applicant_msg_act .modal-dialog .modal-content .inbox_msg {
-	color:  #fff !important;
+#applicant_msg_act .modal-header {
 	background-color: #29aafe;
+	color: #FFFFFF;
+	font-family: 'Kaushan Script';
 }
 #applicant_msg_act .modal-header .close{
 	color: #fff !important;
 	font-size: 30px;
 	opacity: 1;
+}
+#applicant_msg_act .inbox_msg{
+	color:  #29aafe;
+	/*font-weight: bold;*/
+	
 }
 /* Edit profile */
 .profile-edit .input-group-btn {
