@@ -1,6 +1,3 @@
-<?php
-if(!$this->session->userdata("login_status")): 
-?>
 <!DOCTYPE html>
 <!--
 Template Name: Admin Lab Dashboard build with Bootstrap v2.3.1
@@ -131,8 +128,3 @@ Website: http://thevectorlab.net/
 </body>
 <!-- END BODY -->
 </html>
-<?php
-else :
-redirect(base_url().'admin/dashboard');
-endif;
-?>

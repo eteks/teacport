@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    /* Admin Login Form Start */
     $('.admin_login_form').on('submit',function(e) {
         e.preventDefault();
         var form_data = $(this).serialize();
@@ -20,36 +21,11 @@ $(document).ready(function(){
             }
         });
     });
-
-    // // Admin Form
-    // $('.admin_form').on('submit',function(e) {
-    //     e.preventDefault();
-    //     var form_data = $(this).serialize();
-    //     var this_status = $(this).find('.admin_status');
-    //     var action = $(this).data('mode');
-    //     $.ajax({
-    //         type : "POST",
-    //         url : admin_baseurl+$(this).attr('action'),
-    //         dataType : 'json',
-    //         data : form_data+'&'+csrf_name+'='+csfrData[csrf_name]+'&action='+action ,
-    //         success: function(res) {
-    //             if(res.error == 1) {
-    //                this_status.html(res.status);
-    //             }
-    //             else if(res.error == 2) {
-    //                this_status.html(res.status);
-    //                setTimeout(function()
-    //                {
-    //                     location.reload();
-    //                },3000);
-    //             }
-    //         }
-    //     });
-    // });
+    /* Admin Login Form End */
 
     /* Popup module ajax start */
 
-    // Admin Form
+    // Admin Form - Popup form submission
     $('.admin_form').on('submit',function(e) {
         e.preventDefault();
         var form_data = new FormData(this);
@@ -91,7 +67,7 @@ $(document).ready(function(){
         });
     });
 
-    // Admin Delete
+    // Admin Delete - Delete funtionality for alll modules which has poup view.
     $(document).on('click','.pop_delete_action',function() {
         var id = $(this).data('id');
         var this_status = $(this).parents('form').find('.admin_status');
@@ -124,7 +100,7 @@ $(document).ready(function(){
             });
     });
 
-    // Edit and Full view option
+    // Edit and Full view option - Edit and Delete option for popup.
     $(document).on('click','.popup_fields',function(e) {
     	// handleFormWizards();
         var action_data ={};
@@ -149,7 +125,7 @@ $(document).ready(function(){
         });
     }); 
 
-    // Tab menu submission
+    // Tab menu submission - Popup form submission
     $(document).on('submit','.tab_form',function(e) {
         e.preventDefault();
         var formdata = new FormData(this);
@@ -332,7 +308,7 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
    // $(function () {
     // var startDate = new Date('1985-01-01'),
         // endDate = new Date('1995-01-01');
-    // $('#reg_dob').datetimepicker({
+    // $('#reg_dob').datepicker({
         // //other option
         // startDate: startDate, //set start date
         // endDate: endDate //set end date

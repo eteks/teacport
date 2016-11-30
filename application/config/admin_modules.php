@@ -10,7 +10,9 @@ $config['admin_modules'] = array(
 			'name' => 'dashboard', 
 			'access_operation' => 'view', 
 			'route_url' => base_url().'admin/dashboard' 
-	))),
+		)),
+		'icon_name' => 'icon-home'
+	),
 
 	array(
 		'main_module' => 'admin users',
@@ -29,7 +31,9 @@ $config['admin_modules'] = array(
 			'name' => 'privileges', 
 			'access_operation' => 'edit,view', 
 			'route_url' => base_url().'admin/privileges' 
-	))),
+		)),
+		'icon_name' => 'icon-user'
+	),
 
 	array(
 		'main_module' => 'master data',
@@ -88,7 +92,9 @@ $config['admin_modules'] = array(
 			'name' => 'posting details', 
 			'access_operation' => 'add,edit,delete,view',  
 			'route_url' => base_url().'admin/postings' 
-	))),
+		)),
+		'icon_name' => 'icon-th'
+	),
 
 	array(
 		'main_module' => 'job providers',
@@ -117,7 +123,9 @@ $config['admin_modules'] = array(
 			'name' => 'ads posted', 
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'admin/jobprovider_ads' 
-	))),
+		)),
+		'icon_name' => 'icon-sitemap'
+	),
 
 	array(
 		'main_module' => 'job seekers',
@@ -136,7 +144,9 @@ $config['admin_modules'] = array(
 			'name' => 'job applied', 
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'admin/job_seeker_applied' 
-	))),
+		)),
+		'icon_name' => 'icon-search'
+	),
 
 	array(
 		'main_module' => 'plan settings',
@@ -145,7 +155,9 @@ $config['admin_modules'] = array(
 			'name' => 'plan creation & maintanence', 
 			'access_operation' => 'add,edit,delete,view', 
 			'route_url' => base_url().'admin/subscription_plans' 
-	))),
+		)),
+		'icon_name' => 'icon-wrench'
+	),
 
 	array(
 		'main_module' => 'settings',
@@ -169,7 +181,9 @@ $config['admin_modules'] = array(
 			'name' => 'template logo', 
 			'access_operation' => 'view', 
 			'route_url' => base_url().'admin/template_logo' 
-	))),
+		)),
+		'icon_name' => 'icon-cogs'
+	),
 
 	array(
 		'main_module' => 'others',
@@ -183,7 +197,9 @@ $config['admin_modules'] = array(
 			'name' => 'site visits tracking', 
 			'access_operation' => 'view', 
 			'route_url' => base_url().'admin/site_visit_tracking' 
-	))),
+		)),
+		'icon_name' => 'icon-tasks'
+	),
 );
 
 $config['admin_operation_rights'] = array();

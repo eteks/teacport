@@ -8,6 +8,7 @@ class Job_Provider extends CI_Controller {
 		$this->load->model('admin/job_providermodel');
 		$this->load->model('admin/admin_model');
 		$this->load->library('upload');
+		$this->load->library('form_validation');
 		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function
 		$this->config->load('admin_modules');
 
@@ -375,30 +376,22 @@ class Job_Provider extends CI_Controller {
       		$data_values = $this->job_providermodel->get_provider_vacancy('init'); 	
       	}
 
-		if($data['error']==1 || $data['error']==2) {
+		if($data['error']==1) {
 			$result['status'] = $data['status'];
 			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$output['provider_vacancy'] = $data_values['provider_vacancy'];
+			$result['output'] = $this->load->view('admin/jobprovider_vacancy',$output,true);
 			echo json_encode($result);
 		}
 		else {
 			$data['provider_vacancy'] = $data_values['provider_vacancy'];
 			$this->load->view('admin/jobprovider_vacancy',$data);
 		}
-
-
-
-
-		// $data_val = $this->job_providermodel->get_full_provider_vacancy(1);
-
-		// $data['provider_full_vacancies'] = get_provider_vacancy_by_qua($data_val);
-
-		// echo "<pre>";
-
-
-
-		// print_r($data['provider_full_vacancies']);
-
-		// echo "</pre>";
 	}
 
 

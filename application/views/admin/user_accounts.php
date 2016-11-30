@@ -1,5 +1,12 @@
 <?php
-if(!empty($this->session->userdata("login_status"))): 
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
+if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -50,7 +57,7 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div>
                                 </div>
                                 
-                                <form method="post" action="users_accounts" class="admin_module_form" id="users_accounts_form">
+                                <form method="post" action="user_accounts" class="admin_module_form" id="users_accounts_form_tbl">
                                 <?php } ?>
                                 <?php
                                 if(!empty($status)) :
@@ -67,8 +74,12 @@ if(!empty($this->session->userdata("login_status"))):
                                         <th>User Group</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                          <th class="data_action">Edit</th>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                          <th class="data_action">Delete</th>
+                                        <?php endif; ?>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -81,18 +92,26 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="admin_user_name"><?php echo $usr_det['admin_user_name']; ?></td>
                                         <td class="admin_user_password"><?php echo $usr_det['admin_user_password']; ?></td>
                                         <td class="admin_user_email"><?php echo $usr_det['admin_user_password']; ?></td>
-                                        <td class="admin_user_group"><?php echo $usr_det['user_group_name']; ?></td>
+                                        <td class="admin_user_group"><?php echo $usr_det['user_group_name']; ?>
+                                        <input type="hidden" value="<?php echo $usr_det['user_group_id']; ?>" />
+                                        </td>
                                         <td class="admin_user_status"><?php 
                                         if ($usr_det['admin_user_status'] == 1) 
                                           echo "Active";
                                         else
                                           echo "Inactive";
-                                        ?></td>
+                                        ?>
+                                        <input type="hidden" value="<?php echo $usr_det['admin_user_status']; ?>" />
+                                        </td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($usr_det["admin_user_created_date"])); ?></td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $usr_det['admin_user_id']; ?>">Edit</a>
                                         </td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                         <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                     <?php
                                       $i++;
@@ -123,12 +142,22 @@ if(!empty($this->session->userdata("login_status"))):
     // Define default values
     var inputType = new Array("text","text","text","select","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("admin_user_name","admin_user_password","admin_user_email","admin_user_group","admin_user_status"); // Set name of input types
-    var placeholder = new Array("Enter User Name","Enter Password","Enter Email","Select User Group","Select Status"); // Set placeholder of input types
-    var table = "admin_table"; // Set classname of table    
-    var admin_user_group_option = new Array("Select User Group","Super Admin","Moderate Admin"); 
-    var admin_user_group_value = new Array("1","0"); 
+    var placeholder = new Array("Enter User Name","Enter Password","Enter Email"); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table  
+    var admin_user_group_option = new Array("Select Group");
+    var admin_user_group_value = new Array("");
+    <?php
+    if(!empty($user_groups)) :
+    foreach ($user_groups as $grp_val) :
+    ?>
+      admin_user_group_option.push("<?php echo $grp_val['user_group_name']; ?>");
+      admin_user_group_value.push("<?php echo $grp_val['user_group_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>  
     var admin_user_status_option = new Array("Select Status","Active","Inactive"); 
-    var admin_user_status_value = new Array("1","0");
+    var admin_user_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

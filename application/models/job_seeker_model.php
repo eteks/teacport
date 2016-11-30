@@ -42,6 +42,48 @@ class Job_seeker_model extends CI_Model {
 			return $user_details; 
 		}
 	}
+
+	/** Seeker Social authentication **/
+	public function social_authendication_registration($data)
+	{
+		/*query for check wheather data exist or not */
+		$checkquery = $this->db->get_where('tr_candidate_profile', array(
+            'candidate_email' => $data['candidate_email'],
+        ));
+		$count = $checkquery->num_rows();
+		/*check wheather data exist or not */
+		if ($count === 0) {
+			/* data not exist and insert to database and return verification message */
+            $this->db->insert('tr_organization_profile', $data);
+			return 'inserted';
+        }
+		else{
+			/* data exist and return verification message */
+			return 'exists';
+		}
+	}
+
+	/** Seeker Social authentication **/
+	public function social_valid_provider_login($data)
+	{
+		$where = "(candidate_email='".$data['candidate_email']."' AND candidate_status='1')";
+		$existuser = $this->db->get_where('tr_candidate_profile',$where);
+		$count = $existuser->num_rows();
+		if ($count === 1) {
+            $user_data = $existuser->row_array();
+			$user_details['pro_email'] = $user_data['candidate_email'];
+			$user_details['pro_userid'] = $user_data['candidate_id'];
+			$user_details['user_type'] = 'seeker';
+			$user_details['valid_status'] = 'valid';
+			$user_detalls['login_type'] = $user_data['candidate_registration_type'];
+			return $user_details; 
+		}
+		else {
+			$user_details['valid_status'] = 'invalid';
+			return $user_details; 
+		}
+	}
+
 	
 	
 }

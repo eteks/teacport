@@ -195,6 +195,7 @@ if (defined('ENVIRONMENT'))
 	define("FACEBOOKAPPSECRET", "372ac9b0b9e96d105d1b27da18a06e66"); //facebook secret id
 	define("FACEBOOKGRAPHVERSION", "v2.5");//facebook graph version
 	define("FACEBOOKLOGINURL", APP_URL."login/facebookverify");//facebook login url
+	define("FACEBOOKSEEKERLOGINURL", APP_URL."login/seeker/facebookverify");
 	// define("TWITTERCONSUMERKEY","WtZZYO7OMHN6a9GdI8QnIHFjT");
 	// define("TWITTERCONSUMERSECRET", "ebFGoz2TSiFtBLJMEB6v2z2GTnGHGNjRy8OpfgZVoX4nSKkbDE");
 	// define("TWITTERLOGINURL", APP_URL."login/twitterverify");
