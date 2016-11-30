@@ -1,4 +1,11 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -82,8 +89,12 @@ if(!empty($this->session->userdata("login_status"))):
                           <th> Mobile No </th>
                           <th> Status </th>
                           <th> Created Date</th>
-                          <th class="data_action"> Edit </th>
-                          <th class="data_action"> Delete </th>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            <th class="data_action">Edit</th>
+                          <?php endif; ?>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                            <th class="data_action">Delete</th>
+                          <?php endif; ?>
                           <th class="data_action"> Full View </th>
                         </tr>
                       </thead>
@@ -124,12 +135,15 @@ if(!empty($this->session->userdata("login_status"))):
                           </td>
                           <td class=""> 
                             <?php echo date('d-m-Y',strtotime($pro_val['candidate_created_date'])); ?>
-                          </td>                                      
+                          </td>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section">
                               Edit
                             </a>
                           </td>
+                          <?php endif; ?>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                           <td>
                            <!--  <a class="job_delete pop_delete_action" data-id="<?php echo $pro_val['candidate_id']; ?>">
                               Delete
@@ -138,6 +152,7 @@ if(!empty($this->session->userdata("login_status"))):
                               Delete
                             </a>
                           </td>
+                          <?php endif; ?>
                           <td>
                             <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section">
                               Full View
@@ -183,37 +198,37 @@ if(!empty($this->session->userdata("login_status"))):
                       <div class="container">
                         <ul  class="row-fluid nav nav-pills">
                           <li class="span2">
-                            <a href="#tab1" data-toggle="tab" class="step active">
+                            <a href="#tab1" data-toggle="tab" class="step step_menus active">
                             <span class="number seeker_tab_num">1</span>
-                            <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Basic<br /> Info-1</span>
+                            <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Info-1</span>
                             </a>
                          </li>
                          <li class="span2">
-                            <a href="#tab2" data-toggle="tab" class="step">
+                            <a href="#tab2" data-toggle="tab" class="step step_menus">
                               <span class="number seeker_tab_num">2</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Basic<br /> Info-2</span>
+                              <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Info-2</span>
                             </a>
                          </li>
                          <li class="span2">
-                            <a href="#tab3" data-toggle="tab" class="step">
+                            <a href="#tab3" data-toggle="tab" class="step step_menus">
                             <span class="number seeker_tab_num">3</span>
-                            <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Contact<br /> Info</span>
+                            <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Contact Info</span>
                             </a>
                          </li>
                          <li class="span2">
-                            <a href="#tab4" data-toggle="tab" class="step">
+                            <a href="#tab4" data-toggle="tab" class="step step_menus">
                               <span class="number seeker_tab_num">4</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational<br /> Info</span>
                             </a>
                           </li>
                           <li class="span2">
-                            <a href="#tab5" data-toggle="tab" class="step">
+                            <a href="#tab5" data-toggle="tab" class="step step_menus">
                               <span class="number seeker_tab_num">5</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience<br /> Info</span>
                             </a>
                           </li>
                           <li class="span2">
-                            <a href="#tab6" data-toggle="tab" class="step">
+                            <a href="#tab6" data-toggle="tab" class="step step_menus">
                               <span class="number seeker_tab_num">6</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Professional<br /> Info</span>
                             </a>

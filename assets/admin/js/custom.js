@@ -272,7 +272,7 @@ $(document).ready(function(){
     $(document).on("click","."+editbutton,function(){
         var update_id = $(this).data("id");
         var this_row = $(this).parents("tr").attr('id');
-        disable_datatable(0);
+        // disable_datatable(0);
         if(update_id && editing == 0 && tdediting == 0 && ready_save==0) {
             // hide editing row, for the time being
             // $("."+table+" tbody tr:last-child").fadeOut("fast");
@@ -573,7 +573,7 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
         });
     });   
     // ********** End of the code ***********
-
+        
 });
 
 
@@ -599,25 +599,15 @@ function disable_datatable($mode) {
 
 //    //  oSettings.fnSortOnOff( '_all', false );
     
-    if($mode == 0) {
-        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').hide();
-        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','none');
-        $('.admin_table th').addClass('no-sort');
-    }
-    else {
-        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').show();
-        $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','auto');
-        $('.admin_table th').removeClass('no-sort');
-    }
-
-
+    // if($mode == 0) {
+        // $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').hide();
+        // $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','none');
+        // $('.admin_table th').addClass('no-sort');
+    // }
+    // else {
+        // $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').show();
+        // $('.colvis_button,.export_button,.dataTables_filter,.dataTables_paginate').css('pointer-events','auto');
+        // $('.admin_table th').removeClass('no-sort');
+    // }
 }
-// $(document).ready(function(){
-// var startDate = new Date('01-01-1990'),
-        // endDate = new Date('01-01-2000');
-    // $('#regi_dob').datepicker({
-        // format: "dd-mm-yyyy",
-        // startDate: startDate, //set start date
-        // endDate: endDate //set end date
-    // });
-// });
+

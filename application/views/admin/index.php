@@ -1,4 +1,11 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php include "templates/header.php" ?>
@@ -39,7 +46,7 @@ if(!empty($this->session->userdata("login_status"))):
                             </li>
                             <li><a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a><span class="divider-last">&nbsp;</span></li>
                             <li class="pull-right search-wrap">
-                                <form class="hidden-phone" action="search_result.php">
+                                <form class="hidden-phone search_cnt">
                                     <div class="search-input-area">
                                         <input id=" " class="search-query" type="text" placeholder="Search">
                                         <i class="icon-search"></i>
@@ -158,7 +165,7 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div> -->
                                 </div>
                             </div>
-                                <div class="widget-body">
+                                <div class="widget-body filter_by_cnt">
                                 <table class="table table-condensed table-striped table-hover no-margin dash_table" id="filter_vacancy_table">
                                     <thead>
                                     <tr>
@@ -214,7 +221,7 @@ if(!empty($this->session->userdata("login_status"))):
                                     </div> -->
                                 </div>
                                 </div>
-                                <div class="widget-body">
+                                <div class="widget-body filter_by_cnt">
                                 <table class="table table-condensed table-striped table-hover no-margin dash_table" id="filter_provider_table">
                                     <thead>
                                     <tr>
@@ -489,7 +496,7 @@ if(!empty($this->session->userdata("login_status"))):
                             <!-- END EXAMPLE TABLE widget-->
                         </div>
                     </div>
-                    <button class="btn btn-primary latest_align_center" type="button">View All Job Providers</button>
+                    <a href="<?php echo base_url(); ?>admin/job_provider_profile"><button class="btn btn-primary latest_align_center" type="button">View All Job Providers</button></a>
                     <div class="row-fluid">
                         <div class="span12">
                             <!-- BEGIN EXAMPLE TABLE widget-->
@@ -538,7 +545,7 @@ if(!empty($this->session->userdata("login_status"))):
                             <!-- END EXAMPLE TABLE widget-->
                         </div>
                     </div>
-                    <button class="btn btn-primary latest_align_center" type="button">View All Jobs</button>
+                    <a href="<?php echo base_url(); ?>admin/job_provider_vacancies"><button class="btn btn-primary latest_align_center" type="button">View All Jobs</button></a>
 
 
                     <!-- <div class="row-fluid"> -->

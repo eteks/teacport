@@ -1,4 +1,11 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -80,8 +87,12 @@ if(!empty($this->session->userdata("login_status"))):
                           <th class="not-sort">Admin Vefied </th>
                           <th>Ads Status</th>
                           <th>Ads Created Date</th>
-                          <th class="data_action">Edit</th>
-                          <th class="data_action">Delete</th>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            <th class="data_action">Edit</th>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                            <th class="data_action">Delete</th>
+                        <?php endif; ?>
                         </tr>
                       </thead>
                       <tbody>
@@ -120,16 +131,20 @@ if(!empty($this->session->userdata("login_status"))):
                           <td class="created_date">
                             <?php echo date('d-m-Y',strtotime($ads_val['premium_ads_created_date'])); ?>
                            </td>
+                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $ads_val['premium_ads_id']; ?>" data-href="job_provider/teacport_job_provider_ads_ajax" data-mode="edit" data-popup-open="popup_section">
                               Edit
                             </a>
                           </td>
+                          <?php endif; ?>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                           <td>
                             <a class="pop_delete_action" data-mode="delete" data-id="<?php echo $ads_val['premium_ads_id']; ?>">
                               Delete
                             </a>
                           </td>
+                          <?php endif; ?>
                         </tr>
                         <?php
                         endforeach;

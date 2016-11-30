@@ -2,7 +2,8 @@
 $is_super_admin = $this->config->item('is_super_admin');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $current_page_rights = $this->config->item('current_page_rights')['access_permission'];
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
 if(!empty($this->session->userdata("login_status"))): 
@@ -87,10 +88,10 @@ if(!empty($this->session->userdata("login_status"))):
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                                          <th>Edit</th>
+                                          <th class="data_action">Edit</th>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                          <th>Delete</th>
+                                          <th class="data_action">Delete</th>
                                         <?php endif; ?>
                                     </tr>
                                     </thead>

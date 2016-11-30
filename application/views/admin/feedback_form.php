@@ -1,4 +1,11 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php include "templates/header.php" ?>
@@ -81,8 +88,12 @@ if(!empty($this->session->userdata("login_status"))):
                                         <th>Is Viewed</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            				<th class="data_action">Edit</th>
+                          				<?php endif; ?>
+                         				<?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                          				     <th class="data_action">Delete</th>
+                         				<?php endif; ?>
                                       </tr>
                                     </thead>
                                     <tbody>
@@ -114,14 +125,18 @@ if(!empty($this->session->userdata("login_status"))):
                                         <td class="created_date">
                                           00-00-0000
                                         </td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                           <a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">
                                             Edit
                                           </a>
                                         </td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                         <td>
                                           <a class="ajaxDelete" onclick="Confirm.show()" data-id="">Delete</a>
                                         </td>
+                                        <?php endif; ?>
                                       </tr>
                                     </tbody>
                                   </table>

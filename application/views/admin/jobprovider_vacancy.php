@@ -1,4 +1,11 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -81,8 +88,12 @@ if(!empty($this->session->userdata("login_status"))):
                           <th> Close Date </th>
                           <th> Status </th>
                           <th> Created Date</th>
-                          <th class="data_action"> Edit </th>
-                          <th class="data_action"> Delete </th>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            <th class="data_action">Edit</th>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                            <th class="data_action">Delete</th>
+                        <?php endif; ?>
                           <th class="data_action"> Full View </th>
                         </tr>
                       </thead>
@@ -117,17 +128,21 @@ if(!empty($this->session->userdata("login_status"))):
                           </td>
                           <td class=""> 
                             <?php echo date('d-m-Y',strtotime($vac_val['vacancies_created_date'])); ?>
-                          </td>     
+                          </td> 
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>    
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax" data-mode="edit" data-popup-open="popup-1">
                               Edit
                             </a>
                           </td>
+                          <?php endif; ?>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                           <td>
                             <a class="job_delete pop_delete_action" onclick="Confirm.show()" data-id="<?php echo $vac_val['vacancies_id']; ?>">
                               Delete
                             </a>
                           </td>
+                          <?php endif; ?>
                           <td>
                             <a class="job_full_view popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax"  data-mode="full_view" data-popup-open="popup-1">
                               Full View
