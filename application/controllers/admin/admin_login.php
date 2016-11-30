@@ -74,6 +74,8 @@ class Admin_login extends CI_Controller {
 
   	public function teac_admin_login()
 	{	
+		if(!empty($this->session->userdata("admin_login_status")))
+			redirect(base_url().'admin/dashboard');
 		// get cookie
  		$data['remember_value'] = get_cookie('admin_teacport_name');
 		$this->load->view('admin/login',$data);

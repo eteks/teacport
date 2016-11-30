@@ -57,7 +57,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </div>
                                 </div>
                                 
-                                <form method="post" action="users_accounts" class="admin_module_form" id="users_accounts_form_tbl">
+                                <form method="post" action="user_accounts" class="admin_module_form" id="users_accounts_form_tbl">
                                 <?php } ?>
                                 <?php
                                 if(!empty($status)) :
@@ -92,13 +92,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <td class="admin_user_name"><?php echo $usr_det['admin_user_name']; ?></td>
                                         <td class="admin_user_password"><?php echo $usr_det['admin_user_password']; ?></td>
                                         <td class="admin_user_email"><?php echo $usr_det['admin_user_password']; ?></td>
-                                        <td class="admin_user_group"><?php echo $usr_det['user_group_name']; ?></td>
+                                        <td class="admin_user_group"><?php echo $usr_det['user_group_name']; ?>
+                                        <input type="hidden" value="<?php echo $usr_det['user_group_id']; ?>" />
+                                        </td>
                                         <td class="admin_user_status"><?php 
                                         if ($usr_det['admin_user_status'] == 1) 
                                           echo "Active";
                                         else
                                           echo "Inactive";
-                                        ?></td>
+                                        ?>
+                                        <input type="hidden" value="<?php echo $usr_det['admin_user_status']; ?>" />
+                                        </td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($usr_det["admin_user_created_date"])); ?></td>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
@@ -138,12 +142,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
     // Define default values
     var inputType = new Array("text","text","text","select","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("admin_user_name","admin_user_password","admin_user_email","admin_user_group","admin_user_status"); // Set name of input types
-    var placeholder = new Array("Enter User Name","Enter Password","Enter Email","Select User Group","Select Status"); // Set placeholder of input types
-    var table = "admin_table"; // Set classname of table    
-    var admin_user_group_option = new Array("Select User Group","Super Admin","Moderate Admin"); 
-    var admin_user_group_value = new Array("1","0"); 
+    var placeholder = new Array("Enter User Name","Enter Password","Enter Email"); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table  
+    var admin_user_group_option = new Array("Select Group");
+    var admin_user_group_value = new Array("");
+    <?php
+    if(!empty($user_groups)) :
+    foreach ($user_groups as $grp_val) :
+    ?>
+      admin_user_group_option.push("<?php echo $grp_val['user_group_name']; ?>");
+      admin_user_group_value.push("<?php echo $grp_val['user_group_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>  
     var admin_user_status_option = new Array("Select Status","Active","Inactive"); 
-    var admin_user_status_value = new Array("1","0");
+    var admin_user_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

@@ -105,7 +105,7 @@ class Admin_users_model extends CI_Model {
                               'admin_user_name' => $this->input->post('admin_user_name'),
                               'admin_user_password' => $this->input->post('admin_user_password'),
                               'admin_user_email' => $this->input->post('admin_user_email'),
-                              'admin_user_group_id' => $this->input->post('admin_user_group_id'),
+                              'admin_user_group_id' => $this->input->post('admin_user_group'),
                               'admin_user_status' => $this->input->post('admin_user_status')
                             );
       $users_update_where = '( admin_user_id="'.$this->input->post('rid').'")'; 
@@ -122,7 +122,7 @@ class Admin_users_model extends CI_Model {
                               'admin_user_name' => $this->input->post('admin_user_name'),
                               'admin_user_password' => $this->input->post('admin_user_password'),
                               'admin_user_email' => $this->input->post('admin_user_email'),
-                              'admin_user_group_id' => $this->input->post('admin_user_group_id'),
+                              'admin_user_group_id' => $this->input->post('admin_user_group'),
                               'admin_user_status' => $this->input->post('admin_user_status')
                             );
       $this->db->insert("tr_admin_users", $users_insert_data); 
@@ -229,6 +229,12 @@ class Admin_users_model extends CI_Model {
         $this->db->where($users_group_where);
         $query = $this->db->get()->result_array();
         return $query;
+    }
+    //Get all the user groups
+    public function get_user_groups(){
+        $user_group_where = '(user_group_status=1)'; 
+        $model_data = $this->db->get_where("tr_admin_user_groups", $user_group_where)->result_array(); 
+        return $model_data;
     }
 }
 

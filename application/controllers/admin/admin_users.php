@@ -281,6 +281,7 @@ class Admin_users extends CI_Controller {
 		}
 		else {
 			$data['user_details'] = $data_values['user_details'];
+			$data['user_groups'] = $this->admin_users_model->get_user_groups(); 
 			$this->load->view('admin/user_accounts',$data);
 		}	
 			// $this->load->view('admin/user_accounts');
