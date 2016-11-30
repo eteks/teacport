@@ -13,7 +13,7 @@
 .Zebra_DatePicker *:after,
 .Zebra_DatePicker *:before  { -moz-box-sizing: content-box !important; -webkit-box-sizing: content-box !important; box-sizing: content-box !important }
 
-.Zebra_DatePicker           { position: absolute; background: #666; border: 3px solid #666; z-index: 1200; font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 13px; top: 0 }
+.Zebra_DatePicker           { position: absolute; background: #29aafe; border: 3px solid #29aafe; z-index: 1200; font-family: Tahoma, Arial, Helvetica, sans-serif; font-size: 13px; top: 0 }
 
 .Zebra_DatePicker *         { margin: 0; padding: 0; color: #000; background: transparent; border: none }
 
@@ -52,16 +52,16 @@
 .Zebra_DatePicker .dp_header .dp_next       { width: 30px }
 
 .Zebra_DatePicker .dp_header .dp_caption    { font-weight: bold }
-.Zebra_DatePicker .dp_header .dp_hover      { background: #222; color: #FFF }
+.Zebra_DatePicker .dp_header .dp_hover      { background: #FFF; color: #222 }
 
 /* = DATEPICKER
 ----------------------------------------------------------------------------------------------------------------------*/
-.Zebra_DatePicker .dp_daypicker th              { background: #FFCC33 }
+.Zebra_DatePicker .dp_daypicker th              { background: #FFF }
 .Zebra_DatePicker td.dp_not_in_month            { background: #F3F3F3; color: #CDCDCD; cursor: default }
 .Zebra_DatePicker td.dp_not_in_month_selectable { background: #F3F3F3; color: #CDCDCD; cursor: pointer }
-.Zebra_DatePicker td.dp_weekend                 { background: #D8D8D8 }
-.Zebra_DatePicker td.dp_weekend_disabled        { color: #CCC; cursor: default }
-.Zebra_DatePicker td.dp_selected                { background: #5A4B4B; color: #FFF !important }
+.Zebra_DatePicker td.dp_weekend                 { background: #e8e8e8 }
+.Zebra_DatePicker td.dp_weekend_disabled        { color: #CDCDCD; background: #F3F3F3; cursor: default }
+.Zebra_DatePicker td.dp_selected                { background: #29aafe; color: #FFF !important }
 .Zebra_DatePicker td.dp_week_number             { background: #FFCC33; color: #555; cursor: text; font-style: italic }
 
 /* = MONTHPICKER
@@ -75,7 +75,7 @@
 /* = FOOTER
 ----------------------------------------------------------------------------------------------------------------------*/
 .Zebra_DatePicker .dp_footer            { margin-top: 3px }
-.Zebra_DatePicker .dp_footer .dp_hover  { background: #222; color: #FFF }
+.Zebra_DatePicker .dp_footer .dp_hover  { background: #fff; color: #222 }
 
 /* = SELECT CURRENT DAY
 ----------------------------------------------------------------------------------------------------------------------*/
@@ -87,10 +87,10 @@
 
 /* = SOME MORE GLOBALS (MUST BE LAST IN ORDER TO OVERWRITE PREVIOUS PROPERTIES)
 ----------------------------------------------------------------------------------------------------------------------*/
-.Zebra_DatePicker td.dp_current             { color: #C40000 }
+.Zebra_DatePicker td.dp_current             { color: #fff; background: #29aafe }
 .Zebra_DatePicker td.dp_disabled_current    { color: #E38585 }
-.Zebra_DatePicker td.dp_disabled            { background: #F3F3F3; color: #CDCDCD; cursor: default }
-.Zebra_DatePicker td.dp_hover               { background: #482424; color: #FFF }
+.Zebra_DatePicker td.dp_disabled            {  color: #CDCDCD; background: #F3F3F3; cursor: default }
+.Zebra_DatePicker td.dp_hover               { background: #29aafe; color: #fff }
 
 /* = ICON
 ----------------------------------------------------------------------------------------------------------------------*/
