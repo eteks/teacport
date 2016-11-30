@@ -2,47 +2,44 @@
 .txt_blue {
 	color: #29AAFE;
 }
-#srch-strip, .srch_bar {
+.set-srch-strip{
 	display : none;
 }
-.slidershow-bg:hover #srch-strip, .slidershow-bg:hover .srch_bar {
+.slidershow-bg:hover .set-srch-strip {
    display : block;
- }
+}
 .slidershow-bg .search-form-contaner {
 	margin-top: 0px;
-	position: relative;
-	top: -55px;
 	overflow: hidden;
-	padding: 0px 40px;
+	padding: 0px;
 	height: 50px;
 }
-#srch-strip {
-    position: relative;
-    padding: 30px 250px;
+.set-srch-strip {
     background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 35px;
 }
-#srch-strip .fa-close {
-    border: 3px solid #fff;
+.set-srch-strip .fa-close {
     color: #FFFFFF;
-    border-radius: 20px;
+    font-size: 20px;
     cursor: pointer;
     padding: 5px;
     position: absolute;
-    right: 7px;
-    top: 15px;
+    right: 5px;
+    top: 20px;
     z-index: 1;
 }
 #search-icon {
 	background-color: rgba(0, 0, 0, 0.2); 
-	padding: 10px 10px 10px 20px;
-    width: 100%; 
+	width: 25%;
+}
+#search-icon a{
+	color: #FFFFFF;
+	cursor: pointer;
 }
 #search-icon .fa-search{
 	margin: 5px;
 }
-#search-icon .btn-default{
-	margin-top: 0px !important;
-}
+
 /* Featured Jobs Slider */
 .slide-featured-jobs {
 	padding: 10px;
@@ -58,6 +55,10 @@
   top:0;
   left: 0;
   z-index: 1;
+  /* this is a fix for IE7-9 */
+  	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
+ 	filter: alpha(opacity=0);  
+  	opacity:0; 
   }	
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
@@ -82,9 +83,6 @@
 	color: #777;
 	font-size: 22px;
 }
-.pricing-section-1 .drop {
-	position: relative;
-}
 .pricing-section-1 .pricing-selectplan-link{
 	position: absolute;
 	top: 0;
@@ -105,7 +103,16 @@
 .login-container .loginbox-signin a:hover {
 	color: #000;
 }
-
+.loginbox-forgot {
+	cursor: pointer;
+}
+.loginbox-forgot a:hover{
+	color: #000000;
+}
+.checkbox_word {
+	font-size: 14px;
+	cursor: pointer;
+}
 
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
@@ -145,7 +152,25 @@
 	border-bottom: 1px solid #ccc;
 	margin: 5px 0 15px;
 	padding: 0 0 10px; 
+}
+/* User Inbox */
+#user_inbox_msg_act .modal-dialog {
+	border: 1px solid #fff;
+	border-radius: 5px;
 	
+}
+#user_inbox_msg_act .modal-header {
+	background-color: #29aafe;
+	color: #FFFFFF;
+	font-family: 'Kaushan Script';
+}
+#user_inbox_msg_act .modal-header .close{
+	color: #fff !important;
+	font-size: 30px;
+	opacity: 1;
+}
+#user_inbox_msg_act .inbox_msg{
+	color:  #29aafe;
 }
 /* END OF JOB SEEKER DASHBOARD */
 
@@ -303,8 +328,21 @@ select:invalid { color: gray; }
 .list-banner .fa-thumb-tack {
 	margin-right: 5px;
 }
-
-
+/* Resume -inbox */
+.resume-list table tr td{
+	vertical-align: middle;
+	text-align: left;
+}
+/* Browse Candidate jobs */
+#dashboard-jobs-grid .dashboard-jobs-grid-link{
+	/* for grid click event */
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	
+}
 /* END OF COMPANY DASHBOARD */
 
 /* PROVIDERS & SEEKERS DASHBOARD */
@@ -314,6 +352,22 @@ select:invalid { color: gray; }
     height: 22px;
     position: relative;
 }
+/* VACANCIES */
+#list-vacancy .vacancies-grid-link{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	/* this is a fix for IE7-9 */
+  	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
+ 	filter: alpha(opacity=0);  
+  	opacity:0;  
+} 
+
+
+
+
 /*Form validation css for job seeker added by thangam*/
 .error{
 color: red;
@@ -378,4 +432,7 @@ font-size: 13px;
 	    top: -20px;
 	 }   
 }
- */
+ 
+ 
+ 
+ 
