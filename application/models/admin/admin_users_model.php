@@ -17,6 +17,7 @@ class Admin_users_model extends CI_Model {
       $group_update_data = array( 
                               'user_group_name' => $this->input->post('user_group_name'),
                               'user_group_description' => $this->input->post('user_group_description'),
+                              'is_super_admin' => $this->input->post('user_super_admin'),                             
                               'user_group_status' => $this->input->post('user_group_status')
                             );
       $group_update_where = '( user_group_id="'.$this->input->post('rid').'")'; 
@@ -32,6 +33,7 @@ class Admin_users_model extends CI_Model {
       $group_insert_data = array( 
                               'user_group_name' => $this->input->post('user_group_name'),
                               'user_group_description' => $this->input->post('user_group_description'),
+                              'is_super_admin' => $this->input->post('user_super_admin'),      
                               'user_group_status' => $this->input->post('user_group_status')
                             );
       $this->db->insert("tr_admin_user_groups", $group_insert_data); 
@@ -41,7 +43,7 @@ class Admin_users_model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $group_delete_where = '(state_id="'.$this->input->post('rid').'")';
+      $group_delete_where = '(user_group_id="'.$this->input->post('rid').'")';
       $this->db->delete("tr_admin_user_groups", $group_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;

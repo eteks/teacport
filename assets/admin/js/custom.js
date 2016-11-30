@@ -280,10 +280,11 @@ $(document).ready(function(){
             var html;
             for(i=0;i<columns.length;i++){
                 // fetch value inside the TD and place as VALUE in input field
-                if(inputType[i]=='text') {
+                if(inputType[i]=='text' || inputType[i]=='textarea') {
                     var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+"").html();
                 }
                 else {
+                   //It will fetch the value for select field from hidden input field passed in html 
                    var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").val(); 
                 }
                 input = createInput(i,$.trim(val));
