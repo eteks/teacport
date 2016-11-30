@@ -6,7 +6,7 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
-if(!$this->session->userdata("login_status")): 
+if(!$this->session->userdata("admin_login_status")):
 ?>
 <!DOCTYPE html>
 <!--

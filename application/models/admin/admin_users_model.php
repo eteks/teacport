@@ -219,7 +219,7 @@ class Admin_users_model extends CI_Model {
     //Get every access rights of each module by group id
     public function get_admin_rights_by_group(){
         // $users_group_where = '(access_group_id="'.$this->input->post('rid').'")';
-        $access_group_id = $this->session->userdata("login_session")['admin_user_group_id'];
+        $access_group_id = $this->session->userdata("admin_login_session")['admin_user_group_id'];
         $users_group_where = '(access_group_id="'.$access_group_id.'")';
         $this->db->select('am.main_module,am.sub_module,am.operation_available,am.page_url,aac.access_permission');
         $this->db->from('tr_admin_access_control aac');

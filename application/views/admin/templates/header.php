@@ -207,7 +207,7 @@ Website: http://thevectorlab.net/
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
                                 <?php
-                                    $session_data = $this->session->userdata("login_session");
+                                    $session_data = $this->session->userdata("admin_login_session");
                                 ?>
                                 <span class="username"> <?php echo $session_data['admin_user_name']; ?></span>
                                 <b class="caret"></b>
@@ -216,7 +216,7 @@ Website: http://thevectorlab.net/
                                <li><a href="<?php echo base_url(); ?>admin/edit_profile"><i class="icon-edit"></i>  Edit Profile</a></li>
                                 <li><a href="<?php echo base_url(); ?>admin/change_password"><i class="icon-exchange"></i>  Change Password</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?php echo base_url(); ?>admin/admin_login/teac_admin_logout"><i class="icon-key"></i> Log Out</a></li>
+                                <li><a href="<?php echo base_url(); ?>admin/logout"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->
@@ -236,7 +236,7 @@ Website: http://thevectorlab.net/
         // echo "<pre>";
         // print_r($this->config->item('current_page_rights'));
         // echo "</pre>";
-        $is_super_admin = $this->session->userdata("login_session")['is_super_admin'];
+        $is_super_admin = $this->session->userdata("admin_login_session")['is_super_admin'];
     ?>
     <!-- BEGIN SIDEBAR -->
         <div id="sidebar" class="nav-collapse collapse">

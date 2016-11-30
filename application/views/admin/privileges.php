@@ -64,10 +64,10 @@ if(!empty($this->session->userdata("login_status"))):
                                 <table class="table table-striped table-hover table-bordered privileges_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
-                                        <th>Module Name</th>
-                                        <?php 
+                                        <th class="not-sort">Module Name</th>
+                                        <?php   
                                         foreach ($admin_group as $group) : ?>
-                                            <th> 
+                                            <th class="not-sort"> 
                                             <?php echo ucwords($group['user_group_name']); ?>
                                             </th>
                                         <?php 
@@ -90,15 +90,18 @@ if(!empty($this->session->userdata("login_status"))):
                                         // echo "</pre>";
                                     ?>
                                     <!--- First Module Description -->
-                                    <tr class="parents_tr" id="column1">
+                                    <tr class="parents_tr" id="">
                                         <td class="main_module"><?php echo strtoupper($mod['main_module']); ?></td>
-                                        <td class=""></td>
-                                        <td class=""></td>
+                                         <?php   
+                                        foreach ($admin_group as $group) : ?>
+                                          <td class=""></td> 
+                                        <?php 
+                                        endforeach ?>                                      
                                     </tr>
                                     <?php  
                                         foreach ($sub_module_data as $sub) :
                                     ?>
-                                        <tr class="parents_tr module_data" id="column2">
+                                        <tr class="parents_tr module_data" id="">
                                             <td class="sub_module"> <input type="hidden" name="module_id" class="module_id" value="<?php echo $sub[0] ?>"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <?php echo ucwords($sub[1]); ?></td>
                                             <?php 
                                               foreach ($admin_group as $group) : 

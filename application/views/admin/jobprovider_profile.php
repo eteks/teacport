@@ -6,7 +6,7 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
-if(!empty($this->session->userdata("login_status"))): 
+if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -177,8 +177,8 @@ if(!empty($this->session->userdata("login_status"))):
               </h4>                        
             </div>
             <div class="widget-body form pop_details_section">
+              <?php } ?>
               <form class="tab_form" action="job_provider/teacport_job_provider_profile" data-index="" method="POST" data-mode="update">
-                <?php } ?>
                 <?php
                 if(!empty($provider_full_profile)) :
                 ?>
@@ -628,8 +628,8 @@ if(!empty($this->session->userdata("login_status"))):
                 <?php
                 endif;
                 ?>
-                <?php if(!$this->input->is_ajax_request()) { ?>
               </form>
+              <?php if(!$this->input->is_ajax_request()) { ?>
             </div>
           </div>
         	<p>
@@ -638,19 +638,11 @@ if(!empty($this->session->userdata("login_status"))):
           <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
         </div>
       </div>     	
-    </div><!--Test datepicker -->
-    <!-- <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Registrant DOB</label>
-                          <span>
-                            <input type="text" id="regi_dob" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" />
-                          </span>
-                        </div>
-  </div> --><!--End of datepicker -->
+    </div>
     <!-- END PAGE CONTAINER-->
   </div>
   <!-- END PAGE -->
-</div>           
+</div>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>
 <?php

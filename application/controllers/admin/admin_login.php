@@ -50,8 +50,8 @@ class Admin_login extends CI_Controller {
 			if($data['status']=='login_success') {
 				$data['login_values'] = $data_values['login_values'];
 				// Session
-	        	$this->session->set_userdata("login_status",1);
-    	    	$this->session->set_userdata("login_session",$data['login_values']);
+	        	$this->session->set_userdata("admin_login_status",1);
+    	    	$this->session->set_userdata("admin_login_session",$data['login_values']);
 				if($this->input->post('remember_me')) {
 					// Set cookie
 					$cookie = array(
@@ -158,8 +158,8 @@ class Admin_login extends CI_Controller {
 
   	// Admin - Logout
   	public function teac_admin_logout() {
-  		$this->session->unset_userdata("login_status");
-        $this->session->unset_userdata("login_session");
+  		$this->session->unset_userdata("admin_login_status");
+        $this->session->unset_userdata("admin_login_session");
         redirect(base_url().'admin');
   	}
 
