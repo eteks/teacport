@@ -1,5 +1,12 @@
 <?php
-if(!empty($this->session->userdata("admin_login_status"))): 
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
+if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -79,8 +86,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Subcription Plan </th>
                           <th> Status </th>
                           <th> Created Date</th>
-                          <th class="data_action"> Edit </th>
-                          <th class="data_action"> Delete </th>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            <th class="data_action">Edit</th>
+                          <?php endif; ?>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                            <th class="data_action">Delete</th>
+                          <?php endif; ?>
                           <th class="data_action"> Full Details </th>
                         </tr>
                       </thead>
@@ -118,17 +129,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <td class=""> 
                             <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
-                          </td>                                      
+                          </td> 
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section">
                               Edit
                             </a>
                           </td>
+                          <?php endif; ?>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                           <td>
                             <a class="job_delete pop_delete_action" data-id="<?php echo $pro_val['organization_id']; ?>">
                               Delete
                             </a>
                           </td>
+                          <?php endif; ?>
                           <td>
                             <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section">
                               Full View

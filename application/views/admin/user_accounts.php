@@ -1,4 +1,11 @@
 <?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -50,7 +57,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </div>
                                 </div>
                                 
-                                <form method="post" action="users_accounts" class="admin_module_form" id="users_accounts_form">
+                                <form method="post" action="users_accounts" class="admin_module_form" id="users_accounts_form_tbl">
                                 <?php } ?>
                                 <?php
                                 if(!empty($status)) :
@@ -58,7 +65,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> 
                                 <p class='val_error error_msg_md'> <p>
-                                <table class="table table-striped table-hover table-bordered admin_table user_acct_tbl" id="sample_editable_1">
+                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>User Name</th>
@@ -67,8 +74,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <th>User Group</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
-                                        <th>Edit</th>
-                                        <th>Delete</th>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                          <th class="data_action">Edit</th>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                          <th class="data_action">Delete</th>
+                                        <?php endif; ?>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -89,10 +100,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                           echo "Inactive";
                                         ?></td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($usr_det["admin_user_created_date"])); ?></td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $usr_det['admin_user_id']; ?>">Edit</a>
                                         </td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                         <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                     <?php
                                       $i++;

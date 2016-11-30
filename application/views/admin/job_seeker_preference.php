@@ -1,5 +1,12 @@
 <?php
-if(!empty($this->session->userdata("admin_login_status"))): 
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
+if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -67,8 +74,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <th>Class Level</th>
                                     <th>Subject</th>
                                     <th>Created Date</th>
-                                    <th>Edit</th>
-                                    <th>Delete</th>
+                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            			<th class="data_action">Edit</th>
+                         			<?php endif; ?>
+                          			<?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                            			<th class="data_action">Delete</th>
+                          			<?php endif; ?>
                                   </thead>
                                 </tr>
                                 <tbody>
@@ -80,10 +91,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <td class="candidate_willing_class_level_id">Class1</td>
                                         <td class="candidate_willing_subject_id">Maths</td>
                                         <td class="created_date">00-00-0000</td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="uidelete" id="">Delete</a></td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                        <td><a class="ajaxDelete" id="column1" onclick="Confirm.show()">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                     <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name2</td>
@@ -93,10 +108,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <td class="candidate_willing_class_level_id">Class2</td>
                                         <td class="candidate_willing_subject_id">English</td>
                                         <td class="created_date">00-00-0000</td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="uidelete" id="">Delete</a></td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                        <td><a class="ajaxDelete" id="column2" onclick="Confirm.show()">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                     <tr class="parents_tr" id="">
                                         <td class="candidate_profile_id">Name3</td>
@@ -106,10 +125,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <td class="candidate_willing_class_level_id">Class3</td>
                                         <td class="candidate_willing_subject_id">Science</td>
                                         <td class="created_date">00-00-0000</td>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="" href="javascript:;" data-id="">Edit</a>
                                         </td>
-                                        <td><a class="uidelete" id="">Delete</a></td>
+                                        <?php endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                        <td><a class="ajaxDelete" id="column3" onclick="Confirm.show()">Delete</a></td>
+                                        <?php endif; ?>
                                     </tr>
                                 </tbody>
                               </table>

@@ -1,3 +1,14 @@
+<?php
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
+if(!empty($this->session->userdata("login_status"))): 
+?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -53,8 +64,12 @@
 	                                    <th>Candidate</th>
 	                                    <th>Status</th>
 	                                    <th>Created Date</th>
-	                                    <th>Edit</th>
-	                                    <th>Delete</th>
+	                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            				<th class="data_action">Edit</th>
+                         				<?php endif; ?>
+                          				<?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                           					 <th class="data_action">Delete</th>
+                          				<?php endif; ?>
 	                                  </tr>
 	                                </thead>
 	                                <tbody>
@@ -63,30 +78,42 @@
 	                                        <td class="applied_job_candidate_id">Candidate Name1</td>
 	                                        <td class="applied_job_status">Active</td>
 	                                        <td class="created_date">01-01-2000</td>
+	                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
 	                                        <td class="edit_section">
 	                                        	<a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
 	                                        </td>
+	                                        <?php endif; ?>
+	                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
 	                                        <td><a class="ajaxDelete" id="column1" onclick="Confirm.show()">Delete</a></td>
+	                                        <?php endif; ?>
 	                                    </tr>
 	                                    <tr class="parents_tr" id="column2">
 	                                        <td class="applied_job_vacancies_id">20</td>
 	                                        <td class="applied_job_candidate_id">Candidate Name2</td>
 	                                        <td class="applied_job_status">Active</td>
 	                                        <td class="created_date">01-01-2000</td>
+	                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
 	                                        <td class="edit_section">
 	                                        	<a class="ajaxEdit" id="column2" href="javascript:;" data-id="column2">Edit</a>
 	                                        </td>
+	                                        <?php endif; ?>
+	                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
 	                                        <td><a class="ajaxDelete" id="column2" onclick="Confirm.show()">Delete</a></td>
+	                                        <?php endif; ?>
 	                                    </tr>
 	                                    <tr class="parents_tr" id="column3">
 	                                        <td class="applied_job_vacancies_id">30</td>
 	                                        <td class="applied_job_candidate_id">Candidate Name3</td>
 	                                        <td class="applied_job_status">Inactive</td>
 	                                        <td class="created_date">01-01-2000</td>
+	                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
 	                                        <td class="edit_section">
 	                                        	<a class="ajaxEdit" id="column3" href="javascript:;" data-id="column3">Edit</a>
 	                                        </td>
+	                                        <?php endif; ?>
+	                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
 	                                        <td><a class="ajaxDelete" id="column3" onclick="Confirm.show()">Delete</a></td>
+	                                        <?php endif; ?>
 	                                    </tr>
 	                                    </tbody>
                                  </table>
@@ -119,3 +146,9 @@
     var applied_job_status_value = new Array("1","0"); // Set value for select optionvalue which must have name of the select tag with '_value' . ex. select tag name is status means , the variable of the select optionvalue should be as 'status_value'
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
+<?php
+else :
+redirect(base_url().'admin');
+endif;
+?>

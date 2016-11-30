@@ -573,6 +573,39 @@ ul.sidebar-menu span.icon-box  {
 
     background: url("../img/submenu_hover.png") !important;
 }
+/*After Adding a scrollbar*/
+#sidebar > ul > li > div >ul.sub {
+    display: none;
+    list-style: none;
+    clear: both;
+    margin: 0px;
+}
+
+#sidebar > ul > li.active > div > ul.sub {
+    display: block;
+}
+
+#sidebar > ul > li > div > ul.sub > li {
+    background: none !important;
+    padding: 0px;
+}
+
+#sidebar > ul > li > div > ul.sub > li > a {
+    display: block;
+    position: relative;
+    padding: 10px 10px 10px 60px;
+    color: #ccc;
+    text-decoration: none;
+    text-shadow: 0 1px 1px #000;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+#sidebar > ul > li > div > ul.sub > li.active > a, #sidebar > ul > li > div > > ul.sub > li > a:hover {
+
+    background: url("../img/submenu_hover.png") !important;
+}
+/*Ending Scrollbar*/
 
 /* ie8, ie9 fixes */
 .ie8 #sidebar .search-query, .ie8 #header .search-query {
@@ -4407,4 +4440,11 @@ div.dt-button-background {
 
 .sub_module_access{
     display: none;
+}
+.sub{
+	max-height: 200px;
+	height: auto !important;
+}
+.slimScrollDiv {
+	height: auto !important;
 }
