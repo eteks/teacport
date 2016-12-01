@@ -387,11 +387,82 @@ class Job_Seeker extends CI_Controller {
 	}
 	public function job_seeker_applied()
 	{
-		$this->load->view('admin/job_seeker_applied');
+		$data['vac_values'] = $this->admin_model->get_vacancy_values();
+		$data['cand_values'] = $this->admin_model->get_candidate_values();
 
+		// Update data
+	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
+	  		$id = $this->input->post('rid');
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'vac_name',
+		                              'label'   => 'Vacancy Name',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                                 'field'   => 'cand_name',
+		                                 'label'   => 'Candidate Name',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                              'field'   => 'job_status',
+		                              'label'   => 'Job Status',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            )
+		                        );
+
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->job_seekermodel->teacport_seeker_applied_job('update');
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+
+    	// Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->job_seekermodel->teacport_seeker_applied_job('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->job_seekermodel->teacport_seeker_applied_job('init');
+      	}
+
+		if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['job_applied'] = $data_values['job_applied'];
+			$data_ajax['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/job_seeker_applied',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['job_applied'] = $data_values['job_applied'];
+			$this->load->view('admin/job_seeker_applied',$data);
+		}
 	}
 
 	
 }
-/* End of file Job_Srovider.php */ 
+/* End of file Job_Provider.php */ 
 /* Location: ./application/controllers/Job_Seeker.php */

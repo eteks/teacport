@@ -17,6 +17,20 @@ class Common {
 		return $helper->getLoginUrl(FACEBOOKLOGINURL, $permissions);
 	}
 
+	public function facebookloginurl_seeker(){
+		/* Load custom facebook library file and return login url(using email permission) */
+		$CI =& get_instance();
+		$CI->load->library('Facebook/autoload');
+		$fb = new Facebook\Facebook([
+		  	'app_id' => FACEBOOKAPPID,
+		  	'app_secret' => FACEBOOKAPPSECRET,
+		  	'default_graph_version' => FACEBOOKGRAPHVERSION,
+	  	]);
+		$helper = $fb->getRedirectLoginHelper();
+		$permissions = ['email'];
+		return $helper->getLoginUrl(FACEBOOKSEEKERLOGINURL, $permissions);	
+	}
+
 	public function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds')
 	{
 		/* Generate random password with atleasr one uppercase, atleast one lowercase, atleast one digit, atleast one special character  and return combined password*/
@@ -51,6 +65,10 @@ class Common {
 		}
 		$dash_str .= $password;
 		return $dash_str;
+	}
+	function reformatDate($date, $from_format = 'd/m/Y', $to_format = 'Y-m-d') {
+	    $date_aux = date_create_from_format($from_format, $date);
+	    return date_format($date_aux,$to_format);
 	}
 
 }

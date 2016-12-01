@@ -676,3 +676,31 @@ table .dataTables_empty{
 .step_menus{
 	width: 130px !important;
 }
+#plan_upgrade_creation_form table {
+    display: block !important;
+    overflow: auto !important;
+    width: 100% !important;
+}
+#plan_upgrade_creation_form table th {
+    width: 250px !important;
+}
+#plan_upgrade_creation_form table .parents_tr input {
+    width: 125px !important;
+}
+#plan_upgrade_creation_form table .parents_tr select {
+    width: 125px !important;
+}
+#plan_upgrade_or_renewal table {
+    display: block !important;
+    overflow: auto !important;
+    width: 100% !important;
+}
+#plan_upgrade_or_renewal table th {
+    width: 250px !important;
+}
+#plan_upgrade_or_renewal table .parents_tr input {
+    width: 125px !important;
+}
+#plan_upgrade_or_renewal table .parents_tr select {
+    width: 125px !important;
+}

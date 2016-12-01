@@ -530,6 +530,18 @@ font-size: 13px;
 	 }   
 }
 
-
-
+.success_server_msg{
+	color: #fff;
+	margin: 10px 0;
+	text-align: center;
+	background: #29aafe none repeat scroll 0 0;
+}
+.col-md-2-5{
+	min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    float: left;
+    width: 20%;
+}
 

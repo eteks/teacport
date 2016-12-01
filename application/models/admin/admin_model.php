@@ -726,6 +726,14 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Get vacancy values
+  public function get_vacancy_values()
+  {
+    $vacancy_get_where = '(vacancies_status=1)'; 
+    $model_data = $this->db->get_where("tr_organization_vacancies", $vacancy_get_where)->result_array(); 
+    return $model_data;
+  }
+
 
   
 }
