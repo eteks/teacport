@@ -477,6 +477,24 @@ $(document).ready(function(){
         $(this).addClass("on");
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
+
+    // Marital status
+    $(document).on("click",".radio_status",function(){
+        $(this).siblings('.hidden_status').val($(this).val());
+    });
+
+    // Known languages
+    $(document).on("click",".known_languages",function(){
+        var value = [];
+        $('.known_languages').each(function() {
+            if($(this).is(':checked')) {
+              value.push($(this).val());
+            }
+        });
+        $(this).siblings('.hidden_known_lang').val(value);
+    });
+
+    
     
  // error popup alert box  
     function error_popup(message){

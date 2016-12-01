@@ -65,11 +65,7 @@ if(!empty($this->session->userdata("login_status"))):
                 </div> 
                 <form action="job_provider/teacport_job_provider_profile">
                   <p class="admin_status"> </p>
-                  <div class="table_content_section">
-                    <?php } ?>
-                    <?php
-                    if(!empty($provider_profile))  :
-                    ?>              
+                  <div class="">            
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
@@ -84,7 +80,11 @@ if(!empty($this->session->userdata("login_status"))):
                           <th class="data_action"> Full Details </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="table_content_section">
+                        <?php } ?>
+                        <?php
+                        if(!empty($provider_profile))  :
+                        ?>  
                         <?php
                         foreach ($provider_profile as $pro_val) :
                         ?>                               
@@ -138,12 +138,12 @@ if(!empty($this->session->userdata("login_status"))):
                         <?php
                         endforeach;
                         ?>
+                        <?php 
+                        endif;
+                        ?>
+                        <?php if(!$this->input->is_ajax_request()) { ?> 
                       </tbody>
                     </table>
-                    <?php 
-                    endif;
-                    ?>
-                    <?php if(!$this->input->is_ajax_request()) { ?> 
                   </div>
                 </form>
               </div>

@@ -50,8 +50,8 @@ if(!empty($this->session->userdata("login_status"))):
            <div class="widget-body">
                 <div class="portlet-body">
                   <div class="clearfix add_section">
-                </div>
-                <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
+                  </div>
+                  <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
                   <?php } ?> 
                   <?php
                   if(!empty($status)) :
@@ -91,27 +91,27 @@ if(!empty($this->session->userdata("login_status"))):
                         <td class="act_sms center_align">
                           <?php 
                           if ($act_val['is_sms_sent'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
+                            echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>";
                           else
-                            echo "<span class='icon-remove'> </span>";
-                          ?>                               
+                            echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
+                          ?>
                           <input type="hidden" value="<?php echo $act_val['is_sms_sent']; ?>" />
                         </td>
                         <td class="act_email center_align">
                           <?php 
                           if ($act_val['is_email_sent'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
+                            echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>" ;
                           else
-                            echo "<span class='icon-remove'> </span>";
+                            echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
                           ?>                               
                           <input type="hidden" value="<?php echo $act_val['is_email_sent']; ?>" />
                         </td>
                         <td class="act_resume center_align">
                           <?php 
                           if ($act_val['is_resume_downloaded'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
+                            echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>";
                           else
-                            echo "<span class='icon-remove'> </span>";
+                            echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
                           ?>                               
                           <input type="hidden" value="<?php echo $act_val['is_resume_downloaded']; ?>" />
                         </td>  
@@ -134,7 +134,7 @@ if(!empty($this->session->userdata("login_status"))):
                     </tbody>
                   </table>
                   <?php if(!$this->input->is_ajax_request()) { ?>
-                </form>
+                </form> 
               </div>
             </div>
           </div>
