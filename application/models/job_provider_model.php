@@ -37,7 +37,8 @@ class Job_provider_model extends CI_Model {
 			$user_details['registrant_name'] = $user_data['registrant_name'];
 			$user_details['user_type'] = 'provider';
 			$user_details['valid_status'] = 'valid';
-			$user_detalls['login_type'] = 'teacherrecruit';
+			$user_details['institution_type'] = $user_data['organization_institution_type_id'];
+			$user_details['login_type'] = 'teacherrecruit';
 			return $user_details; 
 		}
 		else {

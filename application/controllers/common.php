@@ -52,4 +52,5 @@ class Common {
 		$dash_str .= $password;
 		return $dash_str;
 	}
+
 }

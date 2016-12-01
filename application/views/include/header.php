@@ -33,6 +33,7 @@
     
     <!-- FOR POST-JOB PAGES ONLY -->
     <link href="css/select2.min.css" rel="stylesheet" />
+    
     <link rel="stylesheet" href="css/jquery.tagsinput.min.css">
     
     <!--Custom CSS-->
@@ -76,7 +77,7 @@
     <div class="page category-page">
         <div id="spinner">
             <div class="spinner-img">
-                <img alt="Opportunities Preloader" src="<?php echo base_url(); ?>assets/images/loader.gif" />
+                <img alt="Teacher recruit Preloader" src="<?php echo base_url(); ?>assets/images/loader.gif" />
                 <h2>Please Wait.....</h2>
             </div>
         </div>

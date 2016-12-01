@@ -465,7 +465,7 @@ var App = function () {
             last.removeClass("open");
             jQuery('.arrow', last).removeClass("open");
             jQuery('.sub', last).slideUp(200);
-            var sub = jQuery(this).next();
+            var sub = jQuery(this).next('div').find('ul');
             if (sub.is(":visible")) {
                 jQuery('.arrow', jQuery(this)).removeClass("open");
                 jQuery(this).parent().removeClass("open");
@@ -474,7 +474,7 @@ var App = function () {
                 jQuery('.arrow', jQuery(this)).addClass("open");
                 jQuery(this).parent().addClass("open");
                 sub.slideDown(200);
-            }
+            }                       
         });
     }
 
