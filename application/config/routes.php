@@ -46,6 +46,8 @@ $route['login/seeker'] = 'job_seeker';
 $route['login/provider'] = 'job_provider';
 $route['login/facebook'] = 'social/facebook';
 $route['login/facebookverify'] = 'social/facebookverify';
+$route['login/seeker/facebook'] = 'social/seekerfacebook';
+$route['login/seeker/facebookverify'] = 'social/seekerfacebookverify';
 $route['login/twitter'] = 'social/twitter';
 $route['login/linkedin'] = 'social/linkedin';
 $route['login/google'] = 'social/google';
@@ -61,6 +63,8 @@ $route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
 $route['provider/inbox'] = 'job_provider/inbox';
 $route['provider/inbox/message'] = 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
+$route['provider/candidate'] = 'job_provider/browse_candidate';
+$route['provider/postjob'] = 'job_provider/postjob';
 $route['provider/logout'] = 'job_provider/provider_logout';
 
 //JOB SEEKER
@@ -125,6 +129,7 @@ $route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 
 $route['admin/edit_profile'] = 'admin/admin_users/edit_profile';
 $route['admin/change_password'] = 'admin/admin_users/change_password';
+$route['admin/logout'] = 'admin/admin_login/teac_admin_logout';
 
 $route['admin/payment_gateway'] = 'admin/setting/payment_gateway';
 $route['admin/sms_gateway'] = 'admin/setting/sms_gateway';
@@ -133,6 +138,7 @@ $route['admin/template_logo'] = 'admin/setting/template_logo';
 
 $route['admin/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['admin/feedback_form'] = 'admin/other_module/feedback_form';
+
 
 
 

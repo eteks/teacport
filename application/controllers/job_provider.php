@@ -219,10 +219,6 @@ class Job_provider extends CI_Controller {
 			// /* check forms data are valid are not */
 			if ($this->form_validation->run())
 		    {
-		    	echo "<pre>";	
-		    	print_r($_POST);
-				print_r($_FILES);
-				echo "</pre>";
 		    	$provider_logo_file_name = '';
 				$profile_completeness = 0;
 		    	if (!empty($_FILES['provider_logo']['name']))
@@ -351,23 +347,54 @@ class Job_provider extends CI_Controller {
 		$session_data = $this->session->all_userdata();
 		$inboxdata['organization'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$inboxdata['message'] = $this->job_provider_model->job_provider_inbox($session_data['login_session']['pro_userid']);
-		//echo $this->db->last_query();
 		$this->load->view('company-dashboard-inbox',$inboxdata);
-		// echo "<pre>";
-		// print_r($inboxdata['message']);
-		// echo "</pre>";
 	}
 	public function inbox_message(){
-		//echo $this->input->post('orgid');
-		//echo "'test','test','test','test'";
-		//$ar = array('apple', 'orange', 'banana', 'strawberry');
 		echo json_encode($this->job_provider_model->job_provider_inbox_ajax($this->input->post('orgid'),$this->input->post('lastid')));
-		//echo json_encode($ar);
 	}
 	public function inbox_message_count(){
 		echo $this->job_provider_model->job_provider_unread_inbox_count($this->input->post('orgid'));
 	}
-	public function companydbd_browsejobs(){
+	public function postjob(){
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
+		$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
+		$data['qualificatoin']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+		$data['medium']			= $this->common_model->medium_of_instruction();
+		if(!$_POST){
+			$this->load->view('company-dashboard-post-jobs',$data);
+		}
+		else{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('provider_ug_or_pg', 'Required course type', 'trim|required|alpha|callback_pg_or_ug_check|exact_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|max_length[80]|xss_clean');
+			$this->form_validation->set_rules('provider_vacancy', 'No of vacancy', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			$this->form_validation->set_rules('provider_class_level', 'Class Level', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_qualification', 'Qualification', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_open_date', 'Open date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_close_date', 'Close date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_interview_start', 'Interview start date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_interview_end', 'Interview end date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_university', 'University', 'trim|callback_alpha_dash_space|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_medium_of_instruction', 'Medium of Instruction', 'trim|required|alpha|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|callback_alpha_dash_space|min_length[10]|xss_clean');
+			if ($this->form_validation->run())
+			{
+				echo 'corrrect';
+			}
+			else
+			{
+				$this->load->view('company-dashboard-post-jobs',$data);
+			}
+		}
+	}
+	public function browse_candidate(){
 		$this->load->view('company-dashboard-browse-jobs');
 	}
 	
@@ -442,6 +469,25 @@ class Job_provider extends CI_Controller {
 	    }else{
 	        return TRUE;
 	    }
+	}
+	public function pg_or_ug_check(){
+		$pg_or_ug_data = $this->input->post('provider_ug_or_pg');
+		if($pg_or_ug_data === 'ug' or $pg_or_ug_data === 'pg'){
+			return TRUE;
+		}
+		else {
+			$this->form_validation->set_message('pg_or_ug_check', 'Wrongly selected course type');
+			return FALSE;
+		}
+		
+	}
+	function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
 	}
 	public function forgot_password()
 	{
