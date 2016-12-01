@@ -111,6 +111,60 @@ class Job_Seekermodel extends CI_Model {
     return $model_data;
   }
 
+  // Seeker applied job
+  public function teacport_seeker_applied_job($status) {
+  	$model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+	    $applied_get_where   = "applied_job_vacancies_id =" . "'" . $this->input->post('vac_name') . "' AND applied_job_candidate_id =" . "'" . $this->input->post('cand_name') . "' AND applied_job_id NOT IN (". $this->input->post('rid').")";
+    	$applied_get = $this->db->get_where('tr_candidate_applied_job',$applied_get_where);
+      	if($applied_get -> num_rows() > 0 ) {
+        	$model_data['status'] = "Already exists";
+        	$model_data['error'] = 1;
+     	}
+     	else {
+     		$applied_update_data = array( 
+                              'applied_job_vacancies_id' => $this->input->post('vac_name'),
+                              'applied_job_candidate_id' => $this->input->post('cand_name'),
+                              'applied_job_status' => $this->input->post('job_status')
+                            );	
+      		$applied_update_where = '( applied_job_id="'.$this->input->post('rid').'")'; 
+      		$this->db->set($applied_update_data); 
+      		$this->db->where($applied_update_where);
+      		$this->db->update("tr_candidate_applied_job", $applied_update_data); 
+      		$model_data['status'] = "Updated Successfully";
+      		$model_data['error'] = 2;
+     	}         
+    }
+
+	// Delete data
+    else if($status =='delete') {
+      $applied_delete_where = '(applied_job_id="'.$this->input->post('rid').'")';
+      $this->db->delete("tr_candidate_applied_job", $applied_delete_where); 
+      $model_data['status'] = "Deleted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // View
+    $this->db->select('*');
+    $this->db->from('tr_candidate_applied_job cja');
+    $this->db->join('tr_organization_vacancies ov','cja.applied_job_vacancies_id=ov.vacancies_id','inner');
+    $this->db->join('tr_candidate_profile cp','cja.applied_job_candidate_id=cp.candidate_id','inner');
+    $model_data['job_applied'] = $this->db->get()->result_array();
+    return $model_data;
+  }
+
+
+
+
+
+
+
+
+  
+
 }
 /* End of file Job_Seekermodel.php */
 /* Location: ./application/controllers/Job_Seekermodel.php */

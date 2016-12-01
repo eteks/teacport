@@ -86,7 +86,7 @@ createInput = function(i,str){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
     else if(inputType[i] == "label"){
-        input = '<label name='+columns[i]+'>'+str+'</label>';
+        input = '<label class='+columns[i]+'>'+str+'</label>';
     }
     else if(inputType[i] == "select"){
         input = '<select name='+columns[i]+'>';
@@ -280,7 +280,7 @@ $(document).ready(function(){
             var html;
             for(i=0;i<columns.length;i++){
                 // fetch value inside the TD and place as VALUE in input field
-                if(inputType[i]=='text' || inputType[i]=='textarea') {
+                if(inputType[i]=='text' || inputType[i]=='textarea' || inputType[i]=='label') {
                     var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+"").html();
                 }
                 else {
