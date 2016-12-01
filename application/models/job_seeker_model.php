@@ -54,7 +54,7 @@ class Job_seeker_model extends CI_Model {
 		/*check wheather data exist or not */
 		if ($count === 0) {
 			/* data not exist and insert to database and return verification message */
-            $this->db->insert('tr_organization_profile', $data);
+            $this->db->insert('tr_candidate_profile', $data);
 			return 'inserted';
         }
 		else{

@@ -122,21 +122,27 @@ class Admin_login extends CI_Controller {
 				// $this->email->message("Your registered password is ".$user_values['admin_user_password']);
 				// $this->email->send();
 				// $data['status'] = "Mail sent successfully";
+				
+
 				$config = Array(
               		'protocol' => 'smtp',
               		'smtp_host' => 'ssl://smtp.gmail.com',
               		'smtp_port' => 465,
-              		'smtp_user' => 'sender@gmail.com',
-              		'smtp_pass' => 'password'
+              		'smtp_user' => 'sivaramakannan05@gmail.com',
+              		'smtp_pass' => ''
     			);
 
     			$this->load->library('email',$config);
     			$this->email->set_newline("\r\n");
 
-    			$this->email->from("sender@gmail.com");
-    			$this->email->to("receiver@gmail.com");
+    			$this->email->from("sivaramakannan05@gmail.com");
+    			$this->email->to("sivaramakannan05@gmail.com");
     			$this->email->subject("Email with Codeigniter");
     			$this->email->message("This is email has been sent with Codeigniter");
+
+
+
+
 
     			if($this->email->send())
     			{

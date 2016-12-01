@@ -694,8 +694,49 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+  // Get language values
+  public function get_language_list()
+  {
+    $language_get_where = '(language_status=1)'; 
+    $model_data = $this->db->get_where("tr_languages", $language_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get subject values
+  public function get_subject_values()
+  {
+    $subject_get_where = '(subject_status=1)'; 
+    $model_data = $this->db->get_where("tr_subject", $subject_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get extra curricular values
+  public function get_extra_curricular_values()
+  {
+    $extra_curricular_get_where = '(extra_curricular_status=1)'; 
+    $model_data = $this->db->get_where("tr_extra_curricular", $extra_curricular_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get posting values
+  public function get_posting_values()
+  {
+    $posting_get_where = '(posting_status=1)'; 
+    $model_data = $this->db->get_where("tr_applicable_posting", $posting_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get vacancy values
+  public function get_vacancy_values()
+  {
+    $vacancy_get_where = '(vacancies_status=1)'; 
+    $model_data = $this->db->get_where("tr_organization_vacancies", $vacancy_get_where)->result_array(); 
+    return $model_data;
+  }
+
+
   
 }
 
-/* End of file Ajax_Model.php */
-/* Location: ./application/controllers/Ajax_Model.php */
+/* End of file Admin_Model.php */
+/* Location: ./application/controllers/Admin_Model.php */
