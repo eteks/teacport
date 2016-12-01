@@ -96,6 +96,7 @@ class Job_provider_model extends CI_Model {
 		else{
 			return 'has_data';
 		}	
+		
 	}
 	public function get_org_data_by_id($id)
 	{
@@ -167,6 +168,7 @@ class Job_provider_model extends CI_Model {
 		$inboxdata = $this->db->get();
 		return $inboxdata->result_array(); 
 	 }
+
 	 public function job_provider_post_vacancy($vacancydata)
 	 {
 	 	if($this->db->insert('tr_organization_vacancies', $vacancydata)){
@@ -176,11 +178,13 @@ class Job_provider_model extends CI_Model {
 			return FALSE;
 		}
 	 }
+	 
 	 public function job_provider_posted_job_counts($ins_id)
 	 {
 	 	return $this->db->where('vacancies_organization_id',$ins_id)->from("tr_organization_vacancies")->count_all_results();
 	 }
-	  public function job_provider_posted_jobs($limit,$start,$ins_id)
+	 
+	 public function job_provider_posted_jobs($limit,$start,$ins_id)
 	 {
 	 	$this->db->select('*');    
 		$this->db->from('tr_organization_vacancies');
