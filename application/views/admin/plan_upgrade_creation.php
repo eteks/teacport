@@ -42,15 +42,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                        <li>
                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
-                        <li>
+                       <li>
                           <a href="#">Plan Settings</a><span class="divider">&nbsp;</span>
-                        </li>
+                       </li>
                        <li>
                           <a href="<?php echo base_url(); ?>admin/plan_upgrade_creation">
                             Plan Upgrade Creation
                           </a>
                           <span class="divider-last">&nbsp;</span>
-                        </li>
+                       </li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
