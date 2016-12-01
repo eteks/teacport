@@ -1,4 +1,4 @@
-<?php include "header.php"; ?>
+<?php include "templates/header.php"; ?>
 	<!-- BEGIN CONTAINER -->
 	<div id="container" class="row-fluid">
 		

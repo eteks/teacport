@@ -1,5 +1,4 @@
 var App = function () {
-
     var isMainPage = false;
     var isMapPage = false;
     var isIE8 = false;
@@ -475,7 +474,7 @@ var App = function () {
                 jQuery('.arrow', jQuery(this)).addClass("open");
                 jQuery(this).parent().addClass("open");
                 sub.slideDown(200);
-            }
+            }                       
         });
     }
 
@@ -1272,8 +1271,8 @@ var App = function () {
 
         jQuery('#forget-btn').click(function () {
 
-            jQuery('#loginform').slideDown(200);
-            jQuery('#forgotform').slideUp(200);
+            // jQuery('#loginform').slideDown(200);
+            // jQuery('#forgotform').slideUp(200);
         });
     }
 
@@ -1842,7 +1841,6 @@ var App = function () {
     }
 
     var handleDateTimePickers = function () {
-
         if (!jQuery().daterangepicker) {
             return;
         }
@@ -1997,7 +1995,7 @@ var App = function () {
                 disableFadeOut: true
             });
         });
-    }
+    };
 
     var handleFormWizards = function () {
         if (!jQuery().bootstrapWizard) {
@@ -2008,7 +2006,7 @@ var App = function () {
             'nextSelector': '.button-next',
             'previousSelector': '.button-previous',
             onTabClick: function (tab, navigation, index) {
-                alert('on tab click disabled');
+                error_popup('on tab click disabled');
                 return false;
             },
             onNext: function (tab, navigation, index) {
@@ -2075,12 +2073,11 @@ var App = function () {
                 });
             }
         });
-
         $('#form_wizard_1').find('.button-previous').hide();
         $('#form_wizard_1 .button-submit').click(function () {
             alert('Finished!');
         }).hide();
-    }
+    };
 
     var handleTagsInput = function () {
         if (!jQuery().tagsInput) {
@@ -2165,7 +2162,8 @@ var App = function () {
 
         //main function to initiate template pages
         init: function () {
-
+        	
+			$('.date-picker').datepicker();
             if (jQuery.browser.msie && jQuery.browser.version.substr(0, 1) == 8) {
                 isIE8 = true; // checkes for IE8 browser version
                 $('.visible-ie8').show();
@@ -2175,8 +2173,8 @@ var App = function () {
             handleChoosenSelect(); // handles bootstrap chosen dropdowns
 
             if (isMainPage) {
-                handleDashboardCharts(); // handles plot charts for main page
-                handleJQVMAP(); // handles vector maps for home page
+                // handleDashboardCharts(); // handles plot charts for main page
+                // handleJQVMAP(); // handles vector maps for home page
                 handleDashboardCalendar(); // handles full calendar for main page
                 handleChat() // handles dashboard chat
             } else {
@@ -2202,7 +2200,7 @@ var App = function () {
             handlePopover(); // handles bootstrap popovers
             handleToggleButtons(); // handles form toogle buttons
             handleWysihtml5(); //handles WYSIWYG Editor 
-            handleDateTimePickers(); //handles form timepickers
+            // handleDateTimePickers(); //handles form timepickers
             handleColorPicker(); // handles form color pickers
             handleFancyBox(); // handles fancy box image previews
             handleStyler(); // handles style customer tool
@@ -2210,13 +2208,13 @@ var App = function () {
             handleFixInputPlaceholderForIE(); // fixes/enables html5 placeholder attribute for IE9, IE8
             handleGoTop(); //handles scroll to top functionality in the footer
             handleAccordions();
-            handleFormWizards();
+            // handleFormWizards();
             handleSidebarToggler();
 
             if (isMainPage) { // this is for demo purpose. you may remove handleIntro function for your project
 //                handleIntro();
             }
-        },
+        },        
 
         // login page setup
         initLogin: function () {
@@ -2309,13 +2307,13 @@ try{
     }});
 }
     catch (e){
-    errorMessage(e);
+    // errorMessage(e);
 }
 
 
 //knob
 
-$(".knob").knob();
+// $(".knob").knob();
 
 
 
