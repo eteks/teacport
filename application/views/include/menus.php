@@ -16,7 +16,7 @@
   	                <li class="profile-pic">
   	                	<?php 
   	                		$user_type = $this->session->userdata("login_session"); 
-
+                        //print_r($user_type);
   	                		if($user_type['user_type'] =='provider' ){
         	                	?>
               						  <a href="javascript:void(0)"> 
@@ -29,12 +29,11 @@
                                 <li><a href="<?php echo base_url(); ?>provider/dashboard/editprofile"><i class="fa fa-gear"></i> Edit Profile</a></li>
                                 <li><a href="<?php echo base_url(); ?>provider/logout"></i> Logout</a></li>
                             </ul>
-                      <?php }else if($user_type['user_type'] =='seeker' ){
-                        //print_r($user_type);
+                      <?php }else if($user_type['user_type'] =='seeker' ){          
                        ?>
                           <a href="javascript:void(0)"> 
-                          <img src="<?php echo $user_type['candidate_image_path'] ;?>" alt="user-img" class="img-circle" width="36">
-                          <span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'] ;?> </span>
+                          <img src="<?php echo !empty($user_type['candidate_image_path'])?$user_type['candidate_image_path']:base_url().'assets/images/admin.jpg';?>" alt="user-img" class="img-circle" width="36">
+                          <span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'];?> </span>
                           <i class="fa fa-angle-down fa-indicator"></i> 
                         </a>
                         <ul class="drop-down-multilevel left-side">
@@ -43,7 +42,9 @@
                             <li><a href="<?php echo base_url(); ?>seeker/logout"></i> Logout</a></li>
                         </ul>
                       <?php }else{ ?>                          
-                        	<a href="javascript:void(0)"> <img src="<?php echo !empty($user_data['registrant_logo'])?$user_data['registrant_logo']:base_url().'assets/images/admin.jpg'; ?>" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm"><?php echo $user_data['registrant_name']; ?> </span><i class="fa fa-angle-down fa-indicator"></i>
+                        	<a href="javascript:void(0)"> 
+                              <img src="<?php echo !empty($user_data['registrant_logo'])?$user_data['registrant_logo']:base_url().'assets/images/admin.jpg'; ?>" 
+                              alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm"><?php echo $user_data['registrant_name']; ?> </span><i class="fa fa-angle-down fa-indicator"></i>
                           </a>
                         <?php } ?>
                     </li>

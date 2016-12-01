@@ -15,7 +15,7 @@ class Job_seeker extends CI_Controller {
 		$common = new Common();
 		if(!$_POST){
 			/* Job provider login page with facebook login url */
-			$data['fbloginurl'] = $common->facebookloginurl();
+			$data['fbloginurl'] = $common->facebookloginurl_seeker();
 			$this->load->view('job-seekers-login',$data);
 		}
 		else {
@@ -31,7 +31,7 @@ class Job_seeker extends CI_Controller {
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE){
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
-   				$fb['fbloginurl'] = $common->facebookloginurl();
+   				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$this->load->view('job-seekers-login',$fb);
 			}
 			else{
@@ -47,7 +47,7 @@ class Job_seeker extends CI_Controller {
 				}
 				else{
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
-   					$fb['fbloginurl'] = $common->facebookloginurl();
+   					$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$this->load->view('job-seekers-login',$fb);
 				}
 			}
@@ -64,7 +64,7 @@ class Job_seeker extends CI_Controller {
 		$this->load->library('email', $emailsetup);
 		/* Registration page loading with out posted data */
 		if(!$_POST){
-			$data['fbloginurl'] = $common->facebookloginurl();
+			$data['fbloginurl'] = $common->facebookloginurl_seeker();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
@@ -84,7 +84,7 @@ class Job_seeker extends CI_Controller {
 	       	{
 	       		/* Registration form invalid stage */
 	       		$fb['reg_server_msg'] = 'Please provide valid information!';	
-	       		$fb['fbloginurl'] = $common->facebookloginurl();
+	       		$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
@@ -119,7 +119,7 @@ class Job_seeker extends CI_Controller {
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
-	       				$fb['fbloginurl'] = $common->facebookloginurl();
+	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$this->load->view('job-seekers-login',$fb);
@@ -127,7 +127,7 @@ class Job_seeker extends CI_Controller {
 					else{
 						/* mail sent error stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';	
-	       				$fb['fbloginurl'] = $common->facebookloginurl();
+	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
@@ -138,7 +138,7 @@ class Job_seeker extends CI_Controller {
 				else{
 					/* data exist stage. send  facebook login link and server message to login page */
 					$fb['reg_server_msg'] = 'Some thing wrong in data insertion process. So please register again!';	
-       				$fb['fbloginurl'] = $common->facebookloginurl();
+       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
