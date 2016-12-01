@@ -41,6 +41,9 @@
 }
 
 /* Featured Jobs Slider */
+.slide-featured-jobs .content-area{
+	height: 250px;
+}
 .slide-featured-jobs {
 	padding: 10px;
 	cursor: pointer;
