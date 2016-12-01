@@ -25,6 +25,17 @@
 	// });
 
 
+//Home Page search Bar 
+	  $(".search-close").on("click", function() {
+	  	$(".set-srch-strip").hide();
+	  	$("#search-icon").show();
+	  });    
+	  
+	  $('#search-icon a').on("click", function() {
+	   	$('.set-srch-strip').show();
+	  	$("#search-icon").hide();
+	  }); 
+
 
 //Normal & Advanced Search
   $('#btn_advanced_act').click(function() {
@@ -42,27 +53,42 @@
 //Provider Signin & SignUp
   $(".loginbox-signup a").on("click", function() {
   	$("#provider-signin").hide();
+  	$("#provider-forgotpwd").hide();
   	$("#provider-signup").show();
   });    
   
   $(".loginbox-signin a").on("click", function() {
   	$("#provider-signup").hide();
+  	$("#provider-forgotpwd").hide();
    	$("#provider-signin").show();
   }); 
+  
+  $(".loginbox-forgot a").on("click", function(){
+  	$("#provider-forgotpwd").show();
+  	$("#provider-signin").hide();
+  	$("#provider-signup").hide();
+  });
+  
   
 //Seeker Signin & SignUp
   $(".loginbox-signup a").on("click", function() {
   	$("#seeker-signin").hide();
+  	$("#seeker-forgotpwd").hide();
   	$("#seeker-signup").show();
   });    
   
   $(".loginbox-signin a").on("click", function() {
   	$("#seeker-signup").hide();
+  	$("#seeker-forgotpwd").hide();
    	$("#seeker-signin").show();
-  });  
+  }); 
+  
+  $(".loginbox-forgot a").on("click", function(){
+  	$("#seeker-forgotpwd").show();
+  	$("#seeker-signup").hide();
+  	$("#seeker-signin").hide();
+  }); 
     
-
-
 
 $(document).ready(function() {
 	
@@ -92,17 +118,7 @@ $(document).ready(function() {
 	     	
 	  }).change();
 	
-	//Seacrch bar 
-	
-	// $("#home_search_bar").mouseover(function(){
-		// (".search-form-contaner").show();
-	// });  
-	// $("#home_search_bar").mouseleave(function(){
-		// (".search-form-contaner").hide();
-	// }); 
-	
-	
-	
+		
 });  //end document 
 
 

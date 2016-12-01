@@ -69,38 +69,34 @@
 	        </ul>
 	        <ul class="menu-links pull-right">
 	            <li class="profile-pic">
-		             <a href="javascript:void(0)"> <img src="images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>
-		             <ul class="drop-down-multilevel left-side">
-		                 <li><a href="user-dashboard.html"><i class="fa fa-user"></i> My Profile</a></li>
-		                 <li><a href="index.html"><i class="fa fa-power-off"></i> Logout</a></li>
-		             </ul>
-		        </li>
-	           </ul>
+			         <a href="javascript:void(0)"> <img src="images/admin.jpg" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm">Arslan </span><i class="fa fa-angle-down fa-indicator"></i> </a>
+			         <ul class="drop-down-multilevel left-side">
+			              <li><a href="user-dashboard.html"><i class="fa fa-user"></i> My Profile</a></li>
+			              <li><a href="index.html"><i class="fa fa-power-off"></i> Logout</a></li>
+			         </ul>
+		         </li>
+	        </ul>
 	        </section>
         </nav>
-       <div class="clearfix"></div>
-     <!--End of Header-->  
-       
-       
-        <!--breadcrumb-->
+        <div class="clearfix"></div>
+
         <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                        <h3>My Feedback</h3>
+                        <h3>Inbox</h3>
                     </div>
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
                                 <li><a href="index.html">Home</a> </li>
-                                <li class="active">Feedback</li>
+                                <li class="active">Inbox</li>
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
         <section class="dashboard-body">
             <div class="container">
                 <div class="row">
@@ -130,7 +126,7 @@
                                         <li>
                                             <a href="user-dashboard.html"> <i class="fa fa-user"></i> Profile</a>
                                         </li>
-                                         <li>
+                                        <li class="active">
                                             <a href="user-dashboard-inbox.html"> <i class="fa fa-user"></i> Inbox</a>
                                         </li>
                                         <li>
@@ -142,7 +138,7 @@
                                         <li>
                                             <a href="user-job-applied.html"> <i class="fa  fa-list-ul"></i> Jobs Applied</a>
                                         </li>
-                                        <li class="active">
+                                        <li>
                                             <a href="user-followed-companies.html"> <i class="fa  fa-bookmark-o"></i> Feedback </a>
                                         </li>
                                         <li>
@@ -152,45 +148,72 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8 col-sm-12 col-xs-12">
-                            <div class="heading-inner first-heading">
-                                <p class="title">Change Password</p>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                           <div class="heading-inner first-heading">
+                                <p class="title">Your Inbox</p>
                             </div>
-                            <div class="profile-edit">
-                                <form class="form-horizontal">
-	                                <div class="form-group">
-										<label class="col-sm-12">You can change your password below</label>
-									</div>	
-									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
-											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
-											</div>
-										</div>
-									</div>	
-									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="col-sm-6">New Password<span class="alert">*</span></label>
-											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
-											</div>
-										</div>
-									</div>	
-									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
-											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
-											</div>
-										</div>
-									</div>	
-									<div class="col-sm-12">
-										<a class="btn btn-default pull-right" type="submit" href="#">APPLY</a>
-									</div>
-									<div class="clearfix"> </div>		
-                                </form>
+                            <div class="resume-list">
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead class="thead-inverse">
+                                            <tr>
+                                                <th><input type="checkbox" /> All</th>
+                                                <th>From</th>
+                                                <th>Message</th>
+                                                <th>Date</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                            	 <td><input type="checkbox" /></td>
+                                                <td><span>XXX</span></td>
+                                                <td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false">Hi, your resume has been received </a></td>
+                                                <td> 15.11.2016 </td>
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" /></td>
+                                                <td><span>YYY</span></td>
+                                                <td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false"> Hi, your resume  </a></td>
+                                                <td>10.11.2016</td>
+                                                
+                                            </tr>
+                                            <tr>
+                                            	<td><input type="checkbox" /></td>
+                                                <td><span>ZZZ</span></td>
+                                                <td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false"> Hi, your resume  </a></td>
+                                                <td> 05.11.2016 </td>
+                                                
+                                            </tr>
+                                            <tr>
+                                                <td><input type="checkbox" /></td>
+                                                <td><span>AAA</span></td>
+                                                <td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false"> Hi, your resume  </a></td>
+                                                <td> 01.11.2016 </td>
+                                                
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
+	                      	<!--Popup Message for Inbox message-->
+						  	<div class="modal fade" id="user_inbox_msg_act" role="dialog">
+							    <div class="modal-dialog">
+							      <!-- Modal content-->
+							      <div class="modal-content">
+							      	<div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Message</h4>
+							        </div>
+							         <div class="modal-body">
+							          	<p class="inbox_msg">Hi, Kindly find my resume attached. Hi, Kindly find my resume attached. Hi, Kindly find my resume attached.</p>	
+							         </div>
+							      </div>
+							    </div>	
+						    </div>
+						   <!--End of Popup Message for Inbox message-->
                         </div>
                     </div>
                 </div>
@@ -304,8 +327,6 @@
         </section>
        </div>
        <!--End of Footer-->
-
-       
 
         <a href="user-followed-companies.html#" class="scrollup"><i class="fa fa-chevron-up"></i></a>
 

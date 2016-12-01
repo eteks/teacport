@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="ScriptsBundle">
-    <title>Opportunities A Mega Job Board Template</title>
+    <title>Teachers Recruit</title>
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 
     <!-- BOOTSTRAPE STYLESHEET CSS FILES -->
@@ -88,34 +88,6 @@
         </nav>
         <div class="clearfix"></div>
 
-        <div class="search">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                        <div class="input-group">
-                            <div class="input-group-btn search-panel">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">Filter By</span> <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="company-dashboard-followers.html#">By Company</a></li>
-                                    <li><a href="company-dashboard-followers.html#">By Function</a></li>
-                                    <li><a href="company-dashboard-followers.html#">By City </a></li>
-                                    <li><a href="company-dashboard-followers.html#">By Salary </a></li>
-                                    <li><a href="company-dashboard-followers.html#">By Industry</a></li>
-                                </ul>
-                            </div>
-                            <input type="hidden" name="search_param" value="all" id="search_param">
-                            <input type="text" class="form-control search-field" name="x" placeholder="Search term...">
-                            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
@@ -186,95 +158,85 @@
                                 <p class="title">Posted Jobs</p>
                             </div>
                             <!---List of posted jobs-->
-                            <div class="all-jobs-list-box2">
+                            <div id="dashboard-jobs-grid" class="all-jobs-list-box2">
                                 <div class="job-box job-box-2">
 	                                <div class="col-md-2 col-sm-2 col-xs-12 hidden-xs hidden-sm">
 	                                    <div class="comp-logo">
-	                                        <a href="company-dashboard-active-jobs.html"><img src="images/company/5.png" class="img-responsive" alt="scriptsbundle"> </a>
+	                                        <img src="images/company/5.png" class="img-responsive" alt="scriptsbundle">
 	                                    </div>
-	
 	                                </div>
 	                                <div class="col-md-10 col-sm-10 col-xs-12">
 	                                    <div class="job-title-box">
-	                                        <a href="company-dashboard-active-jobs.html#">
-	                                            <div class="job-title"> Technical Documentation Specialist</div>
-	                                        </a>
-	                                        <a href="company-dashboard-active-jobs.html#"><span class="comp-name">conversi Pvt. Ltd. United States </span></a>
-	                                        <a href="company-dashboard-active-jobs.html" class="job-type jt-full-time-color">
-	                                            <i class="fa fa-clock-o"></i> Full time
-	                                        </a>
-	                                    </div>
-	                                    <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide.......<a href="company-dashboard-job-detail.html">Read More</a> </p>
+	                                        <div class="job-title"> Name of the Candidate</div>
+	                                        <span class="comp-name">Designation </span>
+	                                        <span class="pull-right"><i class="fa fa-calendar"></i> Year of Experience </span>
+	                                     </div>
+	                                     <span class="comp-name">CTC per annum</span> <br>
+	                                     <span class="comp-name">Salary Expectation </span> <br>
+	                                     <span class="comp-name">Location</span> <br>
+	                                     <span class="comp-name">Gender </span>
+	                                    <p>Other Informations and Candidate Details.......<a href="company-dashboard-job-detail.html">Read More</a> </p>
 	                                </div>
-	                                <div class="job-salary">
+	                                <a href="javascript:void(0)" onclick='window.location = "company-dashboard-job-detail.html"'>
+	                                	<span class="dashboard-jobs-grid-link"> </span>
+	                                </a>
+	                                <!-- <div class="job-salary">
 	                                    <i class="fa fa-money"></i> $400 - $500
-	                                </div>
+	                                </div> -->
                                 </div>
                                 <div class="job-box job-box-2">
                                     <div class="col-md-2 col-sm-2 col-xs-12  hidden-xs hidden-sm">
                                         <div class="comp-logo">
-                                            <a href="company-dashboard-active-jobs.html"><img src="images/company/1.png" class="img-responsive" alt="scriptsbundle"> </a>
+                                           <img src="<?php echo base_url(); ?>assets/images/company/1.png" class="img-responsive" alt="scriptsbundle">
                                         </div>
                                     </div>
                                     <div class="col-md-10 col-sm-10 col-xs-12">
                                         <div class="job-title-box">
-                                            <a href="company-dashboard-active-jobs.html#">
-                                                <div class="job-title"> Assistant Engineer (IT/Networks)</div>
-                                            </a>
-                                            <a href="company-dashboard-active-jobs.html#"><span class="comp-name">conversi Pvt. Ltd. Malaysia</span></a>
-                                            <a href="company-dashboard-active-jobs.html" class="job-type jt-part-time-color">
-                                                <i class="fa fa-clock-o"></i> Part Time
-                                            </a>
+                                            <div class="job-title"> Assistant Engineer (IT/Networks)</div>
+                                            <span class="comp-name">conversi Pvt. Ltd. Malaysia</span>
+                                            <span><i class="fa fa-clock-o"></i> 2 Days Ago </span>
                                         </div>
                                         <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide.......<a href="company-dashboard-job-detail.html">Read More</a> </p>
                                     </div>
-                                    <div class="job-salary">
-                                        <i class="fa fa-money"></i> $200 - $300
-                                    </div>
+                                    <a href="javascript:void(0)" onclick='window.location = "company-dashboard-job-detail.html"'>
+	                                	<span class="dashboard-jobs-grid-link"> </span>
+	                                </a>
                                 </div>
                                 <div class="job-box job-box-2">
                                     <div class="col-md-2 col-sm-2 col-xs-12  hidden-xs hidden-sm">
                                         <div class="comp-logo">
-                                            <a href="company-dashboard-active-jobs.html"><img src="images/company/5.png" class="img-responsive" alt="scriptsbundle"> </a>
+                                            <img src="images/company/5.png" class="img-responsive" alt="scriptsbundle">
                                         </div>
                                     </div>
                                     <div class="col-md-10 col-sm-10 col-xs-12">
                                         <div class="job-title-box">
-                                            <a href="company-dashboard-active-jobs.html#">
-                                                <div class="job-title"> Technical Network Director (IT/Networks)</div>
-                                            </a>
-                                            <a href="company-dashboard-active-jobs.html#"><span class="comp-name">conversi Pvt. Ltd. United States</span></a>
-                                            <a href="company-dashboard-active-jobs.html" class="job-type jt-remote-color">
-                                                <i class="fa fa-clock-o"></i> Remote
-                                            </a>
+                                            <div class="job-title"> Technical Network Director (IT/Networks)</div>
+                                            <span class="comp-name">conversi Pvt. Ltd. United States</span>
+                                            <span><i class="fa fa-clock-o"></i> 3 days ago </span>
                                         </div>
                                         <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide.......<a href="company-dashboard-job-detail.html">Read More</a> </p>
                                     </div>
-                                    <div class="job-salary">
-                                        <i class="fa fa-money"></i> $200 - $250
-                                    </div>
+                                    <a href="javascript:void(0)" onclick='window.location = "company-dashboard-job-detail.html"'>
+	                                	<span class="dashboard-jobs-grid-link"> </span>
+	                                </a>
                                 </div>
                                 <div class="job-box job-box-2">
                                     <div class="col-md-2 col-sm-2 col-xs-12  hidden-xs hidden-sm">
                                         <div class="comp-logo">
-                                            <a href="company-dashboard-active-jobs.html"><img src="images/company/5.png" class="img-responsive" alt="scriptsbundle"> </a>
+                                            <img src="images/company/5.png" class="img-responsive" alt="scriptsbundle">
                                         </div>
                                     </div>
                                     <div class="col-md-10 col-sm-10 col-xs-12">
                                         <div class="job-title-box">
-                                            <a href="company-dashboard-active-jobs.html#">
-                                                <div class="job-title"> Technical Documentation Specialist</div>
-                                            </a>
-                                            <a href="company-dashboard-active-jobs.html#"><span class="comp-name">conversi Pvt. Ltd. United States</span></a>
-                                            <a href="company-dashboard-active-jobs.html" class="job-type jt-intern-color">
-                                                <i class="fa fa-clock-o"></i> Internship
-                                            </a>
+                                            <div class="job-title"> Technical Documentation Specialist</div>
+                                            <span class="comp-name">conversi Pvt. Ltd. United States</span>
+                                            <span><i class="fa fa-clock-o"></i> Internship </span>
                                         </div>
                                         <p>Prompta numquam mel ad, tempor definiebas id usu, cum cu feugiat bonorum. Eu pri labores maiorum patrioque, sea an tation utinam. Idque albucius prodesset ei est, sea te vide ......<a href="company-dashboard-job-detail.html">Read More</a> </p>
                                     </div>
-                                    <div class="job-salary">
-                                        <i class="fa fa-money"></i> $100 - $150
-                                    </div>
+                                    <a href="javascript:void(0)" onclick='window.location = "company-dashboard-job-detail.html"'>
+	                                	<span class="dashboard-jobs-grid-link"> </span>
+	                                </a>
                                 </div>
                             </div>
                             <!--Pagination-->

@@ -82,7 +82,7 @@
                                     <input placeholder="" class="form-control" type="password">
                                 </div>
                                 <div class="loginbox-forgot">
-                                    <a href="login-4.html">Forgot Password?</a>
+                                    <a class="txt_blue">Forgot Password?</a>
                                 </div>
                                 <div class="loginbox-submit">
                                     <a href="user-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Login"></a>
@@ -100,6 +100,20 @@
                                 </ul>
                                 <div class="loginbox-signup">New User ? <a class="txt_blue">Sign Up</a>
                                 </div>
+                            </div>
+                            <!--Forgot password-->
+                            <div id="seeker-forgotpwd" class="loginbox" style="display:none;">  
+                             	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> 
+                            	  Forgot Password 
+                            	  <a class="pull-right" href="index.html"><i class="fa fa-close"></i></a>
+                                </div><br>
+                                <div class="form-group">
+                                    <label>Email: <span class="required">*</span></label>
+                                    <input placeholder="" class="form-control" type="email">
+                                </div>  
+                                <div class="loginbox-submit">
+                                    <a href="-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Retrive Password"></a>
+                                </div>               
                             </div>
                             <!--Seeker Signup-->
                             <div id="seeker-signup" class="loginbox" style="display:none;">
@@ -123,8 +137,8 @@
                                     <label>Confirm Password: <span class="required">*</span></label>
                                     <input placeholder="" class="form-control" type="password">
                                 </div>
-                                <div class="loginbox-forgot">
-                                    <input type="checkbox" for="loginbox-forgot"> I accept <a class="txt_blue" href="register-4.html">Terms and conditions?</a>
+                                <div class="loginbox-terms">
+                                    <label class="checkbox_word"><input type="checkbox">I accept </label> <a class="txt_blue" href="register-4.html">Terms and conditions?</a>
                                 </div>
                                 <div class="loginbox-submit">
                                     <a href="user-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Register"></a>
