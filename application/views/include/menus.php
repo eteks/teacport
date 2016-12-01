@@ -29,10 +29,12 @@
                                 <li><a href="<?php echo base_url(); ?>provider/dashboard/editprofile"><i class="fa fa-gear"></i> Edit Profile</a></li>
                                 <li><a href="<?php echo base_url(); ?>provider/logout"></i> Logout</a></li>
                             </ul>
-                      <?php }else if($user_type['user_type'] =='seeker' ){ ?>
+                      <?php }else if($user_type['user_type'] =='seeker' ){
+                        //print_r($user_type);
+                       ?>
                           <a href="javascript:void(0)"> 
-                          <img src="<?php echo $user_type['can_email'] ;?>" alt="user-img" class="img-circle" width="36">
-                          <span class="hidden-xs hidden-sm"><?php echo $user_type['can_email'] ;?> </span>
+                          <img src="<?php echo $user_type['candidate_image_path'] ;?>" alt="user-img" class="img-circle" width="36">
+                          <span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'] ;?> </span>
                           <i class="fa fa-angle-down fa-indicator"></i> 
                         </a>
                         <ul class="drop-down-multilevel left-side">
