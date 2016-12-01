@@ -4431,6 +4431,21 @@ div.dt-button-background {
     cursor: pointer;
     text-decoration: none;
 }
+.hidden_values {
+    display: none;
+}
+/* Seeker profile */
+
+.seeker_profile_education {
+    margin: 0 0 20px;
+}
+.seeker_profile_education th, .seeker_profile_education td{
+    padding: 10px 0;
+    text-align: left;
+    width: 10%;
+}
+
+
 
 /* Datatable Css to add checkbox with columns for columns visibility end */
 

@@ -1,13 +1,3 @@
-<?php
-// $is_super_admin = $this->config->item('is_super_admin');
-// // $access_rights = $this->config->item('access_rights');
-// if(!$is_super_admin){
-  // $access_permission=$this->config->item('current_page_rights');	
-  // $current_page_rights = $access_permission['access_permission'];
-  // $access_rights = explode(',',$current_page_rights);
-// }
-if(!$this->session->userdata("admin_login_status")):
-?>
 <!DOCTYPE html>
 <!--
 Template Name: Admin Lab Dashboard build with Bootstrap v2.3.1
@@ -138,8 +128,3 @@ Website: http://thevectorlab.net/
 </body>
 <!-- END BODY -->
 </html>
-<?php
-else :
-redirect(base_url().'admin/dashboard');
-endif;
-?>

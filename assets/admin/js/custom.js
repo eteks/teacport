@@ -86,7 +86,7 @@ createInput = function(i,str){
         input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
     else if(inputType[i] == "label"){
-        input = '<label name='+columns[i]+'>'+str+'</label>';
+        input = '<label class='+columns[i]+'>'+str+'</label>';
     }
     else if(inputType[i] == "select"){
         input = '<select name='+columns[i]+'>';
@@ -280,10 +280,11 @@ $(document).ready(function(){
             var html;
             for(i=0;i<columns.length;i++){
                 // fetch value inside the TD and place as VALUE in input field
-                if(inputType[i]=='text') {
+                if(inputType[i]=='text' || inputType[i]=='textarea' || inputType[i]=='label') {
                     var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+"").html();
                 }
                 else {
+                   //It will fetch the value for select field from hidden input field passed in html 
                    var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").val(); 
                 }
                 input = createInput(i,$.trim(val));
@@ -477,6 +478,24 @@ $(document).ready(function(){
         $(this).addClass("on");
         $(this).parent().siblings('.verification').val($(this).data('value'));
     });
+
+    // Marital status
+    $(document).on("click",".radio_status",function(){
+        $(this).siblings('.hidden_status').val($(this).val());
+    });
+
+    // Known languages
+    $(document).on("click",".known_languages",function(){
+        var value = [];
+        $('.known_languages').each(function() {
+            if($(this).is(':checked')) {
+              value.push($(this).val());
+            }
+        });
+        $(this).siblings('.hidden_known_lang').val(value);
+    });
+
+    
     
  // error popup alert box  
     function error_popup(message){

@@ -73,12 +73,17 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'user_group_name',
 		                              'label'   => 'Group Name',
-		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_state.state_id.state_name.'.$id.']'
+		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_admin_user_groups.user_group_id.user_group_name.'.$id.']'
 
 		                            ),
 		                            array(
 		                                 'field'   => 'user_group_description',
 		                                 'label'   => 'Group Description',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'user_super_admin',
+		                                 'label'   => 'Admin Type',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
@@ -99,6 +104,11 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                                 'field'   => 'user_group_description',
 		                                 'label'   => 'Group Description',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'user_super_admin',
+		                                 'label'   => 'Admin Type',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                            array(
@@ -271,6 +281,7 @@ class Admin_users extends CI_Controller {
 		}
 		else {
 			$data['user_details'] = $data_values['user_details'];
+			$data['user_groups'] = $this->admin_users_model->get_user_groups(); 
 			$this->load->view('admin/user_accounts',$data);
 		}	
 			// $this->load->view('admin/user_accounts');

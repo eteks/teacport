@@ -63,6 +63,8 @@ $route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
 $route['provider/inbox'] = 'job_provider/inbox';
 $route['provider/inbox/message'] = 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
+$route['provider/candidate'] = 'job_provider/browse_candidate';
+$route['provider/postjob'] = 'job_provider/postjob';
 $route['provider/logout'] = 'job_provider/provider_logout';
 
 //JOB SEEKER
@@ -124,7 +126,7 @@ $route['admin/user_groups'] = 'admin/admin_users/user_groups';
 $route['admin/user_accounts'] = 'admin/admin_users/user_accounts';
 $route['admin/privileges'] = 'admin/admin_users/privileges';
 
-$route['admin/job_seeker_profile'] = 'admin/job_seeker/job_seeker_profile';
+$route['admin/job_seeker_profile'] = 'admin/job_seeker/teacport_job_seeker_profile';
 $route['admin/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
 $route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 // $route['admin/admin_modules'] = 'admin/admin_users/admin_modules';

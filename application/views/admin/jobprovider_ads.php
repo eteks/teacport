@@ -115,9 +115,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <td class="center_align"> 
                             <?php 
                             if ($ads_val['is_admin_verified'] == 1) 
-                              echo "<span class='icon-ok'> </span>";
+                              echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>";
                             else
-                              echo "<span class='icon-remove'> </span>";
+                              echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
                             ?>   
                           </td>
                           <td class=""> 

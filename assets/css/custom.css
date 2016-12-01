@@ -248,11 +248,14 @@ select:invalid { color: gray; }
 color: red;
 font-size: 13px;
 }
-.provider-profile-edit input.form-control, select.form-control {
+.provider-profile-edit input.form-control, select.form-control ,#post_job_form input.form-control{
     border-radius: 0;
     height: 45px;
     letter-spacing: 1px;
     width: 100% !important;
+}
+#post_job_form .select2-container--default .select2-selection--single{
+	height :45px !important;
 }
 .error_box_shadow{
 	box-shadow: 0 0 5px #ff0000;
@@ -356,4 +359,8 @@ font-size: 13px;
     position: absolute;
     right: 17px;
     top: 9px;
+}
+.provider_job_instruction{
+	height: 160px;
+    width: 100%;
 }
