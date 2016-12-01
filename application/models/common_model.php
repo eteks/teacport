@@ -54,4 +54,13 @@ class Common_model extends CI_Model {
 		$moi = $this->db->get();
 		return $moi->result_array(); 
 	}
+	public function applicable_posting($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_applicable_posting');
+		$where = "(posting_institution_id like '%".$ins_id."%' AND posting_status='1')";
+		$this->db->where($where);
+		$moi = $this->db->get();
+		return $moi->result_array(); 
+	}
 }

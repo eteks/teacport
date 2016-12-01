@@ -36,7 +36,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/subject">University / Board</a>
+              <a href="<?php echo base_url(); ?>admin/university">University / Board</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
