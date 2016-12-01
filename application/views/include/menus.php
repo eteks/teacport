@@ -12,7 +12,7 @@
                 <ul class="menu-links pull-right">
                     
                   <?php if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ ?>
-                  	<li class="no-bg"><a href="<?php echo base_url(); ?>job_provider/companydbd_postjobs" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
+                  	<li class="no-bg"><a href="<?php echo base_url(); ?>job_provider/companydbd_postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
   	                <li class="profile-pic">
   	                	<?php 
   	                		$user_type = $this->session->userdata("login_session"); 
@@ -71,30 +71,4 @@
             </section>
         </nav>
         <div class="clearfix"></div>
-        <div class="search">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                        <div class="input-group">
-                            <div class="input-group-btn search-panel">
-                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                    <span id="search_concept">Filter By</span> <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="company-dashboard-active-jobs.html#">By Company</a></li>
-                                    <li><a href="company-dashboard-active-jobs.html#">By Function</a></li>
-                                    <li><a href="company-dashboard-active-jobs.html#">By City </a></li>
-                                    <li><a href="company-dashboard-active-jobs.html#">By Salary </a></li>
-                                    <li><a href="company-dashboard-active-jobs.html#">By Industry</a></li>
-                                </ul>
-                            </div>
-                            <input type="hidden" name="search_param" value="all" id="search_param">
-                            <input type="text" class="form-control search-field" name="x" placeholder="Search term...">
-                            <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        
