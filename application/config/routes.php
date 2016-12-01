@@ -65,6 +65,8 @@ $route['provider/inbox/message'] = 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
 $route['provider/candidate'] = 'job_provider/browse_candidate';
 $route['provider/postjob'] = 'job_provider/postjob';
+$route['provider/postedjob'] = 'job_provider/postedjob';
+$route['provider/postedjob/(:num)'] = 'job_provider/postedjob/$1';
 $route['provider/logout'] = 'job_provider/provider_logout';
 
 //JOB SEEKER
