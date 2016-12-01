@@ -20,6 +20,14 @@ class Subscription_Plan extends CI_Controller {
 		$data['subscription_plans'] = $this->subscription_plan_model->get_subscription_plans();
 		$this->load->view('admin/subscription_plans',$data);
 	}
+	public function plan_upgrade_creation()
+	{
+		$this->load->view('admin/plan_upgrade_creation');
+	}
+	public function organization_plan_notification()
+	{
+		$this->load->view('admin/organization_plan_notification');
+	}
 
 
 

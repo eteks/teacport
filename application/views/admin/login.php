@@ -1,11 +1,11 @@
 <?php
-$is_super_admin = $this->config->item('is_super_admin');
-// $access_rights = $this->config->item('access_rights');
-if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
-  $current_page_rights = $access_permission['access_permission'];
-  $access_rights = explode(',',$current_page_rights);
-}
+// $is_super_admin = $this->config->item('is_super_admin');
+// // $access_rights = $this->config->item('access_rights');
+// if(!$is_super_admin){
+  // $access_permission=$this->config->item('current_page_rights');	
+  // $current_page_rights = $access_permission['access_permission'];
+  // $access_rights = explode(',',$current_page_rights);
+// }
 if(!$this->session->userdata("admin_login_status")):
 ?>
 <!DOCTYPE html>
@@ -22,7 +22,7 @@ Website: http://thevectorlab.net/
 <!-- BEGIN HEAD -->
 <head>
   <meta charset="utf-8" />
-  <title>Login page</title>
+  <title>Teachers Recruit - Login page</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta content="" name="description" />
   <meta content="" name="author" />
