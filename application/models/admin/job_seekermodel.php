@@ -152,6 +152,7 @@ class Job_Seekermodel extends CI_Model {
     $this->db->from('tr_candidate_applied_job cja');
     $this->db->join('tr_organization_vacancies ov','cja.applied_job_vacancies_id=ov.vacancies_id','inner');
     $this->db->join('tr_candidate_profile cp','cja.applied_job_candidate_id=cp.candidate_id','inner');
+    $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
     $model_data['job_applied'] = $this->db->get()->result_array();
     return $model_data;
   }

@@ -136,6 +136,33 @@ class Job_Provider extends CI_Controller {
 			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|'
 			                            );			                       
 	   		}
+	   		if($this->input->post('index')==4 || $this->input->post('index')=="end") {
+	   			$validation_rules[] =	array(
+			                              'field'   => 'email_valid',
+			                              'label'   => 'Email Validity',
+			                              'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'sms_valid',
+			                                'label'   => 'SMS Validity',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'resume_valid',
+			                                'label'   => 'Resume Validity',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'val_sdate',
+			                                'label'   => 'Validity Start Date',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'val_edate',
+			                                'label'   => 'Validity End Date',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );			                       
+	   		}
 	   		$this->form_validation->set_rules($validation_rules);
 			if ($this->form_validation->run() == FALSE) {   
 		        foreach($validation_rules as $row){

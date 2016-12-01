@@ -214,6 +214,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
                             </a>
                           </li>
+                          <li class="span3">
+                            <a href="#tab5" data-toggle="tab" class="step">
+                              <span class="number">5</span>
+                              <span class="desc"><i class="icon-ok"></i>Validity Details</span>
+                            </a>
+                          </li>
                           <?php
                           else :
                           ?>
@@ -221,6 +227,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <a href="#tab3" data-toggle="tab" class="step">
                             	<span class="number">3</span>
                               <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
+                            </a>
+                          </li>
+                          <li class="span3">
+                            <a href="#tab4" data-toggle="tab" class="step">
+                              <span class="number">4</span>
+                              <span class="desc"><i class="icon-ok"></i>Validity Details</span>
                             </a>
                           </li>
                           <?php
@@ -465,6 +477,63 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                     </div>
+                    <div class="tab-pane" id="tab5">
+                      <h4>Validity Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Email Validity</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['is_email_validity']==1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Validity Start Date</label>
+                          <span class="dynamic_data"> 
+                            <?php echo date('d-m-Y',strtotime($provider_full_profile['validity_start_date'])); ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">SMS Validity</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['is_sms_validity']==1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Validity End Date</label>
+                          <span class="dynamic_data"> 
+                            <?php echo date('d-m-Y',strtotime($provider_full_profile['validity_end_date'])); ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Resume Validity</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['is_resume_validity']==1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                     <?php
                     else :
                     ?>
@@ -610,6 +679,57 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Registrant Mobile</label>
                           <span>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="tab-pane" id="tab4">
+                      <h4>Validity Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Email Validity</label>
+                          <span>
+                            <ul class="on_off_button on_off_button_j">
+                              <li data-value="1" <?php if($provider_full_profile['is_email_validity']==1) echo "class='on'"; ?>><a>Yes</a></li>
+                              <li data-value="0" <?php if($provider_full_profile['is_email_validity']==0) echo "class='on'"; ?>><a>No</a></li>
+                            </ul> 
+                            <input type="hidden" value="<?php echo $provider_full_profile['is_email_validity']; ?>" class="verification tabfield4 tabfield" name="email_valid" />
+                          </span>
+                        </div>
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Validity Start Date</label>
+                          <span>
+                            <input class=" m-ctrl-medium date-picker dp_width tabfield4 tabfield" size="16" type="text" value="<?php echo date('d-m-Y',strtotime($provider_full_profile['validity_start_date'])); ?>" name="val_sdate" />
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">SMS Validity</label>
+                          <span>
+                            <ul class="on_off_button on_off_button_j">
+                              <li data-value="1" <?php if($provider_full_profile['is_sms_validity']==1) echo "class='on'"; ?>><a>Yes</a></li>
+                              <li data-value="0" <?php if($provider_full_profile['is_sms_validity']==0) echo "class='on'"; ?>><a>No</a></li>
+                            </ul> 
+                            <input type="hidden" value="<?php echo $provider_full_profile['is_sms_validity']; ?>" class="verification tabfield4 tabfield" name="sms_valid" />
+                          </span>
+                        </div>
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Validity End Date</label>
+                          <span>
+                            <input class=" m-ctrl-medium date-picker dp_width tabfield4 tabfield" size="16" type="text" value="<?php echo date('d-m-Y',strtotime($provider_full_profile['validity_end_date'])); ?>" name="val_edate" />
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Resume Validity</label>
+                          <span>
+                            <ul class="on_off_button on_off_button_j">
+                              <li data-value="1" <?php if($provider_full_profile['is_resume_validity']==1) echo "class='on'"; ?>><a>Yes</a></li>
+                              <li data-value="0" <?php if($provider_full_profile['is_resume_validity']==0) echo "class='on'"; ?>><a>No</a></li>
+                            </ul> 
+                            <input type="hidden" value="<?php echo $provider_full_profile['is_resume_validity']; ?>" class="verification tabfield4 tabfield" name="resume_valid" />
                           </span>
                         </div>
                       </div>

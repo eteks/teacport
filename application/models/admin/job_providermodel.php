@@ -15,6 +15,8 @@ class Job_Providermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
+      $start_date = date('Y-m-d',strtotime($this->input->post('val_sdate')));
+      $end_date = date('Y-m-d',strtotime($this->input->post('val_edate')));
       $profile_update_data = array( 
                               'organization_name' => $this->input->post('organization_name'),
                               'organization_logo' => $this->input->post('organization_logo'),
@@ -28,6 +30,11 @@ class Job_Providermodel extends CI_Model {
                               'organization_address_3' => $this->input->post('org_addr_3'),
                               'organization_address_2' => $this->input->post('org_addr_2'),
                               'organization_address_1' => $this->input->post('org_addr_1'),
+                              'is_email_validity' => $this->input->post('email_valid'),
+                              'is_sms_validity' => $this->input->post('sms_valid'),
+                              'is_resume_validity' => $this->input->post('resume_valid'),
+                              'validity_start_date' => $start_date,
+                              'validity_end_date' => $end_date,
                               'organization_institution_type_id' => $this->input->post('institution_type')
                             );
       $profile_update_where = '( organization_id="'.$this->input->post('rid').'")'; 
