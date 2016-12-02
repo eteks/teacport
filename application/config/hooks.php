@@ -10,14 +10,14 @@
 |
 */
 
-$hook['pre_controller'] = array(
-        'class'    => 'Admin_users',
-        'function' => 'admin_module_access_privileges',
-        'filename' => 'admin_users.php',
-        'filepath' => 'controllers/admin',
-        // 'params'   => array('bread', 'wine', 'butter')
-        'params' => array()
-        );
+// $hook['pre_controller'] = array(
+//         'class'    => 'Admin_users',
+//         'function' => 'admin_module_access_privileges',
+//         'filename' => 'admin_users.php',
+//         'filepath' => 'controllers/admin',
+//         // 'params'   => array('bread', 'wine', 'butter')
+//         'params' => array()
+//         );
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
