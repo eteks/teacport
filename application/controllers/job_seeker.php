@@ -14,6 +14,8 @@ class Job_seeker extends CI_Controller {
 	{
 		$common = new Common();
 		if(!$_POST){
+			$data['captcha'] = $this->captcha->main();
+			$this->session->set_userdata('captcha_info', $data['captcha']);
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl_seeker();
 			$this->load->view('job-seekers-login',$data);
