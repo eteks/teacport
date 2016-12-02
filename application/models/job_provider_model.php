@@ -37,7 +37,8 @@ class Job_provider_model extends CI_Model {
 			$user_details['registrant_name'] = $user_data['registrant_name'];
 			$user_details['user_type'] = 'provider';
 			$user_details['valid_status'] = 'valid';
-			$user_detalls['login_type'] = 'teacherrecruit';
+			$user_details['institution_type'] = $user_data['organization_institution_type_id'];
+			$user_details['login_type'] = 'teacherrecruit';
 			return $user_details; 
 		}
 		else {
@@ -102,7 +103,7 @@ class Job_provider_model extends CI_Model {
 		
 		$this->db->select('*');    
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
 		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
 		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
 		$where = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
@@ -114,7 +115,7 @@ class Job_provider_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
 		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
 		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
 		$where = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
@@ -166,6 +167,32 @@ class Job_provider_model extends CI_Model {
 		$this->db->where($where);
 		$inboxdata = $this->db->get();
 		return $inboxdata->result_array(); 
+	 }
+
+	 public function job_provider_post_vacancy($vacancydata)
+	 {
+	 	if($this->db->insert('tr_organization_vacancies', $vacancydata)){
+	 		return TRUE;
+	 	}
+		else{
+			return FALSE;
+		}
+	 }
+	 
+	 public function job_provider_posted_job_counts($ins_id)
+	 {
+	 	return $this->db->where('vacancies_organization_id',$ins_id)->from("tr_organization_vacancies")->count_all_results();
+	 }
+	 
+	 public function job_provider_posted_jobs($limit,$start,$ins_id)
+	 {
+	 	$this->db->select('*');    
+		$this->db->from('tr_organization_vacancies');
+		$where = "(vacancies_organization_id='".$ins_id."' AND vacancies_status='1')";
+		$this->db->limit($limit,$start);
+		$this->db->where($where);
+		$postedjobdata = $this->db->get();
+		return $postedjobdata->result_array(); 
 	 }
 	
 }

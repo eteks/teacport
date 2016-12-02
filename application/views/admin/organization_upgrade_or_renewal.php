@@ -36,7 +36,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
                      Teachers Recruit
-                     <small>Others</small>
+                     <small>Job Providers</small>
                   </h3>
                   <ul class="breadcrumb">
                        <li>
@@ -46,8 +46,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <a href="#">Others</a><span class="divider">&nbsp;</span>
                         </li>
                        <li>
-                          <a href="<?php echo base_url(); ?>admin/jobprovider_ads">
-                            Feedback Form
+                          <a href="<?php echo base_url(); ?>admin/plan_upgrade_or_renewal">
+                            Plan Upgrade Or Renewal
                           </a>
                           <span class="divider-last">&nbsp;</span>
                         </li>
@@ -63,29 +63,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
                         <div class="widget-title">
-                            <h4><i class="icon-reorder"></i> Feedback Form</h4>
+                            <h4><i class="icon-reorder"></i> Plan Upgrade Or Renewal</h4>
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
+                                        <!-- <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
                                             Add New <i class="icon-plus"></i>
-                                        </button>
+                                        </button> -->
                                     </div>
-                                </div>
-                                
-                                <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
-                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                </div>                                
+                                <form method="post" action="job_provider/plan_upgrade_or_renewal" class="admin_module_form" id="plan_upgrade_or_renewal">
+                                  <table class="table table-striped table-hover table-bordered admin_table plan_upgrade_creation" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th>Form Title</th>
-                                        <th>Form Message</th>
-                                        <th>Is Organization?</th>
-                                        <th>Is Candidate?</th>
-                                        <th>Is Guest User?</th>
-                                        <th>Candidate or Organization</th>
-                                        <th>Is Viewed</th>
+                                        <th>Organization Name</th>
+                                        <th>Subscription Name</th>
+                                        <th>Upgrade ID</th>
+                                        <th>Validity Start Date</th>
+                                        <th>Validity End Date</th>
+                                        <th>Transaction ID</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -98,28 +96,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </thead>
                                     <tbody>
                                       <tr class="parents_tr" id="column1">
-                                        <td class=""> 
-                                          Feedback Form
+                                        <td class="organization_id"> 
+                                          ETS
                                         </td>
-                                        <td class=""> 
-                                          Message 
+                                        <td class="subscription_id"> 
+                                          Plan1 
                                         </td>
-                                        <td class="is_organization center_align"> 
-                                          <span class="icon-ok"> </span>
+                                        <td class="upgrade_id"> 
+                                          12345
                                         </td>
-                                        <td class="is_candidate center_align">
-                                          <span class="icon-remove"> </span>
+                                        <td class="validity_start_date"> 
+                                          01-01-2000
                                         </td>
-                                        <td class="is_guest_user center_align"> 
-                                          <span class="icon-remove"> </span>
+                                        <td class="validity_end_date"> 
+                                          01-01-2000 
                                         </td>
-                                        <td class=""> 
-                                          Ets
+                                        <td class="transaction_id"> 
+                                          123445 
                                         </td>
-                                        <td class="is_viewed is_viewd_onoff center_align"> 
-                                          <span class="icon-ok"> </span>
-                                        </td>
-                                        <td class="feedback_form_status center_align"> 
+                                        <td class="plan_upgrade_or_renewal_status"> 
                                           Active
                                         </td>
                                         <td class="created_date">
@@ -134,7 +129,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                         <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="">Delete</a>
+                                          <a class="ajaxDelete" id="column1" data-id="column1">Delete</a>
                                         </td>
                                         <?php endif; ?>
                                       </tr>
@@ -157,13 +152,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
   </div>
   <script>
     // Define default values
-    var inputType = new Array("label","label","label","label","label","label","on_off","select","label"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("feedback_form_title","feedback_form_message","is_organization","is_candidate","is_guest_user","candidate_or_organization_id","is_viewed","feedback_form_status","created_date"); // Set name of input types
+    var inputType = new Array("text","text","text","text","text","text","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("organization_id","subscription_id","upgrade_id","validity_start_date","validity_end_date","transaction_id","plan_upgrade_or_renewal_status"); // Set name of input types
     var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
-    var is_created ="no";
-    var feedback_form_status_option = new Array("Active","Inactive"); 
-    var feedback_form_status_value = new Array("1","0"); 
+    // var is_created ="no";
+    var plan_upgrade_or_renewal_status_option = new Array("Active","Inactive"); 
+    var plan_upgrade_or_renewal_status_value = new Array("1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php
@@ -171,6 +166,3 @@ else :
 redirect(base_url().'admin');
 endif;
 ?>
-
-
-text, browse,text,datepicker,verify,select

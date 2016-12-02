@@ -308,7 +308,7 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
    // $(function () {
     // var startDate = new Date('1985-01-01'),
         // endDate = new Date('1995-01-01');
-    // $('#reg_dob').datetimepicker({
+    // $('#reg_dob').datepicker({
         // //other option
         // startDate: startDate, //set start date
         // endDate: endDate //set end date

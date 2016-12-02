@@ -63,6 +63,9 @@ $route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
 $route['provider/inbox'] = 'job_provider/inbox';
 $route['provider/inbox/message'] = 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
+$route['provider/candidate'] = 'job_provider/browse_candidate';
+$route['provider/postjob'] = 'job_provider/postjob';
+$route['provider/postedjob/(:num)'] = 'job_provider/postedjob/$1';
 $route['provider/logout'] = 'job_provider/provider_logout';
 
 //JOB SEEKER
@@ -109,24 +112,29 @@ $route['admin/university'] = 'admin/adminindex/university';
 $route['admin/postings'] = 'admin/adminindex/posting';
 $route['admin/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
 $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
-$route['admin/subscription_plans'] = 'admin/subscription_plan/teacport_subscription_plans';
 $route['admin/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
 $route['admin/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
 $route['admin/jobprovider_mailstatus'] = 'admin/job_provider/teacport_jobprovider_mailstatus';
+$route['admin/organization_upgrade_or_renewal'] = 'admin/job_provider/organization_upgrade_or_renewal';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
+
+$route['admin/subscription_plans'] = 'admin/subscription_plan/teacport_subscription_plans';
+$route['admin/plan_upgrade_creation'] = 'admin/subscription_plan/plan_upgrade_creation';
+$route['admin/organization_plan_notification'] = 'admin/subscription_plan/organization_plan_notification';
 
 $route['admin/user_groups'] = 'admin/admin_users/user_groups';
 $route['admin/user_accounts'] = 'admin/admin_users/user_accounts';
 $route['admin/privileges'] = 'admin/admin_users/privileges';
 
-$route['admin/job_seeker_profile'] = 'admin/job_seeker/job_seeker_profile';
+$route['admin/job_seeker_profile'] = 'admin/job_seeker/teacport_job_seeker_profile';
 $route['admin/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
 $route['admin/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 // $route['admin/admin_modules'] = 'admin/admin_users/admin_modules';
 
 $route['admin/edit_profile'] = 'admin/admin_users/edit_profile';
 $route['admin/change_password'] = 'admin/admin_users/change_password';
+$route['admin/logout'] = 'admin/admin_login/teac_admin_logout';
 
 $route['admin/payment_gateway'] = 'admin/setting/payment_gateway';
 $route['admin/sms_gateway'] = 'admin/setting/sms_gateway';
@@ -135,6 +143,7 @@ $route['admin/template_logo'] = 'admin/setting/template_logo';
 
 $route['admin/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['admin/feedback_form'] = 'admin/other_module/feedback_form';
+
 
 
 

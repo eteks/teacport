@@ -2,10 +2,11 @@
 $is_super_admin = $this->config->item('is_super_admin');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $current_page_rights = $this->config->item('current_page_rights')['access_permission'];
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
-if(!empty($this->session->userdata("login_status"))): 
+if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -84,13 +85,14 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tr class="ajaxTitle">
                                         <th>Group Name</th>
                                         <th>Group Description</th>
+                                        <th>Is Super Admin</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                                          <th>Edit</th>
+                                          <th class="data_action">Edit</th>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                          <th>Delete</th>
+                                          <th class="data_action">Delete</th>
                                         <?php endif; ?>
                                     </tr>
                                     </thead>
@@ -103,20 +105,25 @@ if(!empty($this->session->userdata("login_status"))):
                                     <tr class="parents_tr" id="column<?php echo $i; ?>">
                                         <td class="user_group_name"><?php echo $grp_val['user_group_name']; ?></td>
                                         <td class="user_group_description"><?php echo $grp_val['user_group_description']; ?></td>
+                                        <td class="user_super_admin center_align"><?php if($grp_val['is_super_admin'] == 1) echo "<span class='icon-ok'> </span>"; else echo "<span class='icon-remove'> </span>";?>
+                                          <input type="hidden" value="<?php echo $grp_val['is_super_admin']; ?>" />
+                                        </td>
                                         <td class="user_group_status"><?php 
                                         if ($grp_val['user_group_status'] == 1) 
                                           echo "Active";
                                         else
                                           echo "Inactive";
-                                        ?></td>
+                                        ?>
+                                        <input type="hidden" value="<?php echo $grp_val['user_group_status']; ?>" />
+                                        </td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($grp_val["user_group_created_date"])); ?></td>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                           <td class="edit_section">
-                                            <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
+                                            <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
                                           </td>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                          <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
+                                          <td><a class="ajaxDelete" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
                                         <?php endif; ?>
                                     </tr>
                                     <?php
@@ -146,11 +153,13 @@ if(!empty($this->session->userdata("login_status"))):
    <!-- END CONTAINER -->
     <script>
     // Define default values
-    var inputType = new Array("text","textarea","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("user_group_name","user_group_description","user_group_status"); // Set name of input types
+    var inputType = new Array("text","textarea","select","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("user_group_name","user_group_description","user_super_admin","user_group_status"); // Set name of input types
     var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table    
-    var user_group_status_option = new Array("Please select status","Active","Inactive"); 
+    var user_super_admin_option = new Array("Select Admin Type","Yes","No"); 
+    var user_super_admin_value = new Array("","1","0");
+    var user_group_status_option = new Array("Select status","Active","Inactive"); 
     var user_group_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>

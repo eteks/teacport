@@ -615,11 +615,10 @@ class Job_Provider extends CI_Controller {
 			redirect(base_url().'admin/admin_error');
 		}
 	}
-
-		
-
-	
-
+public function organization_upgrade_or_renewal()
+	{
+		$this->load->view('admin/organization_upgrade_or_renewal');
+	}
 
 }
 /* End of file Job_Provider.php */ 

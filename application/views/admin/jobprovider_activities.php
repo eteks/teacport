@@ -1,5 +1,12 @@
 <?php
-if(!empty($this->session->userdata("login_status"))): 
+$is_super_admin = $this->config->item('is_super_admin');
+// $access_rights = $this->config->item('access_rights');
+if(!$is_super_admin){
+  $access_permission=$this->config->item('current_page_rights');	
+  $current_page_rights = $access_permission['access_permission'];
+  $access_rights = explode(',',$current_page_rights);
+}
+if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -50,8 +57,8 @@ if(!empty($this->session->userdata("login_status"))):
            <div class="widget-body">
                 <div class="portlet-body">
                   <div class="clearfix add_section">
-                </div>
-                <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
+                  </div>
+                  <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
                   <?php } ?> 
                   <?php
                   if(!empty($status)) :
@@ -68,8 +75,12 @@ if(!empty($this->session->userdata("login_status"))):
                         <th class="not-sort"> Mail Sent </th>
                         <th class="not-sort"> Resume Downloaded </th>
                         <th class="data_action" style="display: none;"> </th>
-                        <th class="data_action">Edit</th>
-                        <th class="data_action">Delete</th>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            <th class="data_action">Edit</th>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                            <th class="data_action">Delete</th>
+                        <?php endif; ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -91,41 +102,45 @@ if(!empty($this->session->userdata("login_status"))):
                         <td class="act_sms center_align">
                           <?php 
                           if ($act_val['is_sms_sent'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
+                            echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>";
                           else
-                            echo "<span class='icon-remove'> </span>";
-                          ?>                               
+                            echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
+                          ?>
                           <input type="hidden" value="<?php echo $act_val['is_sms_sent']; ?>" />
                         </td>
                         <td class="act_email center_align">
                           <?php 
                           if ($act_val['is_email_sent'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
+                            echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>" ;
                           else
-                            echo "<span class='icon-remove'> </span>";
+                            echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
                           ?>                               
                           <input type="hidden" value="<?php echo $act_val['is_email_sent']; ?>" />
                         </td>
                         <td class="act_resume center_align">
                           <?php 
                           if ($act_val['is_resume_downloaded'] == 1) 
-                            echo "<span class='icon-ok'> </span>";
+                            echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>";
                           else
-                            echo "<span class='icon-remove'> </span>";
+                            echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
                           ?>                               
                           <input type="hidden" value="<?php echo $act_val['is_resume_downloaded']; ?>" />
                         </td>  
-                        <td style="display: none;"> </td>                               
+                        <td style="display: none;"> </td> 
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                              
                         <td class="edit_section">
                           <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $act_val['activity_id']; ?>">
                             Edit
                           </a>
                         </td>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td>
                           <a class="ajaxDelete" data-id="<?php echo $act_val['activity_id']; ?>">
                             Delete
                           </a>
                         </td>
+                        <?php endif; ?>
                       </tr>
                       <?php
                       endforeach;
@@ -134,7 +149,7 @@ if(!empty($this->session->userdata("login_status"))):
                     </tbody>
                   </table>
                   <?php if(!$this->input->is_ajax_request()) { ?>
-                </form>
+                </form> 
               </div>
             </div>
           </div>

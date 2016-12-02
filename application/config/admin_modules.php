@@ -123,6 +123,16 @@ $config['admin_modules'] = array(
 			'name' => 'ads posted', 
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'admin/jobprovider_ads' 
+		),
+		array(
+			'name' => 'organization upgrade or renewal', 
+			'access_operation' => 'edit,delete,view', 
+			'route_url' => base_url().'admin/organization_upgrade_or_renewal' 
+		),
+		array(
+			'name' => 'organization plan notification', 
+			'access_operation' => 'view', 
+			'route_url' => base_url().'admin/organization_plan_notification' 
 		)),
 		'icon_name' => 'icon-sitemap'
 	),
@@ -155,6 +165,11 @@ $config['admin_modules'] = array(
 			'name' => 'plan creation & maintanence', 
 			'access_operation' => 'add,edit,delete,view', 
 			'route_url' => base_url().'admin/subscription_plans' 
+		),
+		array(
+			'name' => 'plan upgrade creation', 
+			'access_operation' => 'add,edit,delete,view', 
+			'route_url' => base_url().'admin/plan_upgrade_creation' 
 		)),
 		'icon_name' => 'icon-wrench'
 	),

@@ -49,7 +49,26 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
 #sidebar > ul > li > ul.sub > li > a {
     color: #fff;
 }
+/*After adding scroll */
+#sidebar > ul > li > div > ul > li.active > a{
+    background: rgba(0, 0, 0, 0) url("../img/side-bar-list-bg.png");
+}
+#sidebar > ul > li > div > ul.sub > li > a {
+    color: #fff;
+}
+#sidebar > ul > li > div > ul > li >a:hover, #sidebar > ul > li:hover>a {
+    color: #fff !important;
+    background: url("../img/side-bar-list-bg.png");
+}
+#sidebar > ul > li > div > ul.sub > li {
+    border-bottom: 1px solid #3393A2;
+}
 
+#sidebar > ul > li > div > ul.sub > li:last-child {
+    border-bottom:none;
+}
+
+/*Ending scroll */
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
     background-color: #EEEEEE;
     background-image: none;
@@ -221,6 +240,9 @@ tr select {
 }
 .site_visites_cont{
 	padding: 15px 15px 8px !important;
+	max-height: 333px !important;
+    min-height: 111px !important;
+    overflow-y: auto !important;
 }
 #footer > span {
     margin-left: 75px;
@@ -247,6 +269,7 @@ tr select {
     top:0px;
     left:0px;
     background:rgba(0,0,0,0.75);
+    z-index: 3;
 }
 .popup-sec {
     width:100%;
@@ -456,12 +479,14 @@ tr select {
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
     display:none;
+    margin-top: 10px !important;
 }
 .db_status,.privilege_status{
 	background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    margin-top: 10px !important;
 }
 .main_module_name {
     font-family: Helvetica;
@@ -603,22 +628,79 @@ tr select {
 .form-wizard .step .seeker_tab_desc {
     display: inline-block !important;
     font-size: 12px !important;
-    font-weight: 300 !important;
+    font-weight: 600 !important;
     margin-top: 5px !important;
+    position: absolute !important;
+    text-align: center !important;
+}
+.form-wizard .step .seeker_tab_desc_info {
+    display: inline-block !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    margin-top: 12px !important;
     position: absolute !important;
     text-align: center !important;
 }
 .admin_table td .on_off_button{
 	width: 85px !important;
 }
-#sidebar > ul > li > ul.sub {
+/*#sidebar > ul > li > ul.sub {
     max-height: 250px !important;
     min-height: auto !important;
     overflow: auto;
-}
-/*.user_acct_tbl {
-    display: block !important;
-    max-width: 1000px !important;
-    min-width: 800px !important;
-    overflow: auto;
 }*/
+#users_accounts_form_tbl table{
+    display: block !important;
+    max-width: 1066px !important;
+    min-width: 1066px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+}
+#users_accounts_form_tbl table th {
+    width: 250px !important;
+}
+.filter_by_cnt{
+	min-height: 100px !important;
+	max-height: 150px !important;
+	overflow-y: auto !important;
+	width: 95% !important;
+}
+.privilege_form > #sample_editable_1_filter > label {
+    margin-right: 20px;
+}
+table .dataTables_empty{
+	font-size:  15px !important;
+	text-transform: capitalize !important;
+	font-weight: 600;
+}
+.step_menus{
+	width: 130px !important;
+}
+#plan_upgrade_creation_form table {
+    display: block !important;
+    overflow: auto !important;
+    width: 100% !important;
+}
+#plan_upgrade_creation_form table th {
+    width: 250px !important;
+}
+#plan_upgrade_creation_form table .parents_tr input {
+    width: 125px !important;
+}
+#plan_upgrade_creation_form table .parents_tr select {
+    width: 125px !important;
+}
+#plan_upgrade_or_renewal table {
+    display: block !important;
+    overflow: auto !important;
+    width: 100% !important;
+}
+#plan_upgrade_or_renewal table th {
+    width: 250px !important;
+}
+#plan_upgrade_or_renewal table .parents_tr input {
+    width: 125px !important;
+}
+#plan_upgrade_or_renewal table .parents_tr select {
+    width: 125px !important;
+}
