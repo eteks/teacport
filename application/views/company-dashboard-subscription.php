@@ -9,11 +9,11 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="company-dashboard-followers.html#">Home</a>
+                                <li><a href="<?php echo base_url();?>">Home</a>
                                 </li>
                                 <li><a href="company-dashboard-followers.html#">Dashboard</a>
                                 </li>
-                                <li class="active">Feedback</li>
+                                <li class="active">Subscribe Plan</li>
                             </ol>
                         </div>
                     </div>
@@ -25,55 +25,15 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="panel">
-                                <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="images/company/logo1.jpg" alt="Image">
-                                </div>
-                                <div class="text-center dashboard-logo-sidebar-title">
-                                    <h4>Your Companty Agency Pvt. Ltd</h4>
-                                </div>
-                            </div>
-                            <div class="profile-nav">
-                                <div class="panel">
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/dashboard"> <i class="fa fa-user"></i> Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/companydbd_resume"> <i class="fa fa-file-o"></i>Inbox </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/companydbd_browsejobs"> <i class="fa  fa-list-ul"></i> Browse Candidate</a>
-                                        </li>
-                                        <li class="provider-jobs">
-                                            <a href="#"><i class="fa  fa-list-alt"></i> Jobs</a>
-                                            <ul>
-                                            	<li><a href="<?php echo base_url();?>job_provider/companydbd_postjobs"> <i class="fa  fa-list-alt"></i>New Jobs</a></li>
-                                            	<li class="active"><a href="<?php echo base_url();?>job_provider/companydbd_postedjobs"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>company-dashboard-post-jobs.php"> <i class="fa  fa-bookmark-o"></i> Post Adds </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-money"></i> Subcribe Plan</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-commenting-o"></i> Feedback </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <!--include left panel menu-->
+                            <?php include('include/company_dashboard_sidebar.php'); ?>                           
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                         	<div class="heading-inner first-heading">
                                 <p class="title">Choose Your Plan</p>
                             </div>
                             <div class="subscription">
-                             <!--Select Pricing Plan-->
+                                <!--Select Pricing Plan-->
                                 <form id="form-school" class="form-horizontal" action="" name="" autocomplete="false" method="post" accept-charset="utf-8">
                                 	<div class="form-group">
 										<label class="col-sm-3" for="subpack">Select Subscription : </label>
@@ -90,7 +50,7 @@
 											</p>
 										</div>
 										<div class="col-sm-3">
-											<a href="<?php echo base_url(); ?>pricing" target="_blank" class="btn btn-info btn-large">View Details &amp; Features</a>
+											<a href="pricing.html" target="_blank" class="btn btn-info btn-large">View Details &amp; Features</a>
 								     </div>
 								     </div>
 							    </form> <!--End Select Pricing Plan-->
@@ -98,7 +58,7 @@
                                 <!--Display Chosen Plan-->
                                 <div class="pricing-section-1">
                                 	<!--Basic Plan-->
-                                	<div id="basic_plan_act" class="col-md-6 col-sm-6 col-xs-12 light-grey subplan_act">
+                                	<div id="basic_plan_act" class="col-md-12 col-sm-12 col-xs-12 light-grey subplan_act">
                                 		<div class="heading-inner">
                                     		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected</span>
                                 		</div>
@@ -120,16 +80,10 @@
 			                                    </div>
 			                                    <p>Join us soon to get total benefits.</p>
 			                                </div>
-			                                <div class="drop">
-			                                    <a href="register-job-providers.html">
-			                                        <p>Select Plan</p>
-			                                    </a>
-			                                    <div class="arrow"></div>
-			                                </div>
 			                            </div>
 			                        </div>
 			                        <!--Premium Plan-->
-                                	<div id="premium_plan_act" class="col-md-6 col-sm-6 col-xs-12 light-grey subplan_act">
+                                	<div id="premium_plan_act" class="col-md-12 col-sm-12 col-xs-12 light-grey subplan_act">
                                 		<div class="heading-inner">
                                     		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected</span>
                                 		</div>
@@ -152,16 +106,10 @@
 			                                    </div>
 			                                    <p>Join us soon to get total benefits and start Recruitment</p>
 			                                </div>
-			                                <div class="drop">
-			                                    <a href="register-job-providers.html">
-			                                        <p>Select Plan</p>
-			                                    </a>
-			                                    <div class="arrow"></div>
-			                                </div>
-			                            </div>
+			                             </div>
                        			    </div>
                        			    <!--Standarad Plan-->
-                       			    <div id="standard_plan_act"class="col-md-6 col-sm-6 col-xs-12 light-grey subplan_act">
+                       			    <div id="standard_plan_act"class="col-md-12 col-sm-12 col-xs-12 light-grey subplan_act">
                        			    	<div class="heading-inner">
                                     		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected</span>
                                 		</div>
@@ -185,19 +133,13 @@
 			                                    </div>
 			                                    <p>Join Standard plan and get total benefits soon.</p>
 			                                </div>
-			                                <div class="drop">
-			                                    <a href="register-job-providers.html">
-			                                        <p>Select Plan</p>
-			                                    </a>
-			                                    <div class="arrow"></div>
-			                                </div>
 			                            </div>
 			                        </div>
 			                    </div> 
 			                 </div>     
 			                 
 		                    <!--Proceed to payment-->
-		                    <div class="col-sm-12 pull-right">
+		                    <div class="col-sm-offset-9 col-sm-1">
 		                    	<a class="btn btn-default" href="#"> Proceed to pay </a>
 		                    </div>
                         </div> <!--End right panel-->

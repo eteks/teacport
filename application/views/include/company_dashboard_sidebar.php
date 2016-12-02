@@ -15,20 +15,20 @@
                 <a href="#"><i class="fa  fa-list-alt"></i> Jobs</a>
                 <ul>
                 	<li class="<?php if($this->uri->segment(2)=='postjob') echo 'active'; ?>"><a href="<?php echo base_url();?>provider/postjob"> <i class="fa  fa-list-alt"></i>New Jobs</a></li>
-                	<li><a href="<?php echo base_url();?>job_provider/companydbd_postedjobs"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
+                	<li class="<?php if($this->uri->segment(2)=='postedjob') echo 'active'; ?>"><a href="<?php echo base_url();?>provider/postedjob"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
                 </ul>
             </li>
             <li>
-                <a href="<?php echo base_url();?>company-dashboard-post-jobs.php"> <i class="fa  fa-bookmark-o"></i> Post Adds </a>
+                <a href="<?php echo base_url();?>job_provider/companydbd_postedjobs"> <i class="fa  fa-bookmark-o"></i> Post Adds </a>
             </li>
             <li>
-                <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-money"></i> Subcribe Plan</a>
+                <a href="<?php echo base_url();?>job_provider/companydbd_subscription"> <i class="fa fa-money"></i> Subcribe Plan</a>
             </li>
             <li>
-                <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-commenting-o"></i> Feedback </a>
+                <a href="<?php echo base_url();?>job_provider/companydbd_feedback"> <i class="fa fa-commenting-o"></i> Feedback </a>
             </li>
             <li>
-                <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
+                <a href="<?php echo base_url();?>job_provider/companydbd_changepwd"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
             </li>
         </ul>
     </div>

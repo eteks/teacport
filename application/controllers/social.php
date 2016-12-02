@@ -189,7 +189,7 @@ class Social extends CI_Controller {
 				$this->session->set_userdata("login_session",$fbdata);
 				redirect('seeker/dashboard');
 			}else{
-				$checkvaliduser = $this->job_seeker_model->social_valid_provider_login($fbdata);
+				$checkvaliduser = $this->job_seeker_model->social_valid_seeker_login($fbdata);
 				if($checkvaliduser['valid_status'] === 'valid'){
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$checkvaliduser);
