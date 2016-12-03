@@ -177,8 +177,7 @@ $(document).ready(function(){
     });
 
     $('.sub_scroll_section').slimScroll({
-        height: 'auto',
-         wheelStep: 2
+        height: 'auto'
     });
 
     if($('.has-sub').length > 0) {
