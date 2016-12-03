@@ -168,6 +168,7 @@ ajax = function (params,action,form_id){
 };
 
 $(document).ready(function(){
+    
     default_credentials();
 
     $('#dialog-overlay').on('click',function() {

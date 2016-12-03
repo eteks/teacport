@@ -14,6 +14,8 @@ class Job_provider extends CI_Controller {
 		/* initialize common controller php file*/
 		$common = new Common();
 		if(!$_POST){
+			$data['captcha'] = $this->captcha->main();
+			$this->session->set_userdata('captcha_info', $data['captcha']);
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl();
 			$this->load->view('job-providers-login',$data);
