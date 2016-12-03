@@ -11,6 +11,27 @@ class Common_model extends CI_Model {
 		$allinstitutions = $this->db->get_where('tr_institution_type', array('institution_type_status' => '1'))->result_array();
 		return $allinstitutions;
 	}
+    public function get_search_list()
+    {
+        if ($this->input->post('search_keyword')) {
+        	$null_search = $this->input->post('search_keyword');
+        	$search_product=$this->db->select('*');
+            $search_product=$this->db->from('tr_organization_vacancies cp');
+            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+            $where1 = '(cp.vacancies_status=1)';
+            $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
+            $search_product=$this->db->where($where1);
+            $search_product=$this->db->group_by('cp.vacancies_id');
+            $query = $this->db->get()->result_array();
+        }
+        if (empty($null_search)){
+			$search_product=$this->db->select('*');
+			$search_product=$this->db->from('tr_organization_vacancies cp');
+            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+			$query = $this->db->get()->result_array();
+			};
+        return $query;
+    }
 	public function get_all_district()
 	{
 		$district = array();
@@ -50,6 +71,15 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
 		$where = "(is_medium_of_instruction = '1'  AND language_status='1')";
+		$this->db->where($where);
+		$moi = $this->db->get();
+		return $moi->result_array(); 
+	}
+	public function applicable_posting($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_applicable_posting');
+		$where = "(posting_institution_id like '%".$ins_id."%' AND posting_status='1')";
 		$this->db->where($where);
 		$moi = $this->db->get();
 		return $moi->result_array(); 

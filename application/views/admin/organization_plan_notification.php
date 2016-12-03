@@ -36,14 +36,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
                   <h3 class="page-title">
                      Teachers Recruit
-                     <small>Others</small>
+                     <small>Job Providers</small>
                   </h3>
                   <ul class="breadcrumb">
                        <li>
                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                         <li>
-                          <a href="#">Plan Settings</a><span class="divider">&nbsp;</span>
+                          <a href="#">Job Providers</a><span class="divider">&nbsp;</span>
                         </li>
                        <li>
                           <a href="<?php echo base_url(); ?>admin/organization_plan_notification">
@@ -67,7 +67,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
-                                <div class="clearfix">
+                                <div class="clearfix add_section">
                                     <div class="btn-group">
                                         <!-- <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>

@@ -1,6 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller {
+	public function __construct()
+    {
+    	
+        parent::__construct();
+        $this->load->library(array('form_validation','session','captcha')); 
+		$this->load->model(array('job_provider_model','common_model'));
+    }
 
 	/**
 	 * Index Page for this controller.
@@ -29,8 +36,7 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('contactus');
 	}
-	
-	
+
 	//Akila Created
 	public function pricing(){
 		$this->load->view('pricing');
@@ -42,11 +48,14 @@ class Home extends CI_Controller {
 		$this->load->view('all-institutions');
 	}
 	public function vacancies(){
-		$this->load->view('vacancies');
+		$categories['search_results'] = $this->common_model->get_search_list();
+        $this->load->view('vacancies',$categories);
 	}
-	
-	
-	
+	public function search_section()
+    {
+    	$categories['search_results'] = $this->common_model->get_search_list();
+        $this->load->view('vacancies',$categories);
+    }	
 }
 
 /* End of file welcome.php */

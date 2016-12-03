@@ -1,8 +1,68 @@
 /* Custom Code */
+.txt_blue {
+	color: #29AAFE;
+}
+.set-srch-strip{
+	display : none;
+}
+.slidershow-bg:hover .set-srch-strip {
+   display : block;
+}
+.slidershow-bg .search-form-contaner {
+	margin-top: 0px;
+	overflow: hidden;
+	padding: 0px;
+	height: 50px;
+}
+.set-srch-strip {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 10px 35px;
+}
+.set-srch-strip .fa-close {
+    color: #FFFFFF;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    position: absolute;
+    right: 5px;
+    top: 20px;
+    z-index: 1;
+}
+#search-icon {
+	background-color: rgba(0, 0, 0, 0.2); 
+	width: 25%;
+}
+#search-icon a{
+	color: #FFFFFF;
+	cursor: pointer;
+}
+#search-icon .fa-search{
+	margin: 5px;
+}
+
 /* Featured Jobs Slider */
+.slide-featured-jobs .content-area{
+	height: 250px;
+}
 .slide-featured-jobs {
 	padding: 10px;
+	cursor: pointer;
+	/* only required rule to the whole div clickable work */
+	position: relative;
 }
+.featured-jobs-grid-link{
+  /* all rules required to make the whole div clickable */ 
+  position:absolute; 
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+  z-index: 1;
+  /* this is a fix for IE7-9 */
+  	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
+ 	filter: alpha(opacity=0);  
+  	opacity:0; 
+  }	
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -11,10 +71,57 @@
 	width: 320px;
 	margin: auto;
 }	
+/* Signin & SignUp forms */
+ .loginbox_parallex::before {
+	background: rgba(0, 0, 0, 0.8) !important;
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+}
+.loginbox-terms {
+    margin: 10px 0;
+}
+.login-container #submit {
+	margin-bottom: 0;
+}
+
 /* Pricing --Features */
 .all-jobs-list-box2 .fa{
 	color: #777;
 	font-size: 22px;
+}
+.pricing-section-1 .pricing-selectplan-link{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+/* Provider- Signup & Signin form */
+.login-container .loginbox-signin {
+	font-size: 14px;
+	color: #242424;
+	margin-top: 20px;
+	float: right;
+	position: relative;
+	overflow: hidden;
+	cursor: pointer;
+}
+.login-container .loginbox-signin a:hover {
+	color: #000;
+}
+.loginbox-forgot {
+	cursor: pointer;
+}
+.loginbox-forgot a:hover{
+	color: #000000;
+}
+.checkbox_word {
+	font-size: 14px;
+	cursor: pointer;
 }
 
 /* JOB SEEKER DASHBOARD */
@@ -55,7 +162,25 @@
 	border-bottom: 1px solid #ccc;
 	margin: 5px 0 15px;
 	padding: 0 0 10px; 
+}
+/* User Inbox */
+#user_inbox_msg_act .modal-dialog {
+	border: 1px solid #fff;
+	border-radius: 5px;
 	
+}
+#user_inbox_msg_act .modal-header {
+	background-color: #29aafe;
+	color: #FFFFFF;
+	font-family: 'Kaushan Script';
+}
+#user_inbox_msg_act .modal-header .close{
+	color: #fff !important;
+	font-size: 30px;
+	opacity: 1;
+}
+#user_inbox_msg_act .inbox_msg{
+	color:  #29aafe;
 }
 /* END OF JOB SEEKER DASHBOARD */
 
@@ -86,13 +211,13 @@
 	color: #FFF !important;
 }
 .imagepreview_act {
-    width: 180px;
+    width: 175px;
     height: 180px;
     background-position: center center;
     background-size: cover;
     -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
     display: inline-block;
-    margin: 10px 10px 10px 0;
+    margin: 35px 10px 10px 10px;
 }
 /*.select-salary select option:first{
 	color: #999;
@@ -102,12 +227,11 @@ select:invalid { color: gray; }
  .advanced_search {
  	margin: 10px;
  }
- 
  #advancedsearch_act {
  	margin: 10px 0;
  }
- .info {
-	color: #ff0030;
+.info {
+	color: #009900;
 	font-size: 15px;
 }
 #applicant_msg_act .modal-dialog {
@@ -115,14 +239,20 @@ select:invalid { color: gray; }
 	border-radius: 5px;
 	
 }
-#applicant_msg_act .modal-content, #applicant_msg_act .modal-dialog .modal-content .inbox_msg {
-	color:  #fff !important;
+#applicant_msg_act .modal-header {
 	background-color: #29aafe;
+	color: #FFFFFF;
+	font-family: 'Kaushan Script';
 }
 #applicant_msg_act .modal-header .close{
 	color: #fff !important;
 	font-size: 30px;
 	opacity: 1;
+}
+#applicant_msg_act .inbox_msg{
+	color:  #29aafe;
+	/*font-weight: bold;*/
+	
 }
 /* Edit profile */
 .profile-edit .input-group-btn {
@@ -131,8 +261,8 @@ select:invalid { color: gray; }
 #provider_upload .input-group {
 	border-collapse: separate;
     display: table;
+    left: 195px;
     position: relative;
-    width: 60% !important;
 }
 #provider_add_upload .input-group{
 	border-collapse: separate;
@@ -208,21 +338,53 @@ select:invalid { color: gray; }
 .list-banner .fa-thumb-tack {
 	margin-right: 5px;
 }
-
+/* Resume -inbox */
+.resume-list table tr td{
+	vertical-align: middle;
+	text-align: left;
+}
+.del_provdbd_mail {
+	margin: 10px 5px;
+	background-color: #ccebff;
+}
+.resume-list .table-striped > tbody > tr:nth-of-type(2n+1) {
+    background-color: #ccebff;
+}
+  
+/* Browse Candidate jobs */
+#dashboard-jobs-grid .dashboard-jobs-grid-link{
+	/* for grid click event */
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	
+}
 /* END OF COMPANY DASHBOARD */
 
 /* PROVIDERS & SEEKERS DASHBOARD */
-#provider-profilebar .progress, #seeker-profilebar .progress {
+#custom-profilebar .progress, #seeker-profilebar .progress {
     border-radius: 15px;
     box-shadow: none;
     height: 22px;
     position: relative;
 }
-
+/* VACANCIES */
+#list-vacancy .vacancies-grid-link{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	/* this is a fix for IE7-9 */
+  	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
+ 	filter: alpha(opacity=0);  
+  	opacity:0;  
+} 
 
 /*Added by thangam*/
 /*css for login and registrartion start*/
-
 .registration_status {
 	color: #c24641;
 	display: none;
@@ -237,33 +399,6 @@ select:invalid { color: gray; }
 	width: 106px;
 }
 /*css for login and registrartion end*/
-/*Ended by thangam*/
-
-.registration_server_msg{
-	color: #c24641;
-	margin: 10px 0;
-	text-align: center;
-}
-.error, .uploaderror p{
-color: red;
-font-size: 13px;
-}
-.provider-profile-edit input.form-control, select.form-control ,#post_job_form input.form-control{
-    border-radius: 0;
-    height: 45px;
-    letter-spacing: 1px;
-    width: 100% !important;
-}
-#post_job_form .select2-container--default .select2-selection--single{
-	height :45px !important;
-}
-.error_box_shadow{
-	box-shadow: 0 0 5px #ff0000;
-	padding: 3px 0px 3px 3px;
-  	margin: 5px 1px 3px 0px;
-  	border: 1px solid #ff0000;
-}
-/*Added by thangam*/
 .error_test {
   color :red ;
   font-size : 12px; 
@@ -326,6 +461,51 @@ font-size: 13px;
     width: 220px;
 }
 /*Ended by thangam*/
+
+.registration_server_msg{
+	color: #c24641;
+	margin: 10px 0;
+	text-align: center;
+}
+.error, .uploaderror p{
+color: red;
+font-size: 13px;
+}
+.provider-profile-edit input.form-control, select.form-control ,#post_job_form input.form-control{
+    border-radius: 0;
+    height: 45px;
+    letter-spacing: 1px;
+    width: 100% !important;
+}
+#post_job_form .select2-container--default .select2-selection--single{
+	height :45px !important;
+}
+.error_box_shadow{
+	box-shadow: 0 0 5px #ff0000;
+	padding: 3px 0px 3px 3px;
+  	margin: 5px 1px 3px 0px;
+  	border: 1px solid #ff0000;
+}
+.inbox_menu{
+	position: relative;
+}
+.button__badge {
+  background-color: #fa3e3e;
+    border-radius: 20px;
+    color: white;
+    font-size: 13px;
+    padding: 0 11px;
+    position: absolute;
+    right: 17px;
+    top: 9px;
+}
+.provider_job_instruction{
+	height: 160px;
+    width: 100%;
+}
+
+
+
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {	
 	#provider_upload .input-group {
@@ -346,21 +526,33 @@ font-size: 13px;
 	}
 
 }	
+/* For Home page Search Buttonp */
+@media(min-width: 320px) and (max-width: 767px){
+	.slidershow-bg .search-form-contaner {
+		height: 255px;
+	    margin-top: 0;
+	    overflow: hidden;
+	    padding: 10px 20px;
+	    position: relative;
+	    top: -20px;
+	 }   
+}
 
-.inbox_menu{
-	position: relative;
+.success_server_msg{
+	color: #fff;
+	margin: 10px 0;
+	text-align: center;
+	background: #29aafe none repeat scroll 0 0;
 }
-.button__badge {
-  background-color: #fa3e3e;
-    border-radius: 20px;
-    color: white;
-    font-size: 13px;
-    padding: 0 11px;
-    position: absolute;
-    right: 17px;
-    top: 9px;
+.col-md-2-5{
+	min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+    position: relative;
+    float: left;
+    width: 20%;
 }
-.provider_job_instruction{
-	height: 160px;
-    width: 100%;
-}
+
+
+
+

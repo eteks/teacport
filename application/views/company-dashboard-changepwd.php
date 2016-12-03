@@ -9,7 +9,7 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="company-dashboard-followers.html#">Home</a>
+                                <li><a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
                                 <li><a href="company-dashboard-followers.html#">Dashboard</a>
                                 </li>
@@ -33,47 +33,15 @@
                                     <h4>Your School Name</h4>
                                 </div>
                             </div>
-                            <div class="profile-nav">
-                                <div class="panel">
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/dashboard"> <i class="fa fa-user"></i> Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/companydbd_resume"> <i class="fa fa-file-o"></i>Inbox </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/companydbd_browsejobs"> <i class="fa  fa-list-ul"></i> Browse Candidate</a>
-                                        </li>
-                                        <li class="provider-jobs">
-                                            <a href="#"><i class="fa  fa-list-alt"></i> Jobs</a>
-                                            <ul>
-                                            	<li><a href="<?php echo base_url();?>job_provider/companydbd_postjobs"> <i class="fa  fa-list-alt"></i>New Jobs</a></li>
-                                            	<li><a href="<?php echo base_url();?>job_provider/companydbd_postedjobs"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>company-dashboard-post-jobs.php"> <i class="fa  fa-bookmark-o"></i> Post Adds </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-money"></i> Subcribe Plan</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-commenting-o"></i> Feedback </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <!--include left panel menu-->
+                            <?php include('include/company_dashboard_sidebar.php'); ?>
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                         	<div class="heading-inner first-heading">
                                 <p class="title">Change Password</p>
                             </div>
                             <div class="">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal profile-edit">
 	                                <div class="form-group">
 										<label class="col-sm-12">You can change your password below</label>
 									</div>	
@@ -107,10 +75,10 @@
 									<div class="clearfix"> </div>		
                                 </form>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                       </div> 
+                  </div> <!--col-sm-12-->   
+                </div> <!--row-->
+            </div> <!--container->
         </section>
 <?php include('include/footermenu.php'); ?>
        <?php include('include/footer.php'); ?>

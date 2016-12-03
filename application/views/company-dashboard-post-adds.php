@@ -33,45 +33,13 @@
                                     <h4>Your Companty Agency Pvt. Ltd</h4>
                                 </div>
                             </div>
-                            <div class="profile-nav">
-                                <div class="panel">
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/dashboard"> <i class="fa fa-user"></i> Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/companydbd_resume"> <i class="fa fa-file-o"></i>Inbox </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/companydbd_browsejobs"> <i class="fa  fa-list-ul"></i> Browse Candidate</a>
-                                        </li>
-                                        <li class="provider-jobs">
-                                            <a href="#"><i class="fa  fa-list-alt"></i> Jobs</a>
-                                            <ul>
-                                            	<li><a href="<?php echo base_url();?>job_provider/companydbd_postjobs"> <i class="fa  fa-list-alt"></i>New Jobs</a></li>
-                                            	<li><a href="<?php echo base_url();?>job_provider/companydbd_postedjobs"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="active">
-                                            <a href="<?php echo base_url();?>company-dashboard-post-jobs.php"> <i class="fa  fa-bookmark-o"></i> Post Adds </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-money"></i> Subcribe Plan</a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-commenting-o"></i> Feedback </a>
-                                        </li>
-                                        <li>
-                                            <a href="<?php echo base_url();?>job_provider/"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <!--include left panel menu-->
+                            <?php include('include/company_dashboard_sidebar.php'); ?>
                         </div>
                         <div id="post_adds" class="col-md-8 col-sm-8 col-xs-12">
                         	 <div class="visible-lg visible-md">
                         	 	<div class="heading-inner first-heading">
-                                	<p class="title">Adds</p>
+                                	<p class="title">Post Adds</p>
                             	</div>
 	                        	<h6><span>*</span>This image is <strong> illustrative</strong></h6>
                         		<div class=" col-sm-8 col-xs-8">

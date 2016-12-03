@@ -30,7 +30,9 @@ class Job_seeker_model extends CI_Model {
 		$count = $existuser->num_rows();
 		if ($count === 1) {
             $user_data = $existuser->row_array();
+            print_r($user_data);            
 			$user_details['can_email'] = $user_data['candidate_email'];
+			$user_details['candidate_name'] = $user_data['candidate_name'];
 			$user_details['can_userid'] = $user_data['candidate_id'];
 			$user_details['can_mobile'] = $user_data['candidate_mobile_no'];
 			$user_details['user_type'] = 'seeker';
@@ -64,15 +66,16 @@ class Job_seeker_model extends CI_Model {
 	}
 
 	/** Seeker Social authentication **/
-	public function social_valid_provider_login($data)
+	public function social_valid_seeker_login($data)
 	{
 		$where = "(candidate_email='".$data['candidate_email']."' AND candidate_status='1')";
 		$existuser = $this->db->get_where('tr_candidate_profile',$where);
 		$count = $existuser->num_rows();
 		if ($count === 1) {
-            $user_data = $existuser->row_array();
-			$user_details['pro_email'] = $user_data['candidate_email'];
-			$user_details['pro_userid'] = $user_data['candidate_id'];
+            $user_data = $existuser->row_array();            
+			$user_details['candidate_email'] = $user_data['candidate_email'];
+			$user_details['candidate_name'] = $user_data['candidate_name'];			
+			$user_details['candidate_id'] = $user_data['candidate_id'];
 			$user_details['user_type'] = 'seeker';
 			$user_details['valid_status'] = 'valid';
 			$user_detalls['login_type'] = $user_data['candidate_registration_type'];
