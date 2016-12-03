@@ -56,7 +56,7 @@ class Job_Providermodel extends CI_Model {
     // View
     $this->db->select('*');
     $this->db->from('tr_organization_profile op');
-    $this->db->join('tr_subscription s','op.subcription_id=s.subscription_id','inner');
+    $this->db->join('tr_subscription s','op.subcription_id=s.subscription_id','left');
     $model_data['provider_profile'] = $this->db->get()->result_array();
     return $model_data;
   }
@@ -66,11 +66,27 @@ class Job_Providermodel extends CI_Model {
     $provider_profile_where = '(op.organization_id="'.$value.'")';
     $this->db->select('*');
     $this->db->from('tr_organization_profile op');
-    $this->db->join('tr_subscription s','op.subcription_id=s.subscription_id','inner');
+    $this->db->join('tr_subscription s','op.subcription_id=s.subscription_id','left');
     $this->db->join('tr_institution_type it','op.organization_institution_type_id=it.institution_type_id','inner');
-    $this->db->join('tr_district d','op.organization_district_id=d.district_id','inner');
-    $provider_profile = $this->db->where($provider_profile_where)->get()->row_array();
-    return $provider_profile;
+    $this->db->join('tr_district d','op.organization_district_id=d.district_id','left');
+    $model_data['provider_full_profile'] = $this->db->where($provider_profile_where)->get()->row_array();
+    $model_data['payment_details'] =  array();
+    $model_data['payment_status'] = 0;
+
+    $subscription_where = '(organization_id="'.$value.'")';
+    $subscription_get = $this->db->get_where('tr_organization_profile',$subscription_where)->row_array();
+    $subscription_id = $subscription_get['subcription_id'];
+
+    if(!empty($subscription_id)) {
+      $model_data['payment_status'] = 1;
+      $payment_where = '(ts.subscription_id="'.$subscription_id.'" and tour.organization_id="'.$value.'" and status=1)';
+      $this->db->select('*');
+      $this->db->from('tr_subscription ts');
+      $this->db->join('tr_subscription_upgrade tsu','ts.subscription_id=tsu.subscription_id','inner');
+      $this->db->join('tr_organization_upgrade_or_renewal tour','ts.subscription_id=tour.subscription_id','inner');
+      $model_data['payment_details'] = $this->db->where($payment_where)->get()->row_array();
+    }
+    return $model_data;
   }
 
   // Job provider profile

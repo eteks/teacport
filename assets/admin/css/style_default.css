@@ -16,7 +16,7 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
 }
 #header.navbar-inverse .navbar-inner {
     background:#4e4e4e url("../img/top-bg.jpg") repeat-x !important;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e4e4e',endColorstr='#4e4e4e',GradientType=0)
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e4e4e',endColorstr='#4e4e4e',GradientType=0)
     border-width: 0;
 }
 
@@ -201,7 +201,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     max-width: 180px !important;
 }*/
 .error{
-	border: 1px solid #ff0000 !important;
+    border: 1px solid #ff0000 !important;
 }
 tr select {
     max-width: 175px !important;
@@ -214,10 +214,10 @@ tr select {
     min-width: 238px !important;
 }
 .widget-title div.select_by_option{
-	border-left: none !important;
+    border-left: none !important;
 }
 .widget-title .prev_next_opt{
-	margin-top: -17px !important;
+    margin-top: -17px !important;
 }
 .cal_graph_range {
     margin-left: 55px !important;
@@ -228,19 +228,19 @@ tr select {
     min-width: 100px !important;
 }
 /*.alert_msg_chart{
-	min-height: 300px !important;
+    min-height: 300px !important;
 }*/
 .alert_msg_chart{
-	color: #FF0000;
-	margin-left: 15px !important
+    color: #FF0000;
+    margin-left: 15px !important
 }
 #chart svg {
     margin-left: -20px;
     margin-top: -15px;
 }
 .site_visites_cont{
-	padding: 15px 15px 8px !important;
-	max-height: 333px !important;
+    padding: 15px 15px 8px !important;
+    max-height: 333px !important;
     min-height: 111px !important;
     overflow-y: auto !important;
 }
@@ -248,18 +248,18 @@ tr select {
     margin-left: 75px;
 }
 .error_msg_md{
-	color: #ff0000 !important;
-	font-size: 14px !important;
-	/*font-weight:500;*/
-	/*background-color: #d9edf7 !important;
+    color: #ff0000 !important;
+    font-size: 14px !important;
+    /*font-weight:500;*/
+    /*background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;*/
 }
 .update_success_md,.privilege_status{
-	color: #ff0000 !important;
-	font-size: 14px !important;
-	/*font-weight: 600;*/
+    color: #ff0000 !important;
+    font-size: 14px !important;
+    /*font-weight: 600;*/
 }
 .popup {
     width:100%;
@@ -269,7 +269,7 @@ tr select {
     top:0px;
     left:0px;
     background:rgba(0,0,0,0.75);
-    z-index: 3;
+    z-index: 1040;
 }
 .popup-sec {
     width:100%;
@@ -287,7 +287,7 @@ tr select {
     width:90%;
     padding:10px 40px;
     position: fixed;
-    top:55%;
+    top:53%;
     left:50%;
     -webkit-transform:translate(-50%, -50%);
     transform:translate(-50%, -50%);
@@ -348,33 +348,33 @@ tr select {
     text-decoration:none;
 }
 .input_field_width{
-	margin-left: 0px !important;
+    margin-left: 0px !important;
 }
 .uploaded_img{
-	height: 100px;
-	width: 150px;
-	margin-left: -30px;
+    height: 100px;
+    width: 150px;
+    margin-left: -30px;
 }
 .uploaded_img_preview{
-	 max-width: 200px; 
-	 max-height: 150px; 
-	 line-height: 20px;
-	 margin-left: -20px;
+     max-width: 200px; 
+     max-height: 150px; 
+     line-height: 20px;
+     margin-left: -20px;
 }
 .select_chng_rmv{
-	margin-left: -20px;
+    margin-left: -20px;
 }
 .popup_select{
-	width: 200px !important;
+    width: 200px !important;
 }
 .dp_width{
-	width: 185px !important;
+    width: 185px !important;
 }
 .form-horizontal .control-label{
-	padding-top: 0px !important;
-	width: 170px !important;
-	font-weight: 600 !important;
-	font-size: 13px;
+    padding-top: 0px !important;
+    width: 170px !important;
+    font-weight: 600 !important;
+    font-size: 13px;
 }
 .dynamic_data {
     font-size: 13px;
@@ -382,10 +382,10 @@ tr select {
     text-transform: capitalize;
 }
 .parents_tr td textarea{
-	min-height:20px !important;
-	max-height:40px !important;
-	overflow: auto !important;
-	max-width: 145px !important;    
+    min-height:20px !important;
+    max-height:40px !important;
+    overflow: auto !important;
+    max-width: 145px !important;    
     min-width: 100px !important;
 }
 .user_accts_table td input {
@@ -405,21 +405,21 @@ tr select {
     overflow: auto;
 }
 .main_module{
-	font-size: 13px;
-	font-weight:600;
-	color: #555;
+    font-size: 13px;
+    font-weight:600;
+    color: #555;
 }
 .admin_status{
-	color: #ff0000 !important;
-	font-size: 14px !important;
-	background-color: #d9edf7 !important;
+    color: #ff0000 !important;
+    font-size: 14px !important;
+    background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
     display:none;
 }
 .popup_fade{
-	background: #000000 none repeat scroll 0 0;
+    background: #000000 none repeat scroll 0 0;
     display: none;
     height: 1000%;
     opacity: 0.63;
@@ -443,14 +443,14 @@ tr select {
     border-radius: 5px;
 }
 .success-alert {
-  	padding: 25px 0 30px;
+    padding: 25px 0 30px;
     text-align: center;
 }
 .success-alert span{
-	color: #ff0000;
+    color: #ff0000;
 }
 .alert_btn_popup{
-	left: 87px;
+    left: 87px;
     position: relative;
     -moz-border-bottom-colors: none;
     -moz-border-left-colors: none;
@@ -468,13 +468,13 @@ tr select {
     text-transform: uppercase;
 }
 .alert_btn_popup:hover{
-	background-color: #2cc1cc !important;
+    background-color: #2cc1cc !important;
 }
 .val_error{
     color: #ff0000 !important;
-	font-size: 14px !important;
-	/*font-weight: 600;*/
-	background-color: #d9edf7 !important;
+    font-size: 14px !important;
+    /*font-weight: 600;*/
+    background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
@@ -482,7 +482,7 @@ tr select {
     margin-top: 10px !important;
 }
 .db_status,.privilege_status{
-	background-color: #d9edf7 !important;
+    background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
@@ -511,8 +511,8 @@ tr select {
     padding: 5px 14px;
 }
 .pager .previous > a, .pager .previous > span{
-	background: #e8e8e8 none repeat scroll 0 0 !important;
-    color: #333 !important;	
+    background: #e8e8e8 none repeat scroll 0 0 !important;
+    color: #333 !important; 
 }
 #dialog-overlay {
     display: none;
@@ -546,7 +546,7 @@ tr select {
     margin-bottom: 20px;
 }
 .del_no{
-	background: #2fade7 none repeat scroll 0 0 !important;
+    background: #2fade7 none repeat scroll 0 0 !important;
     color: #fff !important;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
@@ -554,7 +554,7 @@ tr select {
     cursor: pointer;
 }
 .del_yes{
-	background: #dc5d3a none repeat scroll 0 0 !important;
+    background: #dc5d3a none repeat scroll 0 0 !important;
     color: #fff !important;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
     text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
@@ -568,12 +568,12 @@ tr select {
     text-transform: capitalize;
 }
 .privileges_table td .chzn-container .chzn-choices{
-	min-width: 255px !important;
-	max-width: 255px !important;
+    min-width: 255px !important;
+    max-width: 255px !important;
 }
 .admin_table td .chzn-container .chzn-choices{
-	min-width: 170px !important;
-	max-width: 170px !important;
+    min-width: 170px !important;
+    max-width: 170px !important;
 }
 .admin_table td .chzn-container .chzn-drop {
    max-height: 100px !important;
@@ -582,20 +582,20 @@ tr select {
     overflow: auto;
 }
 .admin_table td .chzn-container .chzn-container-multi .chzn-container-active{
-	max-height: 100px !important;
+    max-height: 100px !important;
     max-width: 170px !important;
     min-width: 170px !important;    
     overflow: auto;
 }
 .admin_table td .chzn-container-multi .chzn-choices{
-	max-height: 100px !important;
+    max-height: 100px !important;
     max-width: 170px !important;
     min-width: 170px !important;    
     overflow: auto;
 }
 .job_seeker_table td .chzn-container .chzn-choices{
-	min-width: 130px !important;
-	max-width: 130px !important;
+    min-width: 130px !important;
+    max-width: 130px !important;
 }
 .job_seeker_table td .chzn-container .chzn-drop {
    max-height: 100px !important;
@@ -604,13 +604,13 @@ tr select {
     overflow: auto;
 }
 .job_seeker_table td .chzn-container .chzn-container-multi .chzn-container-active{
-	max-height: 100px !important;
+    max-height: 100px !important;
     max-width: 130px !important;
     min-width: 130px !important;    
     overflow: auto;
 }
 .job_seeker_table td .chzn-container-multi .chzn-choices{
-	max-height: 100px !important;
+    max-height: 100px !important;
     max-width: 130px !important;
     min-width: 130px !important;    
     overflow: auto;
@@ -642,7 +642,7 @@ tr select {
     text-align: center !important;
 }
 .admin_table td .on_off_button{
-	width: 85px !important;
+    width: 85px !important;
 }
 /*#sidebar > ul > li > ul.sub {
     max-height: 250px !important;
@@ -660,21 +660,21 @@ tr select {
     width: 250px !important;
 }
 .filter_by_cnt{
-	min-height: 100px !important;
-	max-height: 150px !important;
-	overflow-y: auto !important;
-	width: 95% !important;
+    min-height: 100px !important;
+    max-height: 150px !important;
+    overflow-y: auto !important;
+    width: 95% !important;
 }
 .privilege_form > #sample_editable_1_filter > label {
     margin-right: 20px;
 }
 table .dataTables_empty{
-	font-size:  15px !important;
-	text-transform: capitalize !important;
-	font-weight: 600;
+    font-size:  15px !important;
+    text-transform: capitalize !important;
+    font-weight: 600;
 }
 .step_menus{
-	width: 130px !important;
+    width: 130px !important;
 }
 #plan_upgrade_creation_form table {
     display: block !important;

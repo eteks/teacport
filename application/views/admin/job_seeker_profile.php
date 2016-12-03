@@ -196,19 +196,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <ul  class="row-fluid nav nav-pills">
                           <li class="span2">
                             <a href="#tab1" data-toggle="tab" class="step step_menus active">
-                            <span class="number seeker_tab_num">1</span>
+                            <span class="number">1</span>
                             <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Info-1</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab2" data-toggle="tab" class="step step_menus">
-                              <span class="number seeker_tab_num">2</span>
+                              <span class="number">2</span>
                               <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Info-2</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab3" data-toggle="tab" class="step step_menus">
-                              <span class="number seeker_tab_num">3</span>
+                              <span class="number">3</span>
                               <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Contact Info</span>
                             </a>
                           </li>
@@ -217,19 +217,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           ?>
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step step_menus">
-                              <span class="number seeker_tab_num">4</span>
+                              <span class="number">4</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational<br /> Info</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab5" data-toggle="tab" class="step step_menus">
-                              <span class="number seeker_tab_num">5</span>
+                              <span class="number">5</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience<br /> Info</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab6" data-toggle="tab" class="step step_menus">
-                              <span class="number seeker_tab_num">6</span>
+                              <span class="number">6</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Professional<br /> Info</span>
                             </a>
                           </li>
@@ -238,7 +238,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           ?>
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step">
-                              <span class="number seeker_tab_num">4</span>
+                              <span class="number">4</span>
                               <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Professional<br /> Info</span>
                             </a>
                           </li>

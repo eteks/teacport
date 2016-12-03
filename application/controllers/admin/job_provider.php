@@ -252,7 +252,10 @@ class Job_Provider extends CI_Controller {
 			$value = $this->input->post('value');
 			$data['instution_values'] = $this->admin_model->get_institution_type_list();
 			$data['district_values'] = $this->admin_model->get_district_values();
-			$data['provider_full_profile'] = $this->job_providermodel->get_full_provider_profile($value);
+			$data_values = $this->job_providermodel->get_full_provider_profile($value);
+			$data['provider_full_profile'] = $data_values['provider_full_profile'];
+			$data['payment_details'] = $data_values['payment_details'];
+			$data['payment_status'] = $data_values['payment_status'];
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/jobprovider_profile',$data);
 		}
