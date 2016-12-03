@@ -4279,8 +4279,9 @@ a.dt-button:focus:not(.disabled) {
 }
 
 div.dt-buttons {
-    position: relative;
-    float: left
+    position: absolute;
+    right: 30px;
+    float: left;
 }
 
 div.dt-buttons.buttons-right {
@@ -4614,7 +4615,14 @@ div.dt-button-background {
 .sub{
     max-height: 200px;
     height: auto !important;
+    /*overflow: auto;*/
+    display: block !important;
 }
-.slimScrollDiv {
+.has-sub div {
+   display: none;
+}
+
+/*.slimScrollDiv {
     height: auto !important;
 }
+*/

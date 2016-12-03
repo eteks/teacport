@@ -176,10 +176,15 @@ $(document).ready(function(){
         $('#dialog-overlay').fadeOut(350);
     });
 
+    $('.sub_scroll_section').slimScroll({
+        height: 'auto',
+         wheelStep: 2
+    });
+
     if($('.has-sub').length > 0) {
         $('.has-sub').each(function(){
             if($(this).hasClass('open')) {
-                $(this).find('ul').slideDown();
+                $(this).find('div').slideDown();
             }
         });
     }
