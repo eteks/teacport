@@ -87,6 +87,54 @@ class Job_seeker_model extends CI_Model {
 		}
 	}
 
+
+	public function check_has_initial_data($data)
+	{
+		$where = "((((candidate_password IS NULL OR candidate_password = '') AND candidate_email='".$data."') OR ((candidate_mobile_no IS NULL OR candidate_mobile_no ='')  AND candidate_email='".$data."') AND candidate_status='1'))";
+		$validuser = $this->db->get_where('tr_candidate_profile',$where);
+		$counts = $validuser->num_rows();
+		if ($counts === 1) {
+			return 'has_no_data';
+		}
+		else{
+			return 'has_data';
+		}	
+		
+	}
+
+	public function job_seeker_update_profile($id,$profile)
+	 {
+	 	$this->db->where('candidate_id', $id);
+		$this->db->update('tr_candidate_profile', $profile);
+		return 'updated';
+	 }
+
+	 public function get_cand_data_by_id($id)
+	{
+		
+		$this->db->select('*');    
+		$this->db->from('tr_candidate_profile');
+		$this->db->join('tr_institution_type', 'tr_candidate_profile.candidate_institution_type = tr_institution_type.institution_type_id','left');
+		$this->db->join('tr_district', 'tr_candidate_profile.candidate_district_id = tr_district.district_id','left');
+		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
+		$where = "(tr_candidate_profile.candidate_id='".$id."' AND tr_candidate_profile.candidate_status='1')";
+		$this->db->where($where);
+		$existuser = $this->db->get()->row_array();
+		return $existuser; 
+	} 
+	public function get_cand_data_by_mail($email)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_candidate_profile');
+		$this->db->join('tr_institution_type', ' tr_candidate_profile.candidate_institution_type = tr_institution_type.institution_type_id','left');
+		$this->db->join('tr_district', 'tr_candidate_profile.candidate_district_id = tr_district.district_id','left');
+		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
+		$where = "(tr_candidate_profile.candidate_email='".$email."' AND tr_candidate_profile.candidate_status='1')";
+		$this->db->where($where);
+		$existuser = $this->db->get()->row_array();
+		return $existuser; 
+	} 
+
 	
 	
 }
