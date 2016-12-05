@@ -100,8 +100,15 @@
 select:invalid { color: gray; }
 
  .advanced_search {
- 	margin: 10px;
+ 	margin-top: 5px;
+ 	float:right;
+ 	color: #fff;
+ 	cursor: pointer;
  }
+.advanced_search:hover { 
+	color: #fff;
+	text-decoration: underline;
+}
  
  #advancedsearch_act {
  	margin: 10px 0;
@@ -372,9 +379,14 @@ font-size: 13px;
 }
 .col-md-2-5{
 	min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
     position: relative;
     float: left;
     width: 20%;
+    padding-top:5px;
+}
+.advance_search_btn{
+	margin-top: 10px !important;
+	margin-left : 5px;
 }

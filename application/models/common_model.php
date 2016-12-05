@@ -60,7 +60,35 @@ class Common_model extends CI_Model {
 		$this->db->from('tr_applicable_posting');
 		$where = "(posting_institution_id like '%".$ins_id."%' AND posting_status='1')";
 		$this->db->where($where);
-		$moi = $this->db->get();
-		return $moi->result_array(); 
+		$posting = $this->db->get();
+		return $posting->result_array(); 
 	}
+	public function mother_tongue()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_languages');
+		$where = "(is_mother_tangue = '1'  AND language_status='1')";
+		$this->db->where($where);
+		$mt = $this->db->get();
+		return $mt->result_array(); 
+	}
+	public function subjects($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_subject');
+		$where = "(subject_institution_id like '%".$ins_id."%'  AND subject_status='1')";
+		$this->db->where($where);
+		$subject = $this->db->get();
+		return $subject->result_array(); 
+	}
+	public function qualification($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_educational_qualification');
+		$where = "(educational_qualifcation_inst_type_id like '%".$ins_id."%'  AND educational_qualification_status='1')";
+		$this->db->where($where);
+		$qualification = $this->db->get();
+		return $qualification->result_array(); 
+	}
+	
 }

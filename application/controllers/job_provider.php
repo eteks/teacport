@@ -452,15 +452,36 @@ class Job_provider extends CI_Controller {
 		$this->load->view('company-dashboard-posted-jobs',$data);
 	}
 	public function browse_candidate(){
+		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
-		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
-		$data['posting']		= $this->common_model->applicable_posting($data['organization']['organization_institution_type_id']);
-		$data['district']		= $this->common_model->get_all_district();
+		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['posting']				= $this->common_model->applicable_posting($data['organization']['organization_institution_type_id']);
+		$data['district']				= $this->common_model->get_all_district();
+		$data['medium']					= $this->common_model->medium_of_instruction();
+		$data['mother_tongue']			= $this->common_model->mother_tongue();
+		$data['subject']				= $this->common_model->subjects($data['organization']['organization_institution_type_id']);
+		$data['qualification']			= $this->common_model->qualification($data['organization']['organization_institution_type_id']);
+		$pagination 					= array();
+		$pagination["base_url"] 		= base_url() . "provider/candidate";
+		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
+		$pagination["per_page"] 		= 20;
+		$pagination['use_page_numbers'] = TRUE;
+		$pagination['num_links'] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
+		$pagination['cur_tag_open'] 	= '&nbsp;<li class="active"><a>';
+		$pagination['cur_tag_close'] 	= '</a></li>';
+		$pagination['next_link'] 		= 'Next';
+		$pagination['prev_link'] 		= 'Previous';
+		$this->pagination->initialize($pagination);
+		if($this->uri->segment(3) && $this->uri->segment(3) > $pagination["total_rows"]){
+			$page = ($this->uri->segment(3))-1;
+		}
+		else{
+			$page = 0;
+		}
+		$data["candidates"] = $this->job_provider_model->all_candidate_list($pagination["per_page"], $page,$data['organization']['organization_institution_type_id']);
+		$str_links = $this->pagination->create_links();
+		$data["links"] = explode('&nbsp;',$str_links );
 		$this->load->view('company-dashboard-browse-candidate',$data);
-	}
-	
-	public function companydbd_postedjobs(){
-		$this->load->view('company-dashboard-posted-jobs');
 	}
     public function companydbd_postadds(){
 		$this->load->view('company-dashboard-post-adds');
