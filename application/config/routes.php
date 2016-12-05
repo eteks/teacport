@@ -92,8 +92,12 @@ $route['provider/postedjobs'] = 'job_provider/companydbd_postedjobs';
 $route['provider/postadds'] = 'job_provider/companydbd_postadds';
 $route['provider/subscription'] = 'job_provider/companydbd_subscription';
 $route['provider/feedback'] = 'job_provider/companydbd_feedback';
+$route['provider/feedback'] = 'job_provider/companydbd_feedback';
+$route['provider/singleprofile'] = 'job_provider/singleprofile';
+
 $route['provider/changepwd'] = 'job_provider/companydbd_changepwd';
 $route['seeker/editprofile'] = 'job_seeker/seekerdbd_editprofile';
+
 
 
 

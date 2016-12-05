@@ -388,7 +388,16 @@ select:invalid { color: gray; }
 	left: 0;
 	height: 100%;
 	width: 100%;
-	
+}
+.seeker_individual_profile h5{
+	color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
+}
+#normalsearch_act .btn-default{
+	margin-top: 0px !important;
+	padding: 12px 30px;
 }
 /* END OF COMPANY DASHBOARD */
 
