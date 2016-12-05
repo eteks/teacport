@@ -129,14 +129,14 @@ class Job_provider_model extends CI_Model {
 		$check_completeness = $this->db->get_where('tr_organization_profile',$where);
 		
 	}
-	 public function job_provider_update_profile($id,$profile)
-	 {
+	public function job_provider_update_profile($id,$profile)
+	{
 	 	$this->db->where('organization_id', $id);
 		$this->db->update('tr_organization_profile', $profile);
 		return 'updated';
-	 }
-	 public function job_provider_inbox($organizationid)
-	 {
+	}
+	public function job_provider_inbox($organizationid)
+	{
 	 	$this->db->select('*');    
 		$this->db->from('tr_organizaion_inbox');
 		$this->db->join('tr_candidate_profile', ' tr_organizaion_inbox.inbox_candidate_id = tr_candidate_profile.candidate_id');
@@ -146,18 +146,18 @@ class Job_provider_model extends CI_Model {
 		$this->db->where($where);
 		$inboxdata = $this->db->get();
 		return $inboxdata->result_array(); 
-	 }
-	 public function job_provider_unread_inbox_count($organizationid)
-	 {
+	}
+	public function job_provider_unread_inbox_count($organizationid)
+	{
 	 	$this->db->select('count(is_viewed) as messagecount');    
 		$this->db->from('tr_organizaion_inbox');
 		$where = "(inbox_organization_id='".$organizationid."' AND inbox_status='1' AND is_viewed ='0')";
 		$this->db->where($where);
 		$inboxcount = $this->db->get()->row_array();
 		return $inboxcount['messagecount']; 
-	 }
-	 public function job_provider_inbox_ajax($organizationid,$lastid)
-	 {
+	}
+	public function job_provider_inbox_ajax($organizationid,$lastid)
+	{
 	 	$this->db->select('*');    
 		$this->db->from('tr_organizaion_inbox');
 		$this->db->join('tr_candidate_profile', ' tr_organizaion_inbox.inbox_candidate_id = tr_candidate_profile.candidate_id');
@@ -167,25 +167,22 @@ class Job_provider_model extends CI_Model {
 		$this->db->where($where);
 		$inboxdata = $this->db->get();
 		return $inboxdata->result_array(); 
-	 }
-
-	 public function job_provider_post_vacancy($vacancydata)
-	 {
+	}
+	public function job_provider_post_vacancy($vacancydata)
+	{
 	 	if($this->db->insert('tr_organization_vacancies', $vacancydata)){
 	 		return TRUE;
 	 	}
 		else{
 			return FALSE;
 		}
-	 }
-	 
-	 public function job_provider_posted_job_counts($ins_id)
-	 {
-	 	return $this->db->where('vacancies_organization_id',$ins_id)->from("tr_organization_vacancies")->count_all_results();
-	 }
-	 
-	 public function job_provider_posted_jobs($limit,$start,$ins_id)
-	 {
+	}
+	public function job_provider_posted_job_counts($ins_id)
+	{
+		return $this->db->where('vacancies_organization_id',$ins_id)->from("tr_organization_vacancies")->count_all_results();
+	}
+	public function job_provider_posted_jobs($limit,$start,$ins_id)
+	{
 	 	$this->db->select('*');    
 		$this->db->from('tr_organization_vacancies');
 		$where = "(vacancies_organization_id='".$ins_id."' AND vacancies_status='1')";
@@ -193,6 +190,39 @@ class Job_provider_model extends CI_Model {
 		$this->db->where($where);
 		$postedjobdata = $this->db->get();
 		return $postedjobdata->result_array(); 
-	 }
+	}
+	public function all_candidate_list($limit,$start,$ins_id)
+	{
+		$this->db->select('tr_candidate_profile.candidate_marital_status,tr_candidate_profile.candidate_gender,tr_candidate_profile.candidate_date_of_birth,tr_candidate_profile.candidate_image_path,tr_candidate_preferance.candidate_expecting_start_salary,tr_candidate_preferance.candidate_expecting_end_salary,tr_candidate_profile.candidate_name,tr_district.district_name,tr_subject.subject_name,tr_educational_qualification.educational_qualification,(select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) as experience');
+		$this->db->from('tr_candidate_profile');
+		$this->db->join('tr_district`', 'tr_district.district_id = tr_candidate_profile.candidate_live_district_id');
+		$this->db->join('tr_candidate_education', 'tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_candidate_experience', 'tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
+		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
+		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
+		$this->db->limit($limit,$start);
+		$this->db->where($where);
+		$this->db->group_by('tr_candidate_profile.candidate_id'); 
+		$postedjobdata = $this->db->get();
+		return $postedjobdata->result_array();
+	}
+	public function all_candidate_list_counts($ins_id)
+	{
+		$this->db->select('tr_candidate_profile.candidate_marital_status,tr_candidate_profile.candidate_gender,tr_candidate_profile.candidate_date_of_birth,tr_candidate_profile.candidate_image_path,tr_candidate_preferance.candidate_expecting_start_salary,tr_candidate_preferance.candidate_expecting_end_salary,tr_candidate_profile.candidate_name,tr_district.district_name,tr_subject.subject_name,tr_educational_qualification.educational_qualification,(select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) as experience');
+		$this->db->from('tr_candidate_profile');
+		$this->db->join('tr_district`', 'tr_district.district_id = tr_candidate_profile.candidate_live_district_id');
+		$this->db->join('tr_candidate_education', 'tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_candidate_experience', 'tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
+		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
+		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
+		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
+		$this->db->where($where);
+		$this->db->group_by('tr_candidate_profile.candidate_id');
+		$postedjobdata = $this->db->get();
+		return $postedjobdata->num_rows();
+	}
 	
 }

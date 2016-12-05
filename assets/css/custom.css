@@ -87,7 +87,12 @@
 .login-container #submit {
 	margin-bottom: 0;
 }
-
+.loginbox-signup a {
+	cursor: pointer;
+}
+.loginbox-signup a:hover, .loginbox-forgot a:hover {
+	color: #000000 !important;
+}
 /* Pricing --Features */
 .all-jobs-list-box2 .fa{
 	color: #777;
@@ -225,8 +230,15 @@
 select:invalid { color: gray; }
 
  .advanced_search {
- 	margin: 10px;
+ 	margin-top: 5px;
+ 	float:right;
+ 	color: #fff;
+ 	cursor: pointer;
  }
+.advanced_search:hover { 
+	color: #fff;
+	text-decoration: underline;
+}
  #advancedsearch_act {
  	margin: 10px 0;
  }
@@ -338,7 +350,7 @@ select:invalid { color: gray; }
 .list-banner .fa-thumb-tack {
 	margin-right: 5px;
 }
-/* Resume -inbox */
+/* Company Resume -inbox */
 .resume-list table tr td{
 	vertical-align: middle;
 	text-align: left;
@@ -350,7 +362,24 @@ select:invalid { color: gray; }
 .resume-list .table-striped > tbody > tr:nth-of-type(2n+1) {
     background-color: #ccebff;
 }
-  
+.display_seeker_details {
+	margin: 5px 0 15px;
+    padding: 0 0 10px;
+}
+#applicant_msg_act .modal-body{
+	height: 490px;
+	overflow-y: auto;
+}	
+#applicant_msg_act .modal-footer{
+	background-color: #29aafe; 
+}	
+#pro_inbox_msg h5 {
+    color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
+} 
+
 /* Browse Candidate jobs */
 #dashboard-jobs-grid .dashboard-jobs-grid-link{
 	/* for grid click event */
@@ -359,11 +388,23 @@ select:invalid { color: gray; }
 	left: 0;
 	height: 100%;
 	width: 100%;
-	
+}
+.seeker_individual_profile h5{
+	color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
+}
+#normalsearch_act .btn-default{
+	margin-top: 0px !important;
+	padding: 12px 30px;
 }
 /* END OF COMPANY DASHBOARD */
 
 /* PROVIDERS & SEEKERS DASHBOARD */
+#dashboard_popup_act .modal-footer{
+	padding: 0px;
+}
 #custom-profilebar .progress, #seeker-profilebar .progress {
     border-radius: 15px;
     box-shadow: none;
@@ -546,11 +587,16 @@ font-size: 13px;
 }
 .col-md-2-5{
 	min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
     position: relative;
     float: left;
     width: 20%;
+    padding-top:5px;
+}
+.advance_search_btn{
+	margin-top: 10px !important;
+	margin-left : 5px;
 }
 
 
