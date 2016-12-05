@@ -464,16 +464,17 @@ var App = function () {
             var last = jQuery('.has-sub.open', $('#sidebar'));
             last.removeClass("open");
             jQuery('.arrow', last).removeClass("open");
-            jQuery('.sub', last).slideUp(200);
-            var sub = jQuery(this).next('div').find('ul');
+            jQuery('div', last).slideUp();
+            var sub = jQuery(this).next('div');
             if (sub.is(":visible")) {
                 jQuery('.arrow', jQuery(this)).removeClass("open");
                 jQuery(this).parent().removeClass("open");
-                sub.slideUp(200);
-            } else {
+                sub.slideUp("slow");
+            } 
+            else {
                 jQuery('.arrow', jQuery(this)).addClass("open");
                 jQuery(this).parent().addClass("open");
-                sub.slideDown(200);
+                sub.slideDown("slow");
             }                       
         });
     }

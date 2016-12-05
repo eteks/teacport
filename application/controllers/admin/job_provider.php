@@ -136,6 +136,33 @@ class Job_Provider extends CI_Controller {
 			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|'
 			                            );			                       
 	   		}
+	   		if($this->input->post('index')==4 || $this->input->post('index')=="end") {
+	   			$validation_rules[] =	array(
+			                              'field'   => 'email_valid',
+			                              'label'   => 'Email Validity',
+			                              'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'sms_valid',
+			                                'label'   => 'SMS Validity',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'resume_valid',
+			                                'label'   => 'Resume Validity',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'val_sdate',
+			                                'label'   => 'Validity Start Date',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+	   			$validation_rules[] =	array(
+			                                'field'   => 'val_edate',
+			                                'label'   => 'Validity End Date',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );			                       
+	   		}
 	   		$this->form_validation->set_rules($validation_rules);
 			if ($this->form_validation->run() == FALSE) {   
 		        foreach($validation_rules as $row){
@@ -225,7 +252,10 @@ class Job_Provider extends CI_Controller {
 			$value = $this->input->post('value');
 			$data['instution_values'] = $this->admin_model->get_institution_type_list();
 			$data['district_values'] = $this->admin_model->get_district_values();
-			$data['provider_full_profile'] = $this->job_providermodel->get_full_provider_profile($value);
+			$data_values = $this->job_providermodel->get_full_provider_profile($value);
+			$data['provider_full_profile'] = $data_values['provider_full_profile'];
+			$data['payment_details'] = $data_values['payment_details'];
+			$data['payment_status'] = $data_values['payment_status'];
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/jobprovider_profile',$data);
 		}
@@ -615,9 +645,9 @@ class Job_Provider extends CI_Controller {
 			redirect(base_url().'admin/admin_error');
 		}
 	}
-public function plan_upgrade_or_renewal()
+public function organization_upgrade_or_renewal()
 	{
-		$this->load->view('admin/plan_upgrade_or_renewal');
+		$this->load->view('admin/organization_upgrade_or_renewal');
 	}
 
 }

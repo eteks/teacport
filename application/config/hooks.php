@@ -10,6 +10,7 @@
 |
 */
 
+
 $hook['pre_controller'] = array(
         'class'    => 'Admin_users',
         'function' => 'admin_module_access_privileges',

@@ -66,13 +66,14 @@ $route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
 $route['provider/candidate'] = 'job_provider/browse_candidate';
 $route['provider/candidate/(:num)'] = 'job_provider/browse_candidate/$1';
 $route['provider/postjob'] = 'job_provider/postjob';
-$route['provider/postedjob'] = 'job_provider/postedjob';
 $route['provider/postedjob/(:num)'] = 'job_provider/postedjob/$1';
 $route['provider/logout'] = 'job_provider/provider_logout';
 
 //JOB SEEKER
 $route['seeker/dashboard'] = 'job_seeker/dashboard';
 $route['seeker/logout'] = 'job_seeker/seeker_logout';
+$route['seeker/initialdata'] = 'job_seeker/initialdata';
+$route['seeker/dashboard/editprofile'] = 'job_seeker/editprofile';
 
 //OTHER PAGES
 $route['aboutus'] = 'home/aboutus';
@@ -117,7 +118,7 @@ $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provid
 $route['admin/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
 $route['admin/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
 $route['admin/jobprovider_mailstatus'] = 'admin/job_provider/teacport_jobprovider_mailstatus';
-$route['admin/plan_upgrade_or_renewal'] = 'admin/job_provider/plan_upgrade_or_renewal';
+$route['admin/organization_upgrade_or_renewal'] = 'admin/job_provider/organization_upgrade_or_renewal';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 

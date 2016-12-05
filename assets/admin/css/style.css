@@ -391,7 +391,7 @@ a,a:focus, a:hover, a:active {
 /* body container */
 #login-body {
     background-color: #f7f7f7  !important;
-	background-image: url("../img/body-bg.png") !important;
+    background-image: url("../img/body-bg.png") !important;
 }
 
 #main-content {
@@ -2863,12 +2863,13 @@ div.tagsinput .not_valid {
 .form-wizard .steps .navbar-inner li a {
     background-color: #eee !important;
     background-image: none !important;
-    filter:none !important;
-    border: 0px;
+    border: 0 none;
+    border-radius: 30px;
     box-shadow: none !important;
-    border-radius:30px;
-    -moz-border-radius: 30px;
-    -webkit-border-radius: 30px;
+    filter: none !important;
+    min-height: 40px;
+    position: relative;
+}
 }
 
 .form-wizard .step:hover {
@@ -2876,15 +2877,16 @@ div.tagsinput .not_valid {
 }
 
 .form-wizard .step .number {
-    background-color: #ccc;
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 300;
-    padding: 12px 15px !important;
-    margin-right: 10px;
-    -webkit-border-radius: 30px 0 0 30px !important;
-    -moz-border-radius: 30px 0 0 30px !important;
     border-radius: 30px 0 0 30px !important;
+    display: inline-block;
+    left: 0;
+    min-height: 40px;
+    position: absolute;
+    top: 0;
+    line-height: 40px;
+    width: 30px;
+    text-align: center;
+    background: #d3d3d3;
 }
 
 .form-wizard .navbar .nav > li > a {
@@ -2895,6 +2897,8 @@ div.tagsinput .not_valid {
     display: inline-block;
     font-size: 13px;
     font-weight: 300;
+    margin-left: 35px;
+    margin-top: 5px;
 }
 
 .form-wizard .active .step .number {
@@ -4275,8 +4279,9 @@ a.dt-button:focus:not(.disabled) {
 }
 
 div.dt-buttons {
-    position: relative;
-    float: left
+    position: absolute;
+    right: 30px;
+    float: left;
 }
 
 div.dt-buttons.buttons-right {
@@ -4444,8 +4449,159 @@ div.dt-button-background {
     text-align: left;
     width: 10%;
 }
+.full-width {
+    width: 100% !important;
+}
+/*.plan_field_section, .plan_label_section {
+    height: 200px;
+}*/
+.plan_field_section {
+    background: rgba(243,245,246,0.7);
+    position: relative;
+    height: 260px;
+}
+.profile_plan_section h4 {
+    font-weight: bold;
+}
+.profile_plan_section {
+    margin-bottom: 10px;
+}
+.plan_label_section label , .plan_field_section label {
+    display: block; 
+    width: 100% !important;
+    margin-bottom: 15px;
+}
+.plan_field_section label {
+    margin-left: 15px;
+}
+.inner-triangle{
+    border-bottom: 50px solid transparent;
+    border-left: 20px solid transparent;
+    /*border-right: 60px solid green;*/
+    border-right: 60px solid #A5D16C;
+    height: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 0;
+    z-index: 2;
+}
+.triangle_disabled {
+   border-right: 60px solid #E74955;   
+}
+.triangle_notification {
+    color: #fff;
+    font-size: 18px;
+    position: absolute;
+    right: 8px;
+    top: 6px;
+    z-index: 5;
+    width: auto !important;
+}
 
 
+
+/**
+ * Icon
+ */
+
+.icon {
+    border-radius: 5px;
+    color: #fff;
+    display: inline-block;
+    font-family: sans-serif;
+    font-size: 12px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 !important;
+    overflow: hidden;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    background: cornflowerblue;
+    padding: 0 5px;
+    width: auto !important;
+}
+.icon_expired {
+    background: salmon !important;
+}
+.icon_not_activate {
+    background: gray !important;
+}
+
+/*.icon:nth-child(1) { background: cornflowerblue; }
+.icon:nth-child(2) { background: salmon; }
+.icon:nth-child(3) { background: gray; }*/
+
+/**
+ * The "shine" element
+ */
+
+.icon:after {
+  content: "";
+  position: absolute;
+  top: -110%;
+  left: -210%;
+  width: 200%;
+  height: 200%;
+  opacity: 0;
+  transform: rotate(30deg);
+  
+  background: rgba(255, 255, 255, 0.13);
+  background: linear-gradient(
+    to right, 
+    rgba(255, 255, 255, 0.13) 0%,
+    rgba(255, 255, 255, 0.13) 77%,
+    rgba(255, 255, 255, 0.5) 92%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
+}
+
+/* Hover state - trigger effect */
+
+.icon:hover:after {
+  left: -50%;
+  opacity: 1;
+  top: -50%;
+  transition-property: left, top, opacity;
+  transition-duration: 0.7s, 0.7s, 0.15s;
+  transition-timing-function: ease;
+}
+
+/* Active state */
+
+.icon:active:after {
+  opacity: 0;
+}
+.tab-pane {
+    min-height: 150px;
+}
+.empty_subscription_section {
+    margin-left: 6px;
+    padding: 10px;
+    font-weight: bold;
+    font-size: 14px;
+}
+.empty_subscription_section span {
+    width: auto !important;
+    color: #e74955;
+}
+.plan_name {
+    margin-top: 0px ;
+    font-weight: bold;
+}
+.span-2 {
+    width: 17.53% !important;
+}
+.desc {
+    color: #777;
+}
+.subscription_status {
+    margin-bottom: 5px !important;
+}
+.pager {
+    margin: 10px 0 0;
+}
 
 /* Datatable Css to add checkbox with columns for columns visibility end */
 
@@ -4457,9 +4613,16 @@ div.dt-button-background {
     display: none;
 }
 .sub{
-	max-height: 200px;
-	height: auto !important;
+    max-height: 200px;
+    height: auto !important;
+    /*overflow: auto;*/
+    display: block !important;
 }
-.slimScrollDiv {
-	height: auto !important;
+.has-sub div {
+   display: none;
 }
+
+/*.slimScrollDiv {
+    height: auto !important;
+}
+*/

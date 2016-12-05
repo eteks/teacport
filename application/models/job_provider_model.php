@@ -96,6 +96,7 @@ class Job_provider_model extends CI_Model {
 		else{
 			return 'has_data';
 		}	
+		
 	}
 	public function get_org_data_by_id($id)
 	{

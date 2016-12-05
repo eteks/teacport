@@ -9,11 +9,11 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="company-dashboard-followers.html#">Home</a>
+                                <li><a href="index.php">Home</a>
                                 </li>
-                                <li><a href="company-dashboard-followers.html#">Dashboard</a>
+                                <li><a href="company-dashboard.html">Dashboard</a>
                                 </li>
-                                <li class="active">Feedback</li>
+                                <li class="active">Posted Jobs</li>
                             </ol>
                         </div>
                     </div>
@@ -33,15 +33,17 @@
                                     <h4><?php echo $organization['organization_name']; ?></h4>
                                 </div>
                             </div>
-                            <!-- dashboard side bar  -->
-                            <?php include('include/company_dashboard_sidebar.php'); ?>
-                        </div>
+                            <!--include left panel menu-->
+                             <?php include('include/company_dashboard_sidebar.php'); ?>  
+                         </div>
+                        
                         <?php //echo "<pre>"; print_r($postedjob);echo "</pre>"; ?>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                         	
                             <div class="heading-inner first-heading">
                                 <p class="title">Posted Jobs</p>
                             </div>
+
                              <!---List of posted jobs-->
                             <div class="all-jobs-list-box2">
                             	<?php foreach ($postedjob as $postedjobs) { ?>
@@ -58,10 +60,14 @@
 	                                <div class="job-salary">
 	                                    <i class="fa fa-money"></i> &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>
 	                                </div>
+	                                <a href="javascript:void(0)" onclick='window.location = "company-dashboard-job-detail.html"'>
+	                                	<span class="dashboard-jobs-grid-link"> </span>
+	                                </a>
                                 </div>
                               <?php }  ?>
                             </div>
                            
+
                             <!--Pagination-->
                             <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                                 <div class="pagination-box clearfix">
