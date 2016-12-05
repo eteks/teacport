@@ -10,11 +10,13 @@
 |
 */
 
+
 $hook['pre_controller'] = array(
         'class'    => 'Admin_users',
         'function' => 'admin_module_access_privileges',
         'filename' => 'admin_users.php',
         'filepath' => 'controllers/admin',
+        // 'params'   => array('bread', 'wine', 'butter')
         'params' => array()
         );
 

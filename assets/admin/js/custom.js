@@ -168,6 +168,7 @@ ajax = function (params,action,form_id){
 };
 
 $(document).ready(function(){
+    
     default_credentials();
 
     $('#dialog-overlay').on('click',function() {
@@ -175,10 +176,14 @@ $(document).ready(function(){
         $('#dialog-overlay').fadeOut(350);
     });
 
+    $('.sub_scroll_section').slimScroll({
+        height: 'auto'
+    });
+
     if($('.has-sub').length > 0) {
         $('.has-sub').each(function(){
             if($(this).hasClass('open')) {
-                $(this).find('ul').slideDown();
+                $(this).find('div').slideDown();
             }
         });
     }

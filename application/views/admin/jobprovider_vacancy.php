@@ -187,19 +187,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="navbar-inner">
                           <div class="container">
                             <ul class="row-fluid nav nav-pills">
-                              <li class="span4">
+                              <li class="span-2">
                                 <a href="#tab1" data-toggle="tab" class="step active">
                                 	<span class="number">1</span>
                                     <span class="desc"><i class="icon-ok"></i>Vacancies Details</span>
                                 </a>
                               </li>
-                              <li class="span4">
+                              <li class="span-2">
                                 <a href="#tab2" data-toggle="tab" class="step">
                                 	<span class="number">2</span>
                                     <span class="desc"><i class="icon-ok"></i>Vacancies Pre-Requisite</span>
                                 </a>
                               </li>
-                              <li class="span4">
+                              <li class="span-2">
                                 <a href="#tab3" data-toggle="tab" class="step">
                                 	<span class="number">3</span>
                                     <span class="desc"><i class="icon-ok"></i>Vacancies Instructions</span>

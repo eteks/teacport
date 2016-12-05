@@ -69,7 +69,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">
-                        <th>Job Vacancies</th>
+                        <th>Organization</th>
+                        <th>Job Title</th>
 	                      <th>Candidate</th>
                         <th>Status</th>
                         <th>Applied Date</th>
@@ -89,6 +90,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       $i++;
                       ?>
 	                    <tr class="parents_tr" id="column<?php echo $i; ?>">
+                        <td class="org_name">
+                          <?php echo $job_val['organization_name']; ?>
+                        </td>
                         <td class="vac_name">
                           <?php echo $job_val['vacancies_job_title']; ?>
                           <input type="hidden" value="<?php echo $job_val['applied_job_vacancies_id']; ?>" />
@@ -144,8 +148,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <!-- END CONTAINER -->
 <script>
   // Define default values
-  var inputType = new Array("select","select","select","label"); // Set type of input which are you have used like text, select,textarea.
-  var columns = new Array("vac_name","cand_name","job_status","applied_date"); // Set name of input types
+  var inputType = new Array("label","select","select","select","label"); // Set type of input which are you have used like text, select,textarea.
+  var columns = new Array("org_name","vac_name","cand_name","job_status","applied_date"); // Set name of input types
   var table = "admin_table"; // Set classname of table
   var vac_name_option = new Array("Please select vacancy"); 
   var vac_name_value = new Array("");
