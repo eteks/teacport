@@ -374,9 +374,10 @@ select:invalid { color: gray; }
 	background-color: #29aafe; 
 }	
 #pro_inbox_msg h5 {
-    background-color: #29aafe !important;
-    color: #fff;
-    padding: 5px;
+    color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
 } 
 
 /* Browse Candidate jobs */
