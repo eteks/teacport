@@ -488,6 +488,9 @@ tr select {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
     margin-top: 10px !important;
 }
+.privilege_status{
+    margin: 10px 26px 0px 20px !important;
+}
 .main_module_name {
     font-family: Helvetica;
     font-size: 12px !important;

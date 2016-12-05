@@ -91,7 +91,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <tr class="parents_tr user_accts_table" id="column<?php echo $i; ?>">
                                         <td class="admin_user_name"><?php echo $usr_det['admin_user_name']; ?></td>
                                         <td class="admin_user_password"><?php echo $usr_det['admin_user_password']; ?></td>
-                                        <td class="admin_user_email"><?php echo $usr_det['admin_user_password']; ?></td>
+                                        <td class="admin_user_email"><?php echo $usr_det['admin_user_email']; ?></td>
                                         <td class="admin_user_group"><?php echo $usr_det['user_group_name']; ?>
                                         <input type="hidden" value="<?php echo $usr_det['user_group_id']; ?>" />
                                         </td>
@@ -110,7 +110,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         </td>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                        <td><a class="ajaxDelete" id="column<?php echo $i; ?>" onclick="Confirm.show()" data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
+                                        <td><a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
                                         <?php endif; ?>
                                     </tr>
                                     <?php
