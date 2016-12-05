@@ -64,6 +64,7 @@ $route['provider/inbox'] = 'job_provider/inbox';
 $route['provider/inbox/message'] = 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
 $route['provider/candidate'] = 'job_provider/browse_candidate';
+$route['provider/candidate/(:num)'] = 'job_provider/browse_candidate/$1';
 $route['provider/postjob'] = 'job_provider/postjob';
 $route['provider/postedjob/(:num)'] = 'job_provider/postedjob/$1';
 $route['provider/logout'] = 'job_provider/provider_logout';
@@ -71,6 +72,8 @@ $route['provider/logout'] = 'job_provider/provider_logout';
 //JOB SEEKER
 $route['seeker/dashboard'] = 'job_seeker/dashboard';
 $route['seeker/logout'] = 'job_seeker/seeker_logout';
+$route['seeker/initialdata'] = 'job_seeker/initialdata';
+$route['seeker/dashboard/editprofile'] = 'job_seeker/editprofile';
 
 //OTHER PAGES
 $route['aboutus'] = 'home/aboutus';

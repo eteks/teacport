@@ -132,7 +132,7 @@ class Admin_users_model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $users_delete_where = '(state_id="'.$this->input->post('rid').'")';
+      $users_delete_where = '(admin_user_id="'.$this->input->post('rid').'")';
       $this->db->delete("tr_admin_users", $users_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
