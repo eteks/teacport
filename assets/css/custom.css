@@ -211,13 +211,13 @@
 	color: #FFF !important;
 }
 .imagepreview_act {
-    width: 175px;
-    height: 180px;
+    width: 100%;
+    max-height: auto;
     background-position: center center;
     background-size: cover;
-    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    /*-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);*/
     display: inline-block;
-    margin: 35px 10px 10px 10px;
+    /*margin: 35px 10px 10px 10px;*/
 }
 /*.select-salary select option:first{
 	color: #999;
@@ -288,54 +288,54 @@ select:invalid { color: gray; }
 	border: 1px solid #ccc;
 	margin: 15px 0;
 	height: auto;
-	width: 470px;
+	width: 100%;
 	background-color: #E4E4E4;
 }
 .header_part {
-	width: 450px;
+	width: 97%;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .home_slider{
-	width: 450px;
+	width: 97%;
 	height: 80px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .featured_jobs_area {
-	margin: 8px;
+	margin: 10px;
 	border: 5px solid #f2f2f2;
 }
 .fjob {
-	width: 131px;
+	width: 30.3%;
 	height: 80px;
-	margin: 5px 8px 0;
+	margin: 8px 10px 0;
 	background-color: #f2f2f2;
 }
 .counter_area {
-	width: 450px;
+	width: 97%;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .post_adds_caurosel {
 	border: 5px solid #f2f2f2;
-	width: 450px;
+	width: 97%;
 	height: 100px;
 	background-color: #ccefff;
 	
 	margin: 5px 10px;
 }
 .page_layout .footer_section {
-	width: 450px;
+	width: 97%;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .page_layout .footer{
 	background-color: #eee;
-	width: 450px;
+	width: 97%;
 	height: 10px;
 	margin: 1px 10px 5px 10px;
 }
@@ -476,7 +476,7 @@ select:invalid { color: gray; }
 }
 .error, .uploaderror p{
 color: red;
-font-size: 13px;
+font-size: 12px;
 }
 .provider-profile-edit input.form-control, select.form-control ,#post_job_form input.form-control{
     border-radius: 0;
@@ -564,7 +564,9 @@ font-size: 13px;
 	margin-top: 10px !important;
 	margin-left : 5px;
 }
-
-
-
-
+.postad_preview{
+	display: none;
+}
+.preview_post_ad_image{
+	cursor: pointer;
+}
