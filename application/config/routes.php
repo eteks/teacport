@@ -95,6 +95,8 @@ $route['seeker/editprofile'] 							= 'job_seeker/seekerdbd_editprofile';
 
 
 
+
+
 //Route url for admin
 $route['admin'] = 'admin/admin_login/teac_admin_login';
 $route['admin/dashboard'] = 'admin/dashboardpage/dashboard';

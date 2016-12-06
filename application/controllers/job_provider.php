@@ -729,4 +729,8 @@ class Job_provider extends CI_Controller {
 				}
 			}   	
 		}
+
+      public function singleprofile() {
+      	 $this->load->view('company-dashboard-job-detail');
+      }
 }

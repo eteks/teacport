@@ -48,7 +48,7 @@
                                    <label class="checkbox_word"><input type="checkbox">I accept <a href="register-4.html" class="txt_blue">Term and conditions?</a>
                                 </div>
                                 <div class="loginbox-submit">
-                                    <a href="user-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Register"></a>
+                                    <input type="submit" class="btn btn-default btn-block" value="Register">
                                 </div>
                                 <div class="loginbox-or">
                                     <div class="or-line"></div>
@@ -115,7 +115,7 @@
                                     <a class="txt_blue">Forgot Password?</a>
                                 </div>
                                 <div class="loginbox-submit">
-                                    <a href="user-dashboard.html"><input type="submit" class="btn btn-default btn-block" value="Login"></a>
+                                    <input type="submit" class="btn btn-default btn-block" value="Login">
                                 </div>
                                 <?php echo form_close(); ?>
                                 <div class="loginbox-or">
