@@ -30,11 +30,11 @@ class Job_seeker_model extends CI_Model {
 		$count = $existuser->num_rows();
 		if ($count === 1) {
             $user_data = $existuser->row_array();
-            print_r($user_data);            
-			$user_details['can_email'] = $user_data['candidate_email'];
+            //print_r($user_data);            
+			$user_details['candidate_email'] = $user_data['candidate_email'];
 			$user_details['candidate_name'] = $user_data['candidate_name'];
-			$user_details['can_userid'] = $user_data['candidate_id'];
-			$user_details['can_mobile'] = $user_data['candidate_mobile_no'];
+			$user_details['candidate_id'] = $user_data['candidate_id'];
+			$user_details['candidate_mobile_no'] = $user_data['candidate_mobile_no'];
 			$user_details['user_type'] = 'seeker';
 			$user_details['valid_status'] = 'valid';
 			return $user_details; 
@@ -87,19 +87,17 @@ class Job_seeker_model extends CI_Model {
 		}
 	}
 
-
-	public function check_has_initial_data($data)
-	{
-		$where = "((((candidate_password IS NULL OR candidate_password = '') AND candidate_email='".$data."') OR ((candidate_mobile_no IS NULL OR candidate_mobile_no ='')  AND candidate_email='".$data."') AND candidate_status='1'))";
+	public function check_has_initial_data($data) {
+		
+		$where = "(candidate_email='".$data."' AND candidate_status='1')";
 		$validuser = $this->db->get_where('tr_candidate_profile',$where);
 		$counts = $validuser->num_rows();
-		if ($counts === 1) {
-			return 'has_no_data';
-		}
-		else{
+		if ($counts === 1) {					
 			return 'has_data';
-		}	
-		
+		}
+		else{				
+			return 'has_no_data';
+		}			
 	}
 
 	public function job_seeker_update_profile($id,$profile)

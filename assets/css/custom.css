@@ -87,7 +87,12 @@
 .login-container #submit {
 	margin-bottom: 0;
 }
-
+.loginbox-signup a {
+	cursor: pointer;
+}
+.loginbox-signup a:hover, .loginbox-forgot a:hover {
+	color: #000000 !important;
+}
 /* Pricing --Features */
 .all-jobs-list-box2 .fa{
 	color: #777;
@@ -211,13 +216,13 @@
 	color: #FFF !important;
 }
 .imagepreview_act {
-    width: 175px;
-    height: 180px;
+    width: 100%;
+    max-height: auto;
     background-position: center center;
     background-size: cover;
-    -webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+    /*-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);*/
     display: inline-block;
-    margin: 35px 10px 10px 10px;
+    /*margin: 35px 10px 10px 10px;*/
 }
 /*.select-salary select option:first{
 	color: #999;
@@ -225,8 +230,15 @@
 select:invalid { color: gray; }
 
  .advanced_search {
- 	margin: 10px;
+ 	margin-top: 5px;
+ 	float:right;
+ 	color: #fff;
+ 	cursor: pointer;
  }
+.advanced_search:hover { 
+	color: #fff;
+	text-decoration: underline;
+}
  #advancedsearch_act {
  	margin: 10px 0;
  }
@@ -281,54 +293,54 @@ select:invalid { color: gray; }
 	border: 1px solid #ccc;
 	margin: 15px 0;
 	height: auto;
-	width: 470px;
+	width: 100%;
 	background-color: #E4E4E4;
 }
 .header_part {
-	width: 450px;
+	width: 97%;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .home_slider{
-	width: 450px;
+	width: 97%;
 	height: 80px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .featured_jobs_area {
-	margin: 8px;
+	margin: 10px;
 	border: 5px solid #f2f2f2;
 }
 .fjob {
-	width: 131px;
+	width: 30.3%;
 	height: 80px;
-	margin: 5px 8px 0;
+	margin: 8px 10px 0;
 	background-color: #f2f2f2;
 }
 .counter_area {
-	width: 450px;
+	width: 97%;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .post_adds_caurosel {
 	border: 5px solid #f2f2f2;
-	width: 450px;
+	width: 97%;
 	height: 100px;
 	background-color: #ccefff;
 	
 	margin: 5px 10px;
 }
 .page_layout .footer_section {
-	width: 450px;
+	width: 97%;
 	height: 30px;
 	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .page_layout .footer{
 	background-color: #eee;
-	width: 450px;
+	width: 97%;
 	height: 10px;
 	margin: 1px 10px 5px 10px;
 }
@@ -338,7 +350,7 @@ select:invalid { color: gray; }
 .list-banner .fa-thumb-tack {
 	margin-right: 5px;
 }
-/* Resume -inbox */
+/* Company Resume -inbox */
 .resume-list table tr td{
 	vertical-align: middle;
 	text-align: left;
@@ -350,7 +362,24 @@ select:invalid { color: gray; }
 .resume-list .table-striped > tbody > tr:nth-of-type(2n+1) {
     background-color: #ccebff;
 }
-  
+.display_seeker_details {
+	margin: 5px 0 15px;
+    padding: 0 0 10px;
+}
+#applicant_msg_act .modal-body{
+	height: 490px;
+	overflow-y: auto;
+}	
+#applicant_msg_act .modal-footer{
+	background-color: #29aafe; 
+}	
+#pro_inbox_msg h5 {
+    color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
+} 
+
 /* Browse Candidate jobs */
 #dashboard-jobs-grid .dashboard-jobs-grid-link{
 	/* for grid click event */
@@ -359,11 +388,23 @@ select:invalid { color: gray; }
 	left: 0;
 	height: 100%;
 	width: 100%;
-	
+}
+.seeker_individual_profile h5{
+	color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
+}
+#normalsearch_act .btn-default{
+	margin-top: 0px !important;
+	padding: 12px 30px;
 }
 /* END OF COMPANY DASHBOARD */
 
 /* PROVIDERS & SEEKERS DASHBOARD */
+#dashboard_popup_act .modal-footer{
+	padding: 0px;
+}
 #custom-profilebar .progress, #seeker-profilebar .progress {
     border-radius: 15px;
     box-shadow: none;
@@ -469,7 +510,7 @@ select:invalid { color: gray; }
 }
 .error, .uploaderror p{
 color: red;
-font-size: 13px;
+font-size: 12px;
 }
 .provider-profile-edit input.form-control, select.form-control ,#post_job_form input.form-control{
     border-radius: 0;
@@ -546,13 +587,20 @@ font-size: 13px;
 }
 .col-md-2-5{
 	min-height: 1px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
     position: relative;
     float: left;
     width: 20%;
+    padding-top:5px;
 }
-
-
-
-
+.advance_search_btn{
+	margin-top: 10px !important;
+	margin-left : 5px;
+}
+.postad_preview{
+	display: none;
+}
+.preview_post_ad_image{
+	cursor: pointer;
+}

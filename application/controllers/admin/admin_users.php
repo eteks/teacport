@@ -190,7 +190,7 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                                 'field'   => 'admin_user_email',
 		                                 'label'   => 'User Email',
-		                                 'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_admin_users.admin_user_id.admin_user_email.'.$id.']'
+		                                 'rules'   => 'trim|required|xss_clean|valid_email|callback_edit_unique[tr_admin_users.admin_user_id.admin_user_email.'.$id.']'
 		                            ),
 		                            array(
 		                                 'field'   => 'admin_user_group',
@@ -219,7 +219,7 @@ class Admin_users extends CI_Controller {
 	                            array(
 	                                 'field'   => 'admin_user_email',
 	                                 'label'   => 'User Email',
-	                                 'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_admin_users.admin_user_id.admin_user_email.'.$id.']'
+	                                 'rules'   => 'trim|required|xss_clean|valid_email|is_unique[tr_admin_users.admin_user_name]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_group',

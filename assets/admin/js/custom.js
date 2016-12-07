@@ -607,8 +607,9 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
             success: function(res) {
                 $res = JSON.parse(res);
                 if($res == "success"){
-                    $("html, body").animate({ scrollTop: 800 }, "slow");
-                    $('.privilege_status').text("Updated Successfully").show();
+                    $("html, body,.form_table_scl").animate({ scrollTop: 0 }, "slow");
+                    $('.privilege_status').text("Updated Successfully").show().fadeOut(3000);
+
                 }
             }
         });
