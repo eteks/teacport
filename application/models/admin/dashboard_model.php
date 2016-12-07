@@ -155,13 +155,20 @@ class Dashboard_model extends CI_Model {
   }
   public function paid_job_providers(){
       //Get vacancies by district wise to combine the table of Vacancies, Organization and District
-      $condition = "org.organization_status = 1 AND sub.subscription_status=1";
-      $this->db->select('count(subscription_id) as count_plan,sub.subscription_id,sub.subscription_plan,sub.subscription_price');
-      $this->db->from('tr_organization_profile AS org');
-      $this->db->join('tr_subscription AS sub', 'sub.subscription_id = org.subcription_id', 'inner');
+      // $condition = "org.organization_status = 1 AND sub.subscription_status=1";
+      // $this->db->select('count(subscription_id) as count_plan,sub.subscription_id,sub.subscription_plan,sub.subscription_price');
+      // $this->db->from('tr_organization_profile AS org');
+      // $this->db->join('tr_subscription AS sub', 'sub.subscription_id = org.subcription_id', 'inner');
+      // $this->db->where($condition);
+      // $this->db->order_by('count_plan','desc');
+      // $this->db->group_by('sub.subscription_id');
+      $condition = "org.organization_subscription_status = 1 AND sub.subscription_status=1";
+      $this->db->select('count(org.subscription_id) as count_plan,sub.subscription_id,sub.subscription_plan,sub.subscription_price');
+      $this->db->from('tr_organization_subscription AS org');
+      $this->db->join('tr_subscription AS sub', 'sub.subscription_id = org.subscription_id', 'inner');
       $this->db->where($condition);
       $this->db->order_by('count_plan','desc');
-      $this->db->group_by('sub.subscription_id');
+      $this->db->group_by('org.organization_id');
       $query = $this->db->get()->result_array();
       // echo "plan job provider";
       // print_r($query);
@@ -169,10 +176,18 @@ class Dashboard_model extends CI_Model {
   }
   public function paid_job_providers_by_district(){
       //Get vacancies by district wise to combine the table of Vacancies, Organization and District
-      $condition = "org.subcription_id IS NOT NULL AND org.organization_status = 1 AND dist.district_status=1";
+      // $condition = "org.subcription_id IS NOT NULL AND org.organization_status = 1 AND dist.district_status=1";
+      // $this->db->select('count(district_id) as count_dist,dist.district_id,dist.district_name');
+      // $this->db->from('tr_organization_profile AS org');
+      // $this->db->join('tr_district AS dist', 'dist.district_id = org.organization_district_id', 'inner');
+      // $this->db->where($condition);
+      // $this->db->order_by('count_dist','desc');
+      // $this->db->group_by('dist.district_id');
+      $condition = "org_sub.subscription_id IS NOT NULL AND org.organization_status = 1 AND dist.district_status=1";
       $this->db->select('count(district_id) as count_dist,dist.district_id,dist.district_name');
       $this->db->from('tr_organization_profile AS org');
       $this->db->join('tr_district AS dist', 'dist.district_id = org.organization_district_id', 'inner');
+      $this->db->join('tr_organization_subscription AS org_sub', 'org_sub.organization_id = org.organization_id', 'inner');
       $this->db->where($condition);
       $this->db->order_by('count_dist','desc');
       $this->db->group_by('dist.district_id');
@@ -183,10 +198,18 @@ class Dashboard_model extends CI_Model {
   }
   public function free_job_providers_by_district(){
       //Get vacancies by district wise to combine the table of Vacancies, Organization and District
-      $condition = "org.subcription_id IS NULL AND org.organization_status = 1 AND dist.district_status=1";
+      // $condition = "org.subcription_id IS NULL AND org.organization_status = 1 AND dist.district_status=1";
+      // $this->db->select('count(district_id) as count_dist,dist.district_id,dist.district_name');
+      // $this->db->from('tr_organization_profile AS org');
+      // $this->db->join('tr_district AS dist', 'dist.district_id = org.organization_district_id', 'inner');
+      // $this->db->where($condition);
+      // $this->db->order_by('count_dist','desc');
+      // $this->db->group_by('dist.district_id');
+      $condition = "org_sub.subscription_id IS NULL AND org.organization_status = 1 AND dist.district_status=1";
       $this->db->select('count(district_id) as count_dist,dist.district_id,dist.district_name');
       $this->db->from('tr_organization_profile AS org');
       $this->db->join('tr_district AS dist', 'dist.district_id = org.organization_district_id', 'inner');
+      $this->db->join('tr_organization_subscription AS org_sub', 'org_sub.organization_id = org.organization_id', 'inner');
       $this->db->where($condition);
       $this->db->order_by('count_dist','desc');
       $this->db->group_by('dist.district_id');

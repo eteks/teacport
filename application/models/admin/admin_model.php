@@ -449,9 +449,9 @@ class Admin_Model extends CI_Model {
     // View
     $departments_list_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.department_educational_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_departments t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.department_educational_qualification_id ) - LENGTH( REPLACE( t.department_educational_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id order by (a.departments_id) desc");
     $model_data['departments_values'] = $departments_list_query->result_array(); 
-	echo "<pre>";
-	print_r($model_data['departments_values']);
-	echo "</pre>";
+	// echo "<pre>";
+	// print_r($model_data['departments_values']);
+	// echo "</pre>";
     return $model_data;
   }
 
