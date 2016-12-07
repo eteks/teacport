@@ -119,7 +119,7 @@
                                     <a class="txt_blue">Forgot Password?</a>
                                 </div>
                                 <div class="loginbox-submit">
-                                    <a href="user-dashboard.html"><input type="submit" class="btn btn-default btn-block" value="Login"></a>
+                                    <input type="submit" class="btn btn-default btn-block" value="Login">
                                 </div>
                                 <?php echo form_close(); ?>
                                 <div class="loginbox-or">

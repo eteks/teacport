@@ -54,8 +54,10 @@
 			<script src="<?php echo base_url(); ?>assets/js/ajax-call.js"></script>
 			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fine-uploader.min.js"></script>		 -->
 			
-			<?php if($this->session->userdata('login_status') === TRUE && $this->session->userdata('user_type') === 'provider'){
+			<?php 
 				$user_type = $this->session->userdata("login_session"); 
+				if($this->session->userdata('login_status') === TRUE && $user_type['user_type'] === 'provider'){
+				
 			?>
 			
 			<script type="text/javascript">

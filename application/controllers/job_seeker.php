@@ -68,7 +68,7 @@ class Job_seeker extends CI_Controller {
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
 		/* Registration page loading with out posted data */
-		if(!$_POST){
+		if(!$_POST){	
 			$data['fbloginurl'] = $common->facebookloginurl_seeker();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$data['captcha'] = $this->captcha->main();
@@ -103,9 +103,7 @@ class Job_seeker extends CI_Controller {
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$this->load->view('register-job-seekers',$fb);	
-	        }
-			else
-			{
+	        } else {	        	
 				/* Registration form valid stage */
 				/* Get and store posted data to array */
 				$data = array(
@@ -148,9 +146,8 @@ class Job_seeker extends CI_Controller {
 						
 						$this->load->view('register-job-seekers',$fb);
 					}
-				}
-				else{
-					/* data exist stage. send  facebook login link and server message to login page */
+				} else {
+					/* data exist stage. send  facebook login link and server message to login page */					
 					$fb['reg_server_msg'] = 'Some thing wrong in data insertion process. So please register again!';	
        				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -185,32 +182,32 @@ class Job_seeker extends CI_Controller {
 
 	public function dashboard() {     	
 
-     	$session_data = $this->session->all_userdata();    		
+     	$session_data = $this->session->all_userdata();  
+     	// print_r($session_data);
+     	// exit();  		
 		$candidate_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']
 			['candidate_email']:$session_data['login_session']['candidate_id']);
+
 		if($this->job_seeker_model->check_has_initial_data($candidate_email)=='has_no_data'){
-			$data['initial_data'] = 'show_popup';
+			$data['initial_data'] = 'show_popup';			
 		}
 		else{
-			$data['initial_data'] = 'hide_popup';
-		}
-
+			$data['initial_data'] = 'hide_popup';			
+		}	
+		
 		$candidate_data = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
 
+         if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
 
-        	if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
 			if($data['initial_data'] === 'show_popup')
 			{
 				$data['user_data'] = $candidate_data;
 				$this->load->view('user-dashboard',$data);
-			}
-			else
-			{
-				redirect('seeker/dashboard/editprofile');
-			}
-			
-		}
-		else{
+			} else {				
+				$data['user_data'] = $candidate_data;
+				$this->load->view('user-dashboard',$data);
+			}			
+		} else {			
 			$data['user_data'] = $candidate_data;
 			$this->load->view('user-dashboard',$data);
 		}
@@ -417,3 +414,4 @@ class Job_seeker extends CI_Controller {
 	} /** End of Edit Profile **/
 
 }
+

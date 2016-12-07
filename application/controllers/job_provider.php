@@ -489,18 +489,126 @@ class Job_provider extends CI_Controller {
 		$data["links"] = explode('&nbsp;',$str_links );
 		$this->load->view('company-dashboard-browse-candidate',$data);
 	}
-    public function companydbd_postadds(){
-		$this->load->view('company-dashboard-post-adds');
+	public function changepassword(){
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		if(!$_POST){
+			$this->load->view('company-dashboard-changepwd',$data);
+		}
+		else
+		{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('provideroldpassword', 'Old password', 'trim|required|min_length[8]|xss_clean|callback_validpassword');
+			$this->form_validation->set_rules('providernewpassword', 'New password', 'trim|required|min_length[8]|xss_clean');
+			$this->form_validation->set_rules('providerconfirmnewpassword', 'Confirm password', 'trim|required|min_length[8]|xss_clean|matches[providernewpassword]');
+			if ($this->form_validation->run()){
+				$changepassworddata 	= array('registrant_password' => $this->input->post('providerconfirmnewpassword'));
+				if($this->job_provider_model->update_provider_password($changepassworddata,$session_data['login_session']['pro_userid'])){
+					$data['pasword_server_msg'] = 'Your password successfully changed!';
+					$this->load->view('company-dashboard-changepwd',$data);
+				}
+				else{
+					$data['pasword_server_msg'] = 'Some thing wrong data insertion process! Please try again!!';
+					$this->load->view('company-dashboard-changepwd',$data);
+				}
+			}
+			else {
+				$this->load->view('company-dashboard-changepwd',$data);
+			}
+		}
+	}
+	public function feedback(){
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		if(!$_POST){
+			$this->load->view('company-dashboard-feedback',$data);
+		}
+		else{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
+			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			if ($this->form_validation->run()){
+				$feedback_data = array(
+									'feedback_form_title' => $this->input->post('feedback_subject'),
+									'feedback_form_message' => $this->input->post('feedback_content'),
+									'is_organization' => 1,
+									'is_candidate' => 0,
+									'is_guest_user' => 0,
+									'candidate_or_organization_id' => $session_data['login_session']['pro_userid'],
+									'feedback_form_status' => 1
+								);
+				if($this->job_provider_model->organization_feedback_form($feedback_data)){
+					$data['feedback_server_msg'] = 'Thanks for your valuable feedback! Our customer support representative will contact you soon!!';
+					$this->load->view('company-dashboard-feedback',$data);
+				}
+				else{
+					$data['feedback_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+					$this->load->view('company-dashboard-feedback',$data);
+				}
+			}
+			else{
+				$this->load->view('company-dashboard-feedback',$data);
+			}
+		}
+	}
+    public function postad(){
+    	$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		if(!$_POST){
+			$this->load->view('company-dashboard-post-adds',$data);	
+		}
+		else{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|xss_clean');
+			$this->form_validation->set_rules('provider_premium_ad_image', 'Ad image', 'callback_provider_premium_ad_validation');
+			if ($this->form_validation->run()){
+				if (!empty($_FILES['provider_premium_ad_image']['name'])){
+			        $provider_premium_ad['upload_path'] 		= './uploads/jobprovider/premiumad';
+					$provider_premium_ad['allowed_types'] 		= 'jpg|png|jpeg';
+					$provider_premium_ad['max_size']     		= '2048';
+					$provider_premium_ad['max_width'] 			= '1024';
+					$provider_premium_ad['max_height'] 			= '768';
+					$provider_premium_ad['encrypt_name'] 		= TRUE;
+					$provider_premium_ad['file_ext_tolower'] 	= TRUE;
+					$this->load->library('upload', $provider_premium_ad);
+					$this->upload->initialize($provider_premium_ad);
+					if ( ! $this->upload->do_upload('provider_premium_ad_image'))
+					{
+						$data['provider_premium_ad_error'] = $this->upload->display_errors();
+						$this->load->view('company-dashboard-post-adds',$data);
+	                }
+	                else
+	                {
+	                    $provider_premium_aduploaddata = $this->upload->data();
+						$premium_ad_data = array(
+												'premium_ads_name'		=> $this->input->post('provider_ad_title'),
+												'ads_image_path'		=> $provider_premium_aduploaddata['file_name'],
+												'organization_id'		=> $session_data['login_session']['pro_userid'],
+												'ad_visible_days'		=> 30,
+												'is_admin_verified'		=> 0,
+												'premium_ads_status'	=> 1
+											);
+						if($this->job_provider_model->organization_premiun_ad_upload($premium_ad_data)){
+							$data['premiumad_server_msg'] = 'Your premium ad upload successfully. Admin will approve soon. After that you ad image will shown on your selective position!';
+							$this->load->view('company-dashboard-post-adds',$data);
+						}
+						else{
+							$data['premiumad_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+							$this->load->view('company-dashboard-post-adds',$data);
+						}
+	                }
+                }
+			}
+			else{
+				$this->load->view('company-dashboard-post-adds',$data);
+			}
+		}
+		
 	}
 	public function companydbd_subscription(){
 		$this->load->view('company-dashboard-subscription');
 	}
-	public function companydbd_feedback(){
-		$this->load->view('company-dashboard-feedback');
-	}
-	public function companydbd_changepwd(){
-		$this->load->view('company-dashboard-changepwd');
-	}
+	
 	/* custom validataion rules */
 	public function valid_date($date)
 	{
@@ -522,6 +630,14 @@ class Job_provider extends CI_Controller {
 		
     	if (empty($_FILES['organization_logo']['name'])) {
     		$this->form_validation->set_message('organization_logo_validation', 'Please select file.');
+            return false;
+        }else{
+            return true;
+        }
+	}
+	public function provider_premium_ad_validation(){
+		if (empty($_FILES['provider_premium_ad_image']['name'])) {
+    		$this->form_validation->set_message('provider_premium_ad_validation', 'Please upload image.');
             return false;
         }else{
             return true;
@@ -562,7 +678,7 @@ class Job_provider extends CI_Controller {
 		}
 		
 	}
-	function alpha_dash_space($provider_job_title){
+	public function alpha_dash_space($provider_job_title){
 		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
 			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
 			return FALSE;
@@ -570,6 +686,19 @@ class Job_provider extends CI_Controller {
 			return TRUE;
 		}
 	}
+	public function validpassword()
+	{
+		$oldpassword	= $this->input->post('provideroldpassword');
+		$providerid 	= $this->session->userdata('login_session');
+		if($this->job_provider_model->checkvalidpassword($oldpassword,$providerid['pro_userid'])){
+			
+			return TRUE;
+		}
+		else {
+			$this->form_validation->set_message('validpassword', 'The %s doesnot match!');
+			return FALSE;
+		}
+	} 
 	public function forgot_password()
 	{
 			$ci =& get_instance();	
@@ -604,4 +733,8 @@ class Job_provider extends CI_Controller {
 				}
 			}   	
 		}
+
+      public function singleprofile() {
+      	 $this->load->view('company-dashboard-job-detail');
+      }
 }
