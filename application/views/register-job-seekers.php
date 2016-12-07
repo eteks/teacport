@@ -44,11 +44,15 @@
                                 <div class="form-group">
                                 	 <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
                                 </div>
-                                <div class="loginbox-terms">
-                                   <label class="checkbox_word"><input type="checkbox">I accept <a href="register-4.html" class="txt_blue">Term and conditions?</a>
+                                <div>
+                                   <label class="checkbox_word"><input id="accept_terms" name="accept_terms" value="yes" type="checkbox">I accept <a class="txt_blue">Term and conditions?</a>
                                 </div>
+                                <!-- <div class="form-group class="loginbox-terms"">
+                                     <?php echo form_input(array('id' => 'accept_terms','class' => 'form-control checkbox_word','name' => 'accept_terms','type' => 'checkbox')); ?>
+                                     I accept <a class="txt_blue">Term and conditions?</a>
+                                </div> -->
                                 <div class="loginbox-submit">
-                                    <input type="submit" class="btn btn-default btn-block" value="Register">
+                                <input type="submit" class="btn btn-default btn-block" value="Register">
                                 </div>
                                 <div class="loginbox-or">
                                     <div class="or-line"></div>
