@@ -65,6 +65,14 @@ function add_new_record() {
     $("."+table).prepend(blankrow);
 }
 
+// Init scroller for multiselect
+function scroller_multiselect() {
+    $('.multi_choice').find('ul').addClass('scroller');
+    $('.multi_choice').find('ul').slimScroll({
+        height: 'auto'
+    });
+}
+
 var handleChoosenSelect = function () {
         if (!jQuery().chosen) {
             return;
@@ -74,6 +82,8 @@ var handleChoosenSelect = function () {
             allow_single_deselect: true
         });
    },
+   
+
 // Create Input
 createInput = function(i,str){
     // alert(str);
@@ -117,7 +127,7 @@ createInput = function(i,str){
         input += '<input type="hidden" value="'+str+'" class="verification" name="'+columns[i]+'" />';
     }
     else if(inputType[i] == "multiselect"){
-        input = '<select data-placeholder="'+placeholder[i]+'" name="'+columns[i]+'" class="chosen span6" multiple="multiple" >';
+        input = '<span class="multi_choice"> <select data-placeholder="'+placeholder[i]+'" name="'+columns[i]+'" class="chosen span6" multiple="multiple" >';
         var select_option = eval(columns[i]+'_option');
         var select_value = eval(columns[i]+'_value');
         var selected_value = new Array();
@@ -132,7 +142,7 @@ createInput = function(i,str){
             }
             input += '<option value="'+select_value[i]+'" '+selected+'>'+select_option[i]+'</option>';
         }
-        input += '</select>';
+        input += '</select> </span>';
         //console.log(str);        
     }
     return input;
@@ -194,6 +204,7 @@ $(document).ready(function(){
         if(editing==0 && ready_save==0) {        	      	 
             add_new_record();            
             handleChoosenSelect();
+            scroller_multiselect();
             ready_save=1;
         }
     });
@@ -309,6 +320,7 @@ $(document).ready(function(){
              // $(this).html(html).fadeIn(500);
              // }); 
             handleChoosenSelect();
+            scroller_multiselect();
             // set editing flag
             editing = 1;
             ready_save= 1;
@@ -488,6 +500,11 @@ $(document).ready(function(){
     $(document).on("click",".radio_status",function(){
         $(this).siblings('.hidden_status').val($(this).val());
     });
+
+    // // Multi Select status
+    // $(document).on("click",".radio_status",function(){
+    //     $(this).siblings('.hidden_status').val($(this).val());
+    // });
 
     // Known languages
     $(document).on("click",".known_languages",function(){

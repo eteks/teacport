@@ -459,7 +459,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Qualification Name</label>
-                              <span>
+                              <span class="multi_choice">
                                 <?php
                                 $qua_array = array();
                                 foreach ($vac_val['educational_qualification_id'] as $qua_key => $qua_val) :

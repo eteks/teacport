@@ -1,4 +1,4 @@
-/*
+
 Template Name: Admin Lab Dashboard build with Bootstrap v2.3.1
 Template Version: 1.3
 Author: Mosaddek Hossain
@@ -1457,7 +1457,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     position: absolute;
     top: 100%;
     left: 0;
-    z-index: 1000;
+    z-index: 1100;
     display: none;
     float: left;
     padding: 0px 0;
@@ -4602,6 +4602,24 @@ div.dt-button-background {
 .pager {
     margin: 10px 0 0;
 }
+#table_wrapper_Datatable {
+    clear: both;
+}
+
+/* Multi choice start */
+.multi_choice > div ul{
+    max-height: 100px !important;
+}
+.multi_choice > div{
+    width : auto !important;
+}
+.multi_choice{
+    display: block;
+    height: 100px;
+}
+/* Multi choice end */
+
+
 
 /* Datatable Css to add checkbox with columns for columns visibility end */
 
@@ -4625,4 +4643,3 @@ div.dt-button-background {
 /*.slimScrollDiv {
     height: auto !important;
 }
-*/
