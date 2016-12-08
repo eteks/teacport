@@ -601,8 +601,14 @@ class Job_provider extends CI_Controller {
 		}
 		
 	}
-	public function companydbd_subscription(){
-		$this->load->view('company-dashboard-subscription');
+	public function subscription(){
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['subcription_plan'] = $this->common_model->subcription_plan();
+		if(!$_POST){
+			$this->load->view('company-dashboard-subscription',$data);	
+		}
+		
 	}
 	
 	/* custom validataion rules */

@@ -69,6 +69,8 @@ $route['provider/postjob'] 								= 'job_provider/postjob';
 $route['provider/postedjob'] 							= 'job_provider/postedjob';
 $route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';
 $route['provider/postad'] 								= 'job_provider/postad';
+$route['provider/subscription'] 						= 'job_provider/subscription';
+$route['provider/payment'] 								= 'payu';
 $route['provider/feedback'] 							= 'job_provider/feedback/';
 $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/logout'] 								= 'job_provider/provider_logout';
@@ -81,18 +83,11 @@ $route['seeker/dashboard/editprofile'] 					= 'job_seeker/editprofile';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
-$route['contactus'] 									= 'home/contactus';
-
-//Akila created								
+$route['contactus'] 									= 'home/contactus';							
 $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['vacancies'] 									= 'home/vacancies';
-$route['provider/postadds'] 							= 'job_provider/companydbd_postadds';
-$route['provider/subscription'] 						= 'job_provider/companydbd_subscription';
-$route['seeker/editprofile'] 							= 'job_seeker/seekerdbd_editprofile';
-
-
 
 
 

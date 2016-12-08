@@ -604,3 +604,6 @@ font-size: 12px;
 .preview_post_ad_image{
 	cursor: pointer;
 }
+.dn{
+	display: none;
+}
