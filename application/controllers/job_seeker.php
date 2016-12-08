@@ -315,9 +315,7 @@ class Job_seeker extends CI_Controller {
 	public function jobsapplied(){
 		$this->load->view('user-job-applied');
 	}
-
 	
-		
 
 
 	// 	public function editprofile(){
