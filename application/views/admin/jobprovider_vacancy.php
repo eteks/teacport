@@ -258,13 +258,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               </span>
                             </div>
                             <div class="span6 control-group">
-                              <label class="control-label"> Start Salary </label>
+                              <label class="control-label"> Salary </label>
                               <span class="dynamic_data"> 
-                                <?php echo $vac_val['vacancies_end_salary']; ?>
+                                <?php echo $vac_val['vacancies_start_salary']." to ".$vac_val['vacancies_end_salary']; ?>
                               </span>
                             </div>
                           </div>
                           <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label"> Posting Name </label>
+                              <span class="dynamic_data"> 
+                                <?php
+                                if(!empty($vac_val['posting_name'])) :
+                                  echo $vac_val['posting_name'];
+                                else :
+                                  echo "NULL";
+                                endif;
+                                ?>
+                              </span>
+                            </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label"> Status </label>
                               <span class="dynamic_data"> 
@@ -315,10 +327,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </div>
                           </div>
                           <div class="span12">
+                            <div class="span6 control-group">
+                              <label class="control-label"> Department Name </label>
+                              <span class="dynamic_data"> 
+                                <?php echo $vac_val['departments_name']; ?>
+                              </span>
+                            </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label">Subject Name</label>
                               <span class="dynamic_data"> 
-                                <?php echo $vac_val['vacancies_medium']; ?>
+                                <?php echo $vac_val['subject_name']; ?>
                               </span>
                             </div>
                           </div>
@@ -329,7 +347,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Vacancies Medium</label>
                               <span class="dynamic_data"> 
-                                <?php echo $vac_val['vacancies_medium']; ?>
+                                <?php
+                                $lan_array = explode(',',$vac_val['vacancies_medium']);
+                                if(!empty($medium_language_values)) :
+                                foreach ($medium_language_values as $lan_val) :
+                                ?>
+                                <?php
+                                if(in_array($lan_val['language_id'], $lan_array)) {
+                                  echo '<span> '.$lan_val["language_name"].' </span>';
+                                }
+                                endforeach;
+                                endif;
+                                ?>
                               </span>                         
                             </div>
                             <div class="span6 control-group">
@@ -547,10 +576,34 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </div>
                           <div class="span12">
                             <div class="span6 control-group">                                       
+                              <label class="control-label">Department Name</label>
+                              <span>
+                                <select name="vac_dept_name" class="span6 tabfield2 tabfield">
+                                  <option value=""> Please select department </option>
+                                  <?php
+                                  if(!empty($department_values)) :
+                                  foreach ($department_values as $dep_val) :
+                                  ?>
+                                  <?php
+                                    if($dep_val['departments_id']==$vac_val['vacancies_department_id']) {
+                                      echo '<option value='.$dep_val["departments_id"].' selected> '.$dep_val["departments_name"].' </option>';
+                                    }
+                                    else {
+                                      echo '<option value='.$dep_val["departments_id"].'> '.$dep_val["departments_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$vac_val['vacancies_department_id'].' selected> "'.$vac_val['departments_name'].'" </option>';
+                                  endif;
+                                  ?>
+                                </select>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
                               <label class="control-label">Subject Name</label>
                               <span>
                                 <select name="vac_sub_name" class="span6 tabfield2 tabfield">
-                                  <option value=""> Please select Subject </option>
+                                  <option value=""> Please select subject </option>
                                   <?php
                                   if(!empty($subject_values)) :
                                   foreach ($subject_values as $sub_val) :
@@ -576,33 +629,76 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <h4>Vacancies Instructions</h4>
                           <div class="span12">
                             <div class="span6 control-group">                                       
-                              <label class="control-label">Vacancies Medium</label>
+                              <label class="control-label">Posting Name</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_medium']; ?>" name="vac_medium" class="span6 tabfield3 tabfield" /> 
+                                <select name="vac_pos_name" class="span6 tabfield3 tabfield">
+                                  <option value=""> Please select posting </option>
+                                  <?php
+                                  if(!empty($posting_values)) :
+                                  foreach ($posting_values as $pos_val) :
+                                  ?>
+                                  <?php
+                                    if($pos_val['posting_id']==$vac_val['vacancies_applicable_posting_id']) {
+                                      echo '<option value='.$pos_val["posting_id"].' selected> '.$pos_val["posting_name"].' </option>';
+                                    }
+                                    else {
+                                      echo '<option value='.$pos_val["posting_id"].'> '.$pos_val["posting_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  else :
+                                    echo '<option value='.$vac_val['vacancies_department_id'].' selected> "'.$vac_val['posting_name'].'" </option>';
+                                  endif;
+                                  ?>
+                                </select>
                               </span>
                             </div>
+
+                            <div class="span6 control-group">                                       
+                              <label class="control-label">Vacancies Medium</label>
+                              <span class="multi_choice">
+                                <?php
+                                $lan_array = explode(',',$vac_val['vacancies_medium']);
+                                ?>
+                                <select data-placeholder="select" name="vac_medium" class="chosen span6 tabfield3 tabfield" multiple="multiple" >
+                                  <?php
+                                  if(!empty($medium_language_values)) :
+                                  foreach ($medium_language_values as $lan_val) :
+                                  ?>
+                                  <?php
+                                    if(in_array($lan_val['language_id'], $lan_array)) {
+                                      echo '<option value='.$lan_val["language_id"].' selected> '.$lan_val["language_name"].' </option>';
+                                    }
+                                    else{
+                                      echo '<option value='.$lan_val["language_id"].'> '.$lan_val["language_name"].' </option>';
+                                    }
+                                  endforeach;
+                                  endif;
+                                  ?>
+                                </select>
+                              </span>
+                            </div>
+                          </div>
+                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Accommodation Info</label>
                               <span>
                                 <input type="text" value="<?php echo $vac_val['vacancies_accommodation_info']; ?>" name="vac_accom" class="span6 tabfield3 tabfield" />
                               </span>
                             </div>
-                          </div>
-                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Instruction</label>
                               <span>
                                 <textarea name="vac_instruction" class="span6 tabfield3 tabfield"> <?php echo $vac_val['vacancies_instruction']; ?> </textarea>
                               </span>
                             </div>
+                          </div>
+                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Interview Start Date</label>
                               <span>
                                 <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo $vac_val['vacancies_interview_start_date']; ?>" name="vac_inter_sdate" />
                               </span>
                             </div>
-                          </div>
-                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Interview End Date</label>
                               <span>

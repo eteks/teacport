@@ -71,6 +71,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <tr class="ajaxTitle">
                         <th> Organization Name </th>
                         <th> Candidate Name </th>
+                        <th> Vacancy </th>
                         <th class="not-sort"> Sms Sent </th>
                         <th class="not-sort"> Mail Sent </th>
                         <th class="not-sort"> Resume Downloaded </th>
@@ -98,6 +99,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <td class="act_cand_name"> 
                           <?php echo $act_val['candidate_name']; ?>
                           <input type="hidden" value="<?php echo $act_val['activity_candidate_id']; ?>" />
+                        </td>
+                        <td class="act_vac_name"> 
+                          <?php  
+                          if(!empty($act_val['vacancies_job_title'])) :
+                            echo $act_val['vacancies_job_title']; 
+                          else :
+                            echo "NULL";
+                          endif;
+                          ?>
+                          <input type="hidden" value="<?php echo $act_val['activity_vacancy_id']; ?>" />
                         </td>
                         <td class="act_sms center_align">
                           <?php 
@@ -166,8 +177,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <!-- END CONTAINER -->
 <script>
   // Define default values
-  var inputType = new Array("select","select","on_off","on_off","on_off");
-  var columns = new Array("act_org_name","act_cand_name","act_sms","act_email","act_resume");
+  var inputType = new Array("select","select","select","on_off","on_off","on_off");
+  var columns = new Array("act_org_name","act_cand_name","act_vac_name","act_sms","act_email","act_resume");
   var placeholder = new Array(""); // Set placeholder of input types
   var table = "admin_table"; // Set classname of table
   var act_org_name_option = new Array("Select");
@@ -194,6 +205,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
   endforeach;
   endif;
   ?>
+  var act_vac_name_option = new Array("Select");
+  var act_vac_name_value = new Array("");
+  <?php
+  if(!empty($vacancy_values)) :
+  foreach ($vacancy_values as $vac_val) :
+  ?>
+    act_vac_name_option.push("<?php echo $vac_val['vacancies_job_title']; ?>");
+    act_vac_name_value.push("<?php echo $vac_val['vacancies_id']; ?>");
+  <?php
+  endforeach;
+  endif;
+  ?>
+
   var is_created ="no";
 </script>
 <?php include "templates/footer_grid.php" ?>
