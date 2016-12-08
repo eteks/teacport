@@ -449,9 +449,9 @@ class Admin_Model extends CI_Model {
     // View
     $departments_list_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.department_educational_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_departments t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.department_educational_qualification_id ) - LENGTH( REPLACE( t.department_educational_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id order by (a.departments_id) desc");
     $model_data['departments_values'] = $departments_list_query->result_array(); 
-	echo "<pre>";
-	print_r($model_data['departments_values']);
-	echo "</pre>";
+	// echo "<pre>";
+	// print_r($model_data['departments_values']);
+	// echo "</pre>";
     return $model_data;
   }
 
@@ -705,6 +705,14 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+   // Get medium language values
+  public function get_medium_language_list()
+  {
+    $medium_language_get_where = '(language_status=1 and is_medium_of_instruction=1)'; 
+    $model_data = $this->db->get_where("tr_languages", $medium_language_get_where)->result_array(); 
+    return $model_data;
+  }
+
   // Get subject values
   public function get_subject_values()
   {
@@ -726,6 +734,14 @@ class Admin_Model extends CI_Model {
   {
     $posting_get_where = '(posting_status=1)'; 
     $model_data = $this->db->get_where("tr_applicable_posting", $posting_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get departments values
+  public function get_departments_values()
+  {
+    $department_get_where = '(departments_status=1)'; 
+    $model_data = $this->db->get_where("tr_departments", $department_get_where)->result_array(); 
     return $model_data;
   }
 
