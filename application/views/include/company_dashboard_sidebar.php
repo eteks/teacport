@@ -21,8 +21,8 @@
             <li class="<?php if($this->uri->segment(2)=='postad') echo 'active'; ?>">
                 <a href="<?php echo base_url();?>provider/postad"> <i class="fa  fa-bookmark-o"></i> Post Ads </a>
             </li>
-            <li>
-                <a href="<?php echo base_url();?>job_provider/companydbd_subscription"> <i class="fa fa-money"></i> Subcribe Plan</a>
+            <li class="<?php if($this->uri->segment(2)=='subscription') echo 'active'; ?>">
+                <a href="<?php echo base_url();?>provider/subscription"> <i class="fa fa-money"></i> Subcribe Plan</a>
             </li>
             <li class="<?php if($this->uri->segment(2)=='feedback') echo 'active'; ?>">
                 <a href="<?php echo base_url();?>provider/feedback"> <i class="fa fa-commenting-o"></i> Feedback </a>

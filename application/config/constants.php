@@ -44,7 +44,12 @@ define('COURSE_TYPE',serialize(array("UG"=>"Under Graduate",
 define('STATUS',serialize(array("0"=>"Active",
         "1"=>"Inactive")));
 
-
+define('PAYUMERCHANTKEY', 'OwGF14'); 
+define('PAYUMERCHANTSALT', 'RjWAdXh0');
+define('PAYUBASEURL', 'https://test.payu.in');
+define('PAYUSUCCESSURL', APP_URL.'provider/subscription'); 
+define('PAYUFAILUREURL', APP_URL.'provider/subscription');
+define('PAYUCANCELURL', APP_URL.'provider/subscription');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

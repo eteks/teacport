@@ -19,4 +19,5 @@ $config = array(
   'linkedinApiSecret' => 'NfqbGWLdIPYKfAJC',
   'linkedinScope'  => 'r_basicprofile r_emailaddress'
 );
+
 ?>

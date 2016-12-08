@@ -210,6 +210,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     endforeach;
     endif;
     ?>
+    var is_created = "no";
   </script>
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

@@ -705,6 +705,14 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
+   // Get medium language values
+  public function get_medium_language_list()
+  {
+    $medium_language_get_where = '(language_status=1 and is_medium_of_instruction=1)'; 
+    $model_data = $this->db->get_where("tr_languages", $medium_language_get_where)->result_array(); 
+    return $model_data;
+  }
+
   // Get subject values
   public function get_subject_values()
   {
@@ -726,6 +734,14 @@ class Admin_Model extends CI_Model {
   {
     $posting_get_where = '(posting_status=1)'; 
     $model_data = $this->db->get_where("tr_applicable_posting", $posting_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get departments values
+  public function get_departments_values()
+  {
+    $department_get_where = '(departments_status=1)'; 
+    $model_data = $this->db->get_where("tr_departments", $department_get_where)->result_array(); 
     return $model_data;
   }
 

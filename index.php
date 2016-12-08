@@ -212,6 +212,7 @@ if (defined('ENVIRONMENT'))
 	define("GOOGLECLIENTID",'544080576755-0ch4mllq7fi0d6umo0tp2s73k2jebeha.apps.googleusercontent.com');//google client id
 	define("GOOGLECLIENTSECRET",'MkyykL90dEedMBOkrCm7CbCT');//google client secret
 	define("GOOGLEREDIRECTURL",APP_URL."login/google");//google redirect urlt
+	define("GOOGLESEEKERREDIRECTURL",APP_URL."login/seeker/google");//google redirect urlt
 	define("GOOGLEAPPNAME", "Login to Teacher Recruit");
 	
 /*
