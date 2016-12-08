@@ -11,7 +11,7 @@
                             <ol class="breadcrumb">
                                 <li><a href="<?php echo base_url();?>">Home</a>
                                 </li>
-                                <li><a href="company-dashboard-followers.html#">Dashboard</a>
+                                <li><a href="<?php echo base_url();?>provider/dashboard">Dashboard</a>
                                 </li>
                                 <li class="active">Subscribe Plan</li>
                             </ol>
@@ -25,6 +25,14 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                         <div class="col-md-4 col-sm-4 col-xs-12">
+                        	<div class="panel">
+								<div class="dashboard-logo-sidebar">
+									<img class="img-responsive center-block" src="<?php echo base_url().'uploads/jobprovider/'.$organization['organization_logo'];?>" alt="Image">
+								</div>
+								<div class="text-center dashboard-logo-sidebar-title">
+									<h4><?php echo $organization['organization_name']; ?></h4>
+								</div>
+							</div>
                             <!--include left panel menu-->
                             <?php include('include/company_dashboard_sidebar.php'); ?>                           
                         </div>
@@ -40,9 +48,10 @@
 										<div class="col-sm-6">
 											<select id="subpack_act" class="form-control" name="subpack">
 												<option> Select Package </option>
-												<option value="basic">Basic Membership Plan @ Rs. 10000</option>
-												<option value="premium">Premium Membership Plan for 1 Year @ Rs.15000</option>
-												<option value="standard">Standard Membership Plan for 1 Year @ Rs.30000</option>
+												<?php foreach ($subcription_plan as $plan) {
+													$startdate = strtotime($plan['subcription_valid_start_date']);$enddate = strtotime($plan['subcription_valid_end_date']);$datediff = $enddate-$startdate;
+													echo "<option value='".$plan['subscription_id']."' data-name='".$plan['subscription_plan']."' data-amount='".$plan['subscription_price']."'>".$plan['subscription_plan']." Membership plan @ ".floor(($datediff / (60 * 60 * 24))+1)." days Rs. ".$plan['subscription_price']." </option>";
+												} ?>
 											</select>
 											<p>
 												<b> + 15%</b>
@@ -50,97 +59,61 @@
 											</p>
 										</div>
 										<div class="col-sm-3">
-											<a href="pricing.html" target="_blank" class="btn btn-info btn-large">View Details &amp; Features</a>
+											<a href="<?php echo base_url(); ?>" target="_blank" class="btn btn-info btn-large">View Details &amp; Features</a>
 								     </div>
 								     </div>
 							    </form> <!--End Select Pricing Plan-->
                                 
                                 <!--Display Chosen Plan-->
-                                <div class="pricing-section-1">
+                                <div class="pricing-section-1 subscription_plan_description">
                                 	<!--Basic Plan-->
-                                	<div id="basic_plan_act" class="col-md-12 col-sm-12 col-xs-12 light-grey subplan_act">
+                                	<?php 
+                                		foreach ($subcription_plan as $plan) {
+                                			$startdate = strtotime($plan['subcription_valid_start_date']);$enddate = strtotime($plan['subcription_valid_end_date']);$datediff = $enddate-$startdate; 
+                                	?>
+                                	<div id="<?php echo $plan['subscription_plan'];?>" class="col-md-12 col-sm-12 col-xs-12 light-grey dn subscription_plan">
                                 		<div class="heading-inner">
-                                    		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected</span>
+                                    		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected <?php echo $plan['subscription_plan'];?> plan</span>
                                 		</div>
 			                            <div class="ui_box">
 			                                <div class="ui_box__inner">
-			                                    <h2> Basic Plan </h2>
-			                                    <div class="price-rates"><i class="fa fa-inr" aria-hidden="true"></i> 10000 <small>per year</small> </div>
+			                                    <h2> <?php echo $plan['subscription_plan'];?> Plan </h2>
+			                                    <div class="price-rates"><i class="fa fa-inr" aria-hidden="true"></i> <?php echo $plan['subscription_price']; ?> <small>for <?php echo floor(($datediff / (60 * 60 * 24))+1);?> days</small> </div>
 			                                    <div class="features_left">
 			                                        <ul>
-			                                            <li> Posting </li>
-			                                            <li> Searching </li>
-			                                            <li> 5000 SMS </li>
-			                                            <li class="cut"> Support </li>
-			                                            <li class="cut"> Access Resume </li>
-			                                            <li class="cut"> Contact Details </li>
-			                                            <li class="cut"> Interviews </li>
-			                                            <li class="cut"> Test Preprations </li>
+			                                        	<?php
+			                                        	$planfeatures = explode(',', $plan['subscription_features']);
+														foreach ($planfeatures as $features) {
+														?>
+			                                            <li> <?php echo ucfirst($features); ?> </li>
+			                                            <?php } ?>
 			                                        </ul>
 			                                    </div>
-			                                    <p>Join us soon to get total benefits.</p>
 			                                </div>
 			                            </div>
 			                        </div>
-			                        <!--Premium Plan-->
-                                	<div id="premium_plan_act" class="col-md-12 col-sm-12 col-xs-12 light-grey subplan_act">
-                                		<div class="heading-inner">
-                                    		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected</span>
-                                		</div>
-			                            <div class="ui_box">
-			                                <div class="ui_box__inner">
-			                                    <h2> Premium Plan </h2>
-			                                    <div class="price-rates"><i class="fa fa-inr" aria-hidden="true"></i> 15000 <small> per year</small></div>
-			                                    <div class="features_left">
-			                                        <ul>
-			                                            <li> Posting </li>
-			                                            <li> Searching </li>
-			                                            <li> 15000 SMS </li>
-			                                            <li> Support </li>
-			                                            <li> Unlimited Recruitment </li>
-			                                            <li> FTP Alerts - FREE Bulk SMS package </li>
-			                                            <li class="cut"> Contact Details </li>
-			                                            <li class="cut"> Interviews </li>
-			                                            <li class="cut"> Test Preprations </li>
-			                                        </ul>
-			                                    </div>
-			                                    <p>Join us soon to get total benefits and start Recruitment</p>
-			                                </div>
-			                             </div>
-                       			    </div>
-                       			    <!--Standarad Plan-->
-                       			    <div id="standard_plan_act"class="col-md-12 col-sm-12 col-xs-12 light-grey subplan_act">
-                       			    	<div class="heading-inner">
-                                    		<span class="info"><i class="fa fa-info-circle" aria-hidden="true"></i> You have selected</span>
-                                		</div>
-			                            <div class="ui_box">
-			                                <div class="ui_box__inner">
-			                                    <h2> Standard Plan </h2>
-			                                    <div class="price-rates"><i class="fa fa-inr" aria-hidden="true"></i> 30000 <small>per year</small> </div>
-			                                    <div class="features_left">
-			                                        <ul>
-			                                            <li> Posting </li>
-			                                            <li> Searching </li>
-			                                            <li> Documentation </li>
-			                                            <li> Support </li>
-			                                            <li> Access Resume </li>
-			                                            <li> Contact Details </li>
-			                                            <li> Interviews </li>
-			                                            <li> Test Preprations </li>
-			                                            <li> FTP Alerts - FREE Bulk SMS Package </li>
-			                                            
-			                                        </ul>
-			                                    </div>
-			                                    <p>Join Standard plan and get total benefits soon.</p>
-			                                </div>
-			                            </div>
-			                        </div>
+			                        <?php } ?>
 			                    </div> 
 			                 </div>     
-			                 
 		                    <!--Proceed to payment-->
 		                    <div class="col-sm-offset-9 col-sm-1">
-		                    	<a class="btn btn-default" href="#"> Proceed to pay </a>
+		                    	<?php 
+		                    	echo form_open('provider/payment','id="provider_subscription_form"');
+								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>$organization['registrant_name']));
+								echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
+								echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
+								echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
+								echo form_input(array('name' => 'productinfo', 'type'=>'hidden', 'id' =>'payu_plan','value'=>''));
+								echo form_input(array('name' => 'address1', 'type'=>'hidden', 'id' =>'payu_addr1','value'=>$organization['organization_address_1']));
+								echo form_input(array('name' => 'address2', 'type'=>'hidden', 'id' =>'payu_addr2','value'=>$organization['organization_address_2']));
+								echo form_input(array('name' => 'city', 'type'=>'hidden', 'id' =>'payu_city','value'=>$organization['district_name']));
+								echo form_input(array('name' => 'state', 'type'=>'hidden', 'id' =>'payu_state','value'=>$organization['state_name']));
+								echo form_input(array('name' => 'country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'india'));
+								echo form_input(array('name' => 'udf1', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
+								echo form_input(array('name' => 'udf2', 'type'=>'hidden', 'id' =>'payu_planid','value'=>''));
+	                    		?>
+	                    		<button type='submit' class="btn btn-default payu_submit"> Proceed to pay </button>
+		                    	<?php echo form_close(); ?>
 		                    </div>
                         </div> <!--End right panel-->
                     </div>

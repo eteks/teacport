@@ -111,5 +111,12 @@ class Common_model extends CI_Model {
 		$qualification = $this->db->get();
 		return $qualification->result_array(); 
 	}
+	public function subcription_plan()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_subscription');
+		$qualification = $this->db->get();
+		return $qualification->result_array(); 
+	}
 	
 }
