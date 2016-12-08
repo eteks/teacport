@@ -38,66 +38,59 @@
 |
 */
 
-$route['default_controller'] = "home/index";
-$route['404_override'] = 'missingpage';
+$route['default_controller'] 							= "home/index";
+$route['404_override'] 									= 'missingpage';
 
 /* Route settings for Jobseeker and Jobprovider */
-$route['login/seeker'] = 'job_seeker';
-$route['login/provider'] = 'job_provider';
-$route['login/facebook'] = 'social/facebook';
-$route['login/facebookverify'] = 'social/facebookverify';
-$route['login/seeker/facebook'] = 'social/seekerfacebook';
-$route['login/seeker/facebookverify'] = 'social/seekerfacebookverify';
-$route['login/twitter'] = 'social/twitter';
-$route['login/linkedin'] = 'social/linkedin';
-$route['login/google'] = 'social/google';
-$route['login/forgotpassword'] = 'job_provider/forgot_password';
-$route['login/forgot-password'] = 'job_seeker/forgot_password';
+$route['login/seeker'] 									= 'job_seeker';
+$route['login/provider'] 								= 'job_provider';
+$route['login/facebook'] 								= 'social/facebook';
+$route['login/facebookverify'] 							= 'social/facebookverify';
+$route['login/seeker/facebook'] 						= 'social/seekerfacebook';
+$route['login/seeker/facebookverify'] 					= 'social/seekerfacebookverify';
+$route['login/seeker/twitter'] 							= 'social/seekertwitter';
+$route['login/seeker/linkedin'] 						= 'social/seekerlinkedin';
+$route['login/seeker/google'] 							= 'social/seekergoogle';
+$route['login/twitter'] 								= 'social/twitter';
+$route['login/linkedin'] 								= 'social/linkedin';
+$route['login/google'] 									= 'social/google';
+$route['login/forgotpassword'] 							= 'job_provider/forgot_password';
+$route['login/forgot-password'] 						= 'job_seeker/forgot_password';
 //SIGN UP
-$route['signup/seeker'] = 'job_seeker/signup';
-$route['signup/provider'] = 'job_provider/signup';
+$route['signup/seeker'] 								= 'job_seeker/signup';
+$route['signup/provider'] 								= 'job_provider/signup';
 //JOB PROVIDER
-$route['provider/dashboard'] = 'job_provider/dashboard';
-$route['provider/initialdata'] = 'job_provider/initialdata';
-$route['provider/dashboard/editprofile'] = 'job_provider/editprofile';
-$route['provider/inbox'] = 'job_provider/inbox';
-$route['provider/inbox/message'] = 'job_provider/inbox_message';
-$route['provider/inbox/messagecount'] = 'job_provider/inbox_message_count';
-$route['provider/candidate'] = 'job_provider/browse_candidate';
-$route['provider/candidate/(:num)'] = 'job_provider/browse_candidate/$1';
-$route['provider/postjob'] = 'job_provider/postjob';
-$route['provider/postedjob/(:num)'] = 'job_provider/postedjob/$1';
-$route['provider/logout'] = 'job_provider/provider_logout';
+$route['provider/dashboard'] 							= 'job_provider/dashboard';
+$route['provider/initialdata'] 							= 'job_provider/initialdata';
+$route['provider/dashboard/editprofile'] 				= 'job_provider/editprofile';
+$route['provider/inbox'] 								= 'job_provider/inbox';
+$route['provider/inbox/message'] 						= 'job_provider/inbox_message';
+$route['provider/inbox/messagecount'] 					= 'job_provider/inbox_message_count';
+$route['provider/candidate'] 							= 'job_provider/browse_candidate';
+$route['provider/candidate/(:num)'] 					= 'job_provider/browse_candidate/$1';
+$route['provider/postjob'] 								= 'job_provider/postjob';
+$route['provider/postedjob'] 							= 'job_provider/postedjob';
+$route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';
+$route['provider/postad'] 								= 'job_provider/postad';
+$route['provider/subscription'] 						= 'job_provider/subscription';
+$route['provider/payment'] 								= 'payu';
+$route['provider/feedback'] 							= 'job_provider/feedback/';
+$route['provider/password'] 							= 'job_provider/changepassword/';
+$route['provider/logout'] 								= 'job_provider/provider_logout';
 
 //JOB SEEKER
-$route['seeker/dashboard'] = 'job_seeker/dashboard';
-$route['seeker/logout'] = 'job_seeker/seeker_logout';
-$route['seeker/initialdata'] = 'job_seeker/initialdata';
-$route['seeker/dashboard/editprofile'] = 'job_seeker/editprofile';
+$route['seeker/dashboard'] 								= 'job_seeker/dashboard';
+$route['seeker/logout'] 								= 'job_seeker/seeker_logout';
+$route['seeker/initialdata'] 							= 'job_seeker/initialdata';
+$route['seeker/dashboard/editprofile'] 					= 'job_seeker/editprofile';
 
 //OTHER PAGES
-$route['aboutus'] = 'home/aboutus';
-$route['contactus'] = 'home/contactus';
-
-//Akila created
-$route['pricing'] = 'home/pricing';
-$route['faq'] = 'home/faq';
-$route['allinstitutions'] = 'home/allinstitutions';
-$route['vacancies'] = 'home/vacancies';
-$route['provider/editprofile'] = 'job_provider/companydbd_editprofile';
-$route['provider/browsejobs'] = 'job_provider/companydbd_browsejobs';
-$route['provider/resume'] = 'job_provider/companydbd_resume';
-$route['provider/postjobs'] = 'job_provider/companydbd_postjobs';
-$route['provider/postedjobs'] = 'job_provider/companydbd_postedjobs';
-$route['provider/postadds'] = 'job_provider/companydbd_postadds';
-$route['provider/subscription'] = 'job_provider/companydbd_subscription';
-$route['provider/feedback'] = 'job_provider/companydbd_feedback';
-$route['provider/feedback'] = 'job_provider/companydbd_feedback';
-$route['provider/singleprofile'] = 'job_provider/singleprofile';
-
-$route['provider/changepwd'] = 'job_provider/companydbd_changepwd';
-$route['seeker/editprofile'] = 'job_seeker/seekerdbd_editprofile';
-
+$route['aboutus'] 										= 'home/aboutus';
+$route['contactus'] 									= 'home/contactus';							
+$route['pricing']										= 'home/pricing';
+$route['faq'] 											= 'home/faq';
+$route['allinstitutions'] 								= 'home/allinstitutions';
+$route['vacancies'] 									= 'home/vacancies';
 
 
 

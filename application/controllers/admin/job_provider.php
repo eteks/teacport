@@ -161,6 +161,11 @@ class Job_Provider extends CI_Controller {
 			                                'field'   => 'val_edate',
 			                                'label'   => 'Validity End Date',
 			                                'rules'   => 'trim|required|xss_clean|'
+			                            );
+			    $validation_rules[] =	array(
+			                                'field'   => 'subscription_status',
+			                                'label'   => 'Subscription Status',
+			                                'rules'   => 'trim|required|xss_clean|'
 			                            );			                       
 	   		}
 	   		$this->form_validation->set_rules($validation_rules);

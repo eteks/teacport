@@ -106,6 +106,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
 		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
 		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
+		$this->db->join('tr_organization_subscription', 'tr_organization_subscription.organization_id = tr_organization_profile.organization_id','left');
 		$where = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
 		$this->db->where($where);
 		$existuser = $this->db->get()->row_array();
@@ -118,6 +119,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
 		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
 		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
+		$this->db->join('tr_organization_subscription', 'tr_organization_subscription.organization_id = tr_organization_profile.organization_id','left');
 		$where = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
 		$this->db->where($where);
 		$existuser = $this->db->get()->row_array();
@@ -224,5 +226,45 @@ class Job_provider_model extends CI_Model {
 		$postedjobdata = $this->db->get();
 		return $postedjobdata->num_rows();
 	}
-	
+	public function checkvalidpassword($oldpassword,$providerid)
+	{
+		$this->db->select('registrant_password');
+		$this->db->from('tr_organization_profile');
+		$where = "(organization_id='".$providerid."')";
+		$org_profiledata = $this->db->get()->row_array();
+		if($oldpassword === $org_profiledata['registrant_password']){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	public function update_provider_password($newpassword,$providerid)
+	{
+		$this->db->where('organization_id', $providerid);
+		if($this->db->update('tr_organization_profile', $newpassword)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	public function organization_feedback_form($data)
+	{
+		if($this->db->insert('tr_feedback_form', $data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	public function organization_premiun_ad_upload($data)
+	{
+		if($this->db->insert('tr_premium_ads', $data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 }

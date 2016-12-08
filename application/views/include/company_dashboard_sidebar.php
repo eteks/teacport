@@ -18,17 +18,17 @@
                 	<li class="<?php if($this->uri->segment(2)=='postedjob') echo 'active'; ?>"><a href="<?php echo base_url();?>provider/postedjob"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="<?php echo base_url();?>job_provider/companydbd_postedjobs"> <i class="fa  fa-bookmark-o"></i> Post Adds </a>
+            <li class="<?php if($this->uri->segment(2)=='postad') echo 'active'; ?>">
+                <a href="<?php echo base_url();?>provider/postad"> <i class="fa  fa-bookmark-o"></i> Post Ads </a>
             </li>
-            <li>
-                <a href="<?php echo base_url();?>job_provider/companydbd_subscription"> <i class="fa fa-money"></i> Subcribe Plan</a>
+            <li class="<?php if($this->uri->segment(2)=='subscription') echo 'active'; ?>">
+                <a href="<?php echo base_url();?>provider/subscription"> <i class="fa fa-money"></i> Subcribe Plan</a>
             </li>
-            <li>
-                <a href="<?php echo base_url();?>job_provider/companydbd_feedback"> <i class="fa fa-commenting-o"></i> Feedback </a>
+            <li class="<?php if($this->uri->segment(2)=='feedback') echo 'active'; ?>">
+                <a href="<?php echo base_url();?>provider/feedback"> <i class="fa fa-commenting-o"></i> Feedback </a>
             </li>
-            <li>
-                <a href="<?php echo base_url();?>job_provider/companydbd_changepwd"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
+            <li class="<?php if($this->uri->segment(2)=='password') echo 'active'; ?>">
+                <a href="<?php echo base_url();?>provider/password"> <i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
             </li>
         </ul>
     </div>

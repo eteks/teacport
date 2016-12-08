@@ -1,5 +1,7 @@
-<?php include('include/header.php'); ?>
-<?php include('include/menus.php'); ?>
+<?php 
+	include('include/header.php');
+	include('include/menus.php');
+?>
         <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
@@ -11,7 +13,7 @@
                             <ol class="breadcrumb">
                                 <li><a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
-                                <li><a href="company-dashboard-followers.html#">Dashboard</a>
+                                <li><a href="<?php echo base_url(); ?>provider/dashboard">Dashboard</a>
                                 </li>
                                 <li class="active">Change Password</li>
                             </ol>
@@ -27,10 +29,10 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="images/company/logo1.jpg" alt="Image">
+                                    <img class="img-responsive center-block" src="<?php echo base_url().'uploads/jobprovider/'.$organization['organization_logo'];?>" alt="Image">
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
-                                    <h4>Your School Name</h4>
+                                    <h4><?php echo $organization['organization_name']; ?></h4>
                                 </div>
                             </div>
                             <!--include left panel menu-->
@@ -40,45 +42,54 @@
                         	<div class="heading-inner first-heading">
                                 <p class="title">Change Password</p>
                             </div>
+                            <p class="success_server_msg"><?php if(isset($pasword_server_msg)) echo $pasword_server_msg; ?></p>
                             <div class="">
-                                <form class="form-horizontal profile-edit">
+                            	<?php echo form_open('provider/password', 'class="form-horizontal profile-edit"'); ?>
 	                                <div class="form-group">
 										<label class="col-sm-12">You can change your password below</label>
 									</div>	
 									<div class="form-group">
 										<div class="col-sm-12">
+											<div class="col-sm-6 pull-right"><?php echo form_error('provideroldpassword'); ?></div>
+											<div class="clearfix"> </div>
 											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
+												<input id="" class="form-control" name="provideroldpassword" size="25" type="password">
 											</div>
 										</div>
 									</div>	
 									<div class="form-group">
 										<div class="col-sm-12">
+											<div class="col-sm-6 pull-right"><?php echo form_error('providernewpassword'); ?></div>
+											<div class="clearfix"> </div>
 											<label class="col-sm-6">New Password<span class="alert">*</span></label>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
+												<input id="" class="form-control" name="providernewpassword" size="25" type="password">
 											</div>
 										</div>
 									</div>	
 									<div class="form-group">
 										<div class="col-sm-12">
+											<div class="col-sm-6 pull-right"><?php echo form_error('providerconfirmnewpassword'); ?></div>
+											<div class="clearfix"> </div>
 											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
+												<input id="" class="form-control" name="providerconfirmnewpassword" size="25" type="password">
 											</div>
 										</div>
 									</div>	
 									<div class="col-sm-12">
-										<a class="btn btn-default pull-right" type="submit" href="#">APPLY</a>
+										<button class="btn btn-default pull-right" type="submit">APPLY</button>
 									</div>
 									<div class="clearfix"> </div>		
-                                </form>
+                                <?php echo form_close(); ?>
                             </div>
                        </div> 
                   </div> <!--col-sm-12-->   
                 </div> <!--row-->
-            </div> <!--container->
+            </div> <!--container-->
         </section>
-<?php include('include/footermenu.php'); ?>
-       <?php include('include/footer.php'); ?>
+<?php 
+include('include/footermenu.php');
+include('include/footer.php'); 
+?>

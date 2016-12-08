@@ -84,15 +84,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script> -->  
         <script>
-         $('.admin_table').wrap("<div id='table_wrapper_Datatable' style='\n\
-                                        overflow: auto;\n\
-                                        overflow-y: hidden;\n\
-                                        -ms-overflow-y: hidden\n\
-                                        position:relative;\n\
-                                        margin-right:5px;\n\
-                                        padding-bottom: 15px;\n\
-                                        display:block;\n\
-                                   '>/");
+         
 
             var datatable = "";
 
@@ -194,6 +186,18 @@
                 "order" : [],
                 "bPaginate": false,
             });
+
+            $('.admin_table').wrap("<div id='table_wrapper_Datatable' style='\n\
+                                        overflow: auto;\n\
+                                        overflow-y: hidden;\n\
+                                        -ms-overflow-y: hidden\n\
+                                        position:relative;\n\
+                                        margin-right:5px;\n\
+                                        padding-bottom: 15px;\n\
+                                        display:block;\n\
+                                   '>/");
+
+
            });
         </script>
         <!-- <script>
