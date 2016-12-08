@@ -18,6 +18,7 @@ class Job_seeker extends CI_Controller {
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			/* Job provider login page with facebook login url */
 			$data['fbloginurl'] = $common->facebookloginurl_seeker();
+			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$this->load->view('job-seekers-login',$data);
 		}
 		else {
@@ -32,6 +33,8 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_password', 'Password', 'trim|required|xss_clean');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE){
+				$fb['captcha'] = $this->captcha->main();
+				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$this->load->view('job-seekers-login',$fb);
@@ -71,8 +74,17 @@ class Job_seeker extends CI_Controller {
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			$this->load->view('register-job-seekers',$data);
-		} else {			
-			/* Registration page loading with posted data */
+		}
+		/* Registration page loading with posted data */
+		else {
+			/* set validation condition as per given input value are email or mobile number */
+			$emailval = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/';
+			$mobileval="/^[1-9][0-9]*$/"; 
+			if(!preg_match($mobileval,$this->input->post('candidate_mobile_no'))){
+				$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
+			}else if(!preg_match($emailval,$this->input->post('candidate_email'))){
+				$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean');
+			}
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			/* Set validate condition for registration form */
 			$this->form_validation->set_rules('candidate_institution_type', 'Institution', 'trim|required|numeric|xss_clean');
@@ -80,6 +92,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
+			$this->form_validation->set_rules('accept_terms','trim|required', 'callback_accept_terms');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE)
 	       	{
@@ -221,7 +234,7 @@ class Job_seeker extends CI_Controller {
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE){
 				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-				$this->load->view('forgot-password-seeker');
+				$this->load->view('forgot-password');
 			}
 			else{
 
@@ -243,7 +256,7 @@ class Job_seeker extends CI_Controller {
 					$this->load->view('forgot-password-seeker',$data);
 				} else {
 					$data['reg_server_msg'] = 'Your Provided Login data is invalid!';	
-					$this->load->view('forgot-password-seeker',$data);
+					$this->load->view('forgot-password',$data);
 				}
 			}   		
 	}

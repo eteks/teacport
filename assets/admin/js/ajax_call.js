@@ -120,6 +120,10 @@ $(document).ready(function(){
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
                     handleChoosenSelect();
                     // e.preventDefault();
+                    $('.multi_choice').find('ul').addClass('scroller');
+                    $('.multi_choice').find('ul').slimScroll({
+                        height: 'auto'
+                    });
                 }
             }
         });
@@ -128,7 +132,15 @@ $(document).ready(function(){
     // Tab menu submission - Popup form submission
     $(document).on('submit','.tab_form',function(e) {
         e.preventDefault();
-        var formdata = new FormData(this);
+        var formdata = new FormData();
+        $('.tab_form').find('.tabfield').each(function() {
+            if($(this).attr('type') == 'file') {
+                formdata.append($(this).attr('name'),$(this)[0].files[0]); 
+            }
+            else {
+                formdata.append($(this).attr('name'),$(this).val());
+            }
+        });
         tabmenu_ci_validation('end',formdata);
     });
 

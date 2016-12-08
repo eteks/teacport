@@ -34,9 +34,9 @@
                                 <div class="loginbox-title">Sign in using social Accounts</div>
                                 <ul class="social-network social-circle onwhite">
                                     <li><a href="<?php echo $fbloginurl; ?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="<?php echo site_url('login/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="<?php echo  site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="<?php echo site_url('login/seeker/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="<?php echo  site_url('login/seeker/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="<?php echo site_url('login/seeker/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                                 <div class="loginbox-signup">New User ?
                                     <a class="txt_blue">Sign Up</a>
@@ -51,14 +51,14 @@
                             	</div><br>
                             	<p class="registration_server_msg"><?php if(isset($reg_server_msg)) echo $reg_server_msg; ?></p>
                                  <span class="error_test"> Please fill Enter Valid Email </span> 
-                                 <?php echo form_open('job_seeker/forgot_password', 'id="forgotpass-form" class="forgotpass-form"'); ?>
+                                 <?php echo form_open('login/forgot-password', 'id="forgotpass-form" class="forgotpass-form"'); ?>
                                     <p class="registration_status"> </p>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"> Email address </label>
                                         <?php echo form_error('forget_email'); ?>
                                         <input id="forget_email" name="forget_email" class="form-control input" size="20" placeholder="Enter Email" type="text">
                                     </div>
-                                    <button id="submit" type="submit" class="btn btn-default btn-block">
+                                    <button type="submit" class="btn btn-default btn-block">
                                         <i class="fa fa-unlock"> </i> Retrieve Password
                                     </button>
                                 <?php echo form_close(); ?>
@@ -96,7 +96,7 @@
                                 <?php echo form_input(array('id' => 'candidate_name','class' => 'form-control', 'name' => 'candidate_name')); ?>
                                 </div>
                                 <div class="form-group">
-                                    <?php echo form_label('Email :'); ?> <?php echo form_error('candidate_email'); ?>
+                                    <?php echo form_label('Email :'); ?>
                                 	<?php echo form_input(array('id' => 'candidate_email','class' => 'form-control', 'name' => 'candidate_email')); ?>
                                 </div>
                                 <div class="form-group">
@@ -115,7 +115,7 @@
                                    <label class="checkbox_word"><input type="checkbox"> I accept <a href="register-4.html" class="txt_blue">Term and conditions?</a>
                                 </div>
                                 <div class="loginbox-submit">
-                                    <a href="user-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Register"></a>
+                                    <input type="submit" class="btn btn-default btn-block" value="Register">
                                 </div>
                                 <div class="loginbox-or">
                                     <div class="or-line"></div>
