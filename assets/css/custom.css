@@ -607,3 +607,11 @@ font-size: 12px;
 .dn{
 	display: none;
 }
+.bold{
+	font-weight:bold;
+	cursor:pointer;
+}
+.inbox_popup_data 
+{
+    text-transform:capitalize;
+}

@@ -66,6 +66,7 @@ $route['provider/dashboard/editprofile'] 				= 'job_provider/editprofile';
 $route['provider/inbox'] 								= 'job_provider/inbox';
 $route['provider/inbox/message'] 						= 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] 					= 'job_provider/inbox_message_count';
+$route['provider/inbox/fulldata'] 						= 'job_provider/inbox_message_full_data';
 $route['provider/candidate'] 							= 'job_provider/browse_candidate';
 $route['provider/candidate/(:num)'] 					= 'job_provider/browse_candidate/$1';
 $route['provider/postjob'] 								= 'job_provider/postjob';
