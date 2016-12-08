@@ -81,6 +81,9 @@
 	top: 0;
 	width: 100%;
 }
+.login-page-4{
+	min-height: 100%;
+}
 .loginbox-terms {
     margin: 10px 0;
 }
@@ -151,6 +154,7 @@
 }
 #candidate-form select{
 	padding: 5px !important;
+	width: 100%;
 }	
 .alert {
     color: #ff0030;
@@ -167,6 +171,10 @@
 	border-bottom: 1px solid #ccc;
 	margin: 5px 0 15px;
 	padding: 0 0 10px; 
+}
+/* Edit Profile */
+.upload_resume input[type="file"] {
+	color: #29AAFE;
 }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
@@ -368,9 +376,10 @@ select:invalid { color: gray; }
 	background-color: #29aafe; 
 }	
 #pro_inbox_msg h5 {
-    background-color: #29aafe !important;
-    color: #fff;
-    padding: 5px;
+    color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
 } 
 /* Browse Candidate jobs */
 #dashboard-jobs-grid .dashboard-jobs-grid-link{
@@ -381,6 +390,12 @@ select:invalid { color: gray; }
 	height: 100%;
 	width: 100%;
 	
+}
+.seeker_individual_profile h5{
+	color: #29AAFE;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Kaushan Script';
 }
 /* END OF COMPANY DASHBOARD */
 
@@ -406,8 +421,6 @@ select:invalid { color: gray; }
  	filter: alpha(opacity=0);  
   	opacity:0;  
 } 
-
-
 
 
 /*Form validation css for job seeker added by thangam*/

@@ -118,6 +118,50 @@ $(document).ready(function() {
 	     	
 	  }).change();
 	
+	
+	
+	// Clone fields for Candidate field
+		var cloneIndex = $(".clonedInput").length;
+		function clone(){
+			alert('hi');
+		    $(this).parents(".clonedInput").clone()
+		        .appendTo(".clone_all_fields")
+		        .attr("id", "edu_set_act " +  cloneIndex)
+		        .find("*","input") 
+		        .val("")
+		              .on('click', 'button.clone', clone)
+		        .on('click', 'button.remove', remove);
+		    cloneIndex++;
+		     
+		}
+		function remove(){
+		    $(this).parents(".clonedInput").remove();
+		}
+		$("button.clone").on("click", clone);
+		
+		$("button.remove").on("click", remove);   
+		
+		
+	//Clone Professional Details - OtherJobs
+	var cloneValue = $(".other_jobs").length;
+		function add(){
+			alert('hi');
+		    $(this).parents(".other_jobs").clone()
+		        .appendTo(".add_otherjobs")
+		        .attr("id", "otherjobs_act " +  cloneValue)
+		        .find("*","input") 
+		        .val("")
+		              .on('click', 'button.add', add)
+		        .on('click', 'button.remov', remov);
+		    cloneValue++;
+		}
+		function remov(){
+		    $(this).parents(".other_jobs").remove();
+		}
+		$("button.add").on("click", add);
+		
+		$("button.remov").on("click", remov); 	
+	
 		
 });  //end document 
 
