@@ -199,9 +199,13 @@ if (defined('ENVIRONMENT'))
 	// define("TWITTERCONSUMERKEY","WtZZYO7OMHN6a9GdI8QnIHFjT");
 	// define("TWITTERCONSUMERSECRET", "ebFGoz2TSiFtBLJMEB6v2z2GTnGHGNjRy8OpfgZVoX4nSKkbDE");
 	// define("TWITTERLOGINURL", APP_URL."login/twitterverify");
-	define("GOOGLECLIENTID",'917333063130-hrjho3c5b53ati7uepe7dsto6jjsk345.apps.googleusercontent.com');//google client id
-	define("GOOGLECLIENTSECRET",'7pgkz0KpxuUVSLgaymVsYNcG');//google client secret
+	//define("GOOGLECLIENTID",'917333063130-hrjho3c5b53ati7uepe7dsto6jjsk345.apps.googleusercontent.com');//google client id
+	//define("GOOGLECLIENTSECRET",'7pgkz0KpxuUVSLgaymVsYNcG');//google client secret
+
+	define("GOOGLECLIENTID",'635152558229-c0aelp1aob4dqmj9isnh9s21qv43l3jp.apps.googleusercontent.com');//google client id	  
+	define("GOOGLECLIENTSECRET",'6hQOSwkY_JywJc8TJLI7Sp1r');//google client secret	
 	define("GOOGLEREDIRECTURL",APP_URL."login/google");//google redirect urlt
+	define("GOOGLESEEKERREDIRECTURL",APP_URL."login/seeker/google");//google redirect urlt
 	define("GOOGLEAPPNAME", "Login to Teacher Recruit");
 	
 /*

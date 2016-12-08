@@ -44,11 +44,15 @@
                                 <div class="form-group">
                                 	 <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
                                 </div>
-                                <div class="loginbox-terms">
-                                   <label class="checkbox_word"><input type="checkbox">I accept <a href="register-4.html" class="txt_blue">Term and conditions?</a>
+                                <div>
+                                   <label class="checkbox_word"><input id="accept_terms" name="accept_terms" value="yes" type="checkbox">I accept <a class="txt_blue">Term and conditions?</a>
                                 </div>
+                                <!-- <div class="form-group class="loginbox-terms"">
+                                     <?php echo form_input(array('id' => 'accept_terms','class' => 'form-control checkbox_word','name' => 'accept_terms','type' => 'checkbox')); ?>
+                                     I accept <a class="txt_blue">Term and conditions?</a>
+                                </div> -->
                                 <div class="loginbox-submit">
-                                    <input type="submit" class="btn btn-default btn-block" value="Register">
+                                <input type="submit" class="btn btn-default btn-block" value="Register">
                                 </div>
                                 <div class="loginbox-or">
                                     <div class="or-line"></div>
@@ -57,9 +61,9 @@
                                 <div class="loginbox-title">Sign Up using social accounts</div>
 	                                <ul class="social-network social-circle onwhite">
                                         <li><a href="<?php echo site_url('login/seeker/facebook');?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                        <li><a href="<?php echo site_url('login/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                        <li><a href="<?php echo site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                        <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+                                        <li><a href="<?php echo site_url('login/seeker/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                        <li><a href="<?php echo site_url('login/seeker/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                        <li><a href="<?php echo site_url('login/seeker/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                     </ul> 
                                 	<div class="loginbox-signin"> Already have account ?<a class="txt_blue"> Sign in</a> </div>
                             </div> <!--End Signup-->
@@ -125,9 +129,9 @@
                                 <div class="loginbox-title">Sign in using social Accounts</div>
                                 <ul class="social-network social-circle onwhite">
                                     <li><a href="<?php echo $fbloginurl; ?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="<?php echo site_url('login/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="<?php echo  site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="<?php echo site_url('login/seeker/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                    <li><a href="<?php echo  site_url('login/seeker/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <li><a href="<?php echo site_url('login/seeker/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                                 <div class="loginbox-or">
                                     <div class="or-line"></div>

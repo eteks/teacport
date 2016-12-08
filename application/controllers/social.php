@@ -203,6 +203,8 @@ class Social extends CI_Controller {
 			}
 		}
 	}
+
+	/** Twitter Login for Provider ( Start Here ) **/ 
 	public function twitter(){
 		$ok = $this->twconnect->twredirect('social/twitterverify');
 		if (!$ok) {
@@ -268,6 +270,82 @@ class Social extends CI_Controller {
 			redirect('/');
 		}
 	}
+
+	/** Twitter Login for Provider ( End Here ) **/ 
+
+
+
+	/** Twitter Login for Seeker ( Start Here ) **/ 
+	public function seekertwitter(){
+		$ok = $this->twconnect->twredirect('social/seeker_twitterverify');
+		if (!$ok) {
+			echo 'Could not connect to Twitter. Refresh the page or try again later.';
+		}
+	}
+
+	public function seeker_twitterverify() {		
+		
+		$ok = $this->twconnect->twprocess_callback();		
+		if ( $ok ) { 
+			redirect('social/seeker_twittersuccess'); 
+		} else {
+			redirect ('social/seeker_twitterfailure');
+		}	
+	}
+
+	public function seeker_twittersuccess() {
+		
+		$this->twconnect->twaccount_verify_credentials();		
+		$user_profile = $this->twconnect->tw_user_info;		
+		$profile = array(
+			'id' => $user_profile->id,
+			'name' => $user_profile->name,
+			'screen_name' => $user_profile->screen_name,
+			'location' => $user_profile->location,
+			'description' => $user_profile->description,
+			'profile_image_url' => $user_profile->profile_image_url,
+		);
+		
+		// print_r($arr);
+		$twdata = array(
+			'candidate_email' => $profile['screen_name'].'@twitter.com',
+			'candidate_name' => $profile['name'],
+			'candidate_image_path' => $profile['profile_image_url'],
+			'candidate_registration_type' => 'twitter'
+		);
+		if($this->job_seeker_model->social_authendication_registration($twdata) === 'inserted')
+		{
+			$twdata['user_type'] = 'seeker';
+			$twdata['login_type'] = 'twitter';
+			$this->session->set_userdata("login_status", TRUE);
+			$this->session->set_userdata("login_session",$twdata);
+			redirect('seeker/dashboard');
+		}
+		else{
+			$checkvaliduser = $this->job_seeker_model->social_valid_provider_login($twdata);
+			if($checkvaliduser['valid_status'] === 'valid'){
+				$this->session->set_userdata("login_status", TRUE);
+				$this->session->set_userdata("login_session",$checkvaliduser);
+				redirect('seeker/dashboard');
+			}
+			else{
+				$tw['reg_server_msg'] = 'Your Twitter account does not associate with Teacher recruit!';	
+				$tw['fbloginurl'] = $common->facebookloginurl();
+				$this->load->view('job-seekers-login',$tw);
+			}
+		}
+		
+	}
+
+	public function seeker_twitterfailure() {
+		if($this->session->userdata('login') == true){
+			redirect('/');
+		}
+	}
+	/** Twitter Login for Seeker ( End Here ) **/ 
+
+
+
 	public function linkedin() {
 		$ci =& get_instance();
 		$ci->config->load('linkedin', true);
@@ -345,6 +423,95 @@ class Social extends CI_Controller {
 		 redirect("/"); 
 		}
 	}
+
+
+
+	/** LinkedIn Login for Seeker ( Start Here ) **/ 
+
+	public function seekerlinkedin() {
+
+		$ci =& get_instance();
+		$ci->config->load('linkedin', true);
+		$config = $ci->config->item('linkedin');	
+
+		if (isset($_GET["oauth_problem"]) && $_GET["oauth_problem"] <> "") {
+  			// in case if user cancel the login. redirect back to home page.
+  			$_SESSION["err_msg"] = $_GET["oauth_problem"];
+  			redirect("login/seeker");
+  			exit;
+		}
+
+		$client = new oauth_client_class;
+		$client->debug = false;
+		$client->debug_http = true;
+		$client->redirect_uri = $config['seekercallbackURL'];
+		$client->client_id = $config['linkedinApiKey'];
+		$application_line = __LINE__;
+		$client->client_secret = $config['linkedinApiSecret'];
+		if (strlen($client->client_id) == 0 || strlen($client->client_secret) == 0)
+  			die('Please go to LinkedIn Apps page https://www.linkedin.com/secure/developer?newapp= , '.
+			'create an application, and in the line '.$application_line.
+			' set the client_id to Consumer key and client_secret with Consumer secret. '.
+			'The Callback URL must be '.$client->redirect_uri).' Make sure you enable the '.
+			'necessary permissions to execute the API calls your application needs.';
+		/* API permissions */
+		$client->scope = $config['linkedinScope'];				
+
+		if (($success = $client->Initialize())) {
+  			if (($success = $client->Process())) {
+    			if (strlen($client->authorization_error)) {
+      				$client->error = $client->authorization_error;
+      				$success = false;
+    			} elseif (strlen($client->access_token)) {
+      				$success = $client->CallAPI(
+					'http://api.linkedin.com/v1/people/~:(id,email-address,first-name,last-name,location,picture-url,public-profile-url,formatted-name)', 
+					'GET', array(
+						'format'=>'json'
+					), array('FailOnAccessError'=>true), $user);
+    			}
+  			}
+  			$success = $client->Finalize($success);
+		}
+
+		if ($client->exit){
+			//redirect("login/seeker"); exit;
+		 }
+
+		if ($success) {
+			if(isset($user)){
+				$lidata = array(
+					'candidate_email' => $user->emailAddress,
+					'candidate_name' => $user->firstName,
+					'candidate_image_path' => $user->pictureUrl,
+					'candidate_registration_type' => 'linkedin'
+				);
+				if($this->job_seeker_model->social_authendication_registration($lidata) === 'inserted')	{					
+					$lidata['user_type'] = 'seeker';
+					$lidata['login_type'] = 'linkedin';
+					$this->session->set_userdata("login_status", TRUE);
+					$this->session->set_userdata("login_session",$lidata);
+					redirect('seeker/dashboard');
+				} else {					
+					$checkvaliduser = $this->job_seeker_model->social_valid_seeker_login($lidata);
+					if($checkvaliduser['valid_status'] === 'valid'){
+						$this->session->set_userdata("login_status", TRUE);
+						$this->session->set_userdata("login_session",$checkvaliduser);
+						redirect('seeker/dashboard');
+					}
+					else{
+						$li['reg_server_msg'] = 'Your Twitter account does not associate with Teacher recruit!';	
+						$li['fbloginurl'] = $common->facebookloginurl();
+						$this->load->view('job-seekers-login',$li);
+					}
+				}
+			}
+		} else {
+		 redirect("/"); 
+		}
+	}
+	/** LinkedIn Login for Seeker ( End Here ) **/ 
+
+
 	public function google()
 	{
 		$CI =& get_instance();
@@ -401,5 +568,63 @@ class Social extends CI_Controller {
         	redirect($gClient->createAuthUrl());
         }
 	}
+
+
+	/** Google Login for Seeker ( Start Here ) **/ 
+
+	public function seekergoogle()
+	{
+		$CI =& get_instance();
+		include_once APPPATH."libraries/google/Google_Client.php";
+        include_once APPPATH."libraries/google/contrib/Google_Oauth2Service.php"; 
+        // Google Client Configuration
+        $gClient = new Google_Client();
+        $gClient->setApplicationName(GOOGLEAPPNAME);
+        $gClient->setClientId(GOOGLECLIENTID);
+        $gClient->setClientSecret(GOOGLECLIENTSECRET);
+        $gClient->setRedirectUri(GOOGLESEEKERREDIRECTURL);
+        $google_oauthV2 = new Google_Oauth2Service($gClient);
+        if (isset($_REQUEST['code'])) {
+        	$CI =& get_instance();
+            $gClient->authenticate();
+            $CI->session->set_userdata('token', $gClient->getAccessToken());
+            redirect(filter_var($redirectUrl, FILTER_SANITIZE_URL));
+        }
+        $token = $CI->session->userdata('token');
+        if (!empty($token)) {
+            $gClient->setAccessToken($token);
+        }
+        if ($gClient->getAccessToken()) {
+            $profile = $google_oauthV2->userinfo->get();
+            $godata = array(
+				'candidate_email' => $profile['email'],
+				'candidate_name' => $profile['given_name'],
+				'candidate_image_path' => $profile['picture'],
+				'candidate_registration_type' => 'google'
+			);
+			if($this->job_seeker_model->social_authendication_registration($godata) === 'inserted')
+			{
+				$godata['user_type'] = 'seeker';
+				$godata['login_type'] = 'google';
+				$this->session->set_userdata("login_status", TRUE);
+				$this->session->set_userdata("login_session",$godata);
+				redirect('seeker/dashboard');
+			} else {
+				$checkvaliduser = $this->job_seeker_model->social_valid_seeker_login($godata);
+				if($checkvaliduser['valid_status'] === 'valid'){
+					$this->session->set_userdata("login_status", TRUE);
+					$this->session->set_userdata("login_session",$checkvaliduser);
+					redirect('seeker/dashboard');
+				} else {
+					$go['reg_server_msg'] = 'Your Google account does not associate with Teacher recruit!';	
+					$go['fbloginurl'] = $common->facebookloginurl();
+					$this->load->view('job-seekers-login',$go);
+				}
+			}
+        } 
+        else {
+        	redirect($gClient->createAuthUrl());
+        }
+	} /** Google Login for Seeker ( End Here ) **/ 
 	
 }
