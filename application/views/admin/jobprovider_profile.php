@@ -361,106 +361,160 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane" id="tab3">
-                      <h4>Payment Details <a class="subscription_paginate"> <i class="icon-chevron-left"></i> </a> <a class="subscription_paginate">  <i class="icon-chevron-right"></i> </a> </h4>
+                    <div class="tab-pane profile_subscription_tab" id="tab3">
+                      <h4>
+                        Payment Details 
+                        <span class="arrow_section">
+                          <a class="subscription_paginate popup_pag_prev"> 
+                            <i class="icon-chevron-left"></i> 
+                          </a> 
+                          <a class="subscription_paginate">  
+                            <i class="icon-chevron-right popup_pag_next"></i> 
+                          </a> 
+                        </span>
+                      </h4>
                       <?php
-                      if($payment_status != 0 ) :
+                      if(!empty($payment_details)) :
                       ?>
                       <div class="subscription_organization_section">
-                        <h4 class="center_align plan_name"><?php echo $provider_full_profile['subscription_plan']; ?> </h4>
-                        <div class="span12 profile_plan_section">
-                          <div class="span3 plan_label_section">                                       
-                            <h4 class="">Summary</h4>
-                            <label class=""> Subscription Price </label>
-                            <label class=""> Subscription Start Date </label>
-                            <label class=""> Subscription End Date </label>
-                            <label class=""> Transaction Id </label>
-                            <label class=""> Subscription Status </label>
-                            <label class=""> Subscription Created Date </label>
-                          </div>
-                          <div class="span3 plan_field_section">                                       
-                            <h4 class="">Original Plan</h4>
-                            <label class=""> &#8377 <?php echo $provider_full_profile['subscription_price']; ?> </label>
-                            <label class=""> <?php echo date('d M Y',strtotime($provider_full_profile['subcription_valid_start_date'])); ?> </label>
-                            <label class=""> <?php echo date('d M Y',strtotime($provider_full_profile['subcription_valid_end_date'])); ?> </label>
-                            <label class=""> <?php echo $provider_full_profile['transcation_id']; ?> </label>
-                            <?php
-                            if($provider_full_profile['subscription_status'] == 1) :
-                              echo "<label class='subscription_status'> <span class='icon'> Active <span> </label>";
-                              if(empty($payment_details)) :
-                                echo "<div class='inner-triangle'> </div> <span class='icon-ok triangle_notification'> </span>";
+                        <?php
+                        foreach ($payment_details as $pay_key => $pay_val) :
+                        ?>
+                        <div class="span12 subscription_organization_inner_section">
+                          <h4 class="center_align plan_name"><?php echo $pay_val['subscription_plan']; ?> </h4>
+                          <div class="profile_plan_section">
+                            <div class="span3 plan_label_section">                                       
+                              <h4 class="">Summary</h4>
+                              <label class=""> Subscription Price </label>
+                              <label class=""> Subscription Start Date </label>
+                              <label class=""> Subscription End Date </label>
+                              <label class=""> Transaction Id </label>
+                              <label class=""> Subscription Status </label>
+                              <label class=""> Subscription Created Date </label>
+                            </div>
+                            <div class="span3 plan_field_section">                                       
+                              <h4 class="">Original Plan</h4>
+                              <label class=""> &#8377 </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> </label>
+                              <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
+                              <?php
+                              if($pay_val['organization_subscription_status'] == 1) :
+                              ?>
+                              <label class='subscription_status'> <span class='icon'> Active <span> </label>
+                              <div class='inner-triangle'> </div> <span class='icon-ok triangle_notification'> </span>
+                              <?php
                               else :
-                                echo "<div class='inner-triangle triangle_disabled'> </div>";
+                              ?>
+                              <label class='subscription_status'> <span class='icon icon_expired'> Inactive <span></label> 
+                              <div class='inner-triangle triangle_disabled'> </div>
+                              <?php
                               endif;
+                              ?>               
+                              <label class=""> <?php echo date('d-m-Y',strtotime($pay_val['organization_subscription_created_date'])); ?> </label>                   
+                            </div>
+                            <?php
+                            if(!empty($pay_val['upgrade_renewal']) && $pay_key) :
+                            $upgrade = 0;
+                            $renewal = 0;
+                            foreach ($pay_val['upgrade_renewal'] as $up_re_key => $up_re_val) :
+                            ?>
+                            <?php
+                            if(!empty($up_re_val['organization_upgrade_id'])) :
+                            $upgrade = 1;
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class="">Upgrade Plan</h4>
+                              <label class=""> &#8377  </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
+                              <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
+                              <?php
+                              if($up_re_val['status'] == 1) :
+                              ?>
+                              <label class='subscription_status'> <span class='icon'> Active <span> </label>
+                              <div class='inner-triangle'> </div> <span class='icon-ok triangle_notification'> </span>
+                              <?php
+                              else :
+                              ?>
+                              <label class='subscription_status'> <span class='icon icon_expired'> Inactive <span></label> 
+                              <div class='inner-triangle triangle_disabled'> </div>
+                              <?php
+                              endif;
+                              ?>
+                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>  
+                            </div>
+                            <?php
                             else :
-                              echo "<label class='subscription_status'> <span class='icon icon_expired'> Expired <span></label> <div class='inner-triangle triangle_disabled'> </div>";
+                            $renewal = 1;
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class="">Renewal Plan</h4>
+                              <label class=""> &#8377  </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
+                              <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
+                              <?php
+                              if($up_re_val['status'] == 1) :
+                              ?>
+                              <label class='subscription_status'> <span class='icon'> Active <span> </label>
+                              <div class='inner-triangle'> </div> <span class='icon-ok triangle_notification'> </span>
+                              <?php
+                              else :
+                              ?>
+                              <label class='subscription_status'> <span class='icon icon_expired'> Inactive <span></label> 
+                              <div class='inner-triangle triangle_disabled'> </div>
+                              <?php
+                              endif;
+                              ?>
+                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>  
+                            </div>
+                            <?php
                             endif;
-                            ?>               
-                            <label class=""> <?php echo date('d-m-Y',strtotime($provider_full_profile['subscription_created_date'])); ?> </label>                   
-                          </div>
-                          <?php
-                          if(!empty($payment_details)) :
-                          ?>
-                          <?php if(!empty($payment_details['organization_upgrade_id'])) :
-                          ?>
-                          <div class="span3 plan_field_section">     
-                            <h4 class="">Upgrade Plan</h4>
-                            <!-- <label class=""> Plan1 </label> -->
-                            <label class=""> &#8377 <?php echo $payment_details['upgrade_price']; ?> </label>
-                            <label class=""> <?php echo date('d M Y',strtotime($payment_details['validity_start_date'])); ?> </label>
-                            <label class=""> <?php echo date('d M Y',strtotime($payment_details['validity_end_date'])); ?> </label>
-                            <label class=""> <?php echo $payment_details['transaction_id']; ?> </label>
-                            <label class="subscription_status"> <span class='icon'> Active <span> </label>
-                            <label class=""> <?php echo date('d-m-Y',strtotime($payment_details['created_date'])); ?> </label>  
-                            <div class="inner-triangle"> </div>
-                            <span class="icon-ok triangle_notification">  </span>                         
-                          </div>
-                          <div class="span3 plan_field_section">     
-                            <h4 class=""> Renewal Plan </h4>  
-                            <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
-                            <div class="inner-triangle triangle_disabled"></div>                        
-                          </div>
-                          <?php
-                          else :
-                          ?>
-                          <div class="span3 plan_field_section">     
-                            <h4 class="">Upgrade Plan</h4>
-                            <label class="subscription_status"> <span class='icon icon_not_activate'> Not Upgrade <span> </label>
-                            <div class="inner-triangle triangle_disabled"></div>                           
-                          </div>
+                            endforeach;
+                            ?>
+                            <?php
+                            if($renewal == 0):
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class=""> Renewal Plan </h4>  
+                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
+                              <div class="inner-triangle triangle_disabled"></div>                        
+                            </div>
+                            <?php
+                            elseif($upgrade == 0):
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class="">Upgrade Plan</h4>
+                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Upgrade <span> </label>
+                              <div class="inner-triangle triangle_disabled"></div>                    
+                            </div>
+                            <?php
+                            endif;
+                            ?>
+                            <?php
+                            else :
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class="">Upgrade Plan</h4>
+                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Upgrade <span> </label>
+                              <div class="inner-triangle triangle_disabled"></div>                    
+                            </div>
+                            <div class="span3 plan_field_section">     
+                              <h4 class=""> Renewal Plan </h4>  
+                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
+                              <div class="inner-triangle triangle_disabled"></div>                        
+                            </div>
+                            <?php
+                            endif;
+                            ?>
 
-                          <div class="span3 plan_field_section">     
-                            <h4 class="">Renewal Plan</h4>  
-                            <!-- <label class=""> Plan1 </label> -->
-                            <label class=""> &#8377 <?php echo $payment_details['subscription_price']; ?> </label>
-                            <label class=""> <?php echo date('d M Y',strtotime($payment_details['validity_start_date'])); ?> </label>
-                            <label class=""> <?php echo date('d M Y',strtotime($payment_details['validity_end_date'])); ?> </label>
-                            <label class=""> <?php echo $payment_details['transaction_id']; ?> </label>
-                            <label class="subscription_status"> <span class='icon'> Active <span> </label>
-                            <label class=""> <?php echo date('d-m-Y',strtotime($payment_details['created_date'])); ?> </label>
-                            <div class="inner-triangle"> </div>
-                            <span class="icon-ok triangle_notification">  </span>                        
+
                           </div>
-                          <?php
-                          endif;
-                          ?>
-                          <?php
-                          else :
-                          ?>
-                          <div class="span3 plan_field_section">     
-                            <h4 class="">Upgrade Plan</h4>
-                            <label class="subscription_status"> <span class='icon icon_not_activate'> Not Upgrade <span> </label>
-                            <div class="inner-triangle triangle_disabled"></div>                           
-                          </div>
-                          <div class="span3 plan_field_section">     
-                            <h4 class=""> Renewal Plan </h4>  
-                            <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
-                            <div class="inner-triangle triangle_disabled"></div>                        
-                          </div> 
-                          <?php
-                          endif;
-                          ?>
                         </div>
+                        <?php
+                        endforeach;
+                        ?>
                       </div>
                       <?php
                       else :
@@ -471,17 +525,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <?php
                       endif;
                       ?>
-
-
-
-
-
-
-
-
-
-
-
                     </div>
                     <div class="tab-pane" id="tab4">
                       <h4>Addtional Details</h4>

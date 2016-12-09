@@ -47,16 +47,22 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-
+// local settings
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '';
 $db['default']['database'] = 'teacherrecruite';
+// server settings
+// $db['default']['hostname'] = '166.62.28.109';
+// $db['default']['username'] = 'teacherrecruit';
+// $db['default']['password'] = 'teacherrecruit';
+// $db['default']['database'] = 'teacherrecruit';
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
 $db['default']['db_debug'] = TRUE;
-$db['default']['cache_on'] = FALSE;
+$db['default']['cache_on'] = TRUE;
 $db['default']['cachedir'] = '';
 $db['default']['char_set'] = 'utf8';
 $db['default']['dbcollat'] = 'utf8_general_ci';

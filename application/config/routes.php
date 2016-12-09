@@ -66,6 +66,7 @@ $route['provider/dashboard/editprofile'] 				= 'job_provider/editprofile';
 $route['provider/inbox'] 								= 'job_provider/inbox';
 $route['provider/inbox/message'] 						= 'job_provider/inbox_message';
 $route['provider/inbox/messagecount'] 					= 'job_provider/inbox_message_count';
+$route['provider/inbox/fulldata'] 						= 'job_provider/inbox_message_full_data';
 $route['provider/candidate'] 							= 'job_provider/browse_candidate';
 $route['provider/candidate/(:num)'] 					= 'job_provider/browse_candidate/$1';
 $route['provider/postjob'] 								= 'job_provider/postjob';
@@ -82,7 +83,11 @@ $route['provider/logout'] 								= 'job_provider/provider_logout';
 $route['seeker/dashboard'] 								= 'job_seeker/dashboard';
 $route['seeker/logout'] 								= 'job_seeker/seeker_logout';
 $route['seeker/initialdata'] 							= 'job_seeker/initialdata';
-$route['seeker/dashboard/editprofile'] 					= 'job_seeker/editprofile';
+$route['seeker/editprofile'] 							= 'job_seeker/editprofile';
+$route['seeker/inbox'] 								    = 'job_seeker/inbox';
+$route['seeker/findjob'] 								= 'job_seeker/findjob';
+$route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
+
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
