@@ -106,7 +106,7 @@ if ( ! function_exists('get_provider_vacancy_by_qua')){
 					{
 						$out[$row['vacancies_id']]['educational_qualification_id'][$row['educational_qualification_id']] = $row['educational_qualification'];
 				   	}
-				   	if($k == 'vacancies_job_title' || $k == 'organization_name' || $k == 'vacancies_available' || $k == 'vacancies_open_date' || $k == 'vacancies_close_date' || $k == 'vacancies_start_salary' || $k == 'vacancies_end_salary' || $k == 'vacancies_status' || $k == 'vacancies_experience' || $k == 'vacancies_class_level_id' || $k == 'vacancies_university_board_id' || $k == 'vacancies_subject_id' || $k == 'class_level' || $k == 'university_board_name' || $k == 'subject_name' || $k == 'vacancies_medium' || $k == 'vacancies_accommodation_info' || $k == 'vacancies_instruction' || $k == 'vacancies_interview_start_date' || $k == 'vacancies_end_date' || $k == 'vacancies_organization_id') {
+				   	if($k == 'vacancies_job_title' || $k == 'organization_name' || $k == 'vacancies_available' || $k == 'vacancies_open_date' || $k == 'vacancies_close_date' || $k == 'vacancies_start_salary' || $k == 'vacancies_end_salary' || $k == 'vacancies_status' || $k == 'vacancies_experience' || $k == 'vacancies_class_level_id' || $k == 'vacancies_university_board_id' || $k == 'vacancies_subject_id' || $k == 'class_level' || $k == 'university_board_name' || $k == 'subject_name' || $k == 'vacancies_medium' || $k == 'vacancies_accommodation_info' || $k == 'vacancies_instruction' || $k == 'vacancies_interview_start_date' || $k == 'vacancies_end_date' || $k == 'vacancies_organization_id' || $k == 'vacancies_department_id' || $k == 'departments_name' || $k == 'vacancies_applicable_posting_id' || $k == 'posting_name') {
 	     				$out[$row['vacancies_id']][$k] = $row[$k];
 	     			}
 			    }
@@ -212,6 +212,30 @@ if ( ! function_exists('get_cand_pref_pcs')){
 			    }
 			}
 		}
+		return $out;
+	}
+}
+
+// Job provider profile - subscription
+if ( ! function_exists('get_provider_subscription')){
+	function get_provider_subscription($value) 
+	{
+		$out = array();
+    	if(!empty($value)) {
+      	foreach ($value as $key => $row) {
+        	foreach ($row as $k => $r) {
+          		if($k=='upgrade_or_renewal_id' || $k=='organization_upgrade_id' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
+            			if(!isset($out[$row['organization_subscription_id']][$row['upgrade_or_renewal_id']]))
+				        {
+			            	$out[$row['organization_subscription_id']]['upgrade_renewal'][$row['upgrade_or_renewal_id']][$k] = $row[$k];
+				        }
+          			}
+          			else {
+            			$out[$row['organization_subscription_id']][$k] = $row[$k];
+          			}
+        		}
+      		}
+    	}
 		return $out;
 	}
 }

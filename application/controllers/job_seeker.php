@@ -6,7 +6,6 @@ class Job_seeker extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_seeker_model','common_model')); 
-
         session_start();
     }
 
@@ -37,6 +36,7 @@ class Job_seeker extends CI_Controller {
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
+   				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-seekers-login',$fb);
 			}
 			else{
