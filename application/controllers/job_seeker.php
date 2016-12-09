@@ -45,7 +45,7 @@ class Job_seeker extends CI_Controller {
 					'candidate_password' => $this->input->post('candidate_password')
 				);
 				$checkvaliduser = $this->job_seeker_model->check_valid_seeker_login($data);
-				if($checkvaliduser['valid_status'] === 'valid'){
+				if($checkvaliduser['valid_status'] === 'valid') {
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$checkvaliduser);
 					redirect('seeker/dashboard');
@@ -183,36 +183,104 @@ class Job_seeker extends CI_Controller {
 	public function dashboard() {     	
 
      	$session_data = $this->session->all_userdata();  
-     	// print_r($session_data);
+     	// print_r($session_data['login_session']);
      	// exit();  		
-		$candidate_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']
-			['candidate_email']:$session_data['login_session']['candidate_id']);
+		// $candidate_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']
+		// 	['candidate_email']:$session_data['login_session']['candidate_id']);
 
-		if($this->job_seeker_model->check_has_initial_data($candidate_email)=='has_no_data'){
-			$data['initial_data'] = 'show_popup';			
-		}
-		else{
-			$data['initial_data'] = 'hide_popup';			
-		}	
+		// if($this->job_seeker_model->check_has_initial_data($candidate_email)=='has_no_data'){
+		// 	$data['initial_data'] = 'show_popup';			
+		// }
+		// else{
+		// 	$data['initial_data'] = 'hide_popup';			
+		// }	
+		if($_POST) {
+			if($this->input->post('popup_type') == 'social') {
+				$this->form_validation->set_rules('seeker_email', 'Email', 'trim|required|xss_clean|valid_email');
+				$this->form_validation->set_rules('seeker_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
+				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|');
+				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|matches[seeker_password]');
+				$this->form_validation->set_rules('seeker_institution', 'Institution Type', 'trim|required|xss_clean|');
+			}
+
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
 		
-		$candidate_data = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
+			if($this->form_validation->run()) {
+				$data_array = array(
+					'candidate_father_name' => $this->input->post('seeker_father'),
+					'candidate_date_of_birth' => $this->input->post('seeker_dob'),
+					'candidate_address_1' => $this->input->post('seeker_address1'),
+					'candidate_address_2' => $this->input->post('seeker_address2'),
+					'candidate_district_id' => $this->input->post('seeker_district')
+					);
+				if($this->input->post('popup_type') == 'social') {
+					$data_array = array(
+						'candidate_email' => $this->input->post('seeker_email'),
+						'candidate_mobile_no' => $this->input->post('seeker_mobile'),
+						'candidate_password' => $this->input->post('seeker_password'),
+						'candidate_institution_type' => $this->input->post('seeker_institution'),
+						'candidate_father_name' => $this->input->post('seeker_father'),
+						'candidate_date_of_birth' => $this->input->post('seeker_dob'),
+						'candidate_address_1' => $this->input->post('seeker_address1'),
+						'candidate_address_2' => $this->input->post('seeker_address2'),
+						'candidate_district_id' => $this->input->post('seeker_district')
+					);
+				}
 
-         if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
-
-			if($data['initial_data'] === 'show_popup')
-			{
-				$data['user_data'] = $candidate_data;
-				$this->load->view('user-dashboard',$data);
-			} else {				
-				$data['user_data'] = $candidate_data;
-				$this->load->view('user-dashboard',$data);
-			}			
-		} else {			
-			$data['user_data'] = $candidate_data;
-			$this->load->view('user-dashboard',$data);
+				$candidate_status = ($this->input->post('popup_type')) ? $this->job_seeker_model->check_seeker_popup_fields_social($data_array) : $this->job_seeker_model->check_seeker_popup_fields($data_array) ;
+				;	
+				$data['status'] = $candidate_status;
+			}		
 		}
 
-     }
+
+
+		$candidate_data = (isset($session_data['login_session']['candidate_email'])?$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']):$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']));
+
+		// if(!empty($candidate_data['candidate_father_name']))
+		if($candidate_data['candidate_father_name'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_district_id'] == '' or $candidate_data['candidate_date_of_birth'] == '') 
+		{
+			if($candidate_data['candidate_institution_type'] == '' or $candidate_data['candidate_email'] == '' or $candidate_data['candidate_mobile_no'] == '' or $candidate_data['candidate_password'] == '') {
+				$data['initial_data'] = 'show_popup';
+				$data['popup_type'] = 'social';
+			}
+			else {
+				$data['initial_data'] = 'show_popup';
+				$data['popup_type'] = 'ordinary';
+			}
+		}
+		$data['district_values'] = $this->common_model->get_all_district();
+		$data['institution_values'] = $this->common_model->get_institution_type();
+        // print_r($candidate_data);
+        // echo $data['popup_type'];
+        $data['user_data'] = $candidate_data;
+		$this->load->view('user-dashboard',$data);
+
+  //       if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
+
+		// 	if($data['initial_data'] === 'show_popup')
+		// 	{
+		// 		$data['user_data'] = $candidate_data;
+		// 		$this->load->view('user-dashboard',$data);
+		// 	} 
+		// 	else {				
+		// 		$data['user_data'] = $candidate_data;
+		// 		$this->load->view('user-dashboard',$data);
+		// 	}
+		// 	// $data['user_data'] = $candidate_data;
+		// 	// $this->load->view('user-dashboard',$data);			
+		// } 
+		// else {			
+		// 	$data['user_data'] = $candidate_data;
+		// 	$this->load->view('user-dashboard',$data);
+		// }
+
+    }
 
      public function seeker_logout(){
 		$this->session->set_userdata('login_status', FALSE);
@@ -255,49 +323,52 @@ class Job_seeker extends CI_Controller {
 			}   		
 	}
 
-		/** Seeker Inital Data Validation With Pop-up **/		
-		public function initialdata(){			
-			if($_POST){				
-				$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-				$this->form_validation->set_rules('registrant_mobile_no', 'Mobile number', 'trim|required|numeric');
-				$this->form_validation->set_rules('seekerpassword', 'Password', 'trim|required|min_length[8]');
-				$this->form_validation->set_rules('seekerconfirmpassword', 'Password Confirmation', 'trim|required|matches[seekerpassword]');
-
-				if ($this->form_validation->run()){					
-					$initial_data_profile = array(
+	/** Seeker Inital Data Validation With Pop-up **/		
+	public function initialdata(){			
+		if($_POST){				
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
+			
+			if ($this->form_validation->run()){					
+				$initial_data_profile = array(
 					'candidate_password'	=> $this->input->post('seekerpassword'),
 					'candidate_mobile_no'	=> $this->input->post('registrant_mobile_no'),
 					'candidate_profile_completeness' => 41
-					);					
-					if($this->job_seeker_model->job_seeker_update_profile($this->input->post('candidate_id'),$initial_data_profile)=='updated'){
+				);					
+				if($this->job_seeker_model->job_seeker_update_profile($this->input->post('candidate_id'),$initial_data_profile)=='updated'){
 						redirect('seeker/dashboard');
 					}
-				} else {					
-					$session_data = $this->session->all_userdata();
-					$user_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']['candidate_email']:$session_data['login_session']['candidate_id']);
-						if($this->job_seeker_model->check_has_initial_data($user_email)=='has_no_data'){						
-							$data['initial_data'] = 'show_popup';
-						}
-						else{
-							echo 'Out';
-							$data['initial_data'] = 'hide_popup';
-						}
+				} 
+				else {					
+					// $session_data = $this->session->all_userdata();
+					// $user_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']['candidate_email']:$session_data['login_session']['candidate_id']);
+					// 	if($this->job_seeker_model->check_has_initial_data($user_email)=='has_no_data'){						
+					// 		$data['initial_data'] = 'show_popup';
+					// 	}
+					// 	else{
+					// 		echo 'Out';
+					// 		$data['initial_data'] = 'hide_popup';
+					// 	}
 
-					$candidate_data = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
+					// $candidate_data = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
 
-					// if($candidate_data['organization_name'] == '' or $candidate_data['organization_logo'] == '' or $candidate_data['organization_address_1'] == '' or $candidate_data['organization_address_2'] == '' or $candidate_data['organization_address_3'] == '' or $candidate_data['organization_district_id'] == '' or $candidate_data['registrant_name'] == '' or $candidate_data['registrant_designation'] == '' ){
+					// // if($candidate_data['organization_name'] == '' or $candidate_data['organization_logo'] == '' or $candidate_data['organization_address_1'] == '' or $candidate_data['organization_address_2'] == '' or $candidate_data['organization_address_3'] == '' or $candidate_data['organization_district_id'] == '' or $candidate_data['registrant_name'] == '' or $candidate_data['registrant_designation'] == '' ){
 
-					if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
-							if($data['initial_data'] === 'show_popup'){
-								$data['user_data'] = $candidate_data;
-									$this->load->view('user-dashboard',$data);
-								} else {
-									redirect('seeker/dashboard/editprofile');
-								}
-					} else {
-						$data['user_data'] = $candidate_data;
-						$this->load->view('user-dashboard',$data);
-					}
+					// if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
+					// 		if($data['initial_data'] === 'show_popup'){
+					// 			$data['user_data'] = $candidate_data;
+					// 				$this->load->view('user-dashboard',$data);
+					// 			} else {
+					// 				redirect('seeker/dashboard/editprofile');
+					// 			}
+					// } else {
+					// 	$data['user_data'] = $candidate_data;
+					// 	$this->load->view('user-dashboard',$data);
+					// }
+					redirect('seeker/dashboard');
 				}
 			} /** POST END **/
 		}
