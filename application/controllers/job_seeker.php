@@ -6,7 +6,6 @@ class Job_seeker extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_seeker_model','common_model')); 
-
         session_start();
     }
 
@@ -37,6 +36,7 @@ class Job_seeker extends CI_Controller {
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
+   				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-seekers-login',$fb);
 			}
 			else{
@@ -379,12 +379,57 @@ class Job_seeker extends CI_Controller {
 		$this->load->view('user-edit-profile');
 	}
 	
-	public function findjob(){
-		$this->load->view('user-resume');
+	/** Job Seeker find Jobs - Start Here **/
+	public function findjob(){		
+
+		$this->load->library('pagination');	
+		$session_data = $this->session->all_userdata();		
+		$data['candidate_data'] = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
+
+		$pagination = array();
+		$pagination["base_url"] = base_url() . "seeker/findjob";
+
+		if(!isset($session_data['login_session']['candidate_id'])) {
+			$candidate_data = $this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']);
+			$session_data['login_session']['candidate_id'] = $candidate_data['candidate_id'];
+		}
+
+		if(isset($session_data['login_session']['candidate_id'])) {
+			$pagination["total_rows"] = $this->job_seeker_model->job_seeker_find_job_counts($session_data['login_session']['candidate_id']);
+			$pagination["per_page"] = 20;
+			$pagination['use_page_numbers'] = TRUE;
+			$pagination['num_links'] = $this->job_seeker_model->job_seeker_find_job_counts($session_data['login_session']['candidate_id']);
+			$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
+			$pagination['cur_tag_close'] = '</a></li>';
+			$pagination['next_link'] = 'Next';
+			$pagination['prev_link'] = 'Previous';
+			$this->pagination->initialize($pagination);
+			if($this->uri->segment(3)){
+				$page = ($this->uri->segment(3)) ;
+			}
+			else{
+				$page = 0;
+			}
+			$data["findjob"] = $this->job_seeker_model->job_seeker_find_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);
+			$str_links = $this->pagination->create_links();
+			$data["links"] = explode('&nbsp;',$str_links );
+
+			// echo '<pre>';
+			// print_r($data);
+			// echo '</pre>';
+			$data['institutiontype'] = $this->common_model->get_institution_type();
+
+			$this->load->view('user-find-jobs', $data);
+		}		
 	}
+	/** Job Seeker find Jobs - End Here **/
 
 	public function jobsapplied(){
 		$this->load->view('user-job-applied');
+	}
+
+	public function applynow(){
+		$this->load->view('single-job');	
 	}
 	
 

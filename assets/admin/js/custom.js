@@ -200,7 +200,7 @@ $(document).ready(function(){
 
     // Add - New record
     $(document).on('click','.add_new',function() {
-        disable_datatable(0);
+        // disable_datatable(0);
         if(editing==0 && ready_save==0) {        	      	 
             add_new_record();            
             handleChoosenSelect();
@@ -249,7 +249,7 @@ $(document).ready(function(){
 
     // Remove - New record
     $(document).on('click','.new_remove',function() {
-        disable_datatable(1);
+        // disable_datatable(1);
         if(editing==0 && ready_save==1) {
             $(this).parents('tr').fadeOut(600);
             ready_save=0;
@@ -331,7 +331,7 @@ $(document).ready(function(){
 
     // Cancel - Old record
     $(document).on("click","."+cancelbutton,function(){
-        disable_datatable(1);
+        // disable_datatable(1);
         var this_row = $(this).parents("tr").attr('id');         
         // $("."+table+" tr:last-child").fadeIn('fast');   
         $("."+table+" #"+this_row+"").fadeOut(500, function() {

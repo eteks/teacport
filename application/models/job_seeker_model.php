@@ -133,6 +133,7 @@ class Job_seeker_model extends CI_Model {
 		return $existuser; 
 	} 
 
+
 	public function check_seeker_popup_fields_social($data=array()) {
 		$mobile_exists_where = "candidate_mobile_no =" . "'" . $data['candidate_mobile_no'] . "' AND candidate_id NOT IN (". $this->input->post('candidate_id').")";
 
@@ -166,6 +167,25 @@ class Job_seeker_model extends CI_Model {
 		return $status;
 	}
 
-	
-	
-}
+
+	public function job_seeker_find_job_counts($ins_id)
+	{
+		$this->db->from('tr_organization_profile');
+		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id');
+		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')";
+		$this->db->order_by('organization_id','desc');
+		return $this->db->where($where)->count_all_results();
+	}
+	public function job_seeker_find_jobs($limit,$start,$ins_id)
+	{
+	 	$this->db->select('*');   
+	 	$this->db->from('tr_organization_profile');
+		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id');
+		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')"; 		
+		$this->db->limit($limit,$start);
+		$this->db->where($where);
+		$findjobsjobdata = $this->db->get();
+		return $findjobsjobdata->result_array(); 
+	}
+
+} // End
