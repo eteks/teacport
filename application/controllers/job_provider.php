@@ -37,6 +37,7 @@ class Job_provider extends CI_Controller {
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
+   				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
 			}
 			else{
