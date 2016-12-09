@@ -27,7 +27,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                         	<div class="panel">
 								<div class="dashboard-logo-sidebar">
-									<img class="img-responsive center-block" src="<?php echo base_url().'uploads/jobprovider/'.$organization['organization_logo'];?>" alt="Image">
+									<img class="img-responsive center-block" src="<?php echo $organization['organization_logo'];?>" alt="Image">
 								</div>
 								<div class="text-center dashboard-logo-sidebar-title">
 									<h4><?php echo $organization['organization_name']; ?></h4>
@@ -111,6 +111,7 @@
 								echo form_input(array('name' => 'country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'india'));
 								echo form_input(array('name' => 'udf1', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
 								echo form_input(array('name' => 'udf2', 'type'=>'hidden', 'id' =>'payu_planid','value'=>''));
+								echo form_input(array('name' => 'udf5', 'type'=>'hidden', 'id' =>'payu_csrf','value'=>$this->security->get_csrf_hash()));
 	                    		?>
 	                    		<button type='submit' class="btn btn-default payu_submit"> Proceed to pay </button>
 		                    	<?php echo form_close(); ?>

@@ -55,4 +55,15 @@ class Payu extends CI_Controller {
 			redirect($this->agent->referrer());
 		}
 	}
+
+	public function reply()
+	{
+		$reply = array();
+		if (!empty($_POST)) {
+			foreach ($_POST as $key => $value) {
+				$reply[$key] = $value;
+			}
+		}
+		$this->load->view('payureply',$reply);
+	}
 }
