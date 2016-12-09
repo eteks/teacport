@@ -142,6 +142,9 @@
 .style-btn-info {
 	margin: 10px 0;
 }
+.inline-checkbox {
+	padding: 0 !important;
+}
 .inline-checkbox li{
 	display: inline-block;
 	padding: 0 5px;
@@ -170,9 +173,28 @@
 	padding: 0 0 10px; 
 }
 /* Edit Profile */
-.upload_resume input[type="file"] {
-	color: #29AAFE;
+/* Find Jobs */
+#candidate-browse-jobs .all-jobs-list-box2 {
+    margin: 30px 0;
+    position: relative;
 }
+#candidate_nos_act .btn-default{
+	margin-top: 0px;
+	padding: 12px 30px;
+} 
+#candidate-browse-jobs .advanced_search{
+	color: #fff;
+	cursor: pointer;
+}
+#candidate_ads_act select{
+	margin: 10px 5px;
+}
+#candidate_ads_act .btn-default{
+	margin: 8px 20px;
+    padding: 12px 30px;
+    width: 100%;
+} 
+
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
