@@ -642,3 +642,7 @@ font-size: 12px;
 {
     text-transform:capitalize;
 }
+/* Added by siva */
+.datepicker_section span {
+	width : 100% !important;
+}
