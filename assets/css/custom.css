@@ -151,6 +151,7 @@
 }
 #candidate-form select{
 	padding: 5px !important;
+	width: 100%;
 }	
 .alert {
     color: #ff0030;
@@ -167,6 +168,10 @@
 	border-bottom: 1px solid #ccc;
 	margin: 5px 0 15px;
 	padding: 0 0 10px; 
+}
+/* Edit Profile */
+.upload_resume input[type="file"] {
+	color: #29AAFE;
 }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
@@ -603,4 +608,15 @@ font-size: 12px;
 }
 .preview_post_ad_image{
 	cursor: pointer;
+}
+.dn{
+	display: none;
+}
+.bold{
+	font-weight:bold;
+	cursor:pointer;
+}
+.inbox_popup_data 
+{
+    text-transform:capitalize;
 }

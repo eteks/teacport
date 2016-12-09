@@ -259,8 +259,8 @@ class Job_Provider extends CI_Controller {
 			$data['district_values'] = $this->admin_model->get_district_values();
 			$data_values = $this->job_providermodel->get_full_provider_profile($value);
 			$data['provider_full_profile'] = $data_values['provider_full_profile'];
-			$data['payment_details'] = $data_values['payment_details'];
-			$data['payment_status'] = $data_values['payment_status'];
+			$data['payment_details'] = get_provider_subscription($data_values['payment_details']);
+			// $data['payment_status'] = $data_values['payment_status'];
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/jobprovider_profile',$data);
 		}
@@ -339,6 +339,11 @@ class Job_Provider extends CI_Controller {
 				                                'field'   => 'vac_univ_name',
 				                                'label'   => 'Vacancy University',
 				                                'rules'   => 'trim|required|xss_clean|'
+				                            );
+	   				$validation_rules[] =	array(
+				                              'field'   => 'vac_dept_name',
+				                              'label'   => 'Department Name',
+				                              'rules'   => 'trim|required|xss_clean|'
 				                            );
 	   				$validation_rules[] =	array(
 				                                'field'   => 'vac_sub_name',
@@ -430,7 +435,7 @@ class Job_Provider extends CI_Controller {
 	}
 
 
-	// Job provider profile - Ajax
+	// Job provider vacancy - Ajax
 	public function teacport_job_provider_vacancy_ajax()
 	{
 		if($this->input->post('action') && $this->input->post('value')) {
@@ -438,7 +443,10 @@ class Job_Provider extends CI_Controller {
 			$data['org_values'] = $this->admin_model->get_organization_values();
 			$data['class_levels'] = $this->admin_model->get_class_levels_list();
 			$data['university_values'] = $this->admin_model->get_university_list();
+			$data['department_values'] = $this->admin_model->get_departments_values();
+			$data['posting_values'] = $this->admin_model->get_posting_values();
 			$data['subject_values'] = $this->admin_model->get_subjects_list();
+			$data['medium_language_values'] = $this->admin_model->get_medium_language_list();
 			$data['qualification_values'] = $this->admin_model->get_qualification_list();
 			$data_vacancy = $this->job_providermodel->get_full_provider_vacancy($value);
 			$data['provider_full_vacancies'] = get_provider_vacancy_by_qua($data_vacancy);
@@ -455,6 +463,7 @@ class Job_Provider extends CI_Controller {
 	{
 		$data['organization_values'] = $this->admin_model->get_organization_values();
 		$data['candidate_values'] = $this->admin_model->get_candidate_values();
+		$data['vacancy_values'] = $this->admin_model->get_vacancy_values();
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {

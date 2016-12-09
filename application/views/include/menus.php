@@ -24,7 +24,7 @@
 			          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
 			          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
 			          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
-			        	<li class="no-bg"><a href="<?php echo base_url(); ?>job_provider/companydbd_postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
+			        	<li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
 								<img src="<?php echo $user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">

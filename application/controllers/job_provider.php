@@ -24,9 +24,9 @@ class Job_provider extends CI_Controller {
 			/* set validation condition as per given input value are email or mobile number */
 			$emailval = '/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/';
 			$mobileval="/^[1-9][0-9]*$/"; 
-			if(!preg_match($mobileval,$this->input->post('registrant_mobile_no'))){
-				$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
-			}else if(!preg_match($emailval,$this->input->post('registrant_email_id'))){
+			if(preg_match($mobileval,$this->input->post('registrant_email_id'))){
+				$this->form_validation->set_rules('registrant_email_id', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
+			}else if(preg_match($emailval,$this->input->post('registrant_email_id'))){
 				$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean');
 			}
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
@@ -35,7 +35,6 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    				$fb['fbloginurl'] = $common->facebookloginurl();
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
@@ -361,6 +360,11 @@ class Job_provider extends CI_Controller {
 	public function inbox_message_count(){
 		echo $this->job_provider_model->job_provider_unread_inbox_count($this->input->post('orgid'));
 	}
+	public function inbox_message_full_data(){
+		$candidate_id = $this->input->post('candidate_id');	
+		$vacancy_id = $this->input->post('vacancy');	
+		echo json_encode($this->job_provider_model->candidate_full_data($candidate_id,$vacancy_id));
+	}
 	public function postjob(){
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
@@ -606,8 +610,14 @@ class Job_provider extends CI_Controller {
 		}
 		
 	}
-	public function companydbd_subscription(){
-		$this->load->view('company-dashboard-subscription');
+	public function subscription(){
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['subcription_plan'] = $this->common_model->subcription_plan();
+		if(!$_POST){
+			$this->load->view('company-dashboard-subscription',$data);	
+		}
+		
 	}
 	
 	/* custom validataion rules */

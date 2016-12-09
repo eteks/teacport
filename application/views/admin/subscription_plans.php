@@ -85,10 +85,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <th>Plan</th>
                         <th>Price</th>
                         <th>Features</th>
-                        <th>Validitity</th>
-                        <th>Maximum Posts</th>
-                        <th>Sms Count</th>
-                        <th>Resume Download Count</th>
+                        <th>Validity</th>
+                        <th>Max Vacancy Posts</th>
+                        <th>Max Sms</th>
+                        <th>Max Email</th>
+                        <th>Max Resume Download</th>
+                        <th>Max Ad Posts</th>
+                        <th>Max Days Ad visible</th>
                         <th>Status</th>
                         <th>Created Date</th>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -112,10 +115,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           2. Lorem2
                         </td>
                         <td class="state_name"> 
-                          08-12-2016
+                          08/11/2016 to 08/12/2016
                         </td>
                         <td class="state_name"> 
                           200
+                        </td>
+                        <td class="state_name"> 
+                          100
+                        </td>
+                        <td class="state_name"> 
+                          100
+                        </td>
+                        <td class="state_name"> 
+                          100
                         </td>
                         <td class="state_name"> 
                           100
@@ -164,65 +176,93 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </h4>                        
           </div>
           <div class="widget-body form pop_details_section">
-            <form action="#" class="form-horizontal">
+            <form action="subscription_plans" class="form-horizontal">
               <fieldset>
                 <legend> Subscription plan details:</legend>
                 <div class="form-wizard">
                   <div class="tab-content">
                     <div class="col12">
-                      <div class="col6 control-group">                                       
+                      <div class="col6 control-group">  
                         <label class="control-label">Subscription Plan</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Subscription Plan" /> 
+                          <input type="text" class="form-control" placeholder="Subscription Plan" name="sub_plan"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Price</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Subscription Price" /> 
+                          <input type="text" class="form-control" placeholder="Subscription Price" name="sub_price"/> 
                         </span>
                       </div>
                     </div>
                     <div class="col12">
-                      <div class="col6 control-group">                                       
-                        <label class="control-label">Subscription Validitity</label>
+                      <div class="col6 control-group">  
+                        <label class="control-label">Validitity Start</label>
                         <span class="dynamic_data"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" />
+                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" name="sub_start_validity"/>
                         </span>
                       </div>
+                      <div class="col6 control-group">  
+                        <label class="control-label">Validitity End</label>
+                        <span class="dynamic_data"> 
+                          <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
+                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" name="sub_end_validity"/>
+                        </span>
+                      </div> 
+                    <div class="col12">
                       <div class="col6 control-group">
                         <label class="control-label">Maximum Posts Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum Posts Count" /> 
+                          <input type="text" class="form-control" placeholder="Maximum Posts Count" name="sub_max_vacancy"/> 
                         </span>
                       </div>
-                    </div>
-                    <div class="col12">
-                      <div class="col6 control-group">                                       
+                      <div class="col6 control-group">  
                         <label class="control-label">Maximum SMS Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum SMS Count" /> 
+                          <input type="text" class="form-control" placeholder="Maximum SMS Count" name="sub_max_sms"/> 
+                        </span>
+                      </div>
+                      </div>
+                    <div class="col12">  
+                      <div class="col6 control-group">
+                        <label class="control-label"> Maximum Email Count </label>
+                        <span class="dynamic_data"> 
+                          <input type="text" class="form-control" placeholder="Maximum Email Count" name="sub_max_email"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Resume Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum Resume Count" /> 
+                          <input type="text" class="form-control" placeholder="Maximum Resume Count" name="sub_max_resume"/> 
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col12">  
+                      <div class="col6 control-group">
+                        <label class="control-label"> Maximum Ads </label>
+                        <span class="dynamic_data"> 
+                          <input type="text" class="form-control" placeholder="Maximum Ads" name="sub_max_ads"/> 
+                        </span>
+                      </div>
+                      <div class="col6 control-group">
+                        <label class="control-label"> Max Days Ad visisble </label>
+                        <span class="dynamic_data"> 
+                          <input type="text" class="form-control" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible"/> 
                         </span>
                       </div>
                     </div>
                     <div class="col12">
-                      <div class="col6 control-group">                                       
+                      <div class="col6 control-group">  
                         <label class="control-label"> Subscription Features </label>
                         <span class="dynamic_data"> 
-                          <textarea class="textarea"></textarea>
+                          <textarea class="textarea" placeholder="Subscription Features" name="sub_features"></textarea>
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Status</label>
                         <span class="dynamic_data"> 
-                          <select>
+                          <select name="sub_status">
                             <option> Please select status </option>
                             <option> Active </option>
                             <option> Inactive </option>

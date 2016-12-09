@@ -652,16 +652,16 @@ tr select {
     min-height: auto !important;
     overflow: auto;
 }*/
-#users_accounts_form_tbl table{
+/*#users_accounts_form_tbl table{
     display: block !important;
     max-width: 1066px !important;
     min-width: 1066px !important;
     overflow-x: auto !important;
     overflow-y: hidden !important;
-}
-#users_accounts_form_tbl table th {
+}*/
+/*#users_accounts_form_tbl table th {
     width: 250px !important;
-}
+}*/
 .filter_by_cnt{
     min-height: 100px !important;
     max-height: 150px !important;
