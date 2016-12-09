@@ -39,6 +39,7 @@ class Job_provider extends CI_Controller {
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
    				$fb['fbloginurl'] = $common->facebookloginurl();
+   				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
 			}
 			else{

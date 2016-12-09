@@ -17,7 +17,10 @@
                     <a href="<?php echo base_url(); ?>job_seeker/jobsapplied"> <i class="fa  fa-list-ul"></i>Jobs Applied</a>
                 </li>
                 <li>
-                    <a href="user-followed-companies.html"> <i class="fa fa-commenting-o"></i>Feedback</a>
+                    <a href="user-dashboard-feedback.php"> <i class="fa fa-commenting-o"></i>Feedback</a>
+                </li>
+                 <li>
+                    <a href="user-dashboard-changepwd.php"> <i class="fa fa-commenting-o"></i>Change Password</a>
                 </li>
             </ul>
         </div>

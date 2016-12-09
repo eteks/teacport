@@ -88,6 +88,7 @@ $route['seeker/editprofile'] 							= 'job_seeker/editprofile';
 $route['seeker/inbox'] 								    = 'job_seeker/inbox';
 $route['seeker/findjob'] 								= 'job_seeker/findjob';
 $route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
+$route['seeker/applynow'] 								= 'job_seeker/applynow';
 
 
 //OTHER PAGES
