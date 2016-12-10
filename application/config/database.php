@@ -51,8 +51,8 @@ $active_record = TRUE;
 // local settings
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'teacherrecruit_server';
+$db['default']['password'] = '';
+$db['default']['database'] = 'teacherrecruite';
 
 // server settings
 // $db['default']['hostname'] = '166.62.28.109';

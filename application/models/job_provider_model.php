@@ -103,10 +103,18 @@ class Job_provider_model extends CI_Model {
 		
 		$this->db->select('*');    
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
-		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
-		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
-		$this->db->join('tr_organization_subscription', 'tr_organization_subscription.organization_id = tr_organization_profile.organization_id','left');
+		$wherecheck = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
+		$this->db->where($wherecheck);
+		$checkuser = $this->db->get()->row_array();
+		$this->db->select('*');    
+		$this->db->from('tr_organization_profile');
+		if($checkuser['organization_institution_type_id']){
+			$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		}
+		if($checkuser['organization_district_id']){
+			$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id');
+			$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id');
+		}
 		$where = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
 		$this->db->where($where);
 		$existuser = $this->db->get()->row_array();
@@ -116,10 +124,18 @@ class Job_provider_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
-		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
-		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
-		$this->db->join('tr_organization_subscription', 'tr_organization_subscription.organization_id = tr_organization_profile.organization_id','left');
+		$wherecheck = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
+		$this->db->where($wherecheck);
+		$checkuser = $this->db->get()->row_array();
+		$this->db->select('*');    
+		$this->db->from('tr_organization_profile');
+		if($checkuser['organization_institution_type_id']){
+			$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		}
+		if($checkuser['organization_district_id']){
+			$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id');
+			$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id');
+		}
 		$where = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
 		$this->db->where($where);
 		$existuser = $this->db->get()->row_array();
