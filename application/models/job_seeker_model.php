@@ -171,7 +171,7 @@ class Job_seeker_model extends CI_Model {
 	public function job_seeker_find_job_counts($ins_id)
 	{
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id');
+		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id', 'left');
 		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')";
 		$this->db->order_by('organization_id','desc');
 		return $this->db->where($where)->count_all_results();
@@ -180,9 +180,20 @@ class Job_seeker_model extends CI_Model {
 	{
 	 	$this->db->select('*');   
 	 	$this->db->from('tr_organization_profile');
-		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id');
+		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id','left');
 		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')"; 		
 		$this->db->limit($limit,$start);
+		$this->db->where($where);
+		$findjobsjobdata = $this->db->get();
+		return $findjobsjobdata->result_array(); 
+	}
+
+	public function job_seeker_detail_jobs($ins_id)
+	{
+	 	$this->db->select('*');   
+	 	$this->db->from('tr_organization_vacancies');
+		$this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id','left');
+		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->result_array(); 
