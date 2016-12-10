@@ -75,6 +75,7 @@ $route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';
 $route['provider/postad'] 								= 'job_provider/postad';
 $route['provider/subscription'] 						= 'job_provider/subscription';
 $route['provider/payment'] 								= 'payu';
+$route['provider/paymentreply'] 						= 'payu/reply';
 $route['provider/feedback'] 							= 'job_provider/feedback/';
 $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/logout'] 								= 'job_provider/provider_logout';
@@ -86,9 +87,11 @@ $route['seeker/initialdata'] 							= 'job_seeker/initialdata';
 $route['seeker/editprofile'] 							= 'job_seeker/editprofile';
 $route['seeker/inbox'] 								    = 'job_seeker/inbox';
 $route['seeker/findjob'] 								= 'job_seeker/findjob';
+$route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';
 $route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
 $route['seeker/applynow'] 								= 'job_seeker/applynow';
 $route['seeker/password'] 								= 'job_seeker/change_password';
+$route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 
 
 //OTHER PAGES

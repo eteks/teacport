@@ -101,6 +101,7 @@ class Social extends CI_Controller {
 			{
 				$fbdata['user_type'] = 'provider';
 				$fbdata['login_type'] = 'facebook';
+				$fbdata['pro_userid'] = $insert_id = $this->db->insert_id();
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$fbdata);
 				redirect('provider/dashboard');

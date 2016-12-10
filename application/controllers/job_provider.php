@@ -29,6 +29,9 @@ class Job_provider extends CI_Controller {
 			}else if(preg_match($emailval,$this->input->post('registrant_email_id'))){
 				$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean');
 			}
+			else{
+				$this->form_validation->set_rules('registrant_email_id', 'Email ID or Mobile', 'trim|required|xss_clean');
+			}
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			$this->form_validation->set_rules('registrant_password', 'Password', 'trim|required|xss_clean');
 			/* Check whether registration form server side validation are valid or not */
@@ -173,19 +176,20 @@ class Job_provider extends CI_Controller {
 		}
 		$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
         if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
+			$data['organization'] = $organization_data;
+			$data['district'] = $this->common_model->get_all_district();
+			$data['institutiontype'] = $this->common_model->get_institution_type();
 			if($data['initial_data'] === 'show_popup')
 			{
-				$data['user_data'] = $organization_data;
 				$this->load->view('company-dashboard',$data);
 			}
 			else
 			{
-				redirect('provider/dashboard/editprofile');
+				$this->load->view('company-dashboard-edit-profile',$data);
 			}
-			
 		}
 		else{
-			$data['user_data'] = $organization_data;
+			$data['organization'] = $organization_data;
 			$this->load->view('company-dashboard',$data);
 		}
         
@@ -199,10 +203,10 @@ class Job_provider extends CI_Controller {
     	redirect('/','refresh');
 	}
 	public function editprofile(){
-		$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha|min_length[3]|xss_clean');
 		$session_data = $this->session->all_userdata();
-		$data['user_data'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['organization'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['district'] = $this->common_model->get_all_district();
+		$data['institutiontype'] = $this->common_model->get_institution_type();
 		if(!$_POST){
 			
 			$this->load->view('company-dashboard-edit-profile',$data);
@@ -278,7 +282,7 @@ class Job_provider extends CI_Controller {
 				$dob_split = explode('/', $this->input->post('provider_dob'));
 				$edit_profile_data = array(
 					'organization_name'			=> $this->input->post('organization_name'),
-					'organization_logo' 		=> $organization_logo_file_name,
+					'organization_logo' 		=> base_url().'uploads/jobprovider/'.$organization_logo_file_name,
 					'organization_address_1' 	=> $this->input->post('address-line1'),
 					'organization_address_2' 	=> $this->input->post('address-line2'),
 					'organization_address_3' 	=> $this->input->post('address-line3'),
@@ -286,10 +290,10 @@ class Job_provider extends CI_Controller {
 					'registrant_name' 			=> $this->input->post('provider_name'),
 					'registrant_designation' 	=> $this->input->post('provider_designation'),
 					'registrant_date_of_birth' 	=> $dob_split[2].'-'.$dob_split[1].'-'.$dob_split[0],
-					'registrant_logo'			=> $provider_logo_file_name,
+					'registrant_logo'			=> base_url().'uploads/jobprovider/'.$provider_logo_file_name,
 					'organization_profile_completeness' => 90+$profile_completeness,
 				);
-				if($this->job_provider_model->job_provider_update_profile($data['user_data']['organization_id'],$edit_profile_data)=='updated')
+				if($this->job_provider_model->job_provider_update_profile($data['organization']['organization_id'],$edit_profile_data)=='updated')
 				{
 					redirect('provider/dashboard');
 				}
@@ -304,11 +308,13 @@ class Job_provider extends CI_Controller {
 	public function initialdata(){
 		if($_POST){
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
 			$this->form_validation->set_rules('provider_mobile_no', 'Mobile number', 'trim|required|numeric|exact_length[10]|is_unique[tr_organization_profile.registrant_mobile_no]|xss_clean');
 			$this->form_validation->set_rules('providerpassword', 'Password', 'trim|required|min_length[8]');
 			$this->form_validation->set_rules('providerconfirmpassword', 'Password Confirmation', 'trim|required|matches[providerpassword]');
 			if ($this->form_validation->run()){
 				$initial_data_profile = array(
+					'organization_institution_type_id' => $this->input->post('registrant_institution_type'),
 					'registrant_password'	=> $this->input->post('providerpassword'),
 					'registrant_mobile_no'	=> $this->input->post('provider_mobile_no'),
 					'organization_profile_completeness' => 40
@@ -320,6 +326,7 @@ class Job_provider extends CI_Controller {
 			}
 			else{
 				$session_data = $this->session->all_userdata();
+				
 				$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
 				if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
 					$data['initial_data'] = 'show_popup';
@@ -331,7 +338,7 @@ class Job_provider extends CI_Controller {
 		        if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
 					if($data['initial_data'] === 'show_popup')
 					{
-						$data['user_data'] = $organization_data;
+						$data['organization'] = $organization_data;
 						$this->load->view('company-dashboard',$data);
 					}
 					else
@@ -341,10 +348,13 @@ class Job_provider extends CI_Controller {
 					
 				}
 				else{
-					$data['user_data'] = $organization_data;
+					$data['organization'] = $organization_data;
 					$this->load->view('company-dashboard',$data);
 				}
 			}
+		}
+		else{
+			exit('No direct script access allowed');
 		}
 	}
 
@@ -616,6 +626,11 @@ class Job_provider extends CI_Controller {
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		if(!$_POST){
 			$this->load->view('company-dashboard-subscription',$data);	
+		}
+		else{
+			echo "<pre>";
+			print_r($_POST);
+			echo "</pre>";
 		}
 		
 	}

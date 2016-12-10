@@ -402,8 +402,7 @@ class Job_seeker extends CI_Controller {
 	}
 	
 	/** Job Seeker find Jobs - Start Here **/
-	public function findjob(){		
-
+	public function findjob(){	
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();		
 		$data['candidate_data'] = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
@@ -416,31 +415,35 @@ class Job_seeker extends CI_Controller {
 			$session_data['login_session']['candidate_id'] = $candidate_data['candidate_id'];
 		}
 
-		if(isset($session_data['login_session']['candidate_id'])) {
-			$pagination["total_rows"] = $this->job_seeker_model->job_seeker_find_job_counts($session_data['login_session']['candidate_id']);
-			$pagination["per_page"] = 20;
+		if(isset($session_data['login_session']['candidate_id'])) {	
+			$pagination["per_page"] = 20;		
+			if($this->uri->segment(3)){	$page = ($this->uri->segment(3)) ; } else {	$page = 0;}
+
+			if($_POST){
+
+
+				
+			}else{
+				$pagination["total_rows"] = $this->job_seeker_model->job_seeker_find_job_counts($session_data['login_session']['candidate_id']);				
+				$pagination['num_links'] = $this->job_seeker_model->job_seeker_find_job_counts($session_data['login_session']['candidate_id']);	
+				$data["findjob"] = $this->job_seeker_model->job_seeker_find_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);				
+			}
 			$pagination['use_page_numbers'] = TRUE;
-			$pagination['num_links'] = $this->job_seeker_model->job_seeker_find_job_counts($session_data['login_session']['candidate_id']);
 			$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
 			$pagination['cur_tag_close'] = '</a></li>';
 			$pagination['next_link'] = 'Next';
 			$pagination['prev_link'] = 'Previous';
 			$this->pagination->initialize($pagination);
-			if($this->uri->segment(3)){
-				$page = ($this->uri->segment(3)) ;
-			}
-			else{
-				$page = 0;
-			}
-			$data["findjob"] = $this->job_seeker_model->job_seeker_find_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);
+			
 			$str_links = $this->pagination->create_links();
 			$data["links"] = explode('&nbsp;',$str_links );
 
-			// echo '<pre>';
-			// print_r($data);
-			// echo '</pre>';
-			$data['institutiontype'] = $this->common_model->get_institution_type();
-
+			$data['get_institution_types'] = $this->common_model->get_institution_type();
+			$data['get_all_districts'] = $this->common_model->get_all_district();
+			$data['mother_tongues'] = $this->common_model->mother_tongue();
+			$data['applicable_postings'] = $this->common_model->applicable_posting();
+			$data['subjects'] = $this->common_model->subjects();
+			$data['qualifications'] = $this->common_model->qualification();
 			$this->load->view('user-find-jobs', $data);
 		}		
 	}

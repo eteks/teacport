@@ -56,9 +56,9 @@ define('STATUS',serialize(array("0"=>"Active",
 define('PAYUMERCHANTKEY', 'OwGF14'); 
 define('PAYUMERCHANTSALT', 'RjWAdXh0');
 define('PAYUBASEURL', 'https://test.payu.in');
-define('PAYUSUCCESSURL', APP_URL.'provider/subscription'); 
-define('PAYUFAILUREURL', APP_URL.'provider/subscription');
-define('PAYUCANCELURL', APP_URL.'provider/subscription');
+define('PAYUSUCCESSURL', APP_URL.'provider/paymentreply'); 
+define('PAYUFAILUREURL', APP_URL.'provider/paymentreply');
+define('PAYUCANCELURL', APP_URL.'provider/paymentreply');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

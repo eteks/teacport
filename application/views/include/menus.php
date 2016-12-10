@@ -27,14 +27,14 @@
 			        	<li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
-								<img src="<?php echo $user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
-			                    <span class="hidden-xs hidden-sm"><?php echo $user_type['registrant_name'] ;?> </span>
+								<img src="<?php echo isset($user_type['registrant_logo'])?$user_type['registrant_logo']:$organization['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
+			                    <span class="hidden-xs hidden-sm"><?php echo isset($user_type['registrant_name'])?$user_type['registrant_name']:$organization['registrant_name'] ;?> </span>
 			                    <i class="fa fa-angle-down fa-indicator"></i> 
 			                </a>
 				            <ul class="drop-down-multilevel left-side">
 				                <li><a href="<?php echo base_url(); ?>provider/dashboard"><i class="fa fa-user"></i> Dashboard</a></li>
 				                <li><a href="<?php echo base_url(); ?>provider/dashboard/editprofile"><i class="fa fa-gear"></i> Edit Profile</a></li>
-				                <li><a href="<?php echo base_url(); ?>provider/logout"></i> Logout</a></li>
+				                <li><a href="<?php echo base_url(); ?>provider/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
 				            </ul>
 			<?php 
 					}
@@ -74,7 +74,7 @@
 			?>
 						<li class="profile-pic">                        
 			        		<a href="javascript:void(0)"> 
-								<img src="<?php echo !empty($user_data['registrant_logo'])?$user_data['registrant_logo']:base_url().'assets/images/admin.jpg'; ?>" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm"><?php echo $user_data['registrant_name']; ?> </span><i class="fa fa-angle-down fa-indicator"></i>
+								<img src="<?php echo !empty($organization['registrant_logo'])?$organization['registrant_logo']:base_url().'assets/images/admin.jpg'; ?>" alt="user-img" class="img-circle" width="36"><span class="hidden-xs hidden-sm"><?php echo $organization['registrant_name']; ?> </span><i class="fa fa-angle-down fa-indicator"></i>
 							</a>
             <?php 
 					} 

@@ -75,11 +75,15 @@ class Common_model extends CI_Model {
 		$moi = $this->db->get();
 		return $moi->result_array(); 
 	}
-	public function applicable_posting($ins_id)
+	public function applicable_posting($ins_id = '')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_applicable_posting');
-		$where = "(posting_institution_id like '%".$ins_id."%' AND posting_status='1')";
+		if($ins_id!='') {
+			$where = "(posting_institution_id like '%".$ins_id."%' AND posting_status='1')";
+		}else {
+			$where = "(posting_status='1')";	
+		}		
 		$this->db->where($where);
 		$posting = $this->db->get();
 		return $posting->result_array(); 
@@ -93,20 +97,28 @@ class Common_model extends CI_Model {
 		$mt = $this->db->get();
 		return $mt->result_array(); 
 	}
-	public function subjects($ins_id)
+	public function subjects($ins_id = '')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_subject');
-		$where = "(subject_institution_id like '%".$ins_id."%'  AND subject_status='1')";
+		if($ins_id!='') {
+			$where = "(subject_institution_id like '%".$ins_id."%'  AND subject_status='1')";
+		}else {
+			$where = "(subject_status='1')";	
+		}		
 		$this->db->where($where);
 		$subject = $this->db->get();
 		return $subject->result_array(); 
 	}
-	public function qualification($ins_id)
+	public function qualification($ins_id = '')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_educational_qualification');
-		$where = "(educational_qualifcation_inst_type_id like '%".$ins_id."%'  AND educational_qualification_status='1')";
+		if($ins_id!='') {
+			$where = "(educational_qualifcation_inst_type_id like '%".$ins_id."%'  AND educational_qualification_status='1')";
+		}else {
+			$where = "(educational_qualification_status='1')";	
+		}	
 		$this->db->where($where);
 		$qualification = $this->db->get();
 		return $qualification->result_array(); 

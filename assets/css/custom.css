@@ -221,26 +221,28 @@
 	position: relative;
 	margin: 30px 0;
 }
-.provider-jobs li {
-	padding: 10px 15px;
-	text-align: center;
-	line-height: 30px;
+/* pro-Dashboard LeftsideMenu */
+.dashboard-body .profile-nav .provider-jobs {
+    border-bottom: 1px solid #ebeae6;
+    line-height: 30px;
+    margin-top: 0;
+    cursor: pointer;
 }
-.provider-jobs li, .provider-jobs li:hover {
-	color: #FFF !important;
-	cursor: pointer;
+.dashboard-body .profile-nav .provider-jobs {
+    border-left: 5px solid #fff;
+    border-radius: 0;
+    color: #242424;
+    font-size: 18px;
 }
-.dashboard-body .profile-nav .provider-jobs ul > li:hover, .dashboard-body .profile-nav .provider-jobs ul > li:focus, .dashboard-body .profile-nav .provider-jobs ul li.active  {
-	background: #29aafe;
-	border-left: 5px solid #2088cb;
-	color: #FFF !important;
+.dashboard-body .profile-nav .provider-jobs  {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
 }
-.dashboard-body .profile-nav .provider-jobs ul li > a{
-	border: none;
-	
-}
-.dashboard-body .profile-nav .provider-jobs ul li > a:hover{
-	color: #FFF !important;
+.dashboard-body .profile-nav .provider-jobs  i {
+    color: #29aafe;
+    font-size: 16px;
+    padding-right: 10px;
 }
 .imagepreview_act {
     width: 100%;
@@ -255,8 +257,7 @@
 	color: #999;
 }*/
 select:invalid { color: gray; }
-
- .advanced_search {
+.advanced_search {
  	margin-top: 5px;
  	float:right;
  	color: #fff;
@@ -300,7 +301,6 @@ select:invalid { color: gray; }
 #provider_upload .input-group {
 	border-collapse: separate;
     display: table;
-    left: 195px;
     position: relative;
 }
 #provider_add_upload .input-group{
@@ -509,7 +509,7 @@ select:invalid { color: gray; }
 }
 .image_upload_profile{
 	bottom: 0;
-    left: 500px;
+	right: 0;
 }
 #image_upload_logo_preview{
 	position: absolute;
