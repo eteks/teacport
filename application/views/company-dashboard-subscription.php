@@ -40,6 +40,7 @@
                         	<div class="heading-inner first-heading">
                                 <p class="title">Choose Your Plan</p>
                             </div>
+                            <p class="success_server_msg"><?php if(isset($subscription_server_msg)) echo $subscription_server_msg; ?></p>
                             <div class="subscription">
                                 <!--Select Pricing Plan-->
                                 <form id="form-school" class="form-horizontal" action="" name="" autocomplete="false" method="post" accept-charset="utf-8">
