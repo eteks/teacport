@@ -375,8 +375,30 @@ class Job_seeker extends CI_Controller {
 
 	// Job Seeker Edit Profile 
     
-    public function editprofile(){
-		$this->load->view('user-edit-profile');
+    public function editprofile() {
+    	$session = $this->session->all_userdata();
+    	$data['district_values'] = $this->common_model->get_all_district();
+    	$data['candidate_values'] = $this->job_seeker_model->get_seeker_details($session['login_session']['candidate_id']);
+    	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
+    	$data['mother_language_values'] = $this->common_model->mother_tongue();
+    	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
+    	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type']);
+    	$data['salary_values'] = $this->common_model->get_salary_details();
+    	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
+    	$data['education_values'] = $this->job_seeker_model->get_seeker_education_details($session['login_session']['candidate_id']);
+    	$data['department_values'] = $this->common_model->get_department_details();
+    	$data['board_values'] = $this->common_model->get_board_details();
+    	$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details();
+    	$data['experience_values'] = $this->job_seeker_model->get_seeker_experience_details($session['login_session']['candidate_id']);
+
+
+    	// echo "<pre>";
+    	// print_r($data['experience_values']);
+    	// echo "</pre>";
+
+		$this->load->view('user-edit-profile',$data);
 	}
 	
 	/** Job Seeker find Jobs - Start Here **/
@@ -551,5 +573,32 @@ class Job_seeker extends CI_Controller {
 	public function inbox(){		
 		$this->load->view('user-dashboard-inbox');
 	}	
-}
+
+	// Change password
+	public function change_password() {
+		$data['status'] = '';
+		if($_POST) {
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+			/* Set validate condition for registration form */
+			$session_data = $this->session->all_userdata();	
+			$id = $session_data['login_session']['candidate_id'];
+			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required|xss_clean|max_length[20]|');
+			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|required|xss_clean|max_length[20]');
+			$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'trim|required|xss_clean|max_length[20]|matches[new_pass]');
+ 	  		if ($this->form_validation->run()) {   
+ 	  			$data_array = array(
+ 	  						'old_password' => $this->input->post('old_pass'),
+ 	  						'new_password' => $this->input->post('new_pass'),
+ 	  						'candidate_id' => $id
+ 	  					);
+ 	  			$data['status'] = $this->job_seeker_model->password_change($data_array);
+		    }
+		}
+		$this->load->view('user-dashboard-changepwd',$data);
+	}
+
+
+
+} // End
+
 
