@@ -37,16 +37,26 @@
 	  }); 
 
 
-//Normal & Advanced Search
+// Provider - Normal & Advanced Search
   $('#btn_advanced_act').click(function() {
   	$('#normalsearch_act').hide();
   	$('#advancedsearch_act').show();
   });    
   
-  
-   $('#btn_normal_act').click(function() {
+  $('#btn_normal_act').click(function() {
   	$('#advancedsearch_act').hide();
   	$('#normalsearch_act').show();
+  }); 
+  
+  // Seeker - Normal & Advanced Search
+  $("#advanced_srch_act a").on("click", function() {
+  	$('#candidate_nos_act').hide();
+  	$('#candidate_ads_act').show();
+  });    
+  
+  $("#normal_srch_act a").on("click", function() {
+  	$('#candidate_ads_act').hide();
+  	$('#candidate_nos_act').show();
   }); 
 
 
@@ -161,6 +171,33 @@ $(document).ready(function() {
 		$("button.add").on("click", add);
 		
 		$("button.remov").on("click", remov); 	
+		
+	//Provider dashboard SideMenu
+	$(".provider-jobs").click(function(){
+        $(".submenu").slideToggle("slow");
+    });	
+    $(window).load(function(){
+    	$(".submenu").slideUp();
+    });
+    
+    //For Select Boxes
+    $(".select-district").select2({
+        placeholder: "Select District",
+        allowClear: true,
+        maximumSelectionLength: 3,
+    });
+    $(".select-institution").select2({
+        placeholder: "Select Institution Type",
+        allowClear: true,
+        maximumSelectionLength: 3,
+    });
+    $(".select-package").select2({
+        placeholder: "Select Package",
+        allowClear: true,
+        maximumSelectionLength: 3,
+    });
+		
+		
 	
 		
 });  //end document 

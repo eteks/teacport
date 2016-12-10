@@ -129,13 +129,13 @@
                                         <li>
                                             <a href="company-dashboard-browse-jobs.html"> <i class="fa  fa-list-ul"></i> Browse Candidate</a>
                                         </li>
-                                        <li class="provider-jobs">
-                                            <a href="#"> <i class="fa  fa-list-alt"></i>Jobs</a>
-                                            <ul>
-		                                        <li><a href="company-dashboard-post-jobs.html"><i class="fa  fa-list-alt"></i>New Jobs</a></li>
-		                                        <li><a href="company-dashboard-posted-jobs.html"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
-	                                        </ul>
-	                                    </li>   
+                                        <ul class="nav nav-stacked dbd_submenu provider-jobs"> <i class="fa  fa-list-alt"></i>Jobs <span class="pull-right"><i class="fa fa-angle-double-down"></i></span>
+	                                        <li class="submenu"><a href="company-dashboard-post-jobs.html"><i class="fa  fa-list-alt"></i>New Jobs</a></li>
+	                                        <li class="submenu"><a href="company-dashboard-posted-jobs.html"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
+	                                    </ul>
+	                                    <li>
+                                            <a href="company-dashboard-post-adds.html"><i class="fa fa-money"></i> Post Adds </a>
+                                        </li> 
 	                                    <li>
                                             <a href="company-dashboard-subscription.html"><i class="fa fa-money"></i> Subscribe Plan </a>
                                         </li>
@@ -161,7 +161,7 @@
                                 	<div class="form-group">
 										<label class="col-sm-3" for="subpack">Select Subscription : </label>
 										<div class="col-sm-6">
-											<select id="subpack_act" class="form-control" name="subpack">
+											<select id="subpack_act" class="select-package form-control" name="subpack">
 												<option> Select Package </option>
 												<option value="basic">Basic Membership Plan @ Rs. 10000</option>
 												<option value="premium">Premium Membership Plan for 1 Year @ Rs.15000</option>
@@ -259,7 +259,50 @@
 			                            </div>
 			                        </div>
 			                    </div> 
-			                 </div>     
+			                 </div>  
+			                 
+			                 <!--Renewal & Upgrade-->
+			                 <div class="span12 subscription_organization_inner_section">
+							    <h4 class="center_align plan_name"> plan name </h4>
+							    <div class="profile_plan_section">
+							      <div class="span3 plan_label_section">                                       
+							        <h4 class="">Summary</h4>
+							        <label class=""> Subscription Price </label>
+							        <label class=""> Subscription Start Date </label>
+							        <label class=""> Subscription End Date </label>
+							        <label class=""> Transaction Id </label>
+							        <label class=""> Subscription Status </label>
+							        <label class=""> Subscription Created Date </label>
+							      </div>
+							      <div class="span3 plan_field_section">                                       
+							        <h4 class="">Original Plan</h4>
+							        <label class=""> &#8377 price </label>
+							        <label class=""> start date </label>
+							        <label class=""> end date </label>
+							        <label class=""> transaction id </label>
+							        <label class='subscription_status'> <span class='icon'> Active <span> </label>
+							        <div class='inner-triangle'> </div> <span class='icon-ok triangle_notification'> </span>
+							        <label class=""> created date </label>   
+							      </div>
+							      <div class="span3 plan_field_section">     
+							        <h4 class="">Upgrade Plan</h4>
+							        <label class=""> &#8377 price </label>
+							        <label class=""> start date </label>
+							        <label class=""> end date </label>
+							        <label class=""> transaction id </label>
+							        <label class='subscription_status'> <span class='icon icon_expired'> Inactive <span></label> 
+							        <div class='inner-triangle triangle_disabled'> </div>
+							        <label class=""> created date </label> 
+							      </div>
+							      <div class="span3 plan_field_section">     
+							        <h4 class=""> Renewal Plan </h4>  
+							        <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
+							        <div class="inner-triangle triangle_disabled"></div>                        
+							      </div>
+							    </div>
+							  </div>
+							</div>
+			                    
 			                 
 		                    <!--Proceed to payment-->
 		                    <div class="col-sm-offset-9 col-sm-1">
