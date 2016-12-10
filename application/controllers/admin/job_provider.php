@@ -152,16 +152,6 @@ class Job_Provider extends CI_Controller {
 			                                'label'   => 'Resume Validity',
 			                                'rules'   => 'trim|required|xss_clean|'
 			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'val_sdate',
-			                                'label'   => 'Validity Start Date',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'val_edate',
-			                                'label'   => 'Validity End Date',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
 			    $validation_rules[] =	array(
 			                                'field'   => 'subscription_status',
 			                                'label'   => 'Subscription Status',

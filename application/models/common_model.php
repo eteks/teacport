@@ -136,6 +136,41 @@ class Common_model extends CI_Model {
 		$subcription = $this->db->get();
 		return $subcription->result_array(); 
 	}
-	
+
+	// Get vacancy details
+	public function get_vacancy_details()
+	{
+		$value = $this->db->get_where('tr_organization_vacancies',array('vacancies_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get salary details
+	public function get_salary_details()
+	{
+		$value = $this->db->get_where('tr_expect_salary',array('expect_salary_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get department details
+	public function get_department_details()
+	{
+		$value = $this->db->get_where('tr_departments',array('departments_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get university board details
+	public function get_board_details()
+	{
+		$value = $this->db->get_where('tr_university_board',array('university_board_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get extra curricular details
+	public function get_extra_curricular_details()
+	{
+		$value = $this->db->get_where('tr_extra_curricular',array('extra_curricular_status' => '1'))->result_array();
+		return $value;
+	}
 	
 }
+
