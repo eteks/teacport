@@ -339,6 +339,8 @@ class Job_provider extends CI_Controller {
 					if($data['initial_data'] === 'show_popup')
 					{
 						$data['organization'] = $organization_data;
+						$data['district'] = $this->common_model->get_all_district();
+						$data['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('company-dashboard',$data);
 					}
 					else
@@ -354,7 +356,32 @@ class Job_provider extends CI_Controller {
 			}
 		}
 		else{
-			exit('No direct script access allowed');
+			$session_data = $this->session->all_userdata();
+			$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
+			if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
+				$data['initial_data'] = 'show_popup';
+			}
+			else{
+				$data['initial_data'] = 'hide_popup';
+			}
+			$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+	        if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
+				$data['organization'] = $organization_data;
+				$data['district'] = $this->common_model->get_all_district();
+				$data['institutiontype'] = $this->common_model->get_institution_type();
+				if($data['initial_data'] === 'show_popup')
+				{
+					$this->load->view('company-dashboard',$data);
+				}
+				else
+				{
+					$this->load->view('company-dashboard-edit-profile',$data);
+				}
+			}
+			else{
+				$data['organization'] = $organization_data;
+				$this->load->view('company-dashboard',$data);
+			}
 		}
 	}
 
@@ -622,15 +649,76 @@ class Job_provider extends CI_Controller {
 	}
 	public function subscription(){
 		$session_data = $this->session->all_userdata();
+		
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		if(!$_POST){
 			$this->load->view('company-dashboard-subscription',$data);	
 		}
 		else{
-			echo "<pre>";
-			print_r($_POST);
-			echo "</pre>";
+			$transaction_data = array(
+									'organization_id' 			=> $this->input->post('udf1'),
+									'tracking_id ' 				=> $this->input->post('txnid'),
+									'mihpayid' 					=> $this->input->post('mihpayid'),
+									'payumoneyid' 				=> $this->input->post('payuMoneyId'),
+									'merchant_key' 				=> $this->input->post('key'),
+									'bank_code' 				=> $this->input->post('bankcode'),
+									'bank_referrence_number' 	=> $this->input->post('bank_ref_num'),
+									'transaction_status' 		=> $this->input->post('status'),
+									'payment_mode' 				=> $this->input->post('mode'),
+									'pg_type' 					=> $this->input->post('PG_TYPE'),
+									'unmapped_status' 			=> $this->input->post('unmappedstatus'),
+									'card_name' 				=> $this->input->post('name_on_card'),
+									'card_number' 				=> $this->input->post('cardnum'),
+									'transaction_date_time' 	=> $this->input->post('addedon'),
+									'discount_value' 			=> $this->input->post('discount'),
+									'amount' 					=> $this->input->post('amount'),
+									'net_amount_debit' 			=> $this->input->post('net_amount_debit'),
+									'error_code' 				=> $this->input->post('error'),
+									'error_message' 			=> $this->input->post('error_Message'),
+								);
+			if($this->job_provider_model->subscription_transaction_data($transaction_data)){
+				$transaction_id = $this->db->insert_id();
+				$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
+				$subcription_startdate = strtotime($subscription_plan_data[0]['subcription_valid_start_date']); 
+				$subcription_end_date = strtotime($subscription_plan_data[0]['subcription_valid_end_date']);
+				$datediff = $subcription_end_date - $subcription_startdate;
+				$no_of_days =  floor($datediff / (60 * 60 * 24));
+				if($this->input->post('status')==='success' ){
+					$user_subscription_data = array(
+													'organization_id' 								=> $this->input->post('udf1'),
+													'subscription_id' 								=> $this->input->post('udf2'),
+													'organization_transcation_id' 					=> $transaction_id,
+													'organization_email_count' 						=> $subscription_plan_data[0]['subscription_email_counts'],
+													'organization_sms_count'						=> $subscription_plan_data[0]['subcription_sms_counts'],
+													'organization_resume_download_count'			=> $subscription_plan_data[0]['subcription_resume_download_count'],
+													'organization_email_remaining_count'			=> $subscription_plan_data[0]['subscription_email_counts'],
+													'organization_sms_remaining_count'				=> $subscription_plan_data[0]['subcription_sms_counts'],
+													'organization_remaining_resume_download_count'	=> $subscription_plan_data[0]['subcription_resume_download_count'],
+													'is_email_validity'								=> 1,
+													'is_sms_validity'								=> 1,
+													'is_resume_validity'							=> 1,
+													'org_sub_validity_start_date'					=> date('Y-m-d'),
+													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+													'organization_subscription_status'				=> 1
+												);
+					
+					if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
+						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
+						$this->load->view('company-dashboard-subscription',$data);
+					}
+					else {
+						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
+						$this->load->view('company-dashboard-subscription',$data);			
+					}
+					
+				}
+
+			}
+			else{
+				$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!';
+				$this->load->view('company-dashboard-subscription',$data);
+			}
 		}
 		
 	}

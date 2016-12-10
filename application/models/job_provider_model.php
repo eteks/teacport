@@ -350,4 +350,22 @@ class Job_provider_model extends CI_Model {
 		$candidate['vacancy'] = $this->db->get()->row_array();
 		return $candidate;
 	}
+	public function subscription_transaction_data($transction_data)
+	{
+		if($this->db->insert('tr_payumoney_transaction', $transction_data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	public function subscriped_plan_data($subscrip_data)
+	{
+		if($this->db->insert('tr_organization_subscription', $subscrip_data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 }

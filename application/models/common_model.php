@@ -123,12 +123,19 @@ class Common_model extends CI_Model {
 		$qualification = $this->db->get();
 		return $qualification->result_array(); 
 	}
-	public function subcription_plan()
+	public function subcription_plan($planid='')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_subscription');
-		$qualification = $this->db->get();
-		return $qualification->result_array(); 
+		if($planid!='') {
+			$where = "(subscription_id = '".$planid."'  AND subscription_status='1')";
+		}else {
+			$where = "(subscription_status='1')";	
+		}
+		$this->db->where($where);
+		$subcription = $this->db->get();
+		return $subcription->result_array(); 
 	}
+	
 	
 }
