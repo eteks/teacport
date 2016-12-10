@@ -78,7 +78,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </button>
                   </div>
                 </div>
-                <form>
+                <form action="subscription_plan/subscription_plans">
                   <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">

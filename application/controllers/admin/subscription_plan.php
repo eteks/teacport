@@ -15,7 +15,7 @@ class Subscription_Plan extends CI_Controller {
 	}
 
 	// Job provider profile
-	public function teacport_subscription_plans()
+	public function subscription_plans()
 	{
 		$data['subscription_plans'] = $this->subscription_plan_model->get_subscription_plans();
 		$this->load->view('admin/subscription_plans',$data);

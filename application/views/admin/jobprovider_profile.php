@@ -72,7 +72,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </div> 
                 <form action="job_provider/teacport_job_provider_profile">
                   <p class="admin_status"> </p>
-                  <div class="">            
+                  <div class="">
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
