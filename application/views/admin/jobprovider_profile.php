@@ -603,7 +603,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Validity Start Date</label>
                           <span class="dynamic_data"> 
-                            <?php echo date('d-m-Y',strtotime($provider_full_profile['validity_start_date'])); ?>
+                            <?php echo date('d-m-Y',strtotime($provider_full_profile['org_sub_validity_start_date'])); ?>
                           </span>
                         </div>
                       </div>
@@ -623,7 +623,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Validity End Date</label>
                           <span class="dynamic_data"> 
-                            <?php echo date('d-m-Y',strtotime($provider_full_profile['validity_end_date'])); ?>
+                            <?php echo date('d-m-Y',strtotime($provider_full_profile['org_sub_validity_end_date'])); ?>
                           </span>
                         </div>
                       </div>
@@ -805,14 +805,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
-                          <label class="control-label">Validity Start Date</label>
-                          <span>
-                            <input class=" m-ctrl-medium date-picker dp_width tabfield4 tabfield" size="16" type="text" value="<?php echo date('d-m-Y',strtotime($provider_full_profile['validity_start_date'])); ?>" name="val_sdate" />
-                          </span>
-                        </div>
-                      </div>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
                           <label class="control-label">SMS Validity</label>
                           <span>
                             <ul class="on_off_button on_off_button_j">
@@ -820,12 +812,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <li data-value="0" <?php if($provider_full_profile['is_sms_validity']==0) echo "class='on'"; ?>><a>No</a></li>
                             </ul> 
                             <input type="hidden" value="<?php echo $provider_full_profile['is_sms_validity']; ?>" class="verification tabfield4 tabfield" name="sms_valid" />
-                          </span>
-                        </div>
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Validity End Date</label>
-                          <span>
-                            <input class=" m-ctrl-medium date-picker dp_width tabfield4 tabfield" size="16" type="text" value="<?php echo date('d-m-Y',strtotime($provider_full_profile['validity_end_date'])); ?>" name="val_edate" />
                           </span>
                         </div>
                       </div>

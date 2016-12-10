@@ -44,72 +44,54 @@
                                     <li><a href="user-followed-companies.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
-                            <div class="profile-nav">
-                                <div class="panel">
-                                    <ul class="nav nav-pills nav-stacked">
-                                        <li>
-                                            <a href="user-dashboard.html"> <i class="fa fa-user"></i> Profile</a>
-                                        </li>
-                                         <li>
-                                            <a href="user-dashboard-inbox.html"> <i class="fa fa-user"></i> Inbox</a>
-                                        </li>
-                                        <li>
-                                            <a href="user-edit-profile.html"> <i class="fa fa-edit"></i> Edit Profile</a>
-                                        </li>
-                                        <li>
-                                            <a href="user-find-jobs.html"> <i class="fa fa-file-o"></i>Find Jobs </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-job-applied.html"> <i class="fa  fa-list-ul"></i> Jobs Applied</a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="user-feedback.php"> <i class="fa  fa-bookmark-o"></i> Feedback </a>
-                                        </li>
-                                        <li>
-                                            <a href="user-dashboard-changepwd.html"><i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <?php include('include/user_dashboard_sidemenu.php'); ?>
                         </div>
                         <div class="col-md-8 col-sm-12 col-xs-12">
                             <div class="heading-inner first-heading">
                                 <p class="title">Change Password</p>
                             </div>
+                            <?php
+                            if(!empty($status)) :
+                                echo "<div class='error'> $status </div>";
+                            endif;
+                            ?>
                             <div class="profile-edit">
-                                <form class="form-horizontal">
+                                <?php echo form_open('seeker/password','class="form-horizontal"'); ?>
 	                                <div class="form-group">
 										<label class="col-sm-12">You can change your password below</label>
 									</div>	
 									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
+                                            <?php echo form_error('old_pass'); ?>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
+												<input id="" class="form-control" name="old_pass" size="25" type="password" value="<?php echo set_value('old_pass'); ?>">
 											</div>
 										</div>
 									</div>	
 									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="col-sm-6">New Password<span class="alert">*</span></label>
+                                            <?php echo form_error('new_pass'); ?>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
+												<input id="" class="form-control" name="new_pass" size="25" type="password" value="<?php echo set_value('new_pass'); ?>">
 											</div>
 										</div>
 									</div>	
 									<div class="form-group">
 										<div class="col-sm-12">
 											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
+                                            <?php echo form_error('confirm_pass'); ?>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="" size="25" type="password">
+												<input id="" class="form-control" name="confirm_pass" size="25" type="password" value="<?php echo set_value('confirm_pass'); ?>">
 											</div>
 										</div>
 									</div>	
 									<div class="col-sm-12">
-										<a class="btn btn-default pull-right" type="submit" href="#">APPLY</a>
+										<button class="btn btn-default pull-right" type="submit">APPLY</button>
 									</div>
 									<div class="clearfix"> </div>		
-                                </form>
+                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
