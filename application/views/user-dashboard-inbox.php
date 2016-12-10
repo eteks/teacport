@@ -12,8 +12,8 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a> </li>
-                                <li><a href="index.html">Dashboard</a> </li>
+                                <li><a href="<?php echo base_url(); ?>">Home</a> </li>
+                                <li><a href="<?php echo base_url(); ?>job_seeker/dashboard">Dashboard</a> </li>
                                 <li class="active">Inbox</li>
                             </ol>
                         </div>

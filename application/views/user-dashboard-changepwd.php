@@ -12,6 +12,7 @@
                         <div class="bread">
                             <ol class="breadcrumb">
                                 <li><a href="index.html">Home</a> </li>
+                                <li><a href="<?php echo base_url(); ?>job_seeker/dashboard">Dashboard</li>
                                 <li class="active">Feedback</li>
                             </ol>
                         </div>
