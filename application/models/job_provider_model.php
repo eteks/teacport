@@ -33,7 +33,7 @@ class Job_provider_model extends CI_Model {
 			$user_details['pro_email'] = $user_data['registrant_email_id'];
 			$user_details['pro_userid'] = $user_data['organization_id'];
 			$user_details['pro_mobile'] = $user_data['registrant_mobile_no'];
-			$user_details['registrant_logo'] = (!empty($user_data['registrant_logo'])?base_url().'uploads/jobprovider/'.$user_data['registrant_logo']:base_url().'assets/images/admin.jpg');
+			$user_details['registrant_logo'] = (!empty($user_data['registrant_logo'])?$user_data['registrant_logo']:base_url().'assets/images/admin.jpg');
 			$user_details['registrant_name'] = $user_data['registrant_name'];
 			$user_details['user_type'] = 'provider';
 			$user_details['valid_status'] = 'valid';
