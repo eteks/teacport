@@ -301,7 +301,6 @@ select:invalid { color: gray; }
 #provider_upload .input-group {
 	border-collapse: separate;
     display: table;
-    left: 195px;
     position: relative;
 }
 #provider_add_upload .input-group{
@@ -510,7 +509,7 @@ select:invalid { color: gray; }
 }
 .image_upload_profile{
 	bottom: 0;
-    left: 500px;
+	right: 0;
 }
 #image_upload_logo_preview{
 	position: absolute;

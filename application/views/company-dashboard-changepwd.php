@@ -29,7 +29,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="<?php echo base_url().'uploads/jobprovider/'.$organization['organization_logo'];?>" alt="Image">
+                                    <img class="img-responsive center-block" src="<?php $organization['organization_logo'];?>" alt="Image">
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
                                     <h4><?php echo $organization['organization_name']; ?></h4>

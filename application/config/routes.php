@@ -75,6 +75,7 @@ $route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';
 $route['provider/postad'] 								= 'job_provider/postad';
 $route['provider/subscription'] 						= 'job_provider/subscription';
 $route['provider/payment'] 								= 'payu';
+$route['provider/paymentreply'] 						= 'payu/reply';
 $route['provider/feedback'] 							= 'job_provider/feedback/';
 $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/logout'] 								= 'job_provider/provider_logout';
