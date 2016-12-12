@@ -455,7 +455,9 @@ $(document).ready(function(){
     $('.add_option,.edit_option').on('click', function(e)  {
         var targeted_popup_class = $(this).data('open');
         $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-         e.preventDefault();
+        //newly added by kalai
+        $('.admin_form').attr("data-mode",$(this).data('action'));
+        e.preventDefault();
     });
     
     $('.close_trig').on('click', function(e)  {

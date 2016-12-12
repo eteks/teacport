@@ -33,7 +33,7 @@ $(document).ready(function(){
         var this_popup = $(this).parents('.popup').data('popup');
         var this_table_content = $(this).parents('#main-content').find('.table_content_section');
         var this_popup_content = $(this).find('.tab-content');
-        var action = $(this).data('mode');
+        var action = $(this).attr('data-mode');
         form_data.append(csrf_name,csfrData[csrf_name]);
         form_data.append('action',action);
         $.ajax({
@@ -41,9 +41,9 @@ $(document).ready(function(){
             url : admin_baseurl+$(this).attr('action'),
             dataType : 'json',
             data : form_data,
-                 contentType: false,       // The content type used when sending data to the server.
-        cache: false,             // To unable request pages to be cached
-        processData:false,
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false,
             success: function(res) {
                 if(res.error == 1) {
                     this_status.html(res.status);
@@ -91,7 +91,6 @@ $(document).ready(function(){
                         this_status.fadeIn(1000);
                         this_status.fadeOut(2000);
                         setTimeout(function() { datatable_initialization(); }, 3000); 
-
                     }
                 }
             });
