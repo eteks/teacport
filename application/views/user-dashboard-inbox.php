@@ -1,7 +1,7 @@
 <?php include('include/header.php');
     include('include/menus.php');   
   // echo "<pre>"; print_r($initial_data); echo "</pre>";
-  // echo "<pre>"; print_r($user_data); echo "</pre>";
+  // echo "<pre>"; print_r($organization); echo "</pre>";
   ?>
     <section class="job-breadcrumb">
             <div class="container">

@@ -36,9 +36,7 @@ class Job_Providermodel extends CI_Model {
       $profile_update_org_sub_data = array( 
                               'is_email_validity' => $this->input->post('email_valid'), 
                               'is_sms_validity' => $this->input->post('sms_valid'),
-                              'is_resume_validity' => $this->input->post('resume_valid'),
-                              'validity_start_date' => $start_date,
-                              'validity_end_date' => $end_date,
+                              'is_resume_validity' => $this->input->post('resume_valid')
                             );
       $profile_update_org_where = '( organization_id="'.$this->input->post('rid').'")'; 
       $this->db->set($profile_update_org_data);                         

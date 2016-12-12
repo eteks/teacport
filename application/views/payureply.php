@@ -47,6 +47,12 @@ $data = array(
         'udf10'				=> $udf10,
         'unmappedstatus' 	=> $unmappedstatus,
         'zipcode' 			=> $zipcode,
+        'encryptedPaymentId'=> $encryptedPaymentId,
+        'name_on_card'		=> $name_on_card,
+        'cardnum'			=> $cardnum,
+        'cardhash'			=> $cardhash,
+   		'discount'			=> $discount,
+   		'net_amount_debit'	=> $net_amount_debit,
         'csrf_token'		=> $udf5
 );
 echo form_open('provider/subscription','name="payureplyform"');

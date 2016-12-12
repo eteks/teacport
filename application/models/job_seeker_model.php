@@ -171,7 +171,7 @@ class Job_seeker_model extends CI_Model {
 	public function job_seeker_find_job_counts($ins_id)
 	{
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id');
+		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id', 'left');
 		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')";
 		$this->db->order_by('organization_id','desc');
 		return $this->db->where($where)->count_all_results();
@@ -180,12 +180,75 @@ class Job_seeker_model extends CI_Model {
 	{
 	 	$this->db->select('*');   
 	 	$this->db->from('tr_organization_profile');
-		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id');
+		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id','left');
 		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')"; 		
 		$this->db->limit($limit,$start);
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->result_array(); 
+	}
+
+	public function job_seeker_detail_jobs($ins_id)
+	{
+	 	$this->db->select('*');   
+	 	$this->db->from('tr_organization_vacancies');
+		$this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id','left');
+		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
+		$this->db->where($where);
+		$findjobsjobdata = $this->db->get();
+		return $findjobsjobdata->result_array(); 
+	}
+
+	// Get seeker details
+	public function get_seeker_details($id)
+	{
+		$this->db->select('*');
+		$this->db->from('tr_candidate_profile cp');
+		$this->db->join('tr_candidate_preferance cpre','cp.candidate_id=cpre.candidate_profile_id','left');
+		$this->db->where(array('candidate_id' => $id));
+		$value = $this->db->get()->row_array();
+		// $value = $this->db->get_where('tr_candidate_profile',array('candidate_id' => $id))->row_array();
+		return $value;
+	}
+
+	// Get seeker applied job details
+	public function get_seeker_applied_job($id)
+	{
+		$value = $this->db->get_where('tr_candidate_applied_job',array('applied_job_candidate_id' => $id, 'applied_job_status' => '1'))->result_array();
+		return $value;
+	}
+	
+	// Get seeker education details
+	public function get_seeker_education_details($id)
+	{
+		$value = $this->db->get_where('tr_candidate_education',array('candidate_profile_id' => $id, 'candidate_education_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get seeker experience details
+	public function get_seeker_experience_details($id)
+	{
+		$value = $this->db->get_where('tr_candidate_experience',array('candidate_profile_id' => $id, 'candidate_experience_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get seeker education details
+	public function password_change($data=array())
+	{
+		$password_check_where =  '(candidate_id="'.$data['candidate_id'].'" and candidate_password="'.$data['old_password'].'")';
+		$password_check = $this->db->get_where('tr_candidate_profile',$password_check_where);
+		if($password_check->num_rows() == 1) {
+			$password_update_where = '(candidate_id="'.$data['candidate_id'].'")';
+			$password_update_data = array('candidate_password' => $data['new_password']);
+			$this->db->set($password_update_data);
+			$this->db->where($password_update_where);
+			$this->db->update('tr_candidate_profile',$password_update_data);
+			$value = "Updated successfully";
+		}
+		else {
+			$value = "Password Not match";
+		}
+		return $value;
 	}
 
 } // End
