@@ -245,14 +245,13 @@
     padding-right: 10px;
 }
 .imagepreview_act {
-    width: 100%;
-    max-height: auto;
-    background-position: center center;
-    background-size: cover;
-    /*-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);*/
     display: inline-block;
-    /*margin: 35px 10px 10px 10px;*/
 }
+.imagepreview_act img {
+	max-height: 300px;
+	max-width: 300px;
+	object-fit: cover;
+} 
 /*.select-salary select option:first{
 	color: #999;
 }*/
