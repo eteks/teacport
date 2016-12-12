@@ -9,9 +9,9 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a>
+                                <li><a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
-                                <li><a href="company-dashboard-job-detail.html">Dashboard</a>
+                                <li><a href="<?php echo base_url(); ?>job_provider/dashboard">Dashboard</a>
                                 </li>
                                 <li class="active">Job Detail</li>
                             </ol>

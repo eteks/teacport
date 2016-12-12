@@ -11,12 +11,10 @@
             <li class="<?php if($this->uri->segment(2)=='candidate') echo 'active'; ?>">
                 <a href="<?php echo base_url();?>provider/candidate"> <i class="fa  fa-list-ul"></i> Browse Candidate</a>
             </li>
-            <li class="provider-jobs ">
-                <a href="#"><i class="fa  fa-list-alt"></i> Jobs</a>
-                <ul>
-                	<li class="<?php if($this->uri->segment(2)=='postjob') echo 'active'; ?>"><a href="<?php echo base_url();?>provider/postjob"> <i class="fa  fa-list-alt"></i>New Jobs</a></li>
-                	<li class="<?php if($this->uri->segment(2)=='postedjob') echo 'active'; ?>"><a href="<?php echo base_url();?>provider/postedjob"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
-                </ul>
+            <ul class="nav nav-stacked provider-jobs"> <i class="fa  fa-list-alt"></i>Jobs <span class="pull-right"><i class="fa fa-angle-double-down"></i></span>
+            	<li class="<?php if($this->uri->segment(2)=='postjob') echo 'active'; ?> submenu"><a href="<?php echo base_url();?>provider/postjob"> <i class="fa  fa-list-alt"></i>New Jobs</a></li>
+            	<li class="<?php if($this->uri->segment(2)=='postedjob') echo 'active'; ?> submenu"><a href="<?php echo base_url();?>provider/postedjob"> <i class="fa  fa-list-alt"></i>Posted Jobs</a></li>
+            </ul>
             </li>
             <li class="<?php if($this->uri->segment(2)=='postad') echo 'active'; ?>">
                 <a href="<?php echo base_url();?>provider/postad"> <i class="fa  fa-bookmark-o"></i> Post Ads </a>

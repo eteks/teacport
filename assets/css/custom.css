@@ -142,6 +142,9 @@
 .style-btn-info {
 	margin: 10px 0;
 }
+.inline-checkbox {
+	padding: 0 !important;
+}
 .inline-checkbox li{
 	display: inline-block;
 	padding: 0 5px;
@@ -170,9 +173,28 @@
 	padding: 0 0 10px; 
 }
 /* Edit Profile */
-.upload_resume input[type="file"] {
-	color: #29AAFE;
+/* Find Jobs */
+#candidate-browse-jobs .all-jobs-list-box2 {
+    margin: 30px 0;
+    position: relative;
 }
+#candidate_nos_act .btn-default{
+	margin-top: 0px;
+	padding: 12px 30px;
+} 
+#candidate-browse-jobs .advanced_search{
+	color: #fff;
+	cursor: pointer;
+}
+#candidate_ads_act select{
+	margin: 10px 5px;
+}
+#candidate_ads_act .btn-default{
+	margin: 8px 20px;
+    padding: 12px 30px;
+    width: 100%;
+} 
+
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
@@ -199,42 +221,42 @@
 	position: relative;
 	margin: 30px 0;
 }
-.provider-jobs li {
-	padding: 10px 15px;
-	text-align: center;
-	line-height: 30px;
+/* pro-Dashboard LeftsideMenu */
+.dashboard-body .profile-nav .provider-jobs {
+    border-bottom: 1px solid #ebeae6;
+    line-height: 30px;
+    margin-top: 0;
+    cursor: pointer;
 }
-.provider-jobs li, .provider-jobs li:hover {
-	color: #FFF !important;
-	cursor: pointer;
+.dashboard-body .profile-nav .provider-jobs {
+    border-left: 5px solid #fff;
+    border-radius: 0;
+    color: #242424;
+    font-size: 18px;
 }
-.dashboard-body .profile-nav .provider-jobs ul > li:hover, .dashboard-body .profile-nav .provider-jobs ul > li:focus, .dashboard-body .profile-nav .provider-jobs ul li.active  {
-	background: #29aafe;
-	border-left: 5px solid #2088cb;
-	color: #FFF !important;
+.dashboard-body .profile-nav .provider-jobs  {
+    display: block;
+    padding: 10px 15px;
+    position: relative;
 }
-.dashboard-body .profile-nav .provider-jobs ul li > a{
-	border: none;
-	
-}
-.dashboard-body .profile-nav .provider-jobs ul li > a:hover{
-	color: #FFF !important;
+.dashboard-body .profile-nav .provider-jobs  i {
+    color: #29aafe;
+    font-size: 16px;
+    padding-right: 10px;
 }
 .imagepreview_act {
-    width: 100%;
-    max-height: auto;
-    background-position: center center;
-    background-size: cover;
-    /*-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);*/
     display: inline-block;
-    /*margin: 35px 10px 10px 10px;*/
 }
+.imagepreview_act img {
+	max-height: 300px;
+	max-width: 300px;
+	object-fit: cover;
+} 
 /*.select-salary select option:first{
 	color: #999;
 }*/
 select:invalid { color: gray; }
-
- .advanced_search {
+.advanced_search {
  	margin-top: 5px;
  	float:right;
  	color: #fff;
@@ -278,7 +300,6 @@ select:invalid { color: gray; }
 #provider_upload .input-group {
 	border-collapse: separate;
     display: table;
-    left: 195px;
     position: relative;
 }
 #provider_add_upload .input-group{
@@ -487,7 +508,7 @@ select:invalid { color: gray; }
 }
 .image_upload_profile{
 	bottom: 0;
-    left: 500px;
+	right: 0;
 }
 #image_upload_logo_preview{
 	position: absolute;
@@ -619,4 +640,8 @@ font-size: 12px;
 .inbox_popup_data 
 {
     text-transform:capitalize;
+}
+/* Added by siva */
+.datepicker_section span {
+	width : 100% !important;
 }

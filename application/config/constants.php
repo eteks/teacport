@@ -40,6 +40,15 @@ define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 define('COURSE_TYPE',serialize(array("UG"=>"Under Graduate",
         "PG"=>"Post Graduate")));
 
+// Nationality
+define('NATIONALITY',serialize(array("indian"=>"Indian",
+            "other"=>"Others")));
+// Religion
+define('RELIGION',serialize(array("hindu"=>"Hindu","muslim"=>"Muslim","christian"=>"Christian",
+        "PG"=>"Post Graduate","other"=>"Others")));
+// Community
+define('COMMUNAL',serialize(array("scheduled tribe (st)"=>"Scheduled Tribe (ST)","scheduled caste (sc)"=>"Scheduled Caste (SC)","scheduled caste-arunthathiar (sca)"=>"Scheduled Caste-Arunthathiar (SCA)","most backward class (mbc)"=>"Most Backward Class (MBC)","denotified community (dc)"=>"Denotified Community (DC)","backward class (bc)"=>"Backward Class (BC)","backward blass-muslim (bcm)"=>"Backward Class-Muslim (BCM)","others"=>"Others")));
+
 //array to get status
 define('STATUS',serialize(array("0"=>"Active",
         "1"=>"Inactive")));
@@ -47,9 +56,9 @@ define('STATUS',serialize(array("0"=>"Active",
 define('PAYUMERCHANTKEY', 'OwGF14'); 
 define('PAYUMERCHANTSALT', 'RjWAdXh0');
 define('PAYUBASEURL', 'https://test.payu.in');
-define('PAYUSUCCESSURL', APP_URL.'provider/subscription'); 
-define('PAYUFAILUREURL', APP_URL.'provider/subscription');
-define('PAYUCANCELURL', APP_URL.'provider/subscription');
+define('PAYUSUCCESSURL', APP_URL.'provider/paymentreply'); 
+define('PAYUFAILUREURL', APP_URL.'provider/paymentreply');
+define('PAYUCANCELURL', APP_URL.'provider/paymentreply');
 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

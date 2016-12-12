@@ -11,9 +11,9 @@ include ('include/menus.php');
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="company-dashboard-followers.html#">Home</a>
+                                <li><a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
-                                <li><a href="company-dashboard-followers.html#">Dashboard</a>
+                                <li><a href="<?php echo base_url(); ?>job_provider/dashboard">Dashboard</a>
                                 </li>
                                 <li class="active">Post Adds</li>
                             </ol>
@@ -29,7 +29,7 @@ include ('include/menus.php');
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="<?php echo base_url() . 'uploads/jobprovider/' . $organization['organization_logo']; ?>" alt="Image">
+                                    <img class="img-responsive center-block" src="<?php echo $organization['organization_logo']; ?>" alt="Image">
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
                                     <h4><?php echo $organization['organization_name']; ?></h4>
@@ -103,8 +103,9 @@ include ('include/menus.php');
 	                                    	</div>
 	                                    </div>	
 		                            </div>
-		                            <div class="col-sm-12 imagepreview_act"> </div>
-		                            
+		                            <div class="col-sm-offset-4 col-sm-8">
+		                            	<div class="imagepreview_act"> </div>
+		                            </div>	
 		                            <div class="clearfix"> </div>
 		                            <div class="form-group">
 	                            		<div class="col-sm-6"> </div>

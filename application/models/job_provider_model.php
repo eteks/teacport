@@ -33,7 +33,7 @@ class Job_provider_model extends CI_Model {
 			$user_details['pro_email'] = $user_data['registrant_email_id'];
 			$user_details['pro_userid'] = $user_data['organization_id'];
 			$user_details['pro_mobile'] = $user_data['registrant_mobile_no'];
-			$user_details['registrant_logo'] = (!empty($user_data['registrant_logo'])?base_url().'uploads/jobprovider/'.$user_data['registrant_logo']:base_url().'assets/images/admin.jpg');
+			$user_details['registrant_logo'] = (!empty($user_data['registrant_logo'])?$user_data['registrant_logo']:base_url().'assets/images/admin.jpg');
 			$user_details['registrant_name'] = $user_data['registrant_name'];
 			$user_details['user_type'] = 'provider';
 			$user_details['valid_status'] = 'valid';
@@ -103,10 +103,18 @@ class Job_provider_model extends CI_Model {
 		
 		$this->db->select('*');    
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
-		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
-		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
-		$this->db->join('tr_organization_subscription', 'tr_organization_subscription.organization_id = tr_organization_profile.organization_id','left');
+		$wherecheck = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
+		$this->db->where($wherecheck);
+		$checkuser = $this->db->get()->row_array();
+		$this->db->select('*');    
+		$this->db->from('tr_organization_profile');
+		if($checkuser['organization_institution_type_id']){
+			$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		}
+		if($checkuser['organization_district_id']){
+			$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id');
+			$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id');
+		}
 		$where = "(tr_organization_profile.organization_id='".$id."' AND tr_organization_profile.organization_status='1')";
 		$this->db->where($where);
 		$existuser = $this->db->get()->row_array();
@@ -116,10 +124,18 @@ class Job_provider_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id','left');
-		$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id','left');
-		$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id','left');
-		$this->db->join('tr_organization_subscription', 'tr_organization_subscription.organization_id = tr_organization_profile.organization_id','left');
+		$wherecheck = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
+		$this->db->where($wherecheck);
+		$checkuser = $this->db->get()->row_array();
+		$this->db->select('*');    
+		$this->db->from('tr_organization_profile');
+		if($checkuser['organization_institution_type_id']){
+			$this->db->join('tr_institution_type', ' tr_organization_profile.organization_institution_type_id = tr_institution_type.institution_type_id');
+		}
+		if($checkuser['organization_district_id']){
+			$this->db->join('tr_district', 'tr_organization_profile.organization_district_id = tr_district.district_id');
+			$this->db->join('tr_state', 'tr_district.district_state_id = tr_state.state_id');
+		}
 		$where = "(tr_organization_profile.registrant_email_id='".$email."' AND tr_organization_profile.organization_status='1')";
 		$this->db->where($where);
 		$existuser = $this->db->get()->row_array();
@@ -333,5 +349,23 @@ class Job_provider_model extends CI_Model {
 		$this->db->where($vacancy);
 		$candidate['vacancy'] = $this->db->get()->row_array();
 		return $candidate;
+	}
+	public function subscription_transaction_data($transction_data)
+	{
+		if($this->db->insert('tr_payumoney_transaction', $transction_data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	public function subscriped_plan_data($subscrip_data)
+	{
+		if($this->db->insert('tr_organization_subscription', $subscrip_data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
 	}
 }

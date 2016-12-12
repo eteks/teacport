@@ -19,7 +19,8 @@ $data = array(
         'surl' 				=> $surl,
         'txnid' 			=> $txnid,
         'udf1' 				=> $udf1,
-        'udf2' 				=> $udf2
+        'udf2' 				=> $udf2,
+        'udf5' 				=> $udf5
 );
 echo form_open($action,'name="payuform"');
 echo form_hidden($data);

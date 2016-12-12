@@ -1,10 +1,9 @@
 <?php include('include/header.php');
     include('include/menus.php');   
   // echo "<pre>"; print_r($initial_data); echo "</pre>";
-  // echo "<pre>"; print_r($user_data); echo "</pre>";
+  // echo "<pre>"; print_r($organization); echo "</pre>";
   ?>
-
-        <section class="job-breadcrumb">
+    <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-7 co-xs-12 text-left">
@@ -13,7 +12,8 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a> </li>
+                                <li><a href="<?php echo base_url(); ?>">Home</a> </li>
+                                <li><a href="<?php echo base_url(); ?>job_seeker/dashboard">Dashboard</a> </li>
                                 <li class="active">Inbox</li>
                             </ol>
                         </div>
@@ -44,7 +44,9 @@
                                     <li><a href="user-followed-companies.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                                 </ul>
                             </div>
+
                             <?php include('include/user_dashboard_sidemenu.php'); ?>
+
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                            <div class="heading-inner first-heading">
@@ -148,6 +150,6 @@
         </div>
 
 <?php include('include/footermenu.php'); ?>
-<?php include('include/footer.php'); ?>       
+<?php include('include/footer.php'); ?>          
 
-    </div>
+

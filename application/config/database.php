@@ -47,16 +47,21 @@
 
 $active_group = 'default';
 $active_record = TRUE;
-// local settings
-$db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'root';
-$db['default']['password'] = 'root';
-$db['default']['database'] = 'teacherrecruite';
-// server settings
-// $db['default']['hostname'] = '166.62.28.109';
-// $db['default']['username'] = 'teacherrecruit';
-// $db['default']['password'] = 'teacherrecruit';
-// $db['default']['database'] = 'teacherrecruit';
+
+
+if(in_array($_SERVER['SERVER_ADDR'], array("127.0.0.1","::1","localhost"))){
+	// local settings
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'root';
+	$db['default']['password'] = 'root';
+	$db['default']['database'] = 'teacherrecruite';
+}else if(in_array($_SERVER['SERVER_ADDR'], array("http://sunmicromac.com","166.62.28.109"))){
+	// server settings
+	$db['default']['hostname'] = '166.62.28.109';
+	$db['default']['username'] = 'teacherrecruit';
+	$db['default']['password'] = 'teacherrecruit';
+	$db['default']['database'] = 'teacherrecruit';
+}
 
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
@@ -69,7 +74,6 @@ $db['default']['dbcollat'] = 'utf8_general_ci';
 $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
-
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */
