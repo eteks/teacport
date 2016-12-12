@@ -172,5 +172,18 @@ class Common_model extends CI_Model {
 		return $value;
 	}
 	
+	public function provider_subscription_active_plans($org_id){
+		$this->db->select('*');    
+		$this->db->from('tr_organization_subscription');
+		$this->db->join('tr_subscription', 'tr_subscription.subscription_id = tr_organization_subscription.subscription_id');
+		$where = "(organization_id = '".$org_id."' AND validity_start_date <= CURRENT_DATE() AND  validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
+		$this->db->where($where);
+		$providersubcription = $this->db->get();
+		return $providersubcription->row_array(); 
+	}
+	public function posted_jobs_count($org_id){
+		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_organization_id =".$org_id);
+		return $posted_jobs->num_rows();
+	}
 }
 

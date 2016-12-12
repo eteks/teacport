@@ -41,6 +41,7 @@
                                 <p class="title">Choose Your Plan</p>
                             </div>
                             <p class="success_server_msg"><?php if(isset($subscription_server_msg)) echo $subscription_server_msg; ?></p>
+                            <?php if (!empty($subcription_plan)) { ?>
                             <div class="subscription">
                                 <!--Select Pricing Plan-->
                                 <form id="form-school" class="form-horizontal" action="" name="" autocomplete="false" method="post" accept-charset="utf-8">
@@ -95,7 +96,8 @@
 			                        </div>
 			                        <?php } ?>
 			                    </div> 
-			                 </div>     
+			                 </div>  
+			                    
 		                    <!--Proceed to payment-->
 		                    <div class="col-sm-offset-9 col-sm-1">
 		                    	<?php 
@@ -117,6 +119,9 @@
 	                    		<button type='submit' class="btn btn-default payu_submit"> Proceed to pay </button>
 		                    	<?php echo form_close(); ?>
 		                    </div>
+		                    <?php } else {?>
+			                 	<div><h2>No subscription plan available!</h2></div>
+			                 <?php } ?>
                         </div> <!--End right panel-->
                     </div>
                 </div> <!--row-->

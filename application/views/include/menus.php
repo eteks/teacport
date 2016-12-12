@@ -27,7 +27,7 @@
 			        	<li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
-								<img src="<?php echo isset($user_type['registrant_logo'])?$user_type['registrant_logo']:$organization['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
+								<img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
 			                    <span class="hidden-xs hidden-sm"><?php echo isset($user_type['registrant_name'])?$user_type['registrant_name']:$organization['registrant_name'] ;?> </span>
 			                    <i class="fa fa-angle-down fa-indicator"></i> 
 			                </a>
