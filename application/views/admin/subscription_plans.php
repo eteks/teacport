@@ -8,6 +8,7 @@ if(!$is_super_admin){
 }
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
 <!-- BEGIN CONTAINER -->
 <div id="container" class="row-fluid">
@@ -73,25 +74,35 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                   <div class="btn-group">
-                    <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
+                    <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option" data-action="save">
                       Add New <i class="icon-plus"></i>
                     </button>
                   </div>
                 </div>
-                <form action="subscription_plan/subscription_plans">
+                <form action="subscription_plans">
+                <p class="admin_status"> </p>
+                  <div class="table_content_section">
+                    <?php } ?>
+                    <?php
+                    // echo "<pre>";
+                    // print_r($subscription_plans);
+                    // echo "</pre>";
+                    if(!empty($subscription_plans)):
+                    ?>
                   <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">
                         <th>Plan</th>
                         <th>Price</th>
                         <th>Features</th>
-                        <th>Validity</th>
-                        <th>Max Vacancy Posts</th>
+                        <th>Validity Start Date</th>
+                        <th>Validity End Date</th>
+                        <!-- <th>Max Vacancy Posts</th>
                         <th>Max Sms</th>
                         <th>Max Email</th>
                         <th>Max Resume Download</th>
                         <th>Max Ad Posts</th>
-                        <th>Max Days Ad visible</th>
+                        <th>Max Days Ad visible</th> -->
                         <th>Status</th>
                         <th>Created Date</th>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -102,62 +113,62 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php endif; ?>                                 
                       </tr>
                     </thead>
-                    <tbody>                                   
+                    <tbody>     
+                    <?php
+                      foreach ($subscription_plans as $sub) :
+                    ?>                              
                       <tr class="parents_tr" id="column">
-                        <td class="state_name"> 
-                          Plan1
+                        <td> 
+                        <?php echo $sub['subscription_plan']; ?>
                         </td>
-                        <td class="state_name"> 
-                          100
+                        <td> 
+                          <?php echo $sub['subscription_price']; ?>
                         </td>
-                        <td class="state_name"> 
-                          1.Lorem
-                          2. Lorem2
+                        <td> 
+                          <?php echo $sub['subscription_features']; ?>
                         </td>
-                        <td class="state_name"> 
-                          08/11/2016 to 08/12/2016
+                        <td> 
+                          <?php echo $sub['subcription_valid_start_date']; ?>
                         </td>
-                        <td class="state_name"> 
-                          200
+                        <td> 
+                          <?php echo $sub['subcription_valid_end_date']; ?>
                         </td>
-                        <td class="state_name"> 
-                          100
+                        <td> 
+                          <?php 
+                            if ($sub['subscription_status'] == 1) 
+                              echo "Active";
+                            else
+                              echo "Inactive";
+                            ?>
                         </td>
-                        <td class="state_name"> 
-                          100
-                        </td>
-                        <td class="state_name"> 
-                          100
-                        </td>
-                        <td class="state_name"> 
-                          100
-                        </td>
-                        <td class="state_name"> 
-                          100
-                        </td>
-                        <td class="state_name"> 
-                          Active
-                        </td>
-                        <td class="state_name"> 
-                          18-12-2016
+                        <td> 
+                          <?php echo $sub['subscription_created_date']; ?>
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
-                          <a class="edit_option" data-open="popup_section" id="column" href="javascript:;" data-id="">
+                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section" data-href="subscription_plan/subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section" data-action="update">
                             Edit
                           </a>
                         </td>
                         <?php endif; ?>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td>
-                          <a class="uidelete" data-id="">
+                          <a class="pop_delete_action" data-mode="delete" data-id="<?php echo $sub['subscription_id']; ?>">
                             Delete
                           </a>
                         </td>
                         <?php endif; ?>
                       </tr>
+                      <?php
+                        endforeach;
+                      ?>
                    </tbody>
                   </table>
+                  <?php 
+                    endif;
+                  ?>
+                  <?php if(!$this->input->is_ajax_request()) { ?> 
+                  </div>
                 </form>
               </div>
           </div>
@@ -175,23 +186,28 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <i class="icon-reorder"></i> Subscription Plan
             </h4>                        
           </div>
-          <div class="widget-body form pop_details_section">
-            <form action="subscription_plans" class="form-horizontal">
+          <div class="widget-body form">
+            <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+            <p class="admin_status"> </p>
               <fieldset>
                 <legend> Subscription plan details:</legend>
-                <div class="form-wizard">
+                <div class="form-wizard pop_details_section">
+                <?php } ?>
+                <?php
+                if(!empty(isset($subscription_plan_details)) || !$this->input->is_ajax_request()) :
+                ?>
                   <div class="tab-content">
                     <div class="col12">
                       <div class="col6 control-group">  
                         <label class="control-label">Subscription Plan</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Subscription Plan" name="sub_plan"/> 
+                          <input type="text" class="form-control" placeholder="Subscription Plan" name="sub_plan" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_plan']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Price</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Subscription Price" name="sub_price"/> 
+                          <input type="text" class="form-control" placeholder="Subscription Price" name="sub_price" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_price']; ?>"/> 
                         </span>
                       </div>
                     </div>
@@ -200,27 +216,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <label class="control-label">Validitity Start</label>
                         <span class="dynamic_data"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" name="sub_start_validity"/>
+                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_valid_start_date']; ?>"/>
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity End</label>
                         <span class="dynamic_data"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" value="12-02-2012" name="sub_end_validity"/>
+                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_valid_end_date']; ?>"/>
                         </span>
                       </div> 
                     <div class="col12">
                       <div class="col6 control-group">
                         <label class="control-label">Maximum Posts Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum Posts Count" name="sub_max_vacancy"/> 
+                          <input type="text" class="form-control" placeholder="Maximum Posts Count" name="sub_max_vacancy" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_posts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Maximum SMS Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum SMS Count" name="sub_max_sms"/> 
+                          <input type="text" class="form-control" placeholder="Maximum SMS Count" name="sub_max_sms" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_sms_counts']; ?>"/> 
                         </span>
                       </div>
                       </div>
@@ -228,13 +244,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Email Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum Email Count" name="sub_max_email"/> 
+                          <input type="text" class="form-control" placeholder="Maximum Email Count" name="sub_max_email" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_email_counts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Resume Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum Resume Count" name="sub_max_resume"/> 
+                          <input type="text" class="form-control" placeholder="Maximum Resume Count" name="sub_max_resume" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_resume_download_count']; ?>"/> 
                         </span>
                       </div>
                     </div>
@@ -242,13 +258,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Ads </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Maximum Ads" name="sub_max_ads"/> 
+                          <input type="text" class="form-control" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Max Days Ad visisble </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible"/> 
+                          <input type="text" class="form-control" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
                         </span>
                       </div>
                     </div>
@@ -256,23 +272,29 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">  
                         <label class="control-label"> Subscription Features </label>
                         <span class="dynamic_data"> 
-                          <textarea class="textarea" placeholder="Subscription Features" name="sub_features"></textarea>
+                          <textarea class="textarea" placeholder="Subscription Features" name="sub_features"><?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Status</label>
                         <span class="dynamic_data"> 
                           <select name="sub_status">
-                            <option> Please select status </option>
-                            <option> Active </option>
-                            <option> Inactive </option>
+                            <option value=""> Please select status </option>
+                                <option value="1" <?php if(isset($subscription_plan_details))  if($subscription_plan_details['subscription_status']==1) echo "selected"; ?>> Active </option>
+                                <option value="0" <?php if(isset($subscription_plan_details))  if($subscription_plan_details['subscription_status']==0) echo "selected"; ?>> Inactive </option>
                           </select>
                         </span>
                       </div>
                     </div>
                   </div>
+                  <input type="hidden" name="rid" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_id']; ?>"/>
                 </div>
                 <button type="submit" class="btn btn-info save_button">Save</button>
+                <?php
+                  endif;
+                  ?>
+                  <?php if(!$this->input->is_ajax_request()) { ?>
+                </div>
               </fieldset>
             </form>
           </div>  
@@ -284,16 +306,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
     </div>
   </div> 
  </div>
+      <!-- END ADVANCED TABLE widget-->
 
-            <!-- END ADVANCED TABLE widget-->
-
-            <!-- END PAGE CONTENT-->
-         </div>
-         <!-- END PAGE CONTAINER-->
-      </div>
-      <!-- END PAGE -->
-  </div>
+      <!-- END PAGE CONTENT-->
+   </div>
+   <!-- END PAGE CONTAINER-->
+</div>
+<!-- END PAGE -->
+</div>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');

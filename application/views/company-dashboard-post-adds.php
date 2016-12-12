@@ -103,8 +103,9 @@ include ('include/menus.php');
 	                                    	</div>
 	                                    </div>	
 		                            </div>
-		                            <div class="col-sm-12 imagepreview_act"> </div>
-		                            
+		                            <div class="col-sm-offset-4 col-sm-8">
+		                            	<div class="imagepreview_act"> </div>
+		                            </div>	
 		                            <div class="clearfix"> </div>
 		                            <div class="form-group">
 	                            		<div class="col-sm-6"> </div>

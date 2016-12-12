@@ -8,6 +8,7 @@ if(!$is_super_admin){
 }
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -73,61 +74,75 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
-                                </div>
-                                
+                                </div>                               
                                 <form method="post" action="subscription_pan/plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
+                                <?php } ?> 
+                                <?php
+                                if(!empty($status)) :
+                                  echo "<p class='db_status update_success_md'> $status </p>";
+                                endif;
+                                ?> 
+                                <p class='val_error error_msg_md'> <p>
                                   <table class="table table-striped table-hover table-bordered admin_table plan_upgrade_creation" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
                                         <th>Subscription Name</th>
-                                        <th>Is SMS?</th>
                                         <th>SMS Count</th>
-                                        <th>Is Email?</th>
                                         <th>Email Count</th>
-                                        <th>Is Resume?</th>
                                         <th>Resume Count</th>
                                         <th>Price</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                            				<th class="data_action">Edit</th>
-                          				<?php endif; ?>
-                         				<?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                          				     <th class="data_action">Delete</th>
-                         				<?php endif; ?>
-                                      </tr>
+                                  			   <th class="data_action">Edit</th>
+                                				<?php endif; ?>
+                               				  <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                				    <th class="data_action">Delete</th>
+                               				  <?php endif; ?>
+                                        </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                      if(!empty($subscription_plan_upgrade)) :
+                                      $i=0;
+                                      foreach ($subscription_plan_upgrade as $plan_upgrade) :
+                                      $i++;
+                                    ?>    
                                       <tr class="parents_tr" id="column1">
                                         <td class="subscription_name"> 
-                                          Plan1
+                                          <?php echo $plan_upgrade['subscription_plan']; ?>
                                         </td>
-                                        <td class="is_sms center_align"> 
+<!--                                         <td class="is_sms center_align"> 
                                           <span class="icon-ok"> </span> 
-                                        </td>
+                                        </td> -->
                                         <td class="sms_count"> 
-                                          20 
+                                          <?php echo $plan_upgrade['sms_count']; ?>
                                         </td>
-                                        <td class="is_email center_align"> 
+                                        <!-- <td class="is_email center_align"> 
                                           <span class="icon-ok"> </span>
-                                        </td>
+                                        </td> -->
                                         <td class="email_count"> 
-                                          20 
+                                          <?php echo $plan_upgrade['email_count']; ?>
                                         </td>
-                                        <td class="is_resume center_align">
+                                        <!-- <td class="is_resume center_align">
                                           <span class="icon-remove"> </span>
-                                        </td>
+                                        </td> -->
                                         <td class="resume_count"> 
-                                          20 
+                                          <?php echo $plan_upgrade['resume_count']; ?>
                                         </td>
                                         <td class="price"> 
-                                          1000
+                                          <?php echo $plan_upgrade['upgrade_price']; ?>
                                         </td>
                                         <td class="plan_upgrade_creation_status"> 
-                                          Active
+                                          <?php 
+                                            if ($plan_upgrade['upgrade_status'] == 1) 
+                                              echo "Active";
+                                            else
+                                              echo "Inactive";
+                                          ?>
                                         </td>
                                         <td class="created_date">
-                                          00-00-0000
+                                          <?php echo $plan_upgrade['upgrade_created_date']; ?>
                                         </td>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
@@ -142,6 +157,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         </td>
                                         <?php endif; ?>
                                       </tr>
+                                      <?php
+                                        endforeach;
+                                        endif;
+                                      ?>
                                     </tbody>
                                   </table>
                                 </form>
@@ -161,8 +180,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
   </div>
   <script>
     // Define default values
-    var inputType = new Array("text","on_off","text","on_off","text","on_off","text","text","select","label"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("subscription_name","is_sms","sms_count","is_email","email_count","is_resume","resume_count","price","plan_upgrade_creation_status","created_date"); // Set name of input types
+    // var inputType = new Array("text","on_off","text","on_off","text","on_off","text","text","select","label"); 
+    var inputType = new Array("text","text","text","text","text","select","label");// Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("subscription_name","sms_count","email_count","resume_count","price","plan_upgrade_creation_status","created_date"); // Set name of input types
     var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table
     var is_created ="no";
