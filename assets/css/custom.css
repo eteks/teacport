@@ -654,3 +654,10 @@ font-size: 12px;
 .datepicker_section span {
 	width : 100% !important;
 }
+.subcription_plan_details{
+	color: #fff;
+    font-weight: bold;
+    left: 200px;
+    position: absolute;
+    top: 261px;
+  }
