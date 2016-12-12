@@ -26,7 +26,20 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('index');
+	    $categories['job_results'] = $this->common_model->get_job_list();
+	    $this->load->view('index',$categories);
+	}
+	public function featured_job()
+	{
+		$session_data = $this->session->all_userdata();
+		if(isset($session_data['login_session']))
+		{
+			$categories['search_results'] = $this->common_model->get_search_list();
+        $this->load->view('vacancies',$categories);
+		}
+	    else {
+		    redirect('login/seeker');
+		}
 	}
 	public function aboutus()
 	{
@@ -36,7 +49,6 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('contactus');
 	}
-
 	//Akila Created
 	public function pricing(){
 		$this->load->view('pricing');
