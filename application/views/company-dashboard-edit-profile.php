@@ -102,7 +102,7 @@
 								<label class="col-sm-4" for="add_district">District : <span class="required">*</span></label>
 								<div class="col-sm-4">
 									<?php echo form_error('organization_district'); ?>
-									<select id="organization_district" class="form-control <?php if($organization['organization_district_id'] == '') echo "error_box_shadow"; ?>" name="organization_district" onchange="">
+									<select id="organization_district" class="select-location form-control <?php if($organization['organization_district_id'] == '') echo "error_box_shadow"; ?>" name="organization_district" onchange="">
 										<option value="">Select district</option>
 										<?php
 										foreach ($district as $value) {

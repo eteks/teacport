@@ -9,7 +9,7 @@
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
                             <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a>
+                                <li><a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
                                 <li class="active">Informations</li>
                                 
