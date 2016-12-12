@@ -101,6 +101,8 @@ $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['vacancies'] 									= 'home/vacancies';
+$route['informations'] 									= 'home/informations';
+$route['terms'] 										= 'home/terms';
 
 
 

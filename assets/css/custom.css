@@ -139,6 +139,9 @@
 #candidate-form .fa-pencil{
 	font-size: 20px;
  }	
+ #candidate-form input{
+ 	line-height: 40px;
+ }
 .style-btn-info {
 	margin: 10px 0;
 }
@@ -216,7 +219,7 @@
 }
 /* END OF JOB SEEKER DASHBOARD */
 
-/* COMPANY DASHBOARD */
+/* COMPANY or PROVIDER DASHBOARD */
 #company-browse-candidate .all-jobs-list-box2 {
 	position: relative;
 	margin: 30px 0;
@@ -294,6 +297,12 @@ select:invalid { color: gray; }
 	
 }
 /* Edit profile */
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    height: 48px;
+}
 .profile-edit .input-group-btn {
     padding-top: 0 !important;
 }

@@ -55,7 +55,15 @@ class Home extends CI_Controller {
     {
     	$categories['search_results'] = $this->common_model->get_search_list();
         $this->load->view('vacancies',$categories);
-    }	
+    }
+	public function informations()
+	{
+		$this->load->view('information');
+	}
+	public function terms()
+	{
+		$this->load->view('terms');
+	}	
 }
 
 /* End of file welcome.php */
