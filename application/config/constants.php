@@ -60,5 +60,27 @@ define('PAYUSUCCESSURL', APP_URL.'provider/paymentreply');
 define('PAYUFAILUREURL', APP_URL.'provider/paymentreply');
 define('PAYUCANCELURL', APP_URL.'provider/paymentreply');
 
+//local settings
+define("FACEBOOKAPPID", "1434580023238776"); //facebook app id
+define("FACEBOOKAPPSECRET", "372ac9b0b9e96d105d1b27da18a06e66"); //facebook secret id
+//server settings
+//define("FACEBOOKAPPID", "1328481350548849"); //facebook app id
+//define("FACEBOOKAPPSECRET", "6455b91fc9ee69b60f10914c3e0ecb06"); //facebook secret id
+
+define("FACEBOOKGRAPHVERSION", "v2.5");//facebook graph version
+define("FACEBOOKLOGINURL", APP_URL."login/facebookverify");//facebook login url
+define("FACEBOOKSEEKERLOGINURL", APP_URL."login/seeker/facebookverify");
+// define("TWITTERCONSUMERKEY","WtZZYO7OMHN6a9GdI8QnIHFjT");
+// define("TWITTERCONSUMERSECRET", "ebFGoz2TSiFtBLJMEB6v2z2GTnGHGNjRy8OpfgZVoX4nSKkbDE");
+// define("TWITTERLOGINURL", APP_URL."login/twitterverify");
+// Local Settings
+define("GOOGLECLIENTID",'917333063130-hrjho3c5b53ati7uepe7dsto6jjsk345.apps.googleusercontent.com');//google client id
+define("GOOGLECLIENTSECRET",'7pgkz0KpxuUVSLgaymVsYNcG');//google client secret
+define("GOOGLEDEVELOPERKEY",'AIzaSyBFL_IJd2SpUhmXCJMJ1mZg5Gy6NckvjI8');
+//define("GOOGLECLIENTID",'544080576755-0ch4mllq7fi0d6umo0tp2s73k2jebeha.apps.googleusercontent.com');//google client id
+//define("GOOGLECLIENTSECRET",'MkyykL90dEedMBOkrCm7CbCT');//google client secret
+define("GOOGLEREDIRECTURL",APP_URL."login/google");//google redirect urlt
+define("GOOGLESEEKERREDIRECTURL",APP_URL."login/seeker/google");//google redirect urlt
+define("GOOGLEAPPNAME", "Login to Teacher Recruit");
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */
