@@ -447,7 +447,7 @@ class Job_provider extends CI_Controller {
 									'vacancies_end_date'			=> $common->reformatDate($this->input->post('provider_interview_end')),
 									'vacancies_subject_id'			=> $this->input->post('provider_subject'),
 									'vacancies_experience'			=> $this->input->post('provider_experience'),
-									'vacancies_university_board'	=> $this->input->post('provider_university'),
+									'vacancies_university_board_id'	=> $this->input->post('provider_university'),
 									'vacancies_medium'				=> $this->input->post('provider_medium_of_instruction'),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
