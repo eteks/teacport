@@ -168,6 +168,7 @@ class Job_provider extends CI_Controller {
     {
     	$session_data = $this->session->all_userdata();
 		$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
+		
 		if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
 			$data['initial_data'] = 'show_popup';
 		}
@@ -175,6 +176,8 @@ class Job_provider extends CI_Controller {
 			$data['initial_data'] = 'hide_popup';
 		}
 		$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+        $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
+		$data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
         if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
 			$data['organization'] = $organization_data;
 			$data['district'] = $this->common_model->get_all_district();
@@ -335,6 +338,8 @@ class Job_provider extends CI_Controller {
 					$data['initial_data'] = 'hide_popup';
 				}
 				$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		        $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
+		        $data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
 		        if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
 					if($data['initial_data'] === 'show_popup')
 					{
@@ -365,6 +370,8 @@ class Job_provider extends CI_Controller {
 				$data['initial_data'] = 'hide_popup';
 			}
 			$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+	        $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
+	        $data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
 	        if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
 				$data['organization'] = $organization_data;
 				$data['district'] = $this->common_model->get_all_district();
@@ -405,11 +412,13 @@ class Job_provider extends CI_Controller {
 	public function postjob(){
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
+		
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
 		$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
 		$data['qualificatoin']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
 		$data['medium']			= $this->common_model->medium_of_instruction();
+		$data['university']		= $this->common_model->get_board_details();
 		if(!$_POST){
 			$this->load->view('company-dashboard-post-jobs',$data);
 		}
@@ -426,7 +435,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_interview_end', 'Interview end date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
-			$this->form_validation->set_rules('provider_university', 'University', 'trim|callback_alpha_dash_space|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction', 'Medium of Instruction', 'trim|required|alpha|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
@@ -447,7 +456,7 @@ class Job_provider extends CI_Controller {
 									'vacancies_end_date'			=> $common->reformatDate($this->input->post('provider_interview_end')),
 									'vacancies_subject_id'			=> $this->input->post('provider_subject'),
 									'vacancies_experience'			=> $this->input->post('provider_experience'),
-									'vacancies_university_board'	=> $this->input->post('provider_university'),
+									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
 									'vacancies_medium'				=> $this->input->post('provider_medium_of_instruction'),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
@@ -509,6 +518,7 @@ class Job_provider extends CI_Controller {
 		$data['mother_tongue']			= $this->common_model->mother_tongue();
 		$data['subject']				= $this->common_model->subjects($data['organization']['organization_institution_type_id']);
 		$data['qualification']			= $this->common_model->qualification($data['organization']['organization_institution_type_id']);
+		$data['subscrib_plan'] 			= $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";
 		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
@@ -688,7 +698,7 @@ class Job_provider extends CI_Controller {
 					$user_subscription_data = array(
 													'organization_id' 								=> $this->input->post('udf1'),
 													'subscription_id' 								=> $this->input->post('udf2'),
-													'organization_transcation_id' 					=> $transaction_id,
+													'transcation_id' 								=> $transaction_id,
 													'organization_email_count' 						=> $subscription_plan_data[0]['subscription_email_counts'],
 													'organization_sms_count'						=> $subscription_plan_data[0]['subcription_sms_counts'],
 													'organization_resume_download_count'			=> $subscription_plan_data[0]['subcription_resume_download_count'],
@@ -698,8 +708,8 @@ class Job_provider extends CI_Controller {
 													'is_email_validity'								=> 1,
 													'is_sms_validity'								=> 1,
 													'is_resume_validity'							=> 1,
-													'org_sub_validity_start_date'					=> date('Y-m-d'),
-													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+													'validity_start_date'							=> date('Y-m-d'),
+													'validity_end_date'								=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
 													'organization_subscription_status'				=> 1
 												);
 					

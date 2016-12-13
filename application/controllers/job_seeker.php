@@ -464,6 +464,17 @@ class Job_seeker extends CI_Controller {
 		$this->load->view('single-job', $data);
 	}
 	
+	// if($data["current_jobvacancy_id"]) {
+	// 		$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+	// 		$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+	// 		$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+	// 		$this->load->view('single-job', $data);
+	// 	}else {
+	// 		$this->load->view('single-job');
+	// 	}
+	// }	
+
+
 	// Change password
 	public function change_password() {
 		$data['status'] = '';

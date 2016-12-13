@@ -196,7 +196,7 @@ class Job_seeker_model extends CI_Model {
 		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
-		return $findjobsjobdata->result_array(); 
+		return $findjobsjobdata->row_array(); 
 	}
 
 	// Get seeker details
@@ -315,5 +315,25 @@ class Job_seeker_model extends CI_Model {
 	//  Inbox end
 
 
+
+	//get 
+
+	public function qualification_ids($value){
+		$this->db->select('*');    
+		$this->db->from('tr_educational_qualification');
+		$where = "(educational_qualification_id in (".$value.") AND educational_qualification_status='1')";
+		$this->db->where($where);
+		$subjectdata = $this->db->get();
+		return $subjectdata->result_array(); 
+	}
+
+	public function medium_of_instruction($value){
+		$this->db->select('*');    
+		$this->db->from('tr_languages');
+		$where = "(language_id in (".$value.") AND language_status='1')";
+		$this->db->where($where);
+		$subjectdata = $this->db->get();
+		return $subjectdata->result_array(); 
+	}
 
 } // End

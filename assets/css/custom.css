@@ -139,6 +139,9 @@
 #candidate-form .fa-pencil{
 	font-size: 20px;
  }	
+ #candidate-form input{
+ 	line-height: 40px;
+ }
 .style-btn-info {
 	margin: 10px 0;
 }
@@ -216,7 +219,7 @@
 }
 /* END OF JOB SEEKER DASHBOARD */
 
-/* COMPANY DASHBOARD */
+/* COMPANY or PROVIDER DASHBOARD */
 #company-browse-candidate .all-jobs-list-box2 {
 	position: relative;
 	margin: 30px 0;
@@ -245,14 +248,13 @@
     padding-right: 10px;
 }
 .imagepreview_act {
-    width: 100%;
-    max-height: auto;
-    background-position: center center;
-    background-size: cover;
-    /*-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);*/
     display: inline-block;
-    /*margin: 35px 10px 10px 10px;*/
 }
+.imagepreview_act img {
+	max-height: 300px;
+	max-width: 300px;
+	object-fit: cover;
+} 
 /*.select-salary select option:first{
 	color: #999;
 }*/
@@ -295,6 +297,12 @@ select:invalid { color: gray; }
 	
 }
 /* Edit profile */
+.select2-container--default .select2-selection--single {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 0;
+    height: 48px;
+}
 .profile-edit .input-group-btn {
     padding-top: 0 !important;
 }
@@ -656,3 +664,11 @@ table tr[data-name="bold_section"] a {
     cursor: default !important;
     background-image: none !important; 
 } 
+/* Ended by siva */
+.subcription_plan_details{
+	color: #fff;
+    font-weight: bold;
+    left: 200px;
+    position: absolute;
+    top: 261px;
+}

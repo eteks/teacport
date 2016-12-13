@@ -16,11 +16,11 @@
                         <div class="footer_block">
                             <h4>Useful Links</h4>
                             <ul class="footer-links">
-                                <li> <a href="index.html">Home</a> </li>
-                                <li> <a href="aboutus.html">About Us</a> </li>
-                                <li> <a href="information.html">Information</a> </li>
-                                <li> <a href="contactus.html">Contact Us</a> </li>
-                                <li> <a href="terms.html">Terms &amp; Conditions</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>aboutus">About Us</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>informations">Informations</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>contactus">Contact Us</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>terms">Terms &amp; Conditions</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -28,10 +28,10 @@
                         <div class="footer_block dark_gry">
                             <h4>Jobs by Category</h4>
                             <ul class="recentpost">
-                                <li><a href="vacancies.html">Teacher Jobs</a> </li>
-                                <li><a href="vacancies.html">Office Admin Jobs </a></li>                      
-                                <li><a href="vacancies.html">Hindi Teacher Jobs</a></li>
-                                <li><a href="vacancies.html">View all jobs</a></li>
+                                <li><a href="<?php echo base_url(); ?>vacancies">Teacher Jobs</a> </li>
+                                <li><a href="<?php echo base_url(); ?>vacancies">Office Admin Jobs </a></li>                      
+                                <li><a href="<?php echo base_url(); ?>vacancies">Hindi Teacher Jobs</a></li>
+                                <li><a href="<?php echo base_url(); ?>vacancies">View all jobs</a></li>
                             </ul>
                         </div>
                     </div>
