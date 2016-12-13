@@ -458,6 +458,7 @@ class Job_seeker extends CI_Controller {
 	}
 
 	public function applynow(){
+		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		$form_data = $this->input->post();
 
