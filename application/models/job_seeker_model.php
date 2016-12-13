@@ -307,17 +307,6 @@ class Job_seeker_model extends CI_Model {
 		return $data; 
 	}
 
-
-
-
-
-
-	//  Inbox end
-
-
-
-	//get 
-
 	public function qualification_ids($value){
 		$this->db->select('*');    
 		$this->db->from('tr_educational_qualification');
@@ -334,6 +323,16 @@ class Job_seeker_model extends CI_Model {
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
+	}
+
+	public function job_seeker_applied_job($appliedjobdata)
+	{
+	 	if($this->db->insert('tr_organizaion_inbox', $appliedjobdata)){
+	 		return TRUE;
+	 	}
+		else{
+			return FALSE;
+		}
 	}
 
 } // End

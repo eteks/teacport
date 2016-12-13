@@ -459,22 +459,42 @@ class Job_seeker extends CI_Controller {
 
 	public function applynow(){
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
-		$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
-		//print_r($this->db->last_query());		
-		$this->load->view('single-job', $data);
+		$form_data = $this->input->post();
+
+		if(!$_POST && !$form_data){
+			// echo 'default values to show in html';
+			if($data["current_jobvacancy_id"]){
+					$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+					$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+					$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+					$this->load->view('single-job', $data);
+			}
+		}else{
+			// echo 'Post values default values to show in html';
+			$session_data = $this->session->all_userdata();		
+			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+			$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+			$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+			$seeker_appliedjob = array(									
+									'inbox_messge'					=> 'Apply job',
+									'inbox_organization_id'			=> $data["applyjob"]['organization_id'],
+									'inbox_candidate_id'			=> $session_data['login_session']['candidate_id'],
+									'inbox_vacancy_id'				=> $data["applyjob"]['vacancies_id'],
+									'is_viewed'						=> 0,
+									'inbox_status'					=> 0
+								);
+			if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob)) {
+				$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+				$this->load->view('single-job', $data);
+			} else {
+				$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
+				$this->load->view('single-job', $data);
+			}
+
+		}
 	}
 	
-	// if($data["current_jobvacancy_id"]) {
-	// 		$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
-	// 		$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
-	// 		$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
-	// 		$this->load->view('single-job', $data);
-	// 	}else {
-	// 		$this->load->view('single-job');
-	// 	}
-	// }	
-
-
+	
 	// Change password
 	public function change_password() {
 		$data['status'] = '';
@@ -525,7 +545,4 @@ class Job_seeker extends CI_Controller {
 		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
 	}
 
-
 } // End
-
-
