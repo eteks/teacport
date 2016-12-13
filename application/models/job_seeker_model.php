@@ -199,6 +199,19 @@ class Job_seeker_model extends CI_Model {
 		return $findjobsjobdata->row_array(); 
 	}
 
+	public function get_relatedjob_list()
+	{
+		$search_product=$this->db->select('*');
+        $search_product=$this->db->from('tr_organization_vacancies cp');
+        $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+        $where1 = '(cp.vacancies_status=1)';
+        $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
+        $search_product=$this->db->where($where1);
+        $search_product=$this->db->group_by('cp.vacancies_id');
+        $query = $this->db->get()->result_array();
+        return $query;
+	}
+
 	// Get seeker details
 	public function get_seeker_details($id)
 	{
