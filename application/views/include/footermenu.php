@@ -9,7 +9,7 @@
                         		<h4><strong style="color: #2ae; font-size: 30px; font-family: 'Kaushan Script', cursive;">Teachers Recruit</strong></h4>
                         	    <!-- <img src="images/logo.png" class="img-responsive" alt="logo"> -->
                         	</a>
-                            <p>Recruit Teachers is a Teaching and Non-Teaching adds and recriutment job portal site for job seekers and job providers.</p>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-2 col-xs-12">
@@ -39,8 +39,11 @@
                         <div class="footer_block">
                             <h4>Contact Information</h4>
                             <ul class="personal-info">
-                                <li><i class="fa fa-map-marker"></i> NO.82/2, Thiruvalluvar Road, UthukottaiTown &amp; Tk, Thiruvallur Dt - 602026</li>
-                                <li><a href="mailto:info@teachersrecruit.com"><i class="fa fa-envelope"></i> info@recruitteachers.com</a></li>
+                                <li><span class="pull-left"><i class="fa fa-map-marker"></i></span>
+                                	<span class="pull-left foo_addr"> NO.82/2, Thiruvalluvar Road,<br> UthukottaiTown &amp; Tk,<br> Thiruvallur Dt - 602026 </span>
+                                	<span class="clearfix"> </span>
+                                </li>
+                                <li><a href="mailto:info@teachersrecruit.com"><i class="fa fa-envelope"></i> info@teachersrecruit.com</a></li>
                                 <li><i class="fa fa-phone"></i> +91 95850 12949</li>
                                 <li><i class="fa fa-clock-o"></i> Mon - Sun: 8:00 - 17:00</li>
                             </ul>

@@ -1,4 +1,15 @@
 /* Custom Code */
+.mega-menu .menu-links > li > a {
+   font-size: 16px;
+}
+.slidershow-bg {
+    background-color: transparent !important;
+    height: 500px !important;
+}
+/* Custom Select field */
+.select2-search__field {
+	display: none;
+}
 .txt_blue {
 	color: #29AAFE;
 }
@@ -458,6 +469,13 @@ select:invalid { color: gray; }
  	filter: alpha(opacity=0);  
   	opacity:0;  
 } 
+/* FOOTER */
+.small-footer p {
+	text-align: justify;
+}
+.foo_addr{
+	margin-left: 5px;
+}
 
 /*Added by thangam*/
 /*css for login and registrartion start*/
