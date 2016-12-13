@@ -182,6 +182,16 @@ class Common_model extends CI_Model {
             $query = $this->db->get()->result_array(); 
             return $query;
 	}
+	public function get_allinstitutions_list()
+	{
+			$search_product=$this->db->select('*');
+            $search_product=$this->db->from('tr_organization_profile cp');
+            $where1 = '(cp.organization_status=1)';
+            $search_product=$this->db->where($where1);
+            $search_product=$this->db->group_by('cp.organization_id');
+            $query = $this->db->get()->result_array(); 
+            return $query;
+	}
 	
 	public function provider_subscription_active_plans($org_id){
 		$this->db->select('*');    
