@@ -383,7 +383,7 @@ class Job_seeker extends CI_Controller {
     	$data['mother_language_values'] = $this->common_model->mother_tongue();
     	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
     	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type']);
-    	$data['salary_values'] = $this->common_model->get_salary_details();
+    	// $data['salary_values'] = $this->common_model->get_salary_details();
     	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
     	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type']);
     	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
