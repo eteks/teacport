@@ -26,7 +26,21 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('index');
+	    $categories['job_results'] = $this->common_model->get_job_list();
+	    // $categories['count_results'] = $this->common_model->get_count_list();
+	    $this->load->view('index',$categories);
+	}
+	public function featured_job()
+	{
+		$session_data = $this->session->all_userdata();
+		if(isset($session_data['login_session']))
+		{
+			$categories['search_results'] = $this->common_model->get_search_list();
+        $this->load->view('vacancies',$categories);
+		}
+	    else {
+		    redirect('login/seeker');
+		}
 	}
 	public function aboutus()
 	{
@@ -36,7 +50,6 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('contactus');
 	}
-
 	//Akila Created
 	public function pricing(){
 		$this->load->view('pricing');
@@ -45,11 +58,21 @@ class Home extends CI_Controller {
 		$this->load->view('faq');
 	}
 	public function allinstitutions(){
-		$this->load->view('all-institutions');
+		$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
+		$this->load->view('all-institutions',$categories);
 	}
-	public function vacancies(){
-		$categories['search_results'] = $this->common_model->get_search_list();
+	public function vacancies()
+	{
+		$session_data = $this->session->all_userdata();
+		if(isset($session_data['login_session']))
+		{
+			$categories['search_results'] = $this->common_model->get_search_list();
         $this->load->view('vacancies',$categories);
+		}
+	    else {
+		    redirect('login/seeker');
+		}
+		
 	}
 	public function search_section()
     {
