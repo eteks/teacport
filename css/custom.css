@@ -1,4 +1,11 @@
 /* Custom Code */
+.mega-menu .menu-links > li > a {
+   font-size: 15px;
+}
+/* Custom Select field */
+.select2-search__field {
+	display: none;
+}
 .txt_blue {
 	color: #29AAFE;
 }
@@ -440,7 +447,13 @@ select:invalid { color: gray; }
  	filter: alpha(opacity=0);  
   	opacity:0;  
 } 
-
+/* FOOTER */
+.small-footer p {
+	text-align: justify;
+}
+.foo_addr{
+	margin-left: 5px;
+}
 
 /*Form validation css for job seeker added by thangam*/
 .error{
@@ -509,3 +522,19 @@ font-size: 13px;
  
  
 
+.subscription_organization_inner_section {
+	border: 1px solid #29aafe;
+	background-color: #999;
+}
+
+.profile_plan_section h4{
+	color: #29AAFE;
+	font-weight: bold;	
+}
+.plan_label_section, .plan_field_section {
+	margin: 10px;
+	padding: 10px;
+	border: 1px solid #29aafe;
+	background-color: #CCEBFF;
+	height: 250px;
+}
