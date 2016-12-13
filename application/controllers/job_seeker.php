@@ -464,115 +464,16 @@ class Job_seeker extends CI_Controller {
 		$this->load->view('single-job', $data);
 	}
 	
+	// if($data["current_jobvacancy_id"]) {
+	// 		$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+	// 		$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+	// 		$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+	// 		$this->load->view('single-job', $data);
+	// 	}else {
+	// 		$this->load->view('single-job');
+	// 	}
+	// }	
 
-
-	// 	public function editprofile(){
-	// 		$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha|min_length[3]|xss_clean');
-	// 		$session_data = $this->session->all_userdata();
-	// 		$data['user_data'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
-	// 		$data['district'] = $this->common_model->get_all_district();
-	// 		if(!$_POST){
-				
-	// 			$this->load->view('company-dashboard-edit-profile',$data);
-	// 			$this->session->unset_userdata('upload_provider_logo_error');
-	// 		}
-	// 		else{
-	// 			/* Set validate condition for profile update form */
-	// 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-	// 			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha_numeric_spaces|min_length[3]|xss_clean');
-	// 			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'callback_organization_logo_validation');
-	// 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-	// 			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-	// 			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-	// 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
-	// 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
-	// 			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|required|min_length[3]|max_length[150]|xss_clean');
-	// 			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|alpha_numeric|min_length[3]|max_length[150]|xss_clean');
-	// 			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date');
-	// 			$this->form_validation->set_rules('declar_accept', 'Declaration', 'callback_form_declaration');
-	// 			// /* check forms data are valid are not */
-	// 			if ($this->form_validation->run())
-	// 		    {
-	// 		    	$provider_logo_file_name = '';
-	// 				$profile_completeness = 0;
-	// 		    	if (!empty($_FILES['provider_logo']['name']))
-	// 				{
-	// 					$personnal_logo['upload_path'] 			= './uploads/jobprovider';
-	// 					$personnal_logo['allowed_types'] 		= 'jpg|png|jpeg';
-	// 					$personnal_logo['max_size']     		= '2048';
-	// 					$personnal_logo['max_width'] 			= '1024';
-	// 					$personnal_logo['max_height'] 			= '768';
-	// 					$personnal_logo['encrypt_name'] 		= TRUE;
-	// 					$personnal_logo['file_ext_tolower'] 	= TRUE;
-	// 					$this->load->library('upload', $personnal_logo);
-	// 					$this->upload->initialize($personnal_logo);
-	// 					if ( ! $this->upload->do_upload('provider_logo'))
-	// 					{
-	// 	                    $data['upload_provider_logo_error'] = $this->upload->display_errors();
-	// 						$provider_logo_file_name = '';
-	// 						$profile_completeness = 0;
-	// 	                }
-	// 	                else
-	// 	                {
-	// 	                    $provideruploaddata = $this->upload->data();
-	// 						$provider_logo_file_name = $provideruploaddata['file_name'];
-	// 						$profile_completeness = 10;
-	// 	                }
-						
-	// 				}
-	// 				if (!empty($_FILES['organization_logo']['name'])){
-	// 			        $organization_logo['upload_path'] 		= './uploads/jobprovider';
-	// 					$organization_logo['allowed_types'] 	= 'jpg|png|jpeg';
-	// 					$organization_logo['max_size']     		= '2048';
-	// 					$organization_logo['max_width'] 		= '1024';
-	// 					$organization_logo['max_height'] 		= '768';
-	// 					$organization_logo['encrypt_name'] 		= TRUE;
-	// 					$organization_logo['file_ext_tolower'] 	= TRUE;
-	// 					$this->load->library('upload', $organization_logo);
-	// 					$this->upload->initialize($organization_logo);
-	// 					if ( ! $this->upload->do_upload('organization_logo'))
-	// 					{
-	// 	                    //$data['upload_provider_logo_error'] = $this->upload->display_errors();
-	// 						$this->session->set_userdata('upload_provider_logo_error', $this->upload->display_errors());
-	// 						$organization_logo_file_name = '';
-							
-	// 	                }
-	// 	                else
-	// 	                {
-	// 	                    $organizationuploaddata = $this->upload->data();
-	// 						$organization_logo_file_name = $organizationuploaddata['file_name'];
-	// 	                }
-	//                 }
-	// 				$dob_split = explode('/', $this->input->post('provider_dob'));
-	// 				$edit_profile_data = array(
-	// 					'organization_name'			=> $this->input->post('organization_name'),
-	// 					'organization_logo' 		=> $organization_logo_file_name,
-	// 					'organization_address_1' 	=> $this->input->post('address-line1'),
-	// 					'organization_address_2' 	=> $this->input->post('address-line2'),
-	// 					'organization_address_3' 	=> $this->input->post('address-line3'),
-	// 					'organization_district_id'	=> $this->input->post('organization_district'),
-	// 					'registrant_name' 			=> $this->input->post('provider_name'),
-	// 					'registrant_designation' 	=> $this->input->post('provider_designation'),
-	// 					'registrant_date_of_birth' 	=> $dob_split[2].'-'.$dob_split[1].'-'.$dob_split[0],
-	// 					'registrant_logo'			=> $provider_logo_file_name,
-	// 					'organization_profile_completeness' => 90+$profile_completeness,
-	// 				);
-	// 				if($this->job_provider_model->job_provider_update_profile($data['user_data']['organization_id'],$edit_profile_data)=='updated')
-	// 				{
-	// 					redirect('provider/dashboard');
-	// 				}
-	// 		    }
-	// 		    else
-	// 		    {
-	// 		    	$this->load->view('company-dashboard-edit-profile',$data);
-	// 		    }		
-	// 		}
-		
-	// } /** End of Edit Profile **/
-
-	public function inbox(){		
-		$this->load->view('user-dashboard-inbox');
-	}	
 
 	// Change password
 	public function change_password() {
@@ -597,6 +498,32 @@ class Job_seeker extends CI_Controller {
 		$this->load->view('user-dashboard-changepwd',$data);
 	}
 
+	// Candidate inbox
+	public function inbox(){
+		$session = $this->session->all_userdata();
+		// print_r($session['login_session']);
+		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session['login_session']['candidate_id']);
+		$data['message'] = $this->job_seeker_model->job_seeker_inbox($session['login_session']['candidate_id']);
+
+		// print_r($data['candidate_id']);
+		$this->load->view('user-dashboard-inbox',$data);
+	}
+
+	// Candidate message - get message from db without page refersh (ajax)	
+	public function inbox_message(){
+		echo json_encode($this->job_seeker_model->job_seeker_inbox_ajax($this->input->post('cand_id'),$this->input->post('lastid')));
+	}
+
+	// Candidate inbox message count
+	public function inbox_message_count(){
+		echo $this->job_seeker_model->job_seeker_unread_inbox_count($this->input->post('cand_id'));
+	}	
+
+	// Candidate inbox full data
+	public function inbox_message_full_data() {
+		$inbox_id = $this->input->post('inbox_id');	
+		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
+	}
 
 
 } // End

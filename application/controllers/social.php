@@ -57,12 +57,12 @@ class Social extends CI_Controller {
 		} catch(Facebook\Exceptions\FacebookResponseException $e) {
 		 	// When Graph returns an error
 		 	//echo 'Graph returned an error: ' . $e->getMessage();
-			redirect('login/seeker');
+			redirect('login/provider');
 		  	exit;
 		} catch(Facebook\Exceptions\FacebookSDKException $e) {
 		 	// When validation fails or other local issues
 			//echo 'Facebook SDK returned an error: ' . $e->getMessage();
-			redirect('login/seeker');
+			redirect('login/provider');
 		  	exit;
 	 	}
 		if (isset($accessToken)) {
@@ -83,12 +83,12 @@ class Social extends CI_Controller {
 				// When Graph returns an error
 				session_destroy();
 				//header("Location: ./");
-				redirect('login/seeker');
+				redirect('login/provider');
 				exit;
 			} catch(Facebook\Exceptions\FacebookSDKException $e) {
 				// When validation fails or other local issues
 				//echo 'Facebook SDK returned an error: ' . $e->getMessage();
-				redirect('login/seeker');
+				redirect('login/provider');
 				exit;
 			}
 			$fbdata = array(
@@ -247,6 +247,7 @@ class Social extends CI_Controller {
 		{
 			$twdata['user_type'] = 'provider';
 			$twdata['login_type'] = 'twitter';
+			$fbdata['pro_userid'] = $insert_id = $this->db->insert_id();
 			$this->session->set_userdata("login_status", TRUE);
 			$this->session->set_userdata("login_session",$twdata);
 			redirect('provider/dashboard');
@@ -402,6 +403,7 @@ class Social extends CI_Controller {
 				{
 					$lidata['user_type'] = 'provider';
 					$lidata['login_type'] = 'linkedin';
+					$lidata['pro_userid'] = $this->db->insert_id();
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$lidata);
 					redirect('provider/dashboard');
@@ -515,29 +517,16 @@ class Social extends CI_Controller {
 
 	public function google()
 	{
-		$CI =& get_instance();
-		include_once APPPATH."libraries/google/Google_Client.php";
-        include_once APPPATH."libraries/google/contrib/Google_Oauth2Service.php"; 
-        // Google Client Configuration
-        $gClient = new Google_Client();
-        $gClient->setApplicationName(GOOGLEAPPNAME);
-        $gClient->setClientId(GOOGLECLIENTID);
-        $gClient->setClientSecret(GOOGLECLIENTSECRET);
-        $gClient->setRedirectUri(GOOGLEREDIRECTURL);
-        $google_oauthV2 = new Google_Oauth2Service($gClient);
-        if (isset($_REQUEST['code'])) {
-        	$CI =& get_instance();
-            $gClient->authenticate();
-            $CI->session->set_userdata('token', $gClient->getAccessToken());
-            redirect(filter_var($redirectUrl, FILTER_SANITIZE_URL));
-        }
-        $token = $CI->session->userdata('token');
-        if (!empty($token)) {
-            $gClient->setAccessToken($token);
-        }
-        if ($gClient->getAccessToken()) {
-            $profile = $google_oauthV2->userinfo->get();
-            $godata = array(
+       	$this->load->library('googleplus');
+		$this->googleplus->initial_settings(GOOGLEREDIRECTURL);
+       	if($this->session->userdata('login_status') == true){
+			redirect('provider/dashboard');
+		}
+		
+		if (isset($_GET['code'])) {
+			$this->googleplus->getAuthenticate();
+			$profile = $this->googleplus->getUserInfo();
+			$godata = array(
 				'registrant_email_id' => $profile['email'],
 				'registrant_name' => $profile['given_name'],
 				'registrant_logo' => $profile['picture'],
@@ -547,6 +536,7 @@ class Social extends CI_Controller {
 			{
 				$godata['user_type'] = 'provider';
 				$godata['login_type'] = 'google';
+				$godata['pro_userid'] = $this->db->insert_id();
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$godata);
 				redirect('provider/dashboard');
@@ -564,10 +554,9 @@ class Social extends CI_Controller {
 					$this->load->view('job-providers-login',$go);
 				}
 			}
-        } 
-        else {
-        	redirect($gClient->createAuthUrl());
-        }
+			
+		} 
+		redirect($this->googleplus->loginURL());	
 	}
 
 
@@ -575,29 +564,16 @@ class Social extends CI_Controller {
 
 	public function seekergoogle()
 	{
-		$CI =& get_instance();
-		include_once APPPATH."libraries/google/Google_Client.php";
-        include_once APPPATH."libraries/google/contrib/Google_Oauth2Service.php"; 
-        // Google Client Configuration
-        $gClient = new Google_Client();
-        $gClient->setApplicationName(GOOGLEAPPNAME);
-        $gClient->setClientId(GOOGLECLIENTID);
-        $gClient->setClientSecret(GOOGLECLIENTSECRET);
-        $gClient->setRedirectUri(GOOGLESEEKERREDIRECTURL);
-        $google_oauthV2 = new Google_Oauth2Service($gClient);
-        if (isset($_REQUEST['code'])) {
-        	$CI =& get_instance();
-            $gClient->authenticate();
-            $CI->session->set_userdata('token', $gClient->getAccessToken());
-            redirect(filter_var($redirectUrl, FILTER_SANITIZE_URL));
-        }
-        $token = $CI->session->userdata('token');
-        if (!empty($token)) {
-            $gClient->setAccessToken($token);
-        }
-        if ($gClient->getAccessToken()) {
-            $profile = $google_oauthV2->userinfo->get();
-            $godata = array(
+        $this->load->library('googleplus');
+		$this->googleplus->initial_settings(GOOGLESEEKERREDIRECTURL);
+       	if($this->session->userdata('login_status') == true){
+			redirect('provider/dashboard');
+		}
+		
+		if (isset($_GET['code'])) {
+			$this->googleplus->getAuthenticate();
+			$profile = $this->googleplus->getUserInfo();
+			$godata = array(
 				'candidate_email' => $profile['email'],
 				'candidate_name' => $profile['given_name'],
 				'candidate_image_path' => $profile['picture'],
@@ -622,10 +598,9 @@ class Social extends CI_Controller {
 					$this->load->view('job-seekers-login',$go);
 				}
 			}
-        } 
-        else {
-        	redirect($gClient->createAuthUrl());
-        }
+			
+		} 
+		redirect($this->googleplus->loginURL());
 	} /** Google Login for Seeker ( End Here ) **/ 
 	
 }

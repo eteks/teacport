@@ -196,7 +196,7 @@ class Job_seeker_model extends CI_Model {
 		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
-		return $findjobsjobdata->result_array(); 
+		return $findjobsjobdata->row_array(); 
 	}
 
 	// Get seeker details
@@ -249,6 +249,91 @@ class Job_seeker_model extends CI_Model {
 			$value = "Password Not match";
 		}
 		return $value;
+	}
+	public function candidate_profile_by_id($id) {
+		$cand_where = '(candidate_id="'.$id.'")';
+		$value = $this->db->get_where('tr_candidate_profile',$cand_where)->row_array();
+		return $value;
+	}
+
+	//  Inbox start
+
+	// Inbox unread message count
+	public function job_seeker_unread_inbox_count($candidate_id)
+	{
+	 	$this->db->select('count(is_viewed) as messagecount');    
+		$this->db->from('tr_candidate_inbox');
+		$where = "(candidate_id='".$candidate_id."' AND candidate_inbox_status='1' AND is_viewed ='0')";
+		$this->db->where($where);
+		$inboxcount = $this->db->get()->row_array();
+		return $inboxcount['messagecount']; 
+	}
+
+	public function job_seeker_inbox($candidate_id)
+	{
+	 	$this->db->select('*');    
+		$this->db->from('tr_candidate_inbox ci');
+		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$where = "(ci.candidate_id='".$candidate_id."' AND ci.candidate_inbox_status='1')";
+		$this->db->order_by('ci.candidate_inbox_id','desc');
+		$this->db->where($where);
+		$inboxdata = $this->db->get();
+		return $inboxdata->result_array(); 
+	}
+
+	public function job_seeker_inbox_ajax($candidate_id,$lastid)
+	{
+	 	$this->db->select('*');    
+		$this->db->from('tr_candidate_inbox ci');
+		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$where = "(ci.candidate_id='".$candidate_id."' AND ci.candidate_inbox_status='1' AND ci.candidate_inbox_id > '".$lastid."')";
+		$this->db->order_by('ci.candidate_inbox_id','desc');
+		$this->db->where($where);
+		$inboxdata = $this->db->get();
+		return $inboxdata->result_array(); 
+	}
+
+	public function job_seeker_inbox_full_data($id)
+	{
+	 	$this->db->select('*');    
+		$this->db->from('tr_candidate_inbox ci');
+		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$where = "(ci.candidate_inbox_id='".$id."' AND ci.candidate_inbox_status='1')";
+		$this->db->where($where);
+		$data['inbox_data'] = $this->db->get()->row_array();
+		return $data; 
+	}
+
+
+
+
+
+
+	//  Inbox end
+
+
+
+	//get 
+
+	public function qualification_ids($value){
+		$this->db->select('*');    
+		$this->db->from('tr_educational_qualification');
+		$where = "(educational_qualification_id in (".$value.") AND educational_qualification_status='1')";
+		$this->db->where($where);
+		$subjectdata = $this->db->get();
+		return $subjectdata->result_array(); 
+	}
+
+	public function medium_of_instruction($value){
+		$this->db->select('*');    
+		$this->db->from('tr_languages');
+		$where = "(language_id in (".$value.") AND language_status='1')";
+		$this->db->where($where);
+		$subjectdata = $this->db->get();
+		return $subjectdata->result_array(); 
 	}
 
 } // End
