@@ -158,6 +158,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("d_name","d_state_name","d_status"); // Set name of input types
     var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
+    var class_selector = new Array("");//To set class for element
     var table = "admin_table"; // Set classname of table
     var d_state_name_option = new Array("Please select state");
     var d_state_name_value = new Array("");

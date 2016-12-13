@@ -90,16 +90,16 @@ createInput = function(i,str){
     str = typeof str !== 'undefined' ? str : null;
     //alert(str);
     if(inputType[i] == "text"){
-        input = '<input type='+inputType[i]+' name='+columns[i]+' placeholder="'+placeholder[i]+'" value="'+str+'" >';
+        input = '<input type='+inputType[i]+' name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
     }
     else if(inputType[i] == "textarea"){
-        input = '<textarea name='+columns[i]+' placeholder="'+placeholder[i]+'">'+str+'</textarea>';
+        input = '<textarea name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
     else if(inputType[i] == "label"){
         input = '<label class='+columns[i]+'>'+str+'</label>';
     }
     else if(inputType[i] == "select"){
-        input = '<select name='+columns[i]+'>';
+        input = '<select class="'+class_selector[i]+'" name='+columns[i]+'>';
         var select_option = eval(columns[i]+'_option');
         var select_value = eval(columns[i]+'_value');
 
@@ -639,7 +639,23 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
     });
     /* Popup pagination with arrow end */
 
+    //check only entered value is numeric
+    $(document).delegate('.numeric_act','keypress',function(e){
+     //if the letter is not digit then display error 
+     if (e.which != 8 && e.which != 45 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        return false;
+     }
+    });
 
+    //check only entered value is decimal
+    $(document).delegate('.decimal_act','keypress',function(e){
+     //if the letter is not digit then display error 
+     if ((e.which != 46 || $(this).val().indexOf('.') != -1) && (e.which < 48 || e.which > 57) && e.which != 8) {
+        //display error message
+        return false;
+     }
+    });
 
 }); // End document
 

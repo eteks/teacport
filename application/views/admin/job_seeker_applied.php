@@ -150,6 +150,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   // Define default values
   var inputType = new Array("label","select","select","select","label"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("org_name","vac_name","cand_name","job_status","applied_date"); // Set name of input types
+  var class_selector = new Array("");//To set class for element
   var table = "admin_table"; // Set classname of table
   var vac_name_option = new Array("Please select vacancy"); 
   var vac_name_value = new Array("");

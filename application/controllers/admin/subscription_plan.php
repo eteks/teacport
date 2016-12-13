@@ -30,6 +30,18 @@ class Subscription_Plan extends CI_Controller {
 	    }
 	}
 
+	public function compareDate() {
+	  $startDate = strtotime($_POST['sub_start_validity']);
+	  $endDate = strtotime($_POST['sub_end_validity']);
+
+	  if ($endDate >= $startDate)
+	    return True;
+	  else {
+	    $this->form_validation->set_message('compareDate', '%s should be greater than Validity Start Date.');
+	    return False;
+	  }
+	}
+
 	// Job provider profile
 	public function subscription_plans()
 	{
@@ -58,7 +70,7 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_end_validity',
 		                                 'label'   => 'Plan End validity',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
@@ -118,42 +130,42 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_start_validity',
 		                                 'label'   => 'Plan Start validity',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_end_validity',
 		                                 'label'   => 'Plan End validity',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_sms',
 		                                 'label'   => 'Max SMS',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_email',
 		                                 'label'   => 'Max Email',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_resume',
 		                                 'label'   => 'Max Resume',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_ads',
 		                                 'label'   => 'Max Ads',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_days_ad_visible',
 		                                 'label'   => 'Max Days Ad visible',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_features',
@@ -232,22 +244,41 @@ class Subscription_Plan extends CI_Controller {
 		}
 	}
 	public function plan_upgrade_creation()
-	{
-		$data['subscription_plans'] = $this->subscription_plan_model->plan_subscription_details('init');
-
-		// Update data
-	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
-	  		$id = $this->input->post('rid');
+	{	
+		$data['subscription_plans'] = $this->subscription_plan_model->plan_subscription_details('init')['subscription_plans'];
+		// Update and save data
+	   if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'act_org_name',
-		                              'label'   => 'Organization Name',
+		                              'field'   => 'subscription_name',
+		                              'label'   => 'Subscription Plan',
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
+		                           	array(
+		                              'field'   => 'sms_count',
+		                              'label'   => 'SMS count',
+		                              'rules'   => 'trim|required|xss_clean|max_length[5]|numeric'
+
+		                            ),
 		                            array(
-		                                 'field'   => 'act_cand_name',
-		                                 'label'   => 'Candidate Name',
+		                              'field'   => 'email_count',
+		                              'label'   => 'Email count',
+		                              'rules'   => 'trim|required|xss_clean|max_length[5]|numeric'
+		                            ),
+		                            array(
+		                              'field'   => 'resume_count',
+		                              'label'   => 'Resume count',
+		                              'rules'   => 'trim|required|xss_clean|max_length[5]|numeric'
+		                            ),
+		                            array(
+		                              'field'   => 'price',
+		                              'label'   => 'Price',
+		                              'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'plan_upgrade_creation_status',
+		                                 'label'   => 'Plan Upgrade Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                        );
@@ -256,6 +287,8 @@ class Subscription_Plan extends CI_Controller {
 		        foreach($validation_rules as $row){
 		          $field = $row['field'];         //getting field name
 		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
 		          if($error){
 		            $data['status'] = strip_tags($error);
 		            $data['error'] = 1;
@@ -264,7 +297,7 @@ class Subscription_Plan extends CI_Controller {
 		        }
 	  		}
       		else {
-         		$data_values = $this->job_providermodel->teacport_organization_activities('update');
+         		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details($this->input->post('action'));//the value here will be pass either "update" or "save"
          		$data['error'] = $data_values['error'];
 		        $data['status'] = $data_values['status'];
      		}
@@ -272,7 +305,7 @@ class Subscription_Plan extends CI_Controller {
 
     	// Delete data
     	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
-      		$data_values = $this->job_providermodel->teacport_organization_activities('delete'); 	
+      		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('delete'); 	
       		$data['error'] = $data_values['error'];
 		    $data['status'] = $data_values['status'];
       	}
@@ -288,7 +321,7 @@ class Subscription_Plan extends CI_Controller {
 			echo json_encode($result);
 		}
 		else if($data['error']==2) {
-			$data_ajax['pro_activities'] = $data_values['pro_activities'];
+			$data_ajax['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
 			$data_ajax['status'] = $data['status'];
 			$result['error'] = $data['error'];
 			$result['output'] = $this->load->view('admin/plan_upgrade_creation',$data_ajax,true);
@@ -297,11 +330,13 @@ class Subscription_Plan extends CI_Controller {
 		else {
 			$data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
 			$this->load->view('admin/plan_upgrade_creation',$data);
-		}	
+		}
+
 	}
 	public function organization_plan_notification()
 	{
-		$this->load->view('admin/organization_plan_notification');
+		$data['org_notification'] = $this->subscription_plan_model->get_organization_plan_notification();
+		$this->load->view('admin/organization_plan_notification',$data);
 	}
 }
 /* End of file Subscription_Plan.php */ 
