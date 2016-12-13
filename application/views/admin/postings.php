@@ -183,6 +183,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","multiselect","select"); 
   var columns = new Array("p_name","p_inst_type","p_status"); 
   var placeholder = new Array("Enter Posting Name","Please select institution"); 
+  var class_selector = new Array("");//To set class for element
   var table = "admin_table"; 
   var p_inst_type_option = new Array();
   var p_inst_type_value = new Array();

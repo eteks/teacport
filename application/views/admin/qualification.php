@@ -171,6 +171,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("q_name","q_course_type","q_inst_type","q_status"); // Set name of input types
   var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
+  var class_selector = new Array("");//To set class for element
   var table = "admin_table"; // Set classname of table
   var q_course_type_option = new Array("Please select course"); 
   var q_course_type_value = new Array("");

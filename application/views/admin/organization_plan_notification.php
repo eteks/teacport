@@ -2,12 +2,13 @@
 $is_super_admin = $this->config->item('is_super_admin');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
+  $access_permission=$this->config->item('current_page_rights');  
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
-if(!empty($this->session->userdata("admin_login_status"))):
+if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -66,20 +67,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <h4><i class="icon-reorder"></i> Organization Plan Notification</h4>
                         </div>
                         <div class="widget-body">
-                            <div class="portlet-body">
-                                <div class="clearfix add_section">
-                                    <div class="btn-group">
-                                        <!-- <button id="sample_editable_1_new" class="btn green add_new">
-                                            Add New <i class="icon-plus"></i>
-                                        </button> -->
-                                    </div>
-                                </div>
+                             <div class="portlet-body">
+                            <div class="clearfix add_section">
+                            </div>
+                            <form>
+                            <?php } ?> 
                                   <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
                                         <th>Organization Name</th>
                                         <th>Subscription Name</th>
-                                        <th>Upgrade Or Renewal</th>
+                                        <th>Is Upgrade/Renewal?</th>
+                                        <th>Validity Start Date</th>
+                                        <th>Validity End Date</th>
                                         <th>Is Email Sent?</th>
                                         <th>Is Email Viewed?</th>
                                         <th>Is Email Read?</th>
@@ -87,54 +87,76 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                       </tr>
                                     </thead>
                                     <tbody>
+                                    <?php
+                                    // echo sizeof($org_notification);
+                                    // echo "<pre>";
+                                    // print_r($org_notification);
+                                    // echo "</pre>";
+                                      if(!empty($org_notification)) :
+                                      $i=1;
+                                      foreach ($org_notification as $org_not) :
+                                    ?>   
                                       <tr class="parents_tr" id="column1">
 	                                        <td class=""> 
-	                                          ETS
+	                                          <?php echo $org_not['organization_name']; ?>
 	                                        </td>
 	                                        <td class=""> 
-	                                          Plan1
+	                                          <?php echo $org_not['subscription_plan']; ?>
 	                                        </td>
 	                                        <td class=""> 
-	                                          12344
+	                                          <?php 
+                                              if($org_not['upgrade_or_renewal_id'] !=NULL) echo "<span class='icon-ok'> </span>";
+                                              else
+                                                echo "<span class='icon-remove'> </span>";
+                                             ?>
 	                                        </td>
-	                                        <td class="is_email_sent center_align"> 
-	                                          <span class="icon-ok"> </span>
-	                                        </td>
+                                          <td class="center_align"> 
+                                            <?php 
+                                              if($org_not['upgrade_or_renewal_id'] !=NULL) echo $org_not['upg_vstart'];
+                                              else
+                                                echo $org_not['org_sub_vstart'];
+                                             ?>
+                                          </td>
+                                          <td class="center_align"> 
+                                            <?php 
+                                              if($org_not['upgrade_or_renewal_id'] !=NULL) echo $org_not['upg_vend'];
+                                              else
+                                                echo $org_not['org_sub_vend'];
+                                             ?>
+                                          </td>
+                                          <td class="is_email_sent center_align">
+  	                                        <?php 
+                                                if($org_not['is_email_sent'] ==1) echo "<span class='icon-ok'> </span>";
+                                                else
+                                                  echo "<span class='icon-remove'> </span>";
+                                            ?>
+                                          </td>
 	                                        <td class="is_email_viewed center_align"> 
-	                                          <span class="icon-ok"> </span>
+	                                          <?php 
+                                                if($org_not['is_email_viewed'] ==1) echo "<span class='icon-ok'> </span>";
+                                                else
+                                                  echo "<span class='icon-remove'> </span>";
+                                            ?>
 	                                        </td>
 	                                        <td class="is_email_read center_align"> 
-	                                          <span class="icon-ok"> </span>
+	                                          <?php 
+                                                if($org_not['is_email_read'] ==1) echo "<span class='icon-ok'> </span>";
+                                                else
+                                                  echo "<span class='icon-remove'> </span>";
+                                            ?>
 	                                        </td>
 	                                        <td class="created_date">
 	                                          01-01-2000
 	                                        </td>
                                        </tr>
-                                      <tr class="parents_tr" id="column2">
-	                                        <td class=""> 
-	                                          Etek
-	                                        </td>
-	                                        <td class=""> 
-	                                          Plan2
-	                                        </td>
-	                                        <td class=""> 
-	                                          56788
-	                                        </td>
-	                                        <td class="is_email_sent center_align"> 
-	                                          <span class="icon-ok"> </span>
-	                                        </td>
-	                                        <td class="is_email_viewed center_align"> 
-	                                          <span class="icon-remove"> </span>
-	                                        </td>
-	                                        <td class="is_email_read center_align"> 
-	                                          <span class="icon-remove"> </span>
-	                                        </td>
-	                                        <td class="created_date">
-	                                          10-10-2000
-	                                        </td>
-                                       </tr>
+                                       <?php
+                                        $i++;
+                                        endforeach;
+                                        endif;
+                                      ?>
                                     </tbody>
                                   </table>
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
                                 </form>
                             </div>
                         </div>
@@ -150,6 +172,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- END PAGE -->
   </div>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');

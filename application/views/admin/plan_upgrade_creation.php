@@ -2,11 +2,11 @@
 $is_super_admin = $this->config->item('is_super_admin');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
+  $access_permission=$this->config->item('current_page_rights');  
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
-if(!empty($this->session->userdata("admin_login_status"))):
+if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -70,12 +70,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
-                                        <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
+                                        <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
                                     </div>
                                 </div>                               
-                                <form method="post" action="subscription_pan/plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
+                                <form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
                                 <?php } ?> 
                                 <?php
                                 if(!empty($status)) :
@@ -83,7 +83,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> 
                                 <p class='val_error error_msg_md'> <p>
-                                  <table class="table table-striped table-hover table-bordered admin_table plan_upgrade_creation" id="sample_editable_1">
+                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
                                         <th>Subscription Name</th>
@@ -104,13 +104,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <tbody>
                                     <?php
                                       if(!empty($subscription_plan_upgrade)) :
-                                      $i=0;
+                                      $i=1;
                                       foreach ($subscription_plan_upgrade as $plan_upgrade) :
-                                      $i++;
                                     ?>    
-                                      <tr class="parents_tr" id="column1">
+                                      <tr class="parents_tr" id="column<?php echo $i; ?>">
                                         <td class="subscription_name"> 
                                           <?php echo $plan_upgrade['subscription_plan']; ?>
+                                          <input type="hidden" value="<?php echo $plan_upgrade['subscription_id']; ?>" />
                                         </td>
 <!--                                         <td class="is_sms center_align"> 
                                           <span class="icon-ok"> </span> 
@@ -140,29 +140,30 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             else
                                               echo "Inactive";
                                           ?>
+                                          <input type="hidden" value="<?php echo $plan_upgrade['upgrade_status']; ?>" />
                                         </td>
                                         <td class="created_date">
                                           <?php echo $plan_upgrade['upgrade_created_date']; ?>
                                         </td>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
-                                          <a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">
-                                            Edit
-                                          </a>
+                                          <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Edit</a>
                                         </td>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                         <td>
-                                          <a class="ajaxDelete" id="column1" data-id="column1">Delete</a>
+                                          <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Delete</a>
                                         </td>
                                         <?php endif; ?>
                                       </tr>
                                       <?php
+                                        $i++;
                                         endforeach;
                                         endif;
                                       ?>
                                     </tbody>
                                   </table>
+                                  <?php if(!$this->input->is_ajax_request()) { ?>
                                 </form>
                             </div>
                         </div>
@@ -180,16 +181,28 @@ if(!empty($this->session->userdata("admin_login_status"))):
   </div>
   <script>
     // Define default values
-    // var inputType = new Array("text","on_off","text","on_off","text","on_off","text","text","select","label"); 
-    var inputType = new Array("text","text","text","text","text","select","label");// Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("subscription_name","sms_count","email_count","resume_count","price","plan_upgrade_creation_status","created_date"); // Set name of input types
-    var placeholder = new Array("Enter State Name",""); // Set placeholder of input types
-    var table = "admin_table"; // Set classname of table
-    var is_created ="no";
-    var plan_upgrade_creation_status_option = new Array("Active","Inactive"); 
-    var plan_upgrade_creation_status_value = new Array("1","0"); 
+    var inputType = new Array("select","text","text","text","text","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("subscription_name","sms_count","email_count","resume_count","price","plan_upgrade_creation_status"); // Set name of input types
+    var placeholder = new Array("","Enter SMS count","Enter Email count","Enter Resume count",""); // Set placeholder of input types
+    var class_selector = new Array("","numeric_act","numeric_act","numeric_act","decimal_act",""); // Set placeholder of input types
+    var table = "admin_table"; // Set classname of table  
+    var subscription_name_option = new Array("Select Plan");
+    var subscription_name_value = new Array("");
+    <?php
+    if(!empty($subscription_plans)) :
+    foreach ($subscription_plans as $sub) :
+    ?>
+      subscription_name_option.push("<?php echo $sub['subscription_plan']; ?>");
+      subscription_name_value.push("<?php echo $sub['subscription_id']; ?>");
+    <?php
+    endforeach;
+    endif;
+    ?>  
+    var plan_upgrade_creation_status_option = new Array("Select Status","Active","Inactive"); 
+    var plan_upgrade_creation_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');
