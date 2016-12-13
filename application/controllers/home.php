@@ -27,6 +27,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 	    $categories['job_results'] = $this->common_model->get_job_list();
+	    // $categories['count_results'] = $this->common_model->get_count_list();
 	    $this->load->view('index',$categories);
 	}
 	public function featured_job()
