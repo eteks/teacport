@@ -646,3 +646,13 @@ font-size: 12px;
 .datepicker_section span {
 	width : 100% !important;
 }
+table tr[data-name="bold_section"] {
+    font-weight: bold;
+}
+table tr[data-name="bold_section"] a {
+    font-weight: bold;
+}
+.no-sort { 
+    cursor: default !important;
+    background-image: none !important; 
+} 
