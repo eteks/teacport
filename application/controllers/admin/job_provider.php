@@ -520,12 +520,6 @@ class Job_Provider extends CI_Controller {
 		}	
 	}
 
-	// Job provider mail details and status 
-	public function teacport_jobprovider_mailstatus()
-	{
-		$this->load->view('admin/jobprovider_mailstatus');
-	}	
-
 	// Job provider ads 
 	public function teacport_job_provider_ads()
 	{
@@ -649,9 +643,27 @@ class Job_Provider extends CI_Controller {
 			redirect(base_url().'admin/admin_error');
 		}
 	}
-public function organization_upgrade_or_renewal()
+	public function organization_upgrade_or_renewal()
 	{
 		$this->load->view('admin/organization_upgrade_or_renewal');
+	}
+	public function transaction()
+	{	
+		$data['job_provider_transaction'] = $this->job_providermodel->get_provider_transaction();
+		$this->load->view('admin/transaction',$data);
+	}
+	// Job provider Transaction - Full view details
+	public function get_transaction_full_view()
+	{
+		if($this->input->post('action') && $this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['provider_full_transaction'] = $this->job_providermodel->get_provider_transaction_full_view($value);
+			$data['mode'] = $this->input->post('action');
+			$this->load->view('admin/transaction',$data);
+		}
+		else {
+			redirect(base_url().'admin/admin_error');
+		}
 	}
 
 }

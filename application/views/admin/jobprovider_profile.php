@@ -364,14 +364,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="tab-pane profile_subscription_tab" id="tab3">
                       <h4>
                         Payment Details 
-                        <span class="arrow_section">
+                        <!-- <span class="arrow_section">
                           <a class="subscription_paginate popup_pag_prev"> 
                             <i class="icon-chevron-left"></i> 
                           </a> 
                           <a class="subscription_paginate">  
                             <i class="icon-chevron-right popup_pag_next"></i> 
                           </a> 
-                        </span>
+                        </span> -->
                       </h4>
                       <?php
                       if(!empty($payment_details)) :

@@ -146,7 +146,7 @@
 								<div class="col-sm-4">
 									<?php echo form_error('provider_dob'); 
 									?>
-									<input id="dob" class="form-control provider_date_of_birth" name="provider_dob" size="40" value="<?php if($organization['registrant_date_of_birth'] != '' && $organization['registrant_date_of_birth'] != '0000-00-00'){ $dobsplit = explode('-',$organization['registrant_date_of_birth']); echo $dobsplit[2].'/'.$dobsplit[1].'/'.$dobsplit[0]; } ?>" placeholder="DOB" type="date">
+									<input id="dob" class="form-control provider_date_of_birth" name="provider_dob" size="40" value="<?php if($organization['registrant_date_of_birth'] != '' && $organization['registrant_date_of_birth'] != '0000-00-00'){ $dobsplit = explode('-',$organization['registrant_date_of_birth']); echo $dobsplit[2].'/'.$dobsplit[1].'/'.$dobsplit[0]; } ?>" placeholder="DOB" type="text">
 								</div>
 								<div class="col-sm-4"></div>
 							</div>

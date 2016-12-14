@@ -186,6 +186,7 @@ class Social extends CI_Controller {
 			{
 				$fbdata['user_type'] = 'seeker';
 				$fbdata['login_type'] = 'facebook';
+				$fbdata['candidate_id'] = $this->db->insert_id();
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$fbdata);
 				redirect('seeker/dashboard');
@@ -319,6 +320,7 @@ class Social extends CI_Controller {
 		{
 			$twdata['user_type'] = 'seeker';
 			$twdata['login_type'] = 'twitter';
+			$lidata['candidate_id'] = $this->db->insert_id();
 			$this->session->set_userdata("login_status", TRUE);
 			$this->session->set_userdata("login_session",$twdata);
 			redirect('seeker/dashboard');
@@ -491,6 +493,7 @@ class Social extends CI_Controller {
 				if($this->job_seeker_model->social_authendication_registration($lidata) === 'inserted')	{					
 					$lidata['user_type'] = 'seeker';
 					$lidata['login_type'] = 'linkedin';
+					$lidata['candidate_id'] = $this->db->insert_id();
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$lidata);
 					redirect('seeker/dashboard');
@@ -583,6 +586,7 @@ class Social extends CI_Controller {
 			{
 				$godata['user_type'] = 'seeker';
 				$godata['login_type'] = 'google';
+				$lidata['candidate_id'] = $this->db->insert_id();
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$godata);
 				redirect('seeker/dashboard');

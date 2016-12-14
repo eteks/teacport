@@ -110,19 +110,9 @@
                                                 <div class="col-sm-7 org_name inbox_popup_data"></div>
                                             </div>                                          
                                             <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4"> Organization Address - 1 </span>
+                                                <span class="col-sm-4"> Organization Address </span>
                                                 <span class="col-sm-1"> : </span>
-                                                <span class="col-sm-7 org_addr1 inbox_popup_data"></span>
-                                            </div>
-                                            <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4">Organization Address - 2 </span>
-                                                <span class="col-sm-1"> : </span>
-                                                <div class="col-sm-7 org_addr2 inbox_popup_data"></div>
-                                            </div>
-                                            <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4">Organization Address - 3 </span>
-                                                <span class="col-sm-1"> : </span>
-                                                <div class="col-sm-7 org_addr3 inbox_popup_data"></div>
+                                                <span class="col-sm-7 org_addr inbox_popup_data"></span>
                                             </div>
                                             <div class="display_provider_details col-md-12">
                                                 <span class="col-sm-4">Organization District </span>
@@ -171,7 +161,32 @@
                                             <div class="display_provider_details col-md-12">
                                                 <span class="col-sm-4"> Vacancy End Date </span>
                                                 <span class="col-sm-1"> : </span>
-                                                <span class="col-sm-7 vac_edate"></span>
+                                                <span class="col-sm-7 vac_edate inbox_popup_data"></span>
+                                            </div>
+                                            <div class="display_provider_details col-md-12">
+                                                <span class="col-sm-4"> Minimum Salary </span>
+                                                <span class="col-sm-1"> : </span>
+                                                <span class="col-sm-7 vac_min_sal date inbox_popup_data"></span>
+                                            </div>
+                                            <div class="display_provider_details col-md-12">
+                                                <span class="col-sm-4"> Maximum Salary </span>
+                                                <span class="col-sm-1"> : </span>
+                                                <span class="col-sm-7 vac_max_sal inbox_popup_data"></span>
+                                            </div>
+                                            <div class="display_provider_details col-md-12">
+                                                <span class="col-sm-4"> Experience </span>
+                                                <span class="col-sm-1"> : </span>
+                                                <span class="col-sm-7 vac_exp inbox_popup_data"></span>
+                                            </div>
+                                            <div class="display_provider_details col-md-12">
+                                                <span class="col-sm-4"> Interview Start Date </span>
+                                                <span class="col-sm-1"> : </span>
+                                                <span class="col-sm-7 vac_int_sdate inbox_popup_data"></span>
+                                            </div>
+                                            <div class="display_provider_details col-md-12">
+                                                <span class="col-sm-4"> Interview End Date </span>
+                                                <span class="col-sm-1"> : </span>
+                                                <span class="col-sm-7 vac_int_edate inbox_popup_data"></span>
                                             </div>
                                         </div> <br> <!---End vacancy details--> 
                                     </div> <!--#pro_inbox_msg-->
@@ -282,6 +297,7 @@ $(document).ready(function(){
     
     $('.view_inbox_details').on('click',function(){
         var inbox = $(this).attr('data-value');
+        $(this).parents('tr').attr('data-name','unbold_section');
         var url = '<?php echo base_url(); ?>';
         var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
         $.ajax({
@@ -292,19 +308,30 @@ $(document).ready(function(){
            async: false,
            success: function(data) {
                 var c = $.parseJSON(data);
+                // Organization details
                 $('#seeker_inbox_msg .org_name').text(c.inbox_data.organization_name);
-                $('#seeker_inbox_msg .org_addr1').text(c.inbox_data.organization_address_1);
-                $('#seeker_inbox_msg .org_addr2').text(c.inbox_data.organization_address_2);
-                $('#seeker_inbox_msg .org_addr3').text(c.inbox_data.organization_address_3);
-                $('#seeker_inbox_msg .org_dis').text(c.inbox_data.organization_district_id);
+                $('#seeker_inbox_msg .org_addr').html(c.inbox_data.organization_address_1 + '<br/> ' + c.inbox_data.organization_address_2 + '<br/> ' + c.inbox_data.organization_address_3);
+                $('#seeker_inbox_msg .org_dis').text(c.inbox_data.district_name);
                 $('#seeker_inbox_msg .reg_name').text(c.inbox_data.registrant_name);
                 $('#seeker_inbox_msg .reg_desig').text(c.inbox_data.registrant_designation);
                 $('#seeker_inbox_msg .reg_mail').text(c.inbox_data.registrant_email_id);
                 $('#seeker_inbox_msg .reg_mob').text(c.inbox_data.registrant_mobile_no); 
-           }
+                // Vacancy details
+                $('#seeker_inbox_msg .vac_title').text(c.inbox_data.vacancies_job_title);
+                $('#seeker_inbox_msg .vac_ava').html(c.inbox_data.vacancies_available);
+                $('#seeker_inbox_msg .vac_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_open_date));
+                $('#seeker_inbox_msg .vac_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_close_date));
+                $('#seeker_inbox_msg .vac_min_sal').text(c.inbox_data.vacancies_start_salary);
+                $('#seeker_inbox_msg .vac_max_sal').text(c.inbox_data.vacancies_end_salary);
+                $('#seeker_inbox_msg .vac_exp').text(c.inbox_data.vacancies_experience); 
+                $('#seeker_inbox_msg .vac_int_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_interview_start_date));
+                $('#seeker_inbox_msg .vac_int_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_end_date));
+            }
        });
     });
 });
+
+
 function mysql_time_to_javascript_time(mysqltime){
     var datetimesplit = mysqltime.split(" ");
     var datesplit = datetimesplit[0].split('-');
@@ -323,10 +350,10 @@ function mysql_time_to_javascript_time(mysqltime){
     }
     return datesplit[2]+'/'+datesplit[1]+'/'+datesplit[0]+' '+hour+':'+timesplit[1]+' '+meridian
 }
-// function mysql_date_format_to_javascript_format(date){
-//     var datesplit = date.split('-');
-//     return datesplit[2]+'/'+datesplit[1]+'/'+datesplit[0]
-// }
+function mysql_date_format_to_javascript_format(date){
+    var datesplit = date.split('-');
+    return datesplit[2]+'/'+datesplit[1]+'/'+datesplit[0]
+}
     function seeker_inbox_ajax_message(url,id,csrf){
         var lastmessageid = $('.seeker_inbox_last_id').length > 0 ? parseInt($(document).find('.seeker_inbox_last_id').val()):0;
         var message = $.ajax({
@@ -342,8 +369,9 @@ function mysql_time_to_javascript_time(mysqltime){
         var retrivedatacount = json_data.length;
         if(retrivedatacount > 0){
             var new_row;
+            var last_id = parseInt(json_data[0].candidate_inbox_id);
             $.each(json_data, function(i){
-            // var inbox_id_increase = parseInt(lastmessageid)+1;
+            
             var converted_time = mysql_time_to_javascript_time(json_data[i].candidate_inbox_created_date);
 
 
@@ -395,7 +423,8 @@ function mysql_time_to_javascript_time(mysqltime){
 
 
             });   
-            seeker_inbox_message.draw();        
+            seeker_inbox_message.draw();    
+            $(document).find('.seeker_inbox_last_id').val(last_id);    
 
             // seeker_inbox_message.row.add(row);
             // $('#seeker_inbox_data tbody').prepend(row);
@@ -411,7 +440,7 @@ function mysql_time_to_javascript_time(mysqltime){
 //             table1.row(1);
     
 
-            // $(document).find('.seeker_inbox_last_id').val(lastmessageid+retrivedatacount);
+            // 
         }
         
 
