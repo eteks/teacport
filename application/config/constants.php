@@ -45,7 +45,7 @@ define('NATIONALITY',serialize(array("indian"=>"Indian",
             "other"=>"Others")));
 // Religion
 define('RELIGION',serialize(array("hindu"=>"Hindu","muslim"=>"Muslim","christian"=>"Christian",
-        "PG"=>"Post Graduate","other"=>"Others")));
+        "PG"=>"Post Graduate","others"=>"Others")));
 // Community
 define('COMMUNAL',serialize(array("scheduled tribe (st)"=>"Scheduled Tribe (ST)","scheduled caste (sc)"=>"Scheduled Caste (SC)","scheduled caste-arunthathiar (sca)"=>"Scheduled Caste-Arunthathiar (SCA)","most backward class (mbc)"=>"Most Backward Class (MBC)","denotified community (dc)"=>"Denotified Community (DC)","backward class (bc)"=>"Backward Class (BC)","backward blass-muslim (bcm)"=>"Backward Class-Muslim (BCM)","others"=>"Others")));
 
