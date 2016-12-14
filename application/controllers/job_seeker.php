@@ -437,12 +437,10 @@ class Job_seeker extends CI_Controller {
 	public function findjob(){	
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();		
-		$data['candidate_data'] = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
-
+		$data['candidate_data'] = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
 		
-
 		if(!isset($session_data['login_session']['institution_type_id'])) {
-			$candidate_data = $this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']);
+			$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
 			$session_data['login_session']['candidate_id'] = $candidate_data['candidate_id'];
 			$session_data['login_session']['institution_type_id'] = $candidate_data['institution_type_id'];
 		}
@@ -460,7 +458,7 @@ class Job_seeker extends CI_Controller {
 			//$pagination['use_page_numbers'] = TRUE;
 
 			if($_POST){
-
+			/** For Finds Jobs Search and Advance Search Code **/
 
 				
 			}else{
@@ -485,9 +483,39 @@ class Job_seeker extends CI_Controller {
 	}
 	/** Job Seeker find Jobs - End Here **/
 
+	/** Job Applied Jobs - Start Here **/
 	public function jobsapplied(){
-		$this->load->view('user-job-applied');
+		$this->load->library('pagination');	
+		$session_data = $this->session->all_userdata();
+		$pagination = array();
+		$pagination["base_url"] = base_url() . "seeker/jobsapplied";
+		$pagination["per_page"] = 1;
+		$pagination["use_page_numbers"] = 0;	
+		$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
+		$pagination['cur_tag_close'] = '</a></li>';
+		$pagination['next_link'] = 'Next';
+		$pagination['prev_link'] = 'Previous';
+		//$pagination['use_page_numbers'] = TRUE;	
+
+		if($session_data['login_session']['candidate_id']) {
+			$pagination["total_rows"] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);
+			$pagination['num_links'] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);				
+			$this->pagination->initialize($pagination);
+			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
+			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);	
+			$str_links = $this->pagination->create_links();
+			$data["links"] = explode('&nbsp;',$str_links );
+
+			echo '<pre>';
+			print_r($data);
+			echo '</pre>';
+			
+			$this->load->view('user-job-applied', $data);
+		}else{
+			$this->load->view('user-job-applied');
+		}
 	}
+	/** Job Applied Jobs - End Here **/
 
 	public function applynow(){
 		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
@@ -508,15 +536,24 @@ class Job_seeker extends CI_Controller {
 			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
 			$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
 			$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+
+			/** Insert data for Organization Inbox **/
 			$seeker_appliedjob = array(									
 									'inbox_messge'					=> 'Apply job',
 									'inbox_organization_id'			=> $data["applyjob"]['organization_id'],
 									'inbox_candidate_id'			=> $session_data['login_session']['candidate_id'],
 									'inbox_vacancy_id'				=> $data["applyjob"]['vacancies_id'],
 									'is_viewed'						=> 0,
-									'inbox_status'					=> 0
+									'inbox_status'					=> 1
 								);
-			if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob)) {
+			/** Insert data for Candidate Applied Job **/
+			$seeker_candidatejob = array(									
+									'applied_job_vacancies_id'		=> $data["applyjob"]['vacancies_id'],
+									'applied_job_candidate_id'		=> $session_data['login_session']['candidate_id'],
+									'applied_job_status'			=> 1
+								);
+				
+			if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob) && $this->job_seeker_model->job_seeker_candidatejob($seeker_candidatejob)) {
 				$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
 				$this->load->view('single-job', $data);
 			} else {
