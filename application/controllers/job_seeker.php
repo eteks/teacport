@@ -183,17 +183,10 @@ class Job_seeker extends CI_Controller {
 	public function dashboard() {     	
 
      	$session_data = $this->session->all_userdata();  
+     	if($session_data['login_status'] != TRUE) {
+     		redirect('missingpage');
+     	}
      	// print_r($session_data['login_session']);
-     	// exit();  		
-		// $candidate_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']
-		// 	['candidate_email']:$session_data['login_session']['candidate_id']);
-
-		// if($this->job_seeker_model->check_has_initial_data($candidate_email)=='has_no_data'){
-		// 	$data['initial_data'] = 'show_popup';			
-		// }
-		// else{
-		// 	$data['initial_data'] = 'hide_popup';			
-		// }	
 		if($_POST) {
 			if($this->input->post('popup_type') == 'social') {
 				$this->form_validation->set_rules('seeker_email', 'Email', 'trim|required|xss_clean|valid_email');
@@ -225,22 +218,25 @@ class Job_seeker extends CI_Controller {
 						'candidate_password' => $this->input->post('seeker_password'),
 						'candidate_institution_type' => $this->input->post('seeker_institution'),
 						'candidate_father_name' => $this->input->post('seeker_father'),
-						'candidate_date_of_birth' => $this->input->post('seeker_dob'),
+						'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 						'candidate_address_1' => $this->input->post('seeker_address1'),
 						'candidate_address_2' => $this->input->post('seeker_address2'),
 						'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				}
 
-				$candidate_status = ($this->input->post('popup_type')) ? $this->job_seeker_model->check_seeker_popup_fields_social($data_array) : $this->job_seeker_model->check_seeker_popup_fields($data_array) ;
+				$candidate_values = ($this->input->post('popup_type')) ? $this->job_seeker_model->check_seeker_popup_fields_social($data_array) : $this->job_seeker_model->check_seeker_popup_fields($data_array) ;
 				;	
-				$data['status'] = $candidate_status;
+				$data['status'] = $candidate_values['status'];
+				if(!empty($candidate_values['candidate_data'])) {
+					$this->session->set_userdata('login_session',$candidate_values['candidate_data']);
+				}
 			}		
 		}
 
 
 
-		$candidate_data = (isset($session_data['login_session']['candidate_email'])?$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']):$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']));
+		$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
 
 		// if(!empty($candidate_data['candidate_father_name']))
 		if($candidate_data['candidate_father_name'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_district_id'] == '' or $candidate_data['candidate_date_of_birth'] == '') 
@@ -260,29 +256,9 @@ class Job_seeker extends CI_Controller {
         // echo $data['popup_type'];
         $data['user_data'] = $candidate_data;
 		$this->load->view('user-dashboard',$data);
+	}
 
-  //       if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
-
-		// 	if($data['initial_data'] === 'show_popup')
-		// 	{
-		// 		$data['user_data'] = $candidate_data;
-		// 		$this->load->view('user-dashboard',$data);
-		// 	} 
-		// 	else {				
-		// 		$data['user_data'] = $candidate_data;
-		// 		$this->load->view('user-dashboard',$data);
-		// 	}
-		// 	// $data['user_data'] = $candidate_data;
-		// 	// $this->load->view('user-dashboard',$data);			
-		// } 
-		// else {			
-		// 	$data['user_data'] = $candidate_data;
-		// 	$this->load->view('user-dashboard',$data);
-		// }
-
-    }
-
-     public function seeker_logout(){
+    public function seeker_logout(){
 		$this->session->set_userdata('login_status', FALSE);
 		$this->session->unset_userdata('login_session');
 		$this->session->sess_destroy();
@@ -377,13 +353,18 @@ class Job_seeker extends CI_Controller {
     
     public function editprofile() {
     	$session = $this->session->all_userdata();
-    	$data['district_values'] = $this->common_model->get_all_district();
+    	// print_r($session['login_session']);
+    	if($session['login_status'] != TRUE) {
+     		redirect('missingpage');
+     	}
+     	$data['update_status'] = '';
+
     	$data['candidate_values'] = $this->job_seeker_model->get_seeker_details($session['login_session']['candidate_id']);
+    	$data['district_values'] = $this->common_model->get_all_district();
     	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
     	$data['mother_language_values'] = $this->common_model->mother_tongue();
     	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
     	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type']);
-    	// $data['salary_values'] = $this->common_model->get_salary_details();
     	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
     	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type']);
     	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
@@ -394,6 +375,57 @@ class Job_seeker extends CI_Controller {
     	$data['experience_values'] = $this->job_seeker_model->get_seeker_experience_details($session['login_session']['candidate_id']);
 
 
+    	if($_POST) {
+    		
+    		 //   			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_pic', 'label' => 'Picture','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_mother_ton', 'label' => 'Mother Tongue','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_known_lan[]', 'label' => 'Known Languages','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_nation', 'label' => 'Nation','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_religion', 'label' => 'Religion','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_communal', 'label' => 'Community','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_phy', 'label' => 'Physical Challenge Status','rules' => 'required|trim|xss_clean'),
+
+    			// 	array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_start_sal', 'label' => 'Minimum Salary','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
+    			// array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean')
+
+
+    		// Profile, Preference Validation	
+	   		$validation_fields = array(
+ 
+    			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
+    			array('field' => 'cand_start_sal', 'label' => 'Minimum Salary','rules' => 'required|trim|xss_clean'),
+    			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean'),
+    			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
+    			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean')
+
+
+
+
+    		);
+    		$this->form_validation->set_rules($validation_fields);
+    		if($this->form_validation->run() == FALSE) {
+    			foreach($validation_fields as $row){
+		          $field = $row['field'];
+		          $error = form_error($field);
+		          if($error){
+		            $data['update_status'] = strip_tags($error);
+		            break;
+		          }
+		        }
+    		}
+    		else {
+    			$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
+    		}
+    	}
     	// echo "<pre>";
     	// print_r($data['experience_values']);
     	// echo "</pre>";
@@ -477,11 +509,15 @@ class Job_seeker extends CI_Controller {
 
 	// Change password
 	public function change_password() {
+		$session_data = $this->session->all_userdata();	
+    	// print_r($session['login_session']);
+    	if($session_data['login_status'] != TRUE) {
+     		redirect('missingpage');
+     	}
 		$data['status'] = '';
 		if($_POST) {
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			/* Set validate condition for registration form */
-			$session_data = $this->session->all_userdata();	
 			$id = $session_data['login_session']['candidate_id'];
 			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required|xss_clean|max_length[20]|');
 			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|required|xss_clean|max_length[20]');
@@ -502,6 +538,9 @@ class Job_seeker extends CI_Controller {
 	public function inbox(){
 		$session = $this->session->all_userdata();
 		// print_r($session['login_session']);
+		if($session['login_status'] != TRUE) {
+     		redirect('missingpage');
+     	}
 		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session['login_session']['candidate_id']);
 		$data['message'] = $this->job_seeker_model->job_seeker_inbox($session['login_session']['candidate_id']);
 

@@ -144,13 +144,6 @@ class Common_model extends CI_Model {
 		return $value;
 	}
 
-	// Get salary details
-	public function get_salary_details()
-	{
-		$value = $this->db->get_where('tr_expect_salary',array('expect_salary_status' => '1'))->result_array();
-		return $value;
-	}
-
 	// Get department details
 	public function get_department_details()
 	{

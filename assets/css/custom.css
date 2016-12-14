@@ -664,6 +664,25 @@ table tr[data-name="bold_section"] a {
     cursor: default !important;
     background-image: none !important; 
 } 
+#seeker_inbox_msg h5 {
+	padding-left: 10px;
+}
+.display_provider_details {
+    line-height: 30px;
+}
+#image_upload_seeker_profile_preview {
+	height: 50px;
+    position: relative;
+    width: 50px;
+}
+#image_upload_seeker_profile_preview img {
+	height: 100%;
+	width: 100%;
+}
+.disabled {
+	pointer-events: none;
+}
+
 /* Ended by siva */
 .subcription_plan_details{
 	color: #fff;
