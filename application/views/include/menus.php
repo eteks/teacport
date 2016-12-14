@@ -65,7 +65,7 @@
 				            <ul class="drop-down-multilevel left-side">
 				                <li><a href="<?php echo base_url(); ?>seeker/dashboard"><i class="fa fa-user"></i> Dashboard </a></li>
 				                <li><a href="<?php echo base_url(); ?>seeker/editprofile"><i class="fa fa-gear"></i> Edit Profile</a></li>
-				                <li><a href="<?php echo base_url(); ?>seeker/logout"></i> Logout</a></li>
+				                <li><a href="<?php echo base_url(); ?>seeker/logout"></i><i class="fa fa-sign-out"></i> Logout</a></li>
 				            </ul>
           	<?php 
 					}

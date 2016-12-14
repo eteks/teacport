@@ -180,6 +180,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("select","select","select","on_off","on_off","on_off");
   var columns = new Array("act_org_name","act_cand_name","act_vac_name","act_sms","act_email","act_resume");
   var placeholder = new Array(""); // Set placeholder of input types
+  var class_selector = new Array("");//To set class for element
   var table = "admin_table"; // Set classname of table
   var act_org_name_option = new Array("Select");
   var act_org_name_value = new Array("");

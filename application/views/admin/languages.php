@@ -177,6 +177,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("l_name","l_mother_tongue","l_instruction","l_status"); // Set name of input types
   var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
+  var class_selector = new Array("");//To set class for element
   var table = "admin_table"; // Set classname of table
   var l_mother_tongue_option = new Array("select","Yes","No"); 
   var l_mother_tongue_value = new Array("","1","0");
