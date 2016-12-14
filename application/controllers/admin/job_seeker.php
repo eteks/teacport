@@ -461,6 +461,12 @@ class Job_Seeker extends CI_Controller {
 			$this->load->view('admin/job_seeker_applied',$data);
 		}
 	}
+	// Job seeker mail details and status 
+	public function teacport_jobseeker_mailstatus()
+	{
+		$data['approved_candidate_jobs']=$this->job_seekermodel->get_approved_candidate_jobs();
+		$this->load->view('admin/jobseeker_mailstatus',$data);
+	}	
 
 	
 }

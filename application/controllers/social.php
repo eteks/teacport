@@ -186,7 +186,7 @@ class Social extends CI_Controller {
 			{
 				$fbdata['user_type'] = 'seeker';
 				$fbdata['login_type'] = 'facebook';
-				$lidata['candidate_id'] = $this->db->insert_id();
+				$fbdata['candidate_id'] = $this->db->insert_id();
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$fbdata);
 				redirect('seeker/dashboard');

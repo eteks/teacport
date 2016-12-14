@@ -115,11 +115,6 @@ $config['admin_modules'] = array(
 			'route_url' => base_url().'admin/jobprovider_activities' 
 		),
 		array(
-			'name' => 'approved job mail status', 
-			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/jobprovider_mailstatus' 
-		),
-		array(
 			'name' => 'ads posted', 
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'admin/jobprovider_ads' 
@@ -133,8 +128,12 @@ $config['admin_modules'] = array(
 			'name' => 'organization plan notification', 
 			'access_operation' => 'view', 
 			'route_url' => base_url().'admin/organization_plan_notification' 
-		)
 		),
+		array(
+			'name' => 'transaction', 
+			'access_operation' => 'view', 
+			'route_url' => base_url().'admin/transaction' 
+		)),
 		'icon_name' => 'icon-sitemap'
 	),
 
@@ -155,6 +154,11 @@ $config['admin_modules'] = array(
 			'name' => 'job applied', 
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'admin/job_seeker_applied' 
+		),
+		array(
+			'name' => 'candidate approved job mail & status', 
+			'access_operation' => 'view', 
+			'route_url' => base_url().'admin/jobseeker_mailstatus' 
 		)),
 		'icon_name' => 'icon-search'
 	),
@@ -171,11 +175,6 @@ $config['admin_modules'] = array(
 			'name' => 'plan upgrade creation', 
 			'access_operation' => 'add,edit,delete,view', 
 			'route_url' => base_url().'admin/plan_upgrade_creation' 
-		),
-		array(
-			'name' => 'transaction', 
-			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/transaction' 
 		)),
 		'icon_name' => 'icon-wrench'
 	),

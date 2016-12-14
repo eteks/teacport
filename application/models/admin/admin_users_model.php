@@ -57,7 +57,7 @@ class Admin_users_model extends CI_Model {
   // Edit admin profile
   public function teac_admin_edit_profile($status)
   {
-    $session_data = $this->session->userdata('login_session');
+    $session_data = $this->session->userdata('admin_login_session');
     // Update data
     if($status == 'update') {
       $update_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
@@ -80,7 +80,7 @@ class Admin_users_model extends CI_Model {
   // Change password
   public function teac_admin_change_password()
   {
-    $session_data = $this->session->userdata('login_session');
+    $session_data = $this->session->userdata('admin_login_session');
     // Update data
     $update_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
     $update_data =  array(
