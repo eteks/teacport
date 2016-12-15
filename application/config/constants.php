@@ -47,11 +47,14 @@ define('NATIONALITY',serialize(array("indian"=>"Indian",
 define('RELIGION',serialize(array("hindu"=>"Hindu","muslim"=>"Muslim","christian"=>"Christian",
         "PG"=>"Post Graduate","others"=>"Others")));
 // Community
-define('COMMUNAL',serialize(array("scheduled tribe (st)"=>"Scheduled Tribe (ST)","scheduled caste (sc)"=>"Scheduled Caste (SC)","scheduled caste-arunthathiar (sca)"=>"Scheduled Caste-Arunthathiar (SCA)","most backward class (mbc)"=>"Most Backward Class (MBC)","denotified community (dc)"=>"Denotified Community (DC)","backward class (bc)"=>"Backward Class (BC)","backward blass-muslim (bcm)"=>"Backward Class-Muslim (BCM)","others"=>"Others")));
+define('COMMUNAL',serialize(array("st"=>"Scheduled Tribe (ST)","sc"=>"Scheduled Caste (SC)","sca"=>"Scheduled Caste-Arunthathiar (SCA)","mbc"=>"Most Backward Class (MBC)","dc"=>"Denotified Community (DC)","bc"=>"Backward Class (BC)","bcm"=>"Backward Class-Muslim (BCM)","others"=>"Others")));
 
 //array to get status
 define('STATUS',serialize(array("0"=>"Active",
         "1"=>"Inactive")));
+
+// Define seeker upload path
+define('SEEKER_UPLOAD','assets/images/seeker/');
 
 define('PAYUMERCHANTKEY', 'OwGF14'); 
 define('PAYUMERCHANTSALT', 'RjWAdXh0');
