@@ -98,6 +98,7 @@ $route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
 $route['seeker/inbox/message'] 							= 'job_seeker/inbox_message';
 $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
+$route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
