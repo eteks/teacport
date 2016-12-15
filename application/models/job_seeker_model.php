@@ -216,6 +216,30 @@ class Job_seeker_model extends CI_Model {
 		return $findjobsjobdata->result_array(); 
 	}
 
+	/** to get applied job counts **/
+	public function job_seeker_applied_job_counts($ins_id)
+	{
+		$this->db->from('tr_candidate_applied_job');
+		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id = tr_organization_vacancies.vacancies_id', 'left');
+		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.	applied_job_status='1')";
+		$this->db->order_by('applied_job_id','desc');
+		return $this->db->where($where)->count_all_results();
+	}
+
+	/** to get applied job records **/
+	public function job_seeker_applied_jobs($limit,$start,$ins_id)
+	{
+	 	$this->db->select('*');   
+	 	$this->db->from('tr_candidate_applied_job');
+		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id =	tr_organization_vacancies.vacancies_id','left');
+		// $this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id');
+		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.applied_job_status='1')"; 		
+		$this->db->limit($limit,$start);
+		$this->db->where($where);
+		$findjobsjobdata = $this->db->get();
+		return $findjobsjobdata->result_array(); 
+	}
+
 	public function job_seeker_detail_jobs($ins_id)
 	{
 	 	$this->db->select('*');   
@@ -355,9 +379,133 @@ class Job_seeker_model extends CI_Model {
 	}
 	//  Inbox end
 
-	// Edit profile validation
+	// Edit profile updation
 	public function editprofile_validation($data=array()) {
-		print_r($data);
+		if(!$this->input->post('cand_fresh')) {
+			$fresh = 0 ;
+		}
+		else {
+			$fresh = 1 ;
+		}
+		// Check Mobile Number or Email already exists or not
+		$mobile_exists_where = "candidate_mobile_no =" . "'" . $data['cand_mobile'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
+
+		$mobile_exists = $this->db->get_where('tr_candidate_profile',$mobile_exists_where);
+		if($mobile_exists->num_rows() > 0) {
+			$model_data['status'] = "Mobile Number Already exists";
+		}
+		else {
+			$email_exists_where = "candidate_email =" . "'" . $data['cand_email'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
+			$email_exists = $this->db->get_where('tr_candidate_profile',$email_exists_where);
+			if($email_exists->num_rows() > 0) {
+				$model_data['status'] = "Email Already exists";
+			}
+			else {
+				// Updation in profile table
+				$profile_update_data = array(
+								'candidate_name' => $data['cand_firstname'],
+								'candidate_gender' => $data['cand_gen'],
+								'candidate_date_of_birth' => date('Y-m-d',strtotime($data['cand_dob'])),
+								'candidate_father_name' => $data['cand_fa_name'],
+								'candidate_image_path' => $data['cand_pic'],
+								'candidate_marital_status' => $data['cand_marital'],
+								'candidate_district_id' => $data['cand_native_dis'],
+								'candidate_mother_tongue' => $data['cand_mother_ton'],
+								'candidate_language_known' => implode(',',$data['cand_known_lan']),
+								'candidate_nationality' => $data['cand_nation'],
+								'candidate_religion' => $data['cand_religion'],
+								'candidate_community' => $data['cand_communal'],
+								'candidate_is_physically_challenged' => $data['cand_phy'],
+								'candidate_address_1' => $data['cand_addr1'],
+								'candidate_address_2' => $data['cand_addr2'],
+								'candidate_live_district_id' => $data['cand_live_dis'],
+								'candidate_pincode' => $data['cand_pincode'],
+								'candidate_email' => $data['cand_email'],
+								'candidate_mobile_no' => $data['cand_mobile'],
+								'candidate_facebook_url' => $data['cand_facebook'],
+								'candidate_googleplus_url' => $data['cand_google'],
+								'candidate_linkedin_url' => $data['cand_linkedin'],
+								'candidate_tet_exam_status' => $data['cand_tet'],
+								'candidate_interest_subject_id' => $data['cand_int_sub'],
+								'candidate_extra_curricular_id' => implode(',',$data['cand_extra_cur']),
+								'candidate_is_fresher' => $fresh,
+								);
+				$this->db->set($profile_update_data);
+				$this->db->where('candidate_id',$data['cand_pro']);
+				$this->db->update('tr_candidate_profile',$profile_update_data);	
+				// Updation in preference table
+				$prefrence_update_data = array(
+										'candidate_posting_applied_for' => implode(',',$data['cand_posts']),
+										'candidate_expecting_start_salary' => $data['cand_start_sal'],
+										'candidate_expecting_end_salary' => $data['cand_end_sal'],
+										'candidate_willing_class_level_id' => implode(',',$data['cand_class']),
+										'candidate_willing_subject_id' => implode(',',$data['cand_sub'])
+										);
+				$this->db->set($prefrence_update_data);
+				$this->db->where('candidate_preferance_id',$data['cand_pre']);
+				$this->db->update('tr_candidate_preferance',$prefrence_update_data);
+				// Updation in education table
+				$data_education = array_map(null,$data['cand_qual'],$data['cand_yop'],$data['cand_med'],$data['cand_dept'],$data['cand_board'],$data['cand_percen'],$data['cand_edu']);
+				foreach ($data_education as $edu_key => $edu_val) {
+					if(!empty($edu_val[6])) {
+						$education_update_data = array(
+										'candidate_education_qualification_id' => $edu_val[0],
+										'candidate_education_yop' => $edu_val[1],
+										'candidate_medium_of_inst_id' => $edu_val[2],
+										'candidate_education_department_id' => $edu_val[3],
+										'candidate_edu_board' => $edu_val[4],
+										'candidate_education_percentage' => $edu_val[5]
+										);
+						$this->db->set($education_update_data);
+						$this->db->where('candidate_education_id',$edu_val[6]);
+						$this->db->update('tr_candidate_education',$education_update_data);
+					}
+					else {
+						$education_insert_data = array(
+										'candidate_education_qualification_id' => $edu_val[0],
+										'candidate_education_yop' => $edu_val[1],
+										'candidate_medium_of_inst_id' => $edu_val[2],
+										'candidate_education_department_id' => $edu_val[3],
+										'candidate_edu_board' => $edu_val[4],
+										'candidate_education_percentage' => $edu_val[5],
+										'candidate_profile_id' => $data['cand_pro'],
+										'candidate_education_status' => '1'
+										);
+						$this->db->insert('tr_candidate_education',$education_insert_data);
+					}
+				}
+				// Updation in experience table
+				if($fresh == 0 ) {
+					$data_experience = array_map(null,$data['cand_exp_class'],$data['cand_exp_sub'],$data['cand_exp_board'],$data['cand_exp_yr'],$data['cand_exp']);
+					foreach ($data_experience as $exp_key => $exp_val) {
+						if(!empty($exp_val[4])) {
+							$experience_update_data = array(
+											'candidate_experience_class_level_id' => $exp_val[0],
+											'candidate_experience_subject_id' => $exp_val[1],
+											'candidate_experience_board' => $exp_val[2],
+											'candidate_experience_year' => $exp_val[3]
+											);
+							$this->db->set($experience_update_data);
+							$this->db->where('candidate_experience_id',$edu_val[4]);
+							$this->db->update('tr_candidate_experience',$experience_update_data);
+						}
+						else {
+							$experience_insert_data = array(
+											'candidate_experience_class_level_id' => $exp_val[0],
+											'candidate_experience_subject_id' => $exp_val[1],
+											'candidate_experience_board' => $exp_val[2],
+											'candidate_experience_year' => $exp_val[3],
+											'candidate_profile_id' => $data['cand_pro'],
+											'candidate_experience_status' => 1
+											);
+							$this->db->insert('tr_candidate_experience',$experience_insert_data);
+						}
+					}
+				}
+				$status = "success";
+			}
+		}
+		return $status;
 	}
 
 	//get 
@@ -373,7 +521,7 @@ class Job_seeker_model extends CI_Model {
 	public function medium_of_instruction($value){
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
-		$where = "(language_id in (".$value.") AND language_status='1')";
+		$where = "(language_name like '%".$value."%' AND language_status='1')";
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
@@ -382,6 +530,16 @@ class Job_seeker_model extends CI_Model {
 	public function job_seeker_applied_job($appliedjobdata)
 	{
 	 	if($this->db->insert('tr_organizaion_inbox', $appliedjobdata)){
+	 		return TRUE;
+	 	}
+		else{
+			return FALSE;
+		}
+	}
+
+	public function job_seeker_candidatejob($appliedjobdata)
+	{
+	 	if($this->db->insert('tr_candidate_applied_job', $appliedjobdata)){
 	 		return TRUE;
 	 	}
 		else{

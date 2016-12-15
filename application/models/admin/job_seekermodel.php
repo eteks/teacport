@@ -157,14 +157,17 @@ class Job_Seekermodel extends CI_Model {
     return $model_data;
   }
 
-
-
-
-
-
-
-
-  
+  //Get the approved candidate jobs by provider from candidate inbox
+  public function get_approved_candidate_jobs(){
+    // View
+    $this->db->select('ci.*,cp.candidate_name,cp.candidate_mobile_no,op.organization_name,ov.vacancies_job_title');
+    $this->db->from('tr_candidate_inbox ci');
+    $this->db->join('tr_candidate_profile cp','cp.candidate_id=ci.candidate_id','left');
+    $this->db->join('tr_organization_profile op','op.organization_id=ci.candidate_organization_id','left');
+    $this->db->join('tr_organization_vacancies ov','ov.vacancies_id=ci.candidate_vacancy_id','left');
+    $model_data = $this->db->order_by('ci.candidate_inbox_id','desc')->get()->result_array();
+    return $model_data;
+  }
 
 }
 /* End of file Job_Seekermodel.php */

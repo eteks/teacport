@@ -91,13 +91,15 @@ $route['seeker/inbox'] 								    = 'job_seeker/inbox';
 $route['seeker/findjob'] 								= 'job_seeker/findjob';
 $route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';
 $route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
+$route['seeker/jobsapplied/(:num)'] 					= 'job_seeker/jobsapplied/$1';
+$route['seeker/jobsapplieddetails/(:num)'] 				= 'job_seeker/applynow/$1';
 $route['seeker/applynow'] 								= 'job_seeker/applynow';
-$route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
+$route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
 $route['seeker/inbox/message'] 							= 'job_seeker/inbox_message';
 $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
-
+$route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
@@ -131,8 +133,9 @@ $route['admin/job_provider_profile'] = 'admin/job_provider/teacport_job_provider
 $route['admin/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
 $route['admin/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
 $route['admin/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
-$route['admin/jobprovider_mailstatus'] = 'admin/job_provider/teacport_jobprovider_mailstatus';
+$route['admin/jobseeker_mailstatus'] = 'admin/job_seeker/teacport_jobseeker_mailstatus';
 $route['admin/organization_upgrade_or_renewal'] = 'admin/job_provider/organization_upgrade_or_renewal';
+$route['admin/transaction'] = 'admin/job_provider/transaction';
 $route['admin/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['admin/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 

@@ -49,6 +49,14 @@ class Admin_users_model extends CI_Model {
       $model_data['error'] = 2;
     }
 
+    else if($status == 'mapping'){
+      $this->db->select('*');
+      $this->db->from('tr_admin_user_groups grp');
+      $this->db->join('tr_admin_users usr','usr.admin_user_group_id=grp.user_group_id','LEFT');
+      $this->db->join('tr_admin_access_control acc','acc.access_group_id=grp.user_group_id','LEFT');
+      $model_data['mapped_status'] = $this->db->get();
+    }
+
     // View
     $model_data['group_values'] = $this->db->get_where('tr_admin_user_groups')->result_array();
     return $model_data;
@@ -57,7 +65,7 @@ class Admin_users_model extends CI_Model {
   // Edit admin profile
   public function teac_admin_edit_profile($status)
   {
-    $session_data = $this->session->userdata('login_session');
+    $session_data = $this->session->userdata('admin_login_session');
     // Update data
     if($status == 'update') {
       $update_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
@@ -80,7 +88,7 @@ class Admin_users_model extends CI_Model {
   // Change password
   public function teac_admin_change_password()
   {
-    $session_data = $this->session->userdata('login_session');
+    $session_data = $this->session->userdata('admin_login_session');
     // Update data
     $update_where = '(admin_user_id="'.$session_data['admin_user_id'].'")';
     $update_data =  array(

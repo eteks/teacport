@@ -206,5 +206,11 @@ class Common_model extends CI_Model {
 		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_organization_id =".$org_id);
 		return $posted_jobs->num_rows();
 	}
+	public function organization_details($org_id){
+		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_profile WHERE organization_id =".$org_id);
+		return $posted_jobs->row_array();
+
+	}
+
 }
 

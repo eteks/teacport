@@ -116,6 +116,9 @@
 	height: 100%;
 	width: 100%;
 }
+/*.pricing-section-1 .ui_box__inner {
+    height: 550px;
+} */   
 /* Provider- Signup & Signin form */
 .login-container .loginbox-signin {
 	font-size: 14px;
@@ -204,9 +207,8 @@
 	margin: 10px 5px;
 }
 #candidate_ads_act .btn-default{
-	margin: 8px 20px;
+	margin: 8px 0 8px 45px;
     padding: 12px 30px;
-    width: 100%;
 } 
 
 /* User Inbox */
@@ -269,10 +271,11 @@
 /*.select-salary select option:first{
 	color: #999;
 }*/
-select:invalid { color: gray; }
+select:invalid { 
+	color: gray; 
+}
 .advanced_search {
- 	margin-top: 5px;
- 	float:right;
+ 	margin: 45px 50px 5px 5px;
  	color: #fff;
  	cursor: pointer;
  }
@@ -441,9 +444,9 @@ select:invalid { color: gray; }
     font-size: 16px;
     font-family: 'Kaushan Script';
 }
-#normalsearch_act .btn-default{
+#normalsearch_act .btn-default, #candidate_nos_act .btn-default{
 	margin-top: 0px !important;
-	padding: 12px 30px;
+	padding: 19px 30px;
 }
 /* END OF COMPANY DASHBOARD */
 
@@ -648,8 +651,8 @@ font-size: 12px;
     padding-top:5px;
 }
 .advance_search_btn{
-	margin-top: 10px !important;
-	margin-left : 5px;
+	/*margin-top: 10px !important;*/
+	margin-left : 45px;
 }
 .postad_preview{
 	display: none;

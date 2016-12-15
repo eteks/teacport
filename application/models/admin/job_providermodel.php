@@ -282,12 +282,30 @@ class Job_Providermodel extends CI_Model {
     return $model_data;
   }
 
-
-
   // Job provider profile - ajax
   public function get_full_provider_ads($value) {
     $ads_where = '(premium_ads_id="'.$value.'")';
     $model_data = $this->db->get_where('tr_premium_ads',$ads_where)->row_array();
+    return $model_data;
+  }
+
+  public function get_provider_transaction(){
+    // View
+    $this->db->select('*');
+    $this->db->from('tr_payumoney_transaction trans');
+    $this->db->join('tr_organization_profile org','org.organization_id=trans.organization_id','left');
+    $model_data= $this->db->order_by('trans.transaction_id','desc')->get()->result_array();
+    return $model_data;
+  }
+  
+  // Job provider profile - ajax
+  public function get_provider_transaction_full_view($value) {
+    $trans_where = '(transaction_id="'.$value.'")';
+    $this->db->select('*');
+    $this->db->from('tr_payumoney_transaction trans');
+    $this->db->join('tr_organization_profile org','org.organization_id=trans.organization_id','left');
+    $this->db->where($trans_where);  
+    $model_data = $this->db->get()->row_array();
     return $model_data;
   }
   
