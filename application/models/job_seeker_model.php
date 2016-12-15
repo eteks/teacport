@@ -232,6 +232,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');   
 	 	$this->db->from('tr_candidate_applied_job');
 		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id =	tr_organization_vacancies.vacancies_id','left');
+		// $this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id');
 		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.applied_job_status='1')"; 		
 		$this->db->limit($limit,$start);
 		$this->db->where($where);

@@ -499,20 +499,18 @@ class Job_seeker extends CI_Controller {
 
 		if($session_data['login_session']['candidate_id']) {
 			$pagination["total_rows"] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);
-			$pagination['num_links'] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);				
+			$pagination['num_links'] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);	
+			// echo $this->db->last_query();					
 			$this->pagination->initialize($pagination);
 			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
-			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);	
+			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);					
+			$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			// echo $this->db->last_query();			
 			$str_links = $this->pagination->create_links();
-			$data["links"] = explode('&nbsp;',$str_links );
-
-			echo '<pre>';
-			print_r($data);
-			echo '</pre>';
-			
+			$data["links"] = explode('&nbsp;',$str_links );			
 			$this->load->view('user-job-applied', $data);
 		}else{
-			$this->load->view('user-job-applied');
+			$this->load->view('missingpage');
 		}
 	}
 	/** Job Applied Jobs - End Here **/
@@ -558,11 +556,22 @@ class Job_seeker extends CI_Controller {
 				$this->load->view('single-job', $data);
 			} else {
 				$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
-				$this->load->view('single-job', $data);
+				redirect('missingpage');
 			}
 
 		}
 	}
+
+
+	// public function jobsapplieddetails(){		
+	// 	$data["current_jobvacancy_id"] = $this->uri->segment('3');
+	// 	if(isset($data["current_jobvacancy_id"])){
+	// 		$data["jobsapplieddetails"] = 'readonly';
+	// 		redirect('job_seeker/applynow/'.$data["current_jobvacancy_id"]);
+	// 	}else{
+	// 		redirect('missingpage');
+	// 	}
+	// }
 	
 	
 	// Change password
