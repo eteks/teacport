@@ -1,4 +1,4 @@
-// $(document).ready(function() {
+$(document).ready(function() {
 
 // 	/*  -- Registration and Login section Start -- */
 
@@ -125,4 +125,35 @@
 //     // });
 
 
-// }); // End document
+$(document).on('submit','.seeker_edit_form',function(e) {
+	e.preventDefault();
+	var form_data = new FormData(this);
+	form_data.append('csrf_token',csrf_token_value);
+	
+	$.ajax({
+		type : "POST",
+		url : baseurl+"seeker/seeker_edit_form",
+		data : form_data,
+		contentType: false,
+		processData:false,
+		success : function(res) {
+			if(res == 'success') {
+				location.reload();
+			}
+			else {
+				$('.form_error_ajax').text(res);
+				
+			}
+		}
+
+	});
+
+
+
+
+});
+
+
+
+
+}); // End document
