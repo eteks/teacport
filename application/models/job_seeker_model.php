@@ -216,6 +216,29 @@ class Job_seeker_model extends CI_Model {
 		return $findjobsjobdata->result_array(); 
 	}
 
+	/** to get applied job counts **/
+	public function job_seeker_applied_job_counts($ins_id)
+	{
+		$this->db->from('tr_candidate_applied_job');
+		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id = tr_organization_vacancies.vacancies_id', 'left');
+		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.	applied_job_status='1')";
+		$this->db->order_by('applied_job_id','desc');
+		return $this->db->where($where)->count_all_results();
+	}
+
+	/** to get applied job records **/
+	public function job_seeker_applied_jobs($limit,$start,$ins_id)
+	{
+	 	$this->db->select('*');   
+	 	$this->db->from('tr_candidate_applied_job');
+		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id =	tr_organization_vacancies.vacancies_id','left');
+		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.applied_job_status='1')"; 		
+		$this->db->limit($limit,$start);
+		$this->db->where($where);
+		$findjobsjobdata = $this->db->get();
+		return $findjobsjobdata->result_array(); 
+	}
+
 	public function job_seeker_detail_jobs($ins_id)
 	{
 	 	$this->db->select('*');   
@@ -497,7 +520,7 @@ class Job_seeker_model extends CI_Model {
 	public function medium_of_instruction($value){
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
-		$where = "(language_id in (".$value.") AND language_status='1')";
+		$where = "(language_name like '%".$value."%' AND language_status='1')";
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
@@ -506,6 +529,16 @@ class Job_seeker_model extends CI_Model {
 	public function job_seeker_applied_job($appliedjobdata)
 	{
 	 	if($this->db->insert('tr_organizaion_inbox', $appliedjobdata)){
+	 		return TRUE;
+	 	}
+		else{
+			return FALSE;
+		}
+	}
+
+	public function job_seeker_candidatejob($appliedjobdata)
+	{
+	 	if($this->db->insert('tr_candidate_applied_job', $appliedjobdata)){
 	 		return TRUE;
 	 	}
 		else{
