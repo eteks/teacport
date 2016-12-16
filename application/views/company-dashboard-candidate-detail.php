@@ -53,12 +53,12 @@
 				                           	 	<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Name of the Candidate</span>
 				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">	<?php echo $candidate['personnal']['candidate_name']; ?> </div>
+													<div class="col-sm-7">	<?php echo ucfirst($candidate['personnal']['candidate_name']); ?> </div>
 												</div>											
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Gender </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_gender']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_gender']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Date of Birth </span>
@@ -68,37 +68,37 @@
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Father's Name </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_father_name']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_father_name']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Marital Status </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_marital_status']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_marital_status']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Native District  </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['living_district']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['living_district']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Mother Tongue</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['language_name']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['language_name']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Nationality  </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_nationality']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_nationality']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Religion </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_religion']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_religion']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Communal Category </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_community']; ?> </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_community']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Physically Handicapped Person</span>

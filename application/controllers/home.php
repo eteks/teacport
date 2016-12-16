@@ -28,6 +28,9 @@ class Home extends CI_Controller {
 	{
 	    $categories['job_results'] = $this->common_model->get_job_list();
 	    // $categories['count_results'] = $this->common_model->get_count_list();
+	    // echo "<pre>";
+		// print_r($categories);
+		// echo "</pre>";
 	    $this->load->view('index',$categories);
 	}
 	public function featured_job()
@@ -48,7 +51,41 @@ class Home extends CI_Controller {
 	}
 	public function contactus()
 	{
-		$this->load->view('contactus');
+		if($_POST){
+			$session_data = $this->session->all_userdata();
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+			$this->form_validation->set_rules('contact_us_name', 'Name', 'trim|required|alpha|xss_clean|min_length[3]');
+			$this->form_validation->set_rules('contact_us_email', 'Email ID', 'trim|required|valid_email|xss_clean');
+			$this->form_validation->set_rules('contact_us_mobile', 'Mobile', 'trim|required|numeric|min_length[10]|max_length[15]|xss_clean');
+			$this->form_validation->set_rules('contact_us_subject', 'Subject', 'trim|required|alpha_numeric_spaces|min_length[4]|max_length[100]|xss_clean');
+			$this->form_validation->set_rules('contact_us_message', 'Message', 'trim|required|min_length[10]|max_length[700]|xss_clean');
+			if ($this->form_validation->run()){
+				
+				$contact_us_data = array(
+										'feedback_form_title' => $this->input->post('contact_us_subject'),
+										'feedback_form_message' => 'Hi, My name is '.$this->input->post('contact_us_name').'. '.$this->input->post('contact_us_subject').' Mobile number: '.$this->input->post('contact_us_mobile').' .Email address: '.$this->input->post('contact_us_email'),
+										'is_organization' => 0,
+										'is_candidate' => 0,
+										'is_guest_user' =>1,
+										'is_viewed'=>0,
+										'feedback_form_status'=>1
+									);
+				if($this->common_model->guest_user_feedback($contact_us_data)){
+					$data['contact_server_msg'] = 'Thank you for contact us! Our customer representative contact you soon!!';
+					$this->load->view('contactus',$data);
+				}
+				else{
+					$data['contact_server_msg'] = 'Some thing wrong data insertion process! Please try again!!';
+					$this->load->view('contactus',$data);
+				}
+			}
+			else{
+				$this->load->view('contactus');
+			}
+		}
+		else{
+			$this->load->view('contactus');
+		}
 	}
 	//Akila Created
 	public function pricing(){
