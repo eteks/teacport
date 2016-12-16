@@ -670,8 +670,10 @@ class Job_seeker extends CI_Controller {
 			// echo $this->db->last_query();					
 			$this->pagination->initialize($pagination);
 			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
-			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);					
-			$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);		
+			if(isset($data["jobsapplied"][0]['vacancies_organization_id'])){			
+				$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			}	
 			// echo $this->db->last_query();			
 			$str_links = $this->pagination->create_links();
 			$data["links"] = explode('&nbsp;',$str_links );			
