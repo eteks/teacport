@@ -216,9 +216,8 @@
 	margin: 10px 5px;
 }
 #candidate_ads_act .btn-default{
-	margin: 8px 20px;
+	margin: 8px 0 8px 45px;
     padding: 12px 30px;
-    width: 100%;
 } 
 /* END OF JOB SEEKER DASHBOARD */
 
@@ -265,7 +264,9 @@
 select:invalid { color: gray; }
 
  .advanced_search {
- 	margin: 10px;
+ 	margin: 45px 50px 5px 5px;
+ 	color: #fff;
+ 	cursor: pointer;
  }
  #advancedsearch_act {
  	margin: 10px 0;
@@ -423,6 +424,20 @@ select:invalid { color: gray; }
     font-size: 16px;
     font-family: 'Kaushan Script';
 }
+#normalsearch_act .btn-default, #candidate_nos_act .btn-default{
+	margin-top: 0px !important;
+	padding: 19px 30px;
+}
+/* Subcription */
+#plandetail_act .modal-dialog {
+    margin: 30px auto;
+    width: 1200px !important;
+}
+.plan_status {
+	font-size: 25px;
+	color: #009900;
+}
+
 /* END OF COMPANY DASHBOARD */
 
 /* PROVIDERS & SEEKERS DASHBOARD */
@@ -520,7 +535,6 @@ font-size: 13px;
 	 }   
 }
  
- 
 
 .subscription_organization_inner_section {
 	border: 1px solid #29aafe;
@@ -537,4 +551,8 @@ font-size: 13px;
 	border: 1px solid #29aafe;
 	background-color: #CCEBFF;
 	height: 250px;
+}
+.advance_search_btn{
+	/*margin-top: 10px !important;*/
+	margin-left : 45px;
 }
