@@ -8,7 +8,7 @@
 }
 /* Custom Select field */
 .select2-search__field {
-	display: none;
+	display: block;
 }
 .txt_blue {
 	color: #29AAFE;

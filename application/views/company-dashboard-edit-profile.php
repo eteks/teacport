@@ -49,7 +49,7 @@
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
-                               		<div class=" col-sm-10 input-group image-preview <?php if($organization['organization_logo'] == '') echo "error_box_shadow"; ?>">
+                               		<div class=" col-sm-10 input-group image-preview">
                                			<input type="text" disabled="disabled" class="form-control image-preview-filename " placeholder="Upload Profile Image">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_profile" style="display: none;" class="btn btn-default image-preview-clear" type="button">
@@ -73,7 +73,7 @@
 								<label class="col-sm-4" for="organization_name">Organization Name : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_name'); ?>
-									<input id="instituition_name" class="form-control <?php if($organization['organization_name'] == '') echo "error_box_shadow"; ?>" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; ?>" placeholder="Institution Name" type="text">
+									<input id="instituition_name" class="form-control" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; ?>" placeholder="Institution Name" type="text">
 								</div>
 							</div>
                             
@@ -81,28 +81,28 @@
 								<label class="col-sm-4" for="address-line1">Address Line1 : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line1'); ?>
-									<input id="address-line1" class="form-control <?php if($organization['organization_address_1'] == '') echo "error_box_shadow"; ?>" maxlength="30" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; ?>" placeholder="Building No / Road / Street" type="text">
+									<input id="address-line1" class="form-control" maxlength="30" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; ?>" placeholder="Building No / Road / Street" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="address-line2">Address Line2 : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line2'); ?>
-									<input id="address-line2" class="form-control <?php if($organization['organization_address_2'] == '') echo "error_box_shadow"; ?>" maxlength="30" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; ?>" placeholder="Locality / Area / Village" type="text">
+									<input id="address-line2" class="form-control" maxlength="30" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; ?>" placeholder="Locality / Area / Village" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="address-line3">Address Line3 : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line3'); ?>
-									<input id="address-line2" class="form-control <?php if($organization['organization_address_3'] == '') echo "error_box_shadow"; ?>" maxlength="30" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; ?>" placeholder="Taluk / City" type="text">
+									<input id="address-line2" class="form-control" maxlength="30" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; ?>" placeholder="Taluk / City" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="add_district">District : <span class="required">*</span></label>
 								<div class="col-sm-4">
 									<?php echo form_error('organization_district'); ?>
-									<select id="organization_district" class="select-location form-control <?php if($organization['organization_district_id'] == '') echo "error_box_shadow"; ?>" name="organization_district" onchange="">
+									<select id="organization_district" class="select-location form-control" name="organization_district" onchange="">
 										<option value="">Select district</option>
 										<?php
 										foreach ($district as $value) {
@@ -131,14 +131,14 @@
 								<label class="col-sm-4" for="firstname">Registrant Name : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
-									<input id="firstname" class="form-control <?php if($organization['registrant_name'] == '') echo "error_box_shadow"; ?>" maxlength="30" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; ?>" placeholder="Full Name">
+									<input id="firstname" class="form-control" maxlength="30" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="designation">Registrant Designation : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_designation'); ?>
-									<input id="designation" class="form-control <?php if($organization['registrant_designation'] == '') echo "error_box_shadow"; ?>" maxlength="30" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; ?>" placeholder="ex. Principal / Correspondent">
+									<input id="designation" class="form-control" maxlength="30" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; ?>" placeholder="ex. Principal / Correspondent">
 								</div>
 							</div>
 							<div class="form-group">
@@ -156,7 +156,7 @@
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
-                               		<div class="col-sm-10 input-group image-preview <?php if($organization['organization_logo'] == '') echo "error_box_shadow"; ?>">
+                               		<div class="col-sm-10 input-group image-preview">
                                			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Profile Image">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_your_image" style="display: none;" class="btn btn-default image-preview-clear" type="button">
@@ -176,6 +176,7 @@
                             </div>
 							<div class="form-group declaration">
 								<div class="col-sm-12">
+									<?php echo form_error('declar_accept'); ?>
 									<p>
 										<input id="declar_accept" class="ace" name="declar_accept" value="Y" type="checkbox">
 										<span class="lbl"></span>
@@ -209,9 +210,11 @@
 <?php include ('include/footer.php'); ?>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.js"></script>
 <script type="application/javascript">
-	$('.provider_date_of_birth').datepicker({
-		 format: "dd/mm/yyyy",
-     	autoclose: true,
-	});
+  	$('.provider_date_of_birth').Zebra_DatePicker({
+    	direction: -1,
+        format: 'd/m/Y',
+        view: 'years'
+    });
+     	
 </script>
 
