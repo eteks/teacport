@@ -60,6 +60,11 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <!--My data table css--> 
    	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.dataTables.min.css">
+   	
+   	<!--content carousel-->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/demo.css" >
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/style.css" >
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/jquery.jscrollpane.css" media="all" >
 
     <!-- JavaScripts -->
     <script src="<?php echo base_url(); ?>assets/js/modernizr.js"></script>
