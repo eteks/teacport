@@ -6,7 +6,107 @@ class Job_seeker extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_seeker_model','common_model')); 
+		$this->load->library('upload');
         session_start();
+    }
+
+    // Url Validation - Check whether the url format is correct or not
+    function valid_url_format($str){
+        $pattern = "|^http(s)?://[a-z0-9-]+(.[a-z0-9-]+)*(:[0-9]+)?(/.*)?$|i";
+        if (!preg_match($pattern, $str)){
+            $this->form_validation->set_message('valid_url_format', 'The URL you entered is not correctly formatted.');
+            return FALSE;
+        }
+        return TRUE;
+ 	}      
+
+ 	// Salary Validation
+ 	function check_greater_value($second_field,$first_field) 
+	{ 
+		if ($second_field < $first_field) { 
+			$this->form_validation->set_message('check_greater_value', 'The %s field must contain a number greater than Minimum Salary'); 
+			return FALSE;
+		}
+ 		return TRUE;
+	} 
+  
+  	// Url Validaiton - Check whether the url exists or not
+    // function url_exists($url){                                   
+    //     $url_data = parse_url($url); // scheme, host, port, path, query
+    //     if(!fsockopen($url_data['host'], isset($url_data['port']) ? $url_data['port'] : 80)){
+    //         $this->form_validation->set_message('url_exists', 'The URL you entered is not accessible.');
+    //         return FALSE;
+    //     }               
+    //     return TRUE;
+    // }  
+
+    // Image validation
+	function validate_image_type($value,$params) {
+		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
+		list($action,$field) = explode(".",$params); // To split the array values
+		$upload_path = SEEKER_UPLOAD."pictures/"; // Admin upload path
+	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+        $config['max_size']    = '1000'; // Maximum size - 1MB
+    	$config['max_width']  = '1024'; // Maximumm width - 1024px
+    	$config['max_height']  = '768'; // Maximum height - 768px
+        $this->upload->initialize($config); // Initialize the configuration
+        if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
+        {
+           return TRUE;
+        }
+        else if($action == 'update') // If action is update means, No need to check validation
+        {
+        	$old_file_path = $_POST['old_file_path'];
+        	if(isset($_POST['old_file_path']) && !empty($_POST['old_file_path'])) {
+        		$_POST[$field] = $old_file_path;
+            	return TRUE;
+        	}
+        	else {
+        		$_POST[$field] = NULL; //
+	            $this->form_validation->set_message('validate_image_type', "The %s is required");
+	            return FALSE;
+        	}
+        }
+        else {
+        	$_POST[$field] = NULL; //
+            $this->form_validation->set_message('validate_image_type', "The %s is required");
+            return FALSE;
+        }
+    }
+
+    function validate_file_type($value,$params) {
+		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
+		list($action,$field) = explode(".",$params); // To split the array values
+		$upload_path = SEEKER_UPLOAD."resume/"; // Admin upload path
+	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+        $config['allowed_types'] = 'pdf|doc|docx'; // Allowed tupes
+        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+        $config['max_size']    = '2000'; // Maximum size - 2MB
+        $this->upload->initialize($config); // Initialize the configuration
+        if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
+        {
+           return TRUE;
+        }
+        else if($action == 'update') // If action is update means, No need to check validation
+        {
+        	$prev_file_path = $_POST['prev_file_path'];
+        	if(isset($_POST['prev_file_path']) && !empty($_POST['prev_file_path'])) {
+        		$_POST[$field] = $prev_file_path;
+            	return TRUE;
+        	}
+        	else {
+        		$_POST[$field] = NULL; //
+	            $this->form_validation->set_message('validate_file_type', "The %s is required");
+	            return FALSE;
+        	}
+        }
+        else {
+        	$_POST[$field] = NULL; //
+            $this->form_validation->set_message('validate_file_type', "The %s is required");
+            return FALSE;
+        }
     }
 
 	public function index()
@@ -241,7 +341,7 @@ class Job_seeker extends CI_Controller {
 		// if(!empty($candidate_data['candidate_father_name']))
 		if($candidate_data['candidate_father_name'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_district_id'] == '' or $candidate_data['candidate_date_of_birth'] == '') 
 		{
-			if($candidate_data['candidate_institution_type'] == '' or $candidate_data['candidate_email'] == '' or $candidate_data['candidate_mobile_no'] == '' or $candidate_data['candidate_password'] == '') {
+			if($candidate_data['candidate_institution_type'] == '0' or $candidate_data['candidate_institution_type'] == '' or $candidate_data['candidate_email'] == '' or $candidate_data['candidate_mobile_no'] == '' or $candidate_data['candidate_password'] == '') {
 				$data['initial_data'] = 'show_popup';
 				$data['popup_type'] = 'social';
 			}
@@ -358,8 +458,8 @@ class Job_seeker extends CI_Controller {
      		redirect('missingpage');
      	}
      	$data['update_status'] = '';
-
-    	$data['candidate_values'] = $this->job_seeker_model->get_seeker_details($session['login_session']['candidate_id']);
+	
+		$data['candidate_values'] = $this->job_seeker_model->get_seeker_details($session['login_session']['candidate_id']);
     	$data['district_values'] = $this->common_model->get_all_district();
     	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
     	$data['mother_language_values'] = $this->common_model->mother_tongue();
@@ -375,64 +475,131 @@ class Job_seeker extends CI_Controller {
     	$data['experience_values'] = $this->job_seeker_model->get_seeker_experience_details($session['login_session']['candidate_id']);
 
 
-    	if($_POST) {
-    		
-    		 //   			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_pic', 'label' => 'Picture','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_mother_ton', 'label' => 'Mother Tongue','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_known_lan[]', 'label' => 'Known Languages','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_nation', 'label' => 'Nation','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_religion', 'label' => 'Religion','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_communal', 'label' => 'Community','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_phy', 'label' => 'Physical Challenge Status','rules' => 'required|trim|xss_clean'),
-
-    			// 	array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_start_sal', 'label' => 'Minimum Salary','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
-    			// array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean')
-
-
-    		// Profile, Preference Validation	
-	   		$validation_fields = array(
- 
-    			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
-    			array('field' => 'cand_start_sal', 'label' => 'Minimum Salary','rules' => 'required|trim|xss_clean'),
-    			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean'),
-    			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
-    			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean')
-
-
-
-
-    		);
-    		$this->form_validation->set_rules($validation_fields);
-    		if($this->form_validation->run() == FALSE) {
-    			foreach($validation_fields as $row){
-		          $field = $row['field'];
-		          $error = form_error($field);
-		          if($error){
-		            $data['update_status'] = strip_tags($error);
-		            break;
-		          }
-		        }
-    		}
-    		else {
-    			$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
-    		}
-    	}
     	// echo "<pre>";
     	// print_r($data['experience_values']);
     	// echo "</pre>";
 
 		$this->load->view('user-edit-profile',$data);
 	}
-	
+		
+
+	public function edit_profile_validation_ajax() {
+   		$action = "update"	;
+   		// Profile, Preference, Education, Communication Validation	
+	   	$validation_fields = array(	
+			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_pic', 'label' => 'Picture','rules' => 'callback_validate_image_type['.$action.'.cand_pic]'),
+			array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_mother_ton', 'label' => 'Mother Tongue','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_known_lan[]', 'label' => 'Known Languages','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_nation', 'label' => 'Nation','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_religion', 'label' => 'Religion','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_communal', 'label' => 'Community','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_phy', 'label' => 'Physical Challenge Status','rules' => 'required|trim|xss_clean'),
+
+			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_start_sal', 'label'=> 'Minimum Salary','rules' => 'required|trim|xss_clean|numeric'),
+			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean|numeric|callback_check_greater_value['.$this->input->post('cand_start_sal').']' ),
+			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean'),
+
+		   	array('field' => 'cand_qual[]', 'label' => 'Education Qualification','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_yop[]', 'label' => 'Education Year Of Passing','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_med[]', 'label' => 'Education Medium','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_dept[]', 'label' => 'Education Department','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_board[]', 'label' => 'Education Board','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
+
+			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{6}$/]'),
+	    	array('field' => 'cand_email', 'label' => 'Email','rules' => 'required|trim|xss_clean|valid_email'),
+	    	array('field' => 'cand_mobile', 'label' => 'Mobile','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{10}$/]'),
+	    	array('field' => 'cand_facebook', 'label' => 'Facebook Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
+	    	array('field' => 'cand_google', 'label' => 'Google Plus Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
+	    	array('field' => 'cand_linkedin', 'label' => 'Linkedin Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
+	    	array('field' => 'cand_accept', 'label' => 'Accept Terms & Condition','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_resume', 'label' => 'Resume','rules' => 'callback_validate_file_type['.$action.'.cand_resume]'),
+		);
+		if(!$this->input->post('cand_fresh')) {
+			$validation_fields = array(	
+				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
+						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
+				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
+				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2}$/]'),
+				    );
+		}
+		$this->form_validation->set_rules($validation_fields);
+		if($this->form_validation->run() == FALSE) {
+			foreach($validation_fields as $row){
+	          $field = $row['field'];
+	          $error = form_error($field);
+	          if($error){
+	            $data['update_status'] = strip_tags($error);
+	            break;
+	          }
+	        }
+		}
+		else {
+			$error = 0;
+   			$upload_image_path = SEEKER_UPLOAD."pictures/";
+   			$upload_resume_path = SEEKER_UPLOAD."resume/";
+    		if(!empty($_FILES['cand_pic']['name']))
+        	{	
+      			if($this->upload->do_upload('cand_pic'))
+          		{
+              		$upload_data = $this->upload->data(); 
+               		$_POST['cand_pic'] = $upload_image_path.$upload_data['file_name']; 
+               		$old_file_path = $_POST['old_file_path'] ;
+               		$upload_error = 0;
+               		@unlink(APPPATH.'../'.$old_file_path);
+               		$error = 0;
+            	}
+   		      	else
+           		{
+           			$error = 1;
+                	$data['update_status'] = strip_tags($this->upload->display_errors()); 
+               	}	
+           	}
+           	else {
+           		$error = 0;
+           	}
+           	if($error == 0) {
+           		if(!empty($_FILES['cand_resume']['name'])) {
+	      			if($this->upload->do_upload('cand_resume'))
+	          		{
+	              		$upload_data = $this->upload->data(); 
+	               		$_POST['cand_resume'] = $upload_resume_path.$upload_data['file_name']; 
+	               		$prev_file_path = $_POST['prev_file_path'] ;
+	               		$upload_error = 0;
+	               		@unlink(APPPATH.'../'.$prev_file_path);
+						$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
+	            	}
+	   		      	else
+	           		{
+	                	// $data['update_status'] = strip_tags($this->upload->display_errors()); 
+	           			$data['update_status'] = $_FILES['cand_resume']['name'];
+	               	}	
+	            }
+	            else {
+	            	$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
+	            }	
+           	}
+       	}
+       	echo $data['update_status'];
+	}
+
+
+
+
 	/** Job Seeker find Jobs - Start Here **/
 	public function findjob(){	
 		$this->load->library('pagination');	
@@ -499,20 +666,18 @@ class Job_seeker extends CI_Controller {
 
 		if($session_data['login_session']['candidate_id']) {
 			$pagination["total_rows"] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);
-			$pagination['num_links'] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);				
+			$pagination['num_links'] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);	
+			// echo $this->db->last_query();					
 			$this->pagination->initialize($pagination);
 			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
-			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);	
+			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);					
+			$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			// echo $this->db->last_query();			
 			$str_links = $this->pagination->create_links();
-			$data["links"] = explode('&nbsp;',$str_links );
-
-			echo '<pre>';
-			print_r($data);
-			echo '</pre>';
-			
+			$data["links"] = explode('&nbsp;',$str_links );			
 			$this->load->view('user-job-applied', $data);
 		}else{
-			$this->load->view('user-job-applied');
+			$this->load->view('missingpage');
 		}
 	}
 	/** Job Applied Jobs - End Here **/
@@ -558,11 +723,22 @@ class Job_seeker extends CI_Controller {
 				$this->load->view('single-job', $data);
 			} else {
 				$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
-				$this->load->view('single-job', $data);
+				redirect('missingpage');
 			}
 
 		}
 	}
+
+
+	// public function jobsapplieddetails(){		
+	// 	$data["current_jobvacancy_id"] = $this->uri->segment('3');
+	// 	if(isset($data["current_jobvacancy_id"])){
+	// 		$data["jobsapplieddetails"] = 'readonly';
+	// 		redirect('job_seeker/applynow/'.$data["current_jobvacancy_id"]);
+	// 	}else{
+	// 		redirect('missingpage');
+	// 	}
+	// }
 	
 	
 	// Change password

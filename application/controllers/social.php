@@ -320,7 +320,7 @@ class Social extends CI_Controller {
 		{
 			$twdata['user_type'] = 'seeker';
 			$twdata['login_type'] = 'twitter';
-			$lidata['candidate_id'] = $this->db->insert_id();
+			$twdata['candidate_id'] = $this->db->insert_id();
 			$this->session->set_userdata("login_status", TRUE);
 			$this->session->set_userdata("login_session",$twdata);
 			redirect('seeker/dashboard');
@@ -586,7 +586,7 @@ class Social extends CI_Controller {
 			{
 				$godata['user_type'] = 'seeker';
 				$godata['login_type'] = 'google';
-				$lidata['candidate_id'] = $this->db->insert_id();
+				$godata['candidate_id'] = $this->db->insert_id();
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$godata);
 				redirect('seeker/dashboard');

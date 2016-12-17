@@ -119,7 +119,8 @@ class Job_provider extends CI_Controller {
 					/* Email configuration and mail template */
 					$from_email = $emailsetup['smtp_user'];
 					$subject = 'Teacher Recruit Registration';
-					$message = 'Dear '.$data['registrant_name'].',<br /><br />Your Teacher Recruit Application Password has been created to the following:.<br /><br /> <table border="1" bgcolor="#FEF1BC"><tbody><tr><td>Email :&nbsp;<strong><font color="blue">'.$data['registrant_email_id'].'</font></strong></td></tr><tr><td>Password :&nbsp;&nbsp;&nbsp;<strong><font color="blue">'.$data['registrant_password'].'</font></strong></td></tr></tbody></table><br /><br /><br />Thanks<br />Teacher Recruit Team';
+					$message =  $this->load->view('email_template/provider', $data, TRUE);
+					//$message = 'Dear '.$data['registrant_name'].',<br /><br />Your Teacher Recruit Application Password has been created to the following:.<br /><br /> <table border="1" bgcolor="#FEF1BC"><tbody><tr><td>Email :&nbsp;<strong><font color="blue">'.$data['registrant_email_id'].'</font></strong></td></tr><tr><td>Password :&nbsp;&nbsp;&nbsp;<strong><font color="blue">'.$data['registrant_password'].'</font></strong></td></tr></tbody></table><br /><br /><br />Thanks<br />Teacher Recruit Team';
 					$this->email->initialize($emailsetup);
 					$this->email->from($from_email, 'Teacher Recruit');
 					$this->email->to($data['registrant_email_id']);
@@ -490,7 +491,7 @@ class Job_provider extends CI_Controller {
 		$pagination["base_url"] = base_url() . "provider/postedjob";
 		$pagination["total_rows"] = $this->job_provider_model->job_provider_posted_job_counts($session_data['login_session']['pro_userid']);
 		$pagination["per_page"] = 20;
-		$pagination['use_page_numbers'] = TRUE;
+		$pagination['use_page_numbers'] = 0;
 		$pagination['num_links'] = $this->job_provider_model->job_provider_posted_job_counts($session_data['login_session']['pro_userid']);
 		$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
 		$pagination['cur_tag_close'] = '</a></li>';
@@ -522,24 +523,76 @@ class Job_provider extends CI_Controller {
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";
 		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
-		$pagination["per_page"] 		= 20;
-		$pagination['use_page_numbers'] = TRUE;
+		$pagination["per_page"] 		= 1;
+		$pagination['use_page_numbers'] = 0;
 		$pagination['num_links'] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
 		$pagination['cur_tag_open'] 	= '&nbsp;<li class="active"><a>';
 		$pagination['cur_tag_close'] 	= '</a></li>';
 		$pagination['next_link'] 		= 'Next';
 		$pagination['prev_link'] 		= 'Previous';
-		$this->pagination->initialize($pagination);
-		if($this->uri->segment(3) && $this->uri->segment(3) > $pagination["total_rows"]){
-			$page = ($this->uri->segment(3))-1;
+		
+		if($this->uri->segment(3)){
+			$page = ($this->uri->segment(3));
 		}
 		else{
 			$page = 0;
 		}
-		$data["candidates"] = $this->job_provider_model->all_candidate_list($pagination["per_page"], $page,$data['organization']['organization_institution_type_id']);
-		$str_links = $this->pagination->create_links();
-		$data["links"] = explode('&nbsp;',$str_links );
-		$this->load->view('company-dashboard-browse-candidate',$data);
+		if($_POST){
+			$this->session->set_userdata('pro_search_data', $_POST);
+		}
+		if(!empty($this->session->userdata('pro_search_data'))){
+			$provider_search_data = $this->session->userdata('pro_search_data');
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			if(isset($provider_search_data['candidate_willing_district']) && $provider_search_data['candidate_willing_district'] != ''){
+				$this->form_validation->set_rules('candidate_willing_district', 'District', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_mother_tongue']) && $provider_search_data['candidate_mother_tongue'] != ''){
+				$this->form_validation->set_rules('candidate_mother_tongue', 'Mother tongue', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_experience']) && $provider_search_data['candidate_experience'] != ''){
+				$this->form_validation->set_rules('candidate_experience', 'Experience', 'trim|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_posting_name']) && $provider_search_data['candidate_posting_name'] != ''){
+				$this->form_validation->set_rules('candidate_posting_name', 'Posting', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_nationality']) && $provider_search_data['candidate_nationality'] != ''){
+				$this->form_validation->set_rules('candidate_posting_name', 'Nationality', 'trim|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_religion']) && $provider_search_data['candidate_religion'] != ''){
+				$this->form_validation->set_rules('candidate_religion', 'Religion', 'trim|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_tet_status']) && $provider_search_data['candidate_tet_status'] != ''){
+				$this->form_validation->set_rules('candidate_tet_status', 'TET status', 'trim|numeric|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_subject']) && $provider_search_data['candidate_subject'] != ''){
+				$this->form_validation->set_rules('candidate_subject', 'Subject', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_qualification']) && $provider_search_data['candidate_qualification'] != ''){
+				$this->form_validation->set_rules('candidate_qualification', 'Qualification', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			}
+			if(isset($provider_search_data['candidate_salary']) && $provider_search_data['candidate_salary'] != ''){
+				$this->form_validation->set_rules('candidate_salary', 'Salary', 'trim|xss_clean');
+			}
+			$this->form_validation->run();
+			$data["candidates"] = $this->job_provider_model->all_candidate_list_for_search($pagination["per_page"], $page,$data['organization']['organization_institution_type_id'],$provider_search_data);
+			$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_for_search_count($data['organization']['organization_institution_type_id'],$provider_search_data);
+			$this->pagination->initialize($pagination);
+			$str_links = $this->pagination->create_links();
+			$data["links"] = explode('&nbsp;',$str_links );
+			$data['search_mode'] = $provider_search_data['candidate_search_type'];
+			$this->load->view('company-dashboard-browse-candidate',$data);
+			
+		}
+		else{
+			$data["candidates"] = $this->job_provider_model->all_candidate_list($pagination["per_page"], $page,$data['organization']['organization_institution_type_id']);
+			$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
+			$this->pagination->initialize($pagination);
+			$str_links = $this->pagination->create_links();
+			$data["links"] = explode('&nbsp;',$str_links );
+			$data['search_mode'] = 'normal';
+			$this->load->view('company-dashboard-browse-candidate',$data);
+		}
+		
 	}
 	public function changepassword(){
 		$session_data = $this->session->all_userdata();
@@ -733,6 +786,20 @@ class Job_provider extends CI_Controller {
 		
 	}
 	
+	public function candidateprofile() {
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$candidate_id = $this->uri->segment(3);
+		$institution_type_id = $data['organization']['organization_institution_type_id'];	
+		$data['candidate'] = $this->job_provider_model->candidate_full_data($candidate_id);
+		if($data['candidate']['personnal']['candidate_institution_type'] == $institution_type_id){
+			$this->load->view('company-dashboard-candidate-detail',$data);
+		}
+		else{
+			$this->load->view('404page');
+		}
+ 	}
+	
 	/* custom validataion rules */
 	public function valid_date($date)
 	{
@@ -858,7 +925,5 @@ class Job_provider extends CI_Controller {
 			}   	
 		}
 
-      public function singleprofile() {
-      	 $this->load->view('company-dashboard-job-detail');
-      }
+      
 }

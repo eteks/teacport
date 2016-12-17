@@ -4,7 +4,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                        <h3>Job Detail</h3>
+                        <h3>Candidate Detail</h3>
                     </div>
                     <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                         <div class="bread">
@@ -13,7 +13,7 @@
                                 </li>
                                 <li><a href="<?php echo base_url(); ?>job_provider/dashboard">Dashboard</a>
                                 </li>
-                                <li class="active">Job Detail</li>
+                                <li class="active">Candidate Detail</li>
                             </ol>
                         </div>
                     </div>
@@ -27,44 +27,16 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="images/company/logo1.jpg" alt="Image">
+                                    <img class="img-responsive center-block" src="<?php echo $organization['organization_logo'];?>" alt="Image">
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
-                                    <h4>School Name</h4>
+                                    <h4><?php echo $organization['organization_name']; ?></h4>
                                 </div>
                             </div>
-                            <div class="profile-nav">
-                                <div class="panel">
-                                     <ul class="nav nav-pills nav-stacked">
-                                        <li>
-                                            <a href="company-dashboard.html"> <i class="fa fa-user"></i> Dashboard</a>
-                                        </li>
-                                        <li>
-                                            <a href="company-dashboard-resume.html"> <i class="fa fa-file-o"></i>Inbox </a>
-                                        </li>
-                                        <li class="active">
-                                            <a href="company-dashboard-browse-jobs.html"> <i class="fa  fa-list-ul"></i> Browse Candidate</a>
-                                        </li>
-                                        <li class="provider-jobs">
-                                            <a href="company-dashboard-post-jobs.html"> <i class="fa  fa-list-alt"></i>Jobs</a>
-                                            <ul>
-		                                        <li><a href="company-dashboard-post-jobs.html"><i class="fa  fa-list-alt"></i>New Jobs</a></li>
-		                                        <li><a href="company-dashboard-browse-jobs.html"> <i class="fa  fa-list-alt"></i>Post Jobs</a></li>
-	                                        </ul>
-	                                    </li>   
-	                                   <li>
-                                            <a href="company-dashboard-subscription.html"><i class="fa fa-money"></i> Subscribe Plan </a>
-                                        </li>
-                                        <li>
-                                            <a href="company-dashboard-feedback.html"><i class="fa fa-commenting-o"></i> Feedback </a>
-                                        </li>
-                                        <li>
-                                            <a href="company-dashboard-changepwd.html"><i class="fa fa-key" aria-hidden="true"></i> Change Password </a>
-                                        </li>
-                                     </ul>
-                                </div>
-                            </div>
+                             <!--include left panel menu-->
+                            <?php include('include/company_dashboard_sidebar.php'); ?>
                         </div>
+                        <?php //echo "<pre>"; print_r($candidate); echo"</pre>"; ?>;
                         <div id="company-browse-candidate" class="col-md-8 col-sm-8 col-xs-12">
                         	<div class="heading-inner first-heading">
                                 <p class="title">Profile Detail</p>
@@ -81,57 +53,57 @@
 				                           	 	<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Name of the Candidate</span>
 				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">	XXX </div>
+													<div class="col-sm-7">	<?php echo ucfirst($candidate['personnal']['candidate_name']); ?> </div>
 												</div>											
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Gender </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> Male </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_gender']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Date of Birth </span>
 													<span class="col-sm-1"> : </span>
-													<div class="col-sm-7"> 21.03.1992 </div>
+													<div class="col-sm-7"> <?php echo $candidate['personnal']['candidate_date_of_birth']; ?> </div>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Father's Name </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_father_name']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Marital Status </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_marital_status']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Native District  </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['living_district']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Mother Tongue</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['language_name']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Nationality  </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_nationality']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Religion </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_religion']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Communal Category </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_community']); ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Physically Handicapped Person</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_is_physically_challenged']; ?> </span>
 												</div>
 											</div> <br> <!---End personal profile-->	
 											<!--Post Preference-->

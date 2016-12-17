@@ -55,7 +55,7 @@
 	                                        </a>
 	                                        <a href="#"><span class="comp-name"><?php echo $postedjobs['vacancies_available']; ?> vancancies, <?php echo $postedjobs['vacancies_experience']; ?></span></a>
 	                                    </div>
-	                                    <p><?php echo $postedjobs['vacancies_instruction']; ?>.......<a href="#">Read More</a> </p>
+	                                    <p><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?>.......<a href="#">Read More</a> </p>
 	                                </div>
 	                                <div class="job-salary">
 	                                    <i class="fa fa-money"></i> &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>

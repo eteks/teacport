@@ -166,6 +166,9 @@ class Admin_users extends CI_Controller {
 		}
 		else {
 			$data['group_values'] = $data_values['group_values'];
+			//code To check mapping already exists
+			$data['mapped_status'] = $this->admin_users_model->user_groups('mapping')['mapped_status'];
+			// print_r($data['mapped_status']);
 			$this->load->view('admin/user_groups',$data);
 		}
 	}

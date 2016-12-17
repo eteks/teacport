@@ -70,6 +70,7 @@ $route['provider/inbox/messagecount'] 					= 'job_provider/inbox_message_count';
 $route['provider/inbox/fulldata'] 						= 'job_provider/inbox_message_full_data';
 $route['provider/candidate'] 							= 'job_provider/browse_candidate';
 $route['provider/candidate/(:num)'] 					= 'job_provider/browse_candidate/$1';
+$route['provider/candidateprofile/(:num)'] 				= 'job_provider/candidateprofile/$1';
 $route['provider/postjob'] 								= 'job_provider/postjob';
 $route['provider/postedjob'] 							= 'job_provider/postedjob';
 $route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';
@@ -91,12 +92,14 @@ $route['seeker/findjob'] 								= 'job_seeker/findjob';
 $route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';
 $route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
 $route['seeker/jobsapplied/(:num)'] 					= 'job_seeker/jobsapplied/$1';
+$route['seeker/jobsapplieddetails/(:num)'] 				= 'job_seeker/applynow/$1';
 $route['seeker/applynow'] 								= 'job_seeker/applynow';
 $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 $route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
 $route['seeker/inbox/message'] 							= 'job_seeker/inbox_message';
 $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
+$route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
