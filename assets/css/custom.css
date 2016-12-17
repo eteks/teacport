@@ -2,10 +2,6 @@
 .mega-menu .menu-links > li > a {
    font-size: 16px;
 }
-.slidershow-bg {
-    background-color: transparent !important;
-    height: 500px !important;
-}
 /* Custom Select field */
 .select2-search__field {
 	display: none;
@@ -91,6 +87,12 @@
 	position: absolute;
 	top: 0;
 	width: 100%;
+}
+.login-page-4 .form-group{
+	margin-bottom: 5px;
+}
+.captcha_holder {
+	margin-top: 13px;
 }
 .loginbox-terms {
     margin: 10px 0;
@@ -447,6 +449,15 @@ select:invalid {
 #normalsearch_act .btn-default, #candidate_nos_act .btn-default{
 	margin-top: 0px !important;
 	padding: 19px 30px;
+}
+/* Subcription */
+#plandetail_act .modal-dialog {
+    margin: 30px auto;
+    width: 1200px !important;
+}
+.plan_status {
+	font-size: 25px;
+	color: #009900;
 }
 /* END OF COMPANY DASHBOARD */
 

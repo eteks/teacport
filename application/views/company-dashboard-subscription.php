@@ -97,7 +97,7 @@
 			                        <?php } ?>
 			                    </div> 
 			                 </div>  
-			                    
+			                     
 		                    <!--Proceed to payment-->
 		                    <div class="col-sm-offset-9 col-sm-1">
 		                    	<?php 
@@ -122,6 +122,209 @@
 		                    <?php } else {?>
 			                 	<div><h2>No subscription plan available!</h2></div>
 			                 <?php } ?>
+			                 
+			                 
+			                 
+			                 
+			                  <div class="col-sm-6">
+			                 	<button class="btn" data-toggle="modal" data-target="#plandetail_act"  data-backdrop="static" data-keyboard="false"> View Plan Details </button>
+			                 </div>	
+			                 
+			                 <!-- Modal -->
+					  <div class="modal fade" id="plandetail_act" role="dialog">
+					    <div class="modal-dialog">
+					      <!-- Modal content-->
+					      <div class="modal-content">
+					        <div class="modal-header">
+					        	<a class="pull-right" href="index.html"><i class="fa fa-close"></i></a>
+					          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+					          <h3 class="modal-title">You are on <strong class="info"> BASIC PLAN ! </strong> </h3>
+					        </div>
+					        <div class="modal-body">
+					        	
+					        	<!--PlanDetail Content Carousel Starts-->
+					        	<div id="ca-container" class="ca-container">
+					        	<div class="ca-wrapper">
+					        		<div class="ca-item ca-item-1">
+										<div class="ca-item-main">
+											<h3><span class="plan_status"><i class="fa fa-check" aria-hidden="true"></i></span> Active Plan</h3>
+											<h4>
+												<span class="ca-quote">&ldquo;</span>
+												<span class=""> Subscription Price </span><br>
+										        <span class=""> Subscription Start Date </span><br>
+										        <span class=""> Subscription End Date </span><br>
+										        <span class=""> Transaction Id </span><br>
+										        <span class=""> Subscription Status </span><br>
+										        <span class=""> Subscription Created Date </span>
+											</h4>
+												<a href="#" class="ca-more">more...</a>
+										</div>
+										<div class="ca-content-wrapper">
+											<div class="ca-content">
+												<h6>Plan Details</h6>
+												<a href="#" class="ca-close">close</a>
+												<div class="col-sm-12">
+													<div class="col-sm-6 ca-content-text">
+														<span>Subscription Price :  &#8377 price </span><br>
+												        <span>Subscription Start Date :  start date </span><br>
+												        <span> Subscription End Date :  end date </span><br>
+												        <span> Transaction Id : transaction id </span><br>
+												        <span class='subscription_status'>Subscription Status :  Active </span><br>
+												        <span class=""> Subcription created date : 21/11/16</span>
+												        
+													</div>
+													<ul class="col-sm-6 plan_options">
+														<li><a href="#">Upgrade</a></li>
+														<li><a href="#">Renew</a></li>
+														<li><a href="#">Inactive</a></li>
+													</ul>
+												</div>	
+											</div>
+										</div>
+									</div>
+									<div class="ca-item ca-item-2">
+										<div class="ca-item-main">
+											<h3>Upgrade Plan</h3>
+											<h4>
+												<span class="ca-quote">&ldquo;</span>
+												<span class=""> Subscription Price </span><br>
+										        <span class=""> Subscription Start Date </span><br>
+										        <span class=""> Subscription End Date </span><br>
+										        <span class=""> Transaction Id </span><br>
+										        <span class=""> Subscription Status </span><br>
+										        <span class=""> Subscription Created Date </span>
+											</h4>
+												<a href="#" class="ca-more">more...</a>
+										</div>
+										<div class="ca-content-wrapper">
+											<div class="ca-content">
+												<h6>Plan Detail</h6>
+												<a href="#" class="ca-close">close</a>
+												<div class="ca-content-text">
+													<span class=""> &#8377 price </span><br>
+											        <span class=""> start date </span><br>
+											        <span class=""> end date </span><br>
+											        <span class=""> transaction id </span><br>
+											        <span class='subscription_status'> <span class='icon'> Active <span> </span><br>
+											        <span class=""> Subcription created date </span>
+												</div>
+												<ul>
+													<li><a href="#">Upgrade</a></li>
+													<li><a href="#">Renew</a></li>
+													<li><a href="#">Inactive</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="ca-item ca-item-3">
+										<div class="ca-item-main">
+											<h3>Renewal Plan</h3>
+											<h4>
+												<span class="ca-quote">&ldquo;</span>
+												<span class=""> Subscription Price </span><br>
+										        <span class=""> Subscription Start Date </span><br>
+										        <span class=""> Subscription End Date </span><br>
+										        <span class=""> Transaction Id </span><br>
+										        <span class=""> Subscription Status </span><br>
+										        <span class=""> Subscription Created Date </span>
+											</h4>
+												<a href="#" class="ca-more">more...</a>
+										</div>
+										<div class="ca-content-wrapper">
+											<div class="ca-content">
+												<h6>Plan Detail</h6>
+												<a href="#" class="ca-close">close</a>
+												<div class="ca-content-text">
+													<span class=""> &#8377 price </span><br>
+											        <span class=""> start date </span><br>
+											        <span class=""> end date </span><br>
+											        <span class=""> transaction id </span><br>
+											        <span class='subscription_status'> <span class='icon'> Active <span> </span><br>
+											        <span class=""> Subcription created date </span>
+												</div>
+												<ul>
+													<li><a href="#">Upgrade</a></li>
+													<li><a href="#">Renew</a></li>
+													<li><a href="#">Inactive</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="ca-item ca-item-4">
+										<div class="ca-item-main">
+											<h3>Upgrade Plan</h3>
+											<h4>
+												<span class="ca-quote">&ldquo;</span>
+												<span class=""> Subscription Price </span><br>
+										        <span class=""> Subscription Start Date </span><br>
+										        <span class=""> Subscription End Date </span><br>
+										        <span class=""> Transaction Id </span><br>
+										        <span class=""> Subscription Status </span><br>
+										        <span class=""> Subscription Created Date </span>
+											</h4>
+												<a href="#" class="ca-more">more...</a>
+										</div>
+										<div class="ca-content-wrapper">
+											<div class="ca-content">
+												<h6>Plan Detail</h6>
+												<a href="#" class="ca-close">close</a>
+												<div class="ca-content-text">
+													<span class=""> &#8377 price </span><br>
+											        <span class=""> start date </span><br>
+											        <span class=""> end date </span><br>
+											        <span class=""> transaction id </span><br>
+											        <span class='subscription_status'> <span class='icon'> Active <span> </span><br>
+											        <span class=""> Subcription created date </span>
+												</div>
+												<ul>
+													<li><a href="#">Upgrade</a></li>
+													<li><a href="#">Renew</a></li>
+													<li><a href="#">Inactive</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+									<div class="ca-item ca-item-5">
+										<div class="ca-item-main">
+											<h3>Renewal Plan</h3>
+											<h4>
+												<span class="ca-quote">&ldquo;</span>
+												<span class=""> Subscription Price </span><br>
+										        <span class=""> Subscription Start Date </span><br>
+										        <span class=""> Subscription End Date </span><br>
+										        <span class=""> Transaction Id </span><br>
+										        <span class=""> Subscription Status </span><br>
+										        <span class=""> Subscription Created Date </span>
+												
+											</h4>
+												<a href="#" class="ca-more">more...</a>
+										</div>
+										<div class="ca-content-wrapper">
+											<div class="ca-content">
+												<h6>Plan Detail</h6>
+												<a href="#" class="ca-close">close</a>
+												<div class="ca-content-text">
+													<span class=""> &#8377 price </span><br>
+											        <span class=""> start date </span><br>
+											        <span class=""> end date </span><br>
+											        <span class=""> transaction id </span><br>
+											        <span class='subscription_status'> <span class='icon'> Active <span> </span><br>
+											        <span class=""> Subcription created date </span>
+												</div>
+												<ul>
+													<li><a href="#">Upgrade</a></li>
+													<li><a href="#">Renew</a></li>
+													<li><a href="#">Inactive</a></li>
+												</ul>
+											</div>
+										</div>
+									</div>
+								 </div>
+							</div>  <!--PlanDetail Content Carousel Ends-->
+			                 
+			                 
+			                 
+			                 
                         </div> <!--End right panel-->
                     </div>
                 </div> <!--row-->
