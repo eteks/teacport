@@ -1,7 +1,7 @@
 <?php include ('include/header.php'); ?>
 <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap-datepicker.css">
 <?php include('include/menus.php'); ?>
-<?php //echo "<pre>"; print_r($this->session->all_userdata());print_r($user_data); echo "</pre>"; ?> 
+<?php // echo "<pre>"; print_r($providerlogo);print_r($organizationlogo); echo "</pre>"; ?> 
 <section class="job-breadcrumb">
 	<div class="container">
 		<div class="row">
@@ -73,7 +73,7 @@
 								<label class="col-sm-4" for="organization_name">Organization Name : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_name'); ?>
-									<input id="instituition_name" class="form-control" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; ?>" placeholder="Institution Name" type="text">
+									<input id="instituition_name" class="form-control" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; elseif (set_value('organization_name') !='') { echo set_value('organization_name'); } ?>" placeholder="Institution Name" type="text">
 								</div>
 							</div>
                             
@@ -81,21 +81,21 @@
 								<label class="col-sm-4" for="address-line1">Address Line1 : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line1'); ?>
-									<input id="address-line1" class="form-control" maxlength="30" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; ?>" placeholder="Building No / Road / Street" type="text">
+									<input id="address-line1" class="form-control" maxlength="30" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; elseif (set_value('address-line1') != '') { echo set_value('address-line1'); } ?>" placeholder="Building No / Road / Street" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="address-line2">Address Line2 : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line2'); ?>
-									<input id="address-line2" class="form-control" maxlength="30" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; ?>" placeholder="Locality / Area / Village" type="text">
+									<input id="address-line2" class="form-control" maxlength="30" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; elseif (set_value('address-line2') !='') { echo set_value('address-line2'); } ?>" placeholder="Locality / Area / Village" type="text">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="address-line3">Address Line3 : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line3'); ?>
-									<input id="address-line2" class="form-control" maxlength="30" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; ?>" placeholder="Taluk / City" type="text">
+									<input id="address-line2" class="form-control" maxlength="30" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
 								</div>
 							</div>
 							<div class="form-group">
@@ -108,6 +108,9 @@
 										foreach ($district as $value) {
 											if($organization['organization_district_id'] == $value['district_id']){
 												echo '<option value="'.$value['district_id'].'" selected>'.$value['district_name'].'</option>';
+											}
+											elseif(set_select('organization_district', $value['district_id']) != ''){
+												echo '<option value="'.$value['district_id'].'" '.set_select('organization_district', $value['district_id']).'>'.$value['district_name'].'</option>';
 											}
 											else{
 												echo '<option value="'.$value['district_id'].'">'.$value['district_name'].'</option>';
@@ -131,14 +134,14 @@
 								<label class="col-sm-4" for="firstname">Registrant Name : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
-									<input id="firstname" class="form-control" maxlength="30" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; ?>" placeholder="Full Name">
+									<input id="firstname" class="form-control" maxlength="30" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="designation">Registrant Designation : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_designation'); ?>
-									<input id="designation" class="form-control" maxlength="30" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; ?>" placeholder="ex. Principal / Correspondent">
+									<input id="designation" class="form-control" maxlength="30" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; elseif (set_value('provider_designation')!= '') { echo set_value('provider_designation'); } ?>" placeholder="ex. Principal / Correspondent">
 								</div>
 							</div>
 							<div class="form-group">
@@ -146,7 +149,7 @@
 								<div class="col-sm-4">
 									<?php echo form_error('provider_dob'); 
 									?>
-									<input id="dob" class="form-control provider_date_of_birth" name="provider_dob" size="40" value="<?php if($organization['registrant_date_of_birth'] != '' && $organization['registrant_date_of_birth'] != '0000-00-00'){ $dobsplit = explode('-',$organization['registrant_date_of_birth']); echo $dobsplit[2].'/'.$dobsplit[1].'/'.$dobsplit[0]; } ?>" placeholder="DOB" type="text">
+									<input id="dob" class="form-control provider_date_of_birth" name="provider_dob" size="40" value="<?php if($organization['registrant_date_of_birth'] != '' && $organization['registrant_date_of_birth'] != '0000-00-00'){ $dobsplit = explode('-',$organization['registrant_date_of_birth']); echo $dobsplit[2].'/'.$dobsplit[1].'/'.$dobsplit[0];  } elseif (set_value('provider_dob') != '') { echo set_value('provider_dob'); } ?>" placeholder="DOB" type="text">
 								</div>
 								<div class="col-sm-4"></div>
 							</div>

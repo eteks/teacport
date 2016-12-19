@@ -451,8 +451,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span3 plan_field_section">     
                               <h4 class="">Renewal Plan</h4>
                               <label class=""> &#8377  </label>
-                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
-                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['org_sub_validity_start_date'])); ?> </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['org_sub_validity_end_date'])); ?> </label>
                               <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
                               <?php
                               if($up_re_val['status'] == 1) :
