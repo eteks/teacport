@@ -20,7 +20,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN THEME CUSTOMIZER-->
-          <div id="theme-change" class="hidden-phone">
+          <!--<div id="theme-change" class="hidden-phone">
             <i class="icon-cogs"></i>
             <span class="settings">
               <span class="text">Theme:</span>
@@ -31,7 +31,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <span class="color-navy-blue" data-style="navy-blue"></span>
               </span>
             </span>
-          </div>
+          </div> -->
           <!-- END THEME CUSTOMIZER-->
           <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
           <h3 class="page-title">
@@ -88,7 +88,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
-                    echo "<p class='db_status'> $status </p>";
+                    echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
                   endif;
                   ?> 
                   <p class='val_error'> <p>

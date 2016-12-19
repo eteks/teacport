@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
-                    echo "<p class='db_status update_success_md'> $status </p>";
+                    echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
                   endif;
                   ?> 
                   <p class='val_error error_msg_md'> <p>
@@ -82,7 +82,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <thead>
                       <tr class="ajaxTitle">
                         <th>Language</th>
-                        <th>Is Mother Tangue?</th>
+                        <th>Is Mother Tongue?</th>
                         <th>Is Medium of Instruction?</th>
                         <th>Status</th>
                         <th>Created Date</th>

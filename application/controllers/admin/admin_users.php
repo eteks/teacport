@@ -281,6 +281,9 @@ class Admin_users extends CI_Controller {
 			$result['error'] = $data['error'];
 			// print_r($data_ajax['group_values']);
 			$result['output'] = $this->load->view('admin/user_accounts',$data_ajax,true);
+			$session_data = $this->session->userdata('admin_login_session');
+			if($_POST['admin_user_email'] == $session_data["admin_user_email"])
+				$result['session_data'] = true;
 			echo json_encode($result);
 		}
 		else {
