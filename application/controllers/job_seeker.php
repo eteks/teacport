@@ -485,6 +485,15 @@ class Job_seeker extends CI_Controller {
 
 	public function edit_profile_validation_ajax() {
    		$action = "update"	;
+   		// Experience Validation
+   		if(!$this->input->post('cand_fresh')) {
+			$validation_fields = array(	
+				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
+						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
+				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
+				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2}$/]'),
+				    );
+		}
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
 			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean'),
@@ -529,14 +538,7 @@ class Job_seeker extends CI_Controller {
 	    	array('field' => 'cand_accept', 'label' => 'Accept Terms & Condition','rules' => 'required|trim|xss_clean'),
 	    	array('field' => 'cand_resume', 'label' => 'Resume','rules' => 'callback_validate_file_type['.$action.'.cand_resume]'),
 		);
-		if(!$this->input->post('cand_fresh')) {
-			$validation_fields = array(	
-				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
-						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
-				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
-				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2}$/]'),
-				    );
-		}
+		
 		$this->form_validation->set_rules($validation_fields);
 		if($this->form_validation->run() == FALSE) {
 			foreach($validation_fields as $row){

@@ -7,6 +7,8 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_provider_model','common_model'));
+		$this->load->library("ajax_pagination");
+		$this->perPage = 2;
     }
 
 	/**
@@ -79,6 +81,31 @@ class Home extends CI_Controller {
     	$categories['search_results'] = $this->common_model->get_search_list();
         $this->load->view('vacancies',$categories);
     }
+
+    public function search_results() {
+    	// Get offset
+        $offset = ($this->input->post('page')) ? $this->input->post('page') : 0;
+        $search_results = $this->common_model->get_search_results($this->perPage, $offset);
+    	$totalRec = $search_results['total_rows'];
+    	$data["search_results"] = $search_results['search_results'];
+       
+        // Pagination Configuration
+        $config['target']      = '#searchlist';
+        $config['base_url']    = base_url().'search';
+        $config['total_rows']  = $totalRec;
+        $config['per_page']    = $this->perPage;
+        $this->ajax_pagination->initialize($config);
+        
+       //load the view
+        $this->load->view('search_result', $data);
+  
+        
+        //load the view
+        // $this->load->view('search_result', $data, false);
+
+	}
+
+
 	public function informations()
 	{
 		$this->load->view('information');

@@ -11,6 +11,9 @@ class Common_model extends CI_Model {
 		$allinstitutions = $this->db->get_where('tr_institution_type', array('institution_type_status' => '1'))->result_array();
 		return $allinstitutions;
 	}
+
+
+
     public function get_search_list()
     {
         if ($this->input->post('search_keyword')) {
@@ -32,6 +35,52 @@ class Common_model extends CI_Model {
 			};
         return $query;
     }
+
+    public function get_search_results($limit,$start)
+    {
+     	$status = 0;
+		if ($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
+			$status = 1;
+			if($this->input->post('search_amount') && $this->input->post('search_location')) {
+				$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$this->input->post('search_amount').'" AND op.organization_district_id="'.$this->input->post('search_location').'")';
+			}
+			else if($this->input->post('search_amount')) {
+				$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$this->input->post('search_amount').'")';
+			}
+			else if($this->input->post('search_location')) {
+				$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$this->input->post('search_location').'")';
+			}
+			else {
+				$search_where = '(ov.vacancies_status=1)';
+			}
+	        $this->db->select('*');
+            $this->db->from('tr_organization_vacancies ov');
+            $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+			$this->db->like('ov.vacancies_job_title',$this->input->post('search_keyword'));
+			$this->db->or_like('op.organization_name',$this->input->post('search_keyword'));
+            $this->db->where($search_where);
+            $this->db->limit($limit,$start);
+            $model_data['search_results'] = $this->db->get()->result_array();
+
+            //total count
+            $this->db->select('*');
+            $this->db->from('tr_organization_vacancies ov');
+            $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+			$this->db->like('ov.vacancies_job_title','test');
+			$this->db->or_like('op.organization_name','test');
+            $this->db->where($search_where);
+            $model_data['total_rows'] = $this->db->get()->num_rows();
+             
+        }
+        // if($status == 0) {
+
+        // }
+
+        return $model_data;
+
+    }
+
+
 	public function get_all_district()
 	{
 		$district = array();
