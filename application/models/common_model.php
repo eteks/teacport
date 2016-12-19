@@ -220,6 +220,20 @@ class Common_model extends CI_Model {
 			return FALSE;
 		}
 	}
-
+	/* show total count of vacancies  */
+	public function vacancies_count(){
+		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_status = 1");
+		return $posted_jobs->num_rows();
+	}
+	/* show total count of vacancies  */
+	public function candidate_count(){
+		$candidate = $this->db->query("SELECT * FROM tr_candidate_profile WHERE candidate_status = 1");
+		return $candidate->num_rows();
+	}
+	/* show total count of vacancies  */
+	public function organization_count(){
+		$organization = $this->db->query("SELECT * FROM tr_organization_profile WHERE organization_status = 1");
+		return $organization->num_rows();
+	}
 }
 

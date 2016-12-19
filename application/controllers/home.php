@@ -26,12 +26,13 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-	    $categories['job_results'] = $this->common_model->get_job_list();
-	    // $categories['count_results'] = $this->common_model->get_count_list();
-	    // echo "<pre>";
-		// print_r($categories);
-		// echo "</pre>";
-	    $this->load->view('index',$categories);
+	    $home['job_results'] = $this->common_model->get_job_list();
+		$home['totalvacancy'] = $this->common_model->vacancies_count();
+		$home['totalcandidate'] = $this->common_model->candidate_count();
+		$home['totalorganization'] = $this->common_model->organization_count();
+		$home['allposting'] = $this->common_model->applicable_posting();
+		$home['alldistrict'] = $this->common_model->get_all_district();
+	    $this->load->view('index',$home);
 	}
 	public function featured_job()
 	{
@@ -89,7 +90,8 @@ class Home extends CI_Controller {
 	}
 	//Akila Created
 	public function pricing(){
-		$this->load->view('pricing');
+		$data['subcription_plan'] = $this->common_model->subcription_plan();
+		$this->load->view('pricing',$data);
 	}
 	public function faq(){
 		$this->load->view('faq');
