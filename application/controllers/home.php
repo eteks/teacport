@@ -7,8 +7,6 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
 		$this->load->model(array('job_provider_model','common_model'));
-		$this->load->library("ajax_pagination");
-		$this->perPage = 2;
     }
 
 	/**
@@ -119,28 +117,62 @@ class Home extends CI_Controller {
         $this->load->view('vacancies',$categories);
     }
 
+	// Added By Siva
     public function search_results() {
-    	// Get offset
-        $offset = ($this->input->post('page')) ? $this->input->post('page') : 0;
-        $search_results = $this->common_model->get_search_results($this->perPage, $offset);
-    	$totalRec = $search_results['total_rows'];
-    	$data["search_results"] = $search_results['search_results'];
-       
-        // Pagination Configuration
-        $config['target']      = '#searchlist';
-        $config['base_url']    = base_url().'search';
-        $config['total_rows']  = $totalRec;
-        $config['per_page']    = $this->perPage;
-        $this->ajax_pagination->initialize($config);
-        
-       //load the view
-        $this->load->view('search_result', $data);
-  
-        
-        //load the view
-        // $this->load->view('search_result', $data, false);
 
-	}
+    	if($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
+    		$inputs = array(
+        				'keyword' => $this->input->post('search_keyword'),
+        				'amount' => $this->input->post('search_amount'),
+        				'location' => $this->input->post('search_location')
+        				);
+    		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
+    	}
+    	$search_inputs = $this->session->userdata('search_inputs'); // To get search inputs from session
+
+    	// Pagination values
+    	$per_page = 1;
+
+
+    	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
+        $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
+    	$total_rows = $search_results['total_rows'];
+    	$data["search_results"] = $search_results['search_results'];
+
+    	//pagination
+		$this->load->library('pagination');
+
+		// Pagination configuration
+  		$config['base_url'] = base_url().'search';
+		$config['per_page'] = $per_page;
+		$config['total_rows'] = $total_rows;
+		$config['uri_segment'] = 2;
+		$config['num_links'] = $total_rows;
+		$config['use_page_numbers'] = TRUE;
+
+    	// Custom Configuration
+		$config['full_tag_open'] = '<div class="full_pagination">';
+		$config['full_tag_close'] = '</div>';
+		$config['next_tag_open'] = '<span class="prev_next_pagination">';
+		$config['next_tag_close'] = '</span>';
+		$config['prev_tag_open'] = '<span class="prev_next_pagination">';
+		$config['prev_tag_close'] = '</span>';
+		$config['num_tag_open'] = '<span class="num_pagination">';
+		$config['num_tag_close'] = '</span>';
+		$config['cur_tag_open'] = '<span class="cur_pagination">';
+		$config['cur_tag_close'] = '</span>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Prev';
+
+
+		$this->pagination->initialize($config);
+
+		$pagination_links = $this->pagination->create_links();
+		$data["links"] = $pagination_links;
+       
+       	//load the view
+        $this->load->view('search_result', $data);
+  	}
 
 
 	public function informations()

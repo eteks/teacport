@@ -36,45 +36,44 @@ class Common_model extends CI_Model {
         return $query;
     }
 
-    public function get_search_results($limit,$start)
+    // Added By Siva
+    public function get_search_results($limit,$start,$data=array())
     {
-     	$status = 0;
-		if ($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
-			$status = 1;
-			if($this->input->post('search_amount') && $this->input->post('search_location')) {
-				$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$this->input->post('search_amount').'" AND op.organization_district_id="'.$this->input->post('search_location').'")';
-			}
-			else if($this->input->post('search_amount')) {
-				$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$this->input->post('search_amount').'")';
-			}
-			else if($this->input->post('search_location')) {
-				$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$this->input->post('search_location').'")';
-			}
-			else {
-				$search_where = '(ov.vacancies_status=1)';
-			}
-	        $this->db->select('*');
-            $this->db->from('tr_organization_vacancies ov');
-            $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-			$this->db->like('ov.vacancies_job_title',$this->input->post('search_keyword'));
-			$this->db->or_like('op.organization_name',$this->input->post('search_keyword'));
-            $this->db->where($search_where);
-            $this->db->limit($limit,$start);
-            $model_data['search_results'] = $this->db->get()->result_array();
 
-            //total count
-            $this->db->select('*');
-            $this->db->from('tr_organization_vacancies ov');
-            $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-			$this->db->like('ov.vacancies_job_title','test');
-			$this->db->or_like('op.organization_name','test');
-            $this->db->where($search_where);
-            $model_data['total_rows'] = $this->db->get()->num_rows();
+		if(!empty($data['amount'])  && !empty($data['location'])) {
+			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'" AND op.organization_district_id="'.$data['location'].'")';
+		}
+		else if(!empty($data['amount'])) {
+			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'")';
+		}
+		else if(!empty($data['location'])) {
+			$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$data['location'].'")';
+		}
+		else {
+			$search_where = '(ov.vacancies_status=1)';
+		}
+
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+		$this->db->like('ov.vacancies_job_title',$data['keyword']);
+		$this->db->or_like('op.organization_name',$data['keyword']);
+        $this->db->where($search_where);
+        $this->db->limit($limit,$start);
+        $model_data['search_results'] = $this->db->get()->result_array();
+
+        // echo "<pre>";
+        // print_r($model_data['search_results']);
+        // echo "</pre>";
+        //total count
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+		$this->db->like('ov.vacancies_job_title',$data['keyword']);
+		$this->db->or_like('op.organization_name',$data['keyword']);
+        $this->db->where($search_where);
+        $model_data['total_rows'] = $this->db->get()->num_rows();
              
-        }
-        // if($status == 0) {
-
-        // }
 
         return $model_data;
 
