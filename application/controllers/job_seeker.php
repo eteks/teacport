@@ -730,18 +730,6 @@ class Job_seeker extends CI_Controller {
 
 		}
 	}
-
-
-	// public function jobsapplieddetails(){		
-	// 	$data["current_jobvacancy_id"] = $this->uri->segment('3');
-	// 	if(isset($data["current_jobvacancy_id"])){
-	// 		$data["jobsapplieddetails"] = 'readonly';
-	// 		redirect('job_seeker/applynow/'.$data["current_jobvacancy_id"]);
-	// 	}else{
-	// 		redirect('missingpage');
-	// 	}
-	// }
-	
 	
 	// Change password
 	public function change_password() {
@@ -798,6 +786,42 @@ class Job_seeker extends CI_Controller {
 	public function inbox_message_full_data() {
 		$inbox_id = $this->input->post('inbox_id');	
 		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
+	}
+
+	public function feedback(){
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		if(!$_POST){
+			$this->load->view('company-dashboard-feedback',$data);
+		}
+		else{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
+			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			if ($this->form_validation->run()){
+				$feedback_data = array(
+									'feedback_form_title' => $this->input->post('feedback_subject'),
+									'feedback_form_message' => $this->input->post('feedback_content'),
+									'is_organization' => 1,
+									'is_candidate' => 0,
+									'is_guest_user' => 0,
+									'candidate_or_organization_id' => $session_data['login_session']['pro_userid'],
+									'feedback_form_status' => 1
+								);
+				if($this->job_provider_model->organization_feedback_form($feedback_data)){
+					$data['feedback_server_msg'] = 'Thanks for your valuable feedback! Our customer support representative will contact you soon!!';
+					$this->load->view('company-dashboard-feedback',$data);
+				}
+				else{
+					$data['feedback_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+					$this->load->view('company-dashboard-feedback',$data);
+				}
+			}
+			else{
+				$this->load->view('company-dashboard-feedback',$data);
+			}
+		}
+		
 	}
 
 } // End
