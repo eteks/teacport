@@ -43,11 +43,11 @@ $route['404_override'] 									= 'missingpage';
 
 // Search 
 $route['search']  										= 'home/search_results';
-$route['search/(:num)']  										= 'home/search_results/$1';
+$route['search/(:num)']  								= 'home/search_results/$1';
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';
 $route['login/provider'] 								= 'job_provider';
-$route['login/featured_job'] 										= 'home/featured_job';
+$route['login/featured_job'] 							= 'home/featured_job';
 $route['login/facebook'] 								= 'social/facebook';
 $route['login/facebookverify'] 							= 'social/facebookverify';
 $route['login/seeker/facebook'] 						= 'social/seekerfacebook';
