@@ -11,6 +11,9 @@ class Common_model extends CI_Model {
 		$allinstitutions = $this->db->get_where('tr_institution_type', array('institution_type_status' => '1'))->result_array();
 		return $allinstitutions;
 	}
+
+
+
     public function get_search_list()
     {
         if ($this->input->post('search_keyword')) {
@@ -32,6 +35,51 @@ class Common_model extends CI_Model {
 			};
         return $query;
     }
+
+    // Added By Siva
+    public function get_search_results($limit,$start,$data=array())
+    {
+
+		if(!empty($data['amount'])  && !empty($data['location'])) {
+			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'" AND op.organization_district_id="'.$data['location'].'")';
+		}
+		else if(!empty($data['amount'])) {
+			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'")';
+		}
+		else if(!empty($data['location'])) {
+			$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$data['location'].'")';
+		}
+		else {
+			$search_where = '(ov.vacancies_status=1)';
+		}
+
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+		$this->db->like('ov.vacancies_job_title',$data['keyword']);
+		$this->db->or_like('op.organization_name',$data['keyword']);
+        $this->db->where($search_where);
+        $this->db->limit($limit,$start);
+        $model_data['search_results'] = $this->db->get()->result_array();
+
+        // echo "<pre>";
+        // print_r($model_data['search_results']);
+        // echo "</pre>";
+        //total count
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+		$this->db->like('ov.vacancies_job_title',$data['keyword']);
+		$this->db->or_like('op.organization_name',$data['keyword']);
+        $this->db->where($search_where);
+        $model_data['total_rows'] = $this->db->get()->num_rows();
+             
+
+        return $model_data;
+
+    }
+
+
 	public function get_all_district()
 	{
 		$district = array();
@@ -197,7 +245,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_organization_subscription');
 		$this->db->join('tr_subscription', 'tr_subscription.subscription_id = tr_organization_subscription.subscription_id');
-		$where = "(organization_id = '".$org_id."' AND validity_start_date <= CURRENT_DATE() AND  validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
+		$where = "(organization_id = '".$org_id."' AND org_sub_validity_start_date <= CURRENT_DATE() AND  org_sub_validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
 		$this->db->where($where);
 		$providersubcription = $this->db->get();
 		return $providersubcription->row_array(); 
