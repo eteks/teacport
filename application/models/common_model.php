@@ -97,11 +97,11 @@ class Common_model extends CI_Model {
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
 	}
-	public function qualification_by_institution($ins_id,$course_type = 'ug')
+	public function qualification_by_institution($ins_id)
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_educational_qualification');
-		$where = "(educational_qualifcation_inst_type_id = '".$ins_id."' AND educational_qualification_course_type = '".$course_type."' AND educational_qualification_status='1')";
+		$where = "(educational_qualifcation_inst_type_id = '".$ins_id."' AND educational_qualification_status='1')";
 		$this->db->where($where);
 		$educationdata = $this->db->get();
 		return $educationdata->result_array(); 
@@ -255,5 +255,20 @@ class Common_model extends CI_Model {
 		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_organization_id =".$org_id);
 		return $posted_jobs->num_rows();
 	}
+	public function organization_details($org_id){
+		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_profile WHERE organization_id =".$org_id);
+		return $posted_jobs->row_array();
+
+	}
+	public function guest_user_feedback($contact_us_data)
+	{
+		if($this->db->insert('tr_feedback_form',$contact_us_data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+
 }
 

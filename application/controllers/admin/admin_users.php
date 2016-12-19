@@ -166,6 +166,10 @@ class Admin_users extends CI_Controller {
 		}
 		else {
 			$data['group_values'] = $data_values['group_values'];
+			//code To check mapping already exists
+			$data['mapped_status'] = $this->admin_users_model->user_groups('mapping')['mapped_status'];
+			// print_r($data['mapped_status']);
+			// print_r($data);
 			$this->load->view('admin/user_groups',$data);
 		}
 	}
@@ -219,7 +223,7 @@ class Admin_users extends CI_Controller {
 	                            array(
 	                                 'field'   => 'admin_user_email',
 	                                 'label'   => 'User Email',
-	                                 'rules'   => 'trim|required|xss_clean|valid_email|is_unique[tr_admin_users.admin_user_name]'
+	                                 'rules'   => 'trim|required|xss_clean|valid_email|is_unique[tr_admin_users.admin_user_email]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_group',
