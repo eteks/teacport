@@ -69,7 +69,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="portlet-body">
                                 <div class="clearfix">
                                 </div>
-                                
+                                <form>
                                   <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">

@@ -153,6 +153,7 @@ class Job_seeker extends CI_Controller {
 				else{
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
    					$fb['fbloginurl'] = $common->facebookloginurl_seeker();
+					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-seekers-login',$fb);
 				}
 			}
@@ -233,6 +234,7 @@ class Job_seeker extends CI_Controller {
 						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
+						$data['institutiontype'] = $this->common_model->get_institution_type();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$this->load->view('job-seekers-login',$fb);
 					}
@@ -366,37 +368,43 @@ class Job_seeker extends CI_Controller {
 	}
 
 	public function forgot_password()
-	{
+	{ 
+		$ci =& get_instance();	
+		$ci->config->load('email', true);
+		$emailsetup = $ci->config->item('email');
+		$this->load->library('email', $emailsetup);
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
-			/* Check whether registration form server side validation are valid or not */
-			if ($this->form_validation->run() == FALSE){
-				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-				$this->load->view('forgot-password');
-			}
-			else{
-
-            $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
-      		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
-				if(count($forget_query) != 0) {
-					$config['protocol'] = 'smtp';
-					$config['smtp_host'] = 'smtp.googlemail.com';
-					$config['smtp_port'] = 25;
-					$config['smtp_user'] = $forget_query['registrant_email_id'];
-					$config['smtp_pass'] = '********';          
-					$this->load->library('email', $config);   
-					$this->email->from('thangamgold45@gmail.com', 'Thangam');
-					$this->email->to($config['smtp_user']);           
-					$this->email->subject('Get your forgotten Password');
-					$this->email->message("Your registered password is ".$forget_query['registrant_password']);
-					$this->email->send();
-					$data['reg_server_msg'] = "Mail has sent successfully";
-					$this->load->view('forgot-password-seeker',$data);
-				} else {
-					$data['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+		/* Check whether registration form server side validation are valid or not */
+		if ($this->form_validation->run() == FALSE){
+			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$this->load->view('forgot-password');
+		}
+		else{
+	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
+	  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
+	      	if($forget_query['candidate_password'] != '') {
+				$from_email = $emailsetup['smtp_user'];
+				$this->email->initialize($emailsetup);
+				$this->email->from($from_email, 'Teacher Recruit');
+				$this->email->to($forget_query['candidate_email']);
+	        	$this->email->subject('Get your forgotten Password');
+	       		$this->email->message("Your registered password is ".$forget_query['candidate_password']);
+	        	if($this->email->send()){
+		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$this->load->view('forgot-password',$data);
+	        	}
+				else{
+					show_error($this->email->print_debugger());
+					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
 					$this->load->view('forgot-password',$data);
 				}
-			}   		
+	      	}
+			else{
+				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$this->load->view('forgot-password',$data);
+			}
+		}   	 		
 	}
 
 	/** Seeker Inital Data Validation With Pop-up **/		

@@ -354,6 +354,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->select('registrant_password');
 		$this->db->from('tr_organization_profile');
 		$where = "(organization_id='".$providerid."')";
+		$this->db->where($where);
 		$org_profiledata = $this->db->get()->row_array();
 		if($oldpassword === $org_profiledata['registrant_password']){
 			return TRUE;

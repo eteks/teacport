@@ -6,7 +6,7 @@
 
 			<!-- JAVASCRIPT JS  -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-2.2.3.min.js"></script>
-
+			
 			<!-- BOOTSTRAP CORE JS -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 			
@@ -48,10 +48,24 @@
 			<!-- CORE JS -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+			
+			<!--SubscriptionPlan carousel-->
+			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.6.2.min.js"></script> -->
+			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.easing.1.3.js"></script>
+			<!-- the jScrollPane script -->
+			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.mousewheel.js"></script>
+			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.contentcarousel.js"></script>
+			<script type="text/javascript">
+				$('#ca-container').contentcarousel();
+			</script>
+			
+			
 			<script type="text/javascript">
 			  var baseurl = "<?php echo base_url(); ?>";
+
 			  var csrf_token_value = "<?php echo $this->security->get_csrf_hash(); ?>";
 			</script>			
+
 			<script src="<?php echo base_url(); ?>assets/js/ajax-call.js"></script>
 			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fine-uploader.min.js"></script>		 -->
 			
