@@ -125,15 +125,8 @@ class Home extends CI_Controller {
 	}
 	public function vacancies()
 	{
-		$session_data = $this->session->all_userdata();
-		if(isset($session_data['login_session']))
-		{
-			$categories['search_results'] = $this->common_model->get_search_list();
+		$categories['search_results'] = $this->common_model->get_search_list();
         $this->load->view('vacancies',$categories);
-		}
-	    else {
-		    redirect('login/seeker');
-		}
 		
 	}
 	public function search_section()
