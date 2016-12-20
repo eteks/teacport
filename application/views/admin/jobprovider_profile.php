@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -79,7 +82,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Organization Name </th>
                           <th> Registrant Name </th>
                           <th> Profile Completeness </th>
-                          <th> Subcription Plan </th>
+                          <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
                           <th> Created Date</th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -109,15 +112,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <td class="">
                             <?php echo $pro_val['organization_profile_completeness']." %"; ?>      
                           </td>
-                          <td class="">
+                          <!-- <td class="">
                             <?php 
-                            if(!empty($pro_val['subscription_plan'])) :
-                              echo $pro_val['subscription_plan'];
-                            else :
-                              echo "Null";
-                            endif;
+                            // if(!empty($pro_val['subscription_plan'])) :
+                            //   echo $pro_val['subscription_plan'];
+                            // else :
+                            //   echo "Null";
+                            // endif;
                             ?>   
-                          </td>
+                          </td> -->
                           <td class="">
                             <?php 
                             if($pro_val['organization_status']==1) :
@@ -208,7 +211,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <span class="desc"><i class="icon-ok"></i>Payment <br/> Details</span>
                             </a>
                           </li>
-                          <li class="span-2">
+                          <!-- <li class="span-2">
                             <a href="#tab4" data-toggle="tab" class="step">
                             	<span class="number">4</span>
                               <span class="desc"><i class="icon-ok"></i>Addtional <br/> Details</span>
@@ -219,7 +222,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <span class="number">5</span>
                               <span class="desc"><i class="icon-ok"></i>Validity <br/> Details</span>
                             </a>
-                          </li>
+                          </li> -->
                           <?php
                           else :
                           ?>
@@ -256,14 +259,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_name']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['organization_name'])) :
+                              echo $provider_full_profile['organization_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Organization Logo</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_logo']; ?>
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" />
+                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo not loaded" />
                           </span>
                         </div>
                       </div>
@@ -271,13 +279,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Address1</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_address_1']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['organization_address_1'])) :
+                              echo $provider_full_profile['organization_address_1']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Organization Address2</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_address_2']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['organization_address_2'])) :
+                              echo $provider_full_profile['organization_address_2']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -285,13 +305,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Address3</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_address_3']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['organization_address_3'])) :
+                              echo $provider_full_profile['organization_address_3']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">District Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['district_name']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['district_name'])) :
+                              echo $provider_full_profile['district_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -299,7 +331,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Institution Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['institution_type_name']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['institution_type_name'])) :
+                              echo $provider_full_profile['institution_type_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -322,13 +360,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_name']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['registrant_name'])) :
+                              echo $provider_full_profile['registrant_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?> 
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Register Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_register_type']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['registrant_register_type'])) :
+                              echo $provider_full_profile['registrant_register_type']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -336,13 +386,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Designation</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_designation']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['registrant_designation'])) :
+                              echo $provider_full_profile['registrant_designation']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Date Of Birth</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_date_of_birth']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['registrant_date_of_birth'])) :
+                              echo $provider_full_profile['registrant_date_of_birth']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -350,13 +412,39 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Email ID</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_email_id']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['registrant_email_id'])) :
+                              echo $provider_full_profile['registrant_email_id']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Mobile No</label>
                           <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['registrant_mobile_no']; ?>
+                            <?php 
+                            if(!empty($provider_full_profile['registrant_mobile_no'])) :
+                              echo $provider_full_profile['registrant_mobile_no']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label"> Sms Verification</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if($provider_full_profile['is_sms_verified']==1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -364,14 +452,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="tab-pane profile_subscription_tab" id="tab3">
                       <h4>
                         Payment Details 
-                        <!-- <span class="arrow_section">
+                        <?php
+                        if(!empty($payment_details)) :
+                        ?>
+                        <span class="arrow_section">
                           <a class="subscription_paginate popup_pag_prev"> 
                             <i class="icon-chevron-left"></i> 
                           </a> 
                           <a class="subscription_paginate">  
                             <i class="icon-chevron-right popup_pag_next"></i> 
                           </a> 
-                        </span> -->
+                        </span>
+                        <?php
+                        endif;
+                        ?>
                       </h4>
                       <?php
                       if(!empty($payment_details)) :
@@ -381,7 +475,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         foreach ($payment_details as $pay_key => $pay_val) :
                         ?>
                         <div class="span12 subscription_organization_inner_section">
-                          <h4 class="center_align plan_name"><?php echo $pay_val['subscription_plan']; ?> </h4>
+                          <h4 class="center_align plan_name"> <a class="payment_wrapper"> Additional Details </a> <?php echo $pay_val['subscription_plan']; ?> </h4>
                           <div class="profile_plan_section">
                             <div class="span3 plan_label_section">                                       
                               <h4 class="">Summary</h4>
@@ -421,9 +515,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                             <?php
                             if(!empty($up_re_val['organization_upgrade_id'])) :
-                            $upgrade = 1;
                             ?>
-                            <div class="span3 plan_field_section">     
+                            <div class="upgrade_holder_content upgrade_section_profile plan_field_section">     
                               <h4 class="">Upgrade Plan</h4>
                               <label class=""> &#8377  </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
@@ -442,13 +535,29 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <?php
                               endif;
                               ?>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>  
+                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label> 
                             </div>
                             <?php
+                            if($upgrade == 0) :
+                            ?>  
+                            <div class="upgrade_holder_content navigation_options">
+                              <span class="arrow_section">
+                                <a class="subscription_paginate upgrade_pag_prev"> 
+                                  <i class="icon-chevron-left"></i> 
+                                </a> 
+                                <a class="subscription_paginate upgrade_pag_next">  
+                                  <i class="icon-chevron-right"></i> 
+                                </a> 
+                              </span>
+                            </div>
+                            <?php
+                            endif;
+                            ?> 
+                            <?php
+                            $upgrade++;
                             else :
-                            $renewal = 1;
-                            ?>
-                            <div class="span3 plan_field_section">     
+                            ?>                  
+                            <div class="renewal_holder_content renewal_section_profile plan_field_section">     
                               <h4 class="">Renewal Plan</h4>
                               <label class=""> &#8377  </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['org_sub_validity_start_date'])); ?> </label>
@@ -467,9 +576,26 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <?php
                               endif;
                               ?>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>  
+                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label> 
                             </div>
                             <?php
+                            if($renewal == 0) :
+                            ?>  
+                            <div class="renewal_holder_content navigation_options">
+                              <span class="arrow_section">
+                                <a class="subscription_paginate renew_pag_prev"> 
+                                  <i class="icon-chevron-left"></i> 
+                                </a> 
+                                <a class="subscription_paginate">  
+                                  <i class="icon-chevron-right renew_pag_next"></i> 
+                                </a> 
+                              </span>
+                            </div>
+                            <?php
+                            endif;
+                            ?>
+                            <?php
+                            $renewal++;
                             endif;
                             endforeach;
                             ?>
@@ -508,8 +634,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             endif;
                             ?>
-
-
                           </div>
                         </div>
                         <?php
@@ -525,85 +649,32 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <?php
                       endif;
                       ?>
-                    </div>
-                    <div class="tab-pane" id="tab4">
-                      <h4>Addtional Details</h4>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Is SMS Verified</label>
-                          <span class="dynamic_data"> 
-                            <?php 
-                            if($provider_full_profile['is_sms_verified']==1) :
-                              echo "Yes";
-                            else :
-                              echo "No";
-                            endif;
-                            ?>
-                          </span>
-                        </div>
-                        <div class="span6 control-group">
-                          <label class="control-label">Total SMS Count</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_sms_count']; ?>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Used SMS Count</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count']; ?>
-                          </span>
-                        </div>
-                        <div class="span6 control-group">
-                          <label class="control-label">Remaining SMS Count</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_sms_remaining_count']; ?>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Total Resume Count</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_resume_download_count']; ?>
-                          </span>
-                        </div>
-                        <div class="span6 control-group">
-                          <label class="control-label">Used Resume Count</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count']; ?>
-                          </span>
-                        </div>
-                      </div>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Remaining Resume Count</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $provider_full_profile['organization_remaining_resume_download_count']; ?>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="tab-pane" id="tab5">
-                      <h4>Validity Details</h4>
+
+
+                      <!-- <h4>Validity Details</h4>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Email Validity</label>
                           <span class="dynamic_data"> 
                             <?php 
-                            if($provider_full_profile['is_email_validity']==1) :
-                              echo "Yes";
-                            else :
-                              echo "No";
-                            endif;
+                            // if($provider_full_profile['is_email_validity']==1) :
+                            //   echo "Yes";
+                            // else :
+                            //   echo "No";
+                            // endif;
                             ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Validity Start Date</label>
                           <span class="dynamic_data"> 
-                            <?php echo date('d-m-Y',strtotime($provider_full_profile['org_sub_validity_start_date'])); ?>
+                            <?php 
+                            // if(!empty($provider_full_profile['org_sub_validity_start_date'])) :
+                            //   echo $provider_full_profile['org_sub_validity_start_date'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?> 
                           </span>
                         </div>
                       </div>
@@ -612,18 +683,24 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">SMS Validity</label>
                           <span class="dynamic_data"> 
                             <?php 
-                            if($provider_full_profile['is_sms_validity']==1) :
-                              echo "Yes";
-                            else :
-                              echo "No";
-                            endif;
+                            // if($provider_full_profile['is_sms_validity']==1) :
+                            //   echo "Yes";
+                            // else :
+                            //   echo "No";
+                            // endif;
                             ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Validity End Date</label>
                           <span class="dynamic_data"> 
-                            <?php echo date('d-m-Y',strtotime($provider_full_profile['org_sub_validity_end_date'])); ?>
+                            <?php 
+                            // if(!empty($provider_full_profile['org_sub_validity_end_date'])) :
+                            //   echo $provider_full_profile['org_sub_validity_end_date'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -632,16 +709,150 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Resume Validity</label>
                           <span class="dynamic_data"> 
                             <?php 
-                            if($provider_full_profile['is_resume_validity']==1) :
-                              echo "Yes";
-                            else :
-                              echo "No";
-                            endif;
+                            // if($provider_full_profile['is_resume_validity']==1) :
+                            //   echo "Yes";
+                            // else :
+                            //   echo "No";
+                            // endif;
                             ?>
                           </span>
                         </div>
                       </div>
+              
+
+                      <h4>Addtional Details</h4>
+                      <div class="span12">
+                        
+                        <div class="span6 control-group">
+                          <label class="control-label">Total SMS Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_sms_count'])) :
+                            //   echo $provider_full_profile['organization_sms_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Used SMS Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_sms_count'])) :
+                            //   echo $provider_full_profile['organization_sms_count']-$provider_full_profile['organization_sms_remaining_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Remaining SMS Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_sms_remaining_count'])) :
+                            //   echo $provider_full_profile['organization_sms_remaining_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Total Resume Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_resume_download_count'])) :
+                            //   echo $provider_full_profile['organization_resume_download_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Used Resume Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_resume_download_count'])) :
+                            //   echo $provider_full_profile['organization_resume_download_count']-$provider_full_profile['organization_remaining_resume_download_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Remaining Resume Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_remaining_resume_download_count'])) :
+                            //   echo $provider_full_profile['organization_remaining_resume_download_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Total Email Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_email_count'])) :
+                            //   echo $provider_full_profile['organization_email_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Used Email Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_email_count'])) :
+                            //   echo $provider_full_profile['organization_email_count']-$provider_full_profile['organization_email_remaining_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Remaining Email Count</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            // if(!empty($provider_full_profile['organization_email_remaining_count'])) :
+                            //   echo $provider_full_profile['organization_email_remaining_count'];
+                            // else :
+                            //   echo "NULL";
+                            // endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div> -->
+
+
+
+
+
+
+
+
+
+
                     </div>
+                   
+                    
                     <?php
                     else :
                     ?>
@@ -661,7 +872,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <a class="btn upload_option"> Upload </a>
                             <input class="form-control hidden_upload tabfield1 tabfield" name="organization_logo" type="file">
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview">
+                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Not Loaded">
                             <input type="hidden" value="<?php echo $provider_full_profile['organization_logo']; ?>" class="tabfield1 tabfield" name="old_file_path" />
                           </span>
                         </div>
@@ -831,8 +1042,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <select name="subscription_status" class="tabfield4 tabfield">
                               <option value=""> Please select status </option>
-                              <option value="1" <?php if($provider_full_profile['subscription_status']==1) echo "selected"; ?>> Active </option>
-                              <option value="0" <?php if($provider_full_profile['subscription_status']==0) echo "selected"; ?>> Inactive </option>
+                              <option value="1" <?php if($provider_full_profile['organization_subscription_status']==1) echo "selected"; ?>> Active </option>
+                              <option value="0" <?php if($provider_full_profile['organization_subscription_status']==0) echo "selected"; ?>> Inactive </option>
                             </select>
                           </span>
                         </div>
@@ -848,7 +1059,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </ul>
                   </div>  
                 </div>
-                <input type="hidden" class="hidden_id" value="<?php echo $provider_full_profile['organization_id']; ?>" />
+                <input type="hidden" class="hidden_id" value="<?php echo $provider_full_profile['org_id']; ?>" />
                 <?php
                 endif;
                 ?>

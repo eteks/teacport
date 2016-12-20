@@ -222,7 +222,7 @@ class Job_seeker extends CI_Controller {
 					/* Email configuration and mail template */
 					$from_email = $emailsetup['smtp_user'];
 					$subject = 'Teacher Recruit Candidate Registration';
-					$message = 'Dear '.$data['candidate_name'].',<br /><br />Your Teacher Recruit Application Password has been created to the following:.<br /><br /> <table border="1" bgcolor="#FEF1BC"><tbody><tr><td>Email :&nbsp;<strong><font color="blue">'.$data['candidate_email'].'</font></strong></td></tr><tr><td>Password :&nbsp;&nbsp;&nbsp;<strong><font color="blue">'.$data['candidate_password'].'</font></strong></td></tr></tbody></table><br /><br /><br />Thanks<br />Teacher Recruit Team';
+					$message = $this->load->view('email_template/seeker', $data, TRUE);
 					$this->email->initialize($emailsetup);
 					$this->email->from($from_email, 'Teacher Recruit');
 					$this->email->to($data['candidate_email']);
@@ -379,6 +379,8 @@ class Job_seeker extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
 			$this->load->view('forgot-password');
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
 		}
 		else{
 	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
@@ -389,7 +391,8 @@ class Job_seeker extends CI_Controller {
 				$this->email->from($from_email, 'Teacher Recruit');
 				$this->email->to($forget_query['candidate_email']);
 	        	$this->email->subject('Get your forgotten Password');
-	       		$this->email->message("Your registered password is ".$forget_query['candidate_password']);
+	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
+	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
 		        	$this->load->view('forgot-password',$data);

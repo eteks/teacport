@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -61,7 +64,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <?php } ?>
                                 <?php
                                 if(!empty($status)) :
-                                  echo "<p class='db_status update_success_md'> $status </p>";
+                                  echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
                                 endif;
                                 ?> 
                                 <p class='val_error error_msg_md'> <p>
@@ -72,6 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <th>Password</th>
                                         <th>Email</th>
                                         <th>User Group</th>
+                                        <th>Is Main Admin?</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -84,6 +88,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </thead>
                                     <tbody>
                                     <?php
+                                      $session_data = $this->session->userdata("admin_login_session");
                                       if(!empty($user_details)) :
                                       $i=1;
                                       foreach ($user_details as $usr_det) :
@@ -95,6 +100,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <td class="admin_user_group"><?php echo $usr_det['user_group_name']; ?>
                                         <input type="hidden" value="<?php echo $usr_det['user_group_id']; ?>" />
                                         </td>
+                                        <td class="is_main_admin"><?php 
+                                        if ($usr_det['is_main_admin'] == 1) 
+                                          echo "Yes";
+                                        else
+                                          echo "No";
+                                        ?>
                                         <td class="admin_user_status"><?php 
                                         if ($usr_det['admin_user_status'] == 1) 
                                           echo "Active";
@@ -104,12 +115,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <input type="hidden" value="<?php echo $usr_det['admin_user_status']; ?>" />
                                         </td>
                                         <td class="created_date"><?php echo date("d/m/Y", strtotime($usr_det["admin_user_created_date"])); ?></td>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                        <?php 
+                                        if($usr_det['is_main_admin'] || $usr_det['admin_user_id'] == $session_data['admin_user_id'])
+                                          echo "<td>-</td>";
+                                        else if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $usr_det['admin_user_id']; ?>">Edit</a>
                                         </td>
                                         <?php endif; ?>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                        <?php 
+                                        if($usr_det['is_main_admin'] || $session_data['admin_user_id'] == $usr_det['admin_user_id'])
+                                          echo "<td>-</td>";
+                                        else if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                         <td><a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
                                         <?php endif; ?>
                                     </tr>
@@ -140,8 +157,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
    <!-- END CONTAINER -->
     <script>
     // Define default values
-    var inputType = new Array("text","text","text","select","select"); // Set type of input which are you have used like text, select,textarea.
-    var columns = new Array("admin_user_name","admin_user_password","admin_user_email","admin_user_group","admin_user_status"); // Set name of input types
+    var inputType = new Array("text","text","text","select","label","select"); // Set type of input which are you have used like text, select,textarea.
+    var columns = new Array("admin_user_name","admin_user_password","admin_user_email","admin_user_group","is_main_admin","admin_user_status"); // Set name of input types
     var placeholder = new Array("Enter User Name","Enter Password","Enter Email"); // Set placeholder of input types
     var class_selector = new Array("");//To set class for element
     var table = "admin_table"; // Set classname of table  

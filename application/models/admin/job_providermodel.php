@@ -21,7 +21,6 @@ class Job_Providermodel extends CI_Model {
                               'organization_name' => $this->input->post('organization_name'),
                               'organization_logo' => $this->input->post('organization_logo'),
                               'organization_status' => $this->input->post('organization_status'),
-                              'subscription_status' => $this->input->post('subscription_status'),
                               'registrant_designation' => $this->input->post('registrant_designation'),
                               'registrant_date_of_birth' => $this->input->post('registrant_dob'),
                               'registrant_email_id' => $this->input->post('registrant_email'),
@@ -36,7 +35,8 @@ class Job_Providermodel extends CI_Model {
       $profile_update_org_sub_data = array( 
                               'is_email_validity' => $this->input->post('email_valid'), 
                               'is_sms_validity' => $this->input->post('sms_valid'),
-                              'is_resume_validity' => $this->input->post('resume_valid')
+                              'is_resume_validity' => $this->input->post('resume_valid'),
+                              'subscription_status' => $this->input->post('subscription_status'),
                             );
       $profile_update_org_where = '( organization_id="'.$this->input->post('rid').'")'; 
       $this->db->set($profile_update_org_data);                         
@@ -64,23 +64,49 @@ class Job_Providermodel extends CI_Model {
 
     // View
     $this->db->select('*');
-    $this->db->from('tr_organization_profile op');
-    $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
-    $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
+    $this->db->from('tr_organization_profile');
+    $this->db->order_by('organization_id','desc');
+    // $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
+    // $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
+    // $this->db->group_by('org_id');
+    // $this->db->where('os.organization_subscription_status','1');
+    // $this->db->or_where('os.organization_subscription_status',NULL);
     $model_data['provider_profile'] = $this->db->get()->result_array();
+
+    // echo "<pre>";
+    // print_r($model_data['provider_profile']);
+    // echo "</pre>";
+
+
+    //   $subscription_where = '(tos.organization_id="1")';
+
+    // $this->db->select('*');
+    // $this->db->from('tr_organization_subscription tos');
+    // $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
+    // $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id','left');
+    // $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.organization_upgrade_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
+
+    //     echo "<pre>";
+    // print_r(get_provider_subscription($model_data['payment_details']));
+    // echo "</pre>";
+
+
+
 
     return $model_data;
   }
 
   // Job provider profile - ajax
   public function get_full_provider_profile($value) {
-    $provider_profile_where = '(op.organization_id="'.$value.'")';
-    $this->db->select('*');
+    $provider_profile_where = '(op.organization_id="'.$value.'" )';
+    $this->db->select('op.organization_id as org_id,op.*,os.*,it.*,os.*,d.*');
     $this->db->from('tr_organization_profile op');
     $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
     $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
-    $this->db->join('tr_institution_type it','op.organization_institution_type_id=it.institution_type_id','inner');
+    $this->db->join('tr_institution_type it','op.organization_institution_type_id=it.institution_type_id','left');
     $this->db->join('tr_district d','op.organization_district_id=d.district_id','left');
+    $this->db->order_by('os.organization_subscription_status','desc');
+    $this->db->group_by('org_id');
     $model_data['provider_full_profile'] = $this->db->where($provider_profile_where)->get()->row_array();
     $model_data['payment_details'] =  array();
 
@@ -90,7 +116,7 @@ class Job_Providermodel extends CI_Model {
     $this->db->from('tr_organization_subscription tos');
     $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
     $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id','left');
-    $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
+    $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.organization_upgrade_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
     return $model_data;
   }
 

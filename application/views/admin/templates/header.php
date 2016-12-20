@@ -69,10 +69,10 @@ Website: http://thevectorlab.net/
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-envelope-alt"></i>
                                 <span class="badge badge-important">5</span>
-                            </a>
+                            </a> -->
                             <ul class="dropdown-menu extended inbox">
                                 <li>
                                     <p>You have 5 new messages</p>
@@ -133,11 +133,11 @@ Website: http://thevectorlab.net/
                         <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN NOTIFICATION DROPDOWN -->
                         <li class="dropdown" id="header_notification_bar">
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                           <!--  <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
 
                                 <i class="icon-bell-alt"></i>
                                 <span class="badge badge-warning">7</span>
-                            </a>
+                            </a> -->
                             <ul class="dropdown-menu extended notification">
                                 <li>
                                     <p>You have 7 new notifications</p>
@@ -197,9 +197,9 @@ Website: http://thevectorlab.net/
                             </a>
                         </li> -->
                         <li class="dropdown mtop5">
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Help">
+                            <!-- <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Help">
                                 <i class="icon-headphones"></i>
-                            </a>
+                            </a> -->
                         </li>
                         <!-- END SUPPORT -->
                         <!-- BEGIN USER LOGIN DROPDOWN -->
