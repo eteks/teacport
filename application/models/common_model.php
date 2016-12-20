@@ -197,7 +197,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_organization_subscription');
 		$this->db->join('tr_subscription', 'tr_subscription.subscription_id = tr_organization_subscription.subscription_id');
-		$where = "(organization_id = '".$org_id."' AND validity_start_date <= CURRENT_DATE() AND  validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
+		$where = "(organization_id = '".$org_id."' AND org_sub_validity_start_date <= CURRENT_DATE() AND  org_sub_validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
 		$this->db->where($where);
 		$providersubcription = $this->db->get();
 		return $providersubcription->row_array(); 
