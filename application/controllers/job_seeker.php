@@ -222,7 +222,7 @@ class Job_seeker extends CI_Controller {
 					/* Email configuration and mail template */
 					$from_email = $emailsetup['smtp_user'];
 					$subject = 'Teacher Recruit Candidate Registration';
-					$message = 'Dear '.$data['candidate_name'].',<br /><br />Your Teacher Recruit Application Password has been created to the following:.<br /><br /> <table border="1" bgcolor="#FEF1BC"><tbody><tr><td>Email :&nbsp;<strong><font color="blue">'.$data['candidate_email'].'</font></strong></td></tr><tr><td>Password :&nbsp;&nbsp;&nbsp;<strong><font color="blue">'.$data['candidate_password'].'</font></strong></td></tr></tbody></table><br /><br /><br />Thanks<br />Teacher Recruit Team';
+					$message = $this->load->view('email_template/seeker', $data, TRUE);
 					$this->email->initialize($emailsetup);
 					$this->email->from($from_email, 'Teacher Recruit');
 					$this->email->to($data['candidate_email']);
@@ -379,6 +379,8 @@ class Job_seeker extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
 			$this->load->view('forgot-password');
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
 		}
 		else{
 	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
@@ -389,7 +391,8 @@ class Job_seeker extends CI_Controller {
 				$this->email->from($from_email, 'Teacher Recruit');
 				$this->email->to($forget_query['candidate_email']);
 	        	$this->email->subject('Get your forgotten Password');
-	       		$this->email->message("Your registered password is ".$forget_query['candidate_password']);
+	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
+	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
 		        	$this->load->view('forgot-password',$data);
@@ -680,8 +683,10 @@ class Job_seeker extends CI_Controller {
 			// echo $this->db->last_query();					
 			$this->pagination->initialize($pagination);
 			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
-			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);					
-			$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);		
+			if(isset($data["jobsapplied"][0]['vacancies_organization_id'])){			
+				$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			}	
 			// echo $this->db->last_query();			
 			$str_links = $this->pagination->create_links();
 			$data["links"] = explode('&nbsp;',$str_links );			
@@ -738,18 +743,6 @@ class Job_seeker extends CI_Controller {
 
 		}
 	}
-
-
-	// public function jobsapplieddetails(){		
-	// 	$data["current_jobvacancy_id"] = $this->uri->segment('3');
-	// 	if(isset($data["current_jobvacancy_id"])){
-	// 		$data["jobsapplieddetails"] = 'readonly';
-	// 		redirect('job_seeker/applynow/'.$data["current_jobvacancy_id"]);
-	// 	}else{
-	// 		redirect('missingpage');
-	// 	}
-	// }
-	
 	
 	// Change password
 	public function change_password() {
@@ -806,6 +799,45 @@ class Job_seeker extends CI_Controller {
 	public function inbox_message_full_data() {
 		$inbox_id = $this->input->post('inbox_id');	
 		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
+	}
+
+	public function feedback(){
+		$session_data = $this->session->all_userdata();
+		// $data['candidate'] 	= isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['candidate'] 	= $session_data['login_session']['candidate_id'];
+		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session_data['login_session']['candidate_id']);
+
+		if(!$_POST){
+			$this->load->view('user-dashboard-feedback',$data);
+		}
+		else{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			if ($this->form_validation->run()){
+				$feedback_data = array(
+									'feedback_form_title' => $this->input->post('feedback_subject'),
+									'feedback_form_message' => $this->input->post('feedback_content'),
+									'is_organization' => 0,
+									'is_candidate' => 1,
+									'is_guest_user' => 0,
+									'candidate_or_organization_id' => $session_data['login_session']['candidate_id'],
+									'feedback_form_status' => 1
+								);
+				if($this->job_seeker_model->candidate_feedback_form($feedback_data)){
+					$data['feedback_server_msg'] = 'Thanks for your valuable feedback! Our customer support representative will contact you soon!!';
+					$this->load->view('user-dashboard-feedback',$data);
+				}
+				else{
+					$data['feedback_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+					$this->load->view('user-dashboard-feedback',$data);
+				}
+			}
+			else{
+				$this->load->view('user-dashboard-feedback',$data);
+			}
+		}
+		
 	}
 
 } // End

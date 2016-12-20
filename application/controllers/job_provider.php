@@ -209,7 +209,6 @@ class Job_provider extends CI_Controller {
 		$data['district'] = $this->common_model->get_all_district();
 		$data['institutiontype'] = $this->common_model->get_institution_type();
 		if(!$_POST){
-			
 			$this->load->view('company-dashboard-edit-profile',$data);
 			$this->session->unset_userdata('upload_provider_logo_error');
 		}
@@ -520,7 +519,7 @@ class Job_provider extends CI_Controller {
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";
 		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
-		$pagination["per_page"] 		= 1;
+		$pagination["per_page"] 		= 20;
 		$pagination['use_page_numbers'] = 0;
 		$pagination['num_links'] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
 		$pagination['cur_tag_open'] 	= '&nbsp;<li class="active"><a>';
@@ -758,8 +757,8 @@ class Job_provider extends CI_Controller {
 													'is_email_validity'								=> 1,
 													'is_sms_validity'								=> 1,
 													'is_resume_validity'							=> 1,
-													'validity_start_date'							=> date('Y-m-d'),
-													'validity_end_date'								=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+													'org_sub_validity_start_date'					=> date('Y-m-d'),
+													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
 													'organization_subscription_status'				=> 1
 												);
 					
@@ -809,7 +808,10 @@ class Job_provider extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
 			$this->load->view('forgot-password');
-		}
+			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('username' => $registrant_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('password' => $registrant_password))->result_array();
+		} 
+			
 		else{
 	        $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
 	  		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
@@ -818,8 +820,11 @@ class Job_provider extends CI_Controller {
 				$this->email->initialize($emailsetup);
 				$this->email->from($from_email, 'Teacher Recruit');
 				$this->email->to($forget_query['registrant_email_id']);
-	        	$this->email->subject('Get your forgotten Password');
-	       		$this->email->message("Your registered password is ".$forget_query['registrant_password']);
+	        	$subject = $this->email->subject('Get your forgotten Password');
+	        	$message = $this->load->view('email_template/forget_pwd_user', $forget_query, TRUE);
+	        	// print_r($message);
+				$this->email->message($message);
+	       		// $this->email->message("Your registered password is ".$forget_query['registrant_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
 		        	$this->load->view('forgot-password',$data);

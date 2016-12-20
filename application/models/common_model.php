@@ -222,13 +222,15 @@ class Common_model extends CI_Model {
 	public function get_job_list()
 	{
 			$search_product=$this->db->select('*');
-            $search_product=$this->db->from('tr_organization_vacancies cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
-            $where1 = '(cp.vacancies_status=1)';
+            $search_product=$this->db->from('tr_organization_vacancies ov,tr_candidate_profile cp');
+            $search_product = $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
+            $where1 = '(ov.vacancies_status=1)';
+            $where2 = '(cp.candidate_status=1)';
             $search_product=$this->db->where($where1);
-            $search_product=$this->db->group_by('cp.vacancies_id');
+            $search_product=$this->db->where($where2);
+            $search_product=$this->db->group_by('ov.vacancies_id');
             $query = $this->db->get()->result_array(); 
-            return $query;
+            return $query;           
 	}
 	public function get_allinstitutions_list()
 	{
@@ -245,7 +247,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_organization_subscription');
 		$this->db->join('tr_subscription', 'tr_subscription.subscription_id = tr_organization_subscription.subscription_id');
-		$where = "(organization_id = '".$org_id."' AND validity_start_date <= CURRENT_DATE() AND  validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
+		$where = "(organization_id = '".$org_id."' AND org_sub_validity_start_date <= CURRENT_DATE() AND  org_sub_validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
 		$this->db->where($where);
 		$providersubcription = $this->db->get();
 		return $providersubcription->row_array(); 
@@ -268,6 +270,20 @@ class Common_model extends CI_Model {
 			return FALSE;
 		}
 	}
-
+	/* show total count of vacancies  */
+	public function vacancies_count(){
+		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_status = 1");
+		return $posted_jobs->num_rows();
+	}
+	/* show total count of vacancies  */
+	public function candidate_count(){
+		$candidate = $this->db->query("SELECT * FROM tr_candidate_profile WHERE candidate_status = 1");
+		return $candidate->num_rows();
+	}
+	/* show total count of vacancies  */
+	public function organization_count(){
+		$organization = $this->db->query("SELECT * FROM tr_organization_profile WHERE organization_status = 1");
+		return $organization->num_rows();
+	}
 }
 
