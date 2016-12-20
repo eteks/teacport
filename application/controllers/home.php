@@ -52,6 +52,10 @@ class Home extends CI_Controller {
 	}
 	public function contactus()
 	{
+		$ci =& get_instance();	
+		$ci->config->load('email', true);
+		$emailsetup = $ci->config->item('email');
+		$this->load->library('email', $emailsetup);
 		if($_POST){
 			$session_data = $this->session->all_userdata();
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
@@ -71,7 +75,26 @@ class Home extends CI_Controller {
 										'is_viewed'=>0,
 										'feedback_form_status'=>1
 									);
+				$data['data_value'] = array(
+					'name' => $this->input->post('contact_us_name'),
+					'email' =>$this->input->post('contact_us_email'),
+					'phone' =>$this->input->post('contact_us_mobile'),
+					'subject' =>$this->input->post('contact_us_subject'),
+					'Message' => $this->input->post('contact_us_message')
+				);
+				// print_r($contact_us_data);
 				if($this->common_model->guest_user_feedback($contact_us_data)){
+					$from_email = $emailsetup['smtp_user'];
+					$subject = 'Teacher Recruit Contact';
+					$message =  $this->load->view('email_template/contact_form', $data, TRUE);	
+					// print_r($message);		
+					$this->email->initialize($emailsetup);
+					$this->email->from($from_email, 'Teacher Recruit');
+					$this->email->to($this->input->post('contact_us_email'));
+					$this->email->subject($subject);
+					$this->email->message($message);
+					/* Check whether mail send or not*/
+					$this->email->send();
 					$data['contact_server_msg'] = 'Thank you for contact us! Our customer representative contact you soon!!';
 					$this->load->view('contactus',$data);
 				}
@@ -102,15 +125,8 @@ class Home extends CI_Controller {
 	}
 	public function vacancies()
 	{
-		$session_data = $this->session->all_userdata();
-		if(isset($session_data['login_session']))
-		{
-			$categories['search_results'] = $this->common_model->get_search_list();
+		$categories['search_results'] = $this->common_model->get_search_list();
         $this->load->view('vacancies',$categories);
-		}
-	    else {
-		    redirect('login/seeker');
-		}
 		
 	}
 	public function search_section()
