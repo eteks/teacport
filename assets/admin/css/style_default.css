@@ -411,8 +411,10 @@ tr select {
     color: #555;
 }
 .admin_status{
-    color: #ff0000 !important;
-    font-size: 14px !important;
+    /*color: #ff0000 !important;
+    font-size: 14px !important;*/
+    color: #ff0000;
+    font-size: 14px;
     background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
