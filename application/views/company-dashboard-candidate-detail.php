@@ -1,5 +1,6 @@
  <?php include('include/header.php'); ?>
  <?php include('include/menus.php'); ?>
+ <?php //echo "<pre>";print_r($subscrib_plan);echo "</pre>"; ?>
         <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
@@ -27,7 +28,11 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="<?php echo $organization['organization_logo'];?>" alt="Image">
+                                     <?php if (file_exists($organization['organization_logo'])) { ?>
+                                    <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } else { ?>
+                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } ?>
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
                                     <h4><?php echo $organization['organization_name']; ?></h4>
@@ -36,7 +41,6 @@
                              <!--include left panel menu-->
                             <?php include('include/company_dashboard_sidebar.php'); ?>
                         </div>
-                        <?php //echo "<pre>"; print_r($candidate); echo"</pre>"; ?>;
                         <div id="company-browse-candidate" class="col-md-8 col-sm-8 col-xs-12">
                         	<div class="heading-inner first-heading">
                                 <p class="title">Profile Detail</p>
@@ -63,7 +67,7 @@
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Date of Birth </span>
 													<span class="col-sm-1"> : </span>
-													<div class="col-sm-7"> <?php echo $candidate['personnal']['candidate_date_of_birth']; ?> </div>
+													<div class="col-sm-7"> <?php echo substr($candidate['personnal']['candidate_date_of_birth'], 8, 2).'.'.substr($candidate['personnal']['candidate_date_of_birth'], 5, 2).'.'.substr($candidate['personnal']['candidate_date_of_birth'], 0, 4); ?> </div>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Father's Name </span>
@@ -100,34 +104,48 @@
 													<span class="col-sm-1"> : </span>
 													<span class="col-sm-7"> <?php echo ucfirst($candidate['personnal']['candidate_community']); ?> </span>
 												</div>
+												<?php if(isset($candidate['personnal']['candidate_is_physically_challenged'])){ ?>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Physically Handicapped Person</span>
 													<span class="col-sm-1"> : </span>
 													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_is_physically_challenged']; ?> </span>
 												</div>
+												<?php } ?>
 											</div> <br> <!---End personal profile-->	
 											<!--Post Preference-->
+											<?php
+											 $applied_posting = '';
+											 foreach ($candidate['appliedposting'] as $posting) {
+												 $applied_posting .= $posting['posting_name'].', ';
+											 }
+											 $trimed_posting = trim($applied_posting, ", ");
+											 $whising_class = '';
+											 foreach ($candidate['willingclass'] as $willing_calss) {
+												 $whising_class .= $willing_calss['class_level'].', ';
+											 }
+											 $trimmed_class = trim($whising_class, ", ");
+											?>
 			     							 <div>
 			     							 	<h5>Post Preference</h5>
 				                           	 	<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Post Applying For</span>
 				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">	XXX </div>
+													<div class="col-sm-7">	<?php echo $trimed_posting; ?> </div>
 												</div>											
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Expected Monthly Salary</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['preferance']['candidate_expecting_start_salary']; ?> to <?php echo $candidate['preferance']['candidate_expecting_end_salary']; ?>  </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Wish to Work in District </span>
 													<span class="col-sm-1"> : </span>
-													<div class="col-sm-7"> XXX </div>
+													<div class="col-sm-7"> <?php echo $candidate['personnal']['willing_district']; ?> </div>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Wish to take Classes For </span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $trimmed_class; ?> </span>
 												</div>
 											</div> <br> <!---End Post Preference-->	
 											<!--Educatinaol Profile-->
@@ -139,63 +157,50 @@
 															<th>Qualification</th>
 															<th>Year of Passing </th>
 															<th>Medium Of Instruction</th>
-															<th>Subject</th>
+															<th>Board/university</th>
 															<th>% of Marks</th>
 														</thead>
 														<tbody>
+															<?php foreach ($candidate['education'] as $education) { ?>
 															<tr>
-																<td>SSLC</td>
-																<td>2010 </td>
-																<td>2012 </td>
-																<td>Science</td>
-																<td>95%</td>
+																<td><?php echo $education['qualification']; ?></td>
+																<td><?php echo $education['passedout']; ?> </td>
+																<td><?php echo $education['medium']; ?> </td>
+																<td><?php echo $education['boardname']; ?></td>
+																<td><?php echo $education['percentage']; ?>%</td>
 															<tr>
-															<tr>
-																<td>HSC</td>
-																<td>2010 </td>
-																<td>2012 </td>
-																<td>Science</td>
-																<td>95%</td></tr>
-															<tr>
-																<td>BSC</td>
-																<td>2010 </td>
-																<td>2012 </td>
-																<td>Science</td>
-																<td>95%</td>
-															</tr>
-															<tr>
-																<td>Mphil</td>
-																<td>2010 </td>
-																<td>2012 </td>
-																<td>Science</td>
-																<td>95%</td>
-															</tr>
+															<?php } ?>
 														</tbody>
 													</table>
 												</div> <!--.table-responsive-->
 												<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">TET Exam Status</span>
 				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">	XXX </div>
+													<div class="col-sm-7">	<?php if($candidate['personnal']['candidate_tet_exam_status']) echo 'Pass'; else echo 'Nil'; ?> </div>
 												</div>
-												<div class="display_seeker_details">
-				                           	 		<span class="col-sm-4">Others</span>
-				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">	XXX </div>
-												</div>	
+												<?php
+													$extra_curricular = '';
+													foreach ($candidate['extracurricular'] as $ecurricular) {
+														$extra_curricular .= $ecurricular['extra_curricular'].', ';
+													}
+													$trimmed_extracullar = trim($extra_curricular, ", ");
+												?>
 												<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Extra Curricular Skills </span>
 				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">Abacus Computer Typing Drawing Hindi Sports Dance Red Cross Blue Cross </div>
-												</div>	
+													<div class="col-sm-7"><?php echo $trimmed_extracullar; ?></div>
+												</div>
+												<div class="display_seeker_details">
+				                           	 		<span class="col-sm-4">Is experienced </span>
+				                           	 		<span class="col-sm-1"> : </span>
+													<div class="col-sm-7"><?php if($candidate['personnal']['candidate_is_fresher'] != 1) echo 'Yes'; else echo 'No, I am a fresher'; ?></div>
+												</div>
 											</div> <br>
 											<!---End Educational Profile -->
+											<?php if($candidate['personnal']['candidate_is_fresher'] != 1){ ?>
 											<!--Professional Profile-->
 			     							 <div>
 			     							 	<h5>Professional Profile</h5>
-				                           	 	<div class="display_seeker_details">
-				                           	 		<span class="col-sm-12"><strong>I am a Fresh Candidate</strong></span>
-				                           	 	</div>											
 												<div class="table-responsive">
 													<table class="table">
 														<thead>
@@ -204,84 +209,64 @@
 															<th>No. of Years</th>
 														</thead>
 														<tbody>
-															<tr>
-																<td>Primary</td>
-																<td>Matric </td>
-																<td>2 </td>
-															<tr>
-															<tr>
-																<td>Middle</td>
-																<td>StateBoard </td>
-																<td>0.7</td>
-																
-															<tr>
-																<td>High School</td>
-																<td>Others </td>
-																<td>1</td>
-															</tr>
-															<tr>
-																<td>Higher Secondary</td>
-																<td>CBSE </td>
-																<td>3 </td>
-															</tr>
-															<tr>
-																<td>Higher Secondary</td>
-																<td>CBSE </td>
-																<td>3 </td>
-															</tr>
-															<tr>
-																<td>College</td>
-																<td>Arts </td>
-																<td>3 </td>
-															</tr>
-															<tr>
-																<td>Others</td>
-																<td>Drawing Teacher</td>
-																<td>3</td>
-															</tr>
+															<?php foreach ($candidate['experience'] as $experience) { ?>
+																<tr>
+																	<td><?php echo $experience['classlevel']; ?></td>
+																	<td><?php echo $experience['experienceboard']; ?> </td>
+																	<td><?php echo $experience['experienceyear']; ?></td>
+																<tr>
+															<?php } ?>
+															
 														</tbody>
 													</table>
 												 </div> <!--.table-responsive-->
 											  </div> <br> <!---End Professional Profile-->
+											  <?php } ?>
+											  <?php if(!empty($subscrib_plan)){?>
 											  <!--Communication Information-->
 			     							 <div>
 			     							 	<h5>Communication Information</h5>
 				                           	 	<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Door No.</span>
 				                           	 		<span class="col-sm-1"> : </span>
-													<div class="col-sm-7">	XXX </div>
+													<div class="col-sm-7">	<?php echo $candidate['personnal']['candidate_address_1']; ?> </div>
 												</div>											
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Post/Village/Taluk</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_address_2']; ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">District </span>
 													<span class="col-sm-1"> : </span>
-													<div class="col-sm-7"> XXX </div>
+													<div class="col-sm-7"> <?php echo $candidate['personnal']['living_district']; ?> </div>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">State</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['personnal']['livestate']; ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Pin-Code</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_pincode']; ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Email ID</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_email']; ?> </span>
 												</div>
 												<div class="display_seeker_details">
 													<span class="col-sm-4">Mobile No</span>
 													<span class="col-sm-1"> : </span>
-													<span class="col-sm-7"> XXX </span>
+													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_mobile_no']; ?> </span>
 												</div>
 											</div> <br> <!---Communication Information-->	
+											<?php } else{ ?>
+												<div class="personnal_information">
+													
+												</div><br>
+											<?php } ?>
 	            						</div> <!--.seeker_induvidual_profile-->
 	                                </div>
 	                                <!-- <div class="job-salary">

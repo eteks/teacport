@@ -54,7 +54,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </span>
                         </div>
                         <div class="widget-body form">
-                          <form action="admin_users/edit_profile_validation" class="form-horizontal admin_login_form" method="POST">
+                          <form action="admin_users/edit_profile_validation" class="form-horizontal admin_profile_form" method="POST">
                             <p class="admin_status"> </p>
 	                          <div class="control-group">
 	                            <label class="control-label">User Name</label>

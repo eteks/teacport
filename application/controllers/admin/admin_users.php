@@ -375,6 +375,8 @@ class Admin_users extends CI_Controller {
 		$data['status'] = 0;
 		$session_data = $this->session->userdata('admin_login_session');
 		$id = $session_data['admin_user_id'];
+		$user_name = $session_data["admin_user_name"];
+		$user_email = $session_data["admin_user_email"];
 		$validation_rules = array(
  					          	array(
   			                        'field'   => 'user_name',
@@ -402,8 +404,12 @@ class Admin_users extends CI_Controller {
 		else {
 			$data_values = $this->admin_users_model->teac_admin_edit_profile('update'); 
 		 	$data['status'] = $data_values['status'];
+		 	$data['error'] = 2;
+			if($user_name!=$_POST['user_name'] || $user_email!=$_POST['user_email'])
+				$data['session_data'] = true;
 		}
-		echo $data['status'];
+		// echo $data['status'];
+		echo json_encode($data);
 	}
 
 
@@ -419,6 +425,7 @@ class Admin_users extends CI_Controller {
 		$data['status'] = 0;
 		$session_data = $this->session->userdata('admin_login_session');
 		$id = $session_data['admin_user_id'];
+		$user_password = $session_data["admin_user_password"];
 		$validation_rules = array(
  					          	array(
 				                	'field'   => 'current_pass',
@@ -451,8 +458,12 @@ class Admin_users extends CI_Controller {
 		else {
 			$data_values = $this->admin_users_model->teac_admin_change_password(); 
 		 	$data['status'] = $data_values['status'];
+		 	$data['error'] = 2;
+			if($user_password!=$_POST['new_pass'])
+				$data['session_data'] = true;
 		}
-		echo $data['status'];
+		// echo $data['status'];
+		echo json_encode($data);
 	}
 	function get_full_array_by_recursive_search(array $array, $needle)
 	{
