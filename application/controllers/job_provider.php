@@ -809,7 +809,10 @@ class Job_provider extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
 			$this->load->view('forgot-password');
-		}
+			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('username' => $registrant_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('password' => $registrant_password))->result_array();
+		} 
+			
 		else{
 	        $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
 	  		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
@@ -818,8 +821,11 @@ class Job_provider extends CI_Controller {
 				$this->email->initialize($emailsetup);
 				$this->email->from($from_email, 'Teacher Recruit');
 				$this->email->to($forget_query['registrant_email_id']);
-	        	$this->email->subject('Get your forgotten Password');
-	       		$this->email->message("Your registered password is ".$forget_query['registrant_password']);
+	        	$subject = $this->email->subject('Get your forgotten Password');
+	        	$message = $this->load->view('email_template/forget_pwd_user', $forget_query, TRUE);
+	        	// print_r($message);
+				$this->email->message($message);
+	       		// $this->email->message("Your registered password is ".$forget_query['registrant_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
 		        	$this->load->view('forgot-password',$data);
