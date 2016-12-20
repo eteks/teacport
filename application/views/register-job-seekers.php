@@ -39,11 +39,10 @@
 	                                <?php echo form_input(array('id' => 'candidate_mobile_no','class' => 'form-control','name' => 'candidate_mobile_no')); ?>
 	                                </div>
 	                                <div class="form-group">
-		                                <div class="col-sm-6 nopadding">	
-		                                  <?php echo form_label('Captcha. :'); ?> <?php echo form_error('captcha_value'); ?>
-		                                  <?php echo ('<img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" ')?>
-		                                  <a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
-		                                </div>
+										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
+										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
+	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
+	                                </div>
 		                                <div class="col-sm-6 captcha_holder nopadding">
 		                                	<label>Enter captcha Value :</label>
 		                                	 <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
