@@ -32,21 +32,21 @@ class Job_Providermodel extends CI_Model {
                               'organization_address_1' => $this->input->post('org_addr_1'),
                               'organization_institution_type_id' => $this->input->post('institution_type')
                             );
-      $profile_update_org_sub_data = array( 
-                              'is_email_validity' => $this->input->post('email_valid'), 
-                              'is_sms_validity' => $this->input->post('sms_valid'),
-                              'is_resume_validity' => $this->input->post('resume_valid'),
-                              'subscription_status' => $this->input->post('subscription_status'),
-                            );
+      // $profile_update_org_sub_data = array( 
+      //                         'is_email_validity' => $this->input->post('email_valid'), 
+      //                         'is_sms_validity' => $this->input->post('sms_valid'),
+      //                         'is_resume_validity' => $this->input->post('resume_valid'),
+      //                         'subscription_status' => $this->input->post('subscription_status'),
+      //                       );
       $profile_update_org_where = '( organization_id="'.$this->input->post('rid').'")'; 
       $this->db->set($profile_update_org_data);                         
       $this->db->where($profile_update_org_where);
       $this->db->update("tr_organization_profile", $profile_update_org_data); 
 
-      $profile_update_org_sub_where = '( organization_id="'.$this->input->post('rid').'" and organization_subscription_status=1)'; 
-      $this->db->set($profile_update_org_sub_data);                         
-      $this->db->where($profile_update_org_sub_where);
-      $this->db->update("tr_organization_subscription", $profile_update_org_sub_data);
+      // $profile_update_org_sub_where = '( organization_id="'.$this->input->post('rid').'" and organization_subscription_status=1)'; 
+      // $this->db->set($profile_update_org_sub_data);                         
+      // $this->db->where($profile_update_org_sub_where);
+      // $this->db->update("tr_organization_subscription", $profile_update_org_sub_data);
 
       $model_data['status'] = "Updated Successfully";
       $model_data['error'] = 2;   
