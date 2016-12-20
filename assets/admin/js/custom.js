@@ -637,6 +637,88 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
 
         sliderResponse(target);
     });
+
+    // Previous button click - Upgrade
+    $(document).on('click','.upgrade_pag_prev',function() {
+        var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(index_Val != 0 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val-1).fadeIn(3000);
+        }
+    });
+
+    // Next button click - Upgrade
+    $(document).on('click','.upgrade_pag_next',function() {
+        var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(this_holder_len != index_Val+1 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val+1).fadeIn(3000);
+        }
+    });
+
+    // Previous button click - Renewal
+    $(document).on('click','.renew_pag_prev',function() {
+        var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(index_Val != 0 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val-1).fadeIn(3000);
+        }
+    });
+
+    // Next button click - Renewal
+    $(document).on('click','.renew_pag_next',function() {
+        var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(this_holder_len != index_Val+1 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val+1).fadeIn(3000);
+        }
+    });
+
+    
+
+
+
+
     /* Popup pagination with arrow end */
 
     //check only entered value is numeric
@@ -674,6 +756,12 @@ function popup_pagination() {
     sections_width = sections.width();  
     mask.css('width', sections_width*(lastElem+1) +'px');
     sections.first().addClass('viewed');
+    $('.profile_plan_section').each(function() {
+       // $(this).find('.upgrade_section_profile').first().addClass('visible_upgrade'); 
+       // $(this).find('.renewal_section_profile').first().addClass('visible_renewal'); 
+        $('div.upgrade_holder_content',this).wrapAll('<div class="span3 upgrade_holder"></div>');
+        $('div.renewal_holder_content',this).wrapAll('<div class="span3 renewal_holder"></div>');
+    });
 }
 
 // Animation effect - slider

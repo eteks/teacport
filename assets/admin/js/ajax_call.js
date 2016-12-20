@@ -118,7 +118,7 @@ $(document).ready(function(){
                     handleFormWizards();
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
                     handleChoosenSelect();
-                    // popup_pagination();
+                    popup_pagination();
                     // e.preventDefault();
                     $('.multi_choice').find('ul').addClass('scroller');
                     $('.multi_choice').find('ul').slimScroll({
