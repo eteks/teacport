@@ -109,7 +109,7 @@
 		          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
 		          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
 		          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
-		          	<li class="no-bg login-btn-no-bg"><a href=".html" class="login-header-btn"><i class="fa fa-sign-in"></i> Log in</a></li>
+		          	<li class="no-bg login-btn-no-bg"><a href="#" class="login-header-btn"><i class="fa fa-sign-in"></i> Log in</a></li>
 			<?php
 				}
 			?>
