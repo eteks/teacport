@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php include "templates/header.php" ?>

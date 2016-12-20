@@ -28,7 +28,26 @@ function default_credentials() {
     editingtdcol = 0;
     ready_save = 0;
 }
+function customalert(msg){
+    var alertBox = $("#alert-dialog-box");
+    var overlay = $("#dialog-overlay");
+    alertBox.find(".message").text(msg);
+    alertBox.find(".ok_btn").unbind().click(function() {
+        alertBox.hide();
+        overlay.hide();
+    });
 
+    var winH = $(window).height();
+    var winW = $(window).width();
+    var popupH = alertBox.height();
+    var popupW = alertBox.width();
+    var alertBox_top = ((winH / 2) - (popupH / 2)) + "px";
+    var alertBox_left = ((winW / 2) - (popupW / 2)) + "px"; 
+    alertBox.css('top',alertBox_top);
+    alertBox.css('left',alertBox_left);
+    overlay.fadeIn(350);
+    alertBox.fadeIn(350);
+}
 function doConfirm(msg, yesFn, noFn) {
     var confirmBox = $("#dialog-box");
     var overlay = $("#dialog-overlay");
@@ -172,10 +191,12 @@ ajax = function (params,action,form_id){
                 setTimeout(function() { datatable_initialization(); }, 3000); 
                 setTimeout(function() { $('.db_status').remove(); }, 5000);
                 default_credentials();
-                if(res.session_data != 'undefined' && res.session_data == true){
-                    alert("You have changed your Accounts. We need to logout your session to confirm");
-                    setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 3000 );
-                }
+                // Implement for clearing session when user change their own account details
+                // Commented this code for future enhancement
+                // if(res.session_data != 'undefined' && res.session_data == true){ 
+                //     customalert("You have changed your Accounts. We need to logout your session to confirm");
+                //     setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
+                // }
             }
         }
     });

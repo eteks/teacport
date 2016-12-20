@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    /* Admin Login Form Start */
+     /* Admin Login Form Start */
     $('.admin_login_form').on('submit',function(e) {
         e.preventDefault();
         var form_data = $(this).serialize();
@@ -10,10 +10,9 @@ $(document).ready(function(){
             data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
             success: function(res) {
                 if(res != 'login_success') {
-                   this_status.html(res);
-                $('.admin_status').html(res.status);
-                $('.admin_status').fadeIn(500);
-                $('.admin_status').fadeOut(3000);
+                    this_status.html(res);
+                    this_status.fadeIn(500);
+                    this_status.fadeOut(3000);
                 }
                 else {
                    window.location.href = admin_baseurl+"dashboard";
