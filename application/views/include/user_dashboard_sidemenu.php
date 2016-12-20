@@ -17,7 +17,7 @@
                     <a href="<?php echo base_url(); ?>seeker/jobsapplied"> <i class="fa  fa-list-ul"></i> Jobs Applied</a>
                 </li>
                 <li>
-                    <a href="user-dashboard-feedback.php"> <i class="fa fa-commenting-o"></i> Feedback</a>
+                    <a href="<?php echo base_url(); ?>seeker/feedback"> <i class="fa fa-commenting-o"></i> Feedback</a>
                 </li>
                  <li>
                     <a href="<?php echo base_url(); ?>seeker/password"> <i class="fa fa-key" aria-hidden="true"></i> Change Password</a>

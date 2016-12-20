@@ -110,39 +110,35 @@ class Admin_login extends CI_Controller {
 		if($data['error']==0) {
 			if($data['status']=='valid') {
 				$user_values = $data_values['user_values'];	
-			 	// $config['protocol'] = 'smtp';
-			 	// $config['smtp_host'] = 'ssl://smtp.googlemail.com';
-    			// $config['smtp_port'] = 25;
-			 	// $config['smtp_user'] = $user_values['admin_user_email'];
-			 	// $config['smtp_pass'] = '********';          
-		  		// $this->load->library('email', $config);		
-				// $this->email->from('sivaramakannan05@gmail.com');
-				// $this->email->to($config['smtp_user']);						
-				// $this->email->subject('Get your forgotten Password');
-				// $this->email->message("Your registered password is ".$user_values['admin_user_password']);
-				// $this->email->send();
-				// $data['status'] = "Mail sent successfully";
-				
+			 	
+			 	//Siva's code(Commented by kalai)
+				// $config = Array(
+    //           		'protocol' => 'smtp',
+    //           		'smtp_host' => 'ssl://smtp.gmail.com',
+    //           		'smtp_port' => 465,
+    //           		'smtp_user' => 'sivaramakannan05@gmail.com',
+    //           		'smtp_pass' => ''
+    // 			);
 
-				$config = Array(
-              		'protocol' => 'smtp',
-              		'smtp_host' => 'ssl://smtp.gmail.com',
-              		'smtp_port' => 465,
-              		'smtp_user' => 'sivaramakannan05@gmail.com',
-              		'smtp_pass' => ''
-    			);
+    // 			$this->load->library('email',$config);
+    // 			$this->email->set_newline("\r\n");
 
-    			$this->load->library('email',$config);
-    			$this->email->set_newline("\r\n");
+    // 			$this->email->from("sivaramakannan05@gmail.com");
+    // 			$this->email->to("sivaramakannan05@gmail.com");
+    // 			$this->email->subject("Email with Codeigniter");
+    // 			$this->email->message("This is email has been sent with Codeigniter");
 
-    			$this->email->from("sivaramakannan05@gmail.com");
-    			$this->email->to("sivaramakannan05@gmail.com");
-    			$this->email->subject("Email with Codeigniter");
-    			$this->email->message("This is email has been sent with Codeigniter");
-
-
-
-
+				//Newly added by Kalai
+				$ci =& get_instance();	
+				$ci->config->load('email', true);
+				$emailsetup = $ci->config->item('email');
+				$this->load->library('email', $emailsetup);
+				$from_email = $emailsetup['smtp_user'];
+				$this->email->initialize($emailsetup);
+				$this->email->from($from_email, 'Teacher Recruit');
+                $this->email->to($user_values['admin_user_email']);
+    			$this->email->subject('Get your forgotten Password');
+    			$this->email->message("Your registered password is ".$user_values['admin_user_password']);
 
     			if($this->email->send())
     			{

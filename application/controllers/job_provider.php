@@ -16,7 +16,6 @@ class Job_provider extends CI_Controller {
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
 			/* Job provider login page with facebook login url */
-			$data['fbloginurl'] = $common->facebookloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$this->load->view('job-providers-login',$data);
 		}
@@ -38,7 +37,6 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-   				$fb['fbloginurl'] = $common->facebookloginurl();
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
 			}
@@ -57,7 +55,7 @@ class Job_provider extends CI_Controller {
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
-   					$fb['fbloginurl'] = $common->facebookloginurl();
+					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
 				}
 			}
@@ -76,7 +74,6 @@ class Job_provider extends CI_Controller {
 		if(!$_POST){						
 			$data['captcha'] = $this->captcha->main();
 			$this->session->set_userdata('captcha_info', $data['captcha']);
-			$data['fbloginurl'] = $common->facebookloginurl();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
 			$this->load->view('register-job-providers',$data);
 		}
@@ -89,6 +86,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_organization_profile.registrant_mobile_no]');
             $this->form_validation->set_rules('captcha_value', 'Captcha', 'callback_validate_captcha');
+			$this->form_validation->set_rules('provider_term_and_condition', 'Accept terms and condition', 'callback_accept_term_and_condition');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE)
 	       	{
@@ -96,7 +94,6 @@ class Job_provider extends CI_Controller {
 	       		$fb['reg_server_msg'] = 'Please provide valid information!';
 	       		$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);	
-	       		$fb['fbloginurl'] = $common->facebookloginurl();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('register-job-providers',$fb);	
 	        }
@@ -130,7 +127,7 @@ class Job_provider extends CI_Controller {
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Resitration Successful!. Check your email address!!';	
-	       				$fb['fbloginurl'] = $common->facebookloginurl();
+						$data['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
@@ -138,7 +135,6 @@ class Job_provider extends CI_Controller {
 						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';	
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-	       				$fb['fbloginurl'] = $common->facebookloginurl();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('register-job-providers',$fb);
 					}
@@ -148,7 +144,6 @@ class Job_provider extends CI_Controller {
 					$fb['reg_server_msg'] = 'Some thing wrong in data insertion process. So please register again!';
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);	
-       				$fb['fbloginurl'] = $common->facebookloginurl();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('register-job-providers',$fb);
 				}
@@ -203,6 +198,8 @@ class Job_provider extends CI_Controller {
 		$this->session->unset_userdata('token');
 		$this->session->unset_userdata('userData');
 		$this->session->unset_userdata('login_session');
+		unset($_SESSION['FBRLH_state']);
+		unset($_SESSION['facebook_access_token']);
 		$this->session->sess_destroy();
     	redirect('/','refresh');
 	}
@@ -212,7 +209,6 @@ class Job_provider extends CI_Controller {
 		$data['district'] = $this->common_model->get_all_district();
 		$data['institutiontype'] = $this->common_model->get_institution_type();
 		if(!$_POST){
-			
 			$this->load->view('company-dashboard-edit-profile',$data);
 			$this->session->unset_userdata('upload_provider_logo_error');
 		}
@@ -230,7 +226,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|alpha_numeric|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date');
 			$this->form_validation->set_rules('declar_accept', 'Declaration', 'callback_form_declaration');
-			// /* check forms data are valid are not */
+			/* check forms data are valid are not */
 			if ($this->form_validation->run())
 		    {
 		    	$provider_logo_file_name = '';
@@ -441,7 +437,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|callback_alpha_dash_space|min_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run())
 			{
 				$vacancy_data = array(
@@ -523,7 +519,7 @@ class Job_provider extends CI_Controller {
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";
 		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
-		$pagination["per_page"] 		= 1;
+		$pagination["per_page"] 		= 20;
 		$pagination['use_page_numbers'] = 0;
 		$pagination['num_links'] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
 		$pagination['cur_tag_open'] 	= '&nbsp;<li class="active"><a>';
@@ -761,8 +757,13 @@ class Job_provider extends CI_Controller {
 													'is_email_validity'								=> 1,
 													'is_sms_validity'								=> 1,
 													'is_resume_validity'							=> 1,
+<<<<<<< HEAD
 													'org_sub_validity_start_date'							=> date('Y-m-d'),
 													'org_sub_validity_end_date'								=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+=======
+													'org_sub_validity_start_date'					=> date('Y-m-d'),
+													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+>>>>>>> 9db7f3ed8a707a3fb756aad25dc2a692be41fa73
 													'organization_subscription_status'				=> 1
 												);
 					
@@ -800,6 +801,51 @@ class Job_provider extends CI_Controller {
 		}
  	}
 	
+	public function forgot_password()
+	{
+		$ci =& get_instance();	
+		$ci->config->load('email', true);
+		$emailsetup = $ci->config->item('email');
+		$this->load->library('email', $emailsetup);
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+		/* Check whether registration form server side validation are valid or not */
+		if ($this->form_validation->run() == FALSE){
+			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$this->load->view('forgot-password');
+			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('username' => $registrant_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('password' => $registrant_password))->result_array();
+		} 
+			
+		else{
+	        $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
+	  		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
+	      	if($forget_query['registrant_password'] != '') {
+				$from_email = $emailsetup['smtp_user'];
+				$this->email->initialize($emailsetup);
+				$this->email->from($from_email, 'Teacher Recruit');
+				$this->email->to($forget_query['registrant_email_id']);
+	        	$subject = $this->email->subject('Get your forgotten Password');
+	        	$message = $this->load->view('email_template/forget_pwd_user', $forget_query, TRUE);
+	        	// print_r($message);
+				$this->email->message($message);
+	       		// $this->email->message("Your registered password is ".$forget_query['registrant_password']);
+	        	if($this->email->send()){
+		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$this->load->view('forgot-password',$data);
+	        	}
+				else{
+					show_error($this->email->print_debugger());
+					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
+					$this->load->view('forgot-password',$data);
+				}
+	      	}
+			else{
+				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$this->load->view('forgot-password',$data);
+			}
+		}   	
+	}
 	/* custom validataion rules */
 	public function valid_date($date)
 	{
@@ -890,40 +936,14 @@ class Job_provider extends CI_Controller {
 			return FALSE;
 		}
 	} 
-	public function forgot_password()
-	{
-			$ci =& get_instance();	
-			$ci->config->load('email', true);
-			$emailsetup = $ci->config->item('email');
-			$this->load->library('email', $emailsetup);
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
-			/* Check whether registration form server side validation are valid or not */
-			if ($this->form_validation->run() == FALSE){
-				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-				$this->load->view('forgot-password');
-			}
-			else{
-
-            $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
-      		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
-          	if(count($forget_query) != 0) {
-          	
-			$from_email = $emailsetup['smtp_user'];
-			$this->email->initialize($emailsetup);
-					$this->email->from($from_email, 'Teacher Recruit');
-            $this->email->subject('Get your forgotten Password');
-            $this->email->message("Your registered password is ".$forget_query['registrant_password']);
-            $this->email->send();
-            $data['reg_server_msg'] = "Mail has sent successfully";
-            $this->load->view('forgot-password',$data);
-          }
-				else{
-					$data['reg_server_msg'] = 'Your Provided Login data is invalid!';	
-					$this->load->view('forgot-password',$data);
-				}
-			}   	
+	public function accept_term_and_condition(){
+		 if ($this->input->post('provider_term_and_condition')){
+			return TRUE;
 		}
-
-      
+		else{
+			$error = 'Please accept term and condition!.';
+			$this->form_validation->set_message('accept_term_and_condition', $error);
+			return FALSE;
+		}
+	}
 }

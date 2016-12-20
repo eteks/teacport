@@ -21,6 +21,13 @@
                   <span class="del_no no">No</span>
                 </div>
             </div>
+            <!--  Alert box with ok button only -->
+            <div id="alert-dialog-box">
+                <h3 class="message"></h3>
+                <div>
+                  <span class="ok_btn">ok</span>
+                </div>
+            </div>
 		<script>								 	
             var csfrData = {};
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
