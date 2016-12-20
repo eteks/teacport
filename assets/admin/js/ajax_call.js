@@ -77,12 +77,14 @@ $(document).ready(function(){
             processData:false,
             success: function(res) {
                 if(res.error == 1) {
-                    this_status.html(res.status);
+                    this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                    this_status.removeClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
                 }
                 else if(res.error == 2) {
-                    this_status.html(res.status);
+                    this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                    this_status.addClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
                     $('.admin_table').dataTable().fnDestroy();  

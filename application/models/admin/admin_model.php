@@ -267,7 +267,7 @@ class Admin_Model extends CI_Model {
     else if($status=='save') {
       $language_insert_data = array( 
                                       'language_name' => $this->input->post('l_name'),
-                                      'is_mother_tangue' => $this->input->post('l_mother_tangue'),
+                                      'is_mother_tangue' => $this->input->post('l_mother_tongue'),
                                       'is_medium_of_instruction' => $this->input->post('l_instruction'),
                                       'language_status' => $this->input->post('l_status'),
                                     );
