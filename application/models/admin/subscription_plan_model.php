@@ -133,7 +133,7 @@ class Subscription_Plan_Model extends CI_Model {
     // $model_data = $this->db->order_by('notification_id','desc')->get_where('tr_organization_plan_notification')->result_array();
     // return $model_data;
     // View
-    $this->db->select('n.*,sub.subscription_plan,org_sub.validity_start_date as org_sub_vstart,org_sub.validity_end_date as org_sub_vend,org.organization_name,upg.validity_start_date as upg_vstart,upg.validity_end_date as upg_vend');
+    $this->db->select('n.*,sub.subscription_plan,org_sub.org_sub_validity_start_date as org_sub_vstart,org_sub.org_sub_validity_end_date as org_sub_vend,org.organization_name,upg.validity_start_date as upg_vstart,upg.validity_end_date as upg_vend');
     $this->db->from('tr_organization_plan_notification n');
     $this->db->join('tr_organization_subscription org_sub','org_sub.organization_subscription_id=n.organization_subscription_id','inner');
     $this->db->join('tr_subscription sub','sub.subscription_id=org_sub.subscription_id','inner');

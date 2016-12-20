@@ -748,3 +748,11 @@ table tr[data-name="bold_section"] a {
     position: absolute;
     top: 261px;
 }
+.personnal_information{
+	background-image: url(../images/personall.png);
+	background-repeat: no-repeat;
+	height: 228px;
+}
+.margin_10{
+	margin-top:10px;
+}

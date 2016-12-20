@@ -27,7 +27,11 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="<?php echo $organization['organization_logo'];?>" alt="Image">
+                                    <?php if (file_exists($organization['organization_logo'])) { ?>
+                                    <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } else { ?>
+                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } ?>
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
                                     <h4><?php echo $organization['organization_name']; ?></h4>
@@ -55,7 +59,7 @@
 	                                        </a>
 	                                        <a href="#"><span class="comp-name"><?php echo $postedjobs['vacancies_available']; ?> vancancies, <?php echo $postedjobs['vacancies_experience']; ?></span></a>
 	                                    </div>
-	                                    <p><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?>.......<a href="#">Read More</a> </p>
+	                                    <p><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?></p>
 	                                </div>
 	                                <div class="job-salary">
 	                                    <i class="fa fa-money"></i> &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>

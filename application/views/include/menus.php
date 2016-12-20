@@ -27,7 +27,12 @@
 			          	<li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
-								<img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
+								<?php if (isset($organization['registrant_logo']) && file_exists($organization['organization_logo'])) { ?>
+                                <img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
+                                <?php } else { ?>
+                            	<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
+                                <?php } ?>
+								
 			                    <span class="hidden-xs hidden-sm"><?php echo isset($user_type['registrant_name'])?$user_type['registrant_name']:$organization['registrant_name'] ;?> </span>
 			                    <i class="fa fa-angle-down fa-indicator"></i> 
 			                </a>
@@ -104,7 +109,7 @@
 		          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
 		          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
 		          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
-		          	<li class="no-bg login-btn-no-bg">
+			       	<li class="no-bg login-btn-no-bg">
 		          	   <a class="login-header-btn" data-toggle="modal" data-target="#login_home_btn"  data-backdrop="static" data-keyboard="false">
 		          		<i class="fa fa-sign-in"></i> Log in
 		          	   </a>
