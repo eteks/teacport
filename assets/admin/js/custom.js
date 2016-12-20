@@ -160,7 +160,7 @@ ajax = function (params,action,form_id){
         data : params ,
         success: function(res) {
             if(res.error==1) {
-                $('.val_error').html(res.status);
+                $('.val_error').html("<i class='icon-remove-sign'></i>  "+res.status);
                 $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
             }
@@ -172,6 +172,10 @@ ajax = function (params,action,form_id){
                 setTimeout(function() { datatable_initialization(); }, 3000); 
                 setTimeout(function() { $('.db_status').remove(); }, 5000);
                 default_credentials();
+                if(res.session_data != 'undefined' && res.session_data == true){
+                    alert("You have changed your Accounts. We need to logout your session to confirm");
+                    setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 3000 );
+                }
             }
         }
     });
@@ -521,29 +525,29 @@ $(document).ready(function(){
 
     
     
- // error popup alert box  
-    function error_popup(message){
-	$('.error_popup_msg .success-alert span').text(message);
-	$('.popup_fade').show();
-	$('.error_popup_msg').show();
-	document.body.style.overflow = 'hidden';
-}
+//  // error popup alert box  
+//     function error_popup(message){
+// 	$('.error_popup_msg .success-alert span').text(message);
+// 	$('.popup_fade').show();
+// 	$('.error_popup_msg').show();
+// 	document.body.style.overflow = 'hidden';
+// }
     
-// error popup message center alignment
-var height=$('.error_popup_msg').height();
-var width=$('.error_popup_msg').width();
-$('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
+// // error popup message center alignment
+// var height=$('.error_popup_msg').height();
+// var width=$('.error_popup_msg').width();
+// $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
     
-// close error popup when click ok button or popupfade
-	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
-	  	$('.error_popup_msg').hide();
-	  	$('.popup_fade').hide();
-	  	document.body.style.overflow = 'auto';
-	});
+// // close error popup when click ok button or popupfade
+// 	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+// 	  	$('.error_popup_msg').hide();
+// 	  	$('.popup_fade').hide();
+// 	  	document.body.style.overflow = 'auto';
+// 	});
 
-    $(".admin_module_form").submit(function(e){
-    e.preventDefault();
-    });
+//     $(".admin_module_form").submit(function(e){
+//     e.preventDefault();
+//     });
     
    	$("ul, .site_visit_btn").on("click", function () {
            var disabled = $(this).attr("disabled");
@@ -552,11 +556,11 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
            }
            });
        
- //Forgot password
-   $('#forget-password').on("click", function(){
-   	   $("#admin_login_form").hide();
-   	   $("#forgotform").show();
-   });    
+ // //Forgot password
+ //   $('#forget-password').on("click", function(){
+ //   	   $("#admin_login_form").hide();
+ //   	   $("#forgotform").show();
+ //   });    
       
     // Get all the menus from admin and store it in below array to save in db to assign admin rights for each module via ajax
     // ********* Start line of the code **********
@@ -610,7 +614,7 @@ $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -wid
                 $res = JSON.parse(res);
                 if($res == "success"){
                     $("html, body,.form_table_scl").animate({ scrollTop: 0 }, "slow");
-                    $('.privilege_status').text("Updated Successfully").show().fadeOut(3000);
+                    $('.privilege_status').html("<i class='icon-ok-sign'></i>  Updated Successfully").show().fadeOut(3000);
 
                 }
             }

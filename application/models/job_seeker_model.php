@@ -547,4 +547,14 @@ class Job_seeker_model extends CI_Model {
 		}
 	}
 
+	public function candidate_feedback_form($data)
+	{
+		if($this->db->insert('tr_feedback_form', $data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+
 } // End

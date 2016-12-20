@@ -297,25 +297,25 @@ var width=$('.error_popup_msg').width();
 $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
     
 // close error popup when click ok button or popupfade
-	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
-	  	$('.error_popup_msg').hide();
-	  	$('.popup_fade').hide();
-	  	document.body.style.overflow = 'auto';
-	});
-    $(".admin_module_form").submit(function(e){
+$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+  	$('.error_popup_msg').hide();
+  	$('.popup_fade').hide();
+  	document.body.style.overflow = 'auto';
+});
+$(".admin_module_form").submit(function(e){
     e.preventDefault();
-  });
-  
- //Login page
-   $('#forget-password').on("click", function(){
-   	   $("#admin_login_form").hide();
-   	   $("#forgotform").show();
-   });
-   
-   $('#cancel').on("click", function(){
-   	   $("#forgotform").hide();
-   	   $("#admin_login_form").show();
-   });
+});
+
+//Login page
+$('#forget-password').on("click", function(){
+	   $("#admin_login_form").hide();
+	   $("#forgotform").show();
+});
+
+$('#cancel').on("click", function(){
+	   $("#forgotform").hide();
+	   $("#admin_login_form").show();
+});
    
    // $(function () {
     // var startDate = new Date('1985-01-01'),

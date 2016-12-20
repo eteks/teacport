@@ -257,7 +257,8 @@ tr select {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;*/
 }
 .update_success_md,.privilege_status{
-    color: #ff0000 !important;
+    /*color: #ff0000 !important;*/
+    color: #324F17 !important;
     font-size: 14px !important;
     /*font-weight: 600;*/
 }

@@ -495,6 +495,15 @@ class Job_seeker extends CI_Controller {
 
 	public function edit_profile_validation_ajax() {
    		$action = "update"	;
+   		// Experience Validation
+   		if(!$this->input->post('cand_fresh')) {
+			$validation_fields = array(	
+				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
+						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
+				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
+				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2}$/]'),
+				    );
+		}
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
 			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean'),
@@ -539,14 +548,7 @@ class Job_seeker extends CI_Controller {
 	    	array('field' => 'cand_accept', 'label' => 'Accept Terms & Condition','rules' => 'required|trim|xss_clean'),
 	    	array('field' => 'cand_resume', 'label' => 'Resume','rules' => 'callback_validate_file_type['.$action.'.cand_resume]'),
 		);
-		if(!$this->input->post('cand_fresh')) {
-			$validation_fields = array(	
-				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
-						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
-				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
-				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2}$/]'),
-				    );
-		}
+		
 		$this->form_validation->set_rules($validation_fields);
 		if($this->form_validation->run() == FALSE) {
 			foreach($validation_fields as $row){
@@ -680,8 +682,10 @@ class Job_seeker extends CI_Controller {
 			// echo $this->db->last_query();					
 			$this->pagination->initialize($pagination);
 			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
-			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);					
-			$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);		
+			if(isset($data["jobsapplied"][0]['vacancies_organization_id'])){			
+				$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
+			}	
 			// echo $this->db->last_query();			
 			$str_links = $this->pagination->create_links();
 			$data["links"] = explode('&nbsp;',$str_links );			
@@ -738,18 +742,6 @@ class Job_seeker extends CI_Controller {
 
 		}
 	}
-
-
-	// public function jobsapplieddetails(){		
-	// 	$data["current_jobvacancy_id"] = $this->uri->segment('3');
-	// 	if(isset($data["current_jobvacancy_id"])){
-	// 		$data["jobsapplieddetails"] = 'readonly';
-	// 		redirect('job_seeker/applynow/'.$data["current_jobvacancy_id"]);
-	// 	}else{
-	// 		redirect('missingpage');
-	// 	}
-	// }
-	
 	
 	// Change password
 	public function change_password() {
@@ -806,6 +798,45 @@ class Job_seeker extends CI_Controller {
 	public function inbox_message_full_data() {
 		$inbox_id = $this->input->post('inbox_id');	
 		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
+	}
+
+	public function feedback(){
+		$session_data = $this->session->all_userdata();
+		// $data['candidate'] 	= isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['candidate'] 	= $session_data['login_session']['candidate_id'];
+		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session_data['login_session']['candidate_id']);
+
+		if(!$_POST){
+			$this->load->view('user-dashboard-feedback',$data);
+		}
+		else{
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
+		$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			if ($this->form_validation->run()){
+				$feedback_data = array(
+									'feedback_form_title' => $this->input->post('feedback_subject'),
+									'feedback_form_message' => $this->input->post('feedback_content'),
+									'is_organization' => 0,
+									'is_candidate' => 1,
+									'is_guest_user' => 0,
+									'candidate_or_organization_id' => $session_data['login_session']['candidate_id'],
+									'feedback_form_status' => 1
+								);
+				if($this->job_seeker_model->candidate_feedback_form($feedback_data)){
+					$data['feedback_server_msg'] = 'Thanks for your valuable feedback! Our customer support representative will contact you soon!!';
+					$this->load->view('user-dashboard-feedback',$data);
+				}
+				else{
+					$data['feedback_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+					$this->load->view('user-dashboard-feedback',$data);
+				}
+			}
+			else{
+				$this->load->view('user-dashboard-feedback',$data);
+			}
+		}
+		
 	}
 
 } // End

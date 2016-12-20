@@ -72,17 +72,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </div>
                                 </div>
                                 <form method="post" action="user_groups" class="admin_module_form" id="users_group_form">
-                                
+                                <?php } ?>
                                 <?php
                                 if(!empty($status)) :
-                                  echo $error;
-                                  if($error==1)
-                                    echo "<i class='fa fa-times-circle'></i><p class='db_status update_success_md'> $status </p>";
-                                   else
-                                    echo "<i class='fa fa-check'></i><p class='db_status update_success_md'> $status </p>";
+                                    echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
                                 endif;
                                 ?> 
-                                <?php } ?>
                                 <p class='val_error error_msg_md'> <p>
                                 <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
