@@ -29,7 +29,11 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                    <img class="img-responsive center-block" src="<?php echo $organization['organization_logo'];?>" alt="Image">
+                                     <?php if (file_exists($organization['organization_logo'])) { ?>
+                                    <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } else { ?>
+                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } ?>
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
                                     <h4><?php echo $organization['organization_name']; ?></h4>

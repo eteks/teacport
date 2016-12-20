@@ -708,7 +708,6 @@ class Job_provider extends CI_Controller {
 	}
 	public function subscription(){
 		$session_data = $this->session->all_userdata();
-		
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		if(!$_POST){
@@ -785,6 +784,7 @@ class Job_provider extends CI_Controller {
 	public function candidateprofile() {
 		$session_data = $this->session->all_userdata();
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$candidate_id = $this->uri->segment(3);
 		$institution_type_id = $data['organization']['organization_institution_type_id'];	
 		$data['candidate'] = $this->job_provider_model->candidate_full_data($candidate_id);

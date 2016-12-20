@@ -478,4 +478,16 @@ class Job_provider_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	public function subscribed_or_not($subcription_id,$organization_id){
+		$checkquery = $this->db->get_where('tr_organization_subscription', array(
+            'organization_id' => $organization_id,'subscription_id' => $subcription_id
+        ));
+		$count = $checkquery->num_rows();
+		if ($count === 0) {
+			return TRUE;
+        }
+		else{
+			return FALSE;
+		}
+	}
 }
