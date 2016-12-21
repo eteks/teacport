@@ -400,7 +400,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span class="dynamic_data"> 
                             <?php 
                             if(!empty($provider_full_profile['registrant_date_of_birth'])) :
-                              echo $provider_full_profile['registrant_date_of_birth']; 
+                              echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth']));
                             else :
                               echo "NULL";
                             endif;

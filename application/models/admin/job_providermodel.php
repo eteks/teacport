@@ -134,12 +134,21 @@ class Job_Providermodel extends CI_Model {
         else {
           $pos_name = NULL;
         }
+        $vacancy_open = explode('/', $this->input->post('vac_open_date'));
+        $vacancy_open_date = $vacancy_open[2]."-".$vacancy_open[1]."-".$vacancy_open[0];
+        $vacancy_end = explode('/', $this->input->post('vac_end_date'));
+        $vacancy_end_date = $vacancy_end[2]."-".$vacancy_end[1]."-".$vacancy_end[0];
+
+        $interview_start = explode('/', $this->input->post('vac_inter_sdate'));
+        $interview_start_date = $interview_start[2]."-".$interview_start[1]."-".$interview_start[0];
+        $interview_end = explode('/', $this->input->post('vac_inter_edate'));
+        $interview_end_date = $interview_end[2]."-".$interview_end[1]."-".$interview_end[0];
         $vacancy_update_data = array( 
                                 'vacancies_job_title' => $this->input->post('job_title'),
                                 'vacancies_organization_id' => $this->input->post('org_name'),
                                 'vacancies_available' => $this->input->post('vac_available'),
-                                'vacancies_open_date' => $this->input->post('vac_open_date'),
-                                'vacancies_close_date' => $this->input->post('vac_end_date'),
+                                'vacancies_open_date' => $vacancy_open_date,
+                                'vacancies_close_date' => $vacancy_end_date,
                                 'vacancies_start_salary' => $this->input->post('job_min_salary'),
                                 'vacancies_end_salary' => $this->input->post('job_max_salary'),
                                 'vacancies_status' => $this->input->post('vac_status'),
@@ -153,8 +162,8 @@ class Job_Providermodel extends CI_Model {
                                 'vacancies_medium' => $this->input->post('vac_medium'),
                                 'vacancies_accommodation_info' => $this->input->post('vac_accom'),
                                 'vacancies_instruction' => $this->input->post('vac_instruction'),
-                                'vacancies_interview_start_date' => $this->input->post('vac_inter_sdate'),
-                                'vacancies_end_date' => $this->input->post('vac_inter_edate')
+                                'vacancies_interview_start_date' => $interview_start_date,
+                                'vacancies_end_date' => $interview_end_date
                               );
         $vacancy_update_where = '( vacancies_id="'.$this->input->post('rid').'")'; 
         $this->db->set($vacancy_update_data); 
