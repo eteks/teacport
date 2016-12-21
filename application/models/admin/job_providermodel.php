@@ -15,9 +15,8 @@ class Job_Providermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
-       $registrant_dob = explode('/', $this->input->post('registrant_dob'));
+      $registrant_dob = explode('/', $this->input->post('registrant_dob'));
       $registrant_dob_date = $registrant_dob[2]."-".$registrant_dob[1]."-".$registrant_dob[0];
-
 
       // Check Mobile Number or Email already exists or not
       $mobile_exists_where = "registrant_mobile_no =" . "'" . $this->input->post('registrant_mobile') . "' AND organization_id NOT IN (". $this->input->post('rid').")";
@@ -35,7 +34,6 @@ class Job_Providermodel extends CI_Model {
         }
         else {
           $profile_update_org_data = array( 
->>>>>>> da05f9c64b0d5fd24b377b752c6c06781a35d9e9
                               'organization_name' => $this->input->post('organization_name'),
                               'organization_logo' => $this->input->post('organization_logo'),
                               'organization_status' => $this->input->post('organization_status'),
