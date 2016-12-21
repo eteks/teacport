@@ -482,6 +482,9 @@ $(document).ready(function(){
         $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
         //newly added by kalai
         $('.admin_form').attr("data-mode",$(this).data('action'));
+        if($(this).data('action') == "save"){
+            $('.admin_form').find(':input').val('');
+        }
         e.preventDefault();
     });
     

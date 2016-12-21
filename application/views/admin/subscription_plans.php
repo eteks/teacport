@@ -182,7 +182,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>
 
 
-  <!---Full edit popup -->
+  <!---Add and edit popup -->
     <div class="popup" data-popup="popup_section">
       <div class="popup-inner">       
         <div class="widget box blue" id="popup_wizard_section">
