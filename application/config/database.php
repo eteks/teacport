@@ -53,7 +53,7 @@ if(in_array($_SERVER['SERVER_ADDR'], array("127.0.0.1","::1","localhost"))){
 	// local settings
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'root';
-	$db['default']['password'] = 'root';
+	$db['default']['password'] = '';
 	$db['default']['database'] = 'teacherrecruite';
 }else if(in_array($_SERVER['SERVER_ADDR'], array("http://sunmicromac.com","166.62.28.109"))){
 	// server settings

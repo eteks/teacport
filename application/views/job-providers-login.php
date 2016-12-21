@@ -1,4 +1,3 @@
-
  <?php include('include/header.php'); ?>
  <div class="signuppage_body">
         <section class="login-page-4 loginbox_parallex full-page">

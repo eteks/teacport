@@ -756,13 +756,8 @@ class Job_provider extends CI_Controller {
 													'is_email_validity'								=> 1,
 													'is_sms_validity'								=> 1,
 													'is_resume_validity'							=> 1,
-<<<<<<< HEAD
-													'org_sub_validity_start_date'							=> date('Y-m-d'),
-													'org_sub_validity_end_date'								=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
-=======
 													'org_sub_validity_start_date'					=> date('Y-m-d'),
 													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
->>>>>>> 9db7f3ed8a707a3fb756aad25dc2a692be41fa73
 													'organization_subscription_status'				=> 1
 												);
 					
