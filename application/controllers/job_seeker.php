@@ -281,6 +281,16 @@ class Job_seeker extends CI_Controller {
 	        return TRUE;
 	    }
 	}
+	public function readmore(){
+		$session_data = $this->session->all_userdata();
+		if(isset($session_data['login_session']))
+		{
+        $this->load->view('user-find-jobs');
+		}
+	    else {
+		    redirect('login/seeker');
+		}
+	}
 
 	public function dashboard() {     	
 
