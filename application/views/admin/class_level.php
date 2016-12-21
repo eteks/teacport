@@ -117,7 +117,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $cla_val['class_level_status']; ?>" />
                         </td>
                         <td class="created_date"> 
-                          <?php echo $cla_val['class_level_created_date']; ?>
+                          <?php 
+                            $created_datetime = explode(' ', $cla_val['class_level_created_date']);
+                            echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                          ?> 
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">

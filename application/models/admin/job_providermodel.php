@@ -15,14 +15,14 @@ class Job_Providermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $start_date = date('Y-m-d',strtotime($this->input->post('val_sdate')));
-      $end_date = date('Y-m-d',strtotime($this->input->post('val_edate')));
+      $registrant_dob = explode('/', $this->input->post('registrant_dob'));
+      $registrant_dob_date = $registrant_dob[2]."-".$registrant_dob[1]."-".$registrant_dob[0];
       $profile_update_org_data = array( 
                               'organization_name' => $this->input->post('organization_name'),
                               'organization_logo' => $this->input->post('organization_logo'),
                               'organization_status' => $this->input->post('organization_status'),
                               'registrant_designation' => $this->input->post('registrant_designation'),
-                              'registrant_date_of_birth' => $this->input->post('registrant_dob'),
+                              'registrant_date_of_birth' => $registrant_dob_date,
                               'registrant_email_id' => $this->input->post('registrant_email'),
                               'registrant_mobile_no' => $this->input->post('registrant_mobile'),
                               'registrant_name' => $this->input->post('registrant_name'),

@@ -184,7 +184,9 @@ $(document).ready(function(){
 
 // Popup with tab menu
 function handleFormWizards() {	
-	$('.date-picker').datepicker();
+	$('.date-picker').datepicker({
+        format: 'dd/mm/yyyy',
+    });
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
                         var $total = navigation.find('li').length;

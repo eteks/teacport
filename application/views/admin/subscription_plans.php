@@ -131,10 +131,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php echo $sub['subscription_features']; ?>
                         </td>
                         <td> 
-                          <?php echo $sub['subcription_valid_start_date']; ?>
+                          <?php echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
                         </td>
                         <td> 
-                          <?php echo $sub['subcription_valid_end_date']; ?>
+                          <?php echo date("d/m/Y", strtotime($sub['subcription_valid_end_date'])); ?>
                         </td>
                         <td> 
                           <?php 
@@ -145,7 +145,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                         </td>
                         <td> 
-                          <?php echo $sub['subscription_created_date']; ?>
+                          <?php 
+                          $created_datetime = explode(' ', $sub['subscription_created_date']);
+                          echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; ?>
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
@@ -219,14 +221,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <label class="control-label">Validitity Start</label>
                         <span class="dynamic_data"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_valid_start_date']; ?>"/>
+                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity End</label>
                         <span class="dynamic_data"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_valid_end_date']; ?>"/>
+                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
                         </span>
                       </div> 
                     <div class="col12">
