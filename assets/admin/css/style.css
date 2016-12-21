@@ -4779,7 +4779,9 @@ div.dt-button-background {
 }
 /* Style for tooltip in provider profile end */
 
-
+i#admin_error_login {
+    color: red !important;
+}
 /* Ended by siva */
 
 .sub_module_access{

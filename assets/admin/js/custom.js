@@ -48,7 +48,7 @@ function customalert(msg){
     overlay.fadeIn(350);
     alertBox.fadeIn(350);
 }
-function doConfirm(msg, yesFn, noFn) {
+function confirm_alert(msg, yesFn, noFn) {
     var confirmBox = $("#dialog-box");
     var overlay = $("#dialog-overlay");
     confirmBox.find(".message").text(msg);
@@ -288,7 +288,7 @@ $(document).ready(function(){
         var ajax_data = {};
         ajax_data['rid'] = id;
         if(id){
-            doConfirm("Are you sure want to delete?", function yes() {
+            confirm_alert("Are you sure want to delete?", function yes() {
                 ajax(ajax_data,"delete",form_id);
             }, function no() {
                 // do nothing
@@ -300,13 +300,13 @@ $(document).ready(function(){
     });
 
     // Delete - Old record
-    $(document).on("click",".uidelete",function(){
-        doConfirm("Are you sure want to delete?", function yes() {
+    // $(document).on("click",".uidelete",function(){
+    //     doConfirm("Are you sure want to delete?", function yes() {
             
-        }, function no() {
-                // do nothing
-            });
-    });
+    //     }, function no() {
+    //             // do nothing
+    //         });
+    // });
 
 
     // Edit - Old record

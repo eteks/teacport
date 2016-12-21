@@ -10,9 +10,9 @@ $(document).ready(function(){
             data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
             success: function(res) {
                 if(res != 'login_success') {
-                    this_status.html(res);
+                    this_status.html("<i class='icon-remove-sign' id='admin_error_login'></i>  "+res);
                     this_status.fadeIn(500);
-                    this_status.fadeOut(3000);
+                    // this_status.fadeOut(3000);
                 }
                 else {
                    window.location.href = admin_baseurl+"dashboard";
@@ -110,7 +110,7 @@ $(document).ready(function(){
         form_data['rid'] = id;
         form_data[csrf_name] = csfrData[csrf_name];
         form_data['action'] = "delete";
-        doConfirm("Are you sure want to delete?", function yes() {
+        confirm_alert("Are you sure want to delete?", function yes() {
             $.ajax({
                 type : "POST",
                 url : admin_baseurl+action_path,
@@ -120,7 +120,8 @@ $(document).ready(function(){
                     if(res.error == 2) {
                         $('.admin_table').dataTable().fnDestroy();
                         this_table_content.html(res.output);
-                        this_status.html(res.status);
+                        this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                        this_status.addClass('update_success_md');
                         this_status.fadeIn(1000);
                         this_status.fadeOut(2000);
                         setTimeout(function() { datatable_initialization(); }, 3000); 
@@ -291,7 +292,8 @@ function tabmenu_ci_validation(value,data) {
         data : form_data,
         success: function(res) {
             if(res.error==1 && res.status!='valid') {
-                $('.val_error').html(res.status);
+                $('.val_error').html('<i class="icon-remove-sign"></i>'+res.status);
+                $('.val_error').removeClass('update_success_md');
                 $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 return_val = 0;
@@ -300,7 +302,8 @@ function tabmenu_ci_validation(value,data) {
                 return_val = 1;
             }
             else if(res.error == 2) {
-                $('.val_error').html(res.status);
+                $('.val_error').html('<i class=" icon-ok-sign"></i>'+res.status);
+                $('.val_error').addClass('update_success_md');
                 $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 $('.admin_table').dataTable().fnDestroy(); 

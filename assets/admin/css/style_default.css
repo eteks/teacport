@@ -474,7 +474,7 @@ tr select {
     background-color: #2cc1cc !important;
 }
 .val_error{
-    color: #ff0000 !important;
+    color: #ff0000;
     font-size: 14px !important;
     /*font-weight: 600;*/
     background-color: #d9edf7 !important;
