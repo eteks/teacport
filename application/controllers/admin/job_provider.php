@@ -17,12 +17,12 @@ class Job_Provider extends CI_Controller {
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
-		list($action,$field) = explode(".",$params); // To split the array values
-		$upload_path = "assets/admin/uploads/"; // Admin upload path
+		list($action,$field,$upload_path) = explode(".",$params); // To split the array values
 	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
         $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $config['max_size']    = '1000'; // Maximum size - 1MB
+        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+        $personnal_logo['file_ext_tolower'] 	= TRUE;
+        $config['max_size']    = '2048'; // Maximum size - 1MB
     	$config['max_width']  = '1024'; // Maximumm width - 1024px
     	$config['max_height']  = '768'; // Maximum height - 768px
         $this->upload->initialize($config); // Initialize the configuration
@@ -35,20 +35,23 @@ class Job_Provider extends CI_Controller {
         	$old_file_path = $_POST['old_file_path'];
         	if(isset($_POST['old_file_path']) && !empty($_POST['old_file_path'])) {
         		$_POST[$field] = $old_file_path;
-            	return TRUE;
+            	// return TRUE;
         	}
         	else {
         		$_POST[$field] = NULL; //
-	            $this->form_validation->set_message('validate_image_type', "The %s is required");
+	            $this->form_validation->set_message('validate_image_type', "The %s field is required");
 	            return FALSE;
         	}
         }
         else {
         	$_POST[$field] = NULL; //
-            $this->form_validation->set_message('validate_image_type', "The %s is required");
+            $this->form_validation->set_message('validate_image_type', "The %s field is required");
             return FALSE;
         }
     }
+					
+
+
 
 	// Edit unique function - To check the field is already exists or not
 	function edit_unique($value, $params) 
@@ -66,6 +69,22 @@ class Job_Provider extends CI_Controller {
 	      }
 	}
 
+	// Edit unique function - To check the field is already exists or not
+	function multiselect_validate($value,$params) 
+	{
+		//get main CodeIgniter object
+	      $CI =& get_instance();
+	      //load database library
+	      $CI->load->database();    
+	      $CI->form_validation->set_message('multiselect_validate', "The $params field is required.");
+	      if ($value == "null")
+	      {
+	          return FALSE;
+	      }
+	}
+
+	
+
 	// Job provider profile
 	public function teacport_job_provider_profile()
 	{
@@ -73,6 +92,7 @@ class Job_Provider extends CI_Controller {
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	   		$validation_rules = array();	
 	  		$id = $this->input->post('rid');
+	  		$upload_path = "uploads/jobprovider/";
 	  		$action = $this->input->post('action');
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
 	  			$validation_rules[] =  	array(
@@ -93,7 +113,7 @@ class Job_Provider extends CI_Controller {
 			   	$validation_rules[] =   array(
 			                                'field'   => 'organization_logo',
 			                                'label'   => 'Organization Logo',
-			                                'rules'   => 'callback_validate_image_type['.$action.'.organization_logo]'
+			                                'rules'   => 'callback_validate_image_type['.$action.'.organization_logo.'.$upload_path.']'
 			                            );
 	                        
 	   		}
@@ -134,7 +154,12 @@ class Job_Provider extends CI_Controller {
 			                                'field'   => 'registrant_mobile',
 			                                'label'   => 'Registrant Mobile',
 			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|'
-			                            );			                       
+			                            );
+			    $validation_rules[] =	array(
+			                                'field'   => 'sms_verify',
+			                                'label'   => 'Sms Verification',
+			                                'rules'   => 'trim|required|xss_clean|'
+			                            );				                       
 	   		}
 	   		// if($this->input->post('index')==4 || $this->input->post('index')=="end") {
 	   		// 	$validation_rules[] =	array(
@@ -173,7 +198,6 @@ class Job_Provider extends CI_Controller {
       		else {
       			$upload_error = 0;
       			$is_end =0;
-      			$upload_path = "assets/admin/uploads/";
 
     			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
         		{	
@@ -313,7 +337,7 @@ class Job_Provider extends CI_Controller {
 	   				$validation_rules[] =	array(
 				                              'field'   => 'qualification_name',
 				                              'label'   => 'Qualification Name',
-				                              'rules'   => 'trim|required|xss_clean|'
+				                              'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Qualification Name]'
 				                            );
 	   				$validation_rules[] =	array(
 				                                'field'   => 'vac_experience',
@@ -329,11 +353,6 @@ class Job_Provider extends CI_Controller {
 				                                'field'   => 'vac_univ_name',
 				                                'label'   => 'Vacancy University',
 				                                'rules'   => 'trim|required|xss_clean|'
-				                            );
-	   				$validation_rules[] =	array(
-				                              'field'   => 'vac_dept_name',
-				                              'label'   => 'Department Name',
-				                              'rules'   => 'trim|required|xss_clean|'
 				                            );
 	   				$validation_rules[] =	array(
 				                                'field'   => 'vac_sub_name',
@@ -470,6 +489,21 @@ class Job_Provider extends CI_Controller {
 		                                 'label'   => 'Candidate Name',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
+		                            array(
+		                                 'field'   => 'act_sms',
+		                                 'label'   => 'Sms Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'act_email',
+		                                 'label'   => 'Email Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
+		                            array(
+		                                 'field'   => 'act_resume',
+		                                 'label'   => 'Resume Status',
+		                                 'rules'   => 'trim|required|xss_clean|'
+		                            ),
 		                        );
 	 		$this->form_validation->set_rules($validation_rules);
 	  		if ($this->form_validation->run() == FALSE) {   
@@ -527,17 +561,18 @@ class Job_Provider extends CI_Controller {
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	   		$action = $this->input->post('action');
 	  		$id = $this->input->post('rid');
+	  		$upload_path = "uploads/jobprovider/premiumad/";
   			$validation_rules = array(
-  									array(
-		                              'field'   => 'ads_name',
-		                              'label'   => 'Premium Ads Name',
-		                              'rules'   => 'trim|required|xss_clean|'
-		                            ),
-			    					array(
-		                              'field'   => 'ads_days',
-		                              'label'   => 'Premium Visible Days',
-		                              'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,15}$/]'
-		                            ),
+  									// array(
+		         //                      'field'   => 'ads_name',
+		         //                      'label'   => 'Premium Ads Name',
+		         //                      'rules'   => 'trim|required|xss_clean|'
+		         //                    ),
+			    				// 	array(
+		         //                      'field'   => 'ads_days',
+		         //                      'label'   => 'Premium Visible Days',
+		         //                      'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,15}$/]'
+		         //                    ),
 		                            array(
 		                              'field'   => 'org_name',
 		                              'label'   => 'Organization Name',
@@ -556,7 +591,7 @@ class Job_Provider extends CI_Controller {
 		                            array(
 		                              'field'   => 'ads_logo',
 		                              'label'   => 'Ads Logo',
-		                              'rules'   => 'callback_validate_image_type['.$action.'.ads_logo]'
+		                              'rules'   => 'callback_validate_image_type['.$action.'.ads_logo.'.$upload_path.']'
 		                            )
 			                    );
 	   		$this->form_validation->set_rules($validation_rules);
@@ -573,7 +608,6 @@ class Job_Provider extends CI_Controller {
 		  	}
       		else {
       			$upload_error = 0;
-      			$upload_path = "assets/admin/uploads/";
       			if(!empty($_FILES['ads_logo']['name']))
         		{	   			
            			if($this->upload->do_upload('ads_logo'))

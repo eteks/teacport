@@ -271,7 +271,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Organization Logo</label>
                           <span class="dynamic_data"> 
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo not loaded" />
+                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo Not Found" />
                           </span>
                         </div>
                       </div>
@@ -445,6 +445,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo "No";
                             endif;
                             ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Registrant Picture</label>
+                          <span class="dynamic_data"> 
+                            <img src="<?php echo base_url().$provider_full_profile['registrant_logo']; ?>" class="popup_preview" alt="Picture Not Found" />
                           </span>
                         </div>
                       </div>
@@ -848,6 +854,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Registrant Mobile</label>
                           <span>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" />
+                          </span>
+                        </div>
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">SMS Verification</label>
+                          <span>
+                            <ul class="on_off_button on_off_button_j">
+                              <li data-value="1" <?php 
+                              if($provider_full_profile['is_sms_verified']==1) echo "class='on'"; ?>><a>Yes</a></li>
+                              <li data-value="0" <?php 
+                              if($provider_full_profile['is_sms_verified']==0) echo "class='on'"; ?>><a>No</a></li>
+                            </ul> 
+                            <input type="hidden" value="<?php 
+                            echo $provider_full_profile['is_sms_verified']; ?>" class="verification tabfield3 tabfield" name="sms_verify" />
                           </span>
                         </div>
                       </div>
