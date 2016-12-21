@@ -76,11 +76,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </div>
                 <form action="job_provider/teacport_job_provider_vacancies">
                   <p class="admin_status"> </p>
-                  <div class="table_content_section">
-                    <?php } ?>
-                    <?php
-                    if(!empty($provider_vacancy))  :
-                    ?>
+                  <div class="">
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
@@ -100,10 +96,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th class="data_action"> Full View </th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="table_content_section">
+                        <?php } ?>
+                        <?php
+                          if(!empty($provider_vacancy))  :
+                        ?>                    
                         <?php
                         foreach ($provider_vacancy as $vac_val) :
-                        ?>                                   
+                        ?>     
+
                         <tr class="parents_tr" id="column">
                           <td class=""> 
                             <?php echo $vac_val['vacancies_job_title']; ?>
@@ -155,12 +156,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php
                         endforeach;
                         ?>
+                        <?php 
+                        endif;
+                        ?>
+                        <?php if(!$this->input->is_ajax_request()) { ?> 
                       </tbody>
                     </table>                  
-                    <?php 
-                    endif;
-                    ?>
-                    <?php if(!$this->input->is_ajax_request()) { ?> 
                   </div>
                 </form>
               </div>
@@ -303,7 +304,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <?php
                                 foreach ($vac_val['educational_qualification_id'] as $qua_val) :
                                   echo $qua_val;
-                                  echo " ";
+                                  echo "<br/>";
                                 endforeach;
                                 ?>
                               </span>
@@ -333,7 +334,23 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">
                               <label class="control-label"> Department Name </label>
                               <span class="dynamic_data"> 
-                                <?php echo $vac_val['departments_name']; ?>
+                                <?php
+                                if(!empty($vac_val['vacancies_department_id'])) {
+                                  $dep_array = explode(',',$vac_val['vacancies_department_id']);
+                                  if(!empty($department_values)) :
+                                  foreach ($department_values as $dep_val) :
+                                  ?>
+                                  <?php
+                                  if(in_array($dep_val['departments_id'], $dep_array)) {
+                                    echo '<span> '.$dep_val["departments_name"].' </span>';
+                                  }
+                                  endforeach;
+                                  endif;
+                                }
+                                else {
+                                  echo "NULL";
+                                }
+                                ?>
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
@@ -581,22 +598,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Department Name</label>
                               <span>
-                                <select name="vac_dept_name" class="span6 tabfield2 tabfield">
-                                  <option value=""> Please select department </option>
+                                <?php
+                                $dep_array = explode(',',$vac_val['vacancies_department_id']);
+                                ?>
+                                <select data-placeholder="select" name="vac_dept_name" class="chosen span6 tabfield2 tabfield" multiple="multiple" >
                                   <?php
                                   if(!empty($department_values)) :
                                   foreach ($department_values as $dep_val) :
                                   ?>
                                   <?php
-                                    if($dep_val['departments_id']==$vac_val['vacancies_department_id']) {
+                                    if(in_array($dep_val['departments_id'], $dep_array)) {
                                       echo '<option value='.$dep_val["departments_id"].' selected> '.$dep_val["departments_name"].' </option>';
                                     }
-                                    else {
+                                    else{
                                       echo '<option value='.$dep_val["departments_id"].'> '.$dep_val["departments_name"].' </option>';
                                     }
                                   endforeach;
-                                  else :
-                                    echo '<option value='.$vac_val['vacancies_department_id'].' selected> "'.$vac_val['departments_name'].'" </option>';
                                   endif;
                                   ?>
                                 </select>

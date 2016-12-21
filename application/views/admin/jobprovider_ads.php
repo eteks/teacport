@@ -75,11 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </div>
                 <form action="job_provider/teacport_job_provider_ads">
                   <p class="admin_status"> </p>
-                  <div class="table_content_section">
-                    <?php } ?>
-                    <?php
-                    if(!empty($provider_ads))  :
-                    ?>
+                  <div class="">
                     <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
@@ -98,22 +94,38 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php endif; ?>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody class="table_content_section">
+                        <?php } ?>
+                        <?php
+                        if(!empty($provider_ads))  :
+                        ?>
                         <?php
                         foreach ($provider_ads as $ads_val) :
                         ?>
                         <tr class="parents_tr" id="column">
                           <td> 
-                            <?php echo $ads_val['premium_ads_name']; ?>
+                            <?php 
+                            if(!empty($ads_val['premium_ads_name'])) :
+                              echo $ads_val['premium_ads_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td> 
-                            <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" />
+                            <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" alt="Not Found" />
                           </td>
                           <td> 
                             <?php echo $ads_val['organization_name']; ?>
                           </td>
                           <td>
-                            <?php echo $ads_val['ad_visible_days']; ?>
+                            <?php 
+                            if(!empty($ads_val['ad_visible_days'])) :
+                              echo $ads_val['ad_visible_days']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class="center_align"> 
                             <?php 
@@ -148,22 +160,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </a>
                           </td>
                           <?php endif; ?>
-                        </tr>
                         <?php
                         endforeach;
                         ?>
-                      </tbody>
-                    </table>
-                    <?php 
-                    endif;
-                    ?>
-                    <?php if(!$this->input->is_ajax_request()) { ?> 
-                  </div>
-                </form>
-              </div>
+                        <?php 
+                        endif;
+                        ?>
+                        <?php if(!$this->input->is_ajax_request()) { ?>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE widget-->
+        </div>
+        <!-- END EXAMPLE TABLE widget-->
         </div>
         <div class="popup" data-popup="popup_section">
           <div class="popup-inner">       
@@ -196,7 +208,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <span class="dynamic_data"> 
                               <a class="btn upload_option"> Upload </a>
                               <input class="form-control hidden_upload" name="ads_logo" type="file">
-                              <img src="<?php echo base_url().$activities_details['ads_image_path']; ?>" class="popup_preview">
+                              <img src="<?php echo base_url().$activities_details['ads_image_path']; ?>" class="popup_preview" alt="Not Found">
                               <input type="hidden" value="<?php echo $activities_details['ads_image_path']; ?>" name="old_file_path" />
                             </span>
                           </div>

@@ -47,6 +47,7 @@ class Job_Providermodel extends CI_Model {
                               'organization_address_3' => $this->input->post('org_addr_3'),
                               'organization_address_2' => $this->input->post('org_addr_2'),
                               'organization_address_1' => $this->input->post('org_addr_1'),
+                              'is_sms_verified' => $this->input->post('sms_verify'),
                               'organization_institution_type_id' => $this->input->post('institution_type')
                             );
           // $profile_update_org_sub_data = array( 
@@ -135,6 +136,12 @@ class Job_Providermodel extends CI_Model {
         else {
           $pos_name = NULL;
         }
+        if($this->input->post('vac_dept_name') != "null") {
+          $dept_name = $this->input->post('vac_dept_name');
+        }
+        else {
+          $dept_name = NULL;
+        }
         $vacancy_update_data = array( 
                                 'vacancies_job_title' => $this->input->post('job_title'),
                                 'vacancies_organization_id' => $this->input->post('org_name'),
@@ -149,7 +156,7 @@ class Job_Providermodel extends CI_Model {
                                 'vacancies_class_level_id' => $this->input->post('vac_class'),
                                 'vacancies_university_board_id' => $this->input->post('vac_univ_name'),
                                 'vacancies_subject_id' => $this->input->post('vac_sub_name'),
-                                'vacancies_department_id' => $this->input->post('vac_dept_name'),
+                                'vacancies_department_id' => $dept_name,
                                 'vacancies_applicable_posting_id' => $pos_name,
                                 'vacancies_medium' => $this->input->post('vac_medium'),
                                 'vacancies_accommodation_info' => $this->input->post('vac_accom'),
@@ -178,13 +185,14 @@ class Job_Providermodel extends CI_Model {
     $this->db->select('*');
     $this->db->from('tr_organization_vacancies ov');
     $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+    $this->db->order_by('ov.vacancies_id','desc');
     $model_data['provider_vacancy'] = $this->db->get()->result_array();
     return $model_data;
   }
 
   // Job provider vacancy - ajax
   public function get_full_provider_vacancy($value) {
-    $provider_vacancy_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.vacancies_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_organization_vacancies t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.vacancies_qualification_id ) - LENGTH( REPLACE( t.vacancies_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id INNER JOIN tr_organization_profile AS op ON a.vacancies_organization_id=op.organization_id INNER JOIN tr_class_level AS cl ON a.vacancies_class_level_id=cl.class_level_id INNER JOIN tr_university_board AS ub ON a.vacancies_university_board_id=ub.education_board_id INNER JOIN tr_subject AS s ON a.vacancies_subject_id=s.subject_id INNER JOIN tr_departments AS td ON a.vacancies_department_id=td.departments_id LEFT JOIN tr_applicable_posting AS tap ON a.vacancies_applicable_posting_id=tap.posting_id WHERE a.vacancies_id='$value'");
+    $provider_vacancy_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.vacancies_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_organization_vacancies t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.vacancies_qualification_id ) - LENGTH( REPLACE( t.vacancies_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id INNER JOIN tr_organization_profile AS op ON a.vacancies_organization_id=op.organization_id INNER JOIN tr_class_level AS cl ON a.vacancies_class_level_id=cl.class_level_id INNER JOIN tr_university_board AS ub ON a.vacancies_university_board_id=ub.education_board_id INNER JOIN tr_subject AS s ON a.vacancies_subject_id=s.subject_id LEFT JOIN tr_applicable_posting AS tap ON a.vacancies_applicable_posting_id=tap.posting_id WHERE a.vacancies_id='$value'");
     $provider_vacancy = $provider_vacancy_query->result_array();  
     return $provider_vacancy;
   }
