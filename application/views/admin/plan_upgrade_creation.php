@@ -189,7 +189,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     // Define default values
     var inputType = new Array("select","text","text","text","text","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("subscription_name","sms_count","email_count","resume_count","price","plan_upgrade_creation_status"); // Set name of input types
-    var placeholder = new Array("","Enter SMS count","Enter Email count","Enter Resume count",""); // Set placeholder of input types
+    var placeholder = new Array("","Enter SMS count","Enter Email count","Enter Resume count","Enter Price",""); // Set placeholder of input types
     var class_selector = new Array("","numeric_act","numeric_act","numeric_act","decimal_act",""); // Set placeholder of input types
     var table = "admin_table"; // Set classname of table  
     var subscription_name_option = new Array("Select Plan");
