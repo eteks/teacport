@@ -144,9 +144,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td class="created_date">
-                            <?php echo date('d-m-Y',strtotime($ads_val['premium_ads_created_date'])); ?>
-                           </td>
-                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                            <?php 
+                              $created_datetime = explode(' ', $ads_val['premium_ads_created_date']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?>
+                          </td>
+                          <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $ads_val['premium_ads_id']; ?>" data-href="job_provider/teacport_job_provider_ads_ajax" data-mode="edit" data-popup-open="popup_section">
                               Edit

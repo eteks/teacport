@@ -31,16 +31,30 @@ class Subscription_Plan extends CI_Controller {
 	}
 
 	public function compareDate() {
-	  $startDate = strtotime($_POST['sub_start_validity']);
-	  $endDate = strtotime($_POST['sub_end_validity']);
-
-	  if ($endDate >= $startDate)
+	  $startDate = date("Y-m-d", strtotime($_POST['sub_start_validity']));
+	  $endDate = date("Y-m-d", strtotime($_POST['sub_end_validity']));
+	  if ($endDate > $startDate)
 	    return True;
 	  else {
 	    $this->form_validation->set_message('compareDate', '%s should be greater than Validity Start Date.');
 	    return False;
 	  }
 	}
+
+	// public function checkDateFormat($date) {
+	// 	if (preg_match("/^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/", $date)) {
+	// 		if(checkdate(substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4)))
+	// 			return true;
+	// 		else{
+	// 			$this->form_validation->set_message('checkDateFormat', "Date Format must be in the format dd/mm/yyyy");
+	// 			return false;
+	// 		}		
+	// 	} 
+	// 	else {
+	// 		$this->form_validation->set_message('checkDateFormat', "Date Format must be in the format dd/mm/yyyy");
+	// 		return false;
+	// 	}
+	// } 
 
 	// Job provider profile
 	public function subscription_plans()
@@ -65,11 +79,12 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_start_validity',
 		                                 'label'   => 'Plan Start validity',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_end_validity',
 		                                 'label'   => 'Plan End validity',
+		                                 // 'rules'   => 'trim|required|xss_clean|callback_checkDateFormat|callback_compareDate'
 		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
 		                            ),
 		                            array(

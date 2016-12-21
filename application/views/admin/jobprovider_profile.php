@@ -128,7 +128,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?> 
                           </td>
                           <td class=""> 
-                            <?php echo date('d-m-Y',strtotime($pro_val['organization_created_date'])); ?>
+                            <?php 
+                              $created_datetime = explode(' ', $pro_val['organization_created_date']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?> 
                           </td> 
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
@@ -397,7 +400,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span class="dynamic_data"> 
                             <?php 
                             if(!empty($provider_full_profile['registrant_date_of_birth'])) :
-                              echo $provider_full_profile['registrant_date_of_birth']; 
+                              echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth']));
                             else :
                               echo "NULL";
                             endif;
@@ -836,7 +839,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant DOB</label>
                           <span>
-                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_date_of_birth']; ?>" name="registrant_dob" />
+                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
