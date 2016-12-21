@@ -927,7 +927,7 @@ class Job_provider extends CI_Controller {
 			return TRUE;
 		}
 		else {
-			$this->form_validation->set_message('validpassword', 'The %s doesnot match!');
+			$this->form_validation->set_message('validpassword', 'The %s does not match!');
 			return FALSE;
 		}
 	} 

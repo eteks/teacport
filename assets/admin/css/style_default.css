@@ -585,10 +585,10 @@ tr select {
     max-width: 170px !important;
 }
 .admin_table td .chzn-container .chzn-drop {
-   max-height: 100px !important;
-    max-width: 170px !important;
-    min-width: 170px !important;    
-    overflow: auto;
+   max-height: 170px !important;
+   max-width: 170px !important;
+   min-width: 170px !important;    
+   /*overflow: auto;*/
 }
 .admin_table td .chzn-container .chzn-container-multi .chzn-container-active{
     max-height: 100px !important;

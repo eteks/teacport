@@ -1,4 +1,3 @@
-
  <?php include('include/header.php'); ?>
  <div class="signuppage_body">
         <section class="login-page-4 loginbox_parallex full-page">
@@ -113,11 +112,10 @@
 										<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control','name' => 'registrant_mobile_no')); ?>
 									</div>	
 									<div class="form-group">
-										<div class="col-sm-6 nopadding">
-											<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
-											<?php echo ('<img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" ')?>
-	                                		<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
-	                                	</div>	
+										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
+										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
+	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
+	                                </div>	
 	                                	<div class="col-sm-6 captcha_holder nopadding">
 	                                		<label>Enter Captcha value :</label>
 	                        				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
