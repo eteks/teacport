@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -47,7 +50,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <h4><i class="icon-reorder"></i> Template Logo</h4>
                         </div>
                         <div class="widget-body form">
-                          <form action="admin_users/edit_profile_validation" class="form-horizontal admin_login_form" method="POST">
+                          <form action="admin_users/edit_profile_validation" class="form-horizontal" method="POST">
                             <p class="admin_status"> </p>
 	                          <div class="control-group">
 	                            <label class="control-label">Logo</label>

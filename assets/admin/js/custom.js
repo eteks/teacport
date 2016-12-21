@@ -28,7 +28,26 @@ function default_credentials() {
     editingtdcol = 0;
     ready_save = 0;
 }
+function customalert(msg){
+    var alertBox = $("#alert-dialog-box");
+    var overlay = $("#dialog-overlay");
+    alertBox.find(".message").text(msg);
+    alertBox.find(".ok_btn").unbind().click(function() {
+        alertBox.hide();
+        overlay.hide();
+    });
 
+    var winH = $(window).height();
+    var winW = $(window).width();
+    var popupH = alertBox.height();
+    var popupW = alertBox.width();
+    var alertBox_top = ((winH / 2) - (popupH / 2)) + "px";
+    var alertBox_left = ((winW / 2) - (popupW / 2)) + "px"; 
+    alertBox.css('top',alertBox_top);
+    alertBox.css('left',alertBox_left);
+    overlay.fadeIn(350);
+    alertBox.fadeIn(350);
+}
 function doConfirm(msg, yesFn, noFn) {
     var confirmBox = $("#dialog-box");
     var overlay = $("#dialog-overlay");
@@ -172,10 +191,12 @@ ajax = function (params,action,form_id){
                 setTimeout(function() { datatable_initialization(); }, 3000); 
                 setTimeout(function() { $('.db_status').remove(); }, 5000);
                 default_credentials();
-                if(res.session_data != 'undefined' && res.session_data == true){
-                    alert("You have changed your Accounts. We need to logout your session to confirm");
-                    setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 3000 );
-                }
+                // Implement for clearing session when user change their own account details
+                // Commented this code for future enhancement
+                // if(res.session_data != 'undefined' && res.session_data == true){ 
+                //     customalert("You have changed your Accounts. We need to logout your session to confirm");
+                //     setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
+                // }
             }
         }
     });
@@ -641,6 +662,88 @@ $(document).ready(function(){
 
         sliderResponse(target);
     });
+
+    // Previous button click - Upgrade
+    $(document).on('click','.upgrade_pag_prev',function() {
+        var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(index_Val != 0 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val-1).fadeIn(3000);
+        }
+    });
+
+    // Next button click - Upgrade
+    $(document).on('click','.upgrade_pag_next',function() {
+        var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(this_holder_len != index_Val+1 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val+1).fadeIn(3000);
+        }
+    });
+
+    // Previous button click - Renewal
+    $(document).on('click','.renew_pag_prev',function() {
+        var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(index_Val != 0 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val-1).fadeIn(3000);
+        }
+    });
+
+    // Next button click - Renewal
+    $(document).on('click','.renew_pag_next',function() {
+        var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
+        var this_holder_len = this_holder.length;
+        var index_Val;
+        this_holder.each(function() {
+            if($(this).is(':visible')) {
+                index_Val = $(this).index();
+                if(index_Val > 1) {
+                    index_Val = index_Val - 1;
+                }
+            }
+        });
+        if(this_holder_len != index_Val+1 ) {
+            this_holder.eq(index_Val).fadeOut(1000);
+            this_holder.eq(index_Val+1).fadeIn(3000);
+        }
+    });
+
+    
+
+
+
+
     /* Popup pagination with arrow end */
 
     //check only entered value is numeric
@@ -678,6 +781,12 @@ function popup_pagination() {
     sections_width = sections.width();  
     mask.css('width', sections_width*(lastElem+1) +'px');
     sections.first().addClass('viewed');
+    $('.profile_plan_section').each(function() {
+       // $(this).find('.upgrade_section_profile').first().addClass('visible_upgrade'); 
+       // $(this).find('.renewal_section_profile').first().addClass('visible_renewal'); 
+        $('div.upgrade_holder_content',this).wrapAll('<div class="span3 upgrade_holder"></div>');
+        $('div.renewal_holder_content',this).wrapAll('<div class="span3 renewal_holder"></div>');
+    });
 }
 
 // Animation effect - slider

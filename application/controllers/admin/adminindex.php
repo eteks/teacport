@@ -1078,6 +1078,9 @@ class Adminindex extends CI_Controller {
 	public function languages()
 	{	
 		// Update data
+		// echo $_POST['l_mother_tongue'];
+		// echo $_POST['l_instruction'];
+
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(

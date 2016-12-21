@@ -411,8 +411,10 @@ tr select {
     color: #555;
 }
 .admin_status{
-    color: #ff0000 !important;
-    font-size: 14px !important;
+    /*color: #ff0000 !important;
+    font-size: 14px !important;*/
+    color: #ff0000;
+    font-size: 14px;
     background-color: #d9edf7 !important;
     border-color: #bce8f1 !important;
     padding: 8px 35px 8px 14px !important;
@@ -529,7 +531,7 @@ tr select {
     z-index: 100;
     height: 100%;
 }
-#dialog-box {
+#dialog-box,#alert-dialog-box {
     display: none;
     position: fixed;
     background: #FFF;
@@ -543,13 +545,16 @@ tr select {
     -moz-box-shadow: 4px 4px 3px 3px rgba(0, 0, 0, 0.35);
     box-shadow: 4px 4px 3px 3px rgba(0, 0, 0, 0.35);
 }
-#dialog-box .message { 
+#dialog-box .message, #alert-dialog-box .message { 
     margin: 25px 0px;
 }
-#dialog-box div {
+#alert-dialog-box .message{
+    font-size: 20px !important;
+}
+#dialog-box div, #alert-dialog-box div {
     margin-bottom: 20px;
 }
-.del_no{
+.del_no,.ok_btn{
     background: #2fade7 none repeat scroll 0 0 !important;
     color: #fff !important;
     border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25) !important;
@@ -580,10 +585,10 @@ tr select {
     max-width: 170px !important;
 }
 .admin_table td .chzn-container .chzn-drop {
-   max-height: 100px !important;
-    max-width: 170px !important;
-    min-width: 170px !important;    
-    overflow: auto;
+   max-height: 170px !important;
+   max-width: 170px !important;
+   min-width: 170px !important;    
+   /*overflow: auto;*/
 }
 .admin_table td .chzn-container .chzn-container-multi .chzn-container-active{
     max-height: 100px !important;
@@ -682,7 +687,7 @@ table .dataTables_empty{
 }
 #plan_upgrade_creation_form table {
     display: block !important;
-    overflow: auto !important;
+    /*overflow: auto !important;*/
     width: 100% !important;
 }
 #plan_upgrade_creation_form table th {

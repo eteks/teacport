@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    /* Admin Login Form Start */
+     /* Admin Login Form Start */
     $('.admin_login_form').on('submit',function(e) {
         e.preventDefault();
         var form_data = $(this).serialize();
@@ -10,10 +10,9 @@ $(document).ready(function(){
             data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
             success: function(res) {
                 if(res != 'login_success') {
-                   this_status.html(res);
-                $('.admin_status').html(res.status);
-                $('.admin_status').fadeIn(500);
-                $('.admin_status').fadeOut(3000);
+                    this_status.html(res);
+                    this_status.fadeIn(500);
+                    this_status.fadeOut(3000);
                 }
                 else {
                    window.location.href = admin_baseurl+"dashboard";
@@ -22,6 +21,38 @@ $(document).ready(function(){
         });
     });
     /* Admin Login Form End */
+
+    /* Admin Profile Form Start */
+    $('.admin_profile_form').on('submit',function(e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var this_status = $(this).find('.admin_status');
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('action'),
+            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
+            dataType : 'json',
+            success: function(res) {
+                if(res.error == 1){
+                     this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                     this_status.removeClass('update_success_md');
+                     this_status.fadeIn(1000);
+                     this_status.fadeOut(3000);
+                }
+                else if(res.error == 2){
+                     this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                     this_status.addClass('update_success_md');
+                     this_status.fadeIn(1000);
+                     this_status.fadeOut(3000);
+                     if(res.session_data != 'undefined' && res.session_data == true){
+                        customalert("You have changed your Accounts. We need to logout your session to confirm");
+                        setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
+                     }
+                }
+            }
+        });
+    });
+    /* Admin Profile Form End */
 
     /* Popup module ajax start */
 
@@ -46,12 +77,14 @@ $(document).ready(function(){
             processData:false,
             success: function(res) {
                 if(res.error == 1) {
-                    this_status.html(res.status);
+                    this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                    this_status.removeClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
                 }
                 else if(res.error == 2) {
-                    this_status.html(res.status);
+                    this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                    this_status.addClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
                     $('.admin_table').dataTable().fnDestroy();  
@@ -118,7 +151,7 @@ $(document).ready(function(){
                     handleFormWizards();
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
                     handleChoosenSelect();
-                    // popup_pagination();
+                    popup_pagination();
                     // e.preventDefault();
                     $('.multi_choice').find('ul').addClass('scroller');
                     $('.multi_choice').find('ul').slimScroll({

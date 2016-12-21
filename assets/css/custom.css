@@ -2,19 +2,37 @@
 .mega-menu .menu-links > li > a {
    font-size: 16px;
 }
-/* Custom Select field */
-.select2-search__field {
-	display: block;
+/* Home login button */
+#login_home_btn .modal-title{
+	font-size: 22px;
+	font-family: 'Kaushan Script', cursive;
+	color: #29AAFE;
 }
+.home_sociallogin {
+	margin: 10px;
+}
+.login-btn-no-bg {
+	cursor: pointer;
+}
+.provider_radio, .seeker_radio{
+	margin: 5px 0 0 25px;
+}
+.provider_radio input[type="radio"], .seeker_radio input[type="radio"]{
+	margin: 0 10px;
+}
+/* Custom Select field */
+.select2-search {
+	display: none;
+}	
 .txt_blue {
 	color: #29AAFE;
 }
-.set-srch-strip{
+/*.slidershow-bg .set-srch-strip{
 	display : none;
 }
-.slidershow-bg:hover .set-srch-strip {
-   display : block;
-}
+.slidershow-bg:hover .set-srch-strip{
+   display: block;
+}*/
 .slidershow-bg .search-form-contaner {
 	margin-top: 0px;
 	overflow: hidden;
@@ -143,6 +161,10 @@
 .checkbox_word {
 	font-size: 14px;
 	cursor: pointer;
+	margin-bottom: 0px;
+}
+.loginbox-terms a{
+	font-size: 14px;
 }
 
 /* JOB SEEKER DASHBOARD */
@@ -239,6 +261,9 @@
 	position: relative;
 	margin: 30px 0;
 }
+.dashboard-header-logo-box {
+    height: 290px;
+}    
 /* pro-Dashboard LeftsideMenu */
 .dashboard-body .profile-nav .provider-jobs {
     border-bottom: 1px solid #ebeae6;
@@ -663,7 +688,7 @@ font-size: 12px;
 }
 .advance_search_btn{
 	/*margin-top: 10px !important;*/
-	margin-left : 45px;
+	margin-left : 35px;
 }
 .postad_preview{
 	display: none;
@@ -722,4 +747,12 @@ table tr[data-name="bold_section"] a {
     left: 200px;
     position: absolute;
     top: 261px;
+}
+.personnal_information{
+	background-image: url(../images/personall.png);
+	background-repeat: no-repeat;
+	height: 228px;
+}
+.margin_10{
+	margin-top:10px;
 }
