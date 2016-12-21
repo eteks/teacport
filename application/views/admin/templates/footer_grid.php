@@ -182,19 +182,9 @@
                             ]
 
                 });
-            }
-            jQuery(document).ready(function() {
-                datatable_initialization();
-            });
-        </script>
-        <script>
-           jQuery(document).ready(function() {
-              $('.privileges_table').dataTable({
-                "order" : [],
-                "bPaginate": false,
-            });
 
-            $('.admin_table').wrap("<div id='table_wrapper_Datatable' style='\n\
+                // Wrap datatable
+                $('.admin_table').wrap("<div id='table_wrapper_Datatable' style='\n\
                                         overflow: auto;\n\
                                         overflow-y: hidden;\n\
                                         -ms-overflow-y: hidden\n\
@@ -203,9 +193,18 @@
                                         padding-bottom: 15px;\n\
                                         display:block;\n\
                                    '>/");
-
-
-           });
+            }
+            jQuery(document).ready(function() {
+                datatable_initialization();
+            });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.privileges_table').dataTable({
+                    "order" : [],
+                    "bPaginate": false,
+                });
+            });
         </script>
         <!-- <script>
             jQuery(document).ready(function() {
