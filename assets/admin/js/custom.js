@@ -189,7 +189,18 @@ $(document).ready(function(){
     $('.sub_scroll_section').slimScroll({
         height: 'auto'
     });
-
+	
+	
+    $('.sub_pre_section').slimScroll({
+        height: 'auto'
+    });
+    
+     $('.sub_site_visites_cont').slimScroll({
+        height: 'auto',
+       	width: 'auto'
+    });
+    
+	
     if($('.has-sub').length > 0) {
         $('.has-sub').each(function(){
             if($(this).hasClass('open')) {

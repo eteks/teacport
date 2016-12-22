@@ -388,6 +388,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <a href="javascript:;" class="icon-remove"></a>
                                     </span>
                                 </div>
+                                <div class="sub_site_visites_cont">
                                 <div class="widget-body site_visites_cont">
                                     <table class="table table-striped">
                                         <thead>
@@ -412,6 +413,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         </tbody>
                                     </table>
                                 </div>
+                               </div>
                             </div>
                         </div>
                     </div>

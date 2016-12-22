@@ -242,7 +242,11 @@ tr select {
     padding: 15px 15px 8px !important;
     max-height: 333px !important;
     min-height: 111px !important;
-    overflow-y: auto !important;
+    /*overflow-x: scroll !important;*/   	
+}
+
+.sub_site_visites_cont{
+	max-height: 353px !important;		
 }
 #footer > span {
     margin-left: 75px;
@@ -402,7 +406,10 @@ tr select {
     min-width: 800px !important;
     /*min-height:1000px !important;*/
     max-height:700px !important;
-    overflow: auto;
+    /*overflow: auto;*/
+}
+.sub_pre_section{
+	max-height:700px !important; 
 }
 .main_module{
     font-size: 13px;
@@ -582,7 +589,7 @@ tr select {
    max-height: 100px !important;
     max-width: 170px !important;
     min-width: 170px !important;    
-    overflow: auto;
+    /*overflow: auto;*/
 }
 .admin_table td .chzn-container .chzn-container-multi .chzn-container-active{
     max-height: 100px !important;
@@ -707,3 +714,4 @@ table .dataTables_empty{
 #plan_upgrade_or_renewal table .parents_tr select {
     width: 125px !important;
 }
+
