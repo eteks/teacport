@@ -1,14 +1,4 @@
 <?php
-$is_super_admin = $this->config->item('is_super_admin');
-// $access_rights = $this->config->item('access_rights');
-if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
-  $current_page_rights = $access_permission['access_permission'];
-  $access_rights = explode(',',$current_page_rights);
-}
-else{
-  $access_rights = $this->config->item('access_rights');
-}
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -53,18 +43,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class ="sub_pre_section">
                         <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> 
                           <div class="widget-body">
-                              <div class="portlet-body">
-                                  <div class="clearfix">
-                                      <!-- <div class="btn-group">
-                                          <button id="sample_editable_1_new" class="btn green add_new">
-                                              Add New <i class="icon-plus"></i>
-                                          </button>
-                                      </div> -->
-                                      <div class="btn-group pull-right">
-                                          
-                                      </div>
-                                  </div> 
-                                  </div>
+                                  <div class="portlet-body">
+                                    <div class="clearfix">
+                                        <!-- <div class="btn-group">
+                                            <button id="sample_editable_1_new" class="btn green add_new">
+                                                Add New <i class="icon-plus"></i>
+                                            </button>
+                                        </div> -->
+                                        <div class="btn-group pull-right">
+                                            
+                                        </div>
+                                    </div> 
+                                  </div> <!-- portlet-body -->
                                   <!-- class="admin_module_form" -->
                                   <table class="table table-striped table-hover table-bordered privileges_table" id="sample_editable_1">
                                       <thead>
@@ -143,7 +133,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                       </tbody>
                                   </table>
                               </div>
-                          </div>
                           <div class="form-actions">
                              <button type="submit" class="btn btn-success">Update</button>
                              <!-- <button type="button" class="btn">Cancel</button> -->

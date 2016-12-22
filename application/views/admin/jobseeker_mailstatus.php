@@ -1,14 +1,4 @@
 <?php
-$is_super_admin = $this->config->item('is_super_admin');
-// $access_rights = $this->config->item('access_rights');
-if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');  
-  $current_page_rights = $access_permission['access_permission'];
-  $access_rights = explode(',',$current_page_rights);
-}
-else{
-  $access_rights = $this->config->item('access_rights');
-}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
