@@ -58,10 +58,6 @@
 	                              </div>
 	                            </div>   
 	                            <div class="col-sm-6 pull-left">
-	                                <div class="loginbox-or">
-	                                    <div class="or-line"></div>
-	                                    <div class="or">OR</div>
-	                                </div>
 	                                <div class="loginbox-title">Sign Up using social accounts</div>
 		                            <ul class="social-network social-circle onwhite">
 	                                    <li><a href="<?php echo site_url('login/seeker/facebook');?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -69,7 +65,7 @@
 	                                    <li><a href="<?php echo site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
 	                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
 	                                </ul> 
-	                                <div class="loginbox-signin"> Already have account ?<a class="txt_blue remove_error_message_act"> Sign in</a> </div>
+	                                <div class="loginbox-signin"> Already have account ?<a href="<?php echo base_url(); ?>login/seeker" class="txt_blue remove_error_message_act"> Sign in</a> </div>
 	                            </div>  
 	                            <div class="clearfix"> </div> 
                             </div> <!--End Signup-->
@@ -103,7 +99,7 @@
                             </div> <!--End  forgot pwd-->
                             
                             <!--Seeker SignIn-->
-                            <div id="seeker-signin" class="loginbox" style="display:none;">
+                            <!-- <div id="seeker-signin" class="loginbox" style="display:none;">
                                 <div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;">
                                 	Job Seekers Login<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                                 </div>
@@ -128,10 +124,6 @@
 	                            </div>    
                                 <?php echo form_close(); ?>
                                 <div class="col-sm-6 pull-left">
-	                                <div class="loginbox-or">
-	                                    <div class="or-line"></div>
-	                                    <div class="or">OR</div>
-	                                </div>
 	                                <div class="loginbox-title">Sign in using social Accounts</div>
 	                                <ul class="social-network social-circle onwhite">
 	                                    <li><a href="<?php echo $fbloginurl; ?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -144,7 +136,7 @@
 	                                </div>
 	                             </div>   
 	                             <div class="clearfix"> </div>
-                            </div> <!--End SignIn-->
+                            </div> --> <!--End SignIn-->
                            
                           </div>  <!--End login-container-->  
                         </div>   

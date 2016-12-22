@@ -106,9 +106,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <td> 
                             <?php echo $ads_val['premium_ads_name']; ?>
                           </td>
-                          <td> 
-                            <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" />
-                          </td>
+                          <td class="magnify-posted-ads"> 
+                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" alt="ad_image" /></a>
+                          	 <!-- <span class="pull-right">Full View </span> -->
+                           </td>
                           <td> 
                             <?php echo $ads_val['organization_name']; ?>
                           </td>

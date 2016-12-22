@@ -713,3 +713,26 @@ table .dataTables_empty{
 #plan_upgrade_or_renewal table .parents_tr select {
     width: 125px !important;
 }
+/* Job Providers Ad posted */
+cursor: pointer;
+.magnify-posted-ads {
+	cursor: pointer ;
+}
+.magnify-ad img{
+	position: absolute;
+	
+}
+.magnify-posted-ads:hover img{
+ 	visibility: visible;
+ 	top: 50%;
+ 	left: 50%;
+ 	height: 350px;
+ 	width: 400px;
+ 	/*border: 1px solid #2fbfca;*/
+}
+ .magnify-posted-ads:hover,  .magnify-posted-ads:focus {
+	border:0; /* IE6 needs this to show large image */
+	z-index:1;
+}
+
+

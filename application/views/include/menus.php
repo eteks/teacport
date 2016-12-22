@@ -109,11 +109,11 @@
 		          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
 		          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
 		          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
-			       	<li class="no-bg login-btn-no-bg">
+			       	<!-- <li class="no-bg login-btn-no-bg">
 		          	   <a class="login-header-btn" data-toggle="modal" data-target="#login_home_btn"  data-backdrop="static" data-keyboard="false">
 		          		<i class="fa fa-sign-in"></i> Log in
 		          	   </a>
-		            </li>
+		            </li> -->
 			<?php
 				}
 			?>
@@ -131,35 +131,34 @@
   <!-- Modal content-->
   <div class="modal-content">
     <div class="modal-header">
-    	<a class="pull-right" href=""><i class="fa fa-close"></i></a>
+    	<a class="pull-right" href="<?php echo base_url(); ?>"><i class="fa fa-close"></i></a>
       <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-      <h4 class="modal-title">Provider &amp; Seeker Login</h4>
+      <h4 class="modal-title">Provider / Seeker Login</h4>
     </div>
     <div class="modal-body profile-edit">
     	<form class="">
-    				<div class="form-group">
-						<label class="pull-left">Select :<sup class="required alert">*</sup></label>
-						<div class="provider_radio pull-left">
-							<input class="" type="radio">Job Provider
-						</div>
-						<div class="seeker_radio pull-left">
-							<input class="" type="radio">Job Seeker
-						</div>
-						<div class="clearfix"> </div>
-					</div>
-					<div class="form-group">
-                        <label>Email / Mobile No. : <sup class="required alert">*</sup></label>
-                        <input placeholder="" class="form-control" type="email">
-                    </div>
-                    <div class="form-group">
-                        <label>Password : <sup class="required alert">*</sup></label>
-                        <input placeholder="" class="form-control" type="password">
-                    </div>
-                    <div class="loginbox-submit">
-                        <a href="company-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Login"></a>
-                    </div>
-                  
-                 </form>    
+    		<div class="form-group">
+    			<label class="pull-left">Select :<sup class="required alert">*</sup></label>
+				<div class="provider_radio pull-left">
+					<input class="" type="radio" name="user_category">Job Provider
+				</div>	
+				<div class="seeker_radio pull-left">
+					<input class="" type="radio" name="user_category">Job Seeker
+				</div>
+				<div class="clearfix"> </div>
+			</div>		
+				<div class="form-group">
+                    <label>Email / Mobile No. : <sup class="required alert">*</sup></label>
+                    <input placeholder="" class="form-control" type="email">
+                </div>
+                <div class="form-group">
+                    <label>Password : <sup class="required alert">*</sup></label>
+                    <input placeholder="" class="form-control" type="password">
+                </div>
+                <div class="loginbox-submit">
+                    <a href="company-dashboard.html"><input type="button" class="btn btn-default btn-block" value="Login"></a>
+                </div>
+         </form>    
     </div>
     <div class="modal-footer">
     	<div class="home_sociallogin text-center">Sign in using social accounts</div>
@@ -169,7 +168,6 @@
                         <li><a href="login-4.html#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                         <li><a href="login-4.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                     </ul>
-       <div class="loginbox-signup">New User ? <a class="txt_blue" href="<?php echo base_url() ?>signup/seeker"> Sign Up</a></div>
     </div>
   </div>
  </div>
