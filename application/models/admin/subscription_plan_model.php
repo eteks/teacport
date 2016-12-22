@@ -11,14 +11,21 @@ class Subscription_Plan_Model extends CI_Model {
   public function plan_subscription_details($status) {
     $model_data['status'] = 0;
     $model_data['error'] = 0;
+
+    if($status=='update' || $status=='save'){
+        $validity_start = explode('/', $this->input->post('sub_start_validity'));
+        $validity_start_date = $validity_start[2]."-".$validity_start[1]."-".$validity_start[0];
+        $validity_end = explode('/', $this->input->post('sub_end_validity'));
+        $validity_end_date = $validity_end[2]."-".$validity_end[1]."-".$validity_end[0];
+    }
     // Update data
-    if($status=='update') {
+    if($status=='update') {       
         $plans_update_data = array( 
                                 'subscription_plan' => $this->input->post('sub_plan'),
                                 'subscription_price' => $this->input->post('sub_price'),
                                 'subscription_features' => $this->input->post('sub_features'),
-                                'subcription_valid_start_date' => $this->input->post('sub_start_validity'),
-                                'subcription_valid_end_date' => $this->input->post('sub_end_validity'),
+                                'subcription_valid_start_date' => $validity_start_date,
+                                'subcription_valid_end_date' => $validity_end_date,
                                 'subscription_max_no_of_posts' => $this->input->post('sub_max_vacancy'),
                                 'subcription_sms_counts' => $this->input->post('sub_max_sms'),
                                 'subscription_email_counts' => $this->input->post('sub_max_email'),
@@ -41,8 +48,8 @@ class Subscription_Plan_Model extends CI_Model {
                                 'subscription_plan' => $this->input->post('sub_plan'),
                                 'subscription_price' => $this->input->post('sub_price'),
                                 'subscription_features' => $this->input->post('sub_features'),
-                                'subcription_valid_start_date' => $this->input->post('sub_start_validity'),
-                                'subcription_valid_end_date' => $this->input->post('sub_end_validity'),
+                                'subcription_valid_start_date' =>$validity_start_date,
+                                'subcription_valid_end_date' => $validity_end_date,
                                 'subscription_max_no_of_posts' => $this->input->post('sub_max_vacancy'),
                                 'subcription_sms_counts' => $this->input->post('sub_max_sms'),
                                 'subscription_email_counts' => $this->input->post('sub_max_email'),
@@ -133,7 +140,7 @@ class Subscription_Plan_Model extends CI_Model {
     // $model_data = $this->db->order_by('notification_id','desc')->get_where('tr_organization_plan_notification')->result_array();
     // return $model_data;
     // View
-    $this->db->select('n.*,sub.subscription_plan,org_sub.validity_start_date as org_sub_vstart,org_sub.validity_end_date as org_sub_vend,org.organization_name,upg.validity_start_date as upg_vstart,upg.validity_end_date as upg_vend');
+    $this->db->select('n.*,sub.subscription_plan,org_sub.org_sub_validity_start_date as org_sub_vstart,org_sub.org_sub_validity_end_date as org_sub_vend,org.organization_name,upg.validity_start_date as upg_vstart,upg.validity_end_date as upg_vend');
     $this->db->from('tr_organization_plan_notification n');
     $this->db->join('tr_organization_subscription org_sub','org_sub.organization_subscription_id=n.organization_subscription_id','inner');
     $this->db->join('tr_subscription sub','sub.subscription_id=org_sub.subscription_id','inner');

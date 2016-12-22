@@ -1,51 +1,33 @@
 <?php include('include/header.php'); ?>
 <?php include('include/menus.php'); ?>
        
-        <!--breadcrumb-->
-        <section class="job-breadcrumb">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                        <h3>My Feedback</h3>
-                    </div>
-                    <div class="col-md-6 col-sm-5 co-xs-12 text-right">
-                        <div class="bread">
-                            <ol class="breadcrumb">
-                                <li><a href="index.html">Home</a> </li>
-                                <li><a href="<?php echo base_url(); ?>job_seeker/dashboard">Dashboard</li>
-                                <li class="active">Feedback</li>
-                            </ol>
-                        </div>
-                    </div>
+<!--breadcrumb-->
+<section class="job-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-7 co-xs-12 text-left">
+                <h3>My Feedback</h3>
+            </div>
+            <div class="col-md-6 col-sm-5 co-xs-12 text-right">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li><a href="<?php echo base_url(); ?>">Home</a></li>
+                        <li><a href="<?php echo base_url(); ?>job_seeker/dashboard">Dashboard</a></li>
+                        <li class="active">Feedback</li>
+                    </ol>
                 </div>
             </div>
-        </section>
-        
-        <section class="dashboard-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                        <div class="col-md-4 col-sm-12 col-xs-12">
-                            <div class="profile-card">
-                                <div class="banner">
-                                    <img src="images/building.jpg" alt="" class="img-responsive">
-                                </div>
-                                <div class="user-image">
-                                    <img src="images/users/profile-avatar.jpg" class="img-responsive img-circle" alt="">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Mrs. Emilly Copper</h3>
-                                    <span class="title">A web Designer</span>
-                                </div>
-                                <ul class="social-network social-circle onwhite">
-                                    <li><a href="user-followed-companies.html#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="user-followed-companies.html#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="user-followed-companies.html#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="user-followed-companies.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
-                                </ul>
-                            </div>
-                            <?php include('include/user_dashboard_sidemenu.php'); ?>
-                        </div>
+        </div>
+    </div>
+</section>
+     
+<section class="dashboard-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+                <div class="col-md-4 col-sm-12 col-xs-12">
+                    <?php include('include/user_dashboard_sidemenu.php'); ?>
+                </div>
                         <div class="col-md-8 col-sm-12 col-xs-12">
                             <div class="heading-inner first-heading">
                                 <p class="title">Change Password</p>

@@ -44,7 +44,7 @@ $route['404_override'] 									= 'missingpage';
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';
 $route['login/provider'] 								= 'job_provider';
-$route['login/featured_job'] 										= 'home/featured_job';
+$route['login/featured_job'] 							= 'home/featured_job';
 $route['login/facebook'] 								= 'social/facebook';
 $route['login/facebookverify'] 							= 'social/facebookverify';
 $route['login/seeker/facebook'] 						= 'social/seekerfacebook';
@@ -100,6 +100,7 @@ $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
 $route['seeker/inbox/message'] 							= 'job_seeker/inbox_message';
 $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
 $route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
+$route['seeker/feedback'] 								= 'job_seeker/feedback';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
@@ -108,6 +109,7 @@ $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['vacancies'] 									= 'home/vacancies';
+$route['vacancies/(:num)']  							= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
 $route['terms'] 										= 'home/terms';
 

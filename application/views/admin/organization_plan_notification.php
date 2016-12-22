@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -112,16 +115,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                                        </td>
                                           <td class="center_align"> 
                                             <?php 
-                                              if($org_not['upgrade_or_renewal_id'] !=NULL) echo $org_not['upg_vstart'];
+                                              if($org_not['upgrade_or_renewal_id'] !=NULL) 
+                                                echo date("d/m/Y", strtotime($org_not['upg_vstart']));
                                               else
-                                                echo $org_not['org_sub_vstart'];
+                                                echo date("d/m/Y", strtotime($org_not['org_sub_vstart']));
                                              ?>
                                           </td>
                                           <td class="center_align"> 
                                             <?php 
-                                              if($org_not['upgrade_or_renewal_id'] !=NULL) echo $org_not['upg_vend'];
+                                              if($org_not['upgrade_or_renewal_id'] !=NULL) 
+                                                echo date("d/m/Y", strtotime($org_not['upg_vend']));
                                               else
-                                                echo $org_not['org_sub_vend'];
+                                                echo date("d/m/Y", strtotime($org_not['org_sub_vend']));
                                              ?>
                                           </td>
                                           <td class="is_email_sent center_align">
@@ -146,7 +151,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             ?>
 	                                        </td>
 	                                        <td class="created_date">
-	                                          01-01-2000
+	                                          <?php 
+                                              $created_datetime = explode(' ', $org_not['created_date']);
+                                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                                            ?>
 	                                        </td>
                                        </tr>
                                        <?php

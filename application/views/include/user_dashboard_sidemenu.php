@@ -1,3 +1,48 @@
+<div class="profile-card">
+    <div class="banner">
+        <img src="<?php echo base_url(); ?>assets/images/building.jpg" alt="" class="img-responsive">
+    </div>
+    <?php
+    if(!empty($sidebar_values['candidate_image_path'])) : 
+    ?>
+    <div class="user-image">
+        <?php 
+        $keyword = "http";
+        // To check whether the image path is cdn or local path
+        if(strpos( $sidebar_values['candidate_image_path'] , $keyword ) !== false ) :
+        ?>
+        <img src="<?php echo $sidebar_values['candidate_image_path']; ?>" class="img-responsive img-circle" alt="Not Found">
+        <?php
+        else :
+        ?>
+        <img src="<?php echo base_url().$sidebar_values['candidate_image_path']; ?>" class="img-responsive img-circle" alt="Not Found">
+        <?php
+        endif;
+        ?>
+    </div>
+    <?php endif; ?>
+    <div class="card-body">
+        <h3><?php if(!empty($sidebar_values['candidate_name'])) echo $sidebar_values['candidate_name']; ?></h3>
+    </div>
+
+    <ul class="social-network social-circle onwhite">
+        <?php if(!empty($sidebar_values['candidate_facebook_url'])) : ?>
+        <li><a href="<?php echo $sidebar_values['candidate_facebook_url']; ?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+        <?php else : ?>
+        <li class="disabled"><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>   
+        <?php endif; ?>
+        <?php if(!empty($sidebar_values['candidate_googleplus_url'])) : ?>
+        <li><a href="<?php echo $sidebar_values['candidate_googleplus_url']; ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+        <?php else : ?>
+        <li class="disabled"><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+        <?php endif; ?>
+        <?php if(!empty($sidebar_values['candidate_linkedin_url'])) : ?>
+        <li><a href="<?php echo $sidebar_values['candidate_linkedin_url']; ?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+        <?php else : ?>
+        <li class="disabled"><a href="#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
+        <?php endif; ?>                
+    </ul>
+</div>
 <div class="profile-nav">
         <div class="panel">
             <ul class="nav nav-pills nav-stacked">
@@ -17,7 +62,7 @@
                     <a href="<?php echo base_url(); ?>seeker/jobsapplied"> <i class="fa  fa-list-ul"></i> Jobs Applied</a>
                 </li>
                 <li>
-                    <a href="user-dashboard-feedback.php"> <i class="fa fa-commenting-o"></i> Feedback</a>
+                    <a href="<?php echo base_url(); ?>seeker/feedback"> <i class="fa fa-commenting-o"></i> Feedback</a>
                 </li>
                  <li>
                     <a href="<?php echo base_url(); ?>seeker/password"> <i class="fa fa-key" aria-hidden="true"></i> Change Password</a>

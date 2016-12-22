@@ -28,7 +28,7 @@
 		                                    <input placeholder="" name="registrant_password" class="form-control" id="password" type="password" value="<?php echo set_value('registrant_password'); ?>">
 		                                </div>
 		                                <div class="loginbox-forgot propwd-forgot">
-		                                    <a class="txt_blue">Forgot Password?</a>
+		                                    <a class="txt_blue remove_error_message_act">Forgot Password?</a>
 		                                </div>
 		                                <div class="loginbox-submit">
 		                                    <a><input type="submit" class="btn btn-default btn-block" id="provider_login" value="Login"></a>
@@ -46,7 +46,7 @@
 		                                    <li><a href="<?php echo site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
 		                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
 			                             </ul>
-		                                <div class="loginbox-signup">New User ? <a class="txt_blue"> Sign Up</a></div>
+		                                <div class="loginbox-signup">New User ? <a class="txt_blue remove_error_message_act"> Sign Up</a></div>
 		                             </div>   
 		                             <div class="pull-left"> </div>
 	                            <?php echo form_close(); ?>    
@@ -112,11 +112,10 @@
 										<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control','name' => 'registrant_mobile_no')); ?>
 									</div>	
 									<div class="form-group">
-										<div class="col-sm-6 nopadding">
-											<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
-											<?php echo ('<img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" ')?>
-	                                		<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
-	                                	</div>	
+										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
+										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
+	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
+	                                </div>	
 	                                	<div class="col-sm-6 captcha_holder nopadding">
 	                                		<label>Enter Captcha value :</label>
 	                        				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
@@ -124,7 +123,7 @@
 	                        			<div class="clearfix"> </div>
 	                        		</div>	
 									<div class="loginbox-terms">
-										<label class="checkbox_word"><input type="checkbox"> I accept</label> <a href="terms.php" class="txt_blue">Term and conditions?</a>
+										<label class="checkbox_word"><input type="checkbox"> I accept</label> <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
 									</div>	
 									<p id="submit" class="btn btn-default btn-block">Register</p>
 								</div>
@@ -140,7 +139,7 @@
 	                                    <li><a href="<?php echo site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
 	                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
 	                                </ul>
-									<div class="loginbox-signin pull-right"> Already have account ? <a class="txt_blue"> Sign in</a></div>
+									<div class="loginbox-signin pull-right"> Already have account ? <a class="txt_blue remove_error_message_act"> Sign in</a></div>
 								</div>	
 								<div class="clearfix"> </div>
                             	<?php echo form_close(); ?>

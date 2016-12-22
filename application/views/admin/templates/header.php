@@ -15,6 +15,7 @@ Website: http://thevectorlab.net/
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
+	<link rel="icon" href="<?php echo base_url(); ?>assets/admin/img/favicon.ico" type="image/x-icon">
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
@@ -70,66 +71,36 @@ Website: http://thevectorlab.net/
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-envelope-alt"></i>
+                                <i class="icon-envelope-alt"></i>     
                                 <span class="badge badge-important">5</span>
                             </a>
+                            
                             <ul class="dropdown-menu extended inbox">
                                 <li>
                                     <p>You have 5 new messages</p>
                                 </li>
                                 <li>
+                                <?php
+                                    foreach ($feedback_data as $feed) :
+                                ?>
                                     <a href="<?php echo base_url(); ?>admin/dashboard">
                                         <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
 									<span class="subject">
 									<span class="from">Dulal Khan</span>
-									<span class="time">Just now</span>
+									<span class="time"><?php echo $feed['feedback_form_created_date']; ?></span>
 									</span>
 									<span class="message">
-									    Hello, this is an example messages please check
+									    <?php echo $feed['feedback_form_message']; ?>
 									</span>
                                     </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Rafiqul Islam</span>
-									<span class="time">10 mins</span>
-									</span>
-									<span class="message">
-									 Hi, Mosaddek Bhai how are you ?
-									</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Sumon Ahmed</span>
-									<span class="time">3 hrs</span>
-									</span>
-									<span class="message">
-									    This is awesome dashboard templates
-									</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Dulal Khan</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-									    Hello, this is an example messages please check
-									</span>
-                                    </a>
+                                    <?php endforeach; ?>
                                 </li>
                                 <li>
                                     <a href="<?php echo base_url(); ?>admin/dashboard">See all messages</a>
                                 </li>
                             </ul>
                         </li>
+                        
                         <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN NOTIFICATION DROPDOWN -->
                         <li class="dropdown" id="header_notification_bar">
@@ -197,9 +168,9 @@ Website: http://thevectorlab.net/
                             </a>
                         </li> -->
                         <li class="dropdown mtop5">
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Help">
+                            <!-- <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Help">
                                 <i class="icon-headphones"></i>
-                            </a>
+                            </a> -->
                         </li>
                         <!-- END SUPPORT -->
                         <!-- BEGIN USER LOGIN DROPDOWN -->

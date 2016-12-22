@@ -169,11 +169,16 @@ class Admin_users extends CI_Controller {
 			//code To check mapping already exists
 			$data['mapped_status'] = $this->admin_users_model->user_groups('mapping')['mapped_status'];
 			// print_r($data['mapped_status']);
+			// print_r($data);
 			$this->load->view('admin/user_groups',$data);
 		}
 	}
     public function user_accounts()
 	{
+		$session_data = $this->session->userdata('admin_login_session');
+		// echo "<pre>";
+		// print_r($session_data);
+		// echo "</pre>";
 		//Functionality for Both update and save
 		if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
 				if($this->input->post('action')=='update'){
@@ -222,7 +227,7 @@ class Admin_users extends CI_Controller {
 	                            array(
 	                                 'field'   => 'admin_user_email',
 	                                 'label'   => 'User Email',
-	                                 'rules'   => 'trim|required|xss_clean|valid_email|is_unique[tr_admin_users.admin_user_name]'
+	                                 'rules'   => 'trim|required|xss_clean|valid_email|is_unique[tr_admin_users.admin_user_email]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_group',
@@ -279,12 +284,25 @@ class Admin_users extends CI_Controller {
 			$data_ajax['status'] = $data['status'];
 			$result['error'] = $data['error'];
 			// print_r($data_ajax['group_values']);
-			$result['output'] = $this->load->view('admin/user_accounts',$data_ajax,true);
+			$result['output'] = $this->load->view('admin/user_accounts',$data_ajax,true);	
+
+			// Implement for clearing session when user change their own account details
+			// Commented this code for future enhancement
+			// if($this->input->post('rid') == $session_data["admin_user_id"]){
+			// 	$user_name = $session_data["admin_user_name"];
+			// 	$user_password = $session_data["admin_user_password"];
+			// 	$user_email = $session_data["admin_user_email"];
+			// 	if($user_name!=$_POST['admin_user_name'] || $user_password!=$_POST['admin_user_password'] || $user_email!=$_POST['admin_user_email'])
+			// 		$result['session_data'] = true;
+			// }
 			echo json_encode($result);
 		}
 		else {
 			$data['user_details'] = $data_values['user_details'];
 			$data['user_groups'] = $this->admin_users_model->get_user_groups(); 
+			// echo "<pre>";
+			// print_r($this->session->userdata('admin_login_session'));
+			// echo "</pre>";
 			$this->load->view('admin/user_accounts',$data);
 		}	
 			// $this->load->view('admin/user_accounts');
@@ -357,6 +375,8 @@ class Admin_users extends CI_Controller {
 		$data['status'] = 0;
 		$session_data = $this->session->userdata('admin_login_session');
 		$id = $session_data['admin_user_id'];
+		$user_name = $session_data["admin_user_name"];
+		$user_email = $session_data["admin_user_email"];
 		$validation_rules = array(
  					          	array(
   			                        'field'   => 'user_name',
@@ -384,8 +404,12 @@ class Admin_users extends CI_Controller {
 		else {
 			$data_values = $this->admin_users_model->teac_admin_edit_profile('update'); 
 		 	$data['status'] = $data_values['status'];
+		 	$data['error'] = 2;
+			if($user_name!=$_POST['user_name'] || $user_email!=$_POST['user_email'])
+				$data['session_data'] = true;
 		}
-		echo $data['status'];
+		// echo $data['status'];
+		echo json_encode($data);
 	}
 
 
@@ -401,6 +425,7 @@ class Admin_users extends CI_Controller {
 		$data['status'] = 0;
 		$session_data = $this->session->userdata('admin_login_session');
 		$id = $session_data['admin_user_id'];
+		$user_password = $session_data["admin_user_password"];
 		$validation_rules = array(
  					          	array(
 				                	'field'   => 'current_pass',
@@ -433,8 +458,12 @@ class Admin_users extends CI_Controller {
 		else {
 			$data_values = $this->admin_users_model->teac_admin_change_password(); 
 		 	$data['status'] = $data_values['status'];
+		 	$data['error'] = 2;
+			if($user_password!=$_POST['new_pass'])
+				$data['session_data'] = true;
 		}
-		echo $data['status'];
+		// echo $data['status'];
+		echo json_encode($data);
 	}
 	function get_full_array_by_recursive_search(array $array, $needle)
 	{

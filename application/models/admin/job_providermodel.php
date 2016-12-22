@@ -15,15 +15,30 @@ class Job_Providermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $start_date = date('Y-m-d',strtotime($this->input->post('val_sdate')));
-      $end_date = date('Y-m-d',strtotime($this->input->post('val_edate')));
-      $profile_update_org_data = array( 
+      $registrant_dob = explode('/', $this->input->post('registrant_dob'));
+      $registrant_dob_date = $registrant_dob[2]."-".$registrant_dob[1]."-".$registrant_dob[0];
+
+      // Check Mobile Number or Email already exists or not
+      $mobile_exists_where = "registrant_mobile_no =" . "'" . $this->input->post('registrant_mobile') . "' AND organization_id NOT IN (". $this->input->post('rid').")";
+      $mobile_exists = $this->db->get_where('tr_organization_profile',$mobile_exists_where);
+      if($mobile_exists->num_rows() > 0) {
+        $model_data['status'] = "Mobile Number Already exists";
+        $model_data['error'] = 1; 
+      }
+      else {
+        $email_exists_where = "registrant_email_id =" . "'" . $this->input->post('registrant_email') . "' AND organization_id NOT IN (". $this->input->post('rid').")";
+        $email_exists = $this->db->get_where('tr_organization_profile',$email_exists_where);
+        if($email_exists->num_rows() > 0) {
+          $model_data['status'] = "Email Already exists";
+          $model_data['error'] = 1;
+        }
+        else {
+          $profile_update_org_data = array( 
                               'organization_name' => $this->input->post('organization_name'),
                               'organization_logo' => $this->input->post('organization_logo'),
                               'organization_status' => $this->input->post('organization_status'),
-                              'subscription_status' => $this->input->post('subscription_status'),
                               'registrant_designation' => $this->input->post('registrant_designation'),
-                              'registrant_date_of_birth' => $this->input->post('registrant_dob'),
+                              'registrant_date_of_birth' => $registrant_dob_date,
                               'registrant_email_id' => $this->input->post('registrant_email'),
                               'registrant_mobile_no' => $this->input->post('registrant_mobile'),
                               'registrant_name' => $this->input->post('registrant_name'),
@@ -31,42 +46,46 @@ class Job_Providermodel extends CI_Model {
                               'organization_address_3' => $this->input->post('org_addr_3'),
                               'organization_address_2' => $this->input->post('org_addr_2'),
                               'organization_address_1' => $this->input->post('org_addr_1'),
+                              'is_sms_verified' => $this->input->post('sms_verify'),
                               'organization_institution_type_id' => $this->input->post('institution_type')
                             );
-      $profile_update_org_sub_data = array( 
-                              'is_email_validity' => $this->input->post('email_valid'), 
-                              'is_sms_validity' => $this->input->post('sms_valid'),
-                              'is_resume_validity' => $this->input->post('resume_valid')
-                            );
-      $profile_update_org_where = '( organization_id="'.$this->input->post('rid').'")'; 
-      $this->db->set($profile_update_org_data);                         
-      $this->db->where($profile_update_org_where);
-      $this->db->update("tr_organization_profile", $profile_update_org_data); 
-
-      $profile_update_org_sub_where = '( organization_id="'.$this->input->post('rid').'" and organization_subscription_status=1)'; 
-      $this->db->set($profile_update_org_sub_data);                         
-      $this->db->where($profile_update_org_sub_where);
-      $this->db->update("tr_organization_subscription", $profile_update_org_sub_data);
-
-      $model_data['status'] = "Updated Successfully";
-      $model_data['error'] = 2;   
+          // $profile_update_org_sub_data = array( 
+          //                         'is_email_validity' => $this->input->post('email_valid'), 
+          //                         'is_sms_validity' => $this->input->post('sms_valid'),
+          //                         'is_resume_validity' => $this->input->post('resume_valid'),
+          //                         'subscription_status' => $this->input->post('subscription_status'),
+          //                       );
+          $profile_update_org_where = '( organization_id="'.$this->input->post('rid').'")'; 
+          $this->db->set($profile_update_org_data);                         
+          $this->db->where($profile_update_org_where);
+          $this->db->update("tr_organization_profile", $profile_update_org_data); 
+          $model_data['status'] = "Updated Successfully";
+          $model_data['error'] = 2;   
+          // $profile_update_org_sub_where = '( organization_id="'.$this->input->post('rid').'" and organization_subscription_status=1)'; 
+          // $this->db->set($profile_update_org_sub_data);                         
+          // $this->db->where($profile_update_org_sub_where);
+          // $this->db->update("tr_organization_subscription", $profile_update_org_sub_data);
+        }
+      }
     }
 
     // Delete data
     else if($status =='delete') {
       $profile_delete_org_where = '(organization_id="'.$this->input->post('rid').'")';
-      $profile_delete_org_sub_where = '(organization_id="'.$this->input->post('rid').'")';
       $this->db->delete("tr_organization_profile", $profile_delete_org_where); 
-      $this->db->delete("tr_organization_subscription", $profile_delete_org_sub_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;
     }
 
     // View
     $this->db->select('*');
-    $this->db->from('tr_organization_profile op');
-    $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
-    $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
+    $this->db->from('tr_organization_profile');
+    $this->db->order_by('organization_id','desc');
+    // $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
+    // $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
+    // $this->db->group_by('org_id');
+    // $this->db->where('os.organization_subscription_status','1');
+    // $this->db->or_where('os.organization_subscription_status',NULL);
     $model_data['provider_profile'] = $this->db->get()->result_array();
 
     return $model_data;
@@ -74,13 +93,15 @@ class Job_Providermodel extends CI_Model {
 
   // Job provider profile - ajax
   public function get_full_provider_profile($value) {
-    $provider_profile_where = '(op.organization_id="'.$value.'")';
-    $this->db->select('*');
+    $provider_profile_where = '(op.organization_id="'.$value.'" )';
+    $this->db->select('op.organization_id as org_id,op.*,os.*,it.*,os.*,d.*');
     $this->db->from('tr_organization_profile op');
     $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
     $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
-    $this->db->join('tr_institution_type it','op.organization_institution_type_id=it.institution_type_id','inner');
+    $this->db->join('tr_institution_type it','op.organization_institution_type_id=it.institution_type_id','left');
     $this->db->join('tr_district d','op.organization_district_id=d.district_id','left');
+    $this->db->order_by('os.organization_subscription_status','desc');
+    $this->db->group_by('org_id');
     $model_data['provider_full_profile'] = $this->db->where($provider_profile_where)->get()->row_array();
     $model_data['payment_details'] =  array();
 
@@ -90,13 +111,12 @@ class Job_Providermodel extends CI_Model {
     $this->db->from('tr_organization_subscription tos');
     $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
     $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id','left');
-    $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
+    $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.organization_upgrade_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
     return $model_data;
   }
 
-  // Job provider profile
+  // Job provider vacancy
   public function get_provider_vacancy($status) {
-
 
     $model_data['status'] = 0;
     $model_data['error'] = 0;
@@ -115,12 +135,26 @@ class Job_Providermodel extends CI_Model {
         else {
           $pos_name = NULL;
         }
+        if($this->input->post('vac_dept_name') != "null") {
+          $dept_name = $this->input->post('vac_dept_name');
+        }
+        else {
+          $dept_name = NULL;
+        }
+        $vacancy_open = explode('/', $this->input->post('vac_open_date'));
+        $vacancy_open_date = $vacancy_open[2]."-".$vacancy_open[1]."-".$vacancy_open[0];
+        $vacancy_end = explode('/', $this->input->post('vac_end_date'));
+        $vacancy_end_date = $vacancy_end[2]."-".$vacancy_end[1]."-".$vacancy_end[0];
+        $interview_start = explode('/', $this->input->post('vac_inter_sdate'));
+        $interview_start_date = $interview_start[2]."-".$interview_start[1]."-".$interview_start[0];
+        $interview_end = explode('/', $this->input->post('vac_inter_edate'));
+        $interview_end_date = $interview_end[2]."-".$interview_end[1]."-".$interview_end[0];
         $vacancy_update_data = array( 
                                 'vacancies_job_title' => $this->input->post('job_title'),
                                 'vacancies_organization_id' => $this->input->post('org_name'),
                                 'vacancies_available' => $this->input->post('vac_available'),
-                                'vacancies_open_date' => $this->input->post('vac_open_date'),
-                                'vacancies_close_date' => $this->input->post('vac_end_date'),
+                                'vacancies_open_date' => $vacancy_open_date,
+                                'vacancies_close_date' => $vacancy_end_date,
                                 'vacancies_start_salary' => $this->input->post('job_min_salary'),
                                 'vacancies_end_salary' => $this->input->post('job_max_salary'),
                                 'vacancies_status' => $this->input->post('vac_status'),
@@ -129,13 +163,13 @@ class Job_Providermodel extends CI_Model {
                                 'vacancies_class_level_id' => $this->input->post('vac_class'),
                                 'vacancies_university_board_id' => $this->input->post('vac_univ_name'),
                                 'vacancies_subject_id' => $this->input->post('vac_sub_name'),
-                                'vacancies_department_id' => $this->input->post('vac_dept_name'),
+                                'vacancies_department_id' => $dept_name,
                                 'vacancies_applicable_posting_id' => $pos_name,
                                 'vacancies_medium' => $this->input->post('vac_medium'),
                                 'vacancies_accommodation_info' => $this->input->post('vac_accom'),
                                 'vacancies_instruction' => $this->input->post('vac_instruction'),
-                                'vacancies_interview_start_date' => $this->input->post('vac_inter_sdate'),
-                                'vacancies_end_date' => $this->input->post('vac_inter_edate')
+                                'vacancies_interview_start_date' => $interview_start_date,
+                                'vacancies_end_date' => $interview_end_date
                               );
         $vacancy_update_where = '( vacancies_id="'.$this->input->post('rid').'")'; 
         $this->db->set($vacancy_update_data); 
@@ -158,19 +192,14 @@ class Job_Providermodel extends CI_Model {
     $this->db->select('*');
     $this->db->from('tr_organization_vacancies ov');
     $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-    $this->db->join('tr_educational_qualification eq','ov.vacancies_qualification_id=eq.educational_qualification_id','inner');
-    $this->db->join('tr_class_level cl','ov.vacancies_class_level_id=cl.class_level_id','inner');
-    $this->db->join('tr_university_board ub','ov.vacancies_university_board_id=ub.education_board_id','inner');
-    $this->db->join('tr_departments td','ov.vacancies_department_id=td.departments_id','inner');
-    $this->db->join('tr_applicable_posting tap','ov.vacancies_applicable_posting_id=tap.posting_id','left');
-    $this->db->join('tr_subject s','ov.vacancies_subject_id=s.subject_id','inner');
+    $this->db->order_by('ov.vacancies_id','desc');
     $model_data['provider_vacancy'] = $this->db->get()->result_array();
     return $model_data;
   }
 
   // Job provider vacancy - ajax
   public function get_full_provider_vacancy($value) {
-    $provider_vacancy_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.vacancies_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_organization_vacancies t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.vacancies_qualification_id ) - LENGTH( REPLACE( t.vacancies_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id INNER JOIN tr_organization_profile AS op ON a.vacancies_organization_id=op.organization_id INNER JOIN tr_class_level AS cl ON a.vacancies_class_level_id=cl.class_level_id INNER JOIN tr_university_board AS ub ON a.vacancies_university_board_id=ub.education_board_id INNER JOIN tr_subject AS s ON a.vacancies_subject_id=s.subject_id INNER JOIN tr_departments AS td ON a.vacancies_department_id=td.departments_id LEFT JOIN tr_applicable_posting AS tap ON a.vacancies_applicable_posting_id=tap.posting_id WHERE a.vacancies_id='$value'");
+    $provider_vacancy_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.vacancies_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_organization_vacancies t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.vacancies_qualification_id ) - LENGTH( REPLACE( t.vacancies_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id INNER JOIN tr_organization_profile AS op ON a.vacancies_organization_id=op.organization_id INNER JOIN tr_class_level AS cl ON a.vacancies_class_level_id=cl.class_level_id INNER JOIN tr_university_board AS ub ON a.vacancies_university_board_id=ub.education_board_id INNER JOIN tr_subject AS s ON a.vacancies_subject_id=s.subject_id LEFT JOIN tr_applicable_posting AS tap ON a.vacancies_applicable_posting_id=tap.posting_id WHERE a.vacancies_id='$value'");
     $provider_vacancy = $provider_vacancy_query->result_array();  
     return $provider_vacancy;
   }

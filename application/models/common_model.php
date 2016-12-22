@@ -11,27 +11,75 @@ class Common_model extends CI_Model {
 		$allinstitutions = $this->db->get_where('tr_institution_type', array('institution_type_status' => '1'))->result_array();
 		return $allinstitutions;
 	}
-    public function get_search_list()
+
+
+
+   //  public function get_search_list()
+   //  {
+   //      if ($this->input->post('search_keyword')) {
+   //      	$null_search = $this->input->post('search_keyword');
+   //      	$search_product=$this->db->select('*');
+   //          $search_product=$this->db->from('tr_organization_vacancies cp');
+   //          $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+   //          $where1 = '(cp.vacancies_status=1)';
+   //          $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
+   //          $search_product=$this->db->where($where1);
+   //          $search_product=$this->db->group_by('cp.vacancies_id');
+   //          $query = $this->db->get()->result_array();
+   //      }
+   //      if (empty($null_search)){
+			// $search_product=$this->db->select('*');
+			// $search_product=$this->db->from('tr_organization_vacancies cp');
+   //          $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+			// $query = $this->db->get()->result_array();
+			// };
+   //      return $query;
+   //  }
+
+    // Added By Siva
+    public function get_search_results($limit,$start,$data=array())
     {
-        if ($this->input->post('search_keyword')) {
-        	$null_search = $this->input->post('search_keyword');
-        	$search_product=$this->db->select('*');
-            $search_product=$this->db->from('tr_organization_vacancies cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
-            $where1 = '(cp.vacancies_status=1)';
-            $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
-            $search_product=$this->db->where($where1);
-            $search_product=$this->db->group_by('cp.vacancies_id');
-            $query = $this->db->get()->result_array();
-        }
-        if (empty($null_search)){
-			$search_product=$this->db->select('*');
-			$search_product=$this->db->from('tr_organization_vacancies cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
-			$query = $this->db->get()->result_array();
-			};
-        return $query;
+
+		if(!empty($data['amount'])  && !empty($data['location'])) {
+			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'" AND op.organization_district_id="'.$data['location'].'")';
+		}
+		else if(!empty($data['amount'])) {
+			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'")';
+		}
+		else if(!empty($data['location'])) {
+			$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$data['location'].'")';
+		}
+		else {
+			$search_where = '(ov.vacancies_status=1)';
+		}
+
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+		$this->db->like('ov.vacancies_job_title',$data['keyword']);
+		$this->db->or_like('op.organization_name',$data['keyword']);
+        $this->db->where($search_where);
+        $this->db->limit($limit,$start);
+        $model_data['search_results'] = $this->db->get()->result_array();
+
+        // echo "<pre>";
+        // print_r($model_data['search_results']);
+        // echo "</pre>";
+        //total count
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+		$this->db->like('ov.vacancies_job_title',$data['keyword']);
+		$this->db->or_like('op.organization_name',$data['keyword']);
+        $this->db->where($search_where);
+        $model_data['total_rows'] = $this->db->get()->num_rows();
+             
+
+        return $model_data;
+
     }
+
+
 	public function get_all_district()
 	{
 		$district = array();
@@ -48,11 +96,11 @@ class Common_model extends CI_Model {
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
 	}
-	public function qualification_by_institution($ins_id,$course_type = 'ug')
+	public function qualification_by_institution($ins_id)
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_educational_qualification');
-		$where = "(educational_qualifcation_inst_type_id = '".$ins_id."' AND educational_qualification_course_type = '".$course_type."' AND educational_qualification_status='1')";
+		$where = "(educational_qualifcation_inst_type_id = '".$ins_id."' AND educational_qualification_status='1')";
 		$this->db->where($where);
 		$educationdata = $this->db->get();
 		return $educationdata->result_array(); 
@@ -174,13 +222,15 @@ class Common_model extends CI_Model {
 	public function get_job_list()
 	{
 			$search_product=$this->db->select('*');
-            $search_product=$this->db->from('tr_organization_vacancies cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
-            $where1 = '(cp.vacancies_status=1)';
+            $search_product=$this->db->from('tr_organization_vacancies ov,tr_candidate_profile cp');
+            $search_product = $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
+            $where1 = '(ov.vacancies_status=1)';
+            $where2 = '(cp.candidate_status=1)';
             $search_product=$this->db->where($where1);
-            $search_product=$this->db->group_by('cp.vacancies_id');
+            $search_product=$this->db->where($where2);
+            $search_product=$this->db->group_by('ov.vacancies_id');
             $query = $this->db->get()->result_array(); 
-            return $query;
+            return $query;           
 	}
 	public function get_allinstitutions_list()
 	{
@@ -197,7 +247,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_organization_subscription');
 		$this->db->join('tr_subscription', 'tr_subscription.subscription_id = tr_organization_subscription.subscription_id');
-		$where = "(organization_id = '".$org_id."' AND validity_start_date <= CURRENT_DATE() AND  validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
+		$where = "(organization_id = '".$org_id."' AND org_sub_validity_start_date <= CURRENT_DATE() AND  org_sub_validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
 		$this->db->where($where);
 		$providersubcription = $this->db->get();
 		return $providersubcription->row_array(); 
@@ -220,6 +270,20 @@ class Common_model extends CI_Model {
 			return FALSE;
 		}
 	}
-
+	/* show total count of vacancies  */
+	public function vacancies_count(){
+		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_status = 1");
+		return $posted_jobs->num_rows();
+	}
+	/* show total count of vacancies  */
+	public function candidate_count(){
+		$candidate = $this->db->query("SELECT * FROM tr_candidate_profile WHERE candidate_status = 1");
+		return $candidate->num_rows();
+	}
+	/* show total count of vacancies  */
+	public function organization_count(){
+		$organization = $this->db->query("SELECT * FROM tr_organization_profile WHERE organization_status = 1");
+		return $organization->num_rows();
+	}
 }
 

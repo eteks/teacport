@@ -27,7 +27,11 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                         	<div class="panel">
 								<div class="dashboard-logo-sidebar">
-									<img class="img-responsive center-block" src="<?php echo $organization['organization_logo'];?>" alt="Image">
+									<?php if (file_exists($organization['organization_logo'])) { ?>
+                                    <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } else { ?>
+                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
+                                    <?php } ?>
 								</div>
 								<div class="text-center dashboard-logo-sidebar-title">
 									<h4><?php echo $organization['organization_name']; ?></h4>
@@ -40,31 +44,48 @@
                         	<div class="heading-inner first-heading">
                                 <p class="title">Choose Your Plan</p>
                             </div>
-                            <p class="success_server_msg"><?php if(isset($subscription_server_msg)) echo $subscription_server_msg; ?></p>
+                            <p class="success_server_msg"><?php if(isset($subscription_server_msg)) echo $subscription_server_msg; ?><?php if($this->session->userdata('subscription_server_msg')!=''){ echo $this->session->userdata('subscription_server_msg');$this->session->unset_userdata('subscription_server_msg');} ?></p>
                             <?php if (!empty($subcription_plan)) { ?>
                             <div class="subscription">
                                 <!--Select Pricing Plan-->
-                                <form id="form-school" class="form-horizontal" action="" name="" autocomplete="false" method="post" accept-charset="utf-8">
-                                	<div class="form-group">
-										<label class="col-sm-3" for="subpack">Select Subscription : </label>
-										<div class="col-sm-6">
-											<select id="subpack_act" class="form-control" name="subpack">
-												<option> Select Package </option>
-												<?php foreach ($subcription_plan as $plan) {
-													$startdate = strtotime($plan['subcription_valid_start_date']);$enddate = strtotime($plan['subcription_valid_end_date']);$datediff = $enddate-$startdate;
-													echo "<option value='".$plan['subscription_id']."' data-name='".$plan['subscription_plan']."' data-amount='".$plan['subscription_price']."'>".$plan['subscription_plan']." Membership plan @ ".floor(($datediff / (60 * 60 * 24))+1)." days Rs. ".$plan['subscription_price']." </option>";
-												} ?>
-											</select>
-											<p>
-												<b> + 15%</b>
-												service tax applicable
-											</p>
-										</div>
-										<div class="col-sm-3">
-											<a href="<?php echo base_url(); ?>" target="_blank" class="btn btn-info btn-large">View Details &amp; Features</a>
-								     </div>
-								     </div>
-							    </form> <!--End Select Pricing Plan-->
+	                        	<div class="form-group">
+									<label class="col-sm-3 nopadding" for="subpack">Select Subscription : </label>
+									<div class="col-sm-6">
+										<select id="subpack_act" class="form-control" name="subpack">
+											<option value=""> Select Package </option>
+											<?php foreach ($subcription_plan as $plan) {
+												$startdate = strtotime($plan['subcription_valid_start_date']);$enddate = strtotime($plan['subcription_valid_end_date']);$datediff = $enddate-$startdate;
+												echo "<option value='".$plan['subscription_id']."' data-name='".$plan['subscription_plan']."' data-amount='".$plan['subscription_price']."'>".$plan['subscription_plan']." Membership plan @ ".floor(($datediff / (60 * 60 * 24))+1)." days Rs. ".$plan['subscription_price']." </option>";
+											} ?>
+										</select>
+										<p>
+											<b> + 15%</b>
+											service tax applicable
+										</p>
+									</div>
+									<div class="col-sm-3 nopadding">
+										<?php 
+				                    	echo form_open('provider/payment','id="provider_subscription_form"');
+										echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>$organization['registrant_name']));
+										echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
+										echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
+										echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
+										echo form_input(array('name' => 'productinfo', 'type'=>'hidden', 'id' =>'payu_plan','value'=>''));
+										echo form_input(array('name' => 'address1', 'type'=>'hidden', 'id' =>'payu_addr1','value'=>$organization['organization_address_1']));
+										echo form_input(array('name' => 'address2', 'type'=>'hidden', 'id' =>'payu_addr2','value'=>$organization['organization_address_2']));
+										echo form_input(array('name' => 'city', 'type'=>'hidden', 'id' =>'payu_city','value'=>$organization['district_name']));
+										echo form_input(array('name' => 'state', 'type'=>'hidden', 'id' =>'payu_state','value'=>$organization['state_name']));
+										echo form_input(array('name' => 'country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'india'));
+										echo form_input(array('name' => 'udf1', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
+										echo form_input(array('name' => 'udf2', 'type'=>'hidden', 'id' =>'payu_planid','value'=>'""'));
+										echo form_input(array('name' => 'udf5', 'type'=>'hidden', 'id' =>'payu_csrf','value'=>$this->security->get_csrf_hash()));
+			                    		?>
+			                    		<button type='submit' class="btn btn-default payu_submit pull-right" style="margin: 0px !important;"> Proceed to pay </button>
+				                    	<?php echo form_close(); ?>
+										<a href="<?php echo base_url(); ?>pricing" target="_blank" class="txt_blue pull-right margin_10">View Details &amp; Features</a>
+							     </div>
+							     </div>
+							   <!--End Select Pricing Plan-->
                                 
                                 <!--Display Chosen Plan-->
                                 <div class="pricing-section-1 subscription_plan_description">
@@ -97,28 +118,6 @@
 			                        <?php } ?>
 			                    </div> 
 			                 </div>  
-			                     
-		                    <!--Proceed to payment-->
-		                    <div class="col-sm-offset-9 col-sm-1">
-		                    	<?php 
-		                    	echo form_open('provider/payment','id="provider_subscription_form"');
-								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>$organization['registrant_name']));
-								echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
-								echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
-								echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
-								echo form_input(array('name' => 'productinfo', 'type'=>'hidden', 'id' =>'payu_plan','value'=>''));
-								echo form_input(array('name' => 'address1', 'type'=>'hidden', 'id' =>'payu_addr1','value'=>$organization['organization_address_1']));
-								echo form_input(array('name' => 'address2', 'type'=>'hidden', 'id' =>'payu_addr2','value'=>$organization['organization_address_2']));
-								echo form_input(array('name' => 'city', 'type'=>'hidden', 'id' =>'payu_city','value'=>$organization['district_name']));
-								echo form_input(array('name' => 'state', 'type'=>'hidden', 'id' =>'payu_state','value'=>$organization['state_name']));
-								echo form_input(array('name' => 'country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'india'));
-								echo form_input(array('name' => 'udf1', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
-								echo form_input(array('name' => 'udf2', 'type'=>'hidden', 'id' =>'payu_planid','value'=>''));
-								echo form_input(array('name' => 'udf5', 'type'=>'hidden', 'id' =>'payu_csrf','value'=>$this->security->get_csrf_hash()));
-	                    		?>
-	                    		<button type='submit' class="btn btn-default payu_submit"> Proceed to pay </button>
-		                    	<?php echo form_close(); ?>
-		                    </div>
 		                    <?php } else {?>
 			                 	<div><h2>No subscription plan available!</h2></div>
 			                 <?php } ?>
@@ -126,7 +125,7 @@
 			                 
 			                 
 			                 
-			                  <div class="col-sm-6">
+			                  <div class="col-sm-6 dn">
 			                 	<button class="btn" data-toggle="modal" data-target="#plandetail_act"  data-backdrop="static" data-keyboard="false"> View Plan Details </button>
 			                 </div>	
 			                 
@@ -136,7 +135,7 @@
 					      <!-- Modal content-->
 					      <div class="modal-content">
 					        <div class="modal-header">
-					        	<a class="pull-right" href="index.html"><i class="fa fa-close"></i></a>
+					        	<a class="pull-right"><i class="fa fa-close"></i></a>
 					          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
 					          <h3 class="modal-title">You are on <strong class="info"> BASIC PLAN ! </strong> </h3>
 					        </div>

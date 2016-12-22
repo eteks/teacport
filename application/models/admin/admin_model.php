@@ -267,7 +267,7 @@ class Admin_Model extends CI_Model {
     else if($status=='save') {
       $language_insert_data = array( 
                                       'language_name' => $this->input->post('l_name'),
-                                      'is_mother_tangue' => $this->input->post('l_mother_tangue'),
+                                      'is_mother_tangue' => $this->input->post('l_mother_tongue'),
                                       'is_medium_of_instruction' => $this->input->post('l_instruction'),
                                       'language_status' => $this->input->post('l_status'),
                                     );
@@ -750,6 +750,22 @@ class Admin_Model extends CI_Model {
   {
     $vacancy_get_where = '(vacancies_status=1)'; 
     $model_data = $this->db->get_where("tr_organization_vacancies", $vacancy_get_where)->result_array(); 
+    return $model_data;
+  }
+  public function get_admin_feedback_form()
+  {
+    $this->db->select('*');
+    $this->db->from('tr_feedback_form feed');
+    $model_data= $this->db->order_by('feed.feedback_form_id')->get()->result_array();
+    return $model_data;
+  }
+  public function get_admin_feedback_full_view($value) {
+    $feed_where = '(feedback_form_id="'.$value.'")';
+    $this->db->select('*');
+    $this->db->from('tr_feedback_form feed');
+    // $this->db->join('tr_organization_profile org','org.organization_id=feed.candidate_or_organization_id','left');
+    $this->db->where($feed_where);  
+    $model_data = $this->db->get()->row_array();
     return $model_data;
   }
 

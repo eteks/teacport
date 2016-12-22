@@ -195,6 +195,20 @@ class Job_provider_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	public function job_provider_post_job_exist_or_not($vacancydata){
+		$checkquery = $this->db->get_where('tr_organization_vacancies', array(
+            'vacancies_job_title' => $vacancydata['vacancies_job_title'],
+            'vacancies_available' => $vacancydata['vacancies_available']
+        ));
+		$count = $checkquery->num_rows();
+		if($count === 1){
+			return FALSE;
+		}
+		else{
+			return TRUE;
+		}
+		
+	}
 	public function job_provider_posted_job_counts($ins_id)
 	{
 		return $this->db->where('vacancies_organization_id',$ins_id)->from("tr_organization_vacancies")->count_all_results();
@@ -354,6 +368,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->select('registrant_password');
 		$this->db->from('tr_organization_profile');
 		$where = "(organization_id='".$providerid."')";
+		$this->db->where($where);
 		$org_profiledata = $this->db->get()->row_array();
 		if($oldpassword === $org_profiledata['registrant_password']){
 			return TRUE;
@@ -473,6 +488,18 @@ class Job_provider_model extends CI_Model {
 		if($this->db->insert('tr_organization_subscription', $subscrip_data)){
 			return TRUE;
 		}
+		else{
+			return FALSE;
+		}
+	}
+	public function subscribed_or_not($subcription_id,$organization_id){
+		$checkquery = $this->db->get_where('tr_organization_subscription', array(
+            'organization_id' => $organization_id,'subscription_id' => $subcription_id
+        ));
+		$count = $checkquery->num_rows();
+		if ($count === 0) {
+			return TRUE;
+        }
 		else{
 			return FALSE;
 		}

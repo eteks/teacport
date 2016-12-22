@@ -26,12 +26,13 @@ class Home extends CI_Controller {
 	 */
 	public function index()
 	{
-	    $categories['job_results'] = $this->common_model->get_job_list();
-	    // $categories['count_results'] = $this->common_model->get_count_list();
-	    // echo "<pre>";
-		// print_r($categories);
-		// echo "</pre>";
-	    $this->load->view('index',$categories);
+	    $home['job_results'] = $this->common_model->get_job_list();
+		$home['totalvacancy'] = $this->common_model->vacancies_count();
+		$home['totalcandidate'] = $this->common_model->candidate_count();
+		$home['totalorganization'] = $this->common_model->organization_count();
+		$home['allposting'] = $this->common_model->applicable_posting();
+		$home['alldistrict'] = $this->common_model->get_all_district();
+	    $this->load->view('index',$home);
 	}
 	public function featured_job()
 	{
@@ -51,6 +52,10 @@ class Home extends CI_Controller {
 	}
 	public function contactus()
 	{
+		$ci =& get_instance();	
+		$ci->config->load('email', true);
+		$emailsetup = $ci->config->item('email');
+		$this->load->library('email', $emailsetup);
 		if($_POST){
 			$session_data = $this->session->all_userdata();
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
@@ -70,7 +75,26 @@ class Home extends CI_Controller {
 										'is_viewed'=>0,
 										'feedback_form_status'=>1
 									);
+				$data['data_value'] = array(
+					'name' => $this->input->post('contact_us_name'),
+					'email' =>$this->input->post('contact_us_email'),
+					'phone' =>$this->input->post('contact_us_mobile'),
+					'subject' =>$this->input->post('contact_us_subject'),
+					'Message' => $this->input->post('contact_us_message')
+				);
+				// print_r($contact_us_data);
 				if($this->common_model->guest_user_feedback($contact_us_data)){
+					$from_email = $emailsetup['smtp_user'];
+					$subject = 'Teacher Recruit Contact';
+					$message =  $this->load->view('email_template/contact_form', $data, TRUE);	
+					// print_r($message);		
+					$this->email->initialize($emailsetup);
+					$this->email->from($from_email, 'Teacher Recruit');
+					$this->email->to($this->input->post('contact_us_email'));
+					$this->email->subject($subject);
+					$this->email->message($message);
+					/* Check whether mail send or not*/
+					$this->email->send();
 					$data['contact_server_msg'] = 'Thank you for contact us! Our customer representative contact you soon!!';
 					$this->load->view('contactus',$data);
 				}
@@ -89,7 +113,8 @@ class Home extends CI_Controller {
 	}
 	//Akila Created
 	public function pricing(){
-		$this->load->view('pricing');
+		$data['subcription_plan'] = $this->common_model->subcription_plan();
+		$this->load->view('pricing',$data);
 	}
 	public function faq(){
 		$this->load->view('faq');
@@ -100,22 +125,79 @@ class Home extends CI_Controller {
 	}
 	public function vacancies()
 	{
-		$session_data = $this->session->all_userdata();
-		if(isset($session_data['login_session']))
-		{
-			$categories['search_results'] = $this->common_model->get_search_list();
-        $this->load->view('vacancies',$categories);
-		}
-	    else {
-		    redirect('login/seeker');
-		}
+		if($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
+    		$inputs = array(
+        				'keyword' => $this->input->post('search_keyword'),
+        				'min_amount' => $this->input->post('search_min_amount'),
+        				'location' => $this->input->post('search_location'),
+        				'max_amount' => $this->input->post('search_max_amount'),
+        				'experience' => $this->input->post('search_exp'),
+        				);
+    		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
+    	}
+    	$search_inputs = $this->session->userdata('search_inputs'); // To get search inputs from session
+
+    	// Pagination values
+    	$per_page = 1;
+
+    	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
+        $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
+    	$total_rows = $search_results['total_rows'];
+    	$data["search_results"] = $search_results['search_results'];
+
+    	//pagination
+		$this->load->library('pagination');
+
+		// Pagination configuration
+  		$config['base_url'] = base_url().'search';
+		$config['per_page'] = $per_page;
+		$config['total_rows'] = $total_rows;
+		$config['uri_segment'] = 2;
+		$config['num_links'] = $total_rows;
+		$config['use_page_numbers'] = TRUE;
+
+    	// Custom Configuration
+		$config['full_tag_open'] = '<div class="full_pagination">';
+		$config['full_tag_close'] = '</div>';
+		$config['next_tag_open'] = '<span class="prev_next_pagination">';
+		$config['next_tag_close'] = '</span>';
+		$config['prev_tag_open'] = '<span class="prev_next_pagination">';
+		$config['prev_tag_close'] = '</span>';
+		$config['num_tag_open'] = '<span class="num_pagination">';
+		$config['num_tag_close'] = '</span>';
+		$config['cur_tag_open'] = '<span class="cur_pagination">';
+		$config['cur_tag_close'] = '</span>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Prev';
+
+		// Pagination Inititalization
+		$this->pagination->initialize($config);
+
+		// Navigation Links
+		$pagination_links = $this->pagination->create_links();
+		$data["links"] = $pagination_links;
+
+        $this->load->view('vacancies',$data);
 		
 	}
-	public function search_section()
-    {
-    	$categories['search_results'] = $this->common_model->get_search_list();
-        $this->load->view('vacancies',$categories);
-    }
+
+	// Added By Siva
+    public function search_results() {
+
+
+
+    	
+
+
+    	
+
+    	
+       
+       	//load the view
+        $this->load->view('search_result', $data);
+  	}
+
+
 	public function informations()
 	{
 		$this->load->view('information');

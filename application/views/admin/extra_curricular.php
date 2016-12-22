@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -74,7 +77,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
-                    echo "<p class='db_status update_success_md'> $status </p>";
+                    echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
                   endif;
                   ?> 
                   <p class='val_error error_msg_md'> <p>
@@ -113,7 +116,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $exac_val['extra_curricular_status']; ?>" />
                         </td>                        
                         <td class="created_date">
-                          <?php echo $exac_val['extra_curricular_created_date']; ?>
+                          <?php 
+                            $created_datetime = explode(' ', $exac_val['extra_curricular_created_date']);
+                            echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                          ?> 
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">

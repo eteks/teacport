@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -90,7 +93,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </tr>
                       </thead>
                       <tbody class="table_content_section"> 
-                        <?php } ?>
                         <?php
                         if(!empty($job_provider_transaction))  :
                         ?>   
@@ -120,7 +122,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $trans['transaction_status']; ?>
                           </td>
                           <td class=""> 
-                            <?php echo $trans['transaction_date_time']; ?>
+                            <?php 
+                              $created_datetime = explode(' ', $trans['transaction_date_time']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?>
                           </td>
                           <td>
                             <a class="job_full_view popup_fields" data-id="<?php echo $trans['transaction_id']; ?>" data-href="job_provider/get_transaction_full_view"  data-mode="full_view"  data-popup-open="popup_section">
@@ -134,7 +139,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php 
                         endif;
                         ?>
-                        <?php if(!$this->input->is_ajax_request()) { ?> 
                       </tbody>
                     </table>
                   </div>
@@ -305,7 +309,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Transaction date & Time</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['transaction_date_time'])) echo $provider_full_transaction['transaction_date_time']; else echo "-"; ?>
+                            <?php 
+                            if(!empty($provider_full_transaction['transaction_date_time'])) {
+                              $created_datetime = explode(' ', $provider_full_transaction['transaction_date_time']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            }
+                            else echo "-";
+                            ?>
                           </span>
                         </div>
                       </div>          

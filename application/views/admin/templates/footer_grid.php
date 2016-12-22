@@ -21,6 +21,13 @@
                   <span class="del_no no">No</span>
                 </div>
             </div>
+            <!--  Alert box with ok button only -->
+            <div id="alert-dialog-box">
+                <h3 class="message"></h3>
+                <div>
+                  <span class="ok_btn">ok</span>
+                </div>
+            </div>
 		<script>								 	
             var csfrData = {};
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
@@ -175,19 +182,9 @@
                             ]
 
                 });
-            }
-            jQuery(document).ready(function() {
-                datatable_initialization();
-            });
-        </script>
-        <script>
-           jQuery(document).ready(function() {
-              $('.privileges_table').dataTable({
-                "order" : [],
-                "bPaginate": false,
-            });
 
-            $('.admin_table').wrap("<div id='table_wrapper_Datatable' style='\n\
+                // Wrap datatable
+                $('.admin_table').wrap("<div id='table_wrapper_Datatable' style='\n\
                                         overflow: auto;\n\
                                         overflow-y: hidden;\n\
                                         -ms-overflow-y: hidden\n\
@@ -196,9 +193,18 @@
                                         padding-bottom: 15px;\n\
                                         display:block;\n\
                                    '>/");
-
-
-           });
+            }
+            jQuery(document).ready(function() {
+                datatable_initialization();
+            });
+        </script>
+        <script>
+           jQuery(document).ready(function() {
+              $('.privileges_table').dataTable({
+                    "order" : [],
+                    "bPaginate": false,
+                });
+            });
         </script>
         <!-- <script>
             jQuery(document).ready(function() {

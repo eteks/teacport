@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -134,7 +137,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>  
                           </td>
                           <td class=""> 
-                            <?php echo date('d-m-Y',strtotime($pro_val['candidate_created_date'])); ?>
+                            <?php 
+                              $created_datetime = explode(' ', $pro_val['candidate_created_date']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?>
                           </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
@@ -294,7 +300,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Date Of Birth</label>
                           <span class="dynamic_data"> 
-                            <?php echo date('d-m-Y',strtotime($see_val['candidate_date_of_birth'])); ?>
+                            <?php echo date("d/m/Y", strtotime($see_val['candidate_date_of_birth'])) ; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -430,7 +436,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Candidate Status</label>
                           <span class="dynamic_data"> 
-                            <?php echo date('d-m-Y',strtotime($see_val['candidate_created_date'])); ?>
+                            <?php 
+                                $created_datetime = explode(' ', $see_val['candidate_created_date']);
+                                echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -525,7 +534,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> 
                               </td>
-                              <td> <?php echo date('d-m-Y',strtotime($edu_val['candidate_education_created_date'])); ?></td>
+                              <td> 
+                              <?php 
+                                $created_datetime = explode(' ', $edu_val['candidate_education_created_date']);
+                                echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                              ?>
+                              </td>
                             </tr>
                             <?php
                             endforeach;
@@ -566,7 +580,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> 
                               </td>
-                              <td> <?php echo date('d-m-Y',strtotime($exp_val['candidate_experience_created_date'])); ?></td>
+                              <td> 
+                              <?php 
+                                $created_datetime = explode(' ', $exp_val['candidate_experience_created_date']);
+                                echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                              ?>
+                              </td>
                             </tr>
                             <?php
                             endforeach;
@@ -682,7 +701,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Date Of Birth</label>
                           <span>
-                            <input class=" m-ctrl-medium date-picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo $see_val['candidate_date_of_birth']; ?>" name="cand_dob" />
+                            <input class=" m-ctrl-medium date-picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($see_val['candidate_date_of_birth'])); ?>" name="cand_dob" />
                           </span>
                         </div>
                       </div>

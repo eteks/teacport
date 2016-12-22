@@ -230,4 +230,6 @@ $config['current_page_rights'] = array();
 
 $config['is_super_admin'] = false;
 
-// $config['access_rights'] = array();
+$config['access_rights'] = array();
+/*added by thangam*/
+$config['feedback_data'] = array();

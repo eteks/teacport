@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    /* Admin Login Form Start */
+     /* Admin Login Form Start */
     $('.admin_login_form').on('submit',function(e) {
         e.preventDefault();
         var form_data = $(this).serialize();
@@ -10,10 +10,9 @@ $(document).ready(function(){
             data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
             success: function(res) {
                 if(res != 'login_success') {
-                   this_status.html(res);
-                $('.admin_status').html(res.status);
-                $('.admin_status').fadeIn(500);
-                $('.admin_status').fadeOut(3000);
+                    this_status.html("<i class='icon-remove-sign' id='admin_error_login'></i>  "+res);
+                    this_status.fadeIn(500);
+                    // this_status.fadeOut(3000);
                 }
                 else {
                    window.location.href = admin_baseurl+"dashboard";
@@ -22,6 +21,38 @@ $(document).ready(function(){
         });
     });
     /* Admin Login Form End */
+
+    /* Admin Profile Form Start */
+    $('.admin_profile_form').on('submit',function(e) {
+        e.preventDefault();
+        var form_data = $(this).serialize();
+        var this_status = $(this).find('.admin_status');
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('action'),
+            data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
+            dataType : 'json',
+            success: function(res) {
+                if(res.error == 1){
+                     this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                     this_status.removeClass('update_success_md');
+                     this_status.fadeIn(1000);
+                     this_status.fadeOut(3000);
+                }
+                else if(res.error == 2){
+                     this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                     this_status.addClass('update_success_md');
+                     this_status.fadeIn(1000);
+                     this_status.fadeOut(3000);
+                     if(res.session_data != 'undefined' && res.session_data == true){
+                        customalert("You have changed your Accounts. We need to logout your session to confirm");
+                        setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
+                     }
+                }
+            }
+        });
+    });
+    /* Admin Profile Form End */
 
     /* Popup module ajax start */
 
@@ -46,12 +77,14 @@ $(document).ready(function(){
             processData:false,
             success: function(res) {
                 if(res.error == 1) {
-                    this_status.html(res.status);
+                    this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                    this_status.removeClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
                 }
                 else if(res.error == 2) {
-                    this_status.html(res.status);
+                    this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                    this_status.addClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
                     $('.admin_table').dataTable().fnDestroy();  
@@ -77,7 +110,7 @@ $(document).ready(function(){
         form_data['rid'] = id;
         form_data[csrf_name] = csfrData[csrf_name];
         form_data['action'] = "delete";
-        doConfirm("Are you sure want to delete?", function yes() {
+        confirm_alert("Are you sure want to delete?", function yes() {
             $.ajax({
                 type : "POST",
                 url : admin_baseurl+action_path,
@@ -87,7 +120,8 @@ $(document).ready(function(){
                     if(res.error == 2) {
                         $('.admin_table').dataTable().fnDestroy();
                         this_table_content.html(res.output);
-                        this_status.html(res.status);
+                        this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                        this_status.addClass('update_success_md');
                         this_status.fadeIn(1000);
                         this_status.fadeOut(2000);
                         setTimeout(function() { datatable_initialization(); }, 3000); 
@@ -118,7 +152,7 @@ $(document).ready(function(){
                     handleFormWizards();
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
                     handleChoosenSelect();
-                    // popup_pagination();
+                    popup_pagination();
                     // e.preventDefault();
                     $('.multi_choice').find('ul').addClass('scroller');
                     $('.multi_choice').find('ul').slimScroll({
@@ -151,7 +185,9 @@ $(document).ready(function(){
 
 // Popup with tab menu
 function handleFormWizards() {	
-	$('.date-picker').datepicker();
+	$('.date-picker').datepicker({
+        format: 'dd/mm/yyyy',
+    });
     $('#rootwizard').bootstrapWizard({
         onTabShow: function(tab, navigation, index) {
                         var $total = navigation.find('li').length;
@@ -258,7 +294,8 @@ function tabmenu_ci_validation(value,data) {
         data : form_data,
         success: function(res) {
             if(res.error==1 && res.status!='valid') {
-                $('.val_error').html(res.status);
+                $('.val_error').html('<i class="icon-remove-sign"></i>'+res.status);
+                $('.val_error').removeClass('update_success_md');
                 $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 return_val = 0;
@@ -267,7 +304,8 @@ function tabmenu_ci_validation(value,data) {
                 return_val = 1;
             }
             else if(res.error == 2) {
-                $('.val_error').html(res.status);
+                $('.val_error').html('<i class=" icon-ok-sign"></i>'+res.status);
+                $('.val_error').addClass('update_success_md');
                 $('.val_error').fadeIn(500);
                 $('.val_error').fadeOut(3000);
                 $('.admin_table').dataTable().fnDestroy(); 
@@ -297,25 +335,25 @@ var width=$('.error_popup_msg').width();
 $('.error_popup_msg').css({'margin-top': -height / 2 + "px", 'margin-left': -width / 2 + "px"});
     
 // close error popup when click ok button or popupfade
-	$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
-	  	$('.error_popup_msg').hide();
-	  	$('.popup_fade').hide();
-	  	document.body.style.overflow = 'auto';
-	});
-    $(".admin_module_form").submit(function(e){
+$(document).on('click','.alert_btn_popup,.cancel_btn',function(){
+  	$('.error_popup_msg').hide();
+  	$('.popup_fade').hide();
+  	document.body.style.overflow = 'auto';
+});
+$(".admin_module_form").submit(function(e){
     e.preventDefault();
-  });
-  
- //Login page
-   $('#forget-password').on("click", function(){
-   	   $("#admin_login_form").hide();
-   	   $("#forgotform").show();
-   });
-   
-   $('#cancel').on("click", function(){
-   	   $("#forgotform").hide();
-   	   $("#admin_login_form").show();
-   });
+});
+
+//Login page
+$('#forget-password').on("click", function(){
+	   $("#admin_login_form").hide();
+	   $("#forgotform").show();
+});
+
+$('#cancel').on("click", function(){
+	   $("#forgotform").hide();
+	   $("#admin_login_form").show();
+});
    
    // $(function () {
     // var startDate = new Date('1985-01-01'),

@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -129,7 +132,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td class=""> 
-                            <?php echo $jobs['candidate_inbox_created_date']; ?>
+                            <?php 
+                              $created_datetime = explode(' ', $jobs['candidate_inbox_created_date']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?> 
                           </td>         
                         </tr>
                         <?php

@@ -6,6 +6,9 @@ if(!$is_super_admin){
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
+else{
+  $access_rights = $this->config->item('access_rights');
+}
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -127,7 +130,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $unv_val['university_board_status']; ?>"> 
                         </td>
                         <td class="created_date">
-                          <?php echo $unv_val['university_board_created_date']; ?>
+                          <?php 
+                            $created_datetime = explode(' ', $unv_val['university_board_created_date']);
+                            echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                          ?> 
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">

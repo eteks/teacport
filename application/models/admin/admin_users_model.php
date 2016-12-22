@@ -219,8 +219,11 @@ class Admin_users_model extends CI_Model {
     public function insert_update_admin_prvileges($data){
         $data = json_decode($data, true);
         $this->db->trans_start();
-        $this->db->insert_on_duplicate_update_batch('tr_admin_access_control',$data);
-        $this->db->trans_complete();
+        $this->db->truncate('tr_admin_access_control');
+        if(sizeof($data) > 0){
+          $this->db->insert_on_duplicate_update_batch('tr_admin_access_control',$data);
+          $this->db->trans_complete();
+        }
         if($this->db->trans_status() === FALSE)
           return "failure";
         else 
