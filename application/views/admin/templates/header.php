@@ -72,7 +72,7 @@ Website: http://thevectorlab.net/
                         <li class="dropdown" id="header_inbox_bar">
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-envelope-alt"></i>     
-                                <!-- <span class="badge badge-important">5</span> -->
+                                <span class="badge badge-important">5</span>
                             </a>
                             
                             <ul class="dropdown-menu extended inbox">

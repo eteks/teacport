@@ -19,9 +19,16 @@ class Other_module extends CI_Controller {
 	}
 	public function get_feedback_full_view()
 	{
-			echo('cont3');
-			$data['admin_feedback_form'] = $this->admin_model->get_admin_feedback_full_view($value);
+		if($this->input->post('action') && $this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['feedback_form'] = $this->admin_model->get_admin_feedback_full_view($value);
+			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/feedback_form',$data);
+		}
+		else {
+			redirect(base_url().'admin/admin_error');
+		}
+			
 	}
 	public function feedback_global()
 	{

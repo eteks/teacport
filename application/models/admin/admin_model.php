@@ -763,7 +763,6 @@ class Admin_Model extends CI_Model {
     $feed_where = '(feedback_form_id="'.$value.'")';
     $this->db->select('*');
     $this->db->from('tr_feedback_form feed');
-    // $this->db->join('tr_organization_profile org','org.organization_id=feed.candidate_or_organization_id','left');
     $this->db->where($feed_where);  
     $model_data = $this->db->get()->row_array();
     return $model_data;
