@@ -195,6 +195,20 @@ class Job_provider_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	public function job_provider_post_job_exist_or_not($vacancydata){
+		$checkquery = $this->db->get_where('tr_organization_vacancies', array(
+            'vacancies_job_title' => $vacancydata['vacancies_job_title'],
+            'vacancies_available' => $vacancydata['vacancies_available']
+        ));
+		$count = $checkquery->num_rows();
+		if($count === 1){
+			return FALSE;
+		}
+		else{
+			return TRUE;
+		}
+		
+	}
 	public function job_provider_posted_job_counts($ins_id)
 	{
 		return $this->db->where('vacancies_organization_id',$ins_id)->from("tr_organization_vacancies")->count_all_results();

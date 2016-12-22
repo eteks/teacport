@@ -44,7 +44,6 @@ $route['404_override'] 									= 'missingpage';
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';
 $route['login/provider'] 								= 'job_provider';
-$route['login/readmore'] 								= 'job_seeker/readmore';
 $route['login/featured_job'] 							= 'home/featured_job';
 $route['login/facebook'] 								= 'social/facebook';
 $route['login/facebookverify'] 							= 'social/facebookverify';

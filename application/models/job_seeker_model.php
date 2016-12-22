@@ -527,7 +527,7 @@ class Job_seeker_model extends CI_Model {
 	public function medium_of_instruction($value){
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
-		$where = "(language_name like '%".$value."%' AND language_status='1')";
+		$where = "(language_id in (".$value.") AND language_status='1')";
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
