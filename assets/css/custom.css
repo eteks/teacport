@@ -739,6 +739,12 @@ table tr[data-name="bold_section"] a {
 .disabled {
 	pointer-events: none;
 }
+.form_error_ajax {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+}
 
 /* Ended by siva */
 .subcription_plan_details{

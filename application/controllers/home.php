@@ -125,24 +125,13 @@ class Home extends CI_Controller {
 	}
 	public function vacancies()
 	{
-		$categories['search_results'] = $this->common_model->get_search_list();
-        $this->load->view('vacancies',$categories);
-		
-	}
-	public function search_section()
-    {
-    	$categories['search_results'] = $this->common_model->get_search_list();
-        $this->load->view('vacancies',$categories);
-    }
-
-	// Added By Siva
-    public function search_results() {
-
-    	if($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
+		if($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
     		$inputs = array(
         				'keyword' => $this->input->post('search_keyword'),
-        				'amount' => $this->input->post('search_amount'),
-        				'location' => $this->input->post('search_location')
+        				'min_amount' => $this->input->post('search_min_amount'),
+        				'location' => $this->input->post('search_location'),
+        				'max_amount' => $this->input->post('search_max_amount'),
+        				'experience' => $this->input->post('search_exp'),
         				);
     		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
     	}
@@ -150,7 +139,6 @@ class Home extends CI_Controller {
 
     	// Pagination values
     	$per_page = 1;
-
 
     	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
         $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
@@ -182,11 +170,28 @@ class Home extends CI_Controller {
 		$config['next_link'] = 'Next';
 		$config['prev_link'] = 'Prev';
 
-
+		// Pagination Inititalization
 		$this->pagination->initialize($config);
 
+		// Navigation Links
 		$pagination_links = $this->pagination->create_links();
 		$data["links"] = $pagination_links;
+
+        $this->load->view('vacancies',$data);
+		
+	}
+
+	// Added By Siva
+    public function search_results() {
+
+
+
+    	
+
+
+    	
+
+    	
        
        	//load the view
         $this->load->view('search_result', $data);
