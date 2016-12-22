@@ -267,7 +267,7 @@
 	margin: 30px 0;
 }
 .dashboard-header-logo-box {
-    height: 290px;
+    height: auto;
 }    
 /* pro-Dashboard LeftsideMenu */
 .dashboard-body .profile-nav .provider-jobs {
@@ -749,6 +749,12 @@ table tr[data-name="bold_section"] a {
 }
 .disabled {
 	pointer-events: none;
+}
+.form_error_ajax {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 /* Ended by siva */

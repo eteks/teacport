@@ -106,16 +106,16 @@
 	                                <?php echo form_input(array('id' => 'candidate_mobile_no','class' => 'form-control','name' => 'candidate_mobile_no')); ?>
 	                                </div>
 	                                <div class="form-group">
-		                                <div class="col-sm-6 nopadding">	
-		                                  <?php echo form_label('Captcha. :'); ?> <?php echo form_error('captcha_value'); ?>
-		                                  <?php echo ('<img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" ')?>
-		                                  <a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
-		                                </div>
-		                                <div class="col-sm-6 captcha_holder nopadding">
-		                                	<label>Enter captcha Value :</label>
-		                                	 <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
-		                                </div>
-		                            </div>    
+										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
+										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
+	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
+	                                </div>	
+	                                	<div class="col-sm-6 captcha_holder nopadding">
+	                                		<label>Enter Captcha value :</label>
+	                        				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
+	                        			</div>
+	                        			<div class="clearfix"> </div>
+	                        		</div>    
 	                                <div class="loginbox-terms">
 	                                   <label class="checkbox_word"><input type="checkbox"> I accept <a href="register-4.html" class="txt_blue" target="_blank">Term and conditions?</a>
 	                                </div>

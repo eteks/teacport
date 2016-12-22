@@ -14,8 +14,19 @@ class Other_module extends CI_Controller {
 		$this->load->view('admin/site_visit_tracking');
 	}
 	public function feedback_form()
-	{
+	{		
 		$this->load->view('admin/feedback_form');
+	}
+	public function get_feedback_full_view()
+	{
+			echo('cont3');
+			$data['admin_feedback_form'] = $this->admin_model->get_admin_feedback_full_view($value);
+			$this->load->view('admin/feedback_form',$data);
+	}
+	public function feedback_global()
+	{
+			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
+			$this->config->set_item('feedback_data',$admin_feedback_form);
 	}
 		
 }

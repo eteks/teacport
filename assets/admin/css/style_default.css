@@ -242,7 +242,11 @@ tr select {
     padding: 15px 15px 8px !important;
     max-height: 333px !important;
     min-height: 111px !important;
-    overflow-y: auto !important;
+    /*overflow-x: scroll !important;*/   	
+}
+
+.sub_site_visites_cont{
+	max-height: 353px !important;		
 }
 #footer > span {
     margin-left: 75px;
@@ -403,7 +407,10 @@ tr select {
     min-width: 800px !important;
     /*min-height:1000px !important;*/
     max-height:700px !important;
-    overflow: auto;
+    /*overflow: auto;*/
+}
+.sub_pre_section{
+	max-height:700px !important; 
 }
 .main_module{
     font-size: 13px;
@@ -474,7 +481,7 @@ tr select {
     background-color: #2cc1cc !important;
 }
 .val_error{
-    color: #ff0000 !important;
+    color: #ff0000;
     font-size: 14px !important;
     /*font-weight: 600;*/
     background-color: #d9edf7 !important;
@@ -714,7 +721,6 @@ table .dataTables_empty{
     width: 125px !important;
 }
 /* Job Providers Ad posted */
-cursor: pointer;
 .magnify-posted-ads {
 	cursor: pointer ;
 }

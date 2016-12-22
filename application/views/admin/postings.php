@@ -144,7 +144,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $pos_val['posting_status']; ?>" />
                         </td>
                         <td class="created_date">
-                          <?php echo $pos_val['posting_created_date']; ?>
+                          <?php 
+                            $created_datetime = explode(' ', $pos_val['posting_created_date']);
+                            echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                          ?> 
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">

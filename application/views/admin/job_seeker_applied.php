@@ -114,7 +114,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $job_val['applied_job_status']; ?>" />
                         </td>
                         <td class="applied_date">
-                          <?php echo date('d-m-Y',strtotime($job_val['applied_job_date'])); ?>
+                          <?php echo date('d/m/Y',strtotime($job_val['applied_job_date'])); ?>
                         </td>
 	                      <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
 	                      <td class="edit_section">
