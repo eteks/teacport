@@ -169,9 +169,6 @@
 .loginbox-terms a{
 	font-size: 14px;
 }
-.login-container .btn-default, #provider_login .btn-default{
-	width: 75% !important;
-} 
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
