@@ -486,6 +486,10 @@ class Admin_users extends CI_Controller {
 			$this->config->set_item('current_page_rights',  $current_page_rights);
 			$is_super_admin = $this->session->userdata("admin_login_session")['is_super_admin'];
 			$this->config->set_item('is_super_admin',  $is_super_admin);
+
+			//Get feedback data records from database to set in global variable
+			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
+			$this->config->set_item('feedback_data',$admin_feedback_form);
 		}	
 	}
 }

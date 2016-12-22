@@ -19,14 +19,14 @@ $hook['pre_controller'] = array(
         // 'params'   => array('bread', 'wine', 'butter')
         'params' => array()
         );
-$hook['pre_controller'] = array(
-        'class'    => 'Other_module',
-        'function' => 'feedback_global',
-        'filename' => 'other_module.php',
-        'filepath' => 'controllers/admin',
-        // 'params'   => array('bread', 'wine', 'butter')
-        'params' => array()
-        );
+// $hook['pre_controller'] = array(
+//         'class'    => 'Other_module',
+//         'function' => 'feedback_global',
+//         'filename' => 'other_module.php',
+//         'filepath' => 'controllers/admin',
+//         // 'params'   => array('bread', 'wine', 'butter')
+//         'params' => array()
+//         );
 
 /* End of file hooks.php */
 /* Location: ./application/config/hooks.php */
