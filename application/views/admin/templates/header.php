@@ -39,19 +39,6 @@ Website: http://thevectorlab.net/
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<?php 
-$is_super_admin = $this->config->item('is_super_admin');
-// $access_rights = $this->config->item('access_rights');
-if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');    
-  $current_page_rights = $access_permission['access_permission'];
-  $access_rights = explode(',',$current_page_rights);
-}
-else{
-  $access_rights = $this->config->item('access_rights');
-}
-$feedback_data = $this->config->item('feedback_data');
-?>
 <body class="fixed-top">
 	<!-- BEGIN HEADER -->
 	    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
