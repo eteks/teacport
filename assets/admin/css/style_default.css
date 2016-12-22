@@ -242,7 +242,11 @@ tr select {
     padding: 15px 15px 8px !important;
     max-height: 333px !important;
     min-height: 111px !important;
-    overflow-y: auto !important;
+    /*overflow-x: scroll !important;*/   	
+}
+
+.sub_site_visites_cont{
+	max-height: 353px !important;		
 }
 #footer > span {
     margin-left: 75px;
@@ -403,7 +407,10 @@ tr select {
     min-width: 800px !important;
     /*min-height:1000px !important;*/
     max-height:700px !important;
-    overflow: auto;
+    /*overflow: auto;*/
+}
+.sub_pre_section{
+	max-height:700px !important; 
 }
 .main_module{
     font-size: 13px;
@@ -713,3 +720,25 @@ table .dataTables_empty{
 #plan_upgrade_or_renewal table .parents_tr select {
     width: 125px !important;
 }
+/* Job Providers Ad posted */
+.magnify-posted-ads {
+	cursor: pointer ;
+}
+.magnify-ad img{
+	position: absolute;
+	
+}
+.magnify-posted-ads:hover img{
+ 	visibility: visible;
+ 	top: 50%;
+ 	left: 50%;
+ 	height: 350px;
+ 	width: 400px;
+ 	/*border: 1px solid #2fbfca;*/
+}
+ .magnify-posted-ads:hover,  .magnify-posted-ads:focus {
+	border:0; /* IE6 needs this to show large image */
+	z-index:1;
+}
+
+

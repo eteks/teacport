@@ -70,75 +70,45 @@ Website: http://thevectorlab.net/
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
-                            <!-- <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-envelope-alt"></i>
-                                <span class="badge badge-important">5</span>
-                            </a> -->
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-envelope-alt"></i>     
+                                <!-- <span class="badge badge-important">5</span> -->
+                            </a>
+                            
                             <ul class="dropdown-menu extended inbox">
                                 <li>
-                                    <p>You have 5 new messages</p>
+                                    <!-- <p>You have 5 new messages</p> -->
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Dulal Khan</span>
-									<span class="time">Just now</span>
-									</span>
+                             <?php
+                                foreach ($feedback_data as $feed) :
+                                if($feed['is_viewed'] == 0){  ?>
+                                    <a class="job_full_view popup_fields" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section">
+                                        <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
+									<!-- <span class="subject">
+									<span class="from">Dulal Khan</span> -->
+									<span class="time"><?php echo $feed['feedback_form_created_date']; ?></span>
+									<!-- </span> -->
 									<span class="message">
-									    Hello, this is an example messages please check
+									    <?php echo $feed['feedback_form_message']; ?>
 									</span>
                                     </a>
-                                </li>
+                                    <?php }  endforeach;    ?>
+                                </li> 
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Rafiqul Islam</span>
-									<span class="time">10 mins</span>
-									</span>
-									<span class="message">
-									 Hi, Mosaddek Bhai how are you ?
-									</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Sumon Ahmed</span>
-									<span class="time">3 hrs</span>
-									</span>
-									<span class="message">
-									    This is awesome dashboard templates
-									</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Dulal Khan</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-									    Hello, this is an example messages please check
-									</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">See all messages</a>
+                                    <a href="<?php echo base_url(); ?>admin/feedback_form">See all messages</a>
                                 </li>
                             </ul>
                         </li>
+                        
                         <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN NOTIFICATION DROPDOWN -->
-                        <li class="dropdown" id="header_notification_bar">
-                           <!--  <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                        <!-- <li class="dropdown" id="header_notification_bar">
+                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
 
                                 <i class="icon-bell-alt"></i>
                                 <span class="badge badge-warning">7</span>
-                            </a> -->
+                            </a>
                             <ul class="dropdown-menu extended notification">
                                 <li>
                                     <p>You have 7 new notifications</p>
@@ -182,7 +152,7 @@ Website: http://thevectorlab.net/
                                     <a href="index.php#">See all notifications</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <!-- END NOTIFICATION DROPDOWN -->
 
                     </ul>

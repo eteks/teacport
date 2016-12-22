@@ -14,44 +14,61 @@ class Common_model extends CI_Model {
 
 
 
-    public function get_search_list()
-    {
-        if ($this->input->post('search_keyword')) {
-        	$null_search = $this->input->post('search_keyword');
-        	$search_product=$this->db->select('*');
-            $search_product=$this->db->from('tr_organization_vacancies cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
-            $where1 = '(cp.vacancies_status=1)';
-            $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
-            $search_product=$this->db->where($where1);
-            $search_product=$this->db->group_by('cp.vacancies_id');
-            $query = $this->db->get()->result_array();
-        }
-        if (empty($null_search)){
-			$search_product=$this->db->select('*');
-			$search_product=$this->db->from('tr_organization_vacancies cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
-			$query = $this->db->get()->result_array();
-			};
-        return $query;
-    }
+   //  public function get_search_list()
+   //  {
+   //      if ($this->input->post('search_keyword')) {
+   //      	$null_search = $this->input->post('search_keyword');
+   //      	$search_product=$this->db->select('*');
+   //          $search_product=$this->db->from('tr_organization_vacancies cp');
+   //          $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+   //          $where1 = '(cp.vacancies_status=1)';
+   //          $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
+   //          $search_product=$this->db->where($where1);
+   //          $search_product=$this->db->group_by('cp.vacancies_id');
+   //          $query = $this->db->get()->result_array();
+   //      }
+   //      if (empty($null_search)){
+			// $search_product=$this->db->select('*');
+			// $search_product=$this->db->from('tr_organization_vacancies cp');
+   //          $search_product = $this->db->join('tr_organization_profile op', 'cp.vacancies_organization_id = op.organization_id','inner');
+			// $query = $this->db->get()->result_array();
+			// };
+   //      return $query;
+   //  }
 
     // Added By Siva
     public function get_search_results($limit,$start,$data=array())
     {
 
-		if(!empty($data['amount'])  && !empty($data['location'])) {
-			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'" AND op.organization_district_id="'.$data['location'].'")';
-		}
-		else if(!empty($data['amount'])) {
-			$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'")';
-		}
-		else if(!empty($data['location'])) {
-			$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$data['location'].'")';
-		}
-		else {
-			$search_where = '(ov.vacancies_status=1)';
-		}
+
+
+		// if(!empty($data['min_amount'])  && !empty($data['location'])) {
+		// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'" AND op.organization_district_id="'.$data['location'].'")';
+		// }
+		// else if(!empty($data['amount'])) {
+		// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'")';
+		// }
+		// else if(!empty($data['location'])) {
+		// 	$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$data['location'].'")';
+		// }
+		// else {
+		// 	$search_where = '(ov.vacancies_status=1)';
+		// }
+		
+		// $search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_end_salary <= "'.$data['max_amount'].'" AND op.organization_district_id="'.$data['location'].'" AND (ov.vacancies_experience BETWEEN "'.$data['experience'].'" and "'.$data['experience'].'+1") )';
+
+    	if(!empty($data['max_amount'])  && !empty($data['location'])) {
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND op.organization_district_id="'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';
+    	}
+    	else if(!empty($data['max_amount'])) {
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND ov.vacancies_experience >= "'.$data['experience'].'")';	
+    	}
+    	else if(!empty($data['location'])) {
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND op.organization_district_id = "'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';	
+    	}
+    	else {
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';
+    	}
 
         $this->db->select('*');
         $this->db->from('tr_organization_vacancies ov');

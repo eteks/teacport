@@ -41,13 +41,9 @@
 $route['default_controller'] 							= "home/index";
 $route['404_override'] 									= 'missingpage';
 
-// Search 
-$route['search']  										= 'home/search_results';
-$route['search/(:num)']  								= 'home/search_results/$1';
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';
 $route['login/provider'] 								= 'job_provider';
-$route['login/readmore'] 								= 'job_seeker/readmore';
 $route['login/featured_job'] 							= 'home/featured_job';
 $route['login/facebook'] 								= 'social/facebook';
 $route['login/facebookverify'] 							= 'social/facebookverify';
@@ -113,6 +109,7 @@ $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['vacancies'] 									= 'home/vacancies';
+$route['vacancies/(:num)']  							= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
 $route['terms'] 										= 'home/terms';
 

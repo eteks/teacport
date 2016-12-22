@@ -93,7 +93,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </tr>
                       </thead>
                       <tbody class="table_content_section"> 
-                        <?php } ?>
                         <?php
                         if(!empty($job_provider_transaction))  :
                         ?>   
@@ -140,7 +139,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php 
                         endif;
                         ?>
-                        <?php if(!$this->input->is_ajax_request()) { ?> 
                       </tbody>
                     </table>
                   </div>

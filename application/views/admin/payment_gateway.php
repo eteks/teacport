@@ -62,8 +62,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">PayPal Currency Code</label>
-	                            <div class="controls">
-	                              <input class="span6" type="text">
+	                            <div class="controls ">
+	                              <input class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -81,13 +81,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Cheques Address</label>
 	                            <div class="controls">
-	                                <textarea class="span6 " rows="3"></textarea>
+	                                <textarea class="span6" rows="3"></textarea>
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Cheques Address</label>
 	                            <div class="controls">
-	                                <textarea class="span6 " rows="3"></textarea>
+	                                <textarea class="span6" rows="3"></textarea>
 	                             </div>
 	                          </div>
 	                          <div class="control-group">

@@ -23,7 +23,7 @@
 /* Custom Select field */
 .select2-search {
 	display: none;
-}	
+}
 .txt_blue {
 	color: #29AAFE;
 }
@@ -149,6 +149,9 @@
 	overflow: hidden;
 	cursor: pointer;
 }
+.login-container label{
+	font-size: 12px;
+}
 .login-container .loginbox-signin a:hover {
 	color: #000;
 }
@@ -159,14 +162,16 @@
 	color: #000000;
 }
 .checkbox_word {
-	font-size: 14px;
+	font-size: 12px;
 	cursor: pointer;
 	margin-bottom: 0px;
 }
 .loginbox-terms a{
 	font-size: 14px;
 }
-
+.login-container .btn-default, #provider_login .btn-default{
+	width: 75% !important;
+} 
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -389,9 +394,9 @@ select:invalid {
 	border: 5px solid #f2f2f2;
 }
 .fjob {
-	width: 30.3%;
+	width: 28.3%;
 	height: 80px;
-	margin: 8px 10px 0;
+	margin: 8px 10px 8px;
 	background-color: #f2f2f2;
 }
 .counter_area {
@@ -596,7 +601,7 @@ select:invalid {
 /*Ended by thangam*/
 
 .registration_server_msg{
-	color: #c24641;
+	color: red;
 	margin: 10px 0;
 	text-align: center;
 }
@@ -644,6 +649,10 @@ font-size: 12px;
 	#provider_upload .input-group {
 		position: relative;
 		left: 0px;
+	}
+	.footer_block h4 {
+	    margin-bottom: 12px;
+	    margin-top: 25px;
 	}	
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -658,7 +667,9 @@ font-size: 12px;
 		left: 160px;
 	}
 
-}	
+}
+
+ 
 /* For Home page Search Buttonp */
 @media(min-width: 320px) and (max-width: 767px){
 	.slidershow-bg .search-form-contaner {
@@ -738,6 +749,12 @@ table tr[data-name="bold_section"] a {
 }
 .disabled {
 	pointer-events: none;
+}
+.form_error_ajax {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 /* Ended by siva */

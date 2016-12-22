@@ -321,6 +321,7 @@ class Job_seeker extends CI_Controller {
 					'candidate_date_of_birth' => $this->input->post('seeker_dob'),
 					'candidate_address_1' => $this->input->post('seeker_address1'),
 					'candidate_address_2' => $this->input->post('seeker_address2'),
+					'candidate_profile_completeness' => '40',
 					'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				if($this->input->post('popup_type') == 'social') {
@@ -333,6 +334,7 @@ class Job_seeker extends CI_Controller {
 						'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 						'candidate_address_1' => $this->input->post('seeker_address1'),
 						'candidate_address_2' => $this->input->post('seeker_address2'),
+						'candidate_profile_completeness' => '40',
 						'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				}
@@ -367,6 +369,7 @@ class Job_seeker extends CI_Controller {
         // print_r($candidate_data);
         // echo $data['popup_type'];
         $data['user_data'] = $candidate_data;
+        $data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		$this->load->view('user-dashboard',$data);
 	}
 
@@ -499,7 +502,7 @@ class Job_seeker extends CI_Controller {
     	// echo "<pre>";
     	// print_r($data['experience_values']);
     	// echo "</pre>";
-
+    	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		$this->load->view('user-edit-profile',$data);
 	}
 		
@@ -668,6 +671,7 @@ class Job_seeker extends CI_Controller {
 			$data['applicable_postings'] = $this->common_model->applicable_posting();
 			$data['subjects'] = $this->common_model->subjects();
 			$data['qualifications'] = $this->common_model->qualification();
+			$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 			$this->load->view('user-find-jobs', $data);
 		}		
 	}
@@ -699,7 +703,8 @@ class Job_seeker extends CI_Controller {
 			}	
 			// echo $this->db->last_query();			
 			$str_links = $this->pagination->create_links();
-			$data["links"] = explode('&nbsp;',$str_links );			
+			$data["links"] = explode('&nbsp;',$str_links );	
+			$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);		
 			$this->load->view('user-job-applied', $data);
 		}else{
 			$this->load->view('missingpage');
@@ -708,6 +713,10 @@ class Job_seeker extends CI_Controller {
 	/** Job Applied Jobs - End Here **/
 
 	public function applynow(){
+		$session_data = $this->session->all_userdata();	
+    	if($session_data['login_status'] != TRUE) {
+     		redirect('login/seeker');
+     	}
 		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		$form_data = $this->input->post();
@@ -778,6 +787,7 @@ class Job_seeker extends CI_Controller {
  	  			$data['status'] = $this->job_seeker_model->password_change($data_array);
 		    }
 		}
+		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		$this->load->view('user-dashboard-changepwd',$data);
 	}
 
@@ -790,7 +800,7 @@ class Job_seeker extends CI_Controller {
      	}
 		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session['login_session']['candidate_id']);
 		$data['message'] = $this->job_seeker_model->job_seeker_inbox($session['login_session']['candidate_id']);
-
+		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		// print_r($data['candidate_id']);
 		$this->load->view('user-dashboard-inbox',$data);
 	}
@@ -813,6 +823,7 @@ class Job_seeker extends CI_Controller {
 
 	public function feedback(){
 		$session_data = $this->session->all_userdata();
+		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		// $data['candidate'] 	= isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['candidate'] 	= $session_data['login_session']['candidate_id'];
 		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session_data['login_session']['candidate_id']);
