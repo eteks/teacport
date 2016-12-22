@@ -144,7 +144,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <i class="icon-reorder"></i> Job Providers Transaction
               </h4>                        
             </div>
-
+            <input type="hidden" value="view" id="popup_mode" />
+            <div>
                       <div class="span12">
                         <div class="span6 control-group">  
                           <label class="control-label">Form id</label>
@@ -153,7 +154,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Title/label>
+                          <label class="control-label">Title</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($admin_feedback_form['feedback_form_title'])) echo $admin_feedback_form['feedback_form_title']; else echo "-"; ?>
                           </span>
@@ -216,6 +217,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php if(!empty($admin_feedback_form['feedback_form_created_date'])) echo $admin_feedback_form['feedback_form_created_date']; else echo "-"; ?>
                           </span>
                         </div>
+                      </div>
                       </div>
           </div>
           <p>

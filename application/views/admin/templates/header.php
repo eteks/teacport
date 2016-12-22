@@ -72,38 +72,38 @@ Website: http://thevectorlab.net/
                         <li class="dropdown" id="header_inbox_bar">
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="icon-envelope-alt"></i>     
-                                <span class="badge badge-important">5</span>
+                                <!-- <span class="badge badge-important">5</span> -->
                             </a>
                             
                             <ul class="dropdown-menu extended inbox">
                                 <li>
-                                    <p>You have 5 new messages</p>
+                                    <!-- <p>You have 5 new messages</p> -->
                                 </li>
                                 <li>
-                                <?php
-                                    foreach ($feedback_data as $feed) :
-                                ?>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
-                                        <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Dulal Khan</span>
+                             <?php
+                                foreach ($feedback_data as $feed) :
+                                if($feed['is_viewed'] == 0){  ?>
+                                    <a class="job_full_view popup_fields" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section">
+                                        <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
+									<!-- <span class="subject">
+									<span class="from">Dulal Khan</span> -->
 									<span class="time"><?php echo $feed['feedback_form_created_date']; ?></span>
-									</span>
+									<!-- </span> -->
 									<span class="message">
 									    <?php echo $feed['feedback_form_message']; ?>
 									</span>
                                     </a>
-                                    <?php endforeach; ?>
-                                </li>
+                                    <?php }  endforeach;    ?>
+                                </li> 
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">See all messages</a>
+                                    <a href="<?php echo base_url(); ?>admin/feedback_form">See all messages</a>
                                 </li>
                             </ul>
                         </li>
                         
                         <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN NOTIFICATION DROPDOWN -->
-                        <li class="dropdown" id="header_notification_bar">
+                        <!-- <li class="dropdown" id="header_notification_bar">
                             <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
 
                                 <i class="icon-bell-alt"></i>
@@ -152,7 +152,7 @@ Website: http://thevectorlab.net/
                                     <a href="index.php#">See all notifications</a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                         <!-- END NOTIFICATION DROPDOWN -->
 
                     </ul>
