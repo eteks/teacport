@@ -11,14 +11,21 @@ class Subscription_Plan_Model extends CI_Model {
   public function plan_subscription_details($status) {
     $model_data['status'] = 0;
     $model_data['error'] = 0;
+
+    if($status=='update' || $status=='save'){
+        $validity_start = explode('/', $this->input->post('sub_start_validity'));
+        $validity_start_date = $validity_start[2]."-".$validity_start[1]."-".$validity_start[0];
+        $validity_end = explode('/', $this->input->post('sub_end_validity'));
+        $validity_end_date = $validity_end[2]."-".$validity_end[1]."-".$validity_end[0];
+    }
     // Update data
-    if($status=='update') {
+    if($status=='update') {       
         $plans_update_data = array( 
                                 'subscription_plan' => $this->input->post('sub_plan'),
                                 'subscription_price' => $this->input->post('sub_price'),
                                 'subscription_features' => $this->input->post('sub_features'),
-                                'subcription_valid_start_date' => $this->input->post('sub_start_validity'),
-                                'subcription_valid_end_date' => $this->input->post('sub_end_validity'),
+                                'subcription_valid_start_date' => $validity_start_date,
+                                'subcription_valid_end_date' => $validity_end_date,
                                 'subscription_max_no_of_posts' => $this->input->post('sub_max_vacancy'),
                                 'subcription_sms_counts' => $this->input->post('sub_max_sms'),
                                 'subscription_email_counts' => $this->input->post('sub_max_email'),
@@ -41,8 +48,8 @@ class Subscription_Plan_Model extends CI_Model {
                                 'subscription_plan' => $this->input->post('sub_plan'),
                                 'subscription_price' => $this->input->post('sub_price'),
                                 'subscription_features' => $this->input->post('sub_features'),
-                                'subcription_valid_start_date' => $this->input->post('sub_start_validity'),
-                                'subcription_valid_end_date' => $this->input->post('sub_end_validity'),
+                                'subcription_valid_start_date' =>$validity_start_date,
+                                'subcription_valid_end_date' => $validity_end_date,
                                 'subscription_max_no_of_posts' => $this->input->post('sub_max_vacancy'),
                                 'subcription_sms_counts' => $this->input->post('sub_max_sms'),
                                 'subscription_email_counts' => $this->input->post('sub_max_email'),

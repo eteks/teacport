@@ -425,7 +425,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|max_length[80]|xss_clean');
 			$this->form_validation->set_rules('provider_vacancy', 'No of vacancy', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_class_level', 'Class Level', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
-			$this->form_validation->set_rules('provider_qualification', 'Qualification', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_qualification[]', 'Qualification', 'trim|xss_clean|callback_multiple_qualification');
 			$this->form_validation->set_rules('provider_open_date', 'Open date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_close_date', 'Close date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_interview_start', 'Interview start date', 'trim|required|callback_valid_date|exact_length[10]|xss_clean');
@@ -433,20 +433,21 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
-			$this->form_validation->set_rules('provider_medium_of_instruction', 'Medium of Instruction', 'trim|required|alpha|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run())
 			{
+				
 				$vacancy_data = array(
 									'vacancies_course_type'			=> $this->input->post('provider_ug_or_pg'),
 									'vacancies_organization_id'		=> $data['organization']['organization_id'],
 									'vacancies_job_title'			=> $this->input->post('provider_job_title'),
 									'vacancies_available'			=> $this->input->post('provider_vacancy'),
 									'vacancies_class_level_id'		=> $this->input->post('provider_class_level'),
-									'vacancies_qualification_id'	=> $this->input->post('provider_qualification'),
+									'vacancies_qualification_id'	=> implode(',',$this->input->post('provider_qualification')),
 									'vacancies_open_date'			=> $common->reformatDate($this->input->post('provider_open_date')),
 									'vacancies_close_date'			=> $common->reformatDate($this->input->post('provider_close_date')),
 									'vacancies_interview_start_date'=> $common->reformatDate($this->input->post('provider_interview_start')),
@@ -454,28 +455,53 @@ class Job_provider extends CI_Controller {
 									'vacancies_subject_id'			=> $this->input->post('provider_subject'),
 									'vacancies_experience'			=> $this->input->post('provider_experience'),
 									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
-									'vacancies_medium'				=> $this->input->post('provider_medium_of_instruction'),
+									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
 									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),
 									'vacancies_instruction'			=> $this->input->post('provider_job_instruction')
 								);
-				if($this->job_provider_model->job_provider_post_vacancy($vacancy_data))
-				{
-					$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+				if($this->job_provider_model->job_provider_post_job_exist_or_not($vacancy_data)){
+					if($this->job_provider_model->job_provider_post_vacancy($vacancy_data))
+					{
+						$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+						$this->load->view('company-dashboard-post-jobs',$data);
+					}
+					else
+					{
+						$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
+						$this->load->view('company-dashboard-post-jobs',$data);
+					}
+				}
+				else{
+					$data['post_job_server_msg'] = 'Your posting same job title and vacancy.';
 					$this->load->view('company-dashboard-post-jobs',$data);
 				}
-				else
-				{
-					$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
-					$this->load->view('company-dashboard-post-jobs',$data);
-				}
-				
 			}
 			else
 			{
 				$this->load->view('company-dashboard-post-jobs',$data);
 			}
+		}
+	}
+	public function multiple_qualification(){
+		$arr_course = $this->input->post('provider_qualification');
+     	if(empty($arr_course)){
+     		$this->form_validation->set_message('multiple_qualification','Select at least one qualification');
+	        return false;
+		}
+		else{
+			return true;
+		}
+	}
+	public function multiple_medium(){
+		$arr_course = $this->input->post('provider_medium_of_instruction');
+     	if(empty($arr_course)){
+     		$this->form_validation->set_message('multiple_medium','Select at least one medium');
+	        return false;
+        }
+		else{
+			return true;
 		}
 	}
 	public function postedjob()

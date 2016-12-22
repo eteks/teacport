@@ -116,7 +116,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $ins_val['institution_type_status']; ?>" />
                         </td>
                         <td class="created_date"> 
-                          <?php echo $ins_val['institution_type_created_date']; ?> 
+                            <?php 
+                              $created_datetime = explode(' ', $ins_val['institution_type_created_date']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?> 
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">

@@ -114,7 +114,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         ?>
                                         <input type="hidden" value="<?php echo $usr_det['admin_user_status']; ?>" />
                                         </td>
-                                        <td class="created_date"><?php echo date("d/m/Y", strtotime($usr_det["admin_user_created_date"])); ?></td>
+                                        <td class="created_date">
+                                          <?php 
+                                            $created_datetime = explode(' ', $usr_det['admin_user_created_date']);
+                                            echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                                          ?>
+                                        </td>
                                         <?php 
                                         if($usr_det['is_main_admin'] || $usr_det['admin_user_id'] == $session_data['admin_user_id'])
                                           echo "<td>-</td>";

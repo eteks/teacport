@@ -130,7 +130,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $sub_val['subject_status']; ?>" />
                         </td>
                         <td class="created_date">
-                          <?php echo $sub_val['subject_create_date']; ?>
+                          <?php 
+                            $created_datetime = explode(' ', $sub_val['subject_create_date']);
+                            echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                          ?> 
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
