@@ -50,7 +50,7 @@
 		                                <div class="clearfix"> </div>
 		                            </div>    
 	                                <div class="loginbox-terms">
-	                                   <label class="checkbox_word"><input type="checkbox"> I accept <a href="register-4.html" class="txt_blue">Term and conditions?</a>
+	                                   <label class="checkbox_word"><input type="checkbox"> I accept <a href="#" class="txt_blue">Term and conditions?</a>
 	                                </div>
 	                                <div class="loginbox-submit">
 	                                    <input type="submit" class="btn btn-default btn-block" value="Register">
