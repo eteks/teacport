@@ -14,11 +14,13 @@ class Job_Seekermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
+      $candidate_dob = explode('/', $this->input->post('cand_dob'));
+      $candidate_dob_date = $candidate_dob[2]."-".$candidate_dob[1]."-".$candidate_dob[0];
       $profile_update_data = array( 
                               'candidate_name' => $this->input->post('cand_name'),
                               'candidate_gender' => $this->input->post('cand_gen'),
                               'candidate_father_name' => $this->input->post('cand_fa_name'),
-                              'candidate_date_of_birth' => $this->input->post('cand_dob'),
+                              'candidate_date_of_birth' => $candidate_dob_date,
                               'candidate_marital_status' => $this->input->post('cand_mar_status'),
                               'candidate_mother_tongue' => $this->input->post('cand_moth_ton'),
                               'candidate_nationality' => $this->input->post('cand_nationality'),
