@@ -42,7 +42,7 @@
 		                                    <li><a href="<?php echo site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
 		                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
 			                             </ul>
-		                                <div class="loginbox-signup">New User ? <a href="<?php echo base_url(); ?>signup/provider" class="txt_blue remove_error_message_act"> Sign Up</a></div>
+		                                <div class="loginbox-signup">New User ? <a class="txt_blue remove_error_message_act"> Sign Up</a></div>
 		                             </div>   
 		                             <div class="pull-left"> </div>
 	                            <?php echo form_close(); ?>    
@@ -78,7 +78,7 @@
                              
                              
                              <!--Provider- signup-->
-                             <!-- <div id="provider-signup" class="loginbox" style="display:none;">
+                             <div id="provider-signup" class="loginbox" style="display:none;">
                             	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> 
                             	  Let's Get Started
                             	  <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
@@ -135,7 +135,7 @@
 								</div>	
 								<div class="clearfix"> </div>
                             	<?php echo form_close(); ?>
-                            </div> --> <!--End Provider signup-->
+                            </div> <!--End Provider signup-->
                        </div> <!--End .login-container -->
                     </div>
                 </div>

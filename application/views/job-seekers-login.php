@@ -38,7 +38,7 @@
 	                                    <li><a href="<?php echo site_url('login/seeker/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
 	                                </ul>
 	                                <div class="loginbox-signup">New User ?
-	                                    <a class="txt_blue remove_error_message_act" href="<?php echo base_url(); ?>signup/seeker">Sign Up</a>
+	                                    <a class="txt_blue remove_error_message_act">Sign Up</a>
 	                                </div>
 	                             </div>   
 	                             <div class="clearfix"> </div>
@@ -73,7 +73,7 @@
                             </div> <!--End  forgot pwd-->
                             	
                             <!--Seeker Signup-->
-                            <!-- <div id="seeker-signup" class="loginbox" style="display:none;">
+                            <div id="seeker-signup" class="loginbox" style="display:none;">
                             	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;" >
                             	  Let's Get Started
                             	  <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
@@ -135,7 +135,7 @@
 	                                </ul> 
 	                                <div class="loginbox-signin"> Already have account ?<a class="txt_blue remove_error_message_act"> Sign in</a> </div>
 	                            </div>   
-                            </div>  --><!--End Signup-->
+                            </div> <!--End Signup-->
                             
                            
                        </div>  <!--End login-container-->
