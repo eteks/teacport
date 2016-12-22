@@ -1,5 +1,6 @@
 <?php
 $is_super_admin = $this->config->item('is_super_admin');
+$feedback_data = $this->config->item('feedback_data');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
   $access_permission=$this->config->item('current_page_rights');	
@@ -84,64 +85,47 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                       <tr class="ajaxTitle">
                                         <th>Form Title</th>
                                         <th>Form Message</th>
-                                        <th>Is Organization?</th>
-                                        <th>Is Candidate?</th>
-                                        <th>Is Guest User?</th>
-                                        <th>Candidate or Organization</th>
+                                        <!-- <th>Is Organization?</th> -->
+                                        <!-- <th>Is Candidate?</th> -->
+                                        <!-- <th>Is Guest User?</th> -->
+                                        <!-- <th>Candidate or Organization</th> -->
                                         <th>Is Viewed</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                            				<th class="data_action">Edit</th>
-                          				<?php endif; ?>
-                         				<?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                          				     <th class="data_action">Delete</th>
-                         				<?php endif; ?>
+                                        <th class="data_action"> Full View </th>
                                       </tr>
                                     </thead>
-                                    <tbody>
-                                      <tr class="parents_tr" id="column1">
-                                        <td class=""> 
-                                          Feedback Form
-                                        </td>
-                                        <td class=""> 
-                                          Message 
-                                        </td>
-                                        <td class="is_organization center_align"> 
-                                          <span class="icon-ok"> </span>
-                                        </td>
-                                        <td class="is_candidate center_align">
-                                          <span class="icon-remove"> </span>
-                                        </td>
-                                        <td class="is_guest_user center_align"> 
-                                          <span class="icon-remove"> </span>
-                                        </td>
-                                        <td class=""> 
-                                          Ets
-                                        </td>
-                                        <td class="is_viewed is_viewd_onoff center_align"> 
-                                          <span class="icon-ok"> </span>
-                                        </td>
-                                        <td class="feedback_form_status center_align"> 
-                                          Active
-                                        </td>
-                                        <td class="created_date">
-                                          00-00-0000
-                                        </td>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">
-                                            Edit
-                                          </a>
-                                        </td>
-                                        <?php endif; ?>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                        <td>
-                                          <a class="ajaxDelete" onclick="Confirm.show()" data-id="">Delete</a>
-                                        </td>
-                                        <?php endif; ?>
-                                      </tr>
-                                    </tbody>
+                                    <tbody class="table_content_section">   
+                        <?php
+
+                          foreach ($feedback_data as $feed) :
+                          ?>                                  
+                        <tr class="parents_tr" id="column">
+                          <td class="">
+                            <?php echo $feed['feedback_form_title']; ?>
+                          </td>
+                          <td class="">
+                            <?php echo $feed['feedback_form_message']; ?>
+                          </td>
+                          <td class="">
+                            <?php echo $feed['is_viewed']; ?>
+                          </td>
+                          <td class="">
+                            <?php echo $feed['feedback_form_status']; ?>
+                          </td>
+                          <td class="">
+                            <?php echo $feed['feedback_form_created_date']; ?>
+                          </td>
+                          <td>
+                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section">
+                              Full View
+                            </a>
+                          </td>
+                        </tr>
+                        <?php
+                        endforeach;
+                        ?>
+                      </tbody>
                                   </table>
                                 </form>
                             </div>
@@ -150,6 +134,101 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
             </div>
+
+
+            <div class="popup" data-popup="popup_section">
+        <div class="popup-inner">
+          <div class="widget box blue" id="popup_wizard_section">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Job Providers Transaction
+              </h4>                        
+            </div>
+
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Form id</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['feedback_form_id'])) echo $admin_feedback_form['feedback_form_id']; else echo "-"; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Title/label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['feedback_form_title'])) echo $admin_feedback_form['feedback_form_title']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>      
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Message</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['feedback_form_message'])) echo $admin_feedback_form['feedback_form_message']; else echo "-"; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Is Organisation?</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['is_organization'])) echo $admin_feedback_form['is_organization']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>      
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Is Candidate?</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['is_candidate'])) echo $admin_feedback_form['is_candidate']; else echo "-"; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Guest User</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['is_guest_user'])) echo $admin_feedback_form['is_guest_user']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>      
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Candidate Or Organization</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['candidate_or_organization_id'])) echo $admin_feedback_form['candidate_or_organization_id']; else echo "-"; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Message Viewed</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['is_viewed'])) echo $admin_feedback_form['is_viewed']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>      
+                      <div class="span12">
+                        <div class="span6 control-group">
+                          <label class="control-label">Feedback Form Status</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['feedback_form_status'])) echo $admin_feedback_form['feedback_form_status']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>      
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Feedback Created Date</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($admin_feedback_form['feedback_form_created_date'])) echo $admin_feedback_form['feedback_form_created_date']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>
+          </div>
+          <p>
+            <a data-popup-close="popup_section" href="#">Close</a>
+          </p>
+          <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
+        </div>
+      </div> 
+
+
+
+
+
             <!-- END ADVANCED TABLE widget-->
 
             <!-- END PAGE CONTENT-->

@@ -708,6 +708,10 @@ class Job_seeker extends CI_Controller {
 	/** Job Applied Jobs - End Here **/
 
 	public function applynow(){
+		$session_data = $this->session->all_userdata();	
+    	if($session_data['login_status'] != TRUE) {
+     		redirect('login/seeker');
+     	}
 		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		$form_data = $this->input->post();
