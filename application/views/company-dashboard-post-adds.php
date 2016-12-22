@@ -52,14 +52,15 @@ include ('include/menus.php');
                             	<p class="success_server_msg"><?php if(isset($premiumad_server_msg)) echo $premiumad_server_msg; ?></p>
                             	<div class="form-group">
                         			<div class="info" style="margin: 6px 10px;">
-                        				<i class="fa fa-info-circle" aria-hidden="true"></i> Uploading adds will be posted at the Premium adds area ! <a class="preview_post_ad_image">Preview</a>
+                        				<i class="fa fa-info-circle" aria-hidden="true"></i> Uploading adds will be posted at the Premium adds area ! <a class="preview_post_ad_image txt_blue">Preview</a>
                         			</div>
                         		</div>	
-                        		<div class=" col-sm-12 col-xs-12 postad_preview">
+                        		<div class=" col-sm-8 col-xs-8 postad_preview">
+                        			<h6><span>*</span>This image is <strong> illustrative</strong></h6>
 		                        	<div class="page_layout">
 		                        		<div class="header_part"></div>
 			                        	<div class="body_content">
-			                        		<div class="home_slider"></div>
+			                        		<div class="post_adds_caurosel"></div>
 			                        		<div class="featured_jobs_area">
 			                        		 <ul>	
 			                        			<li class="fjob pull-left"></li>
@@ -69,13 +70,20 @@ include ('include/menus.php');
 			                        		 </ul>	
 			                        		</div>
 			                        		<div class="counter_area"> </div>
-			                        		<div class="post_adds_caurosel"></div>
 			                        	</div>	
 		                        		<div class="footer_section"></div>
 		                        		<div class="footer"> </div>	
 			                        </div>
 		                       </div> 
-	                         </div>
+		                       <div class="col-sm-4 col-xs-4">
+	                              	<h6>You can,</h6>
+	                              	<ul class="list-banner">
+	                              		<li><i class="fa fa-thumb-tack" aria-hidden="true"></i> Display targeted ads </li>
+	                              		<li><i class="fa fa-thumb-tack" aria-hidden="true"></i> Reach people seeking information</li>
+	                              		<li><i class="fa fa-thumb-tack" aria-hidden="true"></i> Build recognition </li>
+	                              	</ul>
+                                </div>
+	                        </div> </br>
                          	<div class="profile-edit">
                         		<?php echo form_open_multipart('provider/postad', 'class="form-horizontal post_adds_fields"'); ?>
                             		
@@ -119,7 +127,7 @@ include ('include/menus.php');
 	                            	</div>	                            	
 	                            <?php  echo form_close(); ?>
 	                        </div><br> <!--profile edit-->
-	                   </div>
+	                    </div> <!--Right panel-->
                     </div>
                 </div>
             </div>
