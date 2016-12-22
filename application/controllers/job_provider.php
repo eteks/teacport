@@ -403,7 +403,9 @@ class Job_provider extends CI_Controller {
 	}
 	public function inbox_message_full_data(){
 		$candidate_id = $this->input->post('candidate_id');	
-		$vacancy_id = $this->input->post('vacancy');	
+		$vacancy_id = $this->input->post('vacancy');
+		$inbox_id = $this->input->post('inbox_id');	
+		$this->job_provider_model->provider_inbox_update($inbox_id);
 		echo json_encode($this->job_provider_model->candidate_full_data($candidate_id,$vacancy_id));
 	}
 	public function postjob(){

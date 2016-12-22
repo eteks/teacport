@@ -52,6 +52,16 @@ class Admin_Model extends CI_Model {
 
     // View
     $model_data['state_values'] = $this->db->order_by('state_id','desc')->get_where('tr_state')->result_array();
+
+     // $this->db->select('d.district_state_id');
+    // $this->db->from('tr_state s');
+    // $this->db->join('tr_district d','s.state_id=d.district_state_id','inner');
+    // $this->db->group_by('d.district_state_id');
+    // $model_data['mapped_data'] = $this->db->get()->result_array();
+
+    // echo "<pre>";
+    // print_r($model_data['mapped_data']);
+    // echo "</pre>";
     return $model_data;
   }
 

@@ -648,7 +648,7 @@ $(document).ready(function(){
             success: function(res) {
                 $res = JSON.parse(res);
                 if($res == "success"){
-                    $("html, body,.form_table_scl").animate({ scrollTop: 0 }, "slow");
+                    $("html, body,.sub_pre_section").animate({ scrollTop: 0 }, "slow");
                     $('.privilege_status').html("<i class='icon-ok-sign'></i>  Updated Successfully").show().fadeOut(3000);
 
                 }
