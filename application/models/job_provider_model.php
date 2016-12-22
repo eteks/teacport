@@ -504,4 +504,8 @@ class Job_provider_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	public function provider_inbox_update($inbox_id){
+		$this->db->where('inbox_id', $inbox_id);
+		$this->db->update('tr_organizaion_inbox', array('is_viewed'=>'1'));
+	}
 }
