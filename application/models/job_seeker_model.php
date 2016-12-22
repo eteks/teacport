@@ -166,6 +166,7 @@ class Job_seeker_model extends CI_Model {
 													'candidate_mobile_no' => $cand_data['candidate_email'],
 													'candidate_registration_type' => $cand_data['candidate_email'],
 													'candidate_image_path' => $cand_data['candidate_image_path'],
+
 													);
 			}
 		}
@@ -319,6 +320,11 @@ class Job_seeker_model extends CI_Model {
 		$cand_where = '(candidate_id="'.$id.'")';
 		$value = $this->db->get_where('tr_candidate_profile',$cand_where)->row_array();
 		return $value;
+	}
+	// To get sidebar values
+	public function candidate_sidebar_menu_values($id) {
+		$cand_where = '(candidate_id="'.$id.'")';
+		return $this->db->select('candidate_name,candidate_image_path,candidate_facebook_url,candidate_googleplus_url,candidate_linkedin_url')->from('tr_candidate_profile')->where($cand_where)->get()->row_array();
 	}
 
 	//  Inbox start

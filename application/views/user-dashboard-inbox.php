@@ -27,24 +27,6 @@
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                 <div class="col-md-4 col-sm-12 col-xs-12">
-                    <div class="profile-card">
-                        <div class="banner">
-                            <img src="images/building.jpg" alt="" class="img-responsive">
-                        </div>
-                        <div class="user-image">
-                            <img src="images/users/profile-avatar.jpg" class="img-responsive img-circle" alt="">
-                        </div>
-                        <div class="card-body">
-                            <h3>Mrs. Emilly Copper</h3>
-                            <span class="title">A web Designer</span>
-                        </div>
-                        <ul class="social-network social-circle onwhite">
-                            <li><a href="user-followed-companies.html#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="user-followed-companies.html#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="user-followed-companies.html#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                            <li><a href="user-followed-companies.html#" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
-                    </div>
                     <?php include('include/user_dashboard_sidemenu.php'); ?>
                 </div>
                 <div class="col-md-8 col-sm-8 col-xs-12">
