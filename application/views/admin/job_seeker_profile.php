@@ -119,7 +119,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?> 
                           </td>
                           <td class="">
-                            <?php echo $pro_val['district_name']; ?>
+                            <?php 
+                            if(!empty($pro_val['district_name'])) {
+                              echo $pro_val['district_name'];
+                            }
+                            else {
+                              echo "NULL";
+                            }
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $pro_val['candidate_email']; ?>

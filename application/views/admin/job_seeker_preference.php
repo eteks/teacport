@@ -93,7 +93,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <tr class="parents_tr" id="column<?php echo $i; ?>">
                         <td class="cand_name"> 
                           <?php echo $pre_val['candidate_name']; ?>
-                          <input type="hidden" value="<?php echo $pre_val['candidate_profile_id']; ?>" />
                         </td>
                         <td class="cand_post"> 
                           <?php
@@ -160,7 +159,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <!-- END CONTAINER -->
     <script>
     // Define default values
-    var inputType = new Array("select","multiselect","text","text","multiselect","multiselect"); // Set type of input which are you have used like text, select,textarea.
+    var inputType = new Array("label","multiselect","text","text","multiselect","multiselect"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("cand_name","cand_post","cand_ssalary","cand_esalary","cand_class","cand_sub"); // Set name of input types
     var placeholder = new Array("","Please select Post","Enter Start Salary","Enter End Salary","Please select class","Please Select Subject"); // Set placeholder of input types
     var class_selector = new Array("");//To set class for element
@@ -198,18 +197,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
     ?>
       cand_sub_option.push("<?php echo $sub_val['subject_name']; ?>");
       cand_sub_value.push("<?php echo $sub_val['subject_id']; ?>");
-    <?php
-    endforeach;
-    endif;
-    ?>
-    var cand_name_option = new Array("Please select candidate name");
-    var cand_name_value = new Array("");
-    <?php
-    if(!empty($cand_values)) :
-    foreach ($cand_values as $cand_val) :
-    ?>
-      cand_name_option.push("<?php echo $cand_val['candidate_name']; ?>");
-      cand_name_value.push("<?php echo $cand_val['candidate_id']; ?>");
     <?php
     endforeach;
     endif;
