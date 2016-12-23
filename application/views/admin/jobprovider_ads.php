@@ -2,13 +2,14 @@
 $is_super_admin = $this->config->item('is_super_admin');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
+  $access_permission=$this->config->item('current_page_rights');    
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
 else{
   $access_rights = $this->config->item('access_rights');
 }
+$feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -112,9 +113,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?>
                           </td>
-                          <td> 
-                            <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" alt="Not Found" />
-                          </td>
+                          <td class="magnify-posted-ads"> 
+                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" alt="Not Found" /></a>
+                          	 <!-- <span class="pull-right">Full View </span> -->
+                           </td>
                           <td> 
                             <?php echo $ads_val['organization_name']; ?>
                           </td>

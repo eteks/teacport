@@ -52,6 +52,16 @@ class Admin_Model extends CI_Model {
 
     // View
     $model_data['state_values'] = $this->db->order_by('state_id','desc')->get_where('tr_state')->result_array();
+
+     // $this->db->select('d.district_state_id');
+    // $this->db->from('tr_state s');
+    // $this->db->join('tr_district d','s.state_id=d.district_state_id','inner');
+    // $this->db->group_by('d.district_state_id');
+    // $model_data['mapped_data'] = $this->db->get()->result_array();
+
+    // echo "<pre>";
+    // print_r($model_data['mapped_data']);
+    // echo "</pre>";
     return $model_data;
   }
 
@@ -763,10 +773,26 @@ class Admin_Model extends CI_Model {
     $feed_where = '(feedback_form_id="'.$value.'")';
     $this->db->select('*');
     $this->db->from('tr_feedback_form feed');
-    // $this->db->join('tr_organization_profile org','org.organization_id=feed.candidate_or_organization_id','left');
     $this->db->where($feed_where);  
     $model_data = $this->db->get()->row_array();
     return $model_data;
+  }
+  public function feddback_inbox_full_data($id)
+  {
+    // Update viewd status
+    $this->db->set('is_viewed','1');
+    $this->db->where('candidate_inbox_id',$id);
+    $this->db->update('tr_candidate_inbox');
+
+    $this->db->select('*');    
+    $this->db->from('tr_candidate_inbox ci');
+    $this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
+    $this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+    $this->db->join('tr_district d', 'op.organization_district_id = d.district_id','left');
+    $where = "(ci.candidate_inbox_id='".$id."' AND ci.candidate_inbox_status='1')";
+    $this->db->where($where);
+    $data['inbox_data'] = $this->db->get()->row_array();
+    return $data; 
   }
 
 

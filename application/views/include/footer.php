@@ -53,7 +53,7 @@
 			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.6.2.min.js"></script> -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.easing.1.3.js"></script>
 			<!-- the jScrollPane script -->
-			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.mousewheel.js"></script>
+			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.mousewheel.js"></script> -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.contentcarousel.js"></script>
 			<script type="text/javascript">
 				$('#ca-container').contentcarousel();

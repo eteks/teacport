@@ -50,7 +50,7 @@
 		                                <div class="clearfix"> </div>
 		                            </div>    
 	                                <div class="loginbox-terms">
-	                                   <label class="checkbox_word"><input type="checkbox"> I accept <a href="register-4.html" class="txt_blue">Term and conditions?</a>
+	                                   <label class="checkbox_word"><input type="checkbox"> I accept <a href="#" class="txt_blue">Term and conditions?</a>
 	                                </div>
 	                                <div class="loginbox-submit">
 	                                    <input type="submit" class="btn btn-default btn-block" value="Register">
@@ -58,10 +58,6 @@
 	                              </div>
 	                            </div>   
 	                            <div class="col-sm-6 pull-left">
-	                                <div class="loginbox-or">
-	                                    <div class="or-line"></div>
-	                                    <div class="or">OR</div>
-	                                </div>
 	                                <div class="loginbox-title">Sign Up using social accounts</div>
 		                            <ul class="social-network social-circle onwhite">
 	                                    <li><a href="<?php echo site_url('login/seeker/facebook');?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -128,10 +124,6 @@
 	                            </div>    
                                 <?php echo form_close(); ?>
                                 <div class="col-sm-6 pull-left">
-	                                <div class="loginbox-or">
-	                                    <div class="or-line"></div>
-	                                    <div class="or">OR</div>
-	                                </div>
 	                                <div class="loginbox-title">Sign in using social Accounts</div>
 	                                <ul class="social-network social-circle onwhite">
 	                                    <li><a href="<?php echo $fbloginurl; ?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>

@@ -19,14 +19,24 @@ class Other_module extends CI_Controller {
 	}
 	public function get_feedback_full_view()
 	{
-			echo('cont3');
-			$data['admin_feedback_form'] = $this->admin_model->get_admin_feedback_full_view($value);
+		if($this->input->post('action') && $this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['feedback_form'] = $this->admin_model->get_admin_feedback_full_view($value);
+			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/feedback_form',$data);
+		}
+		else {
+			redirect(base_url().'admin/admin_error');
+		}
+			
 	}
 	public function feedback_global()
 	{
 			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
 			$this->config->set_item('feedback_data',$admin_feedback_form);
+	}
+	public function inbox_message_count(){
+		echo $this->admin_model->feedback_unread_inbox_count($this->input->post('cand_id'));
 	}
 		
 }

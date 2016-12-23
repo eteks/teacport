@@ -403,7 +403,9 @@ class Job_provider extends CI_Controller {
 	}
 	public function inbox_message_full_data(){
 		$candidate_id = $this->input->post('candidate_id');	
-		$vacancy_id = $this->input->post('vacancy');	
+		$vacancy_id = $this->input->post('vacancy');
+		$inbox_id = $this->input->post('inbox_id');	
+		$this->job_provider_model->provider_inbox_update($inbox_id);
 		echo json_encode($this->job_provider_model->candidate_full_data($candidate_id,$vacancy_id));
 	}
 	public function postjob(){
@@ -716,7 +718,7 @@ class Job_provider extends CI_Controller {
 												'premium_ads_status'	=> 1
 											);
 						if($this->job_provider_model->organization_premiun_ad_upload($premium_ad_data)){
-							$data['premiumad_server_msg'] = 'Your premium ad upload successfully. Admin will approve soon. After that you ad image will shown on your selective position!';
+							$data['premiumad_server_msg'] = 'Advertisement Uploaded Successfully. Ads will be flashed soon after administrator approval.';
 							$this->load->view('company-dashboard-post-adds',$data);
 						}
 						else{

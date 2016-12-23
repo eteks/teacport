@@ -35,10 +35,6 @@
 		                                </div>
 		                             </div> 
 		                             <div class="col-sm-6 pull-left">  
-		                                 <div class="loginbox-or">
-		                                    <div class="or-line"></div>
-		                                    <div class="or">OR</div>
-		                                 </div>
 		                                 <div class="loginbox-title">sign in using social accounts</div>
 		                                 <ul class="social-network social-circle onwhite">
 		                                    <li><a href="<?php echo site_url('login/facebook');;?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
@@ -128,10 +124,6 @@
 									<p id="submit" class="btn btn-default btn-block">Register</p>
 								</div>
 								<div class="col-sm-6 pull-left">	
-									<div class="loginbox-or">
-	                                    <div class="or-line"></div>
-	                                    <div class="or">OR</div>
-	                                </div>
 									<div class="loginbox-title">Sign Up using social accounts </div>
 									<ul class="social-network social-circle onwhite">
 	                                    <li><a href="<?php echo site_url('login/facebook');?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>

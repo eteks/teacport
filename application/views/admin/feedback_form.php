@@ -1,17 +1,18 @@
 <?php
 $is_super_admin = $this->config->item('is_super_admin');
-$feedback_data = $this->config->item('feedback_data');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
+  $access_permission=$this->config->item('current_page_rights');    
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
 else{
   $access_rights = $this->config->item('access_rights');
 }
+$feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -144,19 +145,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <i class="icon-reorder"></i> Job Providers Transaction
               </h4>                        
             </div>
-            <input type="hidden" value="view" id="popup_mode" />
-            <div>
+            <div class="widget-body form pop_details_section">
+              <?php } ?>
+              <form class="tab_form" data-index="" method="POST" data-mode="update">
+                <?php
+                if(!empty($feedback_form)) :
+                ?>
+                <div id="rootwizard" class="form-wizard">
+                  <div class="tab-content">
+                    <input type="hidden" value="view" id="popup_mode" />
+                      <div>
                       <div class="span12">
                         <div class="span6 control-group">  
                           <label class="control-label">Form id</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['feedback_form_id'])) echo $admin_feedback_form['feedback_form_id']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['feedback_form_id'])) echo $feedback_form['feedback_form_id']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Title</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['feedback_form_title'])) echo $admin_feedback_form['feedback_form_title']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['feedback_form_title'])) echo $feedback_form['feedback_form_title']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
@@ -164,13 +173,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">  
                           <label class="control-label">Message</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['feedback_form_message'])) echo $admin_feedback_form['feedback_form_message']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['feedback_form_message'])) echo $feedback_form['feedback_form_message']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Is Organisation?</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['is_organization'])) echo $admin_feedback_form['is_organization']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['is_organization'])) echo $feedback_form['is_organization']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
@@ -178,13 +187,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">  
                           <label class="control-label">Is Candidate?</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['is_candidate'])) echo $admin_feedback_form['is_candidate']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['is_candidate'])) echo $feedback_form['is_candidate']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Guest User</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['is_guest_user'])) echo $admin_feedback_form['is_guest_user']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['is_guest_user'])) echo $feedback_form['is_guest_user']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
@@ -192,13 +201,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">  
                           <label class="control-label">Candidate Or Organization</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['candidate_or_organization_id'])) echo $admin_feedback_form['candidate_or_organization_id']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['candidate_or_organization_id'])) echo $feedback_form['candidate_or_organization_id']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Message Viewed</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['is_viewed'])) echo $admin_feedback_form['is_viewed']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['is_viewed'])) echo $feedback_form['is_viewed']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
@@ -206,7 +215,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Feedback Form Status</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['feedback_form_status'])) echo $admin_feedback_form['feedback_form_status']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['feedback_form_status'])) echo $feedback_form['feedback_form_status']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
@@ -214,11 +223,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">  
                           <label class="control-label">Feedback Created Date</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($admin_feedback_form['feedback_form_created_date'])) echo $admin_feedback_form['feedback_form_created_date']; else echo "-"; ?>
+                            <?php if(!empty($feedback_form['feedback_form_created_date'])) echo $feedback_form['feedback_form_created_date']; else echo "-"; ?>
                           </span>
                         </div>
-                      </div>
-                      </div>
+                      </div>          
+                    </div>
+                  </div>  
+                </div>
+                <?php
+                endif;
+                ?>
+              </form>                 
+              <?php if(!$this->input->is_ajax_request()) { ?>
+            </div>
           </div>
           <p>
             <a data-popup-close="popup_section" href="#">Close</a>
@@ -250,11 +267,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var feedback_form_status_value = new Array("1","0"); 
   </script>
 <?php include "templates/footer_grid.php" ?>
+<?php } ?>
 <?php
 else :
 redirect(base_url().'admin');
 endif;
 ?>
-
-
-text, browse,text,datepicker,verify,select
