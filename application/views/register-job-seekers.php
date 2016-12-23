@@ -50,7 +50,8 @@
 		                                <div class="clearfix"> </div>
 		                            </div>    
 	                                <div class="loginbox-terms">
-	                                   <label class="checkbox_word"><input type="checkbox"> I accept <a href="#" class="txt_blue">Term and conditions?</a>
+	                                   <label class="checkbox_word">
+	                                   <?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'accept_terms')); ?> I accept <a href="#" class="txt_blue">Term and conditions?</a>
 	                                </div>
 	                                <div class="loginbox-submit">
 	                                    <input type="submit" class="btn btn-default btn-block" value="Register">

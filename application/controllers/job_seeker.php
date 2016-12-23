@@ -193,7 +193,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
-			$this->form_validation->set_rules('accept_terms','trim|required', 'callback_accept_terms');
+			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_terms');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE)
 	       	{
