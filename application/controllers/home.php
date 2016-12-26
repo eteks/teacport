@@ -125,7 +125,8 @@ class Home extends CI_Controller {
 	}
 	public function vacancies()
 	{
-		if($this->input->post('search_keyword') || $this->input->post('search_amount') || $this->input->post('search_location')) {
+		$search_inputs = array();	
+		if($_POST) {
     		$inputs = array(
         				'keyword' => $this->input->post('search_keyword'),
         				'min_amount' => $this->input->post('search_min_amount'),

@@ -84,7 +84,6 @@ class Job_Seekermodel extends CI_Model {
     // Update data
     if($status=='update') {
       $preference_update_data = array( 
-                              'candidate_profile_id' => $this->input->post('cand_name'),
                               'candidate_posting_applied_for' => $this->input->post('cand_post'),
                               'candidate_expecting_start_salary' => $this->input->post('cand_ssalary'),
                               'candidate_expecting_end_salary' => $this->input->post('cand_esalary'),

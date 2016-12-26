@@ -40,34 +40,21 @@ class Common_model extends CI_Model {
     public function get_search_results($limit,$start,$data=array())
     {
 
-
-
-		// if(!empty($data['min_amount'])  && !empty($data['location'])) {
-		// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'" AND op.organization_district_id="'.$data['location'].'")';
-		// }
-		// else if(!empty($data['amount'])) {
-		// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['amount'].'")';
-		// }
-		// else if(!empty($data['location'])) {
-		// 	$search_where = '(ov.vacancies_status=1 AND op.organization_district_id="'.$data['location'].'")';
-		// }
-		// else {
-		// 	$search_where = '(ov.vacancies_status=1)';
-		// }
-		
-		// $search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_end_salary <= "'.$data['max_amount'].'" AND op.organization_district_id="'.$data['location'].'" AND (ov.vacancies_experience BETWEEN "'.$data['experience'].'" and "'.$data['experience'].'+1") )';
+    	if(empty($data['min_amount'])) {
+    		$data['min_amount'] = 0;
+    	}
 
     	if(!empty($data['max_amount'])  && !empty($data['location'])) {
-    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND op.organization_district_id="'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND op.organization_district_id="'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';
     	}
     	else if(!empty($data['max_amount'])) {
-    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND ov.vacancies_experience >= "'.$data['experience'].'")';	
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND ov.vacancies_experience >= "'.$data['experience'].'")';	
     	}
     	else if(!empty($data['location'])) {
-    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND op.organization_district_id = "'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';	
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND op.organization_district_id = "'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';	
     	}
     	else {
-    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= "'.$data['min_amount'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';
+    		$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND ov.vacancies_experience >= "'.$data['experience'].'")';
     	}
 
         $this->db->select('*');

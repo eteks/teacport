@@ -12,6 +12,19 @@ class Job_Seeker extends CI_Controller {
 		$this->load->library('upload');
 	}
 
+	// Multi select function - To check the field is already exists or not
+	function multiselect_validate($value,$params) 
+	{
+		//get main CodeIgniter object
+	      $CI =& get_instance();
+	      //load database library
+	      $CI->load->database();    
+	      $CI->form_validation->set_message('multiselect_validate', "The $params field is required.");
+	      if ($value == "null")
+	      {
+	          return FALSE;
+	      }
+	}
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
@@ -296,22 +309,15 @@ class Job_Seeker extends CI_Controller {
 		$data['post_values'] = $this->admin_model->get_posting_values();
 		$data['class_values'] = $this->admin_model->get_class_levels();
 		$data['subject_values'] = $this->admin_model->get_subject_values();
-		$data['cand_values'] = $this->admin_model->get_candidate_values();
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'cand_name',
-		                              'label'   => 'Candidate Name',
-		                              'rules'   => 'trim|required|xss_clean|'
-
-		                            ),
-		                            array(
 		                                 'field'   => 'cand_post',
 		                                 'label'   => 'Posting Name',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
 		                            ),
 		                            array(
 		                              'field'   => 'cand_ssalary',
@@ -327,13 +333,13 @@ class Job_Seeker extends CI_Controller {
 		                            array(
 		                              'field'   => 'cand_class',
 		                              'label'   => 'Class Name',
-		                              'rules'   => 'trim|required|xss_clean|'
+		                              'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
 
 		                            ),
 		                            array(
 		                                 'field'   => 'cand_sub',
 		                                 'label'   => 'Subject Name',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
 		                            )
 		                        );
 
