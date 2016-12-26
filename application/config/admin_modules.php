@@ -233,3 +233,5 @@ $config['is_super_admin'] = false;
 $config['access_rights'] = array();
 /*added by thangam*/
 $config['feedback_data'] = array();
+
+$config['feedback_count'] = '';

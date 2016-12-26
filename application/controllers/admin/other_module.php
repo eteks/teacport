@@ -27,16 +27,12 @@ class Other_module extends CI_Controller {
 		}
 		else {
 			redirect(base_url().'admin/admin_error');
-		}
-			
+		}			
 	}
 	public function feedback_global()
 	{
 			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
 			$this->config->set_item('feedback_data',$admin_feedback_form);
-	}
-	public function inbox_message_count(){
-		echo $this->admin_model->feedback_unread_inbox_count($this->input->post('cand_id'));
 	}
 		
 }
