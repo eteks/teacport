@@ -776,27 +776,7 @@ class Admin_Model extends CI_Model {
     $this->db->where($feed_where);  
     $model_data = $this->db->get()->row_array();
     return $model_data;
-  }
-  public function feddback_inbox_full_data($id)
-  {
-    // Update viewd status
-    $this->db->set('is_viewed','1');
-    $this->db->where('candidate_inbox_id',$id);
-    $this->db->update('tr_candidate_inbox');
-
-    $this->db->select('*');    
-    $this->db->from('tr_candidate_inbox ci');
-    $this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-    $this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
-    $this->db->join('tr_district d', 'op.organization_district_id = d.district_id','left');
-    $where = "(ci.candidate_inbox_id='".$id."' AND ci.candidate_inbox_status='1')";
-    $this->db->where($where);
-    $data['inbox_data'] = $this->db->get()->row_array();
-    return $data; 
-  }
-
-
-  
+  }  
 }
 
 /* End of file Admin_Model.php */
