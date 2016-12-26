@@ -948,6 +948,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['districts_values'] = $data_values['districts_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/district',$data);
 		}
 	}
