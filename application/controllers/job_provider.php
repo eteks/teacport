@@ -223,7 +223,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
 			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|required|min_length[3]|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|alpha_numeric|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date');
 			$this->form_validation->set_rules('declar_accept', 'Declaration', 'callback_form_declaration');
 			/* check forms data are valid are not */
@@ -654,8 +654,8 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
-			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|max_length[200]|xss_clean');
+			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|max_length[999]|xss_clean');
 			if ($this->form_validation->run()){
 				$feedback_data = array(
 									'feedback_form_title' => $this->input->post('feedback_subject'),
@@ -774,7 +774,7 @@ class Job_provider extends CI_Controller {
 					$user_subscription_data = array(
 													'organization_id' 								=> $this->input->post('udf1'),
 													'subscription_id' 								=> $this->input->post('udf2'),
-													'transcation_id' 								=> $transaction_id,
+													'organization_transcation_id' 					=> $transaction_id,
 													'organization_email_count' 						=> $subscription_plan_data[0]['subscription_email_counts'],
 													'organization_sms_count'						=> $subscription_plan_data[0]['subcription_sms_counts'],
 													'organization_resume_download_count'			=> $subscription_plan_data[0]['subcription_resume_download_count'],
@@ -929,7 +929,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function pg_or_ug_check(){
 		$pg_or_ug_data = $this->input->post('provider_ug_or_pg');
-		if($pg_or_ug_data === 'ug' or $pg_or_ug_data === 'pg'){
+		if($pg_or_ug_data === 'ug' or $pg_or_ug_data === 'pg' or $pg_or_ug_data === 'phd'){
 			return TRUE;
 		}
 		else {

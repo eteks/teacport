@@ -29,7 +29,7 @@ include ('include/menus.php');
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
                                 <div class="dashboard-logo-sidebar">
-                                     <?php if (file_exists($organization['organization_logo'])) { ?>
+                                     <?php if (@getimagesize($organization['organization_logo'])) { ?>
                                     <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
                                     <?php } else { ?>
                                 	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
