@@ -131,6 +131,13 @@ class Admin_Model extends CI_Model {
     $this->db->order_by('d.district_id','desc');
     $model_data['districts_values'] = $this->db->get()->result_array();
 
+    //Check whether the data is mapped or not
+    $sql= $this->db->query("SELECT d.district_id from tr_district d INNER JOIN tr_candidate_profile c INNER JOIN tr_organization_profile o where c.candidate_district_id=d.district_id OR c.candidate_live_district_id=d.district_id OR o.organization_district_id=d.district_id GROUP BY d.district_id");
+    $model_data['mapped_data'] = $sql->result_array();
+    // echo "<pre>";
+    // print_r($model_data['mapped_data']);
+    // echo "</pre>";
+
     return $model_data;
   }
 
