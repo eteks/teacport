@@ -489,7 +489,15 @@ class Admin_users extends CI_Controller {
 
 			//Get feedback data records from database to set in global variable
 			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
+			// $admin_feedback_msg_count = array_filter($admin_feedback_form, function($feed) { return $feed['is_viewed'] == '0'; });
+			$admin_feedback_msg_count = array_filter($admin_feedback_form, function($feed) { return $feed['is_viewed'] == '0'; });
+			// echo count($admin_feedback_msg_count);
+			// echo('<pre>');
+			// print_r($admin_feedback_msg_count);
+			// echo('</pre>');
+			$this->config->set_item('feedback_count',count($admin_feedback_msg_count));
 			$this->config->set_item('feedback_data',$admin_feedback_form);
+
 		}	
 	}
 }

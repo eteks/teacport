@@ -54,7 +54,7 @@ define('STATUS',serialize(array("0"=>"Active",
         "1"=>"Inactive")));
 
 // Define seeker upload path
-define('SEEKER_UPLOAD','assets/images/seeker/');
+define('SEEKER_UPLOAD','uploads/jobseeker/');
 
 define('PAYUMERCHANTKEY', 'OwGF14'); 
 define('PAYUMERCHANTSALT', 'RjWAdXh0');

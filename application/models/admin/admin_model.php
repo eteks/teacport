@@ -52,6 +52,16 @@ class Admin_Model extends CI_Model {
 
     // View
     $model_data['state_values'] = $this->db->order_by('state_id','desc')->get_where('tr_state')->result_array();
+
+     // $this->db->select('d.district_state_id');
+    // $this->db->from('tr_state s');
+    // $this->db->join('tr_district d','s.state_id=d.district_state_id','inner');
+    // $this->db->group_by('d.district_state_id');
+    // $model_data['mapped_data'] = $this->db->get()->result_array();
+
+    // echo "<pre>";
+    // print_r($model_data['mapped_data']);
+    // echo "</pre>";
     return $model_data;
   }
 
@@ -120,6 +130,13 @@ class Admin_Model extends CI_Model {
     $this->db->join('tr_state s','d.district_state_id=s.state_id','inner');
     $this->db->order_by('d.district_id','desc');
     $model_data['districts_values'] = $this->db->get()->result_array();
+
+    //Check whether the data is mapped or not
+    $sql= $this->db->query("SELECT d.district_id from tr_district d INNER JOIN tr_candidate_profile c INNER JOIN tr_organization_profile o where c.candidate_district_id=d.district_id OR c.candidate_live_district_id=d.district_id OR o.organization_district_id=d.district_id GROUP BY d.district_id");
+    $model_data['mapped_data'] = $sql->result_array();
+    // echo "<pre>";
+    // print_r($model_data['mapped_data']);
+    // echo "</pre>";
 
     return $model_data;
   }
@@ -705,10 +722,18 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
-   // Get medium language values
+  // Get medium language values
   public function get_medium_language_list()
   {
     $medium_language_get_where = '(language_status=1 and is_medium_of_instruction=1)'; 
+    $model_data = $this->db->get_where("tr_languages", $medium_language_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get Mother Tongue language values
+  public function get_mother_tongue_language_list()
+  {
+    $medium_language_get_where = '(language_status=1 and is_mother_tangue=1)'; 
     $model_data = $this->db->get_where("tr_languages", $medium_language_get_where)->result_array(); 
     return $model_data;
   }
@@ -766,10 +791,7 @@ class Admin_Model extends CI_Model {
     $this->db->where($feed_where);  
     $model_data = $this->db->get()->row_array();
     return $model_data;
-  }
-
-
-  
+  }  
 }
 
 /* End of file Admin_Model.php */

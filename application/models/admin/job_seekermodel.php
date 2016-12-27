@@ -14,39 +14,57 @@ class Job_Seekermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $candidate_dob = explode('/', $this->input->post('cand_dob'));
-      $candidate_dob_date = $candidate_dob[2]."-".$candidate_dob[1]."-".$candidate_dob[0];
-      $profile_update_data = array( 
+
+      $mobile_exists_where = "candidate_mobile_no =" . "'" . $this->input->post('cand_mobile') . "' AND candidate_id NOT IN (". $this->input->post('rid').")";
+      $mobile_exists = $this->db->get_where('tr_candidate_profile',$mobile_exists_where);
+      if($mobile_exists->num_rows() > 0) {
+        $model_data['status'] = "Mobile Number Already exists";
+        $model_data['error'] = 1; 
+      }
+      else {
+        $email_exists_where = "candidate_email =" . "'" . $this->input->post('cand_email') . "' AND candidate_id NOT IN (". $this->input->post('rid').")";
+        $email_exists = $this->db->get_where('tr_candidate_profile',$email_exists_where);
+        if($email_exists->num_rows() > 0) {
+          $model_data['status'] = "Email Already exists";
+          $model_data['error'] = 1;
+        }
+        else {
+          $candidate_dob = explode('/', $this->input->post('cand_dob'));
+          $candidate_dob_date = $candidate_dob[2]."-".$candidate_dob[1]."-".$candidate_dob[0];
+          $profile_update_data = array( 
                               'candidate_name' => $this->input->post('cand_name'),
                               'candidate_gender' => $this->input->post('cand_gen'),
                               'candidate_father_name' => $this->input->post('cand_fa_name'),
                               'candidate_date_of_birth' => $candidate_dob_date,
                               'candidate_marital_status' => $this->input->post('cand_mar_status'),
                               'candidate_mother_tongue' => $this->input->post('cand_moth_ton'),
+                              'candidate_language_known' => $this->input->post('cand_known_lang'),
                               'candidate_nationality' => $this->input->post('cand_nationality'),
                               'candidate_religion' => $this->input->post('cand_religion'),
                               'candidate_community' => $this->input->post('cand_community'),
                               'candidate_is_physically_challenged' => $this->input->post('cand_phy'),
                               'candidate_image_path' => $this->input->post('cand_img'),
                               'candidate_mobile_no' => $this->input->post('cand_mobile'),
-                               'candidate_district_id' => $this->input->post('cand_district'),
-                                'candidate_address_1' => $this->input->post('cand_address1'),
-                                 'candidate_address_2' => $this->input->post('cand_address2'),
-                                  'candidate_live_district_id' => $this->input->post('cand_live_district'),
-                                   'candidate_pincode' => $this->input->post('cand_pincode'),
-                                    'candidate_institution_type' => $this->input->post('cand_institution'),
-                                     'candidate_tet_exam_status' => $this->input->post('cand_tet_status'),
-                                      'candidate_interest_subject_id' => $this->input->post('cand_int_sub'),
-                                       'candidate_extra_curricular_id' => $this->input->post('cand_extra'),
-                                       'candidate_is_fresher' => $this->input->post('cand_is_fresh'),
+                              'candidate_district_id' => $this->input->post('cand_district'),
+                              'candidate_address_1' => $this->input->post('cand_address1'),
+                              'candidate_address_2' => $this->input->post('cand_address2'),
+                              'candidate_live_district_id' => $this->input->post('cand_live_district'),
+                              'candidate_pincode' => $this->input->post('cand_pincode'),
+                              'candidate_institution_type' => $this->input->post('cand_institution'),
+                              'candidate_tet_exam_status' => $this->input->post('cand_tet_status'),
+                              'candidate_interest_subject_id' => $this->input->post('cand_int_sub'),
+                              'candidate_extra_curricular_id' => $this->input->post('cand_extra'),
+                              'candidate_is_fresher' => $this->input->post('cand_is_fresh'),
                               'candidate_email' => $this->input->post('cand_email')
                             );
-      $profile_update_where = '( candidate_id="'.$this->input->post('rid').'")'; 
-      $this->db->set($profile_update_data); 
-      $this->db->where($profile_update_where);
-      $this->db->update("tr_candidate_profile", $profile_update_data); 
-      $model_data['status'] = "Updated Successfully";
-      $model_data['error'] = 2;   
+          $profile_update_where = '( candidate_id="'.$this->input->post('rid').'")'; 
+          $this->db->set($profile_update_data); 
+          $this->db->where($profile_update_where);
+          $this->db->update("tr_candidate_profile", $profile_update_data); 
+          $model_data['status'] = "Updated Successfully";
+          $model_data['error'] = 2;   
+        }
+      }
     }
 
 	// Delete data
@@ -61,6 +79,7 @@ class Job_Seekermodel extends CI_Model {
     $this->db->select('*');
     $this->db->from('tr_candidate_profile cp');
     $this->db->join('tr_district d','cp.candidate_live_district_id=d.district_id','left');
+    $this->db->order_by('cp.candidate_id','desc');
     $model_data['seeker_profile'] = $this->db->get()->result_array();
     return $model_data;
   }
@@ -68,10 +87,32 @@ class Job_Seekermodel extends CI_Model {
   // Job seeker profile - ajax
   public function get_full_seeker_profile($value) {
 
-  		// INNER JOIN ( SELECT * FROM tr_languages AS ls INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( ts.candidate_language_known, ',', ns.ns ) , ',', -1 ) value FROM tr_candidate_profile ts CROSS JOIN numbers ns WHERE ns.ns <=1 + ( LENGTH( ts.candidate_language_known ) - LENGTH( REPLACE( ts.candidate_language_known, ',', ''))) ) AS als ON als.value = ls.language_id )
-  		
-    $seeker_profile_query = $this->db->query("SELECT * FROM tr_extra_curricular AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.candidate_extra_curricular_id, ',', n.n ) , ',', -1 ) value FROM tr_candidate_profile t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.candidate_extra_curricular_id ) - LENGTH( REPLACE( t.candidate_extra_curricular_id, ',', ''))) ) AS a ON a.value = c.extra_curricular_id INNER JOIN tr_candidate_education AS ce ON a.candidate_id = ce.candidate_profile_id INNER JOIN tr_candidate_experience AS cex ON a.candidate_id=cex.candidate_profile_id INNER JOIN tr_educational_qualification AS eq ON ce.candidate_education_qualification_id=eq.educational_qualification_id INNER JOIN tr_languages AS el ON ce.candidate_medium_of_inst_id=el.language_id INNER JOIN tr_departments AS ds ON ce.candidate_education_department_id=ds.departments_id INNER JOIN (SELECT dis.district_id,dis.district_name AS district FROM tr_district AS dis) AS dis_val ON a.candidate_district_id=dis_val.district_id INNER JOIN (SELECT ldis.district_id,ldis.district_name AS live_district FROM tr_district AS ldis) AS ldis_val ON a.candidate_live_district_id=ldis_val.district_id INNER JOIN (SELECT lan.language_id,lan.language_name AS mother_tongue FROM tr_languages AS lan) AS lan_val ON a.candidate_mother_tongue=lan_val.language_id INNER JOIN tr_class_level AS cl ON cex.candidate_experience_class_level_id=cl.class_level_id INNER JOIN tr_institution_type AS it ON a.candidate_institution_type=it.institution_type_id INNER JOIN (SELECT int_sub.subject_id,int_sub.subject_name AS edu_interest_sub FROM tr_subject AS int_sub) AS int_sub_val ON a.candidate_interest_subject_id=int_sub_val.subject_id INNER JOIN (SELECT edu.education_board_id,edu.university_board_name AS edu_board FROM tr_university_board AS edu) AS edu_val ON ce.candidate_edu_board=edu_val.education_board_id INNER JOIN (SELECT exu.education_board_id,exu.university_board_name AS exu_board FROM tr_university_board AS exu) AS exu_val ON cex.candidate_experience_board=exu_val.education_board_id WHERE a.candidate_id='$value'");
-    $model_data['seeker_full_profile'] = $seeker_profile_query->result_array();  
+    // Canidate Profile
+    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,it.*,lan.*,sub.*');
+    $this->db->from('tr_candidate_profile cp');
+    $this->db->join('tr_district live_dis','cp.candidate_live_district_id=live_dis.district_id','left');
+    $this->db->join('tr_district native_dis','cp.candidate_district_id=native_dis.district_id','left');
+    $this->db->join('tr_institution_type it','cp.candidate_institution_type=it.institution_type_id','left');
+    $this->db->join('tr_languages lan','cp.candidate_mother_tongue=lan.language_id','left');
+    $this->db->join('tr_subject sub','cp.candidate_interest_subject_id=sub.subject_id','left');
+    $model_data['seeker_full_profile'] = $this->db->where('cp.candidate_id',$value)->get()->row_array();
+
+    // Candidate Education
+    $this->db->select('*');
+    $this->db->from('tr_candidate_education ce');
+    $this->db->join('tr_educational_qualification eq','ce.candidate_education_qualification_id=eq.educational_qualification_id','inner');
+    $this->db->join('tr_languages l','ce.candidate_medium_of_inst_id=l.language_id','inner');
+    $this->db->join('tr_departments d','ce.candidate_education_department_id=d.departments_id','left');
+    $this->db->join('tr_university_board u','ce.candidate_edu_board=u.education_board_id','left');
+    $model_data['education_details'] = $this->db->where('ce.candidate_profile_id',$value)->get()->result_array();
+
+    // Candidate Experience
+    $this->db->select('*');
+    $this->db->from('tr_candidate_experience ce');
+    $this->db->join('tr_class_level cl','ce.candidate_experience_class_level_id=cl.class_level_id','inner');
+    $this->db->join('tr_subject s','ce.candidate_experience_subject_id=s.subject_id','left');
+    $this->db->join('tr_university_board u','ce.candidate_experience_board=u.education_board_id','left');
+    $model_data['experience_details'] = $this->db->where('ce.candidate_profile_id',$value)->get()->result_array();
     return $model_data;
   }
 
@@ -84,7 +125,6 @@ class Job_Seekermodel extends CI_Model {
     // Update data
     if($status=='update') {
       $preference_update_data = array( 
-                              'candidate_profile_id' => $this->input->post('cand_name'),
                               'candidate_posting_applied_for' => $this->input->post('cand_post'),
                               'candidate_expecting_start_salary' => $this->input->post('cand_ssalary'),
                               'candidate_expecting_end_salary' => $this->input->post('cand_esalary'),

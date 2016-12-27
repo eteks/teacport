@@ -558,6 +558,17 @@ $(document).ready(function(){
         $(this).siblings('.hidden_known_lang').val(value);
     });
 
+    // Extra Curricular Values
+    $(document).on("click",".extra_curricular_values",function(){
+        var value = [];
+        $('.extra_curricular_values').each(function() {
+            if($(this).is(':checked')) {
+              value.push($(this).val());
+            }
+        });
+        $(this).siblings('.hidden_extra_curricular').val(value);
+    });
+
     
     
 //  // error popup alert box  
@@ -648,7 +659,7 @@ $(document).ready(function(){
             success: function(res) {
                 $res = JSON.parse(res);
                 if($res == "success"){
-                    $("html, body,.form_table_scl").animate({ scrollTop: 0 }, "slow");
+                    $("html, body,.sub_pre_section").animate({ scrollTop: 0 }, "slow");
                     $('.privilege_status').html("<i class='icon-ok-sign'></i>  Updated Successfully").show().fadeOut(3000);
 
                 }

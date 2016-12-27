@@ -1,15 +1,15 @@
 <?php
 $is_super_admin = $this->config->item('is_super_admin');
-$feedback_data = $this->config->item('feedback_data');
 // $access_rights = $this->config->item('access_rights');
 if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');	
+  $access_permission=$this->config->item('current_page_rights');    
   $current_page_rights = $access_permission['access_permission'];
   $access_rights = explode(',',$current_page_rights);
 }
 else{
   $access_rights = $this->config->item('access_rights');
 }
+$feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
@@ -90,7 +90,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <!-- <th>Is Candidate?</th> -->
                                         <!-- <th>Is Guest User?</th> -->
                                         <!-- <th>Candidate or Organization</th> -->
-                                        <th>Is Viewed</th>
+                                        <th>Viewed</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th class="data_action"> Full View </th>
@@ -142,7 +142,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
               <h4>
-                <i class="icon-reorder"></i> Job Providers Transaction
+                <i class="icon-reorder"></i> Feedback
               </h4>                        
             </div>
             <div class="widget-body form pop_details_section">

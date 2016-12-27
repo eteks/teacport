@@ -27,8 +27,7 @@ class Other_module extends CI_Controller {
 		}
 		else {
 			redirect(base_url().'admin/admin_error');
-		}
-			
+		}			
 	}
 	public function feedback_global()
 	{

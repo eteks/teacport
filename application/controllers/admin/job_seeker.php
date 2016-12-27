@@ -12,11 +12,23 @@ class Job_Seeker extends CI_Controller {
 		$this->load->library('upload');
 	}
 
+	// Multi select function - To check the field is already exists or not
+	function multiselect_validate($value,$params) 
+	{
+		//get main CodeIgniter object
+	      $CI =& get_instance();
+	      //load database library
+	      $CI->load->database();    
+	      $CI->form_validation->set_message('multiselect_validate', "The $params field is required.");
+	      if ($value == "null")
+	      {
+	          return FALSE;
+	      }
+	}
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
-		list($action,$field) = explode(".",$params); // To split the array values
-		$upload_path = "assets/admin/uploads/"; // Admin upload path
+		list($action,$field,$upload_path) = explode(".",$params); // To split the array values
 	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
         $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
         // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
@@ -56,6 +68,7 @@ class Job_Seeker extends CI_Controller {
 	   		$validation_rules = array();	
 	  		$id = $this->input->post('rid');
 	  		$action = $this->input->post('action');
+	  		$upload_path = "uploads/jobseeker/";
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
 	  			$validation_rules[] =  	array(
 			                              'field'   => 'cand_name',
@@ -87,6 +100,11 @@ class Job_Seeker extends CI_Controller {
 			                                'label'   => 'Candidate Mother Tongue',
 			                                'rules'   => 'trim|required|xss_clean|'
 			                            );
+			   	$validation_rules[] =   array(
+			                                'field'   => 'cand_known_lang',
+			                                'label'   => 'Candidate Known Languages',
+			                                'rules'   => 'trim|required|xss_clean'
+			                            );
 			}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array(
@@ -112,7 +130,7 @@ class Job_Seeker extends CI_Controller {
 	   			$validation_rules[] =	array(
 			                                'field'   => 'cand_img',
 			                                'label'   => 'Candidate Image',
-			                                'rules'   => 'callback_validate_image_type['.$action.'.cand_img]'
+			                                'rules'   => 'callback_validate_image_type['.$action.'.cand_img.'.$upload_path.']'
 			                            );
 	   			$validation_rules[] =	array(
 			                                'field'   => 'cand_status',
@@ -154,34 +172,6 @@ class Job_Seeker extends CI_Controller {
 			                            );			                       
 	   		}
 
-	   		if($this->input->post('index')==4 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array(
-			                              'field'   => 'cand_institution',
-			                              'label'   => 'Institution Type',
-			                              'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_tet_status',
-			                                'label'   => 'TET Exam Status',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_int_sub',
-			                                'label'   => 'Interest Subject',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_extra',
-			                                'label'   => 'Extra Curricular',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_is_fresh',
-			                                'label'   => 'Fresher',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );                       
-	   		}
-
 	 		$this->form_validation->set_rules($validation_rules);
 			if ($this->form_validation->run() == FALSE) {   
 		        foreach($validation_rules as $row){
@@ -197,7 +187,6 @@ class Job_Seeker extends CI_Controller {
       		else {
       			$upload_error = 0;
       			$is_end =0;
-      			$upload_path = "assets/admin/uploads/";
 
     			if($this->input->post('index')=="end" && !empty($_FILES['cand_img']['name']))
         		{	
@@ -276,13 +265,16 @@ class Job_Seeker extends CI_Controller {
 	{
 		if($this->input->post('action') && $this->input->post('value')) {
 			$value = $this->input->post('value');
-			$data['language_values'] = $this->admin_model->get_language_list();
+			$data['mother_tongue'] = $this->admin_model->get_mother_tongue_language_list();
+			$data['known_languages'] = $this->admin_model->get_language_list();
 			$data['instution_values'] = $this->admin_model->get_institution_type_list();
 			$data['district_values'] = $this->admin_model->get_district_values();
 			$data['subject_values'] = $this->admin_model->get_subject_values();
 			$data['extra_curricular_values'] = $this->admin_model->get_extra_curricular_values();
 			$data_values = $this->job_seekermodel->get_full_seeker_profile($value);
-			$data['seeker_full_profile'] = get_extra_curricular_seeker_pro($data_values['seeker_full_profile']);
+			$data['seeker_full_profile'] = $data_values['seeker_full_profile'];
+			$data['education_details'] = $data_values['education_details'];
+			$data['experience_details'] = $data_values['experience_details'];
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/job_seeker_profile',$data);
 		}
@@ -296,22 +288,15 @@ class Job_Seeker extends CI_Controller {
 		$data['post_values'] = $this->admin_model->get_posting_values();
 		$data['class_values'] = $this->admin_model->get_class_levels();
 		$data['subject_values'] = $this->admin_model->get_subject_values();
-		$data['cand_values'] = $this->admin_model->get_candidate_values();
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		                            array(
-		                              'field'   => 'cand_name',
-		                              'label'   => 'Candidate Name',
-		                              'rules'   => 'trim|required|xss_clean|'
-
-		                            ),
-		                            array(
 		                                 'field'   => 'cand_post',
 		                                 'label'   => 'Posting Name',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
 		                            ),
 		                            array(
 		                              'field'   => 'cand_ssalary',
@@ -327,13 +312,13 @@ class Job_Seeker extends CI_Controller {
 		                            array(
 		                              'field'   => 'cand_class',
 		                              'label'   => 'Class Name',
-		                              'rules'   => 'trim|required|xss_clean|'
+		                              'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
 
 		                            ),
 		                            array(
 		                                 'field'   => 'cand_sub',
 		                                 'label'   => 'Subject Name',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
 		                            )
 		                        );
 

@@ -69,7 +69,7 @@ class Job_Provider extends CI_Controller {
 	      }
 	}
 
-	// Edit unique function - To check the field is already exists or not
+	// Multi select function - To check the field is already exists or not
 	function multiselect_validate($value,$params) 
 	{
 		//get main CodeIgniter object
@@ -232,7 +232,7 @@ class Job_Provider extends CI_Controller {
 					$data['status'] = "valid";
 		        }
      		}
-	    }
+	    	}
 
     	// Delete data
     	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
