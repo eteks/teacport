@@ -233,7 +233,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
 		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
 		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
-		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
+		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
 		$this->db->limit($limit,$start);
 		$this->db->where($where);
 		$this->db->group_by('tr_candidate_profile.candidate_id'); 
@@ -250,7 +250,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
 		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
 		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
-		$where = "tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id )";
+		$where = "tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id )";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
 			$where .= " AND tr_candidate_profile.candidate_district_id =".$searchdata['candidate_willing_district'];
 		}
@@ -304,7 +304,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
 		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
 		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
-		$where = "tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id )";
+		$where = "tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id )";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
 			$where .= " AND tr_candidate_profile.candidate_district_id =".$searchdata['candidate_willing_district'];
 		}
@@ -357,7 +357,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
 		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
 		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
-		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
+		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
 		$this->db->where($where);
 		$this->db->group_by('tr_candidate_profile.candidate_id');
 		$postedjobdata = $this->db->get();

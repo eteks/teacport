@@ -90,7 +90,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <!-- <th>Is Candidate?</th> -->
                                         <!-- <th>Is Guest User?</th> -->
                                         <!-- <th>Candidate or Organization</th> -->
-                                        <th>Is Viewed</th>
+                                        <th>Viewed</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <th class="data_action"> Full View </th>
@@ -142,7 +142,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
               <h4>
-                <i class="icon-reorder"></i> Job Providers Transaction
+                <i class="icon-reorder"></i> Feedback
               </h4>                        
             </div>
             <div class="widget-body form pop_details_section">
