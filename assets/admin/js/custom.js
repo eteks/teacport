@@ -214,6 +214,32 @@ $(document).ready(function(){
     $('.sub_scroll_section').slimScroll({
         height: 'auto'
     });
+
+    $('.extended').slimScroll({
+        height: 'auto'
+    });
+
+    $('.dropdown_toggle_act').on('click',function() {
+        $('.extended').show();
+        $('.top_layer').show();
+    });
+
+var window_width = $(".navbar-inner").width();    
+var window_height = $(".navbar-inner").height();
+$('.top_layer').width(window_width);
+$('.top_layer').height(window_height);
+$('.top_layer, .message_close').on('click',function() {
+        $('.extended').hide();
+        $('.top_layer').hide();
+    });
+
+
+
+   
+
+
+
+    
 	
 	
     $('.sub_pre_section').slimScroll({
