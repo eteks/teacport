@@ -79,7 +79,7 @@
                             	</div><br>
                             	<p class="registration_server_msg"><?php if(isset($reg_server_msg)) echo $reg_server_msg; ?></p>
                                  <span class="error_test"> Please fill Enter Valid Email </span> 
-                                 <?php echo form_open('job_seeker/forgot_password', 'id="forgotpass-form" class="forgotpass-form"'); ?>
+                                 <?php echo form_open('login/seeker/forgotpassword', 'id="forgotpass-form" class="forgotpass-form"'); ?>
                                     <p class="registration_status"> </p>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"> Email address </label>

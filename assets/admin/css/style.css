@@ -1468,7 +1468,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 
 /* custom dropdown */
 .dropdown-menu {
-    position: absolute;
+    position: relative;
     top: 100%;
     left: 0;
     z-index: 1100;
@@ -4810,15 +4810,17 @@ i#admin_error_login {
    display: none;
 }
 .inbox {
-    /*display: block;*/
     height: auto !important;
     overflow: hidden !important;
-    /*position: absolute;*/
-    top: 48px !important;
+    top: 0 !important;
     width: auto !important;
 }
-
 .dropdown_toggle_act + .slimScrollDiv{
 
-    overflow: visible !important;
+    height: auto !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    top: 46px !important;
+    width: auto !important;
+    z-index: 9999;
 }

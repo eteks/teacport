@@ -100,7 +100,7 @@
 							</div>
 							<div class="form-group">
 								<label class="col-sm-4" for="add_district">District : <span class="required">*</span></label>
-								<div class="col-sm-4">
+								<div class="col-sm-8">
 									<?php echo form_error('organization_district'); ?>
 									<select id="organization_district" class="select-location form-control" name="organization_district" onchange="">
 										<option value="">Select district</option>
@@ -120,9 +120,9 @@
 										?>
 									</select>
 								</div>
-								<div class="col-sm-4">
+								<!-- <div class="col-sm-4">
 									<input id="add_district_oth" class="form-control " disabled="disabled" maxlength="35" name="add_district_oth"  value="" placeholder="Other District" type="text">
-								</div>
+								</div> -->
 							</div>
 							<!-- <div class="form-group">
 								<label class="col-sm-4" for="firstname">Pincode : <span class="required">*</span></label>
