@@ -789,6 +789,12 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val+1).fadeIn(3000);
         }
     });
+    /*use “…” for overflowed block of multi-lines in admin side added by thangam*/
+    $(".message_res").text(function(index, currentText) {
+        if (currentText.length>60) {
+            return currentText.substr(0, 60)+'.....';
+        }
+    });
 
     
 
