@@ -136,9 +136,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </a>
                         </td>
                         <td>
-                          <a class="ajaxDelete" data-id="<?php echo $sta_val['state_id']; ?>">
-                            Delete
-                          </a>
+                          <?php 
+                            $state_id = $sta_val['state_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
+                            return $m == $state_id; });
+                            if(count($mapped_result) > 0)
+                              echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                            else
+                              echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
+                          ?>      
                         </td>
                       </tr>
                       <?php

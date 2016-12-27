@@ -105,7 +105,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <td class="">
                             <?php echo $feed['feedback_form_title']; ?>
                           </td>
-                          <td class="">
+                          <td class="message_res">
                             <?php echo $feed['feedback_form_message']; ?>
                           </td>
                           <td class="">

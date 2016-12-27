@@ -185,18 +185,12 @@ ajax = function (params,action,form_id){
             }
             else if(res.error==2) {
                 $('.val_error').html();
-                $('.admin_table').dataTable().fnDestroy();  
+                // $('.admin_table').dataTable().fnDestroy(); //Commented for page reload
                 form.html(res.output);
                 $('.db_status').fadeOut(3000);
-                setTimeout(function() { datatable_initialization(); }, 3000); 
-                setTimeout(function() { $('.db_status').remove(); }, 5000);
-                default_credentials();
-                // Implement for clearing session when user change their own account details
-                // Commented this code for future enhancement
-                // if(res.session_data != 'undefined' && res.session_data == true){ 
-                //     customalert("You have changed your Accounts. We need to logout your session to confirm");
-                //     setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
-                // }
+                // setTimeout(function() { datatable_initialization(); }, 3000);  //Commented for page reload
+                setTimeout(function() { $('.db_status').remove();location.reload(); }, 3000);
+                default_credentials();  
             }
         }
     });
@@ -214,6 +208,32 @@ $(document).ready(function(){
     $('.sub_scroll_section').slimScroll({
         height: 'auto'
     });
+
+    $('.extended').slimScroll({
+        height: 'auto'
+    });
+
+    $('.dropdown_toggle_act').on('click',function() {
+        $('.extended').show();
+        $('.top_layer').show();
+    });
+
+var window_width = $(".navbar-inner").width();    
+var window_height = $(".navbar-inner").height();
+$('.top_layer').width(window_width);
+$('.top_layer').height(window_height);
+$('.top_layer, .message_close').on('click',function() {
+        $('.extended').hide();
+        $('.top_layer').hide();
+    });
+
+
+
+   
+
+
+
+    
 	
 	
     $('.sub_pre_section').slimScroll({
@@ -761,6 +781,12 @@ $(document).ready(function(){
         if(this_holder_len != index_Val+1 ) {
             this_holder.eq(index_Val).fadeOut(1000);
             this_holder.eq(index_Val+1).fadeIn(3000);
+        }
+    });
+    /*use “…” for overflowed block of multi-lines in admin side added by thangam*/
+    $(".message_res").text(function(index, currentText) {
+        if (currentText.length>60) {
+            return currentText.substr(0, 60)+'.....';
         }
     });
 

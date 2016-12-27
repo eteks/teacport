@@ -51,20 +51,20 @@
                              <!---List of posted jobs-->
                             <div class="all-jobs-list-box2">
                             	<?php foreach ($postedjob as $postedjobs) { ?>
-                                <div class="job-box job-box-2">
+                                <div class="job-box job-box-2" style="cursor:pointer" onclick='window.open("<?php echo base_url();?>provider/postedjobdetail/<?php echo $postedjobs['vacancies_id'];?>","_blank")'>
 	                                <div class="col-md-12 col-sm-12 col-xs-12">
 	                                    <div class="job-title-box">
-	                                        <a href="#">
+	                                        <a>
 	                                            <div class="job-title"><?php echo ucfirst($postedjobs['vacancies_job_title']); ?></div>
 	                                        </a>
-	                                        <a href="#"><span class="comp-name"><?php echo $postedjobs['vacancies_available']; ?> vancancies, <?php echo $postedjobs['vacancies_experience']; ?></span></a>
+	                                        <a><span class="comp-name"><?php echo $postedjobs['vacancies_available']; ?> vancancies, <?php echo $postedjobs['vacancies_experience']; ?></span></a>
 	                                    </div>
-	                                    <p><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?></p>
+	                                    <p><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?>...</p>
 	                                </div>
 	                                <div class="job-salary">
-	                                    <i class="fa fa-money"></i> &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>
+	                                    &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>
 	                                </div>
-	                                <a href="javascript:void(0)" onclick='window.location = "company-dashboard-job-detail.html"'>
+	                                <a href="javascript:void(0)">
 	                                	<span class="dashboard-jobs-grid-link"> </span>
 	                                </a>
                                 </div>
