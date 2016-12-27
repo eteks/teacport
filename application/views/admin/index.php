@@ -14,7 +14,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php include "templates/header.php" ?>
     <!-- BEGIN CONTAINER -->
-    <div id="container" class="row-fluid">
+    <div id="container" class="row-fluid message_close">
         <!-- BEGIN PAGE -->
         <div id="main-content">
             <!-- BEGIN PAGE CONTAINER-->
@@ -636,7 +636,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <!-- END PAGE CONTAINER-->
         </div>
         <!-- END PAGE -->
-        </div>
+
     <!-- END CONTAINER -->
 <?php include "templates/footer.php" ?>
 <?php
