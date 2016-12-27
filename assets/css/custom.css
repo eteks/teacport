@@ -753,6 +753,38 @@ table tr[data-name="bold_section"] a {
     margin-bottom: 10px;
     text-align: center;
 }
+/*.seeker_edit_form input[type="text"] {
+	width: 100%;
+}*/
+.form-input-error {
+	border: 1px solid red !important;
+}
+label.form-input-error {
+	border: none !important;
+	color: red;
+}
+
+.fs10 {
+	font-size: 10px;
+	color: red;
+}
+.clone_icon {
+	background: #D3D3D3;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    margin-top: 5px;
+    text-align: center;
+}
+.np {
+	padding : 0;
+}
+.dn {
+	display: none;
+}
+
 
 /* Ended by siva */
 .subcription_plan_details{

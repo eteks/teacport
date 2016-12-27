@@ -715,10 +715,18 @@ class Admin_Model extends CI_Model {
     return $model_data;
   }
 
-   // Get medium language values
+  // Get medium language values
   public function get_medium_language_list()
   {
     $medium_language_get_where = '(language_status=1 and is_medium_of_instruction=1)'; 
+    $model_data = $this->db->get_where("tr_languages", $medium_language_get_where)->result_array(); 
+    return $model_data;
+  }
+
+  // Get Mother Tongue language values
+  public function get_mother_tongue_language_list()
+  {
+    $medium_language_get_where = '(language_status=1 and is_mother_tangue=1)'; 
     $model_data = $this->db->get_where("tr_languages", $medium_language_get_where)->result_array(); 
     return $model_data;
   }

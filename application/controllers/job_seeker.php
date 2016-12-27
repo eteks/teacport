@@ -61,17 +61,17 @@ class Job_seeker extends CI_Controller {
         	$old_file_path = $_POST['old_file_path'];
         	if(isset($_POST['old_file_path']) && !empty($_POST['old_file_path'])) {
         		$_POST[$field] = $old_file_path;
-            	return TRUE;
+            	// return TRUE;
         	}
         	else {
         		$_POST[$field] = NULL; //
-	            $this->form_validation->set_message('validate_image_type', "The %s is required");
+	            $this->form_validation->set_message('validate_image_type', "The %s field is required");
 	            return FALSE;
         	}
         }
         else {
         	$_POST[$field] = NULL; //
-            $this->form_validation->set_message('validate_image_type', "The %s is required");
+            $this->form_validation->set_message('validate_image_type', "The %s field is required");
             return FALSE;
         }
     }
@@ -81,7 +81,7 @@ class Job_seeker extends CI_Controller {
 		list($action,$field) = explode(".",$params); // To split the array values
 		$upload_path = SEEKER_UPLOAD."resume/"; // Admin upload path
 	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
-        $config['allowed_types'] = 'pdf|doc|docx'; // Allowed tupes
+        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
         // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
         $config['max_size']    = '2000'; // Maximum size - 2MB
         $this->upload->initialize($config); // Initialize the configuration
@@ -94,17 +94,17 @@ class Job_seeker extends CI_Controller {
         	$prev_file_path = $_POST['prev_file_path'];
         	if(isset($_POST['prev_file_path']) && !empty($_POST['prev_file_path'])) {
         		$_POST[$field] = $prev_file_path;
-            	return TRUE;
+            	// return TRUE;
         	}
         	else {
         		$_POST[$field] = NULL; //
-	            $this->form_validation->set_message('validate_file_type', "The %s is required");
+	            $this->form_validation->set_message('validate_file_type', "The %s field is required");
 	            return FALSE;
         	}
         }
         else {
         	$_POST[$field] = NULL; //
-            $this->form_validation->set_message('validate_file_type', "The %s is required");
+            $this->form_validation->set_message('validate_file_type', "The %s field is required");
             return FALSE;
         }
     }
@@ -318,7 +318,7 @@ class Job_seeker extends CI_Controller {
 			if($this->form_validation->run()) {
 				$data_array = array(
 					'candidate_father_name' => $this->input->post('seeker_father'),
-					'candidate_date_of_birth' => $this->input->post('seeker_dob'),
+					'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 					'candidate_address_1' => $this->input->post('seeker_address1'),
 					'candidate_address_2' => $this->input->post('seeker_address2'),
 					'candidate_profile_completeness' => '40',
@@ -500,7 +500,7 @@ class Job_seeker extends CI_Controller {
 
 
     	// echo "<pre>";
-    	// print_r($data['experience_values']);
+    	// print_r($session['login_session']);
     	// echo "</pre>";
     	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		$this->load->view('user-edit-profile',$data);
@@ -511,7 +511,7 @@ class Job_seeker extends CI_Controller {
    		$action = "update"	;
    		// Experience Validation
    		if(!$this->input->post('cand_fresh')) {
-			$validation_fields = array(	
+			$validation_fields_experience = array(	
 				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
 						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
 				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
@@ -547,8 +547,8 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_board[]', 'label' => 'Education Board','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
-	    	array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
-	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
+	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
+	    	// array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
 
 			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
@@ -556,11 +556,11 @@ class Job_seeker extends CI_Controller {
 	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{6}$/]'),
 	    	array('field' => 'cand_email', 'label' => 'Email','rules' => 'required|trim|xss_clean|valid_email'),
 	    	array('field' => 'cand_mobile', 'label' => 'Mobile','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{10}$/]'),
-	    	array('field' => 'cand_facebook', 'label' => 'Facebook Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
-	    	array('field' => 'cand_google', 'label' => 'Google Plus Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
-	    	array('field' => 'cand_linkedin', 'label' => 'Linkedin Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
-	    	array('field' => 'cand_accept', 'label' => 'Accept Terms & Condition','rules' => 'required|trim|xss_clean'),
+	    	// array('field' => 'cand_facebook', 'label' => 'Facebook Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
+	    	// array('field' => 'cand_google', 'label' => 'Google Plus Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
+	    	// array('field' => 'cand_linkedin', 'label' => 'Linkedin Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
 	    	array('field' => 'cand_resume', 'label' => 'Resume','rules' => 'callback_validate_file_type['.$action.'.cand_resume]'),
+	    	array('field' => 'cand_accept', 'label' => 'Accept Terms & Condition','rules' => 'required|trim|xss_clean'),
 		);
 		
 		$this->form_validation->set_rules($validation_fields);
@@ -575,50 +575,87 @@ class Job_seeker extends CI_Controller {
 	        }
 		}
 		else {
-			$error = 0;
-   			$upload_image_path = SEEKER_UPLOAD."pictures/";
-   			$upload_resume_path = SEEKER_UPLOAD."resume/";
-    		if(!empty($_FILES['cand_pic']['name']))
-        	{	
-      			if($this->upload->do_upload('cand_pic'))
-          		{
-              		$upload_data = $this->upload->data(); 
-               		$_POST['cand_pic'] = $upload_image_path.$upload_data['file_name']; 
-               		$old_file_path = $_POST['old_file_path'] ;
-               		$upload_error = 0;
-               		@unlink(APPPATH.'../'.$old_file_path);
-               		$error = 0;
-            	}
-   		      	else
-           		{
-           			$error = 1;
-                	$data['update_status'] = strip_tags($this->upload->display_errors()); 
-               	}	
-           	}
-           	else {
-           		$error = 0;
-           	}
-           	if($error == 0) {
-           		if(!empty($_FILES['cand_resume']['name'])) {
-	      			if($this->upload->do_upload('cand_resume'))
+			$validation_error = 0;
+			if(!$this->input->post('cand_fresh')) {
+				$this->form_validation->set_rules($validation_fields_experience);
+				if($this->form_validation->run() == FALSE) {
+					$validation_error = 1;
+					foreach($validation_fields_experience as $row){
+				        $field = $row['field'];
+				        $error = form_error($field);
+				        if($error){
+					        $data['update_status'] = strip_tags($error);
+				    	    break;
+				        }
+				    }
+				}
+				else {
+					$validation_error = 0;
+				}
+			}
+			if($validation_error == 0) {
+				$error = 0;
+	   			$upload_image_path = SEEKER_UPLOAD."pictures/";
+	   			$upload_resume_path = SEEKER_UPLOAD."resume/";
+	    		if(!empty($_FILES['cand_pic']['name']))
+	        	{
+				 	$config['upload_path'] = APPPATH . '../'.$upload_image_path; // APPPATH means our application folder path.
+			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+			        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+			        $config['max_size']    = '1000'; // Maximum size - 1MB
+			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
+			    	$config['max_height']  = '768'; // Maximum height - 768px
+			        $this->upload->initialize($config); // Initialize the configuration
+
+	      			if($this->upload->do_upload('cand_pic'))
 	          		{
 	              		$upload_data = $this->upload->data(); 
-	               		$_POST['cand_resume'] = $upload_resume_path.$upload_data['file_name']; 
-	               		$prev_file_path = $_POST['prev_file_path'] ;
+	               		$_POST['cand_pic'] = $upload_image_path.$upload_data['file_name']; 
+	               		$old_file_path = $_POST['old_file_path'] ;
 	               		$upload_error = 0;
-	               		@unlink(APPPATH.'../'.$prev_file_path);
-						$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
+	              	    $keyword = "http";
+	        			// To check whether the image path is cdn or local path
+				        if(strpos( $old_file_path , $keyword ) === false && !empty($old_file_path) ) {
+	               			@unlink(APPPATH.'../'.$old_file_path);
+				        }
+	               		$error = 0;
 	            	}
 	   		      	else
 	           		{
-	                	// $data['update_status'] = strip_tags($this->upload->display_errors()); 
-	           			$data['update_status'] = $_FILES['cand_resume']['name'];
+	           			$error = 1;
+	                	$data['update_status'] = strip_tags($this->upload->display_errors()); 
 	               	}	
-	            }
-	            else {
-	            	$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
-	            }	
-           	}
+	           	}
+	           	else {
+	           		$error = 0;
+	           	}
+	           	if($error == 0) {
+	           		if(!empty($_FILES['cand_resume']['name'])) {
+					 	$config['upload_path'] = APPPATH . '../'.$upload_resume_path; // APPPATH means our application folder path.
+				        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
+				        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+				        $config['max_size']    = '2000'; // Maximum size - 2MB
+				        $this->upload->initialize($config); // Initialize the configuration
+		      			if($this->upload->do_upload('cand_resume'))
+		          		{
+		              		$upload_data = $this->upload->data(); 
+		               		$_POST['cand_resume'] = $upload_resume_path.$upload_data['file_name']; 
+		               		$prev_file_path = $_POST['prev_file_path'] ;
+		               		$upload_error = 0;
+		               		@unlink(APPPATH.'../'.$prev_file_path);
+							$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
+		            	}
+		   		      	else
+		           		{
+		                	$data['update_status'] = strip_tags($this->upload->display_errors()); 
+		           			// $data['update_status'] = $_FILES['cand_resume']['name'];
+		               	}	
+		            }
+		            else {
+		            	$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
+		            }	
+	           	}
+	        }
        	}
        	echo $data['update_status'];
 	}

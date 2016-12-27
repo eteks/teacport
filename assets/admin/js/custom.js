@@ -558,6 +558,17 @@ $(document).ready(function(){
         $(this).siblings('.hidden_known_lang').val(value);
     });
 
+    // Extra Curricular Values
+    $(document).on("click",".extra_curricular_values",function(){
+        var value = [];
+        $('.extra_curricular_values').each(function() {
+            if($(this).is(':checked')) {
+              value.push($(this).val());
+            }
+        });
+        $(this).siblings('.hidden_extra_curricular').val(value);
+    });
+
     
     
 //  // error popup alert box  
