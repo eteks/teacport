@@ -90,7 +90,7 @@ Website: http://thevectorlab.net/
 									<span class="from">Dulal Khan</span> -->
 									<span class="time"><?php echo $feed['feedback_form_created_date']; ?></span>
 									<!-- </span> -->
-									<span class="message">
+									<span class="message message_res">
 									    <?php echo $feed['feedback_form_message']; ?>
 									</span>
                                     </a>
