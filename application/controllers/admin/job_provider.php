@@ -232,7 +232,7 @@ class Job_Provider extends CI_Controller {
 					$data['status'] = "valid";
 		        }
      		}
-	    }
+	    	}
 
     	// Delete data
     	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {

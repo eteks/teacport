@@ -270,9 +270,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <?php
                     if(!empty($mode) && $mode=="full_view") :
                     ?>
-                    <?php
-                    foreach ($seeker_full_profile as $see_key => $see_val) :
-                    ?>
                     <input type="hidden" value="view" id="popup_mode" />
                     <div class="tab-pane" id="tab1">
                       <h4>Candidate Basic Info-1</h4>
@@ -280,13 +277,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Candidate Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_name']; ?>
+                            <?php echo $seeker_full_profile['candidate_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Gender</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_gender']; ?>
+                            <?php echo $seeker_full_profile['candidate_gender']; ?>
                           </span>
                         </div>
                       </div>
@@ -294,13 +291,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Father Initial</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_father_initial']; ?>
+                            <?php echo $seeker_full_profile['candidate_father_initial']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Father Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_father_name']; ?>
+                            <?php echo $seeker_full_profile['candidate_father_name']; ?>
                           </span>
                         </div>
                       </div>
@@ -308,13 +305,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Date Of Birth</label>
                           <span class="dynamic_data"> 
-                            <?php echo date("d/m/Y", strtotime($see_val['candidate_date_of_birth'])) ; ?>
+                            <?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])) ; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Marital Status</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_marital_status']; ?>
+                            <?php echo $seeker_full_profile['candidate_marital_status']; ?>
                           </span>
                         </div>
                       </div>
@@ -322,16 +319,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Mother Tongue</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['mother_tongue']; ?>
+                            <?php echo $seeker_full_profile['language_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Language Known</label>
                           <span class="dynamic_data"> 
                             <?php
-                            $lan_array = explode(',',$see_val['candidate_language_known']);
-                            if(!empty($language_values)) :
-                            foreach ($language_values as $lan_val) :
+                            $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
+                            if(!empty($known_languages)) :
+                            foreach ($known_languages as $lan_val) :
                             ?>
                             <?php
                             if(in_array($lan_val['language_id'], $lan_array)) {
@@ -347,7 +344,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Nationality</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_nationality']; ?>
+                            <?php 
+                            foreach (unserialize(NATIONALITY) as $key => $val):
+                            if($seeker_full_profile['candidate_nationality'] == $key) { 
+                                echo $val; 
+                            }
+                            endforeach;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -358,13 +361,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Religion</label>
                           <span class="dynamic_data"> 
-                            test
+                            <?php 
+                            foreach (unserialize(RELIGION) as $key => $val):
+                            if($seeker_full_profile['candidate_religion'] == $key) { 
+                                echo $val; 
+                            }
+                            endforeach;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Community</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_community']; ?>
+                            <?php 
+                            foreach (unserialize(COMMUNAL) as $key => $val):
+                            if($seeker_full_profile['candidate_community'] == $key) { 
+                                echo $val; 
+                            }
+                            endforeach;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -372,13 +387,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Is Physically Challenged</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_is_physically_challenged']; ?>
+                            <?php echo $seeker_full_profile['candidate_is_physically_challenged']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Registration Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_registration_type']; ?>
+                            <?php echo $seeker_full_profile['candidate_registration_type']; ?>
                           </span>
                         </div>
                       </div>
@@ -386,15 +401,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Image Path</label>
                           <span class="dynamic_data"> 
-                            <img class="popup_preview" src="<?php echo base_url().$see_val['candidate_image_path']; ?>" />
+                            <img class="popup_preview" src="<?php echo base_url().$seeker_full_profile['candidate_image_path']; ?>" />
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Facebook url</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if(!empty($see_val['candidate_facebook_url'])) :
-                              echo $see_val['candidate_facebook_url'];
+                            if(!empty($seeker_full_profile['candidate_facebook_url'])) :
+                              echo $seeker_full_profile['candidate_facebook_url'];
                             else :
                               echo "Null";
                             endif;
@@ -407,8 +422,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Google Plus url</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if(!empty($see_val['candidate_googleplus_url'])) :
-                              echo $see_val['candidate_googleplus_url'];
+                            if(!empty($seeker_full_profile['candidate_googleplus_url'])) :
+                              echo $seeker_full_profile['candidate_googleplus_url'];
                             else :
                               echo "Null";
                             endif;
@@ -419,8 +434,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Linkedin url</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if(!empty($see_val['candidate_linkedin_url'])) :
-                              echo $see_val['candidate_linkedin_url'];
+                            if(!empty($seeker_full_profile['candidate_linkedin_url'])) :
+                              echo $seeker_full_profile['candidate_linkedin_url'];
                             else :
                               echo "Null";
                             endif;
@@ -433,7 +448,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Candidate Status</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if($see_val['candidate_status'] == 1) :
+                            if($seeker_full_profile['candidate_status'] == 1) :
                               echo "Active";
                             else :
                               echo "Inactive  ";
@@ -445,7 +460,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Candidate Status</label>
                           <span class="dynamic_data"> 
                             <?php 
-                                $created_datetime = explode(' ', $see_val['candidate_created_date']);
+                                $created_datetime = explode(' ', $seeker_full_profile['candidate_created_date']);
                                 echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?>
                           </span>
@@ -458,13 +473,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Email</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_email']; ?>
+                            <?php echo $seeker_full_profile['candidate_email']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Mobile No</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_mobile_no']; ?>
+                            <?php echo $seeker_full_profile['candidate_mobile_no']; ?>
                           </span>
                         </div>
                       </div>
@@ -472,13 +487,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">District Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['district']; ?>
+                            <?php echo $seeker_full_profile['native_district_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Address 1</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_address_1']; ?>
+                            <?php echo $seeker_full_profile['candidate_address_1']; ?>
                           </span>
                         </div>
                       </div>
@@ -486,13 +501,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Address 2</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_address_2']; ?>
+                            <?php echo $seeker_full_profile['candidate_address_2']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Live District Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['live_district']; ?>
+                            <?php echo $seeker_full_profile['live_district_name']; ?>
                           </span>
                         </div>
                       </div>
@@ -500,7 +515,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Pincode</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_pincode']; ?>
+                            <?php echo $seeker_full_profile['candidate_pincode']; ?>
                           </span>
                         </div>
                       </div>
@@ -508,6 +523,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="tab-pane" id="tab4">
                       <h4>Candidate Educational Info</h4>
                       <div class="span12">
+                        <?php
+                        if($education_details) :
+                        ?>
                         <table class="seeker_profile_education">
                           <thead>
                             <tr>
@@ -523,16 +541,31 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </thead>
                           <tbody>
                             <?php
-                            if(!empty($see_val['candidate_education_details'])) :
-                            foreach ($see_val['candidate_education_details'] as $edu_key => $edu_val) :
+                            foreach ($education_details as $edu_key => $edu_val) :
                             ?>
                             <tr>
                               <td> <?php echo $edu_val['educational_qualification']; ?> </td>
                               <td> <?php echo $edu_val['candidate_education_yop']; ?> </td>
                               <td> <?php echo $edu_val['language_name']; ?> </td>
-                              <td> <?php echo $edu_val['departments_name']; ?> </td>
+                              <td> 
+                                <?php
+                                if(!empty($edu_val['departments_name'])) :
+                                  echo $edu_val['departments_name']; 
+                                else :
+                                  echo "NULL";
+                                endif;
+                                ?> 
+                              </td>
                               <td> <?php echo $edu_val['candidate_education_percentage']." %"; ?> </td>
-                              <td> <?php echo $edu_val['edu_board']; ?> </td>
+                              <td> 
+                                <?php
+                                if(!empty($edu_val['university_board_name'])) :
+                                  echo $edu_val['university_board_name']; 
+                                else :
+                                  echo "NULL";
+                                endif;
+                                ?> 
+                              </td>
                               <td> 
                                 <?php
                                 if($edu_val['candidate_education_status'] == 1) :
@@ -551,34 +584,61 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </tr>
                             <?php
                             endforeach;
-                            endif;
                             ?>
                           </tbody>
                         </table>
+                        <?php
+                        else :
+                        ?>
+                        <p> The candidate has no education details </p>
+                        <?php
+                        endif;
+                        ?>
+
                       </div>
                     </div>
                     <div class="tab-pane" id="tab5">
                       <h4>Candidate Experience Info</h4>
                       <div class="span12">
+                        <?php
+                        if($experience_details) :
+                        ?>
                         <table class="seeker_profile_education">
                           <thead>
                             <tr>
                               <th> Class Level </th>
                               <th> Experience Year </th>
                               <th> Experience Board </th>
+                              <th> Experience Subject </th>
                               <th> Experience Status </th>
                               <th> Created Date </th>
                             </tr>
                           </thead>
                           <tbody>
                             <?php
-                            if(!empty($see_val['candidate_experience_details'])) :
-                            foreach ($see_val['candidate_experience_details'] as $exp_key => $exp_val) :
+                            foreach ($experience_details as $exp_key => $exp_val) :
                             ?>
                             <tr>
                               <td> <?php echo $exp_val['class_level']; ?> </td>
                               <td> <?php echo $exp_val['candidate_experience_year']; ?> </td>
-                              <td> <?php echo $exp_val['exu_board']; ?> </td>
+                              <td> 
+                                <?php
+                                if(!empty($exp_val['university_board_name'])) :
+                                  echo $exp_val['university_board_name']; 
+                                else :
+                                  echo "NULL";
+                                endif;
+                                ?> 
+                              </td>
+                              <td> 
+                                <?php
+                                if(!empty($exp_val['subject_name'])) :
+                                  echo $exp_val['subject_name']; 
+                                else :
+                                  echo "NULL";
+                                endif;
+                                ?> 
+                              </td>
                               <td> 
                                 <?php
                                 if($exp_val['candidate_experience_status'] == 1) :
@@ -597,10 +657,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </tr>
                             <?php
                             endforeach;
-                            endif;
                             ?>
                           </tbody>
                         </table>
+                        <?php
+                        else :
+                        ?>
+                        <p> The candidate has no experience details </p>
+                        <?php
+                        endif;
+                        ?>
                       </div>
                     </div>
                     <div class="tab-pane" id="tab6">
@@ -609,14 +675,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Institution Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['institution_type_name']; ?>
+                            <?php echo $seeker_full_profile['institution_type_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">TET Exam Status</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if($see_val['candidate_tet_exam_status'] == 1) :
+                            if($seeker_full_profile['candidate_tet_exam_status'] == 1) :
                               echo "Yes";
                             else :
                               echo "No";
@@ -629,19 +695,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Interest Subject</label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['edu_interest_sub']; ?>
+                            <?php echo $seeker_full_profile['subject_name']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Extra Curricular</label>
                           <span class="dynamic_data"> 
-                            <?php
-                            foreach ($see_val['extra_curricular_details'] as $value) :
-                            ?>
-                            <span> <?php echo $value; ?> </span>
-                            <?php
+                             <?php
+                            $ext_array = explode(',',$seeker_full_profile['candidate_extra_curricular_id']);
+                            if(!empty($extra_curricular_values)) :
+                            foreach ($extra_curricular_values as $ext_val) :
+                            if(in_array($ext_val['extra_curricular_id'], $ext_array)) {
+                              echo $ext_val['extra_curricular'].'<br/>';
+                            }
                             endforeach;
-                            ?>
+                            endif;
+                            ?>          
                           </span>
                         </div>
                       </div>
@@ -650,7 +719,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Is Fresher</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if($see_val['candidate_is_fresher'] == 1) :
+                            if($seeker_full_profile['candidate_is_fresher'] == 1) :
                               echo "Yes";
                             else :
                               echo "No";
@@ -659,22 +728,26 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Resume Upload Path</label>
+                          <label class="control-label">Resume Uploaded </label>
                           <span class="dynamic_data"> 
-                            <?php echo $see_val['candidate_resume_upload_path']; ?>
-                            <a href="<?php echo base_url().$see_val['candidate_resume_upload_path']; ?>"> Open </a>
+                            <?php 
+                            if(!empty($seeker_full_profile['candidate_resume_upload_path'])) {
+                            ?>
+                              <span> Yes </span> <a href="<?php echo base_url().$seeker_full_profile['candidate_resume_upload_path']; ?>" target="_blank"> Open </a>
+                            <?php
+                            }
+                            else {
+                            ?>
+                             <span> No </span>
+                            <?php
+                            }
+                            ?>
                           </span>
                         </div>
                       </div>
                     </div>
                     <?php
-                    endforeach;
-                    ?>
-                    <?php
                     else :
-                    ?>
-                    <?php
-                    foreach ($seeker_full_profile as $see_key => $see_val) :
                     ?>
                     <input type="hidden" value="edit" id="popup_mode" />
                     <p class="val_error"> </p>
@@ -684,7 +757,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Candidate Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $see_val['candidate_name']; ?>" name="cand_name" />
+                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $seeker_full_profile['candidate_name']; ?>" name="cand_name" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -692,9 +765,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <select name="cand_gen" class="popup_select tabfield1 tabfield">
                               <option value="">Please select gender</option>
-                              <option value="male" <?php if($see_val['candidate_gender']=='male') echo "selected"; ?>>Male</option>
-                              <option value="female" <?php if($see_val['candidate_gender']=='female') echo "selected"; ?>>Female</option>
-                              <option value="others" <?php if($see_val['candidate_gender']=='others') echo "selected"; ?>>Others</option>
+                              <option value="male" <?php if($seeker_full_profile['candidate_gender']=='male') echo "selected"; ?>>Male</option>
+                              <option value="female" <?php if($seeker_full_profile['candidate_gender']=='female') echo "selected"; ?>>Female</option>
+                              <option value="others" <?php if($seeker_full_profile['candidate_gender']=='others') echo "selected"; ?>>Others</option>
                             </select> 
                           </span>
                         </div>
@@ -703,24 +776,24 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Father Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $see_val['candidate_father_name']; ?>" name="cand_fa_name" />
+                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $seeker_full_profile['candidate_father_name']; ?>" name="cand_fa_name" />
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Date Of Birth</label>
                           <span>
-                            <input class=" m-ctrl-medium date-picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($see_val['candidate_date_of_birth'])); ?>" name="cand_dob" />
+                            <input class=" m-ctrl-medium date-picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])); ?>" name="cand_dob" />
                           </span>
                         </div>
                       </div>
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Marital Status</label>
-                          <input type="radio" class="radio_status" name="mar_status" value="single" <?php if($see_val['candidate_marital_status']=='single') echo "checked"; ?> />
+                          <input type="radio" class="radio_status" name="mar_status" value="single" <?php if($seeker_full_profile['candidate_marital_status']=='single') echo "checked"; ?> />
                             Single
-                          <input type="radio" class="radio_status" name="mar_status" value="married" <?php if($see_val['candidate_marital_status']=='married') echo "checked"; ?> />
+                          <input type="radio" class="radio_status" name="mar_status" value="married" <?php if($seeker_full_profile['candidate_marital_status']=='married') echo "checked"; ?> />
                             Married
-                          <input type="hidden" value="<?php echo $see_val['candidate_marital_status']; ?>" name="cand_mar_status" class="hidden_status tabfield1 tabfield"/>
+                          <input type="hidden" value="<?php echo $seeker_full_profile['candidate_marital_status']; ?>" name="cand_mar_status" class="hidden_status tabfield1 tabfield"/>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Mother Tongue</label>
@@ -728,11 +801,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <select name="cand_moth_ton" class="popup_select tabfield1 tabfield">
                               <option value="">Please select mother tongue</option>
                               <?php
-                                if(!empty($language_values)) :
-                                foreach ($language_values as $lan_val) :
+                                if(!empty($mother_tongue)) :
+                                foreach ($mother_tongue as $lan_val) :
                                 ?>
                                 <?php
-                                  if($lan_val['language_id']==$see_val['candidate_mother_tongue']) {
+                                  if($lan_val['language_id']==$seeker_full_profile['candidate_mother_tongue']) {
                                     echo '<option value='.$lan_val["language_id"].' selected> '.$lan_val["language_name"].' </option>';
                                   }
                                   else {
@@ -740,23 +813,32 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                   }
                                 endforeach;
                                   else :
-                                    echo '<option value='.$see_val['candidate_mother_tongue'].' selected> "'.$see_val['mother_tongue'].'" </option>';
+                                    echo '<option value='.$seeker_full_profile['candidate_mother_tongue'].' selected> "'.$seeker_full_profile['mother_tongue'].'" </option>';
                                 endif;
                               ?>
                             </select> 
                           </span>
                         </div>
                       </div>
-                     <!--  <div class="span12">
+                      <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Languages Known</label>
-                            <input type="checkbox" class="known_languages" value="1" checked />  
-                              English
-                            <input type="checkbox" class="known_languages" value="2" /> 
-                              Tamil
-                            <input type="hidden" class="tabfield1 tabfield hidden_known_lang" name="cand_known_lang">
+                           <?php
+                            $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
+                            if(!empty($known_languages)) :
+                            foreach ($known_languages as $lan_val) :
+                            if(in_array($lan_val['language_id'], $lan_array)) {
+                              echo '<input type="checkbox" class="known_languages" value="'.$lan_val['language_id'].'" checked>'.$lan_val['language_name'].'</li>';
+                            }
+                            else {
+                              echo '<input type="checkbox" class="known_languages" value="'.$lan_val['language_id'].'">'.$lan_val['language_name'].'';
+                            }
+                            endforeach;
+                            endif;
+                            ?>
+                          <input type="hidden" value="<?php echo $seeker_full_profile['candidate_language_known']; ?>" class="tabfield1 tabfield hidden_known_lang" name="cand_known_lang">
                         </div>
-                      </div>   --> 
+                      </div>   
                     </div>
                     <div class="tab-pane active" id="tab2">
                       <h4>Candidate Basic Info-2</h4>
@@ -764,13 +846,41 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Nationality</label>
                           <span>
-                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $see_val['candidate_nationality']; ?>" name="cand_nationality" />
+                             <select class="span6 tabfield2 tabfield" name="cand_nationality">
+                              <option value=""> Select </option>
+                              <?php 
+                              foreach (unserialize(NATIONALITY) as $key => $val): 
+                              if($key == $seeker_full_profile['candidate_nationality']) {
+                              echo '<option value='.$key.' selected>
+                                  '.$val.' </option>';
+                              }
+                              else {
+                              echo '<option value='.$key.'>
+                                  '.$val.' </option>';
+                              }
+                              endforeach; 
+                              ?>
+                            </select>
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
                           <label class="control-label">Religion</label>
                           <span>
-                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $see_val['candidate_religion']; ?>" name="cand_religion" />
+                            <select class="span6 tabfield2 tabfield" name="cand_religion">
+                              <option value=""> Select </option>
+                              <?php 
+                              foreach (unserialize(RELIGION) as $key => $val):
+                              if($key == $seeker_full_profile['candidate_religion']) {
+                              echo '<option value='.$key.' selected>
+                                  '.$val.' </option>';
+                              }
+                              else {
+                              echo '<option value='.$key.'>
+                                  '.$val.' </option>';
+                              }
+                              endforeach; 
+                              ?>
+                            </select>
                           </span>
                         </div>
                       </div>
@@ -778,16 +888,30 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Community</label>
                           <span>
-                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $see_val['candidate_community']; ?>" name="cand_community" />
+                            <select class="span6 tabfield2 tabfield" name="cand_community">
+                              <option value=""> Select </option>
+                              <?php 
+                              foreach (unserialize(COMMUNAL) as $key => $val): 
+                              if($key == $seeker_full_profile['candidate_community']) {
+                              echo '<option value='.$key.' selected>
+                                  '.$val.' </option>';
+                              }
+                              else {
+                              echo '<option value='.$key.'>
+                                  '.$val.' </option>';
+                              }
+                              endforeach; 
+                              ?>
+                            </select>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Is Physically Challenged</label>
-                          <input type="radio" class="radio_status" name="phy_status" value="yes" <?php if($see_val['candidate_is_physically_challenged']=='yes') echo "checked"; ?> />
+                          <input type="radio" class="radio_status" name="phy_status" value="yes" <?php if($seeker_full_profile['candidate_is_physically_challenged']=='yes') echo "checked"; ?> />
                             Yes
-                          <input type="radio" class="radio_status" name="phy_status" value="no"  <?php if($see_val['candidate_is_physically_challenged']=='no') echo "checked"; ?> />
+                          <input type="radio" class="radio_status" name="phy_status" value="no"  <?php if($seeker_full_profile['candidate_is_physically_challenged']=='no') echo "checked"; ?> />
                             No
-                          <input type="hidden" value="<?php echo $see_val['candidate_is_physically_challenged']; ?>" name="cand_phy" class="hidden_status tabfield2 tabfield"/>                        
+                          <input type="hidden" value="<?php echo $seeker_full_profile['candidate_is_physically_challenged']; ?>" name="cand_phy" class="hidden_status tabfield2 tabfield"/>                        
                         </div>
                       </div>
                       <div class="span12">
@@ -796,8 +920,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <a class="btn upload_option"> Upload </a>
                             <input class="form-control hidden_upload tabfield2 tabfield" name="cand_img" type="file">
-                            <img src="<?php echo base_url().$see_val['candidate_image_path']; ?>" class="popup_preview">
-                            <input type="hidden" value="<?php echo $see_val['candidate_image_path']; ?>" class="tabfield2 tabfield" name="old_file_path" />
+                            <img src="<?php echo base_url().$seeker_full_profile['candidate_image_path']; ?>" class="popup_preview">
+                            <input type="hidden" value="<?php echo $seeker_full_profile['candidate_image_path']; ?>" class="tabfield2 tabfield" name="old_file_path" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -805,8 +929,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <select name="cand_status" class="popup_select tabfield2 tabfield">
                               <option value="">Please select status</option>
-                              <option value="1" <?php if($see_val['candidate_status']==1) echo "selected"; ?>>Active</option>
-                              <option value="0" <?php if($see_val['candidate_status']==0) echo "selected"; ?>>Inactive</option>
+                              <option value="1" <?php if($seeker_full_profile['candidate_status']==1) echo "selected"; ?>>Active</option>
+                              <option value="0" <?php if($seeker_full_profile['candidate_status']==0) echo "selected"; ?>>Inactive</option>
                             </select> 
                           </span>
                         </div>
@@ -818,13 +942,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Email</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $see_val['candidate_email']; ?>" name="cand_email" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_email']; ?>" name="cand_email" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
                           <label class="control-label">Mobile No</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $see_val['candidate_mobile_no']; ?>" name="cand_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_mobile_no']; ?>" name="cand_mobile" />
                           </span>
                         </div>
                       </div>
@@ -839,7 +963,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               foreach ($district_values as $dis_val) :
                               ?>
                               <?php
-                                if($dis_val['district_id']==$see_val['candidate_district_id']) {
+                                if($dis_val['district_id']==$seeker_full_profile['native_district_id']) {
                                   echo '<option value='.$dis_val["district_id"].' selected> '.$dis_val["district_name"].' </option>';
                                 }
                                 else if($dis_val['district_status']==1){
@@ -847,7 +971,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 }
                               endforeach;
                               else :
-                                echo '<option value='.$see_val['candidate_district_id'].' selected> "'.$see_val['district'].'" </option>';
+                                echo '<option value='.$seeker_full_profile['native_district_id'].' selected> "'.$seeker_full_profile['native_district_name'].'" </option>';
                               endif;
                               ?>
                             </select> 
@@ -856,7 +980,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Address 1</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $see_val['candidate_address_1']; ?>" name="cand_address1" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_1']; ?>" name="cand_address1" />
                           </span>
                         </div>
                       </div>
@@ -864,7 +988,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Address 2</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $see_val['candidate_address_2']; ?>" name="cand_address2" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_2']; ?>" name="cand_address2" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -877,7 +1001,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               foreach ($district_values as $dis_val) :
                               ?>
                               <?php
-                                if($dis_val['district_id']==$see_val['candidate_live_district_id']) {
+                                if($dis_val['district_id']==$seeker_full_profile['live_district_id']) {
                                   echo '<option value='.$dis_val["district_id"].' selected> '.$dis_val["district_name"].' </option>';
                                 }
                                 else if($dis_val['district_status']==1){
@@ -885,7 +1009,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 }
                               endforeach;
                               else :
-                                echo '<option value='.$see_val['candidate_live_district_id'].' selected> "'.$see_val['live_district'].'" </option>';
+                                echo '<option value='.$seeker_full_profile['live_district_id'].' selected> "'.$seeker_full_profile['live_district_name'].'" </option>';
                               endif;
                               ?>
                             </select> 
@@ -896,7 +1020,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Pincode</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $see_val['candidate_pincode']; ?>" name="cand_pincode" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" name="cand_pincode" />
                           </span>
                         </div>
                       </div>
@@ -914,7 +1038,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               foreach ($instution_values as $ins_val) :
                               ?>
                               <?php
-                                if($ins_val['institution_type_id']==$see_val['candidate_institution_type']) {
+                                if($ins_val['institution_type_id']==$seeker_full_profile['candidate_institution_type']) {
                                   echo '<option value='.$ins_val["institution_type_id"].' selected> '.$ins_val["institution_type_name"].' </option>';
                                 }
                                 else if($ins_val['institution_type_status']==1){
@@ -922,7 +1046,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 }
                               endforeach;
                               else :
-                                echo '<option value='.$see_val['candidate_institution_type'].' selected> "'.$see_val['institution_type_name'].'" </option>';
+                                echo '<option value='.$seeker_full_profile['candidate_institution_type'].' selected> "'.$seeker_full_profile['institution_type_name'].'" </option>';
                               endif;
                               ?>
                             </select> 
@@ -933,8 +1057,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <select name="cand_tet_status" class="popup_select tabfield4 tabfield">
                               <option value="">Please select TET status</option>
-                              <option value="1" <?php if($see_val['candidate_tet_exam_status']==1) echo "selected"; ?>>Yes</option>
-                              <option value="0" <?php if($see_val['candidate_tet_exam_status']==0) echo "selected"; ?>>No</option>
+                              <option value="1" <?php if($seeker_full_profile['candidate_tet_exam_status']==1) echo "selected"; ?>>Yes</option>
+                              <option value="0" <?php if($seeker_full_profile['candidate_tet_exam_status']==0) echo "selected"; ?>>No</option>
                             </select>
                           </span>
                         </div>
@@ -950,7 +1074,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               foreach ($subject_values as $sub_val) :
                               ?>
                               <?php
-                                if($sub_val['subject_id']==$see_val['candidate_interest_subject_id']) {
+                                if($sub_val['subject_id']==$seeker_full_profile['candidate_interest_subject_id']) {
                                   echo '<option value='.$sub_val["subject_id"].' selected> '.$sub_val["subject_name"].' </option>';
                                 }
                                 else {
@@ -958,7 +1082,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 }
                               endforeach;
                               else :
-                                echo '<option value='.$see_val['candidate_interest_subject_id'].' selected> "'.$see_val['edu_interest_sub'].'" </option>';
+                                echo '<option value='.$seeker_full_profile['candidate_interest_subject_id'].' selected> "'.$seeker_full_profile['edu_interest_sub'].'" </option>';
                               endif;
                               ?>
                             </select> 
@@ -968,31 +1092,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Extra Curricular</label>
                           <span>
                             <?php
-                            $extr_array = array();
-                            foreach ($see_val['extra_curricular_details'] as $extr_key => $extr_val) :
-                              $extr_array[] = $extr_key;
+                            $ext_array = explode(',',$seeker_full_profile['candidate_extra_curricular_id']);
+                            if(!empty($extra_curricular_values)) :
+                            foreach ($extra_curricular_values as $ext_val) :
+                            if(in_array($ext_val['extra_curricular_id'], $ext_array)) {
+                              echo '<input type="checkbox" class="extra_curricular_values" value="'.$ext_val['extra_curricular_id'].'" checked>'.$ext_val['extra_curricular'].'</li>';
+                            }
+                            else {
+                              echo '<input type="checkbox" class="extra_curricular_values" value="'.$ext_val['extra_curricular_id'].'">'.$ext_val['extra_curricular'].'';
+                            }
                             endforeach;
+                            endif;
                             ?>
-                            <select data-placeholder="select" name="cand_extra" class="chosen span6 popup_select tabfield4 tabfield" multiple="multiple" >
-                              <?php
-                              if(!empty($extra_curricular_values)) :
-                              foreach ($extra_curricular_values as $ext_val) :
-                              ?>
-                              <?php
-                                if(in_array($ext_val['extra_curricular_id'], $extr_array)) {
-                                  echo '<option value='.$ext_val["extra_curricular_id"].' selected> '.$ext_val["extra_curricular"].' </option>';
-                                }
-                                else {
-                                  echo '<option value='.$ext_val["extra_curricular_id"].'> '.$ext_val["extra_curricular"].' </option>';
-                                }
-                              endforeach;
-                              else :
-                                foreach ($see_val['extra_curricular_details'] as $extr_key => $extr_val) :
-                                  echo '<option value='.$extr_key.' selected> "'.$extr_val.'" </option>';
-                                endforeach;  
-                              endif;
-                              ?>
-                            </select> 
+                            <input type="hidden" value="<?php echo $seeker_full_profile['candidate_extra_curricular_id']; ?>" class="tabfield4 tabfield hidden_extra_curricular" name="cand_extra" />                           
                           </span>
                         </div>
                       </div>
@@ -1002,17 +1114,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <select name="cand_is_fresh" class="popup_select tabfield4 tabfield">
                               <option value="">Please select status</option>
-                              <option value="1" <?php if($see_val['candidate_is_fresher']==1) echo "selected"; ?>>Yes</option>
-                              <option value="0" <?php if($see_val['candidate_is_fresher']==0) echo "selected"; ?>>No</option>
+                              <option value="1" <?php if($seeker_full_profile['candidate_is_fresher']==1) echo "selected"; ?>>Yes</option>
+                              <option value="0" <?php if($seeker_full_profile['candidate_is_fresher']==0) echo "selected"; ?>>No</option>
                             </select> 
                           </span>
                         </div>
                       </div>
                     </div> 
-                    <input type="hidden" class="hidden_id" value="<?php echo $see_key; ?>" />
-                    <?php
-                    endforeach;
-                    ?>
+                    <input type="hidden" class="hidden_id" value="<?php echo $seeker_full_profile['candidate_id']; ?>" />  
                     <?php
                     endif;
                     ?>
@@ -1035,7 +1144,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </p>
           <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
         </div>
-      </div> 	
+      </div>  
       <!-- END ADVANCED TABLE widget-->
       <!-- END PAGE CONTENT-->
     </div>

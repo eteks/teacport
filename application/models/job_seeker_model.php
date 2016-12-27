@@ -30,12 +30,17 @@ class Job_seeker_model extends CI_Model {
 		$count = $existuser->num_rows();
 		if ($count === 1) {
             $user_data = $existuser->row_array();
-            //print_r($user_data);            
+            //print_r($user_data);   
 			$user_details['candidate_email'] = $user_data['candidate_email'];
-			$user_details['candidate_name'] = $user_data['candidate_name'];
+			$user_details['candidate_name'] = $user_data['candidate_name'];			
 			$user_details['candidate_id'] = $user_data['candidate_id'];
-			$user_details['candidate_mobile_no'] = $user_data['candidate_mobile_no'];
+			$user_details['login_type'] = $user_data['candidate_registration_type'];
+			$user_details['candidate_date_of_birth'] = $user_data['candidate_date_of_birth'];
+			$user_details['candidate_father_name'] = $user_data['candidate_father_name'];
+			$user_details['candidate_district_id'] = $user_data['candidate_district_id'];
 			$user_details['candidate_institution_type'] = $user_data['candidate_institution_type'];
+			$user_details['candidate_mobile_no'] = $user_data['candidate_mobile_no'];
+			$user_details['candidate_image_path'] = $user_data['candidate_image_path'];
 			$user_details['user_type'] = 'seeker';
 			$user_details['valid_status'] = 'valid';
 			return $user_details; 
@@ -73,13 +78,19 @@ class Job_seeker_model extends CI_Model {
 		$existuser = $this->db->get_where('tr_candidate_profile',$where);
 		$count = $existuser->num_rows();
 		if ($count === 1) {
-            $user_data = $existuser->row_array();            
+            $user_data = $existuser->row_array();  
 			$user_details['candidate_email'] = $user_data['candidate_email'];
 			$user_details['candidate_name'] = $user_data['candidate_name'];			
 			$user_details['candidate_id'] = $user_data['candidate_id'];
 			$user_details['user_type'] = 'seeker';
 			$user_details['valid_status'] = 'valid';
-			$user_detalls['login_type'] = $user_data['candidate_registration_type'];
+			$user_details['login_type'] = $user_data['candidate_registration_type'];
+			$user_details['candidate_date_of_birth'] = $user_data['candidate_date_of_birth'];
+			$user_details['candidate_father_name'] = $user_data['candidate_father_name'];
+			$user_details['candidate_district_id'] = $user_data['candidate_district_id'];
+			$user_details['candidate_institution_type'] = $user_data['candidate_institution_type'];
+			$user_details['candidate_mobile_no'] = $user_data['candidate_mobile_no'];
+			$user_details['candidate_image_path'] = $user_data['candidate_image_path'];
 			return $user_details; 
 		}
 		else {
@@ -163,10 +174,11 @@ class Job_seeker_model extends CI_Model {
 													'candidate_father_name' => $cand_data['candidate_father_name'],
 													'candidate_district_id' => $cand_data['candidate_district_id'],
 													'candidate_institution_type' => $cand_data['candidate_institution_type'],
-													'candidate_mobile_no' => $cand_data['candidate_email'],
-													'candidate_registration_type' => $cand_data['candidate_email'],
+													'candidate_mobile_no' => $cand_data['candidate_mobile_no'],
+													'candidate_email' => $cand_data['candidate_email'],
 													'candidate_image_path' => $cand_data['candidate_image_path'],
-
+													'valid_status' => 'valid',
+													'login_type' => $cand_data['candidate_registration_type'],
 													);
 			}
 		}
@@ -179,6 +191,7 @@ class Job_seeker_model extends CI_Model {
 		$this->db->set($data);
 		$this->db->where($update_where);
 		$this->db->update('tr_candidate_profile',$data);
+		$cand_data = $this->db->get_where('tr_candidate_profile',$update_where)->row_array();
 		$model_data['status'] = "success";
 		$model_data['candidate_data'] =array(
 											'user_type' => 'seeker',
@@ -188,11 +201,13 @@ class Job_seeker_model extends CI_Model {
 											'candidate_father_name' => $cand_data['candidate_father_name'],
 											'candidate_district_id' => $cand_data['candidate_district_id'],
 											'candidate_institution_type' => $cand_data['candidate_institution_type'],
-											'candidate_mobile_no' => $cand_data['candidate_email'],
-											'candidate_registration_type' => $cand_data['candidate_email'],
+											'candidate_mobile_no' => $cand_data['candidate_mobile_no'],
+											'candidate_email' => $cand_data['candidate_email'],
 											'candidate_image_path' => $cand_data['candidate_image_path'],
+											'valid_status' => 'valid',
+											'login_type' => $cand_data['candidate_registration_type'],
 											);
-		return $data;
+		return $model_data;
 	}
 
 
@@ -393,6 +408,12 @@ class Job_seeker_model extends CI_Model {
 		else {
 			$fresh = 1 ;
 		}
+		if(isset($data['cand_extra_cur']) && !empty($data['cand_extra_cur'])) {
+			$cand_extra_cur = implode(',', $data['cand_extra_cur']);
+		}
+		else {
+			$cand_extra_cur = NULL;
+		}
 		// Check Mobile Number or Email already exists or not
 		$mobile_exists_where = "candidate_mobile_no =" . "'" . $data['cand_mobile'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
 
@@ -414,6 +435,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_date_of_birth' => date('Y-m-d',strtotime($data['cand_dob'])),
 								'candidate_father_name' => $data['cand_fa_name'],
 								'candidate_image_path' => $data['cand_pic'],
+								'candidate_resume_upload_path' => $data['cand_resume'],
 								'candidate_marital_status' => $data['cand_marital'],
 								'candidate_district_id' => $data['cand_native_dis'],
 								'candidate_mother_tongue' => $data['cand_mother_ton'],
@@ -432,8 +454,9 @@ class Job_seeker_model extends CI_Model {
 								'candidate_googleplus_url' => $data['cand_google'],
 								'candidate_linkedin_url' => $data['cand_linkedin'],
 								'candidate_tet_exam_status' => $data['cand_tet'],
-								'candidate_interest_subject_id' => $data['cand_int_sub'],
-								'candidate_extra_curricular_id' => implode(',',$data['cand_extra_cur']),
+								'candidate_profile_completeness' => 90,
+								// 'candidate_interest_subject_id' => $data['cand_int_sub'],
+								'candidate_extra_curricular_id' => $cand_extra_cur,
 								'candidate_is_fresher' => $fresh,
 								);
 				$this->db->set($profile_update_data);
@@ -441,19 +464,30 @@ class Job_seeker_model extends CI_Model {
 				$this->db->update('tr_candidate_profile',$profile_update_data);	
 				// Updation in preference table
 				$prefrence_update_data = array(
-										'candidate_posting_applied_for' => implode(',',$data['cand_posts']),
-										'candidate_expecting_start_salary' => $data['cand_start_sal'],
-										'candidate_expecting_end_salary' => $data['cand_end_sal'],
-										'candidate_willing_class_level_id' => implode(',',$data['cand_class']),
-										'candidate_willing_subject_id' => implode(',',$data['cand_sub'])
-										);
-				$this->db->set($prefrence_update_data);
-				$this->db->where('candidate_preferance_id',$data['cand_pre']);
-				$this->db->update('tr_candidate_preferance',$prefrence_update_data);
+											'candidate_profile_id' => $data['cand_pro'],
+											'candidate_posting_applied_for' => implode(',',$data['cand_posts']),
+											'candidate_expecting_start_salary' => $data['cand_start_sal'],
+											'candidate_expecting_end_salary' => $data['cand_end_sal'],
+											'candidate_willing_class_level_id' => implode(',',$data['cand_class']),
+											'candidate_willing_subject_id' => implode(',',$data['cand_sub'])
+											);
+				if(!empty($data['cand_pre'])) {
+					$this->db->set($prefrence_update_data);
+					$this->db->where('candidate_preferance_id',$data['cand_pre']);
+					$this->db->update('tr_candidate_preferance',$prefrence_update_data);
+				}
+				else {
+					$this->db->insert('tr_candidate_preferance',$prefrence_update_data);
+				}
+
+
 				// Updation in education table
 				$data_education = array_map(null,$data['cand_qual'],$data['cand_yop'],$data['cand_med'],$data['cand_dept'],$data['cand_board'],$data['cand_percen'],$data['cand_edu']);
 				foreach ($data_education as $edu_key => $edu_val) {
 					if(!empty($edu_val[6])) {
+						if($edu_val[3] == 0) {
+							$edu_val[3] = NULL;
+						}
 						$education_update_data = array(
 										'candidate_education_qualification_id' => $edu_val[0],
 										'candidate_education_yop' => $edu_val[1],
@@ -467,6 +501,9 @@ class Job_seeker_model extends CI_Model {
 						$this->db->update('tr_candidate_education',$education_update_data);
 					}
 					else {
+						if($edu_val[3] == 0) {
+							$edu_val[3] = NULL;
+						}
 						$education_insert_data = array(
 										'candidate_education_qualification_id' => $edu_val[0],
 										'candidate_education_yop' => $edu_val[1],
@@ -483,6 +520,7 @@ class Job_seeker_model extends CI_Model {
 				// Updation in experience table
 				if($fresh == 0 ) {
 					$data_experience = array_map(null,$data['cand_exp_class'],$data['cand_exp_sub'],$data['cand_exp_board'],$data['cand_exp_yr'],$data['cand_exp']);
+			
 					foreach ($data_experience as $exp_key => $exp_val) {
 						if(!empty($exp_val[4])) {
 							$experience_update_data = array(
@@ -507,6 +545,10 @@ class Job_seeker_model extends CI_Model {
 							$this->db->insert('tr_candidate_experience',$experience_insert_data);
 						}
 					}
+				}
+				else {
+					$this->db->where('candidate_profile_id',$data['cand_pro']);
+					$this->db->delete('tr_candidate_experience');
 				}
 				$status = "success";
 			}

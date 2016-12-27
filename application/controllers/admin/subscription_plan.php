@@ -31,9 +31,11 @@ class Subscription_Plan extends CI_Controller {
 	}
 
 	public function compareDate() {
-	  $startDate = date("Y-m-d", strtotime($_POST['sub_start_validity']));
-	  $endDate = date("Y-m-d", strtotime($_POST['sub_end_validity']));
-	  if ($endDate > $startDate)
+	  $start = explode('/', $_POST['sub_start_validity']);
+      $startDate = $start[2]."-".$start[1]."-".$start[0];
+      $end = explode('/', $_POST['sub_end_validity']);
+      $endDate = $end[2]."-".$end[1]."-".$end[0];
+	  if (strtotime($endDate) >= strtotime($startDate))
 	    return True;
 	  else {
 	    $this->form_validation->set_message('compareDate', '%s should be greater than Validity Start Date.');
