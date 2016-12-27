@@ -94,7 +94,7 @@
 	<div style='padding-left:20px; padding-bottom:10px;color:#339240;'><<img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=' spade image' style="display:block" height="15" width="10" title="password"/>&nbsp;&nbsp;&nbsp;Password  : <?php echo $registrant_password; ?></div>
 	
 
-	<p>In the meantime, you can <a href='<?php echo base_url(); ?>'>return to my website</a> to continue browsing.</p>
+	<p>Please change your password on your next login.In the meantime, you can <a href='<?php echo base_url(); ?>'>return to my website</a> to continue browsing.</p>
 	<br/><br/><br/>
    <p style='color:#339240;'>Best Regards,<br/>
    TeachersRecruit Team</p><br/>

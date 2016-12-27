@@ -386,41 +386,44 @@ class Job_seeker extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
-		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
-		/* Check whether registration form server side validation are valid or not */
-		if ($this->form_validation->run() == FALSE){
-			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-			$this->load->view('forgot-password');
-			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
-			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
-		}
-		else{
-	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
-	  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
-	      	if($forget_query['candidate_password'] != '') {
-				$from_email = $emailsetup['smtp_user'];
-				$this->email->initialize($emailsetup);
-				$this->email->from($from_email, 'Teacher Recruit');
-				$this->email->to($forget_query['candidate_email']);
-	        	$this->email->subject('Get your forgotten Password');
-	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
-	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
-	        	if($this->email->send()){
-		        	$data['reg_server_msg'] = "Check your mail and get your password!";
-		        	$this->load->view('forgot-password',$data);
-	        	}
-				else{
-					show_error($this->email->print_debugger());
-					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
-					$this->load->view('forgot-password',$data);
-				}
-	      	}
-			else{
-				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
-				$this->load->view('forgot-password',$data);
+		if($_POST){
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+			/* Check whether registration form server side validation are valid or not */
+			if ($this->form_validation->run() == FALSE){
+				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+				$this->load->view('forgot-password-seeker');
 			}
-		}   	 		
+			else{
+		        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
+		  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
+		      	if($forget_query['candidate_password'] != '') {
+					$from_email = $emailsetup['smtp_user'];
+					$this->email->initialize($emailsetup);
+					$this->email->from($from_email, 'Teacher Recruit');
+					$this->email->to($forget_query['candidate_email']);
+		        	$this->email->subject('Get your forgotten Password');
+		        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
+		       		$this->email->message($message);
+		        	if($this->email->send()){
+			        	$data['reg_server_msg'] = "Check your mail and get your password!";
+			        	$this->load->view('forgot-password-seeker',$data);
+		        	}
+					else{
+						show_error($this->email->print_debugger());
+						$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please try again!';
+						$this->load->view('forgot-password-seeker',$data);
+					}
+		      	}
+				else{
+					$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+					$this->load->view('forgot-password-seeker',$data);
+				}
+			}
+		}  	 
+		else{
+			$this->load->view('forgot-password-seeker');
+		}		
 	}
 
 	/** Seeker Inital Data Validation With Pop-up **/		
