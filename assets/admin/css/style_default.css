@@ -724,21 +724,30 @@ table .dataTables_empty{
 .magnify-posted-ads {
 	cursor: pointer ;
 }
-.magnify-ad img{
-	position: absolute;
-	
+.ads_table th, .ads_table td {
+	line-height: 35px;
+} 
+#divLargerImage
+{
+    display: none;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    margin: 0 auto;
+    z-index: 99;
 }
-.magnify-posted-ads:hover img{
- 	visibility: visible;
- 	top: 50%;
- 	left: 50%;
- 	height: 350px;
- 	width: 400px;
- 	/*border: 1px solid #2fbfca;*/
+#divOverlay
+{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #CCC;
+    opacity: 0.85;
+    width: 100%;
+    height: 110%;
+    z-index: 98;
 }
- .magnify-posted-ads:hover,  .magnify-posted-ads:focus {
-	border:0; /* IE6 needs this to show large image */
-	z-index:1;
-}
-
 
