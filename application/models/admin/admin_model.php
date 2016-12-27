@@ -53,15 +53,11 @@ class Admin_Model extends CI_Model {
     // View
     $model_data['state_values'] = $this->db->order_by('state_id','desc')->get_where('tr_state')->result_array();
 
-     // $this->db->select('d.district_state_id');
-    // $this->db->from('tr_state s');
-    // $this->db->join('tr_district d','s.state_id=d.district_state_id','inner');
-    // $this->db->group_by('d.district_state_id');
-    // $model_data['mapped_data'] = $this->db->get()->result_array();
-
-    // echo "<pre>";
-    // print_r($model_data['mapped_data']);
-    // echo "</pre>";
+    $this->db->select('s.state_id');
+    $this->db->from('tr_state s');
+    $this->db->join('tr_district d','s.state_id=d.district_state_id','inner');
+    $this->db->group_by('d.district_state_id');
+    $model_data['mapped_data'] = array_column($this->db->get()->result_array(), 'state_id');
     return $model_data;
   }
 
@@ -133,10 +129,7 @@ class Admin_Model extends CI_Model {
 
     //Check whether the data is mapped or not
     $sql= $this->db->query("SELECT d.district_id from tr_district d INNER JOIN tr_candidate_profile c INNER JOIN tr_organization_profile o where c.candidate_district_id=d.district_id OR c.candidate_live_district_id=d.district_id OR o.organization_district_id=d.district_id GROUP BY d.district_id");
-    $model_data['mapped_data'] = $sql->result_array();
-    // echo "<pre>";
-    // print_r($model_data['mapped_data']);
-    // echo "</pre>";
+    $model_data['mapped_data'] = array_column($sql->result_array(), 'district_id');
 
     return $model_data;
   }
@@ -182,6 +175,47 @@ class Admin_Model extends CI_Model {
 
     // View
     $model_data['institution_type_values'] = $this->db->order_by('institution_type_id','desc')->get_where('tr_institution_type')->result_array();
+
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT i.institution_type_id
+        FROM `tr_institution_type` AS i
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( a.posting_institution_id, ',', n.n ) , ',', -1 ) value
+          FROM tr_applicable_posting a
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( a.posting_institution_id ) - LENGTH( REPLACE( a.posting_institution_id, ',', '' ) ) )
+        )AS pos 
+        INNER JOIN 
+        (
+          SELECT candidate_institution_type
+          FROM tr_candidate_profile
+        )AS pr 
+        INNER JOIN 
+        (
+          SELECT class_level_inst_type_id
+          FROM tr_class_level
+        )AS cl
+        INNER JOIN 
+        (
+          SELECT educational_qualifcation_inst_type_id
+          FROM tr_educational_qualification
+        )AS eq
+        INNER JOIN 
+        (
+          SELECT organization_institution_type_id
+          FROM tr_organization_profile
+        )AS op
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( sub.subject_institution_id, ',', n.n ) , ',', -1 ) i_value
+          FROM tr_subject sub
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( sub.subject_institution_id ) - LENGTH( REPLACE( sub.subject_institution_id, ',', '' ) ) )
+        )AS sub_i where pos.value = i.institution_type_id OR pr.candidate_institution_type = i.institution_type_id OR cl.class_level_inst_type_id = i.institution_type_id OR eq.educational_qualifcation_inst_type_id = i.institution_type_id OR op.organization_institution_type_id = i.institution_type_id OR sub_i.i_value = i.institution_type_id group by i.institution_type_id");
+
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'institution_type_id');
+
     return $model_data;
   }
 
@@ -304,6 +338,24 @@ class Admin_Model extends CI_Model {
     // View
     $model_data['language_values'] = $this->db->order_by('language_id','desc')->get('tr_languages')->result_array();
 
+    //Check whether the data is mapped or not
+    // $mapped_data = $this->db->query("SELECT l.language_id
+    //     FROM `tr_languages` AS l
+    //     INNER JOIN 
+    //     (
+    //       SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( v.vacancies_medium, ',', n.n ) , ',', -1 ) value
+    //       FROM tr_organization_vacancies v
+    //       CROSS JOIN numbers n
+    //       WHERE n.n <=1 + ( LENGTH( v.vacancies_medium ) - LENGTH( REPLACE( v.vacancies_medium, ',', '' ) ) )
+    //     )AS vac 
+    //     INNER JOIN 
+    //     (
+    //       SELECT candidate_medium_of_inst_id
+    //       FROM tr_candidate_education
+    //     )AS edu WHERE vac.value = l.language_id AND edu.candidate_medium_of_inst_id = l.language_id group by l.language_id");
+
+    // $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'language_id');
+    // print_r($model_data['mapped_data']);
     return $model_data;
   }
 
@@ -350,6 +402,19 @@ class Admin_Model extends CI_Model {
 
     // View
     $model_data['extra_curricular_values'] = $this->db->order_by('extra_curricular_id','desc')->get_where('tr_extra_curricular')->result_array();
+
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT e.extra_curricular_id
+      FROM `tr_extra_curricular` AS e
+      INNER JOIN 
+      (
+        SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( c.candidate_id, ',', n.n ) , ',', -1 ) value
+        FROM tr_candidate_profile c
+        CROSS JOIN numbers n
+        WHERE n.n <=1 + ( LENGTH( c.candidate_id ) - LENGTH( REPLACE( c.candidate_id, ',', '' ) ) )
+      )AS cand where cand.value = e.extra_curricular_id group by e.extra_curricular_id");
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'extra_curricular_id');
+
     return $model_data;
   }
 

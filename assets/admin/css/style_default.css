@@ -741,4 +741,34 @@ table .dataTables_empty{
 	z-index:1;
 }
 
+.restrict{
+    cursor: pointer !important;
+    /*float: right;
+    position: relative;
+    right: 50px;*/
+}
+.restrict_tooltip{
+    background: #828282 none repeat scroll 0 0;
+    border-radius: 5px;
+    bottom: 38px;
+    color: #fff;
+    display: none;
+    font-family: Montserrat;
+    font-size: 10px;
+    height: 23px;
+    left: -295px;
+    padding: 5px 0 0;
+    /*position: absolute;*/
+    text-align: center;
+    width: 312px;
+    z-index: 9999;
+    top:-26px;
+}
+.restrict:hover{
+    color: #006687 !important;
+}
+.restrict:hover .restrict_tooltip{
+    display: block !important;
+}
+
 
