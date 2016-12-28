@@ -114,7 +114,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td class="magnify-posted-ads"> 
-                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo base_url().$ads_val['ads_image_path']; ?>" alt="Not Found" /></a>
+                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo base_url() ?>assets/admin/img/2.png" alt="Not Found" /></a>
                           	 <!-- <span class="pull-right">Full View </span> -->
                            </td>
                           <td> 
@@ -298,6 +298,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
   </div>
 </div>
 <!-- END PAGE -->
+<!--for Posted Ads popup view--> 
+<div id="divLargerImage"></div>
+	<div id="divOverlay"></div>
+<!--Posted Ads-->
 
 <?php include "templates/footer_grid.php" ?>
 <?php } ?>

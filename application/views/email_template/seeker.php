@@ -71,7 +71,7 @@
 	<div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;Password:<?php echo $candidate_password; ?></div>
 	
 
-	<p>In the meantime, you can <a href=''>return to my website</a> to continue browsing.</p>
+	<p>Please change your password on your next login.In the meantime, you can <a href=''>return to my website</a> to continue browsing.</p>
 	<br/><br/><br/>
   <p style='color:#29aafe'> Best Regards,<br/>
    TeachersRecruit Team<br/></p>

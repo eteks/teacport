@@ -5,7 +5,7 @@ class Job_provider extends CI_Controller {
     {    	
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha')); 
-		$this->load->model(array('job_provider_model','common_model'));
+		$this->load->model(array('job_provider_model','common_model','job_seeker_model'));
 		 session_start();
     }
 	public function index()
@@ -163,6 +163,8 @@ class Job_provider extends CI_Controller {
 	public function dashboard()
     {
     	$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
 		
 		if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
@@ -205,6 +207,8 @@ class Job_provider extends CI_Controller {
 	}
 	public function editprofile(){
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['district'] = $this->common_model->get_all_district();
 		$data['institutiontype'] = $this->common_model->get_institution_type();
@@ -326,7 +330,8 @@ class Job_provider extends CI_Controller {
 			}
 			else{
 				$session_data = $this->session->all_userdata();
-				
+				if(empty($session_data['login_session']))
+					redirect('provider/logout');
 				$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
 				if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
 					$data['initial_data'] = 'show_popup';
@@ -359,6 +364,8 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$session_data = $this->session->all_userdata();
+			if(empty($session_data['login_session']))
+				redirect('provider/logout');
 			$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
 			if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
 				$data['initial_data'] = 'show_popup';
@@ -391,6 +398,8 @@ class Job_provider extends CI_Controller {
 
 	public function inbox(){
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$inboxdata['organization'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$inboxdata['message'] = $this->job_provider_model->job_provider_inbox($session_data['login_session']['pro_userid']);
 		$this->load->view('company-dashboard-inbox',$inboxdata);
@@ -411,7 +420,8 @@ class Job_provider extends CI_Controller {
 	public function postjob(){
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
-		
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
 		$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
@@ -423,7 +433,7 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('provider_ug_or_pg', 'Required course type', 'trim|required|alpha|callback_pg_or_ug_check|exact_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_ug_or_pg', 'Required course type', 'trim|required|alpha|callback_pg_or_ug_check|max_length[3]|xss_clean');
 			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|max_length[80]|xss_clean');
 			$this->form_validation->set_rules('provider_vacancy', 'No of vacancy', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_class_level', 'Class Level', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
@@ -510,6 +520,8 @@ class Job_provider extends CI_Controller {
 	{
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$pagination = array();
 		$pagination["base_url"] = base_url() . "provider/postedjob";
@@ -533,9 +545,31 @@ class Job_provider extends CI_Controller {
 		$data["links"] = explode('&nbsp;',$str_links );
 		$this->load->view('company-dashboard-posted-jobs',$data);
 	}
+	public function postedjobdetail(){
+		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
+		$data["current_jobvacancy_id"] = $this->uri->segment('3');
+		if($data["current_jobvacancy_id"]){
+			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+			if($session_data['login_session']['pro_userid'] === $data["applyjob"]["vacancies_organization_id"]){
+				$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+				$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+				$this->load->view('company-dashboard-posted-jobs-detail', $data);
+			}
+			else{
+				redirect('missingpage');
+			}
+		}
+		else{
+			redirect('provider/postedjob');
+		}
+	}
 	public function browse_candidate(){
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['posting']				= $this->common_model->applicable_posting($data['organization']['organization_institution_type_id']);
 		$data['district']				= $this->common_model->get_all_district();
@@ -620,6 +654,8 @@ class Job_provider extends CI_Controller {
 	}
 	public function changepassword(){
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		if(!$_POST){
 			$this->load->view('company-dashboard-changepwd',$data);
@@ -648,6 +684,8 @@ class Job_provider extends CI_Controller {
 	}
 	public function feedback(){
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		if(!$_POST){
 			$this->load->view('company-dashboard-feedback',$data);
@@ -682,6 +720,8 @@ class Job_provider extends CI_Controller {
 	}
     public function postad(){
     	$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		if(!$_POST){
 			$this->load->view('company-dashboard-post-adds',$data);	
@@ -736,6 +776,8 @@ class Job_provider extends CI_Controller {
 	}
 	public function subscription(){
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		if(!$_POST){
@@ -811,6 +853,8 @@ class Job_provider extends CI_Controller {
 	
 	public function candidateprofile() {
 		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$candidate_id = $this->uri->segment(3);
@@ -836,8 +880,6 @@ class Job_provider extends CI_Controller {
 		if ($this->form_validation->run() == FALSE){
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
 			$this->load->view('forgot-password');
-			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('username' => $registrant_name))->result_array();
-			$data['data_value'] = $this->db->get_where('tr_organization_profile', array('password' => $registrant_password))->result_array();
 		} 
 			
 		else{
