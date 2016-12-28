@@ -682,7 +682,7 @@ class Job_seeker extends CI_Controller {
 
 			$pagination = array();
 			$pagination["base_url"] = base_url() . "seeker/findjob";
-			$pagination["per_page"] = 1;
+			$pagination["per_page"] = 20;
 			$pagination["use_page_numbers"] = 0;	
 			$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
 			$pagination['cur_tag_close'] = '</a></li>';
@@ -723,7 +723,7 @@ class Job_seeker extends CI_Controller {
 		$session_data = $this->session->all_userdata();
 		$pagination = array();
 		$pagination["base_url"] = base_url() . "seeker/jobsapplied";
-		$pagination["per_page"] = 1;
+		$pagination["per_page"] = 20;
 		$pagination["use_page_numbers"] = 0;	
 		$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
 		$pagination['cur_tag_close'] = '</a></li>';
