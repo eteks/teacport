@@ -217,7 +217,7 @@ Website: http://thevectorlab.net/
             </div>
           </div>
           <p>
-            <a data-popup-close="popup_section" href="#">Close</a>
+            <a class="popup_close_act" data-popup-close="popup_section" href="#">Close</a>
           </p>
           <a class="popup-close popup_close_act" data-popup-close="popup_section" href="#">x</a>
         </div>
