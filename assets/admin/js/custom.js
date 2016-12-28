@@ -204,7 +204,7 @@ $(document).ready(function(){
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
     });
-
+    /*Added by thangam*/
     $('.sub_scroll_section').slimScroll({
         height: 'auto'
     });
@@ -215,9 +215,14 @@ $(document).ready(function(){
 
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
+        $('.caret-up').show();
         $('.top_layer').show();
     });
 
+    $('#container').on('click',function() {
+        $('.extended').hide();
+        $('.caret-up').hide();
+    });
 var window_width = $(".navbar-inner").width();    
 var window_height = $(".navbar-inner").height();
 $('.top_layer').width(window_width);
@@ -226,7 +231,7 @@ $('.top_layer, .message_close').on('click',function() {
         $('.extended').hide();
         $('.top_layer').hide();
     });
-
+/*Ended by thangam*/
 
 
    

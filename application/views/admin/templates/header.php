@@ -73,12 +73,12 @@ Website: http://thevectorlab.net/
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
+                        <i class="icon-caret-up caret-up"></i>
+                                <div class="clear_both"></div>
                             <a class="dropdown-toggle pa dropdown_toggle_act">
                                 <i class="icon-envelope-alt"></i>     
                                 <span id="not_count" class="badge badge-important"><?php echo $this->config->item('feedback_count'); ?></span>
-                            </a>
-                                <!-- <i class="icon-caret-up caret-up"></i>
-                                <div class="clear_both"></div> -->
+                            </a>                              
                             <ul class="dropdown-menu extended inbox">
                                 <li>
                                     <!-- <p>You have 5 new messages</p> -->
