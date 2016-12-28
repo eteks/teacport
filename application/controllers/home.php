@@ -139,7 +139,7 @@ class Home extends CI_Controller {
     	$search_inputs = $this->session->userdata('search_inputs'); // To get search inputs from session
 
     	// Pagination values
-    	$per_page = 1;
+    	$per_page = 10;
 
     	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
         $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
@@ -161,16 +161,16 @@ class Home extends CI_Controller {
 		$config['use_page_numbers'] = TRUE;
 
     	// Custom Configuration
-		$config['full_tag_open'] = '<div class="full_pagination">';
-		$config['full_tag_close'] = '</div>';
-		$config['next_tag_open'] = '<span class="prev_next_pagination">';
-		$config['next_tag_close'] = '</span>';
-		$config['prev_tag_open'] = '<span class="prev_next_pagination">';
-		$config['prev_tag_close'] = '</span>';
-		$config['num_tag_open'] = '<span class="num_pagination">';
-		$config['num_tag_close'] = '</span>';
-		$config['cur_tag_open'] = '<span class="cur_pagination">';
-		$config['cur_tag_close'] = '</span>';
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
 		$config['next_link'] = 'Next';
 		$config['prev_link'] = 'Prev';
 
@@ -180,7 +180,7 @@ class Home extends CI_Controller {
 		// Navigation Links
 		$pagination_links = $this->pagination->create_links();
 		$data["links"] = $pagination_links;
-
+		$data['provider_values'] = $this->common_model->get_provider_details();
         $this->load->view('vacancies',$data);
 		
 	}

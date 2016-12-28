@@ -109,6 +109,7 @@ class Common_model extends CI_Model {
 		$educationdata = $this->db->get();
 		return $educationdata->result_array(); 
 	}
+	
 	public function classlevel_by_institution($ins_id)
 	{
 		$this->db->select('*');    
@@ -145,6 +146,15 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
 		$where = "(is_mother_tangue = '1'  AND language_status='1')";
+		$this->db->where($where);
+		$mt = $this->db->get();
+		return $mt->result_array(); 
+	}
+	public function all_languages()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_languages');
+		$where = "(language_status='1')";
 		$this->db->where($where);
 		$mt = $this->db->get();
 		return $mt->result_array(); 
@@ -289,5 +299,16 @@ class Common_model extends CI_Model {
 		$organization = $this->db->query("SELECT * FROM tr_organization_profile WHERE organization_status = 1");
 		return $organization->num_rows();
 	}
-}
+
+	// Organization Logo
+	public function get_provider_details() {
+		$this->db->select('organization_logo,organization_name');
+		$this->db->from('tr_organization_profile');
+		$this->db->where('organization_status','1');
+		$org_data = $this->db->get()->result_array();
+		return $org_data;
+	}
+
+
+} // End
 

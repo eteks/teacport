@@ -63,7 +63,22 @@
 			          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
 			           <li class="profile-pic">
 			              	<a href="javascript:void(0)"> 
-			                  	<img src="<?php echo !empty($user_type['candidate_image_path'])?$user_type['candidate_image_path']:base_url().'assets/images/admin.jpg';?>" alt="user-img" class="img-circle" width="36">
+			              		<?php 
+			              		$session = $this->session->all_userdata();
+			              		if(!empty($session['login_session']['candidate_image_path'])) :
+			              			$keyword = "http";
+        							// To check whether the image path is cdn or local path
+        							if(strpos( $session['login_session']['candidate_image_path'] , $keyword ) !== false ) :
+        							?>
+        							<img src="<?php echo $session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
+							        <?php
+        							else :
+        							?>
+        							<img src="<?php echo base_url().$session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
+							        <?php
+							        endif;
+							    endif;
+							    ?>	
 			                  	<span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'];?> </span>
 			                  	<i class="fa fa-angle-down fa-indicator"></i> 
 			            	</a>

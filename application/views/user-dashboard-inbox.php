@@ -183,35 +183,27 @@
     </div>
 </section>
         
-         <div class="brand-logo-area clients-bg">
-            <div class="clients-list light-blue">
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_1.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_2.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_3.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_4.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_1.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_2.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_3.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-                <div class="client-logo">
-                    <a href="user-dashboard.html#"><img src="images/clients/client_4.png" class="img-responsive" alt="Brand Image" /></a>
-                </div>
-            </div>
+<?php
+if(!empty($provider_values)) :
+?>
+<div class="brand-logo-area clients-bg">
+    <div class="clients-list">
+        <?php
+        foreach ($provider_values as $val) :
+        if(!empty($val['organization_logo'])) :
+        ?>
+        <div class="client-logo">
+            <a href="#"><img src="<?php echo base_url().$val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
         </div>
-
+        <?php
+        endif;
+        endforeach;
+        ?>
+    </div>
+</div>
+<?php
+endif;
+?>
 <?php include('include/footermenu.php'); ?>
 <?php include('include/footer.php'); ?>          
 

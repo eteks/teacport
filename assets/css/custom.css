@@ -784,7 +784,13 @@ label.form-input-error {
 .dn {
 	display: none;
 }
-
+.org_name_search {
+	font-size: 16px;
+    text-align: right;
+}
+.apply-restrict {
+	opacity: 0.3;
+}
 
 /* Ended by siva */
 .subcription_plan_details{
