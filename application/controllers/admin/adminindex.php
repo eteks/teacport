@@ -365,6 +365,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['qualification_type_values'] = $data_values['qualification_type_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/qualification',$data);
 		}
 
@@ -589,6 +590,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['class_level_values'] = $data_values['class_level_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/class_level',$data);
 		}
 	}
@@ -711,6 +713,7 @@ class Adminindex extends CI_Controller {
 		else {
 			$departments_values = $data_values['departments_values'];
 			$data['departments_values'] = get_qualication_by_dept($departments_values);
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/departments',$data);
 		}
 
@@ -834,6 +837,7 @@ class Adminindex extends CI_Controller {
 		else {
 			$subject_values = $data_values['subject_values'];
 			$data['subject_values'] = get_institution_by_dept($subject_values);
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/subject',$data);
 		}
 	}
@@ -1074,6 +1078,7 @@ class Adminindex extends CI_Controller {
 		else {
 			$universities_values = $data_values['universities_values'];
 			$data['universities_values'] = get_class_level_by_dept($universities_values);
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/university',$data);
 		}
 	}
@@ -1203,6 +1208,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['language_values'] = $data_values['language_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/languages',$data);
 		}
 	}	
@@ -1322,6 +1328,7 @@ class Adminindex extends CI_Controller {
 		else {
 			$postings_values = $data_values['postings_values'];
 			$data['postings_values'] = get_institution_by_postname($postings_values);
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/postings',$data);
 		}
 	}

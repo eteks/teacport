@@ -289,6 +289,31 @@ class Admin_Model extends CI_Model {
     $this->db->join('tr_institution_type it','eq.educational_qualifcation_inst_type_id=it.institution_type_id','inner');
     $model_data['qualification_type_values'] = $this->db->order_by('eq.educational_qualification_id','desc')->get()->result_array();
 
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT edu.educational_qualification_id
+        FROM `tr_educational_qualification` AS edu
+        INNER JOIN 
+        (
+          SELECT candidate_education_qualification_id
+          FROM tr_candidate_education
+        )AS can_edu
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( d.department_educational_qualification_id, ',', n.n ) , ',', -1 ) d_value
+          FROM tr_departments d
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( d.department_educational_qualification_id ) - LENGTH( REPLACE( d.department_educational_qualification_id, ',', '' ) ) )
+        )AS dep
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( v.vacancies_qualification_id, ',', n.n ) , ',', -1 ) v_value
+          FROM tr_organization_vacancies v
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( v.vacancies_qualification_id ) - LENGTH( REPLACE( v.vacancies_qualification_id, ',', '' ) ) )
+        )AS vac WHERE edu.educational_qualification_id=can_edu.candidate_education_qualification_id OR edu.educational_qualification_id=dep.d_value OR edu.educational_qualification_id=vac.v_value group by edu.educational_qualification_id");
+
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'educational_qualification_id');
+
     return $model_data;
   }
 
@@ -339,23 +364,29 @@ class Admin_Model extends CI_Model {
     $model_data['language_values'] = $this->db->order_by('language_id','desc')->get('tr_languages')->result_array();
 
     //Check whether the data is mapped or not
-    // $mapped_data = $this->db->query("SELECT l.language_id
-    //     FROM `tr_languages` AS l
-    //     INNER JOIN 
-    //     (
-    //       SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( v.vacancies_medium, ',', n.n ) , ',', -1 ) value
-    //       FROM tr_organization_vacancies v
-    //       CROSS JOIN numbers n
-    //       WHERE n.n <=1 + ( LENGTH( v.vacancies_medium ) - LENGTH( REPLACE( v.vacancies_medium, ',', '' ) ) )
-    //     )AS vac 
-    //     INNER JOIN 
-    //     (
-    //       SELECT candidate_medium_of_inst_id
-    //       FROM tr_candidate_education
-    //     )AS edu WHERE vac.value = l.language_id AND edu.candidate_medium_of_inst_id = l.language_id group by l.language_id");
+    $mapped_data = $this->db->query("SELECT l.language_id
+        FROM `tr_languages` AS l
+        INNER JOIN 
+        (
+          SELECT candidate_mother_tongue,SUBSTRING_INDEX( SUBSTRING_INDEX( c.candidate_language_known, ',', n.n ) , ',', -1 ) c_value
+          FROM tr_candidate_profile c
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( c.candidate_language_known ) - LENGTH( REPLACE( c.candidate_language_known, ',', '' ) ) )
+        )AS can
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( v.vacancies_medium, ',', n.n ) , ',', -1 ) value
+          FROM tr_organization_vacancies v
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( v.vacancies_medium ) - LENGTH( REPLACE( v.vacancies_medium, ',', '' ) ) )
+        )AS vac 
+        INNER JOIN 
+        (
+          SELECT candidate_medium_of_inst_id
+          FROM tr_candidate_education
+        )AS edu WHERE l.language_id=can.candidate_mother_tongue OR l.language_id=can.c_value OR l.language_id=vac.value OR l.language_id=edu.candidate_medium_of_inst_id group by l.language_id");
 
-    // $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'language_id');
-    // print_r($model_data['mapped_data']);
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'language_id');
     return $model_data;
   }
 
@@ -484,6 +515,36 @@ class Admin_Model extends CI_Model {
     $this->db->order_by('cl.class_level_id','desc');
     $model_data['class_level_values'] = $this->db->get()->result_array();
 
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT class.class_level_id
+        FROM `tr_class_level` AS class
+        INNER JOIN 
+        (
+          SELECT candidate_experience_class_level_id
+          FROM tr_candidate_experience
+        )AS exp
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_willing_class_level_id, ',', n.n ) , ',', -1 ) p_value
+          FROM tr_candidate_preferance p
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( p.candidate_willing_class_level_id ) - LENGTH( REPLACE( p.candidate_willing_class_level_id, ',', '' ) ) )
+        )AS pre
+        INNER JOIN 
+        (
+          SELECT vacancies_class_level_id
+          FROM tr_organization_vacancies
+        )AS vac
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( ub.university_class_level_id, ',', n.n ) , ',', -1 ) ub_value
+          FROM tr_university_board ub
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( ub.university_class_level_id ) - LENGTH( REPLACE( ub.university_class_level_id, ',', '' ) ) )
+        )AS uni WHERE class.class_level_id=exp.candidate_experience_class_level_id OR class.class_level_id=pre.p_value OR class.class_level_id=vac.vacancies_class_level_id OR class.class_level_id=uni.ub_value group by class.class_level_id");
+
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'class_level_id');
+
     return $model_data;
   }
 
@@ -531,9 +592,25 @@ class Admin_Model extends CI_Model {
     // View
     $departments_list_query = $this->db->query("SELECT * FROM tr_educational_qualification AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.department_educational_qualification_id, ',', n.n ) , ',', -1 ) value FROM tr_departments t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.department_educational_qualification_id ) - LENGTH( REPLACE( t.department_educational_qualification_id, ',', ''))) ) AS a ON a.value = c.educational_qualification_id order by (a.departments_id) desc");
     $model_data['departments_values'] = $departments_list_query->result_array(); 
-	// echo "<pre>";
-	// print_r($model_data['departments_values']);
-	// echo "</pre>";
+
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT dep.departments_id
+        FROM `tr_departments` AS dep
+        INNER JOIN 
+        (
+          SELECT candidate_education_department_id
+          FROM tr_candidate_education
+        )AS can_edu
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( v.vacancies_department_id, ',', n.n ) , ',', -1 ) v_value
+          FROM tr_organization_vacancies v
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( v.vacancies_department_id ) - LENGTH( REPLACE( v.vacancies_department_id, ',', '' ) ) )
+        )AS vac WHERE dep.departments_id=can_edu.candidate_education_department_id OR dep.departments_id=vac.v_value group by dep.departments_id");
+
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'departments_id');
+
     return $model_data;
   }
 
@@ -581,6 +658,35 @@ class Admin_Model extends CI_Model {
     // View
     $subjects_list_query = $this->db->query("SELECT * FROM tr_institution_type AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.subject_institution_id, ',', n.n ) , ',', -1 ) value FROM tr_subject t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.subject_institution_id ) - LENGTH( REPLACE( t.subject_institution_id, ',', ''))) ) AS a ON a.value = c.institution_type_id order by (a.subject_id) desc");
     $model_data['subject_values'] = $subjects_list_query->result_array();  
+
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT sub.subject_id
+        FROM `tr_subject` AS sub
+        INNER JOIN 
+        (
+          SELECT candidate_experience_subject_id
+          FROM tr_candidate_experience
+        )AS exp
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_willing_subject_id, ',', n.n ) , ',', -1 ) p_value
+          FROM tr_candidate_preferance p
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( p.candidate_willing_subject_id ) - LENGTH( REPLACE( p.candidate_willing_subject_id, ',', '' ) ) )
+        )AS pre
+        INNER JOIN 
+        (
+          SELECT candidate_interest_subject_id
+          FROM tr_candidate_profile
+        )AS pro
+        INNER JOIN 
+        (
+          SELECT vacancies_subject_id
+          FROM tr_organization_vacancies
+        )AS vac WHERE sub.subject_id=exp.candidate_experience_subject_id OR sub.subject_id=pre.p_value OR sub.subject_id=pro.candidate_interest_subject_id OR sub.subject_id=vac.vacancies_subject_id group by sub.subject_id");
+
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'subject_id');
+
     return $model_data;
   }
 
@@ -627,7 +733,11 @@ class Admin_Model extends CI_Model {
 
     // View
     $universities_list_query = $this->db->query("SELECT * FROM tr_class_level AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.university_class_level_id, ',', n.n ) , ',', -1 ) value FROM tr_university_board t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.university_class_level_id ) - LENGTH( REPLACE( t.university_class_level_id, ',', ''))) ) AS a ON a.value = c.class_level_id order by (a.education_board_id) desc");
-    $model_data['universities_values'] = $universities_list_query->result_array();  
+    $model_data['universities_values'] = $universities_list_query->result_array(); 
+
+    $sql= $this->db->query("SELECT ub.education_board_id from tr_university_board ub INNER JOIN tr_organization_vacancies vac INNER JOIN tr_candidate_education edu INNER JOIN tr_candidate_experience exp where ub.education_board_id=vac.vacancies_university_board_id OR ub.education_board_id=edu.candidate_edu_board OR ub.education_board_id=exp.candidate_experience_board GROUP BY ub.education_board_id");
+    $model_data['mapped_data'] = array_column($sql->result_array(), 'education_board_id');
+
     return $model_data;
   }
 
@@ -674,11 +784,27 @@ class Admin_Model extends CI_Model {
 
     // View
     $postings_list_query = $this->db->query("SELECT * FROM tr_institution_type AS c INNER JOIN ( SELECT *, SUBSTRING_INDEX( SUBSTRING_INDEX( t.posting_institution_id, ',', n.n ) , ',', -1 ) value FROM tr_applicable_posting t CROSS JOIN numbers n WHERE n.n <=1 + ( LENGTH( t.posting_institution_id ) - LENGTH( REPLACE( t.posting_institution_id, ',', ''))) ) AS a ON a.value = c.institution_type_id order by (a.posting_id) desc");
-    $model_data['postings_values'] = $postings_list_query->result_array();  
+    $model_data['postings_values'] = $postings_list_query->result_array(); 
+
+    //Check whether the data is mapped or not
+    $mapped_data = $this->db->query("SELECT pos.posting_id
+        FROM `tr_applicable_posting` AS pos
+        INNER JOIN 
+        (
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_preferance_id, ',', n.n ) , ',', -1 ) p_value
+          FROM tr_candidate_preferance p
+          CROSS JOIN numbers n
+          WHERE n.n <=1 + ( LENGTH( p.candidate_preferance_id ) - LENGTH( REPLACE( p.candidate_preferance_id, ',', '' ) ) )
+        )AS pre
+        INNER JOIN 
+        (
+          SELECT vacancies_id
+          FROM tr_organization_vacancies
+        )AS vac WHERE pos.posting_id=pre.p_value OR pos.posting_id=vac.vacancies_id group by pos.posting_id");
+
+    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'posting_id');
+
     return $model_data;
-
-
-
   }
 
   // Get Institution Type list
