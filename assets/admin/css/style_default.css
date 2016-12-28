@@ -781,9 +781,8 @@ table .dataTables_empty{
 }
 /* for priveleges */
 .privileges_table th, .privileges_table td{
-	min-width: 100px;
-	/*max-width: 130px;*/
-	text-align: center;
+	min-width: 200px;
+	/*max-width: 180px;*/
 	overflow: scroll !important;
 }
 

@@ -512,6 +512,13 @@ select:invalid {
  	filter: alpha(opacity=0);  
   	opacity:0;  
 } 
+#vacancies_page input[type="text"]{
+    height: 45px !important;
+}
+#vacancies_page .btn-default{
+	margin-top: 0 !important;
+	padding: 10px 0;
+}
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
