@@ -131,7 +131,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                           </td>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                          <td><a class="ajaxDelete" data-id="<?php echo $grp_val['user_group_id']; ?>">Delete</a></td>
+                                          <td>
+                                            <?php 
+                                              $group_id = $grp_val['user_group_id'];  
+                                              $mapped_result = array_filter($mapped_data, function($m) use ($group_id) {
+                                              return $m == $group_id; });
+                                              if(count($mapped_result) > 0)
+                                                echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                                              else
+                                                echo "<a class='ajaxDelete' data-id='".$grp_val['user_group_id']."'>Delete</a>";
+                                            ?>      
+                                          </td>
                                         <?php endif; ?>
                                     </tr>
                                     <?php

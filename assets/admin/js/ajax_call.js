@@ -136,8 +136,13 @@ $(document).ready(function(){
     // Edit and Full view option - Edit and Delete option for popup.
     $(document).on('click','.popup_fields',function(e) {
     	// handleFormWizards();
+        if($(this).data('section') == "header") {
+            var this_ajax_section = $(this).parents('#header').find('.pop_details_section');
+        }
+        else {
+            var this_ajax_section = $(this).parents('#main-content').find('.pop_details_section');
+        }
         var action_data ={};
-        var this_ajax_section = $(this).parents('#main-content').find('.pop_details_section');
         var targeted_popup_class = $(this).attr('data-popup-open');
         action_data['action'] = $(this).data('mode');
         action_data['value'] = $(this).data('id');
