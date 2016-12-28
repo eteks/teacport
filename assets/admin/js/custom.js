@@ -185,18 +185,12 @@ ajax = function (params,action,form_id){
             }
             else if(res.error==2) {
                 $('.val_error').html();
-                $('.admin_table').dataTable().fnDestroy();  
+                // $('.admin_table').dataTable().fnDestroy(); //Commented for page reload
                 form.html(res.output);
                 $('.db_status').fadeOut(3000);
-                setTimeout(function() { datatable_initialization(); }, 3000); 
-                setTimeout(function() { $('.db_status').remove(); }, 5000);
-                default_credentials();
-                // Implement for clearing session when user change their own account details
-                // Commented this code for future enhancement
-                // if(res.session_data != 'undefined' && res.session_data == true){ 
-                //     customalert("You have changed your Accounts. We need to logout your session to confirm");
-                //     setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
-                // }
+                // setTimeout(function() { datatable_initialization(); }, 3000);  //Commented for page reload
+                setTimeout(function() { $('.db_status').remove();location.reload(); }, 3000);
+                default_credentials();  
             }
         }
     });
@@ -820,6 +814,18 @@ $('.top_layer, .message_close').on('click',function() {
         return false;
      }
     });
+    
+    /* Akila Added */
+    //Job Provider Image popup for posted Ads 
+    $('.magnify-ad img').click(function () {
+	    var $img = $(this);
+	    $('#divLargerImage').html($img.clone().height(250).width(250)).add($('#divOverlay')).fadeIn();
+	});
+    $('#divLargerImage').add($('#divOverlay')).click(function () {
+	    $('#divLargerImage').add($('#divOverlay')).fadeOut(function () {
+	        $('#divLargerImage').empty();
+	    });
+	});
 
 }); // End document
 

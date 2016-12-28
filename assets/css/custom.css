@@ -22,10 +22,13 @@
 }
 /* Custom Select field */
 .select2-search {
-	display: none;
+	/*display: none;*/
 }
 .txt_blue {
 	color: #29AAFE;
+}
+.transform_lowercase {
+	text-transform: lowercase !important;
 }
 /*.slidershow-bg .set-srch-strip{
 	display : none;
@@ -234,7 +237,7 @@
 }
 #candidate_ads_act .btn-default{
 	margin: 8px 0 8px 45px;
-    padding: 12px 30px;
+    padding: 12px 30px 12px 32px;
 } 
 
 /* User Inbox */
@@ -304,16 +307,15 @@ select:invalid {
 	color: gray; 
 }
 .advanced_search {
- 	margin: 45px 50px 5px 5px;
+ 	margin: 5px;
  	color: #fff;
  	cursor: pointer;
  }
-.advanced_search:hover { 
-	color: #fff;
-	text-decoration: underline;
-}
+ .advanced_search:hover {
+ 	color: #FFFFFF;
+ }
  #advancedsearch_act {
- 	margin: 10px 0;
+ 	margin: 5px 0;
  }
 .info {
 	color: #009900;
@@ -517,6 +519,9 @@ select:invalid {
 .foo_addr{
 	margin-left: 5px;
 }
+.mail_contact {
+	text-transform: lowercase !important;
+}
 
 /*Added by thangam*/
 /*css for login and registrartion start*/
@@ -695,8 +700,8 @@ font-size: 12px;
     padding-top:5px;
 }
 .advance_search_btn{
-	/*margin-top: 10px !important;*/
-	margin-left : 35px;
+	margin: 8px 0 8px 45px;
+	padding: 12px 30px 12px 32px;
 }
 .postad_preview{
 	display: none;
@@ -784,7 +789,13 @@ label.form-input-error {
 .dn {
 	display: none;
 }
-
+.org_name_search {
+	font-size: 16px;
+    text-align: right;
+}
+.apply-restrict {
+	opacity: 0.3;
+}
 
 /* Ended by siva */
 .subcription_plan_details{
