@@ -712,7 +712,7 @@ class Job_seeker extends CI_Controller {
 	    	$search_inputs = $this->session->userdata('seeker_search_inputs'); // To get search inputs from session
 
     		// Pagination values
-    		$per_page = 1;
+    		$per_page = 20;
 
     		$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
 	        $search_results = $this->job_seeker_model->get_seeker_search_results($per_page, $offset,$session_data['login_session']['institution_type_id'],$search_inputs);
@@ -765,7 +765,7 @@ class Job_seeker extends CI_Controller {
 		$session_data = $this->session->all_userdata();
 		$pagination = array();
 		$pagination["base_url"] = base_url() . "seeker/jobsapplied";
-		$pagination["per_page"] = 1;
+		$pagination["per_page"] = 20;
 		$pagination["use_page_numbers"] = 0;	
 		$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
 		$pagination['cur_tag_close'] = '</a></li>';

@@ -980,9 +980,12 @@ class Admin_Model extends CI_Model {
     $this->db->select('*');
     $this->db->from('tr_feedback_form feed');
     $this->db->where($feed_where);  
-    $model_data = $this->db->get()->row_array();
+    $model_data = $this->db->get()->row_array(); 
+    $this->db->where($feed_where); 
+    $this->db->update('tr_feedback_form', array('is_viewed' => '1'));
     return $model_data;
   }  
+
 }
 
 /* End of file Admin_Model.php */

@@ -1510,6 +1510,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     max-width: 300px !important;
     width: 233px !important;
     max-height: 200px !important;
+
 }
 
 .dropdown-menu.extended li a{
@@ -4824,3 +4825,13 @@ i#admin_error_login {
     width: auto !important;
     z-index: 9999;
 }
+.dropdown .caret-up{
+    display: none;
+    position: absolute;
+    top: 32px;
+    left: 0px;
+    z-index: 99999;
+    font-size: 30px;
+    color: #fff;
+}
+.clear_both { clear: both;  }

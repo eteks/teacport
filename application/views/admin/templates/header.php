@@ -63,19 +63,22 @@ Website: http://thevectorlab.net/
                 <div id="top_menu" class="nav notify-row">
                     <!-- BEGIN NOTIFICATION -->
                     <ul class="nav top-menu">
+                    
                         <!-- BEGIN SETTINGS -->
                         <!-- <li class="dropdown">
                             <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Settings">
                                 <i class="icon-cog"></i>
                             </a>
-                        </li> -->
+                        </li> 
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
+                        <i class="icon-caret-up caret-up"></i>
+                                <div class="clear_both"></div>
                             <a class="dropdown-toggle pa dropdown_toggle_act">
                                 <i class="icon-envelope-alt"></i>     
-                                <span class="badge badge-important"><?php echo $this->config->item('feedback_count'); ?></span>
-                            </a>
+                                <span id="not_count" class="badge badge-important"><?php echo $this->config->item('feedback_count'); ?></span>
+                            </a>                              
                             <ul class="dropdown-menu extended inbox">
                                 <li>
                                     <!-- <p>You have 5 new messages</p> -->
@@ -84,7 +87,7 @@ Website: http://thevectorlab.net/
                              <?php
                                 foreach ($feedback_data as $feed) :
                                 if($feed['is_viewed'] == 0){  ?>
-                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section">
+                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
                                         <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
 									<!-- <span class="subject">
 									<span class="from">Dulal Khan</span> -->
@@ -199,8 +202,31 @@ Website: http://thevectorlab.net/
                 </div>
             </div>
         </div>
-        <!-- END TOP NAVIGATION BAR -->
+   
+
+    <div class="popup" data-popup="popup_section">
+        <div class="popup-inner">
+          <div class="widget box blue" id="popup_wizard_section">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Feedback
+              </h4>                        
+            </div>
+            <div class="widget-body form pop_details_section">
+                              
+            </div>
+          </div>
+          <p>
+            <a class="popup_close_act" data-popup-close="popup_section" href="#">Close</a>
+          </p>
+          <a class="popup-close popup_close_act" data-popup-close="popup_section" href="#">x</a>
+        </div>
+      </div>
+     <!-- END TOP NAVIGATION BAR -->
     </div>
+
+
+
 	<!-- END HEADER -->
     <?php 
         // echo "access_rights";
