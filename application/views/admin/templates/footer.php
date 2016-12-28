@@ -56,10 +56,13 @@
         <!-- JS import link for charts -->
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/d3.v2.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/sugar.min.js'></script>
+        <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/xcharts.min.js'></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/charts/script.js'></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
         <script type='text/javascript' src='<?php echo base_url(); ?>assets/admin/js/daterangepicker.js'></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script>
 
         <script>
             jQuery(document).ready(function() {

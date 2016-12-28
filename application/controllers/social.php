@@ -269,9 +269,9 @@ class Social extends CI_Controller {
 		
 	}
 	public function twitterfailure() {
-		if($this->session->userdata('login') == true){
+		//if($this->session->userdata('login') == true){
 			redirect('/');
-		}
+		//}
 	}
 
 	/** Twitter Login for Provider ( End Here ) **/ 
@@ -342,9 +342,9 @@ class Social extends CI_Controller {
 	}
 
 	public function seeker_twitterfailure() {
-		if($this->session->userdata('login') == true){
+		//if($this->session->userdata('login') == true){
 			redirect('/');
-		}
+		//}
 	}
 	/** Twitter Login for Seeker ( End Here ) **/ 
 
