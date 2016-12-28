@@ -33,8 +33,7 @@ class Other_module extends CI_Controller {
 	{
 			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
 			$this->config->set_item('feedback_data',$admin_feedback_form);
-	}
-		
+	}		
 }
 /* End of file Job_Srovider.php */ 
 /* Location: ./application/controllers/Job_Seeker.php */

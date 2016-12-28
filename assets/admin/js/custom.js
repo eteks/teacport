@@ -482,6 +482,7 @@ $('.top_layer, .message_close').on('click',function() {
     	handleFormWizards();
         var targeted_popup_class = jQuery(this).attr('data-popup-open');
         $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+        $(".inbox").hide();
  
         e.preventDefault();
     });   
@@ -503,6 +504,10 @@ $('.top_layer, .message_close').on('click',function() {
  
         e.preventDefault();
     });
+    $('.popup_close_act').on('click', function(e)  {
+        window.location.reload()
+    });
+
     
     $('[data-popup-close-edit]').on('click', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-close-edit');
@@ -795,8 +800,10 @@ $('.top_layer, .message_close').on('click',function() {
             return currentText.substr(0, 60)+'.....';
         }
     });
-
-    
+   //   $('.pa').on('click', function(e){
+   //      $("#not_count").html("0");
+   //      // $('#not_count').hide();
+   // });
 
 
 
