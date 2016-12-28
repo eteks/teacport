@@ -236,9 +236,9 @@ $('.top_layer, .message_close').on('click',function() {
     
 	
 	
-    $('.sub_pre_section').slimScroll({
-        height: 'auto'
-    });
+    // $('.sub_pre_section').slimScroll({
+        // height: 'auto'
+    // });
     
      $('.sub_site_visites_cont').slimScroll({
         height: 'auto',
