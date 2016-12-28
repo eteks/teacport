@@ -40,10 +40,10 @@
                             <h4>Contact Information</h4>
                             <ul class="personal-info">
                                 <li><span class="pull-left"><i class="fa fa-map-marker"></i></span>
-                                	<span class="pull-left foo_addr"> NO.82/2, Thiruvalluvar Road,<br> UthukottaiTown &amp; Tk,<br> Thiruvallur Dt - 602026 </span>
+                                	<span class="pull-left foo_addr"> NO.82/2, Thiruvalluvar Road,<br> Uthukottai Town &amp; Tk,<br> Thiruvallur District - 602026 </span>
                                 	<span class="clearfix"> </span>
                                 </li>
-                                <li><a href="mailto:info@teachersrecruit.com"><i class="fa fa-envelope"></i> info@teachersrecruit.com</a></li>
+                                <li><a class="transform_lowercase" href="mailto:info@teachersrecruit.com"><i class="fa fa-envelope"></i> info@teachersrecruit.com</a></li>
                                 <li><i class="fa fa-phone"></i> +91 95850 12949</li>
                                 <li><i class="fa fa-clock-o"></i> Mon - Sun: 8:00 - 17:00</li>
                             </ul>

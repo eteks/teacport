@@ -40,8 +40,10 @@ Website: http://thevectorlab.net/
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="fixed-top">
+
 	<!-- BEGIN HEADER -->
 	    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="top_layer"></div><!-- top_layer -->
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="navbar-inner">
             <div class="container-fluid">
@@ -70,7 +72,7 @@ Website: http://thevectorlab.net/
                         <!-- END SETTINGS -->
                         <!-- BEGIN INBOX DROPDOWN -->
                         <li class="dropdown" id="header_inbox_bar">
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                            <a class="dropdown-toggle pa dropdown_toggle_act">
                                 <i class="icon-envelope-alt"></i>     
                                 <span class="badge badge-important"><?php echo $this->config->item('feedback_count'); ?></span>
                             </a>
@@ -88,7 +90,7 @@ Website: http://thevectorlab.net/
 									<span class="from">Dulal Khan</span> -->
 									<span class="time"><?php echo $feed['feedback_form_created_date']; ?></span>
 									<!-- </span> -->
-									<span class="message">
+									<span class="message message_res">
 									    <?php echo $feed['feedback_form_message']; ?>
 									</span>
                                     </a>
@@ -192,6 +194,7 @@ Website: http://thevectorlab.net/
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->
                     </ul>
+
                     <!-- END TOP NAVIGATION MENU -->
                 </div>
             </div>

@@ -182,7 +182,6 @@
         </div>
     </div>
 </section>
-        
 <?php
 if(!empty($provider_values)) :
 ?>

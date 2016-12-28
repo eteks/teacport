@@ -1,33 +1,14 @@
  <?php include('include/header.php'); ?>
- <?php include('include/menus.php'); ?>      
-        <section class="job-breadcrumb">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                        <h3>Login Page</h3>
-                    </div>
-                    <div class="col-md-6 col-sm-5 co-xs-12 text-right">
-                        <div class="bread">
-                            <ol class="breadcrumb">
-                                <li><a href="login.html#">Home</a> </li>
-                                <li class="active">login</li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="login-page light-blue">
+        <section class="login-page-4 parallex">
             <div class="container">
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                    
                         <div class="login-container">
-                        <div class="loginbox">
-                            <p class="registration_server_msg"><?php if(isset($reg_server_msg)) echo $reg_server_msg; ?></p>
-                                 <div class="loginbox-title">Forgot Password<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a></div><br>
+                            <div class="loginbox">                   
+                            	<p class="registration_server_msg"><?php if(isset($reg_server_msg)) echo $reg_server_msg; ?></p>
+                                 <div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;">Forgot Password<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a></div><br>
                                  <span class="error_test"> Please fill Enter Valid Email </span> 
-                                 <?php echo form_open('job_seeker/forgot_password', 'id="forgotpass-form" class="forgotpass-form"'); ?>
+                                 <?php echo form_open('login/seeker/forgotpassword', 'id="forgotpass-form" class="forgotpass-form"'); ?>
                                     <p class="registration_status"> </p>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1"> Email address </label>
@@ -45,11 +26,11 @@
                                     </li>
                                 </ul>
                             </div>
+                            </div>
                         </div>
-                       </div>
+                        
                     </div>
                 </div>
             </div>
         </section>
-         <?php include('include/footermenu.php'); ?>
-         <?php include('include/footer.php'); ?>
+ <?php include('include/footer.php'); ?>

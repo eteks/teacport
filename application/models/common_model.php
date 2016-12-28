@@ -107,9 +107,10 @@ class Common_model extends CI_Model {
 		$where = "(educational_qualifcation_inst_type_id = '".$ins_id."' AND educational_qualification_status='1')";
 		$this->db->where($where);
 		$educationdata = $this->db->get();
-		return $educationdata->result_array(); 
+		return $educationdata->result_array();
+		 
 	}
-	
+
 	public function classlevel_by_institution($ins_id)
 	{
 		$this->db->select('*');    

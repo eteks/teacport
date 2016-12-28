@@ -720,25 +720,66 @@ table .dataTables_empty{
 #plan_upgrade_or_renewal table .parents_tr select {
     width: 125px !important;
 }
-/* Job Providers Ad posted */
+/* Job Providers Ad posted- Akila Added */
 .magnify-posted-ads {
 	cursor: pointer ;
 }
-.magnify-ad img{
-	position: absolute;
-	
+.ads_table th, .ads_table td {
+	line-height: 35px;
+} 
+#divLargerImage
+{
+    display: none;
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    margin: 0 auto;
+    z-index: 99;
 }
-.magnify-posted-ads:hover img{
- 	visibility: visible;
- 	top: 50%;
- 	left: 50%;
- 	height: 350px;
- 	width: 400px;
- 	/*border: 1px solid #2fbfca;*/
+#divOverlay
+{
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #CCC;
+    opacity: 0.85;
+    width: 100%;
+    height: 110%;
+    z-index: 98;
 }
- .magnify-posted-ads:hover,  .magnify-posted-ads:focus {
-	border:0; /* IE6 needs this to show large image */
-	z-index:1;
+/* End Job Providers Ad posted */
+.restrict{
+    cursor: pointer !important;
+    /*float: right;
+    position: relative;
+    right: 50px;*/
 }
+.restrict_tooltip{
+    background: #828282 none repeat scroll 0 0;
+    border-radius: 5px;
+    bottom: 38px;
+    color: #fff;
+    display: none;
+    font-family: Montserrat;
+    font-size: 10px;
+    height: 23px;
+    left: -295px;
+    padding: 5px 0 0;
+    /*position: absolute;*/
+    text-align: center;
+    width: 312px;
+    z-index: 9999;
+    top:-26px;
+}
+.restrict:hover{
+    color: #006687 !important;
+}
+.restrict:hover .restrict_tooltip{
+    display: block !important;
+}
+
 
 

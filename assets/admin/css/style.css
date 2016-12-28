@@ -13,6 +13,18 @@ body {
     margin: 0px !important;
     font-size:13px;
 }
+.top_layer {
+    position:absolute;
+    z-index: 100;
+}
+.pr { position: relative; }
+.pa { position: absolute; z-index: 99999; }
+.dropdown-toggle { cursor: pointer;  }
+
+
+
+
+
 
 /* fix for font awesome icon classes */
 [class^="icon-"], [class*=" icon-"],[class^="icon-"]:hover, [class*=" icon-"]:hover {
@@ -1456,7 +1468,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 
 /* custom dropdown */
 .dropdown-menu {
-    position: absolute;
+    position: relative;
     top: 100%;
     left: 0;
     z-index: 1100;
@@ -1493,10 +1505,11 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 
 .dropdown-menu.extended {
-    top:40px;
+    top:0px;
     min-width: 160px !important;
     max-width: 300px !important;
     width: 233px !important;
+    max-height: 200px !important;
 }
 
 .dropdown-menu.extended li a{
@@ -4796,7 +4809,18 @@ i#admin_error_login {
 .has-sub div {
    display: none;
 }
-
-/*.slimScrollDiv {
+.inbox {
     height: auto !important;
+    overflow: hidden !important;
+    top: 0 !important;
+    width: auto !important;
+}
+.dropdown_toggle_act + .slimScrollDiv{
+
+    height: auto !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    top: 46px !important;
+    width: auto !important;
+    z-index: 9999;
 }

@@ -130,6 +130,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['state_values'] = $data_values['state_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/state',$data);
 		}
 	}
@@ -235,6 +236,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['institution_type_values'] = $data_values['institution_type_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/institution_types',$data);
 		}
 
@@ -468,6 +470,7 @@ class Adminindex extends CI_Controller {
 		}
 		else {
 			$data['extra_curricular_values'] = $data_values['extra_curricular_values'];
+			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/extra_curricular',$data);
 		}
 	}

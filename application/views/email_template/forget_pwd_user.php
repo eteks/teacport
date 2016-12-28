@@ -63,14 +63,14 @@
 	<td width='325' style='padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' valign='top'>
 	<span style='font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold;'></span>
 	
-	<p>Hi!</p>
+	<p>Hi! <?php echo $registrant_name;?></p>
 	<br/>
-	<p>&nbsp;&nbsp;&nbsp;&nbsp;You have successfully changed your Teachers Recruit Password. The New Password are given below:  </p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;Your Teachers recruite (Job provider) Application Password the following:   </p>
 	<br />
 		<table>
 		<tr>
 			<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span>Username:</span></div></td>
-			<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $registrant_name;?></div></td>	
+			<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $registrant_email_id;?></div></td>	
 		</tr>
 		<tr>
 			<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Password:</span></div></td>
