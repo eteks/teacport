@@ -73,11 +73,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <div class="btn-group">
+                                    <!-- <div class="btn-group">
                                         <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
                                             Add New <i class="icon-plus"></i>
                                         </button>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 
                                 <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
@@ -118,7 +118,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $feed['feedback_form_created_date']; ?>
                           </td>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section_feedback">
                               Full View
                             </a>
                           </td>
@@ -137,7 +137,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
 
 
-            <div class="popup" data-popup="popup_section">
+            <div class="popup" data-popup="popup_section_feedback">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -238,9 +238,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
           </div>
           <p>
-            <a data-popup-close="popup_section" href="#">Close</a>
+            <a data-popup-close="popup_section_feedback" href="#">Close</a>
           </p>
-          <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
+          <a class="popup-close" data-popup-close="popup_section_feedback" href="#">x</a>
         </div>
       </div> 
 

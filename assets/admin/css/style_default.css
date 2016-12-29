@@ -411,6 +411,9 @@ tr select {
 }
 .sub_pre_section{
 	max-height:700px !important; 
+	height: auto;
+	width: auto;
+	overflow: scroll;
 }
 .main_module{
     font-size: 13px;
@@ -584,8 +587,8 @@ tr select {
     text-transform: capitalize;
 }
 .privileges_table td .chzn-container .chzn-choices{
-    min-width: 255px !important;
-    max-width: 255px !important;
+    min-width: 150px !important;
+    /*max-width: 255px !important;*/
 }
 .admin_table td .chzn-container .chzn-choices{
     min-width: 170px !important;
@@ -751,12 +754,6 @@ table .dataTables_empty{
     z-index: 98;
 }
 /* End Job Providers Ad posted */
-.restrict{
-    cursor: pointer !important;
-    /*float: right;
-    position: relative;
-    right: 50px;*/
-}
 .restrict_tooltip{
     background: #828282 none repeat scroll 0 0;
     border-radius: 5px;
@@ -768,18 +765,25 @@ table .dataTables_empty{
     height: 23px;
     left: -295px;
     padding: 5px 0 0;
-    /*position: absolute;*/
+    position: absolute;
     text-align: center;
     width: 312px;
     z-index: 9999;
     top:-26px;
 }
-.restrict:hover{
-    color: #006687 !important;
+.restrict {
+	color: #22878e;
+	position: relative;
+	cursor: pointer !important;
 }
-.restrict:hover .restrict_tooltip{
+.restrict:hover .restrict_tooltip, .restrict:focus .restrict_tooltip{
     display: block !important;
 }
-
+/* for priveleges */
+.privileges_table th, .privileges_table td{
+	min-width: 200px;
+	/*max-width: 180px;*/
+	overflow: scroll !important;
+}
 
 

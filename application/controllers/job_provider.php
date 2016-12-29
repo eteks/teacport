@@ -911,6 +911,16 @@ class Job_provider extends CI_Controller {
 			}
 		}   	
 	}
+	public function resume_download(){
+		if($_POST){
+			$candidate_id = $this->input->post('candidate_id');	
+			$org_id = $this->input->post('org_id');
+			$this->job_provider_model->provider_resume_download_update($candidate_id,$org_id);
+			echo 'update';
+		}else{
+			redirect('missingpage');
+		}
+	}
 	/* custom validataion rules */
 	public function valid_date($date)
 	{

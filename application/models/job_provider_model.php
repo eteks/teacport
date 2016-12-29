@@ -508,4 +508,21 @@ class Job_provider_model extends CI_Model {
 		$this->db->where('inbox_id', $inbox_id);
 		$this->db->update('tr_organizaion_inbox', array('is_viewed'=>'1'));
 	}
+	//provider subscription plan update for resume
+	public function provider_resume_download_update($candidate_id,$org_id){
+		$checkquery = $this->db->get_where('tr_organization_activity', array(
+            'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
+        ));
+		$count = $checkquery->num_rows();
+		if ($count === 0) {
+			$this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'0','is_email_sent'=>'0','is_resume_downloaded'=>'1'));
+		}
+		else{
+			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
+			$this->db->update('tr_organization_activity', array('is_resume_downloaded'=>'1'));
+			$this->db->where(array('organization_id'=>$org_id,'organization_subscription_status'=>1));
+			$this->db->set('organization_remaining_resume_download_count', 'organization_remaining_resume_download_count-1', FALSE);
+			$this->db->update('tr_organization_subscription');
+		}
+	}
 }

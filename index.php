@@ -1,5 +1,4 @@
 <?php
-
 /*
  *---------------------------------------------------------------
  * APPLICATION ENVIRONMENT
@@ -18,7 +17,12 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
+if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
+	define('ENVIRONMENT', 'development');
+}
+else{
 	define('ENVIRONMENT', 'production');
+}
 /*
  *---------------------------------------------------------------
  * ERROR REPORTING
