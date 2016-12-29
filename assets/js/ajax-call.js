@@ -210,6 +210,7 @@ $(document).ready(function() {
 			/* Ajax Post - Store values - Redirect to controller */
 			error = 0;
 			var this_error = $(this).parents('.edit_section_seeker').find('.form_error_ajax');
+			var this_loader = $(this).parents('.edit_section_seeker').find('.edit_loader');
 			this_error.text('').fadeOut();
 			var form_data = new FormData(this);
 			form_data.append('csrf_token',csrf_token_value);
@@ -221,7 +222,10 @@ $(document).ready(function() {
 				data : form_data,
 				contentType: false,
 				processData:false,
-				success : function(res) {
+				beforeSend: function(){
+       				this_loader.removeClass('loader-dn');
+   				},
+ 				success : function(res) {
 					if(res == 'success') {
 						$("html, body").animate({ scrollTop: 0 }, 1000);
 						this_error.addClass('succ_msg');
@@ -232,7 +236,17 @@ $(document).ready(function() {
 						$("html, body").animate({ scrollTop: 0 }, 1000);
 						this_error.text(res).fadeIn();	
 					}
-				}
+				},
+				complete : function(){
+				    this_loader.addClass('loader-dn');
+				},
+				error : function() {
+				    this_loader.addClass('loader-dn');
+				    $("html, body").animate({ scrollTop: 0 }, 1000);
+				    this_error.text("Not Updated due to Connection Problem. Try again.").fadeIn();
+				    setTimeout(function() { location.reload(); }, 3000);
+				},
+
 			});
 		}
 	}); // Submit End
