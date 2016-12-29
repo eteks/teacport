@@ -30,7 +30,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>main/dashboard">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -40,7 +40,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/extra_curricular">Extra Curricular</a>
+              <a href="<?php echo base_url(); ?>main/extra_curricular">Extra Curricular</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
@@ -132,6 +132,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td>
                           <?php 
+                          if(!empty($mapped_data)){
                             $ext_id = $exac_val['extra_curricular_id'];  
                             $mapped_result = array_filter($mapped_data, function($m) use ($ext_id) {
                             return $m == $ext_id; });
@@ -139,6 +140,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Edit or Delete not possible.</div></span>";
                             else
                               echo "<a class='ajaxDelete' data-id='".$exac_val['extra_curricular_id']."'>Delete</a>";
+                          }
+                          else{
+                              echo "<a class='ajaxDelete' data-id='".$exac_val['extra_curricular_id']."'>Delete</a>";
+                          }
                           ?>      
                         </td>
                         <?php endif; ?>
@@ -180,6 +185,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>

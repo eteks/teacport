@@ -236,7 +236,7 @@
 	margin: 10px 5px;
 }
 #candidate_ads_act .btn-default{
-	margin: 8px 0 8px 45px;
+	margin: 8px 0 8px 38px;
     padding: 12px 30px 12px 32px;
 } 
 
@@ -514,6 +514,7 @@ select:invalid {
 } 
 #vacancies_page input[type="text"]{
     height: 45px !important;
+    width: 100%;
 }
 #vacancies_page .btn-default{
 	margin-top: 0 !important;
@@ -831,4 +832,14 @@ label.form-input-error {
 }
 .margin_10{
 	margin-top:10px;
+}
+/* Custom Select2 font-size */
+.select2, .select2-selection__placeholder {
+	font-size: 14px;
+}
+.seeker_search_section .select2-selection__placeholder ,#company-browse-candidate .select2-selection__placeholder, #vacancies_page .select2-selection__placeholder  {
+	font-size: 11px !important;
+}
+#company-browse-candidate input {
+	font-size: 11px;
 }

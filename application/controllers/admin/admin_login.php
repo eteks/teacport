@@ -60,7 +60,7 @@ class Admin_login extends CI_Controller {
 			        'expire' =>  time() + (60 * 24 * 60 * 60),
 			        'domain' => '.localhost',
 			        'path'   => '/',
-			        'prefix' => 'admin_',
+			        'prefix' => 'main_',
 			        );
 			 		set_cookie($cookie);
 			 	}
@@ -68,14 +68,14 @@ class Admin_login extends CI_Controller {
 			echo $data['status'];
 		}
 		else if($data['error']==1) {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
   	}
 
   	public function teac_admin_login()
 	{	
 		if(!empty($this->session->userdata("admin_login_status")))
-			redirect(base_url().'admin/dashboard');
+			redirect(base_url().'main/dashboard');
 		// get cookie
  		$data['remember_value'] = get_cookie('admin_teacport_name');
 		$this->load->view('admin/login',$data);
@@ -156,7 +156,7 @@ class Admin_login extends CI_Controller {
 			}
 		}
 		else if($data['error']==1) {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
   	}
 
@@ -164,7 +164,7 @@ class Admin_login extends CI_Controller {
   	public function teac_admin_logout() {
   		$this->session->unset_userdata("admin_login_status");
         $this->session->unset_userdata("admin_login_session");
-        redirect(base_url().'admin');
+        redirect(base_url().'main');
   	}
 
 

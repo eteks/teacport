@@ -257,7 +257,7 @@ class Subscription_Plan extends CI_Controller {
 			$this->load->view('admin/subscription_plans',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
 	}
 	public function plan_upgrade_creation()

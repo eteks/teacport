@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                <h3>My Feedback</h3>
+                <h3>Change Password</h3>
             </div>
             <div class="col-md-6 col-sm-5 co-xs-12 text-right">
                 <div class="bread">

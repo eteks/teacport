@@ -43,7 +43,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url()."admin/dashboard"; ?>">
+              <a href="<?php echo base_url()."main/dashboard"; ?>">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -53,7 +53,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url()."admin/state"; ?>">State</a>
+              <a href="<?php echo base_url()."main/state"; ?>">State</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
@@ -137,13 +137,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <td>
                           <?php 
-                            $state_id = $sta_val['state_id'];  
-                            $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
-                            return $m == $state_id; });
-                            if(count($mapped_result) > 0)
-                              echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
-                            else
+                            if(!empty($mapped_data)){
+                              $state_id = $sta_val['state_id'];  
+                              $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
+                              return $m == $state_id; });
+                              if(count($mapped_result) > 0)
+                                echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                              else
+                                echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
+                            }
+                            else{
                               echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
+                            }
                           ?>      
                         </td>
                       </tr>
@@ -183,6 +188,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>
