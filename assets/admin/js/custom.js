@@ -174,7 +174,7 @@ ajax = function (params,action,form_id){
     params[csrf_name] = csfrData[csrf_name];
     $.ajax({
         type : "POST",
-        url : admin_baseurl+form.attr('action'),
+        url : baseurl+form.attr('action'),
         dataType : 'json',
         data : params ,
         success: function(res) {
@@ -223,6 +223,9 @@ $(document).ready(function(){
         $('.extended').hide();
         $('.caret-up').hide();
         $('.top_layer').hide();
+    });
+    $('.top_layer').on('click',function() {
+        $('.caret-up').hide();
     });
 var window_width = $(".navbar-inner").width();    
 var window_height = $(".navbar-inner").height();

@@ -30,7 +30,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>main/dashboard">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -40,7 +40,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/subject">Subject</a>
+              <a href="<?php echo base_url(); ?>main/subject">Subject</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
@@ -146,6 +146,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td>
                           <?php 
+                          if(!empty($mapped_data)){
                             $subject_id = $sub_key;  
                             $mapped_result = array_filter($mapped_data, function($m) use ($subject_id) {
                             return $m == $subject_id; });
@@ -153,6 +154,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
                             else
                               echo "<a class='ajaxDelete' data-id='".$sub_key."'>Delete</a>";
+                          }
+                          else{
+                              echo "<a class='ajaxDelete' data-id='".$sub_key."'>Delete</a>";
+                          }
                           ?>      
                         </td>
                         <?php endif; ?>
@@ -205,6 +210,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>

@@ -30,7 +30,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>main/dashboard">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -40,7 +40,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/class_level">Class Level</a>
+              <a href="<?php echo base_url(); ?>main/class_level">Class Level</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
@@ -133,13 +133,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                          <td>
                           <?php 
-                            $class_id = $cla_val['class_level_id'];  
-                            $mapped_result = array_filter($mapped_data, function($m) use ($class_id) {
-                            return $m == $class_id; });
-                            if(count($mapped_result) > 0)
-                              echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
-                            else
+                          if(!empty($mapped_data)){
+                              $class_id = $cla_val['class_level_id'];  
+                              $mapped_result = array_filter($mapped_data, function($m) use ($class_id) {
+                              return $m == $class_id; });
+                              if(count($mapped_result) > 0)
+                                echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                              else
+                                echo "<a class='ajaxDelete' data-id='".$cla_val['class_level_id']."'>Delete</a>";
+                          }
+                          else{
                               echo "<a class='ajaxDelete' data-id='".$cla_val['class_level_id']."'>Delete</a>";
+                          }
                           ?>      
                         </td>
                         <?php endif; ?>  
@@ -192,6 +197,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>
