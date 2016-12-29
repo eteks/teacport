@@ -230,64 +230,59 @@ class Job_seeker_model extends CI_Model {
 		return $model_data;
 	}
 
-	public function job_seeker_find_job_counts($ins_id)
-	{
-		$this->db->from('tr_organization_profile');
-		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id', 'left');
-		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')";
-		$this->db->order_by('organization_id','desc');
-		return $this->db->where($where)->count_all_results();
-	}
+	// public function job_seeker_find_job_counts($ins_id)
+	// {
+	// 	$this->db->from('tr_organization_profile');
+	// 	$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id = tr_organization_vacancies.vacancies_organization_id', 'left');
+	// 	$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')";
+	// 	$this->db->order_by('organization_id','desc');
+	// 	return $this->db->where($where)->count_all_results();
+	// }
 
-	public function job_seeker_find_jobs($limit,$start,$ins_id)
-	{
-	 	$this->db->select('*');   
-	 	$this->db->from('tr_organization_profile');
-		$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id','left');
-		$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')"; 		
-		$this->db->limit($limit,$start);
-		$this->db->where($where);
-		$findjobsjobdata = $this->db->get();
-		return $findjobsjobdata->result_array(); 
-	}
-
-	/** to get applied job counts **/
-	public function job_seeker_applied_job_counts($ins_id)
-	{
-		$this->db->from('tr_candidate_applied_job');
-		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id = tr_organization_vacancies.vacancies_id', 'left');
-		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.	applied_job_status='1')";
-		$this->db->order_by('applied_job_id','desc');
-		return $this->db->where($where)->count_all_results();
-	}
+	// public function job_seeker_find_jobs($limit,$start,$ins_id)
+	// {
+	//  	$this->db->select('*');   
+	//  	$this->db->from('tr_organization_profile');
+	// 	$this->db->join('tr_organization_vacancies','tr_organization_profile.organization_id =	tr_organization_vacancies.vacancies_organization_id','left');
+	// 	$where = "(tr_organization_profile.organization_institution_type_id='".$ins_id."' AND tr_organization_profile.	organization_status='1')"; 		
+	// 	$this->db->limit($limit,$start);
+	// 	$this->db->where($where);
+	// 	$findjobsjobdata = $this->db->get();
+	// 	return $findjobsjobdata->result_array(); 
+	// }
 
 	/** to get applied job records **/
-	public function job_seeker_applied_jobs($limit,$start,$ins_id)
-	{
+	public function job_seeker_applied_jobs($limit,$start,$id)
+	{	
+		$where = "(cap.applied_job_candidate_id='".$id."' AND cap.applied_job_status='1')"; 		
 	 	$this->db->select('*');   
-	 	$this->db->from('tr_candidate_applied_job');
-		$this->db->join('tr_organization_vacancies','tr_candidate_applied_job.applied_job_vacancies_id =	tr_organization_vacancies.vacancies_id','left');
-		// $this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id');
-		$where = "(tr_candidate_applied_job.applied_job_candidate_id='".$ins_id."' AND tr_candidate_applied_job.applied_job_status='1')"; 		
+	 	$this->db->from('tr_candidate_applied_job cap');
+		$this->db->join('tr_organization_vacancies ov','cap.applied_job_vacancies_id =	ov.vacancies_id','inner');
+		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id = op.organization_id','inner');
 		$this->db->limit($limit,$start);
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->result_array(); 
 	}
 
-	public function job_seeker_detail_jobs($ins_id)
+	public function job_seeker_detail_jobs($id)
 	{
+		$where = "(ov.vacancies_id='".$id."' AND ov.vacancies_status='1')"; 				
 	 	$this->db->select('*');   
-	 	$this->db->from('tr_organization_vacancies');
-		$this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id','left');
-		$this->db->join('tr_class_level','tr_organization_vacancies.vacancies_class_level_id =	tr_class_level.class_level_id','left');
-		$this->db->join('tr_university_board','tr_organization_vacancies.vacancies_university_board_id =	tr_university_board.education_board_id','left');
-		$this->db->join('tr_subject','tr_organization_vacancies.vacancies_subject_id =	tr_subject.subject_id','left');
-		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
+	 	$this->db->from('tr_organization_vacancies ov');
+		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id = op.organization_id','inner');
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->row_array(); 
 	}
+
+	public function job_seeker_applied_status($cand_id,$vac_id)
+	{
+		$where = "(applied_job_candidate_id='".$cand_id."' AND applied_job_vacancies_id='".$vac_id."')";
+		$data = $this->db->get_where('tr_candidate_applied_job',$where)->num_rows();
+		return $data; 
+	}
+	
 
 	public function get_relatedjob_list()
 	{
@@ -605,22 +600,16 @@ class Job_seeker_model extends CI_Model {
 		return $subjectdata->result_array(); 
 	}
 
-	public function job_seeker_applied_job($appliedjobdata)
+	public function job_seeker_applied_job($inbox_data,$applied_data)
 	{
-	 	if($this->db->insert('tr_organizaion_inbox', $appliedjobdata)){
-	 		return TRUE;
-	 	}
-		else{
-			return FALSE;
+		$where = '(applied_job_vacancies_id="'.$applied_data['applied_job_vacancies_id'].'" AND applied_job_candidate_id="'.$applied_data['applied_job_candidate_id'].'")';
+		$check_exist = $this->db->get_where('tr_candidate_applied_job',$where)->num_rows();
+		if($check_exist == 0) {
+			$this->db->insert('tr_candidate_applied_job', $applied_data);
+		 	$this->db->insert('tr_organizaion_inbox', $inbox_data);
+		 	return TRUE;
 		}
-	}
-
-	public function job_seeker_candidatejob($appliedjobdata)
-	{
-	 	if($this->db->insert('tr_candidate_applied_job', $appliedjobdata)){
-	 		return TRUE;
-	 	}
-		else{
+		else {
 			return FALSE;
 		}
 	}

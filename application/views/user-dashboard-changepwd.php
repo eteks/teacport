@@ -34,11 +34,12 @@
                             </div>
                             <?php
                             if(!empty($status)) :
-                                echo "<div class='error'> $status </div>";
+                                echo "<p class='success_server_msg'> $status </p>";
                             endif;
                             ?>
                             <div class="profile-edit">
-                                <?php echo form_open('seeker/password','class="form-horizontal"'); ?>
+                                <?php echo form_open('seeker/password','id="seeker_changepassword_form" class="form-horizontal"'); ?>
+                                    <p class="form_error"> </p>
 	                                <div class="form-group">
 										<label class="col-sm-12">You can change your password below</label>
 									</div>	
@@ -47,7 +48,7 @@
 											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
                                             <?php echo form_error('old_pass'); ?>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="old_pass" size="25" type="password" value="<?php echo set_value('old_pass'); ?>">
+												<input id="old_pass" class="form-control" name="old_pass" size="25" type="password" value="<?php echo set_value('old_pass'); ?>">
 											</div>
 										</div>
 									</div>	
@@ -56,7 +57,7 @@
 											<label class="col-sm-6">New Password<span class="alert">*</span></label>
                                             <?php echo form_error('new_pass'); ?>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="new_pass" size="25" type="password" value="<?php echo set_value('new_pass'); ?>">
+												<input id="new_pass" class="form-control" name="new_pass" size="25" type="password" max_length="20" value="<?php echo set_value('new_pass'); ?>">
 											</div>
 										</div>
 									</div>	
@@ -65,7 +66,7 @@
 											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
                                             <?php echo form_error('confirm_pass'); ?>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="confirm_pass" size="25" type="password" value="<?php echo set_value('confirm_pass'); ?>">
+												<input id="confirm_pass" max_length="20" class="form-control" name="confirm_pass" size="25" type="password" value="<?php echo set_value('confirm_pass'); ?>">
 											</div>
 										</div>
 									</div>	

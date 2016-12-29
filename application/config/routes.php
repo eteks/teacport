@@ -87,7 +87,7 @@ $route['provider/logout'] 								= 'job_provider/provider_logout';
 //JOB SEEKER
 $route['seeker/dashboard'] 								= 'job_seeker/dashboard';
 $route['seeker/logout'] 								= 'job_seeker/seeker_logout';
-$route['seeker/initialdata'] 							= 'job_seeker/initialdata';
+// $route['seeker/initialdata'] 							= 'job_seeker/initialdata';
 $route['seeker/editprofile'] 							= 'job_seeker/editprofile';
 $route['seeker/inbox'] 								    = 'job_seeker/inbox';
 $route['seeker/findjob'] 								= 'job_seeker/findjob';
@@ -95,7 +95,7 @@ $route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';
 $route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
 $route['seeker/jobsapplied/(:num)'] 					= 'job_seeker/jobsapplied/$1';
 $route['seeker/jobsapplieddetails/(:num)'] 				= 'job_seeker/applynow/$1';
-$route['seeker/applynow'] 								= 'job_seeker/applynow';
+// $route['seeker/applynow'] 								= 'job_seeker/applynow';
 $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 $route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';

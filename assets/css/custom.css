@@ -766,6 +766,13 @@ table tr[data-name="bold_section"] a {
     text-align: center;
     font-weight: bold;
 }
+.form_error {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: bold;
+}
 .succ_msg {
     color : green;
 }
@@ -811,10 +818,19 @@ label.form-input-error {
 	font-size: 11px;
     padding-left: 10px !important;
 }
-
 .margin-column {
 	margin-bottom : 10px;
 }
+.edit_loader {
+    background: rgba(0, 0, 0, 0) url("../images/seeker_edit_loader.gif") no-repeat scroll center center;
+    display: inline-block;
+    height: 30px;
+    width: 50%;
+}
+.loader-dn {
+	display: none;
+}
+
 
 /* Ended by siva */
 .subcription_plan_details{

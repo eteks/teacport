@@ -292,11 +292,13 @@ class Job_seeker extends CI_Controller {
 		}
 	}
 
-	public function dashboard() {     	
+	/* ==============            Seeker Dashboard Start Here          ================ */
 
+	// Dashboard
+	public function dashboard() {     	
      	$session_data = $this->session->all_userdata();  
-     	if($session_data['login_status'] != TRUE) {
-     		redirect('missingpage');
+     	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
+     		redirect('seeker/logout');
      	}
      	// print_r($session_data['login_session']);
 		if($_POST) {
@@ -348,11 +350,7 @@ class Job_seeker extends CI_Controller {
 			}		
 		}
 
-
-
 		$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
-
-		// if(!empty($candidate_data['candidate_father_name']))
 		if($candidate_data['candidate_father_name'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_district_id'] == '' or $candidate_data['candidate_date_of_birth'] == '') 
 		{
 			if($candidate_data['candidate_institution_type'] == '0' or $candidate_data['candidate_institution_type'] == '' or $candidate_data['candidate_email'] == '' or $candidate_data['candidate_mobile_no'] == '' or $candidate_data['candidate_password'] == '') {
@@ -375,113 +373,51 @@ class Job_seeker extends CI_Controller {
 		$this->load->view('user-dashboard',$data);
 	}
 
-    public function seeker_logout(){
-		$this->session->set_userdata('login_status', FALSE);
-		$this->session->unset_userdata('login_session');
-		$this->session->sess_destroy();
-    	redirect('/','refresh');
+	/* ==============            Seeker Dashboard End Here          ================ */
+
+	/* ==============            Seeker Inbox Start Here          ================ */
+
+	// Candidate inbox
+	public function inbox(){
+		$session = $this->session->all_userdata();
+		// print_r($session['login_session']);
+		if(!isset($session['login_session']) || empty($session['login_session'])) {
+     		redirect('seeker/logout');
+     	}
+		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session['login_session']['candidate_id']);
+		$data['message'] = $this->job_seeker_model->job_seeker_inbox($session['login_session']['candidate_id']);
+		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
+		// print_r($data['candidate_id']);
+		$data['provider_values'] = $this->common_model->get_provider_details();
+		$this->load->view('user-dashboard-inbox',$data);
 	}
 
-	public function forgot_password()
-	{ 
-		$ci =& get_instance();	
-		$ci->config->load('email', true);
-		$emailsetup = $ci->config->item('email');
-		$this->load->library('email', $emailsetup);
-		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
-		/* Check whether registration form server side validation are valid or not */
-		if ($this->form_validation->run() == FALSE){
-			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-			$this->load->view('forgot-password');
-			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
-			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
-		}
-		else{
-	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
-	  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
-	      	if($forget_query['candidate_password'] != '') {
-				$from_email = $emailsetup['smtp_user'];
-				$this->email->initialize($emailsetup);
-				$this->email->from($from_email, 'Teacher Recruit');
-				$this->email->to($forget_query['candidate_email']);
-	        	$this->email->subject('Get your forgotten Password');
-	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
-	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
-	        	if($this->email->send()){
-		        	$data['reg_server_msg'] = "Check your mail and get your password!";
-		        	$this->load->view('forgot-password',$data);
-	        	}
-				else{
-					show_error($this->email->print_debugger());
-					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
-					$this->load->view('forgot-password',$data);
-				}
-	      	}
-			else{
-				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
-				$this->load->view('forgot-password',$data);
-			}
-		}   	 		
+	// Candidate message - get message from db without page refersh (ajax)	
+	public function inbox_message(){
+		echo json_encode($this->job_seeker_model->job_seeker_inbox_ajax($this->input->post('cand_id'),$this->input->post('lastid')));
 	}
 
-	/** Seeker Inital Data Validation With Pop-up **/		
-	public function initialdata(){			
-		if($_POST){				
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
-			
-			if ($this->form_validation->run()){					
-				$initial_data_profile = array(
-					'candidate_password'	=> $this->input->post('seekerpassword'),
-					'candidate_mobile_no'	=> $this->input->post('registrant_mobile_no'),
-					'candidate_profile_completeness' => 41
-				);					
-				if($this->job_seeker_model->job_seeker_update_profile($this->input->post('candidate_id'),$initial_data_profile)=='updated'){
-						redirect('seeker/dashboard');
-					}
-				} 
-				else {					
-					// $session_data = $this->session->all_userdata();
-					// $user_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']['candidate_email']:$session_data['login_session']['candidate_id']);
-					// 	if($this->job_seeker_model->check_has_initial_data($user_email)=='has_no_data'){						
-					// 		$data['initial_data'] = 'show_popup';
-					// 	}
-					// 	else{
-					// 		echo 'Out';
-					// 		$data['initial_data'] = 'hide_popup';
-					// 	}
+	// Candidate inbox message count - get message count from db without page refersh (ajax)	
+	public function inbox_message_count(){
+		echo $this->job_seeker_model->job_seeker_unread_inbox_count($this->input->post('cand_id'));
+	}	
 
-					// $candidate_data = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
+	// Candidate inbox full data
+	public function inbox_message_full_data() {
+		$inbox_id = $this->input->post('inbox_id');	
+		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
+	}
 
-					// // if($candidate_data['organization_name'] == '' or $candidate_data['organization_logo'] == '' or $candidate_data['organization_address_1'] == '' or $candidate_data['organization_address_2'] == '' or $candidate_data['organization_address_3'] == '' or $candidate_data['organization_district_id'] == '' or $candidate_data['registrant_name'] == '' or $candidate_data['registrant_designation'] == '' ){
+	/* ==============            Seeker Inbox End Here          ================ */
 
-					// if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
-					// 		if($data['initial_data'] === 'show_popup'){
-					// 			$data['user_data'] = $candidate_data;
-					// 				$this->load->view('user-dashboard',$data);
-					// 			} else {
-					// 				redirect('seeker/dashboard/editprofile');
-					// 			}
-					// } else {
-					// 	$data['user_data'] = $candidate_data;
-					// 	$this->load->view('user-dashboard',$data);
-					// }
-					redirect('seeker/dashboard');
-				}
-			} /** POST END **/
-		}
+	/* ==============            Seeker Edit Profile Start Here          ================ */
 
 	// Job Seeker Edit Profile 
-    
     public function editprofile() {
     	$session = $this->session->all_userdata();
     	// print_r($session['login_session']);
-    	if($session['login_status'] != TRUE) {
-     		redirect('missingpage');
+    	if(!isset($session['login_session']) || empty($session['login_session'])) {
+     		redirect('seeker/logout');
      	}
      	$data['update_status'] = '';
 		$data['provider_values'] = $this->common_model->get_provider_details();
@@ -512,14 +448,12 @@ class Job_seeker extends CI_Controller {
 		if(!empty($candidate_session_data)) {
 			$this->session->set_userdata('login_session',$candidate_session_data);
 		}
-    	// echo "<pre>";
-    	// print_r($data['provider_values']);
-    	// echo "</pre>";
+
     	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		$this->load->view('user-edit-profile',$data);
 	}
-		
 
+	// Job Seeker Edit Profile Validation - ajax
 	public function edit_profile_validation_ajax() {
    		$action = "update"	;
    		// Experience Validation
@@ -673,12 +607,16 @@ class Job_seeker extends CI_Controller {
        	echo $data['update_status'];
 	}
 
+	/* ==============            Seeker Edit Profile End Here          ================ */
 
+	/* ==============            Seeker Find Jobs Start Here          ================ */
 
-
-	/** Job Seeker find Jobs - Start Here **/
+	// Seeker Find Job
 	public function findjob() {	
 		$session_data = $this->session->all_userdata();		
+		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
+     		redirect('seeker/logout');
+     	}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		$data['provider_values'] = $this->common_model->get_provider_details();
 		$data['alldistricts'] = $this->common_model->get_all_district();
@@ -687,7 +625,6 @@ class Job_seeker extends CI_Controller {
 
 		if(!isset($session_data['login_session']['institution_type_id']) && empty($session_data['login_session']['institution_type_id'])) {
 			$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
-			// $session_data['login_session']['candidate_id'] = $candidate_data['candidate_id'];
 			$session_data['login_session']['institution_type_id'] = $candidate_data['institution_type_id'];
 		}		
 
@@ -754,169 +691,82 @@ class Job_seeker extends CI_Controller {
 			redirect('seeker/dashboard');
 		}		
 	}
-	/** Job Seeker find Jobs - End Here **/
 
-	/** Job Applied Jobs - Start Here **/
+	/* ==============            Seeker Find Jobs End Here          ================ */
+
+	/* ==============            Seeker Applied Jobs Start Here          ================ */
+
+	// Seeker Applied jobs
 	public function jobsapplied(){
-		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
-		$pagination = array();
-		$pagination["base_url"] = base_url() . "seeker/jobsapplied";
-		$pagination["per_page"] = 20;
-		$pagination["use_page_numbers"] = 0;	
-		$pagination['cur_tag_open'] = '&nbsp;<li class="active"><a>';
-		$pagination['cur_tag_close'] = '</a></li>';
-		$pagination['next_link'] = 'Next';
-		$pagination['prev_link'] = 'Previous';
-		//$pagination['use_page_numbers'] = TRUE;	
-
-		if($session_data['login_session']['candidate_id']) {
-			$pagination["total_rows"] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);
-			$pagination['num_links'] = $this->job_seeker_model->job_seeker_applied_job_counts($session_data['login_session']['candidate_id']);	
-			// echo $this->db->last_query();					
-			$this->pagination->initialize($pagination);
-			if($this->uri->segment(3)){ $page = ($this->uri->segment(3)) ; 	} else{	$page = 0;}	
-			$data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($pagination["per_page"], $page,$session_data['login_session']['candidate_id']);		
-			if(isset($data["jobsapplied"][0]['vacancies_organization_id'])){			
-				$data['organization_details'] = $this->common_model->organization_details($data["jobsapplied"][0]['vacancies_organization_id']);
-			}	
-			// echo $this->db->last_query();			
-			$str_links = $this->pagination->create_links();
-			$data["links"] = explode('&nbsp;',$str_links );	
-			$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);		
-			$data['provider_values'] = $this->common_model->get_provider_details();
-			$this->load->view('user-job-applied', $data);
-		}else{
-			$this->load->view('missingpage');
-		}
-	}
-	/** Job Applied Jobs - End Here **/
-
-	public function applynow(){
-		$session_data = $this->session->all_userdata();	
-    	if($session_data['login_status'] != TRUE) {
-     		redirect('login/seeker');
+		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
+     		redirect('seeker/logout');
      	}
-		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
-		$data["current_jobvacancy_id"] = $this->uri->segment('3');
-		$form_data = $this->input->post();
-
-		if(!$_POST && !$form_data){
-			// echo 'default values to show in html';
-			if($data["current_jobvacancy_id"]){
-					$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
-					$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
-					$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
-					$this->load->view('single-job', $data);
-			}
-		}else{
-			// echo 'Post values default values to show in html';
-			$session_data = $this->session->all_userdata();		
-			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
-			$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
-			$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
-
-			/** Insert data for Organization Inbox **/
-			$seeker_appliedjob = array(									
-									'inbox_messge'					=> 'Apply job',
-									'inbox_organization_id'			=> $data["applyjob"]['organization_id'],
-									'inbox_candidate_id'			=> $session_data['login_session']['candidate_id'],
-									'inbox_vacancy_id'				=> $data["applyjob"]['vacancies_id'],
-									'is_viewed'						=> 0,
-									'inbox_status'					=> 1
-								);
-			/** Insert data for Candidate Applied Job **/
-			$seeker_candidatejob = array(									
-									'applied_job_vacancies_id'		=> $data["applyjob"]['vacancies_id'],
-									'applied_job_candidate_id'		=> $session_data['login_session']['candidate_id'],
-									'applied_job_status'			=> 1
-								);
-				
-			if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob) && $this->job_seeker_model->job_seeker_candidatejob($seeker_candidatejob)) {
-				$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
-				$this->load->view('single-job', $data);
-			} else {
-				$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
-				redirect('missingpage');
-			}
-
-		}
-	}
-	
-	// Change password
-	public function change_password() {
-		$session_data = $this->session->all_userdata();	
-    	// print_r($session['login_session']);
-    	if($session_data['login_status'] != TRUE) {
-     		redirect('missingpage');
-     	}
-		$data['status'] = '';
-		if($_POST) {
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			/* Set validate condition for registration form */
-			$id = $session_data['login_session']['candidate_id'];
-			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required|xss_clean|max_length[20]|');
-			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|required|xss_clean|max_length[20]');
-			$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'trim|required|xss_clean|max_length[20]|matches[new_pass]');
- 	  		if ($this->form_validation->run()) {   
- 	  			$data_array = array(
- 	  						'old_password' => $this->input->post('old_pass'),
- 	  						'new_password' => $this->input->post('new_pass'),
- 	  						'candidate_id' => $id
- 	  					);
- 	  			$data['status'] = $this->job_seeker_model->password_change($data_array);
-		    }
-		}
-		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
+		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);		
 		$data['provider_values'] = $this->common_model->get_provider_details();
-		$this->load->view('user-dashboard-changepwd',$data);
+
+		// Pagination values
+		$per_page = 20;
+
+		$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
+		$total_rows = $this->job_seeker_model->candidate_job_applied_count($session_data['login_session']['candidate_id']);
+        $data["jobsapplied"] = $this->job_seeker_model->job_seeker_applied_jobs($per_page, $offset,$session_data['login_session']['candidate_id']);
+
+    	// Load pagination
+		$this->load->library('pagination');
+
+		// Pagination configuration
+			$config['base_url'] = base_url().'seeker/jobsapplied';
+		$config['per_page'] = $per_page;
+		$config['total_rows'] = $total_rows;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = $total_rows;
+		$config['use_page_numbers'] = TRUE;
+
+		// Custom Configuration
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Prev';
+
+		// Pagination Inititalization
+		$this->pagination->initialize($config);
+
+		// Navigation Links
+		$pagination_links = $this->pagination->create_links();
+		$data["links"] = $pagination_links;
+		$this->load->view('user-job-applied', $data);
 	}
 
-	// Candidate inbox
-	public function inbox(){
-		$session = $this->session->all_userdata();
-		// print_r($session['login_session']);
-		if($session['login_status'] != TRUE) {
-     		redirect('missingpage');
-     	}
-		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session['login_session']['candidate_id']);
-		$data['message'] = $this->job_seeker_model->job_seeker_inbox($session['login_session']['candidate_id']);
-		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
-		// print_r($data['candidate_id']);
-		$data['provider_values'] = $this->common_model->get_provider_details();
-		$this->load->view('user-dashboard-inbox',$data);
-	}
+	/* ==============            Seeker Applied Jobs End Here          ================ */
 
-	// Candidate message - get message from db without page refersh (ajax)	
-	public function inbox_message(){
-		echo json_encode($this->job_seeker_model->job_seeker_inbox_ajax($this->input->post('cand_id'),$this->input->post('lastid')));
-	}
+	/* ==============            Seeker Feedback Start Here          ================ */
 
-	// Candidate inbox message count
-	public function inbox_message_count(){
-		echo $this->job_seeker_model->job_seeker_unread_inbox_count($this->input->post('cand_id'));
-	}	
-
-	// Candidate inbox full data
-	public function inbox_message_full_data() {
-		$inbox_id = $this->input->post('inbox_id');	
-		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
-	}
-
+	// Seeker Feedback
 	public function feedback(){
 		$session_data = $this->session->all_userdata();
+		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
+     		redirect('seeker/logout');
+     	}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
-		// $data['candidate'] 	= isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
-		$data['candidate'] 	= $session_data['login_session']['candidate_id'];
-		$data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session_data['login_session']['candidate_id']);
+		// $data['candidate'] 	= $session_data['login_session']['candidate_id'];
+		// $data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session_data['login_session']['candidate_id']);
 		$data['provider_values'] = $this->common_model->get_provider_details();
 		if(!$_POST){
 			$this->load->view('user-dashboard-feedback',$data);
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-		$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
-		$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
+			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
 			if ($this->form_validation->run()){
 				$feedback_data = array(
 									'feedback_form_title' => $this->input->post('feedback_subject'),
@@ -940,7 +790,209 @@ class Job_seeker extends CI_Controller {
 				$this->load->view('user-dashboard-feedback',$data);
 			}
 		}
-		
 	}
+
+	/* ==============            Seeker Feedback End Here          ================ */
+
+	/* ==============            Seeker Change Password Start Here          ================ */
+
+	// Change password
+	public function change_password() {
+		$session_data = $this->session->all_userdata();	
+    	// print_r($session['login_session']);
+    	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
+     		redirect('seeker/logout');
+     	}
+		$data['status'] = '';
+		if($_POST) {
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+			/* Set validate condition for registration form */
+			$id = $session_data['login_session']['candidate_id'];
+			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required|xss_clean|');
+			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|required|xss_clean||min_length[4]|max_length[20]|alpha_numeric|');
+			$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'trim|required|xss_clean||min_length[4]|max_length[20]|alpha_numeric|matches[new_pass]');
+ 	  		if ($this->form_validation->run()) {   
+ 	  			$data_array = array(
+ 	  						'old_password' => $this->input->post('old_pass'),
+ 	  						'new_password' => $this->input->post('new_pass'),
+ 	  						'candidate_id' => $id
+ 	  					);
+ 	  			$data['status'] = $this->job_seeker_model->password_change($data_array);
+		    }
+		}
+		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
+		$data['provider_values'] = $this->common_model->get_provider_details();
+		$this->load->view('user-dashboard-changepwd',$data);
+	}
+
+	/* ==============            Seeker Change Password End Here          ================ */
+
+	/* ==============            Seeker Job Description Start Here  (Apply and Applied job)        ================ */
+
+	// Seeker job apply and job description
+	public function applynow() {
+		$session_data = $this->session->all_userdata();	
+		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
+     		redirect('login/seeker');
+     	}
+		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
+		$data["current_jobvacancy_id"] = $this->uri->segment('3');
+		$data["qualification"] = $this->common_model->qualification();
+		$data["medium"] = $this->common_model->medium_of_instruction();
+		if(!$_POST) {
+			// echo 'default values to show in html';
+			if($data["current_jobvacancy_id"]) {
+				$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+				$data["applied_status"] = $this->job_seeker_model->job_seeker_applied_status($session_data['login_session']['candidate_id'],$data["current_jobvacancy_id"]);
+				$this->load->view('single-job', $data);
+			}
+		}
+		else {
+			// echo 'Post values default values to show in html';
+			$session_data = $this->session->all_userdata();		
+			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+
+			/** Insert data for Organization Inbox **/
+			$seeker_appliedjob = array(									
+									'inbox_messge'					=> 'Apply job',
+									'inbox_organization_id'			=> $data["applyjob"]['organization_id'],
+									'inbox_candidate_id'			=> $session_data['login_session']['candidate_id'],
+									'inbox_vacancy_id'				=> $data["applyjob"]['vacancies_id'],
+									'is_viewed'						=> 0,
+									'inbox_status'					=> 1
+								);
+			/** Insert data for Candidate Applied Job **/
+			$seeker_candidatejob = array(									
+									'applied_job_vacancies_id'		=> $data["applyjob"]['vacancies_id'],
+									'applied_job_candidate_id'		=> $session_data['login_session']['candidate_id'],
+									'applied_job_status'			=> 1
+								);
+				
+			if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob,$seeker_candidatejob)) {
+				$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+				$this->load->view('single-job', $data);
+			} 
+			else {
+				$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
+				redirect('missingpage');
+			}
+		}
+	}
+
+	/* ==============            Seeker Job Description End Here  (Apply and Applied job)        ================ */
+
+
+    public function seeker_logout() {
+		$this->session->set_userdata('login_status', FALSE);
+		$this->session->unset_userdata('login_session');
+		$this->session->sess_destroy();
+    	redirect('/','refresh');
+	}
+
+	public function forgot_password()
+	{ 
+		$ci =& get_instance();	
+		$ci->config->load('email', true);
+		$emailsetup = $ci->config->item('email');
+		$this->load->library('email', $emailsetup);
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+		/* Check whether registration form server side validation are valid or not */
+		if ($this->form_validation->run() == FALSE){
+			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$this->load->view('forgot-password');
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
+		}
+		else{
+	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
+	  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
+	      	if($forget_query['candidate_password'] != '') {
+				$from_email = $emailsetup['smtp_user'];
+				$this->email->initialize($emailsetup);
+				$this->email->from($from_email, 'Teacher Recruit');
+				$this->email->to($forget_query['candidate_email']);
+	        	$this->email->subject('Get your forgotten Password');
+	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
+	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
+	        	if($this->email->send()){
+		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$this->load->view('forgot-password',$data);
+	        	}
+				else{
+					show_error($this->email->print_debugger());
+					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
+					$this->load->view('forgot-password',$data);
+				}
+	      	}
+			else{
+				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$this->load->view('forgot-password',$data);
+			}
+		}   	 		
+	}
+
+	// Commented by siva
+	// /** Seeker Inital Data Validation With Pop-up **/		
+	// public function initialdata(){			
+	// 	if($_POST){				
+	// 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+	// 		$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean');
+	// 		$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean');
+	// 		$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean');
+	// 		$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
+			
+	// 		if ($this->form_validation->run()){					
+	// 			$initial_data_profile = array(
+	// 				'candidate_password'	=> $this->input->post('seekerpassword'),
+	// 				'candidate_mobile_no'	=> $this->input->post('registrant_mobile_no'),
+	// 				'candidate_profile_completeness' => 41
+	// 			);					
+	// 			if($this->job_seeker_model->job_seeker_update_profile($this->input->post('candidate_id'),$initial_data_profile)=='updated'){
+	// 					redirect('seeker/dashboard');
+	// 				}
+	// 			} 
+	// 			else {					
+	// 				// $session_data = $this->session->all_userdata();
+	// 				// $user_email = (isset($session_data['login_session']['candidate_email'])?$session_data['login_session']['candidate_email']:$session_data['login_session']['candidate_id']);
+	// 				// 	if($this->job_seeker_model->check_has_initial_data($user_email)=='has_no_data'){						
+	// 				// 		$data['initial_data'] = 'show_popup';
+	// 				// 	}
+	// 				// 	else{
+	// 				// 		echo 'Out';
+	// 				// 		$data['initial_data'] = 'hide_popup';
+	// 				// 	}
+
+	// 				// $candidate_data = (isset($session_data['login_session']['candidate_id'])?$this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']):$this->job_seeker_model->get_cand_data_by_mail($session_data['login_session']['candidate_email']));
+
+	// 				// // if($candidate_data['organization_name'] == '' or $candidate_data['organization_logo'] == '' or $candidate_data['organization_address_1'] == '' or $candidate_data['organization_address_2'] == '' or $candidate_data['organization_address_3'] == '' or $candidate_data['organization_district_id'] == '' or $candidate_data['registrant_name'] == '' or $candidate_data['registrant_designation'] == '' ){
+
+	// 				// if($candidate_data['candidate_name'] == '' or $candidate_data['candidate_image_path'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_address_2'] == '' or $candidate_data['candidate_live_district_id'] == '' ){
+	// 				// 		if($data['initial_data'] === 'show_popup'){
+	// 				// 			$data['user_data'] = $candidate_data;
+	// 				// 				$this->load->view('user-dashboard',$data);
+	// 				// 			} else {
+	// 				// 				redirect('seeker/dashboard/editprofile');
+	// 				// 			}
+	// 				// } else {
+	// 				// 	$data['user_data'] = $candidate_data;
+	// 				// 	$this->load->view('user-dashboard',$data);
+	// 				// }
+	// 				redirect('seeker/dashboard');
+	// 			}
+	// 		} /** POST END **/
+	// 	}
+
+		
+		
+
+	
+
+
+	
+	
+	
+
+	
 
 } // End
