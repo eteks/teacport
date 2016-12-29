@@ -139,7 +139,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td> 
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section">
+                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section_profile">
                               Edit
                             </a>
                           </td>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php endif; ?>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_profile">
                               Full View
                             </a>
                           </td>
@@ -175,7 +175,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         </div>                
       </div>            
       <!---Full View & Edit popup -->
-      <div class="popup" data-popup="popup_section">
+      <div class="popup" data-popup="popup_section_profile">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -952,9 +952,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
           </div>
         	<p>
-            <a data-popup-close="popup_section" href="#">Close</a>
+            <a data-popup-close="popup_section_profile" href="#">Close</a>
           </p>
-          <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
+          <a class="popup-close" data-popup-close="popup_section_profile" href="#">x</a>
         </div>
       </div>     	
     </div>

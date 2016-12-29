@@ -15,7 +15,6 @@ body {
 }
 .top_layer {
     position:absolute;
-    z-index: 100;
 }
 .pr { position: relative; }
 .pa { position: absolute; z-index: 99999; }
@@ -4835,3 +4834,6 @@ i#admin_error_login {
     color: #fff;
 }
 .clear_both { clear: both;  }
+.time_act{
+    cursor: pointer;
+}

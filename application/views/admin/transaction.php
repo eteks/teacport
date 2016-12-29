@@ -129,7 +129,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $trans['transaction_id']; ?>" data-href="job_provider/get_transaction_full_view"  data-mode="full_view"  data-popup-open="popup_section">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $trans['transaction_id']; ?>" data-href="job_provider/get_transaction_full_view"  data-mode="full_view"  data-popup-open="popup_section_transaction">
                               Full View
                             </a>
                           </td>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>         
 
       <!---Full View popup -->
-      <div class="popup" data-popup="popup_section">
+      <div class="popup" data-popup="popup_section_transaction">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -334,9 +334,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
           </div>
           <p>
-            <a data-popup-close="popup_section" href="#">Close</a>
+            <a data-popup-close="popup_section_transaction" href="#">Close</a>
           </p>
-          <a class="popup-close" data-popup-close="popup_section" href="#">x</a>
+          <a class="popup-close" data-popup-close="popup_section_transaction" href="#">x</a>
         </div>
       </div> 	
       <!-- END ADVANCED TABLE widget-->
