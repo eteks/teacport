@@ -512,6 +512,13 @@ select:invalid {
  	filter: alpha(opacity=0);  
   	opacity:0;  
 } 
+#vacancies_page input[type="text"]{
+    height: 45px !important;
+}
+#vacancies_page .btn-default{
+	margin-top: 0 !important;
+	padding: 10px 0;
+}
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
@@ -757,6 +764,10 @@ table tr[data-name="bold_section"] a {
     font-size: 14px;
     margin-bottom: 10px;
     text-align: center;
+    font-weight: bold;
+}
+.succ_msg {
+    color : green;
 }
 /*.seeker_edit_form input[type="text"] {
 	width: 100%;
@@ -795,6 +806,14 @@ label.form-input-error {
 }
 .apply-restrict {
 	opacity: 0.3;
+}
+.seeker_search_section input, .vacancy_search_section input {
+	font-size: 11px;
+    padding-left: 10px !important;
+}
+
+.margin-column {
+	margin-bottom : 10px;
 }
 
 /* Ended by siva */

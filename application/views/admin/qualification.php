@@ -144,9 +144,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php endif; ?>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td>
-                          <a class="ajaxDelete" data-id="<?php echo $qua_val['educational_qualification_id']; ?>">
-                            Delete
-                          </a>
+                          <?php 
+                            $qual_id = $qua_val['educational_qualification_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($qual_id) {
+                            return $m == $qual_id; });
+                            if(count($mapped_result) > 0)
+                              echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                            else
+                              echo "<a class='ajaxDelete' data-id='".$qua_val['educational_qualification_id']."'>Delete</a>";
+                          ?>      
                         </td>
                         <?php endif; ?>
                       </tr>
