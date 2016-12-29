@@ -44,8 +44,7 @@ define('COURSE_TYPE',serialize(array("UG"=>"Under Graduate",
 define('NATIONALITY',serialize(array("indian"=>"Indian",
             "other"=>"Others")));
 // Religion
-define('RELIGION',serialize(array("hindu"=>"Hindu","muslim"=>"Muslim","christian"=>"Christian",
-        "PG"=>"Post Graduate","others"=>"Others")));
+define('RELIGION',serialize(array("hindu"=>"Hindu","muslim"=>"Muslim","christian"=>"Christian","others"=>"Others")));
 // Community
 define('COMMUNAL',serialize(array("st"=>"Scheduled Tribe (ST)","sc"=>"Scheduled Caste (SC)","sca"=>"Scheduled Caste-Arunthathiar (SCA)","mbc"=>"Most Backward Class (MBC)","dc"=>"Denotified Community (DC)","bc"=>"Backward Class (BC)","bcm"=>"Backward Class-Muslim (BCM)","others"=>"Others")));
 
