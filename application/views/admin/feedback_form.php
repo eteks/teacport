@@ -73,11 +73,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="widget-body">
                             <div class="portlet-body">
                                 <div class="clearfix">
-                                    <!-- <div class="btn-group">
-                                        <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
+                                    <div class="btn-group">
+                                        <!-- <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
                                             Add New <i class="icon-plus"></i>
-                                        </button>
-                                    </div> -->
+                                        </button> -->
+                                    </div>
                                 </div>
                                 
                                 <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
