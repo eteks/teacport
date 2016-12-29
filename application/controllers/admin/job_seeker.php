@@ -279,7 +279,7 @@ class Job_Seeker extends CI_Controller {
 			$this->load->view('admin/job_seeker_profile',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
 	}
 

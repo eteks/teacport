@@ -44,7 +44,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>main/dashboard">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -54,7 +54,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/subscription_plans">
+              <a href="<?php echo base_url(); ?>main/subscription_plans">
                 Subscription Plan
               </a>
               <span class="divider-last">&nbsp;</span>
@@ -83,7 +83,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </button>
                   </div>
                 </div>
-                <form action="subscription_plans">
+                <form action="subscription_plan/subscription_plans">
                 <p class="admin_status"> </p>
                   <div class="table_content_section">
                     <?php } ?>
@@ -193,7 +193,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </h4>                        
           </div>
           <div class="widget-body form">
-            <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+            <form action="subscription_plan/subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
             <p class="admin_status"> </p>
               <fieldset>
                 <legend> Subscription plan details:</legend>
@@ -324,6 +324,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>

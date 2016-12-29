@@ -48,7 +48,7 @@ Website: http://thevectorlab.net/
         <div class="navbar-inner">
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
-                <a class="brand" href="<?php echo base_url(); ?>admin/dashboard">
+                <a class="brand" href="<?php echo base_url(); ?>main/dashboard">
                     <img src="<?php echo base_url(); ?>assets/admin/img/logo_new.png" alt="Admin Lab" />
                 </a>
                 <!-- END LOGO -->
@@ -66,7 +66,7 @@ Website: http://thevectorlab.net/
                     
                         <!-- BEGIN SETTINGS -->
                         <!-- <li class="dropdown">
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Settings">
+                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>main/dashboard" data-original-title="Settings">
                                 <i class="icon-cog"></i>
                             </a>
                         </li> 
@@ -100,7 +100,7 @@ Website: http://thevectorlab.net/
                                     <?php }  endforeach;    ?>
                                 </li> 
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/feedback_form">See all messages</a>
+                                    <a href="<?php echo base_url(); ?>main/feedback_form">See all messages</a>
                                 </li>
                             </ul>
                         </li>
@@ -108,7 +108,7 @@ Website: http://thevectorlab.net/
                         <!-- END INBOX DROPDOWN -->
                         <!-- BEGIN NOTIFICATION DROPDOWN -->
                         <!-- <li class="dropdown" id="header_notification_bar">
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="<?php echo base_url(); ?>main/dashboard" class="dropdown-toggle" data-toggle="dropdown">
 
                                 <i class="icon-bell-alt"></i>
                                 <span class="badge badge-warning">7</span>
@@ -118,35 +118,35 @@ Website: http://thevectorlab.net/
                                     <p>You have 7 new notifications</p>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
+                                    <a href="<?php echo base_url(); ?>main/dashboard">
                                         <span class="label label-important"><i class="icon-bolt"></i></span>
                                         Server #3 overloaded.
                                         <span class="small italic">34 mins</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
+                                    <a href="<?php echo base_url(); ?>main/dashboard">
                                         <span class="label label-warning"><i class="icon-bell"></i></span>
                                         Server #10 not respoding.
                                         <span class="small italic">1 Hours</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
+                                    <a href="<?php echo base_url(); ?>main/dashboard">
                                         <span class="label label-important"><i class="icon-bolt"></i></span>
                                         Database overloaded 24%.
                                         <span class="small italic">4 hrs</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
+                                    <a href="<?php echo base_url(); ?>main/dashboard">
                                         <span class="label label-success"><i class="icon-plus"></i></span>
                                         New user registered.
                                         <span class="small italic">Just now</span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo base_url(); ?>admin/dashboard">
+                                    <a href="<?php echo base_url(); ?>main/dashboard">
                                         <span class="label label-info"><i class="icon-bullhorn"></i></span>
                                         Application error.
                                         <span class="small italic">10 mins</span>
@@ -173,14 +173,14 @@ Website: http://thevectorlab.net/
                             </a>
                         </li> -->
                         <li class="dropdown mtop5">
-                            <!-- <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>admin/dashboard" data-original-title="Help">
+                            <!-- <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>main/dashboard" data-original-title="Help">
                                 <i class="icon-headphones"></i>
                             </a> -->
                         </li>
                         <!-- END SUPPORT -->
                         <!-- BEGIN USER LOGIN DROPDOWN -->
                         <li class="dropdown">
-                            <a href="<?php echo base_url(); ?>admin/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="<?php echo base_url(); ?>main/dashboard" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
                                 <?php
                                     $session_data = $this->session->userdata("admin_login_session");
@@ -189,10 +189,10 @@ Website: http://thevectorlab.net/
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                               <li><a href="<?php echo base_url(); ?>admin/edit_profile"><i class="icon-edit"></i>  Edit Profile</a></li>
-                                <li><a href="<?php echo base_url(); ?>admin/change_password"><i class="icon-exchange"></i>  Change Password</a></li>
+                               <li><a href="<?php echo base_url(); ?>main/edit_profile"><i class="icon-edit"></i>  Edit Profile</a></li>
+                                <li><a href="<?php echo base_url(); ?>main/change_password"><i class="icon-exchange"></i>  Change Password</a></li>
                                 <li class="divider"></li>
-                                <li><a href="<?php echo base_url(); ?>admin/logout"><i class="icon-key"></i> Log Out</a></li>
+                                <li><a href="<?php echo base_url(); ?>main/logout"><i class="icon-key"></i> Log Out</a></li>
                             </ul>
                         </li>
                         <!-- END USER LOGIN DROPDOWN -->

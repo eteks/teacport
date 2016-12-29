@@ -26,7 +26,7 @@ class Other_module extends CI_Controller {
 			$this->load->view('admin/feedback_form',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}			
 	}
 	public function feedback_global()

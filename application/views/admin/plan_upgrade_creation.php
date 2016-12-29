@@ -45,13 +45,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </h3>
                   <ul class="breadcrumb">
                        <li>
-                          <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                          <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
                           <a href="#">Plan Settings</a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                          <a href="<?php echo base_url(); ?>admin/plan_upgrade_creation">
+                          <a href="<?php echo base_url(); ?>main/plan_upgrade_creation">
                             Plan Upgrade Creation
                           </a>
                           <span class="divider-last">&nbsp;</span>
@@ -212,6 +212,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>
