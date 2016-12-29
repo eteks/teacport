@@ -4837,3 +4837,6 @@ i#admin_error_login {
 .time_act{
     cursor: pointer;
 }
+.datepicker {
+    position: absolute !important;
+}

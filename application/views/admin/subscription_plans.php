@@ -78,7 +78,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                   <div class="btn-group">
-                    <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option" data-action="save">
+                    <button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
                       Add New <i class="icon-plus"></i>
                     </button>
                   </div>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
-                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section" data-href="subscription_plan/subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section" data-action="update">
+                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section_subs" data-href="subscription_plan/subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section_subs" data-action="update">
                             Edit
                           </a>
                         </td>
@@ -184,7 +184,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 
 
   <!---Add and edit popup -->
-    <div class="popup" data-popup="popup_section">
+    <div class="popup" data-popup="popup_section_subs">
       <div class="popup-inner">       
         <div class="widget box blue" id="popup_wizard_section">
           <div class="widget-title">
@@ -306,9 +306,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </div>  
         </div>                
       <p>
-        <a data-open="popup_section" class="close_trig" href="#">Close</a>
+        <a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
       </p>
-      <a class="popup-close close_trig" data-open="popup_section"href="#">x</a>
+      <a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
     </div>
   </div> 
  </div>

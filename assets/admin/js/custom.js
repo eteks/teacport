@@ -224,6 +224,9 @@ $(document).ready(function(){
         $('.caret-up').hide();
         $('.top_layer').hide();
     });
+    $('.top_layer').on('click',function() {
+        $('.caret-up').hide();
+    });
 var window_width = $(".navbar-inner").width();    
 var window_height = $(".navbar-inner").height();
 $('.top_layer').width(window_width);
