@@ -82,6 +82,7 @@ $route['provider/paymentreply'] 						= 'payu/reply';
 $route['provider/feedback'] 							= 'job_provider/feedback/';
 $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/resume'] 								= 'job_provider/resume_download';
+$route['provider/sendmail'] 							= 'job_provider/sendmail';
 $route['provider/logout'] 								= 'job_provider/provider_logout';
 
 //JOB SEEKER

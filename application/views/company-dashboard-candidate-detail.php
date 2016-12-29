@@ -269,7 +269,9 @@
                                   					<a class="btn btn-default btn-medium pull-right candidate_resume" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>" href="<?php echo base_url().$candidate['personnal']['candidate_resume_upload_path']; ?>" download>Resume</a>
                                   					<?php } ?>
                                   					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
-                                  					<a disabled class="btn btn-default btn-medium pull-right candidate_email" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
+                                  					<?php if($subscrib_plan['is_email_validity']){ ?>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_email" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Message</a>
+                              						<?php } ?>
                               					</div>
 											</div> <br> <!---Communication Information-->	
 											<?php } else{ ?>
@@ -311,6 +313,24 @@ $(document).ready(function(){
 	       success: function(data) {
 	       		if(data == 'update'){
 	       			$('.subscription_action_message').text('Resume download successfully!');
+	       		}
+	       }
+     	});
+    });
+    $('.candidate_email').on('click',function(){
+    	var candidate =  parseInt($(this).attr('candidate-id'));
+    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    	var url = '<?php echo base_url(); ?>';
+    	var org_id = <?php echo $organization['organization_id']; ?>;
+    	$.ajax({
+	       type: "POST",
+	       url: url+"provider/sendmail",
+	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       cache: false,
+	       async: false,
+	       success: function(data) {
+	       		if(data == 'update'){
+	       			$('.subscription_action_message').text('Message sent successfully!');
 	       		}
 	       }
      	});

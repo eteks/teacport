@@ -14,7 +14,7 @@
                 <div class="bread">
                     <ol class="breadcrumb">
                         <li><a href="<?php echo base_url(); ?>">Home</a> </li>
-                        <li><a href="<?php echo base_url(); ?>job_seeker/dashboard">Dashboard</a> </li>
+                        <li><a href="<?php echo base_url(); ?>seeker/dashboard">Dashboard</a> </li>
                         <li class="active">Inbox</li>
                     </ol>
                 </div>

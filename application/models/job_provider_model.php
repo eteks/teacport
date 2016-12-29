@@ -516,13 +516,44 @@ class Job_provider_model extends CI_Model {
 		$count = $checkquery->num_rows();
 		if ($count === 0) {
 			$this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'0','is_email_sent'=>'0','is_resume_downloaded'=>'1'));
-		}
-		else{
-			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
-			$this->db->update('tr_organization_activity', array('is_resume_downloaded'=>'1'));
 			$this->db->where(array('organization_id'=>$org_id,'organization_subscription_status'=>1));
 			$this->db->set('organization_remaining_resume_download_count', 'organization_remaining_resume_download_count-1', FALSE);
 			$this->db->update('tr_organization_subscription');
 		}
+		else{
+			$check_already = $checkquery->row_array();
+			if($check_already['is_resume_downloaded'] != 1){
+				$this->db->where(array('organization_id'=>$org_id,'organization_subscription_status'=>1));
+				$this->db->set('organization_remaining_resume_download_count', 'organization_remaining_resume_download_count-1', FALSE);
+				$this->db->update('tr_organization_subscription');
+			}
+			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
+			$this->db->update('tr_organization_activity', array('is_resume_downloaded'=>'1'));
+		}
+		
+	}
+	public function provider_mail_send_update($candidate_id,$org_id){
+		$checkquery = $this->db->get_where('tr_organization_activity', array(
+            'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
+        ));
+		$count = $checkquery->num_rows();
+		if ($count === 0) {
+			$this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'0','is_email_sent'=>'1','is_resume_downloaded'=>'0'));
+			$this->db->where(array('organization_id'=>$org_id,'organization_subscription_status'=>1));
+			$this->db->set('organization_email_remaining_count', 'organization_email_remaining_count-1', FALSE);
+			$this->db->update('tr_organization_subscription');
+		}
+		else{
+			$check_already = $checkquery->row_array();
+			if($check_already['is_email_sent'] != 1){
+				$this->db->where(array('organization_id'=>$org_id,'organization_subscription_status'=>1));
+				$this->db->set('organization_email_remaining_count', 'organization_email_remaining_count-1', FALSE);
+				$this->db->update('tr_organization_subscription');
+			}
+			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
+			$this->db->update('tr_organization_activity', array('is_email_sent'=>'1'));
+		}
+		$this->db->insert('tr_candidate_inbox', array('candidate_organization_id'=>$org_id,'candidate_id'=>$candidate_id,'is_viewed'=>'0','candidate_inbox_status'=>'1','candidate_inbox_message'=>'Kudo! You have been Shortlisted.'));
+		
 	}
 }
