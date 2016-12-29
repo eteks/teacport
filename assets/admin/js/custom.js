@@ -222,6 +222,7 @@ $(document).ready(function(){
     $('#container').on('click',function() {
         $('.extended').hide();
         $('.caret-up').hide();
+        $('.top_layer').hide();
     });
 var window_width = $(".navbar-inner").width();    
 var window_height = $(".navbar-inner").height();
@@ -482,6 +483,7 @@ $('.top_layer, .message_close').on('click',function() {
         var targeted_popup_class = jQuery(this).attr('data-popup-open');
         $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
         $(".inbox").hide();
+        $('.caret-up').hide();
  
         e.preventDefault();
     });   

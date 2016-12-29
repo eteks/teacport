@@ -91,7 +91,7 @@ Website: http://thevectorlab.net/
                                         <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
 									<!-- <span class="subject">
 									<span class="from">Dulal Khan</span> -->
-									<span class="time"><?php echo $feed['feedback_form_created_date']; ?></span>
+									<span class="time time_act"><?php echo $feed['feedback_form_created_date']; ?></span>
 									<!-- </span> -->
 									<span class="message message_res">
 									    <?php echo $feed['feedback_form_message']; ?>
