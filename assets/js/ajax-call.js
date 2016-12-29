@@ -226,7 +226,7 @@ $(document).ready(function() {
 						$("html, body").animate({ scrollTop: 0 }, 1000);
 						this_error.addClass('succ_msg');
 						this_error.text("Updated Sucessfully").fadeIn();
-						// location.reload();
+						setTimeout(function() { location.reload(); }, 3000);
 					}
 					else {
 						$("html, body").animate({ scrollTop: 0 }, 1000);

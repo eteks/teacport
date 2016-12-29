@@ -44,12 +44,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </h3>
                    <ul class="breadcrumb">
                        <li>
-                           <a href="<?php echo base_url(); ?>admin/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                           <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                           <a href="<?php echo base_url(); ?>admin/user_groups">Admin Users</a> <span class="divider">&nbsp;</span>
+                           <a href="<?php echo base_url(); ?>main/user_groups">Admin Users</a> <span class="divider">&nbsp;</span>
                        </li>
-                       <li><a href="<?php echo base_url(); ?>admin/user_groups">User Groups</a><span class="divider-last">&nbsp;</span></li>
+                       <li><a href="<?php echo base_url(); ?>main/user_groups">User Groups</a><span class="divider-last">&nbsp;</span></li>
                    </ul>
                   <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
@@ -133,6 +133,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                                           <td>
                                             <?php 
+                                            if(!empty($mapped_data)){
                                               $group_id = $grp_val['user_group_id'];  
                                               $mapped_result = array_filter($mapped_data, function($m) use ($group_id) {
                                               return $m == $group_id; });
@@ -140,6 +141,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                                 echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
                                               else
                                                 echo "<a class='ajaxDelete' data-id='".$grp_val['user_group_id']."'>Delete</a>";
+                                            }
+                                            else{
+                                                echo "<a class='ajaxDelete' data-id='".$grp_val['user_group_id']."'>Delete</a>";
+                                            }
                                             ?>      
                                           </td>
                                         <?php endif; ?>
@@ -185,6 +190,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>

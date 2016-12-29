@@ -4019,7 +4019,7 @@ ul li:last-child{
 }
 .tab-content span input, .tab-content span select {
     max-width: 100%;
-    width: 96% !important;
+    width: 100% !important;
 }
 
 .span12 {
@@ -4836,4 +4836,7 @@ i#admin_error_login {
 .clear_both { clear: both;  }
 .time_act{
     cursor: pointer;
+}
+.datepicker {
+    position: absolute !important;
 }

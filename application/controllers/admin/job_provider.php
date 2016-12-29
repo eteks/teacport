@@ -279,7 +279,7 @@ class Job_Provider extends CI_Controller {
 			$this->load->view('admin/jobprovider_profile',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
 	}
 
@@ -463,7 +463,7 @@ class Job_Provider extends CI_Controller {
 			$this->load->view('admin/jobprovider_vacancy',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
 	}
 
@@ -674,7 +674,7 @@ class Job_Provider extends CI_Controller {
 			$this->load->view('admin/jobprovider_ads',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
 	}
 	public function organization_upgrade_or_renewal()
@@ -696,7 +696,7 @@ class Job_Provider extends CI_Controller {
 			$this->load->view('admin/transaction',$data);
 		}
 		else {
-			redirect(base_url().'admin/admin_error');
+			redirect(base_url().'main/admin_error');
 		}
 	}
 

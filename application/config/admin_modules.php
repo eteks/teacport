@@ -9,7 +9,7 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'dashboard', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/dashboard' 
+			'route_url' => base_url().'main/dashboard' 
 		)),
 		'icon_name' => 'icon-home'
 	),
@@ -20,17 +20,17 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'user groups', 
 			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'admin/user_groups' 
+			'route_url' => base_url().'main/user_groups' 
 		),
 		array(
 			'name' => 'user accounts', 
 			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'admin/user_accounts' 
+			'route_url' => base_url().'main/user_accounts' 
 		),
 		array(
 			'name' => 'privileges', 
 			'access_operation' => 'edit,view', 
-			'route_url' => base_url().'admin/privileges' 
+			'route_url' => base_url().'main/privileges' 
 		)),
 		'icon_name' => 'icon-user'
 	),
@@ -41,57 +41,57 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'state', 
 			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'admin/state' 
+			'route_url' => base_url().'main/state' 
 		),
 		array(
 			'name' => 'district', 
 			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'admin/district' 
+			'route_url' => base_url().'main/district' 
 		),
 		array(
 			'name' => 'institution type', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/institution_types' 
+			'route_url' => base_url().'main/institution_types' 
 		),
 		array(
 			'name' => 'extra curricular', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/extra_curricular' 
+			'route_url' => base_url().'main/extra_curricular' 
 		),
 		array(
 			'name' => 'languages', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/languages' 
+			'route_url' => base_url().'main/languages' 
 		),
 		array(
 			'name' => 'qualification', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/qualification' 
+			'route_url' => base_url().'main/qualification' 
 		),
 		array(
 			'name' => 'class level', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/class_level' 
+			'route_url' => base_url().'main/class_level' 
 		),
 		array(
 			'name' => 'department', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/departments' 
+			'route_url' => base_url().'main/departments' 
 		),
 		array(
 			'name' => 'subject', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/subject' 
+			'route_url' => base_url().'main/subject' 
 		),
 		array(
 			'name' => 'university / board', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/university' 
+			'route_url' => base_url().'main/university' 
 		),
 		array(
 			'name' => 'posting details', 
 			'access_operation' => 'add,edit,delete,view',  
-			'route_url' => base_url().'admin/postings' 
+			'route_url' => base_url().'main/postings' 
 		)),
 		'icon_name' => 'icon-th'
 	),
@@ -102,37 +102,37 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'profile', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/job_provider_profile' 
+			'route_url' => base_url().'main/job_provider_profile' 
 		),
 		array(
 			'name' => 'vacancies posted', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/job_provider_vacancies' 
+			'route_url' => base_url().'main/job_provider_vacancies' 
 		),
 		array(
 			'name' => 'organization activities', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/jobprovider_activities' 
+			'route_url' => base_url().'main/jobprovider_activities' 
 		),
 		array(
 			'name' => 'ads posted', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/jobprovider_ads' 
+			'route_url' => base_url().'main/jobprovider_ads' 
 		),
 		// array(
 		// 	'name' => 'organization upgrade or renewal', 
 		// 	'access_operation' => 'edit,delete,view', 
-		// 	'route_url' => base_url().'admin/organization_upgrade_or_renewal' 
+		// 	'route_url' => base_url().'main/organization_upgrade_or_renewal' 
 		// ),
 		array(
 			'name' => 'organization plan notification', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/organization_plan_notification' 
+			'route_url' => base_url().'main/organization_plan_notification' 
 		),
 		array(
 			'name' => 'transaction', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/transaction' 
+			'route_url' => base_url().'main/transaction' 
 		)),
 		'icon_name' => 'icon-sitemap'
 	),
@@ -143,22 +143,22 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'profile', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/job_seeker_profile' 
+			'route_url' => base_url().'main/job_seeker_profile' 
 		),
 		array(
 			'name' => 'job preferences', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/job_seeker_preference' 
+			'route_url' => base_url().'main/job_seeker_preference' 
 		),
 		array(
 			'name' => 'job applied', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/job_seeker_applied' 
+			'route_url' => base_url().'main/job_seeker_applied' 
 		),
 		array(
 			'name' => 'candidate approved job mail & status', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/jobseeker_mailstatus' 
+			'route_url' => base_url().'main/jobseeker_mailstatus' 
 		)),
 		'icon_name' => 'icon-search'
 	),
@@ -169,12 +169,12 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'plan creation & maintanence', 
 			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'admin/subscription_plans' 
+			'route_url' => base_url().'main/subscription_plans' 
 		),
 		array(
 			'name' => 'plan upgrade creation', 
 			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'admin/plan_upgrade_creation' 
+			'route_url' => base_url().'main/plan_upgrade_creation' 
 		)),
 		'icon_name' => 'icon-wrench'
 	),
@@ -185,22 +185,22 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'payment gateway setting', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/payment_gateway' 
+			'route_url' => base_url().'main/payment_gateway' 
 		),
 		array(
 			'name' => 'SMS gateway setting', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/sms_gateway' 
+			'route_url' => base_url().'main/sms_gateway' 
 		),
 		array(
 			'name' => 'configuration option', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/configuration_option' 
+			'route_url' => base_url().'main/configuration_option' 
 		),
 		array(
 			'name' => 'template logo', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/template_logo' 
+			'route_url' => base_url().'main/template_logo' 
 		)),
 		'icon_name' => 'icon-cogs'
 	),
@@ -211,12 +211,12 @@ $config['admin_modules'] = array(
 		array(
 			'name' => 'feedback form', 
 			'access_operation' => 'edit,delete,view', 
-			'route_url' => base_url().'admin/feedback_form' 
+			'route_url' => base_url().'main/feedback_form' 
 		),
 		array(
 			'name' => 'site visits tracking', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'admin/site_visit_tracking' 
+			'route_url' => base_url().'main/site_visit_tracking' 
 		)),
 		'icon_name' => 'icon-tasks'
 	),

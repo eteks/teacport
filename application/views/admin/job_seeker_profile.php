@@ -43,7 +43,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>main/dashboard">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -53,7 +53,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/job_seeker_profile">Job Seeker Profile</a>
+              <a href="<?php echo base_url(); ?>main/job_seeker_profile">Job Seeker Profile</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section_seesker_profile">
+                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section_seeker_profile">
                               Edit
                             </a>
                           </td>
@@ -165,7 +165,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php endif; ?>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_seesker_profile">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_seeker_profile">
                               Full View
                             </a>
                           </td>
@@ -189,7 +189,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>         
 
       <!---Full View & Edit popup -->
-      <div class="popup" data-popup="popup_section_seesker_profile">
+      <div class="popup" data-popup="popup_section_seeker_profile">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -1140,9 +1140,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
           </div>
           <p>
-            <a data-popup-close="popup_section_seesker_profile" href="#">Close</a>
+            <a data-popup-close="popup_section_seeker_profile" href="#">Close</a>
           </p>
-          <a class="popup-close" data-popup-close="popup_section_seesker_profile" href="#">x</a>
+          <a class="popup-close" data-popup-close="popup_section_seeker_profile" href="#">x</a>
         </div>
       </div>  
       <!-- END ADVANCED TABLE widget-->
@@ -1168,6 +1168,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>

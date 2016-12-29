@@ -15,7 +15,7 @@ $(document).ready(function(){
                     // this_status.fadeOut(3000);
                 }
                 else {
-                   window.location.href = admin_baseurl+"dashboard";
+                   window.location.href = baseurl+"dashboard";
                 }
             }
         });
@@ -46,7 +46,7 @@ $(document).ready(function(){
                      this_status.fadeOut(3000);
                      if(res.session_data != 'undefined' && res.session_data == true){
                         customalert("You have changed your Accounts. We need to logout your session to confirm");
-                        setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
+                        setTimeout(function() { window.location.href = baseurl+'logout'; }, 5000 );
                      }
                 }
             }
@@ -87,12 +87,13 @@ $(document).ready(function(){
                     this_status.addClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
-                    $('.admin_table').dataTable().fnDestroy();  
+                    // $('.admin_table').dataTable().fnDestroy();  //Commented for page reload
                     setTimeout(function()
                     {
                         $('[data-popup="' + this_popup + '"]').fadeOut(350);
                         this_table_content.html(res.output);
-                        datatable_initialization();
+                        // datatable_initialization(); //Commented for page reload
+                        location.reload();
                         this_popup_content.remove();
                     },5000);
                 }

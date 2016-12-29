@@ -46,9 +46,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <a href="index.php#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                             </li>
                             <li>
-                                <a href="<?php echo base_url(); ?>admin/dashboard">Teacher Recruit</a> <span class="divider">&nbsp;</span>
+                                <a href="<?php echo base_url(); ?>main/dashboard">Teacher Recruit</a> <span class="divider">&nbsp;</span>
                             </li>
-                            <li><a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a><span class="divider-last">&nbsp;</span></li>
+                            <li><a href="<?php echo base_url(); ?>main/dashboard">Dashboard</a><span class="divider-last">&nbsp;</span></li>
                             <li class="pull-right search-wrap">
                                 <form class="hidden-phone search_cnt">
                                     <div class="search-input-area">
@@ -502,7 +502,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <!-- END EXAMPLE TABLE widget-->
                         </div>
                     </div>
-                    <a href="<?php echo base_url(); ?>admin/job_provider_profile"><button class="btn btn-primary latest_align_center" type="button">View All Job Providers</button></a>
+                    <a href="<?php echo base_url(); ?>main/job_provider_profile"><button class="btn btn-primary latest_align_center" type="button">View All Job Providers</button></a>
                     <div class="row-fluid">
                         <div class="span12">
                             <!-- BEGIN EXAMPLE TABLE widget-->
@@ -551,7 +551,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <!-- END EXAMPLE TABLE widget-->
                         </div>
                     </div>
-                    <a href="<?php echo base_url(); ?>admin/job_provider_vacancies"><button class="btn btn-primary latest_align_center" type="button">View All Jobs</button></a>
+                    <a href="<?php echo base_url(); ?>main/job_provider_vacancies"><button class="btn btn-primary latest_align_center" type="button">View All Jobs</button></a>
 
 
                     <!-- <div class="row-fluid"> -->
@@ -641,6 +641,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php include "templates/footer.php" ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>

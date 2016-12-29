@@ -44,7 +44,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </h3>
           <ul class="breadcrumb">
             <li>
-              <a href="<?php echo base_url(); ?>admin/dashboard">
+              <a href="<?php echo base_url(); ?>main/dashboard">
                 <i class="icon-home"></i>
               </a>
               <span class="divider">&nbsp;</span>
@@ -54,7 +54,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>admin/subscription_plans">
+              <a href="<?php echo base_url(); ?>main/subscription_plans">
                 Subscription Plan
               </a>
               <span class="divider-last">&nbsp;</span>
@@ -78,12 +78,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                   <div class="btn-group">
-                    <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option" data-action="save">
+                    <button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
                       Add New <i class="icon-plus"></i>
                     </button>
                   </div>
                 </div>
-                <form action="subscription_plans">
+                <form action="subscription_plan/subscription_plans">
                 <p class="admin_status"> </p>
                   <div class="table_content_section">
                     <?php } ?>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
-                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section" data-href="subscription_plan/subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section" data-action="update">
+                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section_subs" data-href="subscription_plan/subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section_subs" data-action="update">
                             Edit
                           </a>
                         </td>
@@ -184,7 +184,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 
 
   <!---Add and edit popup -->
-    <div class="popup" data-popup="popup_section">
+    <div class="popup" data-popup="popup_section_subs">
       <div class="popup-inner">       
         <div class="widget box blue" id="popup_wizard_section">
           <div class="widget-title">
@@ -193,7 +193,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </h4>                        
           </div>
           <div class="widget-body form">
-            <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+            <form action="subscription_plan/subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
             <p class="admin_status"> </p>
               <fieldset>
                 <legend> Subscription plan details:</legend>
@@ -306,9 +306,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </div>  
         </div>                
       <p>
-        <a data-open="popup_section" class="close_trig" href="#">Close</a>
+        <a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
       </p>
-      <a class="popup-close close_trig" data-open="popup_section"href="#">x</a>
+      <a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
     </div>
   </div> 
  </div>
@@ -324,6 +324,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php } ?>
 <?php
 else :
-redirect(base_url().'admin');
+redirect(base_url().'main');
 endif;
 ?>
