@@ -83,7 +83,7 @@ class Job_seeker extends CI_Controller {
 	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
         $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
         // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $config['max_size']    = '2048'; // Maximum size - 2MB
+        $config['max_size']    = '1024'; // Maximum size - 2MB
         $this->upload->initialize($config); // Initialize the configuration
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
         {
@@ -388,44 +388,41 @@ class Job_seeker extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
-		if($_POST){
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
-			/* Check whether registration form server side validation are valid or not */
-			if ($this->form_validation->run() == FALSE){
-				$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-				$this->load->view('forgot-password-seeker');
-			}
-			else{
-		        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
-		  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
-		      	if($forget_query['candidate_password'] != '') {
-					$from_email = $emailsetup['smtp_user'];
-					$this->email->initialize($emailsetup);
-					$this->email->from($from_email, 'Teacher Recruit');
-					$this->email->to($forget_query['candidate_email']);
-		        	$this->email->subject('Get your forgotten Password');
-		        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
-		       		$this->email->message($message);
-		        	if($this->email->send()){
-			        	$data['reg_server_msg'] = "Check your mail and get your password!";
-			        	$this->load->view('forgot-password-seeker',$data);
-		        	}
-					else{
-						show_error($this->email->print_debugger());
-						$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please try again!';
-						$this->load->view('forgot-password-seeker',$data);
-					}
-		      	}
-				else{
-					$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
-					$this->load->view('forgot-password-seeker',$data);
-				}
-			}
-		}  	 
+		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
+		/* Check whether registration form server side validation are valid or not */
+		if ($this->form_validation->run() == FALSE){
+			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$this->load->view('forgot-password');
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
+			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
+		}
 		else{
-			$this->load->view('forgot-password-seeker');
-		}		
+	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
+	  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
+	      	if($forget_query['candidate_password'] != '') {
+				$from_email = $emailsetup['smtp_user'];
+				$this->email->initialize($emailsetup);
+				$this->email->from($from_email, 'Teacher Recruit');
+				$this->email->to($forget_query['candidate_email']);
+	        	$this->email->subject('Get your forgotten Password');
+	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
+	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
+	        	if($this->email->send()){
+		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$this->load->view('forgot-password',$data);
+	        	}
+				else{
+					show_error($this->email->print_debugger());
+					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
+					$this->load->view('forgot-password',$data);
+				}
+	      	}
+			else{
+				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$this->load->view('forgot-password',$data);
+			}
+		}   	 		
 	}
 
 	/** Seeker Inital Data Validation With Pop-up **/		
@@ -531,15 +528,15 @@ class Job_seeker extends CI_Controller {
 				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
 						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
 				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
-				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{1,3}$/]'),
+				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{1,2}$/]'),
 				    );
 		}
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
-			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|alpha'),
 			array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|alpha'),
 			array('field' => 'cand_pic', 'label' => 'Picture','rules' => 'callback_validate_image_type['.$action.'.cand_pic]'),
 			array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
@@ -551,17 +548,17 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_phy', 'label' => 'Physical Challenge Status','rules' => 'required|trim|xss_clean'),
 
 			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_start_sal', 'label'=> 'Minimum Salary','rules' => 'required|trim|xss_clean|numeric'),
-			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean|numeric|callback_check_greater_value['.$this->input->post('cand_start_sal').']' ),
+			array('field' => 'cand_start_sal', 'label'=> 'Minimum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]'),
+			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('cand_start_sal').']' ),
 			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean'),
 
 		   	array('field' => 'cand_qual[]', 'label' => 'Education Qualification','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_yop[]', 'label' => 'Education Year Of Passing','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_yop[]', 'label' => 'Education Year Of Passing','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4}$/]'),
 			array('field' => 'cand_med[]', 'label' => 'Education Medium','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_dept[]', 'label' => 'Education Department','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_board[]', 'label' => 'Education Board','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2,5}$/]'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
@@ -569,7 +566,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'required|trim|xss_clean'),
-	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{6}$/]'),
+	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,6}$/]'),
 	    	array('field' => 'cand_email', 'label' => 'Email','rules' => 'required|trim|xss_clean|valid_email'),
 	    	array('field' => 'cand_mobile', 'label' => 'Mobile','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{10}$/]'),
 	    	// array('field' => 'cand_facebook', 'label' => 'Facebook Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
@@ -581,7 +578,7 @@ class Job_seeker extends CI_Controller {
 		
 		$this->form_validation->set_rules($validation_fields);
 		if($this->form_validation->run() == FALSE) {
-			foreach($validation_fields as $row){
+			foreach($validation_fields as $row) {
 	          $field = $row['field'];
 	          $error = form_error($field);
 	          if($error){
@@ -618,7 +615,7 @@ class Job_seeker extends CI_Controller {
 				 	$config['upload_path'] = APPPATH . '../'.$upload_image_path; // APPPATH means our application folder path.
 			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
 			        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-			        $config['max_size']    = '1000'; // Maximum size - 1MB
+			        $config['max_size']    = '1024'; // Maximum size - 1MB
 			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
 			    	$config['max_height']  = '768'; // Maximum height - 768px
 			        $this->upload->initialize($config); // Initialize the configuration
@@ -650,7 +647,7 @@ class Job_seeker extends CI_Controller {
 					 	$config['upload_path'] = APPPATH . '../'.$upload_resume_path; // APPPATH means our application folder path.
 				        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
 				        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-				        $config['max_size']    = '2000'; // Maximum size - 2MB
+				        $config['max_size']    = '1024'; // Maximum size - 2MB
 				        $this->upload->initialize($config); // Initialize the configuration
 		      			if($this->upload->do_upload('cand_resume'))
 		          		{

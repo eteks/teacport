@@ -150,10 +150,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php endif; ?>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                        <td>   
-                          <a class="ajaxDelete" data-id="<?php echo $lan_val['language_id']; ?>">   
-                            Delete
-                          </a>
+                        <td>
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $lang_id = $lan_val['language_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($lang_id) {
+                            return $m == $lang_id; });
+                            if(count($mapped_result) > 0)
+                              echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                            else
+                              echo "<a class='ajaxDelete' data-id='".$lan_val['language_id']."'>Delete</a>";
+                          }
+                          else{
+                              echo "<a class='ajaxDelete' data-id='".$lan_val['language_id']."'>Delete</a>";
+                          }
+                          ?>      
                         </td>
                         <?php endif; ?>
                       </tr>

@@ -125,6 +125,11 @@ class Home extends CI_Controller {
 	}
 	public function vacancies()
 	{
+		$data['applicable_postings'] = $this->common_model->applicable_posting();
+		$data['qualifications'] = $this->common_model->qualification();
+		$data['institution_values'] = $this->common_model->get_institution_type();
+
+
 		$search_inputs = array();	
 		if($_POST) {
     		$inputs = array(
@@ -133,6 +138,9 @@ class Home extends CI_Controller {
         				'location' => $this->input->post('search_location'),
         				'max_amount' => $this->input->post('search_max_amount'),
         				'experience' => $this->input->post('search_exp'),
+        				'posting' => $this->input->post('search_posting'),
+        				'qualification' => $this->input->post('search_qualification'),
+        				'institution' => $this->input->post('search_institution'),
         				);
     		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
     	}

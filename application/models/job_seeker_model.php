@@ -436,7 +436,7 @@ class Job_seeker_model extends CI_Model {
 		else {
 			$cand_extra_cur = NULL;
 		}
-		// Check Mobile Number or Email already exists or not
+		// Check Mobile Number already exists or not
 		$mobile_exists_where = "candidate_mobile_no =" . "'" . $data['cand_mobile'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
 
 		$mobile_exists = $this->db->get_where('tr_candidate_profile',$mobile_exists_where);
@@ -444,6 +444,7 @@ class Job_seeker_model extends CI_Model {
 			$model_data['status'] = "Mobile Number Already exists";
 		}
 		else {
+			// Check Email already exists or not
 			$email_exists_where = "candidate_email =" . "'" . $data['cand_email'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
 			$email_exists = $this->db->get_where('tr_candidate_profile',$email_exists_where);
 			if($email_exists->num_rows() > 0) {
@@ -484,6 +485,7 @@ class Job_seeker_model extends CI_Model {
 				$this->db->set($profile_update_data);
 				$this->db->where('candidate_id',$data['cand_pro']);
 				$this->db->update('tr_candidate_profile',$profile_update_data);	
+
 				// Updation in preference table
 				$prefrence_update_data = array(
 											'candidate_profile_id' => $data['cand_pro'],
@@ -499,6 +501,7 @@ class Job_seeker_model extends CI_Model {
 					$this->db->update('tr_candidate_preferance',$prefrence_update_data);
 				}
 				else {
+					// Insertion in preference table
 					$this->db->insert('tr_candidate_preferance',$prefrence_update_data);
 				}
 
@@ -528,6 +531,7 @@ class Job_seeker_model extends CI_Model {
 						$this->db->update('tr_candidate_education',$education_update_data);
 					}
 					else {
+						// Insertion in education table
 						if($edu_val[3] == 0) {
 							$edu_val[3] = NULL;
 						}
@@ -634,37 +638,21 @@ class Job_seeker_model extends CI_Model {
 	public function get_seeker_search_results($limit,$start,$ins_id,$data=array())
     {
 
-    		       //  		'keyword' => $this->input->post('search_keyword'),
-	        				// 'min_amount' => $this->input->post('search_min_amount'),
-	        				// 'location' => $this->input->post('search_location'),
-	        				// 'max_amount' => $this->input->post('search_max_amount'),
-	        				// 'experience' => $this->input->post('search_exp'),
-	        				// 'posting' => $this->input->post('search_posting'),
-	        				// 'qualification' => $this->input->post('search_qualification'),
-
 	   	if(empty($data['min_amount'])) {
     		$data['min_amount'] = 0;
     	}
+    	if(!empty($data['experience'])) {
+    		if($data['experience'] <= 10) {
+    			$min_exp = $data['experience'];
+    			$max_exp = $data['experience'] + 1;
+    		}
+    		else {
+    			$min_exp = $data['experience'];
+    			$max_exp = 60;
+    		}
+    	}
 
-    	// if(!empty($data['max_amount'])  && !empty($data['location'])) {
-    	// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND op.organization_district_id="'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';
-    	// }
-    	// else if(!empty($data['max_amount'])) {
-    	// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND ov.vacancies_end_salary <= '.$data['max_amount'].' AND ov.vacancies_experience >= "'.$data['experience'].'")';	
-    	// }
-    	// else if(!empty($data['location'])) {
-    	// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND op.organization_district_id = "'.$data['location'].'" AND ov.vacancies_experience >= "'.$data['experience'].'")';	
-    	// }
-    	// else {
-    	// 	$search_where = '(ov.vacancies_status=1 AND ov.vacancies_start_salary >= '.$data['min_amount'].' AND ov.vacancies_experience >= "'.$data['experience'].'")';
-    	// }
-
-
-
-
-
-
-
+    	// Search with limit
         $this->db->select('*');
         $this->db->from('tr_organization_vacancies ov');
         $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
@@ -672,48 +660,55 @@ class Job_seeker_model extends CI_Model {
         	$this->db->like('ov.vacancies_job_title',$data['keyword']);
 			$this->db->or_like('op.organization_name',$data['keyword']);
         }
-        // $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+        $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+        $this->db->where('ov.vacancies_start_salary >=',$data['min_amount']);
         if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
         if(!empty($data['posting'])) {
         	$this->db->where('ov.vacancies_applicable_posting_id',$data['posting']);
         }
+        if(!empty($data['experience'])) {
+        	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
+        }
         if(!empty($data['max_amount'])) {
         	$this->db->where('ov.vacancies_end_salary <=',$data['max_amount']);
         }
         if(!empty($data['qualification'])) {
-        	$this->db->where_in('ov.vacancies_qualification_id',$data['qualification']);
+        	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }	
 
         $this->db->limit($limit,$start);
         $model_data['search_results'] = $this->db->get()->result_array();
 
-        echo $this->db->last_query();
         // echo "<pre>";
         // print_r($model_data['search_results']);
         // echo "</pre>";
 
-        //total count
+       	// Total count
         $this->db->select('*');
         $this->db->from('tr_organization_vacancies ov');
         $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-		if(!empty($data['keyword'])) {
+        if(!empty($data['keyword'])) {
         	$this->db->like('ov.vacancies_job_title',$data['keyword']);
 			$this->db->or_like('op.organization_name',$data['keyword']);
         }
-       	// $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+        $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+        $this->db->where('ov.vacancies_start_salary >=',$data['min_amount']);
         if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
         if(!empty($data['posting'])) {
         	$this->db->where('ov.vacancies_applicable_posting_id',$data['posting']);
         }
+        if(!empty($data['experience'])) {
+        	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
+        }
         if(!empty($data['max_amount'])) {
         	$this->db->where('ov.vacancies_end_salary <=',$data['max_amount']);
         }
         if(!empty($data['qualification'])) {
-        	$this->db->where_in('ov.vacancies_qualification_id',$data['qualification']);
+        	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
 
         $model_data['total_rows'] = $this->db->get()->num_rows();

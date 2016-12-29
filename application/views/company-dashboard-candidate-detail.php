@@ -261,12 +261,23 @@
 													<span class="col-sm-1"> : </span>
 													<span class="col-sm-7"> <?php echo $candidate['personnal']['candidate_mobile_no']; ?> </span>
 												</div>
+												<div class="loginbox-submit pull-right subscription_action_message">
+												</div>
+												<div class="clearfix"> </div>
+												<div class="loginbox-submit">
+													<?php if($subscrib_plan['is_resume_validity']){ ?>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>" href="<?php echo base_url().$candidate['personnal']['candidate_resume_upload_path']; ?>" download>Resume</a>
+                                  					<?php } ?>
+                                  					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
+                                  					<a disabled class="btn btn-default btn-medium pull-right candidate_email" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
+                              					</div>
 											</div> <br> <!---Communication Information-->	
 											<?php } else{ ?>
 												<div class="personnal_information">
 													
 												</div><br>
 											<?php } ?>
+											
 	            						</div> <!--.seeker_induvidual_profile-->
 	                                </div>
 	                                <!-- <div class="job-salary">
@@ -281,4 +292,29 @@
         </section>
 
 <?php include('include/footermenu.php'); ?>
-<?php include('include/footer.php'); ?>  
+<?php include('include/footer.php'); ?> 
+<?php if(!empty($subscrib_plan)){?>
+<script type="text/javascript"> 
+$(document).ready(function(){
+	// subcription actions like download resume, sms count, job posted counts
+    $('.candidate_resume').on('click',function(){
+    	var candidate =  parseInt($(this).attr('candidate-id'));
+    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    	var url = '<?php echo base_url(); ?>';
+    	var org_id = <?php echo $organization['organization_id']; ?>;
+    	$.ajax({
+	       type: "POST",
+	       url: url+"provider/resume",
+	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       cache: false,
+	       async: false,
+	       success: function(data) {
+	       		if(data == 'update'){
+	       			$('.subscription_action_message').text('Resume download successfully!');
+	       		}
+	       }
+     	});
+    });
+});
+</script>
+<?php } ?>
