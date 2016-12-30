@@ -40,19 +40,19 @@
                 <li class="inbox_menu seeker_message_count <?php if($this->uri->segment(2)=='inbox') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/inbox"> <i class="fa fa-file-o"></i> Inbox <span class="button__badge"> 0 </span> </a>
                 </li>
-                <li>
+                <li class="<?php if($this->uri->segment(2)=='editprofile') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/editprofile"> <i class="fa fa-edit"></i> Edit Profile</a>
                 </li>
-                <li>
+                <li class="<?php if($this->uri->segment(2)=='findjob') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/findjob"> <i class="fa fa-list-alt"></i> Find Jobs </a>
                 </li>
-                <li>
+                <li class="<?php if($this->uri->segment(2)=='jobsapplied') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/jobsapplied"> <i class="fa  fa-list-ul"></i> Jobs Applied</a>
                 </li>
-                <li>
+                <li class="<?php if($this->uri->segment(2)=='feedback') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/feedback"> <i class="fa fa-commenting-o"></i> Feedback</a>
                 </li>
-                 <li>
+                 <li class="<?php if($this->uri->segment(2)=='password') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/password"> <i class="fa fa-key" aria-hidden="true"></i> Change Password</a>
                 </li>
             </ul>

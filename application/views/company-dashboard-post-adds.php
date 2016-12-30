@@ -13,9 +13,9 @@ include ('include/menus.php');
                             <ol class="breadcrumb">
                                 <li><a href="<?php echo base_url(); ?>">Home</a>
                                 </li>
-                                <li><a href="<?php echo base_url(); ?>job_provider/dashboard">Dashboard</a>
+                                <li><a href="<?php echo base_url(); ?>provider/dashboard">Dashboard</a>
                                 </li>
-                                <li class="active">Post Adds</li>
+                                <li class="active">Post Ads</li>
                             </ol>
                         </div>
                     </div>
