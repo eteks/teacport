@@ -205,7 +205,7 @@ class Job_Provider extends CI_Controller {
            			if($this->upload->do_upload('organization_logo'))
             		{
                 		$upload_data = $this->upload->data(); 
-                		$_POST['organization_logo'] = $upload_path.$upload_data['file_name']; 
+                		$_POST['organization_logo'] = base_url().$upload_path.$upload_data['file_name']; 
                 		$old_file_path = $_POST['old_file_path'] ;
                 		$upload_error = 0;
                 		@unlink(APPPATH.'../'.$old_file_path);
@@ -613,7 +613,7 @@ class Job_Provider extends CI_Controller {
            			if($this->upload->do_upload('ads_logo'))
             		{
                 		$upload_data = $this->upload->data(); 
-                		$_POST['ads_logo'] = $upload_path.$upload_data['file_name']; 
+                		$_POST['ads_logo'] = base_url().$upload_path.$upload_data['file_name']; 
                 		$old_file_path = $_POST['old_file_path'] ;
                 		$upload_error = 0;
                 		@unlink(APPPATH.'../'.$old_file_path);

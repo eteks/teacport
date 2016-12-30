@@ -66,17 +66,9 @@
 			              		<?php 
 			              		$session = $this->session->all_userdata();
 			              		if(!empty($session['login_session']['candidate_image_path'])) :
-			              			$keyword = "http";
-        							// To check whether the image path is cdn or local path
-        							if(strpos( $session['login_session']['candidate_image_path'] , $keyword ) !== false ) :
-        							?>
-        							<img src="<?php echo $session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
-							        <?php
-        							else :
-        							?>
-        							<img src="<?php echo base_url().$session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
-							        <?php
-							        endif;
+      							?>
+        						<img src="<?php echo $session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
+							    <?php
 							    endif;
 							    ?>	
 			                  	<span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'];?> </span>

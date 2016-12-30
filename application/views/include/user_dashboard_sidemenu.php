@@ -5,20 +5,8 @@
     <?php
     if(!empty($sidebar_values['candidate_image_path'])) : 
     ?>
-    <div class="user-image">
-        <?php 
-        $keyword = "http";
-        // To check whether the image path is cdn or local path
-        if(strpos( $sidebar_values['candidate_image_path'] , $keyword ) !== false ) :
-        ?>
+    <div class="user-image">    
         <img src="<?php echo $sidebar_values['candidate_image_path']; ?>" class="img-responsive img-circle" alt="Not Found">
-        <?php
-        else :
-        ?>
-        <img src="<?php echo base_url().$sidebar_values['candidate_image_path']; ?>" class="img-responsive img-circle" alt="Not Found">
-        <?php
-        endif;
-        ?>
     </div>
     <?php endif; ?>
     <div class="card-body">

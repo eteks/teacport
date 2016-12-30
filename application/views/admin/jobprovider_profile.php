@@ -275,7 +275,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Organization Logo</label>
                           <span class="dynamic_data"> 
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo Not Found" />
+                            <img src="<?php echo $provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo Not Found" />
                           </span>
                         </div>
                       </div>
@@ -454,7 +454,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Registrant Picture</label>
                           <span class="dynamic_data"> 
-                            <img src="<?php echo base_url().$provider_full_profile['registrant_logo']; ?>" class="popup_preview" alt="Picture Not Found" />
+                            <img src="<?php echo $provider_full_profile['registrant_logo']; ?>" class="popup_preview" alt="Picture Not Found" />
                           </span>
                         </div>
                       </div>
@@ -732,7 +732,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <a class="btn upload_option"> Upload </a>
                             <input class="form-control hidden_upload tabfield1 tabfield" name="organization_logo" type="file">
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Not Loaded">
+                            <img src="<?php echo $provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Not Loaded">
                             <input type="hidden" value="<?php echo $provider_full_profile['organization_logo']; ?>" class="tabfield1 tabfield" name="old_file_path" />
                           </span>
                         </div>

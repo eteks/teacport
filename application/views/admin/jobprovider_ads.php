@@ -114,7 +114,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td class="magnify-posted-ads"> 
-                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo base_url() ?>assets/admin/img/2.png" alt="Not Found" /></a>
+                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo $ads_val['ads_image_path']; ?>" alt="Not Found" /></a>
                           	 <!-- <span class="pull-right">Full View </span> -->
                            </td>
                           <td> 
@@ -213,7 +213,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <span class="dynamic_data"> 
                               <a class="btn upload_option"> Upload </a>
                               <input class="form-control hidden_upload" name="ads_logo" type="file">
-                              <img src="<?php echo base_url().$activities_details['ads_image_path']; ?>" class="popup_preview" alt="Not Found">
+                              <img src="<?php echo $activities_details['ads_image_path']; ?>" class="popup_preview" alt="Not Found">
                               <input type="hidden" value="<?php echo $activities_details['ads_image_path']; ?>" name="old_file_path" />
                             </span>
                           </div>

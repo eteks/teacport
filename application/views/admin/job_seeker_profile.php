@@ -288,40 +288,34 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">Father Initial</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_father_initial']; ?>
-                          </span>
-                        </div>
                         <div class="span6 control-group">
                           <label class="control-label">Father Name</label>
                           <span class="dynamic_data"> 
                             <?php echo $seeker_full_profile['candidate_father_name']; ?>
                           </span>
                         </div>
-                      </div>
-                      <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Date Of Birth</label>
                           <span class="dynamic_data"> 
                             <?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])) ; ?>
                           </span>
                         </div>
+                      </div>
+                      <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Marital Status</label>
                           <span class="dynamic_data"> 
                             <?php echo $seeker_full_profile['candidate_marital_status']; ?>
                           </span>
                         </div>
-                      </div>
-                      <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Mother Tongue</label>
                           <span class="dynamic_data"> 
                             <?php echo $seeker_full_profile['language_name']; ?>
                           </span>
                         </div>
+                      </div>
+                      <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Language Known</label>
                           <span class="dynamic_data"> 
@@ -339,8 +333,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </span>
                         </div>
-                      </div>
-                      <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Nationality</label>
                           <span class="dynamic_data"> 
@@ -399,9 +391,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>
                       <div class="span12">
                         <div class="span6 control-group">                                       
-                          <label class="control-label">Image Path</label>
+                          <label class="control-label"> Candidate Image </label>
                           <span class="dynamic_data"> 
-                            <img class="popup_preview" src="<?php echo base_url().$seeker_full_profile['candidate_image_path']; ?>" />
+                            <img class="popup_preview" src="<?php echo $seeker_full_profile['candidate_image_path']; ?>" alt="Not Found" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -733,7 +725,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php 
                             if(!empty($seeker_full_profile['candidate_resume_upload_path'])) {
                             ?>
-                              <span> Yes </span> <a href="<?php echo base_url().$seeker_full_profile['candidate_resume_upload_path']; ?>" target="_blank"> Open </a>
+                              <span> Yes </span> <a href="<?php echo $seeker_full_profile['candidate_resume_upload_path']; ?>" target="_blank"> Open </a>
                             <?php
                             }
                             else {
@@ -920,7 +912,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <a class="btn upload_option"> Upload </a>
                             <input class="form-control hidden_upload tabfield2 tabfield" name="cand_img" type="file">
-                            <img src="<?php echo base_url().$seeker_full_profile['candidate_image_path']; ?>" class="popup_preview">
+                            <img src="<?php echo $seeker_full_profile['candidate_image_path']; ?>" class="popup_preview" alt="Not Found" />
                             <input type="hidden" value="<?php echo $seeker_full_profile['candidate_image_path']; ?>" class="tabfield2 tabfield" name="old_file_path" />
                           </span>
                         </div>

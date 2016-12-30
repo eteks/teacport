@@ -192,7 +192,7 @@ if(!empty($provider_values)) :
         if(!empty($val['organization_logo'])) :
         ?>
         <div class="client-logo">
-            <a href="#"><img src="<?php echo base_url().$val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
+            <a href="#"><img src="<?php echo $val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
         </div>
         <?php
         endif;
