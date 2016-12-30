@@ -219,6 +219,10 @@
 	padding: 0 0 10px; 
 }
 /* Edit Profile */
+#candidate-form label {
+	font-size: 14px;
+	font-weight: normal;
+}
 /* Find Jobs */
 #candidate-browse-jobs .all-jobs-list-box2 {
     margin: 30px 0;
@@ -267,7 +271,7 @@
 	margin: 30px 0;
 }
 .dashboard-header-logo-box {
-    height: auto;
+    height: 295px;
 }    
 /* pro-Dashboard LeftsideMenu */
 .dashboard-body .profile-nav .provider-jobs {
@@ -319,7 +323,7 @@ select:invalid {
  }
 .info {
 	color: #009900;
-	font-size: 15px;
+	font-size: 12px;
 }
 #applicant_msg_act .modal-dialog {
 	border: 1px solid #fff;
