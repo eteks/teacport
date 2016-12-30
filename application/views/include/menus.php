@@ -29,7 +29,9 @@
 							<a href="javascript:void(0)">
 								<?php if((@getimagesize($organization['registrant_logo']) && isset($organization['registrant_logo']))){ ?>
                                 <img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php } else { ?>
+                                <?php } else if(@getimagesize($user_type['registrant_logo']) && isset($user_type['registrant_logo'])){ ?>
+                                	<img src="<?php echo $user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
+                                <?php }else { ?>
                             	<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
                                 <?php } ?>
 								

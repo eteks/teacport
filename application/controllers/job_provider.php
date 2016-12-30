@@ -417,6 +417,15 @@ class Job_provider extends CI_Controller {
 		$this->job_provider_model->provider_inbox_update($inbox_id);
 		echo json_encode($this->job_provider_model->candidate_full_data($candidate_id,$vacancy_id));
 	}
+	public function inbox_message_remove_data(){
+		$inbox_id = $this->input->post('inbox_id');
+		if($this->job_provider_model->provider_inbox_remove_update($inbox_id)){
+			echo "deleted";
+		}
+		else{
+			echo "error";
+		}		
+	}
 	public function postjob(){
 		$common = new Common();
 		$session_data = $this->session->all_userdata();

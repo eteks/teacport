@@ -377,7 +377,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');    
 		$this->db->from('tr_candidate_inbox ci');
 		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id','left');
 		$where = "(ci.candidate_id='".$candidate_id."' AND ci.candidate_inbox_status='1')";
 		$this->db->order_by('ci.candidate_inbox_id','desc');
 		$this->db->where($where);
@@ -390,7 +390,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');    
 		$this->db->from('tr_candidate_inbox ci');
 		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id','left');
 		$where = "(ci.candidate_id='".$candidate_id."' AND ci.candidate_inbox_status='1' AND ci.candidate_inbox_id > '".$lastid."')";
 		$this->db->order_by('ci.candidate_inbox_id','desc');
 		$this->db->where($where);
@@ -408,7 +408,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');    
 		$this->db->from('tr_candidate_inbox ci');
 		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id','left');
 		$this->db->join('tr_district d', 'op.organization_district_id = d.district_id','left');
 		$where = "(ci.candidate_inbox_id='".$id."' AND ci.candidate_inbox_status='1')";
 		$this->db->where($where);
