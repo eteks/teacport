@@ -508,6 +508,16 @@ class Job_provider_model extends CI_Model {
 		$this->db->where('inbox_id', $inbox_id);
 		$this->db->update('tr_organizaion_inbox', array('is_viewed'=>'1'));
 	}
+	public function provider_inbox_remove_update($inbox_id){
+		$where = "(inbox_id in (".$inbox_id."))";
+		$this->db->where($where);
+		if($this->db->update('tr_organizaion_inbox', array('inbox_status'=>'0'))){
+			return TRUE;
+		}
+		else{
+			return false;
+		}
+	}
 	//provider subscription plan update for resume
 	public function provider_resume_download_update($candidate_id,$org_id){
 		$checkquery = $this->db->get_where('tr_organization_activity', array(

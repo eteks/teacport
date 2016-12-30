@@ -843,7 +843,9 @@ class Job_seeker extends CI_Controller {
 			// echo 'default values to show in html';
 			if($data["current_jobvacancy_id"]) {
 				$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
-				$data["applied_status"] = $this->job_seeker_model->job_seeker_applied_status($session_data['login_session']['candidate_id'],$data["current_jobvacancy_id"]);
+				if($session_data['login_session']['user_type'] != 'provider'){
+					$data["applied_status"] = $this->job_seeker_model->job_seeker_applied_status($session_data['login_session']['candidate_id'],$data["current_jobvacancy_id"]);
+				}
 				$this->load->view('single-job', $data);
 			}
 		}
