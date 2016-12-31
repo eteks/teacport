@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div> 
-                <form action="job_provider/teacport_job_provider_profile">
+                <form action="job_provider_profile">
                   <p class="admin_status"> </p>
                   <div class="">
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
@@ -105,7 +105,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         ?>                               
                         <tr class="parents_tr">
                           <td class="">
-                            <?php echo $pro_val['organization_name']; ?>
+                            <?php
+                            if(!empty($pro_val['organization_name'])) :
+                              echo $pro_val['organization_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $pro_val['registrant_name']; ?> 
@@ -139,7 +145,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td> 
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section_profile">
+                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="popup_section_profile">
                               Edit
                             </a>
                           </td>
@@ -152,7 +158,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php endif; ?>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_profile">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile"  data-mode="full_view"  data-popup-open="popup_section_profile">
                               Full View
                             </a>
                           </td>
@@ -185,7 +191,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
             <div class="widget-body form pop_details_section">
               <?php } ?>
-              <form class="tab_form" action="job_provider/teacport_job_provider_profile" data-index="" method="POST" data-mode="update">
+              <form class="tab_form" action="job_provider_profile" data-index="" method="POST" data-mode="update">
                 <?php
                 if(!empty($provider_full_profile)) :
                 ?>

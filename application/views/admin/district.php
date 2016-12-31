@@ -69,7 +69,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <div class="btn-group pull-right">
                   </div>
                 </div>
-                <form method="post" action="adminindex/district" class="admin_module_form" id="district_form">
+                <form method="post" action="district" class="admin_module_form" id="district_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :

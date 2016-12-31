@@ -4795,6 +4795,18 @@ div.dt-button-background {
 i#admin_error_login {
     color: red !important;
 }
+/*.ajax_loader {
+    background: rgba(0, 0, 0, 0) url("../img/admin_loader.gif") no-repeat scroll center center;
+    display: block;
+    float: left;
+    height: inherit;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 60%;
+}*/
+
+
 /* Ended by siva */
 
 .sub_module_access{

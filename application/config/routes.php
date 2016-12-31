@@ -119,22 +119,38 @@ $route['terms'] 										= 'home/terms';
 
 
 
-//Route url for admin
+/* ===================          Route settings for Admin Start     ====================== */
+
 $route['main'] = 'admin/admin_login/teac_admin_login';
 $route['main/dashboard'] = 'admin/dashboardpage/dashboard';
 $route['main/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
-$route['main/state'] = 'admin/adminindex/state';
-$route['main/district'] = 'admin/adminindex/district';
-$route['main/institution_types'] = 'admin/adminindex/institution_types';
-$route['main/extra_curricular'] = 'admin/adminindex/extra_curricular';
-$route['main/languages'] = 'admin/adminindex/languages';
-$route['main/qualification'] = 'admin/adminindex/qualification';
-$route['main/class_level'] = 'admin/adminindex/class_level';
-$route['main/departments'] = 'admin/adminindex/departments';
-$route['main/subject'] = 'admin/adminindex/subject';
-$route['main/university'] = 'admin/adminindex/university';
-$route['main/postings'] = 'admin/adminindex/posting';
+
+/* ===================          Route settings for Admin Master Data Start     ====================== */
+
+/* $route['url_path'] = 'folder_name/controller_name/function_name' */
+$route['main/state'] = 'admin/master_data/state';
+$route['main/district'] = 'admin/master_data/district';
+$route['main/institution_types'] = 'admin/master_data/institution_types';
+$route['main/extra_curricular'] = 'admin/master_data/extra_curricular';
+$route['main/languages'] = 'admin/master_data/languages';
+$route['main/qualification'] = 'admin/master_data/qualification';
+$route['main/class_level'] = 'admin/master_data/class_level';
+$route['main/departments'] = 'admin/master_data/departments';
+$route['main/subject'] = 'admin/master_data/subject';
+$route['main/university'] = 'admin/master_data/university';
+$route['main/postings'] = 'admin/master_data/posting';
+
+/* ===================          Route settings for Admin Master Data End     ====================== */
+
+/* ===================          Route settings for Admin Job Provider Start     ====================== */
+
+/* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
+$route['main/job_provider_edit_profile'] = 'admin/job_provider/teacport_job_provider_profile_ajax';
+
+/* ===================          Route settings for Admin Job Provider End     ====================== */
+
+
 $route['main/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
 $route['main/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
 $route['main/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
@@ -169,8 +185,7 @@ $route['main/template_logo'] = 'admin/setting/template_logo';
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
 
-
-
+/* ===================          Route settings for Admin End     ====================== */
 
 
 /* End of file routes.php */

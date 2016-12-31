@@ -70,7 +70,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                 </div>
                 
-                <form method="post" action="adminindex/class_level" class="admin_module_form" id="class_level_form">
+                <form method="post" action="class_level" class="admin_module_form" id="class_level_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
