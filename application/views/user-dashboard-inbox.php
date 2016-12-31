@@ -40,6 +40,7 @@
                     </div>
                     <div class="resume-list">
                         <div class="table-responsive">
+                        	<?php if(!empty($message)) {?>
                             <table class="table table-striped" id="seeker_inbox_data">
                                 <thead class="thead-inverse">
                                     <tr>
@@ -52,7 +53,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        if(!empty($message)) :
                                         foreach ($message as $msg) :
                                             $meassage_received_date_time = $msg['candidate_inbox_created_date'];
                                         $meassage_received_date = date("d/m/Y h:i a", strtotime($meassage_received_date_time));
@@ -60,16 +60,18 @@
                                     <tr class="" data-name="<?php if($msg['is_viewed'] == 0) echo 'bold_section'; ?>">
                                         <td><input type="checkbox" class="seeker_inbox_check" value="<?php echo $msg['candidate_inbox_id']; ?>" /></td>
                                         <td><span> <?php echo $msg['organization_name']; ?> </span></td>
-                                        <td><span> <?php echo $msg['vacancies_job_title']; ?> </span></td>
+                                        <td><span> <?php echo isset($msg['vacancies_job_title'])?$msg['vacancies_job_title']:'Not mention'; ?> </span></td>
                                         <td><a class="btn view_inbox_details" data-toggle="modal" data-target="#user_inbox_msg_act"  data-value="<?php echo $msg['candidate_inbox_id']; ?>" data-backdrop="static" data-keyboard="false"> <?php echo $msg['candidate_inbox_message']; ?> </a></td>
                                         <td> <?php echo $meassage_received_date; ?> </td>
                                     </tr>
                                     <?php 
-                                    endforeach;
-                                    endif;
+                                    	endforeach;
                                     ?>
                                 </tbody>
                             </table>
+                            <?php } else { ?>
+	                        	<h2> No message received ! </h2>
+                            <?php } ?>
                         </div>
                     </div>
 	                <!--Popup Message for Inbox message-->
@@ -102,28 +104,28 @@
                                                 <span class="col-sm-7 org_dis inbox_popup_data"></span>
                                             </div>
                                             <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4"> Registrant Name  </span>
+                                                <span class="col-sm-4"> Contace person  </span>
                                                 <span class="col-sm-1"> : </span>
                                                 <span class="col-sm-7 reg_name inbox_popup_data"></span>
                                             </div>
                                             <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4"> Registrant Designation</span>
+                                                <span class="col-sm-4"> Contace person Designation</span>
                                                 <span class="col-sm-1"> : </span>
                                                 <span class="col-sm-7 reg_desig inbox_popup_data"></span>
                                             </div>
                                             <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4"> Registrant Mail  </span>
+                                                <span class="col-sm-4"> Contace Mail  </span>
                                                 <span class="col-sm-1"> : </span>
                                                 <span class="col-sm-7 reg_mail inbox_popup_data"></span>
                                             </div>
                                             <div class="display_provider_details col-md-12">
-                                                <span class="col-sm-4"> Registrant Mobile </span>
+                                                <span class="col-sm-4"> Contace Number </span>
                                                 <span class="col-sm-1"> : </span>
                                                 <span class="col-sm-7 reg_mob inbox_popup_data"></span>
                                             </div>
                                         </div> <br> <!---End organization profile-->    
                                         <!--Vacancy Details-->
-                                        <div class="row">
+                                        <div class="row candidate_vacancy_inbox_data">
                                             <h5>Vacancy Details</h5>
                                             <div class="display_provider_details col-md-12">
                                                 <span class="col-sm-4">Job Title</span>
@@ -232,42 +234,11 @@ var seeker_inbox_message;
 $(document).ready(function(){
     
     seeker_inbox_message = $('#seeker_inbox_data').DataTable( {
-        // "order": [],
-        "aaSorting": [],
-        "ordering": false,
-        // "aaSortingFixed": [[0,'asc']],
-        "lengthMenu" :  [
-                            [5, 25, 50, -1], 
-                            [5, 25, 50, "All"]
-                        ],
-        "pageLength" : 5,
-        "language" : {
-                        "lengthMenu": "_MENU_ records per page", // Remove show entries text from entries dropdown like "sLengthMenu": "_MENU_ records per page"
-                        "zeroRecords": "Nothing found - sorry", // empty table message
-                        "info": "Showing _START_ to _END_ of _TOTAL_ entries", // Entries message
-                        "infoEmpty": "No records available", // No results message
-                        "infoFiltered": "(filtered from _MAX_ total records)", // After filtering, message
-                        "search":         "Search:", // Search message
-                        "paginate": {  // Change pagination text
-                           "previous": "Prev", // Change previous pagination text
-                           "next": "Next" // Change next pagination text
-                        }
-                    },
-//                     "columns": [
-// { "data": "col1" },
-// { "data": "col2" },
-// { "data": "col3" },
-// { "data": "col4" },
-// { "data": "col5" }
-// ]
-
-        // "pagingType": "full_numbers"
+       	"aaSorting": [],
+		"ordering": false,
+    	"pagingType": "full_numbers"
     });
-
-
-
     seeker_inbox_ajax_message('<?php echo base_url(); ?>','<?php echo $candidate_data['candidate_id'] ?>','<?php echo $this->security->get_csrf_hash(); ?>');
-    
     $('.view_inbox_details').on('click',function(){
         var inbox = $(this).attr('data-value');
         $(this).parents('tr').attr('data-name','unbold_section');
@@ -290,15 +261,20 @@ $(document).ready(function(){
                 $('#seeker_inbox_msg .reg_mail').text(c.inbox_data.registrant_email_id);
                 $('#seeker_inbox_msg .reg_mob').text(c.inbox_data.registrant_mobile_no); 
                 // Vacancy details
-                $('#seeker_inbox_msg .vac_title').text(c.inbox_data.vacancies_job_title);
-                $('#seeker_inbox_msg .vac_ava').html(c.inbox_data.vacancies_available);
-                $('#seeker_inbox_msg .vac_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_open_date));
-                $('#seeker_inbox_msg .vac_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_close_date));
-                $('#seeker_inbox_msg .vac_min_sal').text(c.inbox_data.vacancies_start_salary);
-                $('#seeker_inbox_msg .vac_max_sal').text(c.inbox_data.vacancies_end_salary);
-                $('#seeker_inbox_msg .vac_exp').text(c.inbox_data.vacancies_experience); 
-                $('#seeker_inbox_msg .vac_int_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_interview_start_date));
-                $('#seeker_inbox_msg .vac_int_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_end_date));
+                if(c.inbox_data.vacancies_job_title){
+	                $('#seeker_inbox_msg .vac_title').text(c.inbox_data.vacancies_job_title);
+	                $('#seeker_inbox_msg .vac_ava').html(c.inbox_data.vacancies_available);
+	                $('#seeker_inbox_msg .vac_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_open_date));
+	                $('#seeker_inbox_msg .vac_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_close_date));
+	                $('#seeker_inbox_msg .vac_min_sal').text(c.inbox_data.vacancies_start_salary);
+	                $('#seeker_inbox_msg .vac_max_sal').text(c.inbox_data.vacancies_end_salary);
+	                $('#seeker_inbox_msg .vac_exp').text(c.inbox_data.vacancies_experience); 
+	                $('#seeker_inbox_msg .vac_int_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_interview_start_date));
+	                $('#seeker_inbox_msg .vac_int_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_end_date));
+                }
+                else{
+                	$('.candidate_vacancy_inbox_data').hide();
+                }
             }
        });
     });
@@ -327,98 +303,34 @@ function mysql_date_format_to_javascript_format(date){
     var datesplit = date.split('-');
     return datesplit[2]+'/'+datesplit[1]+'/'+datesplit[0]
 }
-    function seeker_inbox_ajax_message(url,id,csrf){
-        var lastmessageid = $('.seeker_inbox_last_id').length > 0 ? parseInt($(document).find('.seeker_inbox_last_id').val()):0;
-        var message = $.ajax({
-            type: "POST",
-            url: url+"seeker/inbox/message",
-            data : { cand_id : id , csrf_token : csrf,lastid: lastmessageid},
-            dataType: 'json',
-            async: false
-        }).complete(function(){
-            setTimeout(function(){seeker_inbox_ajax_message(url,id,csrf);}, 10000);
-        }).responseText;
-        var json_data = $.parseJSON(message);
-        var retrivedatacount = json_data.length;
-        if(retrivedatacount > 0){
-            var new_row;
-            var last_id = parseInt(json_data[0].candidate_inbox_id);
-            $.each(json_data, function(i){
-            
-            var converted_time = mysql_time_to_javascript_time(json_data[i].candidate_inbox_created_date);
-
-
-            // First method
-
-            // if(json_data[i].is_viewed == 0) {
-            //     new_row = $('<tr data-name="bold_section"></tr>');
-            // }
-            // else {
-            //     new_row = $('<tr></tr>');
-            // }
-            // new_row.append('<td><input type="checkbox" class="seeker_inbox_check" value="'+json_data[i].candidate_inbox_id+'" /></td>')
-            // .append('<td> <span> '+json_data[i].organization_name+' </span> </td>')
-            // .append('<td> <span> '+json_data[i].vacancies_job_title+' </span></td>')
-            // .append('<td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false"> '+json_data[i].candidate_inbox_message+' </a></td>')
-            // .append('<td>2014-05-09</td>');
-            // seeker_inbox_message.row.add(new_row);
-            // $('#seeker_inbox_data tbody').prepend(new_row);
-            
-            // second method
-
-            seeker_inbox_message.row.addByPos(['<input type="checkbox" class="seeker_inbox_check" value="'+json_data[i].candidate_inbox_id+'" >','<span>'+json_data[i].organization_name+'</span>','<span>'+json_data[i].vacancies_job_title+'</span>','<a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-value=""'+json_data[i].candidate_inbox_id+'"" data-keyboard="false"> '+json_data[i].candidate_inbox_message+' </a>',converted_time],1);
-
-                // seeker_inbox_message.row.addByPos(['<input type="checkbox" class="provider_inbox_id" data-msg-id ="'+inbox_id_increase+'">',json_data[i].candidate_name,'<a class="btn" data-toggle="modal" data-target="#applicant_msg_act" data-backdrop="static" data-keyboard="false">Hi, I wish to apply for '+json_data[i].vacancies_job_title+'</a>',converted_time],1);
-
-          
-            //  row = seeker_inbox_message.row(1);
-            // row.data(v).draw();
-             // <tr class="" data-name="<?php 
-             // if($msg['is_viewed'] == 0) echo 'bold_section'; ?>">
-             //                            " /></td>
-             //                            <td><span> <?php
-              // echo $msg['organization_name']; ?> </span></td>
-             //                            <td><span> <?php 
-             // echo $msg['vacancies_job_title']; ?> </span></td>
-             //                            <td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false"> <?php 
-             // echo $msg['candidate_inbox_message']; ?> </a></td>
-             //                            <td> <?php 
-             // echo $meassage_received_date; ?> </td>
-             //                        </tr>
-                // row += $('<tr> <td><input type="checkbox" class="seeker_inbox_check" value="'+json_data[i].candidate_inbox_id+'" </td> <td><span> '+json_data[i].organization_name+' </span></td><td><a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-keyboard="false"> '+json_data[i].candidate_inbox_message+' </a></td><td>12-10-17</td> </tr>');
-                // var table1 =         seeker_inbox_message.row.add( {
-//         "col1":       "Tiger Nixon",
-//         "col2":     "$3,120",
-//         "col3": "2011/04/25",
-//         "col4":     "Edinburgh",
-//         "col5":       "5421"
-//     } ).draw();
-
-
-            });   
-            seeker_inbox_message.draw();    
-            $(document).find('.seeker_inbox_last_id').val(last_id);    
-
-            // seeker_inbox_message.row.add(row);
-            // $('#seeker_inbox_data tbody').prepend(row);
-    
-// var table1 =         seeker_inbox_message.row.add( {
-//         "col1":       "Tiger Nixon",
-//         "col2":     "$3,120",
-//         "col3": "2011/04/25",
-//         "col4":     "Edinburgh",
-//         "col5":       "5421"
-//     } ).draw();
-//             // index = table1.column(1).data().indexOf(v.id);
-//             table1.row(1);
-    
-
-            // 
-        }
-        
-
-
-
-
+function seeker_inbox_ajax_message(url,id,csrf){
+    var lastmessageid = $('.seeker_inbox_last_id').length > 0 ? parseInt($(document).find('.seeker_inbox_last_id').val()):0;
+    var message = $.ajax({
+        type: "POST",
+        url: url+"seeker/inbox/message",
+        data : { cand_id : id , csrf_token : csrf,lastid: lastmessageid},
+        dataType: 'json',
+        async: false
+    }).complete(function(){
+        setTimeout(function(){seeker_inbox_ajax_message(url,id,csrf);}, 10000);
+    }).responseText;
+    var json_data = $.parseJSON(message);
+    var retrivedatacount = json_data.length;
+    if(retrivedatacount > 0){
+        var new_row;
+        var last_id = parseInt(json_data[0].candidate_inbox_id);
+        $.each(json_data, function(i){
+        	var converted_time = mysql_time_to_javascript_time(json_data[i].candidate_inbox_created_date);
+        	if(json_data[i].vacancies_job_title){
+        		var vacancies_name = json_data[i].vacancies_job_title;
+        	}
+        	else{
+        		var vacancies_name = 'Not mention'; 
+        	}
+        	seeker_inbox_message.row.addByPos(['<input type="checkbox" class="seeker_inbox_check" value="'+json_data[i].candidate_inbox_id+'" >','<span>'+json_data[i].organization_name+'</span>','<span>'+vacancies_name+'</span>','<a class="btn" data-toggle="modal" data-target="#user_inbox_msg_act"  data-backdrop="static" data-value=""'+json_data[i].candidate_inbox_id+'"" data-keyboard="false"> '+json_data[i].candidate_inbox_message+' </a>',converted_time],1);
+        });   
+        seeker_inbox_message.draw();    
+        $(document).find('.seeker_inbox_last_id').val(lastmessageid+retrivedatacount);    
     }
+}
 </script>
