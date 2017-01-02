@@ -174,7 +174,7 @@ ajax = function (params,action,form_id){
     params[csrf_name] = csfrData[csrf_name];
     $.ajax({
         type : "POST",
-        url : baseurl+form.attr('action'),
+        url : admin_baseurl+form.attr('action'),
         dataType : 'json',
         data : params ,
         success: function(res) {
@@ -185,11 +185,11 @@ ajax = function (params,action,form_id){
             }
             else if(res.error==2) {
                 $('.val_error').html();
-                // $('.admin_table').dataTable().fnDestroy(); //Commented for page reload
+                $('.admin_table').dataTable().fnDestroy(); //Commented for page reload
                 form.html(res.output);
                 $('.db_status').fadeOut(3000);
-                // setTimeout(function() { datatable_initialization(); }, 3000);  //Commented for page reload
-                setTimeout(function() { $('.db_status').remove();location.reload(); }, 3000);
+                setTimeout(function() { datatable_initialization(); }, 3000);  //Commented for page reload
+                // setTimeout(function() { $('.db_status').remove();location.reload(); }, 3000);
                 default_credentials();  
             }
         }
