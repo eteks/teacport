@@ -184,7 +184,9 @@ $route['main/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 // $route['main/admin_modules'] = 'admin/admin_users/admin_modules';
 
 $route['main/edit_profile'] = 'admin/admin_users/edit_profile';
+$route['main/edit_profile_validation'] = 'admin/admin_users/edit_profile_validation';
 $route['main/change_password'] = 'admin/admin_users/change_password';
+$route['main/change_password_validation'] = 'admin/admin_users/change_password_validation';
 $route['main/logout'] = 'admin/admin_login/teac_admin_logout';
 
 $route['main/payment_gateway'] = 'admin/setting/payment_gateway';
@@ -194,7 +196,9 @@ $route['main/template_logo'] = 'admin/setting/template_logo';
 
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
-
+$route['main/admin_login'] = 'admin/admin_login';
+$route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
+$route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
 /* ===================          Route settings for Admin End     ====================== */
 
 

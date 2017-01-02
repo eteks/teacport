@@ -445,14 +445,18 @@ $('.top_layer, .message_close').on('click',function() {
             dataType : 'json',
             data : 'filter_option='+ selected_value+'&'+csrf_name+'='+ csfrData[csrf_name],
             success: function(res) {
+                json_count = Object.keys(res).length;
                 filter_tag = '';
-                if(res!=0){ 
-                  $.each(res, function(i){
-                    filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
-                    $('#filter_vacancy_table').find('.vacancy_header').text(res[i].label_name);
-                  });  
+                if(res!=0){   
+                    $.each(res, function(i){
+                        if(json_count > 1 && typeof res[i].name_data != 'undefined')
+                            filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                        $('#filter_vacancy_table').find('.vacancy_header').text(res[i].label_name);
+                    });  
                 }   
+                $('#filter_vacancy_table').dataTable().fnDestroy();
                 $('#filter_vacancy_table').find('tbody').html(filter_tag);
+                setTimeout(function() { datatable_initialization(id="#filter_vacancy_table"); }, 100);
             }
         });
     });
@@ -464,17 +468,18 @@ $('.top_layer, .message_close').on('click',function() {
             dataType : 'json',
             data : 'filter_option='+ selected_value+'&'+csrf_name+'='+ csfrData[csrf_name],
             success: function(res) {
+                json_count = Object.keys(res).length;
                 filter_tag = '';
-                if(res!=0){ 
-                  $.each(res, function(i){
-                    filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
-                    $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
-                  });  
+                if(res!=0){  
+                    $.each(res, function(i){
+                        if(json_count > 1 && typeof res[i].name_data != 'undefined')
+                            filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                        $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
+                    });          
                 }   
-                else{
-                    // alert("No data available");
-                }
+                $('#filter_provider_table').dataTable().fnDestroy();
                 $('#filter_provider_table').find('tbody').html(filter_tag);
+                setTimeout(function() { datatable_initialization(id="#filter_provider_table"); }, 100);
             }
         });
     });  

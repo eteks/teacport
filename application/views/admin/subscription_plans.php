@@ -83,7 +83,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </button>
                   </div>
                 </div>
-                <form action="subscription_plan/subscription_plans">
+                <form action="subscription_plans">
                 <p class="admin_status"> </p>
                   <div class="table_content_section">
                     <?php } ?>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
-                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section_subs" data-href="subscription_plan/subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section_subs" data-action="update">
+                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section_subs" data-href="subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section_subs" data-action="update">
                             Edit
                           </a>
                         </td>
@@ -193,7 +193,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </h4>                        
           </div>
           <div class="widget-body form">
-            <form action="subscription_plan/subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+            <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
             <p class="admin_status"> </p>
               <fieldset>
                 <legend> Subscription plan details:</legend>
