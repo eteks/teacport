@@ -882,7 +882,6 @@ function sliderResponse(target) {
 
 /* Popup pagination with arrow end */
 
-  if (window.File && window.FileList && window.FileReader) {
     $("#files").on("change", function(e) {
       var files = e.target.files,
         filesLength = files.length;
@@ -903,8 +902,5 @@ function sliderResponse(target) {
         fileReader.readAsDataURL(f);
       }
     });
-  } else {
-    alert("Your browser doesn't support to File API")
-  }
-
+  
 
