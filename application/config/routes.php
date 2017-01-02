@@ -148,28 +148,37 @@ $route['main/postings'] = 'admin/master_data/posting';
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
 $route['main/job_provider_edit_profile'] = 'admin/job_provider/teacport_job_provider_profile_ajax';
+$route['main/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
+$route['main/job_provider_edit_vacancy'] = 'admin/job_provider/teacport_job_provider_vacancy_ajax';
+$route['main/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
+$route['main/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
+$route['main/job_provider_edit_ads'] = 'admin/job_provider/teacport_job_provider_ads_ajax';
+$route['main/organization_plan_notification'] = 'admin/job_provider/organization_plan_notification';
+$route['main/transaction'] = 'admin/job_provider/transaction';
+
+/* ===================          Route settings for Admin Job Provider End     ====================== */
+
+/* ===================          Route settings for Admin Job Provider Start     ====================== */
+
+/* $route['url_path'] = 'folder_name/controller_name/function_name' */
+$route['main/job_seeker_profile'] = 'admin/job_seeker/teacport_job_seeker_profile';
+$route['main/teacport_job_seeker_profile_ajax'] = 'admin/job_seeker/teacport_job_seeker_profile_ajax';
+
 
 /* ===================          Route settings for Admin Job Provider End     ====================== */
 
 
-$route['main/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
-$route['main/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
-$route['main/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
 $route['main/jobseeker_mailstatus'] = 'admin/job_seeker/teacport_jobseeker_mailstatus';
-$route['main/organization_upgrade_or_renewal'] = 'admin/job_provider/organization_upgrade_or_renewal';
-$route['main/transaction'] = 'admin/job_provider/transaction';
 $route['main/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['main/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
 $route['main/subscription_plans'] = 'admin/subscription_plan/subscription_plans';
 $route['main/plan_upgrade_creation'] = 'admin/subscription_plan/plan_upgrade_creation';
-$route['main/organization_plan_notification'] = 'admin/subscription_plan/organization_plan_notification';
 
 $route['main/user_groups'] = 'admin/admin_users/user_groups';
 $route['main/user_accounts'] = 'admin/admin_users/user_accounts';
 $route['main/privileges'] = 'admin/admin_users/privileges';
 
-$route['main/job_seeker_profile'] = 'admin/job_seeker/teacport_job_seeker_profile';
 $route['main/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
 $route['main/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 // $route['main/admin_modules'] = 'admin/admin_users/admin_modules';

@@ -4805,7 +4805,10 @@ i#admin_error_login {
     text-align: center;
     width: 60%;
 }*/
-
+.tab_form textarea {
+    width: 100% !important;
+    height: 100px;
+}
 
 /* Ended by siva */
 

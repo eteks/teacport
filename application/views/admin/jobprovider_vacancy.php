@@ -75,7 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div>
-                <form action="job_provider/teacport_job_provider_vacancies">
+                <form action="job_provider_vacancies">
                   <p class="admin_status"> </p>
                   <div class="">
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
@@ -111,7 +111,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $vac_val['vacancies_job_title']; ?>
                           </td>
                           <td class="">
-                            <?php echo $vac_val['organization_name']; ?>
+                            <?php 
+                            if(!empty($vac_val['organization_name'])) :
+                              echo $vac_val['organization_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class=""> 
                             <?php echo $vac_val['vacancies_available']; ?>
@@ -139,7 +145,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td> 
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>    
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax" data-mode="edit" data-popup-open="popup-1">
+                            <a class="job_edit popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider_edit_vacancy" data-mode="edit" data-popup-open="popup-1">
                               Edit
                             </a>
                           </td>
@@ -152,7 +158,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php endif; ?>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider/teacport_job_provider_vacancy_ajax"  data-mode="full_view" data-popup-open="popup-1">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $vac_val['vacancies_id']; ?>" data-href="job_provider_edit_vacancy"  data-mode="full_view" data-popup-open="popup-1">
                               Full View
                             </a>
                           </td>
@@ -186,7 +192,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                   <div class="widget-body form pop_details_section">
                     <?php } ?>
-                    <form class="tab_form" action="job_provider/teacport_job_provider_vacancies" data-index="" method="POST" data-mode="update">
+                    <form class="tab_form" action="job_provider_vacancies" data-index="" method="POST" data-mode="update">
                     <?php
                     if(!empty($provider_full_vacancies)) :
                     ?>
@@ -240,7 +246,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">
                               <label class="control-label">Organization Name</label>
                               <span class="dynamic_data"> 
-                                <?php echo $vac_val['organization_name']; ?>
+                                <?php 
+                                if(!empty($vac_val['organization_name'])) :
+                                  echo $vac_val['organization_name']; 
+                                else :
+                                  echo "NULL";
+                                endif;
+                                ?>
                               </span>
                             </div>
                           </div>
@@ -436,65 +448,41 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               </span>
                             </div>
                             <div class="span6 control-group">
-                              <label class="control-label">Organization Name</label>
-                              <span>
-                                <select name="org_name" class="tabfield1 tabfield">
-                                  <option value=""> Please select organization </option>
-                                  <?php
-                                  if(!empty($org_values)) :
-                                  foreach ($org_values as $org_val) :
-                                  ?>
-                                    <?php
-                                    if($org_val['organization_id']==$vac_val['vacancies_organization_id']) {
-                                      echo '<option value='.$org_val["organization_id"].' selected> '.$org_val["organization_name"].' </option>';
-                                    }
-                                    else {
-                                      echo '<option value='.$org_val["organization_id"].'> '.$org_val["organization_name"].' </option>';
-                                    }
-                                  endforeach;
-                                  else :
-                                    echo '<option value='.$vac_val['vacancies_organization_id'].' selected> "'.$vac_val['organization_name'].'" </option>';
-                                  endif;
-                                    ?>
-                                </select>   
-                              </span>
-                            </div>
-                          </div>
-                          <div class="span12">
-                            <div class="span6 control-group">
                               <label class="control-label">Available</label>
                               <span>
                                 <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>"  name="vac_available" class="span6 tabfield1 tabfield" />
                               </span>
                             </div>
+                          </div>
+                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Open Date</label>
                               <span>
                                 <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_open_date'])); ?>" name="vac_open_date" />
                               </span>
                             </div>
-                          </div>
-                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Close Date</label>
                               <span>
                                 <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_close_date'])); ?>" name="vac_end_date" />
                               </span>
                             </div>
+                          </div>
+                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label">Start Salary</label>
                               <span>
                                 <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" name="job_min_salary" class="span6 tabfield1 tabfield" />
                               </span>
                             </div>
-                          </div>
-                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label"> End Salary</label>
                               <span>
                                 <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>"  name="job_max_salary" class="span6 tabfield1 tabfield" />
                               </span>
                             </div>
+                          </div>
+                          <div class="span12">
                             <div class="span6 control-group">                                       
                               <label class="control-label"> Status </label>
                               <span>

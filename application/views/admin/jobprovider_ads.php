@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                   <div class="clearfix add_section">
                 </div>
-                <form action="job_provider/teacport_job_provider_ads">
+                <form action="jobprovider_ads">
                   <p class="admin_status"> </p>
                   <div class="">
                     <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
@@ -114,11 +114,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td class="magnify-posted-ads"> 
-                           <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo $ads_val['ads_image_path']; ?>" alt="Not Found" /></a>
+                            <a class="magnify-ad text-center"> <img class="popup_preview" src="<?php echo base_url()."uploads/jobprovider/premiumad/".$ads_val['ads_image_path']; ?>" alt="Not Found" /></a>
                           	 <!-- <span class="pull-right">Full View </span> -->
                            </td>
-                          <td> 
-                            <?php echo $ads_val['organization_name']; ?>
+                          <td>
+                            <?php 
+                            if(!empty($ads_val['organization_name'])) :
+                              echo $ads_val['organization_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td>
                             <?php 
@@ -153,7 +159,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $ads_val['premium_ads_id']; ?>" data-href="job_provider/teacport_job_provider_ads_ajax" data-mode="edit" data-popup-open="popup_section">
+                            <a class="job_edit popup_fields" data-id="<?php echo $ads_val['premium_ads_id']; ?>" data-href="job_provider_edit_ads" data-mode="edit" data-popup-open="popup_edit_section">
                               Edit
                             </a>
                           </td>
@@ -182,7 +188,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         </div>
         <!-- END EXAMPLE TABLE widget-->
         </div>
-        <div class="popup" data-popup="popup_section">
+        <div class="popup" data-popup="popup_edit_section">
           <div class="popup-inner">       
             <div class="widget box blue" id="popup_wizard_section">
               <div class="widget-title">
@@ -191,7 +197,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </h4>                        
               </div>
               <div class="widget-body form">
-                <form action="job_provider/teacport_job_provider_ads" method="POST" class="form-horizontal admin_form" data-mode="update">
+                <form action="jobprovider_ads" method="POST" class="form-horizontal admin_form" data-mode="update">
                   <p class="admin_status"> </p>
                   <fieldset>
                     <legend> Ads Details:</legend>
@@ -213,45 +219,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <span class="dynamic_data"> 
                               <a class="btn upload_option"> Upload </a>
                               <input class="form-control hidden_upload" name="ads_logo" type="file">
-                              <img src="<?php echo $activities_details['ads_image_path']; ?>" class="popup_preview" alt="Not Found">
+                              <img src="<?php echo base_url()."uploads/jobprovider/premiumad/".$activities_details['ads_image_path']; ?>" class="popup_preview" alt="Not Found" />
                               <input type="hidden" value="<?php echo $activities_details['ads_image_path']; ?>" name="old_file_path" />
                             </span>
                           </div>
                         </div>
                         <div class="span12">
-                          <div class="span6 control-group">                                     
-                            <label class="control-label"> Organization Name </label>
-                            <span class="dynamic_data">
-                              <select name="org_name" class="tabfield1 tabfield">
-                                <option value=""> Please select organization </option> 
-                                <?php
-                                if(!empty($org_values)) :
-                                foreach ($org_values as $org_val) :
-                                ?>
-                                <?php
-                                if($org_val['organization_id']==$activities_details['organization_id']) 
-                                {
-                                  echo '<option value='.$org_val["organization_id"].' selected> '.$org_val["organization_name"].' </option>';
-                                }
-                                else {
-                                  echo '<option value='.$org_val["organization_id"].'> '.$org_val["organization_name"].' </option>';
-                                }
-                                endforeach;
-                                else :
-                                  echo '<option value='.$activities_details['organization_id'].' selected> "'.$activities_details['organization_name'].'" </option>';
-                                endif;
-                                ?> 
-                              </select>
-                            </span>
-                          </div>
                           <div class="span6 control-group">
                             <label class="control-label"> Ads Visible days </label>
                             <span class="dynamic_data"> 
                               <input type="text" class="form-control" placeholder="Visible days" value="<?php echo $activities_details['ad_visible_days']; ?>" name="ads_days" /> 
                             </span>
                           </div>
-                        </div>
-                        <div class="span12">
                           <div class="span6 control-group">                                     
                             <label class="control-label"> Admin verification </label>
                             <span class="dynamic_data"> 
@@ -262,6 +241,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <input type="hidden" value="<?php echo $activities_details['is_admin_verified']; ?>" class="verification" name="admin_verify" /> 
                             </span>
                           </div>
+                        </div>
+                        <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label"> Premium Status </label>
                             <span class="dynamic_data"> 
@@ -286,9 +267,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </div>  
             </div>                
             <p>
-              <a data-open="popup_section" class="close_trig" href="#">Close</a>
+              <a data-open="popup_edit_section" class="close_trig" href="#">Close</a>
             </p>
-            <a class="popup-close close_trig" data-open="popup_section"href="#">x</a>
+            <a class="popup-close close_trig" data-open="popup_edit_section"href="#">x</a>
           </div>
         </div>               
       </div>
