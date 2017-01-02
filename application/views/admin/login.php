@@ -122,8 +122,7 @@ Website: http://thevectorlab.net/
   <script>
     var csfrData = {};
     csfrData['<?php echo $this->security->get_csrf_token_name(); ?>'] = '<?php echo $this->security->get_csrf_hash(); ?>';
-    var baseurl = "<?php echo base_url(); ?>main/"; // This is for redirecting page via route
-    var admin_baseurl = "<?php echo base_url(); ?>admin/"; // This is for redirecting page via controller
+    var admin_baseurl = "<?php echo base_url(); ?>main/"; // Route path
     var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
   </script>
 

@@ -91,7 +91,7 @@ Website: http://thevectorlab.net/
                              <?php
                                 foreach ($feedback_data as $feed) :
                                 if($feed['is_viewed'] == 0){  ?>
-                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
+                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
                                         <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
 									<!-- <span class="subject">
 									<span class="from">Dulal Khan</span> -->

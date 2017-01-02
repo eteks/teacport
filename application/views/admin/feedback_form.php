@@ -118,7 +118,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $feed['feedback_form_created_date']; ?>
                           </td>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section_feedback">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section_feedback">
                               Full View
                             </a>
                           </td>

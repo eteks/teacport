@@ -15,7 +15,7 @@ $(document).ready(function(){
                     // this_status.fadeOut(3000);
                 }
                 else {
-                   window.location.href = baseurl+"dashboard";
+                   window.location.href = admin_baseurl+"dashboard";
                 }
             }
         });
@@ -46,7 +46,7 @@ $(document).ready(function(){
                      this_status.fadeOut(3000);
                      if(res.session_data != 'undefined' && res.session_data == true){
                         customalert("You have changed your Accounts. We need to logout your session to confirm");
-                        setTimeout(function() { window.location.href = baseurl+'logout'; }, 5000 );
+                        setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
                      }
                 }
             }
