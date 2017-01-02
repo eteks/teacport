@@ -265,11 +265,14 @@ a,a:focus, a:hover, a:active {
     width: 144px;*/
     background: #333333 none repeat scroll 0 0;
     margin-top: 0 !important;
+    padding: 7px 20px !important;
     opacity: 0.6;
-    padding: 0 77.5px;
-    width: 60px;
+    /*padding: 0 77.5px;
+    width: 60px;*/
 }
-
+.tr_logo {
+	margin: 8px 0;
+}
 /* header nav bar*/
 #header.navbar {
     min-width: 0px;
@@ -1706,12 +1709,9 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 
 /* logo page */
 #logo {
-    width: 56px;
-    margin: 0 auto;
-    padding: 2px;
-    /*text-align: center;*/
+    margin: 8px 15px;
     float: left !important;
-    margin-left: 50px !important;
+     /*text-align: center;*/
 }
 
 .login-header {
@@ -4795,6 +4795,21 @@ div.dt-button-background {
 i#admin_error_login {
     color: red !important;
 }
+/*.ajax_loader {
+    background: rgba(0, 0, 0, 0) url("../img/admin_loader.gif") no-repeat scroll center center;
+    display: block;
+    float: left;
+    height: inherit;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    width: 60%;
+}*/
+.tab_form textarea {
+    width: 100% !important;
+    height: 100px;
+}
+
 /* Ended by siva */
 
 .sub_module_access{

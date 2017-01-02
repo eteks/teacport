@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div> 
-                <form action="job_provider/teacport_job_provider_profile">
+                <form action="job_provider_profile">
                   <p class="admin_status"> </p>
                   <div class="">
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
@@ -105,7 +105,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         ?>                               
                         <tr class="parents_tr">
                           <td class="">
-                            <?php echo $pro_val['organization_name']; ?>
+                            <?php
+                            if(!empty($pro_val['organization_name'])) :
+                              echo $pro_val['organization_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $pro_val['registrant_name']; ?> 
@@ -139,7 +145,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td> 
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax" data-mode="edit" data-popup-open="popup_section_profile">
+                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="popup_section_profile">
                               Edit
                             </a>
                           </td>
@@ -152,7 +158,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php endif; ?>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider/teacport_job_provider_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_profile">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile"  data-mode="full_view"  data-popup-open="popup_section_profile">
                               Full View
                             </a>
                           </td>
@@ -185,7 +191,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
             <div class="widget-body form pop_details_section">
               <?php } ?>
-              <form class="tab_form" action="job_provider/teacport_job_provider_profile" data-index="" method="POST" data-mode="update">
+              <form class="tab_form" action="job_provider_profile" data-index="" method="POST" data-mode="update">
                 <?php
                 if(!empty($provider_full_profile)) :
                 ?>
@@ -275,7 +281,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Organization Logo</label>
                           <span class="dynamic_data"> 
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo Not Found" />
+                            <img src="<?php echo $provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Logo Not Found" />
                           </span>
                         </div>
                       </div>
@@ -454,7 +460,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Registrant Picture</label>
                           <span class="dynamic_data"> 
-                            <img src="<?php echo base_url().$provider_full_profile['registrant_logo']; ?>" class="popup_preview" alt="Picture Not Found" />
+                            <img src="<?php echo $provider_full_profile['registrant_logo']; ?>" class="popup_preview" alt="Picture Not Found" />
                           </span>
                         </div>
                       </div>
@@ -732,7 +738,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span>
                             <a class="btn upload_option"> Upload </a>
                             <input class="form-control hidden_upload tabfield1 tabfield" name="organization_logo" type="file">
-                            <img src="<?php echo base_url().$provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Not Loaded">
+                            <img src="<?php echo $provider_full_profile['organization_logo']; ?>" class="popup_preview" alt="Not Loaded">
                             <input type="hidden" value="<?php echo $provider_full_profile['organization_logo']; ?>" class="tabfield1 tabfield" name="old_file_path" />
                           </span>
                         </div>
@@ -843,7 +849,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant DOB</label>
                           <span>
+                            <?php
+                            if(!empty($provider_full_profile['registrant_date_of_birth'])) :
+                            ?>
                             <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" />
+                            <?php
+                            else :
+                            ?>
+                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="" name="registrant_dob" />
+                            <?php
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
@@ -857,7 +873,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Mobile</label>
                           <span>
+                            <?php
+                            if(!empty($provider_full_profile['registrant_mobile_no']) && $provider_full_profile['registrant_mobile_no'] != 0) :
+                            ?>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" />
+                            <?php
+                            else :
+                            ?>
+                            <input type="text" class="span6 tabfield3 tabfield" value="" name="registrant_mobile" />
+                            <?php
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">                                       

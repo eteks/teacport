@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                 </div>
                 
-                <form method="post" action="adminindex/qualification" class="admin_module_form" id="qualification_form">
+                <form method="post" action="qualification" class="admin_module_form" id="qualification_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
@@ -112,7 +112,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <td class="q_course_type">
                           <?php 
                           $course_type = unserialize(COURSE_TYPE);
-                          echo $course_type[$qua_val['educational_qualification_course_type']];
+                          if(!empty($qua_val['educational_qualification_course_type'])) :
+                            echo $course_type[$qua_val['educational_qualification_course_type']];
+                          else :
+                            echo "NULL";
+                          endif;
                           ?>
                           <input type="hidden" value="<?php echo $qua_val['educational_qualification_course_type']; ?>" />
                         </td>

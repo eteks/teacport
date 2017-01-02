@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                 </div>
                 
-                <form method="post" action="adminindex/subject" class="admin_module_form" id="subject_form">
+                <form method="post" action="subject" class="admin_module_form" id="subject_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :

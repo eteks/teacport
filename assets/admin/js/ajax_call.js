@@ -15,7 +15,7 @@ $(document).ready(function(){
                     // this_status.fadeOut(3000);
                 }
                 else {
-                   window.location.href = baseurl+"dashboard";
+                   window.location.href = admin_baseurl+"dashboard";
                 }
             }
         });
@@ -46,7 +46,7 @@ $(document).ready(function(){
                      this_status.fadeOut(3000);
                      if(res.session_data != 'undefined' && res.session_data == true){
                         customalert("You have changed your Accounts. We need to logout your session to confirm");
-                        setTimeout(function() { window.location.href = baseurl+'logout'; }, 5000 );
+                        setTimeout(function() { window.location.href = admin_baseurl+'logout'; }, 5000 );
                      }
                 }
             }
@@ -87,13 +87,13 @@ $(document).ready(function(){
                     this_status.addClass('update_success_md');
                     this_status.fadeIn(1000);
                     this_status.fadeOut(3000);
-                    // $('.admin_table').dataTable().fnDestroy();  //Commented for page reload
+                    $('.admin_table').dataTable().fnDestroy();  //Commented for page reload
                     setTimeout(function()
                     {
-                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
                         this_table_content.html(res.output);
-                        // datatable_initialization(); //Commented for page reload
-                        location.reload();
+                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
+                        datatable_initialization(); //Commented for page reload
+                        // location.reload();
                         this_popup_content.remove();
                     },5000);
                 }
@@ -134,7 +134,7 @@ $(document).ready(function(){
             });
     });
 
-    // Edit and Full view option - Edit and Delete option for popup.
+    // Edit and Full view option
     $(document).on('click','.popup_fields',function(e) {
     	// handleFormWizards();
         if($(this).data('section') == "header") {
@@ -175,7 +175,12 @@ $(document).ready(function(){
         var formdata = new FormData();
         $('.tab_form').find('.tabfield').each(function() {
             if($(this).attr('type') == 'file') {
-                formdata.append($(this).attr('name'),$(this)[0].files[0]); 
+                if($(this)[0].files[0] != '') {
+                    formdata.append($(this).attr('name'),""); 
+                }
+                else {
+                    formdata.append($(this).attr('name'),$(this)[0].files[0]); 
+                }
             }
             else {
                 formdata.append($(this).attr('name'),$(this).val());
@@ -272,7 +277,12 @@ function tabmenu_ci_validation(value,data) {
         var form_data = new FormData();
         this_form.find('.tabfield'+this_index).each(function() {
             if($(this).attr('type') == 'file') {
-                form_data.append($(this).attr('name'),$(this)[0].files[0]); 
+                if($(this)[0].files[0] != '') {
+                    form_data.append($(this).attr('name'),""); 
+                }
+                else {
+                    form_data.append($(this).attr('name'),$(this)[0].files[0]); 
+                }
             }
             else {
                 form_data.append($(this).attr('name'),$(this).val());

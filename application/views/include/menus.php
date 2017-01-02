@@ -3,8 +3,9 @@
         <ul class="menu-logo">
             <li>
                 <a href="<?php echo base_url(); ?>" id="webpage_title"> 
-                	<h4><strong style="color: #2ae; font-size: 30px; font-family: 'Kaushan Script', cursive;">Teachers Recruit</strong></h4>
-                	<!-- <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> --> 
+                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="35px;" width="35px;">
+                	<h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                	<span class="clearfix"> </span>
                 </a>
             </li>
         </ul>
@@ -29,7 +30,9 @@
 							<a href="javascript:void(0)">
 								<?php if((@getimagesize($organization['registrant_logo']) && isset($organization['registrant_logo']))){ ?>
                                 <img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php } else { ?>
+                                <?php } else if(@getimagesize($user_type['registrant_logo']) && isset($user_type['registrant_logo'])){ ?>
+                                	<img src="<?php echo $user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
+                                <?php }else { ?>
                             	<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
                                 <?php } ?>
 								
@@ -66,17 +69,9 @@
 			              		<?php 
 			              		$session = $this->session->all_userdata();
 			              		if(!empty($session['login_session']['candidate_image_path'])) :
-			              			$keyword = "http";
-        							// To check whether the image path is cdn or local path
-        							if(strpos( $session['login_session']['candidate_image_path'] , $keyword ) !== false ) :
-        							?>
-        							<img src="<?php echo $session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
-							        <?php
-        							else :
-        							?>
-        							<img src="<?php echo base_url().$session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
-							        <?php
-							        endif;
+      							?>
+        						<img src="<?php echo $session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
+							    <?php
 							    endif;
 							    ?>	
 			                  	<span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'];?> </span>

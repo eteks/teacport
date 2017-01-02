@@ -1,41 +1,41 @@
-	<!-- BEGIN FOOTER -->
-        <div id="footer">
-            <span>2016 &copy; Teacher Recruit.</span>
-            <div class="span pull-right">
-                <span class="go-top"><i class="icon-arrow-up"></i></span>
-            </div>
-        </div>        
-	        <div class="popup_fade cancel_btn"></div> 
-			<div class="error_popup_msg">
-				<div class="success-alert">
-			 		<span></span>
-			 	</div><!--- -->
-			 	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
-			</div><!--success_msg-->
-			<div id="dialog-overlay"></div>
-            <!--  Confirm box with yes and no button -->
-            <div id="dialog-box">
-                <h3 class="message"></h3>
-                <div>
-                  <span class="del_yes yes">Yes</span>
-                  <span class="del_no no">No</span>
-                </div>
-            </div>
-            <!--  Alert box with ok button only -->
-            <div id="alert-dialog-box">
-                <h3 class="message"></h3>
-                <div>
-                  <span class="ok_btn">ok</span>
-                </div>
-            </div>
-		<script>								 	
-            var csfrData = {};
-            csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
-                       = '<?php echo $this->security->get_csrf_hash(); ?>';
-            var baseurl = "<?php echo base_url(); ?>main/"; // This is for redirecting page via route
-            var admin_baseurl = "<?php echo base_url(); ?>admin/"; // This is for redirecting page via controller
-            var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
-        </script>
+<!-- BEGIN FOOTER -->
+<div id="footer">
+    <span>2016 &copy; Teacher Recruit.</span>
+    <div class="span pull-right">
+        <span class="go-top"><i class="icon-arrow-up"></i></span>
+    </div>
+</div>        
+<div class="popup_fade cancel_btn"></div> 
+<div class="error_popup_msg">
+	<div class="success-alert">
+ 		<span></span>
+ 	</div>
+ 	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
+</div>
+<div id="dialog-overlay"></div>
+<!--  Confirm box with yes and no button -->
+<div id="dialog-box">
+    <h3 class="message"></h3>
+    <div>
+      <span class="del_yes yes">Yes</span>
+      <span class="del_no no">No</span>
+    </div>
+</div>
+<!--  Alert box with ok button only -->
+<div id="alert-dialog-box">
+    <h3 class="message"></h3>
+    <div>
+        <span class="ok_btn">ok</span>
+    </div>
+</div>
+<script>								 	
+    var csfrData = {};
+    csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']='<?php echo $this->security->get_csrf_hash(); ?>';
+    // var baseurl = "<?php echo base_url(); ?>main/"; // This is for redirecting page via route
+    /* ======          Admin Baseurl          ========*/
+    var admin_baseurl = "<?php echo base_url(); ?>main/"; // Route path
+    var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";
+</script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
         <!-- Load javascripts at bottom, this will reduce page load time -->
@@ -46,11 +46,6 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.blockui.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.cookie.js"></script>
-        <!-- ie8 fixes -->
-        <!--[if lt IE 9]>
-        <script src="js/excanvas.js"></script>
-        <script src="js/respond.js"></script>
-        <![endif]-->
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/jquery.vmap.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.russia.js" type="text/javascript"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jqvmap/jqvmap/maps/jquery.vmap.world.js" type="text/javascript"></script>

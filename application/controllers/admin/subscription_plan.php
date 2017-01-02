@@ -350,11 +350,8 @@ class Subscription_Plan extends CI_Controller {
 		}
 
 	}
-	public function organization_plan_notification()
-	{
-		$data['org_notification'] = $this->subscription_plan_model->get_organization_plan_notification();
-		$this->load->view('admin/organization_plan_notification',$data);
-	}
+	
+	
 }
 /* End of file Subscription_Plan.php */ 
 /* Location: ./application/controllers/Subscription_Plan.php */

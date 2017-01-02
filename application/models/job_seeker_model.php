@@ -265,12 +265,15 @@ class Job_seeker_model extends CI_Model {
 		return $findjobsjobdata->result_array(); 
 	}
 
-	public function job_seeker_detail_jobs($id)
+	public function job_seeker_detail_jobs($ins_id)
 	{
-		$where = "(ov.vacancies_id='".$id."' AND ov.vacancies_status='1')"; 				
 	 	$this->db->select('*');   
-	 	$this->db->from('tr_organization_vacancies ov');
-		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id = op.organization_id','inner');
+	 	$this->db->from('tr_organization_vacancies');
+		$this->db->join('tr_organization_profile','tr_organization_vacancies.vacancies_organization_id =	tr_organization_profile.organization_id','left');
+		$this->db->join('tr_class_level','tr_organization_vacancies.vacancies_class_level_id =	tr_class_level.class_level_id','left');
+		$this->db->join('tr_university_board','tr_organization_vacancies.vacancies_university_board_id =	tr_university_board.education_board_id','left');
+		$this->db->join('tr_subject','tr_organization_vacancies.vacancies_subject_id =	tr_subject.subject_id','left');
+		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->row_array(); 
@@ -377,7 +380,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');    
 		$this->db->from('tr_candidate_inbox ci');
 		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id','left');
 		$where = "(ci.candidate_id='".$candidate_id."' AND ci.candidate_inbox_status='1')";
 		$this->db->order_by('ci.candidate_inbox_id','desc');
 		$this->db->where($where);
@@ -390,7 +393,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');    
 		$this->db->from('tr_candidate_inbox ci');
 		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id','left');
 		$where = "(ci.candidate_id='".$candidate_id."' AND ci.candidate_inbox_status='1' AND ci.candidate_inbox_id > '".$lastid."')";
 		$this->db->order_by('ci.candidate_inbox_id','desc');
 		$this->db->where($where);
@@ -408,7 +411,7 @@ class Job_seeker_model extends CI_Model {
 	 	$this->db->select('*');    
 		$this->db->from('tr_candidate_inbox ci');
 		$this->db->join('tr_organization_profile op', 'ci.candidate_organization_id = op.organization_id');
-		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id');
+		$this->db->join('tr_organization_vacancies ov', 'ci.candidate_vacancy_id = ov.vacancies_id','left');
 		$this->db->join('tr_district d', 'op.organization_district_id = d.district_id','left');
 		$where = "(ci.candidate_inbox_id='".$id."' AND ci.candidate_inbox_status='1')";
 		$this->db->where($where);
