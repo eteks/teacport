@@ -2,6 +2,21 @@
 .mega-menu .menu-links > li > a {
    font-size: 16px;
 }
+/* Logo */
+#webpage_title .tr_logo{
+	margin: 8px 0;
+}
+.logo_firstword {
+	color: #f37021;
+	font-size: 35px; 
+	font-family: 'Kaushan Script', cursive;
+}
+
+.logo_secondword{
+	color: #00a5ed;
+	font-size: 35px; 
+	font-family: 'Kaushan Script', cursive;
+}
 /* Home login button */
 #login_home_btn .modal-title{
 	font-size: 22px;
@@ -835,8 +850,6 @@ label.form-input-error {
 .loader-dn {
 	display: none;
 }
-
-
 /* Ended by siva */
 .subcription_plan_details{
 	color: #fff;

@@ -265,11 +265,14 @@ a,a:focus, a:hover, a:active {
     width: 144px;*/
     background: #333333 none repeat scroll 0 0;
     margin-top: 0 !important;
+    padding: 7px 20px !important;
     opacity: 0.6;
-    padding: 0 77.5px;
-    width: 60px;
+    /*padding: 0 77.5px;
+    width: 60px;*/
 }
-
+.tr_logo {
+	margin: 8px 0;
+}
 /* header nav bar*/
 #header.navbar {
     min-width: 0px;
