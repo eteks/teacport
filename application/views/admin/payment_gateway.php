@@ -51,35 +51,38 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <h4><i class="icon-reorder"></i> Payment Gateway Setting</h4>
                         </div>
                         <div class="widget-body form">
-                          <form action="admin_users/edit_profile_validation" class="form-horizontal" method="POST">
+                        <?php if (isset($error_message)){ 
+                    echo "<p class='error_msg_reg alert alert-info'>".$error_message."</p>";
+                }?>
+                          <form action="<?php echo base_url(); ?>admin/setting/payment_gateway" class="form-horizontal" method="POST">
                             <!-- <p class="admin_status"> </p> -->
-	                          <div class="control-group">
+	                          <!-- <div class="control-group">
 	                            <label class="control-label">Currency Symbol</label>
 	                            <div class="controls">
 	                              <div class="input-prepend input-append">
                                     <span class="add-on">$</span><input class=" " type="text" /><span class="add-on">.00</span>
                                  </div>
 	                            </div>
-	                          </div>
+	                          </div> -->
 	                          <div class="control-group">
-	                            <label class="control-label">PayPal Currency Code</label>
+	                            <label class="control-label">Merchant Key</label>
 	                            <div class="controls ">
-	                              <input class="span6 " type="text">
+	                              <input name="online_transfer_merchant_key" class="span6" value="" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
-	                            <label class="control-label">PayPal ID</label>
+	                            <label class="control-label">Merchant Salt</label>
 	                            <div class="controls">
-	                              <input class="span6" type="text">
+	                              <input name="online_transfer_merchant_salt" class="span6" value="" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
-	                            <label class="control-label">2Checkout ID</label>
+	                            <label class="control-label">Payment url</label>
 	                            <div class="controls">
-	                            	<input class="span6" type="text">
+	                            	<input name="online_transfer_payment_base_url" class="span6" value="" type="text">
 	                             </div>
 	                          </div>
-	                          <div class="control-group">
+	                          <!-- <div class="control-group">
 	                            <label class="control-label">Cheques Address</label>
 	                            <div class="controls">
 	                                <textarea class="span6" rows="3"></textarea>
@@ -90,29 +93,29 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <div class="controls">
 	                                <textarea class="span6" rows="3"></textarea>
 	                             </div>
-	                          </div>
+	                          </div> -->
 	                          <div class="control-group">
-	                            <label class="control-label">Bank Account Information</label>
+	                            <label class="control-label">Account Name</label>
 	                            <div class="controls">
-	                              <input class="span6" type="text">
+	                              <input name="bank_transfer_account_name" class="span6" value="" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
-	                            <label class="control-label">Payments ID</label>
+	                            <label class="control-label">Account Number</label>
 	                            <div class="controls">
-	                              <input class="span6" type="text">
+	                              <input name="bank_transfer_account_number" class="span6" value="" type="text">
 	                             </div>
 	                          </div>
-	                          <div class="control-group">
+	                          <!-- <div class="control-group">
 	                            <label class="control-label">Access Key</label>
 	                            <div class="controls">
 	                              <input class="span6" type="text">
 	                             </div>
-	                          </div>
+	                          </div> -->
 	                          <div class="control-group">
-	                            <label class="control-label">Secret Key</label>
+	                            <label class="control-label">IFSC Code</label>
 	                            <div class="controls">
-	                              <input class="span6" type="text">
+	                              <input name="bank_transfer_ifsc_code" class="span6" value="" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="form-actions">

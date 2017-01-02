@@ -4840,3 +4840,19 @@ i#admin_error_login {
 .datepicker {
     position: absolute !important;
 }
+.imageThumb{
+    border: 0 none;
+    height: auto;
+    max-width: 20%;
+    vertical-align: middle;
+}
+.popup_preview
+{
+    display: none !important;
+}
+#remove
+{
+    left: 699px;
+    position: absolute;
+    top: 330px;
+}
