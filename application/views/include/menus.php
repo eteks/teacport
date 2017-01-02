@@ -3,8 +3,9 @@
         <ul class="menu-logo">
             <li>
                 <a href="<?php echo base_url(); ?>" id="webpage_title"> 
-                	<h4><strong style="color: #2ae; font-size: 30px; font-family: 'Kaushan Script', cursive;">Teachers Recruit</strong></h4>
-                	<!-- <img src="<?php echo base_url(); ?>assets/images/logo.png" alt="logo" class="img-responsive"> --> 
+                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="35px;" width="35px;">
+                	<h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                	<span class="clearfix"> </span>
                 </a>
             </li>
         </ul>
