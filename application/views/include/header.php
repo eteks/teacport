@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Teacher Recruit">
-    <title>Teacher Recruit</title>
+    <title>Teachers Recruit</title>
     <link rel="icon" href="<?php echo base_url(); ?>assets/images/tr_favicon.ico" type="image/x-icon">
 
     <!-- BOOTSTRAPE STYLESHEET CSS FILES -->

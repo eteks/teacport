@@ -16,11 +16,14 @@ Website: http://thevectorlab.net/
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <meta content="" name="description" />
   <meta content="" name="author" />
+  <link rel="icon" href="<?php echo base_url(); ?>assets/admin/img/tr_favicon.ico" type="image/x-icon">
   <link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/admin/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/admin/css/style.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/admin/css/style_responsive.css" rel="stylesheet" />
   <link href="<?php echo base_url(); ?>assets/admin/css/style_default.css" rel="stylesheet" id="style_color" />
+  <!--My custom Fonts--> 
+  <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
@@ -28,7 +31,11 @@ Website: http://thevectorlab.net/
   <div class="login-header">
       <!-- BEGIN LOGO -->
       <div id="logo" class="center">
-          <img src="<?php echo base_url(); ?>assets/admin/img/logo_new.png" alt="logo" class="center" />
+          <a class="brand" href="<?php echo base_url(); ?>main/dashboard">
+	            <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png" alt="Admin Lab" height="30px;" width="30px;" />
+	            <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+	            <span class="clearfix"> </span>
+	        </a>
       </div>
       <!-- END LOGO -->
   </div>

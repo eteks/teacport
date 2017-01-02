@@ -35,7 +35,7 @@ Website: http://thevectorlab.net/
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/xcharts.min.css">
     <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/daterangepicker.css">    
-	 <!--My custom Fonts--> 
+	<!--My custom Fonts--> 
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
 </head>
@@ -51,7 +51,7 @@ Website: http://thevectorlab.net/
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="<?php echo base_url(); ?>main/dashboard">
-                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png" alt="Admin Lab" height="30px;" width="30px;" />
+                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png" alt="Logo" height="30px;" width="30px;" />
                     <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
                     <span class="clearfix"> </span>
                 </a>

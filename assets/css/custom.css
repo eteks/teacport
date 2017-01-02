@@ -856,7 +856,7 @@ label.form-input-error {
     font-weight: bold;
     left: 200px;
     position: absolute;
-    top: 261px;
+    top: 230px;
 }
 .personnal_information{
 	background-image: url(../images/personall.png);
@@ -875,4 +875,10 @@ label.form-input-error {
 }
 #company-browse-candidate input {
 	font-size: 11px;
+}
+/* Premium image */
+.premium_image{
+	left: 0;
+    position: absolute;
+    top: -40px;
 }
