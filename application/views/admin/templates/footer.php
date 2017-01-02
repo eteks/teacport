@@ -11,8 +11,7 @@
             csfrData['<?php echo $this->security->get_csrf_token_name(); ?>']
                        = '<?php echo $this->security->get_csrf_hash(); ?>';
             var csrf_name = "<?php echo $this->security->get_csrf_token_name(); ?>";     
-            var baseurl = "<?php echo base_url(); ?>main/"; // This is for redirecting page via route
-            var admin_baseurl = "<?php echo base_url(); ?>admin/"; // This is for redirecting page via controller
+            var admin_baseurl = "<?php echo base_url(); ?>main/"; // Route path
         </script>
         <!-- END FOOTER -->
         <!-- BEGIN JAVASCRIPTS -->
@@ -73,58 +72,49 @@
             });
         </script>
         <script>
-           jQuery(document).ready(function() {
-              $('.dash_table').dataTable({
-                "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
-                ],
-                // set the initial value
-                "iDisplayLength": 5,
-                "sDom": "<'row-fluid'<''l><''f>r>t<'row-fluid'<''i><''p>>",
-                "sPaginationType": "bootstrap",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ records per page",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
-                    }
-                },
-                "bFilter" : false,
-                 "aLengthMenu": false,
-                 "bLengthChange": false,                 
-                  "searching": false,
-                  'bSortable': false,                
+         
+
+            var datatable = "";
+
+            function datatable_initialization(id) {
+                // alert(id);
+                $(id).dataTable({
+                    "order": [],
+                    // Length of row in grid - row length
+                    "lengthMenu" : [
+                                    [5, 25, 50, -1], 
+                                    [5, 25, 50, "All"]
+                                  ],
+                    // Page length
+                    "pageLength" : 5,       
+                    // set the initial value
+                    "iDisplayLength": 5,
+                    "sDom": "<'row-fluid'<''l><''f>r>t<'row-fluid'<''i><''p>>",
+                    "sPaginationType": "bootstrap",
+                    "bFilter" : false,
+                    "aLengthMenu": false,
+                    "bLengthChange": false,                 
+                    "searching": false,
+                    'bSortable': false,    
+
+                });
+
+                // Wrap datatable
+                $(id).wrap("<div id='table_wrapper_Datatable' style='\n\
+                                        overflow: auto;\n\
+                                        overflow-y: hidden;\n\
+                                        -ms-overflow-y: hidden\n\
+                                        position:relative;\n\
+                                        margin-right:5px;\n\
+                                        padding-bottom: 15px;\n\
+                                        display:block;\n\
+                                   '>/");
+            }
+            jQuery(document).ready(function() {
+                 datatable_initialization(id="#filter_vacancy_table");
+                 datatable_initialization(id="#filter_provider_table");
             });
-           });
-        </script> 
-        <script>
-           jQuery(document).ready(function() {
-              $('.admin_table').dataTable({
-                "aLengthMenu": [
-                    [5, 15, 20, -1],
-                    [5, 15, 20, "All"] // change per page values here
-                ],
-                // set the initial value
-                "iDisplayLength": 5,
-                "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",
-                "sPaginationType": "bootstrap",
-                "oLanguage": {
-                    "sLengthMenu": "_MENU_ records per page",
-                    "oPaginate": {
-                        "sPrevious": "Prev",
-                        "sNext": "Next"
-                    }
-                },
-                "aoColumnDefs": [{
-                        'bSortable': false,
-                        'aTargets': [0],
-                        "bProcessing": true
-                    }
-                ]               
-            });
-           });
-        </script>   
+        </script>
         <!-- END JAVASCRIPTS -->
 
 </body>

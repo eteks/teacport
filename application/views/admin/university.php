@@ -74,11 +74,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                 </div>
                 
-                <form method="post" action="adminindex/university" class="admin_module_form" id="subject_form">
+                <form method="post" action="university" class="admin_module_form" id="subject_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
-                    echo "<p class='db_status'> $status </p>";
+                    echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
                   endif;
                   ?> 
                   <p class='val_error'> <p>

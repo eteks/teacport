@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                 </div>
                 
-                <form method="post" action="adminindex/extra_curricular" class="admin_module_form" id="extra_curricular_form">
+                <form method="post" action="extra_curricular" class="admin_module_form" id="extra_curricular_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :

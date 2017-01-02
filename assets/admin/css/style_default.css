@@ -785,5 +785,16 @@ table .dataTables_empty{
 	/*max-width: 180px;*/
 	overflow: scroll !important;
 }
+/* Logo */
+.logo_firstword {
+	color: #f37021;
+	font-size: 35px; 
+	font-family: 'Kaushan Script', cursive;
+}
 
+.logo_secondword{
+	color: #00a5ed;
+	font-size: 35px; 
+	font-family: 'Kaushan Script', cursive;
+}
 

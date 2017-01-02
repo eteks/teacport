@@ -14,34 +14,24 @@ if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
-<!-- BEGIN CONTAINER -->
-<div id="container" class="row-fluid">
-  <!-- BEGIN SIDEBAR -->
-  <div id="sidebar" class="nav-collapse collapse">
+<div id="container" class="row-fluid"> <!-- BEGIN CONTAINER -->
+  <div id="sidebar" class="nav-collapse collapse"> <!-- BEGIN SIDEBAR -->
     <div class="sidebar-toggler hidden-phone"></div>
-    <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-    <div class="navbar-inverse">
+    <div class="navbar-inverse"> <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
       <form class="navbar-search visible-phone">
         <input type="text" class="search-query" placeholder="Search" />
       </form>
-    </div>
-    <!-- END RESPONSIVE QUICK SEARCH FORM -->
-    <!-- BEGIN SIDEBAR MENU -->
-  </div>
-  <!-- END SIDEBAR -->
-  <!-- BEGIN PAGE -->
-  <div id="main-content">
-    <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
-      <!-- BEGIN PAGE HEADER-->
-      <div class="row-fluid">
+    </div> <!-- END RESPONSIVE QUICK SEARCH FORM -->
+  </div> <!-- END SIDEBAR -->
+  <div id="main-content"> <!-- BEGIN PAGE -->
+    <div class="container-fluid"> <!-- BEGIN PAGE CONTAINER-->
+      <div class="row-fluid"> <!-- BEGIN PAGE HEADER-->
         <div class="span12">
-          <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
           <h3 class="page-title">
             Teachers Recruit
             <small>Master Data</small>
           </h3>
-          <ul class="breadcrumb">
+          <ul class="breadcrumb"> <!-- START PAGE TITLE & BREADCRUMB-->
             <li>
               <a href="<?php echo base_url()."main/dashboard"; ?>">
                 <i class="icon-home"></i>
@@ -56,20 +46,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <a href="<?php echo base_url()."main/state"; ?>">State</a>
               <span class="divider-last">&nbsp;</span>
             </li>
-          </ul>
-          <!-- END PAGE TITLE & BREADCRUMB-->
+          </ul> <!-- END PAGE TITLE & BREADCRUMB-->
         </div>
-      </div>
-      <!-- END PAGE HEADER-->
-      <!-- BEGIN ADVANCED TABLE widget-->
-      <div class="row-fluid">
+      </div> <!-- END PAGE HEADER-->
+      <div class="row-fluid"> <!-- BEGIN ADVANCED TABLE widget-->
         <div class="span12">
-          <!-- BEGIN EXAMPLE TABLE widget-->
           <div class="widget">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> State
               </h4>
+              <!-- <h3 class="ajax_loader">
+                <span> Loading </span>
+              </h3>
+              <p class="cb"> -->
             </div>
             <div class="widget-body">
               <div class="portlet-body">
@@ -82,7 +72,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <div class="btn-group pull-right">
                   </div>
                 </div>
-                <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
+                <form method="post" action="state" class="admin_module_form" id="state_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
@@ -163,16 +153,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </div>
             </div>
           </div>
-          <!-- END EXAMPLE TABLE widget-->
         </div>
-      </div>
-      <!-- END ADVANCED TABLE widget-->
-      <!-- END PAGE CONTENT-->
-    </div>
-    <!-- END PAGE CONTAINER-->
-  </div>
-  <!-- END PAGE -->
-</div>
+      </div> <!-- END ADVANCED TABLE widget-->
+    </div> <!-- END PAGE CONTAINER-->
+  </div> <!-- END PAGE -->
+</div> <!-- END Container -->
 <script>
   // Define default values
   var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.

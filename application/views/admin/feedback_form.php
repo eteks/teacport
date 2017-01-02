@@ -80,7 +80,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </div>
                                 </div>
                                 
-                                <form method="post" action="adminindex/state" class="admin_module_form" id="state_form">
+                                <form method="post" action="#" class="admin_module_form" id="state_form">
                                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
@@ -118,7 +118,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $feed['feedback_form_created_date']; ?>
                           </td>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section_feedback">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section_feedback">
                               Full View
                             </a>
                           </td>

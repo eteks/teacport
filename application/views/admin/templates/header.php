@@ -15,7 +15,7 @@ Website: http://thevectorlab.net/
 	<meta content="width=device-width, initial-scale=1.0" name="viewport" />
 	<meta content="" name="description" />
 	<meta content="" name="author" />
-	<link rel="icon" href="<?php echo base_url(); ?>assets/admin/img/favicon.ico" type="image/x-icon">
+	<link rel="icon" href="<?php echo base_url(); ?>assets/admin/img/tr_favicon.ico" type="image/x-icon">
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
 	<link href="<?php echo base_url(); ?>assets/admin/assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
@@ -35,6 +35,8 @@ Website: http://thevectorlab.net/
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/xcharts.min.css">
     <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/charts/bootstrap.min.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/daterangepicker.css">    
+	<!--My custom Fonts--> 
+    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
 </head>
 <!-- END HEAD -->
@@ -49,7 +51,9 @@ Website: http://thevectorlab.net/
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="<?php echo base_url(); ?>main/dashboard">
-                    <img src="<?php echo base_url(); ?>assets/admin/img/logo_new.png" alt="Admin Lab" />
+                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png" alt="Logo" height="30px;" width="30px;" />
+                    <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                    <span class="clearfix"> </span>
                 </a>
                 <!-- END LOGO -->
                 <!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -87,7 +91,7 @@ Website: http://thevectorlab.net/
                              <?php
                                 foreach ($feedback_data as $feed) :
                                 if($feed['is_viewed'] == 0){  ?>
-                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="other_module/get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
+                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
                                         <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
 									<!-- <span class="subject">
 									<span class="from">Dulal Khan</span> -->

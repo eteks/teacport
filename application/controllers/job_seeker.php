@@ -47,7 +47,7 @@ class Job_seeker extends CI_Controller {
 		$upload_path = SEEKER_UPLOAD."pictures/"; // Admin upload path
 	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
         $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
         $config['max_size']    = '1024'; // Maximum size - 1MB
     	$config['max_width']  = '1024'; // Maximumm width - 1024px
     	$config['max_height']  = '768'; // Maximum height - 768px
@@ -82,7 +82,7 @@ class Job_seeker extends CI_Controller {
 		$upload_path = SEEKER_UPLOAD."resume/"; // Admin upload path
 	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
         $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
-        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
         $config['max_size']    = '1024'; // Maximum size - 2MB
         $this->upload->initialize($config); // Initialize the configuration
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
@@ -438,9 +438,9 @@ class Job_seeker extends CI_Controller {
     	$data['experience_values'] = $this->job_seeker_model->get_seeker_experience_details($session['login_session']['candidate_id']);
 
     	$data['edit_profile_visible_status'] = 1;
-    	if(empty($data['district_values']) || empty($data['mother_language_values']) || empty($data['medium_language_values']) || empty($data['known_languages']) || empty($data['posting_values']) || empty($data['class_values']) || empty($data['subject_values']) || empty($data['qualification_values']) || empty($data['department_values']) || empty($data['board_values'])) {
-    		$data['edit_profile_visible_status'] = 0;
-    	}
+    	// if(empty($data['district_values']) || empty($data['mother_language_values']) || empty($data['medium_language_values']) || empty($data['known_languages']) || empty($data['posting_values']) || empty($data['class_values']) || empty($data['subject_values']) || empty($data['qualification_values']) || empty($data['department_values']) || empty($data['board_values'])) {
+    		// $data['edit_profile_visible_status'] = 0;
+    	// }
 
     	// To store session values
     	$candidate_session_data = $this->job_seeker_model->seeker_session_values($session['login_session']['candidate_id']);
@@ -548,7 +548,7 @@ class Job_seeker extends CI_Controller {
 	        	{
 				 	$config['upload_path'] = APPPATH . '../'.$upload_image_path; // APPPATH means our application folder path.
 			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-			        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 			        $config['max_size']    = '1024'; // Maximum size - 1MB
 			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
 			    	$config['max_height']  = '768'; // Maximum height - 768px
@@ -557,7 +557,7 @@ class Job_seeker extends CI_Controller {
 	      			if($this->upload->do_upload('cand_pic'))
 	          		{
 	              		$upload_data = $this->upload->data(); 
-	               		$_POST['cand_pic'] = $upload_image_path.$upload_data['file_name']; 
+	               		$_POST['cand_pic'] = base_url().$upload_image_path.$upload_data['file_name']; 
 	               		$old_file_path = $_POST['old_file_path'] ;
 	               		$upload_error = 0;
 	              	    $keyword = "http";
@@ -580,13 +580,13 @@ class Job_seeker extends CI_Controller {
 	           		if(!empty($_FILES['cand_resume']['name'])) {
 					 	$config['upload_path'] = APPPATH . '../'.$upload_resume_path; // APPPATH means our application folder path.
 				        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
-				        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+				        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 				        $config['max_size']    = '1024'; // Maximum size - 2MB
 				        $this->upload->initialize($config); // Initialize the configuration
 		      			if($this->upload->do_upload('cand_resume'))
 		          		{
 		              		$upload_data = $this->upload->data(); 
-		               		$_POST['cand_resume'] = $upload_resume_path.$upload_data['file_name']; 
+		               		$_POST['cand_resume'] = base_url().$upload_resume_path.$upload_data['file_name']; 
 		               		$prev_file_path = $_POST['prev_file_path'] ;
 		               		$upload_error = 0;
 		               		@unlink(APPPATH.'../'.$prev_file_path);
@@ -835,6 +835,7 @@ class Job_seeker extends CI_Controller {
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('login/seeker');
      	}
+     	$data['provider_values'] = $this->common_model->get_provider_details();
 		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list();
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		$data["qualification"] = $this->common_model->qualification();

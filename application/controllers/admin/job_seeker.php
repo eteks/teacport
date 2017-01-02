@@ -60,7 +60,9 @@ class Job_Seeker extends CI_Controller {
         }
     }
 
-    // Job seeker profile
+    /* ===================          Job Seeker Profile Controller Start     ====================== */
+
+    // Job seeker profile - Add Edit View Delete
 	public function teacport_job_seeker_profile()
 	{
 		// Update data
@@ -70,108 +72,30 @@ class Job_Seeker extends CI_Controller {
 	  		$action = $this->input->post('action');
 	  		$upload_path = "uploads/jobseeker/";
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
-	  			$validation_rules[] =  	array(
-			                              'field'   => 'cand_name',
-			                              'label'   => 'Candidate Name',
-			                              'rules'   => 'trim|required|xss_clean|'
-			                            );
-			    $validation_rules[] =   array(
-			                            	'field'   => 'cand_gen',
-			                                'label'   => 'Candidate Gender',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-			    $validation_rules[] =   array(
-			                                'field'   => 'cand_fa_name',
-			                                'label'   => 'Candidate Father Name',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-			   	$validation_rules[] =   array(
-			                                'field'   => 'cand_dob',
-			                                'label'   => 'Candidate DOB',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-			   	$validation_rules[] =   array(
-			                                'field'   => 'cand_mar_status',
-			                                'label'   => 'Candidate Marital Status',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-			   	$validation_rules[] =   array(
-			                                'field'   => 'cand_moth_ton',
-			                                'label'   => 'Candidate Mother Tongue',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-			   	$validation_rules[] =   array(
-			                                'field'   => 'cand_known_lang',
-			                                'label'   => 'Candidate Known Languages',
-			                                'rules'   => 'trim|required|xss_clean'
-			                            );
+	  			$validation_rules[] =  	array( 'field'   => 'cand_name','label'   => 'Candidate Name','rules'   => 'trim|required|xss_clean|' );
+			    // $validation_rules[] =   array( 'field'   => 'cand_gen','label'   => 'Candidate Gender','rules'   => 'trim|required|xss_clean|' );
+			    // $validation_rules[] =   array( 'field'   => 'cand_fa_name','label'   => 'Candidate Father Name','rules'   => 'trim|required|xss_clean|' );
+			   	// $validation_rules[] =   array( 'field'   => 'cand_dob','label'   => 'Candidate DOB','rules'   => 'trim|required|xss_clean|' );
+			   	// $validation_rules[] =   array( 'field'   => 'cand_mar_status','label'   => 'Candidate Marital Status','rules'   => 'trim|required|xss_clean|' );
+			   	// $validation_rules[] =   array( 'field'   => 'cand_moth_ton','label'   => 'Candidate Mother Tongue','rules'   => 'trim|required|xss_clean|' );
+			   	// $validation_rules[] =   array( 'field'   => 'cand_known_lang','label'   => 'Candidate Known Languages','rules'   => 'trim|required|xss_clean' );
 			}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array(
-			                              'field'   => 'cand_nationality',
-			                              'label'   => 'Nationality',
-			                              'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_religion',
-			                                'label'   => 'Religion',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_community',
-			                                'label'   => 'Community',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                              'field'   => 'cand_phy',
-			                              'label'   => 'Physically Challenge Status',
-			                              'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_img',
-			                                'label'   => 'Candidate Image',
-			                                'rules'   => 'callback_validate_image_type['.$action.'.cand_img.'.$upload_path.']'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_status',
-			                                'label'   => 'Candidate Status',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
+	   			$validation_rules[] =	array( 'field'   => 'cand_nationality','label'   => 'Nationality','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_religion','label'   => 'Religion','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_community','label'   => 'Community','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_phy','label'   => 'Physically Challenge Status','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_img','label'   => 'Candidate Image','rules'   => 'callback_validate_image_type['.$action.'.cand_img.'.$upload_path.']' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_status','label'   => 'Candidate Status','rules'   => 'trim|required|xss_clean|' );
 	   		}
-
 	  		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array(
-			                              'field'   => 'cand_email',
-			                              'label'   => 'Email',
-			                              'rules'   => 'trim|required|xss_clean|valid_email'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_mobile',
-			                                'label'   => 'Mobile Number',
-			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_district',
-			                                'label'   => 'District Name',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_address1',
-			                                'label'   => 'Address',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-	   			$validation_rules[] =	array(
-			                                'field'   => 'cand_live_district',
-			                                'label'   => 'Live District',
-			                                'rules'   => 'trim|required|xss_clean|'
-			                            );
-			    $validation_rules[] =	array(
-			                                'field'   => 'cand_pincode',
-			                                'label'   => 'Pincode',
-			                                'rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{6}$/]|'
-			                            );			                       
+	   			$validation_rules[] =	array( 'field'   => 'cand_email','label'   => 'Email','rules'   => 'trim|required|xss_clean|valid_email' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_district','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_address1','label'   => 'Address','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_live_district','label'   => 'Live District','rules'   => 'trim|required|xss_clean|' );
+			    $validation_rules[] =	array( 'field'   => 'cand_pincode','label'   => 'Pincode','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{6}$/]|' );			                       
 	   		}
-
 	 		$this->form_validation->set_rules($validation_rules);
 			if ($this->form_validation->run() == FALSE) {   
 		        foreach($validation_rules as $row){
@@ -249,13 +173,6 @@ class Job_Seeker extends CI_Controller {
 		}
 		else {
 			$data['seeker_profile'] = $data_values['seeker_profile'];
-			// 			$data_values = $this->job_seekermodel->get_full_seeker_profile(1);
-			// $data['seeker_full_profile'] = get_extra_curricular_seeker_pro($data_values['seeker_full_profile']);
-
-			// echo "<pre>";
-			// print_r($data['seeker_full_profile']);
-			// echo "</pre>";
-
 			$this->load->view('admin/job_seeker_profile',$data);
 		}
 	}
@@ -278,10 +195,9 @@ class Job_Seeker extends CI_Controller {
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/job_seeker_profile',$data);
 		}
-		else {
-			redirect(base_url().'main/admin_error');
-		}
 	}
+
+	/* ===================          Job Seeker Profile Controller End     ====================== */
 
 	public function job_seeker_preference()
 	{

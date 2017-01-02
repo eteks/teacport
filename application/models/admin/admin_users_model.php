@@ -12,6 +12,10 @@ class Admin_users_model extends CI_Model {
     $model_data['status'] = 0;
     $model_data['error'] = 0;
 
+    //Check whether the data is mapped or not
+    $sql= $this->db->query("SELECT ug.user_group_id from tr_admin_user_groups ug INNER JOIN tr_admin_users u INNER JOIN tr_admin_access_control ac where ug.user_group_id=u.admin_user_group_id OR ug.user_group_id=ac.access_group_id GROUP BY ug.user_group_id");
+    $model_data['mapped_data'] = array_column($sql->result_array(), 'user_group_id');
+
     // Update data
     if($status=='update') {
       $group_update_data = array( 
@@ -43,18 +47,20 @@ class Admin_users_model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $group_delete_where = '(user_group_id="'.$this->input->post('rid').'")';
-      $this->db->delete("tr_admin_user_groups", $group_delete_where); 
-      $model_data['status'] = "Deleted Successfully";
-      $model_data['error'] = 2;
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $group_delete_where = '(user_group_id="'.$this->input->post('rid').'")';
+        $this->db->delete("tr_admin_user_groups", $group_delete_where); 
+        $model_data['status'] = "Deleted Successfully";
+        $model_data['error'] = 2;
+      }
+      else {
+        $model_data['error'] = 1;
+        $model_data['status'] = "Something went wrong. Please try again with correct details ";
+      }
     }
 
     // View
     $model_data['group_values'] = $this->db->get_where('tr_admin_user_groups')->result_array();
-
-    //Check whether the data is mapped or not
-    $sql= $this->db->query("SELECT ug.user_group_id from tr_admin_user_groups ug INNER JOIN tr_admin_users u INNER JOIN tr_admin_access_control ac where ug.user_group_id=u.admin_user_group_id OR ug.user_group_id=ac.access_group_id GROUP BY ug.user_group_id");
-    $model_data['mapped_data'] = array_column($sql->result_array(), 'user_group_id');
 
     return $model_data;
   }

@@ -49,14 +49,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <a href="<?php echo base_url(); ?>main/dashboard">Teacher Recruit</a> <span class="divider">&nbsp;</span>
                             </li>
                             <li><a href="<?php echo base_url(); ?>main/dashboard">Dashboard</a><span class="divider-last">&nbsp;</span></li>
-                            <li class="pull-right search-wrap">
+                            <!-- <li class="pull-right search-wrap">
                                 <form class="hidden-phone search_cnt">
                                     <div class="search-input-area">
                                         <input id=" " class="search-query" type="text" placeholder="Search">
                                         <i class="icon-search"></i>
                                     </div>
                                 </form>
-                            </li>
+                            </li> -->
                         </ul>
                         <!-- END PAGE TITLE & BREADCRUMB-->
                     </div>
@@ -152,7 +152,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                         <select class="select_by filter_vacancy" data-placeholder="Select an option">
-								            <option value="state">State</option>
+                                            <option value="">Select Vacancy</option>
+								            <option value="state" selected>State</option>
 								            <option value="district">District</option>
 								            <option value="qualification">Qualification</option>
 								            <option value="inst_type">Institution Type</option>
@@ -208,7 +209,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <div class="tools pull-right mtop7 mail-btn select_by_option">
                                     <div class="btn-group">
                                          <select class="select_by filter_provider" data-placeholder="Select an option">
-								            <option value="paid_provider">Paid</option>
+                                            <option value="" selected>Select Provider Type</option>
+								            <option value="paid_provider" selected>Paid</option>
 								            <option value="paid_provider_district">Paid Provider District Wise</option>
                                             <option value="free_provider_district">Free Provider District Wise</option>
 								        </select>
@@ -486,7 +488,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 ?>
                                 <tr class="odd gradeX">
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
-                                    <td><?php echo $jobprovider['organization_name'] ?></td>
+                                    <td><?php if(!empty($jobprovider['organization_name'])) echo $jobprovider['organization_name']; else echo "---"; ?></td>
                                     <td class="hidden-phone"><a href="mailto:<?php echo $jobprovider['registrant_email_id'] ?>"><?php echo $jobprovider['registrant_email_id'] ?></a></td>
                                     <td class="hidden-phone"><?php echo $jobprovider['registrant_name'] ?></td>
                                     <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobprovider['organization_created_date'])); ?></td>

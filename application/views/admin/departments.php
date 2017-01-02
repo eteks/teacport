@@ -74,7 +74,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                 </div>
                 
-                <form method="post" action="adminindex/departments" class="admin_module_form" id="departments_form">
+                <form method="post" action="departments" class="admin_module_form" id="departments_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
@@ -196,10 +196,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <?php
   if(!empty($qualification_list)) :
   foreach ($qualification_list as $qua_val) :
+  if(strtolower($qua_val['educational_qualification']) != "sslc" && strtolower($qua_val['educational_qualification']) != "hsc") :
   ?>
     d_qualification_option.push("<?php echo $qua_val['educational_qualification']; ?>");
     d_qualification_value.push("<?php echo $qua_val['educational_qualification_id']; ?>");
   <?php
+  endif;
   endforeach;
   endif;
   ?>

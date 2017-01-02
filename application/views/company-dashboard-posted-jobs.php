@@ -57,7 +57,7 @@
 	                                        <a>
 	                                            <div class="job-title"><?php echo ucfirst($postedjobs['vacancies_job_title']); ?></div>
 	                                        </a>
-	                                        <a><span class="comp-name"><?php echo $postedjobs['vacancies_available']; ?> vancancies, <?php echo $postedjobs['vacancies_experience']; ?></span></a>
+	                                        <a><span class="comp-name"><?php echo $postedjobs['vacancies_available']; ?> vacancies, <?php echo $postedjobs['vacancies_experience']; ?></span></a>
 	                                    </div>
 	                                    <p><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?>...</p>
 	                                </div>
