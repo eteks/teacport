@@ -56,9 +56,16 @@ define('STATUS',serialize(array("0"=>"Active",
 // Define seeker upload path
 define('SEEKER_UPLOAD','uploads/jobseeker/');
 
-define('PAYUMERCHANTKEY', 'OwGF14'); 
-define('PAYUMERCHANTSALT', 'RjWAdXh0');
-define('PAYUBASEURL', 'https://test.payu.in');
+if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
+	define('PAYUMERCHANTKEY', 'OwGF14'); 
+	define('PAYUMERCHANTSALT', 'RjWAdXh0');
+	define('PAYUBASEURL', 'https://test.payu.in');
+}
+else{
+	define('PAYUMERCHANTKEY', 'QcroSIn7'); 
+	define('PAYUMERCHANTSALT', 'tlBvljqBL2');
+	define('PAYUBASEURL', 'https://secure.payu.in');
+}
 define('PAYUSUCCESSURL', APP_URL.'provider/paymentreply'); 
 define('PAYUFAILUREURL', APP_URL.'provider/paymentreply');
 define('PAYUCANCELURL', APP_URL.'provider/paymentreply');

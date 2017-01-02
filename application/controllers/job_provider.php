@@ -850,6 +850,10 @@ class Job_provider extends CI_Controller {
 					}
 					
 				}
+				else if($this->input->post('status')==='failure'){
+					$data['subscription_server_msg'] = 'Transaction failed! please try again';
+					$this->load->view('company-dashboard-subscription',$data);
+				}
 
 			}
 			else{
