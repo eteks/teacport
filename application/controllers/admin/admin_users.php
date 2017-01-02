@@ -159,6 +159,7 @@ class Admin_users extends CI_Controller {
 		else if($data['error']==2) {
 			$data_ajax['group_values'] = $data_values['group_values'];
 			$data_ajax['status'] = $data['status'];
+			$data_ajax['mapped_data'] = $data_values['mapped_data'];
 			$result['error'] = $data['error'];
 			// print_r($data_ajax['group_values']);
 			$result['output'] = $this->load->view('admin/user_groups',$data_ajax,true);
