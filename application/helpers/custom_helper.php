@@ -1,10 +1,9 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-if ( ! function_exists('get_user_details')){
-   function get_user_details(){
-   	return true;
-   }
-}
+// --------------------------------------------------------------------------------------
+// Admin Panel Custom Helper functions which is called in both views and controllers
+// --------------------------------------------------------------------------------------
+
 if ( ! function_exists('get_qualication_by_dept')){
 	// Get qualification by department
 	function get_qualication_by_dept($value) 
@@ -145,45 +144,6 @@ if ( ! function_exists('recursiveFind')){
 	}
 }
 
-// if ( ! function_exists('get_extra_curricular_seeker_pro')){
-// 	// Get institution type by subject
-// 	function get_extra_curricular_seeker_pro($value) 
-// 	{
-// 		$out = array();
-// 		if(!empty($value)) {
-// 			foreach ($value as $key => $row) {
-// 				foreach ($row as $k => $r) {
-// 					if(!isset($out[$row['candidate_id']][$row['extra_curricular_id']]))
-// 					{
-// 						$out[$row['candidate_id']]['extra_curricular_details'][$row['extra_curricular_id']] = $row['extra_curricular'];
-// 				   	}
-
-// 				   	if($k == 'candidate_education_qualification_id' || $k == 'candidate_education_yop' || $k == 'candidate_medium_of_inst_id' || $k == 'candidate_education_percentage' || $k == 'candidate_education_status' || $k == 'candidate_edu_board' || $k == 'edu_board' || $k == 'educational_qualification' || $k == 'language_name' || $k == 'departments_name' || $k == 'candidate_education_created_date') {
-// 					   	if(!isset($out[$row['candidate_id']][$row['candidate_education_id']]))
-// 						{
-// 							$out[$row['candidate_id']]['candidate_education_details'][$row['candidate_education_id']][$k] = $row[$k];
-// 					   	}
-// 					}
-
-// 					if($k == 'candidate_experience_class_level_id' || $k == 'class_level' || $k == 'candidate_experience_year' || $k == 'candidate_experience_board' || $k == 'candidate_experience_status' || $k == 'exu_board' || $k == 'candidate_education_status' || $k == 'candidate_experience_created_date' ) {
-// 					   	if(!isset($out[$row['candidate_id']][$row['candidate_experience_id']]))
-// 						{
-// 							$out[$row['candidate_id']]['candidate_experience_details'][$row['candidate_experience_id']][$k] = $row[$k];
-// 					   	}
-// 					}
-// 					if($k == 'candidate_name' || $k == 'candidate_gender' || $k == 'candidate_date_of_birth' || $k == 'candidate_father_initial' || $k == 'candidate_father_name' || $k == 'candidate_marital_status' || $k == 'candidate_district_id' || $k == 'candidate_mother_tongue' || $k == 'candidate_language_known' || $k == 'candidate_nationality' || $k == 'candidate_religion' || $k == 'candidate_community' || $k == 'candidate_is_physically_challenged' || $k == 'candidate_institution_type' || $k == 'candidate_tet_exam_status' || $k == 'candidate_interest_subject_id' || $k == 'candidate_extra_curricular_id' || $k == 'candidate_is_fresher' || $k == 'candidate_address_1' || $k == 'candidate_address_2' || $k == 'candidate_live_district_id' || $k == 'candidate_pincode' || $k == 'candidate_email' || $k == 'candidate_mobile_no' || $k == 'candidate_registration_type' || $k == 'candidate_resume_upload_path' || $k == 'candidate_password' || $k == 'candidate_image_path' || $k == 'candidate_facebook_url' || $k == 'candidate_googleplus_url' || $k == 'candidate_linkedin_url' || $k == 'district' || $k == 'live_district' || $k == 'candidate_created_date' || $k == 'institution_type_name' || $k == 'mother_tongue' || $k == 'edu_interest_sub' || $k == 'candidate_status') {
-// 						$out[$row['candidate_id']][$k] = $row[$k];
-// 					}
-
-
-
-// 			    }
-// 			}
-// 		}
-// 		return $out;
-// 	}
-// }
-
 if ( ! function_exists('get_cand_pref_pcs')){
 	// Get institution type by subject
 	function get_cand_pref_pcs($value) 
@@ -237,5 +197,29 @@ if ( ! function_exists('get_provider_subscription')){
       		}
     	}
 		return $out;
+	}
+}
+
+// This function is used to merge the array key with values for retreiving distinct values
+if ( ! function_exists('get_arrayvalues_bykeyvalue')){
+	function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2,$is_unique)
+	{
+	    $ret = array();
+	    foreach($array as $arr)
+	    {
+	        foreach($arr as $k => $v)
+	        {
+	            if($arr[$key2] == $v2)
+	            {
+	                if($k == $key)
+	                    $ret[] = $v;   
+	            }
+	        }
+	    }
+	    if($is_unique)
+	    	$u = array_unique($ret);
+	    else
+	    	$u = $ret;
+	    return (sizeof($u) == 1) ? $u[0] : $u;
 	}
 }
