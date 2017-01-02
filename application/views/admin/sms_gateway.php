@@ -51,26 +51,35 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <h4><i class="icon-reorder"></i> SMS Gateway Setting</h4>
                         </div>
                         <div class="widget-body form">
-                          <form action="admin_users/edit_profile_validation" class="form-horizontal" method="POST">
+                        <?php if (isset($error_message)){ 
+                    echo "<p class='error_msg_reg alert alert-info'>".$error_message."</p>";
+                        }?>
+                          <form action="<?php echo base_url(); ?>admin/setting/sms_gateway" class="form-horizontal" method="POST">
                             <p class="admin_status"> </p>
 	                          <div class="control-group">
 	                            <label class="control-label">SMS API URL</label>
 	                            <div class="controls">
-	                              <input type="text" class="span6" />
+	                              <input name="sms_api_url" type="text" class="span6" />
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">SMS API Key</label>
 	                            <div class="controls">
-	                              <input type="text" class="span6" />
+	                              <input name="sms_api_key" type="text" class="span6" />
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Authentication Token</label>
 	                            <div class="controls">
-	                              <input type="text" class="span6" />
+	                              <input name="sms_authentication_token" type="text" class="span6" />
 	                             </div>
 	                          </div>
+                            <div class="control-group">
+                              <label class="control-label">SMS Updated Date</label>
+                              <div class="controls"> 
+                           <input class=" m-ctrl-medium date-picker span6" size="16" type="text" name="template_updated_date" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                        </div>
+                      </div>
 	                          <div class="form-actions">
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
