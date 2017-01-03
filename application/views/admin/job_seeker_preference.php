@@ -62,8 +62,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div>
-                <!-- <form method="post" action="job_seeker/job_seeker_preference" class="admin_module_form form_table_scl" id="job_seeker_preference_form"> -->
-                <form method="post" action="job_seeker/job_seeker_preference" class="admin_module_form" id="job_seeker_preference_form">  
+                <!-- <form method="post" action="job_seeker_preference" class="admin_module_form form_table_scl" id="job_seeker_preference_form"> -->
+                <form method="post" action="job_seeker_preference" class="admin_module_form" id="job_seeker_preference_form">  
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
@@ -104,10 +104,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $pre_val['candidate_posting_applied_for']; ?>" /> 
                         </td>
                         <td class="cand_ssalary">
-                          <?php echo $pre_val['candidate_expecting_start_salary']; ?>
+                          <?php 
+                          if(!empty($pre_val['candidate_expecting_start_salary'])) :
+                            echo $pre_val['candidate_expecting_start_salary'];
+                          else :
+                            echo "0";
+                          endif;
+                          ?>
                         </td>
                         <td class="cand_esalary">
-                          <?php echo $pre_val['candidate_expecting_end_salary']; ?>
+                          <?php 
+                          if(!empty($pre_val['candidate_expecting_end_salary'])) :
+                            echo $pre_val['candidate_expecting_end_salary'];
+                          else :
+                            echo "0";
+                          endif;
+                          ?>
                         </td>
                         <td class="cand_class">
                           <?php

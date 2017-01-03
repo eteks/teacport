@@ -16,26 +16,19 @@ class Job_Seeker extends CI_Controller {
 	function multiselect_validate($value,$params) 
 	{
 		//get main CodeIgniter object
-	      $CI =& get_instance();
-	      //load database library
-	      $CI->load->database();    
-	      $CI->form_validation->set_message('multiselect_validate', "The $params field is required.");
-	      if ($value == "null")
-	      {
-	          return FALSE;
-	      }
+	    $CI =& get_instance();
+	    //load database library
+	    $CI->load->database();    
+	    $CI->form_validation->set_message('multiselect_validate', "The $params field is required.");
+	    if ($value == "null")
+	    {
+	        return FALSE;
+	    }
 	}
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
-		list($action,$field,$upload_path) = explode(".",$params); // To split the array values
-	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
-        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-        // $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $config['max_size']    = '1000'; // Maximum size - 1MB
-    	$config['max_width']  = '1024'; // Maximumm width - 1024px
-    	$config['max_height']  = '768'; // Maximum height - 768px
-        $this->upload->initialize($config); // Initialize the configuration
+		list($action,$field) = explode(".",$params); // To split the array values
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
         {
            return TRUE;
@@ -45,12 +38,12 @@ class Job_Seeker extends CI_Controller {
         	$old_file_path = $_POST['old_file_path'];
         	if(isset($_POST['old_file_path']) && !empty($_POST['old_file_path'])) {
         		$_POST[$field] = $old_file_path;
-            	return TRUE;
+            	// return TRUE;
         	}
         	else {
         		$_POST[$field] = NULL; //
-	            $this->form_validation->set_message('validate_image_type', "The %s is required");
-	            return FALSE;
+	            // $this->form_validation->set_message('validate_image_type', "The %s is required");
+	            // return FALSE;
         	}
         }
         else {
@@ -59,6 +52,16 @@ class Job_Seeker extends CI_Controller {
             return FALSE;
         }
     }
+
+    // Salary Validation
+ 	function check_greater_value($second_field,$first_field) 
+	{ 
+		if ($second_field < $first_field) { 
+			$this->form_validation->set_message('check_greater_value', 'The %s field must contain a number greater than Minimum Salary'); 
+			return FALSE;
+		}
+ 		return TRUE;
+	}
 
     /* ===================          Job Seeker Profile Controller Start     ====================== */
 
@@ -70,7 +73,7 @@ class Job_Seeker extends CI_Controller {
 	   		$validation_rules = array();	
 	  		$id = $this->input->post('rid');
 	  		$action = $this->input->post('action');
-	  		$upload_path = "uploads/jobseeker/";
+	  		$upload_path = SEEKER_UPLOAD."pictures/";
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
 	  			$validation_rules[] =  	array( 'field'   => 'cand_name','label'   => 'Candidate Name','rules'   => 'trim|required|xss_clean|' );
 			    // $validation_rules[] =   array( 'field'   => 'cand_gen','label'   => 'Candidate Gender','rules'   => 'trim|required|xss_clean|' );
@@ -81,20 +84,23 @@ class Job_Seeker extends CI_Controller {
 			   	// $validation_rules[] =   array( 'field'   => 'cand_known_lang','label'   => 'Candidate Known Languages','rules'   => 'trim|required|xss_clean' );
 			}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array( 'field'   => 'cand_nationality','label'   => 'Nationality','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_religion','label'   => 'Religion','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_community','label'   => 'Community','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_phy','label'   => 'Physically Challenge Status','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_img','label'   => 'Candidate Image','rules'   => 'callback_validate_image_type['.$action.'.cand_img.'.$upload_path.']' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_nationality','label'   => 'Nationality','rules'   => 'trim|required|xss_clean|' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_religion','label'   => 'Religion','rules'   => 'trim|required|xss_clean|' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_community','label'   => 'Community','rules'   => 'trim|required|xss_clean|' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_phy','label'   => 'Physically Challenge Status','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_img','label'   => 'Candidate Image','rules'   => 'callback_validate_image_type['.$action.'.cand_img]' );
 	   			$validation_rules[] =	array( 'field'   => 'cand_status','label'   => 'Candidate Status','rules'   => 'trim|required|xss_clean|' );
 	   		}
 	  		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array( 'field'   => 'cand_email','label'   => 'Email','rules'   => 'trim|required|xss_clean|valid_email' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_district','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_address1','label'   => 'Address','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_live_district','label'   => 'Live District','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =	array( 'field'   => 'cand_pincode','label'   => 'Pincode','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{6}$/]|' );			                       
+	   			// $validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_district','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_address1','label'   => 'Address','rules'   => 'trim|required|xss_clean|' );
+	   			// $validation_rules[] =	array( 'field'   => 'cand_live_district','label'   => 'Live District','rules'   => 'trim|required|xss_clean|' );
+			    // $validation_rules[] =	array( 'field'   => 'cand_pincode','label'   => 'Pincode','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{6}$/]|' );			                       
+	   		}
+	   		if($this->input->post('index')==4 || $this->input->post('index')=="end") {
+	   			$validation_rules[] =	array( 'field'   => 'cand_institution','label'   => 'Candidate Institution','rules'   => 'trim|required|xss_clean' );                       
 	   		}
 	 		$this->form_validation->set_rules($validation_rules);
 			if ($this->form_validation->run() == FALSE) {   
@@ -114,11 +120,18 @@ class Job_Seeker extends CI_Controller {
 
     			if($this->input->post('index')=="end" && !empty($_FILES['cand_img']['name']))
         		{	
-        			$is_end = 1;   			
+        			$is_end = 1;
+    				$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+				    $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+				    $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+				    $config['max_size']    = '1000'; // Maximum size - 1MB
+					$config['max_width']  = '1024'; // Maximumm width - 1024px
+					$config['max_height']  = '768'; // Maximum height - 768px
+				    $this->upload->initialize($config); // Initialize the configuration   			
            			if($this->upload->do_upload('cand_img'))
             		{
                 		$upload_data = $this->upload->data(); 
-                		$_POST['cand_img'] = $upload_path.$upload_data['file_name']; 
+                		$_POST['cand_img'] = base_url().$upload_path.$upload_data['file_name']; 
                 		$old_file_path = $_POST['old_file_path'] ;
                 		$upload_error = 0;
                 		@unlink(APPPATH.'../'.$old_file_path);
@@ -199,6 +212,9 @@ class Job_Seeker extends CI_Controller {
 
 	/* ===================          Job Seeker Profile Controller End     ====================== */
 
+	/* ===================          Job Seeker Preference Controller Start     ====================== */
+
+	// JOb seeker preference - Edit Delete View 
 	public function job_seeker_preference()
 	{
 		$data['post_values'] = $this->admin_model->get_posting_values();
@@ -209,40 +225,16 @@ class Job_Seeker extends CI_Controller {
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
-		                            array(
-		                                 'field'   => 'cand_post',
-		                                 'label'   => 'Posting Name',
-		                                 'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
-		                            ),
-		                            array(
-		                              'field'   => 'cand_ssalary',
-		                              'label'   => 'Start Salary',
-		                              'rules'   => 'trim|required|xss_clean|'
-
-		                            ),
-		                            array(
-		                                 'field'   => 'cand_esalary',
-		                                 'label'   => 'End Salary',
-		                                 'rules'   => 'trim|required|xss_clean|'
-		                            ),
-		                            array(
-		                              'field'   => 'cand_class',
-		                              'label'   => 'Class Name',
-		                              'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
-
-		                            ),
-		                            array(
-		                                 'field'   => 'cand_sub',
-		                                 'label'   => 'Subject Name',
-		                                 'rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]'
-		                            )
-		                        );
-
+		        array( 'field'   => 'cand_post','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ),
+		       	array( 'field'   => 'cand_ssalary','label' => 'Start Salary','rules' => 'trim|xss_clean|' ),
+		        array( 'field'   => 'cand_esalary','label' => 'End Salary','rules'   => 'trim|xss_clean|callback_check_greater_value['.$this->input->post('cand_ssalary').']' ),
+		        array( 'field'   => 'cand_class','label'   => 'Class Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ),
+		        array( 'field'   => 'cand_sub','label'   => 'Subject Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ) );
 	 		$this->form_validation->set_rules($validation_rules);
 	  		if ($this->form_validation->run() == FALSE) {   
 		        foreach($validation_rules as $row){
-		          $field = $row['field'];         //getting field name
-		          $error = form_error($field);    //getting error for field name
+		          $field = $row['field']; // getting field name
+		          $error = form_error($field); // getting error for field name
 		          if($error){
 		            $data['status'] = strip_tags($error);
 		            $data['error'] = 1;
@@ -286,6 +278,12 @@ class Job_Seeker extends CI_Controller {
 			$this->load->view('admin/job_seeker_preference',$data);
 		}
 	}
+
+	/* ===================          Job Seeker Preference Controller End     ====================== */
+
+	/* ===================          Job Seeker Applied Job Controller Start     ====================== */
+
+	// Job seeker applied jobs - Edit View Delete
 	public function job_seeker_applied()
 	{
 		$data['vac_values'] = $this->admin_model->get_vacancy_values();
@@ -295,30 +293,14 @@ class Job_Seeker extends CI_Controller {
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
-		                            array(
-		                              'field'   => 'vac_name',
-		                              'label'   => 'Vacancy Name',
-		                              'rules'   => 'trim|required|xss_clean|'
-
-		                            ),
-		                            array(
-		                                 'field'   => 'cand_name',
-		                                 'label'   => 'Candidate Name',
-		                                 'rules'   => 'trim|required|xss_clean|'
-		                            ),
-		                            array(
-		                              'field'   => 'job_status',
-		                              'label'   => 'Job Status',
-		                              'rules'   => 'trim|required|xss_clean|'
-
-		                            )
-		                        );
-
+		        // array( 'field'   => 'vac_name','label'   => 'Vacancy Name','rules'   => 'trim|required|xss_clean|' ),
+		        // array( 'field'   => 'cand_name','label'  => 'Candidate Name','rules' => 'trim|required|xss_clean|' ),
+		        array( 'field'   => 'job_status','label' => 'Job Status','rules'   => 'trim|required|xss_clean|' ) );
 	 		$this->form_validation->set_rules($validation_rules);
 	  		if ($this->form_validation->run() == FALSE) {   
 		        foreach($validation_rules as $row){
-		          $field = $row['field'];         //getting field name
-		          $error = form_error($field);    //getting error for field name
+		          $field = $row['field']; // getting field name
+		          $error = form_error($field); // getting error for field name
 		          if($error){
 		            $data['status'] = strip_tags($error);
 		            $data['error'] = 1;
@@ -362,14 +344,21 @@ class Job_Seeker extends CI_Controller {
 			$this->load->view('admin/job_seeker_applied',$data);
 		}
 	}
-	// Job seeker mail details and status 
+
+	/* ===================          Job Seeker Applied Job Controller End     ====================== */
+
+	/* ===================          Job Seeker Mail Details and Status Controller Start     ====================== */
+
+	// Job seeker mail details and status - View
 	public function teacport_jobseeker_mailstatus()
 	{
 		$data['approved_candidate_jobs']=$this->job_seekermodel->get_approved_candidate_jobs();
 		$this->load->view('admin/jobseeker_mailstatus',$data);
 	}	
 
-	
+	/* ===================          Job Seeker Mail Details and Status Controller End     ====================== */
+
+
 }
-/* End of file Job_Provider.php */ 
+/* End of file Job_Seeker.php */ 
 /* Location: ./application/controllers/Job_Seeker.php */

@@ -7,7 +7,7 @@ class Master_Data extends CI_Controller {
 		parent::__construct();
 		$this->load->model('admin/admin_model');
 		$this->load->model('admin/master_data_model');
-		$this->load->model('admin/dashboard_model');
+		// $this->load->model('admin/dashboard_model');
 		$this->load->helper('custom');
 		//Here, the 'admin_modules' contains the array variable to hold all the modules with their full details, its loads here because to access that global array variable in view without passing in every controller function
 		$this->config->load('admin_modules');
@@ -493,7 +493,7 @@ class Master_Data extends CI_Controller {
 		      	// Error
 		      	else {
 		      		$data['error'] = 1;
-			        $data['status'] = "Something went wrong. Please try again with correct details ";	
+			        $data['status'] = "Something went wrong. Please try again with correct details";	
 			        $secure_error = 1;
 		      	}
 		      	if($secure_error == '') {

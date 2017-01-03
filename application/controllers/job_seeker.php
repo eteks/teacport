@@ -44,14 +44,6 @@ class Job_seeker extends CI_Controller {
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
 		list($action,$field) = explode(".",$params); // To split the array values
-		$upload_path = SEEKER_UPLOAD."pictures/"; // Admin upload path
-	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
-        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $config['max_size']    = '1024'; // Maximum size - 1MB
-    	$config['max_width']  = '1024'; // Maximumm width - 1024px
-    	$config['max_height']  = '768'; // Maximum height - 768px
-        $this->upload->initialize($config); // Initialize the configuration
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
         {
            return TRUE;
@@ -79,12 +71,6 @@ class Job_seeker extends CI_Controller {
     function validate_file_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
 		list($action,$field) = explode(".",$params); // To split the array values
-		$upload_path = SEEKER_UPLOAD."resume/"; // Admin upload path
-	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
-        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
-        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $config['max_size']    = '1024'; // Maximum size - 2MB
-        $this->upload->initialize($config); // Initialize the configuration
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
         {
            return TRUE;

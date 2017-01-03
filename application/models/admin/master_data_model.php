@@ -87,7 +87,7 @@ class Master_data_model extends CI_Model {
       $district_get = $this->db->get_where('tr_district',$district_get_where);
 
       if($district_get -> num_rows() > 0) {
-        $model_data['status'] = "District Name is already exist for choosen state";
+        $model_data['status'] = "Sorry, that District Name is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -111,7 +111,7 @@ class Master_data_model extends CI_Model {
       $district_get = $this->db->get_where('tr_district',$district_get_where);
 
       if($district_get -> num_rows() > 0) {
-        $model_data['status'] = "District Name is already exist for choosen state";
+        $model_data['status'] = "Sorry, that District Name is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -136,7 +136,7 @@ class Master_data_model extends CI_Model {
       }
       else {
         $model_data['error'] = 1;
-        $model_data['status'] = "Something went wrong. Please try again with correct details ";
+        $model_data['status'] = "Something went wrong. Please try again with correct details";
       }  
     }
 
@@ -260,10 +260,10 @@ class Master_data_model extends CI_Model {
       FROM `tr_extra_curricular` AS e
       INNER JOIN 
       (
-        SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( c.candidate_id, ',', n.n ) , ',', -1 ) value
+        SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( c.candidate_extra_curricular_id, ',', n.n ) , ',', -1 ) value
         FROM tr_candidate_profile c
         CROSS JOIN numbers n
-        WHERE n.n <=1 + ( LENGTH( c.candidate_id ) - LENGTH( REPLACE( c.candidate_id, ',', '' ) ) )
+        WHERE n.n <=1 + ( LENGTH( c.candidate_extra_curricular_id ) - LENGTH( REPLACE( c.candidate_extra_curricular_id, ',', '' ) ) )
       )AS cand where cand.value = e.extra_curricular_id group by e.extra_curricular_id");
     $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'extra_curricular_id');
 
@@ -434,19 +434,21 @@ class Master_data_model extends CI_Model {
     // Update data
     if($status=='update') {
       // $qualification_get_where = '(educational_qualification="'.$this->input->post('educational_qualification').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'")';
-      $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualification_course_type =" . "'" . $this->input->post('q_course_type') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
-
-
+      if($this->input->post('q_course_type')) {
+        $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualification_course_type =" . "'" . $this->input->post('q_course_type') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
+      }
+      else {
+        $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
+      }
       $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);
-
       if($qualification_get -> num_rows() > 0) {
-        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
+        $model_data['status'] = "Sorry, that Educational Qualification is already being used.";
         $model_data['error'] = 1;     
       }
       else {
         $qualification_update_data = array( 
                                     'educational_qualification' => $this->input->post('q_name'),
-                                    'educational_qualification_course_type' => $this->input->post('q_course_type'),
+                                    'educational_qualification_course_type' => ($this->input->post('q_course_type')) ? $this->input->post('q_course_type') : NULL,
                                     'educational_qualifcation_inst_type_id' => $this->input->post('q_inst_type'),
                                     'educational_qualification_status' => $this->input->post('q_status'),
                                   );
@@ -461,17 +463,22 @@ class Master_data_model extends CI_Model {
 
     // Save data
     else if($status=='save') {
-      $qualification_get_where = '(educational_qualification="'.$this->input->post('q_name').'" and educational_qualification_course_type="'.$this->input->post('q_course_type').'" and educational_qualifcation_inst_type_id="'.$this->input->post('q_inst_type').'")';
+      if($this->input->post('q_course_type')) {
+        $qualification_get_where = '(educational_qualification="'.$this->input->post('q_name').'" and educational_qualification_course_type="'.$this->input->post('q_course_type').'" and educational_qualifcation_inst_type_id="'.$this->input->post('q_inst_type').'")';
+      }
+      else {
+        $qualification_get_where = '(educational_qualification="'.$this->input->post('q_name').'" and educational_qualifcation_inst_type_id="'.$this->input->post('q_inst_type').'")';
+      }     
       $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);
 
       if($qualification_get -> num_rows() > 0) {
-        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
+        $model_data['status'] = "Sorry, that Educational Qualification is already being used.";
         $model_data['error'] = 1;     
       }
       else {
         $qualification_insert_data = array( 
                                       'educational_qualification' => $this->input->post('q_name'),
-                                      'educational_qualification_course_type' => $this->input->post('q_course_type'),
+                                      'educational_qualification_course_type' => ($this->input->post('q_course_type')) ? $this->input->post('q_course_type') : NULL,
                                       'educational_qualifcation_inst_type_id' => $this->input->post('q_inst_type'),
                                       'educational_qualification_status' => $this->input->post('q_status'),
                                     );
@@ -548,9 +555,8 @@ class Master_data_model extends CI_Model {
     if($status=='update') {
       $class_level_get_where = "class_level =" . "'" . $this->input->post('c_name') . "' AND class_level_inst_type_id =" . "'" . $this->input->post('c_inst_type') . "' AND class_level_id NOT IN (". $this->input->post('rid').")";
       $class_level_get = $this->db->get_where('tr_class_level',$class_level_get_where);
-
       if($class_level_get -> num_rows() > 0) {
-        $model_data['status'] = "Class Level is already exist for choosen institution type";
+        $model_data['status'] = "Sorry, that Class Level is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -574,7 +580,7 @@ class Master_data_model extends CI_Model {
       $class_level_get = $this->db->get_where('tr_class_level',$class_level_get_where);
 
       if($class_level_get -> num_rows() > 0) {
-        $model_data['status'] = "Class Level is already exist for choosen institution type";
+        $model_data['status'] = "Sorry, that Class Level is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -852,10 +858,10 @@ class Master_data_model extends CI_Model {
         FROM `tr_applicable_posting` AS pos
         INNER JOIN 
         (
-          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_preferance_id, ',', n.n ) , ',', -1 ) p_value
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_posting_applied_for, ',', n.n ) , ',', -1 ) p_value
           FROM tr_candidate_preferance p
           CROSS JOIN numbers n
-          WHERE n.n <=1 + ( LENGTH( p.candidate_preferance_id ) - LENGTH( REPLACE( p.candidate_preferance_id, ',', '' ) ) )
+          WHERE n.n <=1 + ( LENGTH( p.candidate_posting_applied_for ) - LENGTH( REPLACE( p.candidate_posting_applied_for, ',', '' ) ) )
         )AS pre
         INNER JOIN 
         (
