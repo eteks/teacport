@@ -84,6 +84,14 @@
 }
 
 /* Featured Jobs Slider */
+.slide-featured-jobs .img-box {
+	height: 180px;
+} 
+.slide-featured-jobs .img-box img {
+	height: 768px;
+	width: 1024px;
+	
+}
 .slide-featured-jobs .content-area{
 	height: 250px;
 }
