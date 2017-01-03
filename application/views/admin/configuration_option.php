@@ -51,9 +51,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <h4><i class="icon-reorder"></i> Configuration Option</h4>
                         </div>
                         <div class="widget-body form">
-                          <form action="admin_users/edit_profile_validation" class="form-horizontal" method="POST">
+                        <?php if (isset($error_message)){ 
+                    echo "<p class='error_msg_reg alert alert-info'>".$error_message."</p>";
+               			 }?>
+                          <form action="<?php echo base_url(); ?>admin/setting/configuration_option" class="form-horizontal" method="POST">
                             <p class="admin_status"> </p>
-	                          <div class="control-group">
+	                          <!-- <div class="control-group">
 	                            <label class="control-label">Facebook Page URL</label>
 	                            <div class="controls">
 	                              <input class="span6 " type="text">
@@ -70,17 +73,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <div class="controls">
 	                              <input class="span6 " type="text">
 	                             </div>
-	                          </div>
+	                          </div> -->
 	                          <div class="control-group">
 	                            <label class="control-label">System Email Address</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="system_email_address" class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Website Time Zone</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                            	<select class="form-control span6"></select>
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -95,13 +98,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Facebook APP ID</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="facebook_app_id" class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Facebook Secret Key</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="facebook_app_secret" class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -116,13 +119,35 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Twitter Key</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="twitter_app_id" class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Twitter Secret</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="twitter_app_secret" class="span6 " type="text">
+	                             </div>
+	                          </div>
+	                          <div class="control-group">
+	                            <label class="control-label">Enable Google Log In</label>
+	                            <div class="controls">
+	                              <ul class="on_off_button on_off_button_j">
+	                              	<li data-value="1" class="on"><a href="#">Yes</a></li> 
+	                              	<li data-value="0"><a href="#">No</a></li>
+	                              </ul>
+	                             </div>
+	                          </div>
+	                          <div class="control-group">
+	                            <label class="control-label">Google Key</label>
+	                            <div class="controls">
+	                              <input name="google_app_id" class="span6 " type="text">
+	                             </div>
+	                          </div>
+	                          <div class="control-group">
+	                            <label class="control-label">
+	                            Google Secret</label>
+	                            <div class="controls">
+	                              <input name="google_app_secret" class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -137,16 +162,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">LinkedIn Key</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="linkedin_app_id" class="span6 " type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">LinkedIn Secret</label>
 	                            <div class="controls">
-	                              <input class="span6 " type="text">
+	                              <input name="linkedin_app_secret" class="span6 " type="text">
 	                             </div>
 	                          </div>
-	                          <div class="control-group">
+	                          <!-- <div class="control-group">
 	                            <label class="control-label">Enable ZIP Field</label>
 	                            <div class="controls">
 	                              <ul class="on_off_button on_off_button_j">
@@ -163,7 +188,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                              	<li data-value="0"><a href="#">No</a></li>
 	                              </ul>
 	                             </div>
-	                          </div>
+	                          </div> -->
 	                          <div class="form-actions">
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->

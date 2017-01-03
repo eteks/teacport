@@ -4805,7 +4805,10 @@ i#admin_error_login {
     text-align: center;
     width: 60%;
 }*/
-
+.tab_form textarea {
+    width: 100% !important;
+    height: 100px;
+}
 
 /* Ended by siva */
 
@@ -4828,7 +4831,6 @@ i#admin_error_login {
     width: auto !important;
 }
 .dropdown_toggle_act + .slimScrollDiv{
-
     height: auto !important;
     overflow: hidden !important;
     position: absolute !important;
@@ -4852,3 +4854,14 @@ i#admin_error_login {
 .datepicker {
     position: absolute !important;
 }
+.imageThumb{
+    border: 0 none;
+    height: auto;
+    max-width: 20%;
+    vertical-align: middle;
+}
+.popup_preview_templatelogo_act
+{
+    display: none !important;
+}
+

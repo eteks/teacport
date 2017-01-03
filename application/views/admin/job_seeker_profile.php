@@ -75,7 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div>
-                <form action="job_seeker/teacport_job_seeker_profile">
+                <form action="job_seeker_profile">
                   <p class="admin_status"> </p>
                   <div class="">  
                     <p class='val_error'> <p>
@@ -133,7 +133,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $pro_val['candidate_email']; ?>
                           </td>
                           <td class="">
-                            <?php echo $pro_val['candidate_mobile_no']; ?>
+                            <?php 
+                            if(!empty($pro_val['candidate_mobile_no']) && $pro_val['candidate_mobile_no'] != 0) {
+                              echo $pro_val['candidate_mobile_no'];
+                            }
+                            else {
+                              echo "NULL";
+                            }
+                            ?>
                           </td>
                           <td class="">
                             <?php 
@@ -152,7 +159,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section_seeker_profile">
+                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section_seeker_profile">
                               Edit
                             </a>
                           </td>
@@ -165,7 +172,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </td>
                           <?php endif; ?>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="job_seeker/teacport_job_seeker_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_seeker_profile">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="teacport_job_seeker_profile_ajax"  data-mode="full_view"  data-popup-open="popup_section_seeker_profile">
                               Full View
                             </a>
                           </td>
@@ -199,7 +206,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
             <div class="widget-body form pop_details_section">
               <?php } ?>
-              <form class="tab_form" action="job_seeker/teacport_job_seeker_profile" data-index="" method="POST" data-mode="update">
+              <form class="tab_form" action="job_seeker_profile" data-index="" method="POST" data-mode="update">
                 <?php
                 if(!empty($seeker_full_profile)) :
                 ?>
@@ -244,7 +251,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab6" data-toggle="tab" class="step step_menus">
                               <span class="number">6</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Professional<br /> Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular<br /> Info</span>
                             </a>
                           </li>
                           <?php
@@ -253,7 +260,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step">
                               <span class="number">4</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Professional<br /> Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular<br /> Info</span>
                             </a>
                           </li>
                           <?php
@@ -283,7 +290,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Gender</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_gender']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_gender'])) :
+                              echo $seeker_full_profile['candidate_gender'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -291,27 +304,51 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Father Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_father_name']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_father_name'])) :
+                              echo $seeker_full_profile['candidate_father_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
                           <label class="control-label">Date Of Birth</label>
-                          <span class="dynamic_data"> 
-                            <?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])) ; ?>
+                          <span class="dynamic_data">
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_date_of_birth'])) :
+                              echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])) ;
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
                       <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Marital Status</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_marital_status']; ?>
+                          <span class="dynamic_data">
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_marital_status'])) :
+                              echo $seeker_full_profile['candidate_marital_status'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?> 
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
                           <label class="control-label">Mother Tongue</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['language_name']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['language_name'])) :
+                              echo $seeker_full_profile['language_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -321,7 +358,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span class="dynamic_data"> 
                             <?php
                             $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
-                            if(!empty($known_languages)) :
+                            if(!empty($known_languages) && !empty($seeker_full_profile['candidate_language_known'])) :
                             foreach ($known_languages as $lan_val) :
                             ?>
                             <?php
@@ -329,6 +366,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo '<span> '.$lan_val["language_name"].' </span>';
                             }
                             endforeach;
+                            else :
+                              echo "NULL";
                             endif;
                             ?>
                           </span>
@@ -337,11 +376,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Nationality</label>
                           <span class="dynamic_data"> 
                             <?php 
+                            if(!empty($seeker_full_profile['candidate_nationality'])) :
                             foreach (unserialize(NATIONALITY) as $key => $val):
                             if($seeker_full_profile['candidate_nationality'] == $key) { 
                                 echo $val; 
                             }
                             endforeach;
+                            else :
+                              echo "NULL";
+                            endif;
                             ?>
                           </span>
                         </div>
@@ -354,11 +397,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Religion</label>
                           <span class="dynamic_data"> 
                             <?php 
+                            if(!empty($seeker_full_profile['candidate_religion'])) :
                             foreach (unserialize(RELIGION) as $key => $val):
                             if($seeker_full_profile['candidate_religion'] == $key) { 
                                 echo $val; 
                             }
                             endforeach;
+                            else :
+                              echo "NULL";
+                            endif;
                             ?>
                           </span>
                         </div>
@@ -366,11 +413,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Community</label>
                           <span class="dynamic_data"> 
                             <?php 
+                            if(!empty($seeker_full_profile['candidate_community'])) :
                             foreach (unserialize(COMMUNAL) as $key => $val):
                             if($seeker_full_profile['candidate_community'] == $key) { 
                                 echo $val; 
                             }
                             endforeach;
+                            else :
+                              echo "NULL";
+                            endif;
                             ?>
                           </span>
                         </div>
@@ -378,8 +429,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Is Physically Challenged</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_is_physically_challenged']; ?>
+                          <span class="dynamic_data">
+                            <?php 
+                            if(!empty($seeker_full_profile['candidate_is_physically_challenged'])) :
+                              echo $seeker_full_profile['candidate_is_physically_challenged'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?> 
+                            <?php  ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -403,7 +461,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             if(!empty($seeker_full_profile['candidate_facebook_url'])) :
                               echo $seeker_full_profile['candidate_facebook_url'];
                             else :
-                              echo "Null";
+                              echo "NULL";
                             endif;
                             ?>
                           </span>
@@ -417,7 +475,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             if(!empty($seeker_full_profile['candidate_googleplus_url'])) :
                               echo $seeker_full_profile['candidate_googleplus_url'];
                             else :
-                              echo "Null";
+                              echo "NULL";
                             endif;
                             ?>
                           </span>
@@ -429,7 +487,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             if(!empty($seeker_full_profile['candidate_linkedin_url'])) :
                               echo $seeker_full_profile['candidate_linkedin_url'];
                             else :
-                              echo "Null";
+                              echo "NULL";
                             endif;
                             ?>
                           </span>
@@ -449,11 +507,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
-                          <label class="control-label">Candidate Status</label>
+                          <label class="control-label">Candidate Created Date</label>
                           <span class="dynamic_data"> 
                             <?php 
-                                $created_datetime = explode(' ', $seeker_full_profile['candidate_created_date']);
-                                echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                              $created_datetime = explode(' ', $seeker_full_profile['candidate_created_date']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?>
                           </span>
                         </div>
@@ -470,8 +528,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Mobile No</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_mobile_no']; ?>
+                          <span class="dynamic_data">
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_mobile_no']) && $seeker_full_profile['candidate_mobile_no'] != 0) :
+                              echo $seeker_full_profile['candidate_mobile_no'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?> 
                           </span>
                         </div>
                       </div>
@@ -479,13 +543,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">District Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['native_district_name']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['native_district_name'])) :
+                              echo $seeker_full_profile['native_district_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Address 1</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_address_1']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_address_1'])) :
+                              echo $seeker_full_profile['candidate_address_1'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -493,13 +569,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Address 2</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_address_2']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_address_2'])) :
+                              echo $seeker_full_profile['candidate_address_2'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Live District Name</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['live_district_name']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['live_district_name'])) :
+                              echo $seeker_full_profile['live_district_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -507,7 +595,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Pincode</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['candidate_pincode']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_pincode']) && $seeker_full_profile['candidate_pincode'] != 0) :
+                              echo $seeker_full_profile['candidate_pincode'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -667,7 +761,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Institution Type</label>
                           <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['institution_type_name']; ?>
+                            <?php
+                            if(!empty($seeker_full_profile['institution_type_name'])) :
+                              echo $seeker_full_profile['institution_type_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -686,8 +786,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Interest Subject</label>
-                          <span class="dynamic_data"> 
-                            <?php echo $seeker_full_profile['subject_name']; ?>
+                          <span class="dynamic_data">
+                            <?php
+                            if(!empty($seeker_full_profile['subject_name'])) :
+                              echo $seeker_full_profile['subject_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>  
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -695,12 +801,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span class="dynamic_data"> 
                              <?php
                             $ext_array = explode(',',$seeker_full_profile['candidate_extra_curricular_id']);
-                            if(!empty($extra_curricular_values)) :
+                            if(!empty($extra_curricular_values) && !empty($seeker_full_profile['candidate_extra_curricular_id'])) :
                             foreach ($extra_curricular_values as $ext_val) :
                             if(in_array($ext_val['extra_curricular_id'], $ext_array)) {
                               echo $ext_val['extra_curricular'].'<br/>';
                             }
                             endforeach;
+                            else :
+                              echo "NULL";
                             endif;
                             ?>          
                           </span>

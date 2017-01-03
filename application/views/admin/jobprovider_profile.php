@@ -849,7 +849,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant DOB</label>
                           <span>
+                            <?php
+                            if(!empty($provider_full_profile['registrant_date_of_birth'])) :
+                            ?>
                             <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" />
+                            <?php
+                            else :
+                            ?>
+                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="" name="registrant_dob" />
+                            <?php
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
@@ -863,7 +873,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Mobile</label>
                           <span>
+                            <?php
+                            if(!empty($provider_full_profile['registrant_mobile_no']) && $provider_full_profile['registrant_mobile_no'] != 0) :
+                            ?>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" />
+                            <?php
+                            else :
+                            ?>
+                            <input type="text" class="span6 tabfield3 tabfield" value="" name="registrant_mobile" />
+                            <?php
+                            endif;
+                            ?>
                           </span>
                         </div>
                         <div class="span6 control-group">                                       

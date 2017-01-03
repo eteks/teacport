@@ -62,7 +62,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <div class="portlet-body">
                   <div class="clearfix add_section">
                   </div>
-                  <form method="post" action="job_provider/teacport_job_provider_activities" class="admin_module_form" id="activitties_form">
+                  <form method="post" action="jobprovider_activities" class="admin_module_form" id="activitties_form">
                   <?php } ?> 
                   <?php
                   if(!empty($status)) :

@@ -13,7 +13,6 @@ class Admin_login extends CI_Controller {
 		$this->config->load('admin_modules');
 	}
 
-	
 	// Extra Curricular - Add Edit View Delete
 	public function index()
 	{	
@@ -148,8 +147,6 @@ class Admin_login extends CI_Controller {
     			{
         			echo "Your email was not sent.!";
     			}
-
-				// echo $data['status'];
 			}
 			else {
 				echo $data['status'];
@@ -166,10 +163,6 @@ class Admin_login extends CI_Controller {
         $this->session->unset_userdata("admin_login_session");
         redirect(base_url().'main');
   	}
-
-
-
-	
 }
 /* End of file Admin_login.php */ 
 /* Location: ./application/controllers/Admin_login.php */

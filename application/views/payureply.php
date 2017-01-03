@@ -45,20 +45,32 @@ $data = array(
         'udf8' 				=> $udf8,
         'udf9' 				=> $udf9,
         'udf10'				=> $udf10,
-        'unmappedstatus' 	=> $unmappedstatus,
         'zipcode' 			=> $zipcode,
-        'encryptedPaymentId'=> $encryptedPaymentId,
-        'name_on_card'		=> $name_on_card,
-        'cardnum'			=> $cardnum,
-        'cardhash'			=> $cardhash,
-   		'discount'			=> $discount,
-   		'net_amount_debit'	=> $net_amount_debit,
+        'unmappedstatus'	=> $unmappedstatus,
         'csrf_token'		=> $udf5
 );
+if(isset($encryptedPaymentId)){
+	$data['encryptedPaymentId'] = $encryptedPaymentId;
+}
+if(isset($name_on_card)){
+	$data['name_on_card'] = $name_on_card;
+}
+if(isset($cardnum)){
+	$data['cardnum'] = $cardnum;
+}
+if(isset($cardhash)){
+	$data['cardhash'] = $cardhash;
+}
+if(isset($discount)){
+	$data['discount'] = $discount;
+}
+if(isset($discount)){
+	$data['net_amount_debit'] = $net_amount_debit;
+}
 echo form_open('provider/subscription','name="payureplyform"');
 echo form_hidden($data);
 echo form_close();
 ?>
 <script type="text/javascript">
-    document.payureplyform.submit();
+   document.payureplyform.submit();
 </script>

@@ -746,7 +746,7 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val-1).fadeIn(3000);
         }
     });
-
+    $('select').timezones(); //code for timezone module in admin side
     // Next button click - Upgrade
     $(document).on('click','.upgrade_pag_next',function() {
         var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
@@ -881,4 +881,26 @@ function sliderResponse(target) {
 }
 
 /* Popup pagination with arrow end */
+
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<span class=\"pip\">" +
+            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
+            "<br/><span id=\"remove\" class=\"icon-remove-sign\">Remove</span>" +
+            "</span>").insertAfter("#files");
+          $("#remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  
 
