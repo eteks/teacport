@@ -167,7 +167,6 @@ $route['main/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
 $route['main/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 $route['main/jobseeker_mailstatus'] = 'admin/job_seeker/teacport_jobseeker_mailstatus';
 
-
 /* ===================          Route settings for Admin Job Seeker End     ====================== */
 
 
@@ -200,6 +199,7 @@ $route['main/feedback_form'] = 'admin/other_module/feedback_form';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
+
 /* ===================          Route settings for Admin End     ====================== */
 
 

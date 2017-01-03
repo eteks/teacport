@@ -87,7 +87,7 @@ class Master_data_model extends CI_Model {
       $district_get = $this->db->get_where('tr_district',$district_get_where);
 
       if($district_get -> num_rows() > 0) {
-        $model_data['status'] = "District Name is already exist for choosen state";
+        $model_data['status'] = "Sorry, that District Name is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -111,7 +111,7 @@ class Master_data_model extends CI_Model {
       $district_get = $this->db->get_where('tr_district',$district_get_where);
 
       if($district_get -> num_rows() > 0) {
-        $model_data['status'] = "District Name is already exist for choosen state";
+        $model_data['status'] = "Sorry, that District Name is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -136,7 +136,7 @@ class Master_data_model extends CI_Model {
       }
       else {
         $model_data['error'] = 1;
-        $model_data['status'] = "Something went wrong. Please try again with correct details ";
+        $model_data['status'] = "Something went wrong. Please try again with correct details";
       }  
     }
 
@@ -434,13 +434,15 @@ class Master_data_model extends CI_Model {
     // Update data
     if($status=='update') {
       // $qualification_get_where = '(educational_qualification="'.$this->input->post('educational_qualification').'" and educational_qualification_course_type="'.$this->input->post('educational_qualification_course_type').'")';
-      $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualification_course_type =" . "'" . $this->input->post('q_course_type') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
-
-
+      if($this->input->post('q_course_type')) {
+        $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualification_course_type =" . "'" . $this->input->post('q_course_type') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
+      }
+      else {
+        $qualification_get_where = "educational_qualification =" . "'" . $this->input->post('q_name') . "' AND educational_qualifcation_inst_type_id =" . "'" . $this->input->post('q_inst_type') . "' AND educational_qualification_id NOT IN (". $this->input->post('rid').")";
+      }
       $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);
-
       if($qualification_get -> num_rows() > 0) {
-        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
+        $model_data['status'] = "Sorry, that Educational Qualification is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -461,11 +463,16 @@ class Master_data_model extends CI_Model {
 
     // Save data
     else if($status=='save') {
-      $qualification_get_where = '(educational_qualification="'.$this->input->post('q_name').'" and educational_qualification_course_type="'.$this->input->post('q_course_type').'" and educational_qualifcation_inst_type_id="'.$this->input->post('q_inst_type').'")';
+      if($this->input->post('q_course_type')) {
+        $qualification_get_where = '(educational_qualification="'.$this->input->post('q_name').'" and educational_qualification_course_type="'.$this->input->post('q_course_type').'" and educational_qualifcation_inst_type_id="'.$this->input->post('q_inst_type').'")';
+      }
+      else {
+        $qualification_get_where = '(educational_qualification="'.$this->input->post('q_name').'" and educational_qualifcation_inst_type_id="'.$this->input->post('q_inst_type').'")';
+      }     
       $qualification_get = $this->db->get_where('tr_educational_qualification',$qualification_get_where);
 
       if($qualification_get -> num_rows() > 0) {
-        $model_data['status'] = "Qualification Name is already exist for choosen qualification course type";
+        $model_data['status'] = "Sorry, that Educational Qualification is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -548,9 +555,8 @@ class Master_data_model extends CI_Model {
     if($status=='update') {
       $class_level_get_where = "class_level =" . "'" . $this->input->post('c_name') . "' AND class_level_inst_type_id =" . "'" . $this->input->post('c_inst_type') . "' AND class_level_id NOT IN (". $this->input->post('rid').")";
       $class_level_get = $this->db->get_where('tr_class_level',$class_level_get_where);
-
       if($class_level_get -> num_rows() > 0) {
-        $model_data['status'] = "Class Level is already exist for choosen institution type";
+        $model_data['status'] = "Sorry, that Class Level is already being used.";
         $model_data['error'] = 1;     
       }
       else {
@@ -574,7 +580,7 @@ class Master_data_model extends CI_Model {
       $class_level_get = $this->db->get_where('tr_class_level',$class_level_get_where);
 
       if($class_level_get -> num_rows() > 0) {
-        $model_data['status'] = "Class Level is already exist for choosen institution type";
+        $model_data['status'] = "Sorry, that Class Level is already being used.";
         $model_data['error'] = 1;     
       }
       else {

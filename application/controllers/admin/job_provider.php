@@ -319,16 +319,16 @@ class Job_Provider extends CI_Controller {
 	// Job provider activities - Add Edit Delete
 	public function teacport_job_provider_activities()
 	{
-		$data['organization_values'] = $this->admin_model->get_organization_values();
-		$data['candidate_values'] = $this->admin_model->get_candidate_values();
-		$data['vacancy_values'] = $this->admin_model->get_vacancy_values();
+		// $data['organization_values'] = $this->admin_model->get_organization_values();
+		// $data['candidate_values'] = $this->admin_model->get_candidate_values();
+		// $data['vacancy_values'] = $this->admin_model->get_vacancy_values();
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array( 
-	   			array( 'field' => 'act_org_name','label' => 'Organization Name','rules' => 'trim|required|xss_clean|' ),
-		        array( 'field' => 'act_cand_name','label' => 'Candidate Name','rules'  => 'trim|required|xss_clean|' ),
+	   			// array( 'field' => 'act_org_name','label' => 'Organization Name','rules' => 'trim|required|xss_clean|' ),
+		     	//array( 'field' => 'act_cand_name','label' => 'Candidate Name','rules' => 'trim|required|xss_clean|' ),
 		        array( 'field' => 'act_sms','label'   => 'Sms Status','rules'   => 'trim|required|xss_clean|' ),
 		        array( 'field' => 'act_email','label'   => 'Email Status','rules'   => 'trim|required|xss_clean|' ),
 		        array( 'field' => 'act_resume', 'label' => 'Resume Status','rules' => 'trim|required|xss_clean|' ), );

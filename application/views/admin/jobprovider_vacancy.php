@@ -445,6 +445,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class="control-label">Vacancies Job Title</label>
                               <span>
                                 <input type="text" value="<?php echo $vac_val['vacancies_job_title']; ?>" name="job_title" class="span6 tabfield1 tabfield" />
+                                <input type="hidden" value="<?php echo $vac_val['vacancies_organization_id']; ?>" name="org_name" class="tabfield" />
                               </span>
                             </div>
                             <div class="span6 control-group">

@@ -136,7 +136,7 @@ class Job_Providermodel extends CI_Model {
       $vacancy_get_where   = "vacancies_organization_id =" . "'" . $this->input->post('org_name') . "' AND vacancies_job_title =" . "'" . $this->input->post('job_title') . "' AND vacancies_id NOT IN (". $this->input->post('rid').")";
       $vacancy_get = $this->db->get_where('tr_organization_vacancies',$vacancy_get_where);
       if($vacancy_get -> num_rows() > 0 ) {
-        $model_data['status'] = "Already exists";
+        $model_data['status'] = "Job Vacancy Title Already exists";
         $model_data['error'] = 1;
       }
       else {
@@ -214,18 +214,18 @@ class Job_Providermodel extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $activity_get_where = "activity_organization_id =" . "'" . $this->input->post('act_org_name') . "' AND activity_candidate_id =" . "'" . $this->input->post('act_cand_name') . "' AND activity_id NOT IN (". $this->input->post('rid').")";
-      $activity_get = $this->db->get_where('tr_organization_activity',$activity_get_where);
+      // $activity_get_where = "activity_organization_id =" . "'" . $this->input->post('act_org_name') . "' AND activity_candidate_id =" . "'" . $this->input->post('act_cand_name') . "' AND activity_id NOT IN (". $this->input->post('rid').")";
+      // $activity_get = $this->db->get_where('tr_organization_activity',$activity_get_where);
 
-      if($activity_get -> num_rows() > 0) {
-        $model_data['status'] = "Already exist";
-        $model_data['error'] = 1;     
-      }
-      else {      
+      // if($activity_get -> num_rows() > 0) {
+      //   $model_data['status'] = "Already exist";
+      //   $model_data['error'] = 1;     
+      // }
+      // else {      
         $activity_update_data = array( 
-                                    'activity_organization_id' => $this->input->post('act_org_name'),
-                                    'activity_candidate_id' => $this->input->post('act_cand_name'),
-                                    'activity_vacancy_id' => ($this->input->post('act_vac_name')) ? $this->input->post('act_vac_name') : NULL,
+                                    // 'activity_organization_id' => $this->input->post('act_org_name'),
+                                    // 'activity_candidate_id' => $this->input->post('act_cand_name'),
+                                    // 'activity_vacancy_id' => ($this->input->post('act_vac_name')) ? $this->input->post('act_vac_name') : NULL,
                                     'is_sms_sent' => $this->input->post('act_sms'),
                                     'is_email_sent' => $this->input->post('act_email'),
                                     'is_resume_downloaded' => $this->input->post('act_resume')
@@ -236,7 +236,7 @@ class Job_Providermodel extends CI_Model {
         $this->db->update("tr_organization_activity", $activity_update_data); 
         $model_data['status'] = "Updated Successfully";
         $model_data['error'] = 2;
-      }
+      // }
     }
 
     // Delete data
