@@ -446,7 +446,7 @@ class Master_data_model extends CI_Model {
       else {
         $qualification_update_data = array( 
                                     'educational_qualification' => $this->input->post('q_name'),
-                                    'educational_qualification_course_type' => $this->input->post('q_course_type'),
+                                    'educational_qualification_course_type' => ($this->input->post('q_course_type')) ? $this->input->post('q_course_type') : NULL,
                                     'educational_qualifcation_inst_type_id' => $this->input->post('q_inst_type'),
                                     'educational_qualification_status' => $this->input->post('q_status'),
                                   );
@@ -471,7 +471,7 @@ class Master_data_model extends CI_Model {
       else {
         $qualification_insert_data = array( 
                                       'educational_qualification' => $this->input->post('q_name'),
-                                      'educational_qualification_course_type' => $this->input->post('q_course_type'),
+                                      'educational_qualification_course_type' => ($this->input->post('q_course_type')) ? $this->input->post('q_course_type') : NULL,
                                       'educational_qualifcation_inst_type_id' => $this->input->post('q_inst_type'),
                                       'educational_qualification_status' => $this->input->post('q_status'),
                                     );

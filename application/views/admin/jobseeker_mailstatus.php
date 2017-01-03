@@ -75,7 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div>
-                <form action="job_seeker/teacport_job_seeker_profile">
+                <form action="jobseeker_mailstatus">
                   <p class="admin_status"> </p>
                   <div class="">  
                     <p class='val_error'> <p>
@@ -105,16 +105,34 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $jobs['candidate_name']; ?>
                           </td>
                           <td class="">
-                            <?php echo $jobs['candidate_mobile_no']; ?>
+                            <?php 
+                            if(!empty($jobs['candidate_mobile_no']) && $jobs['candidate_mobile_no'] != 0) :
+                              echo $jobs['candidate_mobile_no'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $jobs['candidate_inbox_message']; ?>
                           </td>
                           <td class="">
-                            <?php echo $jobs['organization_name']; ?>
+                            <?php 
+                            if(!empty($jobs['organization_name'])) :
+                              echo $jobs['organization_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>   
                           </td>
                           <td class="">
-                            <?php echo $jobs['vacancies_job_title']; ?>
+                            <?php 
+                            if(!empty($jobs['vacancies_job_title'])) :
+                              echo $jobs['vacancies_job_title'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class="center_align">
                             <?php 

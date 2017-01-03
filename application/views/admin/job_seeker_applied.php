@@ -62,7 +62,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div>
-                <form method="post" action="job_seeker/job_seeker_applied" class="admin_module_form" id="job_seeker_applied_form">
+                <form method="post" action="job_seeker_applied" class="admin_module_form" id="job_seeker_applied_form">
                   <?php } ?> 
                   <?php
                   if(!empty($status)) :
@@ -95,15 +95,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       ?>
 	                    <tr class="parents_tr" id="column<?php echo $i; ?>">
                         <td class="org_name">
-                          <?php echo $job_val['organization_name']; ?>
+                          <?php 
+                          if(!empty($job_val['organization_name'])) :
+                            echo $job_val['organization_name']; 
+                          else :
+                            echo "NULL";
+                          endif;
+                          ?>
                         </td>
                         <td class="vac_name">
                           <?php echo $job_val['vacancies_job_title']; ?>
-                          <input type="hidden" value="<?php echo $job_val['applied_job_vacancies_id']; ?>" />
                         </td>
 	                      <td class="cand_name">
                           <?php echo $job_val['candidate_name']; ?>
-                          <input type="hidden" value="<?php echo $job_val['applied_job_candidate_id']; ?>" />
                         </td>
 	                      <td class="job_status">
                           <?php
@@ -152,7 +156,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <!-- END CONTAINER -->
 <script>
   // Define default values
-  var inputType = new Array("label","select","select","select","label"); // Set type of input which are you have used like text, select,textarea.
+  var inputType = new Array("label","label","label","select","label"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("org_name","vac_name","cand_name","job_status","applied_date"); // Set name of input types
   var class_selector = new Array("");//To set class for element
   var table = "admin_table"; // Set classname of table

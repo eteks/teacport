@@ -17,15 +17,7 @@ class Job_Provider extends CI_Controller {
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
-		list($action,$field,$upload_path) = explode(".",$params); // To split the array values
-	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
-        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $personnal_logo['file_ext_tolower'] 	= TRUE;
-        $config['max_size']    = '2048'; // Maximum size - 1MB
-    	$config['max_width']  = '1024'; // Maximumm width - 1024px
-    	$config['max_height']  = '768'; // Maximum height - 768px
-        $this->upload->initialize($config); // Initialize the configuration
+		list($action,$field) = explode(".",$params); // To split the array values
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
         {
            return TRUE;
@@ -100,7 +92,7 @@ class Job_Provider extends CI_Controller {
 	  			$validation_rules[] =  	array( 'field'   => 'organization_name','label'   => 'Organization Name','rules'   => 'trim|xss_clean|callback_edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']' );
 			    $validation_rules[] =   array( 'field'   => 'institution_type','label'   => 'Institution Type','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =   array( 'field'   => 'organization_status','label'   => 'Organization Status','rules'   => 'trim|required|xss_clean|' );
-			   	// $validation_rules[] =   array( 'field'   => 'organization_logo','label'   => 'Organization Logo','rules'   => 'callback_validate_image_type['.$action.'.organization_logo.'.$upload_path.']' );
+			   	$validation_rules[] =   array( 'field'   => 'organization_logo','label'   => 'Organization Logo','rules'   => 'callback_validate_image_type['.$action.'.organization_logo]' );
 	        }
 	        // Tab 2 Validation
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
@@ -141,7 +133,15 @@ class Job_Provider extends CI_Controller {
 
     			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
         		{	
-        			$is_end = 1;   			
+        			$is_end = 1;   
+        			$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+			        $personnal_logo['file_ext_tolower'] 	= TRUE;
+			        $config['max_size']    = '2048'; // Maximum size - 1MB
+			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
+			    	$config['max_height']  = '768'; // Maximum height - 768px
+			        $this->upload->initialize($config); // Initialize the configuration		
            			if($this->upload->do_upload('organization_logo'))
             		{
                 		$upload_data = $this->upload->data(); 
@@ -434,7 +434,15 @@ class Job_Provider extends CI_Controller {
       		else {
       			$upload_error = 0;
       			if(!empty($_FILES['ads_logo']['name']))
-        		{	   			
+        		{	   	
+        			$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+			        $personnal_logo['file_ext_tolower'] 	= TRUE;
+			        $config['max_size']    = '2048'; // Maximum size - 1MB
+			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
+			    	$config['max_height']  = '768'; // Maximum height - 768px
+			        $this->upload->initialize($config); // Initialize the configuration		
            			if($this->upload->do_upload('ads_logo'))
             		{
                 		$upload_data = $this->upload->data(); 

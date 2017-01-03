@@ -7,17 +7,18 @@ class Job_Seekermodel extends CI_Model {
     $this->load->database();
   }
 
-  // Seeker profile
+  /* ===================          Job Seeker Profile Model Start     ====================== */
+
+  // Seeker profile - Edit Delete View
   public function get_seeker_profile($status) {
   	$model_data['status'] = 0;
     $model_data['error'] = 0;
 
     // Update data
     if($status=='update') {
-
       $mobile_exists_where = "candidate_mobile_no =" . "'" . $this->input->post('cand_mobile') . "' AND candidate_id NOT IN (". $this->input->post('rid').")";
       $mobile_exists = $this->db->get_where('tr_candidate_profile',$mobile_exists_where);
-      if($mobile_exists->num_rows() > 0) {
+      if($mobile_exists->num_rows() > 0 && $this->input->post('cand_mobile')) {
         $model_data['status'] = "Mobile Number Already exists";
         $model_data['error'] = 1; 
       }
@@ -30,31 +31,36 @@ class Job_Seekermodel extends CI_Model {
         }
         else {
           $candidate_dob = explode('/', $this->input->post('cand_dob'));
-          $candidate_dob_date = $candidate_dob[2]."-".$candidate_dob[1]."-".$candidate_dob[0];
+          if($this->input->post('cand_dob')) {
+            $candidate_dob_date = $candidate_dob[2]."-".$candidate_dob[1]."-".$candidate_dob[0];
+          }
+          else {
+            $candidate_dob_date = NULL;
+          }
           $profile_update_data = array( 
                               'candidate_name' => $this->input->post('cand_name'),
-                              'candidate_gender' => $this->input->post('cand_gen'),
-                              'candidate_father_name' => $this->input->post('cand_fa_name'),
+                              'candidate_gender' => ($this->input->post('cand_gen')) ? $this->input->post('cand_gen') : NULL,
+                              'candidate_father_name' => ($this->input->post('cand_fa_name')) ? $this->input->post('cand_fa_name') : NULL,
                               'candidate_date_of_birth' => $candidate_dob_date,
-                              'candidate_marital_status' => $this->input->post('cand_mar_status'),
-                              'candidate_mother_tongue' => $this->input->post('cand_moth_ton'),
-                              'candidate_language_known' => $this->input->post('cand_known_lang'),
-                              'candidate_nationality' => $this->input->post('cand_nationality'),
-                              'candidate_religion' => $this->input->post('cand_religion'),
-                              'candidate_community' => $this->input->post('cand_community'),
-                              'candidate_is_physically_challenged' => $this->input->post('cand_phy'),
-                              'candidate_image_path' => $this->input->post('cand_img'),
+                              'candidate_marital_status' => ($this->input->post('cand_mar_status')) ? $this->input->post('cand_mar_status') : NULL,
+                              'candidate_mother_tongue' => ($this->input->post('cand_moth_ton')) ? $this->input->post('cand_moth_ton') : NULL,
+                              'candidate_language_known' => ($this->input->post('cand_known_lang')) ? $this->input->post('cand_known_lang') : NULL,
+                              'candidate_nationality' => ($this->input->post('cand_nationality')) ? $this->input->post('cand_nationality') : NULL,
+                              'candidate_religion' => ($this->input->post('cand_religion')) ? $this->input->post('cand_religion') : NULL,
+                              'candidate_community' => ($this->input->post('cand_community')) ? $this->input->post('cand_community') : NULL,
+                              'candidate_is_physically_challenged' => ($this->input->post('cand_phy')) ? $this->input->post('cand_phy') : NULL,
+                              'candidate_image_path' => ($this->input->post('cand_img')) ? $this->input->post('cand_img') : NULL,
                               'candidate_mobile_no' => $this->input->post('cand_mobile'),
-                              'candidate_district_id' => $this->input->post('cand_district'),
-                              'candidate_address_1' => $this->input->post('cand_address1'),
-                              'candidate_address_2' => $this->input->post('cand_address2'),
-                              'candidate_live_district_id' => $this->input->post('cand_live_district'),
-                              'candidate_pincode' => $this->input->post('cand_pincode'),
+                              'candidate_district_id' => ($this->input->post('cand_district')) ? $this->input->post('cand_district') : NULL,
+                              'candidate_address_1' => ($this->input->post('cand_address1')) ? $this->input->post('cand_address1') : NULL,
+                              'candidate_address_2' => ($this->input->post('cand_address2')) ? $this->input->post('cand_address2') : NULL,
+                              'candidate_live_district_id' => ($this->input->post('cand_live_district')) ? $this->input->post('cand_live_district') : NULL,
+                              'candidate_pincode' => ($this->input->post('cand_pincode')) ? $this->input->post('cand_pincode') : NULL,
                               'candidate_institution_type' => $this->input->post('cand_institution'),
-                              'candidate_tet_exam_status' => $this->input->post('cand_tet_status'),
-                              'candidate_interest_subject_id' => $this->input->post('cand_int_sub'),
-                              'candidate_extra_curricular_id' => $this->input->post('cand_extra'),
-                              'candidate_is_fresher' => $this->input->post('cand_is_fresh'),
+                              'candidate_tet_exam_status' => ($this->input->post('cand_tet_status')) ? $this->input->post('cand_tet_status') : NULL,
+                              // 'candidate_interest_subject_id' => ($this->input->post('cand_int_sub')) ? $this->input->post('cand_int_sub') : NULL,
+                              'candidate_extra_curricular_id' => ($this->input->post('cand_extra')) ? $this->input->post('cand_extra') : NULL,
+                              'candidate_is_fresher' => ($this->input->post('cand_is_fresh')) ? $this->input->post('cand_is_fresh') : NULL,
                               'candidate_email' => $this->input->post('cand_email')
                             );
           $profile_update_where = '( candidate_id="'.$this->input->post('rid').'")'; 
@@ -67,7 +73,7 @@ class Job_Seekermodel extends CI_Model {
       }
     }
 
-	// Delete data
+	  // Delete data
     else if($status =='delete') {
       $profile_delete_where = '(candidate_id="'.$this->input->post('rid').'")';
       $this->db->delete("tr_candidate_profile", $profile_delete_where); 
@@ -84,7 +90,7 @@ class Job_Seekermodel extends CI_Model {
     return $model_data;
   }
 
-  // Job seeker profile - ajax
+  // Job seeker profile - Edit Fullview Popup ajax
   public function get_full_seeker_profile($value) {
 
     // Canidate Profile
@@ -116,8 +122,11 @@ class Job_Seekermodel extends CI_Model {
     return $model_data;
   }
 
+  /* ===================          Job Seeker Profile Model End     ====================== */
 
-  // Seeker preference
+  /* ===================          Job Seeker Preference Model Start     ====================== */
+
+  // Seeker preference - Edit Delete View
   public function teacport_seeker_preference($status) {
   	$model_data['status'] = 0;
     $model_data['error'] = 0;
@@ -126,8 +135,8 @@ class Job_Seekermodel extends CI_Model {
     if($status=='update') {
       $preference_update_data = array( 
                               'candidate_posting_applied_for' => $this->input->post('cand_post'),
-                              'candidate_expecting_start_salary' => $this->input->post('cand_ssalary'),
-                              'candidate_expecting_end_salary' => $this->input->post('cand_esalary'),
+                              'candidate_expecting_start_salary' => ($this->input->post('cand_ssalary')) ? $this->input->post('cand_ssalary') : NULL,
+                              'candidate_expecting_end_salary' => ($this->input->post('cand_esalary')) ? $this->input->post('cand_esalary') : NULL,
                               'candidate_willing_class_level_id' => $this->input->post('cand_class'),
                               'candidate_willing_subject_id' => $this->input->post('cand_sub'),
                             );
@@ -139,7 +148,7 @@ class Job_Seekermodel extends CI_Model {
       $model_data['error'] = 2;   
     }
 
-	// Delete data
+	  // Delete data
     else if($status =='delete') {
       $profile_delete_where = '(candidate_preferance_id="'.$this->input->post('rid').'")';
       $this->db->delete("tr_candidate_preferance", $profile_delete_where); 
@@ -153,23 +162,27 @@ class Job_Seekermodel extends CI_Model {
     return $model_data;
   }
 
-  // Seeker applied job
+  /* ===================          Job Seeker Preference Model End     ====================== */
+
+  /* ===================          Job Seeker Applied Job Model Start     ====================== */
+
+  // Seeker applied job - Edit Vew Delete
   public function teacport_seeker_applied_job($status) {
   	$model_data['status'] = 0;
     $model_data['error'] = 0;
 
     // Update data
     if($status=='update') {
-	    $applied_get_where   = "applied_job_vacancies_id =" . "'" . $this->input->post('vac_name') . "' AND applied_job_candidate_id =" . "'" . $this->input->post('cand_name') . "' AND applied_job_id NOT IN (". $this->input->post('rid').")";
-    	$applied_get = $this->db->get_where('tr_candidate_applied_job',$applied_get_where);
-      	if($applied_get -> num_rows() > 0 ) {
-        	$model_data['status'] = "Already exists";
-        	$model_data['error'] = 1;
-     	}
-     	else {
+	    // $applied_get_where   = "applied_job_vacancies_id =" . "'" . $this->input->post('vac_name') . "' AND applied_job_candidate_id =" . "'" . $this->input->post('cand_name') . "' AND applied_job_id NOT IN (". $this->input->post('rid').")";
+    	// $applied_get = $this->db->get_where('tr_candidate_applied_job',$applied_get_where);
+     //  	if($applied_get -> num_rows() > 0 ) {
+     //    	$model_data['status'] = "Already exists";
+     //    	$model_data['error'] = 1;
+     // 	}
+     // 	else {
      		$applied_update_data = array( 
-                              'applied_job_vacancies_id' => $this->input->post('vac_name'),
-                              'applied_job_candidate_id' => $this->input->post('cand_name'),
+                              // 'applied_job_vacancies_id' => $this->input->post('vac_name'),
+                              // 'applied_job_candidate_id' => $this->input->post('cand_name'),
                               'applied_job_status' => $this->input->post('job_status')
                             );	
       		$applied_update_where = '( applied_job_id="'.$this->input->post('rid').'")'; 
@@ -178,7 +191,7 @@ class Job_Seekermodel extends CI_Model {
       		$this->db->update("tr_candidate_applied_job", $applied_update_data); 
       		$model_data['status'] = "Updated Successfully";
       		$model_data['error'] = 2;
-     	}         
+     	// }         
     }
 
 	// Delete data
@@ -199,9 +212,12 @@ class Job_Seekermodel extends CI_Model {
     return $model_data;
   }
 
+  /* ===================          Job Seeker Applied Job Model End     ====================== */
+
+  /* ===================          Job Seeker Mail Details and Status Model Start     ====================== */
+
   //Get the approved candidate jobs by provider from candidate inbox
   public function get_approved_candidate_jobs(){
-    // View
     $this->db->select('ci.*,cp.candidate_name,cp.candidate_mobile_no,op.organization_name,ov.vacancies_job_title');
     $this->db->from('tr_candidate_inbox ci');
     $this->db->join('tr_candidate_profile cp','cp.candidate_id=ci.candidate_id','left');
@@ -210,6 +226,8 @@ class Job_Seekermodel extends CI_Model {
     $model_data = $this->db->order_by('ci.candidate_inbox_id','desc')->get()->result_array();
     return $model_data;
   }
+
+  /* ===================          Job Seeker Mail Details and Status Model End     ====================== */
 
 }
 /* End of file Job_Seekermodel.php */

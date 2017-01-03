@@ -784,18 +784,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
+                        <!-- <div class="span6 control-group">                                       
                           <label class="control-label">Interest Subject</label>
                           <span class="dynamic_data">
                             <?php
-                            if(!empty($seeker_full_profile['subject_name'])) :
-                              echo $seeker_full_profile['subject_name']; 
-                            else :
-                              echo "NULL";
-                            endif;
+                            // if(!empty($seeker_full_profile['subject_name'])) :
+                            //   echo $seeker_full_profile['subject_name']; 
+                            // else :
+                            //   echo "NULL";
+                            // endif;
                             ?>  
                           </span>
-                        </div>
+                        </div> -->
                         <div class="span6 control-group">
                           <label class="control-label">Extra Curricular</label>
                           <span class="dynamic_data"> 
@@ -813,8 +813,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>          
                           </span>
                         </div>
-                      </div>
-                      <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Is Fresher</label>
                           <span class="dynamic_data"> 
@@ -827,6 +825,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </span>
                         </div>
+                      </div>
+                      <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Resume Uploaded </label>
                           <span class="dynamic_data"> 
@@ -1048,7 +1048,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Mobile No</label>
                           <span>
+                            <?php
+                            if(!empty($seeker_full_profile['candidate_mobile_no']) && $seeker_full_profile['candidate_mobile_no'] != 0) :
+                            ?>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_mobile_no']; ?>" name="cand_mobile" />
+                            <?php
+                            else :
+                            ?>
+                            <input type="text" class="span6 tabfield3 tabfield" value="" name="cand_mobile" />
+                            <?php
+                            endif;
+                            ?>
                           </span>
                         </div>
                       </div>
@@ -1164,33 +1174,42 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
+                        <!-- <div class="span6 control-group">                                       
                           <label class="control-label">Interest Subject</label>
                           <span>
                             <select name="cand_int_sub" class="popup_select tabfield4 tabfield">
                               <option value="">Please select subject</option>
                               <?php
-                              if(!empty($subject_values)) :
-                              foreach ($subject_values as $sub_val) :
+                              // if(!empty($subject_values)) :
+                              // foreach ($subject_values as $sub_val) :
+                              // ?>
+                              // <?php
+                              //   if($sub_val['subject_id']==$seeker_full_profile['candidate_interest_subject_id']) {
+                              //     echo '<option value='.$sub_val["subject_id"].' selected> '.$sub_val["subject_name"].' </option>';
+                              //   }
+                              //   else {
+                              //     echo '<option value='.$sub_val["subject_id"].'> '.$sub_val["subject_name"].' </option>';
+                              //   }
+                              // endforeach;
+                              // else :
+                              //   echo '<option value='.$seeker_full_profile['candidate_interest_subject_id'].' selected> "'.$seeker_full_profile['edu_interest_sub'].'" </option>';
+                              // endif;
                               ?>
-                              <?php
-                                if($sub_val['subject_id']==$seeker_full_profile['candidate_interest_subject_id']) {
-                                  echo '<option value='.$sub_val["subject_id"].' selected> '.$sub_val["subject_name"].' </option>';
-                                }
-                                else {
-                                  echo '<option value='.$sub_val["subject_id"].'> '.$sub_val["subject_name"].' </option>';
-                                }
-                              endforeach;
-                              else :
-                                echo '<option value='.$seeker_full_profile['candidate_interest_subject_id'].' selected> "'.$seeker_full_profile['edu_interest_sub'].'" </option>';
-                              endif;
-                              ?>
+                            </select> 
+                          </span>
+                        </div> -->
+                        <div class="span6 control-group">
+                          <label class="control-label">Fresher</label>
+                          <span>
+                            <select name="cand_is_fresh" class="popup_select tabfield4 tabfield">
+                              <option value="">Please select status</option>
+                              <option value="1" <?php if($seeker_full_profile['candidate_is_fresher']==1) echo "selected"; ?>>Yes</option>
+                              <option value="0" <?php if($seeker_full_profile['candidate_is_fresher']==0) echo "selected"; ?>>No</option>
                             </select> 
                           </span>
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Extra Curricular</label>
-                          <span>
                             <?php
                             $ext_array = explode(',',$seeker_full_profile['candidate_extra_curricular_id']);
                             if(!empty($extra_curricular_values)) :
@@ -1204,23 +1223,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endforeach;
                             endif;
                             ?>
-                            <input type="hidden" value="<?php echo $seeker_full_profile['candidate_extra_curricular_id']; ?>" class="tabfield4 tabfield hidden_extra_curricular" name="cand_extra" />                           
-                          </span>
+                            <input type="hidden" value="<?php echo $seeker_full_profile['candidate_extra_curricular_id']; ?>" class="tabfield4 tabfield hidden_extra_curricular" name="cand_extra" />
                         </div>
                       </div>
-                      <div class="span12">
-                        <div class="span6 control-group">
-                          <label class="control-label">Fresher</label>
-                          <span>
-                            <select name="cand_is_fresh" class="popup_select tabfield4 tabfield">
-                              <option value="">Please select status</option>
-                              <option value="1" <?php if($seeker_full_profile['candidate_is_fresher']==1) echo "selected"; ?>>Yes</option>
-                              <option value="0" <?php if($seeker_full_profile['candidate_is_fresher']==0) echo "selected"; ?>>No</option>
-                            </select> 
-                          </span>
-                        </div>
-                      </div>
-                    </div> 
+                    </div>
                     <input type="hidden" class="hidden_id" value="<?php echo $seeker_full_profile['candidate_id']; ?>" />  
                     <?php
                     endif;
