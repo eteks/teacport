@@ -1,7 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-//Multidimensional array to store the main_module and sub_module
-//sub_module contains the module_name, operation_available for that module,route_url to redirect the page
+/*
+------------------------------------------------------------------------------
+In this file, declares all the global variable going to be used in Admin model, 
+view and controller
+------------------------------------------------------------------------------
+*/
+
+//Multidimensional array(Admin Modules) to store the main_module, sub_module and display icon
+//sub_module contains the module_name, operation_available for that module, route_url to redirect the page
 $config['admin_modules'] = array(
 	array(
 		'main_module' => 'home',
@@ -119,11 +126,6 @@ $config['admin_modules'] = array(
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'main/jobprovider_ads' 
 		),
-		// array(
-		// 	'name' => 'organization upgrade or renewal', 
-		// 	'access_operation' => 'edit,delete,view', 
-		// 	'route_url' => base_url().'main/organization_upgrade_or_renewal' 
-		// ),
 		array(
 			'name' => 'organization plan notification', 
 			'access_operation' => 'view', 
@@ -223,15 +225,10 @@ $config['admin_modules'] = array(
 );
 
 $config['admin_operation_rights'] = array();
-// echo "<pre>";
-// print_r($config['admin_modules']);
-// echo "</pre>";
 $config['current_page_rights'] = array();
-
 $config['is_super_admin'] = false;
-
 $config['access_rights'] = array();
+
 /*added by thangam*/
 $config['feedback_data'] = array();
-
 $config['feedback_count'] = '';

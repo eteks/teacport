@@ -14,22 +14,6 @@ class Subscription_Plan extends CI_Controller {
 
 	}
 
-	// Edit unique function - To check the field is already exists or not
-	function edit_unique($value, $params) 
-	{
-		//get main CodeIgniter object
-	    $CI =& get_instance();
-	    //load database library
-	    $CI->load->database();    
-	    $CI->form_validation->set_message('edit_unique', "Sorry, that %s is already being used.");
-	    list($table, $id, $field, $current_id) = explode(".", $params);    
-	    $query = $CI->db->select()->from($table)->where($field, $value)->limit(1)->get();    
-	    if ($query->row() && $query->row()->$id != $current_id)
-	    {
-	        return FALSE;
-	    }
-	}
-
 	public function compareDate() {
 	  $start = explode('/', $_POST['sub_start_validity']);
       $startDate = $start[2]."-".$start[1]."-".$start[0];
@@ -70,8 +54,8 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                              'field'   => 'sub_plan',
 		                              'label'   => 'Plan Name',
-		                              'rules'   => 'trim|required|xss_clean|callback_edit_unique[tr_subscription.subscription_id.subscription_plan.'.$id.']'
-
+		                              'rules'   => 'trim|required|xss_clean|edit_unique[tr_subscription.subscription_id.subscription_plan.'.$id.']'
+		                              //edit_unique is a custom funciton
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_price',

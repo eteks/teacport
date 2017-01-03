@@ -263,7 +263,7 @@ a,a:focus, a:hover, a:active {
     filter:alpha(opacity=60);
     padding: 18px 35.5px;
     width: 144px;*/
-    background: #333333 none repeat scroll 0 0;
+    /*background: #333333 none repeat scroll 0 0;*/
     margin-top: 0 !important;
     padding: 7px 20px !important;
     opacity: 0.6;
@@ -4831,7 +4831,6 @@ i#admin_error_login {
     width: auto !important;
 }
 .dropdown_toggle_act + .slimScrollDiv{
-
     height: auto !important;
     overflow: hidden !important;
     position: absolute !important;
@@ -4855,3 +4854,14 @@ i#admin_error_login {
 .datepicker {
     position: absolute !important;
 }
+.imageThumb{
+    border: 0 none;
+    height: auto;
+    max-width: 20%;
+    vertical-align: middle;
+}
+.popup_preview_templatelogo_act
+{
+    display: none !important;
+}
+
