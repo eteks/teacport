@@ -17,15 +17,7 @@ class Job_Provider extends CI_Controller {
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
-		list($action,$field,$upload_path) = explode(".",$params); // To split the array values
-	 	$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
-        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
-        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-        $personnal_logo['file_ext_tolower'] 	= TRUE;
-        $config['max_size']    = '2048'; // Maximum size - 1MB
-    	$config['max_width']  = '1024'; // Maximumm width - 1024px
-    	$config['max_height']  = '768'; // Maximum height - 768px
-        $this->upload->initialize($config); // Initialize the configuration
+		list($action,$field) = explode(".",$params); // To split the array values
         if(isset($_FILES[$field]) && !empty($_FILES[$field]['name'])) // Check it is exists and not empty
         {
            return TRUE;
@@ -81,7 +73,7 @@ class Job_Provider extends CI_Controller {
 	  			$validation_rules[] =  	array( 'field'   => 'organization_name','label'   => 'Organization Name','rules'   => 'trim|xss_clean|edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']' );
 			    $validation_rules[] =   array( 'field'   => 'institution_type','label'   => 'Institution Type','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =   array( 'field'   => 'organization_status','label'   => 'Organization Status','rules'   => 'trim|required|xss_clean|' );
-			   	// $validation_rules[] =   array( 'field'   => 'organization_logo','label'   => 'Organization Logo','rules'   => 'callback_validate_image_type['.$action.'.organization_logo.'.$upload_path.']' );
+			   	$validation_rules[] =   array( 'field'   => 'organization_logo','label'   => 'Organization Logo','rules'   => 'callback_validate_image_type['.$action.'.organization_logo]' );
 	        }
 	        // Tab 2 Validation
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
@@ -122,7 +114,15 @@ class Job_Provider extends CI_Controller {
 
     			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
         		{	
-        			$is_end = 1;   			
+        			$is_end = 1;   
+        			$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+			        $personnal_logo['file_ext_tolower'] 	= TRUE;
+			        $config['max_size']    = '2048'; // Maximum size - 1MB
+			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
+			    	$config['max_height']  = '768'; // Maximum height - 768px
+			        $this->upload->initialize($config); // Initialize the configuration		
            			if($this->upload->do_upload('organization_logo'))
             		{
                 		$upload_data = $this->upload->data(); 
@@ -319,16 +319,16 @@ class Job_Provider extends CI_Controller {
 	// Job provider activities - Add Edit Delete
 	public function teacport_job_provider_activities()
 	{
-		$data['organization_values'] = $this->admin_model->get_organization_values();
-		$data['candidate_values'] = $this->admin_model->get_candidate_values();
-		$data['vacancy_values'] = $this->admin_model->get_vacancy_values();
+		// $data['organization_values'] = $this->admin_model->get_organization_values();
+		// $data['candidate_values'] = $this->admin_model->get_candidate_values();
+		// $data['vacancy_values'] = $this->admin_model->get_vacancy_values();
 
 		// Update data
 	   	if($this->input->post('action')=='update' && $this->input->post('rid')) {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array( 
-	   			array( 'field' => 'act_org_name','label' => 'Organization Name','rules' => 'trim|required|xss_clean|' ),
-		        array( 'field' => 'act_cand_name','label' => 'Candidate Name','rules'  => 'trim|required|xss_clean|' ),
+	   			// array( 'field' => 'act_org_name','label' => 'Organization Name','rules' => 'trim|required|xss_clean|' ),
+		     	//array( 'field' => 'act_cand_name','label' => 'Candidate Name','rules' => 'trim|required|xss_clean|' ),
 		        array( 'field' => 'act_sms','label'   => 'Sms Status','rules'   => 'trim|required|xss_clean|' ),
 		        array( 'field' => 'act_email','label'   => 'Email Status','rules'   => 'trim|required|xss_clean|' ),
 		        array( 'field' => 'act_resume', 'label' => 'Resume Status','rules' => 'trim|required|xss_clean|' ), );
@@ -415,7 +415,15 @@ class Job_Provider extends CI_Controller {
       		else {
       			$upload_error = 0;
       			if(!empty($_FILES['ads_logo']['name']))
-        		{	   			
+        		{	   	
+        			$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
+			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
+			        $personnal_logo['file_ext_tolower'] 	= TRUE;
+			        $config['max_size']    = '2048'; // Maximum size - 1MB
+			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
+			    	$config['max_height']  = '768'; // Maximum height - 768px
+			        $this->upload->initialize($config); // Initialize the configuration		
            			if($this->upload->do_upload('ads_logo'))
             		{
                 		$upload_data = $this->upload->data(); 

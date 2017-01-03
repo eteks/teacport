@@ -99,11 +99,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <tr class="parents_tr" id="column<?php echo $i; ?>">
                         <td class="act_org_name"> 
                           <?php echo $act_val['organization_name']; ?>
-                          <input type="hidden" value="<?php echo $act_val['activity_organization_id']; ?>" />
                         </td>
                         <td class="act_cand_name"> 
                           <?php echo $act_val['candidate_name']; ?>
-                          <input type="hidden" value="<?php echo $act_val['activity_candidate_id']; ?>" />
                         </td>
                         <td class="act_vac_name"> 
                           <?php  
@@ -113,7 +111,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             echo "NULL";
                           endif;
                           ?>
-                          <input type="hidden" value="<?php echo $act_val['activity_vacancy_id']; ?>" />
                         </td>
                         <td class="act_sms center_align">
                           <?php 
@@ -182,46 +179,52 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <!-- END CONTAINER -->
 <script>
   // Define default values
-  var inputType = new Array("select","select","select","on_off","on_off","on_off");
+  var inputType = new Array("label","label","label","on_off","on_off","on_off");
   var columns = new Array("act_org_name","act_cand_name","act_vac_name","act_sms","act_email","act_resume");
   var placeholder = new Array(""); // Set placeholder of input types
   var class_selector = new Array("");//To set class for element
   var table = "admin_table"; // Set classname of table
-  var act_org_name_option = new Array("Select");
-  var act_org_name_value = new Array("");
+  // var act_org_name_option = new Array("Select");
+  // var act_org_name_value = new Array("");
   <?php
-  if(!empty($organization_values)) :
-  foreach ($organization_values as $org_val) :
+  // if(!empty($organization_values)) :
+  // foreach ($organization_values as $org_val) :
   ?>
-    act_org_name_option.push("<?php echo $org_val['organization_name']; ?>");
-    act_org_name_value.push("<?php echo $org_val['organization_id']; ?>");
+    // act_org_name_option.push("<?php 
+    // echo $org_val['organization_name']; ?>");
+    // act_org_name_value.push("<?php 
+    // echo $org_val['organization_id']; ?>");
   <?php
-  endforeach;
-  endif;
+  // endforeach;
+  // endif;
   ?>
-  var act_cand_name_option = new Array("Select");
-  var act_cand_name_value = new Array("");
+  // var act_cand_name_option = new Array("Select");
+  // var act_cand_name_value = new Array("");
   <?php
-  if(!empty($candidate_values)) :
-  foreach ($candidate_values as $cand_val) :
+  // if(!empty($candidate_values)) :
+  // foreach ($candidate_values as $cand_val) :
   ?>
-    act_cand_name_option.push("<?php echo $cand_val['candidate_name']; ?>");
-    act_cand_name_value.push("<?php echo $cand_val['candidate_id']; ?>");
+    // act_cand_name_option.push("<?php 
+    // echo $cand_val['candidate_name']; ?>");
+    // act_cand_name_value.push("<?php 
+    // echo $cand_val['candidate_id']; ?>");
   <?php
-  endforeach;
-  endif;
+  // endforeach;
+  // endif;
   ?>
-  var act_vac_name_option = new Array("Select");
-  var act_vac_name_value = new Array("");
+  // var act_vac_name_option = new Array("Select");
+  // var act_vac_name_value = new Array("");
   <?php
-  if(!empty($vacancy_values)) :
-  foreach ($vacancy_values as $vac_val) :
+  // if(!empty($vacancy_values)) :
+  // foreach ($vacancy_values as $vac_val) :
   ?>
-    act_vac_name_option.push("<?php echo $vac_val['vacancies_job_title']; ?>");
-    act_vac_name_value.push("<?php echo $vac_val['vacancies_id']; ?>");
+    // act_vac_name_option.push("<?php 
+    // echo $vac_val['vacancies_job_title']; ?>");
+    // act_vac_name_value.push("<?php 
+    // echo $vac_val['vacancies_id']; ?>");
   <?php
-  endforeach;
-  endif;
+  // endforeach;
+  // endif;
   ?>
 
   var is_created ="no";

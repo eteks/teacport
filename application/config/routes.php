@@ -39,7 +39,11 @@
 */
 
 $route['default_controller'] 							= "home/index";
-$route['404_override'] 									= 'missingpage';
+
+if (strpos($_SERVER['REQUEST_URI'], 'main') !== FALSE)
+	$route['404_override'] 									= 'admin_missingpage';
+else
+	$route['404_override'] 									= 'missingpage';
 
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';
@@ -158,17 +162,19 @@ $route['main/transaction'] = 'admin/job_provider/transaction';
 
 /* ===================          Route settings for Admin Job Provider End     ====================== */
 
-/* ===================          Route settings for Admin Job Provider Start     ====================== */
+/* ===================          Route settings for Admin Job Seeker Start     ====================== */
 
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/job_seeker_profile'] = 'admin/job_seeker/teacport_job_seeker_profile';
 $route['main/teacport_job_seeker_profile_ajax'] = 'admin/job_seeker/teacport_job_seeker_profile_ajax';
-
-
-/* ===================          Route settings for Admin Job Provider End     ====================== */
-
-
+$route['main/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
+$route['main/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 $route['main/jobseeker_mailstatus'] = 'admin/job_seeker/teacport_jobseeker_mailstatus';
+
+/* ===================          Route settings for Admin Job Seeker End     ====================== */
+
+
+
 $route['main/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_vacancy';
 $route['main/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
@@ -179,8 +185,6 @@ $route['main/user_groups'] = 'admin/admin_users/user_groups';
 $route['main/user_accounts'] = 'admin/admin_users/user_accounts';
 $route['main/privileges'] = 'admin/admin_users/privileges';
 
-$route['main/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
-$route['main/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 // $route['main/admin_modules'] = 'admin/admin_users/admin_modules';
 
 $route['main/edit_profile'] = 'admin/admin_users/edit_profile';
@@ -199,6 +203,7 @@ $route['main/feedback_form'] = 'admin/other_module/feedback_form';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
+
 /* ===================          Route settings for Admin End     ====================== */
 
 

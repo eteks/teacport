@@ -905,4 +905,12 @@ label.form-input-error {
     position: absolute;
     top: -40px;
 }
+.client-logo img{
+	height: 125px;
+	width: 125px;
+}
+.featured-image-box img{
+	height: 125px;
+	width: 125px;
+}
 

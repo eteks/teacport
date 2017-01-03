@@ -185,10 +185,10 @@ $(document).ready(function(){
         $('.tab_form').find('.tabfield').each(function() {
             if($(this).attr('type') == 'file') {
                 if($(this)[0].files[0] != '') {
-                    formdata.append($(this).attr('name'),""); 
+                    formdata.append($(this).attr('name'),$(this)[0].files[0]);                    
                 }
                 else {
-                    formdata.append($(this).attr('name'),$(this)[0].files[0]); 
+                    formdata.append($(this).attr('name'),""); 
                 }
             }
             else {
@@ -287,10 +287,10 @@ function tabmenu_ci_validation(value,data) {
         this_form.find('.tabfield'+this_index).each(function() {
             if($(this).attr('type') == 'file') {
                 if($(this)[0].files[0] != '') {
-                    form_data.append($(this).attr('name'),""); 
+                    form_data.append($(this).attr('name'),$(this)[0].files[0]); 
                 }
                 else {
-                    form_data.append($(this).attr('name'),$(this)[0].files[0]); 
+                    form_data.append($(this).attr('name'),""); 
                 }
             }
             else {

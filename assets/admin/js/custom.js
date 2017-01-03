@@ -491,28 +491,6 @@ $('.top_layer, .message_close').on('click',function() {
         });
     });  
     
-    $(function() {
-    //----- OPEN
-    $('[data-popup-open]').on('click', function(e)  {
-    	handleFormWizards();
-        var targeted_popup_class = jQuery(this).attr('data-popup-open');
-        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-        $(".inbox").hide();
-        $('.caret-up').hide();
- 
-        e.preventDefault();
-    });   
-    
-     $('[data-popup-open-edit]').on('click', function(e)  {
-        var targeted_popup_class = jQuery(this).attr('data-popup-open-sec');
-        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeIn(350);
- 
-        e.preventDefault();
-    }); 
-   });
-   
-    $(function() {
-  
     //----- CLOSE
     $('[data-popup-close]').on('click', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-close');
@@ -523,16 +501,6 @@ $('.top_layer, .message_close').on('click',function() {
     $('.popup_close_act').on('click', function(e)  {
         window.location.reload()
     });
-
-    
-    $('[data-popup-close-edit]').on('click', function(e)  {
-        var targeted_popup_class = jQuery(this).attr('data-popup-close-edit');
-        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
- 
-        e.preventDefault();
-    });
-});
-    
 
     // popup for subscription and ads
     $('.add_option,.edit_option').on('click', function(e)  {
