@@ -73,7 +73,7 @@
 								<label class="col-sm-4" for="organization_name">Organization Name : <span class="required">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_name'); ?>
-									<input id="instituition_name" class="form-control" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; elseif (set_value('organization_name') !='') { echo set_value('organization_name'); } ?>" placeholder="Institution Name" type="text">
+									<input id="instituition_name" class="form-control" maxlength="150" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; elseif (set_value('organization_name') !='') { echo set_value('organization_name'); } ?>" placeholder="Institution Name" type="text">
 								</div>
 							</div>
                             
@@ -211,7 +211,9 @@
 </section>
 <?php include('include/footermenu.php'); ?>
 <?php include ('include/footer.php'); ?>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/bootstrap-datepicker.js"></script>
+<!--datepicker-->
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/zebra_datepicker.js"></script>
+<?php include('include/footercustom.php'); ?>
 <script type="application/javascript">
   	$('.provider_date_of_birth').Zebra_DatePicker({
     	direction: -1,
