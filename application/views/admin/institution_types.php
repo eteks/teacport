@@ -57,6 +57,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <h4>
                 <i class="icon-reorder"></i>Institution Type
               </h4>
+               <span class="loader_holder hide_loader"> </span>
               <!-- <span class="tools">
                 <a href="javascript:;" class="icon-chevron-down"></a>
                 <a href="javascript:;" class="icon-remove"></a>

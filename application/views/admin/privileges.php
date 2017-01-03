@@ -49,6 +49,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Privileges</h4>
+                            <span class="loader_holder hide_loader"> </span>
                         </div>
                         <p class='privilege_status' style="display:none;"></p>
                         <div class ="sub_pre_section">

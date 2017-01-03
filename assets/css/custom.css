@@ -547,6 +547,12 @@ select:invalid {
 	margin-top: 0 !important;
 	padding: 10px 0;
 }
+#vacancies_page .form-group input {
+	border-color: #f1f1f1;
+    border-radius: 0;
+    height: 60px;
+    width: 100%;
+ }   
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
@@ -557,7 +563,16 @@ select:invalid {
 .mail_contact {
 	text-transform: lowercase !important;
 }
-
+.small-footer .logo_firstword {
+	color: #f37021;
+	font-size: 30px; 
+	font-family: 'Kaushan Script', cursive;
+}
+.small-footer .logo_secondword{
+	color: #00a5ed;
+	font-size: 30px; 
+	font-family: 'Kaushan Script', cursive;
+}
 /*Added by thangam*/
 /*css for login and registrartion start*/
 .registration_status {
@@ -890,3 +905,4 @@ label.form-input-error {
     position: absolute;
     top: -40px;
 }
+
