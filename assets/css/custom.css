@@ -88,9 +88,10 @@
 	height: 180px;
 } 
 .slide-featured-jobs .img-box img {
-	height: 768px;
-	width: 1024px;
-	
+	/*height: 768px;
+	width: 1024px;*/
+	height: 100%;
+	width: 100%;
 }
 .slide-featured-jobs .content-area{
 	height: 250px;
