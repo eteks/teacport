@@ -746,7 +746,6 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val-1).fadeIn(3000);
         }
     });
-    $('select').timezones(); //code for timezone module in admin side
     // Next button click - Upgrade
     $(document).on('click','.upgrade_pag_next',function() {
         var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
@@ -882,7 +881,6 @@ function sliderResponse(target) {
 
 /* Popup pagination with arrow end */
 
-  if (window.File && window.FileList && window.FileReader) {
     $("#files").on("change", function(e) {
       var files = e.target.files,
         filesLength = files.length;
@@ -903,8 +901,5 @@ function sliderResponse(target) {
         fileReader.readAsDataURL(f);
       }
     });
-  } else {
-    alert("Your browser doesn't support to File API")
-  }
-
+  
 

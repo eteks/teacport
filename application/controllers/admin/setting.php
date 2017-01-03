@@ -84,7 +84,7 @@ class Setting extends CI_Controller {
 			}
     	}
     	if(isset($_POST))
-    		$status['photoshoot_type_data'] = array(
+    		$status['payment_gateway_data'] = array(
 					'online_transfer_merchant_key' => $this->input->post('online_transfer_merchant_key'),
 					'online_transfer_merchant_salt' => $this->input->post('online_transfer_merchant_salt'),
 					'online_transfer_payment_base_url' => $this->input->post('online_transfer_payment_base_url'),
@@ -152,7 +152,7 @@ class Setting extends CI_Controller {
 			}
     	}
     	if(isset($_POST))
-    		$status['photoshoot_type_data'] = array(
+    		$status['sms_gateway_data'] = array(
 					'sms_api_url' => $this->input->post('sms_api_url'),
 					'sms_api_key' => $this->input->post('sms_api_key'),
 					'sms_authentication_token' => $this->input->post('sms_authentication_token'),
@@ -288,7 +288,7 @@ class Setting extends CI_Controller {
 			}
     	}
     	if(isset($_POST))
-    		$status['photoshoot_type_data'] = array(
+    		$status['configuration_option_data'] = array(
 					// 'enable_facebook_login' => $this->input->post('enable_facebook_login'),
 					'facebook_app_id' => $this->input->post('facebook_app_id'),
 					'facebook_app_secret' => $this->input->post('facebook_app_secret'),
@@ -363,7 +363,7 @@ class Setting extends CI_Controller {
 			}
     	}
     	if(isset($_POST))
-    		$status['photoshoot_type_data'] = array(
+    		$status['template_logo_data'] = array(
 					'template_logo' => $this->input->post('template_logo'),
 					'template_logo_text' => $this->input->post('template_logo_text'),
 					'template_updated_date' => $this->input->post('template_updated_date'),

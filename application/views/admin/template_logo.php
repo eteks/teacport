@@ -62,7 +62,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                              <span>
 	                                <a name="" class="btn upload_option"> Upload </a>
 	                                <input name="userimage" id="files" class="form-control hidden_upload" type="file" >
-	                                <img src="<?php echo base_url(); ?>assets/admin/img/gallery/photo1.jpg" class="popup_preview">
+	                                <img class="popup_preview_templatelogo_act">
 	                              </span>
 	                            </div>
 	                          </div>
