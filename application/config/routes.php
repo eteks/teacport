@@ -39,7 +39,11 @@
 */
 
 $route['default_controller'] 							= "home/index";
-$route['404_override'] 									= 'missingpage';
+
+if (strpos($_SERVER['REQUEST_URI'], 'main') !== FALSE)
+	$route['404_override'] 									= 'admin_missingpage';
+else
+	$route['404_override'] 									= 'missingpage';
 
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';

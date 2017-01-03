@@ -260,10 +260,10 @@ class Master_data_model extends CI_Model {
       FROM `tr_extra_curricular` AS e
       INNER JOIN 
       (
-        SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( c.candidate_id, ',', n.n ) , ',', -1 ) value
+        SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( c.candidate_extra_curricular_id, ',', n.n ) , ',', -1 ) value
         FROM tr_candidate_profile c
         CROSS JOIN numbers n
-        WHERE n.n <=1 + ( LENGTH( c.candidate_id ) - LENGTH( REPLACE( c.candidate_id, ',', '' ) ) )
+        WHERE n.n <=1 + ( LENGTH( c.candidate_extra_curricular_id ) - LENGTH( REPLACE( c.candidate_extra_curricular_id, ',', '' ) ) )
       )AS cand where cand.value = e.extra_curricular_id group by e.extra_curricular_id");
     $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'extra_curricular_id');
 
@@ -858,10 +858,10 @@ class Master_data_model extends CI_Model {
         FROM `tr_applicable_posting` AS pos
         INNER JOIN 
         (
-          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_preferance_id, ',', n.n ) , ',', -1 ) p_value
+          SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( p.candidate_posting_applied_for, ',', n.n ) , ',', -1 ) p_value
           FROM tr_candidate_preferance p
           CROSS JOIN numbers n
-          WHERE n.n <=1 + ( LENGTH( p.candidate_preferance_id ) - LENGTH( REPLACE( p.candidate_preferance_id, ',', '' ) ) )
+          WHERE n.n <=1 + ( LENGTH( p.candidate_posting_applied_for ) - LENGTH( REPLACE( p.candidate_posting_applied_for, ',', '' ) ) )
         )AS pre
         INNER JOIN 
         (
