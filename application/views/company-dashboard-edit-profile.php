@@ -40,17 +40,17 @@
 						<span class="error_image"> Please Upload Image </span>
 						<span class="error_extension"> Sorry, only JPG, JPEG, PNG files are allowed! </span>
 					</div>
-					<?php echo form_open_multipart('provider/dashboard/editprofile', 'id="form-school" class="form-horizontal provider-profile-edit"'); ?>
-						
+					<?php echo form_open_multipart('provider/dashboard/editprofile', 'id="provider_editprofile" class="form-horizontal provider-profile-edit"'); ?>
+						<p class="val_status">  </p>	
 						<div class="row-form">
 							<div class="form-group image_upload">
                             	<div class="col-sm-4">
-                                    <label>Provider Logo : <span class="required">*</span></label>
+                                    <label>Provider Logo : <span class="alert">*</span></label>
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
                                		<div class=" col-sm-10 input-group image-preview">
-                               			<input type="text" disabled="disabled" class="form-control image-preview-filename " placeholder="Upload Profile Image">
+                               			<input type="text" disabled="disabled" class="form-control image-preview-filename form_inputs" placeholder="Upload Provider Logo">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_profile" style="display: none;" class="btn btn-default image-preview-clear" type="button">
 	                                        	<span class="glyphicon glyphicon-remove"></span> Clear
@@ -58,51 +58,50 @@
 	                                        <div class="btn btn-default image-preview-input">
 	                                            <span class="glyphicon glyphicon-folder-open"></span>
 	                                            <span class="image-preview-input-title">Browse</span>
-	                                            <input id="file" type="file" accept="file_extension" name="organization_logo">
+	                                            <input id="file" class="image_upload_holder" type="file" accept="file_extension" name="organization_logo">
 	                                        </div>
 	                                    </span>
-	                                     
                                		</div>
                                		<div class="col-sm-2 col-sm-2 pull-right nopadding">   
-                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png">
+                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png" data-href = "<?php echo base_url();?>assets/images/placeholder.png">
                                		</div>                          
                             	</div>
                             	
                             </div>
 							<div class="form-group">
-								<label class="col-sm-4" for="organization_name">Organization Name : <span class="required">*</span></label>
+								<label class="col-sm-4" for="organization_name">Organization Name : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_name'); ?>
-									<input id="instituition_name" class="form-control" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; elseif (set_value('organization_name') !='') { echo set_value('organization_name'); } ?>" placeholder="Institution Name" type="text">
+									<input id="instituition_name" class="form-control form_inputs" maxlength="30" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; elseif (set_value('organization_name') !='') { echo set_value('organization_name'); } ?>" placeholder="Organization Name" type="text">
 								</div>
 							</div>
                             
 							<div class="form-group">
-								<label class="col-sm-4" for="address-line1">Address Line1 : <span class="required">*</span></label>
+								<label class="col-sm-4" for="address-line1">Address Line1 : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line1'); ?>
-									<input id="address-line1" class="form-control" maxlength="30" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; elseif (set_value('address-line1') != '') { echo set_value('address-line1'); } ?>" placeholder="Building No / Road / Street" type="text">
+									<input id="address-line1" class="form-control form_inputs" maxlength="30" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; elseif (set_value('address-line1') != '') { echo set_value('address-line1'); } ?>" placeholder="Building No / Road / Street" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="address-line2">Address Line2 : <span class="required">*</span></label>
+								<label class="col-sm-4" for="address-line2">Address Line2 : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line2'); ?>
-									<input id="address-line2" class="form-control" maxlength="30" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; elseif (set_value('address-line2') !='') { echo set_value('address-line2'); } ?>" placeholder="Locality / Area / Village" type="text">
+									<input id="address-line2" class="form-control form_inputs" maxlength="30" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; elseif (set_value('address-line2') !='') { echo set_value('address-line2'); } ?>" placeholder="Locality / Area / Village" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="address-line3">Address Line3 : <span class="required">*</span></label>
+								<label class="col-sm-4" for="address-line3">Address Line3 : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line3'); ?>
-									<input id="address-line2" class="form-control" maxlength="30" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
+									<input id="address-line2" class="form-control form_inputs" maxlength="30" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="add_district">District : <span class="required">*</span></label>
+								<label class="col-sm-4" for="add_district">District : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_district'); ?>
-									<select id="organization_district" class="select-location form-control" name="organization_district" onchange="">
+									<select id="organization_district" class="select-location form-control form_inputs" name="organization_district" onchange="">
 										<option value="">Select district</option>
 										<?php
 										foreach ($district as $value) {
@@ -125,23 +124,23 @@
 								</div> -->
 							</div>
 							<!-- <div class="form-group">
-								<label class="col-sm-4" for="firstname">Pincode : <span class="required">*</span></label>
+								<label class="col-sm-4" for="firstname">Pincode : <span class="alert">*</span></label>
 								<div class="col-sm-4">
 									<input id="postal-code" class="form-control" maxlength="6" name="postal-code" onkeypress="return number(event)" value="" placeholder="Pin Code" type="text">
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label class="col-sm-4" for="firstname">Registrant Name : <span class="required">*</span></label>
+								<label class="col-sm-4" for="firstname">Registrant Name : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
-									<input id="firstname" class="form-control" maxlength="30" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
+									<input id="firstname" class="form-control form_inputs" maxlength="30" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="designation">Registrant Designation : <span class="required">*</span></label>
+								<label class="col-sm-4" for="designation">Registrant Designation : <span class="alert">*</span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_designation'); ?>
-									<input id="designation" class="form-control" maxlength="30" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; elseif (set_value('provider_designation')!= '') { echo set_value('provider_designation'); } ?>" placeholder="ex. Principal / Correspondent">
+									<input id="designation" class="form-control form_inputs" maxlength="30" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; elseif (set_value('provider_designation')!= '') { echo set_value('provider_designation'); } ?>" placeholder="ex. Principal / Correspondent">
 								</div>
 							</div>
 							<div class="form-group">
@@ -149,18 +148,18 @@
 								<div class="col-sm-4">
 									<?php echo form_error('provider_dob'); 
 									?>
-									<input id="dob" class="form-control provider_date_of_birth" name="provider_dob" size="40" value="<?php if($organization['registrant_date_of_birth'] != '' && $organization['registrant_date_of_birth'] != '0000-00-00'){ $dobsplit = explode('-',$organization['registrant_date_of_birth']); echo $dobsplit[2].'/'.$dobsplit[1].'/'.$dobsplit[0];  } elseif (set_value('provider_dob') != '') { echo set_value('provider_dob'); } ?>" placeholder="DOB" type="text">
+									<input id="dob" class="form-control form_inputs provider_date_of_birth" name="provider_dob" size="40" value="<?php if($organization['registrant_date_of_birth'] != '' && $organization['registrant_date_of_birth'] != '0000-00-00'){ $dobsplit = explode('-',$organization['registrant_date_of_birth']); echo $dobsplit[2].'/'.$dobsplit[1].'/'.$dobsplit[0];  } elseif (set_value('provider_dob') != '') { echo set_value('provider_dob'); } ?>" placeholder="DOB" type="text">
 								</div>
 								<div class="col-sm-4"></div>
 							</div>
 							<div class="form-group image_upload">
                             	<div class="col-sm-4">
-                                    <label>Your image : <span class="required">*</span></label>
+                                    <label>Your image : <span class="alert">*</span></label>
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
                                		<div class="col-sm-10 input-group image-preview">
-                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Profile Image">
+                               			<input type="text" disabled="disabled" class="form-control form_inputs image-preview-filename" placeholder="Upload Profile Image">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_your_image" style="display: none;" class="btn btn-default image-preview-clear" type="button">
 	                                        	<span class="glyphicon glyphicon-remove"></span> Clear
@@ -168,12 +167,12 @@
 	                                        <div class="btn btn-default image-preview-input">
 	                                            <span class="glyphicon glyphicon-folder-open"></span>
 	                                            <span class="image-preview-input-title">Browse</span>
-	                                            <input id="yourfile" type="file" accept="file_extension" name="provider_logo">
+	                                            <input id="yourfile" class="image_upload_holder" type="file" accept="file_extension" name="provider_logo">
 	                                        </div>
 	                                    </span>
                                		</div> 
                                		<div class="col-sm-2 pull-right nopadding">   
-                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png">
+                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png" data-href = "<?php echo base_url();?>assets/images/placeholder.png" /> 
                                		</div>                              
                             	</div>
                             </div>
@@ -181,7 +180,7 @@
 								<div class="col-sm-12">
 									<?php echo form_error('declar_accept'); ?>
 									<p>
-										<input id="declar_accept" class="ace" name="declar_accept" value="Y" type="checkbox">
+										<input id="declar_accept" class="ace form_checkbox" name="declar_accept" value="Y" type="checkbox">
 										<span class="lbl"></span>
 										I hereby declare that all the particulars furnished in this application are true, correct and complete to the best of my knowledge and belief.
 									</p>

@@ -48,6 +48,7 @@
 			<!-- CORE JS -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/custom.js"></script>
+			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validation.js"></script>
 			
 			<!--SubscriptionPlan carousel-->
 			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery-1.6.2.min.js"></script> -->

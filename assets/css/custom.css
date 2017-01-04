@@ -858,6 +858,29 @@ label.form-input-error {
 .loader-dn {
 	display: none;
 }
+.val_status {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    padding: 6px 0;
+    text-align: center;
+    display: none;
+}
+.val_status.val_error {
+	color: #ff1919;
+}
+.val_status.val_success {
+	color: #228b22;
+}
+.form-field-error {
+	border-color: #ff7f7f !important;
+}
+.form-label-error {
+	color: #ff1919;
+}
+
 /* Ended by siva */
 .subcription_plan_details{
 	color: #fff;
