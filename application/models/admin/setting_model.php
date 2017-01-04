@@ -8,46 +8,168 @@ class Setting_Model extends CI_Model {
   }
 
 
-public function insert_payment_gateway($data)
-	{	
-		// Query to insert data in database
-		 $this->db->select('*');
-	    $this->db->from('tr_settings_payment_gateway',$data);
-	    if ($this->db->count_all_results() == 0) {
-	      $query = $this->db->insert('tr_settings_payment_gateway', $data);//insert data
-	    } else {
-	      $query = $this->db->update('tr_settings_payment_gateway', $data);//update with the condition where data exist
-	    }
+public function insert_payment_gateway($status) {	
+
+	if($status == 'update') {
+		$data = array(
+							'online_transfer_merchant_key' => $this->input->post('online_transfer_merchant_key'),
+                              'online_transfer_merchant_salt' => $this->input->post('online_transfer_merchant_salt'),
+                              'online_transfer_payment_base_url' => $this->input->post('online_transfer_payment_base_url'),
+                              'bank_transfer_account_name' => $this->input->post('bank_transfer_account_name'),
+                              'bank_transfer_account_number' => $this->input->post('bank_transfer_account_number'),
+                              'bank_transfer_ifsc_code' => $this->input->post('bank_transfer_ifsc_code'),
+				);
+		$pay_rows = $this->db->get('tr_settings_payment_gateway');
+		if($pay_rows -> num_rows() == 0) {
+		    $this->db->insert('tr_settings_payment_gateway', $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "inserted";
+		}
+		else {
+			$data = array(
+							'online_transfer_merchant_key' => $this->input->post('online_transfer_merchant_key'),
+                              'online_transfer_merchant_salt' => $this->input->post('online_transfer_merchant_salt'),
+                              'online_transfer_payment_base_url' => $this->input->post('online_transfer_payment_base_url'),
+                              'bank_transfer_account_name' => $this->input->post('bank_transfer_account_name'),
+                              'bank_transfer_account_number' => $this->input->post('bank_transfer_account_number'),
+                              'bank_transfer_ifsc_code' => $this->input->post('bank_transfer_ifsc_code'),
+				);
+			$update_where = '( payment_gateway_id="'.$this->input->post('rid').'")';
+			$this->db->set($data); 
+      		$this->db->where($update_where);
+      		$this->db->update("tr_settings_payment_gateway", $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "Updated";
+		}
+      	return $model_data;
 	}
-public function insert_sms_gateway($data)
-	{	
-		$this->db->select('*');
-	    $this->db->from('tr_settings_sms_gateway',$data);
-	    if ($this->db->count_all_results() == 0) {
-	      $query = $this->db->insert('tr_settings_sms_gateway', $data);//insert data
-	    } else {
-	      $query = $this->db->update('tr_settings_sms_gateway', $data);//update with the condition where data exist
-	    }
+
+	// View
+	else {
+		$model_data['payment_values'] = $this->db->get('tr_settings_payment_gateway')->row_array();
+		return $model_data;
 	}
-public function insert_configuration_option($data)
-	{	
-		$this->db->select('*');
-	    $this->db->from('tr_settings_site_configuration',$data);
-	    if ($this->db->count_all_results() == 0) {
-	      $query = $this->db->insert('tr_settings_site_configuration', $data);//insert data
-	    } else {
-	      $query = $this->db->update('tr_settings_site_configuration', $data);//update with the condition where data  exist
-	    }
+
 	}
-public function insert_template_logo($data)
+public function insert_sms_gateway($status)
 	{	
-		$this->db->select('*');
-	    $this->db->from('tr_settings_template',$data);
-	    if ($this->db->count_all_results() == 0) {
-	      $query = $this->db->insert('tr_settings_template', $data);//insert data
-	    } else {
-	      $query = $this->db->update('tr_settings_template', $data);//update with the condition where data exist
-	    }
+		if($status == 'update') {
+		$data = array(
+							'sms_api_url' => $this->input->post('sms_api_url'),
+                              'sms_api_key' => $this->input->post('sms_api_key'),
+                              'sms_authentication_token' => $this->input->post('sms_authentication_token'),
+				);
+		$pay_rows = $this->db->get('tr_settings_sms_gateway');
+		if($pay_rows -> num_rows() == 0) {
+		    $this->db->insert('tr_settings_sms_gateway', $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "inserted";
+		}
+		else {
+			$data = array(
+							'sms_api_url' => $this->input->post('sms_api_url'),
+                              'sms_api_key' => $this->input->post('sms_api_key'),
+                              'sms_authentication_token' => $this->input->post('sms_authentication_token'),
+				);
+			$update_where = '( sms_gateway_id="'.$this->input->post('rid').'")';
+			$this->db->set($data); 
+      		$this->db->where($update_where);
+      		$this->db->update("tr_settings_sms_gateway", $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "Updated";
+		}
+      	return $model_data;
+	}
+
+	// View
+	else {
+		$model_data['payment_values'] = $this->db->get('tr_settings_sms_gateway')->row_array();
+		return $model_data;
+	}
+	}
+public function insert_configuration_option($status)
+	{	
+		if($status == 'update') {
+		$data = array(
+							'system_email_address' => $this->input->post('system_email_address'),
+                              'website_time_zone' => $this->input->post('website_time_zone'),
+                              'facebook_app_id' => $this->input->post('facebook_app_id'),
+                              'facebook_app_secret' => $this->input->post('facebook_app_secret'),
+                              'twitter_app_id' => $this->input->post('twitter_app_id'),
+                              'twitter_app_secret' => $this->input->post('twitter_app_secret'),
+                              'google_app_id' => $this->input->post('google_app_id'),
+                              'google_app_secret' => $this->input->post('google_app_secret'),
+                              'linkedin_app_id' => $this->input->post('linkedin_app_id'),
+                              'linkedin_app_secret' => $this->input->post('linkedin_app_secret'),
+				);
+		$pay_rows = $this->db->get('tr_settings_site_configuration');
+		if($pay_rows -> num_rows() == 0) {
+		    $this->db->insert('tr_settings_site_configuration', $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "inserted";
+		}
+		else {
+			$data = array(
+							'system_email_address' => $this->input->post('system_email_address'),
+                              'website_time_zone' => $this->input->post('website_time_zone'),
+                              'facebook_app_id' => $this->input->post('facebook_app_id'),
+                              'facebook_app_secret' => $this->input->post('facebook_app_secret'),
+                              'twitter_app_id' => $this->input->post('twitter_app_id'),
+                              'twitter_app_secret' => $this->input->post('twitter_app_secret'),
+                              'google_app_id' => $this->input->post('google_app_id'),
+                              'google_app_secret' => $this->input->post('google_app_secret'),
+                              'linkedin_app_id' => $this->input->post('linkedin_app_id'),
+                              'linkedin_app_secret' => $this->input->post('linkedin_app_secret'),
+				);
+			$update_where = '( site_configuration_id="'.$this->input->post('rid').'")';
+			$this->db->set($data); 
+      		$this->db->where($update_where);
+      		$this->db->update("tr_settings_site_configuration", $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "Updated";
+		}
+      	return $model_data;
+	}
+
+	// View
+	else {
+		$model_data['payment_values'] = $this->db->get('tr_settings_site_configuration')->row_array();
+		return $model_data;
+	}
+	}
+public function insert_template_logo($status)
+	{	
+		if($status == 'update') {
+		$data = array(
+							'template_logo' => $this->input->post('template_logo'),
+                              'template_logo_text' => $this->input->post('template_logo_text'),
+				);
+		$pay_rows = $this->db->get('tr_settings_template');
+		if($pay_rows -> num_rows() == 0) {
+		    $this->db->insert('tr_settings_template', $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "inserted";
+		}
+		else {
+			$data = array(
+							'template_logo' => $this->input->post('template_logo'),
+                              'template_logo_text' => $this->input->post('template_logo_text'),
+				);
+			$update_where = '( template_id="'.$this->input->post('rid').'")';
+			$this->db->set($data); 
+      		$this->db->where($update_where);
+      		$this->db->update("tr_settings_template", $data);
+			$model_data['error'] = 2;
+			$model_data['status'] = "Updated";
+		}
+      	return $model_data;
+	}
+
+	// View
+	else {
+		$model_data['payment_values'] = $this->db->get('tr_settings_template')->row_array();
+		return $model_data;
+	}
 	}
 
 
