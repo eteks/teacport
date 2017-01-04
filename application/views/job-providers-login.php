@@ -145,7 +145,7 @@
   </div>      
 
  <?php include('include/footer.php'); ?>
- 
+ <?php include('include/footercustom.php'); ?>
  
  <script type="text/javascript">
         $(".full-page").height($(window).height());

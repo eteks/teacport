@@ -206,11 +206,12 @@ if(!empty($provider_values)) :
 endif;
 ?>
 <?php include('include/footermenu.php'); ?>
-<?php include('include/footer.php'); ?>          
+<?php include('include/footer.php'); ?>  
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.dataTables.min.js"></script>        
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/owl-carousel.js"></script>
+<?php include('include/footercustom.php'); ?>
 
-
-
-<script type="text/javascript">
+<script type="application/javascript">
 
 jQuery.fn.dataTable.Api.register('row.addByPos()', function(data, index) {     
     var currentPage = this.page();
@@ -232,7 +233,19 @@ jQuery.fn.dataTable.Api.register('row.addByPos()', function(data, index) {
 
 var seeker_inbox_message;
 $(document).ready(function(){
-    
+    $(".clients-list").owlCarousel({
+        autoPlay: true,
+        slideSpeed: 2000,
+        pagination: false,
+        navigation: false,
+        loop: true,
+        items: 6,
+        itemsDesktop: [1199, 4],
+        itemsDesktopSmall: [980, 3],
+        itemsTablet: [768, 4],
+        itemsTabletSmall: false,
+        itemsMobile: [479, 2],
+    });
     seeker_inbox_message = $('#seeker_inbox_data').DataTable( {
        	"aaSorting": [],
 		"ordering": false,

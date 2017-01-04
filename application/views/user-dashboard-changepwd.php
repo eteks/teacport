@@ -105,4 +105,23 @@
         ?>
 
 <?php include('include/footermenu.php'); ?>
-<?php include('include/footer.php'); ?>      
+<?php include('include/footer.php'); ?>  
+  <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/owl-carousel.js"></script>
+<?php include('include/footercustom.php'); ?>
+ <script type="application/javascript">
+ $(document).ready(function() {
+ 	$(".clients-list").owlCarousel({
+        autoPlay: true,
+        slideSpeed: 2000,
+        pagination: false,
+        navigation: false,
+        loop: true,
+        items: 6,
+        itemsDesktop: [1199, 4],
+        itemsDesktopSmall: [980, 3],
+        itemsTablet: [768, 4],
+        itemsTabletSmall: false,
+        itemsMobile: [479, 2],
+    });
+ });
+ </script>   

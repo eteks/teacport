@@ -5,10 +5,11 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block"> 
-                        	<a href="index.html" class="">
-                        		<h4><strong style="color: #2ae; font-size: 30px; font-family: 'Kaushan Script', cursive;">Teachers Recruit</strong></h4>
-                        	    <!-- <img src="images/logo.png" class="img-responsive" alt="logo"> -->
-                        	</a>
+                        	<a href="<?php echo base_url(); ?>" id="webpage_title"> 
+			                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="30px;" width="30px;">
+			                	<h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3>
+			                	<span class="clearfix"> </span>
+               				</a>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
                         </div>
                     </div>
@@ -18,7 +19,7 @@
                             <ul class="footer-links">
                                 <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>aboutus">About Us</a> </li>
-                                <li> <a href="<?php echo base_url(); ?>informations">Informations</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>informations">Information</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>contactus">Contact Us</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>terms">Terms &amp; Conditions</a> </li>
                             </ul>
@@ -59,10 +60,10 @@
                         <div class="footer-bottom">
                             <div class="container">
                                 <div class="row">
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
                                         <p>Copyright ©2016 - Teachers Recruit All rights Reserved.<br> Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
                                         <ul class="social-network social-circle onwhite">
                                             <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                                             <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>

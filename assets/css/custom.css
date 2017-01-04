@@ -88,9 +88,10 @@
 	height: 180px;
 } 
 .slide-featured-jobs .img-box img {
-	height: 768px;
-	width: 1024px;
-	
+	/*height: 768px;
+	width: 1024px;*/
+	height: 100%;
+	width: 100%;
 }
 .slide-featured-jobs .content-area{
 	height: 250px;
@@ -547,6 +548,12 @@ select:invalid {
 	margin-top: 0 !important;
 	padding: 10px 0;
 }
+#vacancies_page .form-group input {
+	border-color: #f1f1f1;
+    border-radius: 0;
+    height: 60px;
+    width: 100%;
+ }   
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
@@ -557,7 +564,16 @@ select:invalid {
 .mail_contact {
 	text-transform: lowercase !important;
 }
-
+.small-footer .logo_firstword {
+	color: #f37021;
+	font-size: 30px; 
+	font-family: 'Kaushan Script', cursive;
+}
+.small-footer .logo_secondword{
+	color: #00a5ed;
+	font-size: 30px; 
+	font-family: 'Kaushan Script', cursive;
+}
 /*Added by thangam*/
 /*css for login and registrartion start*/
 .registration_status {
@@ -858,6 +874,29 @@ label.form-input-error {
 .loader-dn {
 	display: none;
 }
+.val_status {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    padding: 6px 0;
+    text-align: center;
+    display: none;
+}
+.val_status.val_error {
+	color: #ff1919;
+}
+.val_status.val_success {
+	color: #228b22;
+}
+.form-field-error {
+	border-color: #ff7f7f !important;
+}
+.form-label-error {
+	color: #ff1919;
+}
+
 /* Ended by siva */
 .subcription_plan_details{
 	color: #fff;
@@ -890,3 +929,12 @@ label.form-input-error {
     position: absolute;
     top: -40px;
 }
+.client-logo img{
+	height: 125px;
+	width: 125px;
+}
+.featured-image-box img{
+	height: 125px;
+	width: 125px;
+}
+

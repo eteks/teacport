@@ -57,6 +57,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <h4>
                 <i class="icon-reorder"></i> Job Activities
               </h4>
+              <span class="loader_holder hide_loader"> </span>
             </div>
            <div class="widget-body">
                 <div class="portlet-body">

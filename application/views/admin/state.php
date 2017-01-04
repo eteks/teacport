@@ -47,7 +47,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul> <!-- END PAGE TITLE & BREADCRUMB-->
-        </div>
+      </div>
       </div> <!-- END PAGE HEADER-->
       <div class="row-fluid"> <!-- BEGIN ADVANCED TABLE widget-->
         <div class="span12">
@@ -56,6 +56,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <h4>
                 <i class="icon-reorder"></i> State
               </h4>
+              <span class="loader_holder hide_loader"> </span>	
               <!-- <h3 class="ajax_loader">
                 <span> Loading </span>
               </h3>

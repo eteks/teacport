@@ -1,4 +1,4 @@
-    /*
+/*
     * Add edit delete rows dynamically using jquery and php
     */
 
@@ -171,12 +171,16 @@ ajax = function (params,action,form_id){
     var form = $('#'+form_id);
     var this_table = $('#'+form_id).find('table');
     params['action'] = action;
+    var this_loader =  form.parents('#main-content').find('.loader_holder'); //for loader  
     params[csrf_name] = csfrData[csrf_name];
     $.ajax({
         type : "POST",
         url : admin_baseurl+form.attr('action'),
         dataType : 'json',
         data : params ,
+        beforeSend: function(){
+       		this_loader.removeClass('hide_loader');
+   		},
         success: function(res) {
             if(res.error==1) {
                 $('.val_error').html("<i class='icon-remove-sign'></i>  "+res.status);
@@ -192,7 +196,10 @@ ajax = function (params,action,form_id){
                 // setTimeout(function() { $('.db_status').remove();location.reload(); }, 3000);
                 default_credentials();  
             }
-        }
+        },
+        complete : function(){
+			setTimeout(function() { this_loader.addClass('hide_loader'); }, 3000);  //Commented for page reload
+		},
     });
 };
 
@@ -484,28 +491,6 @@ $('.top_layer, .message_close').on('click',function() {
         });
     });  
     
-    $(function() {
-    //----- OPEN
-    $('[data-popup-open]').on('click', function(e)  {
-    	handleFormWizards();
-        var targeted_popup_class = jQuery(this).attr('data-popup-open');
-        $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
-        $(".inbox").hide();
-        $('.caret-up').hide();
- 
-        e.preventDefault();
-    });   
-    
-     $('[data-popup-open-edit]').on('click', function(e)  {
-        var targeted_popup_class = jQuery(this).attr('data-popup-open-sec');
-        $('[data-popup-sec="' + targeted_popup_class + '"]').fadeIn(350);
- 
-        e.preventDefault();
-    }); 
-   });
-   
-    $(function() {
-  
     //----- CLOSE
     $('[data-popup-close]').on('click', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-close');
@@ -516,16 +501,6 @@ $('.top_layer, .message_close').on('click',function() {
     $('.popup_close_act').on('click', function(e)  {
         window.location.reload()
     });
-
-    
-    $('[data-popup-close-edit]').on('click', function(e)  {
-        var targeted_popup_class = jQuery(this).attr('data-popup-close-edit');
-        $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
- 
-        e.preventDefault();
-    });
-});
-    
 
     // popup for subscription and ads
     $('.add_option,.edit_option').on('click', function(e)  {
@@ -905,3 +880,7 @@ function sliderResponse(target) {
     });
   
 
+// $(".finish").click(function(){
+	// $(".popup").css("opacity", "0.8" + "z-index", "999999");
+// 	
+// });
