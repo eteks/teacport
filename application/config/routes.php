@@ -40,8 +40,9 @@
 
 $route['default_controller'] 							= "home/index";
 
-if (strpos($_SERVER['REQUEST_URI'], 'main') !== FALSE)
+if (strpos($_SERVER['REQUEST_URI'], 'main') !== FALSE || strpos($_SERVER['REQUEST_URI'], 'admin') !== FALSE){
 	$route['404_override'] 									= 'admin_missingpage';
+}
 else
 	$route['404_override'] 									= 'missingpage';
 

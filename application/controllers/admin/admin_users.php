@@ -11,6 +11,28 @@ class Admin_users extends CI_Controller {
 		$this->config->load('admin_modules');
 	}
 
+	// This function is used to merge the array key with values for retreiving distinct values
+	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2,$is_unique)
+	{
+	    $ret = array();
+	    foreach($array as $arr)
+	    {
+	        foreach($arr as $k => $v)
+	        {
+	            if($arr[$key2] == $v2)
+	            {
+	                if($k == $key)
+	                    $ret[] = $v;   
+	            }
+	        }
+	    }
+	    if($is_unique)
+	    	$u = array_unique($ret);
+	    else
+	    	$u = $ret;
+	    return (sizeof($u) == 1) ? $u[0] : $u;
+	}
+
 	// State - Add Edit Delete View
 	public function user_groups()
 	{	
