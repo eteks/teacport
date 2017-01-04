@@ -69,6 +69,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <h4>
                 <i class="icon-reorder"></i>Job Provider Ads
               </h4>
+              
             </div>
             <div class="widget-body">
               <div class="portlet-body">

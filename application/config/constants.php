@@ -91,9 +91,9 @@ if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 }
 else{
 	// server settings
-	define("GOOGLECLIENTID",'544080576755-0ch4mllq7fi0d6umo0tp2s73k2jebeha.apps.googleusercontent.com');//google client id
-	define("GOOGLECLIENTSECRET",'MkyykL90dEedMBOkrCm7CbCT');//google client secret
-	define("GOOGLEDEVELOPERKEY",'AIzaSyCRbJU5BMQMEMlQSfXQbv_GQRlBVWYewmU');
+	define("GOOGLECLIENTID",'167343618303-us6vlmgsh136s3onjkce6njc20bgmat1.apps.googleusercontent.com');//google client id
+	define("GOOGLECLIENTSECRET",'c8zwR4QdfKZbATZZMCF80gpG');//google client secret
+	define("GOOGLEDEVELOPERKEY",'AIzaSyAeR9CBDl12_fPEmJ-nyjaP9SHjPD13QWM');
 }
 define("GOOGLEREDIRECTURL",APP_URL."login/google");//google redirect urlt
 define("GOOGLESEEKERREDIRECTURL",APP_URL."login/seeker/google");//google redirect urlt

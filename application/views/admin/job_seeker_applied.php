@@ -40,7 +40,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <span class="divider">&nbsp;</span>
             </li>
             <li>
-              <a href="<?php echo base_url(); ?>main/job_seeker_applied"> Job Applaied</a>
+              <a href="<?php echo base_url(); ?>main/job_seeker_applied"> Jobs Applied</a>
               <span class="divider-last">&nbsp;</span>
             </li>
           </ul>
@@ -55,8 +55,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
           <div class="widget">
             <div class="widget-title">
               <h4>
-                <i class="icon-reorder"></i> Job Applied
-              </h4>
+                <i class="icon-reorder"></i> Job Applied </h4>
+                <span class="loader_holder hide_loader"> </span>
             </div>
             <div class="widget-body">
               <div class="portlet-body">

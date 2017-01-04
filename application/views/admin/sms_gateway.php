@@ -49,6 +49,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> SMS Gateway Setting</h4>
+                            <span class="loader_holder hide_loader"> </span>
                         </div>
                         <div class="widget-body form">
                         <?php if (isset($error_message)){ 
