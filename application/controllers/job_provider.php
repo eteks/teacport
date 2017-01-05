@@ -4,7 +4,7 @@ class Job_provider extends CI_Controller {
 	public function __construct()
     {    	
         parent::__construct();
-        $this->load->library(array('form_validation','session','captcha')); 
+        $this->load->library(array('form_validation','session','captcha','image_lib')); 
 		$this->load->model(array('job_provider_model','common_model','job_seeker_model'));
 		 session_start();
     }
@@ -257,6 +257,18 @@ class Job_provider extends CI_Controller {
 	                    $provideruploaddata = $this->upload->data();
 						$provider_logo_file_name = $provideruploaddata['file_name'];
 						$profile_completeness = 10;
+						$provider_logo_thumb['image_library'] = 'gd2';
+						$provider_logo_thumb['source_image'] = './uploads/jobprovider/'.$provider_logo_file_name;
+						$provider_logo_thumb['create_thumb'] = TRUE;
+						$provider_logo_thumb['maintain_ratio'] = TRUE;
+						$provider_logo_thumb['width']         = 180;
+						$provider_logo_thumb['height']       = 180;
+						$this->image_lib->initialize($provider_logo_thumb);
+						if ( ! $this->image_lib->resize())
+							{
+							        echo $this->image_lib->display_errors();
+							}
+						$this->image_lib->clear();
 	                }
 					
 				}
@@ -281,6 +293,18 @@ class Job_provider extends CI_Controller {
 	                {
 	                    $organizationuploaddata = $this->upload->data();
 						$organization_logo_file_name = $organizationuploaddata['file_name'];
+						$organization_logo_thumb['image_library'] = 'gd2';
+						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$organization_logo_file_name;
+						$organization_logo_thumb['create_thumb'] = TRUE;
+						$organization_logo_thumb['maintain_ratio'] = TRUE;
+						$organization_logo_thumb['width']         = 180;
+						$organization_logo_thumb['height']       = 180;
+						$this->image_lib->initialize($organization_logo_thumb);
+						if ( ! $this->image_lib->resize())
+							{
+							        echo $this->image_lib->display_errors();
+							}
+						$this->image_lib->clear();
 	                }
                 }
 				$dob_split = explode('/', $this->input->post('provider_dob'));
