@@ -815,3 +815,6 @@ table .dataTables_empty{
 	z-index: 2;
 	color: #CCCCCC;	
 }*/
+.remove_sidebar{
+    margin-left: 0px !important;
+}

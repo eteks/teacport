@@ -40,11 +40,10 @@
 
 $route['default_controller'] 							= "home/index";
 
-if (strpos($_SERVER['REQUEST_URI'], 'main') !== FALSE || strpos($_SERVER['REQUEST_URI'], 'admin') !== FALSE){
-	$route['404_override'] 									= 'admin_missingpage';
-}
+if (strpos($_SERVER['REQUEST_URI'], 'main') !== FALSE)
+	$route['404_override'] 								= 'admin_missingpage';
 else
-	$route['404_override'] 									= 'missingpage';
+	$route['404_override'] 								= 'missingpage';
 
 /* Route settings for Jobseeker and Jobprovider */
 $route['login/seeker'] 									= 'job_seeker';
@@ -128,6 +127,7 @@ $route['terms'] 										= 'home/terms';
 /* ===================          Route settings for Admin Start     ====================== */
 
 $route['main'] = 'admin/admin_login/teac_admin_login';
+$route['admin'] = 'admin_missingpage';
 $route['main/dashboard'] = 'admin/dashboardpage/dashboard';
 $route['main/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
 
