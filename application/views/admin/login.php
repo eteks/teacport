@@ -84,7 +84,7 @@ Website: http://thevectorlab.net/
     </form>
     <!-- END LOGIN FORM -->        
     <!-- BEGIN FORGOT PASSWORD FORM -->
-    <form id="forgotform" class="form-vertical no-padding no-margin hide admin_login_form" action="admin_login/admin_forget">
+    <form id="forgotform" class="form-vertical no-padding no-margin hide admin_login_form" action="admin_forget">
       <p class="center">Enter your e-mail address below to reset your password.</p>
       <div class="control-group">
         <p class="admin_status"></p>
