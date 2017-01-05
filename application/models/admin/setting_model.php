@@ -21,9 +21,10 @@ public function insert_payment_gateway($status) {
 				);
 		$pay_rows = $this->db->get('tr_settings_payment_gateway');
 		if($pay_rows -> num_rows() == 0) {
+			$this->db->set('time', 'NOW()', FALSE);
 		    $this->db->insert('tr_settings_payment_gateway', $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "inserted";
+			$model_data['error'] = 1;
+			$model_data['status'] = "Data inserted successfully";
 		}
 		else {
 			$data = array(
@@ -34,12 +35,12 @@ public function insert_payment_gateway($status) {
                               'bank_transfer_account_number' => $this->input->post('bank_transfer_account_number'),
                               'bank_transfer_ifsc_code' => $this->input->post('bank_transfer_ifsc_code'),
 				);
-			$update_where = '( payment_gateway_id="'.$this->input->post('rid').'")';
+			$update_where = '(payment_gateway_id="'.$this->input->post('hidden_id_settings').'")';
 			$this->db->set($data); 
       		$this->db->where($update_where);
-      		$this->db->update("tr_settings_payment_gateway", $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Updated";
+      		$this->db->update("tr_settings_payment_gateway",$data);
+			$model_data['error'] = 1;
+			$model_data['status'] = "Data Updated successfully";
 		}
       	return $model_data;
 	}
@@ -61,9 +62,10 @@ public function insert_sms_gateway($status)
 				);
 		$pay_rows = $this->db->get('tr_settings_sms_gateway');
 		if($pay_rows -> num_rows() == 0) {
+			$this->db->set('time', 'NOW()', FALSE);
 		    $this->db->insert('tr_settings_sms_gateway', $data);
 			$model_data['error'] = 2;
-			$model_data['status'] = "inserted";
+			$model_data['status'] = "Data inserted successfully";
 		}
 		else {
 			$data = array(
@@ -71,12 +73,12 @@ public function insert_sms_gateway($status)
                               'sms_api_key' => $this->input->post('sms_api_key'),
                               'sms_authentication_token' => $this->input->post('sms_authentication_token'),
 				);
-			$update_where = '( sms_gateway_id="'.$this->input->post('rid').'")';
+			$update_where = '( sms_gateway_id="'.$this->input->post('hidden_id_settings').'")';
 			$this->db->set($data); 
       		$this->db->where($update_where);
       		$this->db->update("tr_settings_sms_gateway", $data);
 			$model_data['error'] = 2;
-			$model_data['status'] = "Updated";
+			$model_data['status'] = "Data Updated successfully";
 		}
       	return $model_data;
 	}
@@ -104,9 +106,10 @@ public function insert_configuration_option($status)
 				);
 		$pay_rows = $this->db->get('tr_settings_site_configuration');
 		if($pay_rows -> num_rows() == 0) {
+			$this->db->set('time', 'NOW()', FALSE);
 		    $this->db->insert('tr_settings_site_configuration', $data);
 			$model_data['error'] = 2;
-			$model_data['status'] = "inserted";
+			$model_data['status'] = "Data inserted successfully";
 		}
 		else {
 			$data = array(
@@ -121,12 +124,12 @@ public function insert_configuration_option($status)
                               'linkedin_app_id' => $this->input->post('linkedin_app_id'),
                               'linkedin_app_secret' => $this->input->post('linkedin_app_secret'),
 				);
-			$update_where = '( site_configuration_id="'.$this->input->post('rid').'")';
+			$update_where = '( site_configuration_id="'.$this->input->post('hidden_id_settings').'")';
 			$this->db->set($data); 
       		$this->db->where($update_where);
       		$this->db->update("tr_settings_site_configuration", $data);
 			$model_data['error'] = 2;
-			$model_data['status'] = "Updated";
+			$model_data['status'] = "Data Updated successfully";
 		}
       	return $model_data;
 	}
@@ -146,21 +149,22 @@ public function insert_template_logo($status)
 				);
 		$pay_rows = $this->db->get('tr_settings_template');
 		if($pay_rows -> num_rows() == 0) {
+			$this->db->set('time', 'NOW()', FALSE);
 		    $this->db->insert('tr_settings_template', $data);
 			$model_data['error'] = 2;
-			$model_data['status'] = "inserted";
+			$model_data['status'] = "Data inserted successfully";
 		}
 		else {
 			$data = array(
 							'template_logo' => $this->input->post('template_logo'),
                               'template_logo_text' => $this->input->post('template_logo_text'),
 				);
-			$update_where = '( template_id="'.$this->input->post('rid').'")';
+			$update_where = '( template_id="'.$this->input->post('hidden_id_settings').'")';
 			$this->db->set($data); 
       		$this->db->where($update_where);
       		$this->db->update("tr_settings_template", $data);
 			$model_data['error'] = 2;
-			$model_data['status'] = "Updated";
+			$model_data['status'] = "Data Updated successfully";
 		}
       	return $model_data;
 	}
