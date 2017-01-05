@@ -199,27 +199,3 @@ if ( ! function_exists('get_provider_subscription')){
 		return $out;
 	}
 }
-
-// This function is used to merge the array key with values for retreiving distinct values
-if ( ! function_exists('get_arrayvalues_bykeyvalue')){
-	function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2,$is_unique)
-	{
-	    $ret = array();
-	    foreach($array as $arr)
-	    {
-	        foreach($arr as $k => $v)
-	        {
-	            if($arr[$key2] == $v2)
-	            {
-	                if($k == $key)
-	                    $ret[] = $v;   
-	            }
-	        }
-	    }
-	    if($is_unique)
-	    	$u = array_unique($ret);
-	    else
-	    	$u = $ret;
-	    return (sizeof($u) == 1) ? $u[0] : $u;
-	}
-}

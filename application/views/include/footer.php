@@ -22,7 +22,3 @@
 
 			<!-- JQUERY WAYPOINT -->
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/waypoints.min.js"></script>
-
-			<!-- Owl Carousel -->
-			<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/owl-carousel.js"></script> -->
-			

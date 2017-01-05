@@ -49,19 +49,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Template Logo</h4>
+                            <span class="loader_holder hide_loader"> </span>
                         </div>
                         <div class="widget-body form">
-                        <?php if (isset($error_message)){ 
-                    echo "<p class='error_msg_reg alert alert-info'>".$error_message."</p>";
-                        }?>
-                          <form action="<?php echo base_url(); ?>admin/setting/template_logo" class="form-horizontal" method="POST">
+                          <form action="template_logo" class="form-horizontal template_logo_act" method="POST">
                             <p class="admin_status"> </p>
 	                          <div class="control-group">
 	                            <label class="control-label">Logo</label>
 	                            <div class="controls">
 	                              <span>
 	                                <a name="" class="btn upload_option"> Upload </a>
-	                                <input name="userimage" id="files" class="form-control hidden_upload" type="file" >
+	                                <input name="userimage" id="files" class="form-control hidden_upload" value="<?php if(!empty($payment_values['template_logo'])) echo $payment_values['template_logo']; ?>" type="file" >
 	                                <img class="popup_preview_templatelogo_act">
 	                              </span>
 	                            </div>
@@ -69,19 +67,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Logo Text</label>
 	                            <div class="controls">
-	                              <input name="template_logo_text" type="text" class="span6" />
+	                              <input name="template_logo_text" value="<?php if(!empty($payment_values['template_logo_text'])) echo $payment_values['template_logo_text']; ?>" type="text" class="span6" />
 	                             </div>
 	                          </div>
-                            <div class="control-group">
-                              <label class="control-label">Logo Created Date</label>
-                              <div class="controls"> 
-                           <input class=" m-ctrl-medium date-picker span6" size="16" type="text" name="template_updated_date" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
-                        </div>
-                      </div>
 	                          <div class="form-actions">
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
                             </div>
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php echo $payment_values['template_id']; ?>" />
                           </form>
                         </div>
                     </div>
