@@ -34,17 +34,11 @@
     <!-- FOR POST-JOB PAGES ONLY -->
     <link href="css/select2.min.css" rel="stylesheet" />
     
-    <link rel="stylesheet" href="css/jquery.tagsinput.min.css">
-    
     <!--Custom CSS-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
     
     <!--Datepicker-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/default.css" type="text/css">
-    
-    <!--Salary range-->
-    <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/range/addSlider.css">
-    
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/default.css" type="text/css">  
 
     <!-- FONT AWESOME -->
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/assets/css/font-awesome.min.css">
@@ -65,10 +59,6 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/demo.css" >
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/style.css" >
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/jquery.jscrollpane.css" media="all" >
-
-    <!-- JavaScripts -->
-    <script src="<?php echo base_url(); ?>assets/js/modernizr.js"></script>
-    
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
