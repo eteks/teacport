@@ -20,6 +20,37 @@ class Job_seeker extends CI_Controller {
         return TRUE;
  	}      
 
+ 	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}	
+
+	/* custom validataion rules */
+	public function valid_date($date)
+	{
+		if(!empty($date)){
+	   		$date_split =  explode('/', $date);
+	   		if (count($date_split) == 3) {      
+			    if (checkdate($date_split[1], $date_split[0], $date_split[2]))
+			    {
+			    	return TRUE;
+			    }
+		      	$this->form_validation->set_message('valid_date','The %s field date is not valid it should match this dd/mm/yyyy format');
+	        	return FALSE;
+		    }
+		}
+		else{
+			$this->form_validation->set_message('valid_date','The %s field date is empty');
+        	return false;
+		}
+	}
+
+
  	// Salary Validation
  	function check_greater_value($second_field,$first_field) 
 	{ 
@@ -453,10 +484,10 @@ class Job_seeker extends CI_Controller {
 		}
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
-			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|alpha'),
+			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[150]|callback_alpha_dash_space'),
 			array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|alpha'),
+			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'trim|xss_clean|callback_valid_date'),
+			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[150]|callback_alpha_dash_space'),
 			array('field' => 'cand_pic', 'label' => 'Picture','rules' => 'callback_validate_image_type['.$action.'.cand_pic]'),
 			array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
@@ -535,7 +566,7 @@ class Job_seeker extends CI_Controller {
 				 	$config['upload_path'] = APPPATH . '../'.$upload_image_path; // APPPATH means our application folder path.
 			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
 			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
-			        $config['max_size']    = '1024'; // Maximum size - 1MB
+			        $config['max_size']    = '2048'; // Maximum size - 2MB
 			    	$config['max_width']  = '1024'; // Maximumm width - 1024px
 			    	$config['max_height']  = '768'; // Maximum height - 768px
 			        $this->upload->initialize($config); // Initialize the configuration
