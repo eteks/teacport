@@ -64,91 +64,92 @@ Website: http://thevectorlab.net/
                     <span class="arrow"></span>
                 </a>
                 <!-- END RESPONSIVE MENU TOGGLER -->
-                <div id="top_menu" class="nav notify-row">
-                    <!-- BEGIN NOTIFICATION -->
-                    <ul class="nav top-menu">
-                    
-                        <!-- BEGIN SETTINGS -->
-                        <!-- <li class="dropdown">
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>main/dashboard" data-original-title="Settings">
-                                <i class="icon-cog"></i>
-                            </a>
-                        </li> 
-                        <!-- END SETTINGS -->
-                        <!-- BEGIN INBOX DROPDOWN -->
-                        <li class="dropdown" id="header_inbox_bar">
-                        <i class="icon-caret-up caret-up"></i>
-                                <div class="clear_both"></div>
-                            <a class="dropdown-toggle pa dropdown_toggle_act">
-                                <i class="icon-envelope-alt"></i>     
-                                <span id="not_count" class="badge badge-important"><?php echo $this->config->item('feedback_count'); ?></span>
-                            </a>                              
-                            <ul class="dropdown-menu extended inbox">
-                                <li>
-                                    <!-- <p>You have 5 new messages</p> -->
-                                </li>
-                                <li>
-                             <?php
-                                foreach ($feedback_data as $feed) :
-                                if($feed['is_viewed'] == 0){  ?>
-                                    <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
-                                        <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
-									<!-- <span class="subject">
-									<span class="from">Dulal Khan</span> -->
-									<span class="time time_act"><?php echo $feed['feedback_form_created_date']; ?></span>
-									<!-- </span> -->
-									<span class="message message_res">
-									    <?php echo $feed['feedback_form_message']; ?>
-									</span>
-                                    </a>
-                                    <?php }  endforeach;    ?>
-                                </li> 
-                                <li>
-                                    <a href="<?php echo base_url(); ?>main/feedback_form">See all messages</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- END  NOTIFICATION -->
-                <div class="top-nav ">
-                    <ul class="nav pull-right top-menu" >
-                        <!-- BEGIN SUPPORT -->
-                        <!-- <li class="dropdown mtop5">
+                <?php if(!empty($this->session->userdata("admin_login_status")) && strpos($_SERVER['REQUEST_URI'], 'admin') === FALSE): ?>
+                    <div id="top_menu" class="nav notify-row">
+                        <!-- BEGIN NOTIFICATION -->
+                        <ul class="nav top-menu">
+                        
+                            <!-- BEGIN SETTINGS -->
+                            <!-- <li class="dropdown">
+                                <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>main/dashboard" data-original-title="Settings">
+                                    <i class="icon-cog"></i>
+                                </a>
+                            </li> 
+                            <!-- END SETTINGS -->
+                            <!-- BEGIN INBOX DROPDOWN -->
+                            <li class="dropdown" id="header_inbox_bar">
+                            <i class="icon-caret-up caret-up"></i>
+                                    <div class="clear_both"></div>
+                                <a class="dropdown-toggle pa dropdown_toggle_act">
+                                    <i class="icon-envelope-alt"></i>     
+                                    <span id="not_count" class="badge badge-important"><?php echo $this->config->item('feedback_count'); ?></span>
+                                </a>                              
+                                <ul class="dropdown-menu extended inbox">
+                                    <li>
+                                        <!-- <p>You have 5 new messages</p> -->
+                                    </li>
+                                    <li>
+                                 <?php
+                                    foreach ($feedback_data as $feed) :
+                                    if($feed['is_viewed'] == 0){  ?>
+                                        <a class="job_full_view popup_fields" data-id="<?php echo $feed['feedback_form_id']; ?>" data-href="get_feedback_full_view"  data-mode="full_view"  data-popup-open="popup_section" data-section="header">
+                                            <!-- <span class="photo"><img src="<?php echo base_url(); ?>assets/admin/img/avatar-mini.png" alt="avatar" /></span> -->
+    									<!-- <span class="subject">
+    									<span class="from">Dulal Khan</span> -->
+    									<span class="time time_act"><?php echo $feed['feedback_form_created_date']; ?></span>
+    									<!-- </span> -->
+    									<span class="message message_res">
+    									    <?php echo $feed['feedback_form_message']; ?>
+    									</span>
+                                        </a>
+                                        <?php }  endforeach;    ?>
+                                    </li> 
+                                    <li>
+                                        <a href="<?php echo base_url(); ?>main/feedback_form">See all messages</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
 
-                            <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="index.php#" data-original-title="Chat">
-                                <i class="icon-comments-alt"></i>
-                            </a>
-                        </li> -->
-                        <li class="dropdown mtop5">
-                            <!-- <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>main/dashboard" data-original-title="Help">
-                                <i class="icon-headphones"></i>
-                            </a> -->
-                        </li>
-                        <!-- END SUPPORT -->
-                        <!-- BEGIN USER LOGIN DROPDOWN -->
-                        <li class="dropdown">
-                            <a href="<?php echo base_url(); ?>main/dashboard" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
-                                <?php
-                                    $session_data = $this->session->userdata("admin_login_session");
-                                ?>
-                                <span class="username"> <?php echo $session_data['admin_user_name']; ?></span>
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                               <li><a href="<?php echo base_url(); ?>main/edit_profile"><i class="icon-edit"></i>  Edit Profile</a></li>
-                                <li><a href="<?php echo base_url(); ?>main/change_password"><i class="icon-exchange"></i>  Change Password</a></li>
-                                <li class="divider"></li>
-                                <li><a href="<?php echo base_url(); ?>main/logout"><i class="icon-key"></i> Log Out</a></li>
-                            </ul>
-                        </li>
-                        <!-- END USER LOGIN DROPDOWN -->
-                    </ul>
+                    <!-- END  NOTIFICATION -->
+                    <div class="top-nav ">
+                        <ul class="nav pull-right top-menu" >
+                            <!-- BEGIN SUPPORT -->
+                            <!-- <li class="dropdown mtop5">
 
-                    <!-- END TOP NAVIGATION MENU -->
-                </div>
+                                <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="index.php#" data-original-title="Chat">
+                                    <i class="icon-comments-alt"></i>
+                                </a>
+                            </li> -->
+                            <li class="dropdown mtop5">
+                                <!-- <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="<?php echo base_url(); ?>main/dashboard" data-original-title="Help">
+                                    <i class="icon-headphones"></i>
+                                </a> -->
+                            </li>
+                            <!-- END SUPPORT -->
+                            <!-- BEGIN USER LOGIN DROPDOWN -->
+                            <li class="dropdown">
+                                <a href="<?php echo base_url(); ?>main/dashboard" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="<?php echo base_url(); ?>assets/admin/img/profile-pic.jpg" alt="" class="profile_picture">
+                                    <?php
+                                        $session_data = $this->session->userdata("admin_login_session");
+                                    ?>
+                                    <span class="username"> <?php echo $session_data['admin_user_name']; ?></span>
+                                    <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                   <li><a href="<?php echo base_url(); ?>main/edit_profile"><i class="icon-edit"></i>  Edit Profile</a></li>
+                                    <li><a href="<?php echo base_url(); ?>main/change_password"><i class="icon-exchange"></i>  Change Password</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<?php echo base_url(); ?>main/logout"><i class="icon-key"></i> Log Out</a></li>
+                                </ul>
+                            </li>
+                            <!-- END USER LOGIN DROPDOWN -->
+                        </ul>
+                        <!-- END TOP NAVIGATION MENU -->
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
    
@@ -173,80 +174,73 @@ Website: http://thevectorlab.net/
       </div>
      <!-- END TOP NAVIGATION BAR -->
     </div>
+    <!-- END HEADER -->
 
-
-
-	<!-- END HEADER -->
     <?php 
-        // echo "access_rights";
-        // echo "<pre>";
-        // print_r($this->config->item('admin_operation_rights'));
-        // echo "</pre>";
-        // echo "<pre>";
-        // print_r($this->config->item('current_page_rights'));
-        // echo "</pre>";
-        $is_super_admin = $this->session->userdata("admin_login_session")['is_super_admin'];
+        if(!empty($this->session->userdata("admin_login_status")) && strpos($_SERVER['REQUEST_URI'], 'admin') === FALSE):
+            $is_super_admin = $this->session->userdata("admin_login_session")['is_super_admin'];
     ?>
-    <!-- BEGIN SIDEBAR -->
-        <div id="sidebar" class="nav-collapse collapse">
-            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-            <div class="sidebar-toggler hidden-phone"></div>
-            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+        <!-- BEGIN SIDEBAR -->
+            <div id="sidebar" class="nav-collapse collapse">
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                <div class="sidebar-toggler hidden-phone"></div>
+                <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
-            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-            <div class="navbar-inverse">
-                <form class="navbar-search visible-phone">
-                    <input type="text" class="search-query" placeholder="Search" />
-                </form>
+                <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                <div class="navbar-inverse">
+                    <form class="navbar-search visible-phone">
+                        <input type="text" class="search-query" placeholder="Search" />
+                    </form>
+                </div>
+                <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                <!-- BEGIN SIDEBAR MENU -->
+                <ul class="sidebar-menu">
+                    <?php 
+                        $admin_modules = $this->config->item('admin_modules');
+                        $admin_operation_rights = $this->config->item('admin_operation_rights');
+                        foreach ($admin_modules as $key => $value):
+                            $result = array();
+                            array_walk($value['sub_module'], function($v) use(&$result) {
+                                $result[] = $id = substr($v['route_url'], strrpos($v['route_url'], '/') + 1);
+                            });
+                            $main_module_exists = in_array($value['main_module'], array_column($admin_operation_rights, 'main_module'));
+                            //if currently logged group has privilege access of this module, it will show in dashboard, otherwise won't show
+                            if($main_module_exists || $is_super_admin):
+                                if(in_array($this->uri->segment(2), $result)): ?>
+                                    <li class="has-sub active open">
+                                <?php
+                                else :
+                                ?>     
+                                    <li class="has-sub">
+                                <?php
+                                endif;
+                                ?>  
+                                    <a href="javascript:;" class="">
+                                        <span class="icon-box"> <i class="<?php echo $value['icon_name'] ?>"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper($value['main_module']);?></span>
+                                        <span class="arrow"></span>
+                                    </a>
+                                    <ul class="sub sub_scroll_section">
+                                        <?php 
+                                        foreach ($value['sub_module'] as $det): 
+                                        //Check loaded sub module access for this user group, here recursiveFind is custom function to search our searched value exists wherever in that mutlidimensional arry
+                                        $sub_module_exists = recursiveFind($admin_operation_rights, $det['name']);
+                                        if($sub_module_exists || $is_super_admin):
+                                        ?>
+                                            <li <?php if($this->uri->segment(2) == $det['name']) echo "class='active_sidebar'"; ?>>
+                                                <a href="<?php echo $det['route_url']; ?>" class="module_details">
+                                                    <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data"><?php echo ucwords($det['name']); ?></span><span class="sub_module_access"><?php echo $det['access_operation']; ?></span>
+                                                <!-- <span class="arrow"></span> -->
+                                                </a>
+                                            </li>
+                                        <?php 
+                                        endif;
+                                        endforeach; ?>
+                                    </ul>
+                                </li>
+                            <?php endif; ?>
+                    <?php endforeach; ?>
+                <!-- END SIDEBAR MENU -->
             </div>
-            <!-- END RESPONSIVE QUICK SEARCH FORM -->
-            <!-- BEGIN SIDEBAR MENU -->
-            <ul class="sidebar-menu">
-                <?php 
-                    $admin_modules = $this->config->item('admin_modules');
-                    $admin_operation_rights = $this->config->item('admin_operation_rights');
-                    foreach ($admin_modules as $key => $value):
-                        $result = array();
-                        array_walk($value['sub_module'], function($v) use(&$result) {
-                            $result[] = $id = substr($v['route_url'], strrpos($v['route_url'], '/') + 1);
-                        });
-                        $main_module_exists = in_array($value['main_module'], array_column($admin_operation_rights, 'main_module'));
-                        //if currently logged group has privilege access of this module, it will show in dashboard, otherwise won't show
-                        if($main_module_exists || $is_super_admin):
-                            if(in_array($this->uri->segment(2), $result)): ?>
-                                <li class="has-sub active open">
-                            <?php
-                            else :
-                            ?>     
-                                <li class="has-sub">
-                            <?php
-                            endif;
-                            ?>  
-                                <a href="javascript:;" class="">
-                                    <span class="icon-box"> <i class="<?php echo $value['icon_name'] ?>"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper($value['main_module']);?></span>
-                                    <span class="arrow"></span>
-                                </a>
-                                <ul class="sub sub_scroll_section">
-                                    <?php 
-                                    foreach ($value['sub_module'] as $det): 
-                                    //Check loaded sub module access for this user group, here recursiveFind is custom function to search our searched value exists wherever in that mutlidimensional arry
-                                    $sub_module_exists = recursiveFind($admin_operation_rights, $det['name']);
-                                    if($sub_module_exists || $is_super_admin):
-                                    ?>
-                                        <li <?php if($this->uri->segment(2) == $det['name']) echo "class='active_sidebar'"; ?>>
-                                            <a href="<?php echo $det['route_url']; ?>" class="module_details">
-                                                <!-- <span class="icon-box"> <i class="icon-dashboard"></i></span> --> <span class="sub_module_data"><?php echo ucwords($det['name']); ?></span><span class="sub_module_access"><?php echo $det['access_operation']; ?></span>
-                                            <!-- <span class="arrow"></span> -->
-                                            </a>
-                                        </li>
-                                    <?php 
-                                    endif;
-                                    endforeach; ?>
-                                </ul>
-                            </li>
-                        <?php endif; ?>
-                <?php endforeach; ?>
-            <!-- END SIDEBAR MENU -->
-        </div>
-        <!-- END SIDEBAR -->
+            <!-- END SIDEBAR -->
+        <?php endif; ?>
 

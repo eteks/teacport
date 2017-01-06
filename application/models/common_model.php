@@ -113,7 +113,7 @@ class Common_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_subject');
-		$where = "(subject_institution_id like '%".$ins_id."%' AND subject_status='1')";
+		$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND subject_status=1)';
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
@@ -131,7 +131,7 @@ class Common_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_class_level');
-		$where = "(class_level_inst_type_id = '".$ins_id."'  AND class_level_status='1')";
+		$where = '(class_level_inst_type_id="'.$ins_id.'" AND class_level_status=1)';
 		$this->db->where($where);
 		$classlevel = $this->db->get();
 		return $classlevel->result_array(); 
@@ -150,7 +150,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_applicable_posting');
 		if($ins_id!='') {
-			$where = "(posting_institution_id like '%".$ins_id."%' AND posting_status='1')";
+			$where = "(posting_institution_id = '".$ins_id."' AND posting_status='1')";
 		}else {
 			$where = "(posting_status='1')";	
 		}		
@@ -194,9 +194,9 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_educational_qualification');
 		if($ins_id!='') {
-			$where = "(educational_qualifcation_inst_type_id like '%".$ins_id."%'  AND educational_qualification_status='1')";
+			$where = '(educational_qualifcation_inst_type_id="'.$ins_id.'" AND educational_qualification_status=1)';
 		}else {
-			$where = "(educational_qualification_status='1')";	
+			$where = '(educational_qualification_status=1)';	
 		}	
 		$this->db->where($where);
 		$qualification = $this->db->get();
