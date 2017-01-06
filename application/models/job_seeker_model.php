@@ -322,7 +322,14 @@ class Job_seeker_model extends CI_Model {
 	// Get seeker education details
 	public function get_seeker_education_details($id)
 	{
-		$value = $this->db->get_where('tr_candidate_education',array('candidate_profile_id' => $id, 'candidate_education_status' => '1'))->result_array();
+		$where = '(candidate_profile_id = "'.$id.'" AND candidate_education_status =1)';
+		$this->db->select('*');
+		$this->db->from('tr_candidate_education ce');
+		$this->db->join('tr_educational_qualification eq','ce.candidate_education_qualification_id=eq.educational_qualification_id','inner');
+		$this->db->join('tr_languages l','ce.candidate_medium_of_inst_id=l.language_id','inner');
+		$this->db->join('tr_departments d','ce.candidate_education_department_id=d.departments_id','left');
+		$this->db->join('tr_university_board u','ce.candidate_edu_board=u.education_board_id','left');
+		$value = $this->db->where($where)->get()->result_array();
 		return $value;
 	}
 
@@ -439,21 +446,23 @@ class Job_seeker_model extends CI_Model {
 
 		$mobile_exists = $this->db->get_where('tr_candidate_profile',$mobile_exists_where);
 		if($mobile_exists->num_rows() > 0) {
-			$model_data['status'] = "Mobile Number Already exists";
+			$status = "Mobile Number Already exists";
 		}
 		else {
 			// Check Email already exists or not
 			$email_exists_where = "candidate_email =" . "'" . $data['cand_email'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
 			$email_exists = $this->db->get_where('tr_candidate_profile',$email_exists_where);
 			if($email_exists->num_rows() > 0) {
-				$model_data['status'] = "Email Already exists";
+				$status = "Email Already exists";
 			}
 			else {
+				$candidate_dob_explode = explode('/', $data['cand_dob']);
+				$candidate_dob = $candidate_dob_explode[2]."-".$candidate_dob_explode[1]."-".$candidate_dob_explode[0];
 				// Updation in profile table
 				$profile_update_data = array(
 								'candidate_name' => $data['cand_firstname'],
 								'candidate_gender' => $data['cand_gen'],
-								'candidate_date_of_birth' => date('Y-m-d',strtotime($data['cand_dob'])),
+								'candidate_date_of_birth' => $candidate_dob,
 								'candidate_father_name' => $data['cand_fa_name'],
 								'candidate_image_path' => $data['cand_pic'],
 								'candidate_resume_upload_path' => $data['cand_resume'],
