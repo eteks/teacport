@@ -28,81 +28,87 @@
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <?php include('include/user_dashboard_sidemenu.php'); ?>
                 </div>
-                        <div class="col-md-8 col-sm-12 col-xs-12">
-                            <div class="heading-inner first-heading">
-                                <p class="title">Change Password</p>
-                            </div>
-                            <?php
-                            if(!empty($status)) :
-                                echo "<p class='success_server_msg'> $status </p>";
+                <div class="col-md-8 col-sm-12 col-xs-12">
+                    <div class="heading-inner first-heading">
+                        <p class="title">Change Password</p>
+                    </div>
+                    <div class="profile-edit">
+                        <?php echo form_open('seeker/password','id="seeker_changepassword_form" class="form-horizontal seeker_form"'); ?>
+                            <?php 
+                            if(!empty($error)) :
+                                if($error == 2) {
+                                    echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $status </p>";
+                                }
+                                else {
+                                    echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $status </p>";
+                                }
+                            else :
+                                echo "<p class='val_status'>  </p>";
                             endif;
                             ?>
-                            <div class="profile-edit">
-                                <?php echo form_open('seeker/password','id="seeker_changepassword_form" class="form-horizontal"'); ?>
-                                    <p class="form_error"> </p>
-	                                <div class="form-group">
-										<label class="col-sm-12">You can change your password below</label>
-									</div>	
-									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
-                                            <?php echo form_error('old_pass'); ?>
-											<div class="col-sm-6">
-												<input id="old_pass" class="form-control" name="old_pass" size="25" type="password" value="<?php echo set_value('old_pass'); ?>">
-											</div>
-										</div>
-									</div>	
-									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="col-sm-6">New Password<span class="alert">*</span></label>
-                                            <?php echo form_error('new_pass'); ?>
-											<div class="col-sm-6">
-												<input id="new_pass" class="form-control" name="new_pass" size="25" type="password" max_length="20" value="<?php echo set_value('new_pass'); ?>">
-											</div>
-										</div>
-									</div>	
-									<div class="form-group">
-										<div class="col-sm-12">
-											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
-                                            <?php echo form_error('confirm_pass'); ?>
-											<div class="col-sm-6">
-												<input id="confirm_pass" max_length="20" class="form-control" name="confirm_pass" size="25" type="password" value="<?php echo set_value('confirm_pass'); ?>">
-											</div>
-										</div>
-									</div>	
-									<div class="col-sm-12">
-										<button class="btn btn-default pull-right" type="submit">APPLY</button>
+                            <div class="form-group">
+    							<label class="col-sm-12">You can change your password below</label>
+    						</div>	
+    						<div class="form-group">
+    							<div class="col-sm-12">
+    								<label class="col-sm-6">Old Password<span class="alert">*</span></label>
+                                    <?php echo form_error('old_pass'); ?>
+    								<div class="col-sm-6">
+    									<input id="old_pass" placeholder="Old Password" class="form-control form_inputs" name="old_pass" size="25" type="password" value="<?php echo set_value('old_pass'); ?>">
+    								</div>
+    							</div>
+    						</div>	
+							<div class="form-group">
+								<div class="col-sm-12">
+									<label class="col-sm-6">New Password<span class="alert">*</span></label>
+                                    <?php echo form_error('new_pass'); ?>
+									<div class="col-sm-6">
+										<input id="new_pass" placeholder="New Password" data-minlength="8" data-name="New Password" class="form-control form_inputs" name="new_pass" size="25" type="password" max_length="20" value="<?php echo set_value('new_pass'); ?>">
 									</div>
-									<div class="clearfix"> </div>		
-                                <?php echo form_close(); ?>
-                            </div>
-                        </div>
+								</div>
+							</div>	
+							<div class="form-group">
+								<div class="col-sm-12">
+									<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
+                                    <?php echo form_error('confirm_pass'); ?>
+									<div class="col-sm-6">
+										<input id="confirm_pass" data-minlength="8" placeholder="Confirm Password" data-name="Confirm Password" max_length="20" class="form-control form_inputs" name="confirm_pass" size="25" type="password" value="<?php echo set_value('confirm_pass'); ?>">
+									</div>
+								</div>
+							</div>	
+							<div class="col-sm-12">
+								<button class="btn btn-default pull-right" type="submit">APPLY</button>
+							</div>
+							<div class="clearfix"> </div>		
+                        <?php echo form_close(); ?>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
         
+<?php
+if(!empty($provider_values)) :
+?>
+<div class="brand-logo-area clients-bg">
+    <div class="clients-list">
         <?php
-        if(!empty($provider_values)) :
+        foreach ($provider_values as $val) :
+        if(!empty($val['organization_logo'])) :
         ?>
-        <div class="brand-logo-area clients-bg">
-            <div class="clients-list">
-                <?php
-                foreach ($provider_values as $val) :
-                if(!empty($val['organization_logo'])) :
-                ?>
-                <div class="client-logo">
-                    <a href="#"><img src="<?php echo $val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
-                </div>
-                <?php
-                endif;
-                endforeach;
-                ?>
-            </div>
+        <div class="client-logo">
+            <a href="#"><img src="<?php echo $val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
         </div>
         <?php
         endif;
+        endforeach;
         ?>
+    </div>
+</div>
+<?php
+endif;
+?>
 
 <?php include('include/footermenu.php'); ?>
 <?php include('include/footer.php'); ?>  
