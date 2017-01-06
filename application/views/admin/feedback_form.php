@@ -39,10 +39,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <div class="row-fluid">
                <div class="span12">
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-                  <h3 class="page-title">
+                  <!-- <h3 class="page-title">
                      Teachers Recruit
                      <small>Others</small>
-                  </h3>
+                  </h3> -->
                   <ul class="breadcrumb">
                        <li>
                           <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
@@ -137,7 +137,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
 
 
-            <div class="popup" data-popup="popup_section_feedback">
+       <div class="popup feedback-design" data-popup="popup_section_feedback">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -157,13 +157,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div>
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Form id</label>
+                          <label class="control-label">Form id :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['feedback_form_id'])) echo $feedback_form['feedback_form_id']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Title</label>
+                          <label class="control-label">Title :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['feedback_form_title'])) echo $feedback_form['feedback_form_title']; else echo "-"; ?>
                           </span>
@@ -171,13 +171,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>      
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Message</label>
+                          <label class="control-label">Message :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['feedback_form_message'])) echo $feedback_form['feedback_form_message']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Is Organisation?</label>
+                          <label class="control-label">Is Organisation ?</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['is_organization'])) echo $feedback_form['is_organization']; else echo "-"; ?>
                           </span>
@@ -185,13 +185,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>      
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Is Candidate?</label>
+                          <label class="control-label">Is Candidate ?</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['is_candidate'])) echo $feedback_form['is_candidate']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Guest User</label>
+                          <label class="control-label">Guest User :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['is_guest_user'])) echo $feedback_form['is_guest_user']; else echo "-"; ?>
                           </span>
@@ -199,13 +199,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>      
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Candidate Or Organization</label>
+                          <label class="control-label">Candidate Or Organization :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['candidate_or_organization_id'])) echo $feedback_form['candidate_or_organization_id']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Message Viewed</label>
+                          <label class="control-label">Message Viewed :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['is_viewed'])) echo $feedback_form['is_viewed']; else echo "-"; ?>
                           </span>
@@ -213,7 +213,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>      
                       <div class="span12">
                         <div class="span6 control-group">
-                          <label class="control-label">Feedback Form Status</label>
+                          <label class="control-label">Feedback Form Status :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['feedback_form_status'])) echo $feedback_form['feedback_form_status']; else echo "-"; ?>
                           </span>
@@ -221,7 +221,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>      
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Feedback Created Date</label>
+                          <label class="control-label">Feedback Created Date :</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($feedback_form['feedback_form_created_date'])) echo $feedback_form['feedback_form_created_date']; else echo "-"; ?>
                           </span>

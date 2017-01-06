@@ -11,8 +11,8 @@
 	                </div>
                     <div class="col-md-3 col-sm-3 col-xs-12 nopadding">
 	                    <div class="form-group">
-	                        <label>Minimum Salary</label>
-	                        <input class="form-control" id="" name="search_min_amount" placeholder="Mimimum Salary" type="text" value="<?php if(!empty($search_inputs['min_amount'])) echo $search_inputs['min_amount']; ?>">
+	                        <label>Salary</label>
+	                        <input class="form-control" id="" name="search_min_amount" placeholder="Minimum Salary" type="text" value="<?php if(!empty($search_inputs['min_amount'])) echo $search_inputs['min_amount']; ?>">
 	                		<!-- <select name="search_min_amount" class="select-category form-control">
 								<option value="">&nbsp;</option>
 								<option value="5000"> 5000 +</option>
@@ -24,8 +24,7 @@
 	                    </div>
 	                </div>
 	                <div class="col-md-3 col-sm-3 col-xs-12 nopadding">
-	                    <div class="form-group">
-	                        <label>Maximum Salary</label>
+	                    <div class="form-group">	                    	<label> </label>
 	                        <input class="form-control" id="" name="search_max_amount" placeholder="Maximum Salary" type="text" value="<?php if(!empty($search_inputs['max_amount'])) echo $search_inputs['max_amount']; ?>">
 	                		<!-- <select name="search_max_amount" class="select-category form-control">
 								<option value="">&nbsp;</option>

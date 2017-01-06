@@ -37,13 +37,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div> -->
                         <!-- END THEME CUSTOMIZER-->
                         <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-                        <h3 class="page-title">
+                        <!-- <h3 class="page-title">
                             Dashboard
                             <small>statistics and more</small>
-                        </h3>
+                        </h3> -->
                         <ul class="breadcrumb">
                             <li>
-                                <a href="index.php#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                                <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                             </li>
                             <li>
                                 <a href="<?php echo base_url(); ?>main/dashboard">Teacher Recruit</a> <span class="divider">&nbsp;</span>

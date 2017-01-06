@@ -137,7 +137,9 @@ class Admin_login extends CI_Controller {
 				$this->email->from($from_email, 'Teacher Recruit');
                 $this->email->to($user_values['admin_user_email']);
     			$this->email->subject('Get your forgotten Password');
-    			$this->email->message("Your registered password is ".$user_values['admin_user_password']);
+    			// $this->email->message("Your registered password is ".$user_values['admin_user_password']);
+    			$message = $this->load->view('admin/email_template/forget_password', $user_values, TRUE);
+    			$this->email->message($message);
 
     			if($this->email->send())
     			{
