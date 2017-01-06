@@ -12,7 +12,6 @@ else{
 $feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
-<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
   <!-- BEGIN CONTAINER -->
   <div id="container" class="row-fluid">
@@ -52,11 +51,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <span class="loader_holder hide_loader"> </span>
                         </div>
                         <div class="widget-body form">
-                        <?php if (isset($error_message)){ 
-                    echo "<p class='error_msg_reg alert alert-info'>".$error_message."</p>";
-                }?>
-                          <form action="<?php echo base_url(); ?>admin/setting/payment_gateway" class="form-horizontal" method="POST">
-                            <!-- <p class="admin_status"> </p> -->
+                          <form action="payment_gateway" class="form-horizontal payment_gateway_act" method="POST">
+                            <p class="admin_status">  </p>
 	                          <!-- <div class="control-group">
 	                            <label class="control-label">Currency Symbol</label>
 	                            <div class="controls">
@@ -68,19 +64,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Merchant Key</label>
 	                            <div class="controls ">
-	                              <input name="online_transfer_merchant_key" class="span6" value="" type="text">
+	                              <input name="online_transfer_merchant_key" class="span6" value="<?php if(!empty($payment_values['online_transfer_merchant_key'])) echo $payment_values['online_transfer_merchant_key']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Merchant Salt</label>
 	                            <div class="controls">
-	                              <input name="online_transfer_merchant_salt" class="span6" value="" type="text">
+	                              <input name="online_transfer_merchant_salt" class="span6" value="<?php if(!empty($payment_values['online_transfer_merchant_salt'])) echo $payment_values['online_transfer_merchant_salt']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Payment url</label>
 	                            <div class="controls">
-	                            	<input name="online_transfer_payment_base_url" class="span6" value="" type="text">
+	                            	<input name="online_transfer_payment_base_url" class="span6" value="<?php if(!empty($payment_values['online_transfer_payment_base_url'])) echo $payment_values['online_transfer_payment_base_url']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <!-- <div class="control-group">
@@ -98,13 +94,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Account Name</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_account_name" class="span6" value="" type="text">
+	                              <input name="bank_transfer_account_name" class="span6" value="<?php if(!empty($payment_values['bank_transfer_account_name'])) echo $payment_values['bank_transfer_account_name']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Account Number</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_account_number" class="span6" value="" type="text">
+	                              <input name="bank_transfer_account_number" class="span6" value="<?php if(!empty($payment_values['bank_transfer_account_number'])) echo $payment_values['bank_transfer_account_number']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <!-- <div class="control-group">
@@ -116,13 +112,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">IFSC Code</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_ifsc_code" class="span6" value="" type="text">
+	                              <input name="bank_transfer_ifsc_code" class="span6" value="<?php if(!empty($payment_values['bank_transfer_ifsc_code'])) echo $payment_values['bank_transfer_ifsc_code']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="form-actions">
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
-                            </div>
+                            </div>   
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php echo $payment_values['payment_gateway_id']; ?>" />                       
                           </form>
                         </div>
                     </div>
@@ -140,7 +137,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
    </div>
    <!-- END CONTAINER -->    
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
 <?php
 else :
 redirect(base_url().'main');

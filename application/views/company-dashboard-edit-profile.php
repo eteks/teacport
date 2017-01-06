@@ -184,7 +184,8 @@
 										<span class="lbl"></span>
 										I hereby declare that all the particulars furnished in this application are true, correct and complete to the best of my knowledge and belief.
 									</p>
-									<p>
+									<!-- commented by muthu -->
+									<!-- <p>
 										<input id="optin_sms" class="ace" name="optin_sms" value="Y" type="checkbox">
 										<span class="lbl"></span>
 										I accept to receive sms notifications to the above specified mobile number.
@@ -193,7 +194,7 @@
 										<input id="optin_mail" class="ace" name="optin_mail" value="Y" type="checkbox">
 										<span class="lbl"></span>
 										I accept to receive E-mail notifications.
-									</p>
+									</p> -->
 								</div>
 							</div>
 							<div class="row">

@@ -1,52 +1,39 @@
-<?php
-$is_super_admin = $this->config->item('is_super_admin');
-// $access_rights = $this->config->item('access_rights');
-if(!$is_super_admin){
-  $access_permission=$this->config->item('current_page_rights');    
-  $current_page_rights = $access_permission['access_permission'];
-  $access_rights = explode(',',$current_page_rights);
-}
-else{
-  $access_rights = $this->config->item('access_rights');
-}
-$feedback_data = $this->config->item('feedback_data');
-if(!empty($this->session->userdata("admin_login_status"))):
-?>
-<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
 <!-- BEGIN CONTAINER -->
 <div id="container" class="row-fluid">
   <!-- BEGIN PAGE -->
-  <div id="main-content">
+  <div id="main-content" class="<?php if(empty($this->session->userdata("admin_login_status"))) echo "remove_sidebar"; ?>">
     <!-- BEGIN PAGE CONTAINER-->
     <div class="container-fluid">
       <!-- BEGIN PAGE HEADER-->
-      <div class="row-fluid">
-        <div class="span12">
-          <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-          <!-- <h3 class="page-title">
-            Error Page
-            <small>404</small>
-          </h3> -->
-          <ul class="breadcrumb">
-            <li>
-              <a href="<?php echo base_url(); ?>main/dashboard">
-                <i class="icon-home"></i>
-              </a>
-              <span class="divider">&nbsp;</span>
-            </li>
-            <li>
-              <span>Error</span> 
-              <span class="divider">&nbsp;</span>
-            </li>
-            <li>
-              <a href="#">404</a>
-              <span class="divider-last">&nbsp;</span>
-            </li>
-          </ul>
-          <!-- END PAGE TITLE & BREADCRUMB-->
+      <?php if(!empty($this->session->userdata("admin_login_status")) && strpos($_SERVER['REQUEST_URI'], 'admin') === FALSE): ?>
+        <div class="row-fluid">
+          <div class="span12">
+            <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
+            <!-- <h3 class="page-title">
+              Error Page
+              <small>404</small>
+            </h3> -->
+            <ul class="breadcrumb">
+              <li>
+                <a href="<?php echo base_url(); ?>main/dashboard">
+                  <i class="icon-home"></i>
+                </a>
+                <span class="divider">&nbsp;</span>
+              </li>
+              <li>
+                <span>Error</span> 
+                <span class="divider">&nbsp;</span>
+              </li>
+              <li>
+                <a href="#">404</a>
+                <span class="divider-last">&nbsp;</span>
+              </li>
+            </ul>
+            <!-- END PAGE TITLE & BREADCRUMB-->
+          </div>
         </div>
-      </div>
+      <?php endif; ?>
       <!-- END PAGE HEADER-->
       <!-- BEGIN ADVANCED TABLE widget-->
       <div class="row-fluid">
@@ -90,21 +77,4 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- END PAGE -->
 </div>
 <!-- END CONTAINER -->
-<script>
-  // Define default values
-  var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
-  var columns = new Array("e_name","e_status"); // Set name of input types
-  var placeholder = new Array("Enter Extra-Curricular Name",""); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
-  var table = "admin_table"; // Set classname of table
-  var e_status_option = new Array("Please select status","Active","Inactive"); 
-  var e_status_value = new Array("","1","0"); 
-</script>
-  
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
-<?php
-else :
-redirect(base_url().'main');
-endif;
-?>

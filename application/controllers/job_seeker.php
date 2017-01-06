@@ -934,6 +934,7 @@ class Job_seeker extends CI_Controller {
 				$this->email->to($forget_query['candidate_email']);
 	        	$this->email->subject('Get your forgotten Password');
 	        	$message = $this->load->view('email_template/forget_pwd_seeker', $forget_query, TRUE);
+				$this->email->message($message);
 	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
