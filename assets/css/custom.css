@@ -1,6 +1,11 @@
 /* Custom Code */
 .mega-menu .menu-links > li > a {
-   font-size: 16px;
+   font-size: 14px;
+}
+.mega-menu > section.menu-list-items { padding: 10px 20px; }
+.mega-menu .menu-links > li > a {
+padding: 0 15px !important;
+line-height: 49px !important;
 }
 /* Logo */
 #webpage_title .tr_logo{
@@ -90,8 +95,8 @@
 .slide-featured-jobs .img-box img {
 	/*height: 768px;
 	width: 1024px;*/
-	height: 100%;
-	width: 100%;
+	/*height: 100%;
+	width: 100%;*/
 }
 .slide-featured-jobs .content-area{
 	height: 250px;
@@ -896,51 +901,6 @@ label.form-input-error {
 .form-label-error {
 	color: #ff1919;
 }
-#seeker-edit-image-preview {
-	height: 55px;
-    position: absolute;
-    width: 90%;
-}
-.btn-width {
-    font-size: 13px;
-    line-height: inherit;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-.check-label-cursor label {
-	cursor: pointer;
-}
-#candidate-form select {
-	cursor: pointer;
-}
-/*.clone_all_fields select {
-	left: 0;
-    opacity: 0;
-    position: absolute;
-    top: 0;
-    height: 45px;
-}
-.custom_select {
-	position: relative;
-    width: 100%;
-}
-.select_holder {
-	border: 1px solid #d9d9d9;
-    height: 45px;
-    overflow: hidden;
-}
-.select_holder .value {
-	float: left;
-    padding: 7px;
-    width: 80%;
-}
-.select_holder .arrow {
-    padding: 7px;
-    width: 20%;
-}*/
-
-
-
 
 /* Ended by siva */
 .subcription_plan_details{
@@ -981,5 +941,8 @@ label.form-input-error {
 .featured-image-box img{
 	height: 125px;
 	width: 125px;
+}
+.footer_logo {
+	margin: -5px 0 0;
 }
 
