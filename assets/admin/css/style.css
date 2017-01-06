@@ -2913,11 +2913,12 @@ div.tagsinput .not_valid {
     font-size: 13px;
     font-weight: 300;
     margin-left: 35px;
-    margin-top: 5px;
+    /*margin-top: 5px;*/
+   padding: 13px 0;
 }
 
 .form-wizard .active .step .number {
-    background-color: #A5D16C;
+    background-color: #e74955 ;
     color: #fff;
 }
 
@@ -2930,7 +2931,7 @@ div.tagsinput .not_valid {
 }
 
 .form-wizard .done .step .number {
-    background-color: #E74955;
+    background-color: #a5d16c;
     color: #fff;
 }
 
@@ -4009,7 +4010,7 @@ ul li:last-child{
 .tab-content label {
     display: inline-block;
     margin-bottom: 5px;
-    width: 50%;
+    width: 45%;
     float: left;
 }
 .tab-content span {
@@ -4018,7 +4019,7 @@ ul li:last-child{
     width: 50%;
 }
 .tab-content span input, .tab-content span select {
-    max-width: 100%;
+    /*max-width: 100%;*/
     width: 100% !important;
 }
 

@@ -12,7 +12,10 @@
  	</div>
  	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
 </div>
+<!--overlay for all popup in admin-->
 <div id="dialog-overlay"></div>
+<!--overlay for loader in admin-->
+<div class="loader_overlay"> </div>
 <!--  Confirm box with yes and no button -->
 <div id="dialog-box">
     <h3 class="message"></h3>
@@ -86,6 +89,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script>  -->
+        <script src="<?php echo base_url(); ?>assets/admin/js/timezones.full.min.js" type="text/javascript"></script>
 
         <script>
          

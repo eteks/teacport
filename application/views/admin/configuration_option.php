@@ -24,10 +24,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <div class="row-fluid">
                <div class="span12">
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-                  <h3 class="page-title">
+                  <!-- <h3 class="page-title">
                      Teachers Recruit
                      <small>Setting</small>
-                  </h3>
+                  </h3> -->
                    <ul class="breadcrumb">
                        <li>
                            <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
@@ -81,12 +81,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                              <input name="system_email_address" class="span6 " type="text">
 	                             </div>
 	                          </div>
-	                          <div class="control-group">
+	                          <!-- <div class="control-group">
 	                            <label class="control-label">Website Time Zone</label>
 	                            <div class="controls">
-	                            	<select class="form-control span6"></select>
+	                            	<select id="timezone_act" class="form-control span6"></select>
 	                             </div>
-	                          </div>
+	                          </div> -->
 	                          <div class="control-group">
 	                            <label class="control-label">Enable Facebook Login</label>
 	                            <div class="controls">
