@@ -824,6 +824,12 @@ $('.top_layer, .message_close').on('click',function() {
 	        $('#divLargerImage').empty();
 	    });
 	});
+    
+    //To change Job provider ad verified status 
+    $(document).delegate('.ad_verify_act li','click',function(e){
+        select_value = $(this).data('value');
+        $('[name=ads_status]').find("[value=" + select_value + "]").attr('selected', 'selected');
+    });
 
 }); // End document
 
