@@ -723,6 +723,8 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val-1).fadeIn(3000);
         }
     });
+    $('#timezone_act').timezones(); //code for timezone module in admin side
+    
     // Next button click - Upgrade
     $(document).on('click','.upgrade_pag_next',function() {
         var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
@@ -824,6 +826,12 @@ $('#timezone_act').timezones(); //code for timezone module in admin side
 	        $('#divLargerImage').empty();
 	    });
 	});
+    
+    //To change Job provider ad verified status 
+    $(document).delegate('.ad_verify_act li','click',function(e){
+        select_value = $(this).data('value');
+        $('[name=ads_status]').find("[value=" + select_value + "]").attr('selected', 'selected');
+    });
 
 }); // End document
 

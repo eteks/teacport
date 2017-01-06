@@ -874,6 +874,74 @@ label.form-input-error {
 .loader-dn {
 	display: none;
 }
+.val_status {
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 40px;
+    padding: 6px 0;
+    text-align: center;
+    display: none;
+}
+.val_status.val_error {
+	color: #ff1919;
+}
+.val_status.val_success {
+	color: #228b22;
+}
+.form-field-error {
+	border-color: #ff7f7f !important;
+}
+.form-label-error {
+	color: #ff1919;
+}
+#seeker-edit-image-preview {
+	height: 55px;
+    position: absolute;
+    width: 90%;
+}
+.btn-width {
+    font-size: 13px;
+    line-height: inherit;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.check-label-cursor label {
+	cursor: pointer;
+}
+#candidate-form select {
+	cursor: pointer;
+}
+/*.clone_all_fields select {
+	left: 0;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    height: 45px;
+}
+.custom_select {
+	position: relative;
+    width: 100%;
+}
+.select_holder {
+	border: 1px solid #d9d9d9;
+    height: 45px;
+    overflow: hidden;
+}
+.select_holder .value {
+	float: left;
+    padding: 7px;
+    width: 80%;
+}
+.select_holder .arrow {
+    padding: 7px;
+    width: 20%;
+}*/
+
+
+
+
 /* Ended by siva */
 .subcription_plan_details{
 	color: #fff;

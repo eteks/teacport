@@ -105,7 +105,7 @@
                                     [5, 25, 50, "All"]
                                   ],
                     // Page length
-                    "pageLength" : 5,
+                    "pageLength" : 15,
                     // Change default text
                     "language" : {
                                     "lengthMenu": "_MENU_ records per page", // Remove show entries text from entries dropdown like "sLengthMenu": "_MENU_ records per page"

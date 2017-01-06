@@ -840,4 +840,14 @@ table .dataTables_empty{
 	border-bottom: 1px solid #ccc;
 	padding: 10px;
 }
+/* Ended by Akila */
+
+/*.ajax_overlay {
+	opacity: 0.5;
+	z-index: 2;
+	color: #CCCCCC;	
+}*/
+.remove_sidebar{
+    margin-left: 0px !important;
+}
 

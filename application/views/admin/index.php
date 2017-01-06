@@ -43,7 +43,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </h3> -->
                         <ul class="breadcrumb">
                             <li>
-                                <a href="index.php#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
+                                <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
                             </li>
                             <li>
                                 <a href="<?php echo base_url(); ?>main/dashboard">Teacher Recruit</a> <span class="divider">&nbsp;</span>

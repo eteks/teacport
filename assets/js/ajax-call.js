@@ -10,7 +10,7 @@ $(document).ready(function() {
 	});
 	/* Accept Only Characters */
 	$(document).on("keypress",".alpha_value",function (e) {
-		if (e.which != 8 && e.which != 46 && e.which != 0 && (e.which < 97 || e.which > 122)) {
+		if (e.which != 8 && e.which != 46 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
 			return false;
 		}
 	});
@@ -18,10 +18,22 @@ $(document).ready(function() {
 	$(document).on("keyup",".numeric_dot",function () {
     	var number_with_dot = new RegExp("^([0-9]+(.[0-9]+)?)*$");
 		if(!number_with_dot.test($(this).val())) {
-			$(this).addClass('form-input-error');
+			$(this).addClass('form-field-error');
 		}
 		else {
-			$(this).removeClass('form-input-error');
+			$(this).removeClass('form-field-error');
+		}
+	});
+	/* Validate minlength and maxlength */
+	$(document).on("keyup",".form_inputs",function () {
+    	var this_val = $.trim($(this).val());
+    	var data_min = parseInt($(this).data('minlength'));
+
+		if(this_val.length < data_min) {
+			$(this).addClass('form-field-error');
+		}
+		else {
+			$(this).removeClass('form-field-error');
 		}
 	});
 	
@@ -57,22 +69,27 @@ $(document).ready(function() {
 	/* Seeker Form Validation On Submit */
 	$(document).on('submit','.seeker_edit_form',function(e) {
 		e.preventDefault();
-		var error = 0;
-	
+		var error = '';
+		var error_msg = $(this).find('.val_status');
+		var message = '';
+		var this_form = $(this);
+		
 		/* Validate Input and Select element */
 		$(this).find('.form_inputs').each(function() {
 			var tag_name = $(this).prop("tagName").toLowerCase();
-			if($(this).val() == '') {
+			var this_val = $.trim($(this).val()); 
+			if(this_val == '') {
 				error = 1;
-				$(this).addClass('form-input-error');
+				message ="Please Provide Valid Information!";
+				$(this).addClass('form-field-error');
 				if(tag_name == "select") {
-					$(this).siblings('span').find('.select2-selection').addClass('form-input-error');
+					$(this).siblings('span').find('.select2-selection').addClass('form-field-error');
 				}
 			}
 			else {
-				$(this).removeClass('form-input-error');
+				$(this).removeClass('form-field-error');
 				if(tag_name == "select") {
-					$(this).siblings('span').find('.select2-selection').removeClass('form-input-error');
+					$(this).siblings('span').find('.select2-selection').removeClass('form-field-error');
 				}
 			}
 		});
@@ -81,17 +98,18 @@ $(document).ready(function() {
 		var radio = [];
     	$('.form_radio').each(function () {
         	var rname = $(this).attr('name');
-        		if ($.inArray(rname, radio) == -1) radio.push(rname);
-    		});
-    		$.each(radio, function (i, name) {
-        		if ($('input[name="' + name + '"]:checked').length == 0) {
-        			error = 1;
-            		$('input[name="' + name + '"]').first().addClass('form-input-error');
-            		$('input[name="' + name + '"]').first().parents('.form-group').find('label').addClass('form-input-error');
-                }
+        	if ($.inArray(rname, radio) == -1) radio.push(rname);
+    	});
+    	$.each(radio, function (i, name) {
+        	if ($('input[name="' + name + '"]:checked').length == 0) {
+        		error = 1;
+				message ="Please Provide Valid Information!";
+           		$('input[name="' + name + '"]').first().addClass('form-field-error');
+           		$('input[name="' + name + '"]').first().parents('.form-group').find('label').addClass('form-label-error');
+            }
         	else {
-        		$('input[name="' + name + '"]').first().removeClass('form-input-error');
-        		$('input[name="' + name + '"]').first().parents('.form-group').find('label').removeClass('form-input-error');
+        		$('input[name="' + name + '"]').first().removeClass('form-field-error');
+        		$('input[name="' + name + '"]').first().parents('.form-group').find('label').removeClass('form-label-error');
         	}
     	});
 
@@ -104,101 +122,87 @@ $(document).ready(function() {
     	$.each(checkbox, function (i, name) {
 	        if ($('input[name="' + name + '"]:checked').length == 0) {
 	        	error = 1;
-        	    $('input[name="' + name + '"]').first().addClass('form-input-error');
-    	        $('input[name="' + name + '"]').first().parents('.form-group').find('label').addClass('form-input-error');
+				message ="Please Provide Valid Information!";
+        	    $('input[name="' + name + '"]').first().addClass('form-field-error');
+    	        $('input[name="' + name + '"]').first().parents('.form-group').find('label').addClass('form-label-error');
         	}
         	else {
-	        	$('input[name="' + name + '"]').first().removeClass('form-input-error');
-        		$('input[name="' + name + '"]').first().parents('.form-group').find('label').removeClass('form-input-error');
+	        	$('input[name="' + name + '"]').first().removeClass('form-field-error');
+        		$('input[name="' + name + '"]').first().parents('.form-group').find('label').removeClass('form-label-error');
         	}
     	});
 
     	/* Validate Professional Profile */
     	if($('#fresher_option').is(':checked')) {
-    		$('.form_exp_inputs').removeClass('form-input-error');
+    		$('.form_exp_inputs').removeClass('form-field-error');
     	}
     	else {
     		$(this).find('.form_exp_inputs').each(function() {
 				if($(this).val() == '') {
 					error = 1;
-					$(this).addClass('form-input-error');
+					message ="Please Provide Valid Information!";
+					$(this).addClass('form-field-error');
 				}
 				else {
-					$(this).removeClass('form-input-error');
+					$(this).removeClass('form-field-error');
 				}
 			});	
     	}
 
+    	/* Validate minlength for input fields */
+    	if(error == '') {
+			$(this).find('.form_inputs').each(function() {
+				var this_val = $.trim($(this).val()); 
+				var data_min = parseInt($(this).data('minlength'));
+    			var data_name = $(this).data('name');
+    			if(this_val.length < data_min) {
+    				error = 1;
+    				message = data_name + " must containes atleast "+data_min+" characters";
+					$(this).addClass('form-field-error');
+					return false;
+				}
+				else {
+					$(this).removeClass('form-field-error');
+				}
+			});
+	   	}
+
     	/* Validate correct details with number fields */
-    	if(error == 0) {
-	    	var amount_error = 0;
-    		$('.inr_validation').each(function() {
-	    		if($(this).val().length < 4 ) {
-	    			amount_error = 1;
-	    			error = 2;
-	    			$(this).addClass('form-input-error');
-	    		}
-	    		else {
-	    			$(this).removeClass('form-input-error');
-	    		}
-    		});
-    		var min_amount = parseInt($('#min_amount').val());
+    	if(error == '') {
+			var min_amount = parseInt($('#min_amount').val());
     		var max_amount = parseInt($('#max_amount').val());
-    		var postal_code = $('#postal-code').val().length;
-    		var mobile = $('#seeker_mobile').val().length;
-    		if((min_amount > max_amount) && amount_error == 0) {
-    			error = 2;
-    			$('#max_amount').addClass('form-input-error');
+			if((min_amount > max_amount) && amount_error == 0) {
+    			error = 1;
+    			message = "Please Provide Information!";
+    			$('#max_amount').addClass('form-field-error');
     		}
     		else {
-    			$('#max_amount').removeClass('form-input-error');
+    			$('#max_amount').removeClass('form-field-error');
     		}
-    		if(postal_code < 4) {
-    			error = 2;
-    			$('#postal-code').addClass('form-input-error');
-    		}
-    		else {
-    			$('#postal-code').removeClass('form-input-error');
-    		}
-    		if(mobile < 10) {
-    			error = 2;
-    			$('#seeker_mobile').addClass('form-input-error');
-    		}
-    		else {
-    			$('#seeker_mobile').removeClass('form-input-error');
-    		}
-    		$('.numeric_dot').each(function() {
-    			var split_val = $(this).val().split('.');
-	    		if(split_val[0].length > 2 ) {
-	    			error = 2;
-	    			$(this).addClass('form-input-error');
-	    		}
-	    		else {
-	    			$(this).removeClass('form-input-error');
-	    		}
-    		});
-    		$('.edu_percen').each(function() {
-	    		if($(this).val().length < 2 ) {
-	    			error = 2;
-	    			$(this).addClass('form-input-error');
-	    		}
-	    		else {
-	    			$(this).removeClass('form-input-error');
-	    		}
+ 			$('.numeric_dot').each(function() {
+    		 	var split_val = $(this).val().split('.');
+	    	 	if(split_val[0].length > 2 ) {
+	    	 		error = 1;
+    				message = "Please Provide Information!";
+	    	 		$(this).addClass('form-field-error');
+	    	 	}
+	    	 	else {
+	    	 		$(this).removeClass('form-field-error');
+	    	 	}
     		});
     	}
 
     	/* Check whether the input and select element has error or not */
-		if($('input,select').hasClass('form-input-error')) {
-			if(error == 1) {
-				$(this).parents('.edit_section_seeker').find('.form_error_ajax').text('Please fill out all mandatory fields').fadeIn();
+		if($('input,select').hasClass('form-field-error')) {
+			if(message == '') {
+				message ="Please Provide Valid Information!";
 			}
-			else {
-				$(this).parents('.edit_section_seeker').find('.form_error_ajax').text('Please fill out with correct details').fadeIn();
-			}
+			error_msg.removeClass('val_success');
+            error_msg.addClass('val_error');
+            $('html,body').animate({scrollTop : $(this).offset().top }, 500);
+            error_msg.html('<i class="fa fa-times" aria-hidden="true"></i> '+message+' ').fadeIn(350);
 			
-
-			var current_error_section = $(this).find('.form-input-error').first().parents('.panel-default');
+			var current_error_section = $(this).find('.form-field-error').first().parents('.panel-default');
 			$('.panel-heading').removeClass('tab-collapsed');
 			$('.panel-collapse').removeClass('in')
 			$('.panel-collapse').attr('aria-expanded',"false");
@@ -209,12 +213,10 @@ $(document).ready(function() {
 		else {
 			/* Ajax Post - Store values - Redirect to controller */
 			error = 0;
-			var this_error = $(this).parents('.edit_section_seeker').find('.form_error_ajax');
+			error_msg.html('').fadeOut(350);
 			var this_loader = $(this).parents('.edit_section_seeker').find('.edit_loader');
-			this_error.text('').fadeOut();
 			var form_data = new FormData(this);
 			form_data.append('csrf_token',csrf_token_value);
-
 			
 			$.ajax({
 				type : "POST",
@@ -227,14 +229,19 @@ $(document).ready(function() {
    				},
  				success : function(res) {
 					if(res == 'success') {
-						$("html, body").animate({ scrollTop: 0 }, 1000);
-						this_error.addClass('succ_msg');
-						this_error.text("Updated Sucessfully").fadeIn();
+            			error_msg.removeClass('val_error');
+						error_msg.addClass('val_success');
+            			$('html,body').animate({scrollTop : this_form.offset().top }, 500);
+            			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Sucessfully').fadeIn(350);
+
 						setTimeout(function() { location.reload(); }, 3000);
+
 					}
 					else {
-						$("html, body").animate({ scrollTop: 0 }, 1000);
-						this_error.text(res).fadeIn();	
+						error_msg.removeClass('val_success');
+            			error_msg.addClass('val_error');
+            			$('html,body').animate({scrollTop : this_form.offset().top }, 500);
+            			error_msg.html('<i class="fa fa-times" aria-hidden="true"></i> '+res+'').fadeIn(350);
 					}
 				},
 				complete : function(){
