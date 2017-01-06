@@ -152,11 +152,13 @@ class Job_seeker_model extends CI_Model {
 		$mobile_exists = $this->db->get_where('tr_candidate_profile',$mobile_exists_where);
 		if($mobile_exists->num_rows() > 0) {
 			$model_data['status'] = "Mobile Number Already exists";
+			$model_data['error'] = 1;
 		}
 		else {
 			$email_exists_where = "candidate_email =" . "'" . $data['candidate_email'] . "' AND candidate_id NOT IN (". $this->input->post('candidate_id').")";
 			$email_exists = $this->db->get_where('tr_candidate_profile',$email_exists_where);
 			if($email_exists->num_rows() > 0) {
+				$model_data['error'] = 1;
 				$model_data['status'] = "Email Already exists";
 			}
 			else {
@@ -164,6 +166,7 @@ class Job_seeker_model extends CI_Model {
 				$this->db->set($data);
 				$this->db->where($update_where);
 				$this->db->update('tr_candidate_profile',$data);
+				$model_data['error'] = 2;
 				$model_data['status'] = "success";
 				$cand_data = $this->db->get_where('tr_candidate_profile',$update_where)->row_array();
 				$model_data['candidate_data'] =array(
@@ -193,6 +196,7 @@ class Job_seeker_model extends CI_Model {
 		$this->db->update('tr_candidate_profile',$data);
 		$cand_data = $this->db->get_where('tr_candidate_profile',$update_where)->row_array();
 		$model_data['status'] = "success";
+		$model_data['error'] = 2;
 		$model_data['candidate_data'] =array(
 											'user_type' => 'seeker',
 											'candidate_id' => $cand_data['candidate_id'],
@@ -351,12 +355,14 @@ class Job_seeker_model extends CI_Model {
 			$this->db->set($password_update_data);
 			$this->db->where($password_update_where);
 			$this->db->update('tr_candidate_profile',$password_update_data);
-			$value = "Updated successfully";
+			$model_data['status'] = "Updated successfully";
+			$model_data['error'] = 2;
 		}
 		else {
-			$value = "Password Not match";
+			$model_data['error'] = 1;
+			$model_data['status'] = "Password Not match";
 		}
-		return $value;
+		return $model_data;
 	}
 	public function candidate_profile_by_id($id) {
 		$cand_where = '(candidate_id="'.$id.'")';
@@ -456,6 +462,12 @@ class Job_seeker_model extends CI_Model {
 				$status = "Email Already exists";
 			}
 			else {
+				if($fresh == 0 ) {
+					$pro_com = 100;
+				}
+				else {
+					$pro_com = 90;
+				}
 				$candidate_dob_explode = explode('/', $data['cand_dob']);
 				$candidate_dob = $candidate_dob_explode[2]."-".$candidate_dob_explode[1]."-".$candidate_dob_explode[0];
 				// Updation in profile table
@@ -484,7 +496,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_googleplus_url' => $data['cand_google'],
 								'candidate_linkedin_url' => $data['cand_linkedin'],
 								'candidate_tet_exam_status' => $data['cand_tet'],
-								'candidate_profile_completeness' => 90,
+								'candidate_profile_completeness' => $pro_com,
 								// 'candidate_interest_subject_id' => $data['cand_int_sub'],
 								'candidate_extra_curricular_id' => $cand_extra_cur,
 								'candidate_is_fresher' => $fresh,
@@ -516,10 +528,7 @@ class Job_seeker_model extends CI_Model {
 				// Updation in education table
 				$data_education = array_map(null,$data['cand_qual'],$data['cand_yop'],$data['cand_med'],$data['cand_dept'],$data['cand_board'],$data['cand_percen'],$data['cand_edu']);
 
-				// $edu_set = $this->input->post('edu_set');
-				// $exp_set = $this->input->post('exp_set');
-				// echo $edu_set;
-				// echo $exp_set;
+				$edu_set = explode(',',$this->input->post('edu_set'));
 				foreach ($data_education as $edu_key => $edu_val) {
 					if(!empty($edu_val[6])) {
 						if($edu_val[3] == 0) {
@@ -536,6 +545,10 @@ class Job_seeker_model extends CI_Model {
 						$this->db->set($education_update_data);
 						$this->db->where('candidate_education_id',$edu_val[6]);
 						$this->db->update('tr_candidate_education',$education_update_data);
+						if (in_array($edu_val[6], $edu_set)) 
+						{
+						    unset($edu_set[array_search($edu_val[6],$edu_set)]);
+						}
 					}
 					else {
 						// Insertion in education table
@@ -555,8 +568,15 @@ class Job_seeker_model extends CI_Model {
 						$this->db->insert('tr_candidate_education',$education_insert_data);
 					}
 				}
+				// Delete record in education table
+				if (!empty($edu_set)) {
+			        $this->db->where_in('candidate_education_id', $edu_set);
+			        $this->db->delete('tr_candidate_education');
+			    }
+
 				// Updation in experience table
 				if($fresh == 0 ) {
+					$exp_set = explode(',',$this->input->post('exp_set'));
 					$data_experience = array_map(null,$data['cand_exp_class'],$data['cand_exp_sub'],$data['cand_exp_board'],$data['cand_exp_yr'],$data['cand_exp']);
 					foreach ($data_experience as $exp_key => $exp_val) {
 						if(!empty($exp_val[4])) {
@@ -569,6 +589,10 @@ class Job_seeker_model extends CI_Model {
 							$this->db->set($experience_update_data);
 							$this->db->where('candidate_experience_id',$exp_val[4]);
 							$this->db->update('tr_candidate_experience',$experience_update_data);
+							if (in_array($exp_val[4], $exp_set)) 
+							{
+							    unset($exp_set[array_search($exp_val[4],$exp_set)]);
+							}
 						}
 						else {
 							$experience_insert_data = array(
@@ -582,6 +606,11 @@ class Job_seeker_model extends CI_Model {
 							$this->db->insert('tr_candidate_experience',$experience_insert_data);
 						}
 					}
+					// Delete record in education table
+					if (!empty($exp_set)) {
+				        $this->db->where_in('candidate_experience_id', $exp_set);
+				        $this->db->delete('tr_candidate_experience');
+				    }
 				}
 				else {
 					$this->db->where('candidate_profile_id',$data['cand_pro']);

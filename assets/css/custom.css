@@ -890,6 +890,9 @@ label.form-input-error {
 .val_status.val_success {
 	color: #228b22;
 }
+.val_status.db {
+	display: block;
+}
 .form-field-error {
 	border-color: #ff7f7f !important;
 }
@@ -938,7 +941,9 @@ label.form-input-error {
     padding: 7px;
     width: 20%;
 }*/
-
+.select2-container--open .select2-selection {
+	border-color: #66afe9 !important;
+}
 
 
 

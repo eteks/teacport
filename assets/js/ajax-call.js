@@ -4,32 +4,41 @@ $(document).ready(function() {
 
 	/* Accept Only Numbers */
 	$(document).on("keypress",".numeric_value",function (e) {
+		if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+			return false;
+		}
+	});
+
+	/* Accept Only Characters with space */
+	$(document).on("keypress",".alpha_value",function (e) {
+		if (e.which != 8 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
+			return false;
+		}
+	});
+
+	/* Accept Only Numeric with dot */
+	$(document).on("keypress",".numeric_dot",function (e) {
 		if (e.which != 8 && e.which != 46 && e.which != 0 && (e.which < 48 || e.which > 57)) {
 			return false;
 		}
 	});
-	/* Accept Only Characters */
-	$(document).on("keypress",".alpha_value",function (e) {
-		if (e.which != 8 && e.which != 46 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
-			return false;
-		}
-	});
-	/* Accept Only Numbers With Dot Operator */
-	$(document).on("keyup",".numeric_dot",function () {
-    	var number_with_dot = new RegExp("^([0-9]+(.[0-9]+)?)*$");
-		if(!number_with_dot.test($(this).val())) {
+
+	/* Validate minlength and maxlength */
+	$(document).on("keyup",".form_inputs",function () {
+    	var this_val = $.trim($(this).val());
+    	var data_min = parseInt($(this).data('minlength'));
+		if(this_val.length < data_min) {
 			$(this).addClass('form-field-error');
 		}
 		else {
 			$(this).removeClass('form-field-error');
 		}
 	});
-	/* Validate minlength and maxlength */
-	$(document).on("keyup",".form_inputs",function () {
-    	var this_val = $.trim($(this).val());
-    	var data_min = parseInt($(this).data('minlength'));
 
-		if(this_val.length < data_min) {
+	/* Accept Only Numbers With Dot Operator */
+	$(document).on("keyup",".numeric_dot",function () {
+    	var number_with_dot = new RegExp("^([0-9]+(.[0-9]+)?)*$");
+		if(!number_with_dot.test($(this).val())) {
 			$(this).addClass('form-field-error');
 		}
 		else {
@@ -154,6 +163,7 @@ $(document).ready(function() {
 			$(this).find('.form_inputs').each(function() {
 				var this_val = $.trim($(this).val()); 
 				var data_min = parseInt($(this).data('minlength'));
+				var data_max = parseInt($(this).attr('maxlength'));
     			var data_name = $(this).data('name');
     			if(this_val.length < data_min) {
     				error = 1;
@@ -161,6 +171,12 @@ $(document).ready(function() {
 					$(this).addClass('form-field-error');
 					return false;
 				}
+				else if(this_val.length > data_max) { 
+                    error = 1;
+                    message = data_name + " must containes maximum "+data_max+" characters";
+                    $(this).addClass('form-field-error');
+                    return false;
+                }
 				else {
 					$(this).removeClass('form-field-error');
 				}
@@ -173,24 +189,31 @@ $(document).ready(function() {
     		var max_amount = parseInt($('#max_amount').val());
 			if((min_amount > max_amount) && amount_error == 0) {
     			error = 1;
-    			message = "Please Provide Information!";
+    			message = "Please Enter Maximum Amount!";
     			$('#max_amount').addClass('form-field-error');
     		}
     		else {
     			$('#max_amount').removeClass('form-field-error');
     		}
- 			$('.numeric_dot').each(function() {
-    		 	var split_val = $(this).val().split('.');
-	    	 	if(split_val[0].length > 2 ) {
-	    	 		error = 1;
-    				message = "Please Provide Information!";
-	    	 		$(this).addClass('form-field-error');
-	    	 	}
-	    	 	else {
-	    	 		$(this).removeClass('form-field-error');
-	    	 	}
+    	}
+    	/* Validate correct details with number fields */
+    	if(error == '') {
+			$('.numeric_dot').each(function() {
+ 				if($(this).is(':visible')) {
+	    		 	var split_val = $(this).val().split('.');
+	    		 	var number_with_dot = new RegExp("^([0-9]+(.[0-9]+)?)*$");
+		    	 	if(split_val[0].length > 2 || split_val[0].length < 2 || !number_with_dot.test($(this).val())) {
+		    	 		error = 1;
+	    				message = "Please Provide Valid Information!";
+		    	 		$(this).addClass('form-field-error');
+		    	 	}
+		    	 	else {
+		    	 		$(this).removeClass('form-field-error');
+		    	 	}
+		    	}
     		});
     	}
+
 
     	/* Check whether the input and select element has error or not */
 		if($('input,select').hasClass('form-field-error')) {
@@ -233,9 +256,7 @@ $(document).ready(function() {
 						error_msg.addClass('val_success');
             			$('html,body').animate({scrollTop : this_form.offset().top }, 500);
             			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Sucessfully').fadeIn(350);
-
 						setTimeout(function() { location.reload(); }, 3000);
-
 					}
 					else {
 						error_msg.removeClass('val_success');

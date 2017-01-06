@@ -30,6 +30,18 @@ class Job_seeker extends CI_Controller {
 		}
 	}	
 
+	// Numeric with dot
+ 	public function numeric_dot($value) {
+		if (! preg_match('/^[0-9]+(\\.[0-9]+)?$/', $value)) {
+			$this->form_validation->set_message('numeric_dot', 'The %s field may only contain decimal or integer value');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
+	
+
 	/* custom validataion rules */
 	public function valid_date($date)
 	{
@@ -322,16 +334,16 @@ class Job_seeker extends CI_Controller {
 			if($this->input->post('popup_type') == 'social') {
 				$this->form_validation->set_rules('seeker_email', 'Email', 'trim|required|xss_clean|valid_email');
 				$this->form_validation->set_rules('seeker_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
-				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|');
-				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|matches[seeker_password]');
+				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[20]');
+				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|min_length[8]|max_length[20]|matches[seeker_password]');
 				$this->form_validation->set_rules('seeker_institution', 'Institution Type', 'trim|required|xss_clean|');
 			}
 
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean');
-			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
+			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
+			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean|min_length[3]|max_length[150]');
+			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|required|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
 		
 			if($this->form_validation->run()) {
@@ -361,6 +373,7 @@ class Job_seeker extends CI_Controller {
 				$candidate_values = ($this->input->post('popup_type')) ? $this->job_seeker_model->check_seeker_popup_fields_social($data_array) : $this->job_seeker_model->check_seeker_popup_fields($data_array) ;
 				;	
 				$data['status'] = $candidate_values['status'];
+				$data['error'] = $candidate_values['error'];
 				if(!empty($candidate_values['candidate_data'])) {
 					$this->session->set_userdata('login_session',$candidate_values['candidate_data']);
 				}
@@ -479,15 +492,15 @@ class Job_seeker extends CI_Controller {
 				    	array('field' => 'cand_exp_class[]', 'label' => 'Experience Class Level','rules' => 'required|trim|xss_clean'),
 						array('field' => 'cand_exp_sub[]', 'label' => 'Experience Subject','rules' => 'required|trim|xss_clean'),
 				    	array('field' => 'cand_exp_board[]', 'label' => 'Experience Board','rules' => 'required|trim|xss_clean'),
-				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{1,2}$/]'),
+				    	array('field' => 'cand_exp_yr[]', 'label' => 'Experience Year','rules' => 'required|trim|xss_clean|callback_numeric_dot'),
 				    );
 		}
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
-			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[150]|callback_alpha_dash_space'),
+			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
 			array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'trim|xss_clean|callback_valid_date'),
-			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[150]|callback_alpha_dash_space'),
+			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
 			array('field' => 'cand_pic', 'label' => 'Picture','rules' => 'callback_validate_image_type['.$action.'.cand_pic]'),
 			array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
@@ -509,13 +522,13 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_med[]', 'label' => 'Education Medium','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_dept[]', 'label' => 'Education Department','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_board[]', 'label' => 'Education Board','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{2,5}$/]'),
+			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|maxlength[5]|callback_numeric_dot'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
 
-			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'required|trim|xss_clean|minlength[3]|maxlength[150]'),
+			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'required|trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'required|trim|xss_clean'),
 	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,6}$/]'),
 	    	array('field' => 'cand_email', 'label' => 'Email','rules' => 'required|trim|xss_clean|valid_email'),
@@ -768,7 +781,7 @@ class Job_seeker extends CI_Controller {
 	/* ==============            Seeker Feedback Start Here          ================ */
 
 	// Seeker Feedback
-	public function feedback(){
+	public function feedback() {
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -782,8 +795,8 @@ class Job_seeker extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|xss_clean');
-			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|xss_clean');
+			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|max_length[100]|xss_clean');
+			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run()){
 				$feedback_data = array(
 									'feedback_form_title' => $this->input->post('feedback_subject'),
@@ -796,10 +809,12 @@ class Job_seeker extends CI_Controller {
 								);
 				if($this->job_seeker_model->candidate_feedback_form($feedback_data)){
 					$data['feedback_server_msg'] = 'Thanks for your valuable feedback! Our customer support representative will contact you soon!!';
+					$data['error'] = 2;
 					$this->load->view('user-dashboard-feedback',$data);
 				}
 				else{
 					$data['feedback_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+					$data['error'] = 1;
 					$this->load->view('user-dashboard-feedback',$data);
 				}
 			}
@@ -821,20 +836,23 @@ class Job_seeker extends CI_Controller {
      		redirect('seeker/logout');
      	}
 		$data['status'] = '';
+		$data['error'] = '';
 		if($_POST) {
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			/* Set validate condition for registration form */
 			$id = $session_data['login_session']['candidate_id'];
 			$this->form_validation->set_rules('old_pass', 'Old Password', 'trim|required|xss_clean|');
-			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|required|xss_clean||min_length[4]|max_length[20]|alpha_numeric|');
-			$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'trim|required|xss_clean||min_length[4]|max_length[20]|alpha_numeric|matches[new_pass]');
+			$this->form_validation->set_rules('new_pass', 'New Password', 'trim|required|xss_clean||min_length[8]|max_length[20]|');
+			$this->form_validation->set_rules('confirm_pass', 'Confirm Password', 'trim|required|xss_clean||min_length[8]|max_length[20]|matches[new_pass]');
  	  		if ($this->form_validation->run()) {   
  	  			$data_array = array(
  	  						'old_password' => $this->input->post('old_pass'),
  	  						'new_password' => $this->input->post('new_pass'),
  	  						'candidate_id' => $id
  	  					);
- 	  			$data['status'] = $this->job_seeker_model->password_change($data_array);
+ 	  			$data_values = $this->job_seeker_model->password_change($data_array);
+ 	  			$data['status'] = $data_values['status'];
+ 	  			$data['error'] = $data_values['error'];
 		    }
 		}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
