@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block"> 
-                        	<a href="<?php echo base_url(); ?>" id="webpage_title"> 
+                        	<a href="<?php echo base_url(); ?>" id="webpage_title" class="footer_logo"> 
 			                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="30px;" width="30px;">
 			                	<h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3>
 			                	<span class="clearfix"> </span>
