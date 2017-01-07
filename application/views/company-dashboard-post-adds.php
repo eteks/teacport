@@ -49,7 +49,6 @@ include ('include/menus.php');
                         	 	<div class="heading-inner first-heading">
                                 	<p class="title">Post Ads</p>
                             	</div>
-                            	<p class="success_server_msg"><?php if(isset($premiumad_server_msg)) echo $premiumad_server_msg; ?></p>
                             	<div class="form-group">
                         			<div class="info" style="margin: 6px 10px;">
                         				<i class="fa fa-info-circle" aria-hidden="true"></i> Uploading adds will be posted at the Premium adds area ! <a class="preview_post_ad_image txt_blue">Preview</a>
@@ -85,14 +84,25 @@ include ('include/menus.php');
                                 </div>
 	                        </div> </br>
                          	<div class="profile-edit">
-                        		<?php echo form_open_multipart('provider/postad', 'class="form-horizontal post_adds_fields"'); ?>
-                            		
+                        		<?php echo form_open_multipart('provider/postad', 'class="form-horizontal post_adds_fields provider_form"'); ?>
+                            		<?php 
+		                            if(isset($error)) :
+		                                if($error == 2) {
+		                                    echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $premiumad_server_msg </p>";
+		                                }
+		                                else {
+		                                    echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $premiumad_server_msg </p>";
+		                                }
+		                            else :
+		                                echo "<p class='val_status'>  </p>";
+		                            endif;
+		                            ?>
 	                            	<div class="form-group">
 	                            		<div class="col-sm-9 pull-right"><?php echo form_error('provider_ad_title'); ?></div>
 	                            		<div class="clearfix"> </div>
 	                            		<label class="col-sm-3">Title of Ad :<sup class="alert">*</sup></label>
 	                            		<div class="col-sm-9">
-	                            			<input type="text" class="form-control" name="provider_ad_title">
+	                            			<input type="text" placeholder="Ad Title" class="form-control form_inputs" data-name= "Title" data-minlength="3" maxlength="50" name="provider_ad_title">
 	                            		</div>	
 	                            	</div>
 	                            	<div id="provider_add_upload" class="form-group ">
@@ -101,7 +111,7 @@ include ('include/menus.php');
 										<label class="col-sm-3">Upload Image :<sup class="alert">*</sup></label>
 	                                    <div class="col-sm-9">
 	                                    	<div class="input-group image-preview">
-	                                        	<input id="insti_adds" type="text" class="form-control image-preview-filename uploadimage_act" placeholder="Upload add image" disabled="disabled">
+	                                        	<input id="insti_adds" type="text" class="form-control image-preview-filename form_inputs uploadimage_act" placeholder="Upload ad image" disabled="disabled">
 	                                        	<span class="input-group-btn">
 	                               					<button type="button" class="btn btn-default image-preview-clear" style="display:none;">
 	                                    				<span class="glyphicon glyphicon-remove"></span> Clear
@@ -109,11 +119,11 @@ include ('include/menus.php');
 	                                            	<div class="btn btn-default image-preview-input">
 	                                               	 	<span class="glyphicon glyphicon-folder-open"></span>
 	                                               		<span class="image-preview-input-title">Browse</span>
-	                                                	<input class="btn_browse_adds" type="file" accept="file_extension" name="provider_premium_ad_image" />
+	                                                	<input class="image_upload_holder" class="btn_browse_adds" type="file" accept="file_extension" name="provider_premium_ad_image" />
 	                                            	</div>
 	                                        	</span>
 	                                    	</div>
-	                                    </div>	
+	                                    </div>
 		                            </div>
 		                            <div class="col-sm-offset-4 col-sm-8">
 		                            	<div class="imagepreview_act"> </div>

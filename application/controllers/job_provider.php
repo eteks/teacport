@@ -37,6 +37,8 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
+				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+				$fb['error'] = 1;
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
 			}
@@ -55,6 +57,7 @@ class Job_provider extends CI_Controller {
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$fb['error'] = 1;
 					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
 				}
@@ -92,6 +95,7 @@ class Job_provider extends CI_Controller {
 	       	{
 	       		/* Registration form invalid stage */
 	       		$fb['reg_server_msg'] = 'Please provide valid information!';
+	       		$fb['error'] = 1;
 	       		$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);	
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -127,12 +131,14 @@ class Job_provider extends CI_Controller {
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
+						$fb['error'] = 2;
 						$data['institutiontype'] = $this->common_model->get_institution_type();
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
 						/* mail sent error stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';	
+						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
+						$fb['error'] = 1;
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -142,6 +148,7 @@ class Job_provider extends CI_Controller {
 				else{
 					/* data exist stage. send  facebook login link and server message to login page */
 					$fb['reg_server_msg'] = 'Some thing wrong in data insertion process. So please register again!';
+					$fb['error'] = 1;
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);	
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -219,15 +226,15 @@ class Job_provider extends CI_Controller {
 		else{
 			/* Set validate condition for profile update form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha_numeric_spaces|min_length[3]|xss_clean');
+			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'callback_organization_logo_validation');
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
-			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|required|min_length[3]|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|required|min_length[3]|max_length[50]|callback_alpha_dash_space|xss_clean');
+			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date');
 			$this->form_validation->set_rules('declar_accept', 'Declaration', 'callback_form_declaration');
 			/* check forms data are valid are not */
@@ -479,8 +486,8 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
-			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
-			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
+			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
 			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run())
@@ -510,16 +517,19 @@ class Job_provider extends CI_Controller {
 					if($this->job_provider_model->job_provider_post_vacancy($vacancy_data))
 					{
 						$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+						$data['error'] = 2;
 						$this->load->view('company-dashboard-post-jobs',$data);
 					}
 					else
 					{
 						$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
+						$data['error'] = 1;
 						$this->load->view('company-dashboard-post-jobs',$data);
 					}
 				}
 				else{
 					$data['post_job_server_msg'] = 'Your posting same job title and vacancy.';
+					$data['error'] = 1;
 					$this->load->view('company-dashboard-post-jobs',$data);
 				}
 			}
@@ -690,23 +700,26 @@ class Job_provider extends CI_Controller {
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['error'] = '';
 		if(!$_POST){
 			$this->load->view('company-dashboard-changepwd',$data);
 		}
 		else
 		{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('provideroldpassword', 'Old password', 'trim|required|min_length[8]|xss_clean|callback_validpassword');
+			$this->form_validation->set_rules('provideroldpassword', 'Old password', 'trim|required|xss_clean|callback_validpassword');
 			$this->form_validation->set_rules('providernewpassword', 'New password', 'trim|required|min_length[8]|xss_clean');
 			$this->form_validation->set_rules('providerconfirmnewpassword', 'Confirm password', 'trim|required|min_length[8]|xss_clean|matches[providernewpassword]');
 			if ($this->form_validation->run()){
 				$changepassworddata 	= array('registrant_password' => $this->input->post('providerconfirmnewpassword'));
 				if($this->job_provider_model->update_provider_password($changepassworddata,$session_data['login_session']['pro_userid'])){
 					$data['pasword_server_msg'] = 'Your password successfully changed!';
+					$data['error'] = 2;
 					$this->load->view('company-dashboard-changepwd',$data);
 				}
 				else{
 					$data['pasword_server_msg'] = 'Some thing wrong data insertion process! Please try again!!';
+					$data['error'] = 1;
 					$this->load->view('company-dashboard-changepwd',$data);
 				}
 			}
@@ -715,6 +728,7 @@ class Job_provider extends CI_Controller {
 			}
 		}
 	}
+
 	public function feedback(){
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -725,8 +739,8 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|max_length[200]|xss_clean');
-			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|max_length[999]|xss_clean');
+			$this->form_validation->set_rules('feedback_subject', 'Subject', 'trim|required|min_length[5]|max_length[100]|xss_clean');
+			$this->form_validation->set_rules('feedback_content', 'Feedback', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run()){
 				$feedback_data = array(
 									'feedback_form_title' => $this->input->post('feedback_subject'),
@@ -739,10 +753,12 @@ class Job_provider extends CI_Controller {
 								);
 				if($this->job_provider_model->organization_feedback_form($feedback_data)){
 					$data['feedback_server_msg'] = 'Thanks for your valuable feedback! Our customer support representative will contact you soon!!';
+					$data['error'] = 2;
 					$this->load->view('company-dashboard-feedback',$data);
 				}
 				else{
-					$data['feedback_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+					$data['feedback_server_msg'] ='Soemthing wrong in data insertion process. Please try again later!';
+					$data['error'] = 1;
 					$this->load->view('company-dashboard-feedback',$data);
 				}
 			}
@@ -792,10 +808,12 @@ class Job_provider extends CI_Controller {
 											);
 						if($this->job_provider_model->organization_premiun_ad_upload($premium_ad_data)){
 							$data['premiumad_server_msg'] = 'Advertisement Uploaded Successfully. Ads will be flashed soon after administrator approval.';
+							$data['error'] = 2;
 							$this->load->view('company-dashboard-post-adds',$data);
 						}
 						else{
 							$data['premiumad_server_msg'] = 'Soemthing wrong in data insertion process. Please try again later!';
+							$data['error'] = 1;
 							$this->load->view('company-dashboard-post-adds',$data);
 						}
 	                }
@@ -916,13 +934,14 @@ class Job_provider extends CI_Controller {
 		/* Check whether registration form server side validation are valid or not */
 		if ($this->form_validation->run() == FALSE){
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-			$this->load->view('forgot-password');
+			$data['error'] = 1;
+			$this->load->view('forgot-password',$data);
 		} 
 			
 		else{
 	        $forget_where = '(registrant_email_id="'.$this->input->post('forget_email').'")';
 	  		$forget_query = $this->db->get_where('tr_organization_profile',$forget_where)->row_array();
-	      	if($forget_query['registrant_password'] != '') {
+	  		if(isset($forget_query['registrant_password']) && !empty($forget_query['registrant_password'])) {
 				$from_email = $emailsetup['smtp_user'];
 				$this->email->initialize($emailsetup);
 				$this->email->from($from_email, 'Teacher Recruit');
@@ -934,16 +953,19 @@ class Job_provider extends CI_Controller {
 	       		// $this->email->message("Your registered password is ".$forget_query['registrant_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$data['error'] = 2;
 		        	$this->load->view('forgot-password',$data);
 	        	}
 				else{
 					show_error($this->email->print_debugger());
 					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
+					$data['error'] = 1;
 					$this->load->view('forgot-password',$data);
 				}
 	      	}
 			else{
 				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$data['error'] = 1;
 				$this->load->view('forgot-password',$data);
 			}
 		}   	

@@ -944,7 +944,9 @@ label.form-input-error {
 .select2-container--open .select2-selection {
 	border-color: #66afe9 !important;
 }
-
+#contactForm {
+	clear: both
+}
 
 
 /* Ended by siva */
