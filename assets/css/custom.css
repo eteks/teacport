@@ -1,6 +1,11 @@
 /* Custom Code */
 .mega-menu .menu-links > li > a {
-   font-size: 16px;
+   font-size: 14px;
+}
+.mega-menu > section.menu-list-items { padding: 10px 20px; }
+.mega-menu .menu-links > li > a {
+padding: 0 15px !important;
+line-height: 49px !important;
 }
 /* Logo */
 #webpage_title .tr_logo{
@@ -90,8 +95,8 @@
 .slide-featured-jobs .img-box img {
 	/*height: 768px;
 	width: 1024px;*/
-	height: 100%;
-	width: 100%;
+	/*height: 100%;
+	width: 100%;*/
 }
 .slide-featured-jobs .content-area{
 	height: 250px;
@@ -890,6 +895,9 @@ label.form-input-error {
 .val_status.val_success {
 	color: #228b22;
 }
+.val_status.db {
+	display: block;
+}
 .form-field-error {
 	border-color: #ff7f7f !important;
 }
@@ -938,10 +946,9 @@ label.form-input-error {
     padding: 7px;
     width: 20%;
 }*/
-
-
-
-
+.select2-container--open .select2-selection {
+	border-color: #66afe9 !important;
+}
 /* Ended by siva */
 .subcription_plan_details{
 	color: #fff;
@@ -981,5 +988,8 @@ label.form-input-error {
 .featured-image-box img{
 	height: 125px;
 	width: 125px;
+}
+.footer_logo {
+	margin: -5px 0 0;
 }
 

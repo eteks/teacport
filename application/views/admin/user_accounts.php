@@ -25,10 +25,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                <div class="span12">
                    <!-- END THEME CUSTOMIZER-->
                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-                  <h3 class="page-title">
+                  <!-- <h3 class="page-title">
                      Teachers Recruit
                      <small>Admin Users</small>
-                  </h3>
+                  </h3> -->
                    <ul class="breadcrumb">
                        <li>
                            <a href="<?php echo base_url(); ?>main/dashboard"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>

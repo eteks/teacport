@@ -36,10 +36,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-          <h3 class="page-title">
+          <!-- <h3 class="page-title">
             Teachers Recruit
             <small>Job Providers</small>
-          </h3>
+          </h3> -->
           <ul class="breadcrumb">
             <li>
               <a href="<?php echo base_url(); ?>main/dashboard">
@@ -203,13 +203,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab1" data-toggle="tab" class="step active">
                             	<span class="number">1</span>
-                                <span class="desc"><i class="icon-ok"></i>Organization <br/> Detail</span>
+                                <span class="desc"><i class="icon-ok"></i>Organization Details</span>
                             </a>
                           </li>
                           <li class="span-2">
                             <a href="#tab2" data-toggle="tab" class="step">
                             	<span class="number">2</span>
-                                <span class="desc"><i class="icon-ok"></i>Registrant <br/> Details</span>
+                                <span class="desc"><i class="icon-ok"></i>Registrant Details</span>
                             </a>
                           </li>
                           <?php
@@ -218,7 +218,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab3" data-toggle="tab" class="step">
                             	<span class="number">3</span>
-                                <span class="desc"><i class="icon-ok"></i>Payment <br/> Details</span>
+                                <span class="desc"><i class="icon-ok"></i>Payment Details</span>
                             </a>
                           </li>
                           <!-- <li class="span-2">
@@ -239,7 +239,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab3" data-toggle="tab" class="step">
                             	<span class="number">3</span>
-                              <span class="desc"><i class="icon-ok"></i>Addtional <br/> Details</span>
+                              <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
                             </a>
                           </li>
                           <!-- <li class="span-2">

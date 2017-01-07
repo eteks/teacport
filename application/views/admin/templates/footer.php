@@ -87,7 +87,7 @@
                                     [5, 25, 50, "All"]
                                   ],
                     // Page length
-                    "pageLength" : 5,       
+                    "pageLength" : 15,       
                     // set the initial value
                     "iDisplayLength": 5,
                     "sDom": "<'row-fluid'<''l><''f>r>t<'row-fluid'<''i><''p>>",

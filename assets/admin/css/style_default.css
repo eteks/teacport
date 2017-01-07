@@ -648,15 +648,16 @@ tr select {
     display: inline-block !important;
     font-size: 12px !important;
     font-weight: 600 !important;
-    margin-top: 5px !important;
+    /*margin-top: 5px !important;*/
     position: absolute !important;
     text-align: center !important;
+    padding: 13px;
 }
 .form-wizard .step .seeker_tab_desc_info {
     display: inline-block !important;
     font-size: 12px !important;
     font-weight: 600 !important;
-    margin-top: 12px !important;
+    /*margin-top: 12px !important;*/
     position: absolute !important;
     text-align: center !important;
 }
@@ -797,9 +798,9 @@ table .dataTables_empty{
 	font-size: 35px; 
 	font-family: 'Kaushan Script', cursive;
 }
-/* For loader */
+/* For loader-  Added by Akila */
 .loader_holder {
-	background: rgba(0, 0, 0, 0) url("../img/ring64.gif") no-repeat scroll center center;
+	background: rgba(0, 0, 0, 0) url("../img/admin_loader.gif") no-repeat scroll center center;
     display: inline-block;
     height: 150px;
     width: 150px;
@@ -810,6 +811,37 @@ table .dataTables_empty{
 .hide_loader{
 	display: none;
 }
+.loader_overlay {
+	display: none;
+	opacity: 0.01;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+   
+}
+/* For Popup tabs - Added by Akila */
+.tab_form .navbar .nav > li {
+    width: 23% !important;
+    margin: 10px 5px;
+}
+.tab_form input[type="radio"], .tab_form input[type="checkbox"] {
+	margin: 0px 5px !important;
+}	
+/* Feedback */
+.feedback-design label{
+	font-weight:bold;
+	color: #22878e;
+}
+.feedback-design .span12{
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
+}
+/* Ended by Akila */
+
 /*.ajax_overlay {
 	opacity: 0.5;
 	z-index: 2;
@@ -818,3 +850,4 @@ table .dataTables_empty{
 .remove_sidebar{
     margin-left: 0px !important;
 }
+

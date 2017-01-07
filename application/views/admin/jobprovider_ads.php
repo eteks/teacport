@@ -34,10 +34,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">   
-          <h3 class="page-title">
+          <!-- <h3 class="page-title">
             Teachers Recruit
             <small>Job Providers</small>
-          </h3>
+          </h3> -->
           <ul class="breadcrumb">
             <li>
               <a href="<?php echo base_url(); ?>main/dashboard">
@@ -235,7 +235,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <div class="span6 control-group">                                     
                             <label class="control-label"> Admin verification </label>
                             <span class="dynamic_data"> 
-                              <ul class="on_off_button on_off_button_j">
+                              <ul class="on_off_button on_off_button_j ad_verify_act">
                                 <li data-value="1" <?php if($activities_details['is_admin_verified']==1) echo "class='on'"; ?>><a>Yes</a></li>
                                 <li data-value="0" <?php if($activities_details['is_admin_verified']==0) echo "class='on'"; ?>><a>No</a></li>
                               </ul> 

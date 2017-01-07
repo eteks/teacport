@@ -24,10 +24,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-          <h3 class="page-title">
+          <!-- <h3 class="page-title">
             Teachers Recruit
             <small>Job Providers</small>
-          </h3>
+          </h3> -->
           <ul class="breadcrumb">
             <li>
               <a href="<?php echo base_url(); ?>main/dashboard">

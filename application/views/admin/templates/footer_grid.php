@@ -12,7 +12,10 @@
  	</div>
  	<input type="submit" class="btn btn-primary alert_btn_popup" value="OK">
 </div>
+<!--overlay for all popup in admin-->
 <div id="dialog-overlay"></div>
+<!--overlay for loader in admin-->
+<div class="loader_overlay"> </div>
 <!--  Confirm box with yes and no button -->
 <div id="dialog-box">
     <h3 class="message"></h3>
@@ -102,7 +105,7 @@
                                     [5, 25, 50, "All"]
                                   ],
                     // Page length
-                    "pageLength" : 5,
+                    "pageLength" : 15,
                     // Change default text
                     "language" : {
                                     "lengthMenu": "_MENU_ records per page", // Remove show entries text from entries dropdown like "sLengthMenu": "_MENU_ records per page"

@@ -27,10 +27,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
     <div class="container-fluid"> <!-- BEGIN PAGE CONTAINER-->
       <div class="row-fluid"> <!-- BEGIN PAGE HEADER-->
         <div class="span12">
-          <h3 class="page-title">
+          <!-- <h3 class="page-title">
             Teachers Recruit
             <small>Master Data</small>
-          </h3>
+          </h3> -->
           <ul class="breadcrumb"> <!-- START PAGE TITLE & BREADCRUMB-->
             <li>
               <a href="<?php echo base_url()."main/dashboard"; ?>">

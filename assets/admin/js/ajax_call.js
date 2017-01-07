@@ -102,9 +102,8 @@ $(document).ready(function(){
             cache: false,             // To unable request pages to be cached
             processData:false,
             beforeSend: function(){
-            	$(".popup-inner").css({"background-color":"#ccc","opacity":"0.5","z-index":"2"});
-            	// $(".popup-inner").addClass(".ajax_overlay");
-   			},
+            	$(".popup-inner").css({"background-color":"#000","opacity":"0.2","z-index":"9999"});
+            },
             success: function(res) {
                 if(res.error == 1) {
                     this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
@@ -129,8 +128,7 @@ $(document).ready(function(){
                 }
             },
             complete : function(){
-				// setTimeout(function() { $(".popup-inner").removeClass(".ajax_overlay"); }, 3000);  //Commented for page reload
-				setTimeout(function() {$(".popup-inner").css({"background-color":"#ccc","opacity":"1","z-index":"1"}); }, 3000);
+					setTimeout(function() {$(".popup-inner").css({"background-color":"#fff","opacity":"1","z-index":"1"}); }, 3000);
 			},
             
         });

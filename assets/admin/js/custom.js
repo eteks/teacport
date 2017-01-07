@@ -180,6 +180,8 @@ ajax = function (params,action,form_id){
         data : params ,
         beforeSend: function(){
        		this_loader.removeClass('hide_loader');
+       		$(".loader_overlay").css({"display":"block"});
+       		
    		},
         success: function(res) {
             if(res.error==1) {
@@ -198,7 +200,7 @@ ajax = function (params,action,form_id){
             }
         },
         complete : function(){
-			setTimeout(function() { this_loader.addClass('hide_loader'); }, 3000);  //Commented for page reload
+			setTimeout(function() { this_loader.addClass('hide_loader'); $(".loader_overlay").css({"display":"none"});}, 3000);  //Commented for page reload
 		},
     });
 };
@@ -741,7 +743,7 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val+1).fadeIn(3000);
         }
     });
-
+$('#timezone_act').timezones(); //code for timezone module in admin side
     // Previous button click - Renewal
     $(document).on('click','.renew_pag_prev',function() {
         var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
@@ -824,6 +826,12 @@ $('.top_layer, .message_close').on('click',function() {
 	        $('#divLargerImage').empty();
 	    });
 	});
+    
+    //To change Job provider ad verified status 
+    $(document).delegate('.ad_verify_act li','click',function(e){
+        select_value = $(this).data('value');
+        $('[name=ads_status]').find("[value=" + select_value + "]").attr('selected', 'selected');
+    });
 
 }); // End document
 

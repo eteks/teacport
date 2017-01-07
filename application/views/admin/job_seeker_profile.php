@@ -37,10 +37,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
-          <h3 class="page-title">
+          <!-- <h3 class="page-title">
             Teachers Recruit
             <small>Job Seekers</small>
-          </h3>
+          </h3> -->
           <ul class="breadcrumb">
             <li>
               <a href="<?php echo base_url(); ?>main/dashboard">
@@ -239,19 +239,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step step_menus">
                               <span class="number">4</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational<br /> Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational Info</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab5" data-toggle="tab" class="step step_menus">
                               <span class="number">5</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience<br /> Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience Info</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab6" data-toggle="tab" class="step step_menus">
                               <span class="number">6</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular<br /> Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular Info</span>
                             </a>
                           </li>
                           <?php
@@ -260,7 +260,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step">
                               <span class="number">4</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular<br /> Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular  Info</span>
                             </a>
                           </li>
                           <?php
