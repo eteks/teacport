@@ -251,7 +251,7 @@ li.no-bg .login-header-btn:hover{background-color:#242424 !important;color:#FFF 
 .employe-section .employe-detail-section h2{text-transform:capitalize;margin-top:0;font-weight:600;line-height:50px;color:#FFF;font-size:40px;}
 .employe-section .employe-detail-section p{color:#ccc;}
 .employe-section .btn-employe-section{margin-top:26px;margin-right:20px;text-transform:uppercase;}
-.facts{background:rgba(60, 146, 202, 0.7) url("../images/bg.jpg");background-position:center top;background-repeat:no-repeat;background-size:cover;overflow-y:hidden;padding-bottom:30px;}
+.facts{background:rgba(60, 146, 202, 0.7) url("../images/bg.jpg");background-position:center top;background-repeat:no-repeat;background-size:cover;overflow-y:hidden;padding:30px;}
 .fact-box{text-align:center;}
 .facts .single-facts-area{display:inline-block;position:relative;}
 .facts .single-facts-area .facts-icon i{color:#FFF;font-size:40px;z-index:-1;}
