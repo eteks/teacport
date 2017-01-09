@@ -17,15 +17,16 @@
         	?>
         				<li> <a href="<?php echo base_url();?>"> Home </a> </li>
 			        	<li> <a href="<?php echo base_url();?>aboutus"> About Us </a> </li>
-			        	<li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
+			        	<li><a href="<?php echo base_url(); ?>provider/dashboard"> Dashboard</a></li>
+			        	<!-- <li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
 			            	<ul class="drop-down-multilevel">
 			                    <li><a href="<?php echo base_url();?>pricing">Pricing</a></li>
 			             	</ul>
-			          	</li>
+			          	</li> -->
 			          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
 			          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
 			          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
-			          	<li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li>
+			          	<!-- <li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li> -->
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
 								<?php if((@getimagesize($organization['registrant_logo']) && isset($organization['registrant_logo']))){ ?>

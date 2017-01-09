@@ -418,11 +418,13 @@ class Job_provider_model extends CI_Model {
 		$profile = "(tr_candidate_profile.candidate_id ='".$candidate_id."' AND tr_candidate_profile.candidate_status='1')";
 		$this->db->where($profile);
 		$candidate['personnal'] = $this->db->get()->row_array();
-		$this->db->select('extra_curricular');
-		$this->db->from('tr_extra_curricular');
-		$extracurricular = "(extra_curricular_id in (".$candidate['personnal']['candidate_extra_curricular_id']."))";
-		$this->db->where($extracurricular);
-		$candidate['extracurricular'] = $this->db->get()->result_array();
+		if(!empty($candidate['personnal']['candidate_extra_curricular_id'])){
+			$this->db->select('extra_curricular');
+			$this->db->from('tr_extra_curricular');
+			$extracurricular = "(extra_curricular_id in (".$candidate['personnal']['candidate_extra_curricular_id']."))";
+			$this->db->where($extracurricular);
+			$candidate['extracurricular'] = $this->db->get()->result_array();
+		}
 		$this->db->select('language_name');
 		$this->db->from('tr_languages');
 		$languageknown = "(language_id in (".$candidate['personnal']['candidate_language_known']."))";

@@ -70,5 +70,13 @@ class Common {
 	    $date_aux = date_create_from_format($from_format, $date);
 	    return date_format($date_aux,$to_format);
 	}
-
+	function settings(){
+		$CI =& get_instance();
+		$CI->load->database();
+		$CI->db->select('*');    
+		$CI->db->from('tr_settings_site_configuration');
+		$checkuser = $CI->db->get()->row_array();
+		define("FACEBOOKAPPID", $checkuser['facebook_app_id']);
+		define("FACEBOOKAPPSECRET", $checkuser['facebook_app_secret']);
+	}
 }
