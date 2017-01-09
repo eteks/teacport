@@ -61,7 +61,7 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-                                        <p>Copyright ©2016 - Teachers Recruit All rights Reserved.<br> Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
+                                        <p>Copyright ©<?php echo date("Y"); ?> - Teachers Recruit All rights Reserved.<br> Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
                                         <ul class="social-network social-circle onwhite">

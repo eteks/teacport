@@ -75,7 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 </div>
-                <form action="job_seeker/teacport_job_seeker_profile">
+                <form action="transaction">
                   <p class="admin_status"> </p>
                   <div class="">  
                     <p class='val_error'> <p>
@@ -105,7 +105,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $trans['transaction_id']; ?>
                           </td>
                           <td class="">
-                            <?php echo $trans['organization_name']; ?>
+                            <?php 
+                            if(!empty($trans['organization_name'])) :
+                              echo $trans['organization_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $trans['tracking_id']; ?>
@@ -129,7 +135,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td>
-                            <a class="job_full_view popup_fields" data-id="<?php echo $trans['transaction_id']; ?>" data-href="job_provider/get_transaction_full_view"  data-mode="full_view"  data-popup-open="popup_section_transaction">
+                            <a class="job_full_view popup_fields" data-id="<?php echo $trans['transaction_id']; ?>" data-href="transaction_fullview"  data-mode="full_view"  data-popup-open="popup_section_transaction">
                               Full View
                             </a>
                           </td>
@@ -162,7 +168,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
             <div class="widget-body form pop_details_section">
               <?php } ?>
-              <form class="tab_form" action="job_seeker/teacport_job_seeker_profile" data-index="" method="POST" data-mode="update">
+              <form class="tab_form" action="transaction" data-index="" method="POST" data-mode="update">
                 <?php
                 if(!empty($provider_full_transaction)) :
                 ?>

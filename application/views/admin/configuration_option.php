@@ -123,7 +123,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Twitter Secret</label>
 	                            <div class="controls">
-	                              <input name="twitter_app_secret" class="span6" value="<?php if(!empty($payment_values['	twitter_app_secret'])) echo $payment_values['	twitter_app_secret']; ?>" type="text">
+	                              <input name="twitter_app_secret" class="span6" value="<?php if(!empty($payment_values['twitter_app_secret'])) echo $payment_values['twitter_app_secret']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
@@ -191,7 +191,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
                             </div>
-                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php echo $payment_values['site_configuration_id']; ?>" />
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($payment_values['site_configuration_id'])) echo $payment_values['site_configuration_id']; ?>" />
                           </form>
                         </div>
                     </div>

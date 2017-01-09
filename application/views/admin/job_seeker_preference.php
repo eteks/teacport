@@ -176,7 +176,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var inputType = new Array("label","multiselect","text","text","multiselect","multiselect"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("cand_name","cand_post","cand_ssalary","cand_esalary","cand_class","cand_sub"); // Set name of input types
     var placeholder = new Array("","Please select Post","Enter Start Salary","Enter End Salary","Please select class","Please Select Subject"); // Set placeholder of input types
-    var class_selector = new Array("");//To set class for element
+    var class_selector = new Array("","","numeric_value","numeric_value","","");//To set class for element
     var table = "admin_table"; // Set classname of table
 
     var cand_post_option = new Array();
