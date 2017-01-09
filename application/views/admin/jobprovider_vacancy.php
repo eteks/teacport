@@ -451,7 +451,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">
                               <label class="control-label">Available</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>"  name="vac_available" class="span6 tabfield1 tabfield" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>"  name="vac_available" class="span6 tabfield1 tabfield numeric_value" maxlength="8" />
                               </span>
                             </div>
                           </div>
@@ -473,13 +473,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Start Salary</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" name="job_min_salary" class="span6 tabfield1 tabfield" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" name="job_min_salary" class="span6 tabfield1 tabfield numeric_value" maxlength="9" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label"> End Salary</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>"  name="job_max_salary" class="span6 tabfield1 tabfield" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>"  name="job_max_salary" class="span6 tabfield1 tabfield numeric_value" maxlength="9" />
                               </span>
                             </div>
                           </div>
@@ -533,7 +533,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Experience</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_experience']; ?>"  name="vac_experience" class="span6 tabfield2 tabfield" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_experience']; ?>"  name="vac_experience" class="span6 tabfield2 tabfield numeric_value" maxlength="3" />
                               </span>
                             </div>
                           </div>

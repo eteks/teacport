@@ -4445,6 +4445,19 @@ div.dt-button-background {
     cursor: default !important;
     background-image: none !important; 
 } 
+.data-sort {
+    pointer-events: auto !important; 
+    cursor: pointer !important;
+}
+.data-sort.sorting {
+    background-image: url("../img/sort_both.png") !important;   
+}
+.data-sort.sorting_asc {
+    background-image: url("../img/sort_asc.png") !important;   
+}
+.data-sort.sorting_desc {
+    background-image: url("../img/sort_desc.png") !important;   
+}
 .add_section {
     height: 40px;
 }

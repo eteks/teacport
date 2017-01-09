@@ -85,7 +85,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <thead>
                                       <tr class="ajaxTitle">
                                         <th>Form Title</th>
-                                        <th>Form Message</th>
+                                        <th class="data_action data-sort">Form Message</th>
+                                        <th style="display: none">Form Message</th>
                                         <!-- <th>Is Organization?</th> -->
                                         <!-- <th>Is Candidate?</th> -->
                                         <!-- <th>Is Guest User?</th> -->
@@ -108,6 +109,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <td class="message_res">
                             <?php echo $feed['feedback_form_message']; ?>
                           </td>
+                          <td style="display: none"><?php echo $feed['feedback_form_message']; ?></td>
                           <td class="">
                             <?php echo $feed['is_viewed']; ?>
                           </td>

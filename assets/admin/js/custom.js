@@ -104,9 +104,11 @@ var handleChoosenSelect = function () {
    
 
 // Create Input
-createInput = function(i,str){
+createInput = function(i,str,attr){
     // alert(str);
     str = typeof str !== 'undefined' ? str : null;
+    var disabled = (attr==1) ? "disabled" : "";
+    var title = (attr==1) ? "Mapping has been already done. Edit not possible" : "";
     //alert(str);
     if(inputType[i] == "text"){
         input = '<input type='+inputType[i]+' name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
@@ -118,7 +120,7 @@ createInput = function(i,str){
         input = '<label class='+columns[i]+'>'+str+'</label>';
     }
     else if(inputType[i] == "select"){
-        input = '<select class="'+class_selector[i]+'" name='+columns[i]+'>';
+        input = '<select class="'+class_selector[i]+'" title="'+title+'" name="'+columns[i]+'" '+disabled+'>';
         var select_option = eval(columns[i]+'_option');
         var select_value = eval(columns[i]+'_value');
 
@@ -209,6 +211,20 @@ $(document).ready(function(){
     
     default_credentials();
 
+    /* Accept Only Numbers */
+    $(document).on("keypress",".numeric_value",function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
+    /* Accept Only Characters with space */
+    $(document).on("keypress",".alpha_value",function (e) {
+        if (e.which != 8 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
+            return false;
+        }
+    });
+    
     $('#dialog-overlay').on('click',function() {
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
@@ -372,12 +388,14 @@ $('.top_layer, .message_close').on('click',function() {
                 // fetch value inside the TD and place as VALUE in input field
                 if(inputType[i]=='text' || inputType[i]=='textarea' || inputType[i]=='label') {
                     var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+"").html();
+                    var disabled_attr = 0;
                 }
                 else {
                    //It will fetch the value for select field from hidden input field passed in html 
                    var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").val(); 
+                   var disabled_attr = ($(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").data('disabled') == 1) ? 1 : 0;
                 }
-                input = createInput(i,$.trim(val));
+                input = createInput(i,$.trim(val),disabled_attr);
                 html +='<td>'+input+'</td>';
             }
             if(typeof is_created != "undefined" && is_created=="no") {
@@ -565,26 +583,26 @@ $('.top_layer, .message_close').on('click',function() {
     // });
 
     // Known languages
-    $(document).on("click",".known_languages",function(){
-        var value = [];
-        $('.known_languages').each(function() {
-            if($(this).is(':checked')) {
-              value.push($(this).val());
-            }
-        });
-        $(this).siblings('.hidden_known_lang').val(value);
-    });
+    // $(document).on("click",".known_languages",function(){
+    //     var value = [];
+    //     $('.known_languages').each(function() {
+    //         if($(this).find('input').is(':checked')) {
+    //           value.push($(this).find('input').val());
+    //         }
+    //     });
+    //     $(this).siblings('.hidden_known_lang').val(value);
+    // });
 
     // Extra Curricular Values
-    $(document).on("click",".extra_curricular_values",function(){
-        var value = [];
-        $('.extra_curricular_values').each(function() {
-            if($(this).is(':checked')) {
-              value.push($(this).val());
-            }
-        });
-        $(this).siblings('.hidden_extra_curricular').val(value);
-    });
+    // $(document).on("click",".extra_curricular_values",function(){
+    //     var value = [];
+    //     $('.extra_curricular_values').each(function() {
+    //         if($(this).is(':checked')) {
+    //           value.push($(this).val());
+    //         }
+    //     });
+    //     $(this).siblings('.hidden_extra_curricular').val(value);
+    // });
 
     
     
