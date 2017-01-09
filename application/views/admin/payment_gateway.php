@@ -119,7 +119,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
                             </div>   
-                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php echo $payment_values['payment_gateway_id']; ?>" />                       
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($payment_values['payment_gateway_id'])) echo $payment_values['payment_gateway_id']; ?>" />                       
                           </form>
                         </div>
                     </div>
