@@ -57,10 +57,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("label_name" => "District Name"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "District Name"));
-			}	
+			array_push( $result_data, array("label_name" => "District Name"));
 		}
 		else if($filter_option == "state"){
 			$data_value = $this->dashboard_model->count_vacancies_by_state();
@@ -70,10 +67,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("label_name" => "State Name"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "State Name"));
-			}
+			array_push( $result_data, array("label_name" => "State Name"));
 		}
 		else if($filter_option == "qualification"){
 			$data_value = $this->dashboard_model->count_vacancies_by_qualification();
@@ -83,10 +77,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("label_name" => "Educational Qualification"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "Educational Qualification"));
-			}
+			array_push( $result_data, array("label_name" => "Educational Qualification"));
 		}
 		else if($filter_option == "inst_type"){
 			$data_value = $this->dashboard_model->count_vacancies_by_institution();
@@ -96,10 +87,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("label_name" => "Institution Type"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "Institution Type"));
-			}
+			array_push( $result_data, array("label_name" => "Institution Type"));
 		}
 		echo json_encode($result_data);
 	}
@@ -113,10 +101,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("count_data" => $value['count_plan'],'name_data' => $value['subscription_plan'],"label_name" => "Plan"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "Plan"));
-			}	
+			array_push( $result_data, array("label_name" => "Plan"));	
 		}
 		else if($filter_option == "paid_provider_district"){
 			$data_value = $this->dashboard_model->paid_job_providers_by_district();
@@ -125,10 +110,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("count_data" => $value['count_dist'],'name_data' => $value['district_name'],"label_name" => "District Name"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "District Name"));
-			}	
+			array_push( $result_data, array("label_name" => "District Name"));
 		}
 		else if($filter_option == "free_provider_district"){
 			$data_value = $this->dashboard_model->free_job_providers_by_district();
@@ -137,10 +119,7 @@ class Dashboardpage extends CI_Controller {
 					array_push( $result_data, array("count_data" => $value['count_dist'],'name_data' => $value['district_name'],"label_name" => "District Name"));
 				}
 			}
-			else
-			{
-				array_push( $result_data, array("label_name" => "District Name"));
-			}	
+			array_push( $result_data, array("label_name" => "District Name"));
 		}
 		echo json_encode($result_data);
 	}

@@ -468,6 +468,7 @@ class Job_provider extends CI_Controller {
 		$data['qualificatoin']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
 		$data['medium']			= $this->common_model->medium_of_instruction();
 		$data['university']		= $this->common_model->get_board_details();
+		$data['subscrib_plan'] 	= $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		if(!$_POST){
 			$this->load->view('company-dashboard-post-jobs',$data);
 		}

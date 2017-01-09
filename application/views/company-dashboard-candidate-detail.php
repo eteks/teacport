@@ -179,17 +179,19 @@
 													<div class="col-sm-7">	<?php if($candidate['personnal']['candidate_tet_exam_status']) echo 'Pass'; else echo 'Nil'; ?> </div>
 												</div>
 												<?php
-													$extra_curricular = '';
-													foreach ($candidate['extracurricular'] as $ecurricular) {
-														$extra_curricular .= $ecurricular['extra_curricular'].', ';
-													}
-													$trimmed_extracullar = trim($extra_curricular, ", ");
+													if(!empty($candidate['extracurricular'])){
+														$extra_curricular = '';
+														foreach ($candidate['extracurricular'] as $ecurricular) {
+															$extra_curricular .= $ecurricular['extra_curricular'].', ';
+														}
+														$trimmed_extracullar = trim($extra_curricular, ", ");
 												?>
 												<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Extra Curricular Skills </span>
 				                           	 		<span class="col-sm-1"> : </span>
 													<div class="col-sm-7"><?php echo $trimmed_extracullar; ?></div>
 												</div>
+												<?php } ?>
 												<div class="display_seeker_details">
 				                           	 		<span class="col-sm-4">Is experienced </span>
 				                           	 		<span class="col-sm-1"> : </span>

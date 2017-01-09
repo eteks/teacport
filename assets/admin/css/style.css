@@ -4878,4 +4878,12 @@ i#admin_error_login {
 {
     display: none !important;
 }
+#imagepreview_templogo{
+    
+    height:100px;
+    width:100px;
+}
+.temp_remove_act{
+    display: none;
+}
 

@@ -499,8 +499,9 @@ $('.top_layer, .message_close').on('click',function() {
                 filter_tag = '';
                 if(res!=0){  
                     $.each(res, function(i){
-                        if(json_count > 1 && typeof res[i].name_data != 'undefined')
+                        if(json_count > 1 && typeof res[i].name_data != 'undefined'){
                             filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                        }
                         $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
                     });          
                 }   
@@ -881,30 +882,46 @@ function sliderResponse(target) {
     mask.stop(true,false).animate({'left':'-'+ sections_width*target +'px'},1000);
     sections.removeClass('viewed').eq(target).addClass('viewed');
 }
+/*Admin side Template logo upload functionalities added by thangam*/
+function readURL(input) {
 
-/* Popup pagination with arrow end */
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
 
-    $("#files").on("change", function(e) {
-      var files = e.target.files,
-        filesLength = files.length;
-      for (var i = 0; i < filesLength; i++) {
-        var f = files[i]
-        var fileReader = new FileReader();
-        fileReader.onload = (function(e) {
-          var file = e.target;
-          $("<span class=\"pip\">" +
-            "<img class=\"imageThumb\" src=\"" + e.target.result + "\" title=\"" + file.name + "\"/>" +
-            "<br/><span id=\"remove\" class=\"icon-remove-sign\">Remove</span>" +
-            "</span>").insertAfter("#files");
-          $("#remove").click(function(){
-            $(this).parent(".pip").remove();
-          });
-          
-        });
-        fileReader.readAsDataURL(f);
-      }
-    });
-  
+        reader.onload = function (e) {
+            $('#imagepreview_templogo').prop('src', e.target.result).show();
+            $('.temp_remove_act').show();
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+$("#upload_logo").change(function () {
+    readURL(this);
+    $('#imagepreview_templogo').show();
+});
+
+$("#upload_logo").click(function () {
+    
+    $('#imagepreview_templogo').attr('src','');
+});
+
+
+$('#imagepreview_templogo').click(function(){
+
+    $('#upload_logo').replaceWith($('#upload_logo').clone(true));
+    $('#imagepreview_templogo').hide();
+    $('.temp_remove_act').hide();
+
+});
+$('.temp_remove_act').click(function(e)
+   {
+        $('#imagepreview_templogo').hide();
+        $('.temp_remove_act').hide();
+       $('#imagepreview_templogo').attr("src","");
+   })
+/* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){
 	// $(".popup").css("opacity", "0.8" + "z-index", "999999");
