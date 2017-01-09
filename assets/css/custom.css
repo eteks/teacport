@@ -997,4 +997,7 @@ label.form-input-error {
 .footer_logo {
 	margin: -5px 0 0;
 }
-
+.custom_disabled {
+    pointer-events:none; 
+    opacity:0.6;
+}
