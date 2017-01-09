@@ -481,8 +481,9 @@ $('.top_layer, .message_close').on('click',function() {
                 filter_tag = '';
                 if(res!=0){  
                     $.each(res, function(i){
-                        if(json_count > 1 && typeof res[i].name_data != 'undefined')
+                        if(json_count > 1 && typeof res[i].name_data != 'undefined'){
                             filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
+                        }
                         $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
                     });          
                 }   
