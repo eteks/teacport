@@ -12,20 +12,30 @@
                             	  Job Providers Login
                             	  <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                                 </div>
-                                <p class="registration_server_msg"><?php if(isset($reg_server_msg)) echo $reg_server_msg; ?></p>
                                 <!-- <img src="images/logo.png" alt="logo" class="img-responsive center-block"> -->
-                                <?php echo form_open('login/provider/', 'id="provider_login_form" class="provider_login_form form-group form-validate"'); ?>
-	                                <p class="registration_status"> </p>
+                                <?php echo form_open('login/provider/', 'id="provider_login_form" class="provider_login_form form-group form-validate reg_login_form"'); ?>
+                                	<?php 
+				                    if(isset($error)) :
+			    		                if($error == 2) {
+			                                echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $reg_server_msg </p>";
+			                            }
+			                            else {
+			                                echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $reg_server_msg </p>";
+			                            }
+			                        else :
+			            	            echo "<p class='val_status'>  </p>";
+			                        endif;
+			                        ?>
 	                                <div class="col-sm-6 pull-left">
 		                                <?php echo form_error('registrant_email_id'); ?>
 		                                <div class="form-group">
-		                                    <label>Email or Mobile: <span class="">*</span></label>
-		                                    <input placeholder="" name="registrant_email_id" class="form-control" id="email" type="text" value="<?php echo set_value('registrant_email_id'); ?>">
+		                                    <label>Email or Mobile : <span class="alert">*</span></label>
+		                                    <input placeholder="Email or Mobile" name="registrant_email_id" class="form-control form_inputs email_mobile_value" id="email" type="text" value="<?php echo set_value('registrant_email_id'); ?>">
 		                                </div>
 		                                <?php echo form_error('registrant_password'); ?>
 		                                <div class="form-group">
-		                                    <label>Password: <span class="required">*</span></label>
-		                                    <input placeholder="" name="registrant_password" class="form-control" id="password" type="password" value="<?php echo set_value('registrant_password'); ?>">
+		                                    <label>Password: <span class="alert">*</span></label>
+		                                    <input placeholder="Password" name="registrant_password" class="form-control form_inputs" id="password" type="password" value="<?php echo set_value('registrant_password'); ?>">
 		                                </div>
 		                                <div class="loginbox-forgot propwd-forgot">
 		                                    <a class="txt_blue remove_error_message_act">Forgot Password?</a>
@@ -46,66 +56,84 @@
 		                             </div>   
 		                             <div class="pull-left"> </div>
 	                            <?php echo form_close(); ?>    
-                             </div>
-                             
+                             </div>                            
                             <!--Forgot Password-->
                             <div id="provider-forgotpwd" class="loginbox" style="display: none;" >
                             	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> 
                             		Forgot Password 
                             		<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                             	</div><br>
-                            	<p class="registration_server_msg"><?php if(isset($reg_server_msg)) echo $reg_server_msg; ?></p>
-                                 <span class="error_test"> Please fill Enter Valid Email </span> 
-                                 <?php echo form_open('login/provider/forgotpassword', 'id="forgotpass-form" class="forgotpass-form"'); ?>
-                                    <p class="registration_status"> </p>
+                                <?php echo form_open('login/provider/forgotpassword', 'id="forgotpass-form" class="forgotpass-form reg_login_form"'); ?>
+                                 	<?php 
+				                    if(isset($error)) :
+			    		                if($error == 2) {
+			                                echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $reg_server_msg </p>";
+			                            }
+			                            else {
+			                                echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $reg_server_msg </p>";
+			                            }
+			                        else :
+			            	            echo "<p class='val_status'>  </p>";
+			                        endif;
+			                        ?>
                                     <div class="form-group">
-	                                        <label for="exampleInputEmail1"> Email address </label>
-	                                        <?php echo form_error('forget_email'); ?>
-	                                        <input id="forget_email" name="forget_email" class="form-control input" size="20" placeholder="Enter Email" type="text">
-	                                    </div>
-	                                    <button type="submit" class="btn btn-default btn-block">
-	                                        <i class="fa fa-unlock"> </i> Retrieve Password
-	                                    </button>
-	                             <?php echo form_close(); ?>
-	                             <ul class="pager">
+	                                    <label for="exampleInputEmail1"> Email address <span class="alert">*</span></label>
+	                                    <?php echo form_error('forget_email'); ?>
+	                                    <input id="forget_email" name="forget_email" class="form-control input form_inputs email_value" size="20" placeholder="Enter Email" type="text">
+	                                </div>
+	                                <button type="submit" class="btn btn-default btn-block">
+	                                    <i class="fa fa-unlock"> </i> Retrieve Password
+	                                </button>
+	                            <?php echo form_close(); ?>
+                             	<ul class="pager">
                                     <li class="previous pull-right">
-                                        <a href="<?php echo base_url(); ?>"> &larr; Back to Home </a>
-                                    </li>
-	                             </ul>
-	                             <div class="clear clearfix"> </div>
-	                          </div> <!--End  forgot pwd--> 
-                             
-                             
-                             
-                             <!--Provider- signup-->
-                             <div id="provider-signup" class="loginbox" style="display:none;">
-                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> 
-                            	  Let's Get Started
-                            	  <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
+                                    	<a href="<?php echo base_url(); ?>"> &larr; Back to Home </a>
+                                	</li>
+                             	</ul>
+                             	<div class="clear clearfix"> </div>
+                          	</div> <!--End  forgot pwd--> 
+			                <!--Provider- signup-->
+                            <div id="provider-signup" class="loginbox" style="display:none;">
+                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> Let's Get Started
+                            	  	<a class="pull-right" href="<?php echo base_url();?>">
+                            	  		<i class="fa fa-close"></i>
+                            	  	</a>
                                 </div><br>
-                                <?php echo form_open('signup/provider',array('id'=>'form')); ?>
-                                <div class="col-sm-6 pull-left">
+                                <?php echo form_open('signup/provider','id="form" class="reg_login_form"'); ?>
+                                	<?php 
+	                                if(isset($error)) :
+	                                    if($error == 2) {
+	                                        echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $reg_server_msg </p>";
+	                                    }
+	                                    else {
+	                                        echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $reg_server_msg </p>";
+	                                    }
+	                                else :
+	                                    echo "<p class='val_status'>  </p>";
+	                                endif;
+	                                ?>
+                                	<div class="col-sm-6 pull-left">
+										<div class="form-group">
+		                                    <label>Institution :<span class="alert">*</span></label>
+		                                    <select name="registrant_institution_type" id="institution_type" class="form-control form_inputs">
+										<?php
+		                                	foreach ($institutiontype as $institution) {
+												echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
+											}
+			                            ?> 
+			                           		</select>     
+		                            	</div>
 									<div class="form-group">
-	                                    <label>Institution: <span class="required">*</span></label>
-	                                    <select name="registrant_institution_type" id="institution_type" class="form-control">')
-									<?php
-	                                	foreach ($institutiontype as $institution) {
-											echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
-										}
-		                            ?> 
-		                           		</select>     
-	                            	</div>
-									<div class="form-group">
-										<?php echo form_label('Name :'); echo form_error('registrant_name'); ?>
-										<?php echo form_input(array('id' => 'registrant_name','class' => 'form-control', 'name' => 'registrant_name')); ?>
+										<?php echo form_label('Name :<span class="alert">*</span>'); echo form_error('registrant_name'); ?>
+										<?php echo form_input(array('id' => 'registrant_name','class' => 'form-control form_inputs alpha_value', 'data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','name' => 'registrant_name')); ?>
 									</div>
 									<div class="form-group">	
-										<?php echo form_label('Email :'); echo form_error('registrant_email_id'); ?>
-										<?php echo form_input(array('id' => 'registrant_email_id','class' => 'form-control', 'name' => 'registrant_email_id')); ?>
+										<?php echo form_label('Email :<span class="alert">*</span>'); echo form_error('registrant_email_id'); ?>
+										<?php echo form_input(array('id' => 'registrant_email_id','class' => 'form-control form_inputs email_value','placeholder' => 'Email', 'name' => 'registrant_email_id')); ?>
 									</div>
 									<div class="form-group">	
-										<?php echo form_label('Mobile No. :'); echo form_error('registrant_mobile_no'); ?>
-										<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control','name' => 'registrant_mobile_no')); ?>
+										<?php echo form_label('Mobile No. :<span class="alert">*</span>'); echo form_error('registrant_mobile_no'); ?>
+										<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control form_inputs numeric_value','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','name' => 'registrant_mobile_no')); ?>
 									</div>	
 									<div class="form-group">
 										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
@@ -113,14 +141,14 @@
 	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
 	                                </div>	
 	                                	<div class="col-sm-6 captcha_holder nopadding">
-	                                		<label>Enter Captcha value :</label>
-	                        				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value')); ?>
+	                                		<label>Enter Captcha value :<span class="alert">*</span></label>
+	                        				<?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value')); ?>
 	                        			</div>
 	                        			<div class="clearfix"> </div>
 	                        		</div>	
 									<div class="loginbox-terms">
 										<label class="checkbox_word">
-										<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition')); ?>  I accept</label> <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
+										<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition','class' => 'form_dec')); ?>  I accept</label> <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
 									</div>	
 									<p id="submit" class="btn btn-default btn-block">Register</p>
 								</div>
@@ -144,33 +172,28 @@
         </section>
   </div>      
 
- <?php include('include/footer.php'); ?>
- <?php include('include/footercustom.php'); ?>
- 
- <script type="text/javascript">
-        $(".full-page").height($(window).height());
-        $(window).resize(function() {
-            $(".full-page").height($(window).height());
-        });
-            
-		$(function(){
-		    $('.reload-captcha').click(function(event){
-		        event.preventDefault();
-		        $.ajax({
-		           url:baseurl+'job_provider/reload_captcha?'+Math.random(),
-		           success:function(data){
-		           	if(data) {
-		           		// alert(data);
-		
-		           		$('.captcha-img').attr('src', data);
-		           	}
-		           }
-		        });            
-		    });
+<?php include('include/footer.php'); ?>
+<?php include('include/footercustom.php'); ?>
+<script type="text/javascript">
+  	$(".full-page").height($(window).height());
+	$(window).resize(function() {
+       $(".full-page").height($(window).height());
+    });
+    $(function(){
+		$('.reload-captcha').click(function(event){
+		    event.preventDefault();
+		    $.ajax({
+		        url:baseurl+'job_provider/reload_captcha?'+Math.random(),
+				success:function(data){
+			        if(data) {
+			        	// alert(data);
+			       		$('.captcha-img').attr('src', data);
+			       	}
+			    }
+			});            
 		});
-		
-		$("#submit").click(function(){
+	});
+	$("#submit").click(function(){
 		$("#form").submit();  // jQuey's submit function applied on form.
-		});
-
+	});
 </script>
