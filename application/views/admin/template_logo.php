@@ -59,8 +59,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <div class="controls">
 	                              <span>
 	                                <a name="" class="btn upload_option"> Upload </a>
-	                                <input name="userimage" id="files" class="form-control hidden_upload" value="<?php if(!empty($payment_values['template_logo'])) echo $payment_values['template_logo']; ?>" type="file" >
-	                                <img class="popup_preview_templatelogo_act">
+	                                <input name="userimage" id="upload_logo" class="form-control hidden_upload" value="<?php if(!empty($payment_values['template_logo'])) echo $payment_values['template_logo']; ?>" type="file" >
+	                                <img id='imagepreview_templogo'>
+                                  <i class="icon-remove-sign temp_remove_act">Remove</i>
 	                              </span>
 	                            </div>
 	                          </div>
@@ -74,7 +75,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
                             </div>
-                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php echo $payment_values['template_id']; ?>" />
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($payment_values['template_id'])) echo $payment_values['template_id']; ?>" />
                           </form>
                         </div>
                     </div>
