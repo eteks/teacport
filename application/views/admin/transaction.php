@@ -85,7 +85,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Transaction Id </th>
                           <th> Organization Name </th>
                           <th> Merchant Transaction Id </th>
-                          <th> Payu Unique id </th>
+                          <th> Payu Unique Id </th>
                           <th> Payment Id </th>
                           <th> Payment Mode </th>
                           <th> Transaction Status </th>

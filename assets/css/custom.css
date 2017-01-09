@@ -89,15 +89,6 @@ line-height: 49px !important;
 }
 
 /* Featured Jobs Slider */
-.slide-featured-jobs .img-box {
-	height: 180px;
-} 
-.slide-featured-jobs .img-box img {
-	/*height: 768px;
-	width: 1024px;*/
-	/*height: 100%;
-	width: 100%;*/
-}
 .slide-featured-jobs .content-area{
 	height: 250px;
 }
@@ -991,8 +982,8 @@ label.form-input-error {
 	width: 125px;
 }
 .featured-image-box img{
-	height: 125px;
-	width: 125px;
+	height: 50px;
+	width: 50px;
 }
 .footer_logo {
 	margin: -5px 0 0;
