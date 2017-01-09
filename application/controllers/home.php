@@ -24,6 +24,17 @@ class Home extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+
+	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	public function index()
 	{
 	    $home['job_results'] = $this->common_model->get_job_list();
@@ -59,13 +70,12 @@ class Home extends CI_Controller {
 		if($_POST){
 			$session_data = $this->session->all_userdata();
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('contact_us_name', 'Name', 'trim|required|alpha|xss_clean|min_length[3]');
-			$this->form_validation->set_rules('contact_us_email', 'Email ID', 'trim|required|valid_email|xss_clean');
-			$this->form_validation->set_rules('contact_us_mobile', 'Mobile', 'trim|required|numeric|min_length[10]|max_length[15]|xss_clean');
-			$this->form_validation->set_rules('contact_us_subject', 'Subject', 'trim|required|alpha_numeric_spaces|min_length[4]|max_length[100]|xss_clean');
+			$this->form_validation->set_rules('contact_us_name', 'Name', 'trim|required|alpha|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
+			$this->form_validation->set_rules('contact_us_email', 'Email ID', 'trim|required|xss_clean|valid_email');
+			$this->form_validation->set_rules('contact_us_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
+			$this->form_validation->set_rules('contact_us_subject', 'Subject', 'trim|required|min_length[5]|max_length[100]|xss_clean');
 			$this->form_validation->set_rules('contact_us_message', 'Message', 'trim|required|min_length[10]|max_length[700]|xss_clean');
 			if ($this->form_validation->run()){
-				
 				$contact_us_data = array(
 										'feedback_form_title' => $this->input->post('contact_us_subject'),
 										'feedback_form_message' => 'Hi, My name is '.$this->input->post('contact_us_name').'. '.$this->input->post('contact_us_subject').' Mobile number: '.$this->input->post('contact_us_mobile').' .Email address: '.$this->input->post('contact_us_email'),
@@ -84,22 +94,24 @@ class Home extends CI_Controller {
 				);
 				// print_r($contact_us_data);
 				if($this->common_model->guest_user_feedback($contact_us_data)){
-					$from_email = $emailsetup['smtp_user'];
+					$smtp_user = $emailsetup['smtp_user'];
 					$subject = 'Teacher Recruit Contact';
 					$message =  $this->load->view('email_template/contact_form', $data, TRUE);	
 					// print_r($message);		
 					$this->email->initialize($emailsetup);
-					$this->email->from($from_email, 'Teacher Recruit');
-					$this->email->to($this->input->post('contact_us_email'));
+					$this->email->from($this->input->post('contact_us_email'),'Teacher Recruit');
+					$this->email->to($smtp_user);
 					$this->email->subject($subject);
 					$this->email->message($message);
 					/* Check whether mail send or not*/
 					$this->email->send();
 					$data['contact_server_msg'] = 'Thank you for contact us! Our customer representative contact you soon!!';
+					$data['error'] = 2;
 					$this->load->view('contactus',$data);
 				}
 				else{
 					$data['contact_server_msg'] = 'Some thing wrong data insertion process! Please try again!!';
+					$data['error'] = 1;
 					$this->load->view('contactus',$data);
 				}
 			}

@@ -46,9 +46,20 @@
                         	<div class="heading-inner first-heading">
                                 <p class="title">Change Password</p>
                             </div>
-                            <p class="success_server_msg"><?php if(isset($pasword_server_msg)) echo $pasword_server_msg; ?></p>
                             <div class="">
-                            	<?php echo form_open('provider/password', 'class="form-horizontal profile-edit"'); ?>
+                            	<?php echo form_open('provider/password', 'class="form-horizontal profile-edit provider_form"'); ?>
+                                    <?php 
+                                    if(!empty($error)) :
+                                        if($error == 2) {
+                                            echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $pasword_server_msg </p>";
+                                        }
+                                        else {
+                                            echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $pasword_server_msg </p>";
+                                        }
+                                    else :
+                                        echo "<p class='val_status'>  </p>";
+                                    endif;
+                                    ?>
 	                                <div class="form-group">
 										<label class="col-sm-12">You can change your password below</label>
 									</div>	
@@ -58,7 +69,7 @@
 											<div class="clearfix"> </div>
 											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="provideroldpassword" size="25" type="password">
+												<input id="old_pass" placeholder="Old Password" class="form-control form_inputs" name="provideroldpassword" size="25" type="password">
 											</div>
 										</div>
 									</div>	
@@ -68,7 +79,7 @@
 											<div class="clearfix"> </div>
 											<label class="col-sm-6">New Password<span class="alert">*</span></label>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="providernewpassword" size="25" type="password">
+												<input id="new_pass" placeholder="New Password" data-minlength="8" data-name="New Password" class="form-control form_inputs" name="providernewpassword" max_length="20" size="25" type="password">
 											</div>
 										</div>
 									</div>	
@@ -78,7 +89,7 @@
 											<div class="clearfix"> </div>
 											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
 											<div class="col-sm-6">
-												<input id="" class="form-control" name="providerconfirmnewpassword" size="25" type="password">
+												<input id="confirm_pass" data-minlength="8" placeholder="Confirm Password" data-name="Confirm Password" max_length="20" class="form-control form_inputs" name="providerconfirmnewpassword" size="25" type="password">
 											</div>
 										</div>
 									</div>	

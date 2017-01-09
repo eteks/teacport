@@ -164,6 +164,7 @@ class Job_seeker extends CI_Controller {
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+				$fb['error'] = 1;
    				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-seekers-login',$fb);
@@ -181,6 +182,7 @@ class Job_seeker extends CI_Controller {
 				}
 				else{
 					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$fb['error'] = 1;
    					$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-seekers-login',$fb);
@@ -228,6 +230,7 @@ class Job_seeker extends CI_Controller {
 	       	{
 	       		/* Registration form invalid stage */
 	       		$fb['reg_server_msg'] = 'Please provide valid information!';	
+	       		$fb['error'] = 1;
 	       		$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$fb['captcha'] = $this->captcha->main();
@@ -261,6 +264,7 @@ class Job_seeker extends CI_Controller {
 					if($this->email->send()){
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
+						$fb['error'] = 2;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
 						$data['institutiontype'] = $this->common_model->get_institution_type();
@@ -269,7 +273,8 @@ class Job_seeker extends CI_Controller {
 					}
 					else{
 						/* mail sent error stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';	
+						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
+						$fb['error'] = 1;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
@@ -279,7 +284,8 @@ class Job_seeker extends CI_Controller {
 					}
 				} else {
 					/* data exist stage. send  facebook login link and server message to login page */					
-					$fb['reg_server_msg'] = 'Some thing wrong in data insertion process. So please register again!';	
+					$fb['reg_server_msg'] = 'Some thing wrong in data insertion process. So please register again!';
+					$fb['error'] = 1;
        				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$fb['captcha'] = $this->captcha->main();
@@ -936,16 +942,17 @@ class Job_seeker extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
 		/* Check whether registration form server side validation are valid or not */
-		if ($this->form_validation->run() == FALSE){
+		if ($this->form_validation->run() == FALSE) {
 			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
-			$this->load->view('forgot-password');
-			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
-			$data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
+			$data['error'] = 1;
+			$this->load->view('forgot-password-seeker',$data);
+			// $data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
+			// $data['data_value'] = $this->db->get_where('tr_candidate_profile', array('password' => $candidate_password))->result_array();
 		}
 		else{
 	        $forget_where = '(candidate_email="'.$this->input->post('forget_email').'")';
 	  		$forget_query = $this->db->get_where('tr_candidate_profile',$forget_where)->row_array();
-	      	if($forget_query['candidate_password'] != '') {
+	      	if(isset($forget_query['candidate_password']) && !empty($forget_query['candidate_password'])) {
 				$from_email = $emailsetup['smtp_user'];
 				$this->email->initialize($emailsetup);
 				$this->email->from($from_email, 'Teacher Recruit');
@@ -956,20 +963,25 @@ class Job_seeker extends CI_Controller {
 	       		// $this->email->message("Your registered password is ".$forget_query['candidate_password']);
 	        	if($this->email->send()){
 		        	$data['reg_server_msg'] = "Check your mail and get your password!";
-		        	$this->load->view('forgot-password',$data);
+		        	$data['error'] = 2;
+		        	$this->load->view('forgot-password-seeker',$data);
 	        	}
 				else{
 					show_error($this->email->print_debugger());
 					$data['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
-					$this->load->view('forgot-password',$data);
+					$data['error'] = 1;
+					$this->load->view('forgot-password-seeker',$data);
 				}
 	      	}
 			else{
-				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
-				$this->load->view('forgot-password',$data);
+				$data['reg_server_msg'] = 'Your Provided Email Id is invalid';	
+				$data['error'] = 1;
+				$this->load->view('forgot-password-seeker',$data);
 			}
 		}   	 		
 	}
+
+
 
 	// Commented by siva
 	// /** Seeker Inital Data Validation With Pop-up **/		
