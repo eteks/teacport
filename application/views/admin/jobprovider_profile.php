@@ -852,7 +852,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($provider_full_profile['registrant_date_of_birth'])) :
                             ?>
-                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" />
+                            <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" />
                             <?php
                             else :
                             ?>
