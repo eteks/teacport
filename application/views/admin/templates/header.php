@@ -241,6 +241,7 @@ Website: http://thevectorlab.net/
                             <?php endif; ?>
                     <?php endforeach; ?>
                 <!-- END SIDEBAR MENU -->
+                
             </div>
             <!-- END SIDEBAR -->
         <?php endif; ?>

@@ -102,8 +102,8 @@
                     "order": [],
                     // Length of row in grid - row length
                     "lengthMenu" : [
-                                    [5, 25, 50, -1], 
-                                    [5, 25, 50, "All"]
+                                    [15, 25, 50, -1], 
+                                    [15, 25, 50, "All"]
                                   ],
                     // Page length
                     "pageLength" : 15,
@@ -144,7 +144,8 @@
                                                     "text" : "Copy",
                                                     "className" : "export_options",
                                                     "exportOptions": {
-                                                        "columns" : ':visible:not(.data_action)'
+                                                        // "columns" : ':visible:not(.data_action)'
+                                                        "columns" : ':not(.data_action)'
                                                     },
                                                 },
                                                 {
@@ -152,7 +153,8 @@
                                                     "text" : "Save as pdf",
                                                     "className" : "export_options",
                                                     "exportOptions": {
-                                                        "columns" : ':visible:not(.data_action)'
+                                                        // "columns" : ':visible:not(.data_action)'
+                                                        "columns" : ':not(.data_action)'
                                                     },
                                                 },
                                                 {
@@ -160,7 +162,8 @@
                                                     "text" : "Save as csv",
                                                     "className" : "export_options",
                                                     "exportOptions": {
-                                                        "columns" : ':visible:not(.data_action)'
+                                                        // "columns" : ':visible:not(.data_action)'
+                                                        "columns" : ':not(.data_action)'
                                                     },
                                                 },
                                                 {
@@ -168,7 +171,8 @@
                                                     "text" : "Save as excel",
                                                     "className" : "export_options",
                                                     "exportOptions": {
-                                                        "columns" : ':visible:not(.data_action)'
+                                                        // "columns" : ':visible:not(.data_action)'
+                                                        "columns" : ':not(.data_action)'
                                                     },
                                                 },
                                                 {
@@ -176,7 +180,8 @@
                                                     "text" : "Print",
                                                     "className" : "export_options",
                                                     "exportOptions": {
-                                                        "columns" : ':visible:not(.data_action)'
+                                                        // "columns" : ':visible:not(.data_action)'
+                                                        "columns" : ':not(.data_action)'
                                                     },
                                                 },
                                             ],

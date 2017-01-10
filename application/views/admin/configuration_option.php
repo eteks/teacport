@@ -123,7 +123,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Twitter Secret</label>
 	                            <div class="controls">
-	                              <input name="twitter_app_secret" class="span6" value="<?php if(!empty($payment_values['	twitter_app_secret'])) echo $payment_values['	twitter_app_secret']; ?>" type="text">
+	                              <input name="twitter_app_secret" class="span6" value="<?php if(!empty($payment_values['twitter_app_secret'])) echo $payment_values['twitter_app_secret']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">

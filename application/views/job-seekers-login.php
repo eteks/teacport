@@ -35,7 +35,7 @@
 		                                    <a class="txt_blue remove_error_message_act">Forgot Password?</a>
 		                                </div>
 		                                <div class="loginbox-submit">
-		                                    <a href="user-dashboard.html"><input type="submit" class="btn btn-default btn-block" value="Login"></a>
+		                                    <a><input type="submit" class="btn btn-default btn-block" value="Login"></a>
 		                                </div>
 		                            </div>    
                                 <?php echo form_close(); ?>

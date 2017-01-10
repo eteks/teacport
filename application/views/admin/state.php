@@ -51,7 +51,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div> <!-- END PAGE HEADER-->
       <div class="row-fluid"> <!-- BEGIN ADVANCED TABLE widget-->
         <div class="span12">
-          <div class="widget">
+          <div class="widget sub_section_scroll">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> State
@@ -113,7 +113,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $sta_val['state_status']; ?>" />
+                          <?php 
+                            if(!empty($mapped_data)){
+                            $state_id = $sta_val['state_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
+                            return $m == $state_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="0" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$sta_val['state_status'].'" />';
+                            }
+                            else{
+                              echo '<input type="hidden" value="'.$sta_val['state_status'].'" />';
+                            }
+                          ?>                         
                         </td>
                         <td class="created_date"> 
                           <?php 

@@ -402,7 +402,7 @@
                <div class="span12">
                    <div class="space20"></div>
                    <div class="space20"></div>
-                   <div class="widget-body">
+                   <div class="widget-body sub_section_scroll">
                        <div class="error-page" style="min-height: 800px">
                            <img src="img/404.png" alt="404 error">
                            <h1>

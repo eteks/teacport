@@ -1,6 +1,7 @@
 body {
     color: #868686;
     background: #32C2CD url(../img/bg-default.jpg) !important;
+    overflow:hidden;
 }
 #main-content {
     box-shadow: 0 0 10px #757575;
@@ -387,11 +388,11 @@ tr select {
     text-transform: capitalize;
 }
 .parents_tr td textarea{
-    min-height:20px !important;
-    max-height:40px !important;
+    min-height:100px !important;
+    max-height:200px !important;
     overflow: auto !important;
-    max-width: 145px !important;    
-    min-width: 100px !important;
+    /*max-width: 145px !important;    */
+    width: 500px !important;
 }
 .user_accts_table td input {
     max-width: 127px !important;
@@ -409,12 +410,27 @@ tr select {
     max-height:700px !important;
     /*overflow: auto;*/
 }
-.sub_pre_section{
+.scroll_section_sidebar{
+	max-height:100px !important; 
+	height: auto;
+	width: auto;
+	overflow: scroll;
+}
+
+
+ .sub_section_scroll{
 	max-height:700px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
 }
+.sub_pre_section{
+	max-height:500px !important; 
+	height: auto;
+	width: auto;
+	overflow: scroll;
+}
+
 .main_module{
     font-size: 13px;
     font-weight:600;
@@ -783,8 +799,8 @@ table .dataTables_empty{
 /* for priveleges */
 .privileges_table th, .privileges_table td{
 	min-width: 200px;
-	/*max-width: 180px;*/
-	overflow: scroll !important;
+	max-width: 250px;
+	/*overflow: scroll !important;*/
 }
 /* Logo */
 .logo_firstword {

@@ -64,7 +64,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget">
+          <div class="widget sub_section_scroll">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i>Job Provider Profile 
@@ -835,7 +835,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_name']; ?>" name="registrant_name" />
+                            <input type="text" class="span6 tabfield3 tabfield alpha_value" value="<?php echo $provider_full_profile['registrant_name']; ?>" name="registrant_name" maxlength="50" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
@@ -876,11 +876,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($provider_full_profile['registrant_mobile_no']) && $provider_full_profile['registrant_mobile_no'] != 0) :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" maxlength="10" />
                             <?php
                             else :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield" value="" name="registrant_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="" name="registrant_mobile" maxlength="10" />
                             <?php
                             endif;
                             ?>

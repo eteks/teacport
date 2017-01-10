@@ -64,7 +64,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget">
+          <div class="widget sub_section_scroll">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i>Job Provider Ads
@@ -229,7 +229,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <div class="span6 control-group">
                             <label class="control-label"> Ads Visible days </label>
                             <span class="dynamic_data"> 
-                              <input type="text" class="form-control" placeholder="Visible days" value="<?php echo $activities_details['ad_visible_days']; ?>" name="ads_days" /> 
+                              <input type="text" class="form-control numeric_value" placeholder="Visible days" value="<?php echo $activities_details['ad_visible_days']; ?>" maxlength="15" name="ads_days" /> 
                             </span>
                           </div>
                           <div class="span6 control-group">                                     

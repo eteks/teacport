@@ -18,7 +18,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         <!-- BEGIN PAGE -->
         <div id="main-content">
             <!-- BEGIN PAGE CONTAINER-->
-            <div class="container-fluid">
+            <div class="container-fluid sub_pre_section">
                 <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
@@ -65,10 +65,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <!-- BEGIN PAGE CONTENT-->
                 <div id="page" class="dashboard">
                     <!--BEGIN NOTIFICATION-->
-                    <div class="alert alert-info">
+                    <!-- <div class="alert alert-info">
                         <button data-dismiss="alert" class="close">×</button>
                          Welcome to the <strong>Teacher Recruit</strong>. Please don't forget to check all the pages!
-                    </div>
+                    </div> -->
                     <!--END NOTIFICATION-->
                     <!-- BEGIN OVERVIEW STATISTIC BARS-->
                     <div class="row-fluid circle-state-overview">
@@ -170,7 +170,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     </div> -->
                                 </div>
                             </div>
-                                <div class="widget-body filter_by_cnt">
+                            <div class="widget-body filter_by_cnt">
                                 <table class="table table-condensed table-striped table-hover no-margin dash_table" id="filter_vacancy_table">
                                     <thead>
                                     <tr>
@@ -210,7 +210,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <div class="btn-group">
                                          <select class="select_by filter_provider" data-placeholder="Select an option">
                                             <option value="" selected>Select Provider Type</option>
-								            <option value="paid_provider" selected>Paid</option>
+								            <option value="paid_provider" selected>Plan Wise</option>
 								            <option value="paid_provider_district">Paid Provider District Wise</option>
                                             <option value="free_provider_district">Free Provider District Wise</option>
 								        </select>
@@ -372,15 +372,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <div id="site_statistics" class="chart"></div>
                                     </div>
                                 </div> -->
-                                <form class="form-horizontal">
-                                    <div class="input-prepend cal_graph_range">
-                                        <span class="add-on"><i class="icon-calendar"></i></span>
-                                        <input type="text" name="range" id="range" />
+                                <div class="widget-body">
+                                    <form class="form-horizontal">
+                                        <div class="input-prepend cal_graph_range">
+                                            <span class="add-on"><i class="icon-calendar"></i></span>
+                                            <input type="text" name="range" id="range" />
+                                        </div>
+                                    </form>
+                                    <div id="msg"></div>
+                                    <div id="placeholder">
+                                        <figure id="chart"></figure>
                                     </div>
-                                </form>
-                                <div id="msg"></div>
-                                <div id="placeholder">
-                                    <figure id="chart"></figure>
                                 </div>
                             </div>
                             <!-- END SITE VISITS PORTLET-->
@@ -394,32 +396,34 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <a href="javascript:;" class="icon-remove"></a>
                                     </span>
                                 </div>
-                                <div class="sub_site_visites_cont">
-                                <div class="widget-body site_visites_cont">
-                                    <table class="table table-striped">
-                                        <thead>
-                                        <tr>
-                                            <th>Page</th>
-                                            <th>Visits</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <?php
-                                            if(!empty($page_high_count_visits)) :
-                                            foreach ($page_high_count_visits as $high_count) :
-                                        ?>
-                                        <tr>
-                                            <td><?php echo $high_count['page_view'] ?></td>
-                                            <td><strong><?php echo $high_count['count_vis'] ?></strong></td>
-                                        </tr>
-                                        <?php
-                                            endforeach;
-                                            endif;
-                                        ?>
-                                        </tbody>
-                                    </table>
+                                <div class="widget-body">
+                                    <div class="sub_site_visites_cont">
+                                        <div class="widget-body site_visites_cont">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Page</th>
+                                                    <th>Visits</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php
+                                                    if(!empty($page_high_count_visits)) :
+                                                    foreach ($page_high_count_visits as $high_count) :
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $high_count['page_view'] ?></td>
+                                                    <td><strong><?php echo $high_count['count_vis'] ?></strong></td>
+                                                </tr>
+                                                <?php
+                                                    endforeach;
+                                                    endif;
+                                                ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                   </div>
                                 </div>
-                               </div>
                             </div>
                         </div>
                     </div>
