@@ -420,16 +420,21 @@ tr select {
 	width: auto;
 	overflow: scroll;
 }
-
+.sub_section_scrollprivil{
+	max-height:600px !important; 
+	height: auto;
+	width: auto;
+	overflow: scroll;
+}
 
  .sub_section_scroll{
-	max-height:700px !important; 
+	max-height:600px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
 }
 .sub_pre_section{
-	max-height:500px !important; 
+	max-height:570px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
@@ -841,8 +846,25 @@ table .dataTables_empty{
     width: 100%;
     height: 100%;
     z-index: 9999;
-   
 }
+/*.edit_add_overlay {
+    opacity: 0.01;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}*/
+/*.db {
+    display: block;
+}
+.dn {
+    display: none;
+}*/
+
+
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;

@@ -475,7 +475,7 @@ class Job_provider extends CI_Controller {
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			$this->form_validation->set_rules('provider_ug_or_pg', 'Required course type', 'trim|required|alpha|callback_pg_or_ug_check|max_length[3]|xss_clean');
-			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|max_length[80]|xss_clean');
+			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|min_length[3]|max_length[80]|xss_clean');
 			$this->form_validation->set_rules('provider_vacancy', 'No of vacancy', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
 			$this->form_validation->set_rules('provider_class_level', 'Class Level', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_qualification[]', 'Qualification', 'trim|xss_clean|callback_multiple_qualification');
@@ -488,7 +488,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
-			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
+			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|callback_check_greater_value['.$this->input->post('provider_min_salary').']|xss_clean');
 			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run())
@@ -778,7 +778,7 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|xss_clean');
+			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('provider_premium_ad_image', 'Ad image', 'callback_provider_premium_ad_validation');
 			if ($this->form_validation->run()){
 				if (!empty($_FILES['provider_premium_ad_image']['name'])){
@@ -1091,4 +1091,15 @@ class Job_provider extends CI_Controller {
 			return FALSE;
 		}
 	}
+
+	// Salary Validation
+ 	function check_greater_value($second_field,$first_field) 
+	{ 
+		if ($second_field < $first_field) { 
+			$this->form_validation->set_message('check_greater_value', 'The %s field must contain a number greater than Minimum Salary'); 
+			return FALSE;
+		}
+ 		return TRUE;
+	}
+
 }

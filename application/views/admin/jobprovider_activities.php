@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -52,7 +52,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget sub_section_scroll">
+          <div class="widget">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> Job Activities
@@ -182,7 +182,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("label","label","label","on_off","on_off","on_off");
   var columns = new Array("act_org_name","act_cand_name","act_vac_name","act_sms","act_email","act_resume");
   var placeholder = new Array(""); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("","","","","","");//To set class for element
+  var maxlength = new Array("50","","","","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   // var act_org_name_option = new Array("Select");
   // var act_org_name_value = new Array("");

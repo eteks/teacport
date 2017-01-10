@@ -16,6 +16,7 @@
 <div id="dialog-overlay"></div>
 <!--overlay for loader in admin-->
 <div class="loader_overlay"> </div>
+<!-- <div class="edit_add_overlay"> </div> -->
 <!--  Confirm box with yes and no button -->
 <div id="dialog-box">
     <h3 class="message"></h3>
@@ -200,6 +201,11 @@
                                         padding-bottom: 15px;\n\
                                         display:block;\n\
                                    '>/");
+        $(".message_res").text(function(index, currentText) {
+        if (currentText.length>60) {
+            return currentText.substr(0, 60)+'.....';
+        }
+    });
             }
             jQuery(document).ready(function() {
                 datatable_initialization();

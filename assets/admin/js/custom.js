@@ -109,10 +109,10 @@ createInput = function(i,str){
     str = typeof str !== 'undefined' ? str : null;
     //alert(str);
     if(inputType[i] == "text"){
-        input = '<input type='+inputType[i]+' name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
+        input = '<input type="'+inputType[i]+'" name="'+columns[i]+'" maxlength="'+maxlength[i]+'" class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
     }
     else if(inputType[i] == "textarea"){
-        input = '<textarea name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'">'+str+'</textarea>';
+        input = '<textarea name='+columns[i]+' class="'+class_selector[i]+'" maxlength="'+maxlength[i]+'" placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
     else if(inputType[i] == "label"){
         input = '<label class='+columns[i]+'>'+str+'</label>';
@@ -246,17 +246,15 @@ $('.top_layer, .message_close').on('click',function() {
     });
 /*Ended by thangam*/
 
-
-   
-
-
-
-    
-	
-	
-    // $('.sub_pre_section').slimScroll({
-        // height: 'auto'
-    // });
+	 $('.sub_section_scroll').slimScroll({
+        height: 'auto'
+     });
+      $('.sub_section_scrollprivil').slimScroll({
+        height: 'auto'
+     });
+    $('.sub_pre_section').slimScroll({
+        height: 'auto'
+     });
     
      $('.sub_site_visites_cont').slimScroll({
         height: 'auto',
@@ -780,11 +778,7 @@ $('.top_layer, .message_close').on('click',function() {
         }
     });
     /*use “…” for overflowed block of multi-lines in admin side added by thangam*/
-    $(".message_res").text(function(index, currentText) {
-        if (currentText.length>60) {
-            return currentText.substr(0, 60)+'.....';
-        }
-    });
+   
    //   $('.pa').on('click', function(e){
    //      $("#not_count").html("0");
    //      // $('#not_count').hide();

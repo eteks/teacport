@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -52,7 +52,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget sub_section_scroll">
+          <div class="widget">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> Subject
@@ -129,7 +129,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $sub_val['subject_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $subject_id = $sub_key;  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($subject_id) {
+                            return $m == $subject_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$sub_val['subject_status'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$sub_val['subject_status'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$sub_val['subject_status'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="created_date">
                           <?php 
@@ -190,7 +203,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("s_name","s_inst_type","s_status"); // Set name of input types
   var placeholder = new Array("Enter Subject Name","Please select institution"); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","","");//To set class for element
+  var maxlength = new Array("50","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var s_inst_type_option = new Array();
   var s_inst_type_value = new Array();
