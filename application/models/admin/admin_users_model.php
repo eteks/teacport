@@ -21,7 +21,7 @@ class Admin_users_model extends CI_Model {
       $group_update_data = array( 
                               'user_group_name' => $this->input->post('user_group_name'),
                               'user_group_description' => $this->input->post('user_group_description'),
-                              'is_super_admin' => $this->input->post('user_super_admin'),                             
+                              // 'is_super_admin' => $this->input->post('user_super_admin'),                             
                               'user_group_status' => $this->input->post('user_group_status')
                             );
       $group_update_where = '( user_group_id="'.$this->input->post('rid').'")'; 
@@ -37,7 +37,7 @@ class Admin_users_model extends CI_Model {
       $group_insert_data = array( 
                               'user_group_name' => $this->input->post('user_group_name'),
                               'user_group_description' => $this->input->post('user_group_description'),
-                              'is_super_admin' => $this->input->post('user_super_admin'),      
+                              // 'is_super_admin' => $this->input->post('user_super_admin'),      
                               'user_group_status' => $this->input->post('user_group_status')
                             );
       $this->db->insert("tr_admin_user_groups", $group_insert_data); 
@@ -246,7 +246,7 @@ class Admin_users_model extends CI_Model {
     }
     //Get all the user groups
     public function get_user_groups(){
-        $user_group_where = '(user_group_status=1)'; 
+        $user_group_where = '(user_group_status=1 AND NOT is_super_admin)'; 
         $model_data = $this->db->get_where("tr_admin_user_groups", $user_group_where)->result_array(); 
         return $model_data;
     }

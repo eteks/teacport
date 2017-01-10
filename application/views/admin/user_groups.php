@@ -126,12 +126,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                                           ?>
                                         </td>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                                          <td class="edit_section">
-                                            <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
-                                          </td>
-                                        <?php endif; ?>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
+                                          if($grp_val['is_super_admin']):
+                                            echo "<td>-</td>";
+                                          else:
+                                        ?>
+                                            <td class="edit_section">
+                                              <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
+                                            </td>
+                                        <?php 
+                                          endif;
+                                        endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): 
+                                          if($grp_val['is_super_admin']):
+                                            echo "<td>-</td>";
+                                          else:
+                                        ?>
                                           <td>
                                             <?php 
                                             if(!empty($mapped_data)){
@@ -148,7 +158,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             }
                                             ?>      
                                           </td>
-                                        <?php endif; ?>
+                                        <?php 
+                                          endif;
+                                        endif; ?>
                                     </tr>
                                     <?php
                                       $i++;
@@ -177,7 +189,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
    <!-- END CONTAINER -->
     <script>
     // Define default values
-    var inputType = new Array("text","textarea","select","select"); // Set type of input which are you have used like text, select,textarea.
+    var inputType = new Array("text","textarea","label","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("user_group_name","user_group_description","user_super_admin","user_group_status"); // Set name of input types
     var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
     var class_selector = new Array("");//To set class for element
