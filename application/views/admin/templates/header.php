@@ -37,6 +37,7 @@ Website: http://thevectorlab.net/
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/daterangepicker.css">    
 	<!--My custom Fonts--> 
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/default.css" type="text/css"> 
 
 </head>
 <!-- END HEAD -->
@@ -240,6 +241,7 @@ Website: http://thevectorlab.net/
                             <?php endif; ?>
                     <?php endforeach; ?>
                 <!-- END SIDEBAR MENU -->
+                
             </div>
             <!-- END SIDEBAR -->
         <?php endif; ?>

@@ -24,7 +24,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     </div> <!-- END RESPONSIVE QUICK SEARCH FORM -->
   </div> <!-- END SIDEBAR -->
   <div id="main-content"> <!-- BEGIN PAGE -->
-    <div class="container-fluid"> <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid sub_section_scroll"> <!-- BEGIN PAGE CONTAINER-->
       <div class="row-fluid"> <!-- BEGIN PAGE HEADER-->
         <div class="span12">
           <!-- <h3 class="page-title">

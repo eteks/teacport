@@ -32,7 +32,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -882,7 +882,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Date Of Birth</label>
                           <span>
-                            <input class=" m-ctrl-medium date-picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])); ?>" name="cand_dob" />
+                            <input class=" m-ctrl-medium admin_date_picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])); ?>" name="cand_dob" />
                           </span>
                         </div>
                       </div>

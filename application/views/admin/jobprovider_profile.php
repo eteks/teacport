@@ -31,7 +31,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -852,7 +852,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($provider_full_profile['registrant_date_of_birth'])) :
                             ?>
-                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" placeholder="Registrant DOB" />
+                            <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" placeholder="Registrant DOB" />
                             <?php
                             else :
                             ?>

@@ -185,6 +185,7 @@ $(document).ready(function(){
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
                     handleChoosenSelect();
                     popup_pagination();
+                    date_picker();
                     // e.preventDefault();
                     $('.multi_choice').find('ul').addClass('scroller');
                     $('.multi_choice').find('ul').slimScroll({

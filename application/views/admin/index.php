@@ -18,7 +18,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         <!-- BEGIN PAGE -->
         <div id="main-content">
             <!-- BEGIN PAGE CONTAINER-->
-            <div class="container-fluid">
+            <div class="container-fluid sub_pre_section">
                 <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">
@@ -65,10 +65,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <!-- BEGIN PAGE CONTENT-->
                 <div id="page" class="dashboard">
                     <!--BEGIN NOTIFICATION-->
-                    <div class="alert alert-info">
+                    <!-- <div class="alert alert-info">
                         <button data-dismiss="alert" class="close">×</button>
                          Welcome to the <strong>Teacher Recruit</strong>. Please don't forget to check all the pages!
-                    </div>
+                    </div> -->
                     <!--END NOTIFICATION-->
                     <!-- BEGIN OVERVIEW STATISTIC BARS-->
                     <div class="row-fluid circle-state-overview">

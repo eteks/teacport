@@ -263,21 +263,24 @@ $('.top_layer, .message_close').on('click',function() {
 /*Ended by thangam*/
 
 
-   
-
-
-
-    
-	
-	
-    // $('.sub_pre_section').slimScroll({
-        // height: 'auto'
-    // });
+	 $('.sub_section_scroll').slimScroll({
+        height: 'auto'
+     });
+      $('.sub_section_scrollprivil').slimScroll({
+        height: 'auto'
+     });
+    $('.sub_pre_section').slimScroll({
+        height: 'auto'
+     });
     
      $('.sub_site_visites_cont').slimScroll({
         height: 'auto',
        	width: 'auto'
     });
+    
+    $('.scroll_section_sidebar').slimScroll({
+        height: 'auto'
+     });
     
 	
     if($('.has-sub').length > 0) {
@@ -743,7 +746,6 @@ $('.top_layer, .message_close').on('click',function() {
         }
     });
     $('#timezone_act').timezones(); //code for timezone module in admin side
-    
     // Next button click - Upgrade
     $(document).on('click','.upgrade_pag_next',function() {
         var this_holder = $(this).parents('.upgrade_holder').children('.upgrade_section_profile');
@@ -762,7 +764,6 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val+1).fadeIn(3000);
         }
     });
-$('#timezone_act').timezones(); //code for timezone module in admin side
     // Previous button click - Renewal
     $(document).on('click','.renew_pag_prev',function() {
         var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
@@ -801,11 +802,7 @@ $('#timezone_act').timezones(); //code for timezone module in admin side
         }
     });
     /*use “…” for overflowed block of multi-lines in admin side added by thangam*/
-    $(".message_res").text(function(index, currentText) {
-        if (currentText.length>60) {
-            return currentText.substr(0, 60)+'.....';
-        }
-    });
+   
    //   $('.pa').on('click', function(e){
    //      $("#not_count").html("0");
    //      // $('#not_count').hide();
@@ -844,7 +841,7 @@ $('#timezone_act').timezones(); //code for timezone module in admin side
 	    $('#divLargerImage').add($('#divOverlay')).fadeOut(function () {
 	        $('#divLargerImage').empty();
 	    });
-	});
+	}); 
     
     //To change Job provider ad verified status 
     $(document).delegate('.ad_verify_act li','click',function(e){
@@ -876,6 +873,13 @@ function popup_pagination() {
         $('div.renewal_holder_content',this).wrapAll('<div class="span3 renewal_holder"></div>');
     });
 }
+function date_picker() {
+    $('.admin_date_picker').Zebra_DatePicker({
+        direction: -1,
+        format: 'd/m/Y',
+        view: 'years'
+        });
+    }
 
 // Animation effect - slider
 function sliderResponse(target) {

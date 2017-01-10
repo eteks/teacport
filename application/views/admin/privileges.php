@@ -46,13 +46,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <div class="row-fluid">
                 <div class="span12">
                     <!-- BEGIN EXAMPLE TABLE widget-->
-                    <div class="widget">
+                    <div class="widget sub_pre_section">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Privileges</h4>
                             <span class="loader_holder hide_loader"> </span>
                         </div>
                         <p class='privilege_status' style="display:none;"></p>
-                        <div class ="sub_pre_section">
+                       
                         <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> 
                           <div class="widget-body">
                                   <div class="portlet-body">
@@ -150,10 +150,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                              <!-- <button type="button" class="btn">Cancel</button> -->
                           </div>
                         </form>
-                        </div>
+                      
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
-                </div>
+                 </div>
             </div>
             <!-- END ADVANCED TABLE widget-->
 

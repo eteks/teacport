@@ -32,7 +32,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -459,13 +459,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Open Date</label>
                               <span>
-                                <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_open_date'])); ?>" name="vac_open_date" placeholder="Vacancy Open Date" />
+                                <input class="span6 tabfield1 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_open_date'])); ?>" name="vac_open_date" placeholder="Vacancy Open Date" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label">Close Date</label>
                               <span>
-                                <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_close_date'])); ?>" name="vac_end_date" placeholder="Vacancy End Date" />
+                                <input class="span6 tabfield1 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_close_date'])); ?>" name="vac_end_date" placeholder="Vacancy End Date" />
                               </span>
                             </div>
                           </div>
@@ -709,13 +709,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Interview Start Date</label>
                               <span>
-                                <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_interview_start_date'])); ?>" name="vac_inter_sdate"  placeholder="Interview Start Date" />
+                                <input class="span6 tabfield3 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_interview_start_date'])); ?>" name="vac_inter_sdate"  placeholder="Interview Start Date" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label">Interview End Date</label>
                               <span>
-                                <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_end_date'])); ?>" name="vac_inter_edate" placeholder="Interview End Date" />
+                                <input class="span6 tabfield3 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_end_date'])); ?>" name="vac_inter_edate" placeholder="Interview End Date" />
                               </span>
                             </div>
                           </div>
