@@ -238,8 +238,8 @@ class Job_Seeker extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		        array( 'field'   => 'cand_post','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ),
-		       	array( 'field'   => 'cand_ssalary','label' => 'Start Salary','rules' => 'trim|xss_clean|regex_match[/^[0-9]$/]|min_length[4]|max_length[9]' ),
-		        array( 'field'   => 'cand_esalary','label' => 'End Salary','rules'   => 'trim|xss_clean|regex_match[/^[0-9]$/]|min_length[4]|max_length[9]|callback_check_greater_value['.$this->input->post('cand_ssalary').']' ),
+		       	array( 'field'   => 'cand_ssalary','label' => 'Start Salary','rules' => 'trim|xss_clean|regex_match[/^[0-9]{4,9}$/]' ),
+		        array( 'field'   => 'cand_esalary','label' => 'End Salary','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('cand_ssalary').']' ),
 		        array( 'field'   => 'cand_class','label'   => 'Class Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ),
 		        array( 'field'   => 'cand_sub','label'   => 'Subject Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ) );
 	 		$this->form_validation->set_rules($validation_rules);
