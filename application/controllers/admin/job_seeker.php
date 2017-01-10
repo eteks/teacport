@@ -25,6 +25,17 @@ class Job_Seeker extends CI_Controller {
 	        return FALSE;
 	    }
 	}
+
+	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
@@ -75,7 +86,7 @@ class Job_Seeker extends CI_Controller {
 	  		$action = $this->input->post('action');
 	  		$upload_path = SEEKER_UPLOAD."pictures/";
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
-	  			$validation_rules[] =  	array( 'field'   => 'cand_name','label'   => 'Candidate Name','rules'   => 'trim|required|xss_clean|' );
+	  			$validation_rules[] =  	array( 'field'   => 'cand_name','label'   => 'Candidate Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space' );
 			    // $validation_rules[] =   array( 'field'   => 'cand_gen','label'   => 'Candidate Gender','rules'   => 'trim|required|xss_clean|' );
 			    // $validation_rules[] =   array( 'field'   => 'cand_fa_name','label'   => 'Candidate Father Name','rules'   => 'trim|required|xss_clean|' );
 			   	// $validation_rules[] =   array( 'field'   => 'cand_dob','label'   => 'Candidate DOB','rules'   => 'trim|required|xss_clean|' );
@@ -93,11 +104,11 @@ class Job_Seeker extends CI_Controller {
 	   		}
 	  		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array( 'field'   => 'cand_email','label'   => 'Email','rules'   => 'trim|required|xss_clean|valid_email' );
-	   			// $validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{10}$/]|' );
 	   			// $validation_rules[] =	array( 'field'   => 'cand_district','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' );
 	   			// $validation_rules[] =	array( 'field'   => 'cand_address1','label'   => 'Address','rules'   => 'trim|required|xss_clean|' );
 	   			// $validation_rules[] =	array( 'field'   => 'cand_live_district','label'   => 'Live District','rules'   => 'trim|required|xss_clean|' );
-			    // $validation_rules[] =	array( 'field'   => 'cand_pincode','label'   => 'Pincode','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{6}$/]|' );			                       
+			    $validation_rules[] =	array( 'field'   => 'cand_pincode','label'   => 'Pincode','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{4,6}$/]|' );			                       
 	   		}
 	   		if($this->input->post('index')==4 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array( 'field'   => 'cand_institution','label'   => 'Candidate Institution','rules'   => 'trim|required|xss_clean' );                       
@@ -226,8 +237,8 @@ class Job_Seeker extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	   		$validation_rules = array(
 		        array( 'field'   => 'cand_post','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ),
-		       	array( 'field'   => 'cand_ssalary','label' => 'Start Salary','rules' => 'trim|xss_clean|' ),
-		        array( 'field'   => 'cand_esalary','label' => 'End Salary','rules'   => 'trim|xss_clean|callback_check_greater_value['.$this->input->post('cand_ssalary').']' ),
+		       	array( 'field'   => 'cand_ssalary','label' => 'Start Salary','rules' => 'trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|' ),
+		        array( 'field'   => 'cand_esalary','label' => 'End Salary','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('cand_ssalary').']' ),
 		        array( 'field'   => 'cand_class','label'   => 'Class Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ),
 		        array( 'field'   => 'cand_sub','label'   => 'Subject Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Posting Name]' ) );
 	 		$this->form_validation->set_rules($validation_rules);

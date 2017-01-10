@@ -160,6 +160,7 @@ $route['main/jobprovider_ads'] = 'admin/job_provider/teacport_job_provider_ads';
 $route['main/job_provider_edit_ads'] = 'admin/job_provider/teacport_job_provider_ads_ajax';
 $route['main/organization_plan_notification'] = 'admin/job_provider/organization_plan_notification';
 $route['main/transaction'] = 'admin/job_provider/transaction';
+$route['main/transaction_fullview'] = 'admin/job_provider/get_transaction_full_view';
 
 /* ===================          Route settings for Admin Job Provider End     ====================== */
 

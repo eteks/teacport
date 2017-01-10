@@ -24,10 +24,17 @@ class Master_data_model extends CI_Model {
     // print_r($model_data['mapped_data']);
     // Update data
     if($status=='update') {
-      $state_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $state_update_data = array( 
                               'state_name' => $this->input->post('s_name'),
                               'state_status' => $this->input->post('s_status')
+                            ); 
+      }
+      else {
+        $state_update_data = array( 
+                              'state_name' => $this->input->post('s_name')
                             );
+      }
       $state_update_where = '( state_id="'.$this->input->post('rid').'")'; 
       $this->db->set($state_update_data); 
       $this->db->where($state_update_where);
@@ -40,7 +47,7 @@ class Master_data_model extends CI_Model {
     else if($status=='save') {
       $state_insert_data = array( 
                             'state_name' => $this->input->post('s_name'),
-                            'state_status' => $this->input->post('s_status')
+                            'state_status' => $this->input->post('s_staus')
                           );
       $this->db->insert("tr_state", $state_insert_data); 
       $model_data['status'] = "Inserted Successfully";
@@ -202,10 +209,17 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $institution_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $institution_update_data = array( 
                               'institution_type_name' => $this->input->post('i_name'),
                               'institution_type_status' => $this->input->post('i_status')
                             );
+      }
+      else {
+        $institution_update_data = array( 
+                              'institution_type_name' => $this->input->post('i_name')
+                            );
+      }
       $institution_update_where = '(institution_type_id="'.$this->input->post('rid').'")'; 
       $this->db->set($institution_update_data); 
       $this->db->where($institution_update_where);

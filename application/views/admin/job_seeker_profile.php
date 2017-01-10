@@ -923,20 +923,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Languages Known</label>
-                           <?php
+                          <span class="multi_choice">
+                            <?php
                             $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
-                            if(!empty($known_languages)) :
-                            foreach ($known_languages as $lan_val) :
-                            if(in_array($lan_val['language_id'], $lan_array)) {
-                              echo '<input type="checkbox" class="known_languages" value="'.$lan_val['language_id'].'" checked>'.$lan_val['language_name'].'</li>';
-                            }
-                            else {
-                              echo '<input type="checkbox" class="known_languages" value="'.$lan_val['language_id'].'">'.$lan_val['language_name'].'';
-                            }
-                            endforeach;
-                            endif;
                             ?>
-                          <input type="hidden" value="<?php echo $seeker_full_profile['candidate_language_known']; ?>" class="tabfield1 tabfield hidden_known_lang" name="cand_known_lang">
+                            <select data-placeholder="select" name="cand_known_lang" class="chosen span6 tabfield1 tabfield" multiple="multiple" >
+                              <?php
+                              if(!empty($known_languages)) :
+                              foreach ($known_languages as $lan_val) :
+                              if(in_array($lan_val['language_id'], $lan_array)) {
+                                echo '<option value='.$lan_val["language_id"].' selected> '.$lan_val["language_name"].' </option>';
+                              }
+                              else {
+                                echo '<option value='.$lan_val["language_id"].'> '.$lan_val["language_name"].' </option>';
+                              }
+                              endforeach;
+                              endif;
+                              ?>
+                            </select>
+                          </span>
                         </div>
                       </div>   
                     </div>
@@ -1051,11 +1056,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($seeker_full_profile['candidate_mobile_no']) && $seeker_full_profile['candidate_mobile_no'] != 0) :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_mobile_no']; ?>" name="cand_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" maxlength="10" value="<?php echo $seeker_full_profile['candidate_mobile_no']; ?>" name="cand_mobile" />
                             <?php
                             else :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield" value="" name="cand_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" maxlength="10" value="" name="cand_mobile" />
                             <?php
                             endif;
                             ?>
@@ -1130,7 +1135,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Pincode</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" name="cand_pincode" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" maxlength="6" name="cand_pincode" />
                           </span>
                         </div>
                       </div>
@@ -1210,20 +1215,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Extra Curricular</label>
+                          <span class="multi_choice">
                             <?php
                             $ext_array = explode(',',$seeker_full_profile['candidate_extra_curricular_id']);
-                            if(!empty($extra_curricular_values)) :
-                            foreach ($extra_curricular_values as $ext_val) :
-                            if(in_array($ext_val['extra_curricular_id'], $ext_array)) {
-                              echo '<input type="checkbox" class="extra_curricular_values" value="'.$ext_val['extra_curricular_id'].'" checked>'.$ext_val['extra_curricular'].'</li>';
-                            }
-                            else {
-                              echo '<input type="checkbox" class="extra_curricular_values" value="'.$ext_val['extra_curricular_id'].'">'.$ext_val['extra_curricular'].'';
-                            }
-                            endforeach;
-                            endif;
                             ?>
-                            <input type="hidden" value="<?php echo $seeker_full_profile['candidate_extra_curricular_id']; ?>" class="tabfield4 tabfield hidden_extra_curricular" name="cand_extra" />
+                            <select data-placeholder="select" name="cand_extra" class="chosen span6 tabfield4 tabfield" multiple="multiple" >
+                              <?php
+                              if(!empty($extra_curricular_values)) :
+                              foreach ($extra_curricular_values as $ext_val) :
+                              if(in_array($ext_val['extra_curricular_id'], $ext_array)) {
+                                echo '<option value='.$ext_val["extra_curricular_id"].' selected> '.$ext_val["extra_curricular"].' </option>';
+                              }
+                              else {
+                                echo '<option value='.$ext_val["extra_curricular_id"].'> '.$ext_val["extra_curricular"].' </option>';
+                              }
+                              endforeach;
+                              endif;
+                              ?>
+                            </select>
+                          </span>
                         </div>
                       </div>
                     </div>

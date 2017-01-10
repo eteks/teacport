@@ -115,7 +115,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $dis_val['district_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $district_id = $dis_val['district_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($district_id) {
+                            return $m == $district_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="0" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$dis_val['district_status'].'" />';
+                          }
+                          else{
+                              echo '<input type="hidden" value="'.$dis_val['district_status'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="created_date">
                           <?php 

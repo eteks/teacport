@@ -14,6 +14,16 @@ class Job_Provider extends CI_Controller {
 
 	}
 
+	// Salary Validation
+ 	function check_greater_value($second_field,$first_field) 
+	{ 
+		if ($second_field < $first_field) { 
+			$this->form_validation->set_message('check_greater_value', 'The %s field must contain a number greater than Minimum Salary'); 
+			return FALSE;
+		}
+ 		return TRUE;
+	} 
+
 	// Image validation
 	function validate_image_type($value,$params) {
 		// We must use atleast two paramenters in callback function - One is value that is default, another one is user defined values or custom values
@@ -56,6 +66,16 @@ class Job_Provider extends CI_Controller {
 	      }
 	}
 
+	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	
 	/* ===================          Job Provider Profile Controller Start     ====================== */
 
@@ -82,11 +102,11 @@ class Job_Provider extends CI_Controller {
 	   		}
 	   		// Tab 3 Validation
 	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array( 'field'   => 'registrant_name','label'   => 'Registrant Name','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'registrant_name','label'   => 'Registrant Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
 	   			// $validation_rules[] =	array( 'field'   => 'registrant_dob','label'   => 'Registrant DOB','rules'   => 'trim|required|xss_clean|' );
 	   			// $validation_rules[] =	array( 'field'   => 'registrant_designation','label'   => 'Registrant Designation','rules'   => 'trim|required|xss_clean|' );
 	   			$validation_rules[] =	array('field'   => 'registrant_email','label'   => 'Organization District','rules'   => 'trim|required|xss_clean|valid_email|' );
-	   			// $validation_rules[] =	array( 'field'   => 'registrant_mobile','label'   => 'Registrant Mobile','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]|' );
+	   			$validation_rules[] =	array( 'field'   => 'registrant_mobile','label'   => 'Registrant Mobile','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{10}$/]|' );
 			    $validation_rules[] =	array( 'field'   => 'sms_verify','label'   => 'Sms Verification','rules'   => 'trim|required|xss_clean|' );				                       
 	   		}
 	   		// Tab 4 Validation
@@ -214,16 +234,16 @@ class Job_Provider extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
 	  			$validation_rules[] =  	array( 'field'   => 'job_title','label'   => 'Job Title','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =   array( 'field'   => 'vac_available','label'   => 'Vacancy Available','rules'   => 'trim|required|xss_clean|' );
+			    $validation_rules[] =   array( 'field'   => 'vac_available','label'   => 'Vacancy Available','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,8}$/]|' );
 			    $validation_rules[] =   array( 'field'   => 'vac_open_date','label'   => 'Vacancy Open Date','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =   array( 'field'   => 'vac_end_date','label'   => 'Vacancy End Date','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =   array( 'field'   => 'job_min_salary','label'   => 'Start Salary','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =   array( 'field'   => 'job_max_salary','label'   => 'End Salary','rules'   => 'trim|required|xss_clean|' );
+			    $validation_rules[] =   array( 'field'   => 'job_min_salary','label'   => 'Start Salary','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{4,9}$/]|' );
+			    $validation_rules[] =   array( 'field'   => 'job_max_salary','label'   => 'End Salary','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('job_min_salary').']' );
 			    $validation_rules[] =   array( 'field'   => 'vac_status','label'   => 'Vacancy Status','rules'   => 'trim|required|xss_clean|' );
 	   		}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
 	   				$validation_rules[] =	array( 'field'   => 'qualification_name','label'   => 'Qualification Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Qualification Name]' );
-	   				$validation_rules[] =	array( 'field'   => 'vac_experience','label'   => 'Vacancy Experience','rules'   => 'trim|required|xss_clean|' );
+	   				$validation_rules[] =	array( 'field'   => 'vac_experience','label'   => 'Vacancy Experience','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,3}$/]' );
 		   			$validation_rules[] =	array( 'field'   => 'vac_class','label'   => 'Vacancy Class','rules'   => 'trim|required|xss_clean|' );
 	   				$validation_rules[] =	array( 'field'   => 'vac_univ_name','label'   => 'Vacancy University','rules'   => 'trim|required|xss_clean|' );
 	   				$validation_rules[] =	array( 'field'   => 'vac_sub_name','label'   => 'Vacancy Subject','rules'   => 'trim|required|xss_clean|' );
