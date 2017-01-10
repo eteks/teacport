@@ -51,7 +51,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div> <!-- END PAGE HEADER-->
       <div class="row-fluid"> <!-- BEGIN ADVANCED TABLE widget-->
         <div class="span12">
-          <div class="widget">
+          <div class="widget sub_section_scroll">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> State

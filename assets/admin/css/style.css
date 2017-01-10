@@ -785,7 +785,7 @@ form legend {
     line-height: 33px;
     background: url("../img/bread-crumb-bg.jpg") repeat-x;
     float: left;
-    margin-bottom: 25px;
+    margin-bottom: 10px;
     padding: 0  0 0 8px;
 }
 .breadcrumb > li> a{
@@ -1968,7 +1968,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     text-align: center;
     color: #fff;
     margin-bottom: 10px;
-    cursor: pointer;
+    cursor: default;
 
     box-shadow: 1px 0px 1px #fff, 0 0 3px rgba(0, 0, 0, 0.2) inset;
     -moz-box-shadow: 1px 0px 1px #fff, 0 0 3px rgba(0, 0, 0, 0.2) inset;

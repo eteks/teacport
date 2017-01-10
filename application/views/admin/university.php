@@ -42,7 +42,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <li>
               <a href="<?php echo base_url(); ?>main/university">University / Board</a>
               <span class="divider-last">&nbsp;</span>
-            </li>
+            </li>http://localhost/teac/teacport/main/postings
           </ul>
           <!-- END PAGE TITLE & BREADCRUMB-->
         </div>
@@ -52,7 +52,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget">
+          <div class="widget sub_section_scroll">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> University / Board

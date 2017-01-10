@@ -246,22 +246,21 @@ $('.top_layer, .message_close').on('click',function() {
     });
 /*Ended by thangam*/
 
-
-   
-
-
-
-    
-	
-	
-    // $('.sub_pre_section').slimScroll({
-        // height: 'auto'
-    // });
+	 $('.sub_section_scroll').slimScroll({
+        height: 'auto'
+     });
+    $('.sub_pre_section').slimScroll({
+        height: 'auto'
+     });
     
      $('.sub_site_visites_cont').slimScroll({
         height: 'auto',
        	width: 'auto'
     });
+    
+    $('.scroll_section_sidebar').slimScroll({
+        height: 'auto'
+     });
     
 	
     if($('.has-sub').length > 0) {
