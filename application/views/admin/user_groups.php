@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
+         <div class="container-fluid sub_section_scroll">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
@@ -60,7 +60,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <div class="row-fluid">
                 <div class="span12">
                     <!-- BEGIN EXAMPLE TABLE widget-->
-                    <div class="widget sub_section_scroll">
+                    <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>User Groups</h4>
                             <span class="loader_holder hide_loader"> </span>
@@ -88,7 +88,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Group Name</th>
-                                        <th>Group Description</th>
+                                        <th class="data_action data-sort">Group Description</th>
+                                        <th style="display: none">Group Description</th>
+                                        
                                         <th>Is Super Admin</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
@@ -108,7 +110,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     ?>
                                     <tr class="parents_tr" id="column<?php echo $i; ?>">
                                         <td class="user_group_name"><?php echo $grp_val['user_group_name']; ?></td>
-                                        <td class="user_group_description"><?php echo $grp_val['user_group_description']; ?></td>
+                                        <td class="user_group_description message_res"><?php echo $grp_val['user_group_description']; ?></td>
+                                        <td style="display: none"><?php echo $grp_val['user_group_description']; ?></td>
                                         <td class="user_super_admin center_align"><?php if($grp_val['is_super_admin'] == 1) echo "<span class='icon-ok'> </span>"; else echo "<span class='icon-remove'> </span>";?>
                                           <input type="hidden" value="<?php echo $grp_val['is_super_admin']; ?>" />
                                         </td>

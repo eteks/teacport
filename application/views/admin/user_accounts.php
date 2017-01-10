@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
+         <div class="container-fluid sub_section_scroll">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
@@ -47,7 +47,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <div class="row-fluid">
                 <div class="span12">
                     <!-- BEGIN EXAMPLE TABLE widget-->
-                    <div class="widget sub_section_scroll">
+                    <div class="widget">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>User Accounts</h4>
                             <span class="loader_holder hide_loader"> </span>

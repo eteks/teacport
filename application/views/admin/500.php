@@ -27,7 +27,7 @@
    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
        <!-- BEGIN TOP NAVIGATION BAR -->
        <div class="navbar-inner">
-           <div class="container-fluid">
+           <div class="container-fluid sub_section_scroll">
                <!-- BEGIN LOGO -->
                <a class="brand" href="index.php">
                    <img src="img/logo.png" alt="Admin Lab" />

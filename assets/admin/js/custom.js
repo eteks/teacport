@@ -262,7 +262,11 @@ $('.top_layer, .message_close').on('click',function() {
     });
 /*Ended by thangam*/
 
+
 	 $('.sub_section_scroll').slimScroll({
+        height: 'auto'
+     });
+      $('.sub_section_scrollprivil').slimScroll({
         height: 'auto'
      });
     $('.sub_pre_section').slimScroll({
@@ -800,11 +804,7 @@ $('#timezone_act').timezones(); //code for timezone module in admin side
         }
     });
     /*use “…” for overflowed block of multi-lines in admin side added by thangam*/
-    $(".message_res").text(function(index, currentText) {
-        if (currentText.length>60) {
-            return currentText.substr(0, 60)+'.....';
-        }
-    });
+   
    //   $('.pa').on('click', function(e){
    //      $("#not_count").html("0");
    //      // $('#not_count').hide();
