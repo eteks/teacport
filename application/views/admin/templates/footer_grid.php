@@ -90,6 +90,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <!-- <script src="<?php echo base_url(); ?>assets/admin/js/table-editable.js"></script>  -->
         <script src="<?php echo base_url(); ?>assets/admin/js/timezones.full.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/js/zebra_datepicker.js"></script>
 
         <script>
          
@@ -199,6 +200,11 @@
                                         padding-bottom: 15px;\n\
                                         display:block;\n\
                                    '>/");
+        $(".message_res").text(function(index, currentText) {
+        if (currentText.length>60) {
+            return currentText.substr(0, 60)+'.....';
+        }
+    });
             }
             jQuery(document).ready(function() {
                 datatable_initialization();

@@ -24,7 +24,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     </div> <!-- END RESPONSIVE QUICK SEARCH FORM -->
   </div> <!-- END SIDEBAR -->
   <div id="main-content"> <!-- BEGIN PAGE -->
-    <div class="container-fluid"> <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid sub_section_scroll"> <!-- BEGIN PAGE CONTAINER-->
       <div class="row-fluid"> <!-- BEGIN PAGE HEADER-->
         <div class="span12">
           <!-- <h3 class="page-title">
@@ -51,7 +51,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div> <!-- END PAGE HEADER-->
       <div class="row-fluid"> <!-- BEGIN ADVANCED TABLE widget-->
         <div class="span12">
-          <div class="widget sub_section_scroll">
+          <div class="widget">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> State

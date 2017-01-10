@@ -46,7 +46,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <div class="row-fluid">
                 <div class="span12">
                     <!-- BEGIN EXAMPLE TABLE widget-->
-                    <div class="widget sub_section_scroll">
+                    <div class="widget sub_pre_section">
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>Privileges</h4>
                             <span class="loader_holder hide_loader"> </span>
@@ -150,10 +150,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                              <!-- <button type="button" class="btn">Cancel</button> -->
                           </div>
                         </form>
-                       
+                      
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
-                </div>
+                 </div>
             </div>
             <!-- END ADVANCED TABLE widget-->
 

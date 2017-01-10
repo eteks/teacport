@@ -416,16 +416,21 @@ tr select {
 	width: auto;
 	overflow: scroll;
 }
-
+.sub_section_scrollprivil{
+	max-height:600px !important; 
+	height: auto;
+	width: auto;
+	overflow: scroll;
+}
 
  .sub_section_scroll{
-	max-height:700px !important; 
+	max-height:600px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
 }
 .sub_pre_section{
-	max-height:500px !important; 
+	max-height:570px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;

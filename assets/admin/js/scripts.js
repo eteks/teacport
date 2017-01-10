@@ -1956,8 +1956,13 @@ var App = function () {
         if (!jQuery().datepicker || !jQuery().timepicker) {
             return;
         }
-        $('.date-picker').datepicker({
-            format: 'dd/mm/yy',
+        // $('.date-picker').datepicker({
+        //     format: 'dd/mm/yy',
+        // });
+        $('.date-picker').Zebra_DatePicker({
+              direction: -1,
+                format: 'd/m/Y',
+                view: 'years'
         });
 
         $('.timepicker-default').timepicker();
@@ -2166,9 +2171,9 @@ var App = function () {
         //main function to initiate template pages
         init: function () {
         	
-			$('.date-picker').datepicker({
-                format: 'dd/mm/yy',
-            });
+			// $('.date-picker').datepicker({
+   //              format: 'dd/mm/yy',
+   //          });
             if (jQuery.browser.msie && jQuery.browser.version.substr(0, 1) == 8) {
                 isIE8 = true; // checkes for IE8 browser version
                 $('.visible-ie8').show();
