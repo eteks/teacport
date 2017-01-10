@@ -220,14 +220,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="col12">
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity Start</label>
-                        <span class="dynamic_data"> 
+                        <span class="dynamic_data date_picker_act"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
                            <input class=" m-ctrl-medium admin_date_picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity End</label>
-                        <span class="dynamic_data"> 
+                        <span class="dynamic_data date_picker_act"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
                            <input class=" m-ctrl-medium admin_date_picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
                         </span>

@@ -375,6 +375,7 @@ tr select {
 }
 .dp_width{
     width: 185px !important;
+    background-color: unset !important;
 }
 .form-horizontal .control-label{
     padding-top: 0px !important;
@@ -386,6 +387,9 @@ tr select {
     font-size: 13px;
     font-weight: lighter !important;
     text-transform: capitalize;
+}
+.Zebra_DatePicker_Icon_Wrapper{
+    width: 100% !important;
 }
 .parents_tr td textarea{
     min-height:100px !important;
