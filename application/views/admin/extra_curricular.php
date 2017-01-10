@@ -115,7 +115,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $exac_val['extra_curricular_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $ext_id = $exac_val['extra_curricular_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($ext_id) {
+                            return $m == $ext_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$exac_val['extra_curricular_status'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$exac_val['extra_curricular_status'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$exac_val['extra_curricular_status'].'" />';
+                          }
+                          ?>                         
                         </td>                        
                         <td class="created_date">
                           <?php 
@@ -176,7 +189,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("e_name","e_status"); // Set name of input types
   var placeholder = new Array("Enter Extra-Curricular Name",""); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","");//To set class for element
+  var maxlength = new Array("50",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var e_status_option = new Array("Please select status","Active","Inactive"); 
   var e_status_value = new Array("","1","0"); 

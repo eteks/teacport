@@ -857,7 +857,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Candidate Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $seeker_full_profile['candidate_name']; ?>" name="cand_name" />
+                            <input type="text" class="span6 tabfield1 tabfield alpha_value" value="<?php echo $seeker_full_profile['candidate_name']; ?>" placeholder="Candidate Name" maxlength="50" name="cand_name" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -876,7 +876,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Father Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $seeker_full_profile['candidate_father_name']; ?>" name="cand_fa_name" />
+                            <input type="text" class="span6 tabfield1 tabfield alpha_value" placeholder="Father's Name" maxlength="50" value="<?php echo $seeker_full_profile['candidate_father_name']; ?>" name="cand_fa_name" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -1047,7 +1047,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Email</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_email']; ?>" name="cand_email" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_email']; ?>" name="cand_email" placeholder="Email" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
@@ -1056,11 +1056,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($seeker_full_profile['candidate_mobile_no']) && $seeker_full_profile['candidate_mobile_no'] != 0) :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield numeric_value" maxlength="10" value="<?php echo $seeker_full_profile['candidate_mobile_no']; ?>" name="cand_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" maxlength="10" value="<?php echo $seeker_full_profile['candidate_mobile_no']; ?>" placeholder="Mobile" name="cand_mobile" />
                             <?php
                             else :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield numeric_value" maxlength="10" value="" name="cand_mobile" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" placeholder="Mobile" maxlength="10" value="" name="cand_mobile" />
                             <?php
                             endif;
                             ?>
@@ -1095,7 +1095,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Address 1</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_1']; ?>" name="cand_address1" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_1']; ?>" name="cand_address1" maxlength="150" placeholder="Address" />
                           </span>
                         </div>
                       </div>
@@ -1103,7 +1103,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Address 2</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_2']; ?>" name="cand_address2" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_2']; ?>" name="cand_address2" maxlength="150" placeholder="Address" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -1135,7 +1135,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Pincode</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" maxlength="6" name="cand_pincode" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" maxlength="6" placeholder="Pincode" name="cand_pincode" />
                           </span>
                         </div>
                       </div>

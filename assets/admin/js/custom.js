@@ -111,10 +111,10 @@ createInput = function(i,str,attr){
     var title = (attr==1) ? "Mapping has been already done. Edit not possible" : "";
     //alert(str);
     if(inputType[i] == "text"){
-        input = '<input type='+inputType[i]+' name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
+        input = '<input type="'+inputType[i]+'" name="'+columns[i]+'" maxlength="'+maxlength[i]+'" class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
     }
     else if(inputType[i] == "textarea"){
-        input = '<textarea name='+columns[i]+' class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'">'+str+'</textarea>';
+        input = '<textarea name='+columns[i]+' class="'+class_selector[i]+'" maxlength="'+maxlength[i]+'" placeholder="'+placeholder[i]+'">'+str+'</textarea>';
     }
     else if(inputType[i] == "label"){
         input = '<label class='+columns[i]+'>'+str+'</label>';

@@ -180,7 +180,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var inputType = new Array("text","textarea","select","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("user_group_name","user_group_description","user_super_admin","user_group_status"); // Set name of input types
     var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
-    var class_selector = new Array("");//To set class for element
+    var class_selector = new Array("","","","");//To set class for element
+    var maxlength = new Array("","","",""); //To set maxlength for element
     var table = "admin_table"; // Set classname of table    
     var user_super_admin_option = new Array("Select Admin Type","Yes","No"); 
     var user_super_admin_value = new Array("","1","0");

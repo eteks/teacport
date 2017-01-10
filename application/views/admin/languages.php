@@ -135,7 +135,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $lan_val['language_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $lang_id = $lan_val['language_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($lang_id) {
+                            return $m == $lang_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$lan_val['language_status'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$lan_val['language_status'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$lan_val['language_status'].'" />';
+                          }
+                          ?>                        
                         </td>
                         <td class="language_created_date">
                           <?php 
@@ -196,7 +209,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("l_name","l_mother_tongue","l_instruction","l_status"); // Set name of input types
   var placeholder = new Array("Enter Language Name",""); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","","","");//To set class for element
+  var maxlength = new Array("50","","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var l_mother_tongue_option = new Array("select","Yes","No"); 
   var l_mother_tongue_value = new Array("","1","0");

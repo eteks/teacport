@@ -143,7 +143,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $pos_val['posting_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $posting_id = $pos_key;  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($posting_id) {
+                            return $m == $posting_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$pos_val['posting_status'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$pos_val['posting_status'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$pos_val['posting_status'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="created_date">
                           <?php 
@@ -204,7 +217,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","multiselect","select"); 
   var columns = new Array("p_name","p_inst_type","p_status"); 
   var placeholder = new Array("Enter Posting Name","Please select institution"); 
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","","");//To set class for element
+  var maxlength = new Array("50","",""); //To set maxlength for element
   var table = "admin_table"; 
   var p_inst_type_option = new Array();
   var p_inst_type_value = new Array();

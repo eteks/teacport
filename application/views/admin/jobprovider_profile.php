@@ -730,7 +730,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $provider_full_profile['organization_name']; ?>" name="organization_name" />
+                            <input type="text" class="span6 tabfield1 tabfield" value="<?php echo $provider_full_profile['organization_name']; ?>" name="organization_name" placeholder="Organization Name" maxlength="50" />
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -786,13 +786,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Address1</label>
                           <span>
-                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_1']; ?>" name="org_addr_1" />
+                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_1']; ?>" name="org_addr_1" maxlength="150" placeholder="Organization Address" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Address2</label>
                           <span>
-                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_2']; ?>" name="org_addr_2" />
+                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_2']; ?>" name="org_addr_2" maxlength="150" placeholder="Organization Address" />
                           </span>
                         </div>
                       </div>
@@ -800,7 +800,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Organization Address3</label>
                           <span>
-                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_3']; ?>" name="org_addr_3" />
+                            <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_3']; ?>" name="org_addr_3" maxlength="150" placeholder="Organization Address" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
@@ -835,13 +835,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Name</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield alpha_value" value="<?php echo $provider_full_profile['registrant_name']; ?>" name="registrant_name" maxlength="50" />
+                            <input type="text" class="span6 tabfield3 tabfield alpha_value" value="<?php echo $provider_full_profile['registrant_name']; ?>" placeholder="Registrant Name" name="registrant_name" maxlength="50" />
                           </span>
                         </div>
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Designation</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_designation']; ?>" name="registrant_designation" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_designation']; ?>" name="registrant_designation" placeholder="Registrant Designation" maxlength="50" />
                           </span>
                         </div>
                       </div>
@@ -852,11 +852,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($provider_full_profile['registrant_date_of_birth'])) :
                             ?>
-                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" />
+                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="<?php echo date("d/m/Y", strtotime($provider_full_profile['registrant_date_of_birth'])); ?>" name="registrant_dob" placeholder="Registrant DOB" />
                             <?php
                             else :
                             ?>
-                            <input type="text" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="" name="registrant_dob" />
+                            <input type="text" placeholder="Registrant DOB" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="" name="registrant_dob" />
                             <?php
                             endif;
                             ?>
@@ -865,7 +865,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">                                       
                           <label class="control-label">Registrant Email</label>
                           <span>
-                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_email_id']; ?>" name="registrant_email" />
+                            <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $provider_full_profile['registrant_email_id']; ?>" name="registrant_email" placeholder="Registrant Email" />
                           </span>
                         </div>
                       </div>
@@ -876,11 +876,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             if(!empty($provider_full_profile['registrant_mobile_no']) && $provider_full_profile['registrant_mobile_no'] != 0) :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" name="registrant_mobile" maxlength="10" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $provider_full_profile['registrant_mobile_no']; ?>" placeholder="Registrant Mobile" name="registrant_mobile" maxlength="10" />
                             <?php
                             else :
                             ?>
-                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="" name="registrant_mobile" maxlength="10" />
+                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="" placeholder="Registrant Mobile" name="registrant_mobile" maxlength="10" />
                             <?php
                             endif;
                             ?>

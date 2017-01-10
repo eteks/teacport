@@ -821,8 +821,25 @@ table .dataTables_empty{
     width: 100%;
     height: 100%;
     z-index: 9999;
-   
 }
+/*.edit_add_overlay {
+    opacity: 0.01;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}*/
+/*.db {
+    display: block;
+}
+.dn {
+    display: none;
+}*/
+
+
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;

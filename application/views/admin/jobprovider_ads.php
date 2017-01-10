@@ -212,7 +212,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <div class="span6 control-group">                                     
                             <label class="control-label"> Premium Ads Name </label>
                             <span class="dynamic_data"> 
-                              <input type="text" class="form-control" placeholder="Premium Ads Name" value="<?php echo $activities_details['premium_ads_name']; ?>" name="ads_name" /> 
+                              <input type="text" class="form-control" placeholder="Premium Ads Name" value="<?php echo $activities_details['premium_ads_name']; ?>" maxlength="50" name="ads_name" /> 
                             </span>
                           </div>
                           <div class="span6 control-group">

@@ -106,7 +106,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <td class="d_state_name"> 
                           <?php echo $dis_val['state_name']; ?>
-                          <input type="hidden" value="<?php echo $dis_val['state_id']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $district_id = $dis_val['district_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($district_id) {
+                            return $m == $district_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$dis_val['state_id'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$dis_val['state_id'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$dis_val['state_id'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="d_status"> 
                           <?php 
@@ -121,7 +134,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             $mapped_result = array_filter($mapped_data, function($m) use ($district_id) {
                             return $m == $district_id; });
                             if(count($mapped_result) > 0)
-                              echo '<input type="hidden" value="0" data-disabled="1" />';
+                              echo '<input type="hidden" value="'.$dis_val['district_status'].'" data-disabled="1" />';
                             else
                               echo '<input type="hidden" value="'.$dis_val['district_status'].'" />';
                           }
@@ -190,7 +203,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var inputType = new Array("text","select","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("d_name","d_state_name","d_status"); // Set name of input types
     var placeholder = new Array("Enter District Name",""); // Set placeholder of input types
-    var class_selector = new Array("");//To set class for element
+    var class_selector = new Array("alpha_value","","");//To set class for element
+    var maxlength = new Array("50","",""); //To set maxlength for element
     var table = "admin_table"; // Set classname of table
     var d_state_name_option = new Array("Please select state");
     var d_state_name_value = new Array("");

@@ -306,7 +306,7 @@ $config['global_xss_filtering'] = FALSE;
 */
 //$config['csrf_protection'] = TRUE;
 if (stripos($_SERVER["REQUEST_URI"],'/provider/paymentreply') === FALSE) {
-	$config['csrf_protection'] 	= FALSE;
+	$config['csrf_protection'] 	= TRUE;
 }else{ 
 	$config['csrf_protection'] 	= FALSE; 
 }
