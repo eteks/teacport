@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -158,7 +158,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   // Define default values
   var inputType = new Array("label","label","label","select","label"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("org_name","vac_name","cand_name","job_status","applied_date"); // Set name of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("","","","","");//To set class for element
+  var maxlength = new Array("","","","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var vac_name_option = new Array("Please select vacancy"); 
   var vac_name_value = new Array("");

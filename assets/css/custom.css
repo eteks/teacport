@@ -550,9 +550,6 @@ select:invalid {
     height: 60px;
     width: 100%;
  } 
- .vacancy_search_section .fix_max_input {
- 	margin-top: 5px;
- }  
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
@@ -991,10 +988,14 @@ label.form-input-error {
 .footer_logo {
 	margin: -5px 0 0;
 }
+.search_max_amount{
+	margin-top: 5px;
+}
 .custom_disabled {
     pointer-events:none; 
     opacity:0.6;
 }
+/* footer */
 .follow-on  ul.social-network{
 	line-height:50px;
 	float: none;
@@ -1007,4 +1008,5 @@ label.form-input-error {
 	padding:0;
 	display:table;
 }
+
 

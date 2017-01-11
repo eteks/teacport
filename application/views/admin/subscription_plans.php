@@ -33,7 +33,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -207,42 +207,42 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">  
                         <label class="control-label">Subscription Plan</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" placeholder="Subscription Plan" name="sub_plan" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_plan']; ?>"/> 
+                          <input type="text" class="form-control" maxlength="50" placeholder="Subscription Plan" name="sub_plan" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_plan']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Price</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control decimal_act" placeholder="Subscription Price" name="sub_price" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_price']; ?>"/> 
+                          <input type="text" class="form-control decimal_act" maxlength="9" placeholder="Subscription Price" name="sub_price" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_price']; ?>"/> 
                         </span>
                       </div>
                     </div>
                     <div class="col12">
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity Start</label>
-                        <span class="dynamic_data"> 
+                        <span class="dynamic_data date_picker_act"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                           <input class=" m-ctrl-medium admin_date_picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity End</label>
-                        <span class="dynamic_data"> 
+                        <span class="dynamic_data date_picker_act"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium date-picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
+                           <input class=" m-ctrl-medium admin_date_picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
                         </span>
                       </div> 
                     <div class="col12">
                       <div class="col6 control-group">
                         <label class="control-label">Maximum Posts Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" placeholder="Maximum Posts Count" name="sub_max_vacancy" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_posts']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum Posts Count" name="sub_max_vacancy" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_posts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Maximum SMS Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" placeholder="Maximum SMS Count" name="sub_max_sms" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_sms_counts']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum SMS Count" name="sub_max_sms" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_sms_counts']; ?>"/> 
                         </span>
                       </div>
                       </div>
@@ -250,13 +250,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Email Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" placeholder="Maximum Email Count" name="sub_max_email" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_email_counts']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum Email Count" name="sub_max_email" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_email_counts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Resume Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" placeholder="Maximum Resume Count" name="sub_max_resume" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_resume_download_count']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum Resume Count" name="sub_max_resume" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_resume_download_count']; ?>"/> 
                         </span>
                       </div>
                     </div>
@@ -264,7 +264,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Ads </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="15" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">

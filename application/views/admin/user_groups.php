@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
+         <div class="container-fluid sub_section_scroll">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
@@ -88,7 +88,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Group Name</th>
-                                        <th>Group Description</th>
+                                        <th class="data_action data-sort">Group Description</th>
+                                        <th style="display: none">Group Description</th>
+                                        
                                         <th>Is Super Admin</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
@@ -108,7 +110,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     ?>
                                     <tr class="parents_tr" id="column<?php echo $i; ?>">
                                         <td class="user_group_name"><?php echo $grp_val['user_group_name']; ?></td>
-                                        <td class="user_group_description"><?php echo $grp_val['user_group_description']; ?></td>
+                                        <td class="user_group_description message_res"><?php echo $grp_val['user_group_description']; ?></td>
+                                        <td style="display: none"><?php echo $grp_val['user_group_description']; ?></td>
                                         <td class="user_super_admin center_align"><?php if($grp_val['is_super_admin'] == 1) echo "<span class='icon-ok'> </span>"; else echo "<span class='icon-remove'> </span>";?>
                                           <input type="hidden" value="<?php echo $grp_val['is_super_admin']; ?>" />
                                         </td>
@@ -126,12 +129,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                                           ?>
                                         </td>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                                          <td class="edit_section">
-                                            <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
-                                          </td>
-                                        <?php endif; ?>
-                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
+                                          if($grp_val['is_super_admin']):
+                                            echo "<td>-</td>";
+                                          else:
+                                        ?>
+                                            <td class="edit_section">
+                                              <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $grp_val['user_group_id']; ?>">Edit</a>
+                                            </td>
+                                        <?php 
+                                          endif;
+                                        endif; ?>
+                                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): 
+                                          if($grp_val['is_super_admin']):
+                                            echo "<td>-</td>";
+                                          else:
+                                        ?>
                                           <td>
                                             <?php 
                                             if(!empty($mapped_data)){
@@ -148,7 +161,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                             }
                                             ?>      
                                           </td>
-                                        <?php endif; ?>
+                                        <?php 
+                                          endif;
+                                        endif; ?>
                                     </tr>
                                     <?php
                                       $i++;
@@ -177,10 +192,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
    <!-- END CONTAINER -->
     <script>
     // Define default values
-    var inputType = new Array("text","textarea","select","select"); // Set type of input which are you have used like text, select,textarea.
+    var inputType = new Array("text","textarea","label","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("user_group_name","user_group_description","user_super_admin","user_group_status"); // Set name of input types
     var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
-    var class_selector = new Array("");//To set class for element
+    var class_selector = new Array("","","","");//To set class for element
+    var maxlength = new Array("","","",""); //To set maxlength for element
     var table = "admin_table"; // Set classname of table    
     var user_super_admin_option = new Array("Select Admin Type","Yes","No"); 
     var user_super_admin_value = new Array("","1","0");

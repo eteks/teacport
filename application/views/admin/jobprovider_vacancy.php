@@ -32,7 +32,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -444,14 +444,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Vacancies Job Title</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_job_title']; ?>" name="job_title" class="span6 tabfield1 tabfield" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_job_title']; ?>" name="job_title" class="span6 tabfield1 tabfield alpha_value" maxlength="80" placeholder="Job Title" />
                                 <input type="hidden" value="<?php echo $vac_val['vacancies_organization_id']; ?>" name="org_name" class="tabfield" />
                               </span>
                             </div>
                             <div class="span6 control-group">
                               <label class="control-label">Available</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>"  name="vac_available" class="span6 tabfield1 tabfield numeric_value" maxlength="8" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_available']; ?>"  name="vac_available" class="span6 tabfield1 tabfield numeric_value" maxlength="8" placeholder="Vacancies Available" />
                               </span>
                             </div>
                           </div>
@@ -459,13 +459,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Open Date</label>
                               <span>
-                                <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_open_date'])); ?>" name="vac_open_date" />
+                                <input class="span6 tabfield1 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_open_date'])); ?>" name="vac_open_date" placeholder="Vacancy Open Date" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label">Close Date</label>
                               <span>
-                                <input class="span6 tabfield1 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_close_date'])); ?>" name="vac_end_date" />
+                                <input class="span6 tabfield1 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_close_date'])); ?>" name="vac_end_date" placeholder="Vacancy End Date" />
                               </span>
                             </div>
                           </div>
@@ -473,13 +473,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Start Salary</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" name="job_min_salary" class="span6 tabfield1 tabfield numeric_value" maxlength="9" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_start_salary']; ?>" name="job_min_salary" class="span6 tabfield1 tabfield numeric_value" placeholder="Start Salary" maxlength="9" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label"> End Salary</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>"  name="job_max_salary" class="span6 tabfield1 tabfield numeric_value" maxlength="9" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_end_salary']; ?>"  name="job_max_salary" class="span6 tabfield1 tabfield numeric_value" maxlength="9" placeholder="End Salary" />
                               </span>
                             </div>
                           </div>
@@ -533,7 +533,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Experience</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_experience']; ?>"  name="vac_experience" class="span6 tabfield2 tabfield numeric_value" maxlength="3" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_experience']; ?>"  name="vac_experience" class="span6 tabfield2 tabfield numeric_value" maxlength="3" placeholder="Experience" />
                               </span>
                             </div>
                           </div>
@@ -695,13 +695,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Accommodation Info</label>
                               <span>
-                                <input type="text" value="<?php echo $vac_val['vacancies_accommodation_info']; ?>" name="vac_accom" class="span6 tabfield3 tabfield" />
+                                <input type="text" value="<?php echo $vac_val['vacancies_accommodation_info']; ?>" name="vac_accom" class="span6 tabfield3 tabfield alpha_value" maxlength="150" placeholder="Interview End Date" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label">Instruction</label>
                               <span>
-                                <textarea name="vac_instruction" class="span6 tabfield3 tabfield"> <?php echo $vac_val['vacancies_instruction']; ?> </textarea>
+                                <textarea name="vac_instruction" class="span6 tabfield3 tabfield" maxlength="700"> <?php echo $vac_val['vacancies_instruction']; ?> </textarea>
                               </span>
                             </div>
                           </div>
@@ -709,13 +709,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">                                       
                               <label class="control-label">Interview Start Date</label>
                               <span>
-                                <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_interview_start_date'])); ?>" name="vac_inter_sdate" />
+                                <input class="span6 tabfield3 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_interview_start_date'])); ?>" name="vac_inter_sdate"  placeholder="Interview Start Date" />
                               </span>
                             </div>
                             <div class="span6 control-group">                                       
                               <label class="control-label">Interview End Date</label>
                               <span>
-                                <input class="span6 tabfield3 tabfield m-ctrl-medium date-picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_end_date'])); ?>" name="vac_inter_edate"/>
+                                <input class="span6 tabfield3 tabfield m-ctrl-medium admin_date_picker dp_width" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($vac_val['vacancies_end_date'])); ?>" name="vac_inter_edate" placeholder="Interview End Date" />
                               </span>
                             </div>
                           </div>

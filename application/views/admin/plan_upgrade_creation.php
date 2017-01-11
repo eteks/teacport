@@ -34,7 +34,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
+         <div class="container-fluid sub_section_scroll">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
@@ -193,6 +193,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var columns = new Array("subscription_name","sms_count","email_count","resume_count","price","plan_upgrade_creation_status"); // Set name of input types
     var placeholder = new Array("","Enter SMS count","Enter Email count","Enter Resume count","Enter Price",""); // Set placeholder of input types
     var class_selector = new Array("","numeric_act","numeric_act","numeric_act","decimal_act",""); // Set placeholder of input types
+    var maxlength = new Array("","","","","",""); 
     var table = "admin_table"; // Set classname of table  
     var subscription_name_option = new Array("Select Plan");
     var subscription_name_value = new Array("");

@@ -98,11 +98,18 @@ class Master_data_model extends CI_Model {
         $model_data['error'] = 1;     
       }
       else {
-        $district_update_data = array( 
+        if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+          $district_update_data = array( 
                                     'district_name' => $this->input->post('d_name'),
                                     'district_state_id' => $this->input->post('d_state_name'),
                                     'district_status' => $this->input->post('d_status'),
                                   );
+        }
+        else {
+          $district_update_data = array( 
+                                    'district_name' => $this->input->post('d_name'),
+                                  );
+        } 
         $district_update_where = '(district_id="'.$this->input->post('rid').'")'; 
         $this->db->set($district_update_data); 
         $this->db->where($district_update_where);
@@ -363,12 +370,21 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $language_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $language_update_data = array( 
                                     'language_name' => $this->input->post('l_name'),
                                     'is_mother_tangue' => $this->input->post('l_mother_tongue'),
                                     'is_medium_of_instruction' => $this->input->post('l_instruction'),
                                     'language_status' => $this->input->post('l_status'),
                                   );
+      }
+      else {
+        $language_update_data = array( 
+                                    'language_name' => $this->input->post('l_name'),
+                                    'is_mother_tangue' => $this->input->post('l_mother_tongue'),
+                                    'is_medium_of_instruction' => $this->input->post('l_instruction'),
+                                  );
+      }
       $language_update_where = '(language_id="'.$this->input->post('rid').'")'; 
       $this->db->set($language_update_data); 
       $this->db->where($language_update_where);
@@ -460,12 +476,20 @@ class Master_data_model extends CI_Model {
         $model_data['error'] = 1;     
       }
       else {
-        $qualification_update_data = array( 
+        if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+          $qualification_update_data = array( 
                                     'educational_qualification' => $this->input->post('q_name'),
                                     'educational_qualification_course_type' => ($this->input->post('q_course_type')) ? $this->input->post('q_course_type') : NULL,
                                     'educational_qualifcation_inst_type_id' => $this->input->post('q_inst_type'),
                                     'educational_qualification_status' => $this->input->post('q_status'),
                                   );
+        }
+        else {
+          $qualification_update_data = array( 
+                                    'educational_qualification' => $this->input->post('q_name'),
+                                    'educational_qualification_course_type' => ($this->input->post('q_course_type')) ? $this->input->post('q_course_type') : NULL,
+                                  );
+        }
         $qualification_update_where = '(educational_qualification_id="'.$this->input->post('rid').'")'; 
         $this->db->set($qualification_update_data); 
         $this->db->where($qualification_update_where);
@@ -574,11 +598,18 @@ class Master_data_model extends CI_Model {
         $model_data['error'] = 1;     
       }
       else {
-        $class_level_update_data = array( 
+        if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+          $class_level_update_data = array( 
                                     'class_level' => $this->input->post('c_name'),
                                     'class_level_inst_type_id' => $this->input->post('c_inst_type'),
                                     'class_level_status' => $this->input->post('c_status'),
                                   );
+        }
+        else {
+          $class_level_update_data = array( 
+                                    'class_level' => $this->input->post('c_name'),
+                                  );
+        }
         $class_level_update_where = '(class_level_id="'.$this->input->post('rid').'")'; 
         $this->db->set($class_level_update_data); 
         $this->db->where($class_level_update_where);
@@ -663,11 +694,19 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $departments_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $departments_update_data = array( 
                               'departments_name' => $this->input->post('d_name'),
                               'department_educational_qualification_id' => $this->input->post('d_qualification'),
                               'departments_status' => $this->input->post('d_status'),
                             );
+      }
+      else {
+        $departments_update_data = array( 
+                              'departments_name' => $this->input->post('d_name'),
+                              'department_educational_qualification_id' => $this->input->post('d_qualification'),
+                            );
+      }
       $departments_update_where = '(departments_id="'.$this->input->post('rid').'")'; 
       $this->db->set($departments_update_data); 
       $this->db->where($departments_update_where);
@@ -749,11 +788,19 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $subjects_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $subjects_update_data = array( 
                                 'subject_name' => $this->input->post('s_name'),
                                 'subject_institution_id' => $this->input->post('s_inst_type'),
                                 'subject_status' => $this->input->post('s_status'),
                               );
+      }
+      else {
+        $subjects_update_data = array( 
+                                'subject_name' => $this->input->post('s_name'),
+                                'subject_institution_id' => $this->input->post('s_inst_type'),
+                              );
+      }
       $subjects_update_where = '(subject_id="'.$this->input->post('rid').'")'; 
       $this->db->set($subjects_update_data); 
       $this->db->where($subjects_update_where);
@@ -811,11 +858,19 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $universities_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $universities_update_data = array( 
                               'university_board_name' => $this->input->post('u_name'),
                               'university_class_level_id' => $this->input->post('u_class_level'),
                               'university_board_status' => $this->input->post('u_status'),
                             );
+      }
+      else {
+        $universities_update_data = array( 
+                              'university_board_name' => $this->input->post('u_name'),
+                              'university_class_level_id' => $this->input->post('u_class_level'),
+                            );
+      }
       $universities_update_where = '(education_board_id="'.$this->input->post('rid').'")'; 
       $this->db->set($universities_update_data); 
       $this->db->where($universities_update_where);
@@ -887,11 +942,19 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $postings_update_data = array( 
+      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+        $postings_update_data = array( 
                               'posting_name' => $this->input->post('p_name'),
                               'posting_institution_id' => $this->input->post('p_inst_type'),
                               'posting_status' => $this->input->post('p_status'),
                             );
+      }
+      else {
+        $postings_update_data = array( 
+                              'posting_name' => $this->input->post('p_name'),
+                              'posting_institution_id' => $this->input->post('p_inst_type'),
+                            );
+      }
       $postings_update_where = '(posting_id="'.$this->input->post('rid').'")'; 
       $this->db->set($postings_update_data); 
       $this->db->where($postings_update_where);

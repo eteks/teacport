@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -129,7 +129,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $dep_val['departments_status']; ?>" />
+                          <?php 
+                           if(!empty($mapped_data)){
+                              $dept_id = $dep_key;  
+                              $mapped_result = array_filter($mapped_data, function($m) use ($dept_id) {
+                              return $m == $dept_id; });
+                              if(count($mapped_result) > 0)
+                                echo '<input type="hidden" value="'.$dep_val['departments_status'].'" data-disabled="1" />';
+                              else
+                                echo '<input type="hidden" value="'.$dep_val['departments_status'].'" />';
+                            }
+                            else{
+                              echo '<input type="hidden" value="'.$dep_val['departments_status'].'" />';
+                            }
+                          ?>
                         </td>
                         <td class="created_date">
                           <?php 
@@ -190,7 +203,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("d_name","d_qualification","d_status"); // Set name of input types
   var placeholder = new Array("Enter Department Name","Please select qualification",""); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","","");//To set class for element
+  var maxlength = new Array("50","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var d_qualification_option = new Array();
   var d_qualification_value = new Array();

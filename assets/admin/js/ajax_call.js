@@ -101,9 +101,6 @@ $(document).ready(function(){
             contentType: false,       // The content type used when sending data to the server.
             cache: false,             // To unable request pages to be cached
             processData:false,
-            beforeSend: function(){
-            	$(".popup-inner").css({"background-color":"#000","opacity":"0.2","z-index":"9999"});
-            },
             success: function(res) {
                 if(res.error == 1) {
                     this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
@@ -126,11 +123,7 @@ $(document).ready(function(){
                         this_popup_content.remove();
                     },5000);
                 }
-            },
-            complete : function(){
-					setTimeout(function() {$(".popup-inner").css({"background-color":"#fff","opacity":"1","z-index":"1"}); }, 3000);
-			},
-            
+            },            
         });
     });
 
@@ -192,6 +185,7 @@ $(document).ready(function(){
                     $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
                     handleChoosenSelect();
                     popup_pagination();
+                    date_picker();
                     // e.preventDefault();
                     $('.multi_choice').find('ul').addClass('scroller');
                     $('.multi_choice').find('ul').slimScroll({
