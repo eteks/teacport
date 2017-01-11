@@ -609,6 +609,32 @@ class Job_provider extends CI_Controller {
 			redirect('provider/postedjob');
 		}
 	}
+	public function editjobdetail(){
+		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
+		$data["current_jobvacancy_id"] = $this->uri->segment('3');
+		if($data["current_jobvacancy_id"]){
+			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+			if($session_data['login_session']['pro_userid'] === $data["applyjob"]["vacancies_organization_id"]){
+				$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+				$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
+				$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
+				$data['qualificatoin']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+				$data['medium']			= $this->common_model->medium_of_instruction();
+				$data['university']		= $this->common_model->get_board_details();
+				$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+				$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+				$this->load->view('company-dashboard-edit-jobs', $data);
+			}
+			else{
+				redirect('missingpage');
+			}
+		}
+		else{
+			redirect('provider/postedjob');
+		}
+	}
 	public function browse_candidate(){
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
@@ -695,6 +721,76 @@ class Job_provider extends CI_Controller {
 			$this->load->view('company-dashboard-browse-candidate',$data);
 		}
 		
+	}
+	public function updatejob(){
+		$common = new Common();
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		if($_POST){
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('provider_ug_or_pg', 'Required course type', 'trim|required|alpha|callback_pg_or_ug_check|max_length[3]|xss_clean');
+			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|max_length[80]|xss_clean');
+			$this->form_validation->set_rules('provider_vacancy', 'No of vacancy', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			$this->form_validation->set_rules('provider_class_level', 'Class Level', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_qualification[]', 'Qualification', 'trim|xss_clean|callback_multiple_qualification');
+			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
+			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
+			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
+			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
+			if ($this->form_validation->run())
+			{
+				$vacancy_data = array(
+									'vacancies_id'					=> $this->input->post('provider_id'),
+									'vacancies_course_type'			=> $this->input->post('provider_ug_or_pg'),
+									'vacancies_organization_id'		=> $data['organization']['organization_id'],
+									'vacancies_job_title'			=> $this->input->post('provider_job_title'),
+									'vacancies_available'			=> $this->input->post('provider_vacancy'),
+									'vacancies_class_level_id'		=> $this->input->post('provider_class_level'),
+									'vacancies_qualification_id'	=> implode(',',$this->input->post('provider_qualification')),
+									'vacancies_subject_id'			=> $this->input->post('provider_subject'),
+									'vacancies_experience'			=> $this->input->post('provider_experience'),
+									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
+									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
+									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
+									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
+									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),
+									'vacancies_instruction'			=> $this->input->post('provider_job_instruction')
+								);
+				if($this->job_provider_model->job_provider_post_vacancy_update($vacancy_data))
+				{
+					$this->session->set_userdata('post_job_server_msg','Your vacancy successfully updated!');
+					$this->session->set_userdata('error',2);
+					redirect('provider/postedjob');
+				}
+				else
+				{
+					$this->session->set_userdata('post_job_server_msg','Something wrong in data insertion process.Please try again!!');
+					$this->session->set_userdata('error',1);
+					redirect('provider/postedjob');
+				}
+			}
+			else
+			{
+				$this->session->set_userdata('post_job_server_msg','Please provide valid information!!');
+				$this->session->set_userdata('error',1);
+				redirect('provider/editjob/'.$this->input->post('provider_id'));
+			}
+		}
+	}
+	public function postedjob_remove_data(){
+		if($_POST){
+			$vacancyid = $this->input->post('vacancy_id');
+			if($this->job_provider_model->provider_postedjob_remove_update($vacancyid)){
+				echo "deleted";
+			}
+			else{
+				echo "error";
+			}		
+		}
 	}
 	public function changepassword(){
 		$session_data = $this->session->all_userdata();
