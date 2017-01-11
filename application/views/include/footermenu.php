@@ -10,7 +10,7 @@
 			                	<h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3>
 			                	<span class="clearfix"> </span>
                				</a>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s </p>
+                            <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-2 col-xs-12">
@@ -26,13 +26,19 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-4 col-xs-12">
-                        <div class="footer_block dark_gry">
-                            <h4>Jobs by Category</h4>
-                            <ul class="recentpost">
+                        <div class="footer_block dark_gry follow-on">
+                            <h4>Follow Us On</h4>
+                            <!-- <ul class="recentpost">
                                 <li><a href="<?php echo base_url(); ?>vacancies">Teacher Jobs</a> </li>
                                 <li><a href="<?php echo base_url(); ?>vacancies">Office Admin Jobs </a></li>                      
                                 <li><a href="<?php echo base_url(); ?>vacancies">Hindi Teacher Jobs</a></li>
                                 <li><a href="<?php echo base_url(); ?>vacancies">View all jobs</a></li>
+                            </ul> -->
+                            <ul class="social-network social-circle onwhite">
+                                <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="http://plus.google.com" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
                     </div>
@@ -61,18 +67,20 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-                                        <p>Copyright ©<?php echo date("Y"); ?> - Teachers Recruit All rights Reserved.<br> Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
+                                        <p>Copyright ©<?php echo date("Y"); ?> - Teachers Recruit All rights Reserved.<br></p>
                                     </div>
                                     <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-                                        <ul class="social-network social-circle onwhite">
+                                        <!-- <ul class="social-network social-circle onwhite">
                                             <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
                                             <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
                                             <li><a href="http://plus.google.com" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                                             <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul>
+                                        </ul> -->
+                                        <p class="pull-right">Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
+                                        <div class="clearfix"> </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                     </div>
                 </div>

@@ -304,7 +304,7 @@ line-height: 49px !important;
     border-left: 5px solid #fff;
     border-radius: 0;
     color: #242424;
-    font-size: 18px;
+    font-size: 14px;
 }
 .dashboard-body .profile-nav .provider-jobs  {
     display: block;
@@ -549,7 +549,7 @@ select:invalid {
     border-radius: 0;
     height: 60px;
     width: 100%;
- }   
+ } 
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
@@ -677,10 +677,10 @@ font-size: 12px;
 	position: relative;
 }
 .button__badge {
-  background-color: #fa3e3e;
+  background-color: #f37021;
     border-radius: 20px;
     color: white;
-    font-size: 13px;
+    font-size: 12px;
     padding: 0 11px;
     position: absolute;
     right: 17px;
@@ -982,11 +982,14 @@ label.form-input-error {
 	width: 125px;
 }
 .featured-image-box img{
-	height: 50px;
-	width: 50px;
+	height: 60px;
+	width: 100px;
 }
 .footer_logo {
 	margin: -5px 0 0;
+}
+.search_max_amount{
+	margin-top: 5px;
 }
 .custom_disabled {
     pointer-events:none; 
@@ -1046,4 +1049,17 @@ label.form-input-error {
     font-size: 14px;
     padding: 0px 20px;
     text-transform: uppercase;
+}
+/* footer */
+.follow-on  ul.social-network{
+	line-height:50px;
+	float: none;
+	margin:0px;
+}
+.follow-on ul.social-network{
+	list-style:none;
+	display:inline;
+	/*margin:0 auto;*/
+	padding:0;
+	display:table;
 }

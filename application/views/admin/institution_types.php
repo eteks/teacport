@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -52,7 +52,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget sub_section_scroll">
+          <div class="widget">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i>Institution Type
@@ -115,7 +115,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $ins_val['institution_type_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $inst_id = $ins_val['institution_type_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($inst_id) {
+                            return $m == $inst_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$ins_val['institution_type_status'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$ins_val['institution_type_status'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$ins_val['institution_type_status'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="created_date"> 
                             <?php 
@@ -177,7 +190,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select"); 
   var columns = new Array("i_name","i_status"); 
   var placeholder = new Array("Enter Institution Type Name","");
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","");//To set class for element
+  var maxlength = new Array("50",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var i_status_option = new Array("Please select status","Active","Inactive"); 
   var i_status_value = new Array("","1","0"); 

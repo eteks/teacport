@@ -4,7 +4,7 @@
   <!-- BEGIN PAGE -->
   <div id="main-content" class="<?php if(empty($this->session->userdata("admin_login_status"))) echo "remove_sidebar"; ?>">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <?php if(!empty($this->session->userdata("admin_login_status")) && strpos($_SERVER['REQUEST_URI'], 'admin') === FALSE): ?>
         <div class="row-fluid">

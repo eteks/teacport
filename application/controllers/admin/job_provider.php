@@ -90,21 +90,23 @@ class Job_Provider extends CI_Controller {
 	  		$action = $this->input->post('action');
 	  		// Tab 1 Validation
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
-	  			$validation_rules[] =  	array( 'field'   => 'organization_name','label'   => 'Organization Name','rules'   => 'trim|xss_clean|edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']' );
+	  			$validation_rules[] =  	array( 'field'   => 'organization_name','label'   => 'Organization Name','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[50]|edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']' );
 			    $validation_rules[] =   array( 'field'   => 'institution_type','label'   => 'Institution Type','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =   array( 'field'   => 'organization_status','label'   => 'Organization Status','rules'   => 'trim|required|xss_clean|' );
 			   	$validation_rules[] =   array( 'field'   => 'organization_logo','label'   => 'Organization Logo','rules'   => 'callback_validate_image_type['.$action.'.organization_logo]' );
 	        }
 	        // Tab 2 Validation
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
-	   			// $validation_rules[] =	array( 'field'   => 'org_addr_1','label'   => 'Organization Address','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_1','label'   => 'Organization Address','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_2','label'   => 'Organization Address','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_3','label'   => 'Organization Address','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
 	   			$validation_rules[] =	array( 'field'   => 'organization_district','label'  => 'Organization District','rules'   => 'trim|xss_clean|' );
 	   		}
 	   		// Tab 3 Validation
 	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array( 'field'   => 'registrant_name','label'   => 'Registrant Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
 	   			// $validation_rules[] =	array( 'field'   => 'registrant_dob','label'   => 'Registrant DOB','rules'   => 'trim|required|xss_clean|' );
-	   			// $validation_rules[] =	array( 'field'   => 'registrant_designation','label'   => 'Registrant Designation','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'registrant_designation','label'   => 'Registrant Designation','rules'   => 'trim|xss_clean|min_length[3]|max_length[50]' );
 	   			$validation_rules[] =	array('field'   => 'registrant_email','label'   => 'Organization District','rules'   => 'trim|required|xss_clean|valid_email|' );
 	   			$validation_rules[] =	array( 'field'   => 'registrant_mobile','label'   => 'Registrant Mobile','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{10}$/]|' );
 			    $validation_rules[] =	array( 'field'   => 'sms_verify','label'   => 'Sms Verification','rules'   => 'trim|required|xss_clean|' );				                       
@@ -233,25 +235,25 @@ class Job_Provider extends CI_Controller {
 	   		$validation_rules = array();
 	  		$id = $this->input->post('rid');
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
-	  			$validation_rules[] =  	array( 'field'   => 'job_title','label'   => 'Job Title','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =   array( 'field'   => 'vac_available','label'   => 'Vacancy Available','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,8}$/]|' );
+	  			$validation_rules[] =  	array( 'field'   => 'job_title','label'   => 'Job Title','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|min_length[3]|max_length[80]' );
+			    $validation_rules[] =   array( 'field'   => 'vac_available','label'   => 'Vacancy Available','rules'   => 'trim|required|xss_clean|numeric|is_natural_no_zero|max_length[8]' );
 			    $validation_rules[] =   array( 'field'   => 'vac_open_date','label'   => 'Vacancy Open Date','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =   array( 'field'   => 'vac_end_date','label'   => 'Vacancy End Date','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =   array( 'field'   => 'job_min_salary','label'   => 'Start Salary','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{4,9}$/]|' );
-			    $validation_rules[] =   array( 'field'   => 'job_max_salary','label'   => 'End Salary','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('job_min_salary').']' );
+			    $validation_rules[] =   array( 'field'   => 'job_min_salary','label'   => 'Start Salary','rules'   => 'trim|required|xss_clean|numeric|is_natural_no_zero|min_length[4]|max_length[9]|' );
+			    $validation_rules[] =   array( 'field'   => 'job_max_salary','label'   => 'End Salary','rules'   => 'trim|required|xss_clean|numeric|is_natural_no_zero|min_length[4]|max_length[9]|callback_check_greater_value['.$this->input->post('job_min_salary').']' );
 			    $validation_rules[] =   array( 'field'   => 'vac_status','label'   => 'Vacancy Status','rules'   => 'trim|required|xss_clean|' );
 	   		}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
 	   				$validation_rules[] =	array( 'field'   => 'qualification_name','label'   => 'Qualification Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Qualification Name]' );
-	   				$validation_rules[] =	array( 'field'   => 'vac_experience','label'   => 'Vacancy Experience','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,3}$/]' );
+	   				$validation_rules[] =	array( 'field'   => 'vac_experience','label'   => 'Vacancy Experience','rules'   => 'trim|required|xss_clean|numeric|is_natural_no_zero|max_length[3]' );
 		   			$validation_rules[] =	array( 'field'   => 'vac_class','label'   => 'Vacancy Class','rules'   => 'trim|required|xss_clean|' );
 	   				$validation_rules[] =	array( 'field'   => 'vac_univ_name','label'   => 'Vacancy University','rules'   => 'trim|required|xss_clean|' );
 	   				$validation_rules[] =	array( 'field'   => 'vac_sub_name','label'   => 'Vacancy Subject','rules'   => 'trim|required|xss_clean|' );
 	   		}
 	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array( 'field'   => 'vac_medium','label'   => 'Vacancy Medium','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'vac_accom','label'   => 'Vacancy Accomadation','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'vac_instruction','label'   => 'Vacancy Instruction','rules'   => 'trim|required|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'vac_accom','label'   => 'Vacancy Accomadation','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'vac_instruction','label'   => 'Vacancy Instruction','rules'   => 'trim|required|xss_clean|min_length[50]|max_length[700]|' );
 	   			$validation_rules[] =	array( 'field'   => 'vac_inter_sdate','label'   => 'Vacancy Interview Start Date','rules'   => 'trim|required|xss_clean|' );
 	   			$validation_rules[] =	array('field'   => 'vac_inter_edate','label'   => 'Vacancy Interview End Date','rules'   => 'trim|required|xss_clean|' );			                       
 	   		}
@@ -415,7 +417,7 @@ class Job_Provider extends CI_Controller {
 	  		$id = $this->input->post('rid');
 	  		$upload_path = "uploads/jobprovider/premiumad/";
   			$validation_rules = array(
-  				array( 'field'  => 'ads_name','label'   => 'Premium Ads Name','rules' => 'trim|required|xss_clean|' ),
+  				array( 'field'  => 'ads_name','label'   => 'Premium Ads Name','rules' => 'trim|required|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[50]' ),
 			    array( 'field'   => 'ads_days','label'   => 'Premium Visible Days','rules'   => 'trim|required|xss_clean|regex_match[/^[0-9]{1,15}$/]' ),
 		        array( 'field'   => 'ads_status','label'   => 'Premium Visible Status','rules'   => 'trim|required|xss_clean|' ),
 		        array( 'field'   => 'admin_verify','label'   => 'Admin Verification','rules'   => 'trim|required|xss_clean|' ),

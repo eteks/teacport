@@ -375,6 +375,7 @@ tr select {
 }
 .dp_width{
     width: 185px !important;
+    background-color: unset !important;
 }
 .form-horizontal .control-label{
     padding-top: 0px !important;
@@ -386,6 +387,9 @@ tr select {
     font-size: 13px;
     font-weight: lighter !important;
     text-transform: capitalize;
+}
+.Zebra_DatePicker_Icon_Wrapper{
+    width: 100% !important;
 }
 .parents_tr td textarea{
     min-height:100px !important;
@@ -416,16 +420,21 @@ tr select {
 	width: auto;
 	overflow: scroll;
 }
-
+.sub_section_scrollprivil{
+	max-height:600px !important; 
+	height: auto;
+	width: auto;
+	overflow: scroll;
+}
 
  .sub_section_scroll{
-	max-height:700px !important; 
+	max-height:600px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
 }
 .sub_pre_section{
-	max-height:500px !important; 
+	max-height:570px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
@@ -821,8 +830,8 @@ table .dataTables_empty{
     height: 150px;
     width: 150px;
     position: absolute;
-    top: 14%;
-    left: 50%;
+    top: 0;
+    left: 40%;
 }
 .hide_loader{
 	display: none;
@@ -837,8 +846,25 @@ table .dataTables_empty{
     width: 100%;
     height: 100%;
     z-index: 9999;
-   
 }
+/*.edit_add_overlay {
+    opacity: 0.01;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    background: #000;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}*/
+/*.db {
+    display: block;
+}
+.dn {
+    display: none;
+}*/
+
+
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;

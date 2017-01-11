@@ -14,6 +14,16 @@ class Master_Data extends CI_Controller {
 
 	}
 
+	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	/* ===========            State Controller Start       ============ */
 
 	// State - Add Edit Delete View
@@ -28,7 +38,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-				        array('field'   => 's_name','label'   => 'State Name','rules'   => 'trim|required|xss_clean|edit_unique[tr_state.state_id.state_name.'.$id.']' ),
+				        array('field'   => 's_name','label'   => 'State Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_state.state_id.state_name.'.$id.']' ),
 				        array( 'field'   => 's_status','label'   => 'State Status','rules'   => 'trim|required|xss_clean|' ),);
 			    }
 
@@ -36,7 +46,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		            	array( 'field'   => 's_name','label'   => 'State Name','rules'   => 'trim|required|xss_clean|is_unique[tr_state.state_name]' ),
+		            	array( 'field'   => 's_name','label'   => 'State Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_state.state_name]' ),
 				        array( 'field'   => 's_status','label'   => 'State Status','rules'   => 'trim|required|xss_clean|' ),);
 		      	}
 
@@ -117,7 +127,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'd_name','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' ),
+		                array( 'field'   => 'd_name','label'   => 'District Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
 		                array( 'field'   => 'd_state_name','label'   => 'State Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'd_status','label'   => 'District Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -126,7 +136,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'd_name','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' ),
+		                array( 'field'   => 'd_name','label'   => 'District Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
 		                array( 'field'   => 'd_state_name','label'   => 'State Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'd_status','label'   => 'District Status','rules'   => 'trim|required|xss_clean|' ), );
 		      	}
@@ -207,7 +217,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'i_name','label'   => 'Institution Type Name','rules'   => 'trim|required|xss_clean|edit_unique[tr_institution_type.institution_type_id.institution_type_name.'.$id.']' ),
+		                array( 'field'   => 'i_name','label'   => 'Institution Type Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_institution_type.institution_type_id.institution_type_name.'.$id.']' ),
 		                array( 'field'   => 'i_status','label'   => 'Institution Type Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
 
@@ -215,7 +225,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-            			array( 'field'   => 'i_name','label'   => 'Institution Type Name','rules'   => 'trim|required|xss_clean|is_unique[tr_institution_type.institution_type_name]' ),
+            			array( 'field'   => 'i_name','label'   => 'Institution Type Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_institution_type.institution_type_name]' ),
 		                array( 'field'   => 'i_status','label'   => 'Institution Type Status','rules'   => 'trim|required|xss_clean|' ), );
 		      	}
 
@@ -295,7 +305,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'e_name','label'   => 'Extra Curricular Name','rules'   => 'trim|required|xss_clean|edit_unique[tr_extra_curricular.extra_curricular_id.extra_curricular.'.$id.']' ),
+		                array( 'field'   => 'e_name','label'   => 'Extra Curricular Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_extra_curricular.extra_curricular_id.extra_curricular.'.$id.']' ),
 		                array( 'field'   => 'e_status','label'   => 'Extra Curricular Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
 
@@ -303,7 +313,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-            			array( 'field'   => 'e_name','label'   => 'Extra Curricular Name','rules'   => 'trim|required|xss_clean|is_unique[tr_extra_curricular.extra_curricular]' ),
+            			array( 'field'   => 'e_name','label'   => 'Extra Curricular Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_extra_curricular.extra_curricular]' ),
 		                array( 'field'   => 'e_status','label'   => 'Extra Curricular Status','rules'   => 'trim|required|xss_clean|' ), );
 		      	}
 
@@ -383,7 +393,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'l_name','label'   => 'Language Name','rules'   => 'trim|required|xss_clean|edit_unique[tr_languages.language_id.language_name.'.$id.']' ),
+		                array( 'field'   => 'l_name','label'   => 'Language Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_languages.language_id.language_name.'.$id.']' ),
 		                array( 'field'   => 'l_mother_tongue','label'   => 'Mother Tongue','rules'   => 'trim|required|xss_clean|' ),
 		                array('field'   => 'l_instruction','label'   => 'Medium of Instruction','rules'   => 'trim|required|xss_clean|' ),
 		                array('field'   => 'l_status','label'   => 'Language Status','rules'   => 'trim|required|xss_clean|' ), );
@@ -393,7 +403,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'l_name', 'label'   => 'Language Name','rules'   => 'trim|required|xss_clean|is_unique[tr_languages.language_name]' ),
+		                array( 'field'   => 'l_name', 'label'   => 'Language Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_languages.language_name]' ),
 		                array( 'field'   => 'l_mother_tongue','label'   => 'Mother Tongue', 'rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'l_instruction','label'   => 'Medium of Instruction','rules'   => 'trim|required|xss_clean|' ),
 		               	array( 'field'   => 'l_status','label'   => 'Language Status','rules'   => 'trim|required|xss_clean|' ), );
@@ -476,7 +486,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|' ),
+		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
 		                array( 'field'   => 'q_inst_type','label'   => 'Educational Qualifcation Institution Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'q_status', 'label'   => 'Educational Qualification Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -485,7 +495,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|' ),
+		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
 		                array( 'field'   => 'q_inst_type','label'   => 'Educational Qualifcation Institution Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'q_status','label'   => 'Educational Qualification Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }
@@ -567,7 +577,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		               	array( 'field' => 'c_name','label' => 'Class Level','rules'   => 'trim|required|xss_clean|' ),
+		               	array( 'field' => 'c_name','label' => 'Class Level','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
 		                array( 'field'   => 'c_inst_type','label'   => 'Institution Type Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'c_status','label'   => 'Class Level Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -576,7 +586,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field' => 'c_name', 'label' => 'Class Level','rules'   => 'trim|required|xss_clean|' ),
+		                array( 'field' => 'c_name', 'label' => 'Class Level','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
 		                array( 'field'   => 'c_inst_type','label'   => 'Institution Type Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'c_status','label'   => 'Class Level Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }
@@ -658,7 +668,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field' => 'd_name','label' => 'Departments Name','rules' => 'trim|required|xss_clean|edit_unique[tr_departments.departments_id.departments_name.'.$id.']' ),
+		                array( 'field' => 'd_name','label' => 'Departments Name','rules' => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_departments.departments_id.departments_name.'.$id.']' ),
 		                array( 'field'   => 'd_qualification','label'   => 'Qualification Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'd_status','label'   => 'Departments Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -667,7 +677,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'd_name','label'   => 'Departments Name','rules'   => 'trim|required|xss_clean|is_unique[tr_departments.departments_name]' ),
+		                array( 'field'   => 'd_name','label'   => 'Departments Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_departments.departments_name]' ),
 		                array( 'field'   => 'd_qualification','label'   => 'Qualification Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'd_status','label'   => 'Departments Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }
@@ -751,7 +761,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 's_name','label'   => 'Subject Name','rules'  => 'trim|required|xss_clean|edit_unique[tr_subject.subject_id.subject_name.'.$id.']'),
+		                array( 'field'   => 's_name','label'   => 'Subject Name','rules'  => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_subject.subject_id.subject_name.'.$id.']'),
 		                array( 'field'   => 's_inst_type','label'   => 'Institution Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 's_status', 'label'   => 'Subject Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -760,7 +770,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 's_name','label'   => 'Subject Name','rules'   => 'trim|required|xss_clean|is_unique[tr_subject.subject_name]' ),
+		                array( 'field'   => 's_name','label'   => 'Subject Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_subject.subject_name]' ),
 		                array( 'field'   => 's_inst_type','label'   => 'Institution Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 's_status','label'   => 'Subject Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }
@@ -844,7 +854,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'u_name','label'   => 'University Board Name','rules'   => 'trim|required|xss_clean|edit_unique[tr_university_board.education_board_id.university_board_name.'.$id.']' ),
+		                array( 'field'   => 'u_name','label'   => 'University Board Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_university_board.education_board_id.university_board_name.'.$id.']' ),
 		                array( 'field'   => 'u_class_level','label'   => 'University Class Level Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'u_status','label'   => 'University Board Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -853,7 +863,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'u_name','label'   => 'University Board Name','rules'   => 'trim|required|xss_clean|is_unique[tr_university_board.university_board_name]' ),
+		                array( 'field'   => 'u_name','label'   => 'University Board Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_university_board.university_board_name]' ),
 		                array( 'field'   => 'u_class_level','label'   => 'University Class Level Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'u_status','label'   => 'University Board Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }
@@ -937,7 +947,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array('field'   => 'p_name','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|edit_unique[tr_languages.language_id.language_name.'.$id.']' ),
+		                array('field'   => 'p_name','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|edit_unique[tr_languages.language_id.language_name.'.$id.']' ),
 		                array( 'field'   => 'p_inst_type','label'   => 'Posting Institution Name','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'p_status','label'   => 'Posting Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -946,7 +956,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'p_name','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|is_unique[tr_languages.language_name]' ),
+		                array( 'field'   => 'p_name','label'   => 'Posting Name','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|is_unique[tr_languages.language_name]' ),
 		                array( 'field'   => 'p_inst_type','label'   => 'Posting Institution Name','rules'   => 'trim|required|xss_clean|' ),
 		               	array( 'field'   => 'p_status','label'   => 'Posting Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }

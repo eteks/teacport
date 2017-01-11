@@ -53,11 +53,11 @@ class Admin_users extends CI_Controller {
 		                                 'label'   => 'Group Description',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
-		                            array(
-		                                 'field'   => 'user_super_admin',
-		                                 'label'   => 'Admin Type',
-		                                 'rules'   => 'trim|required|xss_clean|'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'user_super_admin',
+		                            //      'label'   => 'Admin Type',
+		                            //      'rules'   => 'trim|required|xss_clean|'
+		                            // ),
 		                            array(
 		                                 'field'   => 'user_group_status',
 		                                 'label'   => 'Group Status',
@@ -78,11 +78,11 @@ class Admin_users extends CI_Controller {
 		                                 'label'   => 'Group Description',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
-		                            array(
-		                                 'field'   => 'user_super_admin',
-		                                 'label'   => 'Admin Type',
-		                                 'rules'   => 'trim|required|xss_clean|'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'user_super_admin',
+		                            //      'label'   => 'Admin Type',
+		                            //      'rules'   => 'trim|required|xss_clean|'
+		                            // ),
 		                            array(
 		                                 'field'   => 'user_group_status',
 		                                 'label'   => 'Group Status',

@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_section_scroll">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -52,7 +52,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
-          <div class="widget sub_section_scroll">
+          <div class="widget">
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> Qualification
@@ -123,7 +123,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <td class="q_inst_type">
                           <?php echo $qua_val['institution_type_name']; ?>
-                          <input type="hidden" value="<?php echo $qua_val['institution_type_id']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $qual_id = $qua_val['educational_qualification_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($qual_id) {
+                            return $m == $qual_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$qua_val['institution_type_id'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$qua_val['institution_type_id'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$qua_val['institution_type_id'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="q_status"> 
                           <?php 
@@ -132,7 +145,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           else
                             echo "Inactive";
                           ?>
-                          <input type="hidden" value="<?php echo $qua_val['educational_qualification_status']; ?>" />
+                          <?php 
+                          if(!empty($mapped_data)){
+                            $qual_id = $qua_val['educational_qualification_id'];  
+                            $mapped_result = array_filter($mapped_data, function($m) use ($qual_id) {
+                            return $m == $qual_id; });
+                            if(count($mapped_result) > 0)
+                              echo '<input type="hidden" value="'.$qua_val['educational_qualification_status'].'" data-disabled="1" />';
+                            else
+                              echo '<input type="hidden" value="'.$qua_val['educational_qualification_status'].'" />';
+                          }
+                          else{
+                            echo '<input type="hidden" value="'.$qua_val['educational_qualification_status'].'" />';
+                          }
+                          ?>
                         </td>
                         <td class="educational_qualification_created_date">
                           <?php 
@@ -194,7 +220,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select","select","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("q_name","q_course_type","q_inst_type","q_status"); // Set name of input types
   var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
-  var class_selector = new Array("");//To set class for element
+  var class_selector = new Array("alpha_value","","","");//To set class for element
+  var maxlength = new Array("50","","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var q_course_type_option = new Array("Please select course"); 
   var q_course_type_value = new Array("");
