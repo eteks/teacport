@@ -5,10 +5,8 @@
 <section class="job-breadcrumb">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-sm-7 co-xs-12 text-left">
-				<h3>Update Your Profile</h3>
-			</div>
-			<div class="col-md-6 col-sm-5 co-xs-12 text-right">
+			
+			<div class="col-md-12 col-sm-12 co-xs-12 text-left">
 				<div class="bread">
 					<ol class="breadcrumb">
 						<li>
@@ -43,8 +41,8 @@
 						<p class="val_status">  </p>	
 						<div class="row-form">
 							<div class="form-group image_upload">
-                            	<div class="col-sm-offset-1 col-sm-2">
-                                    <label>Provider Logo : <span class="alert">*</span></label>
+                           	<div class="col-sm-4">
+                                    <label>Provider Logo : <span class="alert"></span></label>
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
@@ -129,21 +127,21 @@
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label class="col-sm-offset-1 col-sm-2" for="firstname">Registrant Name : <span class="alert">*</span></label>
+								<label class="col-sm-4" for="firstname">Registrant Name : <span class="alert"></span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
 									<input id="firstname" data-name="Registrant Name" data-minlength="3" class="form-control form_inputs alpha_value" maxlength="50" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-offset-1 col-sm-2" for="designation">Registrant Designation : <span class="alert">*</span></label>
+								<label class="col-sm-4" for="designation">Registrant Designation : <span class="alert"></span></label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_designation'); ?>
 									<input id="designation"  data-name="Registrant Designation" data-minlength="3" class="form-control form_inputs" maxlength="50" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; elseif (set_value('provider_designation')!= '') { echo set_value('provider_designation'); } ?>" placeholder="ex. Principal / Correspondent">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-offset-1 col-sm-2" for="dob_yrs">Date of Birth : <span class="alert">*</span></label>
+								<label class="col-sm-4" for="dob_yrs">Date of Birth : <span class="alert"></span></label>
 								<div class="col-sm-4">
 									<?php echo form_error('provider_dob'); 
 									?>

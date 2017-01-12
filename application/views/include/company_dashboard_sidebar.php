@@ -1,4 +1,4 @@
-<div class="profile-nav">
+<div class="profile-nav panel-border">
     <div class="panel">
         <ul class="nav nav-pills nav-stacked">
             <li class="<?php if($this->uri->segment(2)=='dashboard') echo 'active'; ?>">

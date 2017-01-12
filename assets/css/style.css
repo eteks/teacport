@@ -56,7 +56,7 @@ section{padding:10px 0px;position:relative;background-color:#FFF;}
 .Heading-title.black h3::after{background-color:#242424;bottom:0;content:"";height:1px;left:0;margin:0 auto;position:absolute;right:0;width:59px;}
 .heading-inner{margin-bottom:30px;display:block;width:100%;position:relative;overflow:hidden;margin-top:20px;}
 .heading-inner .title{background-color:#fff;border-bottom:2px solid #29aafe;font-size:20px;font-weight:600;padding:20px 0;position:relative;text-transform:capitalize;float:left;color:#242424;margin-bottom:0;}
-.job-breadcrumb{background-color:#242424;padding:30px;overflow:hidden;}
+.job-breadcrumb{background-color:#242424;padding:10px;overflow:hidden;}
 .job-breadcrumb-img{background:rgba(60, 146, 202, 0.7) url("../images/parallax-map.jpg") no-repeat fixed center center/cover;padding:60px 0;overflow:hidden;}
 .job-breadcrumb h3, .job-breadcrumb h2{color:#FFF;margin:8px 0;text-transform:capitalize;font-weight:600;}
 .job-breadcrumb .breadcrumb{background-color:transparent;margin:0;}
@@ -106,7 +106,7 @@ section{padding:10px 0px;position:relative;background-color:#FFF;}
 li.no-bg:hover a{background-color:#2088cb !important;}
 .g-job{background-color:transparent !important;}
 .p-job i, .login-header-btn i{margin-right:5px;}
-.login-header-btn{background-color:#242424 !important;color:#FFF !important;}
+.login-header-btn{background-color:#00a5ef !important;color:#FFF !important;}
 li.no-bg .login-header-btn:hover{background-color:#242424 !important;color:#FFF !important;}
 .login-btn-no-bg{margin-left:15px !important;}
 #header2{background-color:transparent;position:absolute;border-bottom:none;padding:0;top:0.6%;}
@@ -458,7 +458,7 @@ aside{margin-bottom:30px;}
 .dashboard-body .profile-nav ul > li{border-bottom:1px solid #ebeae6;margin-top:0;line-height:30px;}
 .dashboard-body .profile-nav ul > li:last-child{border-bottom:none;}
 .dashboard-body .profile-nav ul > li > a{border-radius:0;-webkit-border-radius:0;color:#242424;border-left:5px solid #fff;font-size:14px;}
-.dashboard-body .profile-nav ul > li > a:hover, .dashboard-body .profile-nav ul > li > a:focus, .dashboard-body .profile-nav ul li.active a{background:#29aafe;border-left:5px solid #2088cb;color:#FFF !important;}
+.dashboard-body .profile-nav ul > li > a:hover, .dashboard-body .profile-nav ul > li > a:focus, .dashboard-body .profile-nav ul li.active a{background:#29aafe;border-left:5px solid #f37021;color:#FFF !important;}
 .dashboard-body .profile-nav ul > li > a:hover .fa, .dashboard-body .profile-nav ul > li > a:focus .fa, .dashboard-body .profile-nav ul > li.active .fa{color:#FFF !important;}
 .dashboard-body .profile-nav ul > li > a:hover{color:#FFF !important;}
 .dashboard-body .profile-nav ul > li > a > i{font-size:14px;padding-right:10px;color:#29aafe;}

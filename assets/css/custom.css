@@ -2,10 +2,23 @@
 .mega-menu .menu-links > li > a {
    font-size: 14px;
 }
+.menu-upperlinks{
+	padding:10px;
+}
 .mega-menu > section.menu-list-items { padding: 10px 20px; }
 .mega-menu .menu-links > li > a {
 padding: 0 15px !important;
 line-height: 49px !important;
+}
+.mega-menu .menu-links > li > a:hover{
+box-shadow:0 8px 6px -6px #da651a !important;	
+}
+
+.job-breadcrumb{
+	border-bottom:5px solid #ccc !important;
+}
+.job-breadcrumb .breadcrumb li a{
+	border-bottom-color: #00a5ef !important;
 }
 /* Logo */
 #webpage_title .tr_logo{
@@ -21,6 +34,9 @@ line-height: 49px !important;
 	color: #00a5ed;
 	font-size: 35px; 
 	font-family: 'Kaushan Script', cursive;
+}
+.login-header-btn{
+	line-height:30px !important;
 }
 /* Home login button */
 #login_home_btn .modal-title{
@@ -330,6 +346,13 @@ line-height: 49px !important;
 	max-width: 300px;
 	object-fit: cover;
 } 
+.panel-border{
+	/*border-right: 2px solid #f37021;
+	padding:0 0px 0 0;*/
+	 box-shadow: 2px 2px 2px #00a5ef !important;
+    -moz-box-shadow: 2px 2px 2px #00a5ef !important;
+    -webkit-box-shadow: 2px 2px 2px #00a5ef !important;
+}
 /*.select-salary select option:first{
 	color: #999;
 }*/
@@ -1002,6 +1025,64 @@ label.form-input-error {
     pointer-events:none; 
     opacity:0.6;
 }
+.login-page-4 .login-container{background-color:#f47020 !important;padding:5px;border:5px solid #FFF;}
+.carousel-control-act.right {    background-image: none; top: 95px;}
+.carousel-control-act.left {    background-image: none; top: 95px;}
+.posted_jobs_provider .buttonss a{
+	margin-top:10px;
+	padding : 6px 12px !important;
+	width: 80%;
+}
+.posted_jobs_provider p{
+	 word-wrap: break-word;
+}
+.popup_fade{
+	background: #000000 none repeat scroll 0 0;
+    display: none;
+    height: 1000%;
+    opacity: 0.63;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1100;
+   
+}
+.error_popup_msg {
+    background: #fff none repeat scroll 0 0;
+    display: none;
+    height: 140px;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    width: 230px;
+    z-index: 9999;
+}
+.success-alert {
+  	padding: 25px 0 30px;
+    text-align: center;
+}
+.success-alert span{
+	color: red;
+}
+.alert_btn{
+	left: 87px;
+    position: relative;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #d6d6d6 none repeat scroll 0 0;
+    border-color: transparent transparent #646464;
+    border-image: none;
+    border-style: solid;
+    border-width: 2px;
+    color: #444444;
+    float: left;
+    font-size: 14px;
+    padding: 0px 20px;
+    text-transform: uppercase;
+}
 /* footer */
 .follow-on  ul.social-network{
 	line-height:50px;
@@ -1034,3 +1115,4 @@ label.form-input-error {
 	height : 200px;
 	width: 200px;
 }
+
