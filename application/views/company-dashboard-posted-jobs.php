@@ -3,10 +3,8 @@
         <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-6 col-sm-7 co-xs-12 text-left">
-                        <h3>Posted Jobs</h3>
-                    </div>
-                    <div class="col-md-6 col-sm-5 co-xs-12 text-right">
+                    
+                    <div class="col-md-12 col-sm-12 co-xs-12 text-left">
                         <div class="bread">
                             <ol class="breadcrumb">
                                 <li><a href="<?php echo base_url(); ?>">Home</a>
@@ -25,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                         <div class="col-md-4 col-sm-4 col-xs-12">
-                            <div class="panel">
+                            <div class="panel panel-border">
                                 <div class="dashboard-logo-sidebar">
                                     <?php if (@getimagesize($organization['organization_logo'])) { ?>
                                     <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">

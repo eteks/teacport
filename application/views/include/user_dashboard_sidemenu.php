@@ -1,4 +1,4 @@
-<div class="profile-card">
+<div class="profile-card panel-border">
     <div class="banner">
         <img src="<?php echo base_url(); ?>assets/images/building.jpg" alt="" class="img-responsive">
     </div>
@@ -32,7 +32,7 @@
     </ul>
 </div>
 <div class="profile-nav">
-        <div class="panel">
+        <div class="panel panel-border">
             <ul class="nav nav-pills nav-stacked">
                 <li class="<?php if($this->uri->segment(2)=='dashboard') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/dashboard"> <i class="fa fa-user"></i> Profile</a>

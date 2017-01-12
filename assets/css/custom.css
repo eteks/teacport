@@ -2,10 +2,23 @@
 .mega-menu .menu-links > li > a {
    font-size: 14px;
 }
+.menu-upperlinks{
+	padding:10px;
+}
 .mega-menu > section.menu-list-items { padding: 10px 20px; }
 .mega-menu .menu-links > li > a {
 padding: 0 15px !important;
 line-height: 49px !important;
+}
+.mega-menu .menu-links > li > a:hover{
+box-shadow:0 8px 6px -6px #da651a !important;	
+}
+
+.job-breadcrumb{
+	border-bottom:5px solid #ccc !important;
+}
+.job-breadcrumb .breadcrumb li a{
+	border-bottom-color: #00a5ef !important;
 }
 /* Logo */
 #webpage_title .tr_logo{
@@ -21,6 +34,9 @@ line-height: 49px !important;
 	color: #00a5ed;
 	font-size: 35px; 
 	font-family: 'Kaushan Script', cursive;
+}
+.login-header-btn{
+	line-height:30px !important;
 }
 /* Home login button */
 #login_home_btn .modal-title{
@@ -324,6 +340,13 @@ line-height: 49px !important;
 	max-width: 300px;
 	object-fit: cover;
 } 
+.panel-border{
+	/*border-right: 2px solid #f37021;
+	padding:0 0px 0 0;*/
+	 box-shadow: 2px 2px 2px #00a5ef !important;
+    -moz-box-shadow: 2px 2px 2px #00a5ef !important;
+    -webkit-box-shadow: 2px 2px 2px #00a5ef !important;
+}
 /*.select-salary select option:first{
 	color: #999;
 }*/
