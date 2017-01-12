@@ -91,6 +91,7 @@ line-height: 49px !important;
 /* Featured Jobs Slider */
 .slide-featured-jobs .content-area{
 	height: 250px;
+	position: relative;
 }
 .slide-featured-jobs {
 	padding: 10px;
@@ -111,6 +112,11 @@ line-height: 49px !important;
  	filter: alpha(opacity=0);  
   	opacity:0; 
   }	
+ .feature-post-meta-bottom .apply {
+  	position: absolute;
+  	bottom: 10px;
+  	right: 10px;
+ }
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -253,7 +259,7 @@ line-height: 49px !important;
 	padding: 12px 30px;
 } 
 #candidate-browse-jobs .advanced_search{
-	color: #fff;
+	color: #29AAFE;
 	cursor: pointer;
 }
 #candidate_ads_act select{
@@ -334,9 +340,10 @@ select:invalid {
  	margin: 5px;
  	color: #fff;
  	cursor: pointer;
+ 	color: #29AAFE;
  }
  .advanced_search:hover {
- 	color: #FFFFFF;
+ 	color: #29AAFE;
  }
  #advancedsearch_act {
  	margin: 5px 0;
@@ -501,7 +508,7 @@ select:invalid {
 }
 #normalsearch_act .btn-default, #candidate_nos_act .btn-default{
 	margin-top: 0px !important;
-	padding: 19px 30px;
+	padding: 19px 50px;
 }
 /* Subcription */
 #plandetail_act .modal-dialog {
@@ -748,7 +755,7 @@ font-size: 12px;
 }
 .advance_search_btn{
 	margin: 8px 0 8px 45px;
-	padding: 12px 30px 12px 32px;
+	padding: 12px 20px 12px 37px;
 }
 .postad_preview{
 	display: none;
@@ -982,14 +989,14 @@ label.form-input-error {
 	width: 125px;
 }
 .featured-image-box img{
-	height: 60px;
-	width: 100px;
+	height: auto;
+	width: 50%;
 }
 .footer_logo {
 	margin: -5px 0 0;
 }
 .search_max_amount{
-	margin-top: 5px;
+	margin-top: 10px;
 }
 .custom_disabled {
     pointer-events:none; 
@@ -1008,5 +1015,22 @@ label.form-input-error {
 	padding:0;
 	display:table;
 }
-
-
+/* About us */
+.about-us p{
+	text-align: justify;
+}
+/*vacancy*/
+.footer-grey-color{
+	background-color:#f1f1f1;
+}
+#vacancies_page .Heading-title{
+	margin-bottom: 30px;
+} 
+#vacancies_page label{
+	font-size: 16px;
+}
+/* Provider Logo Sidebar */
+.dashboard-logo-sidebar {
+	height : 200px;
+	width: 200px;
+}

@@ -28,11 +28,11 @@ include ('include/menus.php');
                     <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel">
-                                <div class="dashboard-logo-sidebar">
+                                <div class="dashboard-logo-sidebar center-block">
                                      <?php if (@getimagesize($organization['organization_logo'])) { ?>
                                     <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
                                     <?php } else { ?>
-                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
+                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive">
                                     <?php } ?>
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
