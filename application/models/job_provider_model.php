@@ -195,10 +195,21 @@ class Job_provider_model extends CI_Model {
 			return FALSE;
 		}
 	}
+	public function job_provider_post_vacancy_update($vacancydata)
+	{
+	 	$this->db->where('vacancies_id', $vacancydata['vacancies_id']);
+		if($this->db->update('tr_organization_vacancies', $vacancydata)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
 	public function job_provider_post_job_exist_or_not($vacancydata){
 		$checkquery = $this->db->get_where('tr_organization_vacancies', array(
             'vacancies_job_title' => $vacancydata['vacancies_job_title'],
-            'vacancies_available' => $vacancydata['vacancies_available']
+            'vacancies_available' => $vacancydata['vacancies_available'],
+            'vacancies_organization_id' => $vacancydata['vacancies_organization_id']
         ));
 		$count = $checkquery->num_rows();
 		if($count === 1){
@@ -514,6 +525,16 @@ class Job_provider_model extends CI_Model {
 		$where = "(inbox_id in (".$inbox_id."))";
 		$this->db->where($where);
 		if($this->db->update('tr_organizaion_inbox', array('inbox_status'=>'0'))){
+			return TRUE;
+		}
+		else{
+			return false;
+		}
+	}
+	public function provider_postedjob_remove_update($vacancy_id){
+		$where = "(vacancies_id in (".$vacancy_id."))";
+		$this->db->where($where);
+		if($this->db->update('tr_organization_vacancies', array('vacancies_status'=>'0'))){
 			return TRUE;
 		}
 		else{

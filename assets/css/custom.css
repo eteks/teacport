@@ -1018,6 +1018,64 @@ label.form-input-error {
     pointer-events:none; 
     opacity:0.6;
 }
+.login-page-4 .login-container{background-color:#f47020 !important;padding:5px;border:5px solid #FFF;}
+.carousel-control-act.right {    background-image: none; top: 95px;}
+.carousel-control-act.left {    background-image: none; top: 95px;}
+.posted_jobs_provider .buttonss a{
+	margin-top:10px;
+	padding : 6px 12px !important;
+	width: 80%;
+}
+.posted_jobs_provider p{
+	 word-wrap: break-word;
+}
+.popup_fade{
+	background: #000000 none repeat scroll 0 0;
+    display: none;
+    height: 1000%;
+    opacity: 0.63;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1100;
+   
+}
+.error_popup_msg {
+    background: #fff none repeat scroll 0 0;
+    display: none;
+    height: 140px;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    width: 230px;
+    z-index: 9999;
+}
+.success-alert {
+  	padding: 25px 0 30px;
+    text-align: center;
+}
+.success-alert span{
+	color: red;
+}
+.alert_btn{
+	left: 87px;
+    position: relative;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #d6d6d6 none repeat scroll 0 0;
+    border-color: transparent transparent #646464;
+    border-image: none;
+    border-style: solid;
+    border-width: 2px;
+    color: #444444;
+    float: left;
+    font-size: 14px;
+    padding: 0px 20px;
+    text-transform: uppercase;
+}
 /* footer */
 .follow-on  ul.social-network{
 	line-height:50px;
@@ -1031,5 +1089,3 @@ label.form-input-error {
 	padding:0;
 	display:table;
 }
-
-

@@ -15,7 +15,7 @@
                     </div>
                     <div class="col-sm-6 col-md-2 col-xs-12">
                         <div class="footer_block">
-                            <h4>Useful Links</h4>
+                            <h4>Quick Links</h4>
                             <ul class="footer-links">
                                 <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>aboutus">About Us</a> </li>
