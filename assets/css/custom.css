@@ -995,3 +995,6 @@ label.form-input-error {
     pointer-events:none; 
     opacity:0.6;
 }
+.login-page-4 .login-container{background-color:#f47020 !important;padding:5px;border:5px solid #FFF;}
+.carousel-control-act.right {    background-image: none; top: 95px;}
+.carousel-control-act.left {    background-image: none; top: 95px;}

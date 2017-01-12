@@ -796,7 +796,7 @@ ul.onwhite a.icoLinkedin:hover{color:#007bb7;}
 .login-page-3 .loginbox-or .or{background-color:#2C303F;color:#999;height:20px;left:calc(50% - 25px);margin:0 auto;position:absolute;top:0;width:50px;}
 .login-page-3 .loginbox-or{position:relative;text-align:center;height:50px;}
 .login-page-3 .social{position:relative;overflow:hidden;padding-bottom:30px;}
-.login-page-4{position:relative;background:rgba(60, 146, 202, 0.7) url("../images/coming-soon.jpg") no-repeat scroll center center/cover;}
+.login-page-4{position:relative;background:rgba(60, 146, 202, 0.7) url("../images/loginbg.jpg") no-repeat scroll center center/cover;}
 .login-page-4 .login-container{background-color:transparent;padding:5px;border:5px solid #FFF;}
 .login-page-4 .loginbox{background-color:#FFF;}
 .login-page-5{position:relative;background-color:#29aafe;}

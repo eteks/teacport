@@ -980,6 +980,80 @@ class Job_seeker extends CI_Controller {
 			}
 		}   	 		
 	}
+	/*Added by thangam*/
+	public function allinstitutions(){
+		$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
+		$this->load->view('all-institutions',$categories);
+	}
+	public function vacancies()
+	{
+		$data['applicable_postings'] = $this->common_model->applicable_posting();
+		$data['qualifications'] = $this->common_model->qualification();
+		$data['institution_values'] = $this->common_model->get_institution_type();
+
+
+		$search_inputs = array();	
+		if($_POST) {
+    		$inputs = array(
+        				'keyword' => $this->input->post('search_keyword'),
+        				'min_amount' => $this->input->post('search_min_amount'),
+        				'location' => $this->input->post('search_location'),
+        				'max_amount' => $this->input->post('search_max_amount'),
+        				'experience' => $this->input->post('search_exp'),
+        				'posting' => $this->input->post('search_posting'),
+        				'qualification' => $this->input->post('search_qualification'),
+        				'institution' => $this->input->post('search_institution'),
+        				);
+    		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
+    	}
+    	$search_inputs = $this->session->userdata('search_inputs'); // To get search inputs from session
+
+    	// Pagination values
+    	$per_page = 20;
+
+    	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
+        $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
+    	$total_rows = $search_results['total_rows'];
+    	$data['search_inputs'] = $search_inputs;
+    	$data['alldistrict'] = $this->common_model->get_all_district();
+    	$data["search_results"] = $search_results['search_results'];
+
+
+    	//pagination
+		$this->load->library('pagination');
+
+		// Pagination configuration
+  		$config['base_url'] = base_url().'vacancies';
+		$config['per_page'] = $per_page;
+		$config['total_rows'] = $total_rows;
+		$config['uri_segment'] = 2;
+		$config['num_links'] = $total_rows;
+		$config['use_page_numbers'] = TRUE;
+
+    	// Custom Configuration
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Previous';
+
+		// Pagination Inititalization
+		$this->pagination->initialize($config);
+
+		// Navigation Links
+		$pagination_links = $this->pagination->create_links();
+		$data["links"] = $pagination_links;
+		$data['provider_values'] = $this->common_model->get_provider_details();
+        $this->load->view('vacancies',$data);
+		
+	}
 
 
 
