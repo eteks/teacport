@@ -1066,3 +1066,30 @@ label.form-input-error {
 	padding:0;
 	display:table;
 }
+.Heading-title{
+	float: left;
+    margin-bottom: 50px;
+    text-align: center;
+    width: 100%;
+}
+.app_post{
+	margin-bottom: 15px !important; 
+}
+.app_post h5{
+	padding-left: 20px !important;
+	text-align: left;
+	color: #00a5ef;
+}
+.app_post .fa-stack{
+	color: #f47020;
+}
+.owl-next{
+	left: 1075px;
+    position: absolute;
+    top: 323px;
+}
+.owl-prev{
+	right: 1075px;
+    position: absolute;
+    top: 323px;
+}
