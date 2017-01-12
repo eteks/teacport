@@ -62,7 +62,7 @@ section{padding:10px 0px;position:relative;background-color:#FFF;}
 .job-breadcrumb .breadcrumb{background-color:transparent;margin:0;}
 .job-breadcrumb .breadcrumb li a{color:#FFF;}
 .breadcrumb > li + li::before{color:#FFF;content:"/ ";padding:0 5px;}
-.breadcrumb > li.active{color:#FFF !important;text-transform:capitalize;}
+.breadcrumb > li.active{color:#29AAFE !important;text-transform:capitalize;}
 .breadcrumb-search{background: #f1f1f1 none repeat scroll 0 0;padding:0;position:relative;}
 .breadcrumb-search .search-form-contaner{margin-top:0;}
 .breadcrumb-search .form-group input.form-control{border-color:#f1f1f1;border-radius:0;height:60px;width:100%;}
