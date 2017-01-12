@@ -79,12 +79,26 @@ class Home extends CI_Controller {
 				$contact_us_data = array(
 										'feedback_form_title' => $this->input->post('contact_us_subject'),
 										'feedback_form_message' => 'Hi, My name is '.$this->input->post('contact_us_name').'. '.$this->input->post('contact_us_subject').' Mobile number: '.$this->input->post('contact_us_mobile').' .Email address: '.$this->input->post('contact_us_email'),
-										'is_organization' => 0,
-										'is_candidate' => 0,
-										'is_guest_user' =>1,
 										'is_viewed'=>0,
 										'feedback_form_status'=>1
 									);
+				if($session_data['login_status']=='1'){
+					if($session_data['login_session']['user_type']=='provider'){
+						$contact_us_data['is_organization']=1;
+						$contact_us_data['is_candidate']=0;
+						$contact_us_data['is_guest_user']=0;
+					}
+					else if($session_data['login_session']['user_type']=='seeker') {
+						$contact_us_data['is_organization']=0;
+						$contact_us_data['is_candidate']=1;
+						$contact_us_data['is_guest_user']=0;
+					}
+				}
+				else{
+					$contact_us_data['is_organization']=0;
+					$contact_us_data['is_candidate']=0;
+					$contact_us_data['is_guest_user']=1;
+				}
 				$data['data_value'] = array(
 					'name' => $this->input->post('contact_us_name'),
 					'email' =>$this->input->post('contact_us_email'),

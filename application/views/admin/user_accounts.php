@@ -176,7 +176,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     // Set name of input types
     var placeholder = new Array("Enter User Name","Enter Password","Enter Email"); // Set placeholder of input types
     var class_selector = new Array("","","","","","");//To set class for element
-    var maxlength = new Array("","","","","",""); //To set maxlength for element
+    var maxlength = new Array("30","25","25","","",""); //To set maxlength for element
     var table = "admin_table"; // Set classname of table  
     var admin_user_group_option = new Array("Select Group");
     var admin_user_group_value = new Array("");

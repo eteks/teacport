@@ -34,6 +34,16 @@ class MY_Form_validation extends CI_Form_validation {
 	    }
 	}
 
+	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	//----------------------------------------------------------------------------------
 	// End Admin Panel Custom Form Validation functions which is called in both views
 	//----------------------------------------------------------------------------------
