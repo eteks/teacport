@@ -458,7 +458,7 @@ aside{margin-bottom:30px;}
 .dashboard-body .profile-nav ul > li{border-bottom:1px solid #ebeae6;margin-top:0;line-height:30px;}
 .dashboard-body .profile-nav ul > li:last-child{border-bottom:none;}
 .dashboard-body .profile-nav ul > li > a{border-radius:0;-webkit-border-radius:0;color:#242424;border-left:5px solid #fff;font-size:14px;}
-.dashboard-body .profile-nav ul > li > a:hover, .dashboard-body .profile-nav ul > li > a:focus, .dashboard-body .profile-nav ul li.active a{background:#29aafe;border-left:5px solid #2088cb;color:#FFF !important;}
+.dashboard-body .profile-nav ul > li > a:hover, .dashboard-body .profile-nav ul > li > a:focus, .dashboard-body .profile-nav ul li.active a{background:#29aafe;border-left:5px solid #f37021;color:#FFF !important;}
 .dashboard-body .profile-nav ul > li > a:hover .fa, .dashboard-body .profile-nav ul > li > a:focus .fa, .dashboard-body .profile-nav ul > li.active .fa{color:#FFF !important;}
 .dashboard-body .profile-nav ul > li > a:hover{color:#FFF !important;}
 .dashboard-body .profile-nav ul > li > a > i{font-size:14px;padding-right:10px;color:#29aafe;}
