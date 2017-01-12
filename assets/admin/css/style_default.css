@@ -830,8 +830,8 @@ table .dataTables_empty{
     height: 150px;
     width: 150px;
     position: absolute;
-    top: 14%;
-    left: 50%;
+    top: 0;
+    left: 40%;
 }
 .hide_loader{
 	display: none;
