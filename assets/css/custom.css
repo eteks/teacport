@@ -248,6 +248,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
     color: #ff0030;
     font-family: Tahoma;
     font-size: 10px;
+    border-radius: 0 !important;
+	margin-bottom: 0px !important;
+	padding: 0px !important;
 } 
 /*personal Profile */
 .ppform{
@@ -1115,4 +1118,36 @@ label.form-input-error {
 	height : 200px;
 	width: 200px;
 }
-
+#provider_editprofile label {
+	line-height: 45px;
+}
+/* Premium adds */
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto;
+      height: 300px;
+}
+.tr_latest_updates .Heading-title {
+	margin-bottom: 25px;
+}
+/* Marquee news */
+.jobs-link li{
+	padding: 5px;
+	margin: 5px;
+	text-align: left;
+}
+.jobs-link li a{
+	color: #29AAFE;
+}
+.update-title {
+	padding: 10px;
+	color: #29AAFE;
+}
+/* Institutions */
+.company-list-box {
+	height: 150px;	
+}
+.company-list-box .company-list-box-detail h5{
+	text-align: left;
+}

@@ -11,3 +11,4 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/easing.js"></script>
 <!-- JQUERY WAYPOINT -->
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/waypoints.min.js"></script>
+
