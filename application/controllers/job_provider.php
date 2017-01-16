@@ -37,7 +37,7 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+				$fb['reg_server_msg'] = 'Provided Login data is invalid!';	
 				$fb['error'] = 1;
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
@@ -56,7 +56,7 @@ class Job_provider extends CI_Controller {
 				else{
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$fb['reg_server_msg'] = 'Provided Login data is invalid!';	
 					$fb['error'] = 1;
 					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
@@ -1061,7 +1061,7 @@ class Job_provider extends CI_Controller {
 				}
 	      	}
 			else{
-				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$data['reg_server_msg'] = 'Provided mail id is invalid!';	
 				$data['error'] = 1;
 				$this->load->view('forgot-password',$data);
 			}
