@@ -403,6 +403,13 @@ tr select {
     font-weight: lighter !important;
     text-transform: capitalize;
 }
+.dynamic_data span{
+	float:left;
+	display: inline block;
+}
+.dynamic_data span:before{
+	content:'-';
+}
 .Zebra_DatePicker_Icon_Wrapper{
     width: 100% !important;
 }

@@ -947,6 +947,7 @@ form legend {
     -webkit-border-radius: 0px 0px 3px 3px;
     -moz-border-radius: 0px 0px 3px 3px;
     border-radius: 0px 0px 3px 3px;
+    overflow-x:scroll;
 }
 
 /* charts & stats */
@@ -3077,6 +3078,7 @@ div.tagsinput .not_valid {
 
 .dataTables_filter label {
     line-height: 32px !important;
+    margin-right:5px;
 }
 
 .dataTables_paginate,
@@ -4092,7 +4094,7 @@ table thead .sorting_desc {
     margin-left: -30px;
     margin-left: -30px;
     padding: 3px 12px !important;
-    right: 0;
+    right: -28px;
     top: -39px;
 }
 .colvis_button {
@@ -4103,7 +4105,7 @@ table thead .sorting_desc {
     margin-left: -30px;
     margin-left: -30px;
     padding: 3px 12px !important;
-    right: 80px;
+    right: 52px;
     top: -39px;
 }
 .colvis_button:hover  {
@@ -4440,6 +4442,9 @@ div.dt-button-background {
 .admin_table th {
     cursor: pointer;
 }
+/*#sample_editable_1 > tr >td:nth-child(2) {
+	width:50px !important;
+}*/
 .not-sort,.data_action { 
     pointer-events: none !important; 
     cursor: default !important;
