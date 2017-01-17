@@ -947,7 +947,7 @@ form legend {
     -webkit-border-radius: 0px 0px 3px 3px;
     -moz-border-radius: 0px 0px 3px 3px;
     border-radius: 0px 0px 3px 3px;
-    overflow-x:scroll;
+    /*overflow-x:scroll;*/
 }
 
 /* charts & stats */

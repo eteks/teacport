@@ -223,6 +223,13 @@ $(document).ready(function(){
     });
      $('.sub_pre_section').slimScroll({
         height: 'auto'
+      
+    });
+	$('.sub_hori_scroll').slimScroll({
+        height: 'auto',
+        axis:'x',
+        width:'auto',
+       
     });
 
 
