@@ -3,8 +3,8 @@
         <ul class="menu-logo">
             <li>
                 <a href="<?php echo base_url(); ?>" id="webpage_title"> 
-                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="35px;" width="35px;">
-                	<h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                	<img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png" alt="logo" class="img-responsive tr_logo pull-left">
+                	<!-- <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4> -->
                 	<span class="clearfix"> </span>
                 </a>
             </li>

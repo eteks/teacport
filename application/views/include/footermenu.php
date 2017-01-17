@@ -6,8 +6,8 @@
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block"> 
                         	<a href="<?php echo base_url(); ?>" id="webpage_title" class="footer_logo"> 
-			                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="30px;" width="30px;">
-			                	<h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3>
+			                	<img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png" alt="logo" class="img-responsive tr_logo pull-left">
+			                	<!-- <h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3> -->
 			                	<span class="clearfix"> </span>
                				</a>
                             <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>

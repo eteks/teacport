@@ -1228,6 +1228,13 @@ label.form-input-error {
 .label_height{
 	line-height: 27px;
 }
+/* All institutions */
+#institution_grids .company-list-name h5 {
+	text-align: left;
+}
+#institution_grids .company-box {
+	padding: 20px 0;	
+}
 /* Ended by Akila */
 
     
