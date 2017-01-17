@@ -52,8 +52,8 @@ Website: http://thevectorlab.net/
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="<?php echo base_url(); ?>main/dashboard">
-                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png" alt="Logo" height="30px;" width="30px;" />
-                    <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/new_logo.png" alt="Logo" />
+                    <!-- <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4> -->
                     <span class="clearfix"> </span>
                 </a>
                 <!-- END LOGO -->
@@ -241,6 +241,7 @@ Website: http://thevectorlab.net/
                                 </li>
                             <?php endif; ?>
                     <?php endforeach; ?>
+                   </ul>
                 <!-- END SIDEBAR MENU -->
                </div> 
           

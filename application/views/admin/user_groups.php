@@ -84,7 +84,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> 
                                 <p class='val_error error_msg_md'> <p>
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                <table class="table table-striped table-hover table-bordered admin_table usergroup_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Group Name</th>

@@ -468,7 +468,7 @@ tr select {
 	overflow: scroll;
 }
 .hori_scroll{
-	overflow-x:scroll !important;
+	ove
 }
 .main_module{
     font-size: 13px;
@@ -922,4 +922,13 @@ table .dataTables_empty{
 .remove_sidebar{
     margin-left: 0px !important;
 }
+/* For Feedback Form */
+.feedback_table tbody > tr:nth-child(2) > td, .feedback_table tbody > tr:nth-child(2) > th {
+    
+    width: 600px !important;
+   }
 
+ .usergroup_table  tbody > tr:nth-child(2) > td, .usergroup_table  tbody > tr:nth-child(2) > th {
+    
+    width: 150px !important;
+   }

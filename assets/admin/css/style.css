@@ -4441,6 +4441,7 @@ div.dt-button-background {
 } 
 .admin_table th {
     cursor: pointer;
+  
 }
 /*#sample_editable_1 > tr >td:nth-child(2) {
 	width:50px !important;
