@@ -37,7 +37,7 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+				$fb['reg_server_msg'] = 'Provided Login data is invalid!';	
 				$fb['error'] = 1;
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
@@ -56,7 +56,7 @@ class Job_provider extends CI_Controller {
 				else{
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$fb['reg_server_msg'] = 'Provided Login data is invalid!';	
 					$fb['error'] = 1;
 					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
@@ -1030,7 +1030,7 @@ class Job_provider extends CI_Controller {
 		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
 		/* Check whether registration form server side validation are valid or not */
 		if ($this->form_validation->run() == FALSE){
-			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$data['reg_server_msg'] = 'Please enter a valid email address';	
 			$data['error'] = 1;
 			$this->load->view('forgot-password',$data);
 		} 
@@ -1049,7 +1049,7 @@ class Job_provider extends CI_Controller {
 				$this->email->message($message);
 	       		// $this->email->message("Your registered password is ".$forget_query['registrant_password']);
 	        	if($this->email->send()){
-		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$data['reg_server_msg'] = "Password has been sent to your registered email address";
 		        	$data['error'] = 2;
 		        	$this->load->view('forgot-password',$data);
 	        	}
@@ -1061,7 +1061,7 @@ class Job_provider extends CI_Controller {
 				}
 	      	}
 			else{
-				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$data['reg_server_msg'] = 'Provided mail id is invalid!';	
 				$data['error'] = 1;
 				$this->load->view('forgot-password',$data);
 			}

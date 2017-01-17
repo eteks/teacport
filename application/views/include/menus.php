@@ -144,6 +144,9 @@
     		</div>
     		<div class="modal-body profile-edit">
 				<form class="" method="post" accept-charset="utf-8">
+					<div style="display:none">
+						<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
+					</div>
     				<div class="form-group">
     					<label class="pull-left">Select :<sup class="required alert">*</sup></label>
 						<div class="provider_radio pull-left">

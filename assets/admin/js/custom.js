@@ -762,7 +762,6 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val-1).fadeIn(3000);
         }
     });
-
     // Next button click - Renewal
     $(document).on('click','.renew_pag_next',function() {
         var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
@@ -855,7 +854,6 @@ function popup_pagination() {
 }
 function date_picker() {
     $('.admin_date_picker').Zebra_DatePicker({
-        direction: -1,
         format: 'd/m/Y',
         view: 'years'
         });

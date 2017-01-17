@@ -3,7 +3,6 @@
         <section class="job-breadcrumb">
             <div class="container">
                 <div class="row">
-                    
                     <div class="col-md-12 col-sm-12 co-xs-12 text-left">
                         <div class="bread">
                             <ol class="breadcrumb">
@@ -24,11 +23,11 @@
                     <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel panel-border">
-                                <div class="dashboard-logo-sidebar">
+                                <div class="dashboard-logo-sidebar center-block">
                                     <?php if (@getimagesize($organization['organization_logo'])) { ?>
                                     <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
                                     <?php } else { ?>
-                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block ">
+                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive">
                                     <?php } ?>
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">

@@ -107,6 +107,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 /* Featured Jobs Slider */
 .slide-featured-jobs .content-area{
 	height: 250px;
+	position: relative;
 }
 .slide-featured-jobs {
 	padding: 10px;
@@ -127,6 +128,11 @@ box-shadow:0 8px 6px -6px #da651a !important;
  	filter: alpha(opacity=0);  
   	opacity:0; 
   }	
+ .feature-post-meta-bottom .apply {
+  	position: absolute;
+  	bottom: 10px;
+  	right: 10px;
+ }
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -267,6 +273,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
     color: #ff0030;
     font-family: Tahoma;
     font-size: 10px;
+    border-radius: 0 !important;
+	margin-bottom: 0px !important;
+	padding: 0px !important;
 } 
 /*personal Profile */
 .ppform{
@@ -294,7 +303,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	padding: 12px 30px;
 } 
 #candidate-browse-jobs .advanced_search{
-	color: #fff;
+	color: #29AAFE;
 	cursor: pointer;
 }
 #candidate_ads_act select{
@@ -368,9 +377,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .panel-border{
 	/*border-right: 2px solid #f37021;
 	padding:0 0px 0 0;*/
-	 box-shadow: 2px 2px 2px #00a5ef !important;
-    -moz-box-shadow: 2px 2px 2px #00a5ef !important;
-    -webkit-box-shadow: 2px 2px 2px #00a5ef !important;
+	 box-shadow: 2px 2px 10px #00a5ef !important;
+    -moz-box-shadow: 2px 2px 10px #00a5ef !important;
+    -webkit-box-shadow: 2px 2px 10px #00a5ef !important;
 }
 /*.select-salary select option:first{
 	color: #999;
@@ -382,9 +391,10 @@ select:invalid {
  	margin: 5px;
  	color: #fff;
  	cursor: pointer;
+ 	color: #29AAFE;
  }
  .advanced_search:hover {
- 	color: #FFFFFF;
+ 	color: #29AAFE;
  }
  #advancedsearch_act {
  	margin: 5px 0;
@@ -549,7 +559,7 @@ select:invalid {
 }
 #normalsearch_act .btn-default, #candidate_nos_act .btn-default{
 	margin-top: 0px !important;
-	padding: 19px 30px;
+	padding: 19px 50px;
 }
 /* Subcription */
 #plandetail_act .modal-dialog {
@@ -796,7 +806,7 @@ font-size: 12px;
 }
 .advance_search_btn{
 	margin: 8px 0 8px 45px;
-	padding: 12px 30px 12px 32px;
+	padding: 12px 20px 12px 37px;
 }
 .postad_preview{
 	display: none;
@@ -1030,14 +1040,14 @@ label.form-input-error {
 	width: 125px;
 }
 .featured-image-box img{
-	height: 60px;
-	width: 100px;
+	height: auto;
+	width: 50%;
 }
 .footer_logo {
 	margin: -5px 0 0;
 }
 .search_max_amount{
-	margin-top: 5px;
+	margin-top: 10px;
 }
 .custom_disabled {
     pointer-events:none; 
@@ -1114,3 +1124,86 @@ label.form-input-error {
 	padding:0;
 	display:table;
 }
+.Heading-title{
+	float: left;
+    margin-bottom: 50px;
+    text-align: center;
+    width: 100%;
+}
+.app_post{
+	margin-bottom: 15px !important; 
+}
+.app_post h5{
+	padding-left: 20px !important;
+	text-align: left;
+	color: #00a5ef;
+}
+.app_post .fa-stack{
+	color: #f47020;
+}
+.owl-next{
+	left: 1075px;
+    position: absolute;
+    top: 323px;
+}
+.owl-prev{
+	right: 1075px;
+    position: absolute;
+    top: 323px;
+}
+/* About us */
+.about-us p{
+	text-align: justify;
+}
+/*vacancy*/
+.footer-grey-color{
+	background-color:#f1f1f1;
+}
+#vacancies_page .Heading-title{
+	margin-bottom: 30px;
+} 
+#vacancies_page label{
+	font-size: 16px;
+}
+/* Provider Logo Sidebar */
+.dashboard-logo-sidebar {
+	height : 200px;
+	width: 200px;
+}
+#provider_editprofile label {
+	line-height: 45px;
+}
+/* Premium adds */
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto;
+      height: 300px;
+}
+.tr_latest_updates .Heading-title {
+	margin-bottom: 25px;
+}
+/* Marquee news */
+.jobs-link li{
+	padding: 5px;
+	margin: 5px;
+	text-align: left;
+}
+.jobs-link li a{
+	color: #29AAFE;
+}
+.update-title {
+	padding: 10px;
+	color: #29AAFE;
+}
+/* Institutions */
+.company-list-box {
+	height: 150px;	
+}
+.company-list-box .company-list-box-detail h5{
+	text-align: left;
+}
+.others_value{position: relative;top: 5px;}
+
+    
+
