@@ -163,7 +163,7 @@ class Job_seeker extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+				$fb['reg_server_msg'] = 'Provided Login data is invalid!';	
 				$fb['error'] = 1;
    				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -181,7 +181,7 @@ class Job_seeker extends CI_Controller {
 					redirect('seeker/dashboard');
 				}
 				else{
-					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$fb['reg_server_msg'] = 'Provided Login data is invalid!';	
 					$fb['error'] = 1;
    					$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$data['institutiontype'] = $this->common_model->get_institution_type();
@@ -943,7 +943,7 @@ class Job_seeker extends CI_Controller {
 		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
 		/* Check whether registration form server side validation are valid or not */
 		if ($this->form_validation->run() == FALSE) {
-			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$data['reg_server_msg'] = 'Provided Email Id is invalid!';	
 			$data['error'] = 1;
 			$this->load->view('forgot-password-seeker',$data);
 			// $data['data_value'] = $this->db->get_where('tr_candidate_profile', array('username' => $candidate_name))->result_array();
