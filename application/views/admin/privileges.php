@@ -54,7 +54,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <p class='privilege_status' style="display:none;"></p>
                        
                         <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> 
-                          <div class="widget-body">
+                          <div class="widget-body hori_scroll">
                                   <div class="portlet-body">
                                     <div class="clearfix">
                                         <!-- <div class="btn-group">
