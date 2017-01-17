@@ -1960,7 +1960,6 @@ var App = function () {
         //     format: 'dd/mm/yy',
         // });
         $('.date-picker').Zebra_DatePicker({
-              direction: -1,
                 format: 'd/m/Y',
                 view: 'years'
         });

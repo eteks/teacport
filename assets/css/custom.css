@@ -181,6 +181,31 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	height: 100%;
 	width: 100%;
 }
+.price-footer a:hover{
+	background-color: #da651a !important;
+}
+.price-footer{
+	position:absolute !important;
+	left:5px !important;
+	right:5px !important;
+}
+.price-days{
+	color:#fff;
+	font-size:20px;	
+	margin-top:5px;
+}
+.price_ui_box{
+	height: 500px;
+    /*margin-bottom: 30px;*/
+    max-height: 600px;
+    /*overflow-y: auto;*/
+    position: relative;
+    width: 100%;
+}
+#featured-price .price-features li{
+	letter-spacing: 1px !important;
+    line-height: 30px !important;
+}
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;
 } */   
@@ -1130,6 +1155,8 @@ label.form-input-error {
     position: absolute;
     top: 323px;
 }
+.others_value{position: relative;top: 5px;}
+/* Added by Akila */
 /* About us */
 .about-us p{
 	text-align: justify;
@@ -1186,3 +1213,9 @@ label.form-input-error {
 .label_height{
 	line-height: 27px;
 }
+/* Ended by Akila */
+
+
+    
+
+

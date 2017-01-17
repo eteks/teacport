@@ -45,7 +45,7 @@ Website: http://thevectorlab.net/
 <body class="fixed-top">
 
 	<!-- BEGIN HEADER -->
-	    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+	    <div id="header" class="navbar navbar-inverse navbar-fixed-top sub_pre_section">
         <div class="top_layer"></div><!-- top_layer -->
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="navbar-inner">
@@ -195,6 +195,7 @@ Website: http://thevectorlab.net/
                 </div>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 <!-- BEGIN SIDEBAR MENU -->
+              
                 <ul class="sidebar-menu">
                     <?php 
                         $admin_modules = $this->config->item('admin_modules');
@@ -241,8 +242,8 @@ Website: http://thevectorlab.net/
                             <?php endif; ?>
                     <?php endforeach; ?>
                 <!-- END SIDEBAR MENU -->
-                
-            </div>
+               </div> 
+          
             <!-- END SIDEBAR -->
         <?php endif; ?>
 

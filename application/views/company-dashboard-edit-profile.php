@@ -213,7 +213,6 @@
 <?php include('include/footercustom.php'); ?>
 <script type="application/javascript">
   	$('.provider_date_of_birth').Zebra_DatePicker({
-    	direction: -1,
         format: 'd/m/Y',
         view: 'years'
     });
