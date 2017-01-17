@@ -85,7 +85,7 @@ class Job_provider extends CI_Controller {
 			/* Set validate condition for registration form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
-			$this->form_validation->set_rules('registrant_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('registrant_name', 'Name', 'trim|required|callback_alpha_dash_space|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_organization_profile.registrant_mobile_no]');
             $this->form_validation->set_rules('captcha_value', 'Captcha', 'callback_validate_captcha');
@@ -183,6 +183,7 @@ class Job_provider extends CI_Controller {
 		$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
         $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
 		$data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
+        $this->session->set_userdata('registrant_logo',$organization_data['registrant_logo']);
         if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
 			$data['organization'] = $organization_data;
 			$data['district'] = $this->common_model->get_all_district();
@@ -720,7 +721,6 @@ class Job_provider extends CI_Controller {
 			$data['search_mode'] = 'normal';
 			$this->load->view('company-dashboard-browse-candidate',$data);
 		}
-		
 	}
 	public function updatejob(){
 		$common = new Common();
@@ -874,14 +874,16 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean|is_unique[tr_premium_ads.premium_ads_name]');
 			$this->form_validation->set_rules('provider_premium_ad_image', 'Ad image', 'callback_provider_premium_ad_validation');
 			if ($this->form_validation->run()){
 				if (!empty($_FILES['provider_premium_ad_image']['name'])){
 			        $provider_premium_ad['upload_path'] 		= './uploads/jobprovider/premiumad';
 					$provider_premium_ad['allowed_types'] 		= 'jpg|png|jpeg';
 					$provider_premium_ad['max_size']     		= '2048';
-					$provider_premium_ad['max_width'] 			= '1024';
+					$provider_premium_ad['min_width'] 			= '800';
+					$provider_premium_ad['min_height'] 			= '300';
+					$provider_premium_ad['max_width'] 			= '1268';
 					$provider_premium_ad['max_height'] 			= '768';
 					$provider_premium_ad['encrypt_name'] 		= TRUE;
 					$provider_premium_ad['file_ext_tolower'] 	= TRUE;
