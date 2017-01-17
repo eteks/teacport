@@ -329,7 +329,11 @@ class Common_model extends CI_Model {
 		$org_data = $this->db->get()->result_array();
 		return $org_data;
 	}
-
+	//premium ads
+	public function get_premiumads(){
+		$ads_data = $this->db->get_where('tr_premium_ads',array('premium_ads_status' => '1','is_admin_verified'=>'1'))->result_array();
+		return $ads_data;
+	}
 
 } // End
 

@@ -43,6 +43,7 @@ class Home extends CI_Controller {
 		$home['totalorganization'] = $this->common_model->organization_count();
 		$home['allposting'] = $this->common_model->applicable_posting();
 		$home['alldistrict'] = $this->common_model->get_all_district();
+		$home['premiumads'] = $this->common_model->get_premiumads();
 	    $this->load->view('index',$home);
 	}
 	public function featured_job()
