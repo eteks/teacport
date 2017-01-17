@@ -59,7 +59,7 @@
                     <a href="<?php echo base_url(); ?>seeker/allinstitutions"> <i class="fa fa-graduation-cap" aria-hidden="true"></i> Institutions </a>
                 </li>
                 <li class="<?php if($this->uri->segment(2)=='vacancies') echo 'active'; ?>">
-                    <a href="<?php echo base_url(); ?>seeker/vacancies"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Vacancies </a>
+                    <a href="<?php echo base_url(); ?>vacancies"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Vacancies </a>
                 </li>
             </ul>
         </div>

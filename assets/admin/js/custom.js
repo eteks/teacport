@@ -221,6 +221,10 @@ $(document).ready(function(){
     $('.extended').slimScroll({
         height: 'auto'
     });
+     $('.sub_pre_section').slimScroll({
+        height: 'auto'
+    });
+
 
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
@@ -758,7 +762,6 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val-1).fadeIn(3000);
         }
     });
-
     // Next button click - Renewal
     $(document).on('click','.renew_pag_next',function() {
         var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
@@ -851,7 +854,6 @@ function popup_pagination() {
 }
 function date_picker() {
     $('.admin_date_picker').Zebra_DatePicker({
-        direction: -1,
         format: 'd/m/Y',
         view: 'years'
         });
@@ -900,7 +902,14 @@ $('.temp_remove_act').click(function(e)
         $('#imagepreview_templogo').hide();
         $('.temp_remove_act').hide();
        $('#imagepreview_templogo').attr("src","");
-   })
+   });
+   
+   var win_height= $(window).height();
+   var head_height= win_height - $('#header').height();
+   // alert (win_height);
+   // alert(head_height);  
+   $('.sub_pre_section').css('max-height', head_height);
+   
 /* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){

@@ -31,7 +31,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid sub_section_scroll">
+    <div class="container-fluid sub_pre_section">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -181,7 +181,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         </div>                
       </div>            
       <!---Full View & Edit popup -->
-      <div class="popup" data-popup="popup_section_profile">
+      <div class="popup feedback-design" data-popup="popup_section_profile">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -195,7 +195,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <?php
                 if(!empty($provider_full_profile)) :
                 ?>
-                <div id="rootwizard" class="form-wizard">
+                <div id="rootwizard" class="form-wizard job_pro_form">
                   <div class="navbar steps">
                     <div class="navbar-inner">
                       <div class="container">
