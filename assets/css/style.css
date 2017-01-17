@@ -826,23 +826,23 @@ body .ui_box__inner span{font-size:36px;font-weight:700;}
 .pricing-white .price-rates small{color:#999;}
 .pricing-section-2{padding-bottom:70px;}
 .single-price{background:#fff;padding-bottom:35px;border:1px solid #F1F1F1;margin-bottom:30px;}
-#featured-price{background:#29aafe;}
+#featured-price{background:#29aafe;height:100%}
 .plan-price{background:#29aafe;}
 .price-header{padding:30px 0 20px;}
 .plan-title{font-size:24px;color:#242424;font-weight:600;text-transform:capitalize;font-family:"Source Sans Pro", sans-serif;}
 .plan-price{border-radius:50%;margin:0 auto;height:130px;width:130px;display:flex;justify-content:center;align-content:center;flex-direction:column;color:#fff;}
-.plan-price > h4{font-size:50px;margin:0;}
+.plan-price > h4{font-size:30px;margin:0;}
 .plan-price > h4 > span{font-size:20px;}
 .price-features{margin-top:35px;}
-.price-features > p{font-size:15px;color:#242424;font-family:"Source Sans Pro", sans-serif;}
-.price-features > p > strong{}
+.price-features li{font-size:15px;color:#242424;font-family:"Source Sans Pro", sans-serif;}
+.price-features li > strong{}
 .price-footer{margin-top:35px;}
-.price-footer > a{background-color:#29aafe;border:1px solid #29aafe;color:#fff;height:45px;border-radius:0;margin-top:10px;padding:10px 35px;text-transform:capitalize;-webkit-transition:all 0.3s ease 0s;-moz-transition:all 0.3s ease- 0s;-o-transition:all 0.3s ease 0s;transition:all 0.3s ease 0s;}
+.price-footer > a{background-color:#29aafe;border:1px solid #29aafe;color:#fff;height:45px;border-radius:0;margin-top:10px;margin-left:2px;padding:10px 35px;text-transform:capitalize;-webkit-transition:all 0.3s ease 0s;-moz-transition:all 0.3s ease- 0s;-o-transition:all 0.3s ease 0s;transition:all 0.3s ease 0s;}
 .price-footer > a:hover{background-color:#2088cb;border:1px solid #2088cb;color:#fff;}
 .price-footer > a:hover{color:#fff;}
 #featured-price .plan-title{color:#fff;}
 #featured-price .plan-price{background:#fff;color:#222;}
-#featured-price .price-features > p{color:#FFF;}
+#featured-price .price-features li{color:#FFF;}
 #featured-price .price-footer > a{background:#fff;color:#242424;}
 #featured-price .price-footer > a:hover{color:#FFF;background-color:#2088cb;border:1px solid #2088cb;}
 .flat .plan-price{border-radius:0;}
