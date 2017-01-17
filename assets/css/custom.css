@@ -130,7 +130,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
   }	
  .feature-post-meta-bottom .apply {
   	position: absolute;
-  	bottom: -15px;
+  	bottom: 10px;
   	right: 10px;
  }
 /* Premium Adds */
@@ -239,6 +239,14 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .loginbox-terms a{
 	font-size: 14px;
 }
+/* Posted Jobs */
+.posted_jobs_provider .fa{
+	color: #fff;
+	font-size:20px;
+}
+.posted_jobs_provider  .btn-default i {
+    margin: 0px;
+}
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -318,7 +326,12 @@ box-shadow:0 8px 6px -6px #da651a !important;
 } 
 .job-box-2 p {
 	text-align: justify;
-}	
+}
+#candidate-browse-jobs .feature-post-meta-bottom .apply {
+  	position: absolute;
+  	bottom: -15px;
+  	right: 10px;
+ }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;

@@ -75,8 +75,8 @@
 		                                </div>
 	                                </div>
 	                                <div class="col-md-2 col-sm-2 col-xs-2 buttonss">
-	                                	<a class="btn btn-default pull-right" href="<?php echo base_url();?>provider/editjob/<?php echo $postedjobs['vacancies_id'];?>">EDIT</a>
-	                                	<a class="btn btn-default pull-right provider_posted_job_delete" data-vacancy="<?php echo $postedjobs['vacancies_id']; ?>">DELETE</a>
+	                                	<a class="btn btn-default pull-right" title="Edit" href="<?php echo base_url();?>provider/editjob/<?php echo $postedjobs['vacancies_id'];?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+	                                	<a class="btn btn-default pull-right provider_posted_job_delete" title="Delete" data-vacancy="<?php echo $postedjobs['vacancies_id']; ?>"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
 	                                </div>
                                 </div>
                               <?php }  ?>
