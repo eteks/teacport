@@ -109,6 +109,7 @@ $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 $route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/allinstitutions'] 						= 'job_seeker/allinstitutions';
 $route['seeker/vacancies'] 								= 'job_seeker/vacancies';
+$route['seeker/vacancies/(:num)'] 						= 'job_seeker/vacancies/$1';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
 $route['seeker/inbox/message'] 							= 'job_seeker/inbox_message';
 $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
