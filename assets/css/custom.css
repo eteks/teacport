@@ -239,6 +239,14 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .loginbox-terms a{
 	font-size: 14px;
 }
+/* Posted Jobs */
+.posted_jobs_provider .fa{
+	color: #fff;
+	font-size:20px;
+}
+.posted_jobs_provider  .btn-default i {
+    margin: 0px;
+}
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -276,6 +284,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
     border-radius: 0 !important;
 	margin-bottom: 0px !important;
 	padding: 0px !important;
+}
+#institution_type {
+	margin-bottom: 5px;
 } 
 /*personal Profile */
 .ppform{
@@ -313,12 +324,18 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin: 8px 0 8px 38px;
     padding: 12px 30px 12px 32px;
 } 
-
+.job-box-2 p {
+	text-align: justify;
+}
+#candidate-browse-jobs .feature-post-meta-bottom .apply {
+  	position: absolute;
+  	bottom: -15px;
+  	right: 10px;
+ }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
 	border-radius: 5px;
-	
 }
 #user_inbox_msg_act .modal-header {
 	background-color: #29aafe;
@@ -1151,6 +1168,8 @@ label.form-input-error {
     position: absolute;
     top: 323px;
 }
+.others_value{position: relative;top: 5px;}
+/* Added by Akila */
 /* About us */
 .about-us p{
 	text-align: justify;
@@ -1204,6 +1223,13 @@ label.form-input-error {
 	text-align: left;
 }
 .others_value{position: relative;top: 5px;}
+.captcha_des_act{position: absolute !important;left: 170px;top: 230px;} /*signup captcha design modified*/
+/* Login-popup*/
+.label_height{
+	line-height: 27px;
+}
+/* Ended by Akila */
 
     
+
 
