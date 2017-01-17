@@ -1222,12 +1222,13 @@ label.form-input-error {
 .company-list-box .company-list-box-detail h5{
 	text-align: left;
 }
+.others_value{position: relative;top: 5px;}
+.captcha_des_act{position: absolute !important;left: 170px;top: 230px;} /*signup captcha design modified*/
 /* Login-popup*/
 .label_height{
 	line-height: 27px;
 }
 /* Ended by Akila */
-
 
     
 

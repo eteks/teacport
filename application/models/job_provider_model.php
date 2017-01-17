@@ -295,7 +295,7 @@ class Job_provider_model extends CI_Model {
 				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0];
 			}
 			else {
-				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0]." AND tr_candidate_preferance.candidate_expecting_end_salary <= ".$salary_split[1];
+				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0]." AND tr_candidate_preferance.candidate_expecting_start_salary <= ".$salary_split[1];
 			}
 			
 		}
@@ -347,9 +347,10 @@ class Job_provider_model extends CI_Model {
 			$salary_split = explode('-', $searchdata['candidate_salary']);	
 			if (strpos($salary_split[1], 'above') !== false) {
 				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0];
+				
 			}
 			else {
-				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0]." AND tr_candidate_preferance.candidate_expecting_end_salary <= ".$salary_split[1];
+				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0]." AND tr_candidate_preferance.candidate_expecting_start_salary <= ".$salary_split[1];
 			}
 			
 		}

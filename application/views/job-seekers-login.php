@@ -138,8 +138,8 @@
 											<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
 		                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
 		                                </div>	
-	                                	<div class="col-sm-6 captcha_holder nopadding">
-	                                		<label>Enter Captcha value<sup class="alert">*</sup></label>
+	                                	<div class="col-sm-6 captcha_holder nopadding captcha_des_act">
+	                                		<label>Enter Captcha value :<span class="alert">*</span></label>
 	                        				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control form_inputs','placeholder' => 'Captcha Value','name' => 'captcha_value')); ?>
 	                        			</div>
 	                        			<div class="clearfix"> </div>
