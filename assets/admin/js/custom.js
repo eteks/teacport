@@ -221,6 +221,10 @@ $(document).ready(function(){
     $('.extended').slimScroll({
         height: 'auto'
     });
+     $('.sub_pre_section').slimScroll({
+        height: 'auto'
+    });
+
 
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
@@ -898,7 +902,14 @@ $('.temp_remove_act').click(function(e)
         $('#imagepreview_templogo').hide();
         $('.temp_remove_act').hide();
        $('#imagepreview_templogo').attr("src","");
-   })
+   });
+   
+   var win_height= $(window).height();
+   var head_height= win_height - $('#header').height();
+   // alert (win_height);
+   // alert(head_height);  
+   $('.sub_pre_section').css('max-height', head_height);
+   
 /* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){

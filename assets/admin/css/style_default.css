@@ -190,6 +190,21 @@ ul.social-link li a:hover, .blog .date .month {
 textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
     border:1px solid #39c0cd;
 }
+.pager li>a, .pager li>span{
+	padding : 3px 12px !important;
+	font-size:12px !important;
+}
+.pager li>a{
+	margin-top:3px !important;
+}
+.job_pro_form .step .desc{
+	margin-left:44px !important;
+	padding:12px 0 !important;
+}
+.job_seek_form  .step .desc{
+	margin-left:26px !important;
+	padding:6px 0 !important;
+}
 /*.brand > img{
     margin-left: 35px !important;
 }
@@ -411,14 +426,14 @@ tr select {
     max-width: 1066px !important;
     min-width: 800px !important;
     /*min-height:1000px !important;*/
-    max-height:700px !important;
+    /*max-height:700px !important;*/
     /*overflow: auto;*/
 }
 .scroll_section_sidebar{
 	max-height:100px !important; 
 	height: auto;
 	width: auto;
-	overflow: scroll;
+	overflow-y: scroll;
 }
 .sub_section_scrollprivil{
 	max-height:600px !important; 
@@ -427,19 +442,18 @@ tr select {
 	overflow: scroll;
 }
 
- .sub_section_scroll{
+ /*.sub_section_scroll{
 	max-height:600px !important; 
 	height: auto;
 	width: auto;
 	overflow: scroll;
-}
+}*/
 .sub_pre_section{
-	max-height:570px !important; 
+	/*max-height:570px !important; */
 	height: auto;
 	width: auto;
 	overflow: scroll;
 }
-
 .main_module{
     font-size: 13px;
     font-weight:600;

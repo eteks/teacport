@@ -130,7 +130,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
   }	
  .feature-post-meta-bottom .apply {
   	position: absolute;
-  	bottom: 10px;
+  	bottom: -15px;
   	right: 10px;
  }
 /* Premium Adds */
@@ -180,6 +180,31 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	left: 0;
 	height: 100%;
 	width: 100%;
+}
+.price-footer a:hover{
+	background-color: #da651a !important;
+}
+.price-footer{
+	position:absolute !important;
+	left:5px !important;
+	right:5px !important;
+}
+.price-days{
+	color:#fff;
+	font-size:20px;	
+	margin-top:5px;
+}
+.price_ui_box{
+	height: 500px;
+    /*margin-bottom: 30px;*/
+    max-height: 600px;
+    /*overflow-y: auto;*/
+    position: relative;
+    width: 100%;
+}
+#featured-price .price-features li{
+	letter-spacing: 1px !important;
+    line-height: 30px !important;
 }
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;
@@ -251,6 +276,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
     border-radius: 0 !important;
 	margin-bottom: 0px !important;
 	padding: 0px !important;
+}
+#institution_type {
+	margin-bottom: 5px;
 } 
 /*personal Profile */
 .ppform{
@@ -288,12 +316,13 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin: 8px 0 8px 38px;
     padding: 12px 30px 12px 32px;
 } 
-
+.job-box-2 p {
+	text-align: justify;
+}	
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
 	border-radius: 5px;
-	
 }
 #user_inbox_msg_act .modal-header {
 	background-color: #29aafe;
@@ -1126,6 +1155,8 @@ label.form-input-error {
     position: absolute;
     top: 323px;
 }
+.others_value{position: relative;top: 5px;}
+/* Added by Akila */
 /* About us */
 .about-us p{
 	text-align: justify;
@@ -1179,6 +1210,13 @@ label.form-input-error {
 	text-align: left;
 }
 .others_value{position: relative;top: 5px;}
+.captcha_des_act{position: absolute !important;left: 170px;top: 230px;} /*signup captcha design modified*/
+/* Login-popup*/
+.label_height{
+	line-height: 27px;
+}
+/* Ended by Akila */
 
     
+
 

@@ -59,13 +59,10 @@
                                     endif;
                                     ?>
 	                                <div class="form-group">
-										<label class="col-sm-12">You can change your password below</label>
-									</div>	
-									<div class="form-group">
 										<div class="col-sm-12">
 											<div class="col-sm-6 pull-right"><?php echo form_error('provideroldpassword'); ?></div>
 											<div class="clearfix"> </div>
-											<label class="col-sm-6">Old Password<span class="alert">*</span></label>
+											<label class="col-sm-6">Old Password<sup class="alert">*</sup></label>
 											<div class="col-sm-6">
 												<input id="old_pass" placeholder="Old Password" class="form-control form_inputs" name="provideroldpassword" size="25" type="password">
 											</div>
@@ -75,7 +72,7 @@
 										<div class="col-sm-12">
 											<div class="col-sm-6 pull-right"><?php echo form_error('providernewpassword'); ?></div>
 											<div class="clearfix"> </div>
-											<label class="col-sm-6">New Password<span class="alert">*</span></label>
+											<label class="col-sm-6">New Password<sup class="alert">*</sup></label>
 											<div class="col-sm-6">
 												<input id="new_pass" placeholder="New Password" data-minlength="8" data-name="New Password" class="form-control form_inputs" name="providernewpassword" max_length="20" size="25" type="password">
 											</div>
@@ -85,7 +82,7 @@
 										<div class="col-sm-12">
 											<div class="col-sm-6 pull-right"><?php echo form_error('providerconfirmnewpassword'); ?></div>
 											<div class="clearfix"> </div>
-											<label class="col-sm-6">Confirm Password<span class="alert">*</span></label>
+											<label class="col-sm-6">Confirm Password<sup class="alert">*</sup></label>
 											<div class="col-sm-6">
 												<input id="confirm_pass" data-minlength="8" placeholder="Confirm Password" data-name="Confirm Password" max_length="20" class="form-control form_inputs" name="providerconfirmnewpassword" size="25" type="password">
 											</div>
