@@ -3,15 +3,15 @@
  	/* sidebar */
 	#sidebar {
 		position: absolute;
- 		width: 215px;
+ 		width: 205px;
   	}
 
   	#sidebar ul{
   		margin-top:50px;
-  		/*width: 215px;*/
+  		width: 215px;
   		margin-left:0 !important;
   		overflow-y:scroll;
-  		height:600px;
+  		height:500px;
   	}
 
   	/* body container */

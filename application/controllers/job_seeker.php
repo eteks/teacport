@@ -1011,7 +1011,7 @@ class Job_seeker extends CI_Controller {
     	// Pagination values
     	$per_page = 20;
 
-    	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
+    	$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
         $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
     	$total_rows = $search_results['total_rows'];
     	$data['search_inputs'] = $search_inputs;
