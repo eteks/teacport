@@ -1,5 +1,5 @@
 <?php include('include/header.php'); ?>
-<section class="login-page-4 parallex">
+<section class="login-page-4">
     <div class="container">
         <div class="row">
             <div class="col-md-12 col-sm-12 col-xs-12">

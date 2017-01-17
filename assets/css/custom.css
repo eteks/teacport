@@ -1155,7 +1155,12 @@ label.form-input-error {
     position: absolute;
     top: 323px;
 }
+/*Added by Thangam*/
+#vacancies_page .Heading-title{margin-bottom: 30px;} 
+#vacancies_page label{font-size: 16px;}
 .others_value{position: relative;top: 5px;}
+.captcha_des_act{position: absolute !important;left: 170px;top: 235px;} /*signup captcha design modified*/
+/*Ended By Thangam*/
 /* Added by Akila */
 /* About us */
 .about-us p{
@@ -1164,12 +1169,6 @@ label.form-input-error {
 /*vacancy*/
 .footer-grey-color{
 	background-color:#f1f1f1;
-}
-#vacancies_page .Heading-title{
-	margin-bottom: 30px;
-} 
-#vacancies_page label{
-	font-size: 16px;
 }
 /* Provider Logo Sidebar */
 .dashboard-logo-sidebar {
@@ -1209,14 +1208,8 @@ label.form-input-error {
 .company-list-box .company-list-box-detail h5{
 	text-align: left;
 }
-.others_value{position: relative;top: 5px;}
-.captcha_des_act{position: absolute !important;left: 170px;top: 230px;} /*signup captcha design modified*/
 /* Login-popup*/
 .label_height{
 	line-height: 27px;
 }
 /* Ended by Akila */
-
-    
-
-
