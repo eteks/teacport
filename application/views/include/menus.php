@@ -148,7 +148,7 @@
 						<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
 					</div>
     				<div class="form-group">
-    					<label class="pull-left">Select :<sup class="required alert">*</sup></label>
+    					<label class="label_height pull-left">I Am  <sup class="required alert">*</sup></label>
 						<div class="provider_radio pull-left">
 							<input class="user_login_category" type="radio" name="user_category" value="provider">Job Provider
 						</div>	
@@ -158,11 +158,11 @@
 						<div class="clearfix"> </div>
 					</div>		
 					<div class="form-group">
-                    	<label>Email / Mobile No. : <sup class="required alert">*</sup></label>
+                    	<label>Email / Mobile No. <sup class="required alert">*</sup></label>
                     	<input placeholder="" class="form-control extra_login_menu_user_name" type="email">
                 	</div>
                 	<div class="form-group">
-                    	<label>Password : <sup class="required alert">*</sup></label>
+                    	<label>Password <sup class="required alert">*</sup></label>
                     	<input placeholder="" class="form-control extra_login_menu_password" type="password">
                 	</div>
                 	<div class="loginbox-submit">

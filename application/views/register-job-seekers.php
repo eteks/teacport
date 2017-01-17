@@ -24,7 +24,7 @@
                                 endif;
                                 ?>  
 	                            <div class="col-sm-6 pull-left">
-			                        <?php echo ('<div class="form-group"> <label>Institution:<span class="alert">*</span></label> <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
+			                        <?php echo ('<div class="form-group"> <label>Institution<sup class="alert">*</sup></label> <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
 			                        <?php
 			                        foreach ($institutiontype as $institution) {
 			                            echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
@@ -32,24 +32,24 @@
 			                        echo('</div> </select>')
 			                        ?>
 			                        <div class="form-group">
-			                            <?php echo form_label('Name :<span class="alert">*</span>'); ?> <?php echo form_error('candidate_name'); ?>
+			                            <?php echo form_label('Name <sup class="alert">*</sup>'); ?> <?php echo form_error('candidate_name'); ?>
 			                        <?php echo form_input(array('id' => 'candidate_name','data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','class' => 'form-control form_inputs alpha_value', 'name' => 'candidate_name')); ?>
 			                        </div>
 			                        <div class="form-group">
-			                            <?php echo form_label('Email :<span class="alert">*</span>'); ?>
+			                            <?php echo form_label('Email <sup class="alert">*</sup>'); ?>
 			                        	<?php echo form_input(array('id' => 'candidate_email','placeholder' => 'Email','class' => 'form-control form_inputs email_value', 'name' => 'candidate_email')); ?>
 		                            </div>
 		                            <div class="form-group">
-		                                <?php echo form_label('Mobile No. :<span class="alert">*</span>'); ?> <?php echo form_error('candidate_mobile_no'); ?>
+		                                <?php echo form_label('Mobile No.<sup class="alert">*</sup>'); ?> <?php echo form_error('candidate_mobile_no'); ?>
 		                            <?php echo form_input(array('id' => 'candidate_mobile_no','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','class' => 'form-control form_inputs numeric_value','name' => 'candidate_mobile_no')); ?>
 		                            </div>
 		                            <div class="form-group">
-										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
+										<?php echo form_label('Captcha'); echo form_error('captcha_value'); ?>
 										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
 		                            	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
 		                            </div>
 		                            <div class="col-sm-6 captcha_holder nopadding">
-		                            	<label>Enter captcha Value :<span class="alert">*</span></label>
+		                            	<label>Enter captcha Value<sup class="alert">*</sup></label>
 		                            	 <?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value')); ?>
 		                            </div>
 			                        <div class="clearfix"> </div>
@@ -96,7 +96,7 @@
                         endif;
                         ?>
                         <div class="form-group">
-                            <label for="exampleInputEmail1"> Email address <span class="alert">*</span> </label>
+                            <label for="exampleInputEmail1"> Email address <sup class="alert">*</sup> </label>
                             <?php echo form_error('forget_email'); ?>
                             <input id="forget_email" name="forget_email" class="form-control form_inputs email_value input" size="20" placeholder="Enter Email" type="text">
                         </div>
@@ -132,11 +132,11 @@
                         ?>
 	                    <div class="col-sm-6 pull-left"> 
 	                        <div class="form-group">
-		                        <label>Email or Mobile :<span class="alert">*</span></label>
+		                        <label>Email or Mobile<sup class="alert">*</sup></label>
     	                        <input placeholder="Email or Mobile" name="candidate_email" class="form-control form_inputs email_mobile_value" id="email" type="text">
                             </div>
                             <div class="form-group">
-                                <label>Password:<span class="alert">*</span></label>
+                                <label>Password<sup class="alert">*</sup></label>
                                 <input placeholder="Password" name="candidate_password" class="form-control form_inputs" id="password" type="password">
                             </div>
                             <div class="loginbox-forgot seekerpwd-forgot">
