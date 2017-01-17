@@ -42,7 +42,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <li>
               <a href="<?php echo base_url(); ?>main/university">University / Board</a>
               <span class="divider-last">&nbsp;</span>
-            </li>http://localhost/teac/teacport/main/postings
+            </li>
           </ul>
           <!-- END PAGE TITLE & BREADCRUMB-->
         </div>
