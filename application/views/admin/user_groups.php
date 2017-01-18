@@ -19,7 +19,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid sub_section_scroll">
+         <div class="container-fluid sub_pre_section">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
@@ -85,7 +85,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> 
                                 <p class='val_error error_msg_md'> <p>
-                                <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                <table class="table table-striped table-hover table-bordered admin_table usergroup_table" id="sample_editable_1">
                                     <thead>
                                     <tr class="ajaxTitle">
                                         <th>Group Name</th>
@@ -196,7 +196,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var inputType = new Array("text","textarea","label","select"); // Set type of input which are you have used like text, select,textarea.
     var columns = new Array("user_group_name","user_group_description","user_super_admin","user_group_status"); // Set name of input types
     var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
-    var class_selector = new Array("","","","");//To set class for element
+    var class_selector = new Array("","","",""); //To set class for element
     var maxlength = new Array("50","700","",""); //To set maxlength for element
     var table = "admin_table"; // Set classname of table    
     var user_super_admin_option = new Array("Select Admin Type","Yes","No"); 

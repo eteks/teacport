@@ -1,4 +1,4 @@
-<div class="profile-card">
+<div class="profile-card panel-border">
     <div class="banner">
         <img src="<?php echo base_url(); ?>assets/images/building.jpg" alt="" class="img-responsive">
     </div>
@@ -32,7 +32,7 @@
     </ul>
 </div>
 <div class="profile-nav">
-        <div class="panel">
+        <div class="panel panel-border">
             <ul class="nav nav-pills nav-stacked">
                 <li class="<?php if($this->uri->segment(2)=='dashboard') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/dashboard"> <i class="fa fa-user"></i> Profile</a>
@@ -54,6 +54,12 @@
                 </li>
                  <li class="<?php if($this->uri->segment(2)=='password') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>seeker/password"> <i class="fa fa-key" aria-hidden="true"></i> Change Password</a>
+                </li>
+                <li class="<?php if($this->uri->segment(2)=='allinstitutions') echo 'active'; ?>">
+                    <a href="<?php echo base_url(); ?>seeker/allinstitutions"> <i class="fa fa-graduation-cap" aria-hidden="true"></i> Institutions </a>
+                </li>
+                <li class="<?php if($this->uri->segment(2)=='vacancies') echo 'active'; ?>">
+                    <a href="<?php echo base_url(); ?>vacancies"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Vacancies </a>
                 </li>
             </ul>
         </div>

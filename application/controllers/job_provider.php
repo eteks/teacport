@@ -37,7 +37,7 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+				$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
 				$fb['error'] = 1;
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
@@ -56,7 +56,7 @@ class Job_provider extends CI_Controller {
 				else{
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['reg_server_msg'] = 'Your Provided Login data is invalid!';	
+					$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
 					$fb['error'] = 1;
 					$data['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
@@ -85,7 +85,7 @@ class Job_provider extends CI_Controller {
 			/* Set validate condition for registration form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
-			$this->form_validation->set_rules('registrant_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('registrant_name', 'Name', 'trim|required|callback_alpha_dash_space|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_organization_profile.registrant_mobile_no]');
             $this->form_validation->set_rules('captcha_value', 'Captcha', 'callback_validate_captcha');
@@ -183,6 +183,7 @@ class Job_provider extends CI_Controller {
 		$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
         $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
 		$data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
+        $this->session->set_userdata('registrant_logo',$organization_data['registrant_logo']);
         if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
 			$data['organization'] = $organization_data;
 			$data['district'] = $this->common_model->get_all_district();
@@ -609,6 +610,32 @@ class Job_provider extends CI_Controller {
 			redirect('provider/postedjob');
 		}
 	}
+	public function editjobdetail(){
+		$session_data = $this->session->all_userdata();
+		if(empty($session_data['login_session']))
+			redirect('provider/logout');
+		$data["current_jobvacancy_id"] = $this->uri->segment('3');
+		if($data["current_jobvacancy_id"]){
+			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+			if($session_data['login_session']['pro_userid'] === $data["applyjob"]["vacancies_organization_id"]){
+				$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+				$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
+				$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
+				$data['qualificatoin']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+				$data['medium']			= $this->common_model->medium_of_instruction();
+				$data['university']		= $this->common_model->get_board_details();
+				$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
+				$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
+				$this->load->view('company-dashboard-edit-jobs', $data);
+			}
+			else{
+				redirect('missingpage');
+			}
+		}
+		else{
+			redirect('provider/postedjob');
+		}
+	}
 	public function browse_candidate(){
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
@@ -694,7 +721,76 @@ class Job_provider extends CI_Controller {
 			$data['search_mode'] = 'normal';
 			$this->load->view('company-dashboard-browse-candidate',$data);
 		}
-		
+	}
+	public function updatejob(){
+		$common = new Common();
+		$session_data = $this->session->all_userdata();
+		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		if($_POST){
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			$this->form_validation->set_rules('provider_ug_or_pg', 'Required course type', 'trim|required|alpha|callback_pg_or_ug_check|max_length[3]|xss_clean');
+			$this->form_validation->set_rules('provider_job_title', 'Job title', 'trim|required|callback_alpha_dash_space|max_length[80]|xss_clean');
+			$this->form_validation->set_rules('provider_vacancy', 'No of vacancy', 'trim|required|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+			$this->form_validation->set_rules('provider_class_level', 'Class Level', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_qualification[]', 'Qualification', 'trim|xss_clean|callback_multiple_qualification');
+			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
+			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
+			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
+			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
+			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
+			if ($this->form_validation->run())
+			{
+				$vacancy_data = array(
+									'vacancies_id'					=> $this->input->post('provider_id'),
+									'vacancies_course_type'			=> $this->input->post('provider_ug_or_pg'),
+									'vacancies_organization_id'		=> $data['organization']['organization_id'],
+									'vacancies_job_title'			=> $this->input->post('provider_job_title'),
+									'vacancies_available'			=> $this->input->post('provider_vacancy'),
+									'vacancies_class_level_id'		=> $this->input->post('provider_class_level'),
+									'vacancies_qualification_id'	=> implode(',',$this->input->post('provider_qualification')),
+									'vacancies_subject_id'			=> $this->input->post('provider_subject'),
+									'vacancies_experience'			=> $this->input->post('provider_experience'),
+									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
+									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
+									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
+									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
+									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),
+									'vacancies_instruction'			=> $this->input->post('provider_job_instruction')
+								);
+				if($this->job_provider_model->job_provider_post_vacancy_update($vacancy_data))
+				{
+					$this->session->set_userdata('post_job_server_msg','Your vacancy successfully updated!');
+					$this->session->set_userdata('error',2);
+					redirect('provider/postedjob');
+				}
+				else
+				{
+					$this->session->set_userdata('post_job_server_msg','Something wrong in data insertion process.Please try again!!');
+					$this->session->set_userdata('error',1);
+					redirect('provider/postedjob');
+				}
+			}
+			else
+			{
+				$this->session->set_userdata('post_job_server_msg','Please provide valid information!!');
+				$this->session->set_userdata('error',1);
+				redirect('provider/editjob/'.$this->input->post('provider_id'));
+			}
+		}
+	}
+	public function postedjob_remove_data(){
+		if($_POST){
+			$vacancyid = $this->input->post('vacancy_id');
+			if($this->job_provider_model->provider_postedjob_remove_update($vacancyid)){
+				echo "deleted";
+			}
+			else{
+				echo "error";
+			}		
+		}
 	}
 	public function changepassword(){
 		$session_data = $this->session->all_userdata();
@@ -778,14 +874,16 @@ class Job_provider extends CI_Controller {
 		}
 		else{
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('provider_ad_title', 'Title of ad', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean|is_unique[tr_premium_ads.premium_ads_name]');
 			$this->form_validation->set_rules('provider_premium_ad_image', 'Ad image', 'callback_provider_premium_ad_validation');
 			if ($this->form_validation->run()){
 				if (!empty($_FILES['provider_premium_ad_image']['name'])){
 			        $provider_premium_ad['upload_path'] 		= './uploads/jobprovider/premiumad';
 					$provider_premium_ad['allowed_types'] 		= 'jpg|png|jpeg';
 					$provider_premium_ad['max_size']     		= '2048';
-					$provider_premium_ad['max_width'] 			= '1024';
+					$provider_premium_ad['min_width'] 			= '800';
+					$provider_premium_ad['min_height'] 			= '300';
+					$provider_premium_ad['max_width'] 			= '1268';
 					$provider_premium_ad['max_height'] 			= '768';
 					$provider_premium_ad['encrypt_name'] 		= TRUE;
 					$provider_premium_ad['file_ext_tolower'] 	= TRUE;
@@ -934,7 +1032,7 @@ class Job_provider extends CI_Controller {
 		$this->form_validation->set_rules('forget_email', 'Email', 'trim|required|valid_email|xss_clean');
 		/* Check whether registration form server side validation are valid or not */
 		if ($this->form_validation->run() == FALSE){
-			$data['reg_server_msg'] = 'Your Provided Email Id is invalid!';	
+			$data['reg_server_msg'] = 'Please enter a valid email address';	
 			$data['error'] = 1;
 			$this->load->view('forgot-password',$data);
 		} 
@@ -953,7 +1051,7 @@ class Job_provider extends CI_Controller {
 				$this->email->message($message);
 	       		// $this->email->message("Your registered password is ".$forget_query['registrant_password']);
 	        	if($this->email->send()){
-		        	$data['reg_server_msg'] = "Check your mail and get your password!";
+		        	$data['reg_server_msg'] = "Password has been sent to your registered email address";
 		        	$data['error'] = 2;
 		        	$this->load->view('forgot-password',$data);
 	        	}
@@ -965,7 +1063,7 @@ class Job_provider extends CI_Controller {
 				}
 	      	}
 			else{
-				$data['reg_server_msg'] = 'Your Provided mail id is invalid!';	
+				$data['reg_server_msg'] = 'Provided mail id is invalid!';	
 				$data['error'] = 1;
 				$this->load->view('forgot-password',$data);
 			}

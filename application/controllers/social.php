@@ -248,7 +248,7 @@ class Social extends CI_Controller {
 		{
 			$twdata['user_type'] = 'provider';
 			$twdata['login_type'] = 'twitter';
-			$fbdata['pro_userid'] = $insert_id = $this->db->insert_id();
+			$twdata['pro_userid'] = $insert_id = $this->db->insert_id();
 			$this->session->set_userdata("login_status", TRUE);
 			$this->session->set_userdata("login_session",$twdata);
 			redirect('provider/dashboard');

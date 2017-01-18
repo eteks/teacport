@@ -104,11 +104,9 @@ var handleChoosenSelect = function () {
    
 
 // Create Input
-createInput = function(i,str,attr){
+createInput = function(i,str){
     // alert(str);
     str = typeof str !== 'undefined' ? str : null;
-    var disabled = (attr==1) ? "disabled" : "";
-    var title = (attr==1) ? "Mapping has been already done. Edit not possible" : "";
     //alert(str);
     if(inputType[i] == "text"){
         input = '<input type="'+inputType[i]+'" name="'+columns[i]+'" maxlength="'+maxlength[i]+'" class="'+class_selector[i]+'" placeholder="'+placeholder[i]+'" value="'+str+'" >';
@@ -120,7 +118,7 @@ createInput = function(i,str,attr){
         input = '<label class='+columns[i]+'>'+str+'</label>';
     }
     else if(inputType[i] == "select"){
-        input = '<select class="'+class_selector[i]+'" title="'+title+'" name="'+columns[i]+'" '+disabled+'>';
+        input = '<select class="'+class_selector[i]+'" name='+columns[i]+'>';
         var select_option = eval(columns[i]+'_option');
         var select_value = eval(columns[i]+'_value');
 
@@ -213,20 +211,6 @@ $(document).ready(function(){
     
     default_credentials();
 
-    /* Accept Only Numbers */
-    $(document).on("keypress",".numeric_value",function (e) {
-        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
-            return false;
-        }
-    });
-
-    /* Accept Only Characters with space */
-    $(document).on("keypress",".alpha_value",function (e) {
-        if (e.which != 8 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
-            return false;
-        }
-    });
-    
     $('#dialog-overlay').on('click',function() {
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
@@ -239,6 +223,17 @@ $(document).ready(function(){
     $('.extended').slimScroll({
         height: 'auto'
     });
+     $('.sub_pre_section').slimScroll({
+        height: 'auto'
+      
+    });
+	$('.sub_hori_scroll').slimScroll({
+        height: 'auto',
+        axis:'x',
+        width:'auto',
+       
+    });
+
 
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
@@ -264,7 +259,6 @@ $('.top_layer, .message_close').on('click',function() {
     });
 /*Ended by thangam*/
 
-
 	 $('.sub_section_scroll').slimScroll({
         height: 'auto'
      });
@@ -279,10 +273,6 @@ $('.top_layer, .message_close').on('click',function() {
         height: 'auto',
        	width: 'auto'
     });
-    
-    $('.scroll_section_sidebar').slimScroll({
-        height: 'auto'
-     });
     
 	
     if($('.has-sub').length > 0) {
@@ -405,14 +395,12 @@ $('.top_layer, .message_close').on('click',function() {
                 // fetch value inside the TD and place as VALUE in input field
                 if(inputType[i]=='text' || inputType[i]=='textarea' || inputType[i]=='label') {
                     var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+"").html();
-                    var disabled_attr = 0;
                 }
                 else {
                    //It will fetch the value for select field from hidden input field passed in html 
                    var val = $(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").val(); 
-                   var disabled_attr = ($(document).find("."+table+" #"+this_row+" ."+columns[i]+" input").data('disabled') == 1) ? 1 : 0;
                 }
-                input = createInput(i,$.trim(val),disabled_attr);
+                input = createInput(i,$.trim(val));
                 html +='<td>'+input+'</td>';
             }
             if(typeof is_created != "undefined" && is_created=="no") {
@@ -520,9 +508,8 @@ $('.top_layer, .message_close').on('click',function() {
                 filter_tag = '';
                 if(res!=0){  
                     $.each(res, function(i){
-                        if(json_count > 1 && typeof res[i].name_data != 'undefined'){
+                        if(json_count > 1 && typeof res[i].name_data != 'undefined')
                             filter_tag += "<tr><td>"+res[i].name_data+"</td><td>"+res[i].count_data+"</td>";
-                        }
                         $('#filter_provider_table').find('.vacancy_header').text(res[i].label_name);
                     });          
                 }   
@@ -605,26 +592,26 @@ $('.top_layer, .message_close').on('click',function() {
     // });
 
     // Known languages
-    // $(document).on("click",".known_languages",function(){
-    //     var value = [];
-    //     $('.known_languages').each(function() {
-    //         if($(this).find('input').is(':checked')) {
-    //           value.push($(this).find('input').val());
-    //         }
-    //     });
-    //     $(this).siblings('.hidden_known_lang').val(value);
-    // });
+    $(document).on("click",".known_languages",function(){
+        var value = [];
+        $('.known_languages').each(function() {
+            if($(this).is(':checked')) {
+              value.push($(this).val());
+            }
+        });
+        $(this).siblings('.hidden_known_lang').val(value);
+    });
 
     // Extra Curricular Values
-    // $(document).on("click",".extra_curricular_values",function(){
-    //     var value = [];
-    //     $('.extra_curricular_values').each(function() {
-    //         if($(this).is(':checked')) {
-    //           value.push($(this).val());
-    //         }
-    //     });
-    //     $(this).siblings('.hidden_extra_curricular').val(value);
-    // });
+    $(document).on("click",".extra_curricular_values",function(){
+        var value = [];
+        $('.extra_curricular_values').each(function() {
+            if($(this).is(':checked')) {
+              value.push($(this).val());
+            }
+        });
+        $(this).siblings('.hidden_extra_curricular').val(value);
+    });
 
     
     
@@ -800,7 +787,6 @@ $('.top_layer, .message_close').on('click',function() {
             this_holder.eq(index_Val-1).fadeIn(3000);
         }
     });
-
     // Next button click - Renewal
     $(document).on('click','.renew_pag_next',function() {
         var this_holder = $(this).parents('.renewal_holder').children('.renewal_section_profile');
@@ -893,7 +879,6 @@ function popup_pagination() {
 }
 function date_picker() {
     $('.admin_date_picker').Zebra_DatePicker({
-        direction: -1,
         format: 'd/m/Y',
         view: 'years'
         });
@@ -942,7 +927,14 @@ $('.temp_remove_act').click(function(e)
         $('#imagepreview_templogo').hide();
         $('.temp_remove_act').hide();
        $('#imagepreview_templogo').attr("src","");
-   })
+   });
+   
+   var win_height= $(window).height();
+   var head_height= win_height - $('#header').height();
+   // alert (win_height);
+   // alert(head_height);  
+   $('.sub_pre_section').css('max-height', head_height);
+   
 /* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){

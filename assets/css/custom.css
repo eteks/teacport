@@ -2,10 +2,23 @@
 .mega-menu .menu-links > li > a {
    font-size: 14px;
 }
+.menu-upperlinks{
+	padding:10px;
+}
 .mega-menu > section.menu-list-items { padding: 10px 20px; }
 .mega-menu .menu-links > li > a {
 padding: 0 15px !important;
 line-height: 49px !important;
+}
+.mega-menu .menu-links > li > a:hover{
+box-shadow:0 8px 6px -6px #da651a !important;	
+}
+
+.job-breadcrumb{
+	border-bottom:5px solid #ccc !important;
+}
+.job-breadcrumb .breadcrumb li a{
+	border-bottom-color: #00a5ef !important;
 }
 /* Logo */
 #webpage_title .tr_logo{
@@ -21,6 +34,9 @@ line-height: 49px !important;
 	color: #00a5ed;
 	font-size: 35px; 
 	font-family: 'Kaushan Script', cursive;
+}
+.login-header-btn{
+	line-height:30px !important;
 }
 /* Home login button */
 #login_home_btn .modal-title{
@@ -91,6 +107,7 @@ line-height: 49px !important;
 /* Featured Jobs Slider */
 .slide-featured-jobs .content-area{
 	height: 250px;
+	position: relative;
 }
 .slide-featured-jobs {
 	padding: 10px;
@@ -111,6 +128,11 @@ line-height: 49px !important;
  	filter: alpha(opacity=0);  
   	opacity:0; 
   }	
+ .feature-post-meta-bottom .apply {
+  	position: absolute;
+  	bottom: 10px;
+  	right: 10px;
+ }
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -159,6 +181,31 @@ line-height: 49px !important;
 	height: 100%;
 	width: 100%;
 }
+.price-footer a:hover{
+	background-color: #da651a !important;
+}
+.price-footer{
+	position:absolute !important;
+	left:5px !important;
+	right:5px !important;
+}
+.price-days{
+	color:#fff;
+	font-size:20px;	
+	margin-top:5px;
+}
+.price_ui_box{
+	height: 500px;
+    /*margin-bottom: 30px;*/
+    max-height: 600px;
+    /*overflow-y: auto;*/
+    position: relative;
+    width: 100%;
+}
+#featured-price .price-features li{
+	letter-spacing: 1px !important;
+    line-height: 30px !important;
+}
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;
 } */   
@@ -191,6 +238,14 @@ line-height: 49px !important;
 }
 .loginbox-terms a{
 	font-size: 14px;
+}
+/* Posted Jobs */
+.posted_jobs_provider .fa{
+	color: #fff;
+	font-size:20px;
+}
+.posted_jobs_provider  .btn-default i {
+    margin: 0px;
 }
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
@@ -226,6 +281,12 @@ line-height: 49px !important;
     color: #ff0030;
     font-family: Tahoma;
     font-size: 10px;
+    border-radius: 0 !important;
+	margin-bottom: 0px !important;
+	padding: 0px !important;
+}
+#institution_type {
+	margin-bottom: 5px;
 } 
 /*personal Profile */
 .ppform{
@@ -253,7 +314,7 @@ line-height: 49px !important;
 	padding: 12px 30px;
 } 
 #candidate-browse-jobs .advanced_search{
-	color: #fff;
+	color: #29AAFE;
 	cursor: pointer;
 }
 #candidate_ads_act select{
@@ -263,12 +324,18 @@ line-height: 49px !important;
 	margin: 8px 0 8px 38px;
     padding: 12px 30px 12px 32px;
 } 
-
+.job-box-2 p {
+	text-align: justify;
+}
+#candidate-browse-jobs .feature-post-meta-bottom .apply {
+  	position: absolute;
+  	bottom: -15px;
+  	right: 10px;
+ }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
 	border-radius: 5px;
-	
 }
 #user_inbox_msg_act .modal-header {
 	background-color: #29aafe;
@@ -304,7 +371,7 @@ line-height: 49px !important;
     border-left: 5px solid #fff;
     border-radius: 0;
     color: #242424;
-    font-size: 18px;
+    font-size: 14px;
 }
 .dashboard-body .profile-nav .provider-jobs  {
     display: block;
@@ -324,6 +391,13 @@ line-height: 49px !important;
 	max-width: 300px;
 	object-fit: cover;
 } 
+.panel-border{
+	/*border-right: 2px solid #f37021;
+	padding:0 0px 0 0;*/
+	 box-shadow: 2px 2px 10px #00a5ef !important;
+    -moz-box-shadow: 2px 2px 10px #00a5ef !important;
+    -webkit-box-shadow: 2px 2px 10px #00a5ef !important;
+}
 /*.select-salary select option:first{
 	color: #999;
 }*/
@@ -334,9 +408,10 @@ select:invalid {
  	margin: 5px;
  	color: #fff;
  	cursor: pointer;
+ 	color: #29AAFE;
  }
  .advanced_search:hover {
- 	color: #FFFFFF;
+ 	color: #29AAFE;
  }
  #advancedsearch_act {
  	margin: 5px 0;
@@ -501,7 +576,7 @@ select:invalid {
 }
 #normalsearch_act .btn-default, #candidate_nos_act .btn-default{
 	margin-top: 0px !important;
-	padding: 19px 30px;
+	padding: 19px 50px;
 }
 /* Subcription */
 #plandetail_act .modal-dialog {
@@ -549,7 +624,7 @@ select:invalid {
     border-radius: 0;
     height: 60px;
     width: 100%;
- }   
+ } 
 /* FOOTER */
 .small-footer p {
 	text-align: justify;
@@ -677,10 +752,10 @@ font-size: 12px;
 	position: relative;
 }
 .button__badge {
-  background-color: #fa3e3e;
+  background-color: #f37021;
     border-radius: 20px;
     color: white;
-    font-size: 13px;
+    font-size: 12px;
     padding: 0 11px;
     position: absolute;
     right: 17px;
@@ -748,7 +823,7 @@ font-size: 12px;
 }
 .advance_search_btn{
 	margin: 8px 0 8px 45px;
-	padding: 12px 30px 12px 32px;
+	padding: 12px 20px 12px 37px;
 }
 .postad_preview{
 	display: none;
@@ -982,16 +1057,181 @@ label.form-input-error {
 	width: 125px;
 }
 .featured-image-box img{
-	height: 50px;
-	width: 50px;
+	height: auto;
+	width: 50%;
 }
 .footer_logo {
 	margin: -5px 0 0;
 }
 .search_max_amount{
-	margin-top: 5px;
+	margin-top: 10px;
 }
 .custom_disabled {
     pointer-events:none; 
     opacity:0.6;
 }
+.login-page-4 .login-container{background-color:#f47020 !important;padding:5px;border:5px solid #FFF;}
+.carousel-control-act.right {    background-image: none; top: 95px;}
+.carousel-control-act.left {    background-image: none; top: 95px;}
+.posted_jobs_provider .buttonss a{
+	margin-top:10px;
+	padding : 6px 12px !important;
+	width: 80%;
+}
+.posted_jobs_provider p{
+	 word-wrap: break-word;
+}
+.popup_fade{
+	background: #000000 none repeat scroll 0 0;
+    display: none;
+    height: 1000%;
+    opacity: 0.63;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1100;
+   
+}
+.error_popup_msg {
+    background: #fff none repeat scroll 0 0;
+    display: none;
+    height: 140px;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    width: 230px;
+    z-index: 9999;
+}
+.success-alert {
+  	padding: 25px 0 30px;
+    text-align: center;
+}
+.success-alert span{
+	color: red;
+}
+.alert_btn{
+	left: 87px;
+    position: relative;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #d6d6d6 none repeat scroll 0 0;
+    border-color: transparent transparent #646464;
+    border-image: none;
+    border-style: solid;
+    border-width: 2px;
+    color: #444444;
+    float: left;
+    font-size: 14px;
+    padding: 0px 20px;
+    text-transform: uppercase;
+}
+/* footer */
+.follow-on  ul.social-network{
+	line-height:50px;
+	float: none;
+	margin:0px;
+}
+.follow-on ul.social-network{
+	list-style:none;
+	display:inline;
+	/*margin:0 auto;*/
+	padding:0;
+	display:table;
+}
+.Heading-title{
+	float: left;
+    margin-bottom: 50px;
+    text-align: center;
+    width: 100%;
+}
+.app_post{
+	margin-bottom: 15px !important; 
+}
+.app_post h5{
+	padding-left: 20px !important;
+	text-align: left;
+	color: #00a5ef;
+}
+.app_post .fa-stack{
+	color: #f47020;
+}
+.owl-next{
+	left: 1075px;
+    position: absolute;
+    top: 323px;
+}
+.owl-prev{
+	right: 1075px;
+    position: absolute;
+    top: 323px;
+}
+/*Added by Thangam*/
+#vacancies_page .Heading-title{margin-bottom: 30px;} 
+#vacancies_page label{font-size: 16px;}
+.others_value{position: relative;top: 5px;}
+.captcha_des_act{position: absolute !important;left: 170px;top: 235px;} /*signup captcha design modified*/
+/*Ended By Thangam*/
+/* Added by Akila */
+/* About us */
+.about-us p{
+	text-align: justify;
+}
+/*vacancy*/
+.footer-grey-color{
+	background-color:#f1f1f1;
+}
+/* Provider Logo Sidebar */
+.dashboard-logo-sidebar {
+	height : 200px;
+	width: 200px;
+}
+#provider_editprofile label {
+	line-height: 45px;
+}
+/* Premium adds */
+.carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 100%;
+      margin: auto;
+      height: 300px;
+}
+.tr_latest_updates .Heading-title {
+	margin-bottom: 25px;
+}
+/* Marquee news */
+.jobs-link li{
+	padding: 5px;
+	margin: 5px;
+	text-align: left;
+}
+.jobs-link li a{
+	color: #29AAFE;
+}
+.update-title {
+	padding: 10px;
+	color: #29AAFE;
+}
+/* Institutions */
+.company-list-box {
+	height: 150px;	
+}
+.company-list-box .company-list-box-detail h5{
+	text-align: left;
+}
+/* Login-popup*/
+.label_height{
+	line-height: 27px;
+}
+/* All institutions */
+#institution_grids .company-list-name h5 {
+	text-align: left;
+}
+#institution_grids .company-box {
+	padding: 20px 0;	
+}
+/* Ended by Akila */
+
+    

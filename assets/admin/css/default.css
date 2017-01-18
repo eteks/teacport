@@ -41,8 +41,8 @@
 .Zebra_DatePicker td.dp_disabled_current{color:#E38585}
 .Zebra_DatePicker td.dp_disabled{color:#CDCDCD;background:#F3F3F3;cursor:default}
 .Zebra_DatePicker td.dp_hover{background:#29aafe;color:#fff}
-button.Zebra_DatePicker_Icon{display:block;position:absolute;width:16px;height:16px;background:url('../images/calendar.png') no-repeat left top;text-indent:-9000px;border:none;cursor:pointer;padding:0;line-height:0;vertical-align:top}
-button.Zebra_DatePicker_Icon_Disabled{background-image:url('../images/calendar-disabled.png')}
+button.Zebra_DatePicker_Icon{display:block;position:absolute;width:16px;height:16px;background:url('../img/calendar.png') no-repeat left top;text-indent:-9000px;border:none;cursor:pointer;padding:0;line-height:0;vertical-align:top}
+button.Zebra_DatePicker_Icon_Disabled{background-image:url('../img/calendar-disabled.png')}
 button.Zebra_DatePicker_Icon{margin:0 0 0 3px}
 button.Zebra_DatePicker_Icon_Inside_Right{margin:0 3px 0 0}
 button.Zebra_DatePicker_Icon_Inside_Left{margin:0 0 0 3px}

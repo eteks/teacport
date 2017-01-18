@@ -3,8 +3,8 @@
         <ul class="menu-logo">
             <li>
                 <a href="<?php echo base_url(); ?>" id="webpage_title"> 
-                	<img src="<?php echo base_url(); ?>assets/images/teachers_recruit_logo.png" alt="logo" class="img-responsive tr_logo pull-left" height="35px;" width="35px;">
-                	<h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                	<img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png" alt="logo" class="img-responsive tr_logo pull-left">
+                	<!-- <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4> -->
                 	<span class="clearfix"> </span>
                 </a>
             </li>
@@ -29,9 +29,11 @@
 			          	<!-- <li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li> -->
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
-								<?php if((@getimagesize($organization['registrant_logo']) && isset($organization['registrant_logo']))){ ?>
+								<?php if((@getimagesize($organization['registrant_logo']) && !empty($organization['registrant_logo']))){ ?>
                                 <img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php } else if(@getimagesize($user_type['registrant_logo']) && isset($user_type['registrant_logo'])){ ?>
+                                <?php } else if(@getimagesize($this->session->userdata("registrant_logo")) && !empty($this->session->userdata("registrant_logo"))){ ?>
+                                	<img src="<?php echo $this->session->userdata("registrant_logo") ;?>" alt="user-img" class="img-circle" width="36">
+                                <?php } else if(@getimagesize($user_type['registrant_logo']) && !empty($user_type['registrant_logo'])){ ?>
                                 	<img src="<?php echo $user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
                                 <?php }else { ?>
                             	<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
@@ -144,8 +146,11 @@
     		</div>
     		<div class="modal-body profile-edit">
 				<form class="" method="post" accept-charset="utf-8">
+					<div style="display:none">
+						<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
+					</div>
     				<div class="form-group">
-    					<label class="pull-left">Select :<sup class="required alert">*</sup></label>
+    					<label class="label_height pull-left">I Am  <sup class="required alert">*</sup></label>
 						<div class="provider_radio pull-left">
 							<input class="user_login_category" type="radio" name="user_category" value="provider">Job Provider
 						</div>	
@@ -155,11 +160,11 @@
 						<div class="clearfix"> </div>
 					</div>		
 					<div class="form-group">
-                    	<label>Email / Mobile No. : <sup class="required alert">*</sup></label>
+                    	<label>Email / Mobile No. <sup class="required alert">*</sup></label>
                     	<input placeholder="" class="form-control extra_login_menu_user_name" type="email">
                 	</div>
                 	<div class="form-group">
-                    	<label>Password : <sup class="required alert">*</sup></label>
+                    	<label>Password <sup class="required alert">*</sup></label>
                     	<input placeholder="" class="form-control extra_login_menu_password" type="password">
                 	</div>
                 	<div class="loginbox-submit">

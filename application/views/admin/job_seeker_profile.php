@@ -32,7 +32,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid sub_section_scroll">
+    <div class="container-fluid sub_pre_section">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">
@@ -196,7 +196,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>         
 
       <!---Full View & Edit popup -->
-      <div class="popup" data-popup="popup_section_seeker_profile">
+      <div class="popup feedback-design" data-popup="popup_section_seeker_profile">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -210,7 +210,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <?php
                 if(!empty($seeker_full_profile)) :
                 ?>
-                <div id="rootwizard" class="form-wizard">
+                <div id="rootwizard" class="form-wizard job_seek_form">
                   <div class="navbar steps">
                     <div class="navbar-inner">
                       <div class="container">
@@ -218,19 +218,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab1" data-toggle="tab" class="step step_menus active">
                             <span class="number">1</span>
-                            <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Info-1</span>
+                            <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Information-1</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab2" data-toggle="tab" class="step step_menus">
                               <span class="number">2</span>
-                              <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Info-2</span>
+                              <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Basic Information-2</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab3" data-toggle="tab" class="step step_menus">
                               <span class="number">3</span>
-                              <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Contact Info</span>
+                              <span class="desc seeker_tab_desc_info"><i class="icon-ok"></i>Contact Information</span>
                             </a>
                           </li>
                           <?php
@@ -239,19 +239,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step step_menus">
                               <span class="number">4</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Educational Information</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab5" data-toggle="tab" class="step step_menus">
                               <span class="number">5</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Experience Information</span>
                             </a>
                           </li>
                           <li class="span2">
                             <a href="#tab6" data-toggle="tab" class="step step_menus">
                               <span class="number">6</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular Information</span>
                             </a>
                           </li>
                           <?php
@@ -260,7 +260,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step">
                               <span class="number">4</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular  Info</span>
+                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular  Information</span>
                             </a>
                           </li>
                           <?php
@@ -355,15 +355,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Language Known</label>
-                          <span class="dynamic_data"> 
-                            <?php
+                          <span class="dynamic_data">
+                          	<?php
                             $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
                             if(!empty($known_languages) && !empty($seeker_full_profile['candidate_language_known'])) :
                             foreach ($known_languages as $lan_val) :
                             ?>
                             <?php
                             if(in_array($lan_val['language_id'], $lan_array)) {
-                              echo '<span> '.$lan_val["language_name"].' </span>';
+                              echo '<span>'.$lan_val["language_name"].' </span>';
                             }
                             endforeach;
                             else :

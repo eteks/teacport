@@ -104,9 +104,13 @@ class Common_model extends CI_Model {
 
 	public function get_all_district()
 	{
-		$district = array();
-		$alldistrict = $this->db->get_where('tr_district',array('district_status' => '1'))->result_array();
-		return $alldistrict;
+		$this->db->select('*');    
+		$this->db->from('tr_district');
+		$where = "(district_status='1')";
+		$this->db->order_by('district_name', 'asc');
+		$this->db->where($where);
+		$alldistrict = $this->db->get();
+		return $alldistrict->result_array(); 
 	}
 		
 	public function subject_by_institution($ins_id)
@@ -181,7 +185,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_subject');
 		if($ins_id!='') {
-			$where = "(subject_institution_id like '%".$ins_id."%'  AND subject_status='1')";
+			$where = "(subject_institution_id in ('.$ins_id.')  AND subject_status='1')";
 		}else {
 			$where = "(subject_status='1')";	
 		}		
@@ -325,7 +329,11 @@ class Common_model extends CI_Model {
 		$org_data = $this->db->get()->result_array();
 		return $org_data;
 	}
-
+	//premium ads
+	public function get_premiumads(){
+		$ads_data = $this->db->get_where('tr_premium_ads',array('premium_ads_status' => '1','is_admin_verified'=>'1'))->result_array();
+		return $ads_data;
+	}
 
 } // End
 

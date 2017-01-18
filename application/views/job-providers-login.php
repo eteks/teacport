@@ -29,12 +29,12 @@
 	                                <div class="col-sm-6 pull-left">
 		                                <?php echo form_error('registrant_email_id'); ?>
 		                                <div class="form-group">
-		                                    <label>Email or Mobile : <span class="alert">*</span></label>
+		                                    <label>Email or Mobile <sup class="alert">*</sup></label>
 		                                    <input placeholder="Email or Mobile" name="registrant_email_id" class="form-control form_inputs email_mobile_value" id="email" type="text" value="<?php echo set_value('registrant_email_id'); ?>">
 		                                </div>
 		                                <?php echo form_error('registrant_password'); ?>
 		                                <div class="form-group">
-		                                    <label>Password: <span class="alert">*</span></label>
+		                                    <label>Password <sup class="alert">*</sup></label>
 		                                    <input placeholder="Password" name="registrant_password" class="form-control form_inputs" id="password" type="password" value="<?php echo set_value('registrant_password'); ?>">
 		                                </div>
 		                                <div class="loginbox-forgot propwd-forgot">
@@ -77,7 +77,7 @@
 			                        endif;
 			                        ?>
                                     <div class="form-group">
-	                                    <label for="exampleInputEmail1"> Email address <span class="alert">*</span></label>
+	                                    <label for="exampleInputEmail1"> Email address <sup class="alert">*</sup></label>
 	                                    <?php echo form_error('forget_email'); ?>
 	                                    <input id="forget_email" name="forget_email" class="form-control input form_inputs email_value" size="20" placeholder="Enter Email" type="text">
 	                                </div>
@@ -114,7 +114,7 @@
 	                                ?>
                                 	<div class="col-sm-6 pull-left">
 										<div class="form-group">
-		                                    <label>Institution :<span class="alert">*</span></label>
+		                                    <label>Institution <sup class="alert">*</sup></label>
 		                                    <select name="registrant_institution_type" id="institution_type" class="form-control form_inputs">
 										<?php
 		                                	foreach ($institutiontype as $institution) {
@@ -124,23 +124,23 @@
 			                           		</select>     
 		                            	</div>
 									<div class="form-group">
-										<?php echo form_label('Name :<span class="alert">*</span>'); echo form_error('registrant_name'); ?>
+										<?php echo form_label('Name <sup class="alert">*</sup>'); echo form_error('registrant_name'); ?>
 										<?php echo form_input(array('id' => 'registrant_name','class' => 'form-control form_inputs alpha_value', 'data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','name' => 'registrant_name')); ?>
 									</div>
 									<div class="form-group">	
-										<?php echo form_label('Email :<span class="alert">*</span>'); echo form_error('registrant_email_id'); ?>
+										<?php echo form_label('Email <sup class="alert">*</sup>'); echo form_error('registrant_email_id'); ?>
 										<?php echo form_input(array('id' => 'registrant_email_id','class' => 'form-control form_inputs email_value','placeholder' => 'Email', 'name' => 'registrant_email_id')); ?>
 									</div>
 									<div class="form-group">	
-										<?php echo form_label('Mobile No. :<span class="alert">*</span>'); echo form_error('registrant_mobile_no'); ?>
+										<?php echo form_label('Mobile No. <sup class="alert">*</sup>'); echo form_error('registrant_mobile_no'); ?>
 										<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control form_inputs numeric_value','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','name' => 'registrant_mobile_no')); ?>
 									</div>	
 									<div class="form-group">
-										<?php echo form_label('Captcha. :'); echo form_error('captcha_value'); ?>
+										<?php echo form_label('Captcha'); echo form_error('captcha_value'); ?>
 										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
 	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
 	                                </div>	
-	                                	<div class="col-sm-6 captcha_holder nopadding">
+	                                	<div class="col-sm-6 captcha_holder nopadding captcha_des_act">
 	                                		<label>Enter Captcha value :<span class="alert">*</span></label>
 	                        				<?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value')); ?>
 	                        			</div>

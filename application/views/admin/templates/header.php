@@ -45,15 +45,15 @@ Website: http://thevectorlab.net/
 <body class="fixed-top">
 
 	<!-- BEGIN HEADER -->
-	    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
+	    <div id="header" class="navbar navbar-inverse navbar-fixed-top sub_pre_section">
         <div class="top_layer"></div><!-- top_layer -->
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="navbar-inner">
             <div class="container-fluid">
                 <!-- BEGIN LOGO -->
                 <a class="brand" href="<?php echo base_url(); ?>main/dashboard">
-                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png" alt="Logo" height="30px;" width="30px;" />
-                    <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4>
+                    <img class="tr_logo pull-left" src="<?php echo base_url(); ?>assets/admin/img/new_logo.png" alt="Logo" />
+                    <!-- <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4> -->
                     <span class="clearfix"> </span>
                 </a>
                 <!-- END LOGO -->
@@ -195,6 +195,7 @@ Website: http://thevectorlab.net/
                 </div>
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 <!-- BEGIN SIDEBAR MENU -->
+              
                 <ul class="sidebar-menu">
                     <?php 
                         $admin_modules = $this->config->item('admin_modules');
@@ -240,9 +241,10 @@ Website: http://thevectorlab.net/
                                 </li>
                             <?php endif; ?>
                     <?php endforeach; ?>
+                   </ul>
                 <!-- END SIDEBAR MENU -->
-                
-            </div>
+               </div> 
+          
             <!-- END SIDEBAR -->
         <?php endif; ?>
 

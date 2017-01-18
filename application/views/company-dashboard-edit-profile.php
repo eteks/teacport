@@ -5,10 +5,8 @@
 <section class="job-breadcrumb">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-6 col-sm-7 co-xs-12 text-left">
-				<h3>Update Your Profile</h3>
-			</div>
-			<div class="col-md-6 col-sm-5 co-xs-12 text-right">
+			
+			<div class="col-md-12 col-sm-12 co-xs-12 text-left">
 				<div class="bread">
 					<ol class="breadcrumb">
 						<li>
@@ -30,12 +28,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-					<div class="heading-inner first-heading">
-						<p class="title">
-							Update Profile
-						</p>
-					</div>
-					<!-- <div class="container">
+					<div class="Heading-title black">
+                        <h1>Update Profile</h1>
+                        <p>Kindly provide your profile details to continue with us.</p>
+                     </div>
+                    <!-- <div class="container">
 						<span class="error_test"> Please fill all required(*) fields </span>
 						<span class="error_image"> Please Upload Image </span>
 						<span class="error_extension"> Sorry, only JPG, JPEG, PNG files are allowed! </span>
@@ -44,8 +41,8 @@
 						<p class="val_status">  </p>	
 						<div class="row-form">
 							<div class="form-group image_upload">
-                            	<div class="col-sm-4">
-                                    <label>Provider Logo : <span class="alert">*</span></label>
+                           	<div class="col-sm-offset-1 col-sm-2">
+                                    <label>Provider Logo</label>
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
@@ -69,7 +66,7 @@
                             	
                             </div>
 							<div class="form-group">
-								<label class="col-sm-4" for="organization_name">Organization Name : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="organization_name">Organization Name <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_name'); ?>
 									<input id="organization_name" class="form-control form_inputs" maxlength="50" data-minlength="3" data-name="Organization Name" name="organization_name" size="40" value="<?php if($organization['organization_name'] != '') echo $organization['organization_name']; elseif (set_value('organization_name') !='') { echo set_value('organization_name'); } ?>" placeholder="Organization Name" type="text">
@@ -77,28 +74,28 @@
 							</div>
                             
 							<div class="form-group">
-								<label class="col-sm-4" for="address-line1">Address Line1 : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="address-line1">Address Line1 <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line1'); ?>
 									<input id="address-line1" data-minlength="3" data-name="Address" class="form-control form_inputs" maxlength="150" name="address-line1" size="40" value="<?php if($organization['organization_address_1'] != '') echo $organization['organization_address_1']; elseif (set_value('address-line1') != '') { echo set_value('address-line1'); } ?>" placeholder="Building No / Road / Street" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="address-line2">Address Line2 : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="address-line2">Address Line2 <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line2'); ?>
 									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control form_inputs" maxlength="150" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; elseif (set_value('address-line2') !='') { echo set_value('address-line2'); } ?>" placeholder="Locality / Area / Village" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="address-line3">Address Line3 : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="address-line3">Address Line3 <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line3'); ?>
 									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control form_inputs" maxlength="150" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="add_district">District : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="add_district">District <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_district'); ?>
 									<select id="organization_district" class="select-location form-control form_inputs" name="organization_district" onchange="">
@@ -130,21 +127,21 @@
 								</div>
 							</div> -->
 							<div class="form-group">
-								<label class="col-sm-4" for="firstname">Registrant Name : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="firstname">Registrant Name</label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
 									<input id="firstname" data-name="Registrant Name" data-minlength="3" class="form-control form_inputs alpha_value" maxlength="50" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="designation">Registrant Designation : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="designation">Registrant Designation </label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_designation'); ?>
 									<input id="designation"  data-name="Registrant Designation" data-minlength="3" class="form-control form_inputs" maxlength="50" name="provider_designation" size="40"  value="<?php if($organization['registrant_designation'] != '') echo $organization['registrant_designation']; elseif (set_value('provider_designation')!= '') { echo set_value('provider_designation'); } ?>" placeholder="ex. Principal / Correspondent">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-4" for="dob_yrs">Date of Birth : <span class="alert">*</span></label>
+								<label class="col-sm-offset-1 col-sm-2" for="dob_yrs">Date of Birth</label>
 								<div class="col-sm-4">
 									<?php echo form_error('provider_dob'); 
 									?>
@@ -153,8 +150,8 @@
 								<div class="col-sm-4"></div>
 							</div>
 							<div class="form-group image_upload">
-                            	<div class="col-sm-4">
-                                    <label>Your image : <span class="alert">*</span></label>
+                            	<div class="col-sm-offset-1 col-sm-2">
+                                    <label>Your image</label>
                                </div>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
@@ -177,7 +174,7 @@
                             	</div>
                             </div>
 							<div class="form-group declaration">
-								<div class="col-sm-12">
+								<div class="col-sm-offset-1 col-sm-11">
 									<?php echo form_error('declar_accept'); ?>
 									<p>
 										<input id="declar_accept" class="ace form_dec" name="declar_accept" value="Y" type="checkbox">
@@ -198,7 +195,7 @@
 								</div>
 							</div>
 							<div class="row">
-								<div class="loginbox-submit col-sm-12">
+								<div class="loginbox-submit col-sm-offset-4 col-sm-7">
 									<a><input type="submit" class="btn btn-default btn-medium pull-right" value="Submit & Next"></a>
 								</div>
 							</div>
@@ -216,7 +213,6 @@
 <?php include('include/footercustom.php'); ?>
 <script type="application/javascript">
   	$('.provider_date_of_birth').Zebra_DatePicker({
-    	direction: -1,
         format: 'd/m/Y',
         view: 'years'
     });

@@ -11,6 +11,16 @@ class Admin_users extends CI_Controller {
 		$this->config->load('admin_modules');
 	}
 
+	// Alpha with white space
+ 	public function alpha_dash_space($provider_job_title){
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
+	}
+
 	// This function is used to merge the array key with values for retreiving distinct values
 	public function get_arrayvalues_bykeyvalue($array, $key, $key2, $v2,$is_unique)
 	{
@@ -44,14 +54,14 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'user_group_name',
 		                              'label'   => 'Group Name',
-		                              'rules'   => 'trim|required|xss_clean|max_length[50]|edit_unique[tr_admin_user_groups.user_group_id.user_group_name.'.$id.']'
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|edit_unique[tr_admin_user_groups.user_group_id.user_group_name.'.$id.']'
 		                              //edit_unique is a custom funciton
 
 		                            ),
 		                            array(
 		                                 'field'   => 'user_group_description',
 		                                 'label'   => 'Group Description',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[700]|'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[700]|'
 		                            ),
 		                            // array(
 		                            //      'field'   => 'user_super_admin',
@@ -70,13 +80,12 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'user_group_name',
 		                              'label'   => 'Group Name',
-		                              'rules'   => 'trim|required|xss_clean|max_length[50]|is_unique[tr_admin_user_groups.user_group_name]'
-
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|is_unique[tr_admin_user_groups.user_group_name]'
 		                            ),
 		                            array(
 		                                 'field'   => 'user_group_description',
 		                                 'label'   => 'Group Description',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[700]|'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[700]'
 		                            ),
 		                            // array(
 		                            //      'field'   => 'user_super_admin',
@@ -154,19 +163,19 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'admin_user_name',
 		                              'label'   => 'Username',
-		                              'rules'   => 'trim|required|xss_clean|edit_unique[tr_admin_users.admin_user_id.admin_user_name.'.$id.']|max_length[50]|'
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|edit_unique[tr_admin_users.admin_user_id.admin_user_name.'.$id.']'
 		                              //edit_unique is a custom funciton
 
 		                            ),
 		                            array(
 		                                 'field'   => 'admin_user_password',
 		                                 'label'   => 'Password',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[20]|'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[8]|max_length[20]'
 		                            ),
 		                            array(
 		                                 'field'   => 'admin_user_email',
 		                                 'label'   => 'User Email',
-		                                 'rules'   => 'trim|required|xss_clean|valid_email|edit_unique[tr_admin_users.admin_user_id.admin_user_email.'.$id.']'
+		                                 'rules'   => 'trim|required|xss_clean|valid_email|min_length[8]|max_length[25]|edit_unique[tr_admin_users.admin_user_id.admin_user_email.'.$id.']'
 		                                 //edit_unique is a custom funciton
 		                            ),
 		                            array(
@@ -186,17 +195,17 @@ class Admin_users extends CI_Controller {
 	                            array(
 	                              'field'   => 'admin_user_name',
 	                              'label'   => 'Username',
-	                              'rules'   => 'trim|required|xss_clean|max_length[50]|is_unique[tr_admin_users.admin_user_name]'
+	                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|is_unique[tr_admin_users.admin_user_name]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_password',
 	                                 'label'   => 'Password',
-	                                 'rules'   => 'trim|required|xss_clean|max_length[20]|'
+	                                 'rules'   => 'trim|required|xss_clean|min_length[8]|max_length[20]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_email',
 	                                 'label'   => 'User Email',
-	                                 'rules'   => 'trim|required|xss_clean|valid_email|is_unique[tr_admin_users.admin_user_email]'
+	                                 'rules'   => 'trim|required|xss_clean|valid_email|min_length[8]|max_length[25]|is_unique[tr_admin_users.admin_user_email]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_group',
