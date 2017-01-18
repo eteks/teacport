@@ -94,13 +94,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Account Name</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_account_name" class="span6" value="<?php if(!empty($payment_values['bank_transfer_account_name'])) echo $payment_values['bank_transfer_account_name']; ?>" type="text">
+	                              <input name="bank_transfer_account_name" class="span6 alpha_value" value="<?php if(!empty($payment_values['bank_transfer_account_name'])) echo $payment_values['bank_transfer_account_name']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Account Number</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_account_number" class="span6" value="<?php if(!empty($payment_values['bank_transfer_account_number'])) echo $payment_values['bank_transfer_account_number']; ?>" type="text">
+	                              <input name="bank_transfer_account_number" class="span6 numeric_value" value="<?php if(!empty($payment_values['bank_transfer_account_number'])) echo $payment_values['bank_transfer_account_number']; ?>" type="text">
 	                             </div>
 	                          </div>
 	                          <!-- <div class="control-group">

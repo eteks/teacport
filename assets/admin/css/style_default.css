@@ -843,22 +843,26 @@ table .dataTables_empty{
     height: 100%;
     z-index: 9999;
 }
-/*.edit_add_overlay {
+.edit_add_overlay {
     opacity: 0.01;
-    position: fixed;
+    position: absolute;
     top: 0px;
     left: 0px;
     background: #000;
     width: 100%;
     height: 100%;
     z-index: 1; 
-}*/
-/*.db {
+}
+.db {
     display: block;
 }
 .dn {
     display: none;
-}*/
+}
+table {
+    z-index: 2;
+    position: relative;
+}
 
 
 /* For Popup tabs - Added by Akila */

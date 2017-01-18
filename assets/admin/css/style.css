@@ -879,6 +879,7 @@ form legend {
     -webkit-box-shadow: 0 0px 5px #ddd;
     -moz-box-shadow: 0 0px 5px #ddd;
     box-shadow: 0 0px 5px #ddd;
+    position: relative;
 }
 
 .widget-title {
@@ -4296,7 +4297,7 @@ a.dt-button:focus:not(.disabled) {
 
 div.dt-buttons {
     position: relative;
-    right: 30px;
+    right: 0;
     float: left;
 }
 
@@ -4433,6 +4434,11 @@ div.dt-button-background {
 }
 
 .no-sort { 
+    pointer-events: none !important; 
+    cursor: default !important;
+    background-image: none !important; 
+} 
+.sort-disabled { 
     pointer-events: none !important; 
     cursor: default !important;
     background-image: none !important; 

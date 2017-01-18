@@ -54,13 +54,13 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                              'field'   => 'sub_plan',
 		                              'label'   => 'Plan Name',
-		                              'rules'   => 'trim|required|xss_clean|edit_unique[tr_subscription.subscription_id.subscription_plan.'.$id.']'
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|edit_unique[tr_subscription.subscription_id.subscription_plan.'.$id.']'
 		                              //edit_unique is a custom funciton
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_price',
 		                                 'label'   => 'Price',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_start_validity',
@@ -76,37 +76,37 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_sms',
 		                                 'label'   => 'Max SMS',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_email',
 		                                 'label'   => 'Max Email',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_resume',
 		                                 'label'   => 'Max Resume',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_ads',
 		                                 'label'   => 'Max Ads',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_days_ad_visible',
 		                                 'label'   => 'Max Days Ad visible',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[15]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_features',
 		                                 'label'   => 'Plan Features',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_status',
@@ -120,13 +120,13 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                              'field'   => 'sub_plan',
 		                              'label'   => 'Plan Name',
-		                              'rules'   => 'trim|required|xss_clean|is_unique[tr_subscription.subscription_plan]'
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|is_unique[tr_subscription.subscription_plan]'
 
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_price',
 		                                 'label'   => 'Price',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_start_validity',
@@ -141,37 +141,37 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_sms',
 		                                 'label'   => 'Max SMS',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_email',
 		                                 'label'   => 'Max Email',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_resume',
 		                                 'label'   => 'Max Resume',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_ads',
 		                                 'label'   => 'Max Ads',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_max_days_ad_visible',
 		                                 'label'   => 'Max Days Ad visible',
-		                                 'rules'   => 'trim|required|xss_clean|max_length[5]'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[15]|'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_features',
 		                                 'label'   => 'Plan Features',
-		                                 'rules'   => 'trim|required|xss_clean|'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
 		                            ),
 		                            array(
 		                                 'field'   => 'sub_status',
@@ -259,23 +259,23 @@ class Subscription_Plan extends CI_Controller {
 		                           	array(
 		                              'field'   => 'sms_count',
 		                              'label'   => 'SMS count',
-		                              'rules'   => 'trim|required|xss_clean|max_length[5]|numeric'
+		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 
 		                            ),
 		                            array(
 		                              'field'   => 'email_count',
 		                              'label'   => 'Email count',
-		                              'rules'   => 'trim|required|xss_clean|max_length[5]|numeric'
+		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                              'field'   => 'resume_count',
 		                              'label'   => 'Resume count',
-		                              'rules'   => 'trim|required|xss_clean|max_length[5]|numeric'
+		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 		                            ),
 		                            array(
 		                              'field'   => 'price',
 		                              'label'   => 'Price',
-		                              'rules'   => 'trim|required|xss_clean|'
+		                              'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
 		                            array(
 		                                 'field'   => 'plan_upgrade_creation_status',

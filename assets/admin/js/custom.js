@@ -196,6 +196,8 @@ ajax = function (params,action,form_id){
                 $('.admin_table').dataTable().fnDestroy(); //Commented for page reload
                 form.html(res.output);
                 $('.db_status').fadeOut(3000);
+                $('.edit_add_overlay').addClass('dn');
+                $('table th').removeClass('sort-disabled');
                 setTimeout(function() { datatable_initialization(); }, 3000);  //Commented for page reload
                 // setTimeout(function() { $('.db_status').remove();location.reload(); }, 3000);
                 default_credentials();  
@@ -294,6 +296,10 @@ $('.top_layer, .message_close').on('click',function() {
     // Add - New record
     $(document).on('click','.add_new',function() {
         // disable_datatable(0);
+        var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
+        var this_table = $(this).parents("table").find('th');
+        this_overlay.removeClass('dn');
+        this_table.addClass('sort-disabled');
         if(editing==0 && ready_save==0) {        	      	 
             add_new_record();            
             handleChoosenSelect();
@@ -343,6 +349,10 @@ $('.top_layer, .message_close').on('click',function() {
     // Remove - New record
     $(document).on('click','.new_remove',function() {
         // disable_datatable(1);
+        var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
+        var this_table = $(this).parents("table").find('th');
+        this_overlay.addClass('dn');
+        this_table.removeClass('sort-disabled');
         if(editing==0 && ready_save==1) {
             $(this).parents('tr').fadeOut(600);
             ready_save=0;
@@ -381,6 +391,10 @@ $('.top_layer, .message_close').on('click',function() {
     $(document).on("click","."+editbutton,function(){
         var update_id = $(this).data("id");
         var this_row = $(this).parents("tr").attr('id');
+        var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
+        var this_table = $(this).parents("table").find('th');
+        this_overlay.removeClass('dn');
+        this_table.addClass('sort-disabled');
         // disable_datatable(0);
         if(update_id && editing == 0 && tdediting == 0 && ready_save==0) {
             // hide editing row, for the time being
@@ -427,6 +441,10 @@ $('.top_layer, .message_close').on('click',function() {
     // Cancel - Old record
     $(document).on("click","."+cancelbutton,function(){
         // disable_datatable(1);
+        var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
+        var this_table = $(this).parents("table").find('th');
+        this_overlay.addClass('dn');
+        this_table.removeClass('sort-disabled');
         var this_row = $(this).parents("tr").attr('id');         
         // $("."+table+" tr:last-child").fadeIn('fast');   
         $("."+table+" #"+this_row+"").fadeOut(500, function() {

@@ -16,7 +16,6 @@
 <div id="dialog-overlay"></div>
 <!--overlay for loader in admin-->
 <div class="loader_overlay"> </div>
-<!-- <div class="edit_add_overlay"> </div> -->
 <!--  Confirm box with yes and no button -->
 <div id="dialog-box">
     <h3 class="message"></h3>
@@ -126,14 +125,15 @@
                     "dom": 'lBfrtip',
                       
                     "buttons": 
-                            [
-                                {
-                                    "extend": 'colvis',
-                                    "columns": ':not(.data_action)',
-                                    "postfixButtons": ['colvisRestore'],
-                                    "text" : ' Column Visibility <i class="icon-angle-down"></i>',
-                                    "className": 'btn dropdown-toggle colvis_button',
-                                },
+                            [   
+                                // Commented by siva.
+                                // {
+                                //     "extend": 'colvis',
+                                //     "columns": ':not(.data_action)',
+                                //     "postfixButtons": ['colvisRestore'],
+                                //     "text" : ' Column Visibility <i class="icon-angle-down"></i>',
+                                //     "className": 'btn dropdown-toggle colvis_button',
+                                // },
                                 {
                                     "extend": 'collection',
                                     "text" : ' Export <i class="icon-angle-down"></i>',

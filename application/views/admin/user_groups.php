@@ -61,6 +61,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <div class="span12">
                     <!-- BEGIN EXAMPLE TABLE widget-->
                     <div class="widget">
+                        <div class="edit_add_overlay dn"> </div> <!-- Overlay for table -->
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i>User Groups</h4>
                             <span class="loader_holder hide_loader"> </span>
@@ -196,7 +197,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var columns = new Array("user_group_name","user_group_description","user_super_admin","user_group_status"); // Set name of input types
     var placeholder = new Array("Enter Group Name","Enter User Group Description"); // Set placeholder of input types
     var class_selector = new Array("","","","");//To set class for element
-    var maxlength = new Array("","","",""); //To set maxlength for element
+    var maxlength = new Array("50","700","",""); //To set maxlength for element
     var table = "admin_table"; // Set classname of table    
     var user_super_admin_option = new Array("Select Admin Type","Yes","No"); 
     var user_super_admin_value = new Array("","1","0");
