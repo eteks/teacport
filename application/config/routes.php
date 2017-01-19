@@ -122,6 +122,7 @@ $route['contactus'] 									= 'home/contactus';
 $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
+$route['user-followed-companies'] 						= 'home/userfollowedcompanies';
 $route['vacancies'] 									= 'home/vacancies';
 $route['vacancies/(:num)']  							= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';

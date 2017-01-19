@@ -81,7 +81,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 </div>
                                 
                                 <form method="post" action="#" class="admin_module_form" id="state_form">
-                                  <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
+                                  <table class="table table-striped table-hover table-bordered admin_table feedback_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
                                         <th>Form Title</th>
