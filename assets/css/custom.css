@@ -174,12 +174,17 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	color: #777;
 	font-size: 22px;
 }
-.pricing-section-1 .pricing-selectplan-link{
+.pricing-section-1 .pricing-selectplan-link .organisation_detail{
 	position: absolute;
 	top: 0;
 	left: 0;
 	height: 100%;
 	width: 100%;
+}
+.organisation .post_job{
+	bottom: 50px !important;
+    position: absolute;
+    right: 32px !important;
 }
 .price-footer a:hover{
 	background-color: #da651a !important;
@@ -205,6 +210,14 @@ box-shadow:0 8px 6px -6px #da651a !important;
 #featured-price .price-features li{
 	letter-spacing: 1px !important;
     line-height: 30px !important;
+}
+.odd{
+	background:#da651a none repeat scroll 0 0 !important;
+	height:100% !important;
+}
+.even{
+	background:#00a5ef none repeat scroll 0 0 !important;
+	height:100% !important;
 }
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;

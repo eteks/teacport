@@ -150,6 +150,10 @@ class Home extends CI_Controller {
 		$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
 		$this->load->view('all-institutions',$categories);
 	}
+	public function userfollowedcompanies()
+	{
+		$this->load->view('user-followed-companies');
+	}
 	public function vacancies()
 	{
 		$data['applicable_postings'] = $this->common_model->applicable_posting();
