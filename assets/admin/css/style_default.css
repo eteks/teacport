@@ -407,7 +407,7 @@ tr select {
 	float:left;
 	display: inline block;
 }
-.dynamic_data span:before{
+.lang_design span:before{
 	content:'-';
 }
 .Zebra_DatePicker_Icon_Wrapper{
@@ -459,16 +459,15 @@ tr select {
 	/*max-height:570px !important; */
 	height: auto;
 	width: auto;
-	overflow: scroll;
+	overflow: hidden;
 }
-.sub_hori_scroll{
+.scroll_section{
 	height: auto;
 	width: auto;
-	max-width:600px !important;
-	overflow: scroll;
+	overflow: hidden;
 }
 .hori_scroll{
-	ove
+	overflow-x:scroll;
 }
 .main_module{
     font-size: 13px;

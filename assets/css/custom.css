@@ -200,9 +200,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin-top:5px;
 }
 .price_ui_box{
-	height: 500px;
+	height: auto;
     /*margin-bottom: 30px;*/
-    max-height: 600px;
+    /*max-height: 600px;*/
     /*overflow-y: auto;*/
     position: relative;
     width: 100%;
@@ -218,6 +218,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .even{
 	background:#00a5ef none repeat scroll 0 0 !important;
 	height:100% !important;
+}
+.subscribe_plan{
+	margin-top: 30px;
 }
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;
@@ -391,7 +394,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
     padding: 10px 15px;
     position: relative;
 }
-.dashboard-body .profile-nav .provider-jobs  i {
+.dashboard-body .profile-nav .provider-jobs  i{
     color: #29aafe;
     font-size: 16px;
     padding-right: 10px;

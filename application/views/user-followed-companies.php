@@ -81,7 +81,8 @@
                             <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas. You can also sign up to Teacherportal for vacancy alerts based on career areas that interest you.</p>
                         </div>
                     </div>
-                    
+                 </div> 
+                
                     <div class="owl-testimonial-2">                   
 	                    <div class="slide-featured-jobs">	                    	
 	                    	<div class="featured-image-box">
@@ -104,9 +105,99 @@
     							</a>
     							<!--end rule-->
                             </div> 
+                          </div>
+                          
+                          <div class="slide-featured-jobs">	                    	
+	                    	<div class="featured-image-box">
+	                            <div class="img-box">	                            	
+                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
+								</div>	                            
+	                            <div class="content-area">
+	                                <div class="">
+	                                    <h4>Teacher</h4>
+	                                    <p>Etekchoservices.com</p>
+	                                </div>
+	                                <div class="feature-post-meta">
+	                                    <i class="fa fa-clock-o">2 days ago</i>
+									</div>
+									<!--Only required rule to the whole div clickable work--> 	                           
+									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+								</div>
+	                            <a href='javascript:void(0)' >
+        							<span class='featured-jobs-grid-link'></span>
+    							</a>
+    							<!--end rule-->
+                            </div> 
+                          </div>
+                          <div class="slide-featured-jobs">	                    	
+	                    	<div class="featured-image-box">
+	                            <div class="img-box">	                            	
+                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
+								</div>	                            
+	                            <div class="content-area">
+	                                <div class="">
+	                                    <h4>Teacher</h4>
+	                                    <p>Etekchoservices.com</p>
+	                                </div>
+	                                <div class="feature-post-meta">
+	                                    <i class="fa fa-clock-o">2 days ago</i>
+									</div>
+									<!--Only required rule to the whole div clickable work--> 	                           
+									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+								</div>
+	                            <a href='javascript:void(0)' >
+        							<span class='featured-jobs-grid-link'></span>
+    							</a>
+    							<!--end rule-->
+                            </div> 
+                          </div>
+                          <div class="slide-featured-jobs">	                    	
+	                    	<div class="featured-image-box">
+	                            <div class="img-box">	                            	
+                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
+								</div>	                            
+	                            <div class="content-area">
+	                                <div class="">
+	                                    <h4>Teacher</h4>
+	                                    <p>Etekchoservices.com</p>
+	                                </div>
+	                                <div class="feature-post-meta">
+	                                    <i class="fa fa-clock-o">2 days ago</i>
+									</div>
+									<!--Only required rule to the whole div clickable work--> 	                           
+									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+								</div>
+	                            <a href='javascript:void(0)' >
+        							<span class='featured-jobs-grid-link'></span>
+    							</a>
+    							<!--end rule-->
+                            </div> 
+                          </div>
+                            
+                          <div class="slide-featured-jobs">	                    	
+	                    	<div class="featured-image-box">
+	                            <div class="img-box">	                            	
+                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
+								</div>	                            
+	                            <div class="content-area">
+	                                <div class="">
+	                                    <h4>Teacher</h4>
+	                                    <p>Etekchoservices.com</p>
+	                                </div>
+	                                <div class="feature-post-meta">
+	                                    <i class="fa fa-clock-o">2 days ago</i>
+									</div>
+									<!--Only required rule to the whole div clickable work--> 	                           
+									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+								</div>
+	                            <a href='javascript:void(0)' >
+        							<span class='featured-jobs-grid-link'></span>
+    							</a>
+    							<!--end rule-->
+                            </div> 
                           </div>                           
-	                    </div>	                   
-	                </div>
+	                 </div>	                 	                 	                   	              	             	                   
+	          </div>
 	                
                     <!-- <div class="col-md-12 col-sm-12 col-xs-12">
                         <div class="load-more-btn">
@@ -115,13 +206,14 @@
                     </div> -->
                 </div>
             </div>
-        </div>
+      
    </section>
    <!--End of Recently Posted jobs-->
 			
         
 <?php include('include/footermenu.php'); ?>	
 	<?php include('include/footer.php'); ?>
+	 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbuVxM8vd876DdJ3vDZMakcC98TUwOGYs&callback=initMap" type="text/javascript"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/counterup.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/owl-carousel.js"></script>
 	<?php include('include/footercustom.php'); ?>
@@ -144,5 +236,18 @@
 	        itemsTabletSmall: false,
 	        itemsMobile: [479, 1]
 	    });
-	 });
+	 });		 	
 	 </script>
+	
+	 
+	 <script type="application/javascript">
+			function initialize() {
+				var mapOptions = {
+					zoom : 17,
+					scrollwheel : false,
+					center : new google.maps.LatLng(11.942160, 79.795164)
+				};
+				var map = new google.maps.Map(document.getElementById('map-contact'), mapOptions);				
+			}
+		google.maps.event.addDomListener(window, 'load', initialize);
+		</script>

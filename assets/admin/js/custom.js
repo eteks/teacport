@@ -213,32 +213,25 @@ $(document).ready(function(){
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
     });
+    
     /*Added by thangam*/
     $('.sub_scroll_section').slimScroll({
         height: 'auto'
-    });
-
+    });    
+    $('.scroll_section').slimScroll({
+        height: 'auto'
+    })   
     $('.extended').slimScroll({
         height: 'auto'
     });
      $('.sub_pre_section').slimScroll({
-        height: 'auto'
-      
-    });
-	$('.sub_hori_scroll').slimScroll({
-        height: 'auto',
-        axis:'x',
-        width:'auto',
-       
-    });
-
-
+        height: 'auto'    
+    });      	
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
         $('.caret-up').show();
         $('.top_layer').show();
     });
-
     $('#container').on('click',function() {
         $('.extended').hide();
         $('.caret-up').hide();
@@ -913,9 +906,10 @@ $('.temp_remove_act').click(function(e)
    
    var win_height= $(window).height();
    var head_height= win_height - $('#header').height();
-   // alert (win_height);
-   // alert(head_height);  
-   $('.sub_pre_section').css('max-height', head_height);
+   var footer_height= head_height -$('#footer').height(); 
+   //alert (win_height);
+   //alert(head_height);  
+   $('.sub_pre_section').css('max-height', footer_height);
    
 /* Popup pagination with arrow end */ 
 
