@@ -222,14 +222,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <label class="control-label">Validitity Start</label>
                         <span class="dynamic_data date_picker_act"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium admin_date_picker dp_width" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                           <input class=" m-ctrl-medium admin_date_picker dp_width" placeholder="Validitity Start Date" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity End</label>
                         <span class="dynamic_data date_picker_act"> 
                           <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium admin_date_picker dp_width" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
+                           <input class=" m-ctrl-medium admin_date_picker dp_width" placeholder="Validitity End Date" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
                         </span>
                       </div> 
                     <div class="col12">
@@ -264,13 +264,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Ads </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" maxlength="15" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Max Days Ad visisble </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="15" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
                         </span>
                       </div>
                     </div>
@@ -278,7 +278,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">  
                         <label class="control-label"> Subscription Features </label>
                         <span class="dynamic_data"> 
-                          <textarea class="textarea" placeholder="Subscription Features" name="sub_features"><?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
+                          <textarea class="textarea" placeholder="Subscription Features" maxlength="150" name="sub_features"><?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
                         </span>
                       </div>
                       <div class="col6 control-group">

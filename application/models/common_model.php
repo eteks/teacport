@@ -38,7 +38,7 @@ class Common_model extends CI_Model {
 			$this->db->or_like('op.organization_name',$data['keyword']);
    		}
    		$this->db->where('ov.vacancies_status','1');
-        $this->db->where('ov.vacancies_start_salary >=',$data['min_amount']);
+        $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
         if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
@@ -49,7 +49,7 @@ class Common_model extends CI_Model {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
         if(!empty($data['max_amount'])) {
-        	$this->db->where('ov.vacancies_end_salary <=',$data['max_amount']);
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -75,7 +75,7 @@ class Common_model extends CI_Model {
 			$this->db->or_like('op.organization_name',$data['keyword']);
    		}
    		$this->db->where('ov.vacancies_status','1');
-        $this->db->where('ov.vacancies_start_salary >=',$data['min_amount']);
+        $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
         if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
@@ -86,7 +86,7 @@ class Common_model extends CI_Model {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
         if(!empty($data['max_amount'])) {
-        	$this->db->where('ov.vacancies_end_salary <=',$data['max_amount']);
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -154,7 +154,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_applicable_posting');
 		if($ins_id!='') {
-			$where = "(posting_institution_id = '".$ins_id."' AND posting_status='1')";
+			$where = '(FIND_IN_SET("'.$ins_id.'",posting_institution_id) !=0 AND posting_status=1)';
 		}else {
 			$where = "(posting_status='1')";	
 		}		

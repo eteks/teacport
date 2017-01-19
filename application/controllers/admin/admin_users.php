@@ -54,14 +54,14 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'user_group_name',
 		                              'label'   => 'Group Name',
-		                              'rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|min_length[3]|max_length[20]|edit_unique[tr_admin_user_groups.user_group_id.user_group_name.'.$id.']'
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|edit_unique[tr_admin_user_groups.user_group_id.user_group_name.'.$id.']'
 		                              //edit_unique is a custom funciton
 
 		                            ),
 		                            array(
 		                                 'field'   => 'user_group_description',
 		                                 'label'   => 'Group Description',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[100]'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[700]|'
 		                            ),
 		                            // array(
 		                            //      'field'   => 'user_super_admin',
@@ -80,13 +80,12 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'user_group_name',
 		                              'label'   => 'Group Name',
-		                              'rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|min_length[3]|max_length[20]|is_unique[tr_admin_user_groups.user_group_name]'
-
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|is_unique[tr_admin_user_groups.user_group_name]'
 		                            ),
 		                            array(
 		                                 'field'   => 'user_group_description',
 		                                 'label'   => 'Group Description',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[100]'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[700]'
 		                            ),
 		                            // array(
 		                            //      'field'   => 'user_super_admin',
@@ -164,14 +163,14 @@ class Admin_users extends CI_Controller {
 		                            array(
 		                              'field'   => 'admin_user_name',
 		                              'label'   => 'Username',
-		                              'rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|min_length[3]|max_length[30]|edit_unique[tr_admin_users.admin_user_id.admin_user_name.'.$id.']'
+		                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|edit_unique[tr_admin_users.admin_user_id.admin_user_name.'.$id.']'
 		                              //edit_unique is a custom funciton
 
 		                            ),
 		                            array(
 		                                 'field'   => 'admin_user_password',
 		                                 'label'   => 'Password',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[5]|max_length[15]'
+		                                 'rules'   => 'trim|required|xss_clean|min_length[8]|max_length[20]'
 		                            ),
 		                            array(
 		                                 'field'   => 'admin_user_email',
@@ -196,12 +195,12 @@ class Admin_users extends CI_Controller {
 	                            array(
 	                              'field'   => 'admin_user_name',
 	                              'label'   => 'Username',
-	                              'rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|min_length[3]|max_length[30]|is_unique[tr_admin_users.admin_user_name]'
+	                              'rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|is_unique[tr_admin_users.admin_user_name]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_password',
 	                                 'label'   => 'Password',
-	                                 'rules'   => 'trim|required|xss_clean|min_length[5]|max_length[15]'
+	                                 'rules'   => 'trim|required|xss_clean|min_length[8]|max_length[20]'
 	                            ),
 	                            array(
 	                                 'field'   => 'admin_user_email',

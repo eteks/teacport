@@ -45,7 +45,7 @@ Website: http://thevectorlab.net/
 <body class="fixed-top">
 
 	<!-- BEGIN HEADER -->
-	    <div id="header" class="navbar navbar-inverse navbar-fixed-top sub_scroll_section">
+	    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
         <div class="top_layer"></div><!-- top_layer -->
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="navbar-inner">
@@ -184,7 +184,7 @@ Website: http://thevectorlab.net/
         <!-- BEGIN SIDEBAR -->
             <div id="sidebar" class="nav-collapse collapse">
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-                <div class="sidebar-toggler hidden-phone"></div>
+                <!-- <div class="sidebar-toggler hidden-phone"></div> -->
                 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 
                 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
@@ -196,7 +196,7 @@ Website: http://thevectorlab.net/
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 <!-- BEGIN SIDEBAR MENU -->
               
-                <ul class="sidebar-menu">
+                <ul class="sidebar-menu sub_scroll_section">
                     <?php 
                         $admin_modules = $this->config->item('admin_modules');
                         $admin_operation_rights = $this->config->item('admin_operation_rights');

@@ -89,20 +89,20 @@
          		 border-radius: 4px !important;
 	}
 
-	#sidebar > ul > li:first-child > a{
+	#sidebar  ul > li:first-child > a{
 		border-top:0px !important;
 	}		
-	#sidebar > ul > li:last-child > a {
+	#sidebar  ul > li:last-child > a {
 		border-bottom:0px !important;
 	}
 
-	#sidebar > ul > li:first-child > a:hover, #sidebar > ul > li.active:first-child > a{
+	#sidebar  ul > li:first-child > a:hover, #sidebar  ul > li.active:first-child > a{
 		 -webkit-border-radius: 4px 4px 0 0 !important;
     		-moz-border-radius: 4px 4px 0 0 !important;
          		 border-radius: 4px 4px 0 0 !important;
          border-top:0px !important;		 
 	}		
-	#sidebar > ul > li:last-child > a:hover, #sidebar > ul > li.active:last-child > a {
+	#sidebar  ul > li:last-child > a:hover, #sidebar  ul > li.active:last-child > a {
 		 -webkit-border-radius: 0 0 4px 4px !important;
     		-moz-border-radius: 0 0 4px 4px !important;
          		 border-radius: 0 0 4px 4px !important;
@@ -255,7 +255,7 @@
 	}
 
 	/* sidebar */
-	#sidebar > ul > li:first-child > a:hover, #sidebar > ul > li.active:first-child > a {
+	#sidebar  ul > li:first-child > a:hover, #sidebar  ul > li.active:first-child > a {
 		 -webkit-border-radius: 0px !important;
     		-moz-border-radius: 0px !important;
          		 border-radius: 0px !important;

@@ -52,6 +52,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="row-fluid"> <!-- BEGIN ADVANCED TABLE widget-->
         <div class="span12">
           <div class="widget">
+            <div class="edit_add_overlay dn"> </div> <!-- Overlay for table -->
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i> State
