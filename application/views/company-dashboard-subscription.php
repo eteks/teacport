@@ -119,13 +119,16 @@
 		                    <?php } else {?>
 			                 	<div><h2>No subscription plan available!</h2></div>
 			                 <?php } ?>
-			                 
-			                 
-			                 
-			                 
-			                  <div class="col-sm-6 dn">
+							 <div class="col-sm-6 dn">
 			                 	<button class="btn" data-toggle="modal" data-target="#plandetail_act"  data-backdrop="static" data-keyboard="false"> View Plan Details </button>
 			                 </div>	
+			               <!-- Pricing Table -->  
+			               <div>
+			               	
+			               </div>
+			               <!-- End Of Pricing Table -->  
+			               
+			               
 			                 
 			                 <!-- Modal -->
 					  <div class="modal fade" id="plandetail_act" role="dialog">

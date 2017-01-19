@@ -45,7 +45,7 @@ Website: http://thevectorlab.net/
 <body class="fixed-top">
 
 	<!-- BEGIN HEADER -->
-	    <div id="header" class="navbar navbar-inverse navbar-fixed-top sub_pre_section">
+	    <div id="header" class="navbar navbar-inverse navbar-fixed-top">
         <div class="top_layer"></div><!-- top_layer -->
         <!-- BEGIN TOP NAVIGATION BAR -->
         <div class="navbar-inner">
