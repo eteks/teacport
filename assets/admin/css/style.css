@@ -446,7 +446,7 @@ a,a:focus, a:hover, a:active {
     content: "\f105";
 }
 
-.sidebar-closed > #sidebar > ul {
+.sidebar-closed > #sidebar  ul {
     display: none;
 }
 
@@ -481,7 +481,7 @@ ul.sidebar-menu span.icon-box  {
     display: none;
 }
 
-#sidebar > ul {
+#sidebar  ul {
     list-style: none;
     margin: 0;
     padding: 0;
@@ -492,7 +492,7 @@ ul.sidebar-menu span.icon-box  {
     border-radius: 0px;
 }
 
-#sidebar > ul > li {
+#sidebar  ul > li {
     display: block;
     margin: 0 0 1px 0;
     padding: 0;
@@ -501,7 +501,7 @@ ul.sidebar-menu span.icon-box  {
     line-height: 30px;
 }
 
-#sidebar > ul > li > a {
+#sidebar  ul > li > a {
     display: block;
     position: relative;
     margin: 0;
@@ -515,21 +515,21 @@ ul.sidebar-menu span.icon-box  {
     font-weight: normal;
 }
 
-#sidebar > ul > li a i {
+#sidebar  ul > li a i {
     color:#eaeaea;
     font-size: 18px;
 }
 
-#sidebar > ul > li.active > a{
+#sidebar  ul > li.active > a{
     border: none;
 }
 
 
-#sidebar > ul > li.active > a .arrow {
+#sidebar  ul > li.active > a .arrow {
     margin-right: 1px;
 }
 
-#sidebar > ul > li.active > a .arrow.open {
+#sidebar  ul > li.active > a .arrow.open {
     margin-right: 0px;
 }
 
@@ -545,7 +545,7 @@ ul.sidebar-menu span.icon-box  {
     border-bottom: 4px solid transparent;
 }
 
-#sidebar > ul > li > a .arrow.open {
+#sidebar  ul > li > a .arrow.open {
     float: right;
     margin-top: 27px;
     margin-right: 3px;
@@ -556,23 +556,23 @@ ul.sidebar-menu span.icon-box  {
     border-right: 4px solid transparent;
 }
 
-#sidebar > ul > li > ul.sub {
+#sidebar  ul > li > ul.sub {
     display: none;
     list-style: none;
     clear: both;
     margin: 0px;
 }
 
-#sidebar > ul > li.active > ul.sub {
+#sidebar  ul > li.active > ul.sub {
     display: block;
 }
 
-#sidebar > ul > li > ul.sub > li {
+#sidebar  ul > li > ul.sub > li {
     background: none !important;
     padding: 0px;
 }
 
-#sidebar > ul > li > ul.sub > li > a {
+#sidebar  ul > li > ul.sub > li > a {
     display: block;
     position: relative;
     padding: 10px 10px 10px 60px;
@@ -583,28 +583,28 @@ ul.sidebar-menu span.icon-box  {
     font-weight: normal;
 }
 
-#sidebar > ul > li > ul.sub > li.active > a, #sidebar > ul > li > ul.sub > li > a:hover {
+#sidebar  ul > li > ul.sub > li.active > a, #sidebar  ul > li > ul.sub > li > a:hover {
 
     background: url("../img/submenu_hover.png") !important;
 }
 /*After Adding a scrollbar*/
-#sidebar > ul > li > div >ul.sub {
+#sidebar  ul > li > div >ul.sub {
     display: none;
     list-style: none;
     clear: both;
     margin: 0px;
 }
 
-#sidebar > ul > li.active > div > ul.sub {
+#sidebar  ul > li.active > div > ul.sub {
     display: block;
 }
 
-#sidebar > ul > li > div > ul.sub > li {
+#sidebar  ul > li > div > ul.sub > li {
     background: none !important;
     padding: 0px;
 }
 
-#sidebar > ul > li > div > ul.sub > li > a {
+#sidebar  ul > li > div > ul.sub > li > a {
     display: block;
     position: relative;
     padding: 10px 10px 10px 60px;
@@ -614,8 +614,9 @@ ul.sidebar-menu span.icon-box  {
     font-size: 13px;
     font-weight: normal;
 }
+.sub_scroll_section{max-height: 600px !important;width: 200px;max-width: 500px;}
 
-#sidebar > ul > li > div > ul.sub > li.active > a, #sidebar > ul > li > div > > ul.sub > li > a:hover {
+#sidebar  ul > li > div > ul.sub > li.active > a, #sidebar  ul > li > div > > ul.sub > li > a:hover {
 
     background: url("../img/submenu_hover.png") !important;
 }
@@ -632,7 +633,7 @@ ul.sidebar-menu span.icon-box  {
     height: 24px;
 }
 
-.ie9 #sidebar > ul > li.active > a .triangle {
+.ie9 #sidebar  ul > li.active > a .triangle {
     right: -1px;
 }
 
@@ -4002,7 +4003,7 @@ ul li:last-child{
 .center_align {
     text-align: center !important;
 }
-#sidebar > ul > li > ul.sub > li.active_sidebar {
+#sidebar  ul > li > ul.sub > li.active_sidebar {
     /*background-color: rgba(0,0,0,0.40) !important ;   */
     /*background-color: rgba(50,50,50,0.70) !important ;*/
    background: rgba(0, 0, 0, 0) url("../img/submenu_hover.png") repeat scroll 0 0 !important;
@@ -4441,7 +4442,6 @@ div.dt-button-background {
 } 
 .admin_table th {
     cursor: pointer;
-  
 }
 /*#sample_editable_1 > tr >td:nth-child(2) {
 	width:50px !important;
@@ -4858,6 +4858,12 @@ i#admin_error_login {
     width: auto !important;
     z-index: 9999;
 }
+/*.sub_scroll_section + .slimScrollDiv{
+    height: auto !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    width: inherit !important;
+}*/
 .dropdown .caret-up{
     display: none;
     position: absolute;
