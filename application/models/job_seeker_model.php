@@ -691,7 +691,7 @@ class Job_seeker_model extends CI_Model {
 			$this->db->or_like('op.organization_name',$data['keyword']);
         }
         $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
-        $this->db->where('ov.vacancies_start_salary >=',$data['min_amount']);
+	    $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
         if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
@@ -702,7 +702,7 @@ class Job_seeker_model extends CI_Model {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
         if(!empty($data['max_amount'])) {
-        	$this->db->where('ov.vacancies_end_salary <=',$data['max_amount']);
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -724,7 +724,7 @@ class Job_seeker_model extends CI_Model {
 			$this->db->or_like('op.organization_name',$data['keyword']);
         }
         $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
-        $this->db->where('ov.vacancies_start_salary >=',$data['min_amount']);
+        $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
         if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
@@ -735,7 +735,7 @@ class Job_seeker_model extends CI_Model {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
         if(!empty($data['max_amount'])) {
-        	$this->db->where('ov.vacancies_end_salary <=',$data['max_amount']);
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
