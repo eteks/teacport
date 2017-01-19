@@ -97,7 +97,7 @@ class Job_Provider extends CI_Controller {
 	   			$validation_rules[] =	array( 'field'   => 'registrant_name','label'   => 'Registrant Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
 	   			// $validation_rules[] =	array( 'field'   => 'registrant_dob','label'   => 'Registrant DOB','rules'   => 'trim|required|xss_clean|' );
 	   			$validation_rules[] =	array( 'field'   => 'registrant_designation','label'   => 'Registrant Designation','rules'   => 'trim|xss_clean|min_length[3]|max_length[50]' );
-	   			$validation_rules[] =	array('field'   => 'registrant_email','label'   => 'Organization District','rules'   => 'trim|required|xss_clean|valid_email|' );
+	   			$validation_rules[] =	array('field'   => 'registrant_email','label'   => 'Organization Email','rules'   => 'trim|required|xss_clean|valid_email|' );
 	   			$validation_rules[] =	array( 'field'   => 'registrant_mobile','label'   => 'Registrant Mobile','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{10}$/]|' );
 			    $validation_rules[] =	array( 'field'   => 'sms_verify','label'   => 'Sms Verification','rules'   => 'trim|required|xss_clean|' );				                       
 	   		}

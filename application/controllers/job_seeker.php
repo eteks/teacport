@@ -476,9 +476,9 @@ class Job_seeker extends CI_Controller {
     	$data['experience_values'] = $this->job_seeker_model->get_seeker_experience_details($session['login_session']['candidate_id']);
 
     	$data['edit_profile_visible_status'] = 1;
-    	if(empty($data['district_values']) || empty($data['mother_language_values']) || empty($data['medium_language_values']) || empty($data['known_languages']) || empty($data['posting_values']) || empty($data['class_values']) || empty($data['subject_values']) || empty($data['qualification_values']) || empty($data['department_values']) || empty($data['board_values'])) {
-    		$data['edit_profile_visible_status'] = 0;
-    	}
+    	// if(empty($data['district_values']) || empty($data['mother_language_values']) || empty($data['medium_language_values']) || empty($data['known_languages']) || empty($data['posting_values']) || empty($data['class_values']) || empty($data['subject_values']) || empty($data['qualification_values']) || empty($data['department_values']) || empty($data['board_values'])) {
+    	// 	$data['edit_profile_visible_status'] = 0;
+    	// }
 
     	// To store session values
     	$candidate_session_data = $this->job_seeker_model->seeker_session_values($session['login_session']['candidate_id']);
