@@ -14,7 +14,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
-<div id="container" class="row-fluid sub_pre_section"> <!-- BEGIN CONTAINER -->
+<div id="container" class="row-fluid"> <!-- BEGIN CONTAINER -->
   <div id="sidebar" class="nav-collapse collapse"> <!-- BEGIN SIDEBAR -->
     <div class="sidebar-toggler hidden-phone"></div>
     <div class="navbar-inverse"> <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
@@ -24,7 +24,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     </div> <!-- END RESPONSIVE QUICK SEARCH FORM -->
   </div> <!-- END SIDEBAR -->
   <div id="main-content"> <!-- BEGIN PAGE -->
-    <div class="container-fluid"> <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid sub_pre_section"> <!-- BEGIN PAGE CONTAINER-->
       <div class="row-fluid"> <!-- BEGIN PAGE HEADER-->
         <div class="span12">
           <!-- <h3 class="page-title">

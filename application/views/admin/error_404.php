@@ -1,10 +1,10 @@
 <?php include "templates/header.php" ?>
 <!-- BEGIN CONTAINER -->
-<div id="container" class="row-fluid sub_pre_section">
+<div id="container" class="row-fluid">
   <!-- BEGIN PAGE -->
   <div id="main-content" class="<?php if(empty($this->session->userdata("admin_login_status"))) echo "remove_sidebar"; ?>">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_pre_section">
       <!-- BEGIN PAGE HEADER-->
       <?php if(!empty($this->session->userdata("admin_login_status")) && strpos($_SERVER['REQUEST_URI'], 'admin') === FALSE): ?>
         <div class="row-fluid">
