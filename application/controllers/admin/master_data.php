@@ -486,7 +486,7 @@ class Master_Data extends CI_Controller {
 			  		$id = $this->input->post('rid');
 			  		$action_post = $this->input->post('action');
 			   		$validation_rules = array(
-		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
+		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|max_length[50]|' ),
 		                array( 'field'   => 'q_inst_type','label'   => 'Educational Qualifcation Institution Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'q_status', 'label'   => 'Educational Qualification Status','rules'   => 'trim|required|xss_clean|' ), );
 			    }
@@ -495,7 +495,7 @@ class Master_Data extends CI_Controller {
 		    	else if($this->input->post('action')=='save') {
 		    		$action_post = $this->input->post('action');
 		      		$validation_rules = array(
-		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|callback_alpha_dash_space|max_length[50]|' ),
+		                array( 'field'   => 'q_name','label'   => 'Educational Qualification','rules'   => 'trim|required|xss_clean|max_length[50]|' ),
 		                array( 'field'   => 'q_inst_type','label'   => 'Educational Qualifcation Institution Type','rules'   => 'trim|required|xss_clean|' ),
 		                array( 'field'   => 'q_status','label'   => 'Educational Qualification Status','rules'   => 'trim|required|xss_clean|' ), );
 		        }

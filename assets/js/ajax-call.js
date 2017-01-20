@@ -133,11 +133,11 @@ $(document).ready(function() {
 	        	error = 1;
 				message ="Please Provide Valid Information!";
         	    $('input[name="' + name + '"]').first().addClass('form-field-error');
-    	        $('input[name="' + name + '"]').first().parents('.form-group').find('label').addClass('form-label-error');
+    	        $('input[name="' + name + '"]').first().parents('.form-group').find('label').first().addClass('form-label-error');
         	}
         	else {
 	        	$('input[name="' + name + '"]').first().removeClass('form-field-error');
-        		$('input[name="' + name + '"]').first().parents('.form-group').find('label').removeClass('form-label-error');
+        		$('input[name="' + name + '"]').first().parents('.form-group').find('label').first().removeClass('form-label-error');
         	}
     	});
 

@@ -100,14 +100,14 @@ class Job_seeker extends CI_Controller {
         	}
         	else {
         		$_POST[$field] = NULL; //
-	            $this->form_validation->set_message('validate_image_type', "The %s field is required");
-	            return FALSE;
+	            // $this->form_validation->set_message('validate_image_type', "The %s field is required");
+	            // return FALSE;
         	}
         }
         else {
         	$_POST[$field] = NULL; //
-            $this->form_validation->set_message('validate_image_type', "The %s field is required");
-            return FALSE;
+            // $this->form_validation->set_message('validate_image_type', "The %s field is required");
+            // return FALSE;
         }
     }
 
@@ -535,10 +535,10 @@ class Job_seeker extends CI_Controller {
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
 
-			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'required|trim|xss_clean|minlength[3]|maxlength[150]'),
-			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'required|trim|xss_clean|minlength[3]|maxlength[150]'),
-			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'required|trim|xss_clean'),
-	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,6}$/]'),
+			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
+			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
+			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'trim|xss_clean'),
+	    	array('field' => 'cand_pincode', 'label' => 'Pincode','rules' => 'trim|xss_clean|regex_match[/^[0-9]{4,6}$/]'),
 	    	array('field' => 'cand_email', 'label' => 'Email','rules' => 'required|trim|xss_clean|valid_email'),
 	    	array('field' => 'cand_mobile', 'label' => 'Mobile','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{10}$/]'),
 	    	// array('field' => 'cand_facebook', 'label' => 'Facebook Url','rules' => 'required|trim|xss_clean|callback_valid_url_format|'),
