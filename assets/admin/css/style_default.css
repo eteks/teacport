@@ -30,42 +30,42 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
     border-right-color: #181a1b;
 }
 
-#sidebar > ul > li > a {
+#sidebar  ul > li > a {
     color: #fff !important;
 }
 
-#sidebar > ul > li a i {
+#sidebar  ul > li a i {
     color: #fff !important;
 }
 
-#sidebar > ul > li >a:hover, #sidebar > ul > li:hover>a {
+#sidebar  ul > li >a:hover, #sidebar  ul > li:hover>a {
     color: #fff !important;
     background: url("../img/side-bar-list-bg.png");
 }
 
-#sidebar > ul > li.active > a{
+#sidebar  ul > li.active > a{
     background: rgba(0, 0, 0, 0) url("../img/side-bar-list-bg.png");
 }
 
-#sidebar > ul > li > ul.sub > li > a {
+#sidebar  ul > li > ul.sub > li > a {
     color: #fff;
 }
 /*After adding scroll */
-#sidebar > ul > li > div > ul > li.active > a{
+#sidebar  ul > li > div > ul > li.active > a{
     background: rgba(0, 0, 0, 0) url("../img/side-bar-list-bg.png");
 }
-#sidebar > ul > li > div > ul.sub > li > a {
+#sidebar  ul > li > div > ul.sub > li > a {
     color: #fff;
 }
-#sidebar > ul > li > div > ul > li >a:hover, #sidebar > ul > li:hover>a {
+#sidebar  ul > li > div > ul > li >a:hover, #sidebar  ul > li:hover>a {
     color: #fff !important;
     background: url("../img/side-bar-list-bg.png");
 }
-#sidebar > ul > li > div > ul.sub > li {
+#sidebar  ul > li > div > ul.sub > li {
     border-bottom: 1px solid #3393A2;
 }
 
-#sidebar > ul > li > div > ul.sub > li:last-child {
+#sidebar  ul > li > div > ul.sub > li:last-child {
     border-bottom:none;
 }
 
@@ -78,11 +78,11 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
     text-decoration: none;
 }
 
-#sidebar > ul > li > ul.sub > li {
+#sidebar  ul > li > ul.sub > li {
     border-bottom: 1px solid #3393A2;
 }
 
-#sidebar > ul > li > ul.sub > li:last-child {
+#sidebar  ul > li > ul.sub > li:last-child {
     border-bottom:none;
 }
 
@@ -115,11 +115,11 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
         border-radius: 4px !important;
     }
 
-    #sidebar > ul > li > a {
+    #sidebar  ul > li > a {
         border-bottom: 1px solid #30c1cb !important;
     }
 
-    #sidebar > ul > li.active > a, #sidebar > ul > li:hover > a, #sidebar > ul > li > a:hover {
+    #sidebar  ul > li.active > a, #sidebar  ul > li:hover > a, #sidebar  ul > li > a:hover {
         border-bottom: 1px solid #30c1cb !important;
     }
 }
@@ -407,7 +407,7 @@ tr select {
 	float:left;
 	display: inline block;
 }
-.dynamic_data span:before{
+.lang_design span:before{
 	content:'-';
 }
 .Zebra_DatePicker_Icon_Wrapper{
@@ -459,16 +459,15 @@ tr select {
 	/*max-height:570px !important; */
 	height: auto;
 	width: auto;
-	overflow: scroll;
+	overflow: hidden;
 }
-.sub_hori_scroll{
+.scroll_section{
 	height: auto;
 	width: auto;
-	max-width:600px !important;
-	overflow: scroll;
+	overflow: hidden;
 }
 .hori_scroll{
-	ove
+	overflow-x:scroll;
 }
 .main_module{
     font-size: 13px;

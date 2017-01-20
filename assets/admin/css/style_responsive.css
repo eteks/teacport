@@ -5,15 +5,13 @@
 		position: absolute;
  		width: 205px;
   	}
-
   	#sidebar ul{
   		margin-top:50px;
   		width: 215px;
   		margin-left:0 !important;
-  		overflow-y:scroll;
+  		/*overflow-y:scroll;*/
   		height:580px;
   	}
-
   	/* body container */
   	#main-content {
 		margin-top: 0px !important;
@@ -23,8 +21,6 @@
 		margin-top: 20px;
 	} 
 }
-
-
 /* dashboard date range button for all device size */
 
 /* General styles for phones and tablets */
@@ -93,20 +89,20 @@
          		 border-radius: 4px !important;
 	}
 
-	#sidebar > ul > li:first-child > a{
+	#sidebar  ul > li:first-child > a{
 		border-top:0px !important;
 	}		
-	#sidebar > ul > li:last-child > a {
+	#sidebar  ul > li:last-child > a {
 		border-bottom:0px !important;
 	}
 
-	#sidebar > ul > li:first-child > a:hover, #sidebar > ul > li.active:first-child > a{
+	#sidebar  ul > li:first-child > a:hover, #sidebar  ul > li.active:first-child > a{
 		 -webkit-border-radius: 4px 4px 0 0 !important;
     		-moz-border-radius: 4px 4px 0 0 !important;
          		 border-radius: 4px 4px 0 0 !important;
          border-top:0px !important;		 
 	}		
-	#sidebar > ul > li:last-child > a:hover, #sidebar > ul > li.active:last-child > a {
+	#sidebar  ul > li:last-child > a:hover, #sidebar  ul > li.active:last-child > a {
 		 -webkit-border-radius: 0 0 4px 4px !important;
     		-moz-border-radius: 0 0 4px 4px !important;
          		 border-radius: 0 0 4px 4px !important;
@@ -259,7 +255,7 @@
 	}
 
 	/* sidebar */
-	#sidebar > ul > li:first-child > a:hover, #sidebar > ul > li.active:first-child > a {
+	#sidebar  ul > li:first-child > a:hover, #sidebar  ul > li.active:first-child > a {
 		 -webkit-border-radius: 0px !important;
     		-moz-border-radius: 0px !important;
          		 border-radius: 0px !important;

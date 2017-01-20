@@ -123,14 +123,83 @@
 			                 	<button class="btn" data-toggle="modal" data-target="#plandetail_act"  data-backdrop="static" data-keyboard="false"> View Plan Details </button>
 			                 </div>	
 			               <!-- Pricing Table -->  
-			               <div>
-			               	
-			               </div>
-			               <!-- End Of Pricing Table -->  
-			               
-			               
-			                 
-			                 <!-- Modal -->
+						<!--Pricing-->
+				        <div class="subscribe">				           
+				                <div class="row">
+				                    <div class="col-md-12 col-sm-12 col-xs-12">			                    	
+										 <div class="col-md-4 col-sm-6 col-xs-12">
+				                        	<div class="price_ui_box subscribe_plan">
+				                            <div class="single-price even" id="featured-price">
+				                                <div class="price-header text-center">
+				                                    <p class="plan-title"><strong>Premium Plan</strong></p>
+				                                </div>
+				                                <div class="plan-price text-center">
+				                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span>30</h4>
+				                                </div>
+				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                               
+				                                <div class="price-features text-center">
+				                                    <ul>
+															<li>Max No of vacancy Posts: 20</li>
+															<li>Sms Counts: 30</li>
+															<li>Email-count: 40</li>
+															<li>Resume Download: 20</li>
+															<li>Max No of ads: 20</li>										
+													</ul>				                                    
+				                                </div>
+				                                <!-- <div class="price-footer"> <a href="#" class="btn">Select Plan</a> </div> -->
+				                            	</div>
+				                        	</div>
+				                        </div> 
+				                        <div class="col-md-4 col-sm-6 col-xs-12">
+				                        	<div class="price_ui_box subscribe_plan">
+				                            <div class="single-price odd" id="featured-price">
+				                                <div class="price-header text-center">
+				                                    <p class="plan-title"><strong>Upgrade Plan</strong></p>
+				                                </div>
+				                                <div class="plan-price text-center">
+				                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span>30</h4>
+				                                </div>
+				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>
+				                                <div class="price-features text-center">
+				                                    <ul>
+															<li>Max No of vacancy Posts: 20</li>
+															<li>Sms Counts: 30</li>
+															<li>Email-count: 40</li>
+															<li>Resume Download: 20</li>
+															<li>Max No of ads: 20</li>
+													</ul>                                   
+				                                </div>
+				                                <!-- <div class="price-footer"> <a href="#" class="btn">Select Plan</a> </div> -->
+				                            </div>
+				                          </div>
+				                        </div>
+				                        <div class="col-md-4 col-sm-6 col-xs-12">
+				                        	<div class="price_ui_box subscribe_plan">
+				                            <div class="single-price even" id="featured-price">
+				                                <div class="price-header text-center">
+				                                    <p class="plan-title"><strong>Renewal Plan</strong></p>
+				                                </div>
+				                                <div class="plan-price text-center">
+				                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span>30</h4>
+				                                </div>
+				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                               
+				                                <div class="price-features text-center">
+				                                    <ul>
+															<li>Max No of vacancy Posts: 20</li>
+															<li>Sms Counts: 30</li>
+															<li>Email-count: 40</li>
+															<li>Resume Download: 20</li>
+															<li>Max No of ads: 20</li>										
+													</ul>				                                    
+				                                </div>
+				                                <!-- <div class="price-footer"> <a href="#" class="btn">Select Plan</a> </div> -->
+				                            	</div>
+				                        	</div>
+				                        </div>                         
+				                     </div>
+				                 </div>				           
+				        </div>			                 
+			      <!-- Modal -->
 					  <div class="modal fade" id="plandetail_act" role="dialog">
 					    <div class="modal-dialog">
 					      <!-- Modal content-->

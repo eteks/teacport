@@ -14,7 +14,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php include "templates/header.php" ?>
    <!-- BEGIN CONTAINER -->
-  <div id="container" class="row-fluid">
+  <div id="container" class="row-fluid sub_pre_section">
       <!-- BEGIN SIDEBAR -->
       <div id="sidebar" class="nav-collapse collapse">
          <div class="sidebar-toggler hidden-phone"></div>
@@ -33,7 +33,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid sub_pre_section">
+         <div class="container-fluid">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
