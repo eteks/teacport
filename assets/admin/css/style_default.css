@@ -198,7 +198,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 	margin-top:3px !important;
 }
 .job_pro_form .step .desc{
-	margin-left:44px !important;
+	margin-left:34px !important;
 	padding:12px 0 !important;
 }
 .job_seek_form  .step .desc{
@@ -902,7 +902,7 @@ table {
 	color: #22878e;
 }
 .feedback-design .span12{
-	border-bottom: 1px solid #ccc;
+	/*border-bottom: 1px solid #ccc;*/
 	padding: 10px;
 }
 /* Ended by Akila */
