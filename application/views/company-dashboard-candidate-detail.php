@@ -266,7 +266,8 @@
 												<div class="clearfix"> </div>
 												<div class="loginbox-submit">
 													<?php if($subscrib_plan['is_resume_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>" href="<?php echo base_url().$candidate['personnal']['candidate_resume_upload_path']; ?>" download>Resume</a>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Resume</a>
+                                  					<a class="dn" id="hidden_download" href="#" download> </a>
                                   					<?php } ?>
                                   					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
                                   					<?php if($subscrib_plan['is_email_validity']){ ?>
@@ -312,12 +313,18 @@ $(document).ready(function(){
 	       cache: false,
 	       async: false,
 	       success: function(data) {
-	       		if(data == 'update'){
+	       		if(data == "failure"){
+	       			$('.subscription_action_message').text('Resume not download!');
+	       		}
+	       		else {
+	       			$('#hidden_download').attr('href',data);
+	       			$('#hidden_download')[0].click();
 	       			$('.subscription_action_message').text('Resume download successfully!');
 	       		}
 	       }
      	});
     });
+
     $('.candidate_email').on('click',function(){
     	var candidate =  parseInt($(this).attr('candidate-id'));
     	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
@@ -330,7 +337,10 @@ $(document).ready(function(){
 	       cache: false,
 	       async: false,
 	       success: function(data) {
-	       		if(data == 'update'){
+	       		if(data == "failure"){
+	       			$('.subscription_action_message').text('Message not sent successfully!');
+	       		}
+	       		else {
 	       			$('.subscription_action_message').text('Message sent successfully!');
 	       		}
 	       }
