@@ -13,13 +13,13 @@ $feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))): 
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
-<?php include "templates/header.php" ?>
+<?php include "templates/header.php"?>
   <!-- BEGIN CONTAINER -->
-  <div id="container" class="row-fluid sub_pre_section">
+  <div id="container" class="row-fluid">
       <!-- BEGIN PAGE -->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
-         <div class="container-fluid">
+         <div class="container-fluid sub_pre_section">
             <!-- BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
@@ -53,8 +53,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <p class='privilege_status' style="display:none;"></p>
                        
-                        <form method="post" class="admin_module_form form_table_scl privilege_form" action="privileges" id="privileges_form"> 
-                          <div class="widget-body hori_scroll">
+                        <form method="post" class="admin_module_form form_table_scl privilege_form hori_scroll" action="privileges" id="privileges_form"> 
+                          <div class="widget-body">
                                   <div class="portlet-body">
                                     <div class="clearfix">
                                         <!-- <div class="btn-group">

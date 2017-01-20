@@ -15,11 +15,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
 <!-- BEGIN CONTAINER -->
-<div id="container" class="row-fluid sub_pre_section">
+<div id="container" class="row-fluid">
   <!-- BEGIN PAGE -->
   <div id="main-content">
     <!-- BEGIN PAGE CONTAINER-->
-    <div class="container-fluid">
+    <div class="container-fluid sub_pre_section">
       <!-- BEGIN PAGE HEADER-->
       <div class="row-fluid">
         <div class="span12">

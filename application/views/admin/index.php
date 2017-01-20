@@ -14,11 +14,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php include "templates/header.php" ?>
     <!-- BEGIN CONTAINER -->
-    <div id="container" class="row-fluid message_close sub_pre_section">
+    <div id="container" class="row-fluid message_close">
         <!-- BEGIN PAGE -->
         <div id="main-content">
             <!-- BEGIN PAGE CONTAINER-->
-            <div class="container-fluid">
+            <div class="container-fluid sub_pre_section">
                 <!-- BEGIN PAGE HEADER-->
                 <div class="row-fluid">
                     <div class="span12">

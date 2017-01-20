@@ -411,7 +411,7 @@ a,a:focus, a:hover, a:active {
 #main-content {
     margin-top: 0px;
     margin-left: 215px;
-    min-height: 800px;
+    min-height: 610px;
     background: #f7f7f7 url("../img/body-bg.png");
 }
 
@@ -4189,7 +4189,7 @@ a.dt-button {
     position: relative;
     display: inline-block;
     box-sizing: border-box;
-    margin-right: 0.333em;
+    margin-right: 3.333em;
     padding: 0.5em 1em;
     border: 1px solid #999;
     border-radius: 2px;
@@ -4904,4 +4904,4 @@ i#admin_error_login {
 .temp_remove_act{
     display: none;
 }
-
+/**/

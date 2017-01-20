@@ -5,6 +5,7 @@
 		position: absolute;
  		width: 205px;
   	}
+
   	#sidebar ul{
   		margin-top:50px;
   		width: 215px;
@@ -12,6 +13,7 @@
   		/*overflow-y:scroll;*/
   		height:580px;
   	}
+
   	/* body container */
   	#main-content {
 		margin-top: 0px !important;
@@ -21,6 +23,8 @@
 		margin-top: 20px;
 	} 
 }
+
+
 /* dashboard date range button for all device size */
 
 /* General styles for phones and tablets */
