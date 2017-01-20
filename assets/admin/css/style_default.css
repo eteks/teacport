@@ -407,9 +407,10 @@ tr select {
 	float:left;
 	display: inline block;
 }
-/*.dynamic_data span:before{
+
+.lang_design span:before{
 	content:'-';
-}*/
+}
 .Zebra_DatePicker_Icon_Wrapper{
     width: 100% !important;
 }
@@ -430,23 +431,11 @@ tr select {
 }
 .form_table_scl {
     /*border-right: 1px solid #868686;*/
-    max-width: 1066px !important;
+    max-width: 1166px !important;
     min-width: 800px !important;
     /*min-height:1000px !important;*/
     /*max-height:700px !important;*/
     /*overflow: auto;*/
-}
-.scroll_section_sidebar{
-	max-height:100px !important; 
-	height: auto;
-	width: auto;
-	overflow-y: scroll;
-}
-.sub_section_scrollprivil{
-	max-height:600px !important; 
-	height: auto;
-	width: auto;
-	overflow: scroll;
 }
 
  /*.sub_section_scroll{
@@ -459,7 +448,7 @@ tr select {
 	/*max-height:570px !important; */
 	height: auto;
 	width: auto;
-	overflow: scroll;
+	overflow: hidden;
 }
 .sub_hori_scroll{
 	height: auto;
@@ -468,7 +457,8 @@ tr select {
 	overflow: scroll;
 }
 .hori_scroll{
-	ove
+	overflow-x:scroll;
+	width:auto;
 }
 .main_module{
     font-size: 13px;

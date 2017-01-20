@@ -227,14 +227,11 @@ $(document).ready(function(){
         height: 'auto'
       
     });
-	$('.sub_hori_scroll').slimScroll({
+	 $('.sub_hori_scroll').slimScroll({
         height: 'auto',
         axis:'x',
-        width:'auto',
-       
+        width:'auto',        
     });
-
-
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
         $('.caret-up').show();
@@ -834,6 +831,22 @@ $('.top_layer, .message_close').on('click',function() {
         return false;
      }
     });
+
+    /* Accept Only Numbers */
+    $(document).on("keypress",".numeric_value",function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
+    /* Accept Only Characters with space */
+    $(document).on("keypress",".alpha_value",function (e) {
+        if (e.which != 8 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
+            return false;
+        }
+    });
+
+
     
     /* Akila Added */
     //Job Provider Image popup for posted Ads 
@@ -929,11 +942,12 @@ $('.temp_remove_act').click(function(e)
        $('#imagepreview_templogo').attr("src","");
    });
    
-   var win_height= $(window).height();
+  	var win_height= $(window).height();
    var head_height= win_height - $('#header').height();
-   // alert (win_height);
-   // alert(head_height);  
-   $('.sub_pre_section').css('max-height', head_height);
+   var footer_height= head_height -$('#footer').height(); 
+   //alert (win_height);
+   //alert(head_height);  
+   $('.sub_pre_section').css('max-height', footer_height);
    
 /* Popup pagination with arrow end */ 
 

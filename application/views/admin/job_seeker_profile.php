@@ -355,7 +355,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Language Known</label>
-                          <span class="dynamic_data">
+                          <span class="dynamic_data lang_design">
                           	<?php
                             $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
                             if(!empty($known_languages) && !empty($seeker_full_profile['candidate_language_known'])) :

@@ -161,7 +161,7 @@
 					</div>		
 					<div class="form-group">
                     	<label>Email / Mobile No. <sup class="required alert">*</sup></label>
-                    	<input placeholder="" class="form-control extra_login_menu_user_name" type="email">
+                    	<input placeholder="" class="form-control extra_login_menu_user_name" type="text">
                 	</div>
                 	<div class="form-group">
                     	<label>Password <sup class="required alert">*</sup></label>
