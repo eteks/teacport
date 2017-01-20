@@ -50,7 +50,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="widget-title">
                             <h4><i class="icon-reorder"></i> Change Password</h4>
                             <span class="tools">
-                                <a href="javascript:;" class="icon-chevron-down"></a>
+                                <!-- <a href="javascript:;" class="icon-chevron-down"></a> -->
                                 <a href="javascript:;" class="icon-remove"></a>
                             </span>
                         </div>
@@ -60,19 +60,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                          <div class="control-group">
 	                            <label class="control-label">Current Password</label>
 	                            <div class="controls">
-	                              <input type="password" class="span6 " name="current_pass" />
+	                              <input type="password" class="span6 " name="current_pass" placeholder="Current Password"/>
 	                            </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">New Password</label>
 	                            <div class="controls">
-	                              <input type="password" class="span6 " name="new_pass" />
+	                              <input type="password" class="span6 " name="new_pass" placeholder="New Password"/>
 	                            </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Confirm Password</label>
 	                            <div class="controls">
-	                              <input type="password" class="span6 " name="new_pass_confirm" />
+	                              <input type="password" class="span6 " name="new_pass_confirm" placeholder="Confirm Password" />
 	                            </div>
 	                          </div>
 	                          <div class="form-actions">

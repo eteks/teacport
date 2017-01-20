@@ -262,6 +262,11 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .posted_jobs_provider  .btn-default i {
     margin: 0px;
 }
+/*Vancancies*/
+.vacan_currency{
+	color: #000 !important;
+	font-size: 17px !important;
+}
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -1163,7 +1168,7 @@ label.form-input-error {
     width: 100%;
 }
 .app_post{
-	margin-bottom: 15px !important; 
+	margin-bottom: 60px !important; 
 }
 .app_post h5{
 	padding-left: 20px !important;
