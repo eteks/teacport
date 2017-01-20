@@ -834,6 +834,22 @@ $('.top_layer, .message_close').on('click',function() {
         return false;
      }
     });
+
+    /* Accept Only Numbers */
+    $(document).on("keypress",".numeric_value",function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
+    /* Accept Only Characters with space */
+    $(document).on("keypress",".alpha_value",function (e) {
+        if (e.which != 8 && e.which != 32 && e.which != 0 && (e.which < 65 || e.which > 90) && (e.which < 97 || e.which > 122)) {
+            return false;
+        }
+    });
+
+
     
     /* Akila Added */
     //Job Provider Image popup for posted Ads 

@@ -228,15 +228,15 @@ class Job_provider extends CI_Controller {
 			/* Set validate condition for profile update form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
-			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'callback_organization_logo_validation');
+			$this->form_validation->set_rules('organization_logo', 'Organization logo', '');
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
-			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|required|min_length[3]|max_length[50]|callback_alpha_dash_space|xss_clean');
-			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|required|min_length[3]|max_length[50]|xss_clean');
-			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date');
+			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|min_length[3]|max_length[50]|callback_alpha_dash_space|xss_clean');
+			$this->form_validation->set_rules('provider_designation', 'Your Designation', 'trim|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('provider_dob', 'Date of Birth', 'callback_valid_date_required');
 			$this->form_validation->set_rules('declar_accept', 'Declaration', 'callback_form_declaration');
 			/* check forms data are valid are not */
 			if ($this->form_validation->run())
@@ -1106,15 +1106,31 @@ class Job_provider extends CI_Controller {
         	return false;
 		}
 	}
-	public function organization_logo_validation(){
-		
-    	if (empty($_FILES['organization_logo']['name'])) {
-    		$this->form_validation->set_message('organization_logo_validation', 'Please select file.');
-            return false;
-        }else{
-            return true;
-        }
+
+	public function valid_date_required($date)
+	{
+		if(!empty($date)){
+	   		$date_split =  explode('/', $date);
+	   		if(checkdate($date_split[1],$date_split[0],$date_split[2]) ) {
+	      		return true;
+	   		} else {
+	     		$this->form_validation->set_message('valid_date','The %s date is not valid it should match this dd/mm/yyyy format');
+	        	return false;
+	   		}
+		}
+		else{
+        	return true;
+		}
 	}
+	// public function organization_logo_validation(){
+		
+ //    	if (empty($_FILES['organization_logo']['name'])) {
+ //    		$this->form_validation->set_message('organization_logo_validation', 'Please select file.');
+ //            return false;
+ //        }else{
+ //            return true;
+ //        }
+	// }
 	public function provider_premium_ad_validation(){
 		if (empty($_FILES['provider_premium_ad_image']['name'])) {
     		$this->form_validation->set_message('provider_premium_ad_validation', 'Please upload image.');
