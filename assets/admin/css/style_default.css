@@ -407,9 +407,9 @@ tr select {
 	float:left;
 	display: inline block;
 }
-.dynamic_data span:before{
+/*.dynamic_data span:before{
 	content:'-';
-}
+}*/
 .Zebra_DatePicker_Icon_Wrapper{
     width: 100% !important;
 }
