@@ -462,12 +462,12 @@ class Job_seeker_model extends CI_Model {
 				$status = "Email Already exists";
 			}
 			else {
-				if($fresh == 0 ) {
+				// if($fresh == 0 ) {
 					$pro_com = 100;
-				}
-				else {
-					$pro_com = 90;
-				}
+				// }
+				// else {
+					// $pro_com = 90;
+				// }
 				$candidate_dob_explode = explode('/', $data['cand_dob']);
 				$candidate_dob = $candidate_dob_explode[2]."-".$candidate_dob_explode[1]."-".$candidate_dob_explode[0];
 				// Updation in profile table

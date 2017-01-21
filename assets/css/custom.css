@@ -262,6 +262,11 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .posted_jobs_provider  .btn-default i {
     margin: 0px;
 }
+/*Vancancies*/
+.vacan_currency{
+	color: #000 !important;
+	font-size: 17px !important;
+}
 /* JOB SEEKER DASHBOARD */
 /* Candidate register form */
 #candidate-form h3 {
@@ -1163,7 +1168,7 @@ label.form-input-error {
     width: 100%;
 }
 .app_post{
-	margin-bottom: 15px !important; 
+	margin-bottom: 60px !important; 
 }
 .app_post h5{
 	padding-left: 20px !important;
@@ -1192,8 +1197,6 @@ label.form-input-error {
 .job_salary_act{top: 25px;}
 .comp_name_act{position: absolute;top: 30px;}
 .vacancies_instruction_act{margin-top: 40px !important;}
-.comp_name_act{position: absolute;top: 30px !important;}
-.cand_description_act{margin-top: 35px !important;}
 /*Ended By Thangam*/
 /* Added by Akila */
 /* About us */

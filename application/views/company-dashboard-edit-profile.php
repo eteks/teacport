@@ -130,7 +130,7 @@
 								<label class="col-sm-offset-1 col-sm-2" for="firstname">Registrant Name</label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
-									<input id="firstname" data-name="Registrant Name" data-minlength="3" class="form-control form_inputs not-required alpha_value" maxlength="50" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
+									<input id="firstname" data-name="Registrant Name" data-minlength="3" class="form-control form_inputs alpha_value" maxlength="50" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">

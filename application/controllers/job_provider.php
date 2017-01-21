@@ -1073,9 +1073,11 @@ class Job_provider extends CI_Controller {
 		if($_POST){
 			$candidate_id = $this->input->post('candidate_id');	
 			$org_id = $this->input->post('org_id');
-			$this->job_provider_model->provider_resume_download_update($candidate_id,$org_id);
-			echo 'update';
-		}else{
+			$status = $this->job_provider_model->provider_resume_download_update($candidate_id,$org_id);
+
+			echo ($status!='')?$status:"failure";
+		}
+		else{
 			redirect('missingpage');
 		}
 	}
@@ -1083,8 +1085,8 @@ class Job_provider extends CI_Controller {
 		if($_POST){
 			$candidate_id = $this->input->post('candidate_id');	
 			$org_id = $this->input->post('org_id');
-			$this->job_provider_model->provider_mail_send_update($candidate_id,$org_id);
-			echo 'update';
+			$status = $this->job_provider_model->provider_mail_send_update($candidate_id,$org_id);
+			echo ($status!='')?$status:"failure";
 		}else{
 			redirect('missingpage');
 		}
