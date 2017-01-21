@@ -4647,8 +4647,11 @@ div.dt-button-background {
 }
 #table_wrapper_Datatable {
     clear: both;
+    /*overflow-x: scroll !important;*/
 }
-
+/*.admin_module_form{
+	overflow-x:scroll !important;
+}*/
 /* Multi choice start */
 .multi_choice > div ul{
     max-height: 100px !important;
