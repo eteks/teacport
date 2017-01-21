@@ -925,3 +925,8 @@ table {
     
     width: 150px !important;
    }
+.upgrade_scroll{
+	overflow-x:scroll !important;
+	
+}
+   
