@@ -2,7 +2,7 @@
         <div id="footer">
             <span>2016 &copy; Teacher Recruit.</span>
             <div class="span pull-right">
-                <span class="go-top"><i class="icon-arrow-up"></i></span>
+                <!-- <span class="go-top"><i class="icon-arrow-up"></i></span> -->
             </div>
         </div>
         <!-- CSRF TOKEN -->

@@ -237,7 +237,6 @@ $(document).ready(function(){
         $('.caret-up').show();
         $('.top_layer').show();
     });
-
     $('#container').on('click',function() {
         $('.extended').hide();
         $('.caret-up').hide();
@@ -245,6 +244,12 @@ $(document).ready(function(){
     });
     $('.top_layer').on('click',function() {
         $('.caret-up').hide();
+    });
+    $('.job_full_view').on('click',function() {
+        $('.caret-up').hide();
+        $('.extended').hide();
+        $('.caret-up').hide();
+        $('.top_layer').hide();
     });
 var window_width = $(".navbar-inner").width();    
 var window_height = $(".navbar-inner").height();

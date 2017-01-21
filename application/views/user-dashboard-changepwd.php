@@ -46,7 +46,7 @@
                             ?>
                             <div class="form-group">
     							<div class="col-sm-12">
-    								<label class="col-sm-3">Old Password<sup class="alert">*</sup></label>
+    								<label class="col-sm-6">Old Password<sup class="alert">*</sup></label>
                                     <?php echo form_error('old_pass'); ?>
     								<div class="col-sm-6">
     									<input id="old_pass" placeholder="Old Password" class="form-control form_inputs" name="old_pass" size="25" type="password" value="<?php echo set_value('old_pass'); ?>">
