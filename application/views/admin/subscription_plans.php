@@ -87,6 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <p class="admin_status"> </p>
                   <div class="table_content_section">
                     <?php } ?>
+                   
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">

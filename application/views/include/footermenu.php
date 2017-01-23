@@ -19,9 +19,9 @@
                             <ul class="footer-links">
                                 <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>aboutus">About Us</a> </li>
-                                <li> <a href="<?php echo base_url(); ?>informations">Information</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>missingpage">Information</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>contactus">Contact Us</a> </li>
-                                <li> <a href="<?php echo base_url(); ?>terms">Terms &amp; Conditions</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>missingpage">Terms &amp; Conditions</a> </li>
                             </ul>
                         </div>
                     </div>
@@ -41,13 +41,17 @@
                                 <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
-                    </div>
+                        <div class="visitor_count footer_block">
+                        	 	<h4>Visitor Count</h4>
+                        		<div align='center'><a href=''><img src='http://hit-counter-html-code.com/wp-content/themes/customizr/hitcounter/c.php?d=9&id=159444&s=34' border='0'></a><br / ><small></small></div>
+                    	</div>
+                    	</div>
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block">
                             <h4>Contact Information</h4>
                             <ul class="personal-info">
                                 <li><span class="pull-left"><i class="fa fa-map-marker"></i></span>
-                                	<span class="pull-left foo_addr"> NO.82/2, Thiruvalluvar Road,<br> Uthukottai Town &amp; Tk,<br> Thiruvallur District - 602026 </span>
+                                	<span class="pull-left foo_addr"> NO. 82/2, Thiruvalluvar Road,<br> Uthukottai Town &amp; Tk,<br> Thiruvallur District - 602026 </span>
                                 	<span class="clearfix"> </span>
                                 </li>
                                 <li><a class="transform_lowercase" href="mailto:info@teachersrecruit.com"><i class="fa fa-envelope"></i> info@teachersrecruit.com</a></li>
