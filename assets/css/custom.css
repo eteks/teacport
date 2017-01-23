@@ -1197,6 +1197,9 @@ label.form-input-error {
 .job_salary_act{top: 25px;}
 .comp_name_act{position: absolute;top: 30px;}
 .vacancies_instruction_act{margin-top: 40px !important;}
+.carousel-control.left, .carousel-control.right {background-image: none}
+.news_flash{border: 3px solid rgb(255,165,0);box-shadow: 0 0 4px #f47020;}
+
 /*Ended By Thangam*/
 /* Added by Akila */
 /* About us */

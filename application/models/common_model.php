@@ -49,7 +49,7 @@ class Common_model extends CI_Model {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
         if(!empty($data['max_amount'])) {
-        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary <=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -86,7 +86,7 @@ class Common_model extends CI_Model {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
         if(!empty($data['max_amount'])) {
-        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary <=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -162,6 +162,7 @@ class Common_model extends CI_Model {
 		$posting = $this->db->get();
 		return $posting->result_array(); 
 	}
+	
 	public function mother_tongue()
 	{
 		$this->db->select('*');    
