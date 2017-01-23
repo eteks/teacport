@@ -200,6 +200,8 @@
                                         margin-right:5px;\n\
                                         padding-bottom: 15px;\n\
                                         display:block;\n\
+                                        position: relative;\n\
+                                        z-index: 2;\n\
                                    '>/");
         $(".message_res").text(function(index, currentText) {
         if (currentText.length>60) {
