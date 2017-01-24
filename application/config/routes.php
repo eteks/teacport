@@ -107,7 +107,7 @@ $route['seeker/jobsapplieddetails/(:num)'] 				= 'job_seeker/applynow/$1';
 // $route['seeker/applynow'] 								= 'job_seeker/applynow';
 $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 $route['seeker/password'] 								= 'job_seeker/change_password';
-$route['seeker/allinstitutions'] 						= 'job_seeker/allinstitutions';
+// $route['seeker/allinstitutions'] 						= 'job_seeker/allinstitutions';
 $route['seeker/vacancies'] 								= 'job_seeker/vacancies';
 $route['seeker/vacancies/(:num)'] 						= 'job_seeker/vacancies/$1';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
@@ -122,7 +122,8 @@ $route['contactus'] 									= 'home/contactus';
 $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
-$route['user-followed-companies'] 						= 'home/userfollowedcompanies';
+$route['allinstitutions/(:num)'] 						= 'home/allinstitutions/$1';
+$route['user-followed-companies/(:num)'] 				= 'home/userfollowedcompanies/$1';
 $route['vacancies'] 									= 'home/vacancies';
 $route['vacancies/(:num)']  							= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
@@ -209,10 +210,12 @@ $route['main/template_logo'] = 'admin/setting/template_logo';
 
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
+$route['main/latest_news'] = 'admin/other_module/latest_news';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
+
 
 /* ===================          Route settings for Admin End     ====================== */
 

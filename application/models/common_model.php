@@ -228,13 +228,6 @@ class Common_model extends CI_Model {
 		return $value;
 	}
 
-	// Get salary details
-	// public function get_salary_details()
-	// {
-	// 	$value = $this->db->get_where('tr_expect_salary',array('expect_salary_status' => '1'))->result_array();
-	// 	return $value;
-	// }
-
 	// Get department details
 	public function get_department_details()
 	{
@@ -246,6 +239,13 @@ class Common_model extends CI_Model {
 	public function get_board_details()
 	{
 		$value = $this->db->get_where('tr_university_board',array('university_board_status' => '1'))->result_array();
+		return $value;
+	}
+
+	// Get latest news
+	public function latest_news()
+	{
+		$value = $this->db->get_where('tr_latest_news',array('latest_news_status' => '1'))->result_array();
 		return $value;
 	}
 
@@ -268,16 +268,54 @@ class Common_model extends CI_Model {
             $query = $this->db->get()->result_array(); 
             return $query;           
 	}
-	public function get_allinstitutions_list()
+	public function get_allinstitutions_list($limit,$start)
 	{
-			$search_product=$this->db->select('*');
-            $search_product=$this->db->from('tr_organization_profile cp');
-            $where1 = '(cp.organization_status=1)';
-            $search_product=$this->db->where($where1);
-            $search_product=$this->db->group_by('cp.organization_id');
-            $query = $this->db->get()->result_array(); 
-            return $query;
+        // Retrieve data with limit
+        $where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+        $model_data['allinstitutions_results'] = $this->db->limit($limit,$start)->get_where('tr_organization_profile',$where)->result_array();
+
+       	// Total count
+       	$model_data['total_rows'] = $this->db->get_where('tr_organization_profile',$where)->num_rows();
+
+       	// Get total jobs count
+       	$total_jobs_where = '(organization_status=1 AND organization_profile_completeness >=90 AND vacancies_status = 1)';  
+       	$this->db->select('op.organization_id,count(ov.vacancies_id) as totaljobs');
+        $this->db->from('tr_organization_profile op');
+        $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');   
+        $this->db->group_by('op.organization_id');
+        $this->db->where($total_jobs_where);
+        $model_data['provider_totaljobs'] = $this->db->get()->result_array();
+
+        // Get new jobs count
+        $new_jobs_where = '(organization_status=1 AND organization_profile_completeness >=90 AND vacancies_status = 1 AND ov.vacancies_created_date BETWEEN CURDATE() - INTERVAL 2 DAY AND CURDATE() + INTERVAL 1 DAY)';  
+       	$this->db->select('op.organization_id,count(ov.vacancies_id) as newjobs');
+        $this->db->from('tr_organization_profile op');
+        $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');   
+        $this->db->group_by('op.organization_id');
+        $this->db->where($new_jobs_where);
+        $model_data['provider_newjobs'] = $this->db->get()->result_array();
+
+      	// echo "<pre>";
+      	// print_r($model_data['provider_newjobs']);
+      	// echo "</pre>";
+
+		return $model_data;
 	}
+
+	// // Get Company full details
+	public function company_details($id)
+	{
+        $where = '(op.organization_status=1 AND op.organization_profile_completeness >=90 AND op.organization_id="'.$id.'")';  
+        $this->db->select('*');
+        $this->db->from('tr_organization_profile op');
+        $this->db->join('tr_district d','op.organization_district_id = d.district_id','left'); 
+        $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
+        $this->db->where($where);
+        $model_data = $this->db->get()->row_array();
+		return $model_data;
+	}
+
+	
 	
 	public function provider_subscription_active_plans($org_id){
 		$this->db->select('*');    

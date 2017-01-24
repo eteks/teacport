@@ -1221,6 +1221,13 @@ label.form-input-error {
 .vacancies_instruction_act{margin-top: 40px !important;}
 .carousel-control.left, .carousel-control.right {background-image: none}
 .news_flash{border: 3px solid rgb(255,165,0);box-shadow: 0 0 4px #f47020;}
+.subs_button{background-color:#4CAF50;border:none;color:white;padding:16px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:33px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer}
+.prem_select{background-color:white;color:black;border:2px solid #00a5ef}
+.prem_select:hover{background-color:#00a5ef;color:white}
+.upg_select{background-color:white;color:black;border:2px solid #da651a}
+.upg_select:hover{background-color:#da651a;color:white}
+.renew_select{background-color:white;color:black;border:2px solid #00a5ef}
+.renew_select:hover{background-color:#00a5ef;color:white}
 
 /*Ended By Thangam*/
 /* Added by Akila */
@@ -1341,4 +1348,3 @@ label.form-input-error {
 	padding-top:40px;
 	pointer-events:none;
 }
-    
