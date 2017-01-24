@@ -929,4 +929,12 @@ table {
 	overflow-x:scroll !important;
 	
 }
-   
+/* For nav-pills */
+.tab_form .navbar .nav-design >li{
+	margin: 10px 22px !important;
+    width: 27% !important
+} 
+.job_pro_form .step .desc_space {
+    margin-left: 34px !important;
+    padding: 13px 3px !important;
+} 

@@ -158,7 +158,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>         
 
       <!---Full View popup -->
-      <div class="popup" data-popup="popup_section_transaction">
+      <div class="popup feedback-design" data-popup="popup_section_transaction">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
