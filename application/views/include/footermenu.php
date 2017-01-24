@@ -11,6 +11,7 @@
 			                	<span class="clearfix"> </span>
                				</a>
                             <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
+                            <blockquote>"Arise, Awake and Stop Not till you reach your goal" - Swami Vivekananda</blockquote>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-2 col-xs-12">
@@ -35,9 +36,9 @@
                                 <li><a href="<?php echo base_url(); ?>vacancies">View all jobs</a></li>
                             </ul> -->
                             <ul class="social-network social-circle onwhite">
-                                <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="http://plus.google.com" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="http://www.facebook.com/teachersrecruit/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="http://www.twitter.com/teacherecruit" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="https://plus.google.com/112001535695316053521" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                                 <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>

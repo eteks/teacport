@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="Teacher Recruit">
     <title>Teachers Recruit</title>
-    <link rel="icon" href="<?php echo base_url(); ?>assets/images/tr_favicon.ico" type="image/x-icon">
+    <link rel="icon" href="<?php echo base_url(); ?>assets/images/logo/tr_favicon.ico" type="image/x-icon">
 
     <!-- BOOTSTRAPE STYLESHEET CSS FILES -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/bootstrap.min.css">
