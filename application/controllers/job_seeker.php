@@ -350,17 +350,23 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
-			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|required|xss_clean|min_length[3]|max_length[150]');
-			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|required|xss_clean|min_length[3]|max_length[150]');
+			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
+			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
-		
+				
 			if($this->form_validation->run()) {
+				if($this->input->post('seeker_address1') || $this->input->post('seeker_address2')) {
+					$profile_complete = 40;
+				}
+				else {
+					$profile_complete = 30;
+				}
 				$data_array = array(
 					'candidate_father_name' => $this->input->post('seeker_father'),
 					'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 					'candidate_address_1' => $this->input->post('seeker_address1'),
 					'candidate_address_2' => $this->input->post('seeker_address2'),
-					'candidate_profile_completeness' => '40',
+					'candidate_profile_completeness' => $profile_complete,
 					'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				if($this->input->post('popup_type') == 'social') {
@@ -373,7 +379,7 @@ class Job_seeker extends CI_Controller {
 						'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 						'candidate_address_1' => $this->input->post('seeker_address1'),
 						'candidate_address_2' => $this->input->post('seeker_address2'),
-						'candidate_profile_completeness' => '40',
+						'candidate_profile_completeness' => $profile_complete,
 						'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				}
@@ -389,7 +395,7 @@ class Job_seeker extends CI_Controller {
 		}
 
 		$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
-		if($candidate_data['candidate_father_name'] == '' or $candidate_data['candidate_address_1'] == '' or $candidate_data['candidate_district_id'] == '' or $candidate_data['candidate_date_of_birth'] == '') 
+		if($candidate_data['candidate_father_name'] == '' or $candidate_data['candidate_district_id'] == '' or $candidate_data['candidate_date_of_birth'] == '') 
 		{
 			if($candidate_data['candidate_institution_type'] == '0' or $candidate_data['candidate_institution_type'] == '' or $candidate_data['candidate_email'] == '' or $candidate_data['candidate_mobile_no'] == '' or $candidate_data['candidate_password'] == '') {
 				$data['initial_data'] = 'show_popup';
@@ -533,8 +539,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|maxlength[5]|callback_numeric_dot'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
-	    	// array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|xss_clean'),
-
+	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|required|xss_clean'),
 			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'trim|xss_clean'),
@@ -983,16 +988,15 @@ class Job_seeker extends CI_Controller {
 		}   	 		
 	}
 	/*Added by thangam*/
-	public function allinstitutions(){
-		$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
-		$this->load->view('all-institutions',$categories);
-	}
+	// public function allinstitutions(){
+	// 	$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
+	// 	$this->load->view('all-institutions',$categories);
+	// }
 	public function vacancies()
 	{
 		$data['applicable_postings'] = $this->common_model->applicable_posting();
 		$data['qualifications'] = $this->common_model->qualification();
 		$data['institution_values'] = $this->common_model->get_institution_type();
-
 
 		$search_inputs = array();	
 		if($_POST) {

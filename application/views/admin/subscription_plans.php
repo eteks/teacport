@@ -85,8 +85,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </div>
                 <form action="subscription_plans">
                 <p class="admin_status"> </p>
-                  <div class="table_content_section">
-                    <?php } ?>
+                  <div>
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">
@@ -111,7 +110,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php endif; ?>                                 
                       </tr>
                     </thead>
-                    <tbody>     
+                    <tbody class="table_content_section">
+                    <?php } ?>
                     <?php
                       if(!empty($subscription_plans)):
                       foreach ($subscription_plans as $sub) :
@@ -164,9 +164,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         endforeach;
                         endif;
                       ?>
-                   </tbody>
+                      <?php if(!$this->input->is_ajax_request()) { ?> 
+                    </tbody>
                   </table>
-                  <?php if(!$this->input->is_ajax_request()) { ?> 
                   </div>
                 </form>
               </div>

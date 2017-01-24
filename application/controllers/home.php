@@ -42,6 +42,7 @@ class Home extends CI_Controller {
 		$home['totalcandidate'] = $this->common_model->candidate_count();
 		$home['totalorganization'] = $this->common_model->organization_count();
 		$home['allposting'] = $this->common_model->applicable_posting();
+		$home['latest_news'] = $this->common_model->latest_news();
 		$home['alldistrict'] = $this->common_model->get_all_district();
 		$home['premiumads'] = $this->common_model->get_premiumads();
 	    $this->load->view('index',$home);
@@ -146,13 +147,61 @@ class Home extends CI_Controller {
 	public function faq(){
 		$this->load->view('faq');
 	}
+
+
 	public function allinstitutions(){
-		$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
-		$this->load->view('all-institutions',$categories);
+		// $categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
+
+    	// Pagination values
+    	$per_page = 20;
+
+    	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
+        $results = $this->common_model->get_allinstitutions_list($per_page, $offset);
+    	$total_rows = $results['total_rows'];
+    	$data["allinstitutions_results"] = $results['allinstitutions_results'];
+    	$data["provider_totaljobs"] = $results['provider_totaljobs'];
+    	$data["provider_newjobs"] = $results['provider_newjobs'];
+
+    	//pagination
+		$this->load->library('pagination');
+
+		// Pagination configuration
+  		$config['base_url'] = base_url().'allinstitutions';
+		$config['per_page'] = $per_page;
+		$config['total_rows'] = $total_rows;
+		$config['uri_segment'] = 2;
+		$config['num_links'] = $total_rows;
+		$config['use_page_numbers'] = TRUE;
+
+    	// Custom Configuration
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Previous';
+
+		// Pagination Inititalization
+		$this->pagination->initialize($config);
+
+		// Navigation Links
+		$pagination_links = $this->pagination->create_links();
+		$data["links"] = $pagination_links;
+        $this->load->view('all-institutions',$data);
 	}
+
+
+
 	public function userfollowedcompanies()
 	{
-		$this->load->view('user-followed-companies');
+		$data['company_details'] = $this->common_model->company_details($this->uri->segment('2'));
+		$this->load->view('user-followed-companies',$data);
 	}
 	public function vacancies()
 	{
