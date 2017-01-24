@@ -411,8 +411,10 @@ a,a:focus, a:hover, a:active {
 #main-content {
     margin-top: 0px;
     margin-left: 215px;
-    min-height: 560px;
+    /*min-height: 560px;*/
     background: #f7f7f7 url("../img/body-bg.png");
+    min-height: 600px;
+    max-height: 100%;
 }
 
 /* page container */
