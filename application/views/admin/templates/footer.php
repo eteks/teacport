@@ -115,6 +115,11 @@
                  datatable_initialization(id="#filter_vacancy_table");
                  datatable_initialization(id="#filter_provider_table");
             });
+            $(".message_res").text(function(index, currentText) {
+                if (currentText.length>60) {
+                    return currentText.substr(0, 60)+'.....';
+                }
+            });
         </script>
         <!-- END JAVASCRIPTS -->
 
