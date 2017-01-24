@@ -504,12 +504,28 @@ select:invalid {
 .home_slider{
 	width: 97%;
 	height: 80px;
-	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .featured_jobs_area {
 	margin: 10px;
 	border: 5px solid #f2f2f2;
+}
+.add_section{
+	width: 100%;
+	height: 100px;
+	margin: 5px;
+}
+.banner_adds{
+	width: 60%;
+	height: 80px;
+	background-color: #ccefff;
+	margin: 5px; 
+}
+.newsflash{
+	width: 35%;
+	height: 80px;
+	background-color: #f2f2f2;
+	margin: 5px; 
 }
 .fjob {
 	width: 28.3%;
@@ -527,8 +543,7 @@ select:invalid {
 	border: 5px solid #f2f2f2;
 	width: 97%;
 	height: 100px;
-	background-color: #ccefff;
-	
+	/*background-color: #ccefff;*/
 	margin: 5px 10px;
 }
 .page_layout .footer_section {
@@ -549,6 +564,12 @@ select:invalid {
 .list-banner .fa-thumb-tack {
 	margin-right: 5px;
 }
+.applicalble_posts_slider{
+	width: 97%;
+	height: 30px;
+	background-color: #f2f2f2;
+	margin: 5px 10px;
+} 
 /* Company Resume -inbox */
 .resume-list table tr td{
 	vertical-align: middle;
@@ -1199,12 +1220,23 @@ label.form-input-error {
 .vacancies_instruction_act{margin-top: 40px !important;}
 .carousel-control.left, .carousel-control.right {background-image: none}
 .news_flash{border: 3px solid rgb(255,165,0);box-shadow: 0 0 4px #f47020;}
+.subs_button{background-color:#4CAF50;border:none;color:white;padding:16px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:33px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer}
+.prem_select{background-color:white;color:black;border:2px solid #00a5ef}
+.prem_select:hover{background-color:#00a5ef;color:white}
+.upg_select{background-color:white;color:black;border:2px solid #da651a}
+.upg_select:hover{background-color:#da651a;color:white}
+.renew_select{background-color:white;color:black;border:2px solid #00a5ef}
+.renew_select:hover{background-color:#00a5ef;color:white}
 
 /*Ended By Thangam*/
 /* Added by Akila */
 /* About us */
 .about-us p{
 	text-align: justify;
+}
+.about-us blockquote{
+	color: #f47020;
+	font-weight: bold;
 }
 /*vacancy*/
 .footer-grey-color{
@@ -1259,6 +1291,24 @@ label.form-input-error {
 #institution_grids .company-box {
 	padding: 20px 0;	
 }
+/*Find jobs */
+.job-box-2 .feature-post-meta-bottom .apply {
+    color: #242424;
+    font-weight: 700;
+}
+/* Footer */
+.footer_block blockquote{
+	font-size: 10px;
+	color: #f47020;
+	font-weight: bold;
+}
+.qualified_level{
+	margin: 15px 0 0;
+}
 /* Ended by Akila */
-
-    
+/* For Visitor Count */
+.visitor_count{
+	float:left;
+	padding-top:40px;
+	pointer-events:none;
+}

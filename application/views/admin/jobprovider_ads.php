@@ -84,7 +84,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th>Premium Ads Name</th>
                           <th class="not-sort">Ads Image</th>
                           <th>Organization Name</th>
-                          <th>Ads Visible Date</th>
+                          <th>Ads Visible Days</th>
                           <th class="not-sort">Admin Vefied </th>
                           <th>Ads Status</th>
                           <th>Ads Created Date</th>

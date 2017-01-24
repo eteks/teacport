@@ -17,6 +17,10 @@ class Other_module extends CI_Controller {
 	{		
 		$this->load->view('admin/feedback_form');
 	}
+	public function latest_news()
+	{		
+		$this->load->view('admin/latest_news');
+	}
 	public function get_feedback_full_view()
 	{
 		if($this->input->post('action') && $this->input->post('value')) {

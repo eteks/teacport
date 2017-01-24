@@ -79,7 +79,14 @@ function add_new_record() {
         input = createInput(i,'');
         blankrow += '<td class="ajaxReq">'+input+'</td>';
     }
-    blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
+     if(typeof is_created != "undefined" && is_created=="no") {
+        blankrow += '<td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
+     }
+     else {
+       blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
+     }
+            
+    
     // prepand blank row at the end of table
     $("."+table).prepend(blankrow);
 }
