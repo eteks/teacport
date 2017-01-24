@@ -58,6 +58,10 @@ include ('include/menus.php');
 		                        		<div class="header_part"></div>
 			                        	<div class="body_content">
 			                        		<div class="post_adds_caurosel"></div>
+			                        		<div class="add_section">
+			                        			<div class="banner_adds pull-left"> </div>
+			                        			<div class="newsflash pull-left"></div>
+			                        		</div>
 			                        		<div class="featured_jobs_area">
 			                        		 <ul>	
 			                        			<li class="fjob pull-left"></li>
@@ -68,6 +72,7 @@ include ('include/menus.php');
 			                        		</div>
 			                        		<div class="counter_area"> </div>
 			                        	</div>	
+			                        	<div class="applicalble_posts_slider"></div>
 		                        		<div class="footer_section"></div>
 		                        		<div class="footer"> </div>	
 			                        </div>

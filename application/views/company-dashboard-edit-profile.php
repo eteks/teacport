@@ -95,6 +95,21 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-offset-1 col-sm-2">State<sup class="alert">*</sup></label>
+								<div class="col-sm-8">
+									<select id="org_state" class="select-state on_change_event_select form-control form_inputs" name="org_native_state">
+										<option value=""> Select State </option>
+										<option value="">Tamil Nadu </option>
+										<option value="">Pondicherry</option>
+										<option value="">Andhra Pradesh</option>
+										<option value="">Andhra Pradesh</option>
+										<option value="">Telungana</option>
+										<option value="">Karnataka</option>
+										<option value="">Kerala</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-offset-1 col-sm-2" for="add_district">District <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_district'); ?>
