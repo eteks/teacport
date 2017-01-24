@@ -203,7 +203,7 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 .job_seek_form  .step .desc{
 	margin-left:26px !important;
-	padding:6px 0 !important;
+	padding:8px 8px !important;
 }
 /*.brand > img{
     margin-left: 35px !important;
@@ -938,3 +938,6 @@ table {
     margin-left: 34px !important;
     padding: 13px 3px !important;
 } 
+.chzn-container-multi .chzn-choices{
+	padding:2px !important;
+}

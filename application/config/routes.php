@@ -209,10 +209,12 @@ $route['main/template_logo'] = 'admin/setting/template_logo';
 
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
+$route['main/latest_news'] = 'admin/other_module/latest_news';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
+
 
 /* ===================          Route settings for Admin End     ====================== */
 
