@@ -47,7 +47,7 @@
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
                                		<div class=" col-sm-10 input-group image-preview">
-                               			<input type="text" disabled="disabled" class="form-control image-preview-filename form_inputs not-required" placeholder="Upload Provider Logo">
+                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Provider Logo">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_profile" style="display: none;" class="btn btn-default image-preview-clear" type="button">
 	                                        	<span class="glyphicon glyphicon-remove"></span> Clear
@@ -95,6 +95,21 @@
 								</div>
 							</div>
 							<div class="form-group">
+								<label class="col-sm-offset-1 col-sm-2">State<sup class="alert">*</sup></label>
+								<div class="col-sm-8">
+									<select id="org_state" class="select-state on_change_event_select form-control form_inputs" name="org_native_state">
+										<option value=""> Select State </option>
+										<option value="">Tamil Nadu </option>
+										<option value="">Pondicherry</option>
+										<option value="">Andhra Pradesh</option>
+										<option value="">Andhra Pradesh</option>
+										<option value="">Telungana</option>
+										<option value="">Karnataka</option>
+										<option value="">Kerala</option>
+									</select>
+								</div>
+							</div>
+							<div class="form-group">
 								<label class="col-sm-offset-1 col-sm-2" for="add_district">District <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_district'); ?>
@@ -130,7 +145,7 @@
 								<label class="col-sm-offset-1 col-sm-2" for="firstname">Registrant Name</label>
 								<div class="col-sm-8">
 									<?php echo form_error('provider_name'); ?>
-									<input id="firstname" data-name="Registrant Name" data-minlength="3" class="form-control form_inputs alpha_value" maxlength="50" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
+									<input id="firstname" data-name="Registrant Name" data-minlength="3" class="form-control form_inputs alpha_value not-required" maxlength="50" name="provider_name" size="40" value="<?php if($organization['registrant_name'] != '') echo $organization['registrant_name']; elseif (set_value('provider_name')!='') { echo set_value('provider_name'); } ?>" placeholder="Full Name">
 								</div>
 							</div>
 							<div class="form-group">
@@ -156,7 +171,7 @@
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
                                		<div class="col-sm-10 input-group image-preview">
-                               			<input type="text" disabled="disabled" class="form-control form_inputs not-required image-preview-filename" placeholder="Upload Profile Image">
+                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Profile Image">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_your_image" style="display: none;" class="btn btn-default image-preview-clear" type="button">
 	                                        	<span class="glyphicon glyphicon-remove"></span> Clear

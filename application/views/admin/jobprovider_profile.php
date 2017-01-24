@@ -199,17 +199,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <div class="navbar steps">
                     <div class="navbar-inner">
                       <div class="container">
-                        <ul  class="span12 row-fluid nav nav-pills">
+                        <ul  class="span12 row-fluid nav nav-pills nav-design">
                           <li class="span-2">
                             <a href="#tab1" data-toggle="tab" class="step active">
                             	<span class="number">1</span>
-                                <span class="desc"><i class="icon-ok"></i>Organization Details</span>
+                                <span class="desc desc_space"><i class="icon-ok"></i>Organization Details</span>
                             </a>
                           </li>
                           <li class="span-2">
                             <a href="#tab2" data-toggle="tab" class="step">
                             	<span class="number">2</span>
-                                <span class="desc"><i class="icon-ok"></i>Registrant Details</span>
+                                <span class="desc desc_space"><i class="icon-ok"></i>Registrant Details</span>
                             </a>
                           </li>
                           <?php
@@ -218,7 +218,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab3" data-toggle="tab" class="step">
                             	<span class="number">3</span>
-                                <span class="desc"><i class="icon-ok"></i>Payment Details</span>
+                                <span class="desc desc_space"><i class="icon-ok"></i>Payment Details</span>
                             </a>
                           </li>
                           <!-- <li class="span-2">

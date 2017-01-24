@@ -26,7 +26,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
          </div>
          <!-- END RESPONSIVE QUICK SEARCH FORM -->
          <!-- BEGIN SIDEBAR MENU -->
-          
+                   
          <!-- END SIDEBAR MENU -->
       </div>
       <!-- END SIDEBAR -->
@@ -71,7 +71,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
-                                <div class="clearfix">
+                                <div class="clearfix add_section">
                                 </div>
                                 <form>
                                   <table class="table table-striped table-hover table-bordered admin_table ads_table" id="sample_editable_1">
@@ -170,4 +170,3 @@ endif;
 ?>
 
 
-text, browse,text,datepicker,verify,select

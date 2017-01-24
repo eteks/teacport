@@ -172,6 +172,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </a>
                           </td>
                           <?php endif; ?>
+                        </tr>
                         <?php
                         endforeach;
                         ?>
@@ -179,7 +180,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         endif;
                         ?>
                         <?php if(!$this->input->is_ajax_request()) { ?>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
