@@ -146,8 +146,8 @@
 															<li>Max No of ads: 20</li>										
 													</ul>				                                    
 				                                </div>
-				                                <!-- <div class="price-footer"> <a href="#" class="btn">Select Plan</a> </div> -->
 				                            	</div>
+				                            	<div class=""> <a href="#" class="subs_button prem_select">Select Plan</a> </div>
 				                        	</div>
 				                        </div> 
 				                        <div class="col-md-4 col-sm-6 col-xs-12">
@@ -169,8 +169,8 @@
 															<li>Max No of ads: 20</li>
 													</ul>                                   
 				                                </div>
-				                                <!-- <div class="price-footer"> <a href="#" class="btn">Select Plan</a> </div> -->
 				                            </div>
+				                            <div class=""> <a href="#" class="subs_button upg_select">Select Plan</a> </div>
 				                          </div>
 				                        </div>
 				                        <div class="col-md-4 col-sm-6 col-xs-12">
@@ -192,8 +192,8 @@
 															<li>Max No of ads: 20</li>										
 													</ul>				                                    
 				                                </div>
-				                                <!-- <div class="price-footer"> <a href="#" class="btn">Select Plan</a> </div> -->
 				                            	</div>
+				                            	<div class=""> <a href="#" class="subs_button renew_select">Select Plan</a> </div>
 				                        	</div>
 				                        </div>                         
 				                     </div>
