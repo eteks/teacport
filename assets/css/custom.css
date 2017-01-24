@@ -504,12 +504,28 @@ select:invalid {
 .home_slider{
 	width: 97%;
 	height: 80px;
-	background-color: #f2f2f2;
 	margin: 5px 10px;
 }
 .featured_jobs_area {
 	margin: 10px;
 	border: 5px solid #f2f2f2;
+}
+.add_section{
+	width: 100%;
+	height: 100px;
+	margin: 5px;
+}
+.banner_adds{
+	width: 60%;
+	height: 80px;
+	background-color: #ccefff;
+	margin: 5px; 
+}
+.newsflash{
+	width: 35%;
+	height: 80px;
+	background-color: #f2f2f2;
+	margin: 5px; 
 }
 .fjob {
 	width: 28.3%;
@@ -527,8 +543,7 @@ select:invalid {
 	border: 5px solid #f2f2f2;
 	width: 97%;
 	height: 100px;
-	background-color: #ccefff;
-	
+	/*background-color: #ccefff;*/
 	margin: 5px 10px;
 }
 .page_layout .footer_section {
@@ -549,6 +564,12 @@ select:invalid {
 .list-banner .fa-thumb-tack {
 	margin-right: 5px;
 }
+.applicalble_posts_slider{
+	width: 97%;
+	height: 30px;
+	background-color: #f2f2f2;
+	margin: 5px 10px;
+} 
 /* Company Resume -inbox */
 .resume-list table tr td{
 	vertical-align: middle;
@@ -1280,6 +1301,9 @@ label.form-input-error {
 	font-size: 10px;
 	color: #f47020;
 	font-weight: bold;
+}
+.qualified_level{
+	margin: 15px 0 0;
 }
 /* Ended by Akila */
 /* For Visitor Count */

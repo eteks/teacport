@@ -72,7 +72,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
-                                <div class="clearfix">
+                                <div class="clearfix add_section">
                                     <div class="btn-group">
                                         <!-- <button id="sample_editable_1_new" data-open="popup_section" class="btn green add_option">
                                             Add New <i class="icon-plus"></i>
