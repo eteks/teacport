@@ -311,8 +311,15 @@ class Job_Providermodel extends CI_Model {
 
   // Job provider ads - Edit Popup Ajax
   public function get_full_provider_ads($value) {
+    // $ads_where = '(premium_ads_id="'.$value.'")';
+    // $model_data = $this->db->get_where('tr_premium_ads',$ads_where)->row_array();
+    //Above code changed by kalai
     $ads_where = '(premium_ads_id="'.$value.'")';
-    $model_data = $this->db->get_where('tr_premium_ads',$ads_where)->row_array();
+    $this->db->select('*');
+    $this->db->from('tr_premium_ads pa');
+    $this->db->join('tr_organization_profile op','pa.organization_id=op.organization_id','inner');
+    $this->db->where($ads_where);
+    $model_data = $this->db->get()->row_array();
     return $model_data;
   }
 
