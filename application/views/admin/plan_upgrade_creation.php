@@ -64,8 +64,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
 
             <!-- BEGIN ADVANCED TABLE widget-->
             <div class="row-fluid">
-                <div class="span12">
                     <!-- BEGIN EXAMPLE TABLE widget-->
+                <div class="span12">
                     <div class="widget">
                         <div class="edit_add_overlay dn"> </div> <!-- Overlay for table -->
                         <div class="widget-title">
@@ -181,7 +181,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </div>
             </div>
             <!-- END ADVANCED TABLE widget-->
-
             <!-- END PAGE CONTENT-->
          </div>
          <!-- END PAGE CONTAINER-->

@@ -2914,7 +2914,7 @@ div.tagsinput .not_valid {
 
 .form-wizard .step .desc {
     display: inline-block;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 300;
     margin-left: 35px;
     /*margin-top: 5px;*/
@@ -4022,6 +4022,7 @@ ul li:last-child{
     display: inline-block;
     margin-bottom: 5px;
     width: 50%;
+    text-align:justify;
 }
 .tab-content span input, .tab-content span select {
     /*max-width: 100%;*/

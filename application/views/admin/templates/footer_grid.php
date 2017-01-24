@@ -43,8 +43,10 @@
         <!-- BEGIN JAVASCRIPTS -->
         <!-- Load javascripts at bottom, this will reduce page load time -->
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery-1.8.3.min.js"></script>
+        
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/js/jquery.blockui.js"></script>
@@ -84,7 +86,7 @@
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>  
         <script type="text/javascript" src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-daterangepicker/date.js"></script>  
         <script src="<?php echo base_url(); ?>assets/admin/js/scripts.js"></script>
-        <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
+        
         <script src="<?php echo base_url(); ?>assets/admin/js/ajax_call.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
@@ -200,6 +202,8 @@
                                         margin-right:5px;\n\
                                         padding-bottom: 15px;\n\
                                         display:block;\n\
+                                        position: relative;\n\
+                                        z-index: 2;\n\
                                    '>/");
             $(".message_res").text(function(index, currentText) {
                 if (currentText.length>60) {

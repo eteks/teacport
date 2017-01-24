@@ -1206,6 +1206,10 @@ label.form-input-error {
 .about-us p{
 	text-align: justify;
 }
+.about-us blockquote{
+	color: #f47020;
+	font-weight: bold;
+}
 /*vacancy*/
 .footer-grey-color{
 	background-color:#f1f1f1;
@@ -1259,6 +1263,22 @@ label.form-input-error {
 #institution_grids .company-box {
 	padding: 20px 0;	
 }
+/*Find jobs */
+.job-box-2 .feature-post-meta-bottom .apply {
+    color: #242424;
+    font-weight: 700;
+}
+/* Footer */
+.footer_block blockquote{
+	font-size: 10px;
+	color: #f47020;
+	font-weight: bold;
+}
 /* Ended by Akila */
-
+/* For Visitor Count */
+.visitor_count{
+	float:left;
+	padding-top:40px;
+	pointer-events:none;
+}
     
