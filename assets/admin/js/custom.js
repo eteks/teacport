@@ -834,6 +834,7 @@ $('.top_layer, .message_close').on('click',function() {
         return false;
      }
     });
+    
 
     //check only entered value is decimal
     $(document).delegate('.decimal_act','keypress',function(e){
@@ -954,12 +955,13 @@ $('.temp_remove_act').click(function(e)
        $('#imagepreview_templogo').attr("src","");
    });
    
-  	var win_height= $(window).height();
-   var head_height= win_height - $('#header').height();
-   var footer_height= head_height -$('#footer').height(); 
-   //alert (win_height);
-   //alert(head_height);  
-   $('.sub_pre_section').css('max-height', footer_height);
+  	
+var win_height= $(window).height();
+var head_height= win_height - $('#header').height();
+var footer_height= head_height -$('#footer').height(); 
+//alert (win_height);
+//alert(head_height);  
+$('.sub_pre_section').css('max-height', footer_height);
    
 /* Popup pagination with arrow end */ 
 
@@ -967,3 +969,70 @@ $('.temp_remove_act').click(function(e)
 	// $(".popup").css("opacity", "0.8" + "z-index", "999999");
 // 	
 // });
+
+/* Accept Only Numbers - Added by Akila */
+$(document).on("keypress",".numeric_value",function (e) {
+	if (e.which != 8 && e.which != 0 && e.which != 45 && (e.which < 48 || e.which > 57)) {
+		return false;
+	}
+});
+// Subscribe_plan Clone
+// function subscribe_plan_clone() {
+    // var current_id = "plan_clone_section" +  subscribe_plan_cloneindex;   
+    // $(this).parents(".clone_plan_fields").find(".subscribe_plan_clone:last").clone().insertAfter('.subscribe_plan_clone:last')
+    // .attr("id", current_id)
+    // .on('click', 'a.plan_clone', subscribe_plan_clone)
+    // .on('click', 'a.plan_remove', subscribe_plan_remove);
+    // subscribe_plan_cloneindex++;
+    // // $('#'+current_id).find('.edit_inputs').val("");
+     // alert("hi");
+    // $('#'+current_id).find('input,select').val("");
+    // $('#'+current_id).find('input,select').removeClass('form-field-error');      
+    // $(this).addClass('dn'); 
+// }
+// Subscribe_plan Remove
+// function subscribe_plan_remove(){
+    // var clone_length = $(".subscribe_plan_clone").length;    
+    // var this_parent = $(this).parents(".clone_plan_fields");
+    // if(clone_length > 1) {
+        // $(this).parents(".subscribe_plan_clone").remove();
+    // }
+    // else {
+        // alert("Dont Remove it");
+    // }
+    // var id = this_parent.find(".clone_section:last").attr("id");
+    // $('.plan_clone').addClass('dn');
+    // $('#'+id).find('.plan_clone').removeClass('dn');
+// }
+// $("a.plan_clone").on("click", subscribe_plan_clone);
+// $("a.plan_remove").on("click", subscribe_plan_remove);
+
+
+				var maxField = 3;
+				var addButton = $('.add_button');
+				var wrapper = $('.field_wrapper');
+				var x = 1;
+				var y = 2;
+				//Initial field counter is 1
+				
+				$(addButton).click(function() {//Once add button s clicked
+					var cloned_content = $('.field_wrapper:last').clone();
+					
+					if (x < maxField) {//Check maximum number of input fields
+						x++;
+						$(cloned_content).insertAfter('.field_wrapper:last').find("*","input").val("");
+						$(cloned_content).find('.remove_button').show();
+						"$(cloned_content).find('.add_button').hide();"
+						$(cloned_content).find('.counter').html(x);
+					}
+					
+				});
+				$(document).on('click','.remove_button',function() {//Once remove button is clicked
+					$(this).parents('.field_wrapper').remove();
+					x--;
+				});
+				
+				
+			
+
+
