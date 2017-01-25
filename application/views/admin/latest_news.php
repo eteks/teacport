@@ -12,7 +12,7 @@ else{
 $feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
-<?php if(!$this->input->is_ajax_request()) { ?>
+
 <?php include "templates/header.php" ?>
 <!-- BEGIN CONTAINER -->
 <div id="container" class="row-fluid">
@@ -92,84 +92,38 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th>Latest News Title </th>
                           <th>Latest News Redirect Link </th>
 						  <th>Latest News Status </th>
-                          
+                          <th>Created date</th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                             <th class="data_action">Delete</th>
-                          <?php endif; ?>
-                          
+                          <?php endif; ?>                          
                         </tr>
                       </thead>
-                      <tbody class="table_content_section"> 
-                        <?php } ?>
-                        <?php
-                        if(!empty($seeker_profile))  :
-                        ?>   
-                        <?php
-                          foreach ($seeker_profile as $pro_val) :
-                          ?>                                  
+                      <tbody class="table_content_section">                        
                         <tr class="parents_tr" id="column">
                           <td class="l_news_title"> 
-                          	<?php echo $sta_val['lat_news_name']; ?>
+                          	test
                           </td>
-                        	<td class="l_redirect_link"> 
-                         	 <?php echo $sta_val['lat_news_link']; ?>
-                        	</td>
-                          
+                          <td class="l_redirect_link"> 
+                         	test
+                          </td>                         
                          <td class="l_news_status"> 
-                          <?php 
-                          if ($sta_val['state_status'] == 1) 
-                            echo "Active";
-                          else
-                            echo "Inactive";
-                          ?>
-                          <?php 
-                            if(!empty($mapped_data)){
-                            $state_id = $sta_val['state_id'];  
-                            $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
-                            return $m == $state_id; });
-                            if(count($mapped_result) > 0)
-                              echo '<input type="hidden" value="'.$sta_val['state_status'].'" data-disabled="1" />';
-                            else
-                              echo '<input type="hidden" value="'.$sta_val['state_status'].'" />';
-                            }
-                            else{
-                              echo '<input type="hidden" value="'.$sta_val['state_status'].'" />';
-                            }
-                          ?>                         
+                            active                 
+                         </td>
+                        <td class="created_date"> 
+                         28/12/2016   13:27:20 
                         </td>
-                       <td class="edit_section">
-                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
+                        <td class="edit_section">
+                          <a class="ajaxEdit" href="javascript:;" data-id="123">
                             Edit
                           </a>
                         </td>
-                         <td>
-                          <?php 
-                            if(!empty($mapped_data)){
-                              $state_id = $sta_val['state_id'];  
-                              $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
-                              return $m == $state_id; });
-                              if(count($mapped_result) > 0)
-                                echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
-                              else
-                                echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
-                            }
-                            else{
-                              echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
-                            }
-                          ?>      
-                        </td>
-                          
-                        </tr>
-                        <?php
-                        endforeach;
-                        ?>
-                        <?php 
-                        endif;
-                        ?>
-                        <?php if(!$this->input->is_ajax_request()) { ?> 
+                        <td>
+  							 <a class='ajaxDelete' data-id=''>Delete</a>
+                        </td>                          
+                        </tr>                       
                       </tbody>
                     </table>
                   </div>
@@ -198,12 +152,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var class_selector = new Array("");//To set class for element
     var table = "admin_table"; // Set classname of table
     var maxlength= new Array("");
-    var is_created="no";
+    // var is_created="no";
     var l_news_status_option = new Array("Please select status","Active","Inactive"); 
     var l_news_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
-<?php } ?>
+
 <?php
 else :
 redirect(base_url().'main');
