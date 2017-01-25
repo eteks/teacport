@@ -27,7 +27,7 @@ $(document).ready(function() {
 	$(document).on("keyup",".form_inputs",function () {
     	var this_val = $.trim($(this).val());
     	var data_min = parseInt($(this).data('minlength'));
-		if(this_val.length < data_min) {
+		if(this_val.length < data_min && this_val.length!=0) {
 			$(this).addClass('form-field-error');
 		}
 		else {
@@ -82,23 +82,26 @@ $(document).ready(function() {
 		var error_msg = $(this).find('.val_status');
 		var message = '';
 		var this_form = $(this);
-		
+		$('.form_inputs').removeClass('form-field-error');
+
 		/* Validate Input and Select element */
 		$(this).find('.form_inputs').each(function() {
-			var tag_name = $(this).prop("tagName").toLowerCase();
-			var this_val = $.trim($(this).val()); 
-			if(this_val == '') {
-				error = 1;
-				message ="Please Provide Valid Information!";
-				$(this).addClass('form-field-error');
-				if(tag_name == "select") {
-					$(this).siblings('span').find('.select2-selection').addClass('form-field-error');
+			if(!$(this).hasClass('not-required')) {
+				var tag_name = $(this).prop("tagName").toLowerCase();
+				var this_val = $.trim($(this).val()); 
+				if(this_val == '') {
+					error = 1;
+					message ="Please Provide Valid Information!";
+					$(this).addClass('form-field-error');
+					if(tag_name == "select") {
+						$(this).siblings('span').find('.select2-selection').addClass('form-field-error');
+					}
 				}
-			}
-			else {
-				$(this).removeClass('form-field-error');
-				if(tag_name == "select") {
-					$(this).siblings('span').find('.select2-selection').removeClass('form-field-error');
+				else {
+					$(this).removeClass('form-field-error');
+					if(tag_name == "select") {
+						$(this).siblings('span').find('.select2-selection').removeClass('form-field-error');
+					}
 				}
 			}
 		});
@@ -165,7 +168,7 @@ $(document).ready(function() {
 				var data_min = parseInt($(this).data('minlength'));
 				var data_max = parseInt($(this).attr('maxlength'));
     			var data_name = $(this).data('name');
-    			if(this_val.length < data_min) {
+    			if(this_val.length < data_min && this_val.length != '') {
     				error = 1;
     				message = data_name + " must containes atleast "+data_min+" characters";
 					$(this).addClass('form-field-error');
@@ -187,7 +190,7 @@ $(document).ready(function() {
     	if(error == '') {
 			var min_amount = parseInt($('#min_amount').val());
     		var max_amount = parseInt($('#max_amount').val());
-			if((min_amount > max_amount) && amount_error == 0) {
+			if(min_amount > max_amount) {
     			error = 1;
     			message = "Please Enter Maximum Amount!";
     			$('#max_amount').addClass('form-field-error');

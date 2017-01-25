@@ -184,7 +184,7 @@ class Job_provider extends CI_Controller {
         $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
 		$data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
         $this->session->set_userdata('registrant_logo',$organization_data['registrant_logo']);
-        if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
+        if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == ''){
 			$data['organization'] = $organization_data;
 			$data['district'] = $this->common_model->get_all_district();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
@@ -227,8 +227,8 @@ class Job_provider extends CI_Controller {
 		else{
 			/* Set validate condition for profile update form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
-			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
-			$this->form_validation->set_rules('organization_logo', 'Organization logo', '');
+			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'trim|xss_clean');
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
@@ -241,8 +241,8 @@ class Job_provider extends CI_Controller {
 			/* check forms data are valid are not */
 			if ($this->form_validation->run())
 		    {
-		    	$provider_logo_file_name = '';
-				$profile_completeness = 0;
+		    	$provider_logo_path_name = '';
+		    	$organization_logo_path_name = '';
 		    	if (!empty($_FILES['provider_logo']['name']))
 				{
 					$personnal_logo['upload_path'] 			= './uploads/jobprovider';
@@ -257,14 +257,13 @@ class Job_provider extends CI_Controller {
 					if ( ! $this->upload->do_upload('provider_logo'))
 					{
 	                    $data['upload_provider_logo_error'] = $this->upload->display_errors();
-						$provider_logo_file_name = '';
-						$profile_completeness = 0;
+						$provider_logo_path_name = '';
 	                }
 	                else
 	                {
 	                    $provideruploaddata = $this->upload->data();
 						$provider_logo_file_name = $provideruploaddata['file_name'];
-						$profile_completeness = 10;
+						$provider_logo_path_name = base_url().'uploads/jobprovider/'.$provider_logo_file_name;
 						$provider_logo_thumb['image_library'] = 'gd2';
 						$provider_logo_thumb['source_image'] = './uploads/jobprovider/'.$provider_logo_file_name;
 						$provider_logo_thumb['create_thumb'] = TRUE;
@@ -294,13 +293,14 @@ class Job_provider extends CI_Controller {
 					{
 	                    //$data['upload_provider_logo_error'] = $this->upload->display_errors();
 						$this->session->set_userdata('upload_provider_logo_error', $this->upload->display_errors());
-						$organization_logo_file_name = '';
+						$organization_logo_path_name = '';
 						
 	                }
 	                else
 	                {
 	                    $organizationuploaddata = $this->upload->data();
 						$organization_logo_file_name = $organizationuploaddata['file_name'];
+						$organization_logo_path_name = base_url().'uploads/jobprovider/'.$organization_logo_file_name;
 						$organization_logo_thumb['image_library'] = 'gd2';
 						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$organization_logo_file_name;
 						$organization_logo_thumb['create_thumb'] = TRUE;
@@ -316,9 +316,27 @@ class Job_provider extends CI_Controller {
 	                }
                 }
 				$dob_split = explode('/', $this->input->post('provider_dob'));
+
+				$profile_completeness = 90;
+				if(!empty($organization_logo_path_name)) {
+					$profile_completeness = $profile_completeness + 2;
+				}	
+				if(!empty($provider_logo_path_name)) {
+					$profile_completeness = $profile_completeness + 2;
+				}
+				if($this->input->post('provider_name')) {
+					$profile_completeness = $profile_completeness + 2;
+				}
+				if($this->input->post('provider_designation')) {
+					$profile_completeness = $profile_completeness + 2;
+				}
+				if($this->input->post('provider_dob')) {
+					$profile_completeness = $profile_completeness + 2;
+				}
+
 				$edit_profile_data = array(
 					'organization_name'			=> $this->input->post('organization_name'),
-					'organization_logo' 		=> base_url().'uploads/jobprovider/'.$organization_logo_file_name,
+					'organization_logo' 		=> $organization_logo_path_name,
 					'organization_address_1' 	=> $this->input->post('address-line1'),
 					'organization_address_2' 	=> $this->input->post('address-line2'),
 					'organization_address_3' 	=> $this->input->post('address-line3'),
@@ -326,8 +344,8 @@ class Job_provider extends CI_Controller {
 					'registrant_name' 			=> $this->input->post('provider_name'),
 					'registrant_designation' 	=> $this->input->post('provider_designation'),
 					'registrant_date_of_birth' 	=> $dob_split[2].'-'.$dob_split[1].'-'.$dob_split[0],
-					'registrant_logo'			=> base_url().'uploads/jobprovider/'.$provider_logo_file_name,
-					'organization_profile_completeness' => 90+$profile_completeness,
+					'registrant_logo'			=> $provider_logo_path_name,
+					'organization_profile_completeness' => $profile_completeness,
 				);
 				if($this->job_provider_model->job_provider_update_profile($data['organization']['organization_id'],$edit_profile_data)=='updated')
 				{
@@ -374,7 +392,7 @@ class Job_provider extends CI_Controller {
 				$organization_data = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		        $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
 		        $data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
-		        if($organization_data['organization_name'] == '' or $organization_data['organization_logo'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == '' or $organization_data['registrant_name'] == '' or $organization_data['registrant_designation'] == '' ){
+		        if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == ''){
 					if($data['initial_data'] === 'show_popup')
 					{
 						$data['organization'] = $organization_data;

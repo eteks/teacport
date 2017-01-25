@@ -172,6 +172,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </a>
                           </td>
                           <?php endif; ?>
+                        </tr>
                         <?php
                         endforeach;
                         ?>
@@ -179,7 +180,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         endif;
                         ?>
                         <?php if(!$this->input->is_ajax_request()) { ?>
-                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -240,6 +240,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <li data-value="0" <?php if($activities_details['is_admin_verified']==0) echo "class='on'"; ?>><a>No</a></li>
                               </ul> 
                               <input type="hidden" value="<?php echo $activities_details['is_admin_verified']; ?>" class="verification" name="admin_verify" /> 
+                              <input type="hidden" value="<?php echo $activities_details['is_admin_verified']; ?>" name="current_verify" /> 
                             </span>
                           </div>
                         </div>
@@ -256,6 +257,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </div>
                         </div>
                         <input type="hidden" name="rid" value="<?php echo $activities_details['premium_ads_id']; ?>" />
+                        <input type="hidden" value="<?php echo $activities_details['registrant_email_id']; ?>" name="registrant_email">
                       </div>
                       <button type="submit" class="btn btn-info save_button">Save</button>
                       <?php
