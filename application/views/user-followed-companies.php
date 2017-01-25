@@ -69,6 +69,228 @@
                 </div>
             </div>
     </section>   
+    <section class="featured-jobs">
+        <div class="container">
+	<div class="row">
+	<div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="Heading-title black">
+                            <h1>Posted Jobs</h1>
+                            <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas.</p>
+                        </div>
+                    </div>
+                 </div>
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div class="table-container">
+							<table id="results" class="table table-filter paginated">
+							<tbody>
+							<tr class="listing_head">
+								<th class="listing_head_title1">Posted Jobs</th>
+			                    <!-- <th class="listing_head_title2">Jobs</th> -->
+			                     <th class="listing_head_title3">Location</th>
+			                     <th class="listing_head_title4">Date</th>								
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date listing_date_act">May 13, 2016</span>
+													<h4 class="title">
+														Web Developer
+														</h4>
+														<span class="listing_location">Mumbai</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date listing_date_act">April 13, 2016</span>
+													<h4 class="title">
+														UI Developer
+														</h4>
+														<span class="listing_location">Delhi</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date">March 13, 2016</span>
+													<h4 class="title">
+														Maths Teacher
+														</h4>
+														<span class="listing_location">Bangalore</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date">Jan 13, 2016</span>
+													<h4 class="title">
+														Science Teacher
+														</h4>
+														<span class="listing_location">Chennai</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date listing_date_act">May 13, 2016</span>
+													<h4 class="title">
+														Web Developer
+														</h4>
+														<span class="listing_location">Mumbai</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date listing_date_act">April 13, 2016</span>
+													<h4 class="title">
+														UI Developer
+														</h4>
+														<span class="listing_location">Delhi</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date">March 13, 2016</span>
+													<h4 class="title">
+														Maths Teacher
+														</h4>
+														<span class="listing_location">Bangalore</span>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<!-- <td>
+											<a href="javascript:;" class="star">
+												<i class="glyphicon glyphicon-star"></i>
+											</a>
+										</td> -->
+										<td>
+											<div class="media">
+												<!-- <a href="#" class="pull-left">
+													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
+												</a> -->
+												<div class="media-body">
+													<span class="media-meta listing_date">Jan 13, 2016</span>
+													<h4 class="title">
+														Science Teacher
+														</h4>
+														<dd class="listing_location">Chennai</dd>
+													<p class="summary">Pondicherry...</p>
+												</div>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="pagination-box clearfix">
+                                    <ul class="pagination">
+                                        <li>
+                                            <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a>
+                                        </li>
+                                        <li class="active"><a href="#">1</a></li>
+                                        <li><a href="#">2</a></li>
+                                        <li><a href="#">3</a></li>
+                                        <li><a href="#">4</a></li>
+                                        <li><a href="#">5</a></li>
+                                        <li>
+                                            <a href="#" aria-label="Next"> <span aria-hidden="true">Next</span> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+					</div>
+					</section>
+
+		
+
    <!--End of Organisation Details-->  
   <!--Recently posted Jobs-->
     <section class="featured-jobs">
