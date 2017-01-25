@@ -25,7 +25,7 @@ class Common_model extends CI_Model {
     		}
     		else {
     			$min_exp = $data['experience'];
-    			$max_exp = 60;
+    			$max_exp = 90; // Maximum experience - We must give it
     		}
     	}
 

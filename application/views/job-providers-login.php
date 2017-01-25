@@ -124,8 +124,8 @@
 			                           		</select>     
 		                            	</div>
 									<div class="form-group">
-										<?php echo form_label('Name <sup class="alert">*</sup>'); echo form_error('registrant_name'); ?>
-										<?php echo form_input(array('id' => 'registrant_name','class' => 'form-control form_inputs alpha_value', 'data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','name' => 'registrant_name')); ?>
+										<?php echo form_label('Name <sup class="alert">*</sup>'); echo form_error('organization_name'); ?>
+										<?php echo form_input(array('id' => 'organization_name','class' => 'form-control form_inputs alpha_value', 'data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Organization Name','name' => 'organization_name')); ?>
 									</div>
 									<div class="form-group">	
 										<?php echo form_label('Email <sup class="alert">*</sup>'); echo form_error('registrant_email_id'); ?>

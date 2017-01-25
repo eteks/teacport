@@ -55,6 +55,7 @@ define('STATUS',serialize(array("0"=>"Active",
 
 // Define seeker upload path
 define('SEEKER_UPLOAD','uploads/jobseeker/');
+define('PROVIDER_UPLOAD','uploads/jobprovider/');
 
 if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
 	define('PAYUMERCHANTKEY', 'OwGF14'); 
