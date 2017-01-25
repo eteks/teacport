@@ -455,6 +455,29 @@ class Job_Provider extends CI_Controller {
                 	$data_values = $this->job_providermodel->get_provider_ads('update');
 	       			$data['error'] = $data_values['error'];
 		        	$data['status'] = $data_values['status'];
+		        	//To send mail for provider if admin is verified their posted ads
+		        	if($data['error'] == 2 && $this->input->post('current_verify') == 0 && $this->input->post('admin_verify') == 1){
+		        		$ci =& get_instance();	
+						$ci->config->load('email', true);
+						$emailsetup = $ci->config->item('email');
+						$this->load->library('email', $emailsetup);
+						$from_email = $emailsetup['smtp_user'];
+						$this->email->initialize($emailsetup);
+						$this->email->from($from_email, 'Teachers Recruit');
+		                $this->email->to($this->input->post('registrant_email'));
+		    			$this->email->subject('Ads Verification Status');
+		    			$message = $this->load->view('admin/email_template/ad_verify',TRUE);
+		    			$this->email->message($message);
+
+		    			if($this->email->send())
+		    			{
+		        			$mail_status = 1;
+		    			}
+		    			else 
+		    			{
+		        			$mail_status = 0;
+		    			}
+		        	}
                 }				
 	        }
 	    }
@@ -477,7 +500,10 @@ class Job_Provider extends CI_Controller {
 			echo json_encode($result);
 		}
 		else if($data['error']==2) {
-			$result['status'] = $data['status'];
+			if(isset($mail_status) == 1)
+				$result['status'] ="Record Updated and Mail sent to provider Successfully";
+			else
+				$result['status'] = $data['status'];
 			$result['error'] = $data['error'];
 			$output['provider_ads'] = $data_values['provider_ads'];
 			$result['output'] = $this->load->view('admin/jobprovider_ads',$output,true);

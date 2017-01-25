@@ -266,12 +266,15 @@
 												<div class="clearfix"> </div>
 												<div class="loginbox-submit">
 													<?php if($subscrib_plan['is_resume_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Resume</a>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" 
+                                  					   title="You used 50 SMS, still you can send 100 more, else you can upgrade the SMS plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
                                   					<a class="dn" id="hidden_download" href="#" download> </a>
                                   					<?php } ?>
-                                  					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
+                                  					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" 
+                                  					   title="You used 50 emails, still you can send 100 more" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
                                   					<?php if($subscrib_plan['is_email_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_email" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Message</a>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" 
+                                  					   title="You downloaded 50 resumes, still you can download 50 more" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Message</a>
                               						<?php } ?>
                               					</div>
 											</div> <br> <!---Communication Information-->	

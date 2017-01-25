@@ -1,6 +1,6 @@
 <!-- BEGIN FOOTER -->
 <div id="footer">
-    <span>2016 &copy; Teacher Recruit.</span>
+    <span><?php echo date("Y"); ?> &copy; Teacher Recruit.</span>
     <div class="span pull-right">
         <!-- <span class="go-top"><i class="icon-arrow-up"></i></span> -->
     </div>
