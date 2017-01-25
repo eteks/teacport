@@ -411,9 +411,10 @@ a,a:focus, a:hover, a:active {
 #main-content {
     margin-top: 0px;
     margin-left: 215px;
-    min-height: 400px;
-    max-height: 100%;
+    /*min-height: 560px;*/
     background: #f7f7f7 url("../img/body-bg.png");
+    min-height: 600px;
+    max-height: 100%;
 }
 
 /* page container */
@@ -2953,6 +2954,7 @@ div.tagsinput .not_valid {
 
 .form-wizard .tab-pane h4 {
     margin-bottom: 20px !important;
+    padding-left:12px !important;
 }
 
 .form-wizard .tab-pane .chzn-container {
@@ -4663,7 +4665,7 @@ div.dt-button-background {
 }
 .multi_choice{
     display: block;
-    height: 100px;
+    height: 30px;
 }
 /* Multi choice end */
 

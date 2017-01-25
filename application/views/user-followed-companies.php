@@ -32,23 +32,60 @@
                                     </div> -->
                                     <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                                         <dl>
+                                        	<?php
+                                        	if(!empty($company_details)) :
+                                        	?>
+                                        	<?php 
+                                        	if(!empty($company_details['organization_name'])) :
+                                        	?>
                                             <dt>Organisation Name:</dt>
-                                            <dd>ETekchno Services P Ltd</dd>
-
+                                            <dd> <?php echo $company_details['organization_name']; ?> </dd>
+                                            <?php
+                                            endif;
+                                            ?>
+                                            <?php 
+                                        	if(!empty($company_details['organization_address_1'])) :
+                                        	?>
                                             <dt>Organisation Address1:</dt>
-                                            <dd>#35, Subramaniyar Koil Street </dd>
-
+                                            <dd><?php echo $company_details['organization_address_1']; ?></dd>
+                                            <?php
+                                            endif;
+                                            ?>
+                                            <?php 
+                                        	if(!empty($company_details['organization_address_2'])) :
+                                        	?>
                                             <dt>Organisation Address2:</dt>
-                                            <dd>Kathirkamam </dd>
-
+                                            <dd><?php echo $company_details['organization_address_2']; ?></dd>
+                                            <?php
+                                            endif;
+                                            ?>
+                                            <?php 
+                                        	if(!empty($company_details['organization_address_3'])) :
+                                        	?>
                                             <dt>Organisation Address3:</dt>
-                                            <dd>Puducherry</dd>
-
-                                            <dt>Organisation District</dt>
-                                            <dd>Puducherry </dd>
-
+                                            <dd><?php echo $company_details['organization_address_3']; ?></dd>
+                                            <?php
+                                            endif;
+                                            ?>
+                                            <?php 
+                                        	if(!empty($company_details['organization_district_id'])) :
+                                        	?>
+                                            <dt>Organisation District:</dt>
+                                            <dd><?php echo $company_details['district_name']; ?></dd>
+                                            <?php
+                                            endif;
+                                            ?>
+                                            <?php 
+                                        	if(!empty($company_details['organization_institution_type_id'])) :
+                                        	?>
                                             <dt>Institution Type:</dt>
-                                            <dd>Engineering</dd>                                        
+                                            <dd><?php echo $company_details['institution_type_name']; ?></dd>
+                                            <?php
+                                            endif;
+                                            ?>
+                                    		<?php
+                                    		endif;
+                                    		?>
                                         </dl>
                                     </div>
                                 </div>

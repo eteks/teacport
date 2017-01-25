@@ -219,6 +219,11 @@ $config['admin_modules'] = array(
 			'name' => 'site visits tracking', 
 			'access_operation' => 'view', 
 			'route_url' => base_url().'main/site_visit_tracking' 
+		),
+		array(
+			'name' => 'latest news', 
+			'access_operation' => 'add,edit,delete,view', 
+			'route_url' => base_url().'main/latest_news' 
 		)),
 		'icon_name' => 'icon-tasks'
 	),

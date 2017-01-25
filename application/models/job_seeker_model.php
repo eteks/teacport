@@ -441,12 +441,7 @@ class Job_seeker_model extends CI_Model {
 		else {
 			$fresh = 1 ;
 		}
-		if(isset($data['cand_extra_cur']) && !empty($data['cand_extra_cur'])) {
-			$cand_extra_cur = implode(',', $data['cand_extra_cur']);
-		}
-		else {
-			$cand_extra_cur = NULL;
-		}
+
 		// Check Mobile Number already exists or not
 		$mobile_exists_where = "candidate_mobile_no =" . "'" . $data['cand_mobile'] . "' AND candidate_id NOT IN (". $this->input->post('cand_pro').")";
 
@@ -462,12 +457,23 @@ class Job_seeker_model extends CI_Model {
 				$status = "Email Already exists";
 			}
 			else {
-				// if($fresh == 0 ) {
-					$pro_com = 100;
-				// }
-				// else {
-					// $pro_com = 90;
-				// }
+				$pro_com = 90;	
+				if(!empty($data['cand_pic'])) {	
+					$pro_com = $pro_com + 2;	
+				}
+				if(!empty($data['cand_live_dis'])) {	
+					$pro_com = $pro_com + 2;	
+				}
+				if(!empty($data['cand_pincode'])) {	
+					$pro_com = $pro_com + 2;	
+				}
+				if(!empty($data['cand_addr1']) || !empty($data['cand_addr2'])) {	
+					$pro_com = $pro_com + 2;	
+				}
+				if(!empty($data['cand_facebook']) && !empty($data['cand_google']) && !empty($data['cand_linkedin'])) {	
+					$pro_com = $pro_com + 2;	
+				}
+
 				$candidate_dob_explode = explode('/', $data['cand_dob']);
 				$candidate_dob = $candidate_dob_explode[2]."-".$candidate_dob_explode[1]."-".$candidate_dob_explode[0];
 				// Updation in profile table
@@ -498,7 +504,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_tet_exam_status' => $data['cand_tet'],
 								'candidate_profile_completeness' => $pro_com,
 								// 'candidate_interest_subject_id' => $data['cand_int_sub'],
-								'candidate_extra_curricular_id' => $cand_extra_cur,
+								'candidate_extra_curricular_id' => implode(',', $data['cand_extra_cur']),
 								'candidate_is_fresher' => $fresh,
 								);
 				$this->db->set($profile_update_data);

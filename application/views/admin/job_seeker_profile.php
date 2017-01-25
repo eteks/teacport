@@ -201,7 +201,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
               <h4>
-                <i class="icon-reorder"></i> Job Providers Profile
+                <i class="icon-reorder"></i> Job Seeker Profile
               </h4>                        
             </div>
             <div class="widget-body form pop_details_section">
@@ -864,7 +864,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Gender</label>
                           <span>
                             <select name="cand_gen" class="popup_select tabfield1 tabfield">
-                              <option value="">Please select gender</option>
+                              <option value="">Select gender</option>
                               <option value="male" <?php if($seeker_full_profile['candidate_gender']=='male') echo "selected"; ?>>Male</option>
                               <option value="female" <?php if($seeker_full_profile['candidate_gender']=='female') echo "selected"; ?>>Female</option>
                               <option value="others" <?php if($seeker_full_profile['candidate_gender']=='others') echo "selected"; ?>>Others</option>
@@ -899,7 +899,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Mother Tongue</label>
                           <span>
                             <select name="cand_moth_ton" class="popup_select tabfield1 tabfield">
-                              <option value="">Please select mother tongue</option>
+                              <option value="">Select mother tongue</option>
                               <?php
                                 if(!empty($mother_tongue)) :
                                 foreach ($mother_tongue as $lan_val) :
@@ -927,7 +927,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             $lan_array = explode(',',$seeker_full_profile['candidate_language_known']);
                             ?>
-                            <select data-placeholder="select" name="cand_known_lang" class="chosen span6 tabfield1 tabfield" multiple="multiple" >
+                            <select data-placeholder="Languages Known" name="cand_known_lang" class="chosen span6 tabfield1 tabfield" multiple="multiple">
                               <?php
                               if(!empty($known_languages)) :
                               foreach ($known_languages as $lan_val) :
