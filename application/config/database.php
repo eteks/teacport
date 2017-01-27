@@ -47,17 +47,26 @@
 
 $active_group = 'default';
 $active_record = TRUE;
+//Local server
 if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'root';
-	$db['default']['password'] = '';
+	$db['default']['password'] = 'root';
 	$db['default']['database'] = 'teacherrecruite';
 }
+//Testing server
 else if($_SERVER['SERVER_ADDR'] === '172.31.47.215'){
 	$db['default']['hostname'] = 'teacherrecruite.cdmulia3ntqw.us-west-2.rds.amazonaws.com';
 	$db['default']['username'] = 'teacherrecruite';
 	$db['default']['password'] = 'teacherrecruite';
 	$db['default']['database'] = 'techerrecruite';
+}
+//Live server
+else{
+	$db['default']['hostname'] = 'localhost';
+	$db['default']['username'] = 'teachrecruit';
+	$db['default']['password'] = 'SC.NAxg3]2kn';
+	$db['default']['database'] = 'teachrecruit';
 }
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
