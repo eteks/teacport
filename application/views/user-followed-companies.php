@@ -22,7 +22,7 @@
                 <div class="row">
                 	<div class="col-md-12 col-sm-12 col-xs-12">
                 		<div class="Heading-title black">
-                           <h3>Etekchnoservices Pvt Limited</h3>                           
+                           <h1>Etekchnoservices Pvt Limited</h1>                           
                         </div>
                         <div class="col-md-8 col-sm-8 col-xs-12">
                         	<div class="single-job-page">
@@ -95,7 +95,7 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                         	<div class="company-detail">
                                     <div class="company-img">
-                                        <img src="assets/images/company/white.jpg" class="img-responsive" alt="Institution Logo" class="img-responsive center-block">
+                                        <img src="assets/images/institution.png" class="img-responsive" alt="Institution Logo" class="img-responsive center-block">
                                     </div>
                                      <div class="single-job-map">
                                			 <div id="map-contact">Organisation Map</div>
@@ -106,229 +106,105 @@
                 </div>
             </div>
     </section>   
-    <section class="featured-jobs">
-        <div class="container">
-	<div class="row">
-	<div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="Heading-title black">
-                            <h1>Posted Jobs</h1>
-                            <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas.</p>
-                        </div>
-                    </div>
-                 </div>
-				<div class="panel panel-default">
-					<div class="panel-body">
-						<div class="table-container">
-							<table id="results" class="table table-filter paginated">
-							<tbody>
-							<tr class="listing_head">
-								<th class="listing_head_title1">Posted Jobs</th>
-			                    <!-- <th class="listing_head_title2">Jobs</th> -->
-			                     <th class="listing_head_title3">Location</th>
-			                     <th class="listing_head_title4">Date</th>								
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date listing_date_act">May 13, 2016</span>
-													<h4 class="title">
-														Web Developer
-														</h4>
-														<span class="listing_location">Mumbai</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date listing_date_act">April 13, 2016</span>
-													<h4 class="title">
-														UI Developer
-														</h4>
-														<span class="listing_location">Delhi</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date">March 13, 2016</span>
-													<h4 class="title">
-														Maths Teacher
-														</h4>
-														<span class="listing_location">Bangalore</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date">Jan 13, 2016</span>
-													<h4 class="title">
-														Science Teacher
-														</h4>
-														<span class="listing_location">Chennai</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date listing_date_act">May 13, 2016</span>
-													<h4 class="title">
-														Web Developer
-														</h4>
-														<span class="listing_location">Mumbai</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date listing_date_act">April 13, 2016</span>
-													<h4 class="title">
-														UI Developer
-														</h4>
-														<span class="listing_location">Delhi</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date">March 13, 2016</span>
-													<h4 class="title">
-														Maths Teacher
-														</h4>
-														<span class="listing_location">Bangalore</span>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<!-- <td>
-											<a href="javascript:;" class="star">
-												<i class="glyphicon glyphicon-star"></i>
-											</a>
-										</td> -->
-										<td>
-											<div class="media">
-												<!-- <a href="#" class="pull-left">
-													<img src="assets/images/company/4.png" class="media-photo"  style="width: 150px;">
-												</a> -->
-												<div class="media-body">
-													<span class="media-meta listing_date">Jan 13, 2016</span>
-													<h4 class="title">
-														Science Teacher
-														</h4>
-														<dd class="listing_location">Chennai</dd>
-													<p class="summary">Pondicherry...</p>
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-								</tr>
-							</table>
-						</div>
-					</div>
-					<div class="pagination-box clearfix">
-                                    <ul class="pagination">
-                                        <li>
-                                            <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a>
-                                        </li>
-                                        <li class="active"><a href="#">1</a></li>
-                                        <li><a href="#">2</a></li>
-                                        <li><a href="#">3</a></li>
-                                        <li><a href="#">4</a></li>
-                                        <li><a href="#">5</a></li>
-                                        <li>
-                                            <a href="#" aria-label="Next"> <span aria-hidden="true">Next</span> </a>
-                                        </li>
-                                    </ul>
-                                </div>
-					</div>
-					</section>
+    <section id="insititution_profile_detail" class="featured-jobs">
+    	<div class="container">
+			<div class="row">
+				<div class="col-md-12 col-sm-12 col-xs-12">
+          			 <div class="Heading-title black">
+			                <h1>Posted Jobs</h1>
+			                <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas.</p>
+			         </div>
+                	 <div class="widget">
+                        <!-- <div class="widget-heading"><span class="title">Posted Jobs</span></div> -->
+                        <ul class="related-post">
+	                        <li>
+	                           	<div class="pull-left">
+	                            	<a href="#">Assistant Manager Procurement</a>
+	                            </div>
+	                            <span class="pull-right"><i class="fa fa-calendar"></i>March 22, 2015</span>
+	                            <div class="clearfix"> </div>
+	                            <p>Well qualified and creative Professionals needed for our company....</p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000 </span>
+	                        </li>
+	                        <li>
+	                            <div class="pull-left">
+	                            	<a href="#">Marketing Professionals Required</a>
+	                            </div>
+	                            <span class="pull-right"><i class="fa fa-calendar"></i>Sep 01, 2015</span>
+	                            <div class="clearfix"> </div>
+	                            <p>Well qualified and creative Professionals needed for our company....</p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
+	                        </li>
+	                        <li>
+	                            <div class="pull-left">
+	                            	<a href="#">Mobile App Programmers </a>
+	                            </div>	
+	                            <span class="pull-right"><i class="fa fa-calendar"></i> March 09, 2016 </span>
+	                            <div class="clearfix"> </div>
+	                            <p>Well qualified and creative Professionals needed for our company.... </p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
+	                        </li>
+	                        <li>
+	                            <div class="pull-left">
+	                            	<a href="#">General Compliance Officer</a>
+	                            </div>	
+	                            <span class="pull-right"><i class="fa fa-calendar"></i>Feb 09, 2016</span>
+	                            <div class="clearfix"> </div>
+	                            <p>Well qualified and creative Professionals needed for our company....</p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
+	                        </li>
+	                        <li>
+	                            <div class="pull-left">
+	                            	<a href="#">Call Centre Manager</a>
+	                            </div>	
+	                            <span class="pull-right"><i class="fa fa-calendar"></i> March 09, 2016</span>
+	                            <div class="clearfix"> </div>
+	                            <p>Well qualified and creative Professionals needed for our company.... </p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
+	                        </li>
+	                        <li>
+	                            <div class="pull-left">
+	                            	<a href="#">Assistant Manager Audit</a>
+	                            </div>
+	                            <span class="pull-right"><i class="fa fa-calendar"></i>Aug 01, 2015 </span>
+	                            <div class="clearfix"> </div>
+	                            <p>Well qualified and creative Professionals needed for our company.... </p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000 </span>
+	                        </li>
+	                        <li>
+	                            <div class="pull-left">
+	                            	<a href="#">Telesales Agent (UK Dialing)</a>
+	                            </div>
+	                            <span class="pull-right"><i class="fa fa-calendar"></i>Sep 01, 2015</span>
+	                            <div class="clearfix"> </div>	
+	                            <p>Well qualified and creative Professionals needed for our company....</p>
+	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
+	                        </li>
+                      </ul>
+                  </div> <!--End .widget-->
+				  <div class="pagination-box clearfix">
+					<ul class="pagination">
+					    <li>
+					        <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a>
+					    </li>
+					    <li class="active"><a href="#">1</a></li>
+					    <li><a href="#">2</a></li>
+					    <li><a href="#">3</a></li>
+					    <li><a href="#">4</a></li>
+					    <li><a href="#">5</a></li>
+					    <li>
+					        <a href="#" aria-label="Next"> <span aria-hidden="true">Next</span> </a>
+					    </li>
+					</ul>
+				 </div>	
+				</div> <!--col-sm-12-->
+			</div> <!--row-->
+		</div> <!--container-->
+</section>
 
 		
 
-   <!--End of Organisation Details-->  
+  <!--End of Organisation Details-->  
   <!--Recently posted Jobs-->
     <section class="featured-jobs">
         <div class="container">
@@ -354,7 +230,7 @@
 	                                    <p>Etekchoservices.com</p>
 	                                </div>
 	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o">2 days ago</i>
+	                                    <i class="fa fa-clock-o"> 2 days ago</i>
 									</div>
 									<!--Only required rule to the whole div clickable work--> 	                           
 									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
@@ -377,7 +253,7 @@
 	                                    <p>Etekchoservices.com</p>
 	                                </div>
 	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o">2 days ago</i>
+	                                    <i class="fa fa-clock-o"> 2 days ago</i>
 									</div>
 									<!--Only required rule to the whole div clickable work--> 	                           
 									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
@@ -399,7 +275,7 @@
 	                                    <p>Etekchoservices.com</p>
 	                                </div>
 	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o">2 days ago</i>
+	                                    <i class="fa fa-clock-o"> 2 days ago</i>
 									</div>
 									<!--Only required rule to the whole div clickable work--> 	                           
 									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
@@ -421,7 +297,7 @@
 	                                    <p>Etekchoservices.com</p>
 	                                </div>
 	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o">2 days ago</i>
+	                                    <i class="fa fa-clock-o"> 2 days ago</i>
 									</div>
 									<!--Only required rule to the whole div clickable work--> 	                           
 									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
@@ -444,7 +320,7 @@
 	                                    <p>Etekchoservices.com</p>
 	                                </div>
 	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o">2 days ago</i>
+	                                    <i class="fa fa-clock-o"> 2 days ago</i>
 									</div>
 									<!--Only required rule to the whole div clickable work--> 	                           
 									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
