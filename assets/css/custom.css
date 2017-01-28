@@ -1400,12 +1400,13 @@ label.form-input-error {
     /*border: 1px solid #000;*/
     padding: 1em;
 }
-/*.panel-body{
-    margin-left: 45px;
-    width: 1140px;
-}*/
 .listing_head{background-color: #f47020 !important; }
 .listing_head_title1{border: none !important;}
 .listing_head_title2{position: absolute; right: 980px; border: none !important;}
 .listing_head_title3{position: absolute; left: 715px; border: none !important; }
 .listing_head_title4{position: absolute; left: 885px; border: none !important;}
+.subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
+.subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
+.subs_input_val_upgact1{border-left-width: 1px;margin-left: 17px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact2{margin-left: 82px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact3{ margin-left: 152px;position: absolute;width: 50px;display: none;}
