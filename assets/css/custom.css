@@ -133,6 +133,68 @@ box-shadow:0 8px 6px -6px #da651a !important;
   	bottom: 10px;
   	right: 10px;
  }
+ /*latest news without having news*/
+.latest_news_head{
+	background-color: #da651a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 11px;
+    text-align: center;
+}
+.latest_news_content{
+	padding:10px;
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:10px;
+	height:210px;
+}
+.latest_news{
+	border: 1px solid #da651a;
+}
+.latest_news_content img{
+	margin-top:20px !important;	
+}
+
+/*latest news having news*/
+.latest_news_head_1{
+	background-color: #da651a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 11px;
+   
+}
+.latest_news_content_1{
+	padding:13px;
+	background-color:#fff;
+	margin:7px;
+	margin-bottom:5px;
+	cursor:pointer;
+	
+}
+.latest_news_1{
+	border: 1px solid #da651a;
+}
+.latest_news_content_1 img{
+	margin-top:20px !important;	
+}
+.view_all{
+	background-color:#fff;
+	color:#000;
+	float:right;
+}
+.data_news{
+	background-color:#f4f7fa;
+	height:210px;
+}
+ #flash_updates_1 .latest_news_content_1:hover {
+background: #ebf1f6; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebf1f6 0%, #89c3eb 2%, #89c3eb 2%, #abd3ee 50%, #d5ebfb 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
+}
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -141,6 +203,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	width: 320px;
 	margin: auto;
 }	
+
 /* Signin & SignUp forms */
  .loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
