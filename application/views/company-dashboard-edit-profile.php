@@ -49,7 +49,7 @@
 					  	 		$old_name = '';
 					  	 		if(!empty($organization['organization_logo'])) :
 						  	 		$image_name = str_replace(base_url().PROVIDER_UPLOAD, '', $organization['organization_logo']);
-						  	 		$old_name = str_replace(base_url(), '',$organization['registrant_logo']);
+						  	 		$old_name = str_replace(base_url(), '',$organization['organization_logo']);
 					  	 		endif;
 								?>
                                <div class="col-sm-8">

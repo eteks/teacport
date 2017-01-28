@@ -187,12 +187,23 @@ class Job_provider_model extends CI_Model {
 		return $inboxdata->result_array(); 
 	}
 	public function job_provider_post_vacancy($vacancydata)
-	{
-	 	if($this->db->insert('tr_organization_vacancies', $vacancydata)){
-	 		return TRUE;
-	 	}
-		else{
-			return FALSE;
+	{	
+		$where = '(organization_id="'.$vacancydata['vacancies_organization_id'].'" AND 	organization_subscription_status=1 AND organization_vacancy_remaining_count > 0)';
+		$validitity = $this->db->get_where('tr_organization_subscription',$where)->num_rows();
+		if($validitity == 1) {
+			if($this->db->insert('tr_organization_vacancies', $vacancydata)){
+				$update_where = '(organization_id="'.$vacancydata['vacancies_organization_id'].'" AND 	organization_subscription_status=1)';
+				$this->db->where($update_where);
+				$this->db->set('organization_vacancy_remaining_count', 'organization_vacancy_remaining_count-1', FALSE);
+				$this->db->update('tr_organization_subscription');
+	 			return "success";
+	 		}
+	 		else{
+				return "insertion_error";
+			}
+		}
+		else {
+			return "failure";
 		}
 	}
 	public function job_provider_post_vacancy_update($vacancydata)
@@ -409,12 +420,23 @@ class Job_provider_model extends CI_Model {
 		}
 	}
 	public function organization_premiun_ad_upload($data)
-	{
-		if($this->db->insert('tr_premium_ads', $data)){
-			return TRUE;
+	{	
+		$where = '(organization_id="'.$data['organization_id'].'" AND 	organization_subscription_status=1 AND organization_ad_remaining_count > 0)';
+		$validitity = $this->db->get_where('tr_organization_subscription',$where)->num_rows();
+		if($validitity == 1) {
+			if($this->db->insert('tr_premium_ads', $data)){
+				$update_where = '(organization_id="'.$data['organization_id'].'" AND 	organization_subscription_status=1)';
+				$this->db->where($update_where);
+				$this->db->set('organization_ad_remaining_count', 'organization_ad_remaining_count-1', FALSE);
+				$this->db->update('tr_organization_subscription');
+				return "success";
+			}
+			else {
+				return "insertion_error";
+			}
 		}
-		else{
-			return FALSE;
+		else {
+			return "failure";
 		}
 	}
 	public function candidate_full_data($candidate_id,$vacancyid=''){
