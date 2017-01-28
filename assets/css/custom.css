@@ -1371,27 +1371,44 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 #insititution_profile_detail .related-post li a{
 	font-size: 14px;
 }
-#institution_grids .company-list {
-	/* only required rule to the whole div clickable work */
-	position: relative;
-}
-#institution_grids .institutional_jobs_grid_link{
-  /* all rules required to make the whole div clickable */ 
-  /*position:absolute; */
-  width:100%;
-  height:100%;
-  top:0;
-  left: 0;
-  z-index: 1;
-  /* this is a fix for IE7-9 */
-  	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
- 	filter: alpha(opacity=0);  
-  	opacity:0; 
-}
+/* Image Centering */
 .organisation_detail .company-img{
 	height: 100px;
+	width: auto;
+	position:relative;
+	
+}
+.company-img img {
+	position:absolute;
+    display: inline-block;
+    width: 30%;
+    height: auto;   
+    left:50%;
+    top:50%;
+    /*width: 50px;
+    height: 50px;*/
+}
+.organisation_detail .company-detail{
+	height: 310px;
+	width: 350px;
+}
+.organisation_detail .single-job-map {
+	padding: 0px;
+}
+/* vacancies*/
+#searchlist .comp-logo, #institution_grids .company-list-img{
+	height: 100px;
 	width: 100px;
-}	
+	position:relative;
+}
+#searchlist .comp-logo img, #institution_grids .company-list-img img{
+	height: auto;
+	width: 100%;
+	position:absolute;
+	left:50%;
+    top:50%;
+}
+	
 
 /* Ended by Akila */
 

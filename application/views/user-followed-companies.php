@@ -94,13 +94,13 @@
                         </div>
                         <div class="col-md-4 col-sm-4 col-xs-12">
                         	<div class="company-detail">
-                                    <div class="company-img">
-                                        <img src="assets/images/institution.png" class="img-responsive" alt="Institution Logo" class="img-responsive center-block">
-                                    </div>
-                                     <div class="single-job-map">
-                               			 <div id="map-contact">Organisation Map</div>
-                           			 </div>                                 
+                                <div class="company-img">
+                                    <img src="<?php echo base_url(); ?>assets/images/premiun.png" class="img-responsive centering_images" alt="Institution Logo" class="img-responsive center-block">
                                 </div>
+                                 <div class="single-job-map">
+                           			 <div id="map-contact">Organisation Map</div>
+                       			 </div>                                 
+                            </div>
                         	</div>
                 	</div>
                 </div>
@@ -384,5 +384,5 @@
 				};
 				var map = new google.maps.Map(document.getElementById('map-contact'), mapOptions);				
 			}
-		google.maps.event.addDomListener(window, 'load', initialize);
-		</script>
+	google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
