@@ -1368,6 +1368,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     margin-bottom: 10px;
     padding-bottom: 10px;
 }
+#insititution_profile_detail .related-post li a{
+	font-size: 14px;
+}
 #institution_grids .company-list {
 	/* only required rule to the whole div clickable work */
 	position: relative;
