@@ -86,7 +86,7 @@
 	<td width='325' style='padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' valign='top'>
 	<span style='font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold;'>Welcome!</span>
 	<br />
-	<p>Hi,<?php echo $registrant_name; ?></p>
+	<p>Hi,<?php echo $organization_name; ?></p>
 	<p>Thanks for registering at Teachers Recruit. Your login details are below:</p>
 	<br />
 	<div style='padding-left:20px; padding-bottom:10px;color:#339240;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt='spade image' style="display:block" height="15" width="10" title="username" />&nbsp;&nbsp;&nbsp;Username  :  <?php echo $registrant_email_id; ?></div>

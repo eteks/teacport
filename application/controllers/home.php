@@ -283,6 +283,15 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('terms');
 	}	
+	// State
+	public function state() {
+		$data = '';
+		if($this->input->post('value')) {
+			$data = $this->common_model->get_district_by_state($this->input->post('value'));
+		}
+		echo json_encode($data);
+	}
+
 }
 
 /* End of file welcome.php */

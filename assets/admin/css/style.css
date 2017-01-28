@@ -4913,3 +4913,64 @@ i#admin_error_login {
     display: none;
 }
 /**/
+/* Added by Akila */
+.plan_creation{
+	position: relative;
+}	
+.field_wrapper {
+	margin: 15px 0 15px 30px;
+	position: relative;
+}	
+.col3{
+	float:left;
+	width: 15%;
+	margin: 0 5px;
+}
+.col4{
+	float:left;
+	width: 28%;
+	margin: 0 5px;
+}
+.plan_creation input[type="text"]{
+	width: 85%;
+}	
+.clone_icon {
+    background: #D3D3D3;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    height: 18px;
+    line-height: 18px;
+    margin-top: 5px;
+    text-align: center;
+}
+.col1{
+	float:left;
+	width:5%;
+}
+.remove_button, .add_button{
+	font-size: 14px;
+	font-weight: bold;
+	padding: 5px;
+	background-color: #15b4cb;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+.remove_button:hover, .add_button:hover{
+	color: #FFFFFF;
+}	
+.add_button {
+    line-height: 14px;
+    position: absolute;
+    bottom: 15px;
+    right: 130px;
+}
+.remove_button {
+    bottom: 0;
+    position: absolute;
+    right: 160px;
+}
+/* End by Akila */
+	
+	
+		

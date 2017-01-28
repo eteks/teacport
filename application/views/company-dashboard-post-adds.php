@@ -86,6 +86,9 @@ include ('include/menus.php');
 	                              	</ul>
                                 </div>
 	                        </div> </br>
+	                        <?php
+	                        if(!empty($subscrib_plan)) :
+	                        ?>
                          	<div class="profile-edit">
                         		<?php echo form_open_multipart('provider/postad', 'class="form-horizontal post_adds_fields provider_form"'); ?>
                             		<?php 
@@ -140,6 +143,15 @@ include ('include/menus.php');
 	                            	</div>	                            	
 	                            <?php  echo form_close(); ?>
 	                        </div><br> <!--profile edit-->
+	                        <?php
+	                        else :
+	                        ?>
+	                    	<div class="profile-edit">
+	                    		<h2>You are not eligible to post new ads until subscribe. If you want subscribe <a class="txt_blue" href="<?php echo base_url().'provider/subscription' ?>">click here...</a></h2>
+	                    	</div>
+	                    	<?php
+	                    	endif;
+	                    	?>
 	                    </div> <!--Right panel-->
                     </div>
                 </div>

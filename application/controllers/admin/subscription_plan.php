@@ -334,6 +334,11 @@ class Subscription_Plan extends CI_Controller {
 		}
 
 	}
+
+	public function customize_plan_settings(){
+		$this->load->view('admin/customize_plan_settings');
+	}
+
 	
 	
 }

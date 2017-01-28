@@ -834,6 +834,7 @@ $('.top_layer, .message_close').on('click',function() {
         return false;
      }
     });
+    
 
     //check only entered value is decimal
     $(document).delegate('.decimal_act','keypress',function(e){
@@ -954,16 +955,70 @@ $('.temp_remove_act').click(function(e)
        $('#imagepreview_templogo').attr("src","");
    });
    
-  	var win_height= $(window).height();
-   var head_height= win_height - $('#header').height();
-   var footer_height= head_height -$('#footer').height(); 
-   //alert (win_height);
-   //alert(head_height);  
-   $('.sub_pre_section').css('max-height', footer_height);
-   
+/* slim scroll */
+var win_height= $(window).height();
+var head_height= win_height - $('#header').height();
+var footer_height= head_height -$('#footer').height(); 
+//alert (win_height);
+//alert(head_height);  
+$('.sub_pre_section').css('max-height', footer_height);
+
 /* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){
 	// $(".popup").css("opacity", "0.8" + "z-index", "999999");
 // 	
 // });
+
+/* Accept Only Numbers - Added by Akila */
+$(document).on("keypress",".numeric_value",function (e) {
+	if (e.which != 8 && e.which != 0 && e.which != 45 && (e.which < 48 || e.which > 57)) {
+		return false;
+	}
+});
+
+//Clone field for Customize plan settings - Added by Akila
+var maxField = 3;
+var addButton = $('.add_button');
+var wrapper = $('.field_wrapper');
+var x = 1;
+var y = 2;
+//Initial field counter is 1
+
+$(addButton).click(function() {//Once add button s clicked
+	var cloned_content = $('.field_wrapper:last').clone();
+	
+	if (x < maxField) {//Check maximum number of input fields
+		x++;
+		$(cloned_content).insertAfter('.field_wrapper:last').find("*","input").val("");
+		$(cloned_content).find('.remove_button').show();
+		"$(cloned_content).find('.add_button').hide();"
+		$(cloned_content).find('.counter').html(x);
+	}
+	// else if (x > maxField) {//Check maximum number of input fields
+		// $('.field_wrapper:last').find('.add_button').addclass('dn');			
+   // }
+	
+});
+$(document).on('click','.remove_button',function() {//Once remove button is clicked
+	$(this).parents('.field_wrapper').remove();
+	x--;
+});
+
+//Validate empty  Clone field
+function field_wrapper(){
+        var clone_length = $(".field_wrapper").length;
+        if(clone_length > 1) {
+            $(this).parents(".field_wrapper").remove();
+        }
+        else {
+            alert("Please Fill all fields");
+        }
+        var id = this_parent.find(".field_wrapper:last").attr("id");
+        $('.add_button').addClass('dn');
+        $('#'+id).find('.add_button').removeClass('dn');
+    }
+
+		
+		
+

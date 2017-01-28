@@ -44,10 +44,18 @@
                            	<div class="col-sm-offset-1 col-sm-2">
                                     <label>Provider Logo</label>
                                </div>
+                               <?php
+					  	 		$image_name = '';
+					  	 		$old_name = '';
+					  	 		if(!empty($organization['organization_logo'])) :
+						  	 		$image_name = str_replace(base_url().PROVIDER_UPLOAD, '', $organization['organization_logo']);
+						  	 		$old_name = str_replace(base_url(), '',$organization['organization_logo']);
+					  	 		endif;
+								?>
                                <div class="col-sm-8">
                                		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
-                               		<div class=" col-sm-10 input-group image-preview">
-                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Provider Logo">
+                              		<div class=" col-sm-10 input-group image-preview">
+                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Provider Logo" value="<?php echo $image_name; ?>">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_profile" style="display: none;" class="btn btn-default image-preview-clear" type="button">
 	                                        	<span class="glyphicon glyphicon-remove"></span> Clear
@@ -58,12 +66,22 @@
 	                                            <input id="file" class="image_upload_holder" type="file" accept="file_extension" name="organization_logo">
 	                                        </div>
 	                                    </span>
+	                                    <input type="hidden" value="<?php echo $old_name; ?>" name="old_ologo_file_path" />
                                		</div>
                                		<div class="col-sm-2 col-sm-2 pull-right nopadding">   
-                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png" data-href = "<?php echo base_url();?>assets/images/placeholder.png">
+                               			<?php
+                               			if(!empty($organization['organization_logo'])) :
+                               			?>
+                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo $organization['organization_logo'];?>" data-href = "<?php echo base_url();?>assets/images/placeholder.png" />
+                               			<?php
+                               			else :
+                               			?>
+                               			<img id="seeker-edit-image-preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png" data-href = "<?php echo base_url();?>assets/images/placeholder.png" />
+                               			<?php
+                               			endif;
+                               			?>
                                		</div>                          
                             	</div>
-                            	
                             </div>
 							<div class="form-group">
 								<label class="col-sm-offset-1 col-sm-2" for="organization_name">Organization Name <sup class="alert">*</sup></label>
@@ -94,7 +112,7 @@
 									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control form_inputs" maxlength="150" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
 								</div>
 							</div>
-							<div class="form-group">
+							<!-- <div class="form-group">
 								<label class="col-sm-offset-1 col-sm-2">State<sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<select id="org_state" class="select-state on_change_event_select form-control form_inputs" name="org_native_state">
@@ -108,7 +126,7 @@
 										<option value="">Kerala</option>
 									</select>
 								</div>
-							</div>
+							</div> -->
 							<div class="form-group">
 								<label class="col-sm-offset-1 col-sm-2" for="add_district">District <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
@@ -167,11 +185,19 @@
 							<div class="form-group image_upload">
                             	<div class="col-sm-offset-1 col-sm-2">
                                     <label>Your image</label>
-                               </div>
-                               <div class="col-sm-8">
-                               		<?php echo form_error('organization_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
+                               	</div>
+                               	<?php
+					  	 		$image_name = '';
+					  	 		$old_name = '';
+					  	 		if(!empty($organization['registrant_logo'])) :
+						  	 		$image_name = str_replace(base_url().PROVIDER_UPLOAD, '', $organization['registrant_logo']);
+						  	 		$old_name = str_replace(base_url(), '',$organization['registrant_logo']);
+					  	 		endif;
+								?>
+                               	<div class="col-sm-8">
+                               		<?php echo form_error('provider_logo'); ?><?php if($this->session->userdata('upload_provider_logo_error')) echo '<div class="uploaderror">'.$this->session->userdata('upload_provider_logo_error').'</div>'; ?>
                                		<div class="col-sm-10 input-group image-preview">
-                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Profile Image">
+                               			<input type="text" disabled="disabled" class="form-control image-preview-filename" placeholder="Upload Profile Image" value="<?php echo $image_name; ?>">
 	                                    <span class="input-group-btn">
 	                                    	<button id="image_preview_clear_your_image" style="display: none;" class="btn btn-default image-preview-clear" type="button">
 	                                        	<span class="glyphicon glyphicon-remove"></span> Clear
@@ -182,10 +208,21 @@
 	                                            <input id="yourfile" class="image_upload_holder" type="file" accept="file_extension" name="provider_logo">
 	                                        </div>
 	                                    </span>
+	                                    <input type="hidden" value="<?php echo $old_name; ?>" name="old_plogo_file_path" />
                                		</div> 
                                		<div class="col-sm-2 pull-right nopadding">   
-                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png" data-href = "<?php echo base_url();?>assets/images/placeholder.png" /> 
-                               		</div>                              
+                               			<?php
+                               			if(!empty($organization['registrant_logo'])) :
+                               			?>
+                               			<img id="image_upload_profile_preview" class="image_upload_profile" src="<?php echo $organization['registrant_logo'];?>" data-href = "<?php echo base_url();?>assets/images/placeholder.png" />
+                               			<?php
+                               			else :
+                               			?>
+                               			<img id="seeker-edit-image-preview" class="image_upload_profile" src="<?php echo base_url();?>assets/images/placeholder.png" data-href = "<?php echo base_url();?>assets/images/placeholder.png" />
+                               			<?php
+                               			endif;
+                               			?>
+                              		</div>                              
                             	</div>
                             </div>
 							<div class="form-group declaration">

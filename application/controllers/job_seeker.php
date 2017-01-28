@@ -353,6 +353,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('seeker_state', 'State', 'trim|required|xss_clean');
 				
 			if($this->form_validation->run()) {
 				if($this->input->post('seeker_address1') || $this->input->post('seeker_address2')) {
@@ -367,6 +368,7 @@ class Job_seeker extends CI_Controller {
 					'candidate_address_1' => $this->input->post('seeker_address1'),
 					'candidate_address_2' => $this->input->post('seeker_address2'),
 					'candidate_profile_completeness' => $profile_complete,
+					'candidate_state_id' => $this->input->post('seeker_state'),
 					'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				if($this->input->post('popup_type') == 'social') {
@@ -380,6 +382,7 @@ class Job_seeker extends CI_Controller {
 						'candidate_address_1' => $this->input->post('seeker_address1'),
 						'candidate_address_2' => $this->input->post('seeker_address2'),
 						'candidate_profile_completeness' => $profile_complete,
+						'candidate_state_id' => $this->input->post('seeker_state'),
 						'candidate_district_id' => $this->input->post('seeker_district')
 					);
 				}
@@ -406,7 +409,9 @@ class Job_seeker extends CI_Controller {
 				$data['popup_type'] = 'ordinary';
 			}
 		}
-		$data['district_values'] = $this->common_model->get_all_district();
+		// $data['district_values'] = $this->common_model->get_all_district();
+		$data['district_values'] = '';
+		$data['state_values'] = $this->common_model->get_all_state();
 		$data['institution_values'] = $this->common_model->get_institution_type();
         // print_r($candidate_data);
         // echo $data['popup_type'];
@@ -603,9 +608,9 @@ class Job_seeker extends CI_Controller {
 	               		$_POST['cand_pic'] = base_url().$upload_image_path.$upload_data['file_name']; 
 	               		$old_file_path = $_POST['old_file_path'] ;
 	               		$upload_error = 0;
-	              	    $keyword = "http";
+	              	    $keyword = "uploads";
 	        			// To check whether the image path is cdn or local path
-				        if(strpos( $old_file_path , $keyword ) === false && !empty($old_file_path) ) {
+				        if(strpos( $old_file_path , $keyword ) !== false && !empty($old_file_path) ) {
 	               			@unlink(APPPATH.'../'.$old_file_path);
 				        }
 	               		$error = 0;
@@ -632,7 +637,10 @@ class Job_seeker extends CI_Controller {
 		               		$_POST['cand_resume'] = base_url().$upload_resume_path.$upload_data['file_name']; 
 		               		$prev_file_path = $_POST['prev_file_path'] ;
 		               		$upload_error = 0;
-		               		@unlink(APPPATH.'../'.$prev_file_path);
+		        			// To check whether the resume path is empty or not
+					        if(!empty($prev_file_path) ) {
+	               				@unlink(APPPATH.'../'.$prev_file_path);
+				        	}	
 							$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
 		            	}
 		   		      	else

@@ -558,8 +558,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span3 plan_field_section">                                       
                               <h4 class="">Original Plan</h4>
                               <label class=""> &#8377 </label>
-                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> </label>
-                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> </label>
+                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> </label>
+                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> </label>
                               <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
                               <?php
                               if($pay_val['organization_subscription_status'] == 1) :

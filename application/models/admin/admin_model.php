@@ -185,6 +185,50 @@ class Admin_Model extends CI_Model {
     $this->db->update('tr_feedback_form', array('is_viewed' => '1'));
     return $model_data;
   }  
+  public function latest_news($status){
+    $model_data['status'] = 0;
+    $model_data['error'] = 0;
+
+    // Update data
+    if($status=='update') {
+      $latest_news_update_data = array( 
+                            'latest_news_title' => $this->input->post('l_news_title'),
+                            'latest_news_redirect_link' => $this->input->post('l_news_redirect_link'),                            
+                            'latest_news_status' => $this->input->post('l_news_status')
+                            );
+      $latest_news_update_where = '( latest_news_id="'.$this->input->post('rid').'")'; 
+      $this->db->set($latest_news_update_data); 
+      $this->db->where($latest_news_update_where);
+      $this->db->update("tr_latest_news", $latest_news_update_data); 
+      $model_data['status'] = "Updated Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Save data
+    else if($status=='save') {
+      $latest_news_insert_data = array( 
+                            'latest_news_title' => $this->input->post('l_news_title'),
+                            'latest_news_redirect_link' => $this->input->post('l_news_redirect_link'),                            
+                            'latest_news_status' => $this->input->post('l_news_status')
+                            );
+      $this->db->insert("tr_latest_news", $group_insert_data); 
+      $model_data['status'] = "Inserted Successfully";
+      $model_data['error'] = 2;
+    }
+
+    // Delete data
+    else if($status =='delete') {      
+        $latest_news_delete_where = '(latest_news_id="'.$this->input->post('rid').'")';
+        $this->db->delete("tr_latest_news", $group_delete_where); 
+        $model_data['status'] = "Deleted Successfully";
+        $model_data['error'] = 2;
+    }
+
+    // View
+    $model_data['latest_news_values'] = $this->db->get_where('tr_latest_news')->result_array();
+    print_r($model_data['latest_news_values']);
+    return $model_data;
+  }
 
 }
 
