@@ -74,12 +74,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                         <div class="widget-body">
                             <div class="portlet-body">
-                                <div class="clearfix">
+                                <div class="clearfix add_section">
                                     <div class="btn-group">
-                                        <button id="sample_editable_1_new" class="btn green add_new">
-                                            Add New <i class="icon-plus"></i>
-                                        </button>
-                                    </div>
+					                    <button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
+					                      Add New <i class="icon-plus"></i>
+					                    </button>
+					                  </div>
                                 </div>                               
                                 <form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
                                 <?php } ?> 
@@ -92,11 +92,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                   <table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
                                     <thead>
                                       <tr class="ajaxTitle">
-                                        <th>Subscription Name</th>
-                                        <th>SMS Count</th>
-                                        <th>Email Count</th>
-                                        <th>Resume Count</th>
+                                        <th>Select Subscription Plan</th>
+                                        <th>Upgrade Plans</th>
                                         <th>Price</th>
+                                        <th>Min Counts</th>
+                                        <th>Max Counts</th>
                                         <th>Status</th>
                                         <th>Created Date</th>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -179,6 +179,110 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
                 </div>
+                
+                <!---Add and edit popup -->
+                <div class="popup" data-popup="popup_section_subs">
+			      <div class="popup-inner">       
+			        <div class="widget box blue" id="popup_wizard_section">
+			          <div class="widget-title">
+			            <h4>
+			              <i class="icon-reorder"></i> Subscription Plan
+			            </h4>                        
+			          </div>
+			          <div class="widget-body form">
+			            <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+			            <p class="admin_status"> </p>
+			              <fieldset>
+			                <legend> Subscription plan details:</legend>
+			                <div class="form-wizard pop_details_section">
+			                <?php } ?>
+			                <div class="plan_creation">
+			                	<div class="form-group col4">
+			                		<label>Select Plan</label>
+			                		<select value="">
+			                			<option value="">Basic plans @ 1999</option>
+			                			<option value="">Standard plans @ 5000</option>
+			                			<option value="">Premium plans @ 10000</option>
+			                		</select>
+			                	</div>
+			                	<!-- <div class="clone_plan_fields">
+			                	  <div id="plan_clone_section" class="form-group clone_section subscribe_plan_clone">	
+				                	<div class="col4">
+				                		<label>Upgrade Plans</label>
+				                		<select class="form-control" value="">
+				                			<option value="">SMS</option>
+				                			<option value="">Email</option>
+				                			<option value="">Resume Download</option>
+				                		</select>
+				                	</div>
+				                	<div class="col2">
+				                		<label>Price</label>
+				                		<input class="form-control" type="text" name="plan_price" maxlength="5">
+				                	</div>
+				                	<div class="col2">
+				                		<label>Min Counts</label>
+				                		<input class="form-control" type="text" name="minimum-count" maxlength="5">
+				                	</div>
+				                	<div class="col2">
+				                		<label>Max Counts</label>
+				                		<input class="form-control" type="text" name="maximum-count" maxlength="5">
+				                	</div>
+				                	<div class="clone_btn col1 actions">
+				                		<a class="plan_clone clone_icon"><strong>+</strong></a>
+				                		<a class="plan_clone clone_icon dn"><strong>+</strong></a>
+				                		<a class="plan_remove clone_icon"><strong>-</strong></a>
+				                	</div>
+				                	<div class="clearfix"> </div>
+				                  </div>	
+				                </div> --><!--End append field-->
+				                <div class="field_wrapper"><!--append field-->
+			                	  	
+				                	<div class="upg_plan col4">
+				                		<label>Upgrade Plans</label>
+				                		<select class="form-control" value="">
+				                			<option value="SMS">SMS</option>
+				                			<option value="Email">Email</option>
+				                			<option value="Resume Download">Resume Download</option>
+				                		</select>
+				                	</div>
+				                	<div class="col2">
+				                		<label>Price</label>
+				                		<input class="form-control" type="text" name="plan_price" maxlength="5">
+				                	</div>
+				                	<div class="col2">
+				                		<label>Min Counts</label>
+				                		<input class="form-control" type="text" name="minimum-count" maxlength="5">
+				                	</div>
+				                	<div class="col2">
+				                		<label>Max Counts</label>
+				                		<input class="form-control" type="text" name="maximum-count" maxlength="5">
+				                	</div>
+				                	<div class="col1">
+				                		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
+				                	</div>
+				                	<div class="clearfix"> </div>
+				                  </div>
+				                  <div class="pull-left">
+				                  	<a class="add_button" title="Add field"><strong>+</strong></a>
+				                  </div>	
+				             	  <div class="clearfix"> </div>
+			          
+			                <button type="submit" class="btn btn-info save_button">Save</button>
+			                <?php if(!$this->input->is_ajax_request()) { ?>
+			                </div>
+			              </fieldset>
+			            </form>
+			            
+			            
+			          </div>  
+			        </div>                
+			      <p>
+			        <a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
+			      </p>
+			      <a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
+			    </div>
+ 			 </div> 
+             <!--End Popup-->  
             </div>
             <!-- END ADVANCED TABLE widget-->
             <!-- END PAGE CONTENT-->

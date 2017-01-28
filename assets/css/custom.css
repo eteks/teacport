@@ -1220,7 +1220,7 @@ label.form-input-error {
 .comp_name_act{position: absolute;top: 30px;}
 .vacancies_instruction_act{margin-top: 40px !important;}
 .carousel-control.left, .carousel-control.right {background-image: none}
-.news_flash{border: 3px solid rgb(255,165,0);box-shadow: 0 0 4px #f47020;}
+.news_flash{border: 3px solid rgb(255,165,0);box-shadow: -8px 0px 10px 1px #f47020;}
 .subs_button{background-color:#4CAF50;border:none;color:white;padding:16px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:33px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer}
 .prem_select{background-color:white;color:black;border:2px solid #00a5ef}
 .prem_select:hover{background-color:#00a5ef;color:white}
@@ -1228,6 +1228,7 @@ label.form-input-error {
 .upg_select:hover{background-color:#da651a;color:white}
 .renew_select{background-color:white;color:black;border:2px solid #00a5ef}
 .renew_select:hover{background-color:#00a5ef;color:white}
+
 
 /*Ended By Thangam*/
 /* Added by Akila */
@@ -1348,3 +1349,63 @@ label.form-input-error {
 	padding-top:40px;
 	pointer-events:none;
 }
+
+.table-filter .star {
+	color: #ccc;
+	text-align: center;
+	display: block;
+}
+.table-filter .star.star-checked {
+	color: #F0AD4E;
+}
+.table-filter .star:hover {
+	color: #ccc;
+}
+.table-filter .star.star-checked:hover {
+	color: #F0AD4E;
+}
+/*.table-filter .media-photo {
+	width: 35px;
+}
+.table-filter .media-body {
+    display: block;
+}
+.table-filter .media-meta {
+	font-size: 11px;
+	color: #999;
+}*/
+.table-filter .media .title {
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
+.table-filter .media .title span {
+	font-size: .8em;
+	margin-right: 20px;
+}
+.listing_location{
+	position: absolute;
+	right: 400px;
+    width: 10em;
+    margin: 0 auto 1em auto;
+    /*border: 1px solid #000;*/
+}
+.listing_date{
+	position: absolute;
+	right: 250px;
+    width: 10em;
+    margin: 0 auto 1em auto;
+    /*border: 1px solid #000;*/
+    padding: 1em;
+}
+/*.panel-body{
+    margin-left: 45px;
+    width: 1140px;
+}*/
+.listing_head{background-color: #f47020 !important; }
+.listing_head_title1{border: none !important;}
+.listing_head_title2{position: absolute; right: 980px; border: none !important;}
+.listing_head_title3{position: absolute; left: 715px; border: none !important; }
+.listing_head_title4{position: absolute; left: 885px; border: none !important;}

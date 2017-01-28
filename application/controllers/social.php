@@ -219,7 +219,7 @@ class Social extends CI_Controller {
 		$ok = $this->twconnect->twprocess_callback();
 		
 		if ( $ok ) { redirect('social/twittersuccess'); }
-			else redirect ('social/twiiterfailure');
+			else redirect ('social/twitterfailure');
 			
 	}
 	public function twittersuccess() {
@@ -326,7 +326,7 @@ class Social extends CI_Controller {
 			redirect('seeker/dashboard');
 		}
 		else{
-			$checkvaliduser = $this->job_seeker_model->social_valid_provider_login($twdata);
+			$checkvaliduser = $this->job_seeker_model->social_valid_seeker_login($twdata);
 			if($checkvaliduser['valid_status'] === 'valid'){
 				$this->session->set_userdata("login_status", TRUE);
 				$this->session->set_userdata("login_session",$checkvaliduser);

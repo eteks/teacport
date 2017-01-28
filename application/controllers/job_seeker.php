@@ -603,9 +603,9 @@ class Job_seeker extends CI_Controller {
 	               		$_POST['cand_pic'] = base_url().$upload_image_path.$upload_data['file_name']; 
 	               		$old_file_path = $_POST['old_file_path'] ;
 	               		$upload_error = 0;
-	              	    $keyword = "http";
+	              	    $keyword = "uploads";
 	        			// To check whether the image path is cdn or local path
-				        if(strpos( $old_file_path , $keyword ) === false && !empty($old_file_path) ) {
+				        if(strpos( $old_file_path , $keyword ) !== false && !empty($old_file_path) ) {
 	               			@unlink(APPPATH.'../'.$old_file_path);
 				        }
 	               		$error = 0;
@@ -632,7 +632,10 @@ class Job_seeker extends CI_Controller {
 		               		$_POST['cand_resume'] = base_url().$upload_resume_path.$upload_data['file_name']; 
 		               		$prev_file_path = $_POST['prev_file_path'] ;
 		               		$upload_error = 0;
-		               		@unlink(APPPATH.'../'.$prev_file_path);
+		        			// To check whether the resume path is empty or not
+					        if(!empty($prev_file_path) ) {
+	               				@unlink(APPPATH.'../'.$prev_file_path);
+				        	}	
 							$data['update_status'] = $this->job_seeker_model->editprofile_validation($_POST);
 		            	}
 		   		      	else

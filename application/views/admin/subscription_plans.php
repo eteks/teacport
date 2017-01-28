@@ -92,8 +92,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <th>Plan</th>
                         <th>Price</th>
                         <th>Features</th>
-                        <th>Validity Start Date</th>
-                        <th>Validity End Date</th>
+                        <th>Validity Days</th>
+                        <!-- <th>Validity End Date</th> -->
                         <!-- <th>Max Vacancy Posts</th>
                         <th>Max Sms</th>
                         <th>Max Email</th>
@@ -127,11 +127,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php echo $sub['subscription_features']; ?>
                         </td>
                         <td> 
-                          <?php echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
+                          <?php //echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
                         </td>
-                        <td> 
+                        <!-- <td> 
                           <?php echo date("d/m/Y", strtotime($sub['subcription_valid_end_date'])); ?>
-                        </td>
+                        </td> -->
                         <td> 
                           <?php 
                             if ($sub['subscription_status'] == 1) 
@@ -212,20 +212,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </div>
                     <div class="col12">
                       <div class="col6 control-group">  
-                        <label class="control-label">Validitity Start</label>
-                        <span class="dynamic_data date_picker_act"> 
-                          <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
-                           <input class=" m-ctrl-medium admin_date_picker dp_width" placeholder="Validitity Start Date" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                        <label class="control-label">Validitity Days</label>
+                        <span class="dynamic_data"> 
+                           <input class="numeric_value" placeholder="Days of Validity" size="16" type="text" name="validity_days" value="<?php if(isset($subscription_plan_details)) //echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
-                      <div class="col6 control-group">  
+                      <!-- <div class="col6 control-group">  
+                        <label class="control-label">Validitity Start</label>
+                        <span class="dynamic_data date_picker_act"> 
+                           <input type="text" class="form-control" placeholder="Subscription Validitity" />
+                           <input class=" m-ctrl-medium admin_date_picker dp_width" placeholder="Validitity Start Date" size="16" type="text" name="sub_start_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                        </span>
+                      </div> -->
+                      <!-- <div class="col6 control-group">  
                         <label class="control-label">Validitity End</label>
                         <span class="dynamic_data date_picker_act"> 
-                          <!-- <input type="text" class="form-control" placeholder="Subscription Validitity" /> -->
+                           <input type="text" class="form-control" placeholder="Subscription Validitity" /> 
                            <input class=" m-ctrl-medium admin_date_picker dp_width" placeholder="Validitity End Date" size="16" type="text" name="sub_end_validity" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_end_date'])); ?>"/>
                         </span>
-                      </div> 
-                    <div class="col12">
+                      </div> --> 
                       <div class="col6 control-group">
                         <label class="control-label">Maximum Posts Count</label>
                         <span class="dynamic_data"> 
@@ -238,8 +243,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum SMS Count" name="sub_max_sms" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_sms_counts']; ?>"/> 
                         </span>
                       </div>
-                      </div>
-                    <div class="col12">  
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Email Count </label>
                         <span class="dynamic_data"> 
@@ -252,8 +255,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="text" class="form-control numeric_act" maxlength="5" placeholder="Maximum Resume Count" name="sub_max_resume" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_resume_download_count']; ?>"/> 
                         </span>
                       </div>
-                    </div>
-                    <div class="col12">  
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Ads </label>
                         <span class="dynamic_data"> 
@@ -266,14 +267,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="text" class="form-control numeric_act" maxlength="15" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
                         </span>
                       </div>
-                    </div>
-                    <div class="col12">
-                      <div class="col6 control-group">  
-                        <label class="control-label"> Subscription Features </label>
-                        <span class="dynamic_data"> 
-                          <textarea class="textarea" placeholder="Subscription Features" maxlength="150" name="sub_features"><?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
-                        </span>
-                      </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Status</label>
                         <span class="dynamic_data"> 
@@ -284,7 +277,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </select>
                         </span>
                       </div>
-                    </div>
+                      <div class="col6 control-group">  
+                        <label class="control-label"> Subscription Features </label>
+                        <span class="dynamic_data"> 
+                          <textarea class="textarea" placeholder="Subscription Features" maxlength="150" name="sub_features"><?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
+                        </span>
+                      </div>
                   </div>
                   <input type="hidden" name="rid" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_id']; ?>"/>
                 </div>
