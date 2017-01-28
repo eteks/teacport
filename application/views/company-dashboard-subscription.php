@@ -1,58 +1,57 @@
 <?php include('include/header.php'); ?>
 <?php include('include/menus.php'); ?>
-        <section class="job-breadcrumb">
-            <div class="container">
-                <div class="row">
-                    
-                    <div class="col-md-12 col-sm-12 co-xs-12 text-left">
-                        <div class="bread">
-                            <ol class="breadcrumb">
-                                <li><a href="<?php echo base_url();?>">Home</a>
-                                </li>
-                                <li><a href="<?php echo base_url(); ?>provider/dashboard">Dashboard</a>
-                                </li>
-                                <li class="active">Subscribe Plan</li>
-                            </ol>
-                        </div>
-                    </div>
+<section class="job-breadcrumb">
+    <div class="container">
+        <div class="row">
+            
+            <div class="col-md-12 col-sm-12 co-xs-12 text-left">
+                <div class="bread">
+                    <ol class="breadcrumb">
+                        <li><a href="<?php echo base_url();?>">Home</a>
+                        </li>
+                        <li><a href="<?php echo base_url(); ?>provider/dashboard">Dashboard</a>
+                        </li>
+                        <li class="active">Subscribe Plan</li>
+                    </ol>
                 </div>
             </div>
-        </section>
-        <section class="dashboard-body">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                        	<div class="panel panel-border">
-								<div class="dashboard-logo-sidebar center-block">
-									<?php if (@getimagesize($organization['organization_logo'])) { ?>
-                                    <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
-                                    <?php } else { ?>
-                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive">
-                                    <?php } ?>
-								</div>
-								<div class="text-center dashboard-logo-sidebar-title">
-									<h4><?php echo $organization['organization_name']; ?></h4>
-								</div>
-							</div>
-                            <!--include left panel menu-->
-                            <?php include('include/company_dashboard_sidebar.php'); ?>                           
-                        </div>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                        	<div class="heading-inner first-heading">
-                                <p class="title">Choose Your Plan</p>
-                            </div>
-                            <p class="success_server_msg"><?php if(isset($subscription_server_msg)) echo $subscription_server_msg; ?><?php if($this->session->userdata('subscription_server_msg')!=''){ echo $this->session->userdata('subscription_server_msg');$this->session->unset_userdata('subscription_server_msg');} ?></p>
-                            <?php if (!empty($subcription_plan)) { ?>
-                            <div class="subscription">
-                                <!--Select Pricing Plan-->
-	                        	<div class="form-group">
-									<label class="col-sm-3 nopadding" for="subpack">Select Subscription : </label>
-									<div class="col-sm-6">
-										<select id="subpack_act" class="form-control" name="subpack">
-											<option value=""> Select Package </option>
+        </div>
+    </div>
+</section>
+<section class="dashboard-body">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                	<div class="panel panel-border">
+						<div class="dashboard-logo-sidebar center-block">
+							<?php if (@getimagesize($organization['organization_logo'])) { ?>
+                            <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
+                            <?php } else { ?>
+                        	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive">
+                            <?php } ?>
+						</div>
+						<div class="text-center dashboard-logo-sidebar-title">
+							<h4><?php echo $organization['organization_name']; ?></h4>
+						</div>
+					</div>
+                    <!--include left panel menu-->
+                    <?php include('include/company_dashboard_sidebar.php'); ?>                           
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                	<div class="heading-inner first-heading">
+                        <p class="title">Choose Your Plan</p>
+                    </div>
+                    <p class="success_server_msg"><?php if(isset($subscription_server_msg)) echo $subscription_server_msg; ?><?php if($this->session->userdata('subscription_server_msg')!=''){ echo $this->session->userdata('subscription_server_msg');$this->session->unset_userdata('subscription_server_msg');} ?></p>
+                    <?php if (!empty($subcription_plan)) { ?>
+                    <div class="subscription">
+                        <!--Select Pricing Plan-->
+                    	<div class="form-group">
+							<label class="col-sm-3 nopadding" for="subpack">Select Subscription : </label>
+							<div class="col-sm-6">
+								<select id="subpack_act" class="form-control" name="subpack">
+									<option value=""> Select Package </option>
 											<?php foreach ($subcription_plan as $plan) {
-												$startdate = strtotime($plan['subcription_valid_start_date']);$enddate = strtotime($plan['subcription_valid_end_date']);$datediff = $enddate-$startdate;
 												echo "<option class='subplan_act' value='".$plan['subscription_id']."' data-name='".$plan['subscription_plan']."' data-amount='".$plan['subscription_price']."'>".$plan['subscription_plan']." Membership plan @ ".floor(($datediff / (60 * 60 * 24))+1)." days Rs. ".$plan['subscription_price']." </option>";
 											} ?>
 										</select>
@@ -90,7 +89,6 @@
                                 	<!--Basic Plan-->
                                 	<?php 
                                 		foreach ($subcription_plan as $plan) {
-                                			$startdate = strtotime($plan['subcription_valid_start_date']);$enddate = strtotime($plan['subcription_valid_end_date']);$datediff = $enddate-$startdate; 
                                 	?>
                                 	<div id="<?php echo $plan['subscription_plan'];?>" class="col-md-12 col-sm-12 col-xs-12 light-grey dn subscription_plan">
                                 		<div class="heading-inner">
@@ -136,15 +134,16 @@
 				                                <div class="plan-price text-center">
 				                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span>30</h4>
 				                                </div>
-				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                               
+				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                          
 				                                <div class="price-features text-center">
-				                                    <ul>
-															<li>Max No of vacancy Posts: 20</li>
-															<li>Sms Counts: 30</li>
-															<li>Email-count: 40</li>
+				                                    <ul class="subs_count_act">
+															<!-- <li>Max No of vacancy Posts: 20</li> -->
+															<li>Sms Counts: 30</li> 
+															<li>Email-count: 40</li> 
 															<li>Resume Download: 20</li>
-															<li>Max No of ads: 20</li>										
-													</ul>				                                    
+															<!-- <li>Max No of ads: 20</li>	 -->
+																								
+													</ul>
 				                                </div>
 				                            	</div>
 				                            	<div class=""> <a href="#" class="subs_button prem_select">Select Plan</a> </div>
@@ -160,17 +159,48 @@
 				                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span>30</h4>
 				                                </div>
 				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>
+				                                <input class="subs_input_val_upgact1" type="text" disabled="disabled" />
+				                                <input class="subs_input_val_upgact2" type="text" disabled="disabled" />
+				                                <input class="subs_input_val_upgact3" type="text" disabled="disabled" />
 				                                <div class="price-features text-center">
-				                                    <ul>
-															<li>Max No of vacancy Posts: 20</li>
-															<li>Sms Counts: 30</li>
-															<li>Email-count: 40</li>
-															<li>Resume Download: 20</li>
-															<li>Max No of ads: 20</li>
+				                                    <ul class="subs_count_act">
+															<!-- <li>Max No of vacancy Posts: 20</li> -->
+															<li id="subs_list_upg_sms" class="subs_list_act" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Sms Counts: 30<i class="icon-edit subs_edit"></i></li>
+															<div id="popover-form" class="hide popover_form_upg_sms">
+										            <form>
+										            <div class="form-group">
+										            <label>SMS COUNT</label>
+										                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_sms" maxlength="5" />
+										            </div>
+										            <button type="button" class="btn btn-success popover_upg_sms_save">Save</button>
+										            </form>
+										        </div>
+															<li id="subs_list_upg_email" class="subs_list_act">Email-count: 40<i class="icon-edit subs_edit"></i></li>
+															<div id="popover-form" class="hide popover_form_upg_email">
+										            <form>
+										            <label>EMAIL COUNT</label>
+										            <div class="form-group">
+										                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_email" maxlength="5" />
+										            </div>
+										            <button type="button" class="btn btn-success popover_upg_email_save">Save</button>
+										            </form>
+										        </div>
+															<li id="subs_list_upg_resume" class="subs_list_act">Resume Download: 20<i class="icon-edit subs_edit" data-original-title="" title=""></i></li>
+															<div id="popover-form" class="hide popover_form_upg_resume">
+										            <form>
+										            <div class="form-group">
+										            <label>RESUME COUNT</label>
+										                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_resume" maxlength="5" />
+										            </div>
+										            <button type="button" class="btn btn-success popover_save popover_upg_resume_save">Save</button>
+										            </form>
+										        </div>
+															<!-- <li>Max No of ads: 20</li> -->
 													</ul>                                   
 				                                </div>
 				                            </div>
 				                            <div class=""> <a href="#" class="subs_button upg_select">Select Plan</a> </div>
+				                            <!-- <div> <a href="#" class="subs_button renew_select">Reset Plan</a> </div> -->
 				                          </div>
 				                        </div>
 				                        <div class="col-md-4 col-sm-6 col-xs-12">
@@ -182,15 +212,26 @@
 				                                <div class="plan-price text-center">
 				                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span>30</h4>
 				                                </div>
-				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                               
+				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                            
 				                                <div class="price-features text-center">
-				                                    <ul>
-															<li>Max No of vacancy Posts: 20</li>
-															<li>Sms Counts: 30</li>
-															<li>Email-count: 40</li>
-															<li>Resume Download: 20</li>
-															<li>Max No of ads: 20</li>										
-													</ul>				                                    
+				                                    <ul class="subs_count_act">
+															<!-- <li>Max No of vacancy Posts: 20</li> -->
+															
+															<li> Sms Counts: 30
+															</li>
+															<div id="popover-form" class="hide popover_form_renewal_sms">
+										            <form>
+										            <div class="form-group">
+										                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_renewal_sms" maxlength="5" />
+										            </div>
+										            <button type="button" class="btn btn-success popover_renewal_sms_save">Save</button>
+										            </form>
+										        	</div>
+													<li>
+													Email-count: 40</li>
+													<li>Resume Download: 20</li>
+													<!-- <li>Max No of ads: 20</li>-->
+													</ul>                    
 				                                </div>
 				                            	</div>
 				                            	<div class=""> <a href="#" class="subs_button renew_select">Select Plan</a> </div>

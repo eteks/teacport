@@ -112,6 +112,28 @@ class Common_model extends CI_Model {
 		$alldistrict = $this->db->get();
 		return $alldistrict->result_array(); 
 	}
+	public function get_district_by_state($id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_district');
+		$where = "(district_status='1' AND district_state_id=$id)";
+		$this->db->order_by('district_name', 'asc');
+		$this->db->where($where);
+		$alldistrict = $this->db->get();
+		return $alldistrict->result_array(); 
+	}
+	
+
+	public function get_all_state()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_state');
+		$where = "(state_status='1')";
+		$this->db->order_by('state_name', 'asc');
+		$this->db->where($where);
+		$alldistrict = $this->db->get();
+		return $alldistrict->result_array(); 
+	}
 		
 	public function subject_by_institution($ins_id)
 	{
@@ -319,13 +341,14 @@ class Common_model extends CI_Model {
 	
 	public function provider_subscription_active_plans($org_id){
 		$this->db->select('*');    
-		$this->db->from('tr_organization_subscription');
-		$this->db->join('tr_subscription', 'tr_subscription.subscription_id = tr_organization_subscription.subscription_id');
-		$where = "(organization_id = '".$org_id."' AND org_sub_validity_start_date <= CURRENT_DATE() AND  org_sub_validity_end_date >= CURRENT_DATE()  AND organization_subscription_status='1')";
+		$this->db->from('tr_organization_subscription os');
+		$this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
+		$where = "(os.organization_id = '".$org_id."' AND os.organization_subscription_status='1')";
 		$this->db->where($where);
 		$providersubcription = $this->db->get();
 		return $providersubcription->row_array(); 
 	}
+
 	public function posted_jobs_count($org_id){
 		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_organization_id =".$org_id);
 		return $posted_jobs->num_rows();
@@ -373,6 +396,46 @@ class Common_model extends CI_Model {
 		$ads_data = $this->db->get_where('tr_premium_ads',array('premium_ads_status' => '1','is_admin_verified'=>'1'))->result_array();
 		return $ads_data;
 	}
+
+	// Get qualification by job level
+	public function qualification_by_joblevel($val,$ins_id) {
+		$where = '(educational_qualification_course_type="'.$val.'" AND educational_qualifcation_inst_type_id="'.$ins_id.'" AND educational_qualification_status=1)';
+		$qua_data = $this->db->get_where('tr_educational_qualification',$where)->result_array();
+		return $qua_data;
+	}
+
+	// Get university by class level
+	public function university_by_classlevel($id) {
+		$where = '(university_class_level_id="'.$id.'" AND university_board_status=1)';
+		$uni_data = $this->db->get_where('tr_university_board',$where)->result_array();
+		return $uni_data;
+	}
+
+	// Get department by qualification
+	public function department_by_qualification($id) {
+		$qua_id = explode(',',$id);
+		$a = 1;
+		$where = "departments_status = '1' AND ";
+		foreach ($qua_id as $val) {
+			$where .= "FIND_IN_SET('".$val."',department_educational_qualification_id) !=0";
+			if($a < count($qua_id)) {
+				$where .= " OR ";
+			}
+			$a++;
+		}
+		// $where = '(FIND_IN_SET("'.$id.'",department_educational_qualification_id) !=0 AND departments_status=1)';
+		$dept_data = $this->db->get_where('tr_departments',$where)->result_array();
+		return $dept_data;
+	}
+
+	// Get subscrition ads visible days by subscription id
+	public function subscription_visible_days($id) {
+		$ads_data = $this->db->get_where('tr_subscription',array('subscription_id' => $id))->row_array();
+		return $ads_data['subscription_max_days_ad_visible'];
+	}
+	
+
+	
 
 } // End
 

@@ -1291,6 +1291,11 @@ label.form-input-error {
 .upg_select:hover{background-color:#da651a;color:white}
 .renew_select{background-color:white;color:black;border:2px solid #00a5ef}
 .renew_select:hover{background-color:#00a5ef;color:white}
+.subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
+.subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
+.subs_input_val_upgact1{border-left-width: 1px;margin-left: 17px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact2{margin-left: 82px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact3{ margin-left: 152px;position: absolute;width: 50px;display: none;}
 
 
 /*Ended By Thangam*/
@@ -1354,7 +1359,8 @@ label.form-input-error {
 	text-align: left;
 }
 #institution_grids .company-box {
-	padding: 20px 0;	
+	padding: 10px 0;	
+	margin: 0 0 10px; 
 }
 /*Find jobs */
 .job-box-2 .feature-post-meta-bottom .apply {
@@ -1388,24 +1394,75 @@ label.form-input-error {
 .custom-btn:focus, .custom-btn:hover{
 	color: #FFFFFF;
 }
-/* Styles for custom tooltip template */
-    .tooltip-head{
-        color: #fff;
-        background: #000;
-        padding: 10px 10px 5px;
-        border-radius: 4px 4px 0 0;
-        text-align: center;
-        margin-bottom: -2px; /* Hide default tooltip rounded corner from top */
-    }
-    .tooltip-head .glyphicon{
-        font-size: 22px;
-        vertical-align: bottom;
-    }
-    .tooltip-head h3{
-        margin: 0;
-        font-size: 14px;
-    }
+/* Styles for custom tooltip template*/
+.tooltip-head{
+    color: #fff;
+    background: #000;
+    padding: 10px 10px 5px;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+    margin-bottom: -2px; /* Hide default tooltip rounded corner from top */
+}
+.tooltip-head .glyphicon{
+    font-size: 22px;
+    vertical-align: bottom;
+}
+.tooltip-head h3 {
+    margin: 0;
+    font-size: 14px;
+}
+/* Institution Page */
+#institution_grids .company-list-img {
+	height: 80px;
+	width: 80px;
+}
+#institution_grids .company-box:hover {
+background: #ebf1f6; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebf1f6 0%, #89c3eb 2%, #89c3eb 2%, #abd3ee 50%, #d5ebfb 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
+}
+#institution_grids .company-list-name h5{
+	color: #000;
+}
+#institution_grids .company-list-name h5:hover {
+	color: #29AAFE;
+}
+.institution_new_jobs, .institution_total_jobs{
+	cursor: pointer;
+}
+#insititution_profile_detail .related-post li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+#insititution_profile_detail .related-post li a{
+	font-size: 14px;
+}
+#institution_grids .company-list {
+	/* only required rule to the whole div clickable work */
+	position: relative;
+}
+#institution_grids .institutional_jobs_grid_link{
+  /* all rules required to make the whole div clickable */ 
+  /*position:absolute; */
+  width:100%;
+  height:100%;
+  top:0;
+  left: 0;
+  z-index: 1;
+  /* this is a fix for IE7-9 */
+  	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";  
+ 	filter: alpha(opacity=0);  
+  	opacity:0; 
+}
+.organisation_detail .company-img{
+	height: 100px;
+	width: 100px;
+}	
+
 /* Ended by Akila */
+
 /* For Visitor Count */
 .visitor_count{
 	float:left;
@@ -1413,62 +1470,4 @@ label.form-input-error {
 	pointer-events:none;
 }
 
-.table-filter .star {
-	color: #ccc;
-	text-align: center;
-	display: block;
-}
-.table-filter .star.star-checked {
-	color: #F0AD4E;
-}
-.table-filter .star:hover {
-	color: #ccc;
-}
-.table-filter .star.star-checked:hover {
-	color: #F0AD4E;
-}
-/*.table-filter .media-photo {
-	width: 35px;
-}
-.table-filter .media-body {
-    display: block;
-}
-.table-filter .media-meta {
-	font-size: 11px;
-	color: #999;
-}*/
-.table-filter .media .title {
-	color: #2BBCDE;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: normal;
-	margin: 0;
-}
-.table-filter .media .title span {
-	font-size: .8em;
-	margin-right: 20px;
-}
-.listing_location{
-	position: absolute;
-	right: 400px;
-    width: 10em;
-    margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-}
-.listing_date{
-	position: absolute;
-	right: 250px;
-    width: 10em;
-    margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-    padding: 1em;
-}
-/*.panel-body{
-    margin-left: 45px;
-    width: 1140px;
-}*/
-.listing_head{background-color: #f47020 !important; }
-.listing_head_title1{border: none !important;}
-.listing_head_title2{position: absolute; right: 980px; border: none !important;}
-.listing_head_title3{position: absolute; left: 715px; border: none !important; }
-.listing_head_title4{position: absolute; left: 885px; border: none !important;}
+

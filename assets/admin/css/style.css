@@ -4914,18 +4914,25 @@ i#admin_error_login {
 }
 /**/
 /* Added by Akila */
-.col2{
+.plan_creation{
+	position: relative;
+}	
+.field_wrapper {
+	margin: 15px 0 15px 30px;
+	position: relative;
+}	
+.col3{
 	float:left;
-	width: 10%;
+	width: 15%;
 	margin: 0 5px;
 }
 .col4{
 	float:left;
-	width: 26%;
+	width: 28%;
 	margin: 0 5px;
 }
 .plan_creation input[type="text"]{
-	width: 70%;
+	width: 85%;
 }	
 .clone_icon {
     background: #D3D3D3;
@@ -4952,7 +4959,18 @@ i#admin_error_login {
 .remove_button:hover, .add_button:hover{
 	color: #FFFFFF;
 }	
-
+.add_button {
+    line-height: 14px;
+    position: absolute;
+    bottom: 15px;
+    right: 130px;
+}
+.remove_button {
+    bottom: 0;
+    position: absolute;
+    right: 160px;
+}
+/* End by Akila */
 	
 	
 		

@@ -45,6 +45,134 @@ $(document).ready(function() {
 			$(this).removeClass('form-field-error');
 		}
 	});
+
+	// Get district based on selected state
+	$(document).on('change','.state_select',function() {
+		var this_id = $(this).val();
+		var selected_state = $.trim($('option:selected',this).text());
+		var this_district = $(this).parents('.state_section').siblings('.district_section').find('select');
+		if($this_id != '') {
+			$.ajax({
+				type : "POST",
+				url : baseurl+"state",
+				data : { value : this_id, csrf_token : csrf_token_value},
+				success : function(res) {
+					if(res) {
+						var obj = JSON.parse(res);
+		            	var options = '<option value="">Select District </option>';   
+		           		if(obj.length!=0) {               
+		                  $.each(obj, function(i){
+		                    options += '<option value="'+obj[i].district_id+'">'+obj[i].district_name+'</option>';
+		                  });  
+		            	}   
+		                else{
+	                    	alert('No District added for '+selected_state);    
+		                }  
+		                this_district.html(options);            
+		            }
+				}
+			});
+		}
+		else {
+			this_district.html(''); 
+		}
+	});
+
+	// Get qualification based on selected qualification level
+	$(document).on('click','.qua_level',function() {
+		var this_id = $(this).val();
+		var this_qua = $(this).parents('.level_section').siblings('.qualification_section').find('select');
+		if(this_id != '') {
+			$.ajax({
+				type : "POST",
+				url : baseurl+"provider/joblevel",
+				data : { value : this_id, csrf_token : csrf_token_value},
+				success : function(res) {
+					if(res) {
+						var obj = JSON.parse(res);
+		            	var options = '<option value="">Select Qualification </option>';   
+		           		if(obj.length!=0) {               
+		                  $.each(obj, function(i){
+		                    options += '<option value="'+obj[i].educational_qualification_id+'">'+obj[i].educational_qualification+'</option>';
+		                  });  
+		            	}   
+		                else{
+		                    	alert('No qualification added for selected joblevel');    
+		                }  
+		                this_qua.html(options);            
+		            }
+				}
+			});
+		}
+		else {
+			this_qua.html('');            
+		}
+	});
+
+	// Get university based on selected classlevel
+	$(document).on('change','.class_level_select',function() {
+		var this_id = $(this).val();
+		var selected_classlevel = $.trim($('option:selected',this).text());
+		var this_university = $(this).parents('.class_level_section').siblings('.university_section').find('select');
+		if(this_id != '') {
+			$.ajax({
+				type : "POST",
+				url : baseurl+"provider/class_level",
+				data : { value : this_id, csrf_token : csrf_token_value},
+				success : function(res) {
+					if(res) {
+						var obj = JSON.parse(res);
+	                	var options = '<option value="">Select University </option>';   
+	               		if(obj.length!=0) {               
+		                  $.each(obj, function(i){
+		                    options += '<option value="'+obj[i].education_board_id+'">'+obj[i].university_board_name+'</option>';
+		                  });  
+	                	}   
+		                else{
+		                    alert('No university added for '+selected_classlevel);    
+		                }  
+		                this_university.html(options);            
+		            }
+				}
+			});
+		}
+		else {
+			this_university.html('');     
+		}
+	});
+
+	// Get department based on selected qualification
+	$(document).on('change','.qualification_select',function() {
+		var this_id = $.trim($(this).val());
+		var this_department = $(this).parents('.qualification_section').siblings('.department_section').find('select');
+		if(this_id != '' ) {
+			$.ajax({
+				type : "POST",
+				url : baseurl+"provider/qualification",
+				data : { value : this_id, csrf_token : csrf_token_value},
+				success : function(res) {
+					if(res) {
+						var obj = JSON.parse(res);
+	                	var options = '<option value="">Select Department </option>';   
+	               		if(obj.length!=0) {               
+		                  $.each(obj, function(i){
+		                    options += '<option value="'+obj[i].departments_id+'">'+obj[i].departments_name+'</option>';
+		                  });  
+	                	}   
+		                else{
+		                	if(this_id != '') {
+		                    	alert('No department added for selected qualification');    
+		                    }
+		                }  
+		                this_department.html(options);            
+		            }
+				}
+			});
+		}
+		else {
+			this_department.html('');
+		}
+	});
 	
 	/* Restriction for department values based on qualification - SSLC and HSC */
     $(document).on('change','.education_qualification',function() {
