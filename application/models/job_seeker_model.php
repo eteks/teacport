@@ -37,6 +37,7 @@ class Job_seeker_model extends CI_Model {
 			$user_details['login_type'] = $user_data['candidate_registration_type'];
 			$user_details['candidate_date_of_birth'] = $user_data['candidate_date_of_birth'];
 			$user_details['candidate_father_name'] = $user_data['candidate_father_name'];
+			$user_details['candidate_state_id'] = $user_data['candidate_state_id'];
 			$user_details['candidate_district_id'] = $user_data['candidate_district_id'];
 			$user_details['candidate_institution_type'] = $user_data['candidate_institution_type'];
 			$user_details['candidate_mobile_no'] = $user_data['candidate_mobile_no'];
@@ -87,6 +88,7 @@ class Job_seeker_model extends CI_Model {
 			$user_details['login_type'] = $user_data['candidate_registration_type'];
 			$user_details['candidate_date_of_birth'] = $user_data['candidate_date_of_birth'];
 			$user_details['candidate_father_name'] = $user_data['candidate_father_name'];
+			$user_details['candidate_state_id'] = $user_data['candidate_state_id'];
 			$user_details['candidate_district_id'] = $user_data['candidate_district_id'];
 			$user_details['candidate_institution_type'] = $user_data['candidate_institution_type'];
 			$user_details['candidate_mobile_no'] = $user_data['candidate_mobile_no'];
@@ -175,6 +177,7 @@ class Job_seeker_model extends CI_Model {
 													'candidate_name' => $cand_data['candidate_name'],
 													'candidate_date_of_birth' => $cand_data['candidate_date_of_birth'],
 													'candidate_father_name' => $cand_data['candidate_father_name'],
+													'candidate_state_id' => $cand_data['candidate_state_id'],
 													'candidate_district_id' => $cand_data['candidate_district_id'],
 													'candidate_institution_type' => $cand_data['candidate_institution_type'],
 													'candidate_mobile_no' => $cand_data['candidate_mobile_no'],
@@ -203,6 +206,7 @@ class Job_seeker_model extends CI_Model {
 											'candidate_name' => $cand_data['candidate_name'],
 											'candidate_date_of_birth' => $cand_data['candidate_date_of_birth'],
 											'candidate_father_name' => $cand_data['candidate_father_name'],
+											'candidate_state_id' => $cand_data['candidate_state_id'],
 											'candidate_district_id' => $cand_data['candidate_district_id'],
 											'candidate_institution_type' => $cand_data['candidate_institution_type'],
 											'candidate_mobile_no' => $cand_data['candidate_mobile_no'],
@@ -223,6 +227,7 @@ class Job_seeker_model extends CI_Model {
 							'candidate_name' => $cand_data['candidate_name'],
 							'candidate_date_of_birth' => $cand_data['candidate_date_of_birth'],
 							'candidate_father_name' => $cand_data['candidate_father_name'],
+							'candidate_state_id' => $cand_data['candidate_state_id'],
 							'candidate_district_id' => $cand_data['candidate_district_id'],
 							'candidate_institution_type' => $cand_data['candidate_institution_type'],
 							'candidate_mobile_no' => $cand_data['candidate_mobile_no'],

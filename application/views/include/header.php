@@ -31,9 +31,6 @@
     <!-- TEMPLATE CORE CSS -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
     
-    <!-- FOR POST-JOB PAGES ONLY -->
-    <link href="css/select2.min.css" rel="stylesheet" />
-    
     <!--Custom CSS-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
     

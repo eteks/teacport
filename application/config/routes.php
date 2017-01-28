@@ -61,6 +61,7 @@ $route['login/linkedin'] 								= 'social/linkedin';
 $route['login/google'] 									= 'social/google';
 $route['login/provider/forgotpassword'] 				= 'job_provider/forgot_password';
 $route['login/seeker/forgotpassword'] 					= 'job_seeker/forgot_password';
+$route['state'] 										= 'home/state';
 //SIGN UP
 $route['signup/seeker'] 								= 'job_seeker/signup';
 $route['signup/provider'] 								= 'job_provider/signup';
@@ -92,6 +93,10 @@ $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/resume'] 								= 'job_provider/resume_download';
 $route['provider/sendmail'] 							= 'job_provider/sendmail';
 $route['provider/logout'] 								= 'job_provider/provider_logout';
+$route['provider/joblevel'] 							= 'job_provider/joblevel_qualification';
+$route['provider/class_level'] 							= 'job_provider/class_level_university';
+$route['provider/qualification'] 						= 'job_provider/qualification_department';
+
 
 //JOB SEEKER
 $route['seeker/dashboard'] 								= 'job_seeker/dashboard';

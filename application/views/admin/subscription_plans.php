@@ -127,7 +127,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php echo $sub['subscription_features']; ?>
                         </td>
                         <td> 
-                          <?php echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
+                          <?php //echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
                         </td>
                         <!-- <td> 
                           <?php echo date("d/m/Y", strtotime($sub['subcription_valid_end_date'])); ?>
@@ -214,7 +214,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity Days</label>
                         <span class="dynamic_data"> 
-                           <input class="numeric_value" placeholder="Days of Validity" size="16" type="text" name="validity_days" value="<?php if(isset($subscription_plan_details)) echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                           <input class="numeric_value" placeholder="Days of Validity" size="16" type="text" name="validity_days" value="<?php if(isset($subscription_plan_details)) //echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <!-- <div class="col6 control-group">  

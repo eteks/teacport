@@ -101,7 +101,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php endif; ?>                          
                         </tr>
                       </thead>
-                      <tbody class="table_content_section">                        
+                      <tbody class="table_content_section"> 
+                      <?php
+                      print_r($latest_news_values);
+                        if(!empty($latest_news_values)) :
+                        $i=0;
+                        foreach ($latest_news_values as $lat_news) :
+                        $i++;
+                      ?>                       
                         <tr class="parents_tr" id="column">
                           <td class="l_news_title"> 
                           	test
@@ -121,9 +128,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </a>
                         </td>
                         <td>
-  							 <a class='ajaxDelete' data-id=''>Delete</a>
+  							        <a class='ajaxDelete' data-id=''>Delete</a>
                         </td>                          
-                        </tr>                       
+                        </tr>  
+                        <?php
+                          endforeach;
+                          endif;
+                        ?>                     
                       </tbody>
                     </table>
                   </div>
