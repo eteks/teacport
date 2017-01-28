@@ -56,7 +56,9 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/demo.css" >
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/style.css" >
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/jquery.jscrollpane.css" media="all" >
-
+	
+	<!--For scrolling the text -->
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.simplyscroll.css" >
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>

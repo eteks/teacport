@@ -133,6 +133,68 @@ box-shadow:0 8px 6px -6px #da651a !important;
   	bottom: 10px;
   	right: 10px;
  }
+ /*latest news without having news*/
+.latest_news_head{
+	background-color: #da651a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 11px;
+    text-align: center;
+}
+.latest_news_content{
+	padding:10px;
+	text-align:center;
+	margin-top:10px;
+	margin-bottom:10px;
+	height:210px;
+}
+.latest_news{
+	border: 1px solid #da651a;
+}
+.latest_news_content img{
+	margin-top:20px !important;	
+}
+
+/*latest news having news*/
+.latest_news_head_1{
+	background-color: #da651a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 11px;
+   
+}
+.latest_news_content_1{
+	padding:13px;
+	background-color:#fff;
+	margin:7px;
+	margin-bottom:5px;
+	cursor:pointer;
+	
+}
+.latest_news_1{
+	border: 1px solid #da651a;
+}
+.latest_news_content_1 img{
+	margin-top:20px !important;	
+}
+.view_all{
+	background-color:#fff;
+	color:#000;
+	float:right;
+}
+.data_news{
+	background-color:#f4f7fa;
+	height:210px;
+}
+ #flash_updates_1 .latest_news_content_1:hover {
+background: #ebf1f6; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebf1f6 0%, #89c3eb 2%, #89c3eb 2%, #abd3ee 50%, #d5ebfb 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
+}
 /* Premium Adds */
 #premium_adds_caurosel .owl-testimonial-2 .single_testimonial img {
 	border-radius: 0 !important;
@@ -141,6 +203,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	width: 320px;
 	margin: auto;
 }	
+
 /* Signin & SignUp forms */
  .loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
@@ -1228,6 +1291,11 @@ label.form-input-error {
 .upg_select:hover{background-color:#da651a;color:white}
 .renew_select{background-color:white;color:black;border:2px solid #00a5ef}
 .renew_select:hover{background-color:#00a5ef;color:white}
+.subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
+.subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
+.subs_input_val_upgact1{border-left-width: 1px;margin-left: 17px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact2{margin-left: 82px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact3{ margin-left: 152px;position: absolute;width: 50px;display: none;}
 
 
 /*Ended By Thangam*/
@@ -1419,63 +1487,4 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	pointer-events:none;
 }
 
-.table-filter .star {
-	color: #ccc;
-	text-align: center;
-	display: block;
-}
-.table-filter .star.star-checked {
-	color: #F0AD4E;
-}
-.table-filter .star:hover {
-	color: #ccc;
-}
-.table-filter .star.star-checked:hover {
-	color: #F0AD4E;
-}
-/*.table-filter .media-photo {
-	width: 35px;
-}
-.table-filter .media-body {
-    display: block;
-}
-.table-filter .media-meta {
-	font-size: 11px;
-	color: #999;
-}*/
-.table-filter .media .title {
-	color: #2BBCDE;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: normal;
-	margin: 0;
-}
-.table-filter .media .title span {
-	font-size: .8em;
-	margin-right: 20px;
-}
-.listing_location{
-	position: absolute;
-	right: 400px;
-    width: 10em;
-    margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-}
-.listing_date{
-	position: absolute;
-	right: 250px;
-    width: 10em;
-    margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-    padding: 1em;
-}
-/*.panel-body{
-    margin-left: 45px;
-    width: 1140px;
-}*/
-.listing_head{background-color: #f47020 !important; }
-.listing_head_title1{border: none !important;}
-.listing_head_title2{position: absolute; right: 980px; border: none !important;}
-.listing_head_title3{position: absolute; left: 715px; border: none !important; }
-.listing_head_title4{position: absolute; left: 885px; border: none !important;}
 
