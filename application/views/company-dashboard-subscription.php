@@ -165,7 +165,7 @@
 				                                <div class="price-features text-center">
 				                                    <ul class="subs_count_act">
 															<!-- <li>Max No of vacancy Posts: 20</li> -->
-															<li id="subs_list_upg_sms" class="subs_list_act" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Sms Counts: 30<i class="icon-edit subs_edit"></i></li>
+															<li id="subs_list_upg_sms" class="subs_list_act" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Sms Counts: 30<span class="glyphicon glyphicon-edit subs_edit"></span></li>
 															<div id="popover-form" class="hide popover_form_upg_sms">
 										            <form>
 										            <div class="form-group">
@@ -175,7 +175,7 @@
 										            <button type="button" class="btn btn-success popover_upg_sms_save">Save</button>
 										            </form>
 										        </div>
-															<li id="subs_list_upg_email" class="subs_list_act">Email-count: 40<i class="icon-edit subs_edit"></i></li>
+															<li id="subs_list_upg_email" class="subs_list_act">Email-count: 40<span class="glyphicon glyphicon-edit subs_edit"></span></li>
 															<div id="popover-form" class="hide popover_form_upg_email">
 										            <form>
 										            <label>EMAIL COUNT</label>
@@ -185,7 +185,7 @@
 										            <button type="button" class="btn btn-success popover_upg_email_save">Save</button>
 										            </form>
 										        </div>
-															<li id="subs_list_upg_resume" class="subs_list_act">Resume Download: 20<i class="icon-edit subs_edit" data-original-title="" title=""></i></li>
+															<li id="subs_list_upg_resume" class="subs_list_act">Resume Download: 20<span class="glyphicon glyphicon-edit subs_edit"></span></li>
 															<div id="popover-form" class="hide popover_form_upg_resume">
 										            <form>
 										            <div class="form-group">
@@ -200,7 +200,7 @@
 				                                </div>
 				                            </div>
 				                            <div class=""> <a href="#" class="subs_button upg_select">Select Plan</a> </div>
-				                            <!-- <div> <a href="#" class="subs_button renew_select">Reset Plan</a> </div> -->
+				                            <button class="subs_reset upg_reset" type="reset" value="Reset">Reset</button>
 				                          </div>
 				                        </div>
 				                        <div class="col-md-4 col-sm-6 col-xs-12">
