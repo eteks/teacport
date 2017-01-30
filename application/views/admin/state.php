@@ -16,7 +16,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <?php include "templates/header.php" ?>
 <div id="container" class="row-fluid"> <!-- BEGIN CONTAINER -->
   <div id="sidebar" class="nav-collapse collapse"> <!-- BEGIN SIDEBAR -->
-    <div class="sidebar-toggler hidden-phone"></div>
+    <!-- <div class="sidebar-toggler hidden-phone"></div> -->
     <div class="navbar-inverse"> <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
       <form class="navbar-search visible-phone">
         <input type="text" class="search-query" placeholder="Search" />

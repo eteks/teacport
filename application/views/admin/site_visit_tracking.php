@@ -17,7 +17,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <div id="container" class="row-fluid">
       <!-- BEGIN SIDEBAR -->
       <div id="sidebar" class="nav-collapse collapse">
-         <div class="sidebar-toggler hidden-phone"></div>
+         <!-- <div class="sidebar-toggler hidden-phone"></div> -->
          <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
          <div class="navbar-inverse">
             <form class="navbar-search visible-phone">

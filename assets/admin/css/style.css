@@ -4970,6 +4970,9 @@ i#admin_error_login {
     position: absolute;
     right: 160px;
 }
+.attribute_error{
+	border-color: red !important;
+}
 /* End by Akila */
 	
 	

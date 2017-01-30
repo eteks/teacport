@@ -45,7 +45,7 @@
                                 	<?php 
                                 	if(!empty($company_details['organization_name'])) :
                                 	?>
-                                    <dt>Organisation Name:</dt>
+                                    <dt>Organisation Name</dt>
                                     <dd> <?php echo $company_details['organization_name']; ?> </dd>
                                     <?php
                                     endif;
@@ -53,7 +53,7 @@
                                     <?php 
                                 	if(!empty($company_details['organization_address_1'])) :
                                 	?>
-                                    <dt>Organisation Address1:</dt>
+                                    <dt>Organisation Address1</dt>
                                     <dd><?php echo $company_details['organization_address_1']; ?></dd>
                                     <?php
                                     endif;
@@ -61,7 +61,7 @@
                                     <?php 
                                 	if(!empty($company_details['organization_address_2'])) :
                                 	?>
-                                    <dt>Organisation Address2:</dt>
+                                    <dt>Organisation Address2</dt>
                                     <dd><?php echo $company_details['organization_address_2']; ?></dd>
                                     <?php
                                     endif;
@@ -69,7 +69,7 @@
                                     <?php 
                                 	if(!empty($company_details['organization_address_3'])) :
                                 	?>
-                                    <dt>Organisation Address3:</dt>
+                                    <dt>Organisation Address3</dt>
                                     <dd><?php echo $company_details['organization_address_3']; ?></dd>
                                     <?php
                                     endif;
@@ -77,7 +77,7 @@
                                     <?php 
                                 	if(!empty($company_details['organization_district_id'])) :
                                 	?>
-                                    <dt>Organisation District:</dt>
+                                    <dt>Organisation District</dt>
                                     <dd><?php echo $company_details['district_name']; ?></dd>
                                     <?php
                                     endif;
@@ -85,7 +85,7 @@
                                     <?php 
                                 	if(!empty($company_details['organization_institution_type_id'])) :
                                 	?>
-                                    <dt>Institution Type:</dt>
+                                    <dt>Institution Type</dt>
                                     <dd><?php echo $company_details['institution_type_name']; ?></dd>
                                     <?php
                                     endif;
@@ -121,8 +121,78 @@
             </div>
         </div>
     </div>
-</section>   
-    <section id="insititution_profile_detail" class="featured-jobs">
+</section> 
+<!--End of Organisation Details-->
+<!--Recently posted Jobs--> 
+<section class="featured-jobs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="Heading-title black">
+                        <h1>Recently Posted Jobs</h1>
+                        <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas. You can also sign up to Teacherportal for vacancy alerts based on career areas that interest you.</p>
+                    </div>
+                </div>
+            </div> 
+            <div class="owl-testimonial-2">     
+                <?php
+                if(!empty($vacancy_details)) :
+                     $recent_jobs = array_slice($vacancy_details,-5,5,true);
+				endif;
+                if(!empty($recent_jobs)) :
+                foreach ($recent_jobs as $rec_val) :
+					
+                ?>
+                <div class="slide-featured-jobs">	                    	
+	             	<div class="featured-image-box">
+	                    <div class="content-area">
+	                        <div class="">
+	                            <h4> <?php echo $rec_val['vacancies_job_title']; ?> </h4>
+	                            <p>  <?php echo $rec_val['organization_name']; ?> </p>
+	                        </div>
+	                        <div class="feature-post-meta">
+	                            <i class="fa fa-clock-o"> 
+                                <?php
+                                $vac_date = date_create(date('Y-m-d',strtotime($rec_val['vacancies_created_date']))); 
+                                $today = date_create(date('Y-m-d'));
+                                $days = date_diff($vac_date,$today);
+                                echo $days->d;
+                                ?> days ago</i>
+						    </div>
+							<!--Only required rule to the whole div clickable work--> 	                           
+							<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+						</div>
+	                    <a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $rec_val['vacancies_id'];?>" >
+							<span class='featured-jobs-grid-link'></span>
+						</a>
+						<!--end rule-->
+                    </div> 
+                </div>
+                <?php
+                endforeach;
+                else :
+                ?>
+                <div>
+                    No recent jobs available
+                </div>
+                <?php
+                endif;
+                ?>
+
+            </div>	                 	                 	                   	              	                       
+	    </div>      
+        <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="load-more-btn">
+                <a class="btn btn-default" href="#"> View All <i class="fa fa-angle-right"></i> </a>
+            </div>
+        </div> -->
+    </div>
+<!-- </div> -->
+</section>  
+<!--End of Recently Posted jobs-->
+<!--Posted Jobs-->
+<section id="insititution_profile_detail" class="featured-jobs">
     	<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-sm-12 col-xs-12">
@@ -178,85 +248,7 @@
 			</div> <!--row-->
 		</div> <!--container-->
 </section>
-<!--End of Organisation Details-->  
-<!--Recently posted Jobs-->
-<section class="featured-jobs">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="Heading-title black">
-                        <h1>Recently Posted Jobs</h1>
-                        <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas. You can also sign up to Teacherportal for vacancy alerts based on career areas that interest you.</p>
-                    </div>
-                </div>
-            </div> 
-            <div class="owl-testimonial-2">     
-                <?php
-                if(!empty($recent_jobs)) :
-                foreach ($recent_jobs as $rec_val) :
-                ?>
-                <div class="slide-featured-jobs">	                    	
-	             	<div class="featured-image-box">
-	                    <div class="img-box">	 
-                            <?php
-                            if(!empty($rec_val['organization_logo'])) :
-                            ?>
-                            <img src="<?php echo $rec_val['organization_logo']; ?>" class="img-responsive center-block" style="height: 119px"  alt="Not Found"> 
-                            <?php
-                            else :
-                            ?>
-                            <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive center-block" style="height: 119px"  alt="Not Found">
-                            <?php
-                            endif;
-                            ?>
-				    	</div>	                            
-	                    <div class="content-area">
-	                        <div class="">
-	                            <h4> <?php echo $rec_val['vacancies_job_title']; ?> </h4>
-	                            <p>  <?php echo $rec_val['organization_name']; ?> </p>
-	                        </div>
-	                        <div class="feature-post-meta">
-	                            <i class="fa fa-clock-o"> 
-                                <?php
-                                $vac_date = date_create(date('Y-m-d',strtotime($rec_val['vacancies_created_date']))); 
-                                $today = date_create(date('Y-m-d'));
-                                $days = date_diff($vac_date,$today);
-                                echo $days->d;
-                                ?> days ago</i>
-						    </div>
-							<!--Only required rule to the whole div clickable work--> 	                           
-							<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
-						</div>
-	                    <a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $rec_val['vacancies_id'];?>" >
-							<span class='featured-jobs-grid-link'></span>
-						</a>
-						<!--end rule-->
-                    </div> 
-                </div>
-                <?php
-                endforeach;
-                else :
-                ?>
-                <div>
-                    No recent jobs available
-                </div>
-                <?php
-                endif;
-                ?>
-
-            </div>	                 	                 	                   	              	                       
-	    </div>      
-        <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-            <div class="load-more-btn">
-                <a class="btn btn-default" href="#"> View All <i class="fa fa-angle-right"></i> </a>
-            </div>
-        </div> -->
-    </div>
-<!-- </div> -->
-</section>
-   <!--End of Recently Posted jobs-->
-			
+<!--End Posted Jobs-->
         
 <?php include('include/footermenu.php'); ?>	
 <?php include('include/footer.php'); ?>
