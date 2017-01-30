@@ -104,11 +104,11 @@
                             <?php
                             if(!empty($company_details['organization_logo'])) :
                             ?>
-                            <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive center-block" alt="Not Found"> 
+                            <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive centering_images" alt="Not Found"> 
                             <?php
                             else :
                             ?>
-                            <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive center-block" alt="Not Found">
+                            <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive centering_images" alt="Institution Logo">
                             <?php
                             endif;
                             ?>  
@@ -296,5 +296,5 @@
 				};
 				var map = new google.maps.Map(document.getElementById('map-contact'), mapOptions);				
 			}
-		google.maps.event.addDomListener(window, 'load', initialize);
-		</script>
+	google.maps.event.addDomListener(window, 'load', initialize);
+	</script>
