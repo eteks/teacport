@@ -958,10 +958,10 @@ $('.temp_remove_act').click(function(e)
 /* slim scroll */
 var win_height= $(window).height();
 var head_height= win_height - $('#header').height();
-var footer_height= head_height -$('#footer').height(); 
+// var footer_height= head_height -$('#footer').height(); 
 //alert (win_height);
 //alert(head_height);  
-$('.sub_pre_section').css('max-height', footer_height);
+$('.sub_pre_section').css('max-height', head_height);
 
 /* Popup pagination with arrow end */ 
 

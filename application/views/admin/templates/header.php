@@ -196,7 +196,7 @@ Website: http://thevectorlab.net/
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 <!-- BEGIN SIDEBAR MENU -->
               
-                <ul class="sidebar-menu sub_scroll_section">
+                <ul class="sidebar-menu sub_pre_section">
                     <?php 
                         $admin_modules = $this->config->item('admin_modules');
                         $admin_operation_rights = $this->config->item('admin_operation_rights');
@@ -221,7 +221,7 @@ Website: http://thevectorlab.net/
                                         <span class="icon-box"> <i class="<?php echo $value['icon_name'] ?>"></i></span> <span class="main_module_name main_module_data"><?php echo strtoupper($value['main_module']);?></span>
                                         <span class="arrow"></span>
                                     </a>
-                                    <ul class="sub sub_pre_section">
+                                    <ul class="sub sub_scroll_section">
                                         <?php 
                                         foreach ($value['sub_module'] as $det): 
                                         //Check loaded sub module access for this user group, here recursiveFind is custom function to search our searched value exists wherever in that mutlidimensional arry
