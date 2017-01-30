@@ -269,7 +269,7 @@ class Job_seeker extends CI_Controller {
 						$fb['error'] = 2;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
-						$data['institutiontype'] = $this->common_model->get_institution_type();
+						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$this->load->view('job-seekers-login',$fb);
 					}

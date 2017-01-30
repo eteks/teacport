@@ -1,111 +1,127 @@
 <?php include('include/header.php'); ?>
 <?php include('include/menus.php');?>
-	<section class="job-breadcrumb">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-sm-12 co-xs-12 text-left">
-                        <div class="bread">
-                            <ol class="breadcrumb">
-                                <li><a href="<?php echo base_url(); ?>">Home</a> </li>
-                                <li><a href="<?php echo base_url(); ?>">Institution</a> </li>
-                                <li class="active">Institutions Details</li>
-                            </ol>
-                        </div>
+<section class="job-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 co-xs-12 text-left">
+                    <div class="bread">
+                        <ol class="breadcrumb">
+                            <li><a href="<?php echo base_url(); ?>">Home</a> </li>
+                            <li><a href="<?php echo base_url(); ?>">Institution</a> </li>
+                            <li class="active">Institutions Details</li>
+                        </ol>
                     </div>
-                    
                 </div>
+                
             </div>
-	</section>
-	<!--Organisation Details--> 
-	<section class="organisation_detail light-grey">
-            <div class="container">
-                <div class="row">
-                	<div class="col-md-12 col-sm-12 col-xs-12">
-                		<div class="Heading-title black">
-                           <h1>Etekchnoservices Pvt Limited</h1>                           
-                        </div>
-                        <div class="col-md-8 col-sm-8 col-xs-12">
-                        	<div class="single-job-page">
-                        		<div class="job-short-detail">
-                                    <!-- <div class="heading-inner">
-                                        <p class="title">Job Details</p>
-                                    </div> -->
-                                    <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
-                                        <dl>
-                                        	<?php
-                                        	if(!empty($company_details)) :
-                                        	?>
-                                        	<?php 
-                                        	if(!empty($company_details['organization_name'])) :
-                                        	?>
-                                            <dt>Organisation Name:</dt>
-                                            <dd> <?php echo $company_details['organization_name']; ?> </dd>
-                                            <?php
-                                            endif;
-                                            ?>
-                                            <?php 
-                                        	if(!empty($company_details['organization_address_1'])) :
-                                        	?>
-                                            <dt>Organisation Address1:</dt>
-                                            <dd><?php echo $company_details['organization_address_1']; ?></dd>
-                                            <?php
-                                            endif;
-                                            ?>
-                                            <?php 
-                                        	if(!empty($company_details['organization_address_2'])) :
-                                        	?>
-                                            <dt>Organisation Address2:</dt>
-                                            <dd><?php echo $company_details['organization_address_2']; ?></dd>
-                                            <?php
-                                            endif;
-                                            ?>
-                                            <?php 
-                                        	if(!empty($company_details['organization_address_3'])) :
-                                        	?>
-                                            <dt>Organisation Address3:</dt>
-                                            <dd><?php echo $company_details['organization_address_3']; ?></dd>
-                                            <?php
-                                            endif;
-                                            ?>
-                                            <?php 
-                                        	if(!empty($company_details['organization_district_id'])) :
-                                        	?>
-                                            <dt>Organisation District:</dt>
-                                            <dd><?php echo $company_details['district_name']; ?></dd>
-                                            <?php
-                                            endif;
-                                            ?>
-                                            <?php 
-                                        	if(!empty($company_details['organization_institution_type_id'])) :
-                                        	?>
-                                            <dt>Institution Type:</dt>
-                                            <dd><?php echo $company_details['institution_type_name']; ?></dd>
-                                            <?php
-                                            endif;
-                                            ?>
-                                    		<?php
-                                    		endif;
-                                    		?>
-                                        </dl>
-                                    </div>
-                                </div>
-
-                        	</div>
-                        </div>
-                        <div class="col-md-4 col-sm-4 col-xs-12">
-                        	<div class="company-detail">
-                                <div class="company-img">
-                                    <img src="<?php echo base_url(); ?>assets/images/premiun.png" class="img-responsive centering_images" alt="Institution Logo" class="img-responsive center-block">
-                                </div>
-                                 <div class="single-job-map">
-                           			 <div id="map-contact">Organisation Map</div>
-                       			 </div>                                 
+        </div>
+</section>
+<!--Organisation Details--> 
+<section class="organisation_detail light-grey">
+    <div class="container">
+        <div class="row">
+        	<div class="col-md-12 col-sm-12 col-xs-12">
+        		<div class="Heading-title black">
+                   <h1><?php 
+                        if(!empty($company_details['organization_name'])) :
+                        ?>
+                        <?php echo $company_details['organization_name']; ?>
+                        <?php
+                        endif;
+                        ?>
+                    </h1>                           
+                </div>
+                <div class="col-md-8 col-sm-8 col-xs-12">
+                	<div class="single-job-page">
+                		<div class="job-short-detail">
+                            <!-- <div class="heading-inner">
+                                <p class="title">Job Details</p>
+                            </div> -->
+                            <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
+                                <dl>
+                                	<?php
+                                	if(!empty($company_details)) :
+                                	?>
+                                	<?php 
+                                	if(!empty($company_details['organization_name'])) :
+                                	?>
+                                    <dt>Organisation Name:</dt>
+                                    <dd> <?php echo $company_details['organization_name']; ?> </dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <?php 
+                                	if(!empty($company_details['organization_address_1'])) :
+                                	?>
+                                    <dt>Organisation Address1:</dt>
+                                    <dd><?php echo $company_details['organization_address_1']; ?></dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <?php 
+                                	if(!empty($company_details['organization_address_2'])) :
+                                	?>
+                                    <dt>Organisation Address2:</dt>
+                                    <dd><?php echo $company_details['organization_address_2']; ?></dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <?php 
+                                	if(!empty($company_details['organization_address_3'])) :
+                                	?>
+                                    <dt>Organisation Address3:</dt>
+                                    <dd><?php echo $company_details['organization_address_3']; ?></dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <?php 
+                                	if(!empty($company_details['organization_district_id'])) :
+                                	?>
+                                    <dt>Organisation District:</dt>
+                                    <dd><?php echo $company_details['district_name']; ?></dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <?php 
+                                	if(!empty($company_details['organization_institution_type_id'])) :
+                                	?>
+                                    <dt>Institution Type:</dt>
+                                    <dd><?php echo $company_details['institution_type_name']; ?></dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                            		<?php
+                            		endif;
+                            		?>
+                                </dl>
                             </div>
-                        	</div>
-                	</div>
+                        </div>
+                  	</div>
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                   	<div class="company-detail">
+                        <div class="company-img">
+                            <?php
+                            if(!empty($company_details['organization_logo'])) :
+                            ?>
+                            <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive centering_images" alt="Not Found"> 
+                            <?php
+                            else :
+                            ?>
+                            <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive centering_images" alt="Institution Logo">
+                            <?php
+                            endif;
+                            ?>  
+                        </div>
+                        <div class="single-job-map">
+                            <div id="map-contact">Organisation Map</div>
+                       	</div>                                 
+                    </div>
                 </div>
             </div>
-    </section>   
+        </div>
+    </div>
+</section>   
     <section id="insititution_profile_detail" class="featured-jobs">
     	<div class="container">
 			<div class="row">
@@ -117,70 +133,31 @@
                 	 <div class="widget">
                         <!-- <div class="widget-heading"><span class="title">Posted Jobs</span></div> -->
                         <ul class="related-post">
+                            <?php
+                            if(!empty($vacancy_details)) :
+                            $recent_jobs = array_slice($vacancy_details,-5,5,true);
+                            foreach ($vacancy_details as $vac_val) :
+                            ?>
 	                        <li>
 	                           	<div class="pull-left">
-	                            	<a href="#">Assistant Manager Procurement</a>
+	                            	<a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $vac_val['vacancies_id'];?>"> <?php echo $vac_val['vacancies_job_title']; ?> </a>
 	                            </div>
-	                            <span class="pull-right"><i class="fa fa-calendar"></i>March 22, 2015</span>
+	                            <span class="pull-right"><i class="fa fa-calendar"></i> <?php echo date('d M Y',strtotime($vac_val['vacancies_open_date'])); ?> </span>
 	                            <div class="clearfix"> </div>
-	                            <p>Well qualified and creative Professionals needed for our company....</p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000 </span>
+	                            <p><?php echo substr($vac_val['vacancies_instruction'], 0, 100); ?>...</p>
+	                            <span><i class="fa fa-rupee"></i> <?php echo number_format($vac_val['vacancies_start_salary']); ?> - <?php echo number_format($vac_val['vacancies_end_salary']); ?> </span>
 	                        </li>
-	                        <li>
-	                            <div class="pull-left">
-	                            	<a href="#">Marketing Professionals Required</a>
-	                            </div>
-	                            <span class="pull-right"><i class="fa fa-calendar"></i>Sep 01, 2015</span>
-	                            <div class="clearfix"> </div>
-	                            <p>Well qualified and creative Professionals needed for our company....</p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
-	                        </li>
-	                        <li>
-	                            <div class="pull-left">
-	                            	<a href="#">Mobile App Programmers </a>
-	                            </div>	
-	                            <span class="pull-right"><i class="fa fa-calendar"></i> March 09, 2016 </span>
-	                            <div class="clearfix"> </div>
-	                            <p>Well qualified and creative Professionals needed for our company.... </p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
-	                        </li>
-	                        <li>
-	                            <div class="pull-left">
-	                            	<a href="#">General Compliance Officer</a>
-	                            </div>	
-	                            <span class="pull-right"><i class="fa fa-calendar"></i>Feb 09, 2016</span>
-	                            <div class="clearfix"> </div>
-	                            <p>Well qualified and creative Professionals needed for our company....</p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
-	                        </li>
-	                        <li>
-	                            <div class="pull-left">
-	                            	<a href="#">Call Centre Manager</a>
-	                            </div>	
-	                            <span class="pull-right"><i class="fa fa-calendar"></i> March 09, 2016</span>
-	                            <div class="clearfix"> </div>
-	                            <p>Well qualified and creative Professionals needed for our company.... </p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
-	                        </li>
-	                        <li>
-	                            <div class="pull-left">
-	                            	<a href="#">Assistant Manager Audit</a>
-	                            </div>
-	                            <span class="pull-right"><i class="fa fa-calendar"></i>Aug 01, 2015 </span>
-	                            <div class="clearfix"> </div>
-	                            <p>Well qualified and creative Professionals needed for our company.... </p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000 </span>
-	                        </li>
-	                        <li>
-	                            <div class="pull-left">
-	                            	<a href="#">Telesales Agent (UK Dialing)</a>
-	                            </div>
-	                            <span class="pull-right"><i class="fa fa-calendar"></i>Sep 01, 2015</span>
-	                            <div class="clearfix"> </div>	
-	                            <p>Well qualified and creative Professionals needed for our company....</p>
-	                            <span><i class="fa fa-rupee"></i>10,000 - 20,000</span>
-	                        </li>
-                      </ul>
+                            <?php
+                            endforeach;
+                            else :
+                            ?>
+                            <li>
+                                No posted jobs available 
+                            </li>
+                            <?php
+                            endif;
+                            ?>
+                        </ul>
                   </div> <!--End .widget-->
 				  <div class="pagination-box clearfix">
 					<ul class="pagination">
@@ -201,153 +178,88 @@
 			</div> <!--row-->
 		</div> <!--container-->
 </section>
-
-		
-
-  <!--End of Organisation Details-->  
-  <!--Recently posted Jobs-->
-    <section class="featured-jobs">
-        <div class="container">
-            <div class="row">
+<!--End of Organisation Details-->  
+<!--Recently posted Jobs-->
+<section class="featured-jobs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="col-md-12 col-sm-12 col-xs-12">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="Heading-title black">
-                            <h1>Recently Posted Jobs</h1>
-                            <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas. You can also sign up to Teacherportal for vacancy alerts based on career areas that interest you.</p>
-                        </div>
+                    <div class="Heading-title black">
+                        <h1>Recently Posted Jobs</h1>
+                        <p>Wondering which jobs might best suit you? Browse our advice on career planning and careers open to you with your degree for ideas. You can also sign up to Teacherportal for vacancy alerts based on career areas that interest you.</p>
                     </div>
-                 </div> 
-                
-                    <div class="owl-testimonial-2">                   
-	                    <div class="slide-featured-jobs">	                    	
-	                    	<div class="featured-image-box">
-	                            <div class="img-box">	                            	
-                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
-								</div>	                            
-	                            <div class="content-area">
-	                                <div class="">
-	                                    <h4>Teacher</h4>
-	                                    <p>Etekchoservices.com</p>
-	                                </div>
-	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o"> 2 days ago</i>
-									</div>
-									<!--Only required rule to the whole div clickable work--> 	                           
-									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
-								</div>
-	                            <a href='javascript:void(0)' >
-        							<span class='featured-jobs-grid-link'></span>
-    							</a>
-    							<!--end rule-->
-                            </div> 
-                          </div>
-                          
-                          <div class="slide-featured-jobs">	                    	
-	                    	<div class="featured-image-box">
-	                            <div class="img-box">	                            	
-                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
-								</div>	                            
-	                            <div class="content-area">
-	                                <div class="">
-	                                    <h4>Teacher</h4>
-	                                    <p>Etekchoservices.com</p>
-	                                </div>
-	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o"> 2 days ago</i>
-									</div>
-									<!--Only required rule to the whole div clickable work--> 	                           
-									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
-								</div>
-	                            <a href='javascript:void(0)' >
-        							<span class='featured-jobs-grid-link'></span>
-    							</a>
-    							<!--end rule-->
-                            </div> 
-                          </div>
-                          <div class="slide-featured-jobs">	                    	
-	                    	<div class="featured-image-box">
-	                            <div class="img-box">	                            	
-                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
-								</div>	                            
-	                            <div class="content-area">
-	                                <div class="">
-	                                    <h4>Teacher</h4>
-	                                    <p>Etekchoservices.com</p>
-	                                </div>
-	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o"> 2 days ago</i>
-									</div>
-									<!--Only required rule to the whole div clickable work--> 	                           
-									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
-								</div>
-	                            <a href='javascript:void(0)' >
-        							<span class='featured-jobs-grid-link'></span>
-    							</a>
-    							<!--end rule-->
-                            </div> 
-                          </div>
-                          <div class="slide-featured-jobs">	                    	
-	                    	<div class="featured-image-box">
-	                            <div class="img-box">	                            	
-                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
-								</div>	                            
-	                            <div class="content-area">
-	                                <div class="">
-	                                    <h4>Teacher</h4>
-	                                    <p>Etekchoservices.com</p>
-	                                </div>
-	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o"> 2 days ago</i>
-									</div>
-									<!--Only required rule to the whole div clickable work--> 	                           
-									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
-								</div>
-	                            <a href='javascript:void(0)' >
-        							<span class='featured-jobs-grid-link'></span>
-    							</a>
-    							<!--end rule-->
-                            </div> 
-                          </div>
-                            
-                          <div class="slide-featured-jobs">	                    	
-	                    	<div class="featured-image-box">
-	                            <div class="img-box">	                            	
-                                		<img src="assets/images/institution.png" alt="Teacher recruit" style="height: 119px" class="img-responsive center-block">
-								</div>	                            
-	                            <div class="content-area">
-	                                <div class="">
-	                                    <h4>Teacher</h4>
-	                                    <p>Etekchoservices.com</p>
-	                                </div>
-	                                <div class="feature-post-meta">
-	                                    <i class="fa fa-clock-o"> 2 days ago</i>
-									</div>
-									<!--Only required rule to the whole div clickable work--> 	                           
-									<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
-								</div>
-	                            <a href='javascript:void(0)' >
-        							<span class='featured-jobs-grid-link'></span>
-    							</a>
-    							<!--end rule-->
-                            </div> 
-                          </div>                           
-	                 </div>	                 	                 	                   	              	             	                   
-	          </div>
-	                
-                    <!-- <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="load-more-btn">
-                            <a class="btn btn-default" href="#"> View All <i class="fa fa-angle-right"></i> </a>
-                        </div>
-                    </div> -->
                 </div>
+            </div> 
+            <div class="owl-testimonial-2">     
+                <?php
+                if(!empty($recent_jobs)) :
+                foreach ($recent_jobs as $rec_val) :
+                ?>
+                <div class="slide-featured-jobs">	                    	
+	             	<div class="featured-image-box">
+	                    <div class="img-box">	 
+                            <?php
+                            if(!empty($rec_val['organization_logo'])) :
+                            ?>
+                            <img src="<?php echo $rec_val['organization_logo']; ?>" class="img-responsive center-block" style="height: 119px"  alt="Not Found"> 
+                            <?php
+                            else :
+                            ?>
+                            <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive center-block" style="height: 119px"  alt="Not Found">
+                            <?php
+                            endif;
+                            ?>
+				    	</div>	                            
+	                    <div class="content-area">
+	                        <div class="">
+	                            <h4> <?php echo $rec_val['vacancies_job_title']; ?> </h4>
+	                            <p>  <?php echo $rec_val['organization_name']; ?> </p>
+	                        </div>
+	                        <div class="feature-post-meta">
+	                            <i class="fa fa-clock-o"> 
+                                <?php
+                                $vac_date = date_create(date('Y-m-d',strtotime($rec_val['vacancies_created_date']))); 
+                                $today = date_create(date('Y-m-d'));
+                                $days = date_diff($vac_date,$today);
+                                echo $days->d;
+                                ?> days ago</i>
+						    </div>
+							<!--Only required rule to the whole div clickable work--> 	                           
+							<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+						</div>
+	                    <a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $rec_val['vacancies_id'];?>" >
+							<span class='featured-jobs-grid-link'></span>
+						</a>
+						<!--end rule-->
+                    </div> 
+                </div>
+                <?php
+                endforeach;
+                else :
+                ?>
+                <div>
+                    No recent jobs available
+                </div>
+                <?php
+                endif;
+                ?>
+
+            </div>	                 	                 	                   	              	                       
+	    </div>      
+        <!-- <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="load-more-btn">
+                <a class="btn btn-default" href="#"> View All <i class="fa fa-angle-right"></i> </a>
             </div>
-      
-   </section>
+        </div> -->
+    </div>
+<!-- </div> -->
+</section>
    <!--End of Recently Posted jobs-->
 			
         
 <?php include('include/footermenu.php'); ?>	
-	<?php include('include/footer.php'); ?>
+<?php include('include/footer.php'); ?>
 	 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbuVxM8vd876DdJ3vDZMakcC98TUwOGYs&callback=initMap" type="text/javascript"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/counterup.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/owl-carousel.js"></script>
