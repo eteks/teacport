@@ -214,19 +214,11 @@
 				                                </div>
 				                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>                            
 				                                <div class="price-features text-center">
-				                                    <ul class="subs_count_act">
+			                                    		<ul class="subs_count_act">
 															<!-- <li>Max No of vacancy Posts: 20</li> -->
 															
-															<li> Sms Counts: 30
-															</li>
-															<div id="popover-form" class="hide popover_form_renewal_sms">
-										            <form>
-										            <div class="form-group">
-										                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_renewal_sms" maxlength="5" />
-										            </div>
-										            <button type="button" class="btn btn-success popover_renewal_sms_save">Save</button>
-										            </form>
-										        	</div>
+													<li> Sms Counts: 30
+													</li>
 													<li>
 													Email-count: 40</li>
 													<li>Resume Download: 20</li>
