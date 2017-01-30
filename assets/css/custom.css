@@ -159,11 +159,14 @@ box-shadow:0 8px 6px -6px #da651a !important;
 /*latest news having news*/
 .latest_news_head_1{
 	background-color: #da651a;
-    color: #fff;
-    font-size: 16px;
-    font-weight: bold;
+    
     padding: 11px;
    
+}
+.latest_news_head_1 p{
+	color:#fff;
+	font-size:16px;
+	font-weight:bold;
 }
 .latest_news_content_1{
 	padding:13px;
@@ -182,11 +185,13 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .view_all{
 	background-color:#fff;
 	color:#000;
-	float:right;
+	border-radius:7px;
+	font-size:16px;
+	font-weight:bold;
 }
 .data_news{
 	background-color:#f4f7fa;
-	height:210px;
+	height:235px;
 }
  #flash_updates_1 .latest_news_content_1:hover {
 background: #ebf1f6; /* Old browsers */
@@ -1295,9 +1300,11 @@ label.form-input-error {
 .subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
 .subs_input_val_upgact1{border-left-width: 1px;margin-left: 17px;position: absolute;width: 50px;display: none;}
 .subs_input_val_upgact2{margin-left: 82px;position: absolute;width: 50px;display: none;}
-.subs_input_val_upgact3{ margin-left: 152px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact3{ margin-left: 147px;position: absolute;width: 50px;display: none;}
 .upg_select.move{margin-left:50px;}
-
+.subs_reset{background-color:#4CAF50;border:none;color:white;padding:10px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:55px;margin-top:25px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer;display: none;}
+.upg_reset{background-color:white;color:black;border:2px solid #da651a}
+.upg_reset:hover{background-color:#da651a;color:white}
 /*Ended By Thangam*/
 /* Added by Akila */
 /* About us */
@@ -1359,12 +1366,11 @@ label.form-input-error {
 	text-align: left;
 }
 #institution_grids .company-box {
-	padding: 10px 0;	
-	margin: 0 0 10px; 
+	padding: 20px 0;	
 }
 /*Find jobs */
 .job-box-2 .feature-post-meta-bottom .apply {
-    color: #242424;
+    color: #FFFFFF;
     font-weight: 700;
 }
 /* Footer */
@@ -1394,7 +1400,7 @@ label.form-input-error {
 .custom-btn:focus, .custom-btn:hover{
 	color: #FFFFFF;
 }
-/* Styles for custom tooltip template*/
+/* Styles for custom tooltip template */
 .tooltip-head{
     color: #fff;
     background: #000;
@@ -1407,37 +1413,9 @@ label.form-input-error {
     font-size: 22px;
     vertical-align: bottom;
 }
-.tooltip-head h3 {
+.tooltip-head h3{
     margin: 0;
     font-size: 14px;
-}
-/* Institution Page */
-#institution_grids .company-list-img {
-	height: 80px;
-	width: 80px;
-}
-#institution_grids .company-box:hover {
-background: #ebf1f6; /* Old browsers */
-background: -moz-linear-gradient(top,  #ebf1f6 0%, #89c3eb 2%, #89c3eb 2%, #abd3ee 50%, #d5ebfb 100%); /* FF3.6-15 */
-background: -webkit-linear-gradient(top,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* Chrome10-25,Safari5.1-6 */
-background: linear-gradient(to bottom,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
-}
-#institution_grids .company-list-name h5{
-	color: #000;
-}
-#institution_grids .company-list-name h5:hover {
-	color: #29AAFE;
-}
-.institution_new_jobs, .institution_total_jobs{
-	cursor: pointer;
-}
-#insititution_profile_detail .related-post li {
-    margin-bottom: 10px;
-    padding-bottom: 10px;
-}
-#insititution_profile_detail .related-post li a{
-	font-size: 14px;
 }
 /* Image Centering */
 .organisation_detail .company-img{
@@ -1476,10 +1454,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	left:50%;
     top:50%;
 }
-	
-
 /* Ended by Akila */
-
 /* For Visitor Count */
 .visitor_count{
 	float:left;
@@ -1487,4 +1462,62 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	pointer-events:none;
 }
 
+.table-filter .star {
+	color: #ccc;
+	text-align: center;
+	display: block;
+}
+.table-filter .star.star-checked {
+	color: #F0AD4E;
+}
+.table-filter .star:hover {
+	color: #ccc;
+}
+.table-filter .star.star-checked:hover {
+	color: #F0AD4E;
+}
+/*.table-filter .media-photo {
+	width: 35px;
+}
+.table-filter .media-body {
+    display: block;
+}
+.table-filter .media-meta {
+	font-size: 11px;
+	color: #999;
+}*/
+.table-filter .media .title {
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
+.table-filter .media .title span {
+	font-size: .8em;
+	margin-right: 20px;
+}
+.listing_location{
+	position: absolute;
+	right: 400px;
+    width: 10em;
+    margin: 0 auto 1em auto;
+    /*border: 1px solid #000;*/
 
+.listing_date{
+	position: absolute;
+	right: 250px;
+    width: 10em;
+    margin: 0 auto 1em auto;
+    /*border: 1px solid #000;*/
+    padding: 1em;
+}
+/*.panel-body{
+    margin-left: 45px;
+    width: 1140px;
+}*/
+.listing_head{background-color: #f47020 !important; }
+.listing_head_title1{border: none !important;}
+.listing_head_title2{position: absolute; right: 980px; border: none !important;}
+.listing_head_title3{position: absolute; left: 715px; border: none !important; }
+.listing_head_title4{position: absolute; left: 885px; border: none !important;}

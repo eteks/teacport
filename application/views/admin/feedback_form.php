@@ -18,27 +18,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <div id="container" class="row-fluid">
       <!-- BEGIN SIDEBAR -->
       <div id="sidebar" class="nav-collapse collapse">
-         <div class="sidebar-toggler hidden-phone"></div>
+         <!-- <div class="sidebar-toggler hidden-phone"></div> -->
          <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
          <div class="navbar-inverse">
             <form class="navbar-search visible-phone">
                <input type="text" class="search-query" placeholder="Search" />
             </form>
          </div>
-         <!-- END RESPONSIVE QUICK SEARCH FORM -->
-         <!-- BEGIN SIDEBAR MENU -->
+         <!--END RESPONSIVE QUICK SEARCH FORM-->
+         <!--BEGIN SIDEBAR MENU-->
           
          <!-- END SIDEBAR MENU -->
       </div>
-      <!-- END SIDEBAR -->
-      <!-- BEGIN PAGE -->
+      <!--END SIDEBAR-->
+      <!--BEGIN PAGE-->
       <div id="main-content">
          <!-- BEGIN PAGE CONTAINER-->
          <div class="container-fluid sub_pre_section>
-            <!-- BEGIN PAGE HEADER-->
+            <!--BEGIN PAGE HEADER-->
             <div class="row-fluid">
                <div class="span12">
-                  <!-- BEGIN PAGE TITLE & BREADCRUMB-->     
+                  <!--BEGIN PAGE TITLE BREADCRUMB-->     
                   <!-- <h3 class="page-title">
                      Teachers Recruit
                      <small>Others</small>
@@ -57,7 +57,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <span class="divider-last">&nbsp;</span>
                         </li>
                    </ul>
-                  <!-- END PAGE TITLE & BREADCRUMB-->
+                  <!-- END PAGE TITLE BREADCRUMB-->
                </div>
             </div>
             <!-- END PAGE HEADER-->
@@ -129,16 +129,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         endforeach;
                         ?>
                       </tbody>
-                                  </table>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END EXAMPLE TABLE widget-->
+                      </table>
+                    </form>
                 </div>
             </div>
-
-
+        </div><!--widget-->
+    </div>
+</div>     
+<!-- END EXAMPLE TABLE widget-->
+    
        <div class="popup feedback-design" data-popup="popup_section_feedback">
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
@@ -245,10 +244,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
           <a class="popup-close" data-popup-close="popup_section_feedback" href="#">x</a>
         </div>
       </div> 
-
-
-
-
 
             <!-- END ADVANCED TABLE widget-->
 

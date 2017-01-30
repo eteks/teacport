@@ -18,7 +18,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <div id="container" class="row-fluid">
       <!-- BEGIN SIDEBAR -->
       <div id="sidebar" class="nav-collapse collapse">
-         <div class="sidebar-toggler hidden-phone"></div>
+         <!-- <div class="sidebar-toggler hidden-phone"></div> -->
          <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
          <div class="navbar-inverse">
             <form class="navbar-search visible-phone">
@@ -197,7 +197,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 			                <div class="form-wizard pop_details_section">
 			                <?php } ?>
 			                <div class="form-group">
-		                		<label>Select Plan</label>
+		                		<label class="control-label">Select Plan</label>
 		                		<select value="">
 		                			<option value="Select">Select</option>
 		                			<option value="Basic plans @ 1999">Basic plans @ 1999</option>
@@ -205,62 +205,31 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		                			<option value="Premium plans @ 10000">Premium plans @ 10000</option>
 		                		</select>
 		                	</div>
-			                <div class="plan_creation">
-			                	
-			                	<!-- <div class="clone_plan_fields">
-			                	  <div id="plan_clone_section" class="form-group clone_section subscribe_plan_clone">	
-				                	<div class="col4">
-				                		<label>Upgrade Plans</label>
-				                		<select class="form-control" value="">
-				                			<option value="">SMS</option>
-				                			<option value="">Email</option>
-				                			<option value="">Resume Download</option>
-				                		</select>
-				                	</div>
-				                	<div class="col2">
-				                		<label>Price</label>
-				                		<input class="form-control" type="text" name="plan_price" maxlength="5">
-				                	</div>
-				                	<div class="col2">
-				                		<label>Min Counts</label>
-				                		<input class="form-control" type="text" name="minimum-count" maxlength="5">
-				                	</div>
-				                	<div class="col2">
-				                		<label>Max Counts</label>
-				                		<input class="form-control" type="text" name="maximum-count" maxlength="5">
-				                	</div>
-				                	<div class="clone_btn col1 actions">
-				                		<a class="plan_clone clone_icon"><strong>+</strong></a>
-				                		<a class="plan_clone clone_icon dn"><strong>+</strong></a>
-				                		<a class="plan_remove clone_icon"><strong>-</strong></a>
-				                	</div>
-				                	<div class="clearfix"> </div>
-				                  </div>	
-				                </div> --><!--End append field-->
-				                <h6>Customize Limits</h6>
-				                <div class="field_wrapper"><!--append field-->
+			                <div class="form-group plan_creation">
+			                	  <div class="form-group field_wrapper"><!--append field-->
+				                  <label class="control-label">Customize Limits</label>
 			                	   <div class="upg_plan col4">
-				                		<select class="form-control" value="">
-				                			<option value="Select">Select</option>
+				                		<select class="form-control customize_plan">
+				                			<option value="">Select</option>
 				                			<option value="SMS">SMS</option>
 				                			<option value="Email">Email</option>
 				                			<option value="Resume Download">Resume Download</option>
 				                		</select>
 				                	</div>
 				                	<div class="col3">
-				                		<input class="form-control numeric_value" type="text" name="plan_price" maxlength="5" placeholder="Price in Rupees">
+				                		<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
 				                	</div>
 				                	<div class="col3">
-				                		<input class="form-control numeric_value" type="text" name="minimum-count" maxlength="5" placeholder="Min Limit">
+				                		<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
 				                	</div>
 				                	<div class="col3">
-				                		<input class="form-control numeric_value" type="text" name="maximum-count" maxlength="5" placeholder="Max Limit">
+				                		<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
 				                	</div>
 				                	<div class="">
 				                		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
 				                	</div>
 				                	<div class="clearfix"> </div>
-				                  </div>
+				                 </div>
 				                  <div class="pull-right">
 				                  	<a class="add_button" title="Add field"><strong>+</strong></a>
 				                  </div>	
