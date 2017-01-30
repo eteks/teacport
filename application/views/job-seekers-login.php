@@ -64,10 +64,10 @@
                                 	<?php 
 				                    if(isset($error)) :
 			    		                if($error == 2) {
-			                                echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $reg_server_msg </p>";
+			                                echo "<p class='val_status'>  </p>";
 			                            }
 			                            else {
-			                                echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $reg_server_msg </p>";
+			                                echo "<p class='val_status'>  </p>";
 			                            }
 			                        else :
 			            	            echo "<p class='val_status'>  </p>";
@@ -100,10 +100,10 @@
                                 	<?php 
 	                                if(isset($error)) :
 	                                    if($error == 2) {
-	                                        echo "<p class='val_status val_success db'> <i class='fa fa-check' aria-hidden='true'></i> $reg_server_msg </p>";
+	                                        echo "<p class='val_status'>  </p>";
 	                                    }
 	                                    else {
-	                                        echo "<p class='val_status val_error db'> <i class='fa fa-times' aria-hidden='true'></i> $reg_server_msg </p>";
+	                                        echo "<p class='val_status'>  </p>";
 	                                    }
 	                                else :
 	                                    echo "<p class='val_status'>  </p>";

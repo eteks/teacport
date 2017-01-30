@@ -18,7 +18,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <div id="container" class="row-fluid">
       <!-- BEGIN SIDEBAR -->
       <div id="sidebar" class="nav-collapse collapse">
-         <div class="sidebar-toggler hidden-phone"></div>
+         <!-- <div class="sidebar-toggler hidden-phone"></div> -->
          <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
          <div class="navbar-inverse">
             <form class="navbar-search visible-phone">
@@ -240,27 +240,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
 				                <h6>Customize Limits</h6>
 				                <div class="field_wrapper"><!--append field-->
 			                	   <div class="upg_plan col4">
-				                		<select class="form-control" value="">
-				                			<option value="Select">Select</option>
+				                		<select class="form-control customize_plan">
+				                			<option value="">Select</option>
 				                			<option value="SMS">SMS</option>
 				                			<option value="Email">Email</option>
 				                			<option value="Resume Download">Resume Download</option>
 				                		</select>
 				                	</div>
 				                	<div class="col3">
-				                		<input class="form-control numeric_value" type="text" name="plan_price" maxlength="5" placeholder="Price in Rupees">
+				                		<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
 				                	</div>
 				                	<div class="col3">
-				                		<input class="form-control numeric_value" type="text" name="minimum-count" maxlength="5" placeholder="Min Limit">
+				                		<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
 				                	</div>
 				                	<div class="col3">
-				                		<input class="form-control numeric_value" type="text" name="maximum-count" maxlength="5" placeholder="Max Limit">
+				                		<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
 				                	</div>
 				                	<div class="">
 				                		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
 				                	</div>
 				                	<div class="clearfix"> </div>
-				                  </div>
+				                 </div>
 				                  <div class="pull-right">
 				                  	<a class="add_button" title="Add field"><strong>+</strong></a>
 				                  </div>	

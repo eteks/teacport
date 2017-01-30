@@ -1296,8 +1296,15 @@ label.form-input-error {
 .upg_select:hover{background-color:#da651a;color:white}
 .renew_select{background-color:white;color:black;border:2px solid #00a5ef}
 .renew_select:hover{background-color:#00a5ef;color:white}
-
-
+.subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
+.subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
+.subs_input_val_upgact1{border-left-width: 1px;margin-left: 17px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact2{margin-left: 82px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact3{ margin-left: 147px;position: absolute;width: 50px;display: none;}
+.upg_select.move{margin-left:50px;}
+.subs_reset{background-color:#4CAF50;border:none;color:white;padding:10px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:55px;margin-top:25px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer;display: none;}
+.upg_reset{background-color:white;color:black;border:2px solid #da651a}
+.upg_reset:hover{background-color:#da651a;color:white}
 /*Ended By Thangam*/
 /* Added by Akila */
 /* About us */
@@ -1363,7 +1370,7 @@ label.form-input-error {
 }
 /*Find jobs */
 .job-box-2 .feature-post-meta-bottom .apply {
-    color: #242424;
+    color: #FFFFFF;
     font-weight: 700;
 }
 /* Footer */
@@ -1394,22 +1401,59 @@ label.form-input-error {
 	color: #FFFFFF;
 }
 /* Styles for custom tooltip template */
-    .tooltip-head{
-        color: #fff;
-        background: #000;
-        padding: 10px 10px 5px;
-        border-radius: 4px 4px 0 0;
-        text-align: center;
-        margin-bottom: -2px; /* Hide default tooltip rounded corner from top */
-    }
-    .tooltip-head .glyphicon{
-        font-size: 22px;
-        vertical-align: bottom;
-    }
-    .tooltip-head h3{
-        margin: 0;
-        font-size: 14px;
-    }
+.tooltip-head{
+    color: #fff;
+    background: #000;
+    padding: 10px 10px 5px;
+    border-radius: 4px 4px 0 0;
+    text-align: center;
+    margin-bottom: -2px; /* Hide default tooltip rounded corner from top */
+}
+.tooltip-head .glyphicon{
+    font-size: 22px;
+    vertical-align: bottom;
+}
+.tooltip-head h3{
+    margin: 0;
+    font-size: 14px;
+}
+/* Image Centering */
+.organisation_detail .company-img{
+	height: 100px;
+	width: auto;
+	position:relative;
+	
+}
+.company-img img {
+	position:absolute;
+    display: inline-block;
+    width: 30%;
+    height: auto;   
+    left:50%;
+    top:50%;
+    /*width: 50px;
+    height: 50px;*/
+}
+.organisation_detail .company-detail{
+	height: 310px;
+	width: 350px;
+}
+.organisation_detail .single-job-map {
+	padding: 0px;
+}
+/* vacancies*/
+#searchlist .comp-logo, #institution_grids .company-list-img{
+	height: 100px;
+	width: 100px;
+	position:relative;
+}
+#searchlist .comp-logo img, #institution_grids .company-list-img img{
+	height: auto;
+	width: 100%;
+	position:absolute;
+	left:50%;
+    top:50%;
+}
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
@@ -1459,7 +1503,7 @@ label.form-input-error {
     width: 10em;
     margin: 0 auto 1em auto;
     /*border: 1px solid #000;*/
-}
+
 .listing_date{
 	position: absolute;
 	right: 250px;

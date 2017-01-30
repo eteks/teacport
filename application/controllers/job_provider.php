@@ -132,7 +132,9 @@ class Job_provider extends CI_Controller {
 						/* mail sent success stage. send  facebook login link and server message to login page */
 						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
 						$fb['error'] = 2;
-						$data['institutiontype'] = $this->common_model->get_institution_type();
+						$fb['institutiontype'] = $this->common_model->get_institution_type();
+						$fb['captcha'] = $this->captcha->main();
+						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
