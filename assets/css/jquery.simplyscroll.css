@@ -47,7 +47,7 @@ Note all DIVs are generated and should not be hard-coded
 	
 		.simply-scroll-list li {
 			/*padding: 3px;*/
-			margin: 6px;
+			/*margin: 6px;*/
 			list-style: none;
 		}
 	
@@ -136,7 +136,7 @@ Note all DIVs are generated and should not be hard-coded
 */
 
 .simply-scroll { /* Customisable base class for style override DIV */
-	width: 576px;
+	/*width: 576px;*/
 	height: 200px;
 	margin-bottom: 1em;
 }
@@ -150,7 +150,7 @@ Note all DIVs are generated and should not be hard-coded
 		
 		.simply-scroll .simply-scroll-list li {
 			float: left;
-			width: 290px;
+			/*width: 290px;*/
 			height: 200px;
 		}
 		.simply-scroll .simply-scroll-list li img {}
@@ -178,23 +178,34 @@ Note all DIVs are generated and should not be hard-coded
 /* Vertical scroller example */
 
 .vert { /* wider than clip to position buttons to side */
-	width: 340px;
+	/*width: 340px;*/
 	height: 400px;
 	margin-bottom: 1.5em;
 }
 
 	.vert .simply-scroll-clip {
-		width: 337px;
-		height: 210px;
+		/*width: 337px;*/
+		height: 235px;
 		margin:5px;
 	}
 	
 		.vert .simply-scroll-list {}
 		
-		.vert .simply-scroll-list li {
+		/*.vert .simply-scroll-list li {
 			width: 330px;
 			
-		}
+		}*/
+		
+		/*@media (min-width:368px)and (max-width:767px) {
+     .vert .simply-scroll-list li {
+        width: 100%;
+    	}
+	}
+	@media (min-width:768px)and (max-width:991px) {
+     .vert .simply-scroll-list li {
+        width: 100%;
+    	}
+	}*/
 		.vert .simply-scroll-list li img {}
 	
 	.vert .simply-scroll-btn {}

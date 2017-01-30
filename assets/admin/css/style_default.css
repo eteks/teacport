@@ -195,15 +195,15 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 	font-size:12px !important;
 }
 .pager li>a{
-	margin-top:5px !important;
+	margin-top:9px !important;
 }
 .job_pro_form .step .desc{
-	margin-left:34px !important;
+	margin-left:40px !important;
 	padding:12px 0 !important;
 }
 .job_seek_form  .step .desc{
-	margin-left:26px !important;
-	padding:8px 8px !important;
+	margin-left:30px !important;
+	padding:4px 6px !important;
 }
 /*.brand > img{
     margin-left: 35px !important;
@@ -906,6 +906,10 @@ table {
 	/*border-bottom: 1px solid #ccc;*/
 	padding: 10px;
 }
+.vacancies-design label{
+	font-weight:bold;
+	color: #22878e;
+}
 /* Ended by Akila */
 
 /*.ajax_overlay {
@@ -933,7 +937,7 @@ table {
 /* For nav-pills */
 .tab_form .navbar .nav-design >li{
 	margin: 10px 22px !important;
-    width: 27% !important
+    width: 25% !important
 } 
 .job_pro_form .step .desc_space {
     margin-left: 34px !important;
@@ -942,3 +946,15 @@ table {
 .chzn-container-multi .chzn-choices{
 	padding:2px !important;
 }
+.nav-tabs > li > a, .nav-pills > li > a{
+	margin-right:6px !important;
+}
+/* For instruction textbox  */
+.instruction_span label{
+	width:22% !important;
+	margin-left: 0 !important;
+}
+.instruction_span span{
+	width:74% !important;
+}
+
