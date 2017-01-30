@@ -301,25 +301,32 @@ class Common_model extends CI_Model {
 
        	// Get total jobs count
        	$total_jobs_where = '(organization_status=1 AND organization_profile_completeness >=90 AND vacancies_status = 1)';  
-       	$this->db->select('op.organization_id,count(ov.vacancies_id) as totaljobs');
+       	$this->db->select('op.organization_id,ov.vacancies_job_title');
         $this->db->from('tr_organization_profile op');
         $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');   
-        $this->db->group_by('op.organization_id');
+        $this->db->order_by('ov.vacancies_id','desc');
         $this->db->where($total_jobs_where);
-        $model_data['provider_totaljobs'] = $this->db->get()->result_array();
+        $provider_job = $this->db->get()->result_array();
+        $out=array();
+		foreach($provider_job as $x) {
+		  $out[$x['organization_id']]['organization_id']=$x['organization_id'];
+		  $out[$x['organization_id']]['job_title'] []= $x['vacancies_job_title'];
+		}
+		$model_data['provider_totaljobs'] = $out;
 
+		
         // Get new jobs count
-        $new_jobs_where = '(organization_status=1 AND organization_profile_completeness >=90 AND vacancies_status = 1 AND ov.vacancies_created_date BETWEEN CURDATE() - INTERVAL 2 DAY AND CURDATE() + INTERVAL 1 DAY)';  
-       	$this->db->select('op.organization_id,count(ov.vacancies_id) as newjobs');
-        $this->db->from('tr_organization_profile op');
-        $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');   
-        $this->db->group_by('op.organization_id');
-        $this->db->where($new_jobs_where);
-        $model_data['provider_newjobs'] = $this->db->get()->result_array();
+        // $new_jobs_where = '(organization_status=1 AND organization_profile_completeness >=90 AND vacancies_status = 1 AND ov.vacancies_created_date BETWEEN CURDATE() - INTERVAL 2 DAY AND CURDATE() + INTERVAL 1 DAY)';  
+       	// $this->db->select('op.organization_id,count(ov.vacancies_id) as newjobs');
+        // $this->db->from('tr_organization_profile op');
+        // $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');   
+        // $this->db->group_by('op.organization_id');
+        // $this->db->where($new_jobs_where);
+        // $model_data['provider_newjobs'] = $this->db->get()->result_array();
 
-      	// echo "<pre>";
-      	// print_r($model_data['provider_newjobs']);
-      	// echo "</pre>";
+     	// echo "<pre>";
+      // 	print_r($out);
+      // 	echo "</pre>";
 
 		return $model_data;
 	}
@@ -333,12 +340,17 @@ class Common_model extends CI_Model {
         $this->db->join('tr_district d','op.organization_district_id = d.district_id','left'); 
         $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
         $this->db->where($where);
-        $model_data = $this->db->get()->row_array();
+        $model_data['company_details'] = $this->db->get()->row_array();
+        $vac_where = '(vacancies_organization_id="'.$id.'" AND vacancies_status=1)';
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+        $this->db->order_by('ov.vacancies_id','asc');
+        $this->db->where($vac_where);
+        $model_data['vacancy_details'] = $this->db->get()->result_array();
 		return $model_data;
 	}
 
-	
-	
 	public function provider_subscription_active_plans($org_id){
 		$this->db->select('*');    
 		$this->db->from('tr_organization_subscription os');

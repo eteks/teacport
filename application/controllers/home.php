@@ -160,7 +160,6 @@ class Home extends CI_Controller {
     	$total_rows = $results['total_rows'];
     	$data["allinstitutions_results"] = $results['allinstitutions_results'];
     	$data["provider_totaljobs"] = $results['provider_totaljobs'];
-    	$data["provider_newjobs"] = $results['provider_newjobs'];
 
     	//pagination
 		$this->load->library('pagination');
@@ -200,7 +199,9 @@ class Home extends CI_Controller {
 
 	public function userfollowedcompanies()
 	{
-		$data['company_details'] = $this->common_model->company_details($this->uri->segment('2'));
+		$data_values = $this->common_model->company_details($this->uri->segment('2'));
+		$data['company_details'] = $data_values['company_details'];
+		$data['vacancy_details'] = $data_values['vacancy_details'];
 		$this->load->view('user-followed-companies',$data);
 	}
 	public function vacancies()

@@ -229,7 +229,7 @@
 								<div class="col-sm-offset-1 col-sm-11">
 									<?php echo form_error('declar_accept'); ?>
 									<p>
-										<input id="declar_accept" class="ace form_dec" name="declar_accept" value="Y" type="checkbox">
+										<input id="declar_accept" class="ace form_dec" name="declar_accept" value="Y" type="checkbox" checked>
 										<span class="lbl"></span>
 										I hereby declare that all the particulars furnished in this application are true, correct and complete to the best of my knowledge and belief.
 									</p>
