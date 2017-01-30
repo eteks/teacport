@@ -4916,20 +4916,20 @@ i#admin_error_login {
 /* Added by Akila */
 .plan_creation{
 	position: relative;
-}	
+}
 .field_wrapper {
-	margin: 15px 0 15px 30px;
+	margin: 15px 0 15px 0px;
 	position: relative;
 }	
 .col3{
-	float:left;
+	display: inline-block;
 	width: 15%;
-	margin: 0 5px;
+	/*margin: 0 5px;*/
 }
 .col4{
-	float:left;
+	display: inline-block;
 	width: 28%;
-	margin: 0 5px;
+	/*margin: 0 5px;*/
 }
 .plan_creation input[type="text"]{
 	width: 85%;
@@ -4962,13 +4962,13 @@ i#admin_error_login {
 .add_button {
     line-height: 14px;
     position: absolute;
-    bottom: 15px;
-    right: 130px;
+    bottom: 18px;
+    right: -10px;
 }
 .remove_button {
     bottom: 0;
     position: absolute;
-    right: 160px;
+    right: 15px;
 }
 .attribute_error{
 	border-color: red !important;

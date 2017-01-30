@@ -569,6 +569,7 @@ tr select {
     border-radius: 15px;
     display: inline-block;
     padding: 5px 14px;
+    float: right;
 }
 .pager .previous > a, .pager .previous > span{
     background: #e8e8e8 none repeat scroll 0 0 !important;
