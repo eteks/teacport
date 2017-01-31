@@ -51,6 +51,7 @@ $(document).ready(function() {
 		var this_id = $(this).val();
 		var selected_state = $.trim($('option:selected',this).text());
 		var this_district = $(this).parents('.state_section').siblings('.district_section').find('select');
+		var options = '<option value="">Select District </option>';   
 		if(this_id != '') {
 			$.ajax({
 				type : "POST",
@@ -59,7 +60,6 @@ $(document).ready(function() {
 				success : function(res) {
 					if(res) {
 						var obj = JSON.parse(res);
-		            	var options = '<option value="">Select District </option>';   
 		           		if(obj.length!=0) {               
 		                  $.each(obj, function(i){
 		                    options += '<option value="'+obj[i].district_id+'">'+obj[i].district_name+'</option>';
@@ -74,7 +74,7 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			this_district.html(''); 
+			this_district.html(options); 
 		}
 	});
 
@@ -82,6 +82,7 @@ $(document).ready(function() {
 	$(document).on('click','.qua_level',function() {
 		var this_id = $(this).val();
 		var this_qua = $(this).parents('.level_section').siblings('.qualification_section').find('select');
+    	var options = '<option value="">Select Qualification </option>';   
 		if(this_id != '') {
 			$.ajax({
 				type : "POST",
@@ -90,7 +91,6 @@ $(document).ready(function() {
 				success : function(res) {
 					if(res) {
 						var obj = JSON.parse(res);
-		            	var options = '<option value="">Select Qualification </option>';   
 		           		if(obj.length!=0) {               
 		                  $.each(obj, function(i){
 		                    options += '<option value="'+obj[i].educational_qualification_id+'">'+obj[i].educational_qualification+'</option>';
@@ -105,7 +105,7 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			this_qua.html('');            
+			this_qua.html(options);            
 		}
 	});
 
@@ -114,6 +114,7 @@ $(document).ready(function() {
 		var this_id = $(this).val();
 		var this_department = $(this).parents('.qualification_section').siblings('.department_section').find('select');
 		var selected_qua = $.trim($('option:selected',this).text()).toLowerCase();
+		var options = '<option value="">Select Department </option>';   
 		var error = 0;
 		if(selected_qua == "sslc" || selected_qua == "hsc")  {
 			error = 1;
@@ -127,7 +128,6 @@ $(document).ready(function() {
 				success : function(res) {
 					if(res) {
 						var obj = JSON.parse(res);
-	                	var options = '<option value="">Select Department </option>';   
 	               		if(obj.length!=0) {               
 		                  $.each(obj, function(i){
 		                    options += '<option value="'+obj[i].departments_id+'">'+obj[i].departments_name+'</option>';
@@ -144,7 +144,7 @@ $(document).ready(function() {
 			});
 		}
 		else if(error == 0) {
-			this_department.html('');
+			this_department.html(options);
 		}
 	});
 
@@ -168,6 +168,7 @@ $(document).ready(function() {
 		var this_id = $(this).val();
 		var selected_classlevel = $.trim($('option:selected',this).text());
 		var this_university = $(this).parents('.class_level_section').siblings('.university_section').find('select');
+		var options = '<option value="">Select University </option>';  
 		if(this_id != '') {
 			$.ajax({
 				type : "POST",
@@ -176,7 +177,6 @@ $(document).ready(function() {
 				success : function(res) {
 					if(res) {
 						var obj = JSON.parse(res);
-	                	var options = '<option value="">Select University </option>';   
 	               		if(obj.length!=0) {               
 		                  $.each(obj, function(i){
 		                    options += '<option value="'+obj[i].education_board_id+'">'+obj[i].university_board_name+'</option>';
@@ -191,7 +191,7 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			this_university.html('');     
+			this_university.html(options);     
 		}
 	});
 
@@ -199,6 +199,7 @@ $(document).ready(function() {
 	$(document).on('change','.qualification_select',function() {
 		var this_id = $.trim($(this).val());
 		var this_department = $(this).parents('.qualification_section').siblings('.department_section').find('select');
+		var options = '<option value="">Select Department </option>';  
 		if(this_id != '' ) {
 			$.ajax({
 				type : "POST",
@@ -207,7 +208,6 @@ $(document).ready(function() {
 				success : function(res) {
 					if(res) {
 						var obj = JSON.parse(res);
-	                	var options = '<option value="">Select Department </option>';   
 	               		if(obj.length!=0) {               
 		                  $.each(obj, function(i){
 		                    options += '<option value="'+obj[i].departments_id+'">'+obj[i].departments_name+'</option>';
@@ -224,7 +224,7 @@ $(document).ready(function() {
 			});
 		}
 		else {
-			this_department.html('');
+			this_department.html(options);
 		}
 	});
 
@@ -425,8 +425,8 @@ $(document).ready(function() {
             			error_msg.removeClass('val_error');
 						error_msg.addClass('val_success');
             			$('html,body').animate({scrollTop : this_form.offset().top }, 500);
-            			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Sucessfully').fadeIn(350);
-						setTimeout(function() { location.reload(); }, 3000);
+            			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Successfully').fadeIn(350);
+						// setTimeout(function() { location.reload(); }, 3000);
 					}
 					else {
 						error_msg.removeClass('val_success');
@@ -441,7 +441,7 @@ $(document).ready(function() {
 				error : function() {
 				    this_loader.addClass('loader-dn');
 				    $("html, body").animate({ scrollTop: 0 }, 1000);
-				    this_error.text("Not Updated due to Connection Problem. Try again.").fadeIn();
+				    error_msg.html('<i class="fa fa-times" aria-hidden="true"></i> Not Updated due to Connection Problem. Try again.').fadeIn(350);
 				    setTimeout(function() { location.reload(); }, 3000);
 				},
 
