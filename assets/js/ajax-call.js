@@ -51,7 +51,7 @@ $(document).ready(function() {
 		var this_id = $(this).val();
 		var selected_state = $.trim($('option:selected',this).text());
 		var this_district = $(this).parents('.state_section').siblings('.district_section').find('select');
-		if($this_id != '') {
+		if(this_id != '') {
 			$.ajax({
 				type : "POST",
 				url : baseurl+"state",
@@ -109,6 +109,60 @@ $(document).ready(function() {
 		}
 	});
 
+	// Get department based on selected qualification
+	$(document).on('change','.select_qualification',function() {
+		var this_id = $(this).val();
+		var this_department = $(this).parents('.qualification_section').siblings('.department_section').find('select');
+		var selected_qua = $.trim($('option:selected',this).text()).toLowerCase();
+		var error = 0;
+		if(selected_qua == "sslc" || selected_qua == "hsc")  {
+			error = 1;
+            this_department.html("<option value='0'> None </option>");
+        }
+		if(this_id != '' && error == 0) {
+			$.ajax({
+				type : "POST",
+				url : baseurl+"provider/qualification",
+				data : { value : this_id, csrf_token : csrf_token_value},
+				success : function(res) {
+					if(res) {
+						var obj = JSON.parse(res);
+	                	var options = '<option value="">Select Department </option>';   
+	               		if(obj.length!=0) {               
+		                  $.each(obj, function(i){
+		                    options += '<option value="'+obj[i].departments_id+'">'+obj[i].departments_name+'</option>';
+		                  });  
+	                	}   
+		                else{
+		                	if(this_id != '') {
+		                    	alert('No department added for ' + selected_qua);    
+		                    }
+		                }  
+		                this_department.html(options);            
+		            }
+				}
+			});
+		}
+		else if(error == 0) {
+			this_department.html('');
+		}
+	});
+
+	// /* Restriction for department values based on qualification - SSLC and HSC */
+    // $(document).on('change','.education_qualification',function() {
+    //     var option = $('option:selected', this).text()..trim();
+    //     if(option == "sslc" || option == "hsc")  {
+    //         $(this).parents('.education_clone').find('.education_department').html("<option value='0'> None </option>");
+    //     }
+    //     else {
+    //     	var input;
+    //     	for(var j=0; j<departments_name_text.length; j++) {
+    //     		input += '<option value="'+departments_name_value[j]+'">'+departments_name_text[j]+'</option>';
+    //     	}
+    //     	$(this).parents('.education_clone').find('.education_department').html(input);
+    //     }
+    // });
+	
 	// Get university based on selected classlevel
 	$(document).on('change','.class_level_select',function() {
 		var this_id = $(this).val();
@@ -173,21 +227,6 @@ $(document).ready(function() {
 			this_department.html('');
 		}
 	});
-	
-	/* Restriction for department values based on qualification - SSLC and HSC */
-    $(document).on('change','.education_qualification',function() {
-        var option = $('option:selected', this).text().toLowerCase().trim();
-        if(option == "sslc" || option == "hsc")  {
-            $(this).parents('.education_clone').find('.education_department').html("<option value='0'> None </option>");
-        }
-        else {
-        	var input;
-        	for(var j=0; j<departments_name_text.length; j++) {
-        		input += '<option value="'+departments_name_value[j]+'">'+departments_name_text[j]+'</option>';
-        	}
-        	$(this).parents('.education_clone').find('.education_department').html(input);
-        }
-    });
 
     /* Professional Profile Restriction */
 	var professional_group;

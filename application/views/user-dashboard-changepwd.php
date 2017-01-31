@@ -91,9 +91,11 @@ if(!empty($provider_values)) :
         <?php
         foreach ($provider_values as $val) :
         if(!empty($val['organization_logo'])) :
+            $thumb_image = explode('.', end(explode('/',$val['organization_logo'])));
+            $thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
         ?>
         <div class="client-logo">
-            <a href="#"><img src="<?php echo $val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
+            <a href="#"><img src="<?php echo base_url().PROVIDER_UPLOAD.$thumb; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
         </div>
         <?php
         endif;
