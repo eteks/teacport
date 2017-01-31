@@ -884,7 +884,7 @@ form legend {
     box-shadow: 0 0px 5px #ddd;
     position: relative;
 }
-
+.widget_act{right: 5px;}
 .widget-title {
     background: #f2f2f2;
     background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#f2f2f2));
@@ -951,6 +951,7 @@ form legend {
     -webkit-border-radius: 0px 0px 3px 3px;
     -moz-border-radius: 0px 0px 3px 3px;
     border-radius: 0px 0px 3px 3px;
+    height: 369px;
     /*overflow-x:scroll;*/
 }
 
@@ -4868,6 +4869,7 @@ i#admin_error_login {
     height: auto !important;
     overflow: hidden !important;
     position: absolute !important;
+    direction: ltr;
     top: 46px !important;
     width: auto !important;
     z-index: 9999;

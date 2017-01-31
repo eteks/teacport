@@ -466,7 +466,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="row-fluid">
                         <div class="span12">
                             <!-- BEGIN EXAMPLE TABLE widget-->
-                            <div class="widget">
+                            <div class="widget widget_act">
                                 <div class="widget-title">
                                     <h4><i class="icon-reorder"></i>Latest Job Providers</h4>
                                         <span class="tools">
@@ -512,7 +512,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <div class="row-fluid">
                         <div class="span12">
                             <!-- BEGIN EXAMPLE TABLE widget-->
-                            <div class="widget">
+                            <div class="widget widget_act">
                                 <div class="widget-title">
                                     <h4><i class="icon-reorder"></i>Latest Jobs</h4>
                                         <span class="tools">
