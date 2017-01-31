@@ -222,6 +222,7 @@ class Job_provider extends CI_Controller {
 		$data['organization'] = (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['district'] = $this->common_model->get_all_district();
 		$data['institutiontype'] = $this->common_model->get_institution_type();
+		$data['state_values'] = $this->common_model->get_all_state();
 		if(!$_POST){
 			$this->load->view('company-dashboard-edit-profile',$data);
 			$this->session->unset_userdata('upload_provider_logo_error');
@@ -234,6 +235,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('organization_state', 'State ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your state'));
 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
 			$this->form_validation->set_rules('provider_name', 'Your name', 'trim|min_length[3]|max_length[50]|callback_alpha_dash_space|xss_clean');
@@ -245,11 +247,20 @@ class Job_provider extends CI_Controller {
 		    {
 		    	$provider_logo_path_name = '';
 		    	$organization_logo_path_name = '';
+		    	$upload_image_path = PROVIDER_UPLOAD;
+		    	$data['upload_provider_logo_error'] = '';
 		    	if($this->input->post('old_ologo_file_path')) {
-		    		$organization_logo_path_name = $this->input->post('old_ologo_file_path');
+		    		$organization_logo_path_name = base_url().$this->input->post('old_ologo_file_path');
 		    	}
 		    	if($this->input->post('old_plogo_file_path')) {
-		    		$provider_logo_path_name = $this->input->post('old_plogo_file_path');
+		    		$keyword = "uploads";
+        			// To check whether the image path is cdn or local path
+			        if(strpos( $this->input->post('old_plogo_file_path') , $keyword ) !== false) {
+		    			$provider_logo_path_name = base_url().$this->input->post('old_plogo_file_path');
+			        }
+			        else {
+			        	$provider_logo_path_name = $this->input->post('old_plogo_file_path');
+			        }
 		    	}
 
 		    	if (!empty($_FILES['provider_logo']['name']))
@@ -276,23 +287,26 @@ class Job_provider extends CI_Controller {
 						$provider_logo_thumb['image_library'] = 'gd2';
 						$provider_logo_thumb['source_image'] = './uploads/jobprovider/'.$provider_logo_file_name;
 						$provider_logo_thumb['create_thumb'] = TRUE;
+						// $provider_logo_thumb['new_image'] = 'thumb_'.$provideruploaddata['file_name'];
 						$provider_logo_thumb['maintain_ratio'] = TRUE;
 						$provider_logo_thumb['width']         = 180;
 						$provider_logo_thumb['height']       = 180;
 						$provider_old_path = $this->input->post('old_plogo_file_path');
 						$this->image_lib->initialize($provider_logo_thumb);
-						$keyword = "uploads";
+						// Resize operation
+						if ( ! $this->image_lib->resize())
+						{
+	                		$data['upload_provider_logo_error'] = strip_tags($this->image_lib->display_errors()); 
+						}
+						$this->image_lib->clear();
+	              	    $keyword = "uploads";
 	        			// To check whether the image path is cdn or local path
 				        if(strpos( $provider_old_path , $keyword ) !== false && !empty($provider_old_path) ) {
 	               			@unlink(APPPATH.'../'.$provider_old_path);
-				        }
-						if ( ! $this->image_lib->resize())
-						{
-					        echo $this->image_lib->display_errors();
-						}
-						$this->image_lib->clear();
+	               			$thumb_image = explode('.', end(explode('/',$provider_old_path)));
+	               			@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
+				        }					
 	                }
-					
 				}
 				if (!empty($_FILES['organization_logo']['name'])){
 			        $organization_logo['upload_path'] 		= './uploads/jobprovider';
@@ -306,7 +320,7 @@ class Job_provider extends CI_Controller {
 					$this->upload->initialize($organization_logo);
 					if ( ! $this->upload->do_upload('organization_logo'))
 					{
-	                    //$data['upload_provider_logo_error'] = $this->upload->display_errors();
+	                    $data['upload_provider_logo_error'] = $this->upload->display_errors();
 						$this->session->set_userdata('upload_provider_logo_error', $this->upload->display_errors());
 						$organization_logo_path_name = '';
 						
@@ -319,22 +333,25 @@ class Job_provider extends CI_Controller {
 						$organization_logo_thumb['image_library'] = 'gd2';
 						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$organization_logo_file_name;
 						$organization_logo_thumb['create_thumb'] = TRUE;
+						// $organization_logo_thumb['new_image'] = 'thumb_'.$organizationuploaddata['file_name'];
 						$organization_logo_thumb['maintain_ratio'] = TRUE;
 						$organization_logo_thumb['width']         = 180;
 						$organization_logo_thumb['height']       = 180;
 						$organization_old_path = $this->input->post('old_ologo_file_path');
 						$this->image_lib->initialize($organization_logo_thumb);
-						
-						// To check old file path is empty or not
-				        if(!empty($organization_old_path) ) {
-	               			@unlink(APPPATH.'../'.$organization_old_path);
-				        }
-
+						// Resize operation
 						if ( ! $this->image_lib->resize())
-							{
-							        echo $this->image_lib->display_errors();
-							}
+						{
+	                		$data['upload_provider_logo_error'] = strip_tags($this->image_lib->display_errors()); 
+						}
 						$this->image_lib->clear();
+	              	    $keyword = "uploads";
+	        			// To check whether the image path is cdn or local path
+				        if(strpos( $organization_old_path , $keyword ) !== false && !empty($organization_old_path) ) {
+	               			@unlink(APPPATH.'../'.$organization_old_path);
+	               			$thumb_image = explode('.', end(explode('/',$organization_old_path)));
+	               			@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
+				        }
 	                }
                 }
 				$dob_split = explode('/', $this->input->post('provider_dob'));
@@ -353,7 +370,11 @@ class Job_provider extends CI_Controller {
 					$profile_completeness = $profile_completeness + 2;
 				}
 				if($this->input->post('provider_dob')) {
+					$dob = $dob_split[2].'-'.$dob_split[1].'-'.$dob_split[0];
 					$profile_completeness = $profile_completeness + 2;
+				}
+				else {
+					$dob = NULL;
 				}
 
 				$edit_profile_data = array(
@@ -362,14 +383,15 @@ class Job_provider extends CI_Controller {
 					'organization_address_1' 	=> $this->input->post('address-line1'),
 					'organization_address_2' 	=> $this->input->post('address-line2'),
 					'organization_address_3' 	=> $this->input->post('address-line3'),
+					'organization_state_id'	=> $this->input->post('organization_state'),
 					'organization_district_id'	=> $this->input->post('organization_district'),
 					'registrant_name' 			=> $this->input->post('provider_name'),
 					'registrant_designation' 	=> $this->input->post('provider_designation'),
-					'registrant_date_of_birth' 	=> $dob_split[2].'-'.$dob_split[1].'-'.$dob_split[0],
+					'registrant_date_of_birth' 	=> $dob,
 					'registrant_logo'			=> $provider_logo_path_name,
 					'organization_profile_completeness' => $profile_completeness,
 				);
-				if($this->job_provider_model->job_provider_update_profile($data['organization']['organization_id'],$edit_profile_data)=='updated')
+				if($this->job_provider_model->job_provider_update_profile($data['organization']['organization_id'],$edit_profile_data)=='updated' && $data['upload_provider_logo_error'] == '')
 				{
 					redirect('provider/dashboard');
 				}
