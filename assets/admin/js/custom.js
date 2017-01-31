@@ -222,23 +222,25 @@ $(document).ready(function(){
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
     });
+    
+   
     /*Added by thangam*/
-    $('.sub_scroll_section').slimScroll({
+     $('.sub_scroll_section').slimScroll({
         height: 'auto'
     });
 
-    $('.extended').slimScroll({
-        height: 'auto'
+     $('.extended').slimScroll({
+         height: 'auto'
     });
-     $('.sub_pre_section').slimScroll({
-        height: 'auto'
-      
-    });
-	 $('.sub_hori_scroll').slimScroll({
-        height: 'auto',
-        axis:'x',
-        width:'auto',        
-    });
+     // $('.sub_pre_section').slimScroll({
+        // height: 'auto'
+//       
+    // });
+	 // $('.sub_hori_scroll').slimScroll({
+        // height: 'auto',
+        // axis:'x',
+        // width:'auto',        
+    // });
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
         $('.caret-up').show();
@@ -268,14 +270,27 @@ $('.top_layer, .message_close').on('click',function() {
     });
 /*Ended by thangam*/
 
+/* slim scroll */
+var win_height= $(window).height();
+var head_height= win_height - $('#header').height();
+var footer_height= head_height -$('#footer').height(); 
+//alert (win_height);
+//alert(head_height);  
+$('.sub_pre_section').css('max-height', footer_height);
+$('.sub_sidebar_section').css('max-height', footer_height);
+	
+
 	 $('.sub_section_scroll').slimScroll({
         height: 'auto'
      });
-      $('.sub_section_scrollprivil').slimScroll({
-        height: 'auto'
-     });
+      
     $('.sub_pre_section').slimScroll({
         height: 'auto'
+        
+     });
+      $('.sub_sidebar_section').slimScroll({
+        height: 'auto'
+        
      });
     
      $('.sub_site_visites_cont').slimScroll({
@@ -954,15 +969,6 @@ $('.temp_remove_act').click(function(e)
         $('.temp_remove_act').hide();
        $('#imagepreview_templogo').attr("src","");
    });
-   
-/* slim scroll */
-var win_height= $(window).height();
-var head_height= win_height - $('#header').height();
-var footer_height= head_height -$('#footer').height(); 
-//alert (win_height);
-//alert(head_height);  
-$('.sub_pre_section').css('max-height', footer_height);
-
 /* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){
