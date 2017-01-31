@@ -16,7 +16,7 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
     background: #22C0CB;
 }
 #header.navbar-inverse .navbar-inner {
-    background:#4e4e4e url("../img/top-bg.jpg") repeat-x !important;
+    /*background:#4e4e4e url("../img/top-bg.jpg") repeat-x !important;*/
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4e4e4e',endColorstr='#4e4e4e',GradientType=0)
     border-width: 0;
 }
@@ -956,5 +956,19 @@ table {
 }
 .instruction_span span{
 	width:74% !important;
+}
+/*Added By Akila*/
+/*Footer*/
+#footer {
+	background-color: #1b1b1b;
+	/*background: #4e4e4e url("../img/top-bg.jpg") repeat-x scroll 0 0 !important;*/
+	z-index:2;
+	position:fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.fixed-top #container{
+	margin-bottom: 20px;
 }
 
