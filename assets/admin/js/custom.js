@@ -222,23 +222,25 @@ $(document).ready(function(){
         $('#dialog-box').fadeOut(350);
         $('#dialog-overlay').fadeOut(350);
     });
+    
+   
     /*Added by thangam*/
-    $('.sub_scroll_section').slimScroll({
+     $('.sub_scroll_section').slimScroll({
         height: 'auto'
     });
 
-    $('.extended').slimScroll({
-        height: 'auto'
+     $('.extended').slimScroll({
+         height: 'auto'
     });
-     $('.sub_pre_section').slimScroll({
-        height: 'auto'
-      
-    });
-	 $('.sub_hori_scroll').slimScroll({
-        height: 'auto',
-        axis:'x',
-        width:'auto',        
-    });
+     // $('.sub_pre_section').slimScroll({
+        // height: 'auto'
+//       
+    // });
+	 // $('.sub_hori_scroll').slimScroll({
+        // height: 'auto',
+        // axis:'x',
+        // width:'auto',        
+    // });
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
         $('.caret-up').show();
@@ -268,14 +270,27 @@ $('.top_layer, .message_close').on('click',function() {
     });
 /*Ended by thangam*/
 
+/* slim scroll */
+var win_height= $(window).height();
+var head_height= win_height - $('#header').height();
+var footer_height= head_height -$('#footer').height(); 
+//alert (win_height);
+//alert(head_height);  
+$('.sub_pre_section').css('max-height', footer_height);
+$('.sub_sidebar_section').css('max-height', footer_height);
+	
+
 	 $('.sub_section_scroll').slimScroll({
         height: 'auto'
      });
-      $('.sub_section_scrollprivil').slimScroll({
-        height: 'auto'
-     });
+      
     $('.sub_pre_section').slimScroll({
         height: 'auto'
+        
+     });
+      $('.sub_sidebar_section').slimScroll({
+        height: 'auto'
+        
      });
     
      $('.sub_site_visites_cont').slimScroll({
@@ -954,15 +969,6 @@ $('.temp_remove_act').click(function(e)
         $('.temp_remove_act').hide();
        $('#imagepreview_templogo').attr("src","");
    });
-   
-/* slim scroll */
-var win_height= $(window).height();
-var head_height= win_height - $('#header').height();
-var footer_height= head_height -$('#footer').height(); 
-//alert (win_height);
-//alert(head_height);  
-$('.sub_pre_section').css('max-height', footer_height);
-
 /* Popup pagination with arrow end */ 
 
 // $(".finish").click(function(){
@@ -984,40 +990,37 @@ var wrapper = $('.field_wrapper');
 var x = 1;
 var y = 2;
 //Initial field counter is 1
-
 $(addButton).click(function() {//Once add button s clicked
-	var cloned_content = $('.field_wrapper:last').clone();
-	
-	if (x < maxField) {//Check maximum number of input fields
-		x++;
-		$(cloned_content).insertAfter('.field_wrapper:last').find("*","input").val("");
-		$(cloned_content).find('.remove_button').show();
-		"$(cloned_content).find('.add_button').hide();"
-		$(cloned_content).find('.counter').html(x);
+	var error = 0;
+	//validate empty fields
+	$(this).parents('.plan_creation').find('.customize_plan').each(function(){
+    if($(this).val() == '')
+	    {        
+	        error = 1;    
+	        $(this).addClass('attribute_error');           
+	    }
+	    else{
+	        $(this).removeClass('attribute_error');
+	    }
+    });
+    //validate select box
+    if(error==0){
+		var cloned_content = $('.field_wrapper:last').clone();
+		if (x < maxField) {//Check maximum number of input fields
+			x++;
+			$(cloned_content).insertAfter('.field_wrapper:last').find('input').val("");
+			$(cloned_content).find('.remove_button').show();
+			// $(cloned_content).find('.add_button').hide();
+			$(cloned_content).find('.counter').html(x);
+		}
 	}
-	// else if (x > maxField) {//Check maximum number of input fields
-		// $('.field_wrapper:last').find('.add_button').addclass('dn');			
-   // }
-	
 });
 $(document).on('click','.remove_button',function() {//Once remove button is clicked
 	$(this).parents('.field_wrapper').remove();
 	x--;
 });
+//Ended by Akila 	
 
-//Validate empty  Clone field
-function field_wrapper(){
-        var clone_length = $(".field_wrapper").length;
-        if(clone_length > 1) {
-            $(this).parents(".field_wrapper").remove();
-        }
-        else {
-            alert("Please Fill all fields");
-        }
-        var id = this_parent.find(".field_wrapper:last").attr("id");
-        $('.add_button').addClass('dn');
-        $('#'+id).find('.add_button').removeClass('dn');
-    }
 
 		
 		

@@ -413,7 +413,7 @@ a,a:focus, a:hover, a:active {
     margin-left: 215px;
     /*min-height: 560px;*/
     background: #f7f7f7 url("../img/body-bg.png");
-    min-height: 600px;
+    min-height: 530px;
     max-height: 100%;
 }
 
@@ -884,7 +884,7 @@ form legend {
     box-shadow: 0 0px 5px #ddd;
     position: relative;
 }
-
+.widget_act{right: 5px;}
 .widget-title {
     background: #f2f2f2;
     background-image: -webkit-gradient(linear, 0 0%, 0 100%, from(#ffffff), to(#f2f2f2));
@@ -951,6 +951,7 @@ form legend {
     -webkit-border-radius: 0px 0px 3px 3px;
     -moz-border-radius: 0px 0px 3px 3px;
     border-radius: 0px 0px 3px 3px;
+    height: 369px;
     /*overflow-x:scroll;*/
 }
 
@@ -2946,14 +2947,14 @@ div.tagsinput .not_valid {
 }
 
 .form-wizard .done .step i {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: normal;
     color: #999;
     display: inline-block;
 }
 
 .form-wizard .tab-pane h4 {
-    margin-bottom: 20px !important;
+    margin-bottom: 19px !important;
     padding-left:12px !important;
 }
 
@@ -4651,6 +4652,7 @@ div.dt-button-background {
 }
 #table_wrapper_Datatable {
     clear: both;
+    margin-right:0 !important;
     /*overflow-x: scroll !important;*/
 }
 /*.admin_module_form{
@@ -4658,14 +4660,14 @@ div.dt-button-background {
 }*/
 /* Multi choice start */
 .multi_choice > div ul{
-    max-height: 100px !important;
+    max-height: 60px !important;
 }
 .multi_choice > div{
     width : auto !important;
 }
 .multi_choice{
     display: block;
-    height: 30px;
+    height: 70px;
 }
 /* Multi choice end */
 
@@ -4868,6 +4870,7 @@ i#admin_error_login {
     height: auto !important;
     overflow: hidden !important;
     position: absolute !important;
+    direction: ltr;
     top: 46px !important;
     width: auto !important;
     z-index: 9999;
@@ -4916,20 +4919,20 @@ i#admin_error_login {
 /* Added by Akila */
 .plan_creation{
 	position: relative;
-}	
+}
 .field_wrapper {
-	margin: 15px 0 15px 30px;
+	margin: 15px 0 15px 0px;
 	position: relative;
 }	
 .col3{
-	float:left;
+	display: inline-block;
 	width: 15%;
-	margin: 0 5px;
+	/*margin: 0 5px;*/
 }
 .col4{
-	float:left;
+	display: inline-block;
 	width: 28%;
-	margin: 0 5px;
+	/*margin: 0 5px;*/
 }
 .plan_creation input[type="text"]{
 	width: 85%;
@@ -4962,13 +4965,20 @@ i#admin_error_login {
 .add_button {
     line-height: 14px;
     position: absolute;
-    bottom: 15px;
-    right: 130px;
+    bottom: 18px;
+    right: -10px;
 }
 .remove_button {
     bottom: 0;
     position: absolute;
-    right: 160px;
+    right: 15px;
+}
+.attribute_error{
+	border-color: red !important;
+}
+/*Side Menubar */
+#sidebar .sidebar-menu{
+    height: 530px !important;
 }
 /* End by Akila */
 	

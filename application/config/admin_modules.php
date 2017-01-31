@@ -177,11 +177,6 @@ $config['admin_modules'] = array(
 			'name' => 'plan upgrade creation', 
 			'access_operation' => 'add,edit,delete,view', 
 			'route_url' => base_url().'main/plan_upgrade_creation' 
-		),
-		array(
-			'name' => 'customize plan settings', 
-			'access_operation' => 'add,edit,delete,view', 
-			'route_url' => base_url().'main/customize_plan_settings' 
 		)),
 		'icon_name' => 'icon-wrench'
 	),

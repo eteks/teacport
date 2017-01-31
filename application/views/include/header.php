@@ -74,4 +74,4 @@
                 <img alt="Teacher recruit Preloader" src="<?php echo base_url(); ?>assets/images/loader.gif" />
                 <h2>Please Wait.....</h2>
             </div>
-        </div>
+        </div> 

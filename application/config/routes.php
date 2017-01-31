@@ -196,7 +196,6 @@ $route['main/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter
 
 $route['main/subscription_plans'] = 'admin/subscription_plan/subscription_plans';
 $route['main/plan_upgrade_creation'] = 'admin/subscription_plan/plan_upgrade_creation';
-$route['main/customize_plan_settings'] = 'admin/subscription_plan/customize_plan_settings';
 
 $route['main/user_groups'] = 'admin/admin_users/user_groups';
 $route['main/user_accounts'] = 'admin/admin_users/user_accounts';

@@ -7,11 +7,11 @@
   	}
 
   	#sidebar ul{
-  		margin-top:50px;
+  		/*margin-top:50px;*/
   		width: 215px;
   		margin-left:0 !important;
   		/*overflow-y:scroll;*/
-  		height:580px;
+  		height: 580px;
   	}
 
   	/* body container */
