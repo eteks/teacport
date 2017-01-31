@@ -958,10 +958,10 @@ $('.temp_remove_act').click(function(e)
 /* slim scroll */
 var win_height= $(window).height();
 var head_height= win_height - $('#header').height();
-// var footer_height= head_height -$('#footer').height(); 
+var footer_height= head_height -$('#footer').height(); 
 //alert (win_height);
 //alert(head_height);  
-$('.sub_pre_section').css('max-height', head_height);
+$('.sub_pre_section').css('max-height', footer_height);
 
 /* Popup pagination with arrow end */ 
 
@@ -986,6 +986,7 @@ var y = 2;
 //Initial field counter is 1
 $(addButton).click(function() {//Once add button s clicked
 	var error = 0;
+	//validate empty fields
 	$(this).parents('.plan_creation').find('.customize_plan').each(function(){
     if($(this).val() == '')
 	    {        
@@ -996,7 +997,8 @@ $(addButton).click(function() {//Once add button s clicked
 	        $(this).removeClass('attribute_error');
 	    }
     });
-	if(error==0){
+    //validate select box
+    if(error==0){
 		var cloned_content = $('.field_wrapper:last').clone();
 		if (x < maxField) {//Check maximum number of input fields
 			x++;
