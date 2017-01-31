@@ -269,12 +269,25 @@ class Job_seeker_model extends CI_Model {
 		$this->db->join('tr_organization_vacancies ov','cap.applied_job_vacancies_id =	ov.vacancies_id','inner');
 		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id = op.organization_id','inner');
 		$this->db->limit($limit,$start);
+		$this->db->order_by('cap.applied_job_id','desc');
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->result_array(); 
 	}
 
-	public function job_seeker_detail_jobs($ins_id)
+	// Get applied job value
+	public function job_seeker_applied_value($id)
+	{	
+		$where = "(applied_job_candidate_id='".$id."' AND applied_job_status='1')"; 		
+	 	$this->db->select('applied_job_vacancies_id');   
+	 	$this->db->from('tr_candidate_applied_job');
+		$this->db->where($where);
+		$findjobsjobdata = $this->db->get();
+		$data = implode(', ', array_column($findjobsjobdata->result_array(), 'applied_job_vacancies_id'));
+		return $data ; 
+	}
+
+	public function job_seeker_detail_jobs($id)
 	{
 	 	$this->db->select('*');   
 	 	$this->db->from('tr_organization_vacancies');
@@ -282,7 +295,7 @@ class Job_seeker_model extends CI_Model {
 		$this->db->join('tr_class_level','tr_organization_vacancies.vacancies_class_level_id =	tr_class_level.class_level_id','left');
 		$this->db->join('tr_university_board','tr_organization_vacancies.vacancies_university_board_id =	tr_university_board.education_board_id','left');
 		$this->db->join('tr_subject','tr_organization_vacancies.vacancies_subject_id =	tr_subject.subject_id','left');
-		$where = "(tr_organization_vacancies.vacancies_id='".$ins_id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
+		$where = "(tr_organization_vacancies.vacancies_id='".$id."' AND tr_organization_vacancies.	vacancies_status='1')"; 				
 		$this->db->where($where);
 		$findjobsjobdata = $this->db->get();
 		return $findjobsjobdata->row_array(); 
@@ -296,17 +309,26 @@ class Job_seeker_model extends CI_Model {
 	}
 	
 
-	public function get_relatedjob_list()
-	{
-		$search_product=$this->db->select('*');
-        $search_product=$this->db->from('tr_organization_vacancies cp');
-        $search_product =$this->db->join('tr_organization_profile op','cp.vacancies_organization_id = op.organization_id','inner');
-        $where1 = '(cp.vacancies_status=1)';
-        $search_product=$this->db->like('cp.vacancies_job_title',$this->input->post('search_keyword'));
-        $search_product=$this->db->where($where1);
-        $search_product=$this->db->group_by('cp.vacancies_id');
-        $query = $this->db->get()->result_array();
-        return $query;
+	public function get_relatedjob_list($vac_id,$ins_id)
+	{	
+		$data = array();
+		$vac_where = '(vacancies_id="'.$vac_id.'" AND vacancies_status=1)';
+		$this->db->select('vacancies_job_title');
+		$this->db->from('tr_organization_vacancies');
+		$vac_title = $this->db->where($vac_where)->get()->row_array();
+		
+		if(!empty($vac_title)) {
+	        $job_where = '((cp.vacancies_status=1 AND cp.vacancies_id!="'.$vac_id.'" AND cp.vacancies_job_title LIKE "%'.$vac_title['vacancies_job_title'].'%") OR (cp.vacancies_status=1 AND cp.vacancies_id!="'.$vac_id.'" AND  op.organization_institution_type_id="'.$ins_id.'"))';
+			$this->db->select('*');
+	        $this->db->from('tr_organization_vacancies cp');
+	        $this->db->join('tr_organization_profile op','cp.vacancies_organization_id = op.organization_id','inner');
+	       	// $this->db->like('cp.vacancies_job_title',$vac_title['vacancies_job_title']);
+	        $this->db->where($job_where);
+	        $this->db->order_by('cp.vacancies_id','desc');
+	        $this->db->limit(15,0);
+	        $data = $this->db->group_by('cp.vacancies_id')->get()->result_array();
+		}
+		return $data;
 	}
 
 	// Get seeker details
@@ -436,6 +458,16 @@ class Job_seeker_model extends CI_Model {
 		$data['inbox_data'] = $this->db->get()->row_array();
 		return $data; 
 	}
+
+	// Inbox remove data
+	public function job_seeker_inbox_removedata($id=array())
+	{	
+		$remove_id = explode(',',$id);
+		$this->db->where_in('candidate_inbox_id', $remove_id);
+		$this->db->delete('tr_candidate_inbox');
+		return "success"; 
+	}
+	
 	//  Inbox end
 
 	// Edit profile updation
@@ -491,6 +523,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_resume_upload_path' => $data['cand_resume'],
 								'candidate_marital_status' => $data['cand_marital'],
 								'candidate_district_id' => $data['cand_native_dis'],
+								'candidate_state_id' => $data['cand_native_state'],						
 								'candidate_mother_tongue' => $data['cand_mother_ton'],
 								'candidate_language_known' => implode(',',$data['cand_known_lan']),
 								'candidate_nationality' => $data['cand_nation'],
@@ -500,6 +533,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_address_1' => $data['cand_addr1'],
 								'candidate_address_2' => $data['cand_addr2'],
 								'candidate_live_district_id' => $data['cand_live_dis'],
+								'candidate_live_state_id' => $data['cand_live_state'],
 								'candidate_pincode' => $data['cand_pincode'],
 								'candidate_email' => $data['cand_email'],
 								'candidate_mobile_no' => $data['cand_mobile'],
@@ -666,6 +700,26 @@ class Job_seeker_model extends CI_Model {
 		}
 	}
 
+	public function job_seeker_apply_status($cand_id,$vac_id)
+	{
+		$pro_where = '(candidate_id="'.$cand_id.'" AND candidate_profile_completeness>=90 AND candidate_status=1)';
+		$pro_value = $this->db->get_where('tr_candidate_profile',$pro_where)->num_rows();
+		if($pro_value == 1) {
+			$apply_where = '(applied_job_vacancies_id="'.$vac_id.'" AND applied_job_candidate_id="'.$cand_id.'")';
+			$apply_value = $this->db->get_where('tr_candidate_applied_job',$apply_where)->num_rows();	
+			if($apply_value == 1) {
+				$status = "You are already applied for this job";
+			}
+			else {
+				$status = "success";
+			}
+		}
+		else {
+			$status = "You are not eligible to apply job. To fill all details in your profile";
+		}
+		return $status;
+	}
+
 	public function candidate_feedback_form($data)
 	{
 		if($this->db->insert('tr_feedback_form', $data)){
@@ -689,7 +743,7 @@ class Job_seeker_model extends CI_Model {
     		}
     		else {
     			$min_exp = $data['experience'];
-    			$max_exp = 60;
+    			$max_exp = 90; // Maximum experience - We must give it
     		}
     	}
 
@@ -720,6 +774,7 @@ class Job_seeker_model extends CI_Model {
         }	
 
         $this->db->limit($limit,$start);
+        $this->db->order_by('ov.vacancies_id','desc');
         $model_data['search_results'] = $this->db->get()->result_array();
 
         // echo "<pre>";
@@ -751,7 +806,7 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
-
+        $this->db->order_by('ov.vacancies_id','desc');
         $model_data['total_rows'] = $this->db->get()->num_rows();
              
 

@@ -4,9 +4,11 @@
     </div>
     <?php
     if(!empty($sidebar_values['candidate_image_path'])) : 
+        $thumb_image = explode('.', end(explode('/',$sidebar_values['candidate_image_path'])));
+        $thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
     ?>
     <div class="user-image">    
-        <img src="<?php echo $sidebar_values['candidate_image_path']; ?>" class="img-responsive img-circle" alt="Not Found">
+        <img src="<?php echo base_url().SEEKER_UPLOAD."pictures/".$thumb; ?>" class="img-responsive img-circle" alt="Not Found">
     </div>
     <?php endif; ?>
     <div class="card-body">
@@ -58,9 +60,9 @@
                 <li class="<?php if($this->uri->segment(2)=='allinstitutions') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>allinstitutions"> <i class="fa fa-graduation-cap" aria-hidden="true"></i> Institutions </a>
                 </li>
-                <li class="<?php if($this->uri->segment(2)=='vacancies') echo 'active'; ?>">
+                <!-- <li class="<?php if($this->uri->segment(2)=='vacancies') echo 'active'; ?>">
                     <a href="<?php echo base_url(); ?>vacancies"> <i class="fa fa-bullhorn" aria-hidden="true"></i> Vacancies </a>
-                </li>
+                </li> -->
             </ul>
         </div>
 </div>

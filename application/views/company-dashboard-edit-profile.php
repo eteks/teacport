@@ -127,25 +127,52 @@
 									</select>
 								</div>
 							</div> -->
-							<div class="form-group">
+							<div class="form-group state_section">
+								<label class="col-sm-offset-1 col-sm-2" for="add_state">State <sup class="alert">*</sup></label>
+								<div class="col-sm-8">
+									<select name="organization_state" class="select-state form-control form_inputs state_select" >
+                                        <option value=""> Select State </option>
+                                        <?php
+                                        if(!empty($state_values)) :
+                                        foreach ($state_values as $sta_val) :
+                                        if(set_value('organization_state') == $sta_val['state_id'] ) {
+                                        	echo "<option value='".$sta_val['state_id']."' selected> ".$sta_val['state_name']." </option>";
+                                        }
+                                        else if ($sta_val['state_id'] == $organization['organization_state_id'] && set_value('organization_state') == '') {
+	                                        echo "<option value='".$sta_val['state_id']."' selected> ".$sta_val['state_name']." </option>";
+	                                    }
+	                                    else  {
+	                                    	echo "<option value='".$sta_val['state_id']."'> ".$sta_val['state_name']." </option>";
+	                                    }
+                                        endforeach;
+                                        endif;
+                                        ?>
+                                    </select>
+								</div>
+							</div>
+							<div class="form-group district_section">
 								<label class="col-sm-offset-1 col-sm-2" for="add_district">District <sup class="alert">*</sup></label>
 								<div class="col-sm-8">
 									<?php echo form_error('organization_district'); ?>
 									<select id="organization_district" class="select-location form-control form_inputs" name="organization_district" onchange="">
 										<option value="">Select district</option>
 										<?php
+										if(!empty($district)) :
 										foreach ($district as $value) {
-											if($organization['organization_district_id'] == $value['district_id']){
-												echo '<option value="'.$value['district_id'].'" selected>'.$value['district_name'].'</option>';
-											}
-											elseif(set_select('organization_district', $value['district_id']) != ''){
-												echo '<option value="'.$value['district_id'].'" '.set_select('organization_district', $value['district_id']).'>'.$value['district_name'].'</option>';
-											}
-											else{
-												echo '<option value="'.$value['district_id'].'">'.$value['district_name'].'</option>';
-											}
-											
+											if(set_value('organization_district') == $value['district_id'] ) {
+                                        		echo "<option value='".$value['district_id']."' selected> ".$value['district_name']." </option>";
+                                        	}
+                                        	else if($value['district_id'] == $organization['organization_district_id'] && set_value('organization_district') == ''){
+                                        		echo '<option value="'.$value['district_id'].'" selected>'.$value['district_name'].'</option>';
+                                        	}
+                                        	else if(set_value('organization_state') == $value['district_state_id'] ) {
+                                        		echo "<option value='".$value['district_id']."'> ".$value['district_name']." </option>";
+                                        	}
+                                        	else if($value['district_state_id'] == $organization['organization_state_id'] && set_value('organization_state') == ''){
+                                        		echo "<option value='".$value['district_id']."'> ".$value['district_name']." </option>";
+                                        	}
 										}
+										endif;
 										?>
 									</select>
 								</div>

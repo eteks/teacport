@@ -65,15 +65,17 @@
 			             	</ul>
 			          	</li>
 			          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
-			          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
+			          	<li> <a href="<?php echo base_url(); ?>seeker/findjob"> Find Jobs </a> </li>
 			          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
 			           <li class="profile-pic">
 			              	<a href="javascript:void(0)"> 
 			              		<?php 
 			              		$session = $this->session->all_userdata();
 			              		if(!empty($session['login_session']['candidate_image_path'])) :
-      							?>
-        						<img src="<?php echo $session['login_session']['candidate_image_path']; ?>" alt="user-img" class="img-circle" width="36" />
+			              			$thumb_image = explode('.', end(explode('/',$session['login_session']['candidate_image_path'])));
+        							$thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
+    							?>
+        						<img src="<?php echo base_url().SEEKER_UPLOAD."pictures/".$thumb; ?>" alt="user-img" class="img-circle" width="36" />
 							    <?php
 							    endif;
 							    ?>	
