@@ -1337,19 +1337,6 @@ label.form-input-error {
 .tr_latest_updates .Heading-title {
 	margin-bottom: 25px;
 }
-/* Marquee news */
-.jobs-link li{
-	padding: 5px;
-	margin: 5px;
-	text-align: left;
-}
-.jobs-link li a{
-	color: #29AAFE;
-}
-.update-title {
-	padding: 10px;
-	color: #29AAFE;
-}
 /* Institutions */
 .company-list-box {
 	height: 150px;	
@@ -1416,6 +1403,34 @@ label.form-input-error {
 .tooltip-head h3{
     margin: 0;
     font-size: 14px;
+}
+/* Institution Page */
+#institution_grids .company-list-img {
+	height: 80px;
+	width: 80px;
+}
+#institution_grids .company-box:hover {
+background: #ebf1f6; /* Old browsers */
+background: -moz-linear-gradient(top,  #ebf1f6 0%, #89c3eb 2%, #89c3eb 2%, #abd3ee 50%, #d5ebfb 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom,  #ebf1f6 0%,#89c3eb 2%,#89c3eb 2%,#abd3ee 50%,#d5ebfb 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', endColorstr='#d5ebfb',GradientType=0 ); /* IE6-9 */
+}
+#institution_grids .company-list-name h5{
+	color: #000;
+}
+#institution_grids .company-list-name h5:hover {
+	color: #29AAFE;
+}
+.institution_new_jobs, .institution_total_jobs{
+	cursor: pointer;
+}
+#insititution_profile_detail .related-post li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+#insititution_profile_detail .related-post li a{
+	font-size: 14px;
 }
 /* Image Centering */
 .organisation_detail .company-img{
