@@ -1004,13 +1004,21 @@ $(addButton).click(function() {//Once add button s clicked
 	    }
     });
     //validate select box
+    // var equal_check_array = [];
+    // $('#select_plan').onchange(function(){
+        // if($('option:selected',this).val() != ''){
+            // equal_check_array.push($('option:selected',this).val());
+        // }
+    // });
+    // var hasDups = !equal_check_array.every(function(v,i) {
+        // return equal_check_array.indexOf(v) == i;
+    // });
     if(error==0){
 		var cloned_content = $('.field_wrapper:last').clone();
 		if (x < maxField) {//Check maximum number of input fields
 			x++;
 			$(cloned_content).insertAfter('.field_wrapper:last').find('input').val("");
 			$(cloned_content).find('.remove_button').show();
-			// $(cloned_content).find('.add_button').hide();
 			$(cloned_content).find('.counter').html(x);
 		}
 	}
