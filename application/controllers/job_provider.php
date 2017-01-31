@@ -196,7 +196,7 @@ class Job_provider extends CI_Controller {
 			}
 			else
 			{
-				$this->load->view('company-dashboard-edit-profile',$data);
+				redirect('provider/dashboard/editprofile');
 			}
 		}
 		else{
@@ -480,7 +480,7 @@ class Job_provider extends CI_Controller {
 				}
 				else
 				{
-					$this->load->view('company-dashboard-edit-profile',$data);
+					redirect('provider/dashboard/editprofile');
 				}
 			}
 			else{
