@@ -967,6 +967,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <li class="next"><a href="#">Next<i class="icon-angle-right"></i></a></li>
                       <li class="finish disabled"><button type="submit">Finish<i class="icon-ok"></i></button></li>
                     </ul>
+                    <div class="clearfix"> </div>
                   </div>  
                 </div>
                 <input type="hidden" class="hidden_id" value="<?php echo $provider_full_profile['org_id']; ?>" />

@@ -196,7 +196,7 @@ Website: http://thevectorlab.net/
                 <!-- END RESPONSIVE QUICK SEARCH FORM -->
                 <!-- BEGIN SIDEBAR MENU -->
               
-                <ul class="sidebar-menu sub_pre_section">
+                <ul class="sidebar-menu sub_sidebar_section">
                     <?php 
                         $admin_modules = $this->config->item('admin_modules');
                         $admin_operation_rights = $this->config->item('admin_operation_rights');

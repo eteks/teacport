@@ -182,7 +182,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>
             
             <!---Full edit popup -->
-            <div class="popup" data-popup="popup-1">
+            <div class="popup vacancies-design" data-popup="popup-1">
               <div class="popup-inner">
                 <div class="widget box blue" id="popup_wizard_section">
                   <div class="widget-title">
@@ -418,8 +418,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               </span>
                             </div>
                           </div>
-                          <div class="span12">
-                            <div class="span6 control-group">
+                          <div class="span12 instruction_span">
+                            <div class="span12 control-group">
                               <label class="control-label">Instruction</label>
                               <span class="dynamic_data"> 
                                 <?php echo $vac_val['vacancies_instruction']; ?>
@@ -732,6 +732,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="next"><a href="#">Next</a></li>
                           <li class="finish disabled"><button type="submit">Finish<i class="icon-ok"></i></button></li>
                         </ul>
+                        <div class="clearfix"> </div>
                       </div>  
                     </div>
                     <?php
