@@ -532,8 +532,8 @@ class Job_seeker_model extends CI_Model {
 								'candidate_is_physically_challenged' => $data['cand_phy'],
 								'candidate_address_1' => $data['cand_addr1'],
 								'candidate_address_2' => $data['cand_addr2'],
-								'candidate_live_district_id' => $data['cand_live_dis'],
-								'candidate_live_state_id' => $data['cand_live_state'],
+								'candidate_live_district_id' =>($data['cand_live_dis']) ? $data['cand_live_dis'] : NULL,
+								'candidate_live_state_id' => ($data['cand_live_state']) ? $data['cand_live_state'] : NULL,
 								'candidate_pincode' => $data['cand_pincode'],
 								'candidate_email' => $data['cand_email'],
 								'candidate_mobile_no' => $data['cand_mobile'],
@@ -549,6 +549,7 @@ class Job_seeker_model extends CI_Model {
 				$this->db->set($profile_update_data);
 				$this->db->where('candidate_id',$data['cand_pro']);
 				$this->db->update('tr_candidate_profile',$profile_update_data);	
+				// echo $this->db->last_query();
 
 				// Updation in preference table
 				$prefrence_update_data = array(

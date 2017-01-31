@@ -425,8 +425,8 @@ $(document).ready(function() {
             			error_msg.removeClass('val_error');
 						error_msg.addClass('val_success');
             			$('html,body').animate({scrollTop : this_form.offset().top }, 500);
-            			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Sucessfully').fadeIn(350);
-						setTimeout(function() { location.reload(); }, 3000);
+            			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Successfully').fadeIn(350);
+						// setTimeout(function() { location.reload(); }, 3000);
 					}
 					else {
 						error_msg.removeClass('val_success');
@@ -441,7 +441,7 @@ $(document).ready(function() {
 				error : function() {
 				    this_loader.addClass('loader-dn');
 				    $("html, body").animate({ scrollTop: 0 }, 1000);
-				    this_error.text("Not Updated due to Connection Problem. Try again.").fadeIn();
+				    error_msg.html('<i class="fa fa-times" aria-hidden="true"></i> Not Updated due to Connection Problem. Try again.').fadeIn(350);
 				    setTimeout(function() { location.reload(); }, 3000);
 				},
 
