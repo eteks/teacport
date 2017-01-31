@@ -2953,7 +2953,7 @@ div.tagsinput .not_valid {
 }
 
 .form-wizard .tab-pane h4 {
-    margin-bottom: 20px !important;
+    margin-bottom: 19px !important;
     padding-left:12px !important;
 }
 
@@ -4651,6 +4651,7 @@ div.dt-button-background {
 }
 #table_wrapper_Datatable {
     clear: both;
+    margin-right:0 !important;
     /*overflow-x: scroll !important;*/
 }
 /*.admin_module_form{
@@ -4658,14 +4659,14 @@ div.dt-button-background {
 }*/
 /* Multi choice start */
 .multi_choice > div ul{
-    max-height: 100px !important;
+    max-height: 60px !important;
 }
 .multi_choice > div{
     width : auto !important;
 }
 .multi_choice{
     display: block;
-    height: 30px;
+    height: 70px;
 }
 /* Multi choice end */
 

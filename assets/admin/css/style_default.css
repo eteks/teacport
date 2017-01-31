@@ -443,8 +443,7 @@ tr select {
 	width: auto;
 	overflow: scroll;
 }*/
-.sub_pre_section{
-	/*max-height:570px !important; */
+.sub_pre_section{	
 	height: auto;
 	width: auto;
 	overflow: hidden;
@@ -956,5 +955,8 @@ table {
 }
 .instruction_span span{
 	width:74% !important;
+}
+.instruction_span .span12{
+	margin-left:0 !important;
 }
 
