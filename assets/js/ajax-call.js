@@ -441,7 +441,8 @@ $(document).ready(function() {
 				error : function() {
 				    this_loader.addClass('loader-dn');
 				    $("html, body").animate({ scrollTop: 0 }, 1000);
-				    this_error.text("Not Updated due to Connection Problem. Try again.").fadeIn();
+				    // this_error.text("Not Updated due to Connection Problem. Try again.").fadeIn();
+				    error_msg.html('<i class="fa fa-times" aria-hidden="true"></i> Not Updated due to Connection Problem').fadeIn(350);
 				    setTimeout(function() { location.reload(); }, 3000);
 				},
 
