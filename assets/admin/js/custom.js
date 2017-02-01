@@ -986,43 +986,52 @@ $(document).on("keypress",".numeric_value",function (e) {
 //Clone field for Customize plan settings - Added by Akila
 var maxField = 3;
 var addButton = $('.add_button');
+var saveButton = $('.save_button');
 var wrapper = $('.field_wrapper');
 var x = 1;
 var y = 2;
 //Initial field counter is 1
-$(addButton).click(function() {//Once add button s clicked
-	var error = 0;
-	//validate empty fields
-	$(this).parents('.plan_creation').find('.customize_plan').each(function(){
-    if($(this).val() == '')
-	    {        
-	        error = 1;    
-	        $(this).addClass('attribute_error');           
+$(addButton,saveButton).click(function() { //Once add button s clicked
+var error = 0;
+		//validate empty fields
+		$(this).parents('.plan_creation').find('.customize_plan').each(function(){
+	    if($(this).val() == '')
+		    {        
+		        error = 1;    
+		        $(this).addClass('attribute_error');           
+		    }
+		    else{
+		        $(this).removeClass('attribute_error');
+		    }
+	    });
+	    //validate select box
+	    if(error==0){
+		    var equal_check_array = [];
+		 	$(this).parents('.plan_creation').find('.select_plan').each(function(){
+		        if($('option:selected',this).val() != ''){
+		            equal_check_array.push($('option:selected',this).val());
+		        }
+		    });
+		    var hasDups = !equal_check_array.every(function(v,i) {
+		        return equal_check_array.indexOf(v) == i;
+	        });
 	    }
-	    else{
-	        $(this).removeClass('attribute_error');
-	    }
-    });
-    //validate select box
-    // var equal_check_array = [];
-    // $('#select_plan').onchange(function(){
-        // if($('option:selected',this).val() != ''){
-            // equal_check_array.push($('option:selected',this).val());
-        // }
-    // });
-    // var hasDups = !equal_check_array.every(function(v,i) {
-        // return equal_check_array.indexOf(v) == i;
-    // });
-    if(error==0){
-		var cloned_content = $('.field_wrapper:last').clone();
-		if (x < maxField) {//Check maximum number of input fields
-			x++;
-			$(cloned_content).insertAfter('.field_wrapper:last').find('input').val("");
-			$(cloned_content).find('.remove_button').show();
-			$(cloned_content).find('.counter').html(x);
+		if(hasDups){
+			error=1;
+			$(this).parents('form').find('.admin_status').text("Please select other option to customize limits. ").fadeIn();
 		}
-	}
-});
+	    if(error==0){
+	    	$(this).parents('form').find('.admin_status').text("").fadeOut();  
+			var cloned_content = $('.field_wrapper:last').clone();
+			if (x < maxField) {//Check maximum number of input fields
+				x++;
+				$(cloned_content).insertAfter('.field_wrapper:last').find('input').val("");
+				$(cloned_content).find('.remove_button').show();
+				$(cloned_content).find('label').text('');
+				$(cloned_content).find('.counter').html(x);
+			}
+		}
+	});
 $(document).on('click','.remove_button',function() {//Once remove button is clicked
 	$(this).parents('.field_wrapper').remove();
 	x--;
