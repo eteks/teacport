@@ -214,7 +214,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <div class="navbar steps">
                     <div class="navbar-inner">
                       <div class="container">
-                        <ul  class="row-fluid nav nav-pills">
+                        <ul  class="row-fluid nav nav-pills" id="fullview_rootwizard">
                           <li class="span2">
                             <a href="#tab1" data-toggle="tab" class="step step_menus active">
                             <span class="number">1</span>
