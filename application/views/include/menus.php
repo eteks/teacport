@@ -24,7 +24,7 @@
 			             	</ul>
 			          	</li> -->
 			          	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
-			          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
+			          	<li> <a href="<?php echo base_url(); ?>provider/candidate"> Browse Candidate </a> </li>
 			          	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
 			          	<!-- <li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li> -->
 						<li class="profile-pic">
@@ -39,7 +39,7 @@
                             	<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
                                 <?php } ?>
 								
-			                    <span class="hidden-xs hidden-sm"><?php echo isset($user_type['registrant_name'])?$user_type['registrant_name']:$organization['registrant_name'] ;?> </span>
+			                    <span class="hidden-xs hidden-sm"><?php echo isset($user_type['registrant_name'])?$user_type['registrant_name']:'' ;?> </span>
 			                    <i class="fa fa-angle-down fa-indicator"></i> 
 			                </a>
 				            <ul class="drop-down-multilevel left-side">

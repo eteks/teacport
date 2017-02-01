@@ -1538,3 +1538,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .listing_head_title2{position: absolute; right: 980px; border: none !important;}
 .listing_head_title3{position: absolute; left: 715px; border: none !important; }
 .listing_head_title4{position: absolute; left: 885px; border: none !important;}
+
+.job-salary .dollar_sign{
+	font-size:17px !important;
+	color:#777 !important;
+}
+	
+.job-box-2 .job-salary{
+	text-align:right !important;
+}	

@@ -311,7 +311,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       <div class="widget-body form">
         <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
         <p class="admin_status"> </p>
-          <fieldset>
+        <fieldset>
             <legend> Subscription plan details:</legend>
             <div class="form-wizard pop_details_section">
             <?php } ?>
@@ -325,29 +325,30 @@ if(!empty($this->session->userdata("admin_login_status"))):
         		</select>
         	</div>
             <div class="form-group plan_creation">
-            	  <div class="form-group field_wrapper"><!--append field-->
-	                  <label class="control-label">Customize Limits</label>
-	            	   <div id="select_plan" class="upg_plan col4">
-	                		<select class="form-control customize_plan">
-	                			<option value="">Select</option>
-	                			<option value="SMS">SMS</option>
-	                			<option value="Email">Email</option>
-	                			<option value="Resume Download">Resume Download</option>
-	                		</select>
-	                	</div>
-	                	<div class="col3">
-	                		<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
-	                	</div>
-	                	<div class="col3">
-	                		<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
-	                	</div>
-	                	<div class="col3">
-	                		<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
-	                	</div>
-	                	<div class="">
-	                		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
-	                	</div>
-	                	<div class="clearfix"> </div>
+            	<!--append field-->
+            	<div class="form-group field_wrapper">
+	            	<label class="control-label" value="Customize">Customize Limits</label>
+            	   <div class="upg_plan col4 select_plan">
+                		<select class="form-control customize_plan">
+                			<option value="">Select</option>
+                			<option value="SMS">SMS</option>
+                			<option value="Email">Email</option>
+                			<option value="Resume Download">Resume Download</option>
+                		</select>
+                	</div>
+                	<div class="col3">
+                		<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
+                	</div>
+                	<div class="col3">
+                		<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
+                	</div>
+                	<div class="col3">
+                		<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
+                	</div>
+                	<div class="">
+                		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
+                	</div>
+                	<div class="clearfix"> </div>
                  </div>
                   <div class="pull-right">
                   	<a class="add_button" title="Add field"><strong>+</strong></a>

@@ -19,12 +19,6 @@ body {
 .pr { position: relative; }
 .pa { position: absolute; z-index: 99999; }
 .dropdown-toggle { cursor: pointer;  }
-
-
-
-
-
-
 /* fix for font awesome icon classes */
 [class^="icon-"], [class*=" icon-"],[class^="icon-"]:hover, [class*=" icon-"]:hover {
     background: none !important;
@@ -387,12 +381,6 @@ a,a:focus, a:hover, a:active {
     text-shadow: none;
 
 }
-
-/* main container */
-#container {
-
-}
-
 .fixed-top #container {
     margin-top: 60px;
 }
@@ -410,7 +398,7 @@ a,a:focus, a:hover, a:active {
 
 #main-content {
     margin-top: 0px;
-    margin-left: 205px;
+    margin-left: 215px;
     /*min-height: 560px;*/
     background: #f7f7f7 url("../img/body-bg.png");
     min-height: 700px;

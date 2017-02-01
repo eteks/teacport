@@ -196,7 +196,7 @@ class Job_provider extends CI_Controller {
 			}
 			else
 			{
-				$this->load->view('company-dashboard-edit-profile',$data);
+				redirect('provider/dashboard/editprofile');
 			}
 		}
 		else{
@@ -480,7 +480,7 @@ class Job_provider extends CI_Controller {
 				}
 				else
 				{
-					$this->load->view('company-dashboard-edit-profile',$data);
+					redirect('provider/dashboard/editprofile');
 				}
 			}
 			else{
@@ -671,14 +671,14 @@ class Job_provider extends CI_Controller {
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		if($data["current_jobvacancy_id"]){
 			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
-			if($session_data['login_session']['pro_userid'] === $data["applyjob"]["vacancies_organization_id"]){
+			// if($session_data['login_session']['pro_userid'] === $data["applyjob"]["vacancies_organization_id"]){
 				$data["qualification"] = $this->job_seeker_model->qualification_ids($data["applyjob"]["vacancies_qualification_id"]);
 				$data["medium"] = $this->job_seeker_model->medium_of_instruction($data["applyjob"]["vacancies_medium"]);
 				$this->load->view('company-dashboard-posted-jobs-detail', $data);
-			}
-			else{
-				redirect('missingpage');
-			}
+			// }
+			// else{
+			// 	redirect('missingpage');
+			// }
 		}
 		else{
 			redirect('provider/postedjob');
