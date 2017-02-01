@@ -55,13 +55,25 @@
                                     <?php
                                         foreach ($message as $msg) :
                                             $meassage_received_date_time = $msg['candidate_inbox_created_date'];
-                                        $meassage_received_date = date("d/m/Y h:i a", strtotime($meassage_received_date_time));
+                                            $meassage_received_date = date("d/m/Y h:i a", strtotime($meassage_received_date_time));
                                     ?>
                                     <tr class="" data-name="<?php if($msg['is_viewed'] == 0) echo 'bold_section'; ?>">
                                         <td><input type="checkbox" class="seeker_inbox_check" value="<?php echo $msg['candidate_inbox_id']; ?>" /></td>
                                         <td><span> <?php echo $msg['organization_name']; ?> </span></td>
                                         <td><span> <?php echo isset($msg['vacancies_job_title'])?$msg['vacancies_job_title']:'Not mention'; ?> </span></td>
-                                        <td><a class="btn view_inbox_details" data-toggle="modal" data-target="#user_inbox_msg_act"  data-value="<?php echo $msg['candidate_inbox_id']; ?>" data-backdrop="static" data-keyboard="false"> <?php echo $msg['candidate_inbox_message']; ?> </a></td>
+                                        <td>
+                                        <?php
+                                        if(!empty($msg['candidate_vacancy_id'])) {
+                                            $href= base_url()."seeker/jobsapplieddetails/".$msg['candidate_vacancy_id'];
+                                        }
+                                        elseif(!empty($msg['candidate_organization_id'])) {
+                                            $href= base_url()."user-followed-companies/".$msg['candidate_organization_id'];
+                                        }
+                                        else {
+                                            $href= "#";
+                                        }
+                                        ?>
+                                        <a class="btn" href="<?php echo $href; ?>"> <?php echo $msg['candidate_inbox_message']; ?> </a></td>
                                         <td> <?php echo $meassage_received_date; ?> </td>
                                     </tr>
                                     <?php 
@@ -69,6 +81,7 @@
                                     ?>
                                 </tbody>
                             </table>
+                            <button class="btn btn-small del_provdbd_mail">Delete</button>
                             <?php } else { ?>
 	                        	<h2> No message received ! </h2>
                             <?php } ?>
@@ -192,9 +205,11 @@ if(!empty($provider_values)) :
         <?php
         foreach ($provider_values as $val) :
         if(!empty($val['organization_logo'])) :
+            $thumb_image = explode('.', end(explode('/',$val['organization_logo'])));
+            $thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
         ?>
         <div class="client-logo">
-            <a href="#"><img src="<?php echo $val['organization_logo']; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
+            <a href="#"><img src="<?php echo base_url().PROVIDER_UPLOAD.$thumb; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
         </div>
         <?php
         endif;
@@ -252,45 +267,45 @@ $(document).ready(function(){
     	"pagingType": "full_numbers"
     });
     seeker_inbox_ajax_message('<?php echo base_url(); ?>','<?php echo $candidate_data['candidate_id'] ?>','<?php echo $this->security->get_csrf_hash(); ?>');
-    $('.view_inbox_details').on('click',function(){
-        var inbox = $(this).attr('data-value');
-        $(this).parents('tr').attr('data-name','unbold_section');
-        var url = '<?php echo base_url(); ?>';
-        var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
-        $.ajax({
-           type: "POST",
-           url: url+"seeker/inbox/fulldata",
-           data:{ inbox_id : inbox, csrf_token : csrf},
-           cache: false,
-           async: false,
-           success: function(data) {
-                var c = $.parseJSON(data);
-                // Organization details
-                $('#seeker_inbox_msg .org_name').text(c.inbox_data.organization_name);
-                $('#seeker_inbox_msg .org_addr').html(c.inbox_data.organization_address_1 + '<br/> ' + c.inbox_data.organization_address_2 + '<br/> ' + c.inbox_data.organization_address_3);
-                $('#seeker_inbox_msg .org_dis').text(c.inbox_data.district_name);
-                $('#seeker_inbox_msg .reg_name').text(c.inbox_data.registrant_name);
-                $('#seeker_inbox_msg .reg_desig').text(c.inbox_data.registrant_designation);
-                $('#seeker_inbox_msg .reg_mail').text(c.inbox_data.registrant_email_id);
-                $('#seeker_inbox_msg .reg_mob').text(c.inbox_data.registrant_mobile_no); 
-                // Vacancy details
-                if(c.inbox_data.vacancies_job_title){
-	                $('#seeker_inbox_msg .vac_title').text(c.inbox_data.vacancies_job_title);
-	                $('#seeker_inbox_msg .vac_ava').html(c.inbox_data.vacancies_available);
-	                $('#seeker_inbox_msg .vac_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_open_date));
-	                $('#seeker_inbox_msg .vac_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_close_date));
-	                $('#seeker_inbox_msg .vac_min_sal').text(c.inbox_data.vacancies_start_salary);
-	                $('#seeker_inbox_msg .vac_max_sal').text(c.inbox_data.vacancies_end_salary);
-	                $('#seeker_inbox_msg .vac_exp').text(c.inbox_data.vacancies_experience); 
-	                $('#seeker_inbox_msg .vac_int_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_interview_start_date));
-	                $('#seeker_inbox_msg .vac_int_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_end_date));
-                }
-                else{
-                	$('.candidate_vacancy_inbox_data').hide();
-                }
-            }
-       });
-    });
+    // $('.view_inbox_details').on('click',function(){
+    //     var inbox = $(this).attr('data-value');
+    //     $(this).parents('tr').attr('data-name','unbold_section');
+    //     var url = '<?php echo base_url(); ?>';
+    //     var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    //     $.ajax({
+    //        type: "POST",
+    //        url: url+"seeker/inbox/fulldata",
+    //        data:{ inbox_id : inbox, csrf_token : csrf},
+    //        cache: false,
+    //        async: false,
+    //        success: function(data) {
+    //             var c = $.parseJSON(data);
+    //             // Organization details
+    //             $('#seeker_inbox_msg .org_name').text(c.inbox_data.organization_name);
+    //             $('#seeker_inbox_msg .org_addr').html(c.inbox_data.organization_address_1 + '<br/> ' + c.inbox_data.organization_address_2 + '<br/> ' + c.inbox_data.organization_address_3);
+    //             $('#seeker_inbox_msg .org_dis').text(c.inbox_data.district_name);
+    //             $('#seeker_inbox_msg .reg_name').text(c.inbox_data.registrant_name);
+    //             $('#seeker_inbox_msg .reg_desig').text(c.inbox_data.registrant_designation);
+    //             $('#seeker_inbox_msg .reg_mail').text(c.inbox_data.registrant_email_id);
+    //             $('#seeker_inbox_msg .reg_mob').text(c.inbox_data.registrant_mobile_no); 
+    //             // Vacancy details
+    //             if(c.inbox_data.vacancies_job_title){
+	   //              $('#seeker_inbox_msg .vac_title').text(c.inbox_data.vacancies_job_title);
+	   //              $('#seeker_inbox_msg .vac_ava').html(c.inbox_data.vacancies_available);
+	   //              $('#seeker_inbox_msg .vac_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_open_date));
+	   //              $('#seeker_inbox_msg .vac_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_close_date));
+	   //              $('#seeker_inbox_msg .vac_min_sal').text(c.inbox_data.vacancies_start_salary);
+	   //              $('#seeker_inbox_msg .vac_max_sal').text(c.inbox_data.vacancies_end_salary);
+	   //              $('#seeker_inbox_msg .vac_exp').text(c.inbox_data.vacancies_experience); 
+	   //              $('#seeker_inbox_msg .vac_int_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_interview_start_date));
+	   //              $('#seeker_inbox_msg .vac_int_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_end_date));
+    //             }
+    //             else{
+    //             	$('.candidate_vacancy_inbox_data').hide();
+    //             }
+    //         }
+    //    });
+    // });
 });
 
 
@@ -346,4 +361,45 @@ function seeker_inbox_ajax_message(url,id,csrf){
         $(document).find('.seeker_inbox_last_id').val(lastmessageid+retrivedatacount);    
     }
 }
+$('.del_provdbd_mail').on('click',function(){
+        var seeker_inbox_msg_id = [];
+        $('#seeker_inbox_data .seeker_inbox_check:checked',document).each(function(){
+            seeker_inbox_msg_id.push($(this).val());
+        });
+        seeker_inbox_msg_id = seeker_inbox_msg_id.join(",");
+        if(seeker_inbox_msg_id != '') {
+            var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+            var url = '<?php echo base_url(); ?>';
+            $.ajax({
+               type: "POST",
+               url: url+"seeker/inbox/removedata",
+               data:{ inbox_id:seeker_inbox_msg_id, csrf_token : csrf},
+               cache: false,
+               async: false,
+               success: function(data) {
+                    location.reload();
+               }
+            });
+        }
+    });
+$('.seeker_inbox_all_check').on('click',function() {
+    if($(this).is(':checked')) {
+       $(this).parents('table').find('.seeker_inbox_check').prop("checked",true);
+    }
+    else {
+        $(this).parents('table').find('.seeker_inbox_check').prop("checked",false);
+    }
+});
+$('.seeker_inbox_check').on('click',function() {
+    var total_len = $('.seeker_inbox_check').length;
+    var checked_len = $('.seeker_inbox_check:checked').length;
+    if(total_len == checked_len) {
+        $(this).parents('table').find('.seeker_inbox_all_check').prop("checked",true);
+    }
+    else {
+        $(this).parents('table').find('.seeker_inbox_all_check').prop("checked",false);
+    }
+});
+
+
 </script>

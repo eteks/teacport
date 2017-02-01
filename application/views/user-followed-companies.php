@@ -158,7 +158,14 @@
                                 $today = date_create(date('Y-m-d'));
                                 $days = date_diff($vac_date,$today);
                                 echo $days->d;
-                                ?> days ago</i>
+                                if($days->d <= 1) {
+                                    echo " day ago";
+                                }
+                                else {
+                                    echo " days ago";
+                                }
+                                ?>
+                                </i>
 						    </div>
 							<!--Only required rule to the whole div clickable work--> 	                           
 							<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>

@@ -279,16 +279,15 @@ class Common_model extends CI_Model {
 	}
 	public function get_job_list()
 	{
-			$search_product=$this->db->select('*');
-            $search_product=$this->db->from('tr_organization_vacancies ov,tr_candidate_profile cp');
-            $search_product = $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
-            $where1 = '(ov.vacancies_status=1)';
-            $where2 = '(cp.candidate_status=1)';
-            $search_product=$this->db->where($where1);
-            $search_product=$this->db->where($where2);
-            $search_product=$this->db->group_by('ov.vacancies_id');
-            $query = $this->db->get()->result_array(); 
-            return $query;           
+        $where = '(ov.vacancies_status=1)';
+		$this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
+        $this->db->where($where);
+	    $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->limit(15,0);
+        $data = $this->db->group_by('ov.vacancies_id')->get()->result_array();
+        return $data;           
 	}
 	public function get_allinstitutions_list($limit,$start)
 	{
