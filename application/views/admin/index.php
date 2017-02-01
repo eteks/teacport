@@ -396,7 +396,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <a href="javascript:;" class="icon-remove"></a>
                                     </span>
                                 </div>
-                                <div class="widget-body">
+                                <div class="widget-body widget_body_act">
                                     <div class="sub_site_visites_cont">
                                         <div class="widget-body site_visites_cont">
                                             <table class="table table-striped">
