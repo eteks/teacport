@@ -1025,6 +1025,14 @@ class Master_Data extends CI_Controller {
 
 	/* ===========            Postings Controller End       ============ */
 
+	// Get District by state
+	public function district_state() {
+		$data = '';
+		if($this->input->post('value')) {
+			$data = $this->admin_model->get_district_by_state($this->input->post('value'));
+		}
+		echo json_encode($data);
+	}
 
 }
 /* End of file Master_Data.php */ 

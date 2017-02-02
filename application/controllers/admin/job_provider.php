@@ -80,26 +80,27 @@ class Job_Provider extends CI_Controller {
 	  		$action = $this->input->post('action');
 	  		// Tab 1 Validation
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
-	  			$validation_rules[] =  	array( 'field'   => 'organization_name','label'   => 'Organization Name','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[50]|edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']' );
+	  			$validation_rules[] =  	array( 'field'   => 'organization_name','label'   => 'Organization Name','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[50]|edit_unique[tr_organization_profile.organization_id.organization_name.'.$id.']' );
 			    $validation_rules[] =   array( 'field'   => 'institution_type','label'   => 'Institution Type','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =   array( 'field'   => 'organization_status','label'   => 'Organization Status','rules'   => 'trim|required|xss_clean|' );
 			   	$validation_rules[] =   array( 'field'   => 'organization_logo','label'   => 'Organization Logo','rules'   => 'callback_validate_image_type['.$action.'.organization_logo]' );
 	        }
 	        // Tab 2 Validation
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array( 'field'   => 'org_addr_1','label'   => 'Organization Address','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
-	   			$validation_rules[] =	array( 'field'   => 'org_addr_2','label'   => 'Organization Address','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
-	   			$validation_rules[] =	array( 'field'   => 'org_addr_3','label'   => 'Organization Address','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
-	   			$validation_rules[] =	array( 'field'   => 'organization_district','label'  => 'Organization District','rules'   => 'trim|xss_clean|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_1','label'   => 'Organization Address1','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_2','label'   => 'Organization Address2','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_3','label'   => 'Organization Address3','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'organization_state','label'  => 'Organization State','rules'   => 'trim|xss_clean|required' );
+	   			$validation_rules[] =	array( 'field'   => 'organization_district','label'  => 'Organization District','rules'   => 'trim|xss_clean|required' );
 	   		}
 	   		// Tab 3 Validation
 	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array( 'field'   => 'registrant_name','label'   => 'Registrant Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
+	   			$validation_rules[] =	array( 'field'   => 'registrant_name','label'   => 'Registrant Name','rules'   => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
 	   			// $validation_rules[] =	array( 'field'   => 'registrant_dob','label'   => 'Registrant DOB','rules'   => 'trim|required|xss_clean|' );
 	   			$validation_rules[] =	array( 'field'   => 'registrant_designation','label'   => 'Registrant Designation','rules'   => 'trim|xss_clean|min_length[3]|max_length[50]' );
-	   			$validation_rules[] =	array('field'   => 'registrant_email','label'   => 'Organization Email','rules'   => 'trim|required|xss_clean|valid_email|' );
-	   			$validation_rules[] =	array( 'field'   => 'registrant_mobile','label'   => 'Registrant Mobile','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{10}$/]|' );
-			    $validation_rules[] =	array( 'field'   => 'sms_verify','label'   => 'Sms Verification','rules'   => 'trim|required|xss_clean|' );				                       
+	   			$validation_rules[] =	array('field'   => 'registrant_email','label'   => 'Registrant Email','rules'   => 'trim|required|xss_clean|valid_email|edit_unique[tr_organization_profile.organization_id.registrant_email_id.'.$id.']' );
+	   			$validation_rules[] =	array( 'field'   => 'registrant_mobile','label'   => 'Registrant Mobile','rules'   => 'trim|xss_clean|required|regex_match[/^[0-9]{10}$/]|edit_unique[tr_organization_profile.organization_id.registrant_mobile_no.'.$id.']' );
+			    // $validation_rules[] =	array( 'field'   => 'sms_verify','label'   => 'Sms Verification','rules'   => 'trim|required|xss_clean|' );				                       
 	   		}
 	   		// Tab 4 Validation
 	   		// if($this->input->post('index')==4 || $this->input->post('index')=="end") {
@@ -204,6 +205,7 @@ class Job_Provider extends CI_Controller {
 			$value = $this->input->post('value');
 			$data['instution_values'] = $this->admin_model->get_institution_type_list();
 			$data['district_values'] = $this->admin_model->get_district_values();
+			$data['state_values'] = $this->admin_model->get_state_values();
 			$data_values = $this->job_providermodel->get_full_provider_profile($value);
 			$data['provider_full_profile'] = $data_values['provider_full_profile'];
 			$data['payment_details'] = get_provider_subscription($data_values['payment_details']);

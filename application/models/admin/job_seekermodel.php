@@ -51,9 +51,11 @@ class Job_Seekermodel extends CI_Model {
                               'candidate_is_physically_challenged' => ($this->input->post('cand_phy')) ? $this->input->post('cand_phy') : NULL,
                               'candidate_image_path' => ($this->input->post('cand_img')) ? $this->input->post('cand_img') : NULL,
                               'candidate_mobile_no' => $this->input->post('cand_mobile'),
+                              'candidate_state_id' => ($this->input->post('cand_state')) ? $this->input->post('cand_state') : NULL,
                               'candidate_district_id' => ($this->input->post('cand_district')) ? $this->input->post('cand_district') : NULL,
                               'candidate_address_1' => ($this->input->post('cand_address1')) ? $this->input->post('cand_address1') : NULL,
                               'candidate_address_2' => ($this->input->post('cand_address2')) ? $this->input->post('cand_address2') : NULL,
+                              'candidate_live_state_id' => ($this->input->post('cand_live_state')) ? $this->input->post('cand_live_state') : NULL,
                               'candidate_live_district_id' => ($this->input->post('cand_live_district')) ? $this->input->post('cand_live_district') : NULL,
                               'candidate_pincode' => ($this->input->post('cand_pincode')) ? $this->input->post('cand_pincode') : NULL,
                               'candidate_institution_type' => $this->input->post('cand_institution'),
@@ -94,8 +96,10 @@ class Job_Seekermodel extends CI_Model {
   public function get_full_seeker_profile($value) {
 
     // Canidate Profile
-    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,it.*,lan.*,sub.*');
+    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,live_st.state_id as live_state_id,live_st.state_name as live_state_name,native_st.state_id as native_state_id,native_st.state_name as native_state_name,it.*,lan.*,sub.*');
     $this->db->from('tr_candidate_profile cp');
+    $this->db->join('tr_state live_st','cp.candidate_live_state_id=live_st.state_id','left');
+    $this->db->join('tr_state native_st','cp.candidate_state_id=native_st.state_id','left');
     $this->db->join('tr_district live_dis','cp.candidate_live_district_id=live_dis.district_id','left');
     $this->db->join('tr_district native_dis','cp.candidate_district_id=native_dis.district_id','left');
     $this->db->join('tr_institution_type it','cp.candidate_institution_type=it.institution_type_id','left');
