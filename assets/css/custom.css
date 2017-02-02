@@ -159,13 +159,11 @@ box-shadow:0 8px 6px -6px #da651a !important;
 /*latest news having news*/
 .latest_news_head_1{
 	background-color: #da651a;
-    
     padding: 11px;
-   
 }
 .latest_news_head_1 p{
 	color:#fff;
-	font-size:16px;
+	font-size:16px;  
 	font-weight:bold;
 }
 .latest_news_content_1{
@@ -174,7 +172,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	
+	font-size: 12px; 
 }
 .latest_news_1{
 	border: 1px solid #da651a;
@@ -193,6 +191,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .data_news{
 	background-color:#f4f7fa;
 	height:235px;
+	font-family: "Open Sans", Sans-Serif;
 }
  #flash_updates_1 .latest_news_content_1:hover {
 background: #ebf1f6; /* Old browsers */
@@ -211,7 +210,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }	
 
 /* Signin & SignUp forms */
- .loginbox_parallex::before {
+.kaushanscript_font_title{
+	color: #2ae !important; 
+	font-size: 25px !important; 
+	font-family: 'Kaushan Script', cursive !important;
+}	
+.loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
 	content: "";
 	height: 100%;
@@ -1132,11 +1136,9 @@ label.form-input-error {
 .select2-container--open .select2-selection {
 	border-color: #66afe9 !important;
 }
-
 #contactForm {
 	clear: both
 }
-
 /* Ended by siva */
 .company-dashboard{
 	padding-bottom:0;
@@ -1153,7 +1155,7 @@ label.form-input-error {
 	height: 70px;
     left: 100px;
     position: absolute;
-    top: 100px;
+    top: 80px;
     width: 70px;
 }
 .subcription_plan_details{
@@ -1560,6 +1562,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	left:50%;
     top:50%;
 }
+/* Seeker Dashboard Profile pic*/
+.user-image{
+	height: 150px;
+	width:auto;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{

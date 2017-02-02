@@ -6,7 +6,7 @@
                         <div class="login-container">
                        		<!--Seeker SignIn-->
                             <div id="seeker-signin" class="loginbox">
-                                <div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;">
+                                <div class="loginbox-title kaushanscript_font_title">
                                 	Job Seekers Login<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                                 </div>
                                 <?php echo form_open('login/seeker/', 'id="seeker_login_form" class="seeker_login_form form-group reg_login_form"'); ?>
@@ -56,7 +56,7 @@
                             
                              <!--Forgot Password-->
                             <div id="seeker-forgotpwd" class="loginbox" style="display:none;">
-                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> 
+                            	<div class="loginbox-title kaushanscript_font_title"> 
                             		Forgot Password 
                             		<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                             	</div><br>
@@ -92,7 +92,7 @@
                             </div> <!--End  forgot pwd-->
                             <!--Seeker Signup-->
                             <div id="seeker-signup" class="loginbox" style="display:none;">
-                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;" >
+                            	<div class="loginbox-title kaushanscript_font_title">
                             	  Let's Get Started
                             	  <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                                 </div><br>

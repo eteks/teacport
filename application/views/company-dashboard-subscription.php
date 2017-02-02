@@ -368,10 +368,4 @@
 		<?php include('include/footermenu.php'); ?>
        <?php include('include/footer.php'); ?>
        <?php include('include/footercustom.php'); ?>
-       <!--SubscriptionPlan carousel-->
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.easing.1.3.js"></script>
-		<!-- the jScrollPane script -->
-		<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/contentcarousel/jquery.contentcarousel.js"></script>
-		<script type="text/javascript">
-			$('#ca-container').contentcarousel();
-		</script>
+       

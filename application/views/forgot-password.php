@@ -5,7 +5,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="login-container">
                     <div class="loginbox">                   
-                        <div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;">Forgot Password
+                        <div class="loginbox-title kaushanscript_font_title">Forgot Password
                             <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                         </div><br>
                         <?php echo form_open('login/provider/forgotpassword', 'id="forgotpass-form" class="forgotpass-form reg_login_form"'); ?>
