@@ -302,7 +302,7 @@ li.no-bg .login-header-btn:hover{background-color:#242424 !important;color:#FFF 
 .job-box-2 .jt-part-time-color{color:#ff5a00 !important;}
 .job-box-2 .jt-intern-color{color:#9d27b3 !important;}
 .job-box-2 .jt-remote-color{color:#46af4a !important;}
-.job-box-2 .job-salary{position:absolute;top:20px;right:20px;font-size:18px;}
+.job-box-2 .job-salary{position:absolute;top:20px;right:20px;font-size:18px;text-align:right;}
 .job-box-2 .job-title-box{margin-left:0;line-height:20px;}
 .job-box-2 .job-title-box .job-title{font-size:20px;font-weight:600;}
 .job-box-2 .job-title-box .job-title:hover{color:#29aafe;}
@@ -1048,6 +1048,7 @@ section.download-app .download-btns a{display:block;margin-bottom:20px;margin-ri
 .job-box-2 .job-title-box .comp-name{display:block;}
 .job-box-2 .job-type{padding:0;}
 .job-box-2 .job-salary{top:105px;}
+
 .login-container, .login-page-2 .login, .login-page-3 .login{width:290px;}
 .social-circle li i{line-height:40px;}
 .social-circle li a{width:40px;height:40px;}

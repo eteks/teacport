@@ -50,11 +50,12 @@ class Job_Providermodel extends CI_Model {
                               'registrant_email_id' => $this->input->post('registrant_email'),
                               'registrant_mobile_no' => ($this->input->post('registrant_mobile')) ? $this->input->post('registrant_mobile') : NULL,
                               'registrant_name' => $this->input->post('registrant_name'),
+                              'organization_state_id' => ($this->input->post('organization_state')) ? $this->input->post('organization_state') : NULL,
                               'organization_district_id' => ($this->input->post('organization_district')) ? $this->input->post('organization_district') : NULL,
                               'organization_address_3' => ($this->input->post('org_addr_3')) ? $this->input->post('org_addr_3') : NULL,
                               'organization_address_2' => ($this->input->post('org_addr_2')) ? $this->input->post('org_addr_2') : NULL,
                               'organization_address_1' => ($this->input->post('org_addr_1')) ? $this->input->post('org_addr_1') : NULL,
-                              'is_sms_verified' => $this->input->post('sms_verify'),
+                              // 'is_sms_verified' => $this->input->post('sms_verify'),
                               'organization_institution_type_id' => $this->input->post('institution_type')
                             );
           // $profile_update_org_sub_data = array( 
@@ -102,11 +103,12 @@ class Job_Providermodel extends CI_Model {
   // Job provider profile - Edit and Fullview Popup - ajax
   public function get_full_provider_profile($value) {
     $provider_profile_where = '(op.organization_id="'.$value.'" )';
-    $this->db->select('op.organization_id as org_id,op.*,os.*,it.*,os.*,d.*');
+    $this->db->select('op.organization_id as org_id,op.*,os.*,it.*,os.*,d.*,st.*');
     $this->db->from('tr_organization_profile op');
     $this->db->join('tr_organization_subscription os','op.organization_id=os.organization_id','left');
     $this->db->join('tr_subscription s','os.subscription_id=s.subscription_id','left');
     $this->db->join('tr_institution_type it','op.organization_institution_type_id=it.institution_type_id','left');
+    $this->db->join('tr_state st','op.organization_state_id=st.state_id','left');
     $this->db->join('tr_district d','op.organization_district_id=d.district_id','left');
     $this->db->order_by('os.organization_subscription_status','desc');
     $this->db->group_by('org_id');

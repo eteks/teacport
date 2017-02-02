@@ -160,20 +160,25 @@
 					                                </div>
 					                                <div class="price-days text-center"><strong>For Next 30 days</strong></div>
 					                                <div class="cost_plan">Per Sms: <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_sms">10</span>, Per Email: <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_email">20 </span></br>Per Resume Download: <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_resume">10</span></div>
+					                               
+						                                <div class="sms_block common_box">					                                	
+						                                	<input class="subs_input_val_upgact1" type="text" disabled="disabled" data-toggle="sms_tooltip" title="No of sms you have selected"/>
+						                                	<!-- <i class="glyphicon glyphicon-comment"></i> -->
+						                                	<span id ="sms_icon"><i class="glyphicon glyphicon-remove-sign"></i></span>					                                						                                	 
+						                                </div>
+						                                <div class="email_block common_box" >
+						                                	<input class="subs_input_val_upgact2" type="text" disabled="disabled" data-toggle="email_tooltip" title="No of email you have selected"/>
+						                                	<!-- <i class="glyphicon glyphicon-envelope"></i> -->
+						                                	<span id = "email_icon"><i class="glyphicon glyphicon-remove-sign"></i></span>
+						                                </div>
+						                                <div class="resume_block common_box">
+						                                	<input class="subs_input_val_upgact3" type="text" disabled="disabled" data-toggle="resume_tooltip" title="No of resume you have selected"/>
+						                                	<!-- <i class="glyphicon glyphicon-cloud-download"></i> -->
+						                                	<span id ="resume_icon"><i class="glyphicon glyphicon-remove-sign" ></i></span>
+						                                </div>
+						                                <div class="cb"> </div>
 					                                
-					                                <div class="sms_block">					                                	
-					                                	<input class="subs_input_val_upgact1" type="text" disabled="disabled"/>
-					                                	<i class="glyphicon glyphicon-comment"></i>					                                	 
-					                                </div>
-					                                <div class="email_block" >
-					                                	<input class="subs_input_val_upgact2" type="text" disabled="disabled"/>
-					                                	<i class="glyphicon glyphicon-envelope"></i>
-					                                </div>
-					                                <div class="resume_block">
-					                                	<input class="subs_input_val_upgact3" type="text" disabled="disabled"/>
-					                                	<i class="glyphicon glyphicon-cloud-download"></i>
-					                                </div>
-					                                <div class="price-features text-center">
+					                                <div class="price-features text-center price2">
 					                                    <ul class="subs_count_act">
 																<!-- <li>Max No of vacancy Posts: 20</li> -->
 																<li id="subs_list_upg_sms" class="subs_list_act" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Sms Counts: 30<span class="glyphicon glyphicon-edit subs_edit"></span></li>

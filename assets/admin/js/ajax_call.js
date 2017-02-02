@@ -218,6 +218,41 @@ $(document).ready(function(){
 
     /* Popup module ajax end */ 
 
+    // Get district based on selected state
+    $(document).on('change','.state_act',function() {
+        var this_id = $(this).val();
+        var selected_state = $.trim($('option:selected',this).text());
+        if($(this).hasClass('seeker_state'))
+            var this_district = $(this).parents('.state_section').siblings('.district_section').find('select');
+        else
+            var this_district = $('.district_section').find('select');
+        var options = '<option value="">Select District </option>'; 
+        if(this_id != '') {
+            $.ajax({
+                type : "POST",
+                url : admin_baseurl+"state",
+                data : { value : this_id, csrf_token : csfrData[csrf_name]},
+                success : function(res) {
+                    if(res) {
+                        var obj = JSON.parse(res);
+                        if(obj.length!=0) {               
+                          $.each(obj, function(i){
+                            options += '<option value="'+obj[i].district_id+'">'+obj[i].district_name+'</option>';
+                          });  
+                        }   
+                        else{
+                            alert('No District added for '+selected_state);    
+                        }  
+                        this_district.html(options);            
+                    }
+                }
+            });
+        }
+        else {
+            this_district.html(options); 
+        }
+    });
+
 
 }); // End document
 
