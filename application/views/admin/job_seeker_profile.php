@@ -1068,8 +1068,32 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">District Name</label>
+                        <div class="span6 control-group state_section">  
+                          <label class="control-label">Native State</label>
+                          <span>
+                            <select name="cand_state" class="popup_select tabfield3 tabfield state_act seeker_state">
+                              <option value="">Please select state</option>
+                              <?php
+                              if(!empty($state_values)) :
+                              foreach ($state_values as $st_val) :
+                              ?>
+                              <?php
+                                if($st_val['state_id']==$seeker_full_profile['native_state_id']) {
+                                  echo '<option value='.$st_val["state_id"].' selected> '.$st_val["state_name"].' </option>';
+                                }
+                                else if($st_val['state_status']==1){
+                                  echo '<option value='.$st_val["state_id"].'> '.$st_val["state_name"].' </option>';
+                                }
+                              endforeach;
+                              else :
+                                echo '<option value='.$seeker_full_profile['native_state_id'].' selected> "'.$seeker_full_profile['native_state_name'].'" </option>';
+                              endif;
+                              ?>
+                            </select> 
+                          </span>
+                        </div>
+                        <div class="span6 control-group district_section">  
+                          <label class="control-label">Native District</label>
                           <span>
                             <select name="cand_district" class="popup_select tabfield3 tabfield">
                               <option value="">Please select district</option>
@@ -1092,21 +1116,47 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </select> 
                           </span>
                         </div>
+                      </div>
+                      <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Address 1</label>
                           <span>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_1']; ?>" name="cand_address1" maxlength="150" placeholder="Address" />
                           </span>
                         </div>
-                      </div>
-                      <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Address 2</label>
                           <span>
                             <input type="text" class="span6 tabfield3 tabfield" value="<?php echo $seeker_full_profile['candidate_address_2']; ?>" name="cand_address2" maxlength="150" placeholder="Address" />
                           </span>
                         </div>
-                        <div class="span6 control-group">
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group state_section">  
+                          <label class="control-label">Live State</label>
+                          <span>
+                            <select name="cand_live_state" class="popup_select tabfield3 tabfield state_act seeker_state">
+                              <option value="">Please select state</option>
+                              <?php
+                              if(!empty($state_values)) :
+                              foreach ($state_values as $st_val) :
+                              ?>
+                              <?php
+                                if($st_val['state_id']==$seeker_full_profile['live_state_id']) {
+                                  echo '<option value='.$st_val["state_id"].' selected> '.$st_val["state_name"].' </option>';
+                                }
+                                else if($st_val['state_status']==1){
+                                  echo '<option value='.$st_val["state_id"].'> '.$st_val["state_name"].' </option>';
+                                }
+                              endforeach;
+                              else :
+                                echo '<option value='.$seeker_full_profile['native_state_id'].' selected> "'.$seeker_full_profile['native_state_name'].'" </option>';
+                              endif;
+                              ?>
+                            </select> 
+                          </span>
+                        </div>
+                        <div class="span6 control-group district_section">
                           <label class="control-label">Live District</label>
                           <span>
                             <select name="cand_live_district" class="popup_select tabfield3 tabfield">
@@ -1133,10 +1183,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>
                       <div class="span12">
                         <div class="span6 control-group">
-                          <label class="control-label">Pincode</label>
-                          <span>
-                            <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" maxlength="6" placeholder="Pincode" name="cand_pincode" />
-                          </span>
+                            <label class="control-label">Pincode</label>
+                            <span>
+                              <input type="text" class="span6 tabfield3 tabfield numeric_value" value="<?php echo $seeker_full_profile['candidate_pincode']; ?>" maxlength="6" placeholder="Pincode" name="cand_pincode" />
+                            </span>
                         </div>
                       </div>
                     </div>

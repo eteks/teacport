@@ -292,6 +292,29 @@ class Home extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
+	// To test email
+	public function test_email() {
+		$ci =& get_instance();	
+		$ci->config->load('email', true);
+		$emailsetup = $ci->config->item('email');
+		$this->load->library('email', $emailsetup);
+		$from_email = $emailsetup['smtp_user'];
+		$subject = 'Test email';
+		$message =  "Hello welcome! test message";
+		$this->email->initialize($emailsetup);
+		$this->email->set_newline("\r\n");
+		$this->email->from($from_email, 'Teacher Recruit');
+		$this->email->to('kalaiarasi@etekchnoservices.com');
+		$this->email->subject($subject);
+		$this->email->message($message);
+		$status = $this->email->send();
+		echo $this->email->print_debugger();
+		/* Check whether mail send or not*/
+		if($status)
+			echo "mail sent";
+		else
+			echo "mail not sent";
+	}
 
 }
 
