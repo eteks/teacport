@@ -26,18 +26,18 @@ class Other_module extends CI_Controller {
 					$id = $this->input->post('rid');
 					$validation_rules = array(
 		                            array(
-		                              'field'   => 'latest_news_title',
+		                              'field'   => 'l_news_title',
 		                              'label'   => 'Latest News title',
-		                              'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[50]|edit_unique[tr_latest_news.latest_news_id.latest_news_title.'.$id.']'
+		                              'rules'   => 'trim|required|xss_clean|min_length[15]|max_length[150]|edit_unique[tr_latest_news.latest_news_id.latest_news_title.'.$id.']'
 		                              //edit_unique is a custom funciton
 		                            ),
 		                            array(
-		                                 'field'   => 'latest_news_redirect_link',
+		                                 'field'   => 'l_redirect_link',
 		                                 'label'   => 'Latest News Link',
 		                                 'rules'   => 'trim|required|xss_clean'
 		                            ),
 		                            array(
-		                                 'field'   => 'latest_news_status',
+		                                 'field'   => 'l_news_status',
 		                                 'label'   => 'Latest News Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -46,17 +46,17 @@ class Other_module extends CI_Controller {
 				else{
 					$validation_rules = array(
 		                            array(
-		                              'field'   => 'latest_news_title',
+		                              'field'   => 'l_news_title',
 		                              'label'   => 'Latest News title',
-		                              'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[50]|is_unique[tr_latest_news.latest_news_title]'
+		                              'rules'   => 'trim|required|xss_clean|min_length[15]|max_length[150]|is_unique[tr_latest_news.latest_news_title]'
 		                            ),
 		                            array(
-		                                 'field'   => 'latest_news_redirect_link',
+		                                 'field'   => 'l_redirect_link',
 		                                 'label'   => 'Latest News Link',
 		                                 'rules'   => 'trim|required|xss_clean'
 		                            ),
 		                            array(
-		                                 'field'   => 'user_group_status',
+		                                 'field'   => 'l_news_status',
 		                                 'label'   => 'Group Status',
 		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
@@ -110,7 +110,6 @@ class Other_module extends CI_Controller {
 		}
 		else {
 			$data['latest_news_values'] = $data_values['latest_news_values'];
-			print_r($data['latest_news_values']);
 			$this->load->view('admin/latest_news',$data);
 		}
 		// $this->load->view('admin/latest_news');

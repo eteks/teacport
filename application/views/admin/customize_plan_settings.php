@@ -210,9 +210,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
             	   <div class="upg_plan col4 select_plan">
                 		<select class="form-control customize_plan">
                 			<option value="">Select</option>
-                			<option value="SMS">SMS</option>
-                			<option value="Email">Email</option>
-                			<option value="Resume Download">Resume Download</option>
+                			<option value="sms">Per SMS</option>
+                			<option value="email">Per Email</option>
+                			<option value="resume">Per Resume Download</option>
                 		</select>
                 	</div>
                 	<div class="col3">
