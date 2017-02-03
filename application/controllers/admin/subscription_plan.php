@@ -63,16 +63,21 @@ class Subscription_Plan extends CI_Controller {
 		                                 'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
 		                            array(
-		                                 'field'   => 'sub_start_validity',
-		                                 'label'   => 'Plan Start validity',
-		                                 'rules'   => 'trim|required|xss_clean'
+		                                 'field'   => 'validity_days',
+		                                 'label'   => 'Validity Days',
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[4]|'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_end_validity',
-		                                 'label'   => 'Plan End validity',
-		                                 // 'rules'   => 'trim|required|xss_clean|callback_checkDateFormat|callback_compareDate'
-		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_start_validity',
+		                            //      'label'   => 'Plan Start validity',
+		                            //      'rules'   => 'trim|required|xss_clean'
+		                            // ),
+		                            // array(
+		                            //      'field'   => 'sub_end_validity',
+		                            //      'label'   => 'Plan End validity',
+		                            //      // 'rules'   => 'trim|required|xss_clean|callback_checkDateFormat|callback_compareDate'
+		                            //      'rules'   => 'trim|required|xss_clean|callback_compareDate'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
@@ -101,13 +106,13 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_max_days_ad_visible',
 		                                 'label'   => 'Max Days Ad visible',
-		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[15]|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[3]|'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_features',
-		                                 'label'   => 'Plan Features',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_features',
+		                            //      'label'   => 'Plan Features',
+		                            //      'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_status',
 		                                 'label'   => 'Plan Status',
@@ -128,16 +133,16 @@ class Subscription_Plan extends CI_Controller {
 		                                 'label'   => 'Price',
 		                                 'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_start_validity',
-		                                 'label'   => 'Plan Start validity',
-		                                 'rules'   => 'trim|required|xss_clean'
-		                            ),
-		                            array(
-		                                 'field'   => 'sub_end_validity',
-		                                 'label'   => 'Plan End validity',
-		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_start_validity',
+		                            //      'label'   => 'Plan Start validity',
+		                            //      'rules'   => 'trim|required|xss_clean'
+		                            // ),
+		                            // array(
+		                            //      'field'   => 'sub_end_validity',
+		                            //      'label'   => 'Plan End validity',
+		                            //      'rules'   => 'trim|required|xss_clean|callback_compareDate'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
@@ -168,11 +173,11 @@ class Subscription_Plan extends CI_Controller {
 		                                 'label'   => 'Max Days Ad visible',
 		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[15]|'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_features',
-		                                 'label'   => 'Plan Features',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_features',
+		                            //      'label'   => 'Plan Features',
+		                            //      'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_status',
 		                                 'label'   => 'Plan Status',
