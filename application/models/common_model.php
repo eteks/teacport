@@ -15,9 +15,6 @@ class Common_model extends CI_Model {
     // Added By Siva
     public function get_search_results($limit,$start,$data=array())
     {
-    	if(empty($data['min_amount'])) {
-    		$data['min_amount'] = 0;
-    	}
     	if(!empty($data['experience'])) {
     		if($data['experience'] <= 10) {
     			$min_exp = $data['experience'];
@@ -34,12 +31,23 @@ class Common_model extends CI_Model {
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
    		if(!empty($data['keyword'])) {
-   		  	$this->db->like('ov.vacancies_job_title',$data['keyword']);
-			$this->db->or_like('op.organization_name',$data['keyword']);
+   			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
+			$this->db->where($like_where);
    		}
    		$this->db->where('ov.vacancies_status','1');
-        $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
-        if(!empty($data['location'])) {
+
+   		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['min_amount']) && empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['max_amount']) && empty($data['min_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        }
+	    if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
         if(!empty($data['posting'])) {
@@ -47,9 +55,6 @@ class Common_model extends CI_Model {
         }
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
-        }
-        if(!empty($data['max_amount'])) {
-        	$this->db->where("ov.vacancies_end_salary <=".$data['max_amount']."");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -59,6 +64,7 @@ class Common_model extends CI_Model {
         }
 
         $this->db->limit($limit,$start);
+        $this->db->order_by('ov.vacancies_id','desc');
         $model_data['search_results'] = $this->db->get()->result_array();
 
         // echo $this->db->last_query();
@@ -71,12 +77,22 @@ class Common_model extends CI_Model {
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
    		if(!empty($data['keyword'])) {
-   		  	$this->db->like('ov.vacancies_job_title',$data['keyword']);
-			$this->db->or_like('op.organization_name',$data['keyword']);
+   			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
+			$this->db->where($like_where);
    		}
    		$this->db->where('ov.vacancies_status','1');
-        $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
-        if(!empty($data['location'])) {
+   		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['min_amount']) && empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['max_amount']) && empty($data['min_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        }
+	    if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
         if(!empty($data['posting'])) {
@@ -85,15 +101,13 @@ class Common_model extends CI_Model {
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
-        if(!empty($data['max_amount'])) {
-        	$this->db->where("ov.vacancies_end_salary <=".$data['max_amount']."");
-        }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
         if(!empty($data['institution'])) {
         	$this->db->where('op.organization_institution_type_id',$data['institution']);
         }
+        $this->db->order_by('ov.vacancies_id','desc');
 
         $model_data['total_rows'] = $this->db->get()->num_rows();
 
@@ -208,7 +222,7 @@ class Common_model extends CI_Model {
 		$this->db->select('*');    
 		$this->db->from('tr_subject');
 		if($ins_id!='') {
-			$where = "(subject_institution_id in ('.$ins_id.')  AND subject_status='1')";
+			$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND subject_status=1)';
 		}else {
 			$where = "(subject_status='1')";	
 		}		
@@ -330,7 +344,7 @@ class Common_model extends CI_Model {
 		return $model_data;
 	}
 
-	// // Get Company full details
+	// Get Company full details
 	public function company_details($id)
 	{
         $where = '(op.organization_status=1 AND op.organization_profile_completeness >=90 AND op.organization_id="'.$id.'")';  
@@ -340,13 +354,37 @@ class Common_model extends CI_Model {
         $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
         $this->db->where($where);
         $model_data['company_details'] = $this->db->get()->row_array();
+
         $vac_where = '(vacancies_organization_id="'.$id.'" AND vacancies_status=1)';
         $this->db->select('*');
         $this->db->from('tr_organization_vacancies ov');
         $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-        $this->db->order_by('ov.vacancies_id','asc');
+        $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->limit(5,0);
+        $this->db->where($vac_where);
+        $model_data['recent_vacancy_details'] = $this->db->get()->result_array();
+
+		return $model_data;
+	}
+
+	// Get vacancy list based on organization
+	public function get_vacancy_list($limit,$start,$id)
+	{
+        $vac_where = '(vacancies_organization_id="'.$id.'" AND vacancies_status=1)';
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+        $this->db->limit($limit,$start);
         $this->db->where($vac_where);
         $model_data['vacancy_details'] = $this->db->get()->result_array();
+
+        // Total rows
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+        $this->db->where($vac_where);
+        $model_data['total_rows'] = $this->db->get()->num_rows();
+
 		return $model_data;
 	}
 
@@ -444,8 +482,12 @@ class Common_model extends CI_Model {
 		$ads_data = $this->db->get_where('tr_subscription',array('subscription_id' => $id))->row_array();
 		return $ads_data['subscription_max_days_ad_visible'];
 	}
-	
 
+	// Get site visit count
+	public function get_site_visit_count() {
+		$count = $this->db->group_by(array('organization_id','candidate_id','DATE(created_date)','ip_address'))->get_where('tr_site_visits')->num_rows();
+		return $count;
+	}
 	
 
 } // End

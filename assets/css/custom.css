@@ -165,7 +165,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 }
 .latest_news_head_1 p{
 	color:#fff;
-	font-size:16px;  
+	font-size:16px;
 	font-weight:bold;
 }
 .latest_news_content_1{
@@ -216,7 +216,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	color: #2ae !important; 
 	font-size: 25px !important; 
 	font-family: 'Kaushan Script', cursive !important;
-}	
+}
 .loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
 	content: "";
@@ -891,9 +891,6 @@ font-size: 12px;
 	height: 160px;
     width: 100%;
 }
-
-
-
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {	
 	#provider_upload .input-group {
@@ -918,8 +915,6 @@ font-size: 12px;
 	}
 
 }
-
- 
 /* For Home page Search Buttonp */
 @media(min-width: 320px) and (max-width: 767px){
 	.slidershow-bg .search-form-contaner {
@@ -1305,7 +1300,6 @@ label.form-input-error {
 	/*width:100px;*/
 }
 .app_post h5{
-	
 	text-align: left;
 	color: #00a5ef;
 	display:inline-block;
@@ -1322,8 +1316,7 @@ label.form-input-error {
     color: #00a5ef;
     font-weight:bold;
     margin-left:75px !important;
-    margin-top:23px;
-	
+    margin-top:23px;	
 }
 .owl-next{
 	left: 1075px;
@@ -1568,7 +1561,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	position:relative;
 	height:200px;
 	width:100%;
-}	
+}
 .company-img img {
 	position:absolute;
     display: inline-block;
@@ -1625,7 +1618,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	padding-top:40px;
 	pointer-events:none;
 }
-
 .table-filter .star {
 	color: #ccc;
 	text-align: center;
@@ -1666,8 +1658,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	right: 400px;
     width: 10em;
     margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-
+   /*border: 1px solid #000;*/
+}
 .listing_date{
 	position: absolute;
 	right: 250px;
@@ -1693,5 +1685,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .job-salary .i{
 	font-size:12px !important;
 	color:#000 !important;
-	}	
+}	
 
