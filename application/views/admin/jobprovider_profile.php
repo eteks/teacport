@@ -114,7 +114,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </td>
                           <td class="">
-                            <?php echo $pro_val['registrant_name']; ?> 
+                            <?php
+                              if(!empty($pro_val['registrant_name'])) :
+                                echo $pro_val['registrant_name']; 
+                              else :
+                                echo "NULL";
+                              endif;
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $pro_val['organization_profile_completeness']." %"; ?>      
@@ -325,6 +331,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                         <div class="span6 control-group">
+                          <label class="control-label">State Name</label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if(!empty($provider_full_profile['state_name'])) :
+                              echo $provider_full_profile['state_name']; 
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">
                           <label class="control-label">District Name</label>
                           <span class="dynamic_data"> 
                             <?php 
@@ -335,10 +355,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?>
                           </span>
-                        </div>
-                      </div>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
+                        </div>   
+                        <div class="span6 control-group">  
                           <label class="control-label">Institution Type</label>
                           <span class="dynamic_data"> 
                             <?php 
@@ -350,6 +368,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </span>
                         </div>
+                      </div>
+                      <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Organization Status</label>
                           <span class="dynamic_data"> 
@@ -445,18 +465,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
+                        <!-- <div class="span6 control-group">                                       
                           <label class="control-label"> Sms Verification</label>
                           <span class="dynamic_data"> 
                             <?php 
-                            if($provider_full_profile['is_sms_verified']==1) :
-                              echo "Yes";
-                            else :
-                              echo "No";
-                            endif;
+                            // if($provider_full_profile['is_sms_verified']==1) :
+                            //   echo "Yes";
+                            // else :
+                            //   echo "No";
+                            // endif;
                             ?>
                           </span>
-                        </div>
+                        </div> -->
                         <div class="span6 control-group">
                           <label class="control-label">Registrant Picture</label>
                           <span class="dynamic_data"> 
@@ -803,7 +823,33 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <input type="text" class="span6 tabfield2 tabfield" value="<?php echo $provider_full_profile['organization_address_3']; ?>" name="org_addr_3" maxlength="150" placeholder="Organization Address" />
                           </span>
                         </div>
-                        <div class="span6 control-group">                                       
+                        <div class="span6 control-group state_section">    
+                          <label class="control-label">Organization State</label>
+                          <span>
+                            <select class="tabfield2 tabfield state_act" name="organization_state">
+                              <option value=""> Please select State </option>
+                              <?php
+                              if(!empty($state_values)) :
+                              foreach ($state_values as $st_val) :
+                              ?>
+                              <?php
+                                if($st_val['state_id']==$provider_full_profile['organization_state_id']) {
+                                  echo '<option value='.$st_val["state_id"].' selected> '.$st_val["state_name"].' </option>';
+                                }
+                                else if($st_val['state_status']==1){
+                                  echo '<option value='.$st_val["state_id"].'> '.$st_val["state_name"].' </option>';
+                                }
+                              endforeach;
+                                else :
+                                  echo '<option value='.$provider_full_profile['organization_state_id'].' selected> "'.$provider_full_profile['state_name'].'" </option>';
+                              endif;
+                              ?>
+                            </select>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group district_section">  
                           <label class="control-label">Organization District</label>
                           <span>
                             <select class="tabfield2 tabfield" name="organization_district">
@@ -886,19 +932,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </span>
                         </div>
-                        <div class="span6 control-group">                                       
+                        <!-- <div class="span6 control-group">                                       
                           <label class="control-label">SMS Verification</label>
                           <span>
                             <ul class="on_off_button on_off_button_j">
                               <li data-value="1" <?php 
-                              if($provider_full_profile['is_sms_verified']==1) echo "class='on'"; ?>><a>Yes</a></li>
+                              //if($provider_full_profile['is_sms_verified']==1) //echo "class='on'"; ?>><a>Yes</a></li>
                               <li data-value="0" <?php 
-                              if($provider_full_profile['is_sms_verified']==0) echo "class='on'"; ?>><a>No</a></li>
+                              //if($provider_full_profile['is_sms_verified']==0) //echo "class='on'"; ?>><a>No</a></li>
                             </ul> 
                             <input type="hidden" value="<?php 
-                            echo $provider_full_profile['is_sms_verified']; ?>" class="verification tabfield3 tabfield" name="sms_verify" />
+                            //echo $provider_full_profile['is_sms_verified']; ?>" class="verification tabfield3 tabfield" name="sms_verify" />
                           </span>
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                     <!-- <div class="tab-pane" id="tab4">

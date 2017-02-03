@@ -192,7 +192,7 @@ $route['main/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_
 $route['main/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
 $route['main/subscription_plans'] = 'admin/subscription_plan/subscription_plans';
-$route['main/plan_upgrade_creation'] = 'admin/subscription_plan/plan_upgrade_creation';
+$route['main/customize_plan_settings'] = 'admin/subscription_plan/customize_plan_settings';
 
 $route['main/user_groups'] = 'admin/admin_users/user_groups';
 $route['main/user_accounts'] = 'admin/admin_users/user_accounts';
@@ -218,6 +218,8 @@ $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
+$route['test_email'] = 'home/test_email';
+$route['main/state'] = 'admin/master_data/district_state';
 
 
 /* ===================          Route settings for Admin End     ====================== */

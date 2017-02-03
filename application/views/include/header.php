@@ -44,20 +44,14 @@
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/slideshowstyle.css" type="text/css">
 
     <!-- Google Fonts -->
-    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700,900,300" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Arizonia" rel="stylesheet"> 
+    <link href="<?php echo base_url(); ?>assets/css/google_fonts/sanspro.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>assets/css/google_fonts/arizonia.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>assets/css/google_fonts/open_sans.css" rel="stylesheet" type="text/css">
     <!--My custom Fonts--> 
-    <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/css/google_fonts/kaushan_script.css" rel="stylesheet" type="text/css">
     <!--My data table css--> 
    	<link rel="stylesheet" href="<?php echo base_url(); ?>/assets/css/jquery.dataTables.min.css">
-   	
-   	<!--content carousel-->
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/demo.css" >
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/style.css" >
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/contentcarousel/jquery.jscrollpane.css" media="all" >
-	
-	<!--For scrolling the text -->
+   	<!--For scrolling the text -->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/css/jquery.simplyscroll.css" >
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

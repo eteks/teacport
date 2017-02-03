@@ -13,7 +13,9 @@ line-height: 49px !important;
 .mega-menu .menu-links > li > a:hover{
 box-shadow:0 8px 6px -6px #da651a !important;	
 }
-
+.cb{
+	clear:both;
+}	
 .job-breadcrumb{
 	border-bottom:5px solid #ccc !important;
 }
@@ -159,13 +161,11 @@ box-shadow:0 8px 6px -6px #da651a !important;
 /*latest news having news*/
 .latest_news_head_1{
 	background-color: #da651a;
-    
     padding: 11px;
-   
 }
 .latest_news_head_1 p{
 	color:#fff;
-	font-size:16px;
+	font-size:16px;  
 	font-weight:bold;
 }
 .latest_news_content_1{
@@ -174,7 +174,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	
+	font-size: 12px; 
 }
 .latest_news_1{
 	border: 1px solid #da651a;
@@ -193,6 +193,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .data_news{
 	background-color:#f4f7fa;
 	height:235px;
+	font-family: "Open Sans", Sans-Serif;
 }
  #flash_updates_1 .latest_news_content_1:hover {
 background: #ebf1f6; /* Old browsers */
@@ -211,7 +212,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }	
 
 /* Signin & SignUp forms */
- .loginbox_parallex::before {
+.kaushanscript_font_title{
+	color: #2ae !important; 
+	font-size: 25px !important; 
+	font-family: 'Kaushan Script', cursive !important;
+}	
+.loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
 	content: "";
 	height: 100%;
@@ -239,7 +245,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	color: #000000 !important;
 }
 /* Pricing --Features */
-.all-jobs-list-box2 .fa{
+.all-jobs-list-box2 i{
 	color: #777;
 	font-size: 22px;
 }
@@ -259,15 +265,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	background-color: #da651a !important;
 }
 .price-footer{
-	position:absolute !important;
-	left:5px !important;
+	position:relative !important;
+	left:90px !important;
 	right:5px !important;
 }
 .price-days{
 	color:#fff;
 	font-size:20px;	
 	margin-top:5px;
-	margin-right: 15px;
+	/*margin-right: 15px;*/
 }
 .price_ui_box{
 	height: auto;
@@ -281,6 +287,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	letter-spacing: 1px !important;
     line-height: 30px !important;
 }
+.price_plan_footer{
+	margin-top:15px !important;
+}
 .odd{
 	background:#da651a none repeat scroll 0 0 !important;
 	height:100% !important;
@@ -291,6 +300,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }
 .subscribe_plan{
 	margin-top: 30px;
+}
+.cost_plan{
+	color:#fff;
+	text-align:center;
+	margin:4px;
 }
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;
@@ -1127,19 +1141,43 @@ label.form-input-error {
 .select2-container--open .select2-selection {
 	border-color: #66afe9 !important;
 }
-
 #contactForm {
 	clear: both
 }
-
 /* Ended by siva */
-.subcription_plan_details{
-	color: #fff;
-    font-weight: bold;
-    left: 200px;
-    position: absolute;
-    top: 230px;
+.company-dashboard{
+	padding-bottom:0;
+}	
+.company-logo-premium{
+	display:block;
+	height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    width: 100%;
 }
+.company-logo-premium img{
+	height: 70px;
+    left: 100px;
+    position: absolute;
+    top: 80px;
+    width: 70px;
+}
+.subcription_plan_details{
+	color: #29AAFE;
+	font-size: 16px;
+    font-weight: bold;
+    /*left: 200px;
+    position: absolute;
+    top: 230px;*/
+    height: 200px;
+    width: 250px;
+    padding: 40px 20px 30px;
+    margin: 20px 10px 10px;
+}
+.subcription_plan_details .fa-handshake-o{
+	font-size: 35px;
+}	
 .personnal_information{
 	background-image: url(../images/personall.png);
 	background-repeat: no-repeat;
@@ -1162,7 +1200,7 @@ label.form-input-error {
 .premium_image{
 	left: 0;
     position: absolute;
-    top: -40px;
+    top: 20px;
 }
 .client-logo img{
 	height: 125px;
@@ -1261,14 +1299,32 @@ label.form-input-error {
 }
 .app_post{
 	margin-bottom: 60px !important; 
+	height:100px;
+}
+.icon_appli_post{
+	display:inline-block;
+	/*width:100px;*/
 }
 .app_post h5{
-	padding-left: 20px !important;
+	
 	text-align: left;
 	color: #00a5ef;
+	display:inline-block;
+	position:absolute;
 }
 .app_post .fa-stack{
 	color: #f47020;
+}
+.appli_post{
+	font-size:18px;
+	display:inline-block;
+    /*padding-left: 20px !important;*/
+    text-align: left;
+    color: #00a5ef;
+    font-weight:bold;
+    margin-left:75px !important;
+    margin-top:23px;
+	
 }
 .owl-next{
 	left: 1075px;
@@ -1300,14 +1356,84 @@ label.form-input-error {
 .renew_select:hover{background-color:#00a5ef;color:white}
 .subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
 .subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
-.subs_input_val_upgact1{border-left-width: 1px;margin-left: 17px;position: absolute;width: 50px;display: none;}
-.subs_input_val_upgact2{margin-left: 82px;position: absolute;width: 50px;display: none;}
-.subs_input_val_upgact3{ margin-left: 147px;position: absolute;width: 50px;display: none;}
+.subs_input_val_upgact1{position: relative;width: 60px;display: none;}
+.subs_input_val_upgact2{position: relative;width: 60px;display: none;}
+.subs_input_val_upgact3{position: relative;width: 60px;display: none;}
 .upg_select.move{margin-left:50px;}
 .subs_reset{background-color:#4CAF50;border:none;color:white;padding:10px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:55px;margin-top:25px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer;display: none;}
 .upg_reset{background-color:white;color:black;border:2px solid #da651a}
 .upg_reset:hover{background-color:#da651a;color:white}
 /*Ended By Thangam*/
+
+.sms_block{
+	padding:5px;
+	position: relative;	
+	color: #fff;
+	display:none;
+	margin:0 5px;
+}
+.sms_block i{
+	color: #b0b0b0;	
+	font-size: 14px;
+	cursor:pointer;	
+}
+.resize-close {
+    margin-left: -24px;     
+}
+.email_block{
+	padding:5px;
+	position: relative;	
+	color: #fff;
+	display:none;
+	margin:0 5px;
+}
+.email_block i{
+	font-size: 14px;
+	color: #b0b0b0;
+	cursor:pointer;		
+}
+.resume_block{
+	padding:5px;
+	position: relative;	
+	color: #fff;
+	display:none;
+	margin:0 5px
+}
+.resume_block i{
+	font-size: 14px;
+	color: #b0b0b0;
+	cursor:pointer
+	/*padding-left: 188px;*/
+	/*top: 6px;*/		
+}
+#resume_icon {
+	cursor: pointer;
+	position: absolute;
+	right: -2px;
+	top: 10px;
+}
+#email_icon {
+	cursor: pointer;
+	position: absolute;
+	right: -2px;
+	top: 10px;
+}
+#sms_icon {
+	cursor: pointer;
+	position: absolute;
+	right: -2px;
+	top: 10px;
+}
+.common_box{
+	width:60px;
+	float:left;
+}
+#upgrade_total_price{
+	font-size:28px;
+}
+.price2{
+	margin-top:5px !important;
+}
 /* Added by Akila */
 /* About us */
 .about-us p{
@@ -1323,7 +1449,7 @@ label.form-input-error {
 }
 /* Provider Logo Sidebar */
 .dashboard-logo-sidebar {
-	height : 200px;
+	height : auto;
 	width: 200px;
 }
 #provider_editprofile label {
@@ -1436,11 +1562,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }
 /* Image Centering */
 .organisation_detail .company-img{
-	height: 100px;
+	height: 200px;
 	width: auto;
-	position:relative;
-	
 }
+.img-holder {
+	position:relative;
+	height:200px;
+	width:100%;
+}	
 .company-img img {
 	position:absolute;
     display: inline-block;
@@ -1451,26 +1580,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     /*width: 50px;
     height: 50px;*/
 }
-.organisation_detail .company-detail{
+/*.organisation_detail .company-detail{
 	height: 310px;
 	width: 350px;
-}
+}*/
 .organisation_detail .single-job-map {
 	padding: 0px;
 }
-/* vacancies*/
-#searchlist .comp-logo, #institution_grids .company-list-img{
-	height: 100px;
+/*Institutions images*/
+#institution_grids .company-list-img{
+	height: auto;;
+	width: 100px;
+	position:relative;
+	margin: 0 auto;
+}
+#institution_grids .company-list-img img{
+	height: 80px;
+	width: 80px;
+	/*position:absolute;*/
+	left:50%;
+    top:50%;
+}
+/* vacancies images*/
+#searchlist .comp-logo{
+	height: auto;;
 	width: 100px;
 	position:relative;
 }
-#searchlist .comp-logo img, #institution_grids .company-list-img img{
+#searchlist .comp-logo img{
 	height: auto;
 	width: 100%;
 	position:absolute;
 	left:50%;
     top:50%;
 }
+/* Seeker Dashboard Profile pic*/
+.user-image{
+	height: 150px;
+	width:auto;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
@@ -1538,3 +1686,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .listing_head_title2{position: absolute; right: 980px; border: none !important;}
 .listing_head_title3{position: absolute; left: 715px; border: none !important; }
 .listing_head_title4{position: absolute; left: 885px; border: none !important;}
+
+.job-salary .dollar_sign i{
+	font-size:17px !important;
+	color:#777 !important;
+}
+.job-salary .i{
+	font-size:12px !important;
+	color:#000 !important;
+	}	
+

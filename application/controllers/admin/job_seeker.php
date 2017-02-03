@@ -104,9 +104,9 @@ class Job_Seeker extends CI_Controller {
 	   		}
 	  		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
 	   			$validation_rules[] =	array( 'field'   => 'cand_email','label'   => 'Email','rules'   => 'trim|required|xss_clean|valid_email' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{10}$/]|' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_mobile','label'   => 'Mobile Number','rules'   => 'trim|xss_clean|required|regex_match[/^[0-9]{10}$/]|' );
 	   			// $validation_rules[] =	array( 'field'   => 'cand_district','label'   => 'District Name','rules'   => 'trim|required|xss_clean|' );
-	   			$validation_rules[] =	array( 'field'   => 'cand_address1','label'   => 'Address','rules'   => 'trim|required|xss_clean|minlength[3]|maxlength[150]' );
+	   			$validation_rules[] =	array( 'field'   => 'cand_address1','label'   => 'Address','rules'   => 'trim|xss_clean|minlength[3]|maxlength[150]' );
 	   			$validation_rules[] =	array( 'field'   => 'cand_address2','label'   => 'Address','rules'   => 'trim|xss_clean|minlength[3]|maxlength[150]' );
 	   			// $validation_rules[] =	array( 'field'   => 'cand_live_district','label'   => 'Live District','rules'   => 'trim|required|xss_clean|' );
 			    $validation_rules[] =	array( 'field'   => 'cand_pincode','label'   => 'Pincode','rules'   => 'trim|xss_clean|regex_match[/^[0-9]{4,6}$/]|' );			                       
@@ -210,6 +210,7 @@ class Job_Seeker extends CI_Controller {
 			$data['mother_tongue'] = $this->admin_model->get_mother_tongue_language_list();
 			$data['known_languages'] = $this->admin_model->get_language_list();
 			$data['instution_values'] = $this->admin_model->get_institution_type_list();
+			$data['state_values'] = $this->admin_model->get_state_values();
 			$data['district_values'] = $this->admin_model->get_district_values();
 			$data['subject_values'] = $this->admin_model->get_subject_values();
 			$data['extra_curricular_values'] = $this->admin_model->get_extra_curricular_values();

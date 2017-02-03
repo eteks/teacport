@@ -273,7 +273,7 @@
                                   					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" 
                                   					   title="You used 50 emails, still you can send 100 more" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
                                   					<?php if($subscrib_plan['is_email_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" 
+                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip"  
                                   					   title="You downloaded 50 resumes, still you can download 50 more" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Message</a>
                               						<?php } ?>
                               					</div>
@@ -291,7 +291,7 @@
 	                                </div> -->
                                 </div>
                             </div>
-                        </div>
+                        </div><!--#company-browse-candidate-->
                     </div>
                 </div>
             </div>

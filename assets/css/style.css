@@ -302,7 +302,7 @@ li.no-bg .login-header-btn:hover{background-color:#242424 !important;color:#FFF 
 .job-box-2 .jt-part-time-color{color:#ff5a00 !important;}
 .job-box-2 .jt-intern-color{color:#9d27b3 !important;}
 .job-box-2 .jt-remote-color{color:#46af4a !important;}
-.job-box-2 .job-salary{position:absolute;top:20px;right:20px;font-size:18px;}
+.job-box-2 .job-salary{position:absolute;top:20px;right:20px;font-size:18px;text-align:right;}
 .job-box-2 .job-title-box{margin-left:0;line-height:20px;}
 .job-box-2 .job-title-box .job-title{font-size:20px;font-weight:600;}
 .job-box-2 .job-title-box .job-title:hover{color:#29aafe;}
@@ -411,7 +411,7 @@ section.download-app .download-btns a:hover{opacity:0.5;}
 .apply-job a i{margin-right:10px;}
 .apply-job a.bookmark{margin:0;margin-bottom:30px;display:block;font-size:16px;background-color:#242424;border:1px solid #242424;}
 .apply-job a.bookmark:hover{background-color:transparent;color:#242424;}
-.single-job-map{padding:10px 0 0;background-color:#fff;border:1px solid #f1f1f1;margin-bottom:10px;overflow:hidden;position:relative;}
+.single-job-map{padding:10px 0 0;background-color:#fff;border:1px solid #f1f1f1;margin-bottom:10px;overflow:hidden;position:relative;height: 225px;}
 .single-job-map #map-contact{height:220px;}
 .apply-job-modal .modal-body{border-radius:0;padding:0;}
 .apply-job-modal .job-modal{padding:20px 30px;background-color:#F1F1F1;}
@@ -449,7 +449,7 @@ aside{margin-bottom:30px;}
 .dashboard{padding-bottom:20px;text-align:center;background:rgba(60, 146, 202, 0.7) url("../images/slider/5.jpg") no-repeat fixed center center/cover;}
 .dashboard-header .user-avatar img{border:10px solid;border-color:rgba(255, 255, 255, 0.5);box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26);width:125px;}
 .dashboard-header h3{color:#FFF;text-transform:capitalize;font-weight:700;}
-.rad-info-box{background:#FFF;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26);border:10px solid;border-color:rgba(204, 204, 204, 0.5);padding:18px;margin-bottom:30px;}
+.rad-info-box{background:#FFF;box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26);border:10px solid;border-color:rgba(204, 204, 204, 0.5);padding:18px;margin:30px 10px;}
 .rad-info-box i{float:left;font-size:2.4em;line-height:75px;}
 .rad-info-box .value, .rad-info-box .title-dashboard{color:#242424;display:block;position:relative;text-align:right;z-index:10;}
 .rad-info-box .value{font-size:20px;font-weight:600;margin-top:5px;}
@@ -467,7 +467,7 @@ aside{margin-bottom:30px;}
 .profile-card{background-color:#fff;border:1px solid #eee;margin-bottom:20px;padding-bottom:20px;}
 .profile-card .banner{border-bottom:7px solid #29aafe;}
 .profile-card .banner img{display:block;height:auto;width:100%;}
-.profile-card .user-image img{border:7px solid #29aafe;display:block;margin:-75px auto 0;max-width:150px;width:100%;}
+.profile-card .user-image img{border:7px solid #29aafe;display:block;margin:-75px auto 0;max-width:180px;width:150px;height:150px;}
 .profile-card .card-body{padding:15px;}
 .profile-card .card-body h3{font-size:24px;font-weight:600;margin:0 0 4px;text-align:center;}
 .profile-card .card-body .title{display:block;font-size:14px;margin-bottom:10px;text-align:center;text-transform:uppercase;}
@@ -501,11 +501,10 @@ aside{margin-bottom:30px;}
 .company-list-box .company-list-box-detail .ratings i.color-red{color:#FF0000 !important;}
 .company-list-box .company-list-box-detail .ratings i.color{color:#29aafe;}
 .company-list-box .company-list-box-detail .ratings span{color:#999;font-weight:600;float:right;color:#FFF;line-height:15px;background-color:#29aafe;}
-.company-dashboard{padding-bottom:40px;text-align:center;background:rgba(60, 146, 202, 0.7) url("../images/bg/2.jpg") no-repeat fixed center center/cover;}
+.company-dashboard{text-align:center;background:rgba(60, 146, 202, 0.7) url("../images/bg/2.jpg") no-repeat fixed center center/cover;}
 .dashboard-header-logo-box{background:white none repeat scroll 0 0 !important;border:8px solid rgba(204, 204, 204, 0.5);box-shadow:0 2px 5px 0 rgba(0, 0, 0, 0.26);padding:20px;}
 .company-logo{border:1px solid #f1f1f1;display:block;margin:0 auto;padding:20px;width:200px;}
 .pos_rel{position:relative;}
-.company-logo-premium{display:block;left:185px;margin:0 auto;padding:20px;position:absolute;top:65px;width:175px;}
 .company-dashboard .dashboard-header h3{margin-bottom:0;color:#242424;}
 ul.social-links{position:relative;overflow:hidden;margin:0;margin-top:10px;}
 .dashboard-header p{color:#242424;margin-bottom:0;}
@@ -1049,6 +1048,7 @@ section.download-app .download-btns a{display:block;margin-bottom:20px;margin-ri
 .job-box-2 .job-title-box .comp-name{display:block;}
 .job-box-2 .job-type{padding:0;}
 .job-box-2 .job-salary{top:105px;}
+
 .login-container, .login-page-2 .login, .login-page-3 .login{width:290px;}
 .social-circle li i{line-height:40px;}
 .social-circle li a{width:40px;height:40px;}

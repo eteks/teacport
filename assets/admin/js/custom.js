@@ -893,6 +893,121 @@ $('.sub_sidebar_section').css('max-height', footer_height);
         select_value = $(this).data('value');
         $('[name=ads_status]').find("[value=" + select_value + "]").attr('selected', 'selected');
     });
+    
+    function date_picker() {
+        $('.admin_date_picker').Zebra_DatePicker({
+            format: 'd/m/Y',
+            view: 'years'
+            });
+        }
+
+    // Animation effect - slider
+    function sliderResponse(target) {
+        mask.stop(true,false).animate({'left':'-'+ sections_width*target +'px'},1000);
+        sections.removeClass('viewed').eq(target).addClass('viewed');
+    }
+    /*Admin side Template logo upload functionalities added by thangam*/
+    function readURL(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#imagepreview_templogo').prop('src', e.target.result).show();
+                $('.temp_remove_act').show();
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+        $("#upload_logo").change(function () {
+            readURL(this);
+            $('#imagepreview_templogo').show();
+        });
+
+        $("#upload_logo").click(function () {
+            
+            $('#imagepreview_templogo').attr('src','');
+        });
+
+
+        $('#imagepreview_templogo').click(function(){
+
+            $('#upload_logo').replaceWith($('#upload_logo').clone(true));
+            $('#imagepreview_templogo').hide();
+            $('.temp_remove_act').hide();
+
+        });
+        $('.temp_remove_act').click(function(e)
+           {
+                $('#imagepreview_templogo').hide();
+                $('.temp_remove_act').hide();
+               $('#imagepreview_templogo').attr("src","");
+           });
+
+        /* Accept Only Numbers - Added by Akila */
+        $(document).on("keypress",".numeric_value",function (e) {
+            if (e.which != 8 && e.which != 0 && e.which != 45 && (e.which < 48 || e.which > 57)) {
+                return false;
+            }
+        });
+
+    //Clone field for Customize plan settings - Added by Akila
+    var maxField = 3;
+    var addButton = $('.add_button');
+    var saveButton = $('.save_button');
+    var wrapper = $('.field_wrapper');
+    var x = 1;
+    var y = 2;
+    //Initial field counter is 1
+    $(addButton,saveButton).click(function() { //Once add button s clicked
+    var error = 0;
+            //validate empty fields
+            $(this).parents('.plan_creation').find('.customize_plan').each(function(){
+            if($(this).val() == '')
+                {        
+                    error = 1;    
+                    $(this).addClass('attribute_error');           
+                }
+                else{
+                    $(this).removeClass('attribute_error');
+                }
+            });
+            //validate select box
+            if(error==0){
+                var equal_check_array = [];
+                $(this).parents('.plan_creation').find('.select_plan').each(function(){
+                    if($('option:selected',this).val() != ''){
+                        equal_check_array.push($('option:selected',this).val());
+                    }
+                });
+                var hasDups = !equal_check_array.every(function(v,i) {
+                    return equal_check_array.indexOf(v) == i;
+                });
+            }
+            if(hasDups){
+                error=1;
+                $(this).parents('form').find('.admin_status').text("Please select other option to customize limits. ").fadeIn();
+            }
+            if(error==0){
+                $(this).parents('form').find('.admin_status').text("").fadeOut();  
+                var cloned_content = $('.field_wrapper:last').clone();
+                if (x < maxField) {//Check maximum number of input fields
+                    x++;
+                    $(cloned_content).insertAfter('.field_wrapper:last').find('input').val("");
+                    $(cloned_content).find('.remove_button').show();
+                    $(cloned_content).find('label').text('');
+                    $(cloned_content).find('.counter').html(x);
+                }
+            }
+        });
+        $(document).on('click','.remove_button',function() {//Once remove button is clicked
+            $(this).parents('.field_wrapper').remove();
+            x--;
+        });
+//Ended by Akila 
+
 
 }); // End document
 
@@ -918,108 +1033,7 @@ function popup_pagination() {
         $('div.renewal_holder_content',this).wrapAll('<div class="span3 renewal_holder"></div>');
     });
 }
-function date_picker() {
-    $('.admin_date_picker').Zebra_DatePicker({
-        format: 'd/m/Y',
-        view: 'years'
-        });
-    }
-
-// Animation effect - slider
-function sliderResponse(target) {
-    mask.stop(true,false).animate({'left':'-'+ sections_width*target +'px'},1000);
-    sections.removeClass('viewed').eq(target).addClass('viewed');
-}
-/*Admin side Template logo upload functionalities added by thangam*/
-function readURL(input) {
-
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            $('#imagepreview_templogo').prop('src', e.target.result).show();
-            $('.temp_remove_act').show();
-        }
-
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-
-$("#upload_logo").change(function () {
-    readURL(this);
-    $('#imagepreview_templogo').show();
-});
-
-$("#upload_logo").click(function () {
-    
-    $('#imagepreview_templogo').attr('src','');
-});
-
-
-$('#imagepreview_templogo').click(function(){
-
-    $('#upload_logo').replaceWith($('#upload_logo').clone(true));
-    $('#imagepreview_templogo').hide();
-    $('.temp_remove_act').hide();
-
-});
-$('.temp_remove_act').click(function(e)
-   {
-        $('#imagepreview_templogo').hide();
-        $('.temp_remove_act').hide();
-       $('#imagepreview_templogo').attr("src","");
-   });
-/* Popup pagination with arrow end */ 
-
-// $(".finish").click(function(){
-	// $(".popup").css("opacity", "0.8" + "z-index", "999999");
-// 	
-// });
-
-/* Accept Only Numbers - Added by Akila */
-$(document).on("keypress",".numeric_value",function (e) {
-	if (e.which != 8 && e.which != 0 && e.which != 45 && (e.which < 48 || e.which > 57)) {
-		return false;
-	}
-});
-
-//Clone field for Customize plan settings - Added by Akila
-var maxField = 3;
-var addButton = $('.add_button');
-var wrapper = $('.field_wrapper');
-var x = 1;
-var y = 2;
-//Initial field counter is 1
-$(addButton).click(function() {//Once add button s clicked
-	var error = 0;
-	//validate empty fields
-	$(this).parents('.plan_creation').find('.customize_plan').each(function(){
-    if($(this).val() == '')
-	    {        
-	        error = 1;    
-	        $(this).addClass('attribute_error');           
-	    }
-	    else{
-	        $(this).removeClass('attribute_error');
-	    }
-    });
-    //validate select box
-    if(error==0){
-		var cloned_content = $('.field_wrapper:last').clone();
-		if (x < maxField) {//Check maximum number of input fields
-			x++;
-			$(cloned_content).insertAfter('.field_wrapper:last').find('input').val("");
-			$(cloned_content).find('.remove_button').show();
-			// $(cloned_content).find('.add_button').hide();
-			$(cloned_content).find('.counter').html(x);
-		}
-	}
-});
-$(document).on('click','.remove_button',function() {//Once remove button is clicked
-	$(this).parents('.field_wrapper').remove();
-	x--;
-});
-//Ended by Akila 	
+	
 
 
 		

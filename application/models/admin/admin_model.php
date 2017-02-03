@@ -229,6 +229,17 @@ class Admin_Model extends CI_Model {
     print_r($model_data['latest_news_values']);
     return $model_data;
   }
+  //get_district_by_state via ajax call
+  public function get_district_by_state($id)
+  {
+    $this->db->select('*');    
+    $this->db->from('tr_district');
+    $where = "(district_status='1' AND district_state_id=$id)";
+    $this->db->order_by('district_name', 'asc');
+    $this->db->where($where);
+    $alldistrict = $this->db->get();
+    return $alldistrict->result_array(); 
+  }
 
 }
 
