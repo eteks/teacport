@@ -52,7 +52,7 @@ $autoload['packages'] = array();
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database','session','Facebook/autoload','iptracker','form_validation');
+$autoload['libraries'] = array('database','session','Facebook/autoload','form_validation');
 
 
 /*

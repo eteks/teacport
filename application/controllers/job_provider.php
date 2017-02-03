@@ -4,7 +4,7 @@ class Job_provider extends CI_Controller {
 	public function __construct()
     {    	
         parent::__construct();
-        $this->load->library(array('form_validation','session','captcha','image_lib')); 
+        $this->load->library(array('form_validation','session','captcha','image_lib','iptracker')); 
 		$this->load->model(array('job_provider_model','common_model','job_seeker_model'));
 		 session_start();
     }
@@ -58,7 +58,7 @@ class Job_provider extends CI_Controller {
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
 					$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
 					$fb['error'] = 1;
-					$data['institutiontype'] = $this->common_model->get_institution_type();
+					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
 				}
 			}
@@ -171,6 +171,7 @@ class Job_provider extends CI_Controller {
 	
 	public function dashboard()
     {
+    	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -216,6 +217,7 @@ class Job_provider extends CI_Controller {
     	redirect('/','refresh');
 	}
 	public function editprofile(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -404,6 +406,7 @@ class Job_provider extends CI_Controller {
 		
 	}
 	public function initialdata(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		if($_POST){
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
@@ -491,6 +494,7 @@ class Job_provider extends CI_Controller {
 	}
 
 	public function inbox(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -521,6 +525,7 @@ class Job_provider extends CI_Controller {
 		}		
 	}
 	public function postjob() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -637,6 +642,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function postedjob()
 	{
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -665,6 +671,7 @@ class Job_provider extends CI_Controller {
 		$this->load->view('company-dashboard-posted-jobs',$data);
 	}
 	public function postedjobdetail(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -685,6 +692,7 @@ class Job_provider extends CI_Controller {
 		}
 	}
 	public function editjobdetail(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -711,6 +719,7 @@ class Job_provider extends CI_Controller {
 		}
 	}
 	public function browse_candidate(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -721,18 +730,26 @@ class Job_provider extends CI_Controller {
 		$data['medium']					= $this->common_model->medium_of_instruction();
 		$data['mother_tongue']			= $this->common_model->mother_tongue();
 		$data['subject']				= $this->common_model->subjects($data['organization']['organization_institution_type_id']);
+		$data['class_level']			= $this->common_model->classlevel_by_institution($data['organization']['organization_institution_type_id']);
 		$data['qualification']			= $this->common_model->qualification($data['organization']['organization_institution_type_id']);
 		$data['subscrib_plan'] 			= $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";
 		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
 		$pagination["per_page"] 		= 20;
-		$pagination['use_page_numbers'] = 0;
-		$pagination['num_links'] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
+		$pagination['use_page_numbers'] = TRUE;
+		$pagination['uri_segment'] 		= 3;
+		$pagination['num_links'] 		= 4;
 		$pagination['cur_tag_open'] 	= '&nbsp;<li class="active"><a>';
 		$pagination['cur_tag_close'] 	= '</a></li>';
 		$pagination['next_link'] 		= 'Next';
-		$pagination['prev_link'] 		= 'Previous';
+		$pagination['prev_link'] 		= 'Prev';
+		$pagination['first_link'] 		= 'First';
+		$pagination['first_tag_open']	= '<li>';
+		$pagination['first_tag_close'] 	= '</li>';
+		$pagination['last_link'] 		= 'Last';
+		$pagination['last_tag_open'] 	= '<li>';
+		$pagination['last_tag_close'] 	= '</li>';
 		
 		if($this->uri->segment(3)){
 			$page = ($this->uri->segment(3));
@@ -743,60 +760,64 @@ class Job_provider extends CI_Controller {
 		if($_POST){
 			$this->session->set_userdata('pro_search_data', $_POST);
 		}
-		if(!empty($this->session->userdata('pro_search_data'))){
-			$provider_search_data = $this->session->userdata('pro_search_data');
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-			if(isset($provider_search_data['candidate_willing_district']) && $provider_search_data['candidate_willing_district'] != ''){
-				$this->form_validation->set_rules('candidate_willing_district', 'District', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_mother_tongue']) && $provider_search_data['candidate_mother_tongue'] != ''){
-				$this->form_validation->set_rules('candidate_mother_tongue', 'Mother tongue', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_experience']) && $provider_search_data['candidate_experience'] != ''){
-				$this->form_validation->set_rules('candidate_experience', 'Experience', 'trim|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_posting_name']) && $provider_search_data['candidate_posting_name'] != ''){
-				$this->form_validation->set_rules('candidate_posting_name', 'Posting', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_nationality']) && $provider_search_data['candidate_nationality'] != ''){
-				$this->form_validation->set_rules('candidate_posting_name', 'Nationality', 'trim|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_religion']) && $provider_search_data['candidate_religion'] != ''){
-				$this->form_validation->set_rules('candidate_religion', 'Religion', 'trim|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_tet_status']) && $provider_search_data['candidate_tet_status'] != ''){
-				$this->form_validation->set_rules('candidate_tet_status', 'TET status', 'trim|numeric|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_subject']) && $provider_search_data['candidate_subject'] != ''){
-				$this->form_validation->set_rules('candidate_subject', 'Subject', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_qualification']) && $provider_search_data['candidate_qualification'] != ''){
-				$this->form_validation->set_rules('candidate_qualification', 'Qualification', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
-			}
-			if(isset($provider_search_data['candidate_salary']) && $provider_search_data['candidate_salary'] != ''){
-				$this->form_validation->set_rules('candidate_salary', 'Salary', 'trim|xss_clean');
-			}
-			$this->form_validation->run();
-			$data["candidates"] = $this->job_provider_model->all_candidate_list_for_search($pagination["per_page"], $page,$data['organization']['organization_institution_type_id'],$provider_search_data);
-			$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_for_search_count($data['organization']['organization_institution_type_id'],$provider_search_data);
-			$this->pagination->initialize($pagination);
-			$str_links = $this->pagination->create_links();
-			$data["links"] = explode('&nbsp;',$str_links );
-			$data['search_mode'] = $provider_search_data['candidate_search_type'];
-			$this->load->view('company-dashboard-browse-candidate',$data);
+		// if(!empty($this->session->userdata('pro_search_data'))){
+		$provider_search_data = $this->session->userdata('pro_search_data');
+
+		// $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+		// if(isset($provider_search_data['candidate_willing_district']) && $provider_search_data['candidate_willing_district'] != ''){
+		// 	$this->form_validation->set_rules('candidate_willing_district', 'District', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_mother_tongue']) && $provider_search_data['candidate_mother_tongue'] != ''){
+		// 	$this->form_validation->set_rules('candidate_mother_tongue', 'Mother tongue', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_experience']) && $provider_search_data['candidate_experience'] != ''){
+		// 	$this->form_validation->set_rules('candidate_experience', 'Experience', 'trim|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_posting_name']) && $provider_search_data['candidate_posting_name'] != ''){
+		// 	$this->form_validation->set_rules('candidate_posting_name', 'Posting', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_nationality']) && $provider_search_data['candidate_nationality'] != ''){
+		// 	$this->form_validation->set_rules('candidate_posting_name', 'Nationality', 'trim|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_religion']) && $provider_search_data['candidate_religion'] != ''){
+		// 	$this->form_validation->set_rules('candidate_religion', 'Religion', 'trim|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_tet_status']) && $provider_search_data['candidate_tet_status'] != ''){
+		// 	$this->form_validation->set_rules('candidate_tet_status', 'TET status', 'trim|numeric|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_subject']) && $provider_search_data['candidate_subject'] != ''){
+		// 	$this->form_validation->set_rules('candidate_subject', 'Subject', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_qualification']) && $provider_search_data['candidate_qualification'] != ''){
+		// 	$this->form_validation->set_rules('candidate_qualification', 'Qualification', 'trim|numeric|is_natural_no_zero|max_length[8]|xss_clean');
+		// }
+		// if(isset($provider_search_data['candidate_salary']) && $provider_search_data['candidate_salary'] != ''){
+		// 	$this->form_validation->set_rules('candidate_salary', 'Salary', 'trim|xss_clean');
+		// }
+		// $this->form_validation->run();
+		$data["candidates"] = $this->job_provider_model->all_candidate_list_for_search($pagination["per_page"], $page,$data['organization']['organization_institution_type_id'],$provider_search_data);
+		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_for_search_count($data['organization']['organization_institution_type_id'],$provider_search_data);
+		$this->pagination->initialize($pagination);
+		$str_links = $this->pagination->create_links();
+		$data["links"] = explode('&nbsp;',$str_links );
+		$data['search_mode'] = isset($provider_search_data['candidate_search_type'])?$provider_search_data['candidate_search_type']:'';
+		$data['search_inputs'] = $provider_search_data;
+		print_r($data['search_inputs']);
+		$this->load->view('company-dashboard-browse-candidate',$data);
 			
-		}
-		else{
-			$data["candidates"] = $this->job_provider_model->all_candidate_list($pagination["per_page"], $page,$data['organization']['organization_institution_type_id']);
-			$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
-			$this->pagination->initialize($pagination);
-			$str_links = $this->pagination->create_links();
-			$data["links"] = explode('&nbsp;',$str_links );
-			$data['search_mode'] = 'normal';
-			$this->load->view('company-dashboard-browse-candidate',$data);
-		}
+		// }
+		// else{
+		// 	$data["candidates"] = $this->job_provider_model->all_candidate_list($pagination["per_page"], $page,$data['organization']['organization_institution_type_id']);
+		// 	$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
+		// 	$this->pagination->initialize($pagination);
+		// 	$str_links = $this->pagination->create_links();
+		// 	$data["links"] = explode('&nbsp;',$str_links );
+		// 	$data['search_mode'] = 'normal';
+		// 	$this->load->view('company-dashboard-browse-candidate',$data);
+		// }
 	}
 	public function updatejob(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
 		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
@@ -867,6 +888,7 @@ class Job_provider extends CI_Controller {
 		}
 	}
 	public function changepassword(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -901,6 +923,7 @@ class Job_provider extends CI_Controller {
 	}
 
 	public function feedback(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -939,6 +962,7 @@ class Job_provider extends CI_Controller {
 		}
 	}
     public function postad(){
+    	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1013,6 +1037,7 @@ class Job_provider extends CI_Controller {
 		}	
 	}
 	public function subscription(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1094,6 +1119,7 @@ class Job_provider extends CI_Controller {
 	}
 	
 	public function candidateprofile() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');

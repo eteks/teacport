@@ -733,10 +733,6 @@ class Job_seeker_model extends CI_Model {
 
 	public function get_seeker_search_results($limit,$start,$ins_id,$data=array())
     {
-
-	   	if(empty($data['min_amount'])) {
-    		$data['min_amount'] = 0;
-    	}
     	if(!empty($data['experience'])) {
     		if($data['experience'] <= 10) {
     			$min_exp = $data['experience'];
@@ -748,17 +744,27 @@ class Job_seeker_model extends CI_Model {
     		}
     	}
 
-    	// Search with limit
-        $this->db->select('*');
-        $this->db->from('tr_organization_vacancies ov');
-        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-        if(!empty($data['keyword'])) {
-        	$this->db->like('ov.vacancies_job_title',$data['keyword']);
-			$this->db->or_like('op.organization_name',$data['keyword']);
-        }
+  		// Search with limit
+   		$this->db->select('*');
+   		$this->db->from('tr_organization_vacancies ov');
+   		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+   		if(!empty($data['keyword'])) {
+   			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
+			$this->db->where($like_where);
+   		}
         $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
-	    $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
-        if(!empty($data['location'])) {
+   		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['min_amount']) && empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['max_amount']) && empty($data['min_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        }
+	    if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
         if(!empty($data['posting'])) {
@@ -767,32 +773,43 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
-        if(!empty($data['max_amount'])) {
-        	$this->db->where("ov.vacancies_end_salary <=".$data['max_amount']."");
-        }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
-        }	
+        }
+        if(!empty($data['institution'])) {
+        	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        }
 
         $this->db->limit($limit,$start);
         $this->db->order_by('ov.vacancies_id','desc');
         $model_data['search_results'] = $this->db->get()->result_array();
 
+	    // echo $this->db->last_query();
         // echo "<pre>";
         // print_r($model_data['search_results']);
         // echo "</pre>";
 
        	// Total count
         $this->db->select('*');
-        $this->db->from('tr_organization_vacancies ov');
-        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-        if(!empty($data['keyword'])) {
-        	$this->db->like('ov.vacancies_job_title',$data['keyword']);
-			$this->db->or_like('op.organization_name',$data['keyword']);
+   		$this->db->from('tr_organization_vacancies ov');
+   		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+   		if(!empty($data['keyword'])) {
+   			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
+			$this->db->where($like_where);
+   		}
+   		$this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+   		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
         }
-        $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
-        $this->db->where("ov.vacancies_start_salary >=".$data['min_amount']."");
-        if(!empty($data['location'])) {
+        if(!empty($data['min_amount']) && empty($data['max_amount'])) {
+        	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
+        }
+        if(!empty($data['max_amount']) && empty($data['min_amount'])) {
+        	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
+        }
+	    if(!empty($data['location'])) {
         	$this->db->where('op.organization_district_id',$data['location']);
         }	
         if(!empty($data['posting'])) {
@@ -801,18 +818,17 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
-        if(!empty($data['max_amount'])) {
-        	$this->db->where("ov.vacancies_end_salary <=".$data['max_amount']."");
-        }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
+        if(!empty($data['institution'])) {
+        	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        }
         $this->db->order_by('ov.vacancies_id','desc');
+
         $model_data['total_rows'] = $this->db->get()->num_rows();
-             
 
         return $model_data;
-
     }
 
     // Candidate job applied count

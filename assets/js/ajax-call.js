@@ -228,6 +228,50 @@ $(document).ready(function() {
 		}
 	});
 
+	// Get qualification and posting based on selected institution
+	$(document).on('change','.select_institution_event',function() {
+		var this_id = $.trim($(this).val());
+		var this_qualification = $(this).parents('.institution_section').siblings('.qualification_section').find('select');
+		var this_posting = $(this).parents('.institution_section').siblings('.posting_section').find('select');
+		var qua_val = $('option:selected',this_qualification).val();
+		var pos_val = $('option:selected',this_posting).val();
+		var qua_options = '<option value="">Select Qualification </option>';  
+		var pos_options = '<option value="">Select Posting </option>'; 
+
+		$.ajax({
+			type : "POST",
+			url : baseurl+"qualification_posting",
+			data : { value : this_id, csrf_token : csrf_token_value},
+			success : function(res) {
+				if(res) {
+					var obj = JSON.parse(res);
+					var qua = obj.qualification;
+					var pos = obj.posting;
+               		if(qua.length!=0) {     
+               			var selected = '';          
+		                $.each(qua, function(i){
+		                	if(qua[i].educational_qualification_id == qua_val) {
+		                		var selected = "selected";
+		                	}
+		                	qua_options += '<option value="'+qua[i].educational_qualification_id+'" '+selected+'>'+qua[i].educational_qualification+'</option>';
+		            	});  
+	           		}
+	           		if(pos.length!=0) {    
+	           			var selected = '';           
+		                $.each(pos, function(i){
+		                	if(pos[i].posting_id == pos_val) {
+		                		var selected = "selected";
+		                	}
+		                	pos_options += '<option value="'+pos[i].posting_id+'" '+selected+'>'+pos[i].posting_name+'</option>';
+		            	});  
+	           		}    
+ 	                this_qualification.html(qua_options);  
+	                this_posting.html(pos_options);           
+	            }
+			}
+		});
+	});
+
     /* Professional Profile Restriction */
 	var professional_group;
 	$('.opt_fresh').on('click',function() {

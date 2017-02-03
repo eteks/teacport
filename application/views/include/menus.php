@@ -29,17 +29,30 @@
 			          	<!-- <li class="no-bg"><a href="<?php echo base_url(); ?>provider/postjob" class="p-job"><i class="fa fa-plus-square"></i> Post a Job</a></li> -->
 						<li class="profile-pic">
 							<a href="javascript:void(0)">
-								<?php if((@getimagesize($organization['registrant_logo']) && !empty($organization['registrant_logo']))){ ?>
-                                <img src="<?php echo isset($organization['registrant_logo'])?$organization['registrant_logo']:$user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php } else if(@getimagesize($this->session->userdata("registrant_logo")) && !empty($this->session->userdata("registrant_logo"))){ ?>
-                                	<img src="<?php echo $this->session->userdata("registrant_logo") ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php } else if(@getimagesize($user_type['registrant_logo']) && !empty($user_type['registrant_logo'])){ ?>
-                                	<img src="<?php echo $user_type['registrant_logo'] ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php }else { ?>
-                            	<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
-                                <?php } ?>
-								
-			                    <span class="hidden-xs hidden-sm"><?php echo isset($user_type['registrant_name'])?$user_type['registrant_name']:'' ;?> </span>
+	                            <?php 
+			              		if(!empty($user_type['provider_image_path'])) :
+			              			$keyword = "uploads";
+					    			// To check whether the image path is cdn or local path
+							        if(strpos( $user_type['provider_image_path'] , $keyword ) !== false) {
+					       				$thumb_image = explode('.', end(explode('/',$user_type['provider_image_path'])));
+        								$thumb = base_url().PROVIDER_UPLOAD.$thumb_image[0]."_thumb.".$thumb_image[1];
+							        }
+							        else {
+							        	$thumb = $user_type['provider_image_path'];
+							        }              			
+    							?>
+        						<img src="<?php echo $thumb; ?>" alt="user-img" class="img-circle" width="36" />
+							    <?php
+							    else :
+							    ?>
+								<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
+								<?php
+							    endif;
+							    ?>	
+			                    <span class="hidden-xs hidden-sm">
+			                    <?php 
+			                    echo !empty($user_type['registrant_name'])?$user_type['registrant_name']:(isset($user_type['organization_name'])?$user_type['organization_name']:'') ; ?> 
+			                    </span>
 			                    <i class="fa fa-angle-down fa-indicator"></i> 
 			                </a>
 				            <ul class="drop-down-multilevel left-side">
@@ -70,13 +83,23 @@
 			           <li class="profile-pic">
 			              	<a href="javascript:void(0)"> 
 			              		<?php 
-			              		$session = $this->session->all_userdata();
-			              		if(!empty($session['login_session']['candidate_image_path'])) :
-			              			$thumb_image = explode('.', end(explode('/',$session['login_session']['candidate_image_path'])));
-        							$thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
+			              		if(!empty($user_type['candidate_image_path'])) :
+			              			$keyword = "uploads";
+					    			// To check whether the image path is cdn or local path
+							        if(strpos( $user_type['candidate_image_path'] , $keyword ) !== false) {
+					       				$thumb_image = explode('.', end(explode('/',$user_type['candidate_image_path'])));
+        								$thumb = base_url().SEEKER_UPLOAD."pictures/".$thumb_image[0]."_thumb.".$thumb_image[1];
+							        }
+							        else {
+							        	$thumb = $user_type['candidate_image_path'];
+							        }              			
     							?>
-        						<img src="<?php echo base_url().SEEKER_UPLOAD."pictures/".$thumb; ?>" alt="user-img" class="img-circle" width="36" />
+        						<img src="<?php echo $thumb; ?>" alt="user-img" class="img-circle" width="36" />
 							    <?php
+							    else :
+							    ?>
+								<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
+								<?php
 							    endif;
 							    ?>	
 			                  	<span class="hidden-xs hidden-sm"><?php echo $user_type['candidate_name'];?> </span>

@@ -5,7 +5,7 @@ class Home extends CI_Controller {
     {
     	
         parent::__construct();
-        $this->load->library(array('form_validation','session','captcha')); 
+        $this->load->library(array('form_validation','session','captcha','iptracker')); 
 		$this->load->model(array('job_provider_model','common_model'));
     }
 
@@ -45,6 +45,7 @@ class Home extends CI_Controller {
 		$home['latest_news'] = $this->common_model->latest_news();
 		$home['alldistrict'] = $this->common_model->get_all_district();
 		$home['premiumads'] = $this->common_model->get_premiumads();
+		$home['site_visit_count'] = $this->common_model->get_site_visit_count();
 	    $this->load->view('index',$home);
 	}
 	public function featured_job()
@@ -61,7 +62,8 @@ class Home extends CI_Controller {
 	}
 	public function aboutus()
 	{
-		$this->load->view('aboutus');
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$this->load->view('aboutus',$data);
 	}
 	public function contactus()
 	{
@@ -69,6 +71,7 @@ class Home extends CI_Controller {
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
 		$this->load->library('email', $emailsetup);
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		if($_POST){
 			$session_data = $this->session->all_userdata();
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
@@ -132,26 +135,28 @@ class Home extends CI_Controller {
 				}
 			}
 			else{
-				$this->load->view('contactus');
+				$this->load->view('contactus',$data);
 			}
 		}
 		else{
-			$this->load->view('contactus');
+			$this->load->view('contactus',$data);
 		}
 	}
 	//Akila Created
 	public function pricing(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		$this->load->view('pricing',$data);
 	}
 	public function faq(){
-		$this->load->view('faq');
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$this->load->view('faq',$data);
 	}
 
 
 	public function allinstitutions(){
 		// $categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
-
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
     	// Pagination values
     	$per_page = 20;
 
@@ -169,7 +174,7 @@ class Home extends CI_Controller {
 		$config['per_page'] = $per_page;
 		$config['total_rows'] = $total_rows;
 		$config['uri_segment'] = 2;
-		$config['num_links'] = $total_rows;
+		$config['num_links'] = 4;
 		$config['use_page_numbers'] = TRUE;
 
     	// Custom Configuration
@@ -184,7 +189,13 @@ class Home extends CI_Controller {
 		$config['cur_tag_open'] = '<li class="active"><a>';
 		$config['cur_tag_close'] = '</a></li>';
 		$config['next_link'] = 'Next';
-		$config['prev_link'] = 'Previous';
+		$config['prev_link'] = 'Prev';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
 
 		// Pagination Inititalization
 		$this->pagination->initialize($config);
@@ -195,21 +206,66 @@ class Home extends CI_Controller {
         $this->load->view('all-institutions',$data);
 	}
 
-
-
 	public function userfollowedcompanies()
-	{
+	{	
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$data_values = $this->common_model->company_details($this->uri->segment('2'));
 		$data['company_details'] = $data_values['company_details'];
-		$data['vacancy_details'] = $data_values['vacancy_details'];
+		$data['recent_vacancy_details'] = $data_values['recent_vacancy_details'];
+
+
+		$per_page = 10;
+
+    	$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
+        $results = $this->common_model->get_vacancy_list($per_page, $offset,$this->uri->segment('2'));
+    	$total_rows = $results['total_rows'];
+    	$data["vacancy_details"] = $results['vacancy_details'];
+
+    	//pagination
+		$this->load->library('pagination');
+
+		// Pagination configuration
+  		$config['base_url'] = base_url().'user-followed-companies/'.$this->uri->segment('2');
+		$config['per_page'] = $per_page;
+		$config['total_rows'] = $total_rows;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 4;
+		$config['use_page_numbers'] = TRUE;
+
+    	// Custom Configuration
+		$config['full_tag_open'] = '<ul class="pagination">';
+		$config['full_tag_close'] = '</ul>';
+		$config['next_tag_open'] = '<li>';
+		$config['next_tag_close'] = '</li>';
+		$config['prev_tag_open'] = '<li>';
+		$config['prev_tag_close'] = '</li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="active"><a>';
+		$config['cur_tag_close'] = '</a></li>';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Prev';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
+
+		// Pagination Inititalization
+		$this->pagination->initialize($config);
+
+		// Navigation Links
+		$pagination_links = $this->pagination->create_links();
+		$data["links"] = $pagination_links;
 		$this->load->view('user-followed-companies',$data);
 	}
 	public function vacancies()
 	{
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$data['applicable_postings'] = $this->common_model->applicable_posting();
 		$data['qualifications'] = $this->common_model->qualification();
 		$data['institution_values'] = $this->common_model->get_institution_type();
-
 
 		$search_inputs = array();	
 		if($_POST) {
@@ -246,7 +302,7 @@ class Home extends CI_Controller {
 		$config['per_page'] = $per_page;
 		$config['total_rows'] = $total_rows;
 		$config['uri_segment'] = 2;
-		$config['num_links'] = $total_rows;
+		$config['num_links'] = 4;
 		$config['use_page_numbers'] = TRUE;
 
     	// Custom Configuration
@@ -261,7 +317,13 @@ class Home extends CI_Controller {
 		$config['cur_tag_open'] = '<li class="active"><a>';
 		$config['cur_tag_close'] = '</a></li>';
 		$config['next_link'] = 'Next';
-		$config['prev_link'] = 'Previous';
+		$config['prev_link'] = 'Prev';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
 
 		// Pagination Inititalization
 		$this->pagination->initialize($config);
@@ -278,11 +340,13 @@ class Home extends CI_Controller {
 
 	public function informations()
 	{
-		$this->load->view('information');
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$this->load->view('information',$data);
 	}
 	public function terms()
 	{
-		$this->load->view('terms');
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$this->load->view('terms',$data);
 	}	
 	// State
 	public function state() {
@@ -293,7 +357,24 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function qua_pos_by_institution() {
+		$data = '';
+		$data['qualification'] = array();
+		$data['posting'] = array();
+		if($this->input->post('value')) {
+			$data['qualification'] = $this->common_model->qualification($this->input->post('value'));
+			$data['posting'] = $this->common_model->applicable_posting($this->input->post('value'));
+		}
+		else {
+			$data['qualification'] = $this->common_model->qualification();
+			$data['posting'] = $this->common_model->applicable_posting();
+		}
+		echo json_encode($data);
+	}
+
+	
+
 }
 
-/* End of file welcome.php */
-/* Location: ./application/controllers/welcome.php */
+/* End of file home.php */
+/* Location: ./application/controllers/home.php */
