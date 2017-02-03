@@ -5,7 +5,7 @@ class Payu extends CI_Controller {
 	public function __construct()
     {    	
         parent::__construct();
-		$this->load->library(array('form_validation','session')); 
+		$this->load->library(array('form_validation','session','iptracker')); 
 		$this->load->model(array('job_provider_model','common_model'));
     }
 	public function index()

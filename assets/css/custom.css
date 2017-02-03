@@ -161,9 +161,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 /*latest news having news*/
 .latest_news_head_1{
 	background-color: #da651a;
-    
     padding: 11px;
-   
 }
 .latest_news_head_1 p{
 	color:#fff;
@@ -176,7 +174,6 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	
 }
 .latest_news_1{
 	border: 1px solid #da651a;
@@ -1278,7 +1275,6 @@ label.form-input-error {
 	/*width:100px;*/
 }
 .app_post h5{
-	
 	text-align: left;
 	color: #00a5ef;
 	display:inline-block;
@@ -1575,7 +1571,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	padding-top:40px;
 	pointer-events:none;
 }
-
 .table-filter .star {
 	color: #ccc;
 	text-align: center;
@@ -1616,8 +1611,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	right: 400px;
     width: 10em;
     margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-
+   /*border: 1px solid #000;*/
+}
 .listing_date{
 	position: absolute;
 	right: 250px;
@@ -1643,5 +1638,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .job-salary .i{
 	font-size:12px !important;
 	color:#000 !important;
-	}	
+}	
 

@@ -146,12 +146,8 @@ class Dashboard_model extends CI_Model {
       return $query;
   }
   public function count_visits(){
-      $this->db->select('count(site_visits_id) as count_vis');
-      $this->db->from('tr_site_visits AS vis');
-      $query = $this->db->get()->result_array();
-      // echo "unique_visitors";
-      // print_r($query);
-      return $query;
+    $count = $this->db->group_by(array('organization_id','candidate_id','DATE(created_date)','ip_address'))->get_where('tr_site_visits')->num_rows();
+    return $count;
   }
   public function paid_job_providers(){
       $condition = "org.organization_subscription_status = 1 AND sub.subscription_status=1";

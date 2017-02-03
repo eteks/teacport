@@ -112,9 +112,6 @@ $route['seeker/jobsapplieddetails/(:num)'] 				= 'job_seeker/applynow/$1';
 // $route['seeker/applynow'] 								= 'job_seeker/applynow';
 $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 $route['seeker/password'] 								= 'job_seeker/change_password';
-// $route['seeker/allinstitutions'] 						= 'job_seeker/allinstitutions';
-$route['seeker/vacancies'] 								= 'job_seeker/vacancies';
-$route['seeker/vacancies/(:num)'] 						= 'job_seeker/vacancies/$1';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
 $route['seeker/inbox/message'] 							= 'job_seeker/inbox_message';
 $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
@@ -130,12 +127,12 @@ $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['allinstitutions/(:num)'] 						= 'home/allinstitutions/$1';
 $route['user-followed-companies/(:num)'] 				= 'home/userfollowedcompanies/$1';
+$route['user-followed-companies/(:num)/(:num)'] 		= 'home/userfollowedcompanies/$1/$1';
 $route['vacancies'] 									= 'home/vacancies';
 $route['vacancies/(:num)']  							= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
 $route['terms'] 										= 'home/terms';
-
-
+$route['qualification_posting'] 						= 'home/qua_pos_by_institution';
 
 
 /* ===================          Route settings for Admin Start     ====================== */
@@ -195,7 +192,7 @@ $route['main/dashboard_filter_vacancy'] = 'admin/dashboardpage/dashboard_filter_
 $route['main/dashboard_filter_provider'] = 'admin/dashboardpage/dashboard_filter_provider';
 
 $route['main/subscription_plans'] = 'admin/subscription_plan/subscription_plans';
-$route['main/plan_upgrade_creation'] = 'admin/subscription_plan/plan_upgrade_creation';
+$route['main/customize_plan_settings'] = 'admin/subscription_plan/customize_plan_settings';
 
 $route['main/user_groups'] = 'admin/admin_users/user_groups';
 $route['main/user_accounts'] = 'admin/admin_users/user_accounts';

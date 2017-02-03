@@ -42,7 +42,7 @@
 						<div class="row-form">
 							<div class="form-group image_upload">
                            	<div class="col-sm-offset-1 col-sm-2">
-                                    <label>Provider Logo</label>
+                                    <label>Organization Logo</label>
                                </div>
                                <?php
 					  	 		$image_name = '';

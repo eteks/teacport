@@ -139,11 +139,8 @@
             </div> 
             <div class="owl-testimonial-2">     
                 <?php
-                if(!empty($vacancy_details)) :
-                     $recent_jobs = array_slice($vacancy_details,-5,5,true);
-				endif;
-                if(!empty($recent_jobs)) :
-                foreach ($recent_jobs as $rec_val) :
+                if(!empty($recent_vacancy_details)) :
+                foreach ($recent_vacancy_details as $rec_val) :
 					
                 ?>
                 <div class="slide-featured-jobs">	                    	
@@ -237,22 +234,12 @@
                             endif;
                             ?>
                         </ul>
-                  </div> <!--End .widget-->
-				  <div class="pagination-box clearfix">
-					<ul class="pagination">
-					    <li>
-					        <a href="#" aria-label="Previous"> <span aria-hidden="true">Previous</span> </a>
-					    </li>
-					    <li class="active"><a href="#">1</a></li>
-					    <li><a href="#">2</a></li>
-					    <li><a href="#">3</a></li>
-					    <li><a href="#">4</a></li>
-					    <li><a href="#">5</a></li>
-					    <li>
-					        <a href="#" aria-label="Next"> <span aria-hidden="true">Next</span> </a>
-					    </li>
-					</ul>
-				 </div>	
+                    </div> <!--End .widget-->
+                    <?php
+                    if(!empty($links)) :
+                        echo "<div class='col-md-12 col-sm-12 col-xs-12 nopadding'><div class='pagination-box clearfix'>" .$links . "</div></div>";
+                    endif;
+                    ?>
 				</div> <!--col-sm-12-->
 			</div> <!--row-->
 		</div> <!--container-->

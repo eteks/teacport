@@ -4,7 +4,7 @@ class Job_seeker extends CI_Controller {
 	public function __construct()
     {
         parent::__construct();
-        $this->load->library(array('form_validation','session','captcha','upload','image_lib')); 
+        $this->load->library(array('form_validation','session','captcha','upload','image_lib','iptracker')); 
 		$this->load->model(array('job_seeker_model','common_model')); 
         session_start();
     }
@@ -94,7 +94,14 @@ class Job_seeker extends CI_Controller {
         {
         	$old_file_path = $_POST['old_file_path'];
         	if(isset($_POST['old_file_path']) && !empty($_POST['old_file_path'])) {
-        		$_POST[$field] = base_url().$old_file_path;
+        		$keyword = "uploads";
+    			// To check whether the image path is cdn or local path
+		        if(strpos( $old_file_path , $keyword ) !== false) {
+       				$_POST[$field] = base_url().$old_file_path;
+		        }
+		        else {
+			       	$_POST[$field] = $old_file_path;
+			    }
             	// return TRUE;
         	}
         	else {
@@ -331,7 +338,8 @@ class Job_seeker extends CI_Controller {
 	/* ==============            Seeker Dashboard Start Here          ================ */
 
 	// Dashboard
-	public function dashboard() {     	
+	public function dashboard() {     
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();	
      	$session_data = $this->session->all_userdata();  
      	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -427,6 +435,7 @@ class Job_seeker extends CI_Controller {
 
 	// Candidate inbox
 	public function inbox(){
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session = $this->session->all_userdata();
 		// print_r($session['login_session']);
 		if(!isset($session['login_session']) || empty($session['login_session'])) {
@@ -468,6 +477,7 @@ class Job_seeker extends CI_Controller {
 
 	// Job Seeker Edit Profile 
     public function editprofile() {
+    	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
     	$session = $this->session->all_userdata();
     	// print_r($session['login_session']);
     	if(!isset($session['login_session']) || empty($session['login_session'])) {
@@ -691,6 +701,7 @@ class Job_seeker extends CI_Controller {
 
 	// Seeker Find Job
 	public function findjob() {	
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();		
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -739,7 +750,7 @@ class Job_seeker extends CI_Controller {
 			$config['per_page'] = $per_page;
 			$config['total_rows'] = $total_rows;
 			$config['uri_segment'] = 3;
-			$config['num_links'] = $total_rows;
+			$config['num_links'] = 4;
 			$config['use_page_numbers'] = TRUE;
 
     		// Custom Configuration
@@ -755,6 +766,12 @@ class Job_seeker extends CI_Controller {
 			$config['cur_tag_close'] = '</a></li>';
 			$config['next_link'] = 'Next';
 			$config['prev_link'] = 'Prev';
+			$config['first_link'] = 'First';
+			$config['first_tag_open'] = '<li>';
+			$config['first_tag_close'] = '</li>';
+			$config['last_link'] = 'Last';
+			$config['last_tag_open'] = '<li>';
+			$config['last_tag_close'] = '</li>';
 
 			// Pagination Inititalization
 			$this->pagination->initialize($config);
@@ -775,6 +792,7 @@ class Job_seeker extends CI_Controller {
 
 	// Seeker Applied jobs
 	public function jobsapplied() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -797,7 +815,7 @@ class Job_seeker extends CI_Controller {
 		$config['per_page'] = $per_page;
 		$config['total_rows'] = $total_rows;
 		$config['uri_segment'] = 3;
-		$config['num_links'] = $total_rows;
+		$config['num_links'] = 4;
 		$config['use_page_numbers'] = TRUE;
 
 		// Custom Configuration
@@ -813,6 +831,12 @@ class Job_seeker extends CI_Controller {
 		$config['cur_tag_close'] = '</a></li>';
 		$config['next_link'] = 'Next';
 		$config['prev_link'] = 'Prev';
+		$config['first_link'] = 'First';
+		$config['first_tag_open'] = '<li>';
+		$config['first_tag_close'] = '</li>';
+		$config['last_link'] = 'Last';
+		$config['last_tag_open'] = '<li>';
+		$config['last_tag_close'] = '</li>';
 
 		// Pagination Inititalization
 		$this->pagination->initialize($config);
@@ -829,6 +853,7 @@ class Job_seeker extends CI_Controller {
 
 	// Seeker Feedback
 	public function feedback() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -877,6 +902,7 @@ class Job_seeker extends CI_Controller {
 
 	// Change password
 	public function change_password() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();	
     	// print_r($session['login_session']);
     	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
@@ -913,14 +939,16 @@ class Job_seeker extends CI_Controller {
 
 	// Seeker job apply and job description
 	public function applynow() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();	
 		if(!isset($session_data['login_session']) || empty($session_data['login_session']) || $session_data['login_session']['user_type'] != 'seeker') {
      		redirect('login/seeker');
      	}
      	$data['provider_values'] = $this->common_model->get_provider_details();
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
-		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list($data["current_jobvacancy_id"],$session_data['login_session']['candidate_institution_type']);
-		$data['qualification'] = $this->common_model->qualification_by_institution($session_data['login_session']['candidate_institution_type']);
+		$institution_id = (isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
+		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list($data["current_jobvacancy_id"],$institution_id);
+		$data['qualification'] = $this->common_model->qualification_by_institution($institution_id);
 		// $data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		$data["medium"] = $this->common_model->medium_of_instruction();
 		if(!$_POST) {
@@ -952,23 +980,30 @@ class Job_seeker extends CI_Controller {
 			$seeker_candidatejob = array(									
 									'applied_job_vacancies_id'		=> $data["applyjob"]['vacancies_id'],
 									'applied_job_candidate_id'		=> $session_data['login_session']['candidate_id'],
-									'applied_job_status'			=> 1,
+									'applied_job_status'			=> 1
 									// 'applied_job_date'				=> date("Y-m-d")
 								);
-			$apply_status = $this->job_seeker_model->job_seeker_apply_status($session_data['login_session']['candidate_id'],$data["applyjob"]['vacancies_id']);
-			if ($apply_status == "success") {
-				if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob,$seeker_candidatejob)) {
-					$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
-					$this->load->view('single-job', $data);
-				} 
+			if($data["applyjob"]['organization_institution_type_id'] == $institution_id ) {
+				$apply_status = $this->job_seeker_model->job_seeker_apply_status($session_data['login_session']['candidate_id'],$data["applyjob"]['vacancies_id']);
+				if ($apply_status == "success") {
+					if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob,$seeker_candidatejob)) {
+						$data["applied_status"] = $this->job_seeker_model->job_seeker_applied_status($session_data['login_session']['candidate_id'],$data["current_jobvacancy_id"]);
+						$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+						$this->load->view('single-job', $data);
+					} 
+					else {
+						$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
+						redirect('missingpage');
+					}
+				}
 				else {
-					$data['post_job_server_msg'] = 'Something wrong in data insertion process.Please try again!!';
-					redirect('missingpage');
+					$data['post_job_server_msg'] = $apply_status;
+					$this->load->view('single-job', $data);	
 				}
 			}
 			else {
-				$data['post_job_server_msg'] = $apply_status;
-				$this->load->view('single-job', $data);	
+				$data['post_job_server_msg'] = 'Something went wrong. Please try again with correct details!!';
+				$this->load->view('single-job', $data);
 			}
 		}
 	}
@@ -985,6 +1020,7 @@ class Job_seeker extends CI_Controller {
 
 	public function forgot_password()
 	{ 
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$ci =& get_instance();	
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
@@ -1030,79 +1066,6 @@ class Job_seeker extends CI_Controller {
 			}
 		}   	 		
 	}
-	/*Added by thangam*/
-	// public function allinstitutions(){
-	// 	$categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
-	// 	$this->load->view('all-institutions',$categories);
-	// }
-	// public function vacancies()
-	// {
-	// 	$data['applicable_postings'] = $this->common_model->applicable_posting();
-	// 	$data['qualifications'] = $this->common_model->qualification();
-	// 	$data['institution_values'] = $this->common_model->get_institution_type();
-
-	// 	$search_inputs = array();	
-	// 	if($_POST) {
- //    		$inputs = array(
- //        				'keyword' => $this->input->post('search_keyword'),
- //        				'min_amount' => $this->input->post('search_min_amount'),
- //        				'location' => $this->input->post('search_location'),
- //        				'max_amount' => $this->input->post('search_max_amount'),
- //        				'experience' => $this->input->post('search_exp'),
- //        				'posting' => $this->input->post('search_posting'),
- //        				'qualification' => $this->input->post('search_qualification'),
- //        				'institution' => $this->input->post('search_institution'),
- //        				);
- //    		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
- //    	}
- //    	$search_inputs = $this->session->userdata('search_inputs'); // To get search inputs from session
-
- //    	// Pagination values
- //    	$per_page = 20;
-
- //    	$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
- //        $search_results = $this->common_model->get_search_results($per_page, $offset,$search_inputs);
- //    	$total_rows = $search_results['total_rows'];
- //    	$data['search_inputs'] = $search_inputs;
- //    	$data['alldistrict'] = $this->common_model->get_all_district();
- //    	$data["search_results"] = $search_results['search_results'];
-
-
- //    	//pagination
-	// 	$this->load->library('pagination');
-
-	// 	// Pagination configuration
- //  		$config['base_url'] = base_url().'vacancies';
-	// 	$config['per_page'] = $per_page;
-	// 	$config['total_rows'] = $total_rows;
-	// 	$config['uri_segment'] = 2;
-	// 	$config['num_links'] = $total_rows;
-	// 	$config['use_page_numbers'] = TRUE;
-
- //    	// Custom Configuration
-	// 	$config['full_tag_open'] = '<ul class="pagination">';
-	// 	$config['full_tag_close'] = '</ul>';
-	// 	$config['next_tag_open'] = '<li>';
-	// 	$config['next_tag_close'] = '</li>';
-	// 	$config['prev_tag_open'] = '<li>';
-	// 	$config['prev_tag_close'] = '</li>';
-	// 	$config['num_tag_open'] = '<li>';
-	// 	$config['num_tag_close'] = '</li>';
-	// 	$config['cur_tag_open'] = '<li class="active"><a>';
-	// 	$config['cur_tag_close'] = '</a></li>';
-	// 	$config['next_link'] = 'Next';
-	// 	$config['prev_link'] = 'Previous';
-
-	// 	// Pagination Inititalization
-	// 	$this->pagination->initialize($config);
-
-	// 	// Navigation Links
-	// 	$pagination_links = $this->pagination->create_links();
-	// 	$data["links"] = $pagination_links;
-	// 	$data['provider_values'] = $this->common_model->get_provider_details();
- //        $this->load->view('vacancies',$data);
-		
-	// }
 
 
 
