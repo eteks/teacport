@@ -51,9 +51,8 @@ $active_record = TRUE;
 if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'root';
-	$db['default']['password'] = 'root';
+	$db['default']['password'] = '';
 	$db['default']['database'] = 'teacherrecruite';
-
 }
 //Testing server
 else if($_SERVER['SERVER_ADDR'] === '172.31.47.215'){
