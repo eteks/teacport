@@ -12,7 +12,7 @@ else{
 $feedback_data = $this->config->item('feedback_data');
 if(!empty($this->session->userdata("admin_login_status"))):
 ?>
-
+<?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
 <!-- BEGIN CONTAINER -->
 <div id="container" class="row-fluid">
@@ -66,6 +66,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
           <div class="widget">
+          <div class="edit_add_overlay dn"> </div> <!-- Overlay for table -->
             <div class="widget-title">
               <h4>
                 <i class="icon-reorder"></i>Latest News 
@@ -80,18 +81,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                               Add New <i class="icon-plus"></i>
                                       </button>
                                     <?php endif; ?>
-                      </div>
+                  </div>
+                  <div class="btn-group pull-right">
+                  </div>
                 </div>
-                <form action="job_seeker_profile">
-                  <p class="admin_status"> </p>
+                <form method="post" action="latest_news" class="admin_module_form" id="latestnews_form">
+                  <?php } ?>
+                    <?php
+                    if(!empty($status)) :
+                      echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
+                    endif;
+                    ?> 
                   <div class="">  
-                    <p class='val_error'> <p>
+                    <p class='val_error error_msg_md'> <p>
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
                           <th>Latest News Title </th>
                           <th>Latest News Redirect Link </th>
-						  <th>Latest News Status </th>
+						              <th>Latest News Status </th>
                           <th>Created date</th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
@@ -103,39 +111,48 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </thead>
                       <tbody class="table_content_section"> 
                       <?php
-                      print_r($latest_news_values);
                         if(!empty($latest_news_values)) :
                         $i=0;
                         foreach ($latest_news_values as $lat_news) :
                         $i++;
                       ?>                       
-                        <tr class="parents_tr" id="column">
+                        <tr class="parents_tr" id="column<?php echo $i; ?>">
                           <td class="l_news_title"> 
-                          	test
+                          	<?php echo $lat_news['latest_news_title']; ?>
                           </td>
                           <td class="l_redirect_link"> 
-                         	test
+                         	<?php echo $lat_news['latest_news_redirect_link']; ?>
                           </td>                         
                          <td class="l_news_status"> 
-                            active                 
+                            <?php 
+                              if ($lat_news['latest_news_status'] == 1) 
+                                echo "Active";
+                              else
+                                echo "Inactive";
+                            ?>      
+                            <input type="hidden" value="<?php echo $lat_news['latest_news_status']; ?>" />         
                          </td>
                         <td class="created_date"> 
-                         28/12/2016   13:27:20 
+                            <?php 
+                              $created_datetime = explode(' ', $lat_news['latest_news_createddate']);
+                              echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+                            ?> 
                         </td>
                         <td class="edit_section">
-                          <a class="ajaxEdit" href="javascript:;" data-id="123">
+                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $lat_news['latest_news_id']; ?>">
                             Edit
                           </a>
                         </td>
                         <td>
-  							        <a class='ajaxDelete' data-id=''>Delete</a>
+  							       <a class='ajaxDelete' data-id="<?php echo $lat_news['latest_news_id']; ?>">Delete</a>
                         </td>                          
                         </tr>  
                         <?php
                           endforeach;
                           endif;
-                        ?>                     
-                      </tbody>
+                        ?>    
+                        <?php if(!$this->input->is_ajax_request()) { ?>
+                    </tbody>
                     </table>
                   </div>
                 </form>
@@ -168,7 +185,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
     var l_news_status_value = new Array("","1","0");
   </script>
 <?php include "templates/footer_grid.php" ?>
-
+<?php } ?>
 <?php
 else :
 redirect(base_url().'main');

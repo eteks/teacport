@@ -174,7 +174,6 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	
 }
 .latest_news_1{
 	border: 1px solid #da651a;
@@ -196,6 +195,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .data_news{
 	background-color:#f4f7fa;
 	height:235px;
+	font-family: "Open Sans", Sans-Serif;
 }
  #flash_updates_1 .latest_news_content_1:hover {
 background: #ebf1f6; /* Old browsers */
@@ -214,7 +214,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }	
 
 /* Signin & SignUp forms */
- .loginbox_parallex::before {
+.kaushanscript_font_title{
+	color: #2ae !important; 
+	font-size: 25px !important; 
+	font-family: 'Kaushan Script', cursive !important;
+}
+.loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
 	content: "";
 	height: 100%;
@@ -888,9 +893,6 @@ font-size: 12px;
 	height: 160px;
     width: 100%;
 }
-
-
-
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {	
 	#provider_upload .input-group {
@@ -915,8 +917,6 @@ font-size: 12px;
 	}
 
 }
-
- 
 /* For Home page Search Buttonp */
 @media(min-width: 320px) and (max-width: 767px){
 	.slidershow-bg .search-form-contaner {
@@ -928,7 +928,6 @@ font-size: 12px;
 	    top: -20px;
 	 }   
 }
-
 .success_server_msg{
 	color: #fff;
 	margin: 10px 0;
@@ -1138,19 +1137,43 @@ label.form-input-error {
 .select2-container--open .select2-selection {
 	border-color: #66afe9 !important;
 }
-
 #contactForm {
 	clear: both
 }
-
 /* Ended by siva */
-.subcription_plan_details{
-	color: #fff;
-    font-weight: bold;
-    left: 200px;
-    position: absolute;
-    top: 230px;
+.company-dashboard{
+	padding-bottom:0;
+}	
+.company-logo-premium{
+	display:block;
+	height: auto;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    width: 100%;
 }
+.company-logo-premium img{
+	height: 70px;
+    left: 100px;
+    position: absolute;
+    top: 80px;
+    width: 70px;
+}
+.subcription_plan_details{
+	color: #29AAFE;
+	font-size: 16px;
+    font-weight: bold;
+    /*left: 200px;
+    position: absolute;
+    top: 230px;*/
+    height: 200px;
+    width: 250px;
+    padding: 40px 20px 30px;
+    margin: 20px 10px 10px;
+}
+.subcription_plan_details .fa-handshake-o{
+	font-size: 35px;
+}	
 .personnal_information{
 	background-image: url(../images/personall.png);
 	background-repeat: no-repeat;
@@ -1173,7 +1196,7 @@ label.form-input-error {
 .premium_image{
 	left: 0;
     position: absolute;
-    top: -40px;
+    top: 20px;
 }
 .client-logo img{
 	height: 125px;
@@ -1315,7 +1338,7 @@ label.form-input-error {
 }
 /*Added by Thangam*/
 #vacancies_page .Heading-title{margin-bottom: 30px;} 
-#vacancies_page label{font-size: 16px;}
+#vacancies_page label{font-size: 18px;}
 .others_value{position: relative;top: 5px;}
 .captcha_des_act{position: absolute !important;left: 170px;top: 235px;} /*signup captcha design modified*/
 .user_dashboard_popup_act{margin-bottom: 13px;margin-right: 13px;margin-left: 13px;}
@@ -1426,7 +1449,7 @@ label.form-input-error {
 }
 /* Provider Logo Sidebar */
 .dashboard-logo-sidebar {
-	height : 200px;
+	height : auto;
 	width: 200px;
 }
 #provider_editprofile label {
@@ -1539,10 +1562,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }
 /* Image Centering */
 .organisation_detail .company-img{
-	height: 100px;
+	height: 200px;
 	width: auto;
+}
+.img-holder {
 	position:relative;
-	
+	height:200px;
+	width:100%;
 }
 .company-img img {
 	position:absolute;
@@ -1554,25 +1580,44 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     /*width: 50px;
     height: 50px;*/
 }
-.organisation_detail .company-detail{
+/*.organisation_detail .company-detail{
 	height: 310px;
 	width: 350px;
-}
+}*/
 .organisation_detail .single-job-map {
 	padding: 0px;
 }
-/* vacancies*/
-#searchlist .comp-logo, #institution_grids .company-list-img{
-	height: 100px;
+/*Institutions images*/
+#institution_grids .company-list-img{
+	height: auto;;
+	width: 100px;
+	position:relative;
+	margin: 0 auto;
+}
+#institution_grids .company-list-img img{
+	height: 80px;
+	width: 80px;
+	/*position:absolute;*/
+	left:50%;
+    top:50%;
+}
+/* vacancies images*/
+#searchlist .comp-logo{
+	height: auto;;
 	width: 100px;
 	position:relative;
 }
-#searchlist .comp-logo img, #institution_grids .company-list-img img{
+#searchlist .comp-logo img{
 	height: auto;
 	width: 100%;
 	position:absolute;
 	left:50%;
     top:50%;
+}
+/* Seeker Dashboard Profile pic*/
+.user-image{
+	height: 150px;
+	width:auto;
 }
 /* Ended by Akila */
 /* For Visitor Count */
