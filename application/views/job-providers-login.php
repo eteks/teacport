@@ -8,7 +8,7 @@
                         	
                             <!--provider login-->
                             <div id="provider-signin" class="loginbox">
-                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;">
+                            	<div class="loginbox-title kaushanscript_font_title">
                             	  Job Providers Login
                             	  <a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                                 </div>
@@ -59,7 +59,7 @@
                              </div>                            
                             <!--Forgot Password-->
                             <div id="provider-forgotpwd" class="loginbox" style="display: none;" >
-                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> 
+                            	<div class="loginbox-title kaushanscript_font_title"> 
                             		Forgot Password 
                             		<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                             	</div><br>
@@ -94,7 +94,7 @@
                           	</div> <!--End  forgot pwd--> 
 			                <!--Provider- signup-->
                             <div id="provider-signup" class="loginbox" style="display:none;">
-                            	<div class="loginbox-title" style="color: #2ae; font-size: 25px; font-family: 'Kaushan Script', cursive;"> Let's Get Started
+                            	<div class="loginbox-title kaushanscript_font_title"> Let's Get Started
                             	  	<a class="pull-right" href="<?php echo base_url();?>">
                             	  		<i class="fa fa-close"></i>
                             	  	</a>

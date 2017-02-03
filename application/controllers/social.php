@@ -5,7 +5,7 @@ class Social extends CI_Controller {
 	public function __construct(){
 		parent::__construct();
 		session_start();
-		$this->load->library(array('linkedin/http_class','linkedin/oauth_client_class','twconnect'));
+		$this->load->library(array('linkedin/http_class','linkedin/oauth_client_class','twconnect','iptracker'));
 		$this->load->model('job_provider_model');
 		$this->load->model('job_seeker_model');
 	}
@@ -94,7 +94,7 @@ class Social extends CI_Controller {
 			$fbdata = array(
 				'registrant_email_id' => $profile['email'],
 				'registrant_name' => $profile['name'],
-				'registrant_logo' => $profile['picture']['url'],
+				'provider_image_path' => $profile['picture']['url'],
 				'registrant_register_type' => 'facebook'
 			);
 			if($this->job_provider_model->social_authendication_registration($fbdata) === 'inserted')

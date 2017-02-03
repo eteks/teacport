@@ -133,7 +133,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <i class="icon-bar-chart"></i>
                                 </div>
                                 <p>
-                                    <strong><?php echo $visitors_count[0]['count_vis']; ?></strong>
+                                    <strong><?php echo $visitors_count; ?></strong>
                                     Page Visits
                                 </p>
                             </div>

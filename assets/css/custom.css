@@ -13,7 +13,9 @@ line-height: 49px !important;
 .mega-menu .menu-links > li > a:hover{
 box-shadow:0 8px 6px -6px #da651a !important;	
 }
-
+.cb{
+	clear:both;
+}	
 .job-breadcrumb{
 	border-bottom:5px solid #ccc !important;
 }
@@ -159,13 +161,11 @@ box-shadow:0 8px 6px -6px #da651a !important;
 /*latest news having news*/
 .latest_news_head_1{
 	background-color: #da651a;
-    
     padding: 11px;
-   
 }
 .latest_news_head_1 p{
 	color:#fff;
-	font-size:16px;
+	font-size:16px;  
 	font-weight:bold;
 }
 .latest_news_content_1{
@@ -174,7 +174,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	
+	font-size: 12px; 
 }
 .latest_news_1{
 	border: 1px solid #da651a;
@@ -193,6 +193,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .data_news{
 	background-color:#f4f7fa;
 	height:235px;
+	font-family: "Open Sans", Sans-Serif;
 }
  #flash_updates_1 .latest_news_content_1:hover {
 background: #ebf1f6; /* Old browsers */
@@ -211,7 +212,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }	
 
 /* Signin & SignUp forms */
- .loginbox_parallex::before {
+.kaushanscript_font_title{
+	color: #2ae !important; 
+	font-size: 25px !important; 
+	font-family: 'Kaushan Script', cursive !important;
+}	
+.loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
 	content: "";
 	height: 100%;
@@ -239,7 +245,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	color: #000000 !important;
 }
 /* Pricing --Features */
-.all-jobs-list-box2 .fa{
+.all-jobs-list-box2 i{
 	color: #777;
 	font-size: 22px;
 }
@@ -259,8 +265,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	background-color: #da651a !important;
 }
 .price-footer{
-	position:absolute !important;
-	left:5px !important;
+	position:relative !important;
+	left:90px !important;
 	right:5px !important;
 }
 .price-days{
@@ -280,6 +286,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 #featured-price .price-features li{
 	letter-spacing: 1px !important;
     line-height: 30px !important;
+}
+.price_plan_footer{
+	margin-top:15px !important;
 }
 .odd{
 	background:#da651a none repeat scroll 0 0 !important;
@@ -1132,11 +1141,9 @@ label.form-input-error {
 .select2-container--open .select2-selection {
 	border-color: #66afe9 !important;
 }
-
 #contactForm {
 	clear: both
 }
-
 /* Ended by siva */
 .company-dashboard{
 	padding-bottom:0;
@@ -1153,7 +1160,7 @@ label.form-input-error {
 	height: 70px;
     left: 100px;
     position: absolute;
-    top: 100px;
+    top: 80px;
     width: 70px;
 }
 .subcription_plan_details{
@@ -1292,14 +1299,32 @@ label.form-input-error {
 }
 .app_post{
 	margin-bottom: 60px !important; 
+	height:100px;
+}
+.icon_appli_post{
+	display:inline-block;
+	/*width:100px;*/
 }
 .app_post h5{
-	padding-left: 20px !important;
+	
 	text-align: left;
 	color: #00a5ef;
+	display:inline-block;
+	position:absolute;
 }
 .app_post .fa-stack{
 	color: #f47020;
+}
+.appli_post{
+	font-size:18px;
+	display:inline-block;
+    /*padding-left: 20px !important;*/
+    text-align: left;
+    color: #00a5ef;
+    font-weight:bold;
+    margin-left:75px !important;
+    margin-top:23px;
+	
 }
 .owl-next{
 	left: 1075px;
@@ -1331,9 +1356,9 @@ label.form-input-error {
 .renew_select:hover{background-color:#00a5ef;color:white}
 .subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
 .subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
-.subs_input_val_upgact1{border-left-width: 1px;margin-left: 4px;position: absolute;width: 60px;display: none;}
-.subs_input_val_upgact2{margin-left: 76px;position: absolute;width: 60px;display: none;}
-.subs_input_val_upgact3{ margin-left: 147px;position: absolute;width: 60px;display: none;}
+.subs_input_val_upgact1{position: relative;width: 60px;display: none;}
+.subs_input_val_upgact2{position: relative;width: 60px;display: none;}
+.subs_input_val_upgact3{position: relative;width: 60px;display: none;}
 .upg_select.move{margin-left:50px;}
 .subs_reset{background-color:#4CAF50;border:none;color:white;padding:10px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:55px;margin-top:25px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer;display: none;}
 .upg_reset{background-color:white;color:black;border:2px solid #da651a}
@@ -1342,43 +1367,72 @@ label.form-input-error {
 
 .sms_block{
 	padding:5px;
-	position: absolute;
-	
+	position: relative;	
 	color: #fff;
 	display:none;
+	margin:0 5px;
 }
 .sms_block i{
-	color: #b0b0b0;
-	padding-left: 46px;
-	top: 6px;
-	font-size: 14px;	
+	color: #b0b0b0;	
+	font-size: 14px;
+	cursor:pointer;	
+}
+.resize-close {
+    margin-left: -24px;     
 }
 .email_block{
 	padding:5px;
-	position: absolute;	
+	position: relative;	
 	color: #fff;
 	display:none;
+	margin:0 5px;
 }
 .email_block i{
 	font-size: 14px;
 	color: #b0b0b0;
-	padding-left: 119px;
-	top: 6px;	
+	cursor:pointer;		
 }
 .resume_block{
 	padding:5px;
-	position: absolute;	
+	position: relative;	
 	color: #fff;
 	display:none;
+	margin:0 5px
 }
 .resume_block i{
 	font-size: 14px;
 	color: #b0b0b0;
-	padding-left: 188px;
-	top: 6px;	
+	cursor:pointer
+	/*padding-left: 188px;*/
+	/*top: 6px;*/		
+}
+#resume_icon {
+	cursor: pointer;
+	position: absolute;
+	right: -2px;
+	top: 10px;
+}
+#email_icon {
+	cursor: pointer;
+	position: absolute;
+	right: -2px;
+	top: 10px;
+}
+#sms_icon {
+	cursor: pointer;
+	position: absolute;
+	right: -2px;
+	top: 10px;
+}
+.common_box{
+	width:60px;
+	float:left;
 }
 #upgrade_total_price{
 	font-size:28px;
+}
+.price2{
+	margin-top:5px !important;
 }
 /* Added by Akila */
 /* About us */
@@ -1560,6 +1614,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	left:50%;
     top:50%;
 }
+/* Seeker Dashboard Profile pic*/
+.user-image{
+	height: 150px;
+	width:auto;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
@@ -1628,11 +1687,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .listing_head_title3{position: absolute; left: 715px; border: none !important; }
 .listing_head_title4{position: absolute; left: 885px; border: none !important;}
 
-.job-salary .dollar_sign{
+.job-salary .dollar_sign i{
 	font-size:17px !important;
 	color:#777 !important;
 }
-	
-.job-box-2 .job-salary{
-	text-align:right !important;
-}	
+.job-salary .i{
+	font-size:12px !important;
+	color:#000 !important;
+	}	
+

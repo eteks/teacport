@@ -44,7 +44,19 @@
                         </div>
                         <div class="visitor_count footer_block">
                         	 	<h4>Visitor Count</h4>
-                        		<div align='center'><a href=''><img src='http://hit-counter-html-code.com/wp-content/themes/customizr/hitcounter/c.php?d=9&id=159444&s=34' border='0'></a><br / ><small></small></div>
+                        		<div align='center'> 
+                                <?php
+                                if(!empty($site_visit_count)) :
+                                    if(strlen($site_visit_count) <= 8) :
+                                        echo sprintf("%08d", $site_visit_count);
+                                    else :
+                                        echo $site_visit_count;
+                                    endif;
+                                else :
+                                    echo sprintf("%08d", 0);
+                                endif;
+                                ?>
+                                </div>
                     	</div>
                     	</div>
                     <div class="col-sm-6 col-md-3 col-xs-12">
