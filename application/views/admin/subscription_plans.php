@@ -91,7 +91,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <tr class="ajaxTitle">
                         <th>Plan</th>
                         <th>Price</th>
-                        <th>Features</th>
+                        <!--<th>Features</th> -->
                         <th>Validity Days</th>
                         <!-- <th>Validity End Date</th> -->
                         <!-- <th>Max Vacancy Posts</th>
@@ -123,15 +123,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <td> 
                           <?php echo $sub['subscription_price']; ?>
                         </td>
-                        <td> 
-                          <?php echo $sub['subscription_features']; ?>
-                        </td>
-                        <td> 
-                          <?php //echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
-                        </td>
                         <!-- <td> 
-                          <?php echo date("d/m/Y", strtotime($sub['subcription_valid_end_date'])); ?>
+                          <?php //echo $sub['subscription_features']; ?>
                         </td> -->
+                        <!-- <td> 
+                          <?php //echo date("d/m/Y", strtotime($sub['subcription_valid_start_date'])); ?>
+                        </td> -->
+                        <!-- <td> 
+                          <?php //echo date("d/m/Y", strtotime($sub['subcription_valid_end_date'])); ?>
+                        </td> -->
+                         <td> 
+                          <?php echo $sub['subscription_validity_days']; ?>
+                        </td>
                         <td> 
                           <?php 
                             if ($sub['subscription_status'] == 1) 
@@ -214,7 +217,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity Days</label>
                         <span class="dynamic_data"> 
-                           <input class="numeric_value" placeholder="Days of Validity" size="16" type="text" name="validity_days" value="<?php if(isset($subscription_plan_details)) //echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                           <input class="numeric_value" placeholder="Days of Validity" size="16" type="text" name="validity_days" maxlength='4' value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_validity_days'];//echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <!-- <div class="col6 control-group">  
@@ -264,7 +267,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label"> Max Days Ad visisble </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act" maxlength="15" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
+                          <input type="text" class="form-control numeric_act" maxlength="3" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
@@ -277,12 +280,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </select>
                         </span>
                       </div>
-                      <div class="col6 control-group">  
+                      <!-- <div class="col6 control-group">  
                         <label class="control-label"> Subscription Features </label>
                         <span class="dynamic_data"> 
-                          <textarea class="textarea" placeholder="Subscription Features" maxlength="150" name="sub_features"><?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
+                          <textarea class="textarea" placeholder="Subscription Features" maxlength="150" name="sub_features"><?php //if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_features']; ?></textarea>
                         </span>
-                      </div>
+                      </div> -->
                   </div>
                   <input type="hidden" name="rid" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_id']; ?>"/>
                 </div>
