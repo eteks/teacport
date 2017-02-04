@@ -295,7 +295,23 @@
                     </div>
                 </div>
             </div>
-        </section>
+            <!---Pop up error msg--->
+            <div id="sitebodyoverlay"> </div><!--overlay-->
+            <!--popup-->
+			<div class="popup_fade cancel_btn"></div> 
+		 	<div class="error_popup_msg">
+		 		<a class="cancel_btn pull-right" href="#">
+		 			<i class="fa fa-close"></i>
+		 		</a>
+		 		<div class="clearfix"></div>
+			 	<div class="success-alert">
+			 		<span>Are you sure to proceed ?</span>
+			 	</div><!--- --->
+			 	<input type="submit" class="btn btn-default alert_btn" value="Proceed">
+			 	<input type="submit" class="btn btn-default alert_btn" value="Cancel">
+		 	</div><!--success_msg-->
+		 	<!---End Pop up error msg--->
+ </section>
 
 <?php include('include/footermenu.php'); ?>
 <?php include('include/footer.php'); ?> 
@@ -328,27 +344,27 @@ $(document).ready(function(){
      	});
     });
 
-    $('.candidate_email').on('click',function(){
-    	var candidate =  parseInt($(this).attr('candidate-id'));
-    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
-    	var url = '<?php echo base_url(); ?>';
-    	var org_id = <?php echo $organization['organization_id']; ?>;
-    	$.ajax({
-	       type: "POST",
-	       url: url+"provider/sendmail",
-	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
-	       cache: false,
-	       async: false,
-	       success: function(data) {
-	       		if(data == "failure"){
-	       			$('.subscription_action_message').text('Message not sent successfully!');
-	       		}
-	       		else {
-	       			$('.subscription_action_message').text('Message sent successfully!');
-	       		}
-	       }
-     	});
-    });
+    // $('.candidate_email').on('click',function(){
+    	// var candidate =  parseInt($(this).attr('candidate-id'));
+    	// var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    	// var url = '<?php echo base_url(); ?>';
+    	// var org_id = <?php echo $organization['organization_id']; ?>;
+    	// $.ajax({
+	       // type: "POST",
+	       // url: url+"provider/sendmail",
+	       // data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       // cache: false,
+	       // async: false,
+	       // success: function(data) {
+	       		// if(data == "failure"){
+	       			// $('.subscription_action_message').text('Message not sent successfully!');
+	       		// }
+	       		// else {
+	       			// $('.subscription_action_message').text('Message sent successfully!');
+	       		// }
+	       // }
+     	// });
+    // });
 });
 </script>
 <?php } ?>

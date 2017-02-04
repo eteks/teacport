@@ -91,95 +91,87 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		              				<table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
 			                			<thead>
 						                  	<tr class="ajaxTitle">
-							                   	<th rowspan="2">Subscription Plan<br/> Name</th>
-							                    <th colspan="4" class="text-center">Upgrade Plans</th>
-						                        <th rowspan="2">Created Date</th>
+							                   	<th>Subscription Plan<br/> Name</th>
+							                    <th class="text-center">Upgrade Plans</th>
+						                        <th>Created Date</th>
 							                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-							              			   <th rowspan="2" class="data_action">Edit</th>
+							              			   <th class="data_action">Edit</th>
 							            				<?php endif; ?>
 							           				  <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-							            				    <th rowspan="2" class="data_action">Delete</th>
+							            				    <th class="data_action">Delete</th>
 							           			<?php endif; ?>
 						                  	</tr>
-											<tr>
-		               		  					<th>Customized Plan<br/> Detail</th>
+						                  	<!-- <tr>
+		               		  					<th>Plan</th>
 		               		  					<th>Price</th>
 		                        				<th>Minimum</th>
 		                        				<th>Maximum</th>
-		               		  				</tr>
-			                			</thead>
+		               		  				</tr> -->
+										 </thead>
 			                			<tbody>
 			                   				<tr>
-			                   					<td>
-													<table class="sub_plan_title">
-														<tbody>
-						                   					<tr>
-						                   						<td>Basic Plan</td>
-						                   					</tr>
-														</tbody> 
-			                   						</table>
-			                   					</td>
-			                   					<td>
-			                   						<table class="sub_upgradeplan_title">
-			                   							<tbody>
-			                   								<tr>
-			                   									<td>SMS <span class="arrow_right"></span></td>
-			                   								</tr>
-			                   								<tr>
-			                   									<td>Email <span class="arrow_right"></span></td>
-			                   								</tr>
-			                   								<tr>
-			                   									<td>Resume Download <span class="arrow_right"></span></td>
-			                   								</tr>
-			                   							</tbody> 
-			                   						</table>
-			                   					</td>
-				                   				<td>
-				                   					<table class="sub_upgradeplan_price">
-			                   							<tbody>
-						                   					<tr>
-						                   						<td>Rs.80 </td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>Rs.80 </td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>Rs.80 </td>
-						                   					</tr>
-			                   							</tbody> 
-			                   						</table>	
-			                   					</td>
-			        							<td>
-			        								<table class="sub_upgradeplan_min">
-						                   				<tbody>
-						                   					<tr>
-						                   						<td>500</td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>700</td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>250</td>
-						                   					</tr>
-						                   				</tbody> 
-			                   						</table>
-			        							</td>
+			                   					<td class="sub_plan_title">Basic Plan</td>
 												<td>
-													<table class="sub_upgradeplan_max">
+			                   						<table class="table table-striped table-hover table-bordered sub_upgradeplan_title ">
 			                   							<tbody>
-						                   					<tr>
-						                   						<td>1500</td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>1700</td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>2000</td>
-						                   					</tr>
+			                   								<tr>
+			                   									<td class="showtooltip">
+			                   										SMS<span class="arrow_right"></span>
+			                   										<span class="info_tooltip">SMS</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										Rs.80 
+			                   										<span class="info_tooltip">Price</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										500 
+			                   										<span class="info_tooltip">Min Count</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										1500 
+			                   										<span class="info_tooltip">Max Count</span>
+			                   									</td>
+			                   								</tr>
+			                   								<tr>
+			                   									<td class="showtooltip">
+			                   										Email <span class="arrow_right"></span>
+			                   										<span class="info_tooltip">Email</span>
+			                   										</td>
+			                   									<td class="showtooltip">
+			                   										Rs.80 
+			                   										<span class="info_tooltip">Price</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										500
+			                   										<span class="info_tooltip">Min Count</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										1500
+			                   										<span class="info_tooltip">Max Count</span>
+			                   									</td>
+			                   								</tr>
+			                   								<tr>
+			                   									<td class="showtooltip">
+			                   										Resume Download <span class="arrow_right"></span>
+			                   										<span class="info_tooltip">Resume Download </span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										Rs.80 
+			                   										<span class="info_tooltip">Price</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										500
+			                   										<span class="info_tooltip">Min Count</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										1500
+			                   										<span class="info_tooltip">Max Count</span>
+			                   									</td>
+			                   								</tr>
 			                   							</tbody> 
 			                   						</table>
-												</td>
-						                   		<td>03/02/2017</td>
+			                   					</td>
+				                   				<td>03/02/2017</td>
 												<td>
 													<a id="sample_editable_1_new" data-open="popup_section_subs" class="green add_option"  data-mode="edit" data-action="update">
 													Edit
@@ -192,64 +184,50 @@ if(!empty($this->session->userdata("admin_login_status"))):
 												</td>
 											</tr>
 											<tr>
-						                   		<td>
-						                   			<table class="sub_plan_title">
-						                   				<tbody>
-						                   					<tr>
-						                   						<td>Basic Plan</td>
-						                   					</tr>
-						                   				</tbody> 
-						                   			</table>
-						                   		</td>
-						                   		<td>
-						                   			<table class="sub_upgradeplan_title">
-						                   				<tbody>
-						                   					<tr>
-						                   						<td>SMS <span class="arrow_right"></span></td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>Resume Download <span class="arrow_right"></span></td>
-						                   					</tr>
-						                   				</tbody> 
-						                   			</table>
-						                   		</td>
-							                   	<td>
-							                   		<table class="sub_upgradeplan_price">
-						                   				<tbody>
-						                   					<tr>
-						                   						<td>Rs.80 </td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>Rs.80 </td>
-						                   					</tr>
-						                   				</tbody> 
-						                   			</table>	
-						                   		</td>
-						        				<td>
-						        					<table class="sub_upgradeplan_min">
-						                   				<tbody>
-						                   					<tr>
-						                   						<td>500</td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>250</td>
-						                   					</tr>
-						                   				</tbody> 
-						                   			</table>
-						        				</td>
+			                   					<td class="sub_plan_title">Basic Plan</td>
 												<td>
-													<table class="sub_upgradeplan_max">
-						                   				<tbody>
-						                   					<tr>
-						                   						<td>1500</td>
-						                   					</tr>
-						                   					<tr>
-						                   						<td>2000</td>
-						                   					</tr>
-						                   				</tbody> 
-						                   			</table>
-												</td>
-						                   		<td>03/02/2017</td>
+			                   						<table class="table table-striped table-hover table-bordered sub_upgradeplan_title ">
+			                   							<tbody>
+			                   								<tr>
+			                   									<td class="showtooltip">
+			                   										SMS<span class="arrow_right"></span>
+			                   										<span class="info_tooltip">SMS</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										Rs.80 
+			                   										<span class="info_tooltip">Price</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										500 
+			                   										<span class="info_tooltip">Min Count</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										1500 
+			                   										<span class="info_tooltip">Max Count</span>
+			                   									</td>
+			                   								</tr>
+			                   								<tr>
+			                   									<td class="showtooltip">
+			                   										Resume Download <span class="arrow_right"></span>
+			                   										<span class="info_tooltip">Resume Download </span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										Rs.80 
+			                   										<span class="info_tooltip">Price</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										500
+			                   										<span class="info_tooltip">Min Count</span>
+			                   									</td>
+			                   									<td class="showtooltip">
+			                   										1500
+			                   										<span class="info_tooltip">Max Count</span>
+			                   									</td>
+			                   								</tr>
+			                   							</tbody> 
+			                   						</table>
+			                   					</td>
+				                   				<td>03/02/2017</td>
 												<td>
 													<a id="sample_editable_1_new" data-open="popup_section_subs" class="green add_option"  data-mode="edit" data-action="update">
 													Edit

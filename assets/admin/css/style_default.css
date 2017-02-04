@@ -958,7 +958,7 @@ table {
 }
 /* Plan upgrade -Table-grid */
 .sub_plan_title{
-	width: 200px;
+	width: 100px;
 	height: auto;
 }
 .table-bordered .sub_plan_title td {
@@ -966,7 +966,7 @@ table {
 }
 .sub_upgradeplan_title, .sub_upgradeplan_price,.sub_upgradeplan_min,.sub_upgradeplan_max{
 	border: 1px solid #ddd;
-	width: 200px;
+	width: 100px;
 	height: auto;
 }
 .sub_upgradeplan_title td, .sub_upgradeplan_price td,.sub_upgradeplan_min td,.sub_upgradeplan_max td{
@@ -987,6 +987,30 @@ table {
 }
 .upgrade_table thead th{
 	vertical-align: middle;
+}
+/*for upgrade table toolip*/
+.info_tooltip{
+    background: #828282 none repeat scroll 0 0;
+    border-radius: 5px;
+    bottom: 38px;
+    color: #fff;
+    display: none;
+    font-family: Montserrat;
+    font-size: 10px;
+    height: 23px;
+    left: 45px;
+    padding: 5px 0 0;
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    z-index: 9999;
+    top:-26px;
+}
+.showtooltip {
+	position: relative;
+}
+.showtooltip:hover .info_tooltip, .showtooltip:focus .info_tooltip{
+    display: block !important;
 }
 /*Footer*/
 #footer {
