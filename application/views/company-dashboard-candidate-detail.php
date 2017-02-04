@@ -265,18 +265,21 @@
 												</div>
 												<div class="clearfix"> </div>
 												<div class="loginbox-submit">
+
+
+													<?php if($subscrib_plan['is_email_validity']){ ?>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" 
+                                  					   title="You used 50 Email, still you can send 100 more, else you can upgrade the Email plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
+                                  					<?php } ?>	
+                                  					<?php if($subscrib_plan['is_sms_validity']){ ?>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" title="You downloaded 50 sms, still you can download 50 more,else you can upgrade the Sms plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Sms</a>
+                              						<?php } ?>
 													<?php if($subscrib_plan['is_resume_validity']){ ?>
                                   					<a class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" 
-                                  					   title="You used 50 SMS, still you can send 100 more, else you can upgrade the SMS plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
+                                  					   title="You used 50 Download, still you can send 100 more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
                                   					<a class="dn" id="hidden_download" href="#" download> </a>
-                                  					<?php } ?>
-                                  					<a disabled class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" 
-                                  					   title="You used 50 emails, still you can send 100 more" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
-                                  					<?php if($subscrib_plan['is_email_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip"  
-                                  					   title="You downloaded 50 resumes, still you can download 50 more" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Message</a>
-                              						<?php } ?>
-                              					</div>
+                                  					<?php } ?>                            					
+                             					</div>
 											</div> <br> <!---Communication Information-->	
 											<?php } else{ ?>
 												<div class="personnal_information">
@@ -320,6 +323,29 @@
 <script type="text/javascript"> 
 $(document).ready(function(){
 	// subcription actions like download resume, sms count, job posted counts
+
+	$('.candidate_sms').on('click',function(){
+    	var candidate =  parseInt($(this).attr('candidate-id'));
+    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    	var url = '<?php echo base_url(); ?>';
+    	var org_id = <?php echo $organization['organization_id']; ?>;
+    	$.ajax({
+	       type: "POST",
+	       url: url+"provider/sendsms",
+	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       cache: false,
+	       async: false,
+	       success: function(data) {
+	       		if(data == "failure"){
+	       			$('.subscription_action_message').text('Message not sent successfully!');
+	       		}
+	       		else {
+	       			$('.subscription_action_message').text('Message sent successfully!');
+	       		}
+	       }
+     	});
+    });
+
     $('.candidate_resume').on('click',function(){
     	var candidate =  parseInt($(this).attr('candidate-id'));
     	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
@@ -343,28 +369,27 @@ $(document).ready(function(){
 	       }
      	});
     });
-
-    // $('.candidate_email').on('click',function(){
-    	// var candidate =  parseInt($(this).attr('candidate-id'));
-    	// var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
-    	// var url = '<?php echo base_url(); ?>';
-    	// var org_id = <?php echo $organization['organization_id']; ?>;
-    	// $.ajax({
-	       // type: "POST",
-	       // url: url+"provider/sendmail",
-	       // data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
-	       // cache: false,
-	       // async: false,
-	       // success: function(data) {
-	       		// if(data == "failure"){
-	       			// $('.subscription_action_message').text('Message not sent successfully!');
-	       		// }
-	       		// else {
-	       			// $('.subscription_action_message').text('Message sent successfully!');
-	       		// }
-	       // }
-     	// });
-    // });
+    $('.candidate_email').on('click',function(){
+    	var candidate =  parseInt($(this).attr('candidate-id'));
+    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    	var url = '<?php echo base_url(); ?>';
+    	var org_id = <?php echo $organization['organization_id']; ?>;
+    	$.ajax({
+	       type: "POST",
+	       url: url+"provider/sendmail",
+	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       cache: false,
+	       async: false,
+	       success: function(data) {
+	       		if(data == "failure"){
+	       			$('.subscription_action_message').text('Message not sent successfully!');
+	       		}
+	       		else {
+	       			$('.subscription_action_message').text('Message sent successfully!');
+	       		}
+	       }
+     	});
+    });
 });
 </script>
 <?php } ?>

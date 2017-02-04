@@ -36,10 +36,12 @@ class Payu extends CI_Controller {
 					$posted['surl'] = PAYUSUCCESSURL;
 					$posted['curl'] = PAYUCANCELURL;
 					$posted['txnid'] = $txnid;
+					$posted['productinfo'] = "test";
 					$hashSequence = "key|txnid|amount|productinfo|firstname|email|udf1|udf2|udf3|udf4|udf5|udf6|udf7|udf8|udf9|udf10";
 					if (empty($posted['hash']) && sizeof($posted) > 0) {
 						if (empty($posted['key']) || empty($posted['txnid']) || empty($posted['amount']) || empty($posted['firstname']) || empty($posted['email']) || empty($posted['phone']) || empty($posted['productinfo']) || empty($posted['surl']) || empty($posted['furl']) || empty($posted['service_provider'])) {
 							$formError = 1;
+							echo "test";
 						} else {
 							$hashVarsSeq = explode('|', $hashSequence);
 							$hash_string = '';

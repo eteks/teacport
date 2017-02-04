@@ -1007,6 +1007,9 @@ font-size: 12px;
 .datepicker_section span {
 	width : 100% !important;
 }
+.subscribe_secure_msg {
+	clear: both;
+}
 table tr[data-name="bold_section"] {
     font-weight: bold;
 }

@@ -82,12 +82,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		           				</div>                               
 		            			<form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
 		            				<?php } ?> 
-		            				<?php
-		            					if(!empty($status)) :
-		              						echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
-		            					endif;
-		            				?> 
-		            				<p class='val_error error_msg_md'> <p>
 		              				<table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
 			                			<thead>
 						                  	<tr class="ajaxTitle">
@@ -248,85 +242,86 @@ if(!empty($this->session->userdata("admin_login_status"))):
 					</div>
 	    			<!-- END EXAMPLE TABLE widget-->
 				</div>
-				<!---Add and edit popup -->
-				<div class="popup" data-popup="popup_section_subs">
-					<div class="popup-inner">       
-					    <div class="widget box blue" id="popup_wizard_section">
-				      		<div class="widget-title">
-				        		<h4>
-				          			<i class="icon-reorder"></i> Subscription Plan
-				        		</h4>                        
-				      		</div>
-				      		<!--widget-body-->
-				      		<div class="widget-body form">
-				        		<form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
-				        			<p class="admin_status"> </p>
-				        			<fieldset>
-										<legend> Subscription plan details:</legend>
-				            			<div class="form-wizard pop_details_section">
-				            				<?php } ?>
-				            				<div class="form-group">
-				        						<label class="control-label">Select Plan</label>
-				        						<select value="">
-				        							<option value="Select">Select</option>
-				        							<option value="Basic plans @ 1999">Basic plans @ 1999</option>
-				        							<option value="Standard plans @ 5000">Standard plans @ 5000</option>
-				        							<option value="Premium plans @ 10000">Premium plans @ 10000</option>
-				        						</select>
-				        					</div>
-				            				<div class="form-group plan_creation">
-				            					<!--append field-->
-				            					<div class="form-group field_wrapper">
-					            					<label class="control-label" value="Customize">Customize Limits</label>
-				            	   					<div class="upg_plan col4 select_plan">
-				                						<select class="form-control customize_plan">
-				                							<option value="">Select</option>
-				                							<option value="SMS">SMS</option>
-				                							<option value="Email">Email</option>
-				                							<option value="Resume Download">Resume Download</option>
-				                						</select>
-				                					</div>
-				                					<div class="col3">
-				                						<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
-				                					</div>
-				                					<div class="col3">
-				                						<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
-				                					</div>
-				                					<div class="col3">
-				                						<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
-				                					</div>
-				                					<div class="">
-				                						<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
-				                					</div>
-			                						<div class="clearfix"> </div>
-				                 				</div>
-				                 				<div class="pull-right">
-				                  					<a class="add_button" title="Add field"><strong>+</strong></a>
-				                  				</div>	
-				             	  				<div class="clearfix"> </div>
-				               					<button type="submit" class="btn btn-info save_button">Save</button>
-				            					<?php if(!$this->input->is_ajax_request()) { ?>
-				            				 </div>
-										</div>				            				 				            				 
-									</fieldset>
-								</form>
-							   </div> <!--widget-body-->  
-							</div>	            
-			  			 <p>
-			    			<a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
-			 			 </p>
-			 			<a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
-					</div> <!--popup-inner-->
-				</div>
-				<!--End Popup-->
-				<!-- END ADVANCED TABLE widget-->
-			</div>     
-				<!-- END PAGE CONTENT-->
-			</div>
-			<!-- END PAGE CONTAINER-->
-		</div>
-			<!-- END PAGE -->
-	</div>
+<!---Add and edit popup -->
+<div class="popup" data-popup="popup_section_subs">
+  <div class="popup-inner">       
+    <div class="widget box blue" id="popup_wizard_section">
+      <div class="widget-title">
+        <h4>
+          <i class="icon-reorder"></i> Subscription Plan
+        </h4>                        
+      </div>
+      <div class="widget-body form">
+        <form action="customize_plan_settings" class="form-horizontal popup_form admin_form upgrade_plan" data-mode="">
+        <p class="admin_status"> </p>
+        <fieldset>
+            <legend> Subscription plan details:</legend>
+            <div class="form-wizard pop_details_section">
+            <?php } ?>
+            <div class="form-group">
+            <label class="control-label">Select Plan</label>
+            <select name="subscription_name">
+              <option value="">Select Plan</option>
+              <?php foreach ($subscription_plans as $sub) : 
+               echo "<option value=".$sub['subscription_id'].">".$sub['subscription_plan']."</option>";
+              endforeach; ?>
+            </select>
+          </div>
+            <div class="form-group plan_creation">
+              <!--append field-->
+              <div class="form-group field_wrapper">
+                <label class="control-label" value="Customize">Upgrade Option</label>
+                 <div class="upg_plan col4 select_plan">
+                    <select class="form-control customize_plan" name="upgrade_option[]">
+                      <option value="">Select</option>
+                      <option value="sms">Per SMS</option>
+                      <option value="email">Per Email</option>
+                      <option value="resume">Per Resume Download</option>
+                    </select>
+                  </div>
+                  <div class="col3">
+                    <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_price[]" maxlength="5" placeholder="Price in Rupees">
+                  </div>
+                  <div class="col3">
+                    <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_min[]" maxlength="5" placeholder="Min Limit">
+                  </div>
+                  <div class="col3">
+                    <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_max[]" maxlength="5" placeholder="Max Limit">
+                  </div>
+                  <div class="">
+                    <a class="remove_button dn" title="Remove field"><strong>-</strong></a>
+                  </div>
+                  <div class="clearfix"> </div>
+                 </div>
+                  <div class="pull-right">
+                    <a class="add_button" title="Add field"><strong>+</strong></a>
+                  </div>  
+                <div class="clearfix"> </div>
+      
+            <button type="submit" class="btn btn-info save_button">Save</button>
+            <?php if(!$this->input->is_ajax_request()) { ?>
+            </div>
+          </fieldset>
+        </form>
+      </div>  
+    </div>                
+  <p>
+    <a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
+  </p>
+  <a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
+</div>
+ </div> 
+ <!--End Popup-->  
+</div>
+<!-- END ADVANCED TABLE widget-->
+<!-- END PAGE CONTENT-->
+ </div>     
+<!-- END PAGE CONTENT-->
+</div>
+<!-- END PAGE CONTAINER-->
+</div>
+<!-- END PAGE -->
+</div>
 <script>
     // Define default values
     var inputType = new Array("select","text","text","text","text","select"); // Set type of input which are you have used like text, select,textarea.
