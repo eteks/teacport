@@ -220,8 +220,8 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     border: 1px solid #ff0000 !important;
 }
 tr select {
-    max-width: 175px !important;
-    min-width: 150px !important;
+    max-width: 130px !important;
+    min-width: 122px !important;
 }
 .select_by {
     height: 30px;
@@ -418,7 +418,7 @@ tr select {
     max-height:200px !important;
     overflow: auto !important;
     /*max-width: 145px !important;    */
-    width: 500px !important;
+    width: 490px !important;
 }
 .user_accts_table td input {
     max-width: 127px !important;
@@ -936,8 +936,8 @@ table {
     width: 25% !important
 } 
 .job_pro_form .step .desc_space {
-    margin-left: 34px !important;
-    padding: 13px 3px !important;
+    /*margin-left: 34px !important;
+    padding: 13px 3px !important;*/
 } 
 .chzn-container-multi .chzn-choices{
 	padding:2px !important;

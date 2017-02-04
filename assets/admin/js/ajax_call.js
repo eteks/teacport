@@ -230,7 +230,7 @@ $(document).ready(function(){
         if(this_id != '') {
             $.ajax({
                 type : "POST",
-                url : admin_baseurl+"state",
+                url : admin_baseurl+"district_state",
                 data : { value : this_id, csrf_token : csfrData[csrf_name]},
                 success : function(res) {
                     if(res) {
