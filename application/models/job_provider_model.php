@@ -268,6 +268,17 @@ class Job_provider_model extends CI_Model {
 	// }
 	public function all_candidate_list_for_search($limit,$start,$ins_id,$searchdata)
 	{
+		if(!empty($searchdata['candidate_experience'])) {
+    		if($searchdata['candidate_experience'] <= 10) {
+    			$min_exp = $searchdata['candidate_experience'];
+    			$max_exp = $searchdata['candidate_experience'] + 1;
+    		}
+    		else {
+    			$min_exp = $searchdata['candidate_experience'];
+    			$max_exp = 90; // Maximum experience - We must give it
+    		}
+    	}
+
 		$this->db->select('d.district_name,cp.candidate_id,cp.candidate_marital_status,cp.candidate_gender,cp.candidate_date_of_birth,cp.candidate_image_path,cp.candidate_name,(select sum(cex.candidate_experience_year) from tr_candidate_experience cex where cex.candidate_profile_id = cp.candidate_id ) as experience,cpre.candidate_expecting_start_salary,cpre.candidate_expecting_end_salary,eq.educational_qualification');
 		$this->db->from('tr_candidate_profile cp');
 		$this->db->join('tr_district d', 'cp.candidate_district_id = d.district_id','inner');
@@ -275,45 +286,44 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_experience cexp', 'cp.candidate_id = cexp.candidate_profile_id','left');
 		$this->db->join('tr_candidate_preferance cpre', 'cp.candidate_id = cpre.candidate_profile_id','inner');
 		$this->db->join('tr_educational_qualification eq', 'cedu.candidate_education_qualification_id = eq.educational_qualification_id','inner');
-		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90' AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
+		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
-			$where .= " AND cp.candidate_district_id =".$searchdata['candidate_willing_district'];
+			$where .= " AND cp.candidate_district_id ='".$searchdata['candidate_willing_district']."'";
 		}
 		if(isset($searchdata['candidate_tet_status']) && $searchdata['candidate_tet_status'] != ''){
-			$where .= " AND cp.candidate_tet_exam_status = ".$searchdata['candidate_tet_status'];
+			$where .= " AND cp.candidate_tet_exam_status = '".$searchdata['candidate_tet_status']."'";
 		}
-		// if(isset($searchdata['candidate_mother_tongue']) && $searchdata['candidate_mother_tongue'] != ''){
-		// 	$where .= " AND tr_candidate_profile.candidate_mother_tongue =".$searchdata['candidate_mother_tongue'];
-		// }
-		// if(isset($searchdata['candidate_experience']) && $searchdata['candidate_experience'] != ''){
-		// 	$where .= " AND (select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) =".$searchdata['candidate_experience'];
-		// }
-		// if(isset($searchdata['candidate_posting_name']) && $searchdata['candidate_posting_name'] != ''){
-		// 	$where .= " AND tr_candidate_preferance.candidate_posting_applied_for in ('".$searchdata['candidate_posting_name']."')";
-		// }
-		// if(isset($searchdata['candidate_nationality']) && $searchdata['candidate_nationality'] != ''){
-		// 	$where .= " AND tr_candidate_profile.candidate_nationality = '".$searchdata['candidate_nationality']."'";
-		// }
-		// if(isset($searchdata['candidate_religion']) && $searchdata['candidate_religion'] != ''){
-		// 	$where .= " AND tr_candidate_profile.candidate_religion = '".$searchdata['candidate_religion']."'";
-		// }
+		if(isset($searchdata['candidate_experience']) && $searchdata['candidate_experience'] != '' && $searchdata['candidate_experience'] != 0){
+			$where .= " AND (select sum(cexpw.candidate_experience_year) as experience from tr_candidate_experience cexpw where cexpw.candidate_profile_id = cp.candidate_id ) BETWEEN '".$min_exp."' AND '".$max_exp."'";
+		}
+		if(isset($searchdata['candidate_experience']) && $searchdata['candidate_experience'] != '' && $searchdata['candidate_experience'] == 0){
+			$where .= " AND cp.candidate_is_fresher='".$searchdata['candidate_experience']."'";
+		}
+		if(isset($searchdata['candidate_posting_name']) && $searchdata['candidate_posting_name'] != ''){
+			$where .= " AND FIND_IN_SET('".$searchdata['candidate_posting_name']."',cpre.candidate_posting_applied_for) !=0";
+		}
+		if(isset($searchdata['candidate_class']) && $searchdata['candidate_class'] != ''){
+			$where .= " AND FIND_IN_SET('".$searchdata['candidate_class']."',cpre.candidate_willing_class_level_id) !=0";
+		}
+		if(isset($searchdata['candidate_subject']) && $searchdata['candidate_subject'] != ''){
+			$where .= " AND FIND_IN_SET('".$searchdata['candidate_subject']."',cpre.candidate_willing_subject_id) !=0";
+		}
+		if(isset($searchdata['candidate_qualification']) && $searchdata['candidate_qualification'] != ''){
+			$where .= " AND cedu.candidate_education_qualification_id = '".$searchdata['candidate_qualification']."'";
+		}
+		else {
+			$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
+		}
+		if(empty($data['candidate_max_amount']) && isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '') {
+        	$where .= "AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' ";	
+        }
+        if(empty($data['candidate_min_amount']) && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
+        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' ";	
+        }
+        if(isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '' && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
+        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_max_amount']."'";	
+        }
 		
-		// if(isset($searchdata['candidate_subject']) && $searchdata['candidate_subject'] != ''){
-		// 	$where .= " AND tr_candidate_preferance.candidate_willing_subject_id in ('".$searchdata['candidate_subject']."')";
-		// }
-		// if(isset($searchdata['candidate_qualification']) && $searchdata['candidate_qualification'] != ''){
-		// 	$where .= " AND tr_candidate_education.candidate_education_id = ".$searchdata['candidate_qualification'];
-		// }
-		// if(isset($searchdata['candidate_salary']) && $searchdata['candidate_salary'] != ''){
-		// 	$salary_split = explode('-', $searchdata['candidate_salary']);	
-		// 	if (strpos($salary_split[1], 'above') !== false) {
-		// 		$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0];
-		// 	}
-		// 	else {
-		// 		$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0]." AND tr_candidate_preferance.candidate_expecting_start_salary <= ".$salary_split[1];
-		// 	}
-			
-		// }
 		$this->db->limit($limit,$start);
 		$this->db->where('('.$where.')');
 		$this->db->group_by('cp.candidate_id'); 
@@ -322,74 +332,83 @@ class Job_provider_model extends CI_Model {
 	}
 	public function all_candidate_list_for_search_count($ins_id,$searchdata)
 	{
-		$this->db->select('tr_candidate_profile.candidate_marital_status,tr_candidate_profile.candidate_gender,tr_candidate_profile.candidate_date_of_birth,tr_candidate_profile.candidate_image_path,tr_candidate_preferance.candidate_expecting_start_salary,tr_candidate_preferance.candidate_expecting_end_salary,tr_candidate_profile.candidate_name,tr_district.district_name,tr_subject.subject_name,tr_educational_qualification.educational_qualification,(select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) as experience');
-		$this->db->from('tr_candidate_profile');
-		$this->db->join('tr_district`', 'tr_district.district_id = tr_candidate_profile.candidate_live_district_id');
-		$this->db->join('tr_candidate_education', 'tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id');
-		$this->db->join('tr_candidate_experience', 'tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id','left');
-		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
-		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
-		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
-		$where = "tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id )";
+		if(!empty($searchdata['candidate_experience'])) {
+    		if($searchdata['candidate_experience'] <= 10) {
+    			$min_exp = $searchdata['candidate_experience'];
+    			$max_exp = $searchdata['candidate_experience'] + 1;
+    		}
+    		else {
+    			$min_exp = $searchdata['candidate_experience'];
+    			$max_exp = 90; // Maximum experience - We must give it
+    		}
+    	}
+
+		$this->db->select('d.district_name,cp.candidate_id,cp.candidate_marital_status,cp.candidate_gender,cp.candidate_date_of_birth,cp.candidate_image_path,cp.candidate_name,(select sum(cex.candidate_experience_year) from tr_candidate_experience cex where cex.candidate_profile_id = cp.candidate_id ) as experience,cpre.candidate_expecting_start_salary,cpre.candidate_expecting_end_salary,eq.educational_qualification');
+		$this->db->from('tr_candidate_profile cp');
+		$this->db->join('tr_district d', 'cp.candidate_district_id = d.district_id','inner');
+		$this->db->join('tr_candidate_education cedu', 'cp.candidate_id = cedu.candidate_profile_id','inner');
+		$this->db->join('tr_candidate_experience cexp', 'cp.candidate_id = cexp.candidate_profile_id','left');
+		$this->db->join('tr_candidate_preferance cpre', 'cp.candidate_id = cpre.candidate_profile_id','inner');
+		$this->db->join('tr_educational_qualification eq', 'cedu.candidate_education_qualification_id = eq.educational_qualification_id','inner');
+		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
-			$where .= " AND tr_candidate_profile.candidate_district_id =".$searchdata['candidate_willing_district'];
-		}
-		if(isset($searchdata['candidate_mother_tongue']) && $searchdata['candidate_mother_tongue'] != ''){
-			$where .= " AND tr_candidate_profile.candidate_mother_tongue =".$searchdata['candidate_mother_tongue'];
-		}
-		if(isset($searchdata['candidate_experience']) && $searchdata['candidate_experience'] != ''){
-			$where .= " AND (select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) =".$searchdata['candidate_experience'];
-		}
-		if(isset($searchdata['candidate_posting_name']) && $searchdata['candidate_posting_name'] != ''){
-			$where .= " AND tr_candidate_preferance.candidate_posting_applied_for in ('".$searchdata['candidate_posting_name']."')";
-		}
-		if(isset($searchdata['candidate_nationality']) && $searchdata['candidate_nationality'] != ''){
-			$where .= " AND tr_candidate_profile.candidate_nationality = '".$searchdata['candidate_nationality']."'";
-		}
-		if(isset($searchdata['candidate_religion']) && $searchdata['candidate_religion'] != ''){
-			$where .= " AND tr_candidate_profile.candidate_religion = '".$searchdata['candidate_religion']."'";
+			$where .= " AND cp.candidate_district_id ='".$searchdata['candidate_willing_district']."'";
 		}
 		if(isset($searchdata['candidate_tet_status']) && $searchdata['candidate_tet_status'] != ''){
-			$where .= " AND tr_candidate_profile.candidate_tet_exam_status = ".$searchdata['candidate_tet_status'];
+			$where .= " AND cp.candidate_tet_exam_status = '".$searchdata['candidate_tet_status']."'";
+		}
+		if(isset($searchdata['candidate_experience']) && $searchdata['candidate_experience'] != '' && $searchdata['candidate_experience'] != 0){
+			$where .= " AND (select sum(cexpw.candidate_experience_year) as experience from tr_candidate_experience cexpw where cexpw.candidate_profile_id = cp.candidate_id ) BETWEEN '".$min_exp."' AND '".$max_exp."'";
+		}
+		if(isset($searchdata['candidate_experience']) && $searchdata['candidate_experience'] != '' && $searchdata['candidate_experience'] == 0){
+			$where .= " AND cp.candidate_is_fresher='".$searchdata['candidate_experience']."'";
+		}
+		if(isset($searchdata['candidate_posting_name']) && $searchdata['candidate_posting_name'] != ''){
+			$where .= " AND FIND_IN_SET('".$searchdata['candidate_posting_name']."',cpre.candidate_posting_applied_for) !=0";
+		}
+		if(isset($searchdata['candidate_class']) && $searchdata['candidate_class'] != ''){
+			$where .= " AND FIND_IN_SET('".$searchdata['candidate_class']."',cpre.candidate_willing_class_level_id) !=0";
 		}
 		if(isset($searchdata['candidate_subject']) && $searchdata['candidate_subject'] != ''){
-			$where .= " AND tr_candidate_preferance.candidate_willing_subject_id in ('".$searchdata['candidate_subject']."')";
+			$where .= " AND FIND_IN_SET('".$searchdata['candidate_subject']."',cpre.candidate_willing_subject_id) !=0";
 		}
 		if(isset($searchdata['candidate_qualification']) && $searchdata['candidate_qualification'] != ''){
-			$where .= " AND tr_candidate_education.candidate_education_id = ".$searchdata['candidate_qualification'];
+			$where .= " AND cedu.candidate_education_qualification_id = '".$searchdata['candidate_qualification']."'";
 		}
-		if(isset($searchdata['candidate_salary']) && $searchdata['candidate_salary'] != ''){
-			$salary_split = explode('-', $searchdata['candidate_salary']);	
-			if (strpos($salary_split[1], 'above') !== false) {
-				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0];
-				
-			}
-			else {
-				$where .= " AND tr_candidate_preferance.candidate_expecting_start_salary >= ".$salary_split[0]." AND tr_candidate_preferance.candidate_expecting_start_salary <= ".$salary_split[1];
-			}
-			
+		else {
+			$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
 		}
+		if(empty($data['candidate_max_amount']) && isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '') {
+        	$where .= "AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' ";	
+        }
+        if(empty($data['candidate_min_amount']) && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
+        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' ";	
+        }
+        if(isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '' && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
+        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_max_amount']."'";	
+        }
+		
 		$this->db->where('('.$where.')');
-		$this->db->group_by('tr_candidate_profile.candidate_id'); 
+		$this->db->group_by('cp.candidate_id'); 
 		$postedjobdata = $this->db->get();
 		return $postedjobdata->num_rows();
 	}
-	public function all_candidate_list_counts($ins_id)
-	{
-		$this->db->select('tr_candidate_profile.candidate_marital_status,tr_candidate_profile.candidate_gender,tr_candidate_profile.candidate_date_of_birth,tr_candidate_profile.candidate_image_path,tr_candidate_preferance.candidate_expecting_start_salary,tr_candidate_preferance.candidate_expecting_end_salary,tr_candidate_profile.candidate_name,tr_district.district_name,tr_subject.subject_name,tr_educational_qualification.educational_qualification,(select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) as experience');
-		$this->db->from('tr_candidate_profile');
-		$this->db->join('tr_district`', 'tr_district.district_id = tr_candidate_profile.candidate_live_district_id');
-		$this->db->join('tr_candidate_education', 'tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id');
-		$this->db->join('tr_candidate_experience', 'tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id','left');
-		$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
-		$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
-		$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
-		$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
-		$this->db->where($where);
-		$this->db->group_by('tr_candidate_profile.candidate_id');
-		$postedjobdata = $this->db->get();
-		return $postedjobdata->num_rows();
-	}
+	// public function all_candidate_list_counts($ins_id)
+	// {
+	// 	$this->db->select('tr_candidate_profile.candidate_marital_status,tr_candidate_profile.candidate_gender,tr_candidate_profile.candidate_date_of_birth,tr_candidate_profile.candidate_image_path,tr_candidate_preferance.candidate_expecting_start_salary,tr_candidate_preferance.candidate_expecting_end_salary,tr_candidate_profile.candidate_name,tr_district.district_name,tr_subject.subject_name,tr_educational_qualification.educational_qualification,(select sum(tr_candidate_experience.candidate_experience_year) as experience from tr_candidate_experience where tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id ) as experience');
+	// 	$this->db->from('tr_candidate_profile');
+	// 	$this->db->join('tr_district`', 'tr_district.district_id = tr_candidate_profile.candidate_live_district_id');
+	// 	$this->db->join('tr_candidate_education', 'tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id');
+	// 	$this->db->join('tr_candidate_experience', 'tr_candidate_experience.candidate_profile_id = tr_candidate_profile.candidate_id','left');
+	// 	$this->db->join('tr_candidate_preferance', 'tr_candidate_preferance.candidate_profile_id = tr_candidate_profile.candidate_id');
+	// 	$this->db->join('tr_subject', 'tr_subject.subject_id = tr_candidate_preferance.candidate_willing_subject_id');
+	// 	$this->db->join('tr_educational_qualification', 'tr_educational_qualification.educational_qualification_id = tr_candidate_education.candidate_education_qualification_id');
+	// 	$where = "(tr_candidate_profile.candidate_institution_type ='".$ins_id."' AND tr_candidate_profile.candidate_status='1' and tr_candidate_education.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education where tr_candidate_education.candidate_profile_id = tr_candidate_profile.candidate_id ))";
+	// 	$this->db->where($where);
+	// 	$this->db->group_by('tr_candidate_profile.candidate_id');
+	// 	$postedjobdata = $this->db->get();
+	// 	return $postedjobdata->num_rows();
+	// }
 	public function checkvalidpassword($oldpassword,$providerid)
 	{
 		$this->db->select('registrant_password');
@@ -445,15 +464,15 @@ class Job_provider_model extends CI_Model {
 	}
 	public function candidate_full_data($candidate_id,$vacancyid=''){
 		$candidate = array();
-		$this->db->select('*,willdistrict.district_name as willing_district,livedistrict.district_name as living_district,livestate.state_name as livestate,willstate.state_name as willstate');
-		$this->db->from('tr_candidate_profile');
-		$this->db->join('tr_district livedistrict', 'livedistrict.district_id = tr_candidate_profile.candidate_live_district_id');
-		$this->db->join('tr_district willdistrict', 'willdistrict.district_id = tr_candidate_profile.candidate_district_id');
-		$this->db->join('tr_state livestate', 'livestate.state_id = livedistrict.district_state_id');
-		$this->db->join('tr_state willstate', 'willstate.state_id = willdistrict.district_state_id');
-		$this->db->join('tr_languages', 'tr_languages.language_id = tr_candidate_profile.candidate_mother_tongue');
-		$this->db->join('tr_institution_type', 'tr_institution_type.institution_type_id = tr_candidate_profile.candidate_institution_type');
-		$profile = "(tr_candidate_profile.candidate_id ='".$candidate_id."' AND tr_candidate_profile.candidate_status='1')";
+		$this->db->select('*,d.district_name as willing_district,dl.district_name as living_district,sl.state_name as livestate,s.state_name as willstate');
+		$this->db->from('tr_candidate_profile cp');
+		$this->db->join('tr_district d', 'cp.candidate_district_id = d.district_id');
+		$this->db->join('tr_district dl', 'cp.candidate_live_district_id = dl.district_id','left');
+		$this->db->join('tr_state s', 'cp.candidate_state_id = s.state_id');
+		$this->db->join('tr_state sl', 'cp.candidate_live_state_id = sl.state_id','left');
+		$this->db->join('tr_languages l', 'cp.candidate_mother_tongue = l.language_id');
+		$this->db->join('tr_institution_type it', 'cp.candidate_institution_type = it.institution_type_id');
+		$profile = "(cp.candidate_id ='".$candidate_id."' AND cp.candidate_status='1')";
 		$this->db->where($profile);
 		$candidate['personnal'] = $this->db->get()->row_array();
 		if(!empty($candidate['personnal']['candidate_extra_curricular_id'])){

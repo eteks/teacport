@@ -56,6 +56,9 @@ class Common_model extends CI_Model {
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
+        if(isset($data['experience']) && $data['experience']!='' && $data['experience']==0) {
+        	$this->db->where("ov.vacancies_experience = 0");
+        }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
@@ -100,6 +103,9 @@ class Common_model extends CI_Model {
         }
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
+        }
+        if(isset($data['experience']) && $data['experience']!='' && $data['experience']==0) {
+        	$this->db->where("ov.vacancies_experience = 0");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
@@ -255,6 +261,30 @@ class Common_model extends CI_Model {
 		$this->db->where($where);
 		$subcription = $this->db->get();
 		return $subcription->result_array(); 
+	}
+
+	// Organization choosen plan
+	public function organization_chosen_plan($id) {
+		// $where = '(op.organization_id="'.$id.'" AND ops.organization_subscription_status=1 AND opu.status=1)';
+		$where = '(op.organization_id="'.$id.'" AND ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
+		$this->db->select('ops.*,opu.*,ops.organization_subscription_id as org_subscription_id');
+		$this->db->from('tr_organization_profile op');
+		$this->db->join('tr_organization_subscription ops','op.organization_id=op.organization_id','inner');
+		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id AND opu.status=1','left');
+		$this->db->where($where);
+		$data = $this->db->get()->row_array();
+		return $data;
+	}
+
+	// Organization subscription with upgrade plan
+	public function subscription_upgrade_plan() {
+		// $where = '(s.subscription_status=1)';
+		$this->db->select('s.*,s.subscription_id as sub_id,su.*');
+		$this->db->from('tr_subscription s');
+		$this->db->join('tr_subscription_upgrade su','s.subscription_id=su.subscription_id AND su.upgrade_status=1','left');
+		// $this->db->where($where);
+		$data = $this->db->get()->result_array();
+		return $data;
 	}
 
 	// Get vacancy details
@@ -455,7 +485,7 @@ class Common_model extends CI_Model {
 
 	// Get university by class level
 	public function university_by_classlevel($id) {
-		$where = '(university_class_level_id="'.$id.'" AND university_board_status=1)';
+		$where = '(FIND_IN_SET("'.$id.'",university_class_level_id) !=0 AND university_board_status=1)';
 		$uni_data = $this->db->get_where('tr_university_board',$where)->result_array();
 		return $uni_data;
 	}

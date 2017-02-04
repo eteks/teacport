@@ -735,7 +735,7 @@ class Job_provider extends CI_Controller {
 		$data['subscrib_plan'] 			= $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";
-		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
+		// $pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_counts($data['organization']['organization_institution_type_id']);
 		$pagination["per_page"] 		= 20;
 		$pagination['use_page_numbers'] = TRUE;
 		$pagination['uri_segment'] 		= 3;
@@ -751,12 +751,8 @@ class Job_provider extends CI_Controller {
 		$pagination['last_tag_open'] 	= '<li>';
 		$pagination['last_tag_close'] 	= '</li>';
 		
-		if($this->uri->segment(3)){
-			$page = ($this->uri->segment(3));
-		}
-		else{
-			$page = 0;
-		}
+		$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$pagination["per_page"] : 0;
+
 		if($_POST){
 			$this->session->set_userdata('pro_search_data', $_POST);
 		}
@@ -795,14 +791,13 @@ class Job_provider extends CI_Controller {
 		// 	$this->form_validation->set_rules('candidate_salary', 'Salary', 'trim|xss_clean');
 		// }
 		// $this->form_validation->run();
-		$data["candidates"] = $this->job_provider_model->all_candidate_list_for_search($pagination["per_page"], $page,$data['organization']['organization_institution_type_id'],$provider_search_data);
+		$data["candidates"] = $this->job_provider_model->all_candidate_list_for_search($pagination["per_page"], $offset,$data['organization']['organization_institution_type_id'],$provider_search_data);
 		$pagination["total_rows"] 		= $this->job_provider_model->all_candidate_list_for_search_count($data['organization']['organization_institution_type_id'],$provider_search_data);
 		$this->pagination->initialize($pagination);
 		$str_links = $this->pagination->create_links();
 		$data["links"] = explode('&nbsp;',$str_links );
 		$data['search_mode'] = isset($provider_search_data['candidate_search_type'])?$provider_search_data['candidate_search_type']:'';
 		$data['search_inputs'] = $provider_search_data;
-		print_r($data['search_inputs']);
 		$this->load->view('company-dashboard-browse-candidate',$data);
 			
 		// }
@@ -1043,10 +1038,28 @@ class Job_provider extends CI_Controller {
 			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
-		if(!$_POST){
-			$this->load->view('company-dashboard-subscription',$data);	
+		$data['organization_chosen_plan'] = $this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
+		$data['subscription_upgrade_plan'] = get_subscription_upgrade($this->common_model->subscription_upgrade_plan());
+		if($this->input->post('subpack') && !in_array($this->input->post('subpack'),array_column($data['subscription_upgrade_plan'],'sub_id'))) {
+			$data['secutiy_msg'] = "Something went wrong. Please try again with correct details";
+			$data['chosen_plan'] = '';
+			$data['organization_chosen_plan'] =array();
 		}
-		else{
+		else {
+			$data['chosen_plan'] = $this->input->post('subpack')?$this->input->post('subpack'):'';
+		}
+		// echo "test".$data['chosen_plan'];
+
+		// echo "<pre>";
+		// print_r($data['subscription_upgrade_plan']);
+		// echo "</pre>";
+
+
+		// if(!$_POST){
+		// 	$this->load->view('company-dashboard-subscription',$data);	
+		// }
+		// else{
+		if($_POST && !$this->input->post('subpack')) {
 			$transaction_data = array(
 									'organization_id' 			=> $this->input->post('udf1'),
 									'tracking_id ' 				=> $this->input->post('txnid'),
@@ -1096,26 +1109,26 @@ class Job_provider extends CI_Controller {
 					
 					if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
 						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
-						$this->load->view('company-dashboard-subscription',$data);
+						// $this->load->view('company-dashboard-subscription',$data);
 					}
 					else {
 						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
-						$this->load->view('company-dashboard-subscription',$data);			
+						// $this->load->view('company-dashboard-subscription',$data);			
 					}
 					
 				}
 				else if($this->input->post('status')==='failure'){
 					$data['subscription_server_msg'] = 'Transaction failed! please try again';
-					$this->load->view('company-dashboard-subscription',$data);
+					// $this->load->view('company-dashboard-subscription',$data);
 				}
 
 			}
 			else{
 				$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!';
-				$this->load->view('company-dashboard-subscription',$data);
+				// $this->load->view('company-dashboard-subscription',$data);
 			}
-		}
-		
+		}	
+		$this->load->view('company-dashboard-subscription',$data);
 	}
 	
 	public function candidateprofile() {
