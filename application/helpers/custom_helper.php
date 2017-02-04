@@ -199,3 +199,27 @@ if ( ! function_exists('get_provider_subscription')){
 		return $out;
 	}
 }
+
+// Job provider - subscription plan with upgrade options
+if ( ! function_exists('get_subscription_upgrade')){
+	function get_subscription_upgrade($value) 
+	{
+		$out = array();
+    	if(!empty($value)) {
+      	foreach ($value as $key => $row) {
+        	foreach ($row as $k => $r) {
+          		if($k=='upgrade_id' || $k=='upgrade_options' || $k=='upgrade_price' || $k=='upgrade_min_allowed' || $k=='upgrade_max_allowed' || $k=='upgrade_status') {
+            			if(!isset($out[$row['sub_id']][$row['upgrade_id']]))
+				        {
+			            	$out[$row['sub_id']]['upgrade_options'][$row['upgrade_id']][$k] = $row[$k];
+				        }
+          			}
+          			else {
+            			$out[$row['sub_id']][$k] = $row[$k];
+          			}
+        		}
+      		}
+    	}
+		return array_values($out);
+	}
+}
