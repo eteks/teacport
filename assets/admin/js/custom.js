@@ -981,7 +981,6 @@ $(document).on('click','.remove_button',function() {//Once remove button is clic
 });
 //Ended by Akila 
 
-
 }); // End document
 
 /* Popup pagination with arrow start */

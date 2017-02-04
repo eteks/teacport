@@ -220,8 +220,8 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
     border: 1px solid #ff0000 !important;
 }
 tr select {
-    max-width: 175px !important;
-    min-width: 150px !important;
+    max-width: 130px !important;
+    min-width: 122px !important;
 }
 .select_by {
     height: 30px;
@@ -418,7 +418,7 @@ tr select {
     max-height:200px !important;
     overflow: auto !important;
     /*max-width: 145px !important;    */
-    width: 500px !important;
+    width: 490px !important;
 }
 .user_accts_table td input {
     max-width: 127px !important;
@@ -886,8 +886,6 @@ table {
     z-index: 2;
     position: relative;
 }
-
-
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;
@@ -931,7 +929,6 @@ table {
    }
 .upgrade_scroll{
 	overflow-x:scroll !important;
-	
 }
 /* For nav-pills */
 .tab_form .navbar .nav-design >li{
@@ -939,8 +936,8 @@ table {
     width: 25% !important
 } 
 .job_pro_form .step .desc_space {
-    margin-left: 34px !important;
-    padding: 13px 3px !important;
+    /*margin-left: 34px !important;
+    padding: 13px 3px !important;*/
 } 
 .chzn-container-multi .chzn-choices{
 	padding:2px !important;
@@ -959,7 +956,38 @@ table {
 .instruction_span .span12{
 	margin-left:0 !important;
 }
-/*Added By Akila*/
+/* Plan upgrade -Table-grid */
+.sub_plan_title{
+	width: 200px;
+	height: auto;
+}
+.table-bordered .sub_plan_title td {
+	border-left: none;
+}
+.sub_upgradeplan_title, .sub_upgradeplan_price,.sub_upgradeplan_min,.sub_upgradeplan_max{
+	border: 1px solid #ddd;
+	width: 200px;
+	height: auto;
+}
+.sub_upgradeplan_title td, .sub_upgradeplan_price td,.sub_upgradeplan_min td,.sub_upgradeplan_max td{
+	width: 200px;
+}
+.arrow_right{
+	border-bottom: 4px solid transparent;
+    border-left: 4px solid #ccc;
+    border-top: 4px solid transparent;
+    float: right;
+    height: 0;
+    margin-right: 5px;
+    margin-top: 7px;
+    width: 0;
+}
+.upgrade_table thead .text-center {
+	text-align: center;
+}
+.upgrade_table thead th{
+	vertical-align: middle;
+}
 /*Footer*/
 #footer {
 	background-color: #1b1b1b;
@@ -973,4 +1001,6 @@ table {
 .fixed-top #container{
 	margin-bottom: 20px;
 }
+/*Added By Akila*/
+
 

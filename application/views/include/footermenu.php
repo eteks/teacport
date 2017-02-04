@@ -29,6 +29,7 @@
                     <div class="col-sm-6 col-md-4 col-xs-12">
                         <div class="footer_block dark_gry follow-on">
                             <h4>Follow Us On</h4>
+                            
                             <!-- <ul class="recentpost">
                                 <li><a href="<?php echo base_url(); ?>vacancies">Teacher Jobs</a> </li>
                                 <li><a href="<?php echo base_url(); ?>vacancies">Office Admin Jobs </a></li>                      
@@ -44,7 +45,8 @@
                         </div>
                         <div class="visitor_count footer_block">
                         	 	<h4>Visitor Count</h4>
-                        		<div align='center'> 
+                        		<div class="visitor_no"> 
+                        		<h4>
                                 <?php
                                 if(!empty($site_visit_count)) :
                                     if(strlen($site_visit_count) <= 8) :
@@ -56,6 +58,7 @@
                                     echo sprintf("%08d", 0);
                                 endif;
                                 ?>
+                                </h4>
                                 </div>
                     	</div>
                     	</div>
