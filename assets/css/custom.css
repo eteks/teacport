@@ -1,3 +1,42 @@
+/* Import CSS */
+/* google webfont */
+@font-face {
+  font-family: 'Source Sans Pro', sans-serif;
+  src:  url('assets/fonts/source_sans_pro/sourcesanspro-black.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-blackitalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-bold.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-bolditalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-extralight.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-extralightitalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-italic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-light.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourceSansPro-lightItalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-regular.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-semibold.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-semibolditalic.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Arizonia', cursive;
+	src: url('assets/fonts/arizonia/arizonia-regular.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Kaushan Script', cursive;
+	src: url('assets/fonts/kaushan_script/kaushanscript-regular.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Open Sans', sans-serif;
+	src: url('assets/fonts/open_sans/opensans-bold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-bolditalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-extrabold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-extrabolditalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-italic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-light.ttf') format('ttf'),  
+		 url('assets/fonts/open_sans/opensans-lightitalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-regular.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-semibold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-semibolditalic.ttf') format('ttf'),
+}
+/* google webfont */
 /* Custom Code */
 .mega-menu .menu-links > li > a {
    font-size: 14px;

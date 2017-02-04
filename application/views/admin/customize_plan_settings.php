@@ -62,202 +62,293 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
             <!-- END PAGE HEADER-->
             <!--Added by Akila-->
-<div class="row-fluid">
-<!-- BEGIN EXAMPLE TABLE widget-->
-<div class="span12">
-    <div class="widget">
-        <div class="edit_add_overlay dn"> </div> <!-- Overlay for table -->
-        <div class="widget-title">
-            <h4><i class="icon-reorder"></i> Plan Upgrade Creation</h4>
-            <span class="loader_holder hide_loader"> </span>
-        </div>
-        <div class="widget-body">
-            <div class="portlet-body">
-                <div class="clearfix add_section">
-                    <div class="btn-group">
-	                    <button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
-	                      Add New <i class="icon-plus"></i>
-	                    </button>
-	                  </div>
-                </div>                               
-                <form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
-                <?php } ?> 
-                <?php
-                if(!empty($status)) :
-                  echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
-                endif;
-                ?> 
-                <p class='val_error error_msg_md'> <p>
-                  <table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
-                    <thead>
-                      <tr class="ajaxTitle">
-                        <th>Select Subscription Plan</th>
-                        <th>Upgrade Plans</th>
-                        <th>Price</th>
-                        <th>Minimum</th>
-                        <th>Maximum</th>
-                        <th>Status</th>
-                        <th>Created Date</th>
-                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                  			   <th class="data_action">Edit</th>
-                				<?php endif; ?>
-               				  <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                				    <th class="data_action">Delete</th>
-               				  <?php endif; ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                      if(!empty($subscription_plan_upgrade)) :
-                      $i=1;
-                      foreach ($subscription_plan_upgrade as $plan_upgrade) :
-                    ?>    
-                      <tr class="parents_tr" id="column<?php echo $i; ?>">
-                        <td class="subscription_name"> 
-                          <?php echo $plan_upgrade['subscription_plan']; ?>
-                          <input type="hidden" value="<?php echo $plan_upgrade['subscription_id']; ?>" />
-                        </td>
-                         <!--<td class="is_sms center_align"> 
-                                  <span class="icon-ok"> </span> 
-                         </td> -->
-                        <td class="sms_count"> 
-                          <?php echo $plan_upgrade['sms_count']; ?>
-                        </td>
-                        <!-- <td class="is_email center_align"> 
-                          <span class="icon-ok"> </span>
-                        </td> -->
-                        <td class="email_count"> 
-                          <?php echo $plan_upgrade['email_count']; ?>
-                        </td>
-                        <!-- <td class="is_resume center_align">
-                          <span class="icon-remove"> </span>
-                        </td> -->
-                        <td class="resume_count"> 
-                          <?php echo $plan_upgrade['resume_count']; ?>
-                        </td>
-                        <td class="price"> 
-                          <?php echo $plan_upgrade['upgrade_price']; ?>
-                        </td>
-                        <td class="plan_upgrade_creation_status"> 
-                          <?php 
-                            if ($plan_upgrade['upgrade_status'] == 1) 
-                              echo "Active";
-                            else
-                              echo "Inactive";
-                          ?>
-                          <input type="hidden" value="<?php echo $plan_upgrade['upgrade_status']; ?>" />
-                        </td>
-                        <td class="created_date">
-                        <?php 
-                          $created_datetime = explode(' ', $plan_upgrade['upgrade_created_date']);
-                          echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
-                        ?> 
-                        </td>
-                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                        <td class="edit_section">
-                          <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Edit</a>
-                        </td>
-                        <?php endif; ?>
-                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                        <td>
-                          <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Delete</a>
-                        </td>
-                        <?php endif; ?>
-                      </tr>
-                      <?php
-                        $i++;
-                        endforeach;
-                        endif;
-                      ?>
-                    </tbody>
-                  </table>
-                  <?php if(!$this->input->is_ajax_request()) { ?>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- END EXAMPLE TABLE widget-->
-</div>
-<!---Add and edit popup -->
-<div class="popup" data-popup="popup_section_subs">
-  <div class="popup-inner">       
-    <div class="widget box blue" id="popup_wizard_section">
-      <div class="widget-title">
-        <h4>
-          <i class="icon-reorder"></i> Subscription Plan
-        </h4>                        
-      </div>
-      <div class="widget-body form">
-        <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
-        <p class="admin_status"> </p>
-        <fieldset>
-            <legend> Subscription plan details:</legend>
-            <div class="form-wizard pop_details_section">
-            <?php } ?>
-            <div class="form-group">
-        		<label class="control-label">Select Plan</label>
-        		<select value="">
-        			<option value="Select">Select</option>
-        			<option value="Basic plans @ 1999">Basic plans @ 1999</option>
-        			<option value="Standard plans @ 5000">Standard plans @ 5000</option>
-        			<option value="Premium plans @ 10000">Premium plans @ 10000</option>
-        		</select>
-        	</div>
-            <div class="form-group plan_creation">
-            	<!--append field-->
-            	<div class="form-group field_wrapper">
-	            	<label class="control-label" value="Customize">Customize Limits</label>
-            	   <div class="upg_plan col4 select_plan">
-                		<select class="form-control customize_plan">
-                			<option value="">Select</option>
-                			<option value="SMS">SMS</option>
-                			<option value="Email">Email</option>
-                			<option value="Resume Download">Resume Download</option>
-                		</select>
-                	</div>
-                	<div class="col3">
-                		<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
-                	</div>
-                	<div class="col3">
-                		<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
-                	</div>
-                	<div class="col3">
-                		<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
-                	</div>
-                	<div class="">
-                		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
-                	</div>
-                	<div class="clearfix"> </div>
-                 </div>
-                  <div class="pull-right">
-                  	<a class="add_button" title="Add field"><strong>+</strong></a>
-                  </div>	
-             	  <div class="clearfix"> </div>
-      
-            <button type="submit" class="btn btn-info save_button">Save</button>
-            <?php if(!$this->input->is_ajax_request()) { ?>
-            </div>
-          </fieldset>
-        </form>
-      </div>  
-    </div>                
-  <p>
-    <a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
-  </p>
-  <a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
-</div>
- </div> 
- <!--End Popup-->  
-</div>
-<!-- END ADVANCED TABLE widget-->
-<!-- END PAGE CONTENT-->
- </div>     
-<!-- END PAGE CONTENT-->
-</div>
-<!-- END PAGE CONTAINER-->
-</div>
-<!-- END PAGE -->
-</div>
+			<div class="row-fluid">
+			<!-- BEGIN EXAMPLE TABLE widget-->
+				<div class="span12">
+					<div class="widget">
+	        			<div class="edit_add_overlay dn"> </div> <!-- Overlay for table -->
+	        				<div class="widget-title">
+	            				<h4><i class="icon-reorder"></i> Plan Upgrade Creation</h4>
+	            				<span class="loader_holder hide_loader"> </span>
+	        				</div>
+	        			<div class="widget-body">
+		        			<div class="portlet-body">
+		            			<div class="clearfix add_section">
+		                			<div class="btn-group">
+		                    			<button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
+		                     				 Add New <i class="icon-plus"></i>
+		                    			</button>
+		                  			</div>
+		           				</div>                               
+		            			<form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
+		            				<?php } ?> 
+		            				<?php
+		            					if(!empty($status)) :
+		              						echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
+		            					endif;
+		            				?> 
+		            				<p class='val_error error_msg_md'> <p>
+		              				<table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
+			                			<thead>
+						                  	<tr class="ajaxTitle">
+							                   	<th rowspan="2">Subscription Plan<br/> Name</th>
+							                    <th colspan="4" class="text-center">Upgrade Plans</th>
+						                        <th rowspan="2">Created Date</th>
+							                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+							              			   <th rowspan="2" class="data_action">Edit</th>
+							            				<?php endif; ?>
+							           				  <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+							            				    <th rowspan="2" class="data_action">Delete</th>
+							           			<?php endif; ?>
+						                  	</tr>
+											<tr>
+		               		  					<th>Customized Plan<br/> Detail</th>
+		               		  					<th>Price</th>
+		                        				<th>Minimum</th>
+		                        				<th>Maximum</th>
+		               		  				</tr>
+			                			</thead>
+			                			<tbody>
+			                   				<tr>
+			                   					<td>
+													<table class="sub_plan_title">
+														<tbody>
+						                   					<tr>
+						                   						<td>Basic Plan</td>
+						                   					</tr>
+														</tbody> 
+			                   						</table>
+			                   					</td>
+			                   					<td>
+			                   						<table class="sub_upgradeplan_title">
+			                   							<tbody>
+			                   								<tr>
+			                   									<td>SMS <span class="arrow_right"></span></td>
+			                   								</tr>
+			                   								<tr>
+			                   									<td>Email <span class="arrow_right"></span></td>
+			                   								</tr>
+			                   								<tr>
+			                   									<td>Resume Download <span class="arrow_right"></span></td>
+			                   								</tr>
+			                   							</tbody> 
+			                   						</table>
+			                   					</td>
+				                   				<td>
+				                   					<table class="sub_upgradeplan_price">
+			                   							<tbody>
+						                   					<tr>
+						                   						<td>Rs.80 </td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>Rs.80 </td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>Rs.80 </td>
+						                   					</tr>
+			                   							</tbody> 
+			                   						</table>	
+			                   					</td>
+			        							<td>
+			        								<table class="sub_upgradeplan_min">
+						                   				<tbody>
+						                   					<tr>
+						                   						<td>500</td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>700</td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>250</td>
+						                   					</tr>
+						                   				</tbody> 
+			                   						</table>
+			        							</td>
+												<td>
+													<table class="sub_upgradeplan_max">
+			                   							<tbody>
+						                   					<tr>
+						                   						<td>1500</td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>1700</td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>2000</td>
+						                   					</tr>
+			                   							</tbody> 
+			                   						</table>
+												</td>
+						                   		<td>03/02/2017</td>
+												<td>
+													<a id="sample_editable_1_new" data-open="popup_section_subs" class="green add_option"  data-mode="edit" data-action="update">
+													Edit
+													</a>
+												</td>
+												<td>
+													<a class="pop_delete_action" data-mode="delete">
+														Delete
+													</a>
+												</td>
+											</tr>
+											<tr>
+						                   		<td>
+						                   			<table class="sub_plan_title">
+						                   				<tbody>
+						                   					<tr>
+						                   						<td>Basic Plan</td>
+						                   					</tr>
+						                   				</tbody> 
+						                   			</table>
+						                   		</td>
+						                   		<td>
+						                   			<table class="sub_upgradeplan_title">
+						                   				<tbody>
+						                   					<tr>
+						                   						<td>SMS <span class="arrow_right"></span></td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>Resume Download <span class="arrow_right"></span></td>
+						                   					</tr>
+						                   				</tbody> 
+						                   			</table>
+						                   		</td>
+							                   	<td>
+							                   		<table class="sub_upgradeplan_price">
+						                   				<tbody>
+						                   					<tr>
+						                   						<td>Rs.80 </td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>Rs.80 </td>
+						                   					</tr>
+						                   				</tbody> 
+						                   			</table>	
+						                   		</td>
+						        				<td>
+						        					<table class="sub_upgradeplan_min">
+						                   				<tbody>
+						                   					<tr>
+						                   						<td>500</td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>250</td>
+						                   					</tr>
+						                   				</tbody> 
+						                   			</table>
+						        				</td>
+												<td>
+													<table class="sub_upgradeplan_max">
+						                   				<tbody>
+						                   					<tr>
+						                   						<td>1500</td>
+						                   					</tr>
+						                   					<tr>
+						                   						<td>2000</td>
+						                   					</tr>
+						                   				</tbody> 
+						                   			</table>
+												</td>
+						                   		<td>03/02/2017</td>
+												<td>
+													<a id="sample_editable_1_new" data-open="popup_section_subs" class="green add_option"  data-mode="edit" data-action="update">
+													Edit
+													</a>
+												</td>
+												<td>
+													<a class="pop_delete_action" data-mode="delete">
+														Delete
+													</a>
+												</td>
+											</tr>	
+										</tbody>
+									</table>
+							    	<?php if(!$this->input->is_ajax_request()) { ?>
+								</form>
+							</div>
+						</div>
+					</div>
+	    			<!-- END EXAMPLE TABLE widget-->
+				</div>
+				<!---Add and edit popup -->
+				<div class="popup" data-popup="popup_section_subs">
+					<div class="popup-inner">       
+					    <div class="widget box blue" id="popup_wizard_section">
+				      		<div class="widget-title">
+				        		<h4>
+				          			<i class="icon-reorder"></i> Subscription Plan
+				        		</h4>                        
+				      		</div>
+				      		<!--widget-body-->
+				      		<div class="widget-body form">
+				        		<form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+				        			<p class="admin_status"> </p>
+				        			<fieldset>
+										<legend> Subscription plan details:</legend>
+				            			<div class="form-wizard pop_details_section">
+				            				<?php } ?>
+				            				<div class="form-group">
+				        						<label class="control-label">Select Plan</label>
+				        						<select value="">
+				        							<option value="Select">Select</option>
+				        							<option value="Basic plans @ 1999">Basic plans @ 1999</option>
+				        							<option value="Standard plans @ 5000">Standard plans @ 5000</option>
+				        							<option value="Premium plans @ 10000">Premium plans @ 10000</option>
+				        						</select>
+				        					</div>
+				            				<div class="form-group plan_creation">
+				            					<!--append field-->
+				            					<div class="form-group field_wrapper">
+					            					<label class="control-label" value="Customize">Customize Limits</label>
+				            	   					<div class="upg_plan col4 select_plan">
+				                						<select class="form-control customize_plan">
+				                							<option value="">Select</option>
+				                							<option value="SMS">SMS</option>
+				                							<option value="Email">Email</option>
+				                							<option value="Resume Download">Resume Download</option>
+				                						</select>
+				                					</div>
+				                					<div class="col3">
+				                						<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
+				                					</div>
+				                					<div class="col3">
+				                						<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
+				                					</div>
+				                					<div class="col3">
+				                						<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
+				                					</div>
+				                					<div class="">
+				                						<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
+				                					</div>
+			                						<div class="clearfix"> </div>
+				                 				</div>
+				                 				<div class="pull-right">
+				                  					<a class="add_button" title="Add field"><strong>+</strong></a>
+				                  				</div>	
+				             	  				<div class="clearfix"> </div>
+				               					<button type="submit" class="btn btn-info save_button">Save</button>
+				            					<?php if(!$this->input->is_ajax_request()) { ?>
+				            				 </div>
+										</div>				            				 				            				 
+									</fieldset>
+								</form>
+							   </div> <!--widget-body-->  
+							</div>	            
+			  			 <p>
+			    			<a data-open="popup_section_subs" class="close_trig" href="#">Close</a>
+			 			 </p>
+			 			<a class="popup-close close_trig" data-open="popup_section_subs"href="#">x</a>
+					</div> <!--popup-inner-->
+				</div>
+				<!--End Popup-->
+				<!-- END ADVANCED TABLE widget-->
+			</div>     
+				<!-- END PAGE CONTENT-->
+			</div>
+			<!-- END PAGE CONTAINER-->
+		</div>
+			<!-- END PAGE -->
+	</div>
 <script>
     // Define default values
     var inputType = new Array("select","text","text","text","text","select"); // Set type of input which are you have used like text, select,textarea.

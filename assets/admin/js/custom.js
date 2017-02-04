@@ -1008,7 +1008,6 @@ $('.sub_sidebar_section').css('max-height', footer_height);
         });
 //Ended by Akila 
 
-
 }); // End document
 
 /* Popup pagination with arrow start */
