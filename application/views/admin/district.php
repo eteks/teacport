@@ -62,11 +62,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </div>
             <div class="widget-body">
               <div class="portlet-body">
-                <div class="clearfix">
+                <div class="clearfix add_section">
                   <div class="btn-group">
-                    <button id="sample_editable_1_new" class="btn green add_new">
-                      Add New <i class="icon-plus"></i>
-                    </button>
+                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
+                      <button id="sample_editable_1_new" class="btn green add_new">
+                        Add New <i class="icon-plus"></i>
+                      </button>
+                    <?php endif; ?>
                   </div>
                   <div class="btn-group pull-right">
                   </div>

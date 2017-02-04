@@ -174,11 +174,13 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	font-size: 12px; 
 }
 .latest_news_1{
 	border: 1px solid #da651a;
 	height: 300px;
+}
+.latest_news_1 a{
+	font-size:13px;
 }
 .latest_news_content_1 img{
 	margin-top:20px !important;	
@@ -1292,8 +1294,11 @@ label.form-input-error {
     width: 100%;
 }
 .app_post{
-	margin-bottom: 60px !important; 
-	height:100px;
+	margin-bottom: 50px !important;
+    height: 100px;
+    margin-top: 20px;
+    padding-top: 20px;
+}
 }
 .icon_appli_post{
 	display:inline-block;
@@ -1304,6 +1309,8 @@ label.form-input-error {
 	color: #00a5ef;
 	display:inline-block;
 	position:absolute;
+	font-size:17px;
+	
 }
 .app_post .fa-stack{
 	color: #f47020;
@@ -1315,8 +1322,9 @@ label.form-input-error {
     text-align: left;
     color: #00a5ef;
     font-weight:bold;
-    margin-left:75px !important;
-    margin-top:23px;	
+    margin-left:50px !important;
+    margin-top:0px;	
+    padding-top:15px;
 }
 .owl-next{
 	left: 1075px;
@@ -1618,6 +1626,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	padding-top:40px;
 	pointer-events:none;
 }
+.visitor_no h4{
+
+    text-align: left;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 4px 4px 6px #11100f, 0 0 60px #ec5610, 0 0 5px #2708fb;
+    letter-spacing: 12px;
+    margin: 5px;
+   }
 .table-filter .star {
 	color: #ccc;
 	text-align: center;
