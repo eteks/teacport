@@ -212,7 +212,7 @@ class Subscription_Plan_Model extends CI_Model {
     }
 
     // View
-    $this->db->select('*');
+    $this->db->select('sub_up.subscription_id,sub_up.upgrade_options,sub_up.upgrade_price,sub_up.upgrade_options,sub_up.upgrade_min_allowed,sub_up.upgrade_max_allowed,sub_up.upgrade_created_date,sub.subscription_plan');
     $this->db->from('tr_subscription_upgrade sub_up');
     $this->db->join('tr_subscription sub','sub.subscription_id=sub_up.subscription_id','inner');
     $model_data['subscription_plan_upgrade'] = $this->db->order_by('sub.subscription_id','desc')->get()->result_array();

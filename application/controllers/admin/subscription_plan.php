@@ -418,7 +418,16 @@ class Subscription_Plan extends CI_Controller {
 			echo json_encode($result);
 		}
 		else {
-			$data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
+			$data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];	
+			//To group data by subscription id from plan ugrade data array
+		    $res = array();
+		    foreach($data_values['subscription_plan_upgrade'] as $val) {
+		        $res[$val['subscription_plan']][] = $val;		    
+			}
+			// echo "<pre>";
+			// print_r($res);
+			// echo "</pre>";
+			$data['subscription_plan_upgrade'] = $res;
 			$this->load->view('admin/customize_plan_settings',$data);
 		}
 	}
