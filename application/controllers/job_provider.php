@@ -1197,6 +1197,16 @@ class Job_provider extends CI_Controller {
 			}
 		}   	
 	}
+	public function sendmail(){
+		if($_POST){
+			$candidate_id = $this->input->post('candidate_id');	
+			$org_id = $this->input->post('org_id');
+			$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id);
+			echo ($status!='')?$status:"failure";
+		}else{
+			redirect('missingpage');
+		}
+	}
 	public function resume_download(){
 		if($_POST){
 			$candidate_id = $this->input->post('candidate_id');	
@@ -1209,16 +1219,16 @@ class Job_provider extends CI_Controller {
 			redirect('missingpage');
 		}
 	}
-	public function sendmail(){
-		if($_POST){
-			$candidate_id = $this->input->post('candidate_id');	
-			$org_id = $this->input->post('org_id');
-			$status = $this->job_provider_model->provider_mail_send_update($candidate_id,$org_id);
-			echo ($status!='')?$status:"failure";
-		}else{
-			redirect('missingpage');
-		}
-	}
+	// public function sendmail(){
+	// 	if($_POST){
+	// 		$candidate_id = $this->input->post('candidate_id');	
+	// 		$org_id = $this->input->post('org_id');
+	// 		$status = $this->job_provider_model->provider_mail_send_update($candidate_id,$org_id);
+	// 		echo ($status!='')?$status:"failure";
+	// 	}else{
+	// 		redirect('missingpage');
+	// 	}
+	// }
 	/* custom validataion rules */
 	public function valid_date($date)
 	{
