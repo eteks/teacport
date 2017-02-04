@@ -82,12 +82,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 </div>                               
                 <form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
                 <?php } ?> 
-                <?php
-                if(!empty($status)) :
-                  echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
-                endif;
-                ?> 
-                <p class='val_error error_msg_md'> <p>
                   <table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">
@@ -188,7 +182,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
         </h4>                        
       </div>
       <div class="widget-body form">
-        <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+        <form action="customize_plan_settings" class="form-horizontal popup_form admin_form upgrade_plan" data-mode="">
         <p class="admin_status"> </p>
         <fieldset>
             <legend> Subscription plan details:</legend>
@@ -196,19 +190,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
             <?php } ?>
             <div class="form-group">
         		<label class="control-label">Select Plan</label>
-        		<select value="">
-        			<option value="Select">Select</option>
-        			<option value="Basic plans @ 1999">Basic plans @ 1999</option>
-        			<option value="Standard plans @ 5000">Standard plans @ 5000</option>
-        			<option value="Premium plans @ 10000">Premium plans @ 10000</option>
+        		<select name="subscription_name">
+        			<option value="">Select Plan</option>
+              <?php foreach ($subscription_plans as $sub) : 
+        			 echo "<option value=".$sub['subscription_id'].">".$sub['subscription_plan']."</option>";
+              endforeach; ?>
         		</select>
         	</div>
             <div class="form-group plan_creation">
             	<!--append field-->
             	<div class="form-group field_wrapper">
-	            	<label class="control-label" value="Customize">Customize Limits</label>
+	            	<label class="control-label" value="Customize">Upgrade Option</label>
             	   <div class="upg_plan col4 select_plan">
-                		<select class="form-control customize_plan">
+                		<select class="form-control customize_plan" name="upgrade_option[]">
                 			<option value="">Select</option>
                 			<option value="sms">Per SMS</option>
                 			<option value="email">Per Email</option>
@@ -216,13 +210,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 		</select>
                 	</div>
                 	<div class="col3">
-                		<input class="form-control customize_plan numeric_value" type="text" value="" name="plan_price" maxlength="5" placeholder="Price in Rupees">
+                		<input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_price[]" maxlength="5" placeholder="Price in Rupees">
                 	</div>
                 	<div class="col3">
-                		<input class="form-control customize_plan numeric_value" type="text" value="" name="minimum-count" maxlength="5" placeholder="Min Limit">
+                		<input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_min[]" maxlength="5" placeholder="Min Limit">
                 	</div>
                 	<div class="col3">
-                		<input class="form-control customize_plan numeric_value" type="text" value="" name="maximum-count" maxlength="5" placeholder="Max Limit">
+                		<input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_max[]" maxlength="5" placeholder="Max Limit">
                 	</div>
                 	<div class="">
                 		<a class="remove_button dn" title="Remove field"><strong>-</strong></a>
