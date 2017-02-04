@@ -1,3 +1,42 @@
+/* Import CSS */
+/* google webfont */
+@font-face {
+  font-family: 'Source Sans Pro', sans-serif;
+  src:  url('assets/fonts/source_sans_pro/sourcesanspro-black.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-blackitalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-bold.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-bolditalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-extralight.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-extralightitalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-italic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-light.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourceSansPro-lightItalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-regular.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-semibold.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-semibolditalic.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Arizonia', cursive;
+	src: url('assets/fonts/arizonia/arizonia-regular.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Kaushan Script', cursive;
+	src: url('assets/fonts/kaushan_script/kaushanscript-regular.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Open Sans', sans-serif;
+	src: url('assets/fonts/open_sans/opensans-bold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-bolditalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-extrabold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-extrabolditalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-italic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-light.ttf') format('ttf'),  
+		 url('assets/fonts/open_sans/opensans-lightitalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-regular.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-semibold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-semibolditalic.ttf') format('ttf'),
+}
+/* google webfont */
 /* Custom Code */
 .mega-menu .menu-links > li > a {
    font-size: 14px;
@@ -165,7 +204,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 }
 .latest_news_head_1 p{
 	color:#fff;
-	font-size:16px;  
+	font-size:16px;
 	font-weight:bold;
 }
 .latest_news_content_1{
@@ -174,11 +213,13 @@ box-shadow:0 8px 6px -6px #da651a !important;
 	margin:7px;
 	margin-bottom:5px;
 	cursor:pointer;
-	font-size: 12px; 
 }
 .latest_news_1{
 	border: 1px solid #da651a;
 	height: 300px;
+}
+.latest_news_1 a{
+	font-size:13px;
 }
 .latest_news_content_1 img{
 	margin-top:20px !important;	
@@ -216,7 +257,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	color: #2ae !important; 
 	font-size: 25px !important; 
 	font-family: 'Kaushan Script', cursive !important;
-}	
+}
 .loginbox_parallex::before {
 	background: rgba(0, 0, 0, 0.8) !important;
 	content: "";
@@ -891,9 +932,6 @@ font-size: 12px;
 	height: 160px;
     width: 100%;
 }
-
-
-
 /* ---------For Responsive---------- */
 @media (min-width: 320px) and (max-width: 767px) {	
 	#provider_upload .input-group {
@@ -918,8 +956,6 @@ font-size: 12px;
 	}
 
 }
-
- 
 /* For Home page Search Buttonp */
 @media(min-width: 320px) and (max-width: 767px){
 	.slidershow-bg .search-form-contaner {
@@ -931,7 +967,6 @@ font-size: 12px;
 	    top: -20px;
 	 }   
 }
-
 .success_server_msg{
 	color: #fff;
 	margin: 10px 0;
@@ -1301,19 +1336,23 @@ label.form-input-error {
     width: 100%;
 }
 .app_post{
-	margin-bottom: 60px !important; 
-	height:100px;
+	margin-bottom: 50px !important;
+    height: 100px;
+    margin-top: 20px;
+    padding-top: 20px;
+}
 }
 .icon_appli_post{
 	display:inline-block;
 	/*width:100px;*/
 }
 .app_post h5{
-	
 	text-align: left;
 	color: #00a5ef;
 	display:inline-block;
 	position:absolute;
+	font-size:17px;
+	
 }
 .app_post .fa-stack{
 	color: #f47020;
@@ -1325,9 +1364,9 @@ label.form-input-error {
     text-align: left;
     color: #00a5ef;
     font-weight:bold;
-    margin-left:75px !important;
-    margin-top:23px;
-	
+    margin-left:50px !important;
+    margin-top:0px;	
+    padding-top:15px;
 }
 .owl-next{
 	left: 1075px;
@@ -1341,7 +1380,7 @@ label.form-input-error {
 }
 /*Added by Thangam*/
 #vacancies_page .Heading-title{margin-bottom: 30px;} 
-#vacancies_page label{font-size: 16px;}
+#vacancies_page label{font-size: 18px;}
 .others_value{position: relative;top: 5px;}
 .captcha_des_act{position: absolute !important;left: 170px;top: 235px;} /*signup captcha design modified*/
 .user_dashboard_popup_act{margin-bottom: 13px;margin-right: 13px;margin-left: 13px;}
@@ -1572,7 +1611,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	position:relative;
 	height:200px;
 	width:100%;
-}	
+}
 .company-img img {
 	position:absolute;
     display: inline-block;
@@ -1621,7 +1660,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .user-image{
 	height: 150px;
 	width:auto;
-}	
+}
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
@@ -1629,7 +1668,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	padding-top:40px;
 	pointer-events:none;
 }
+.visitor_no h4{
 
+    text-align: left;
+    color: #fff;
+    font-size: 22px;
+    font-weight: bold;
+    text-shadow: 4px 4px 6px #11100f, 0 0 60px #ec5610, 0 0 5px #2708fb;
+    letter-spacing: 12px;
+    margin: 5px;
+   }
 .table-filter .star {
 	color: #ccc;
 	text-align: center;
@@ -1670,8 +1718,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	right: 400px;
     width: 10em;
     margin: 0 auto 1em auto;
-    /*border: 1px solid #000;*/
-
+   /*border: 1px solid #000;*/
+}
 .listing_date{
 	position: absolute;
 	right: 250px;
@@ -1697,5 +1745,5 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .job-salary .i{
 	font-size:12px !important;
 	color:#000 !important;
-	}	
+}	
 

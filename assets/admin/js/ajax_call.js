@@ -93,38 +93,59 @@ $(document).ready(function(){
         var action = $(this).attr('data-mode');
         form_data.append(csrf_name,csfrData[csrf_name]);
         form_data.append('action',action);
-        $.ajax({
-            type : "POST",
-            url : admin_baseurl+$(this).attr('action'),
-            dataType : 'json',
-            data : form_data,
-            contentType: false,       // The content type used when sending data to the server.
-            cache: false,             // To unable request pages to be cached
-            processData:false,
-            success: function(res) {
-                if(res.error == 1) {
-                    this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
-                    this_status.removeClass('update_success_md');
-                    this_status.fadeIn(1000);
-                    this_status.fadeOut(3000);
+        error = false;
+        if($(this).hasClass('upgrade_plan')){
+            var equal_check_array = [];
+            $(this).find('.select_plan').each(function(){
+                if($('option:selected',this).val() != ''){
+                    equal_check_array.push($('option:selected',this).val());
                 }
-                else if(res.error == 2) {
-                    this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
-                    this_status.addClass('update_success_md');
-                    this_status.fadeIn(1000);
-                    this_status.fadeOut(3000);
-                    $('.admin_table').dataTable().fnDestroy();  //Commented for page reload
-                    setTimeout(function()
-                    {
-                        this_table_content.html(res.output);
-                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
-                        datatable_initialization(); //Commented for page reload
-                        // location.reload();
-                        this_popup_content.remove();
-                    },5000);
-                }
-            },            
-        });
+            });
+            var hasDups = !equal_check_array.every(function(v,i) {
+                return equal_check_array.indexOf(v) == i;
+            });
+            if(hasDups){
+                $(this).find('.admin_status').text("Please select other option to customize limits. ").fadeIn();
+                error = true;
+            }
+            else{
+                error = false;
+            }
+        }
+        if(!error){
+            $.ajax({
+                type : "POST",
+                url : admin_baseurl+$(this).attr('action'),
+                dataType : 'json',
+                data : form_data,
+                contentType: false,       // The content type used when sending data to the server.
+                cache: false,             // To unable request pages to be cached
+                processData:false,
+                success: function(res) {
+                    if(res.error == 1) {
+                        this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                        this_status.removeClass('update_success_md');
+                        this_status.fadeIn(1000);
+                        this_status.fadeOut(3000);
+                    }
+                    else if(res.error == 2) {
+                        this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                        this_status.addClass('update_success_md');
+                        this_status.fadeIn(1000);
+                        this_status.fadeOut(3000);
+                        $('.admin_table').dataTable().fnDestroy();  //Commented for page reload
+                        setTimeout(function()
+                        {
+                            this_table_content.html(res.output);
+                            $('[data-popup="' + this_popup + '"]').fadeOut(350);
+                            datatable_initialization(); //Commented for page reload
+                            // location.reload();
+                            this_popup_content.remove();
+                        },5000);
+                    }
+                },            
+            });
+        }
     });
 
     // Admin Delete - Delete funtionality for alll modules which has poup view.
@@ -230,7 +251,7 @@ $(document).ready(function(){
         if(this_id != '') {
             $.ajax({
                 type : "POST",
-                url : admin_baseurl+"state",
+                url : admin_baseurl+"district_state",
                 data : { value : this_id, csrf_token : csfrData[csrf_name]},
                 success : function(res) {
                     if(res) {

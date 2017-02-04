@@ -63,16 +63,21 @@ class Subscription_Plan extends CI_Controller {
 		                                 'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
 		                            array(
-		                                 'field'   => 'sub_start_validity',
-		                                 'label'   => 'Plan Start validity',
-		                                 'rules'   => 'trim|required|xss_clean'
+		                                 'field'   => 'validity_days',
+		                                 'label'   => 'Validity Days',
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[4]|'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_end_validity',
-		                                 'label'   => 'Plan End validity',
-		                                 // 'rules'   => 'trim|required|xss_clean|callback_checkDateFormat|callback_compareDate'
-		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_start_validity',
+		                            //      'label'   => 'Plan Start validity',
+		                            //      'rules'   => 'trim|required|xss_clean'
+		                            // ),
+		                            // array(
+		                            //      'field'   => 'sub_end_validity',
+		                            //      'label'   => 'Plan End validity',
+		                            //      // 'rules'   => 'trim|required|xss_clean|callback_checkDateFormat|callback_compareDate'
+		                            //      'rules'   => 'trim|required|xss_clean|callback_compareDate'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
@@ -101,13 +106,13 @@ class Subscription_Plan extends CI_Controller {
 		                            array(
 		                                 'field'   => 'sub_max_days_ad_visible',
 		                                 'label'   => 'Max Days Ad visible',
-		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[15]|'
+		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[3]|'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_features',
-		                                 'label'   => 'Plan Features',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_features',
+		                            //      'label'   => 'Plan Features',
+		                            //      'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_status',
 		                                 'label'   => 'Plan Status',
@@ -128,16 +133,16 @@ class Subscription_Plan extends CI_Controller {
 		                                 'label'   => 'Price',
 		                                 'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_start_validity',
-		                                 'label'   => 'Plan Start validity',
-		                                 'rules'   => 'trim|required|xss_clean'
-		                            ),
-		                            array(
-		                                 'field'   => 'sub_end_validity',
-		                                 'label'   => 'Plan End validity',
-		                                 'rules'   => 'trim|required|xss_clean|callback_compareDate'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_start_validity',
+		                            //      'label'   => 'Plan Start validity',
+		                            //      'rules'   => 'trim|required|xss_clean'
+		                            // ),
+		                            // array(
+		                            //      'field'   => 'sub_end_validity',
+		                            //      'label'   => 'Plan End validity',
+		                            //      'rules'   => 'trim|required|xss_clean|callback_compareDate'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_max_vacancy',
 		                                 'label'   => 'Max vacancy',
@@ -168,11 +173,11 @@ class Subscription_Plan extends CI_Controller {
 		                                 'label'   => 'Max Days Ad visible',
 		                                 'rules'   => 'trim|required|xss_clean|numeric|max_length[15]|'
 		                            ),
-		                            array(
-		                                 'field'   => 'sub_features',
-		                                 'label'   => 'Plan Features',
-		                                 'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
-		                            ),
+		                            // array(
+		                            //      'field'   => 'sub_features',
+		                            //      'label'   => 'Plan Features',
+		                            //      'rules'   => 'trim|required|xss_clean|min_length[10]|max_length[150]'
+		                            // ),
 		                            array(
 		                                 'field'   => 'sub_status',
 		                                 'label'   => 'Plan Status',
@@ -336,7 +341,86 @@ class Subscription_Plan extends CI_Controller {
 	}
 
 	public function customize_plan_settings(){
-		$this->load->view('admin/customize_plan_settings');
+		$data['subscription_plans'] = $this->subscription_plan_model->plan_subscription_details('init')['subscription_plans'];
+		// Update and save data
+	   if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
+	   		$validation_rules = array(
+		                            array(
+		                              'field'   => 'subscription_name',
+		                              'label'   => 'Subscription Plan',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                              'field'   => 'upgrade_option[]',
+		                              'label'   => 'Upgrade option',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                              'field'   => 'upgrade_price[]',
+		                              'label'   => 'Upgrade Price',
+		                              'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
+		                            ),
+		                           	array(
+		                              'field'   => 'upgrade_min[]',
+		                              'label'   => 'Minimum allowed',
+		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
+
+		                            ),
+		                            array(
+		                              'field'   => 'upgrade_max[]',
+		                              'label'   => 'Maximum allowed',
+		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
+		                            ),
+		                        );
+	 		$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details($this->input->post('action'));//the value here will be pass either "update" or "save"
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
+	    }
+	    // Delete data
+    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+      		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('delete'); 	
+      		$data['error'] = $data_values['error'];
+		    $data['status'] = $data_values['status'];
+      	}
+      	else {
+      		$data['error'] = 0;
+		    $data['status'] = 0;
+      		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('init');
+      	}
+	    if($data['error']==1) {
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];	
+			echo json_encode($result);
+		}
+		else if($data['error']==2) {
+			$data_ajax['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
+			$result['status'] = $data['status'];
+			$result['error'] = $data['error'];
+			$result['output'] = $this->load->view('admin/customize_plan_settings',$data_ajax,true);
+			echo json_encode($result);
+		}
+		else {
+			$data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
+			$this->load->view('admin/customize_plan_settings',$data);
+		}
 	}
 
 	
