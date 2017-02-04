@@ -1084,10 +1084,11 @@ class Job_provider extends CI_Controller {
 			if($this->job_provider_model->subscription_transaction_data($transaction_data)){
 				$transaction_id = $this->db->insert_id();
 				$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
-				$subcription_startdate = strtotime($subscription_plan_data[0]['subcription_valid_start_date']); 
-				$subcription_end_date = strtotime($subscription_plan_data[0]['subcription_valid_end_date']);
-				$datediff = $subcription_end_date - $subcription_startdate;
-				$no_of_days =  floor($datediff / (60 * 60 * 24));
+				// $subcription_startdate = strtotime($subscription_plan_data[0]['subcription_valid_start_date']); 
+				// $subcription_end_date = strtotime($subscription_plan_data[0]['subcription_valid_end_date']);
+				// $datediff = $subcription_end_date - $subcription_startdate;
+				// $no_of_days =  floor($datediff / (60 * 60 * 24));
+				$no_of_days = $subscription_plan_data[0]['subscription_validity_days'];
 				if($this->input->post('status')==='success' ){
 					$user_subscription_data = array(
 													'organization_id' 								=> $this->input->post('udf1'),

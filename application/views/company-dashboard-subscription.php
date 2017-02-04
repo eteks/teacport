@@ -161,7 +161,7 @@
 						// If the user already subscripe display current plan or 
 		                $key = trim((isset($organization_chosen_plan['subscription_id']) && !empty($organization_chosen_plan['subscription_id']))?array_search($organization_chosen_plan['subscription_id'], array_column($subscription_upgrade_plan, 'sub_id')):'');
 
-		            	if((trim($chosen_plan) == $organization_chosen_plan['subscription_id'] && !empty($organization_chosen_plan['subscription_id'])) || (trim($chosen_plan) == '' && $key!='')){
+		            	if((!empty($organization_chosen_plan['subscription_id']) && trim($chosen_plan) == $organization_chosen_plan['subscription_id']) || (trim($chosen_plan) == '' && $key!='')){
 		            		$current = 1;
 		            	}
 		            	else {
