@@ -724,7 +724,7 @@ class Job_provider_model extends CI_Model {
 
 	// Payment subscription validation
 	public function orignial_renewal_validation($plan_id,$org_id){
-		$data['error'] = '';
+		$data = '';
 		$already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
 		$check_already = $this->db->get_where('tr_organization_subscription',$already_where);
 		if($check_already -> num_rows() == 1) {
@@ -733,14 +733,16 @@ class Job_provider_model extends CI_Model {
 			$days = date_diff(date_create('today'),$start_date);
 			if($days->invert == 1 || $days->d == 0)
 			{
-				$data['error'] = 2; // if correct
+				$data = 2; // if correct
+                echo "test";
 			}
 			else {
-				$data['error'] = 1; // if wrong
+				$data = 1; // if wrong
+                 echo "test1";
 			}
 		}
 		else {
-			$data['error'] = 2; // if correct
+			$data = 2; // if correct
 		}
 		return $data;
 	}
