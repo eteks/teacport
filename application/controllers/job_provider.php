@@ -1127,23 +1127,23 @@ class Job_provider extends CI_Controller {
 				if($options['plan_option'] == "upgrade") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
 					if($this->input->post('status')==='success' ){
+						$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
 						$user_subscription_data = array(
 													'organization_id' 								=> $this->input->post('udf1'),
 													'subscription_id' 								=> $this->input->post('udf2'),
 													'organization_transcation_id' 					=> $transaction_id,
-													'organization_email_count' 						=> $options['email'],
-													'organization_sms_count'						=> $options['sms'],
-													'organization_resume_download_count'			=> $options['resume'],
-													'organization_email_remaining_count'			=> $options['email'],
-													'organization_sms_remaining_count'				=> $options['sms'],
-													'organization_remaining_resume_download_count'	=> $options['resume'],
-													'is_email_validity'								=> ($options['email'] > 0 ? 1 : 0),
-													'is_sms_validity'								=> ($options['sms'] > 0 ? 1 : 0),
-													'is_resume_validity'							=> ($options['resume'] > 0 ? 1 : 0),
+													'organization_email_count' 						=> $org_sub_id['organization_email_count'] + $options['email'],
+													'organization_sms_count'						=> $org_sub_id['organization_sms_count'] + $options['sms'],
+													'organization_resume_download_count'			=> $org_sub_id['organization_resume_download_count'] + $options['resume'],
+													'organization_email_remaining_count'			=> $org_sub_id['organization_email_remaining_count'] + $options['email'],
+													'organization_sms_remaining_count'				=> $org_sub_id['organization_sms_remaining_count'] + $options['sms'],
+													'organization_remaining_resume_download_count'	=> $org_sub_id['organization_remaining_resume_download_count'] + $options['resume'],
+													'is_email_validity'								=> (($org_sub_id['organization_email_remaining_count'] + $options['email']) > 0 ? 1 : 0),
+													'is_sms_validity'								=> (($org_sub_id['organization_sms_remaining_count'] + $options['sms']) > 0 ? 1 : 0),
+													'is_resume_validity'							=> (($org_sub_id['organization_remaining_resume_download_count'] + $options['resume']) > 0 ? 1 : 0),
 													'organization_subscription_status'				=> 1
 												);
 						if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
-							$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
 							$user_upgrade_data = array(
 													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
 													'is_renewal' 									=> 0,
