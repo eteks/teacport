@@ -244,7 +244,7 @@
 			                                </div>
 			                                <div class="plan-price text-center">
 			                                    <h4><span><i class="fa fa-inr" aria-hidden="true"></i></span><span id="upgrade_total_price" type="text"> 0 </span>
-			                                    <input type="hidden" class="price_hidden" value="" /></h4>
+			                                    <input type="hidden" class="price_hidden" value="2.00" /></h4>
 			                                </div>
 			                                <?php
 			                                $renewal = 0;
