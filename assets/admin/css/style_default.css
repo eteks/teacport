@@ -403,16 +403,20 @@ tr select {
     font-weight: lighter !important;
     text-transform: capitalize;
 }
+
 .dynamic_data span{
 	float:left;
 	display: inline block;
 }
+
 .lang_design span:before{
 	content:'-';
 }
+
 .Zebra_DatePicker_Icon_Wrapper{
     width: 100% !important;
 }
+
 .parents_tr td textarea{
     min-height:100px !important;
     max-height:200px !important;
@@ -420,14 +424,17 @@ tr select {
     /*max-width: 145px !important;    */
     width: 490px !important;
 }
+
 .user_accts_table td input {
     max-width: 127px !important;
     min-width: 125px !important;
 }
+
 .user_accts_table td select {
     max-width: 135px !important;
     min-width: 125px !important;
 }
+
 .form_table_scl {
     /*border-right: 1px solid #868686;*/
     max-width: 1166px !important;
