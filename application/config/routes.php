@@ -77,6 +77,7 @@ $route['provider/inbox/removedata'] 					= 'job_provider/inbox_message_remove_da
 $route['provider/candidate'] 							= 'job_provider/browse_candidate';
 $route['provider/candidate/(:num)'] 					= 'job_provider/browse_candidate/$1';
 $route['provider/candidateprofile/(:num)'] 				= 'job_provider/candidateprofile/$1';
+$route['provider/candidateprofile_inbox/(:num)/(:num)'] = 'job_provider/candidateprofile/$1/$1';
 $route['provider/postjob'] 								= 'job_provider/postjob';
 $route['provider/postedjob'] 							= 'job_provider/postedjob';
 $route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';

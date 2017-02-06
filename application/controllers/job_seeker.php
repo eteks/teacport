@@ -462,7 +462,7 @@ class Job_seeker extends CI_Controller {
 	// Candidate inbox full data
 	public function inbox_message_full_data() {
 		$inbox_id = $this->input->post('inbox_id');	
-		echo json_encode($this->job_seeker_model->job_seeker_inbox_full_data($inbox_id));
+		echo $this->job_seeker_model->job_seeker_inbox_full_data($inbox_id);
 	}
 
 	// Candidate inbox full data

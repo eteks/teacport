@@ -70,7 +70,7 @@
 										else if(isset($organization_chosen_plan['subscription_id']) && !empty($organization_chosen_plan['subscription_id']) && $sub_val['sub_id'] == $organization_chosen_plan['subscription_id'] && $chosen_plan=='') {
 												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
-										else {
+										else if($sub_val['subscription_status'] == 1){
 											echo "<option class='subplan_act' value='".$sub_val['sub_id']."' data-name='".$sub_val['subscription_plan']."' data-amount='".$sub_val['subscription_price']."'>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
 									} 
@@ -189,14 +189,14 @@
                                 				<strong>  
 	                                				<?php 	
 	                                				$start_date = date_create($organization_chosen_plan['org_sub_validity_end_date']);
-	                                   				$days = date_diff(date_create('today'),$start_date);
+	                                   				$days = date_diff(date_create(date('Y-m-d')),$start_date);
 	                                				if($days->invert == 0 && $days->d > 1) {
-	                                					echo "Remaining ".$days->d." days";
+	                                					echo "Remaining ".$days->days." days";
 	                                				}
 	                                				else if($days->invert == 0 && $days->d == 1){
-														echo "Remaining ".$days->d." day";
+														echo "Remaining ".$days->days." day";
 	                                				}
-	                                				else if($days->invert == 0 && $days->d == 0){
+	                                				else if($days->invert == 0 && $days->days == 0){
 														echo "Last day";
 	                                				}
 	                                				else {
