@@ -128,7 +128,8 @@ class Job_Provider extends CI_Controller {
     			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
         		{	
         			$is_end = 1;   
-        			$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+        			$upload_image_path = PROVIDER_UPLOAD;
+        			$config['upload_path'] = $upload_image_path; // APPPATH means our application folder path.
 			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
 			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 			        $personnal_logo['file_ext_tolower'] 	= TRUE;
@@ -142,7 +143,34 @@ class Job_Provider extends CI_Controller {
                 		$_POST['organization_logo'] = base_url().$upload_path.$upload_data['file_name']; 
                 		$old_file_path = $_POST['old_file_path'] ;
                 		$upload_error = 0;
+                		//newly added for thumbnail
+                		$organization_logo_thumb['image_library'] = 'gd2';
+						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$upload_data['file_name'];
+						$organization_logo_thumb['create_thumb'] = TRUE;
+						// $organization_logo_thumb['new_image'] = 'thumb_'.$organizationuploaddata['file_name'];
+						$organization_logo_thumb['maintain_ratio'] = TRUE;
+						$organization_logo_thumb['width']         = 180;
+						$organization_logo_thumb['height']       = 180;
+						$this->load->library('image_lib');
+						$this->image_lib->initialize($organization_logo_thumb);
+						// Resize operation
+						if ( ! $this->image_lib->resize())
+						{
+	                		$data['upload_provider_logo_error'] = strip_tags($this->image_lib->display_errors()); 
+						}
+						$this->image_lib->clear();
+						$keyword = "uploads";
+	        			// To check whether the image path is cdn or local path
+				        if(strpos( $old_file_path , $keyword ) !== false && !empty($old_file_path) ) {
+	               			@unlink(APPPATH.'../'.$old_file_path);
+	               			$thumb_image = explode('.', end(explode('/',$old_file_path)));
+	               			@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
+				        }	
                 		@unlink(APPPATH.'../'.$old_file_path);
+
+                		$thumb_image = explode('.', end(explode('/',$old_file_path)));
+	               		@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
+
   	            	}
     		      	else
             		{
@@ -459,16 +487,19 @@ class Job_Provider extends CI_Controller {
 		        	$data['status'] = $data_values['status'];
 		        	//To send mail for provider if admin is verified their posted ads
 		        	if($data['error'] == 2 && $this->input->post('current_verify') == 0 && $this->input->post('admin_verify') == 1){
+		        		$post_data['ads_name'] = $_POST['ads_name'];
+		        		$post_data['registrant_email'] = $_POST['registrant_email'];
 		        		$ci =& get_instance();	
 						$ci->config->load('email', true);
 						$emailsetup = $ci->config->item('email');
 						$this->load->library('email', $emailsetup);
 						$from_email = $emailsetup['smtp_user'];
 						$this->email->initialize($emailsetup);
-						$this->email->from($from_email, 'Teachers Recruit');
+						$this->email->from($from_email, 'Teacher Recruit');
 		                $this->email->to($this->input->post('registrant_email'));
-		    			$this->email->subject('Ads Verification Status');
-		    			$message = $this->load->view('admin/email_template/ad_verify',TRUE);
+		    			$this->email->subject('Ad Verification Status');
+		    			// $this->email->message("Your registered password is ".$user_values['admin_user_password']);
+		    			$message = $this->load->view('admin/email_template/ad_verify',$post_data, TRUE);
 		    			$this->email->message($message);
 
 		    			if($this->email->send())
