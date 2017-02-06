@@ -205,7 +205,7 @@ class Subscription_Plan_Model extends CI_Model {
 
     // Delete data
     else if($status =='delete') {
-      $plans_delete_where = '(upgrade_id="'.$this->input->post('rid').'")';
+      $plans_delete_where = '(subscription_id="'.$this->input->post('rid').'")';
       $this->db->delete("tr_subscription_upgrade", $plans_delete_where); 
       $model_data['status'] = "Deleted Successfully";
       $model_data['error'] = 2;

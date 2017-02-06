@@ -266,19 +266,37 @@
 												<div class="clearfix"> </div>
 												<div class="loginbox-submit">
 
-
+													<?php if($subscrib_plan['is_sms_validity']){ ?>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" title="You sent <?php echo $subscrib_plan['organization_sms_count'] - $subscrib_plan['organization_sms_remaining_count']; ?> sms, still you can send <?php echo $subscrib_plan['organization_sms_remaining_count']; ?> more,else you can upgrade the Sms plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Sms</a>
+                              						<?php 
+                              						} 
+                              						else {
+                              						?>
+                              						<a href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning sms count, you can upgrade the Sms plan" >Upgrade</a>
+                              						<?php
+                              						}
+                              						?>
 													<?php if($subscrib_plan['is_email_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" 
-                                  					   title="You used 50 Email, still you can send 100 more, else you can upgrade the Email plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
-                                  					<?php } ?>	
-                                  					<?php if($subscrib_plan['is_sms_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" title="You downloaded 50 sms, still you can download 50 more,else you can upgrade the Sms plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Sms</a>
-                              						<?php } ?>
+                                  					<a class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_email_count'] - $subscrib_plan['organization_email_remaining_count']; ?> Email, still you can send <?php echo $subscrib_plan['organization_email_remaining_count']; ?>  more, else you can upgrade the Email plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Email</a>
+                                  					<?php 
+                              						} 
+                              						else {
+                              						?>
+                              						<a href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning email count, you can upgrade the Email plan" >Upgrade</a>
+                              						<?php
+                              						}
+                              						?>                               					
 													<?php if($subscrib_plan['is_resume_validity']){ ?>
-                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" 
-                                  					   title="You used 50 Download, still you can send 100 more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">SMS</a>
-                                  					<a class="dn" id="hidden_download" href="#" download> </a>
-                                  					<?php } ?>                            					
+                                  					<a class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Resume</a>
+                                  					<a class="dn" id="hidden_download" target="_blank" href="#" download> </a>
+                                  					<?php 
+                              						} 
+                              						else {
+                              						?>
+                              						<a href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning download count, you can upgrade the Download plan" >Upgrade</a>
+                              						<?php
+                              						}
+                              						?> 
                              					</div>
 											</div> <br> <!---Communication Information-->	
 											<?php } else{ ?>
@@ -298,7 +316,7 @@
                     </div>
                 </div>
             </div>
-            <!---Pop up error msg--->
+            <!---Pop up error msg-->
             <div id="sitebodyoverlay"> </div><!--overlay-->
             <!--popup-->
 			<div class="popup_fade cancel_btn"></div> 
@@ -309,11 +327,11 @@
 		 		<div class="clearfix"></div>
 			 	<div class="success-alert">
 			 		<span>Are you sure to proceed ?</span>
-			 	</div><!--- --->
+			 	</div><!--- -->
 			 	<input type="submit" class="btn btn-default alert_btn" value="Proceed">
 			 	<input type="submit" class="btn btn-default alert_btn" value="Cancel">
 		 	</div><!--success_msg-->
-		 	<!---End Pop up error msg--->
+		 	<!---End Pop up error msg -->
  </section>
 
 <?php include('include/footermenu.php'); ?>
@@ -324,55 +342,51 @@
 $(document).ready(function(){
 	// subcription actions like download resume, sms count, job posted counts
 
-	$('.candidate_sms').on('click',function(){
+	$('.candidate_sms').on('click',function(e){
+		if(!$(this).attr('href')) {
+    		e.preventDefault();
+    	}
     	var candidate =  parseInt($(this).attr('candidate-id'));
     	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
     	var url = '<?php echo base_url(); ?>';
     	var org_id = <?php echo $organization['organization_id']; ?>;
+    	var this_tag = $(this);
     	$.ajax({
-	       type: "POST",
-	       url: url+"provider/sendsms",
-	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
-	       cache: false,
-	       async: false,
-	       success: function(data) {
-	       		if(data == "failure"){
+	       	type: "POST",
+	       	url: url+"provider/sendsms",
+	       	data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       	cache: false,
+	       	async: false,
+	       	success: function(data) {
+	       		var obj = JSON.parse(data);
+	       		var sub = obj.subscribe_details;
+	       		if(obj.status == "failure"){
 	       			$('.subscription_action_message').text('Message not sent successfully!');
 	       		}
 	       		else {
 	       			$('.subscription_action_message').text('Message sent successfully!');
 	       		}
-	       }
+
+	       		if(sub.organization_sms_remaining_count <= 0) {
+	       			this_tag.text("Upgrade");
+	       			this_tag.attr('href',url+'provider/subscription');
+	       			this_tag.attr('data-original-title','No remaning sms count, you can upgrade the Sms plan');		
+	       		}
+	       		else {
+	       			this_tag.attr('data-original-title','You sent '+(sub.organization_sms_count - sub.organization_sms_remaining_count)+' sms, still you can download '+sub.organization_sms_remaining_count+' more,else you can upgrade the Sms plan');
+	       		}
+			}
      	});
     });
 
-    $('.candidate_resume').on('click',function(){
+     $('.candidate_email').on('click',function(e){
+    	if(!$(this).attr('href')) {
+    		e.preventDefault();
+    	}
     	var candidate =  parseInt($(this).attr('candidate-id'));
     	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
     	var url = '<?php echo base_url(); ?>';
-    	var org_id = <?php echo $organization['organization_id']; ?>;
-    	$.ajax({
-	       type: "POST",
-	       url: url+"provider/resume",
-	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
-	       cache: false,
-	       async: false,
-	       success: function(data) {
-	       		if(data == "failure"){
-	       			$('.subscription_action_message').text('Resume not download!');
-	       		}
-	       		else {
-	       			$('#hidden_download').attr('href',data);
-	       			$('#hidden_download')[0].click();
-	       			$('.subscription_action_message').text('Resume download successfully!');
-	       		}
-	       }
-     	});
-    });
-    $('.candidate_email').on('click',function(){
-    	var candidate =  parseInt($(this).attr('candidate-id'));
-    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
-    	var url = '<?php echo base_url(); ?>';
+    	var this_tag = $(this);
     	var org_id = <?php echo $organization['organization_id']; ?>;
     	$.ajax({
 	       type: "POST",
@@ -381,11 +395,58 @@ $(document).ready(function(){
 	       cache: false,
 	       async: false,
 	       success: function(data) {
-	       		if(data == "failure"){
-	       			$('.subscription_action_message').text('Message not sent successfully!');
+	       		var obj = JSON.parse(data);
+	       		var sub = obj.subscribe_details;
+	       		if(obj.status == "failure"){
+	       			$('.subscription_action_message').text('Email not sent successfully!');
 	       		}
 	       		else {
-	       			$('.subscription_action_message').text('Message sent successfully!');
+	       			$('.subscription_action_message').text('Email sent successfully!');
+	       		}
+	       		if(sub.organization_email_remaining_count <= 0) {
+	       			this_tag.text("Upgrade");
+	       			this_tag.attr('href',url+'provider/subscription');
+	       			this_tag.attr('data-original-title','No remaning email count, you can upgrade the Email plan');		
+	       		}
+	       		else {
+	       			this_tag.attr('data-original-title','You used '+(sub.organization_email_count - sub.organization_email_remaining_count)+' Email, still you can send '+sub.organization_email_remaining_count+'  more, else you can upgrade the Email plan');
+	       		}
+	       }
+     	});
+    });
+    $('.candidate_resume').on('click',function(e){
+    	if(!$(this).attr('href')) {
+    		e.preventDefault();
+    	}
+    	var candidate =  parseInt($(this).attr('candidate-id'));
+    	var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+    	var url = '<?php echo base_url(); ?>';
+    	var this_tag = $(this);
+    	var org_id = <?php echo $organization['organization_id']; ?>;
+    	$.ajax({
+	       type: "POST",
+	       url: url+"provider/resume",
+	       data:{ candidate_id : candidate ,org_id : org_id, csrf_token : csrf},
+	       cache: false,
+	       async: false,
+	       success: function(data) {
+	       		var obj = JSON.parse(data);
+	       		var sub = obj.subscribe_details;
+	       		if(obj.status == "failure"){
+	       			$('.subscription_action_message').text('Resume not download!');
+	       		}
+	       		else {
+	       			$('#hidden_download').attr('href',obj.status);
+	       			$('#hidden_download')[0].click();
+	       			$('.subscription_action_message').text('Resume download successfully!');
+	       		}
+	       		if(sub.organization_remaining_resume_download_count <= 0) {
+	       			this_tag.text("Upgrade");
+	       			this_tag.attr('href',url+'provider/subscription');
+	       			this_tag.attr('data-original-title','No remaning download count, you can upgrade the Upgrade plan');		
+	       		}
+	       		else {
+	       			this_tag.attr('data-original-title','You used '+(sub.organization_resume_download_count - sub.organization_remaining_resume_download_count)+' Download, still you can download '+sub.organization_remaining_resume_download_count+'  more, else you can upgrade the Resume download plan');
 	       		}
 	       }
      	});

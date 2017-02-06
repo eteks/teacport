@@ -544,13 +544,25 @@ class Job_provider_model extends CI_Model {
 	}
 	public function subscriped_plan_data($subscrip_data)
 	{
-		if($this->db->insert('tr_organization_subscription', $subscrip_data)){
-			return TRUE;
-		}
-		else{
-			return FALSE;
-		}
-	}
+		$already_where = '(organization_id = "'.$subscrip_data['organization_id'].'")';
+		$check_already = $this->db->get_where('tr_organization_subscription',$already_where);
+		if($check_already -> num_rows() > 0) {
+			$this->db->where('organization_id',$subscrip_data['organization_id']);
+			$this->db->set('organization_subscription_status', '0', FALSE);
+            $this->db->update('tr_organization_subscription');
+       	}
+        $already_sub_where = '(organization_id = "'.$subscrip_data['organization_id'].'" AND subscription_id="'.$subscrip_data['subscription_id'].'")';
+        $check_sub_already = $this->db->get_where('tr_organization_subscription',$already_sub_where);
+        if($check_sub_already -> num_rows() == 1) {
+            $this->db->where($already_sub_where);
+            $this->db->set($subscrip_data);
+            $this->db->update('tr_organization_subscription');
+        }
+        else {
+            $this->db->insert('tr_organization_subscription', $subscrip_data);
+        }
+        return TRUE;
+    }
 	public function subscribed_or_not($subcription_id,$organization_id){
 		$checkquery = $this->db->get_where('tr_organization_subscription', array(
             'organization_id' => $organization_id,'subscription_id' => $subcription_id
@@ -589,7 +601,7 @@ class Job_provider_model extends CI_Model {
 	}
 	//provider subscription plan update for resume
 	public function provider_resume_download_update($candidate_id,$org_id){
-        $file = '';
+        $data['status'] = '';
         $resume_where = '(candidate_id="'.$candidate_id.'")';
         $cand_resume = $this->db->get_where('tr_candidate_profile',$resume_where)->row_array();
 		$checkquery = $this->db->get_where('tr_organization_activity', array(
@@ -598,14 +610,20 @@ class Job_provider_model extends CI_Model {
 		$count = $checkquery->num_rows();
 		if ($count === 0) {
 			$this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'0','is_email_sent'=>'0','is_resume_downloaded'=>'1'));
-			$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
-			$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
-			if($valid_count['organization_remaining_resume_download_count'] != 0) {
-				if($valid_count['organization_remaining_resume_download_count'] == 1) {
-					$resume_update_data = array(
-												"organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
-												"is_resume_validity" => 0
-												);
+		}
+		else{
+			$check_already = $checkquery->row_array();
+			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
+			$this->db->update('tr_organization_activity', array('is_resume_downloaded'=>'1'));
+		}
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+		if($valid_count['organization_remaining_resume_download_count'] != 0) {
+			if($valid_count['organization_remaining_resume_download_count'] == 1) {
+				$resume_update_data = array(
+											"organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
+											"is_resume_validity" => 0
+										);
 				}
 				else {
 					$resume_update_data = array(
@@ -613,108 +631,139 @@ class Job_provider_model extends CI_Model {
 												"is_resume_validity" => 1
 												);
 				}
-				$this->db->where($valid_count_where);
-				$this->db->set($resume_update_data);
-				$this->db->update('tr_organization_subscription');
-				$file = $cand_resume['candidate_resume_upload_path'];
-			}
+		$this->db->where($valid_count_where);
+		$this->db->set($resume_update_data);
+		$this->db->update('tr_organization_subscription');
+		$data['status'] = $cand_resume['candidate_resume_upload_path'];
 		}
-		else{
-			$check_already = $checkquery->row_array();
-			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
-			$this->db->update('tr_organization_activity', array('is_resume_downloaded'=>'1'));
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$data['subscribe_details'] = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
 
-
-			// if($check_already['is_resume_downloaded'] != 1){
-			$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
-			$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
-			if($valid_count['organization_remaining_resume_download_count'] != 0) {
-				if($valid_count['organization_remaining_resume_download_count'] == 1) {
-					$resume_update_data = array(
-												"organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
-												"is_resume_validity" => 0
-												);
-				}
-				else {
-					$resume_update_data = array(
-													"organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
-													"is_resume_validity" => 1
-													);
-				}
-				$this->db->where($valid_count_where);
-				$this->db->set($resume_update_data);
-				$this->db->update('tr_organization_subscription');
-				$file = $cand_resume['candidate_resume_upload_path'];
-			}
-			// }
-			
-		}
 		return $file;
 	}
 	public function provider_mail_send_update($candidate_id,$org_id){
-		$status = '';
+		$data['status'] = '';
+		// Store details in candidate inbox
+		$this->db->insert('tr_candidate_inbox', array('candidate_organization_id'=>$org_id,'candidate_id'=>$candidate_id,'is_viewed'=>'0','candidate_inbox_status'=>'1','candidate_inbox_message'=>'Kudo! You have been Shortlisted.'));
 		$checkquery = $this->db->get_where('tr_organization_activity', array(
             'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
         ));
 		$count = $checkquery->num_rows();
 		if ($count === 0) {
 			$this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'0','is_email_sent'=>'1','is_resume_downloaded'=>'0'));
-
-			$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
-			$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
-			if($valid_count['organization_email_remaining_count'] != 0) {
-				if($valid_count['organization_email_remaining_count'] == 1) {
-					$email_update_data = array(
-												"organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
-												"is_email_validity" => 0
-												);
-				}
-				else {
-					$email_update_data = array(
-												"organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
-												"is_email_validity" => 1
-												);
-				}
-				$this->db->where($valid_count_where);
-				$this->db->set($email_update_data);
-				$this->db->update('tr_organization_subscription');
-				$status = "success";
-			}
 		}
 		else{
 			$check_already = $checkquery->row_array();
 			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
 			$this->db->update('tr_organization_activity', array('is_email_sent'=>'1'));
-
-
-			// if($check_already['is_email_sent'] != 1){
-			$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
-			$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
-			if($valid_count['organization_email_remaining_count'] != 0) {
-				if($valid_count['organization_email_remaining_count'] == 1) {
-					$resume_update_data = array(
-												"organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
-												"is_email_validity" => 0
-												);
-				}
-				else {
-					$resume_update_data = array(
-												"organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
-												"is_email_validity" => 1
-												);
-				}
-				$this->db->where($valid_count_where);
-				$this->db->set($resume_update_data);
-				$this->db->update('tr_organization_subscription');
-				$status = "success";
-			}
-			// }
-			$this->db->insert('tr_candidate_inbox', array('candidate_organization_id'=>$org_id,'candidate_id'=>$candidate_id,'is_viewed'=>'0','candidate_inbox_status'=>'1','candidate_inbox_message'=>'Kudo! You have been Shortlisted.'));
 		}
-		return $status;
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+		if($valid_count['organization_email_remaining_count'] != 0) {
+			if($valid_count['organization_email_remaining_count'] == 1) {
+				$email_update_data = array(
+											"organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
+											"is_email_validity" => 0
+											);
+			}
+			else {
+				$email_update_data = array(
+											"organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
+											"is_email_validity" => 1
+											);
+			}
+			$this->db->where($valid_count_where);
+			$this->db->set($email_update_data);
+			$this->db->update('tr_organization_subscription');
+			$data['status'] = "success";
+		}
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$data['subscribe_details'] = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+		return $data;
 	}
 
+	// Sendsms
+	public function provider_sms_send_update($candidate_id,$org_id){
+		$data['status'] = '';
+		$checkquery = $this->db->get_where('tr_organization_activity', array(
+            'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
+        ));
+		$count = $checkquery->num_rows();
+		if ($count === 0) {
+			$this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'1','is_email_sent'=>'0','is_resume_downloaded'=>'0'));
+		}
+		else{
+			$check_already = $checkquery->row_array();
+			$this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
+			$this->db->update('tr_organization_activity', array('is_email_sent'=>'1'));
+		}
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+		if($valid_count['organization_sms_remaining_count'] != 0) {
+			if($valid_count['organization_sms_remaining_count'] == 1) {
+				$email_update_data = array(
+											"organization_sms_remaining_count" => $valid_count['organization_sms_remaining_count'] - 1,
+											"is_sms_validity" => 0
+											);
+			}
+			else {
+				$email_update_data = array(
+											"organization_sms_remaining_count" => $valid_count['organization_sms_remaining_count'] - 1,
+											"is_sms_validity" => 1
+											);
+			}
+			$this->db->where($valid_count_where);
+			$this->db->set($email_update_data);
+			$this->db->update('tr_organization_subscription');
+			$data['status'] = "success";
+		}
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$data['subscribe_details'] = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+		return $data;
+	}
+
+	// Payment subscription validation
+	public function orignial_renewal_validation($plan_id,$org_id){
+		$data = '';
+		$already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+		$check_already = $this->db->get_where('tr_organization_subscription',$already_where);
+		if($check_already -> num_rows() == 1) {
+			$plan_value = $check_already->row_array();
+			$start_date = date_create($plan_value['org_sub_validity_end_date']);
+			$days = date_diff(date_create('today'),$start_date);
+			if($days->invert == 1 || $days->d == 0)
+			{
+				$data = 2; // if correct
+                echo "test";
+			}
+			else {
+				$data = 1; // if wrong
+                 echo "test1";
+			}
+		}
+		else {
+			$data = 2; // if correct
+		}
+		return $data;
+	}
+
+    // Get organization subscription details
+    public function organization_subscription_data($org_id,$plan_id){
+        $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+        $data = $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->row_array();
+        return $data;
+    }
+	   
+    // Insert upgrade and renewal plan
+    public function subscribe_upgrade_renewal($data)
+    {
+        if($this->db->insert('tr_organization_upgrade_or_renewal', $data)){
+            return TRUE;
+        }
+        else{
+            return FALSE;
+        }
+    }
 
 
-	
-}
+}  // End
