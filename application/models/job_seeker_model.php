@@ -773,6 +773,9 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
         }
+        if(isset($data['experience']) && $data['experience']!='' && $data['experience']==0) {
+        	$this->db->where("ov.vacancies_experience = 0");
+        }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
@@ -817,6 +820,9 @@ class Job_seeker_model extends CI_Model {
         }
         if(!empty($data['experience'])) {
         	$this->db->where("ov.vacancies_experience BETWEEN $min_exp AND $max_exp");
+        }
+        if(isset($data['experience']) && $data['experience']!='' && $data['experience']==0) {
+        	$this->db->where("ov.vacancies_experience = 0");
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);

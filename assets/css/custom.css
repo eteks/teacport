@@ -1,3 +1,42 @@
+/* Import CSS */
+/* google webfont */
+@font-face {
+  font-family: 'Source Sans Pro', sans-serif;
+  src:  url('assets/fonts/source_sans_pro/sourcesanspro-black.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-blackitalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-bold.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-bolditalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-extralight.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-extralightitalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-italic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-light.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourceSansPro-lightItalic.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-regular.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-semibold.ttf') format('ttf'),
+        url('assets/fonts/source_sans_pro/sourcesanspro-semibolditalic.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Arizonia', cursive;
+	src: url('assets/fonts/arizonia/arizonia-regular.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Kaushan Script', cursive;
+	src: url('assets/fonts/kaushan_script/kaushanscript-regular.ttf') format('ttf'),
+}
+@font-face{
+	font-family: 'Open Sans', sans-serif;
+	src: url('assets/fonts/open_sans/opensans-bold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-bolditalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-extrabold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-extrabolditalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-italic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-light.ttf') format('ttf'),  
+		 url('assets/fonts/open_sans/opensans-lightitalic.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-regular.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-semibold.ttf') format('ttf'),
+		 url('assets/fonts/open_sans/opensans-semibolditalic.ttf') format('ttf'),
+}
+/* google webfont */
 /* Custom Code */
 .mega-menu .menu-links > li > a {
    font-size: 14px;
@@ -968,6 +1007,9 @@ font-size: 12px;
 .datepicker_section span {
 	width : 100% !important;
 }
+.subscribe_secure_msg {
+	clear: both;
+}
 table tr[data-name="bold_section"] {
     font-weight: bold;
 }
@@ -1619,6 +1661,77 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	height: 150px;
 	width:auto;
 }
+/* error Popup */
+#sitebodyoverlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+  z-index: 240;
+  display: none;
+  cursor: pointer;
+  box-shadow: 0 0 20px #000 inset;
+  background-color: rgba(0,0,0,0.5);
+  top: 0;
+  left: 0;
+}
+.popup_fade{
+	background: #000000 none repeat scroll 0 0;
+    display: none;
+    height: 1000%;
+    opacity: 0.63;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1100;
+   
+}
+.error_popup_msg {
+    background: #fff none repeat scroll 0 0;
+    display: none;
+    height: 200px;
+    left: 50%;
+    position: fixed;
+    top: 50%;
+    width: 400px;
+    z-index: 9999;
+    border-radius: 5px;
+}
+.success-alert {
+  	padding: 25px 0;
+  	margin: 10px;
+    text-align: center;
+}
+.success-alert span{
+	color: #000;
+	font-size: 18px;
+	margin: 10px;
+	padding: 10px;
+}
+.alert_btn{
+	left: 87px;
+    position: relative;
+    -moz-border-bottom-colors: none;
+    -moz-border-left-colors: none;
+    -moz-border-right-colors: none;
+    -moz-border-top-colors: none;
+    background: #29AAFE none repeat scroll 0 0;
+    border-color: transparent transparent #29AAFE;
+    border-image: none;
+    border-style: solid;
+    border-width: 2px;
+    color: #ffffff;
+    float: left;
+    font-size: 14px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    margin: 10px;
+}
+.error_popup_msg .fa-close{
+	margin:0 5px;
+	cursor: pointer;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
