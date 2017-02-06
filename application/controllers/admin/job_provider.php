@@ -487,16 +487,19 @@ class Job_Provider extends CI_Controller {
 		        	$data['status'] = $data_values['status'];
 		        	//To send mail for provider if admin is verified their posted ads
 		        	if($data['error'] == 2 && $this->input->post('current_verify') == 0 && $this->input->post('admin_verify') == 1){
+		        		$post_data['ads_name'] = $_POST['ads_name'];
+		        		$post_data['registrant_email'] = $_POST['registrant_email'];
 		        		$ci =& get_instance();	
 						$ci->config->load('email', true);
 						$emailsetup = $ci->config->item('email');
 						$this->load->library('email', $emailsetup);
 						$from_email = $emailsetup['smtp_user'];
 						$this->email->initialize($emailsetup);
-						$this->email->from($from_email, 'Teachers Recruit');
+						$this->email->from($from_email, 'Teacher Recruit');
 		                $this->email->to($this->input->post('registrant_email'));
-		    			$this->email->subject('Ads Verification Status');
-		    			$message = $this->load->view('admin/email_template/ad_verify',TRUE);
+		    			$this->email->subject('Ad Verification Status');
+		    			// $this->email->message("Your registered password is ".$user_values['admin_user_password']);
+		    			$message = $this->load->view('admin/email_template/ad_verify',$post_data, TRUE);
 		    			$this->email->message($message);
 
 		    			if($this->email->send())
