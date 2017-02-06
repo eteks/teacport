@@ -249,8 +249,98 @@ class Subscription_Plan extends CI_Controller {
 			redirect(base_url().'main/admin_error');
 		}
 	}
-	public function plan_upgrade_creation()
-	{	
+	// public function plan_upgrade_creation()
+	// {	
+	// 	$data['subscription_plans'] = $this->subscription_plan_model->plan_subscription_details('init')['subscription_plans'];
+	// 	// Update and save data
+	//    if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
+	//    		$validation_rules = array(
+	// 	                            array(
+	// 	                              'field'   => 'subscription_name',
+	// 	                              'label'   => 'Subscription Plan',
+	// 	                              'rules'   => 'trim|required|xss_clean|'
+
+	// 	                            ),
+	// 	                           	array(
+	// 	                              'field'   => 'sms_count',
+	// 	                              'label'   => 'SMS count',
+	// 	                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
+
+	// 	                            ),
+	// 	                            array(
+	// 	                              'field'   => 'email_count',
+	// 	                              'label'   => 'Email count',
+	// 	                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
+	// 	                            ),
+	// 	                            array(
+	// 	                              'field'   => 'resume_count',
+	// 	                              'label'   => 'Resume count',
+	// 	                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
+	// 	                            ),
+	// 	                            array(
+	// 	                              'field'   => 'price',
+	// 	                              'label'   => 'Price',
+	// 	                              'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
+	// 	                            ),
+	// 	                            array(
+	// 	                                 'field'   => 'plan_upgrade_creation_status',
+	// 	                                 'label'   => 'Plan Upgrade Status',
+	// 	                                 'rules'   => 'trim|required|xss_clean|'
+	// 	                            ),
+	// 	                        );
+	//  		$this->form_validation->set_rules($validation_rules);
+	//   		if ($this->form_validation->run() == FALSE) {   
+	// 	        foreach($validation_rules as $row){
+	// 	          $field = $row['field'];         //getting field name
+	// 	          $error = form_error($field);    //getting error for field name
+	// 	          //form_error() is inbuilt function
+	// 	          //if error is their for field then only add in $errors_array array
+	// 	          if($error){
+	// 	            $data['status'] = strip_tags($error);
+	// 	            $data['error'] = 1;
+	// 	            break;
+	// 	          }
+	// 	        }
+	//   		}
+ //      		else {
+ //         		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details($this->input->post('action'));//the value here will be pass either "update" or "save"
+ //         		$data['error'] = $data_values['error'];
+	// 	        $data['status'] = $data_values['status'];
+ //     		}
+	//     }
+
+ //    	// Delete data
+ //    	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
+ //      		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('delete'); 	
+ //      		$data['error'] = $data_values['error'];
+	// 	    $data['status'] = $data_values['status'];
+ //      	}
+ //      	else {
+ //      		$data['error'] = 0;
+	// 	    $data['status'] = 0;
+ //      		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('init');
+ //      	}
+
+	// 	if($data['error']==1) {
+	// 		$result['status'] = $data['status'];
+	// 		$result['error'] = $data['error'];	
+	// 		echo json_encode($result);
+	// 	}
+	// 	else if($data['error']==2) {
+	// 		$data_ajax['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
+	// 		$data_ajax['status'] = $data['status'];
+	// 		$result['error'] = $data['error'];
+	// 		$result['output'] = $this->load->view('admin/plan_upgrade_creation',$data_ajax,true);
+	// 		echo json_encode($result);
+	// 	}
+	// 	else {
+	// 		$data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
+	// 		$this->load->view('admin/plan_upgrade_creation',$data);
+	// 	}
+
+	// }
+
+	public function customize_plan_settings(){
 		$data['subscription_plans'] = $this->subscription_plan_model->plan_subscription_details('init')['subscription_plans'];
 		// Update and save data
 	   if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
@@ -261,31 +351,27 @@ class Subscription_Plan extends CI_Controller {
 		                              'rules'   => 'trim|required|xss_clean|'
 
 		                            ),
+		                            array(
+		                              'field'   => 'upgrade_option[]',
+		                              'label'   => 'Upgrade option',
+		                              'rules'   => 'trim|required|xss_clean|'
+
+		                            ),
+		                            array(
+		                              'field'   => 'upgrade_price[]',
+		                              'label'   => 'Upgrade Price',
+		                              'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
+		                            ),
 		                           	array(
-		                              'field'   => 'sms_count',
-		                              'label'   => 'SMS count',
+		                              'field'   => 'upgrade_min[]',
+		                              'label'   => 'Minimum allowed',
 		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
 
 		                            ),
 		                            array(
-		                              'field'   => 'email_count',
-		                              'label'   => 'Email count',
+		                              'field'   => 'upgrade_max[]',
+		                              'label'   => 'Maximum allowed',
 		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
-		                            ),
-		                            array(
-		                              'field'   => 'resume_count',
-		                              'label'   => 'Resume count',
-		                              'rules'   => 'trim|required|xss_clean|numeric|max_length[5]|'
-		                            ),
-		                            array(
-		                              'field'   => 'price',
-		                              'label'   => 'Price',
-		                              'rules'   => 'trim|required|xss_clean|max_length[9]|regex_match[/^([0-9]+(.[0-9]+)?)*$/]'
-		                            ),
-		                            array(
-		                                 'field'   => 'plan_upgrade_creation_status',
-		                                 'label'   => 'Plan Upgrade Status',
-		                                 'rules'   => 'trim|required|xss_clean|'
 		                            ),
 		                        );
 	 		$this->form_validation->set_rules($validation_rules);
@@ -308,8 +394,7 @@ class Subscription_Plan extends CI_Controller {
 		        $data['status'] = $data_values['status'];
      		}
 	    }
-
-    	// Delete data
+	    // Delete data
     	else if($this->input->post('action')=='delete' && $this->input->post('rid')) {
       		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('delete'); 	
       		$data['error'] = $data_values['error'];
@@ -320,28 +405,37 @@ class Subscription_Plan extends CI_Controller {
 		    $data['status'] = 0;
       		$data_values = $this->subscription_plan_model->plan_subscription_upgrade_details('init');
       	}
-
-		if($data['error']==1) {
+	    if($data['error']==1) {
 			$result['status'] = $data['status'];
 			$result['error'] = $data['error'];	
 			echo json_encode($result);
 		}
 		else if($data['error']==2) {
-			$data_ajax['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
-			$data_ajax['status'] = $data['status'];
+			// $data_ajax['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
+			//To group data by subscription id from plan ugrade data array
+		    $res = array();
+		    foreach($data_values['subscription_plan_upgrade'] as $val) {
+		        $res[$val['subscription_plan']][] = $val;		    
+			}
+			$data_ajax['subscription_plan_upgrade'] = $res;
+			$data_ajax['status'] = $result['status'] = $data['status'];
 			$result['error'] = $data['error'];
-			$result['output'] = $this->load->view('admin/plan_upgrade_creation',$data_ajax,true);
+			$result['output'] = $this->load->view('admin/customize_plan_settings',$data_ajax,true);
 			echo json_encode($result);
 		}
 		else {
-			$data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];
-			$this->load->view('admin/plan_upgrade_creation',$data);
+			// $data['subscription_plan_upgrade'] = $data_values['subscription_plan_upgrade'];	
+			//To group data by subscription id from plan ugrade data array
+		    $res = array();
+		    foreach($data_values['subscription_plan_upgrade'] as $val) {
+		        $res[$val['subscription_plan']][] = $val;		    
+			}
+			// echo "<pre>";
+			// print_r($res);
+			// echo "</pre>";
+			$data['subscription_plan_upgrade'] = $res;
+			$this->load->view('admin/customize_plan_settings',$data);
 		}
-
-	}
-
-	public function customize_plan_settings(){
-		$this->load->view('admin/customize_plan_settings');
 	}
 
 	

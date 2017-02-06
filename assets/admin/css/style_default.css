@@ -893,8 +893,6 @@ table {
     z-index: 2;
     position: relative;
 }
-
-
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;
@@ -938,7 +936,6 @@ table {
    }
 .upgrade_scroll{
 	overflow-x:scroll !important;
-	
 }
 /* For nav-pills */
 .tab_form .navbar .nav-design >li{
@@ -966,7 +963,62 @@ table {
 .instruction_span .span12{
 	margin-left:0 !important;
 }
-/*Added By Akila*/
+/* Plan upgrade -Table-grid */
+.sub_plan_title{
+	width: 100px;
+	height: auto;
+}
+.table-bordered .sub_plan_title td {
+	border-left: none;
+}
+.sub_upgradeplan_title, .sub_upgradeplan_price,.sub_upgradeplan_min,.sub_upgradeplan_max{
+	border: 1px solid #ddd;
+	width: 100px;
+	height: auto;
+}
+.sub_upgradeplan_title td, .sub_upgradeplan_price td,.sub_upgradeplan_min td,.sub_upgradeplan_max td{
+	width: 200px;
+}
+.arrow_right{
+	border-bottom: 4px solid transparent;
+    border-left: 4px solid #ccc;
+    border-top: 4px solid transparent;
+    float: right;
+    height: 0;
+    margin-right: 5px;
+    margin-top: 7px;
+    width: 0;
+}
+.upgrade_table thead .text-center {
+	text-align: center;
+}
+.upgrade_table thead th{
+	vertical-align: middle;
+}
+/*for upgrade table toolip*/
+.info_tooltip{
+    background: #828282 none repeat scroll 0 0;
+    border-radius: 5px;
+    bottom: 38px;
+    color: #fff;
+    display: none;
+    font-family: Montserrat;
+    font-size: 10px;
+    height: 23px;
+    left: 45px;
+    padding: 5px 0 0;
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    z-index: 9999;
+    top:-26px;
+}
+.showtooltip {
+	position: relative;
+}
+.showtooltip:hover .info_tooltip, .showtooltip:focus .info_tooltip{
+    display: block !important;
+}
 /*Footer*/
 #footer {
 	background-color: #1b1b1b;
@@ -980,4 +1032,6 @@ table {
 .fixed-top #container{
 	margin-bottom: 20px;
 }
+/*Added By Akila*/
+
 
