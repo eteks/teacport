@@ -321,9 +321,8 @@ class Job_provider_model extends CI_Model {
         	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' ";	
         }
         if(isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '' && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_max_amount']."'";	
+        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."'";	
         }
-		
 		$this->db->limit($limit,$start);
 		$this->db->where('('.$where.')');
 		$this->db->group_by('cp.candidate_id'); 
@@ -385,7 +384,7 @@ class Job_provider_model extends CI_Model {
         	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' ";	
         }
         if(isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '' && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_max_amount']."'";	
+        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."'";
         }
 		
 		$this->db->where('('.$where.')');
@@ -639,12 +638,12 @@ class Job_provider_model extends CI_Model {
 		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
 		$data['subscribe_details'] = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
 
-		return $file;
+		return $data;
 	}
-	public function provider_mail_send_update($candidate_id,$org_id){
+	public function provider_mail_send_update($candidate_id,$org_id,$vac_id){
 		$data['status'] = '';
 		// Store details in candidate inbox
-		$this->db->insert('tr_candidate_inbox', array('candidate_organization_id'=>$org_id,'candidate_id'=>$candidate_id,'is_viewed'=>'0','candidate_inbox_status'=>'1','candidate_inbox_message'=>'Kudo! You have been Shortlisted.'));
+		$this->db->insert('tr_candidate_inbox', array('candidate_organization_id'=>$org_id,'candidate_id'=>$candidate_id,'candidate_vacancy_id' =>$vac_id ,'is_viewed'=>'0','candidate_inbox_status'=>'1','candidate_inbox_message'=>'Kudo! You have been Shortlisted.'));
 		$checkquery = $this->db->get_where('tr_organization_activity', array(
             'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
         ));
@@ -684,6 +683,13 @@ class Job_provider_model extends CI_Model {
 
 	// Sendsms
 	public function provider_sms_send_update($candidate_id,$org_id){
+        $data['job_title'] = '';
+        if($vac_id!='') {
+            $this->db->select('vacancies_job_title');
+            $this->db->from('tr_organization_vacancies');
+            $job_title = $this->db->where('vacancies_id',$vac_id)->get()->row_array();
+            $data['job_title'] = $job_title['vacancies_job_title'];
+        }
 		$data['status'] = '';
 		$checkquery = $this->db->get_where('tr_organization_activity', array(
             'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
@@ -723,26 +729,32 @@ class Job_provider_model extends CI_Model {
 	}
 
 	// Payment subscription validation
-	public function orignial_renewal_validation($plan_id,$org_id){
+	public function orignial_renewal_validation($plan_id,$org_id) {
 		$data = '';
 		$already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
 		$check_already = $this->db->get_where('tr_organization_subscription',$already_where);
-		if($check_already -> num_rows() == 1) {
+		if($check_already -> num_rows() > 1) {
 			$plan_value = $check_already->row_array();
+            $org_status = $plan_value['organization_subscription_status'];
 			$start_date = date_create($plan_value['org_sub_validity_end_date']);
 			$days = date_diff(date_create('today'),$start_date);
-			if($days->invert == 1 || $days->d == 0)
+			if($days->invert == 1 || $days->days == 0 || $org_status == 0)
 			{
 				$data = 2; // if correct
-                echo "test";
 			}
 			else {
 				$data = 1; // if wrong
-                 echo "test1";
 			}
 		}
 		else {
-			$data = 2; // if correct
+            $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+            $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where);
+            if($check_already_sub -> num_rows() == 1) {
+                $data = 1; // if wrong
+            }
+            else {
+                $data = 2; // if correct - new subscribe
+            }
 		}
 		return $data;
 	}

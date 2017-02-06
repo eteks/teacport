@@ -179,8 +179,8 @@
                 endforeach;
                 else :
                 ?>
-                <div>
-                    No recent jobs available
+                <div class="text-center">
+                    <h1><strong>No recent jobs available</strong></h1>
                 </div>
                 <?php
                 endif;
@@ -227,8 +227,8 @@
                             endforeach;
                             else :
                             ?>
-                            <li>
-                                No posted jobs available 
+                            <li class="text-center">
+                                <strong>No posted jobs available</strong> 
                             </li>
                             <?php
                             endif;
