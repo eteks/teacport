@@ -986,6 +986,7 @@ $('.sub_sidebar_section').css('max-height', footer_height);
                 e.preventDefault();
         }
     }); 
+       
 }); // End document
 
 /* Popup pagination with arrow start */

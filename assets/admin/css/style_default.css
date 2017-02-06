@@ -995,6 +995,7 @@ table {
 .upgrade_table thead th{
 	vertical-align: middle;
 }
+/*Added By Akila*/
 /*for upgrade table toolip*/
 .info_tooltip{
     background: #828282 none repeat scroll 0 0;
@@ -1019,6 +1020,11 @@ table {
 .showtooltip:hover .info_tooltip, .showtooltip:focus .info_tooltip{
     display: block !important;
 }
+.plan_field_section .fa-inr{
+	color: #22878e;
+	font-weight: bold;
+}
+/* Ended by Akila */
 /*Footer*/
 #footer {
 	background-color: #1b1b1b;
@@ -1032,6 +1038,6 @@ table {
 .fixed-top #container{
 	margin-bottom: 20px;
 }
-/*Added By Akila*/
+
 
 
