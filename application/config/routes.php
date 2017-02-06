@@ -222,6 +222,8 @@ $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_vi
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
 $route['test_email'] = 'home/test_email';
 $route['main/district_state'] = 'admin/master_data/district_state';
+$route['test_sms'] = 'home/test_sms';
+
 
 
 /* ===================          Route settings for Admin End     ====================== */
