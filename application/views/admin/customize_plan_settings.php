@@ -51,7 +51,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <a href="#">Plan Settings</a><span class="divider">&nbsp;</span>
                        </li>
                        <li>
-                          <a href="<?php echo base_url(); ?>main/plan_upgrade_creation">
+                          <a href="<?php echo base_url(); ?>main/customize_plan_settings">
                             Plan Upgrade Creation
                           </a>
                           <span class="divider-last">&nbsp;</span>
@@ -80,19 +80,24 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		                    			</button>
 		                  			</div>
 		           				</div>                               
-		            			<form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
+		            			<form method="post" action="customize_plan_settings" class="admin_module_form" id="plan_upgrade_creation_form">
 		            				<?php } ?> 
+		            				<?php
+		                                if(!empty($status)) :
+		                                  echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
+		                                endif;
+	                                ?> 
 		              				<table class="table table-striped table-hover table-bordered admin_table upgrade_table" id="sample_editable_1">
 			                			<thead>
 						                  	<tr class="ajaxTitle">
 							                   	<th>Subscription Plan<br/> Name</th>
 							                    <th class="text-center">Upgrade Plans</th>
 						                        <th>Created Date</th>
-							                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-							              			   <th class="data_action">Edit</th>
-							            				<?php endif; ?>
-							           				  <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-							            				    <th class="data_action">Delete</th>
+							                    <?php //if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+					              			   		<!-- <th class="data_action">Edit</th> -->
+					            				<?php //endif; ?>
+					           				  	<?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+					            				   	<th class="data_action">Delete</th>
 							           			<?php endif; ?>
 						                  	</tr>
 						                  	<!-- <tr>
@@ -103,81 +108,66 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		               		  				</tr> -->
 										 </thead>
 			                			<tbody>
+			                			<?php
+	                                      if(!empty($subscription_plan_upgrade)) :
+	                                      $i=1;
+	                                      foreach ($subscription_plan_upgrade as $key=>$plan_upgrade) :
+	                                      $plan_upgrade_created_date ='';
+	                                  	  $plan_id ='';
+	                                    ?>   
 			                   				<tr>
-			                   					<td class="sub_plan_title">Basic Plan</td>
+			                   					<td class="sub_plan_title"><?php echo $key; ?></td>
 												<td>
 			                   						<table class="table table-striped table-hover table-bordered sub_upgradeplan_title ">
 			                   							<tbody>
+			                   							<?php foreach ($plan_upgrade as $key => $value):
+			                   							$plan_id = $value['subscription_id']; 
+			                   							$plan_upgrade_created_date = $value['upgrade_created_date']; ?>
 			                   								<tr>
 			                   									<td class="showtooltip">
-			                   										SMS<span class="arrow_right"></span>
+			                   										<?php echo $value['upgrade_options']; ?><span class="arrow_right"></span>
 			                   										<span class="info_tooltip">SMS</span>
 			                   									</td>
 			                   									<td class="showtooltip">
-			                   										Rs.80 
+			                   										<?php echo $value['upgrade_price']; ?>
 			                   										<span class="info_tooltip">Price</span>
 			                   									</td>
 			                   									<td class="showtooltip">
-			                   										500 
-			                   										<span class="info_tooltip">Min Count</span>
+			                   										<?php echo $value['upgrade_min_allowed']; ?> 
+			                   										<span class="info_tooltip">Minimum Allowed</span>
 			                   									</td>
 			                   									<td class="showtooltip">
-			                   										1500 
-			                   										<span class="info_tooltip">Max Count</span>
-			                   									</td>
-			                   								</tr>
-			                   								<tr>
-			                   									<td class="showtooltip">
-			                   										Email <span class="arrow_right"></span>
-			                   										<span class="info_tooltip">Email</span>
-			                   										</td>
-			                   									<td class="showtooltip">
-			                   										Rs.80 
-			                   										<span class="info_tooltip">Price</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										500
-			                   										<span class="info_tooltip">Min Count</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										1500
-			                   										<span class="info_tooltip">Max Count</span>
+			                   										<?php echo $value['upgrade_max_allowed']; ?> 
+			                   										<span class="info_tooltip">Maximum Allowed</span>
 			                   									</td>
 			                   								</tr>
-			                   								<tr>
-			                   									<td class="showtooltip">
-			                   										Resume Download <span class="arrow_right"></span>
-			                   										<span class="info_tooltip">Resume Download </span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										Rs.80 
-			                   										<span class="info_tooltip">Price</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										500
-			                   										<span class="info_tooltip">Min Count</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										1500
-			                   										<span class="info_tooltip">Max Count</span>
-			                   									</td>
-			                   								</tr>
+			                   							<?php
+					                                        endforeach;
+					                                    ?>	
 			                   							</tbody> 
 			                   						</table>
 			                   					</td>
-				                   				<td>03/02/2017</td>
-												<td>
+				                   				<td>
+					                   				<?php 
+			                                          $created_datetime = explode(' ', $plan_upgrade_created_date);
+			                                          echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
+			                                        ?> 
+		                                        </td>
+												<!-- <td>
 													<a id="sample_editable_1_new" data-open="popup_section_subs" class="green add_option"  data-mode="edit" data-action="update">
 													Edit
 													</a>
-												</td>
-												<td>
-													<a class="pop_delete_action" data-mode="delete">
-														Delete
-													</a>
-												</td>
+												</td> -->
+												 <td>
+		                                          <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_id; ?>">Delete</a>
+		                                        </td>
 											</tr>
-											<tr>
+											<?php
+		                                        $i++;
+		                                        endforeach;
+		                                        endif;
+		                                    ?>
+											<!-- <tr>
 			                   					<td class="sub_plan_title">Basic Plan</td>
 												<td>
 			                   						<table class="table table-striped table-hover table-bordered sub_upgradeplan_title ">
@@ -232,7 +222,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 														Delete
 													</a>
 												</td>
-											</tr>	
+											</tr>	 -->
 										</tbody>
 									</table>
 							    	<?php if(!$this->input->is_ajax_request()) { ?>
@@ -257,7 +247,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
         <fieldset>
             <legend> Subscription plan details:</legend>
             <div class="form-wizard pop_details_section">
-            <?php } ?>
             <div class="form-group">
             <label class="control-label">Select Plan</label>
             <select name="subscription_name">
@@ -299,7 +288,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <div class="clearfix"> </div>
       
             <button type="submit" class="btn btn-info save_button">Save</button>
-            <?php if(!$this->input->is_ajax_request()) { ?>
             </div>
           </fieldset>
         </form>

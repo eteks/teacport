@@ -142,7 +142,28 @@ class Job_Provider extends CI_Controller {
                 		$_POST['organization_logo'] = base_url().$upload_path.$upload_data['file_name']; 
                 		$old_file_path = $_POST['old_file_path'] ;
                 		$upload_error = 0;
+                		//newly added for thumbnail
+                		$organization_logo_thumb['image_library'] = 'gd2';
+						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$_POST['organization_logo'];
+						$organization_logo_thumb['create_thumb'] = TRUE;
+						// $organization_logo_thumb['new_image'] = 'thumb_'.$organizationuploaddata['file_name'];
+						$organization_logo_thumb['maintain_ratio'] = TRUE;
+						$organization_logo_thumb['width']         = 180;
+						$organization_logo_thumb['height']       = 180;
+						$this->load->library('image_lib');
+						$this->image_lib->initialize($organization_logo_thumb);
+						// Resize operation
+						if ( ! $this->image_lib->resize())
+						{
+	                		$data['upload_provider_logo_error'] = strip_tags($this->image_lib->display_errors()); 
+						}
+						$this->image_lib->clear();
+
                 		@unlink(APPPATH.'../'.$old_file_path);
+
+                		$thumb_image = explode('.', end(explode('/',$old_file_path)));
+	               		@unlink($config['upload_path'].$thumb_image[0]."_thumb.".$thumb_image[1]);
+
   	            	}
     		      	else
             		{
