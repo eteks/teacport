@@ -128,7 +128,8 @@ class Job_Provider extends CI_Controller {
     			if($this->input->post('index')=="end" && !empty($_FILES['organization_logo']['name']))
         		{	
         			$is_end = 1;   
-        			$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+        			$upload_image_path = PROVIDER_UPLOAD;
+        			$config['upload_path'] = $upload_image_path; // APPPATH means our application folder path.
 			        $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
 			        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 			        $personnal_logo['file_ext_tolower'] 	= TRUE;
@@ -144,7 +145,7 @@ class Job_Provider extends CI_Controller {
                 		$upload_error = 0;
                 		//newly added for thumbnail
                 		$organization_logo_thumb['image_library'] = 'gd2';
-						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$_POST['organization_logo'];
+						$organization_logo_thumb['source_image'] = './uploads/jobprovider/'.$upload_data['file_name'];
 						$organization_logo_thumb['create_thumb'] = TRUE;
 						// $organization_logo_thumb['new_image'] = 'thumb_'.$organizationuploaddata['file_name'];
 						$organization_logo_thumb['maintain_ratio'] = TRUE;
@@ -158,11 +159,17 @@ class Job_Provider extends CI_Controller {
 	                		$data['upload_provider_logo_error'] = strip_tags($this->image_lib->display_errors()); 
 						}
 						$this->image_lib->clear();
-
+						$keyword = "uploads";
+	        			// To check whether the image path is cdn or local path
+				        if(strpos( $old_file_path , $keyword ) !== false && !empty($old_file_path) ) {
+	               			@unlink(APPPATH.'../'.$old_file_path);
+	               			$thumb_image = explode('.', end(explode('/',$old_file_path)));
+	               			@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
+				        }	
                 		@unlink(APPPATH.'../'.$old_file_path);
 
                 		$thumb_image = explode('.', end(explode('/',$old_file_path)));
-	               		@unlink($config['upload_path'].$thumb_image[0]."_thumb.".$thumb_image[1]);
+	               		@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
 
   	            	}
     		      	else
