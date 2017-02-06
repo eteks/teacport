@@ -47,10 +47,11 @@
 								<td width='10'><div style='line-height: 0px; font-size: 1px; position: absolute;'>&nbsp;</div>
 								</td>
 								<td width='600' style='padding-right:10px; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' valign='top'>
-									<span style='font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold;'>Hi <?php echo $this->input->post('registrant_name'); ?>!</span>
+									<span style='font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold;'>Hi 
+									<?php echo $registrant_email; ?>!</span>
 									<br />
 									<p></p>
-									<p style='font-size:15px'>Your <?php echo $this->input->post('premium_ads_name'); ?>; of the ads has been verified successfully. You can now view your ads on our website </p>
+									<p style='font-size:15px'>Your ad title <?php echo '"'.$ads_name.'"'; ?> has been verified successfully. You can now view your ads on our website </p>
 									<br />	
 									<p>You can now view your ads on our website  <a href='<?php echo base_url(); ?>' style="color:#29aafe;">here</a> .</p>
 									<br/>

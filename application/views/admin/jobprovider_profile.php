@@ -540,7 +540,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> </label>
                                 <table>
-                                  <thead> <th> Plan </th> <th> Total </th> <th> Used </th> <th> Remaining </th>
+                                  <thead> <th> Plan option </th> <th> Total </th> <th> Used </th> <th> Remaining </th>
                                   </thead>
                                   <tbody>
                                     <tr>
@@ -560,6 +560,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                       <td> <?php echo $pay_val['organization_email_count']; ?> </td>
                                       <td> <?php echo $pay_val['organization_email_count']-$pay_val['organization_email_remaining_count']; ?> </td>
                                       <td> <?php echo $pay_val['organization_email_remaining_count']; ?> </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Vacancy </td>
+                                      <td> <?php echo $pay_val['organization_post_vacancy_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_post_vacancy_count']-$pay_val['organization_vacancy_remaining_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_vacancy_remaining_count']; ?> </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Ad </td>
+                                      <td> <?php echo $pay_val['organization_post_ad_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_post_ad_count']-$pay_val['organization_ad_remaining_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_ad_remaining_count']; ?> </td>
                                     </tr>
                                   </tbody>
                                 </table>
