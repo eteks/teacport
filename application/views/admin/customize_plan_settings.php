@@ -167,62 +167,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		                                        endforeach;
 		                                        endif;
 		                                    ?>
-											<!-- <tr>
-			                   					<td class="sub_plan_title">Basic Plan</td>
-												<td>
-			                   						<table class="table table-striped table-hover table-bordered sub_upgradeplan_title ">
-			                   							<tbody>
-			                   								<tr>
-			                   									<td class="showtooltip">
-			                   										SMS<span class="arrow_right"></span>
-			                   										<span class="info_tooltip">SMS</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										Rs.80 
-			                   										<span class="info_tooltip">Price</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										500 
-			                   										<span class="info_tooltip">Min Count</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										1500 
-			                   										<span class="info_tooltip">Max Count</span>
-			                   									</td>
-			                   								</tr>
-			                   								<tr>
-			                   									<td class="showtooltip">
-			                   										Resume Download <span class="arrow_right"></span>
-			                   										<span class="info_tooltip">Resume Download </span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										Rs.80 
-			                   										<span class="info_tooltip">Price</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										500
-			                   										<span class="info_tooltip">Min Count</span>
-			                   									</td>
-			                   									<td class="showtooltip">
-			                   										1500
-			                   										<span class="info_tooltip">Max Count</span>
-			                   									</td>
-			                   								</tr>
-			                   							</tbody> 
-			                   						</table>
-			                   					</td>
-				                   				<td>03/02/2017</td>
-												<td>
-													<a id="sample_editable_1_new" data-open="popup_section_subs" class="green add_option"  data-mode="edit" data-action="update">
-													Edit
-													</a>
-												</td>
-												<td>
-													<a class="pop_delete_action" data-mode="delete">
-														Delete
-													</a>
-												</td>
-											</tr>	 -->
 										</tbody>
 									</table>
 							    	<?php if(!$this->input->is_ajax_request()) { ?>
@@ -269,7 +213,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </select>
                   </div>
                   <div class="col3">
-                    <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_price[]" maxlength="5" placeholder="Price in Rupees">
+                    <input class="form-control customize_plan decimal_act" type="text" value="" name="upgrade_price[]" maxlength="5" placeholder="Price in Rupees">
                   </div>
                   <div class="col3">
                     <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_min[]" maxlength="5" placeholder="Min Limit">

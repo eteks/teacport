@@ -980,12 +980,13 @@ $('.sub_sidebar_section').css('max-height', footer_height);
 	    x--;
 	});
 	//Ended by Akila 
+    
+    //Added by Kalai to restrict zero at first position when we enter in textbox
     $(document).on("keypress",".restrict_zero",function (e) { 
-        // alert(e.which);
-        if (e.which == 48){
-                e.preventDefault();
-        }
-    }); 
+       if ($(this).val().length == 0 && e.which == 48 ){
+          e.preventDefault();
+       }
+    });
        
 }); // End document
 
