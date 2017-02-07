@@ -1625,7 +1625,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }
 /* Image Centering */
 .organisation_detail .company-img{
-	height: 200px;
+	height: 250px;
 	width: auto;
 }
 .organisation_detail .img-holder {
@@ -1634,21 +1634,23 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	width:100%;*/
 }
 .organisation_detail .company-img img {
-	display: inline-block;
+	position:absolute;
+	left:50%;
+	top:50%;
     width: 100%;
     height: auto;   
+    margin: 0 auto;
     /*width: 50px;
     height: 50px;
-    left:50%;
-    top:50%;
-    position:absolute;*/
+    display: inline-block;
+    */
 }
 .organisation_detail .single-job-map {
 	padding: 0px;
 }
 /*Single Job*/
 .single-job-section .company-img{
-	height: 200px;
+	height: 250px;
 	width: auto;
 }
 .company-img .img-holder {
@@ -1660,8 +1662,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	position:absolute;
     width: 100%;
     height: auto;   
-    /*left:50%;
-    top:50%;
+    left:50%;
+    /*top:50%;
     display: inline-block;*/
 }  
 .apply-job .btn{
