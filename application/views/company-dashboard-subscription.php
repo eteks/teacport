@@ -233,8 +233,9 @@
 												</ul>
 			                                </div>
 		                            	</div>
-		                            	<div class=""> <a class="subs_button prem_select <?php if($current == 1) echo "disabled"; ?>" data-option="original" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>" >Make Payment</a> </div>
+		                            	
 		                        	</div>
+		                        	<div class="make_payment_option"> <a class="subs_button prem_select <?php if($current == 1) echo "disabled"; ?>" data-option="original" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>" >Make Payment</a> </div>
 		                        </div> 
 		                        <div class="col-md-4 col-sm-6 col-xs-12 plan_selection <?php if($current == 1 && $organization_chosen_plan['status'] == 1) echo "active"; ?>">
 		                        	<div class="price_ui_box subscribe_plan">
@@ -284,7 +285,7 @@
                                             }
                                             ?>
 			                                <div class="cost_plan">
-                                            <?php
+                                            <!-- <?php
                                             $available = 0;
                                             if(!empty($subscription_upgrade_plan[$key]['upgrade_options'])) :
                                             foreach ($subscription_upgrade_plan[$key]['upgrade_options'] as $up_key => $val) :
@@ -304,8 +305,11 @@
 			                                	$upgrade_options = 0;
 			                                	echo "No options available";
 			                                endif;
-			                                ?>
-			                                </div>
+			                                ?> -->
+					                             <div class="sms_icon icon_box_common" data-toggle="sms_icon_tooltip" title="Cost Per SMS"><i class="glyphicon glyphicon-comment"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_sms">10</span></div> 
+					                             <div class="email_icon icon_box_common" data-toggle="email_icon_tooltip" title="Cost per Email"> <i class="glyphicon glyphicon-envelope"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_email">20 </span></br></div>
+					                             <div class="resume_icon icon_box_common" data-toggle="resume_icon_tooltip" title="Cost per Resume Download"> <i class="glyphicon glyphicon-cloud-download"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_resume">10</span></div>
+			                            	</div>
 			                                <div class="sms_block common_box">              	
 			                                	<input class="subs_input_val_upgact1 sms_count" type="text" disabled="disabled" data-toggle="sms_tooltip" title="No of sms you have selected"/>
 			                                	<!-- <i class="glyphicon glyphicon-comment"></i> -->
@@ -314,21 +318,21 @@
 			                                <div class="email_block common_box" >
 			                                	<input class="subs_input_val_upgact2 email_count" type="text" disabled="disabled" data-toggle="email_tooltip" title="No of email you have selected"/>
 			                                	<!-- <i class="glyphicon glyphicon-envelope"></i> -->
-			                                	<span id = "email_icon"><i class="glyphicon glyphicon-remove-sign"></i></span>
+			                                	<span id ="email_icon"><i class="glyphicon glyphicon-remove-sign"></i></span>
 			                                </div>
 			                                <div class="resume_block common_box">
 			                                	<input class="subs_input_val_upgact3 resume_count" type="text" disabled="disabled" data-toggle="resume_tooltip" title="No of resume you have selected"/>
 			                                	<!-- <i class="glyphicon glyphicon-cloud-download"></i> -->
 			                                	<span id ="resume_icon"><i class="glyphicon glyphicon-remove-sign" ></i></span>
 			                                </div>
-			                                <div class="cb"> </div>
+			                                <div class="cb"></div>
 			                                <div class="price-features text-center price2">
 			                                    <ul class="subs_count_act <?php if($current == 0) echo "disabled"; ?>">
 													<!-- <li>Max No of vacancy Posts: 20</li> -->
 													<?php
 													$upgrade_array = array_column($subscription_upgrade_plan[$key]['upgrade_options'],'upgrade_options');
 													?>
- 													<li id="subs_list_upg_sms" class="subs_list_act <?php if(!in_array('sms',$upgrade_array)) echo "disabled"; ?> data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Sms Counts: <?php echo $current ==1 ?$organization_chosen_plan['organization_sms_remaining_count'] : 0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
+ 													<li id="subs_list_upg_sms" class="subs_list_act <?php if(!in_array('sms',$upgrade_array)) echo "disabled"; ?>" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Remaining Sms: <span class="sms_remain_value"><?php echo $current ==1 ?$organization_chosen_plan['organization_sms_remaining_count'] : 0; ?></span><span class="glyphicon glyphicon-edit subs_edit"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_sms">
 													    <form>
 												            <div class="form-group">
@@ -338,7 +342,7 @@
 												            <button type="button" class="btn btn-success popover_upg_sms_save">Save</button>
 											            </form>
 											        </div>
-													<li id="subs_list_upg_email" class="subs_list_act <?php if(!in_array('email',$upgrade_array)) echo "disabled"; ?>">Email-count: <?php echo $current ==1 ?$organization_chosen_plan['organization_email_remaining_count'] : 0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
+													<li id="subs_list_upg_email" class="subs_list_act <?php if(!in_array('email',$upgrade_array)) echo "disabled"; ?>">Remaining Email: <?php echo $current ==1 ?$organization_chosen_plan['organization_email_remaining_count'] : 0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_email">
 											            <form>
 												            <label>EMAIL COUNT</label>
@@ -348,7 +352,7 @@
 												            <button type="button" class="btn btn-success popover_upg_email_save">Save</button>
 										            	</form>
 											        </div>
-													<li id="subs_list_upg_resume" class="subs_list_act <?php if(!in_array('resume',$upgrade_array)) echo "disabled"; ?>">Resume Download: <?php echo $current ==1 ?$organization_chosen_plan['organization_remaining_resume_download_count'] :0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
+													<li id="subs_list_upg_resume" class="subs_list_act <?php if(!in_array('resume',$upgrade_array)) echo "disabled"; ?>">Remaining Download: <?php echo $current ==1 ?$organization_chosen_plan['organization_remaining_resume_download_count'] :0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_resume">
 										           		<form>
 														    <div class="form-group">
@@ -361,11 +365,11 @@
 													<!-- <li>Max No of ads: 20</li> -->
 												</ul>                                   
 			                                </div>
-			                            </div>
-			                            <div class=""> <a class="subs_button upg_select <?php if($current == 0 || ($renewal == 1 && $upgrade_disable == 1) || $available==0)  echo "disabled"; ?>" data-option="upgrade" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>">Make Payment</a> </div>
-			                            <button class="subs_reset upg_reset" type="reset" value="Reset">Reset</button>
+			                            </div>			                          
 		                          	</div>
-		                        </div>
+		                          	<div class="make_payment_option"> <a class="subs_button upg_select <?php if($current == 0 || ($renewal == 1 && $upgrade_disable == 1) || $available==0)  echo "disabled"; ?>" data-option="upgrade" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>">Make Payment</a> </div>
+			                           <button class="subs_reset upg_reset" type="reset" value="Reset">Reset</button>
+		                       		</div>
 		                        <div class="col-md-4 col-sm-6 col-xs-12 plan_selection">
 		                        	<div class="price_ui_box subscribe_plan">
 			                            <div class="single-price even" id="featured-price">
@@ -387,19 +391,20 @@
 													<li>Max No of ads: <?php echo $subscription_upgrade_plan[$key]['subscription_max_no_of_ads']; ?></li>
 												</ul>                    
 			                                </div>
-			                            </div>
-		                            	<div class=""> <a class="subs_button renew_select <?php if($renewal == 0) echo "disabled"; ?>" data-option="renewal" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>">Make Payment</a> </div>
+			                            </div>		                            	
 		                        	</div>
-		                        </div>                         
+		                        	<div class="make_payment_option"> <a class="subs_button renew_select <?php if($renewal == 0) echo "disabled"; ?>" data-option="renewal" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>">Make Payment</a> </div>
+		                        </div> 		                                              
 		                    </div>
-				        </div>				           
+				        </div>					       			           
 				    </div>	
 				    <?php 
                     endif;
                 	?>
-		        </div>
-			</div>
-		</div> 
+		        	</div>
+				</div>
+			</div> 
+		</div>
 	</div>
 </section>
 <?php include('include/footermenu.php'); ?>

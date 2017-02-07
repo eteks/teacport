@@ -199,11 +199,12 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 }
 .job_pro_form .step .desc{
 	margin-left:40px !important;
-	padding:12px 0 !important;
+	/*padding:12px 0 !important;*/
 }
 .job_seek_form  .step .desc{
 	margin-left:30px !important;
-	padding:4px 6px !important;
+	/*padding:4px 6px !important;*/
+	line-height:16px;
 }
 /*.brand > img{
     margin-left: 35px !important;
@@ -702,7 +703,7 @@ tr select {
     /*margin-top: 5px !important;*/
     position: absolute !important;
     text-align: center !important;
-    padding: 13px;
+    /*padding: 13px;*/
 }
 .form-wizard .step .seeker_tab_desc_info {
     display: inline-block !important;
@@ -711,6 +712,10 @@ tr select {
     /*margin-top: 12px !important;*/
     position: absolute !important;
     text-align: center !important;
+}
+.form-wizard .step .nav_curricular{
+	line-height:19px;
+	margin-left:42px !important;
 }
 .admin_table td .on_off_button{
     width: 85px !important;
@@ -893,6 +898,8 @@ table {
     z-index: 2;
     position: relative;
 }
+
+
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;
@@ -936,6 +943,7 @@ table {
    }
 .upgrade_scroll{
 	overflow-x:scroll !important;
+	
 }
 /* For nav-pills */
 .tab_form .navbar .nav-design >li{
@@ -945,6 +953,7 @@ table {
 .job_pro_form .step .desc_space {
     /*margin-left: 34px !important;
     padding: 13px 3px !important;*/
+   line-height:35px;
 } 
 .chzn-container-multi .chzn-choices{
 	padding:2px !important;
@@ -963,62 +972,7 @@ table {
 .instruction_span .span12{
 	margin-left:0 !important;
 }
-/* Plan upgrade -Table-grid */
-.sub_plan_title{
-	width: 100px;
-	height: auto;
-}
-.table-bordered .sub_plan_title td {
-	border-left: none;
-}
-.sub_upgradeplan_title, .sub_upgradeplan_price,.sub_upgradeplan_min,.sub_upgradeplan_max{
-	border: 1px solid #ddd;
-	width: 100px;
-	height: auto;
-}
-.sub_upgradeplan_title td, .sub_upgradeplan_price td,.sub_upgradeplan_min td,.sub_upgradeplan_max td{
-	width: 200px;
-}
-.arrow_right{
-	border-bottom: 4px solid transparent;
-    border-left: 4px solid #ccc;
-    border-top: 4px solid transparent;
-    float: right;
-    height: 0;
-    margin-right: 5px;
-    margin-top: 7px;
-    width: 0;
-}
-.upgrade_table thead .text-center {
-	text-align: center;
-}
-.upgrade_table thead th{
-	vertical-align: middle;
-}
-/*for upgrade table toolip*/
-.info_tooltip{
-    background: #828282 none repeat scroll 0 0;
-    border-radius: 5px;
-    bottom: 38px;
-    color: #fff;
-    display: none;
-    font-family: Montserrat;
-    font-size: 10px;
-    height: 23px;
-    left: 45px;
-    padding: 5px 0 0;
-    position: absolute;
-    text-align: center;
-    width: 100px;
-    z-index: 9999;
-    top:-26px;
-}
-.showtooltip {
-	position: relative;
-}
-.showtooltip:hover .info_tooltip, .showtooltip:focus .info_tooltip{
-    display: block !important;
-}
+/*Added By Akila*/
 /*Footer*/
 #footer {
 	background-color: #1b1b1b;
@@ -1032,6 +986,4 @@ table {
 .fixed-top #container{
 	margin-bottom: 20px;
 }
-/*Added By Akila*/
-
 

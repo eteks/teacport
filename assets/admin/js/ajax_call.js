@@ -341,8 +341,14 @@ function handleFormWizards() {
                 }
             },
         onTabClick: function(tab, navigation, index) {
+        			 if($('.tab-content').find('#popup_mode').val() == 'edit')
+        			{
                         error_popup('on tab click disabled');
                         return false;
+                       }
+                       else {
+                       	return true;
+                       }
                     }
 
     });
