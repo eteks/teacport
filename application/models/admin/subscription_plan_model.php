@@ -218,7 +218,13 @@ class Subscription_Plan_Model extends CI_Model {
     $model_data['subscription_plan_upgrade'] = $this->db->order_by('sub.subscription_id','desc')->get()->result_array();
     return $model_data;
   }
-  
+  // Subscription upgrade details - ajax while click edit
+  public function get_plan_subscription_upgrade_details($value) {
+    $plans_where = '(subscription_id="'.$value.'")';
+    $model_data = $this->db->get_where('tr_subscription_upgrade',$plans_where)->result_array();
+    // print_r($model_data);
+    return $model_data;
+  }
   
 }
 

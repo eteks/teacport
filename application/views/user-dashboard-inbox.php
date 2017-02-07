@@ -73,7 +73,7 @@
                                             $href= "#";
                                         }
                                         ?>
-                                        <a class="btn" href="<?php echo $href; ?>"> <?php echo $msg['candidate_inbox_message']; ?> </a></td>
+                                        <a class="btn view_inbox_details" data-value="<?php echo $msg['candidate_inbox_id']; ?>" href="<?php echo $href; ?>"> <?php echo $msg['candidate_inbox_message']; ?> </a></td>
                                         <td> <?php echo $meassage_received_date; ?> </td>
                                     </tr>
                                     <?php 
@@ -81,17 +81,17 @@
                                     ?>
                                 </tbody>
                             </table>
-                            <button class="btn btn-small del_provdbd_mail">Delete</button>
+                            <button class="btn btn-small del_provdbd_mail"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
                             <?php } else { ?>
 	                        	<h2> No message received ! </h2>
                             <?php } ?>
                         </div>
                     </div>
 	                <!--Popup Message for Inbox message-->
-				    <div class="modal fade" id="user_inbox_msg_act" role="dialog">
+				 <!--    <div class="modal fade" id="user_inbox_msg_act" role="dialog">
     				    <div class="modal-dialog">
     					    <!-- Modal content-->
-    					    <div class="modal-content">
+    					     <!--  <div class="modal-content">
     					     	<div class="modal-header">
     					            <button type="button" class="close" data-dismiss="modal">&times;</button>
     						        <h4 class="modal-title">Message</h4>
@@ -99,7 +99,7 @@
     						    <div class="modal-body">
                                     <div id="seeker_inbox_msg">
                                         <!--Organization Profile-->
-                                        <div class="row">
+                                       <!--    <div class="row">
                                             <h5> Organization Profile</h5>
                                             <div class="display_provider_details col-md-12">
                                                 <span class="col-sm-4">Name of the Organization</span>
@@ -138,7 +138,7 @@
                                             </div>
                                         </div> <br> <!---End organization profile-->    
                                         <!--Vacancy Details-->
-                                        <div class="row candidate_vacancy_inbox_data">
+                                         <!--  <div class="row candidate_vacancy_inbox_data">
                                             <h5>Vacancy Details</h5>
                                             <div class="display_provider_details col-md-12">
                                                 <span class="col-sm-4">Job Title</span>
@@ -186,11 +186,11 @@
                                                 <span class="col-sm-7 vac_int_edate inbox_popup_data"></span>
                                             </div>
                                         </div> <br> <!---End vacancy details--> 
-                                    </div> <!--#pro_inbox_msg-->
-                                </div> <!--.modal-body-->
-    						</div>
+                                    <!--   </div> <!--#pro_inbox_msg-->
+                              <!--     </div> <!--.modal-body-->
+    						 <!--  </div>
     					</div>	
-				    </div>
+				    </div> -->
 				    <!--End of Popup Message for Inbox message-->
                 </div>
             </div>
@@ -267,46 +267,26 @@ $(document).ready(function(){
     	"pagingType": "full_numbers"
     });
     seeker_inbox_ajax_message('<?php echo base_url(); ?>','<?php echo $candidate_data['candidate_id'] ?>','<?php echo $this->security->get_csrf_hash(); ?>');
-    // $('.view_inbox_details').on('click',function(){
-    //     var inbox = $(this).attr('data-value');
-    //     $(this).parents('tr').attr('data-name','unbold_section');
-    //     var url = '<?php echo base_url(); ?>';
-    //     var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
-    //     $.ajax({
-    //        type: "POST",
-    //        url: url+"seeker/inbox/fulldata",
-    //        data:{ inbox_id : inbox, csrf_token : csrf},
-    //        cache: false,
-    //        async: false,
-    //        success: function(data) {
-    //             var c = $.parseJSON(data);
-    //             // Organization details
-    //             $('#seeker_inbox_msg .org_name').text(c.inbox_data.organization_name);
-    //             $('#seeker_inbox_msg .org_addr').html(c.inbox_data.organization_address_1 + '<br/> ' + c.inbox_data.organization_address_2 + '<br/> ' + c.inbox_data.organization_address_3);
-    //             $('#seeker_inbox_msg .org_dis').text(c.inbox_data.district_name);
-    //             $('#seeker_inbox_msg .reg_name').text(c.inbox_data.registrant_name);
-    //             $('#seeker_inbox_msg .reg_desig').text(c.inbox_data.registrant_designation);
-    //             $('#seeker_inbox_msg .reg_mail').text(c.inbox_data.registrant_email_id);
-    //             $('#seeker_inbox_msg .reg_mob').text(c.inbox_data.registrant_mobile_no); 
-    //             // Vacancy details
-    //             if(c.inbox_data.vacancies_job_title){
-	   //              $('#seeker_inbox_msg .vac_title').text(c.inbox_data.vacancies_job_title);
-	   //              $('#seeker_inbox_msg .vac_ava').html(c.inbox_data.vacancies_available);
-	   //              $('#seeker_inbox_msg .vac_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_open_date));
-	   //              $('#seeker_inbox_msg .vac_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_close_date));
-	   //              $('#seeker_inbox_msg .vac_min_sal').text(c.inbox_data.vacancies_start_salary);
-	   //              $('#seeker_inbox_msg .vac_max_sal').text(c.inbox_data.vacancies_end_salary);
-	   //              $('#seeker_inbox_msg .vac_exp').text(c.inbox_data.vacancies_experience); 
-	   //              $('#seeker_inbox_msg .vac_int_sdate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_interview_start_date));
-	   //              $('#seeker_inbox_msg .vac_int_edate').text(mysql_date_format_to_javascript_format(c.inbox_data.vacancies_end_date));
-    //             }
-    //             else{
-    //             	$('.candidate_vacancy_inbox_data').hide();
-    //             }
-    //         }
-    //    });
-    // });
-});
+
+    $('.view_inbox_details').on('click',function(){
+        var inbox = $(this).attr('data-value');
+        var url = '<?php echo base_url(); ?>';
+        var csrf = '<?php echo $this->security->get_csrf_hash(); ?>';
+        $.ajax({
+            type: "POST",
+            url: url+"seeker/inbox/fulldata",
+            data:{ inbox_id : inbox, csrf_token : csrf},
+            cache: false,
+            async: false,
+            success: function(data) {
+                if(data == "success") {
+                  var status = data;   
+                }
+            }
+       });
+    });
+
+}); // End
 
 
 function mysql_time_to_javascript_time(mysqltime){

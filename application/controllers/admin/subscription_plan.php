@@ -437,8 +437,25 @@ class Subscription_Plan extends CI_Controller {
 			$this->load->view('admin/customize_plan_settings',$data);
 		}
 	}
-
-	
+	// subscription upgrade creation - ajax while click edit button
+	public function subscription_upgrade_ajax()
+	{
+		if($this->input->post('action') && $this->input->post('value')) {
+			$value = $this->input->post('value');
+			$resultant_data = $this->subscription_plan_model->get_plan_subscription_upgrade_details($value);
+			$data['mode'] = $this->input->post('action');
+			$res = array();
+		    foreach($resultant_data as $val) {
+		        $res[$val['subscription_id']][] = $val;		    
+			}
+			$data['subscription_upgrade_details'] = $res;
+			// print_r($data['subscription_upgrade_details']);
+			$this->load->view('admin/customize_plan_settings',$data);
+		}
+		else {
+			redirect(base_url().'main/admin_error');
+		}
+	}
 	
 }
 /* End of file Subscription_Plan.php */ 

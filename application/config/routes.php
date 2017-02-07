@@ -77,6 +77,7 @@ $route['provider/inbox/removedata'] 					= 'job_provider/inbox_message_remove_da
 $route['provider/candidate'] 							= 'job_provider/browse_candidate';
 $route['provider/candidate/(:num)'] 					= 'job_provider/browse_candidate/$1';
 $route['provider/candidateprofile/(:num)'] 				= 'job_provider/candidateprofile/$1';
+$route['provider/candidateprofile_inbox/(:num)/(:num)'] = 'job_provider/candidateprofile/$1/$1';
 $route['provider/postjob'] 								= 'job_provider/postjob';
 $route['provider/postedjob'] 							= 'job_provider/postedjob';
 $route['provider/postedjob/(:num)'] 					= 'job_provider/postedjob/$1';
@@ -222,6 +223,9 @@ $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_vi
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
 $route['test_email'] = 'home/test_email';
 $route['main/district_state'] = 'admin/master_data/district_state';
+$route['test_sms'] = 'home/test_sms';
+$route['main/subscription_upgrade_ajax'] = 'admin/subscription_plan/subscription_upgrade_ajax';
+
 
 
 /* ===================          Route settings for Admin End     ====================== */

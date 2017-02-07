@@ -101,13 +101,13 @@
         </section>
 		<?php include('include/footermenu.php'); ?>
        <?php include('include/footer.php'); ?>
-<div class="popup_fade cancel_btn"></div> 
-<div class="error_popup_msg">
- 	<div class="success-alert">
- 		<span></span>
- 	</div><!--- --->
- 	<input type="submit" class="btn btn-default alert_btn provider_job_delete_yes" value="Yes">
-</div><!--success_msg-->
+		<div class="popup_fade cancel_btn"></div> 
+		<div class="error_popup_msg">
+ 			<div class="success-alert">
+ 				<span></span>
+ 			</div><!--- --->
+ 			<input type="submit" class="btn btn-default alert_btn provider_job_delete_yes" value="Yes">
+		</div><!--success_msg-->
        <?php include('include/footercustom.php'); ?>
   <script type="text/javascript">
  	 function error_popup(message){
