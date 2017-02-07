@@ -1732,6 +1732,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	margin:0 5px;
 	cursor: pointer;
 }	
+/* For Other field option */
+.others_txt_field{
+	margin-top: 10px;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
