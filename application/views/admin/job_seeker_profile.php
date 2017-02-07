@@ -260,7 +260,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span2">
                             <a href="#tab4" data-toggle="tab" class="step">
                               <span class="number">4</span>
-                              <span class="desc seeker_tab_desc"><i class="icon-ok"></i>Curricular  Information</span>
+                              <span class="desc seeker_tab_desc nav_curricular"><i class="icon-ok"></i>Curricular  Information</span>
                             </a>
                           </li>
                           <?php
@@ -882,7 +882,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Date Of Birth</label>
                           <span>
-                            <input class=" m-ctrl-medium admin_date_picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])); ?>" name="cand_dob" />
+                            <input class="m-ctrl-medium admin_date_picker dp_width tabfield1 tabfield" size="16" type="text" value="<?php echo date("d/m/Y", strtotime($seeker_full_profile['candidate_date_of_birth'])); ?>" name="cand_dob" />
                           </span>
                         </div>
                       </div>

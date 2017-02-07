@@ -300,7 +300,7 @@ $(document).ready(function() {
 			if(!$(this).hasClass('not-required')) {
 				var tag_name = $(this).prop("tagName").toLowerCase();
 				var this_val = $.trim($(this).val()); 
-				if(this_val == '') {
+				if(this_val == '' && $(this).is(':visible')) {
 					error = 1;
 					message ="Please Provide Valid Information!";
 					$(this).addClass('form-field-error');
@@ -470,7 +470,7 @@ $(document).ready(function() {
 						error_msg.addClass('val_success');
             			$('html,body').animate({scrollTop : this_form.offset().top }, 500);
             			error_msg.html('<i class="fa fa-check" aria-hidden="true"></i> Updated Successfully').fadeIn(350);
-						// setTimeout(function() { location.reload(); }, 3000);
+						setTimeout(function() { location.reload(); }, 3000);
 					}
 					else {
 						error_msg.removeClass('val_success');

@@ -314,7 +314,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	color:#fff;
 	font-size:20px;	
 	margin-top:5px;
-	/*margin-right: 15px;*/
+	margin-bottom: 20px;
 }
 .price_ui_box{
 	height: auto;
@@ -329,7 +329,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     line-height: 30px !important;
 }
 .price_plan_footer{
-	margin-top:15px !important;
+	margin-top:-9px !important;
 }
 .odd{
 	background:#da651a none repeat scroll 0 0 !important;
@@ -341,11 +341,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }
 .subscribe_plan{
 	margin-top: 30px;
+	height:450px;
 }
 .cost_plan{
 	color:#fff;
 	text-align:center;
 	margin:4px;
+}
+.make_payment_option{
+	margin-bottom:10px;
+	margin-top:30px;
 }
 /*.pricing-section-1 .ui_box__inner {
     height: 550px;
@@ -1087,8 +1092,9 @@ label.form-input-error {
 	display: none;
 }
 .org_name_search {
-	font-size: 16px;
+	font-size: 12px;
     text-align: right;
+    margin: 5px 0 !important;
 }
 .apply-restrict {
 	opacity: 0.3;
@@ -1252,7 +1258,7 @@ label.form-input-error {
 	margin: -5px 0 0;
 }
 .search_max_amount{
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 }
 .custom_disabled {
     pointer-events:none; 
@@ -1366,7 +1372,7 @@ label.form-input-error {
     font-weight:bold;
     margin-left:50px !important;
     margin-top:0px;	
-    padding-top:15px;
+    padding-top:4px;
 }
 .owl-next{
 	left: 1075px;
@@ -1397,7 +1403,7 @@ label.form-input-error {
 .renew_select{background-color:white;color:black;border:2px solid #00a5ef}
 .renew_select:hover{background-color:#00a5ef;color:white}
 .subs_edit{cursor: pointer;position: relative;margin-left: 10px;}
-.subs_count_act{padding-left: 20px !important;text-align: left;cursor: pointer;}
+.subs_count_act{padding-left: 10px !important;text-align: left;cursor: pointer;}
 .subs_input_val_upgact1{position: relative;width: 60px;display: none;}
 .subs_input_val_upgact2{position: relative;width: 60px;display: none;}
 .subs_input_val_upgact3{position: relative;width: 60px;display: none;}
@@ -1406,7 +1412,22 @@ label.form-input-error {
 .upg_reset{background-color:white;color:black;border:2px solid #da651a}
 .upg_reset:hover{background-color:#da651a;color:white}
 /*Ended By Thangam*/
-
+.sms_icon{
+	padding:5px;
+	position:relative;
+}
+.email_icon{
+	padding:5px;
+	position:relative;	
+}
+.resume_icon{
+	padding:5px;
+	position:relative;	
+}
+.icon_box_common{
+	width:69px;
+	float:left;
+}
 .sms_block{
 	padding:5px;
 	position: relative;	
@@ -1607,28 +1628,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	height: 200px;
 	width: auto;
 }
-.img-holder {
+.organisation_detail .img-holder {
 	position:relative;
-	height:200px;
-	width:100%;
+	/*height:200px;
+	width:100%;*/
 }
-.company-img img {
-	position:absolute;
-    display: inline-block;
-    width: 30%;
+.organisation_detail .company-img img {
+	display: inline-block;
+    width: 100%;
     height: auto;   
+    /*width: 50px;
+    height: 50px;
     left:50%;
     top:50%;
-    /*width: 50px;
-    height: 50px;*/
+    position:absolute;*/
 }
-/*.organisation_detail .company-detail{
-	height: 310px;
-	width: 350px;
-}*/
 .organisation_detail .single-job-map {
 	padding: 0px;
 }
+/*Single Job*/
+.single-job-section .company-img{
+	height: 200px;
+	width: auto;
+}
+.company-img .img-holder {
+	position:relative;
+	/*height:200px;
+	width:100%;*/
+}
+.single-job-section .company-img img {
+	position:absolute;
+    width: 100%;
+    height: auto;   
+    /*left:50%;
+    top:50%;
+    display: inline-block;*/
+}  
+.apply-job .btn{
+	width: 100%;
+	margin: 20px 0;
+}	  
 /*Institutions images*/
 #institution_grids .company-list-img{
 	height: auto;;
@@ -1654,8 +1693,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	width: 100%;
 	position:absolute;
 	left:50%;
-    top:50%;
+    top: 100%;
 }
+/* Candidate Browse Jobs */
+#candidate-browse-jobs .comp-logo{
+	height: auto;
+    width: 100%;
+    position: relative;
+}
+#candidate-browse-jobs .comp-logo img{
+	height: 100px;
+    width: 100px;
+    position:absolute;
+    margin: 0 auto;
+}    
 /* Seeker Dashboard Profile pic*/
 .user-image{
 	height: 150px;
@@ -1728,6 +1779,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     text-transform: uppercase;
     margin: 10px;
 }
+.alert_yes_btn, .alert_no_btn{
+	margin: 5px  10px 10px;
+}	
 .error_popup_msg .fa-close{
 	margin:0 5px;
 	cursor: pointer;

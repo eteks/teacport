@@ -245,7 +245,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab3" data-toggle="tab" class="step">
                             	<span class="number">3</span>
-                              <span class="desc"><i class="icon-ok"></i>Addtional Details</span>
+                              <span class="desc desc_space"><i class="icon-ok"></i>Addtional Details</span>
                             </a>
                           </li>
                           <!-- <li class="span-2">
@@ -914,7 +914,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             else :
                             ?>
-                            <input type="text" placeholder="Registrant DOB" class="span6 m-ctrl-medium date-picker tabfield3 tabfield" value="" name="registrant_dob" />
+                            <input type="text" placeholder="Registrant DOB" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="registrant_dob" />
                             <?php
                             endif;
                             ?>
