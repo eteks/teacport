@@ -1092,8 +1092,9 @@ label.form-input-error {
 	display: none;
 }
 .org_name_search {
-	font-size: 16px;
+	font-size: 12px;
     text-align: right;
+    margin: 5px 0 !important;
 }
 .apply-restrict {
 	opacity: 0.3;
@@ -1257,7 +1258,7 @@ label.form-input-error {
 	margin: -5px 0 0;
 }
 .search_max_amount{
-	margin-top: 10px;
+	/*margin-top: 10px;*/
 }
 .custom_disabled {
     pointer-events:none; 
@@ -1627,28 +1628,46 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	height: 200px;
 	width: auto;
 }
-.img-holder {
+.organisation_detail .img-holder {
 	position:relative;
-	height:200px;
-	width:100%;
+	/*height:200px;
+	width:100%;*/
 }
-.company-img img {
-	position:absolute;
-    display: inline-block;
-    width: 30%;
+.organisation_detail .company-img img {
+	display: inline-block;
+    width: 100%;
     height: auto;   
+    /*width: 50px;
+    height: 50px;
     left:50%;
     top:50%;
-    /*width: 50px;
-    height: 50px;*/
+    position:absolute;*/
 }
-/*.organisation_detail .company-detail{
-	height: 310px;
-	width: 350px;
-}*/
 .organisation_detail .single-job-map {
 	padding: 0px;
 }
+/*Single Job*/
+.single-job-section .company-img{
+	height: 200px;
+	width: auto;
+}
+.company-img .img-holder {
+	position:relative;
+	/*height:200px;
+	width:100%;*/
+}
+.single-job-section .company-img img {
+	position:absolute;
+    width: 100%;
+    height: auto;   
+    /*left:50%;
+    top:50%;
+    display: inline-block;*/
+}  
+.apply-job .btn{
+	width: 100%;
+	margin: 20px 0;
+}	  
 /*Institutions images*/
 #institution_grids .company-list-img{
 	height: auto;;
@@ -1674,8 +1693,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	width: 100%;
 	position:absolute;
 	left:50%;
-    top:50%;
+    top: 100%;
 }
+/* Candidate Browse Jobs */
+#candidate-browse-jobs .comp-logo{
+	height: auto;
+    width: 100%;
+    position: relative;
+}
+#candidate-browse-jobs .comp-logo img{
+	height: 100px;
+    width: 100px;
+    position:absolute;
+    margin: 0 auto;
+}    
 /* Seeker Dashboard Profile pic*/
 .user-image{
 	height: 150px;
@@ -1748,6 +1779,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     text-transform: uppercase;
     margin: 10px;
 }
+.alert_yes_btn, .alert_no_btn{
+	margin: 5px  10px 10px;
+}	
 .error_popup_msg .fa-close{
 	margin:0 5px;
 	cursor: pointer;

@@ -209,9 +209,9 @@ class Job_provider_model extends CI_Model {
 			return "failure";
 		}
 	}
-	public function job_provider_post_vacancy_update($vacancydata)
+	public function job_provider_post_vacancy_update($vacancydata,$vac_id)
 	{
-	 	$this->db->where('vacancies_id', $vacancydata['vacancies_id']);
+	 	$this->db->where('vacancies_id', $vac_id);
 		if($this->db->update('tr_organization_vacancies', $vacancydata)){
 			return TRUE;
 		}
@@ -683,13 +683,6 @@ class Job_provider_model extends CI_Model {
 
 	// Sendsms
 	public function provider_sms_send_update($candidate_id,$org_id){
-        $data['job_title'] = '';
-        if($vac_id!='') {
-            $this->db->select('vacancies_job_title');
-            $this->db->from('tr_organization_vacancies');
-            $job_title = $this->db->where('vacancies_id',$vac_id)->get()->row_array();
-            $data['job_title'] = $job_title['vacancies_job_title'];
-        }
 		$data['status'] = '';
 		$checkquery = $this->db->get_where('tr_organization_activity', array(
             'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
@@ -775,6 +768,33 @@ class Job_provider_model extends CI_Model {
         else{
             return FALSE;
         }
+    }
+
+    // To get vacancy details with organization details by id
+    public function vac_org_by_id($id)
+    {
+        $vac_where = '(vacancies_id="'.$id.'" AND vacancies_status=1)';
+        $this->db->select('*');
+        $this->db->from('tr_organization_vacancies ov');
+        $this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+        $this->db->join('tr_district d','op.organization_district_id = d.district_id','left'); 
+        $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
+        $this->db->where($vac_where);
+        $model_data = $this->db->get()->row_array();
+        return $model_data;
+    }
+
+        // Get Company full details
+    public function organization_email_details($id)
+    {
+        $where = '(op.organization_status=1 AND op.organization_id="'.$id.'")';  
+        $this->db->select('*');
+        $this->db->from('tr_organization_profile op');
+        $this->db->join('tr_district d','op.organization_district_id = d.district_id','left'); 
+        $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
+        $this->db->where($where);
+        $model_data = $this->db->get()->row_array();
+        return $model_data;
     }
 
 
