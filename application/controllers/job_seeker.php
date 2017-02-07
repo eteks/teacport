@@ -45,7 +45,53 @@ class Job_seeker extends CI_Controller {
    			$this->form_validation->set_message('other_mother_tongue', 'The %s other option is required.');
 	       	return FALSE;
  		}
- 	}    
+ 	} 
+
+ 	// To store other option value and get that value - Known Languages
+ 	function other_known_languages($val) {
+ 		// print_r($_POST['cand_known_lan']);
+//  		$value = array();
+
+//  		array_push($value,$val);
+
+ 		
+//  		if(in_array('others',$value)) {
+//  			echo "tets";
+//  		}
+
+
+
+// $this->form_validation->set_message('other_known_languages', 'Entered %s other option is already inactive by Admin.');
+
+//  		return false;
+ 		return TRUE;
+ 		// if($val == "others" && $_POST['other_mother_tongue']!='') {
+ 		// 	$array = array(
+ 		// 					'language_name' => $_POST['other_mother_tongue'],
+ 		// 					'is_mother_tangue' => 1,
+ 		// 					'is_medium_of_instruction' => 0,
+ 		// 					'language_status' => 2 // It means other option
+ 		// 				);
+ 		// 	$id = $this->common_model->insert_other_mother_tongue($array);
+ 		// 	if($id == "active") {
+ 		// 		$this->form_validation->set_message('other_mother_tongue', 'Entered %s other option is already exist.');
+	  //      		return FALSE;
+ 		// 	}
+ 		// 	if($id == "inactive") {
+ 		// 		$this->form_validation->set_message('other_mother_tongue', 'Entered %s other option is already inactive by Admin.');
+	  //      		return FALSE;
+ 		// 	}
+ 		// 	else {
+ 		// 		$_POST['cand_known_lan'] = $id;
+ 		// 	}
+ 		// }
+ 		// else if($val == "others") {
+   // 			$this->form_validation->set_message('other_mother_tongue', 'The %s other option is required.');
+	  //      	return FALSE;
+ 		// }
+ 	} 
+
+ 	   
 
 
  	
@@ -573,7 +619,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_native_state', 'label' => 'Native State','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_mother_ton', 'label' => 'Mother Tongue','rules' => 'required|trim|xss_clean|callback_other_mother_tongue'),
-			array('field' => 'cand_known_lan[]', 'label' => 'Known Languages','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_known_lan[]', 'label' => 'Known Languages','rules' => 'required|trim|xss_clean|callback_other_known_languages'),
 			array('field' => 'cand_nation', 'label' => 'Nation','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_religion', 'label' => 'Religion','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_communal', 'label' => 'Community','rules' => 'required|trim|xss_clean'),

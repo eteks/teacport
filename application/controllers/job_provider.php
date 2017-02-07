@@ -1327,11 +1327,11 @@ class Job_provider extends CI_Controller {
 			$candidate_id = $this->input->post('candidate_id');	
 			if($vac_id != '') {
 				$link = base_url()."seeker/vacancy_details/".$vac_id;
-				$msg = "We+are+pleased+to+inform+you+that+you+have+been+shortlisted+for+the+job+you+have+been+applied+and+you+are+invited+to+attend+an+interview.+Please+visit+$link";
+				$msg = "You+have+been+shortlisted+for+the+applied+post+for+our+company.Invited+to+attend+the+interview.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
 			else {
 				$link = base_url()."user-followed-companies/".$org_id;
-				$msg = "We+are+pleased+to+inform+you+that+you+have+been+shortlisted+and+you+are+invited+to+attend+an+interview.+Please+visit+$link";
+				$msg = "You+have+been+shortlisted+to+attend+the+interview+for+our+company.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
 			$url = "http://www.etekchnoservices.com/sms/sendsms.php?uid=7845729671&pwd=iloveindia&phone=".$candidate_det['candidate_mobile_no']."&msg=$msg";
 			$get = file_get_contents($url);
