@@ -348,8 +348,10 @@ else {
 			 	<div class="success-alert">
 			 		<span class="message">Are you sure to proceed ?</span>
 			 	</div><!--- -->
-			 	<input type="submit" class="btn btn-default alert_yes_btn" value="Proceed">
-			 	<input type="submit" class="btn btn-default alert_no_btn" value="Cancel">
+			 	<div class="text-center">
+			 		<input type="submit" class="btn btn-default alert_yes_btn" value="Proceed">
+			 		<input type="submit" class="btn btn-default alert_no_btn" value="Cancel">
+			 	</div>	
 		 	</div><!--success_msg-->
 		 	<!---End Pop up error msg -->
  </section>
