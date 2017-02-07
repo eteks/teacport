@@ -540,7 +540,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 endif;
                                 ?> </label>
                                 <table>
-                                  <thead> <th> Plan </th> <th> Total </th> <th> Used </th> <th> Remaining </th>
+                                  <thead> <th> Plan option </th> <th> Total </th> <th> Used </th> <th> Remaining </th>
                                   </thead>
                                   <tbody>
                                     <tr>
@@ -561,6 +561,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                       <td> <?php echo $pay_val['organization_email_count']-$pay_val['organization_email_remaining_count']; ?> </td>
                                       <td> <?php echo $pay_val['organization_email_remaining_count']; ?> </td>
                                     </tr>
+                                    <tr>
+                                      <td> Vacancy </td>
+                                      <td> <?php echo $pay_val['organization_post_vacancy_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_post_vacancy_count']-$pay_val['organization_vacancy_remaining_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_vacancy_remaining_count']; ?> </td>
+                                    </tr>
+                                    <tr>
+                                      <td> Ad </td>
+                                      <td> <?php echo $pay_val['organization_post_ad_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_post_ad_count']-$pay_val['organization_ad_remaining_count']; ?> </td>
+                                      <td> <?php echo $pay_val['organization_ad_remaining_count']; ?> </td>
+                                    </tr>
                                   </tbody>
                                 </table>
                               </div>
@@ -577,9 +589,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </div>
                             <div class="span3 plan_field_section">                                       
                               <h4 class="">Original Plan</h4>
-                              <label class=""> &#8377 </label>
-                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> </label>
-                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> </label>
+                              <label class="">&#x20B9; <span> 50</span></label>
+                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> 31-01-2017</label>
+                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> 15-12-2017  </label>
                               <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
                               <?php
                               if($pay_val['organization_subscription_status'] == 1) :

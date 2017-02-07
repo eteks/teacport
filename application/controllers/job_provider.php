@@ -1084,6 +1084,10 @@ class Job_provider extends CI_Controller {
 													'organization_id' 								=> $this->input->post('udf1'),
 													'subscription_id' 								=> $this->input->post('udf2'),
 													'organization_transcation_id' 					=> $transaction_id,
+													'organization_post_vacancy_count' 				=> $subscription_plan_data[0]['subscription_max_no_of_posts'],
+													'organization_vacancy_remaining_count' 						=> $subscription_plan_data[0]['subscription_max_no_of_posts'],
+													'organization_post_ad_count' 				=> $subscription_plan_data[0]['subscription_max_no_of_ads'],
+													'organization_ad_remaining_count' 						=> $subscription_plan_data[0]['subscription_max_no_of_ads'],
 													'organization_email_count' 						=> $subscription_plan_data[0]['subscription_email_counts'],
 													'organization_sms_count'						=> $subscription_plan_data[0]['subcription_sms_counts'],
 													'organization_resume_download_count'			=> $subscription_plan_data[0]['subcription_resume_download_count'],
@@ -1099,9 +1103,9 @@ class Job_provider extends CI_Controller {
 												);
 					
 						if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
-							if($options['plan_option'] != "renewal") {
+							if($options['plan_option'] == "renewal") {
 								$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
-								$user_upgrade_data = array(
+								$user_renewal_data = array(
 													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
 													'is_renewal' 									=> 1,
 													'validity_start_date' 							=> $org_sub_id['org_sub_validity_start_date'],
@@ -1109,12 +1113,15 @@ class Job_provider extends CI_Controller {
 													'transaction_id'								=> $transaction_id,
 													'status'										=> 1
 												);
-								if($this->job_provider_model->subscribe_upgrade_renewal($user_upgrade_data)) {
+								if($this->job_provider_model->subscribe_upgrade_renewal($user_renewal_data)) {
 									$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
 								}
 								else {
 									$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
 								}
+							}
+							else {
+								$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
 							}				
 							// $this->load->view('company-dashboard-subscription',$data);
 						}
@@ -1248,7 +1255,8 @@ class Job_provider extends CI_Controller {
 		if($_POST){
 			$candidate_id = $this->input->post('candidate_id');	
 			$org_id = $this->input->post('org_id');
-			$status = $this->job_provider_model->provider_mail_send_update($candidate_id,$org_id);
+			$vac_id = ($this->input->post('vac_id'))?$this->input->post('vac_id'):'';
+			$status = $this->job_provider_model->provider_mail_send_update($candidate_id,$org_id,$vac_id);
 			$data['status'] = ($status['status']!='')?$status['status']:"failure";
 			$data['subscribe_details'] = $status['subscribe_details'];
 			echo json_encode($data);
@@ -1260,7 +1268,8 @@ class Job_provider extends CI_Controller {
 		if($_POST){
 			$candidate_id = $this->input->post('candidate_id');	
 			$org_id = $this->input->post('org_id');
-			$status = $this->job_provider_model->provider_resume_download_update($candidate_id,$org_id);
+			$vac_id = ($this->input->post('vac_id'))?$this->input->post('vac_id'):'';
+			$status = $this->job_provider_model->provider_resume_download_update($candidate_id,$org_id,$vac_id);
 			$data['status'] = ($status['status']!='')?$status['status']:"failure";
 			$data['subscribe_details'] = $status['subscribe_details'];
 			echo json_encode($data);
@@ -1271,12 +1280,26 @@ class Job_provider extends CI_Controller {
 	}
 	public function sendsms(){
 		if($_POST){
+			$url = "http://www.etekchnoservices.com/sms/sendsms.php?uid=7845729671&pwd=iloveindia&phone=7200300448&msg=Hello+World";
+			$get = file_get_contents($url);
+
+			if($get){
+    			echo "test";
+			}
+
+
+
 			$candidate_id = $this->input->post('candidate_id');	
 			$org_id = $this->input->post('org_id');
-			$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id);
+			$vac_id = ($this->input->post('vac_id'))?$this->input->post('vac_id'):'';
+			$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id,$vac_id);
 			$data['status'] = ($status['status']!='')?$status['status']:"failure";
 			$data['subscribe_details'] = $status['subscribe_details'];
+			$jobtitle = $status['job_title'];
 			echo json_encode($data);
+
+
+
 		}else{
 			redirect('missingpage');
 		}
