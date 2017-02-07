@@ -1098,6 +1098,12 @@ class Job_seeker extends CI_Controller {
 			}
 		}   	 		
 	}
+	/*Added by thangam*/
+	public function editprofile_fullview(){
+
+		$this->load->view('user-edit-profile-full-view.html');
+	}
+	/*End of full view*/
 
 
 
