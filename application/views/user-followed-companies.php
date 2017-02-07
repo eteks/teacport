@@ -99,26 +99,28 @@
                   	</div>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                   	<div class="company-detail">
-                        <div class="company-img">
-                         	<div class="img-holder">	
-		                        <?php
-		                        if(!empty($company_details['organization_logo'])) :
-		                        ?>
-		                        <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive centering_images" alt="Not Found"> 
-		                        <?php
-		                        else :
-		                        ?>
-		                        <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive centering_images" alt="Institution Logo">
-		                        <?php
-		                        endif;
-		                        ?>
-							</div>  
-						</div>
-                        <div class="single-job-map">
-                            <div id="map-contact">Organisation Map</div>
-                       	</div>                                 
-                    </div>
+                	<aside>
+	                   	<div class="company-detail">
+	                        <div class="company-img">
+	                         	<div class="img-holder">	
+			                        <?php
+			                        if(!empty($company_details['organization_logo'])) :
+			                        ?>
+			                        <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive centering_images" alt="Not Found"> 
+			                        <?php
+			                        else :
+			                        ?>
+			                        <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive centering_images" alt="Institution Logo">
+			                        <?php
+			                        endif;
+			                        ?>
+								</div>  
+							</div>
+	                        <!-- <div class="single-job-map">
+	                            <div id="map-contact">Organisation Map</div>
+	                       	</div>  -->                                
+	                    </div>
+                    </aside>
                 </div>
             </div>
         </div>

@@ -746,7 +746,6 @@ class Job_seeker_model extends CI_Model {
         $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
-        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
         }
         if(!empty($data['min_amount']) && empty($data['max_amount'])) {
@@ -794,7 +793,6 @@ class Job_seeker_model extends CI_Model {
    		$this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
-        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
         }
         if(!empty($data['min_amount']) && empty($data['max_amount'])) {

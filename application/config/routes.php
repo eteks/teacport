@@ -105,6 +105,7 @@ $route['seeker/dashboard'] 								= 'job_seeker/dashboard';
 $route['seeker/logout'] 								= 'job_seeker/seeker_logout';
 // $route['seeker/initialdata'] 							= 'job_seeker/initialdata';
 $route['seeker/editprofile'] 							= 'job_seeker/editprofile';
+$route['seeker/editprofile_fullview'] 							= 'job_seeker/editprofile_fullview';
 $route['seeker/inbox'] 								    = 'job_seeker/inbox';
 $route['seeker/findjob'] 								= 'job_seeker/findjob';
 $route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';
@@ -223,9 +224,6 @@ $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_vi
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
 $route['test_email'] = 'home/test_email';
 $route['main/district_state'] = 'admin/master_data/district_state';
-$route['test_sms'] = 'home/test_sms';
-$route['main/subscription_upgrade_ajax'] = 'admin/subscription_plan/subscription_upgrade_ajax';
-
 
 
 /* ===================          Route settings for Admin End     ====================== */
