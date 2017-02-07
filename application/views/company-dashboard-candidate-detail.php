@@ -396,7 +396,7 @@ function ajax_sms_send(id) {
        		var obj = JSON.parse(data);
        		var sub = obj.subscribe_details;
        		if(obj.status == "failure"){
-       			$('.subscription_action_message').text('Message not sent successfully!');
+       			$('.subscription_action_message').text('Message not sent successfully!. Please try again later.');
        		}
        		else {
        			$('.subscription_action_message').text('Message sent successfully!');
