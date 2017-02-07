@@ -35,10 +35,8 @@ class Common_model extends CI_Model {
 			$this->db->where($like_where);
    		}
    		$this->db->where('ov.vacancies_status','1');
-
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
-        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
         }
         if(!empty($data['min_amount']) && empty($data['max_amount'])) {
@@ -86,7 +84,6 @@ class Common_model extends CI_Model {
    		$this->db->where('ov.vacancies_status','1');
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
-        	$this->db->where("ov.vacancies_end_salary >=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
         }
         if(!empty($data['min_amount']) && empty($data['max_amount'])) {
@@ -155,11 +152,16 @@ class Common_model extends CI_Model {
 		return $alldistrict->result_array(); 
 	}
 		
-	public function subject_by_institution($ins_id)
+	public function subject_by_institution($ins_id,$input='')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_subject');
-		$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND subject_status=1)';
+		if($input != '') {
+			$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND (subject_status=1 || subject_status=2))';	
+		}
+		else {
+			$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND subject_status=1)';
+		}
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
 		return $subjectdata->result_array(); 
@@ -205,11 +207,16 @@ class Common_model extends CI_Model {
 		return $posting->result_array(); 
 	}
 	
-	public function mother_tongue()
+	public function mother_tongue($input='')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
-		$where = "(is_mother_tangue = '1'  AND language_status='1')";
+		if($input != '') {
+			$where = "(is_mother_tangue = '1'  AND (language_status='1' || language_status='2') )";
+		}
+		else {
+			$where = "(is_mother_tangue = '1'  AND language_status='1')";
+		}
 		$this->db->where($where);
 		$mt = $this->db->get();
 		return $mt->result_array(); 
@@ -518,6 +525,54 @@ class Common_model extends CI_Model {
 		$count = $this->db->group_by(array('organization_id','candidate_id','DATE(created_date)','ip_address'))->get_where('tr_site_visits')->num_rows();
 		return $count;
 	}
+
+	// To store other option and get id
+	public function insert_other_mother_tongue($data) {
+		$already_where = '(language_name="'.$data['language_name'].'")';
+		$check_already = $this->db->get_where('tr_languages',$already_where);
+		if($check_already->num_rows() == 1) {
+			$row_array = $check_already->row_array();
+			if($row_array['language_status'] == 0) {
+				$model_data = "inactive";
+			}
+			else if ($row_array['language_status'] == 1) {
+				$model_data = "active";
+			}
+			else {
+				$model_data = $row_array['language_id'];
+			}
+		}
+		else {
+			$this->db->insert('tr_languages',$data);
+			$model_data = $this->db->insert_id();
+		}
+		return $model_data;
+	}
+
+	// To store other option and get id
+	public function insert_other_subject($data) {
+		$already_where = '(subject_name="'.$data['subject_name'].'" AND FIND_IN_SET("'.$data['subject_institution_id'].'",subject_institution_id)!=0)';
+		$check_already = $this->db->get_where('tr_subject',$already_where);
+		if($check_already->num_rows() == 1) {
+			$row_array = $check_already->row_array();
+			if($row_array['subject_status'] == 0) {
+				$model_data = "inactive";
+			}
+			else if ($row_array['subject_status'] == 1) {
+				$model_data = "active";
+			}
+			else {
+				$model_data = $row_array['subject_id'];
+			}
+		}
+		else {
+			$this->db->insert('tr_subject',$data);
+			$model_data = $this->db->insert_id();
+		}
+		return $model_data;
+	}
+
+	
 	
 
 } // End

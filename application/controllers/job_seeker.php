@@ -17,7 +17,39 @@ class Job_seeker extends CI_Controller {
             return FALSE;
         }
         return TRUE;
- 	}      
+ 	}   
+
+ 	// To store other option value and get that value - Mother Tongue
+ 	function other_mother_tongue($val){
+ 		if($val == "others" && $_POST['other_mother_tongue']!='') {
+ 			$array = array(
+ 							'language_name' => $_POST['other_mother_tongue'],
+ 							'is_mother_tangue' => 1,
+ 							'is_medium_of_instruction' => 0,
+ 							'language_status' => 2 // It means other option
+ 						);
+ 			$id = $this->common_model->insert_other_mother_tongue($array);
+ 			if($id == "active") {
+ 				$this->form_validation->set_message('other_mother_tongue', 'Entered %s other option is already exist.');
+	       		return FALSE;
+ 			}
+ 			if($id == "inactive") {
+ 				$this->form_validation->set_message('other_mother_tongue', 'Entered %s other option is already inactive by Admin.');
+	       		return FALSE;
+ 			}
+ 			else {
+ 				$_POST['cand_mother_ton'] = $id;
+ 			}
+ 		}
+ 		else if($val == "others") {
+   			$this->form_validation->set_message('other_mother_tongue', 'The %s other option is required.');
+	       	return FALSE;
+ 		}
+ 	}    
+
+
+ 	
+
 
  	// Alpha with white space
  	public function alpha_dash_space($provider_job_title){
@@ -489,7 +521,7 @@ class Job_seeker extends CI_Controller {
     	$data['district_values'] = $this->common_model->get_all_district();
     	$data['state_values'] = $this->common_model->get_all_state();
     	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
-    	$data['mother_language_values'] = $this->common_model->mother_tongue();
+    	$data['mother_language_values'] = $this->common_model->mother_tongue(1);
     	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
     	$data['known_languages'] = $this->common_model->all_languages();
     	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type']);
@@ -540,7 +572,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_marital', 'label' => 'Martial Status','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_native_state', 'label' => 'Native State','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_native_dis', 'label' => 'Native District','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_mother_ton', 'label' => 'Mother Tongue','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_mother_ton', 'label' => 'Mother Tongue','rules' => 'required|trim|xss_clean|callback_other_mother_tongue'),
 			array('field' => 'cand_known_lan[]', 'label' => 'Known Languages','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_nation', 'label' => 'Nation','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_religion', 'label' => 'Religion','rules' => 'required|trim|xss_clean'),
