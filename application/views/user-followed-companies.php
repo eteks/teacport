@@ -105,11 +105,11 @@
 		                        <?php
 		                        if(!empty($company_details['organization_logo'])) :
 		                        ?>
-		                        <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive centering_images" alt="Not Found"> 
+		                        <img src="<?php echo $company_details['organization_logo']; ?>" class="img-responsive" alt="Not Found"> 
 		                        <?php
 		                        else :
 		                        ?>
-		                        <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive centering_images" alt="Institution Logo">
+		                        <img src="<?php echo base_url()."assets/images/institution.png"; ?>" class="img-responsive" alt="Institution Logo">
 		                        <?php
 		                        endif;
 		                        ?>
