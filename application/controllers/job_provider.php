@@ -37,7 +37,8 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+				// $fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+				$fb['reg_server_msg'] = 'Invalid login Details!';	
 				$fb['error'] = 1;
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
@@ -51,12 +52,17 @@ class Job_provider extends CI_Controller {
 				if($checkvaliduser['valid_status'] === 'valid'){
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$checkvaliduser);
-					redirect('provider/dashboard');
+					if(isset($_GET['reason']) && $_GET['reason']=='plan_selection') {
+						$planid = $_GET['planid'];
+						redirect('provider/subscription');
+					}
+					else
+						redirect('provider/dashboard');
 				}
 				else{
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+					$fb['reg_server_msg'] = 'Invalid login Details!';
 					$fb['error'] = 1;
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
