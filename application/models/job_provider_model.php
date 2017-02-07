@@ -209,9 +209,9 @@ class Job_provider_model extends CI_Model {
 			return "failure";
 		}
 	}
-	public function job_provider_post_vacancy_update($vacancydata)
+	public function job_provider_post_vacancy_update($vacancydata,$vac_id)
 	{
-	 	$this->db->where('vacancies_id', $vacancydata['vacancies_id']);
+	 	$this->db->where('vacancies_id', $vac_id);
 		if($this->db->update('tr_organization_vacancies', $vacancydata)){
 			return TRUE;
 		}
