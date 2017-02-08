@@ -113,6 +113,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php 
                           if ($exac_val['extra_curricular_status'] == 1) 
                             echo "Active";
+                          else if ($exac_val['extra_curricular_status'] == 2) 
+                            echo "<span class='approval'>Waiting For Approval</span>";
                           else
                             echo "Inactive";
                           ?>

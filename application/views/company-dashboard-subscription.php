@@ -70,6 +70,9 @@
 										else if(isset($organization_chosen_plan['subscription_id']) && !empty($organization_chosen_plan['subscription_id']) && $sub_val['sub_id'] == $organization_chosen_plan['subscription_id'] && $chosen_plan=='') {
 												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
+										else if(isset($_GET['reason']) && $_GET['reason']=='plan_selection' && $_GET['planid']==$sub_val['sub_id']){
+												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
+										}
 										else if($sub_val['subscription_status'] == 1){
 											echo "<option class='subplan_act' value='".$sub_val['sub_id']."' data-name='".$sub_val['subscription_plan']."' data-amount='".$sub_val['subscription_price']."'>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
@@ -410,3 +413,10 @@
 <?php include('include/footermenu.php'); ?>
 <?php include('include/footer.php'); ?>
 <?php include('include/footercustom.php'); ?>
+<script>
+	$(document).ready(function(){
+		<?php if(isset($_GET['reason']) && $_GET['reason']=='plan_selection'): ?>
+			$('#provider_subscription_plan_form').submit();  
+		<?php endif; ?> 
+	});
+</script>
