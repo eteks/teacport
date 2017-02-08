@@ -308,6 +308,8 @@ else {
 													<?php if($subscrib_plan['is_resume_validity']){ ?>
                                   					<a data-name="resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>">Resume</a>
                                   					<a class="dn" id="hidden_download" target="_blank" href="#" download> </a>
+                                  					<a data-name="template_resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate['personnal']['candidate_id'];?>"> Templated Resume</a>
+
                                   					<?php 
                               						} 
                               						else 
@@ -499,13 +501,22 @@ $(document).ready(function(){
 		if(!$(this).attr('href')) {
     		var error = 1;
     	}
-    	if(id && error ==1 && (name == "sms" || name == "email" || name == "resume")) {
-			confirm_alert("Are you sure want to proceed ?", function yes() {
+    	if(id && error ==1 && (name == "sms" || name == "email" || name == "resume" || name == "template_resume")) {
+    		if(name == "template_resume") {
+    			var msg= "Are you sure want to proceed. It will be reduce your resume count ?";
+    		}
+    		else {
+    			var msg= "Are you sure want to proceed ?";
+    		}
+			confirm_alert(msg, function yes() {
 			if(name == "sms") {
 				ajax_sms_send(id);
 			}
 			else if(name == "email") {
 				ajax_email_send(id);
+			}
+			else if(name == "template_resume") {
+				alert("test");
 			}
 			else {
 				ajax_resume_download(id);

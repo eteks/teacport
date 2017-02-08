@@ -751,6 +751,50 @@ class Job_provider_model extends CI_Model {
 		}
 		return $data;
 	}
+    // Payment subscription validation - Renewal Plan
+    public function renewal_plan_valid($plan_id,$org_id) {
+        $data = '';
+        $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+        $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
+        if($check_already -> num_rows() > 1) {
+            $plan_value = $check_already->row_array();
+            $org_status = $plan_value['organization_subscription_status'];
+            $start_date = date_create($plan_value['org_sub_validity_end_date']);
+            $days = date_diff(date_create('today'),$start_date);
+            if($days->invert == 1 || $days->days == 0 || $org_status == 0)
+            {
+                $data = 2; // if correct
+            }
+            else {
+                $data = 1; // if wrong
+            }
+        }
+        else {
+            $data = 1; // if wrong
+        }
+        return $data;
+    }
+
+    // Payment subscription validation - Renewal Plan
+    public function orginal_plan_valid($plan_id,$org_id) {
+        $data = '';
+        $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+        $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
+        if($check_already -> num_rows() > 0) {
+            $data = 1; // if wrong
+        }
+        else {
+            $current_sub_where = '(organization_id = "'.$org_id.'" AND organization_subscription_status = 1)';
+            $current_sub = $this->db->get_where('tr_organization_subscription',$current_sub_where);
+            if($current_sub -> num_rows() > 0) {
+                $data = 3; // if wrong
+            }
+            else {
+               $data = 2; // if correct 
+            }
+        }
+       return $data;
+    }
 
     // Get organization subscription details
     public function organization_subscription_data($org_id,$plan_id){
@@ -784,7 +828,7 @@ class Job_provider_model extends CI_Model {
         return $model_data;
     }
 
-        // Get Company full details
+    // Get Company full details
     public function organization_email_details($id)
     {
         $where = '(op.organization_status=1 AND op.organization_id="'.$id.'")';  
@@ -793,6 +837,19 @@ class Job_provider_model extends CI_Model {
         $this->db->join('tr_district d','op.organization_district_id = d.district_id','left'); 
         $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
         $this->db->where($where);
+        $model_data = $this->db->get()->row_array();
+        return $model_data;
+    }
+
+    // Get Company full details with ads details
+    public function ads_organization($val)
+    {
+        $where = '(a.premium_ads_status=1 and a.premium_ads_name="'.$val.'")';  
+        $this->db->select('*');
+        $this->db->from('tr_premium_ads a');
+        $this->db->join('tr_organization_profile op','a.organization_id = op.organization_id','inner'); 
+        $this->db->where($where);
+        $this->db->order_by('a.premium_ads_id','desc');
         $model_data = $this->db->get()->row_array();
         return $model_data;
     }

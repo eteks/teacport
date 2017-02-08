@@ -282,10 +282,10 @@ class Common_model extends CI_Model {
 	// Organization choosen plan
 	public function organization_chosen_plan($id) {
 		// $where = '(op.organization_id="'.$id.'" AND ops.organization_subscription_status=1 AND opu.status=1)';
-		$where = '(op.organization_id="'.$id.'" AND ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
+		$where = '(ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
 		$this->db->select('ops.*,opu.*,ops.organization_subscription_id as org_subscription_id');
-		$this->db->from('tr_organization_profile op');
-		$this->db->join('tr_organization_subscription ops','op.organization_id=op.organization_id','inner');
+		$this->db->from('tr_organization_subscription ops');
+		$this->db->join('tr_organization_profile op','ops.organization_id=op.organization_id','inner');
 		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id AND opu.status=1','left');
 		$this->db->where($where);
 		$data = $this->db->get()->row_array();
