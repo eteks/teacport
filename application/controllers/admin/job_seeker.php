@@ -149,7 +149,8 @@ class Job_Seeker extends CI_Controller {
 
                 		//newly added for thumbnail
                 		$candidate_thumb['image_library'] = 'gd2';
-						$candidate_thumb['source_image'] = $upload_path.$upload_data['file_name'];
+						$candidate_thumb['source_image'] = './'.$upload_path.$upload_data['file_name'];
+
 						$candidate_thumb['create_thumb'] = TRUE;
 						$candidate_thumb['maintain_ratio'] = TRUE;
 						$candidate_thumb['width']         = 180;

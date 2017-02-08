@@ -223,9 +223,12 @@ $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
-$route['test_email'] = 'home/test_email';
 $route['main/district_state'] = 'admin/master_data/district_state';
+
+#Route just for testing purpose
+$route['test_email'] = 'home/test_email';
 $route['test_pdf'] = 'home/test_pdf';
+$route['test_sms'] = 'home/test_sms';
 
 
 /* ===================          Route settings for Admin End     ====================== */
