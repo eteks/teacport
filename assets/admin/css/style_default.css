@@ -753,7 +753,7 @@ table .dataTables_empty{
     width: 130px !important;
 }
 #plan_upgrade_creation_form table {
-    display: block !important;
+    /*display: block !important;*/
     /*overflow: auto !important;*/
     width: 100% !important;
 }
@@ -898,8 +898,6 @@ table {
     z-index: 2;
     position: relative;
 }
-
-
 /* For Popup tabs - Added by Akila */
 .tab_form .navbar .nav > li {
     width: 23% !important;
@@ -971,6 +969,40 @@ table {
 }
 .instruction_span .span12{
 	margin-left:0 !important;
+}
+.icon-remove{
+	color: #cc0000;
+}
+.icon-ok{
+	color: #009933;
+}
+/*for upgrade table toolip*/
+.info_tooltip{
+    background: #828282 none repeat scroll 0 0;
+    border-radius: 5px;
+    bottom: 38px;
+    color: #fff;
+    display: none;
+    font-family: Montserrat;
+    font-size: 10px;
+    height: 23px;
+    left: 45px;
+    padding: 5px 0 0;
+    position: absolute;
+    text-align: center;
+    width: 100px;
+    z-index: 9999;
+    top:-26px;
+}
+.showtooltip {
+	position: relative;
+}
+.showtooltip:hover .info_tooltip, .showtooltip:focus .info_tooltip{
+    display: block !important;
+}
+.plan_field_section .fa-inr{
+	color: #22878e;
+	font-weight: bold;
 }
 /*Added By Akila*/
 /*Footer*/

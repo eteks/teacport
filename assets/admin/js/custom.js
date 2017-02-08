@@ -1009,7 +1009,7 @@ function date_picker() {
     $('.admin_date_picker').Zebra_DatePicker({
         format: 'd/m/Y',
         view: 'years'
-    });
+    });    
 }
 // Animation effect - slider
 function sliderResponse(target) {
