@@ -91,7 +91,7 @@ class Job_provider extends CI_Controller {
 			/* Set validate condition for registration form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
-			$this->form_validation->set_rules('organization_name', 'Organization Name', 'trim|required|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('organization_name', 'Organization Name', 'trim|required|min_length[3]|max_length[50]|is_unique[tr_organization_profile.organization_name]|xss_clean');
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_organization_profile.registrant_mobile_no]');
             $this->form_validation->set_rules('captcha_value', 'Captcha', 'callback_validate_captcha');

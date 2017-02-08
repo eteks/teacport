@@ -87,11 +87,11 @@ class Job_Provider extends CI_Controller {
 	        }
 	        // Tab 2 Validation
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
-	   			$validation_rules[] =	array( 'field'   => 'org_addr_1','label'   => 'Organization Address1','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
-	   			$validation_rules[] =	array( 'field'   => 'org_addr_2','label'   => 'Organization Address2','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
-	   			$validation_rules[] =	array( 'field'   => 'org_addr_3','label'   => 'Organization Address3','rules'   => 'trim|xss_clean|required|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
-	   			$validation_rules[] =	array( 'field'   => 'organization_state','label'  => 'Organization State','rules'   => 'trim|xss_clean|required' );
-	   			$validation_rules[] =	array( 'field'   => 'organization_district','label'  => 'Organization District','rules'   => 'trim|xss_clean|required' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_1','label'   => 'Organization Address1','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_2','label'   => 'Organization Address2','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'org_addr_3','label'   => 'Organization Address3','rules'   => 'trim|xss_clean|alpha_numeric_spaces|min_length[3]|max_length[150]|' );
+	   			$validation_rules[] =	array( 'field'   => 'organization_state','label'  => 'Organization State','rules'   => 'trim|xss_clean' );
+	   			$validation_rules[] =	array( 'field'   => 'organization_district','label'  => 'Organization District','rules'   => 'trim|xss_clean' );
 	   		}
 	   		// Tab 3 Validation
 	   		if($this->input->post('index')==3 || $this->input->post('index')=="end") {
@@ -156,7 +156,7 @@ class Job_Provider extends CI_Controller {
 						// Resize operation
 						if ( ! $this->image_lib->resize())
 						{
-	                		$data['upload_provider_logo_error'] = strip_tags($this->image_lib->display_errors()); 
+	                		$data['status'] = strip_tags($this->image_lib->display_errors()); 
 						}
 						$this->image_lib->clear();
 						$keyword = "uploads";
@@ -166,11 +166,6 @@ class Job_Provider extends CI_Controller {
 	               			$thumb_image = explode('.', end(explode('/',$old_file_path)));
 	               			@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
 				        }	
-                		@unlink(APPPATH.'../'.$old_file_path);
-
-                		$thumb_image = explode('.', end(explode('/',$old_file_path)));
-	               		@unlink(APPPATH.'../'.$upload_image_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
-
   	            	}
     		      	else
             		{
