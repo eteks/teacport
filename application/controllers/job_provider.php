@@ -54,7 +54,7 @@ class Job_provider extends CI_Controller {
 					$this->session->set_userdata("login_session",$checkvaliduser);
 					if(isset($_GET['reason']) && $_GET['reason']=='plan_selection') {
 						$planid = $_GET['planid'];
-						redirect('provider/subscription');
+						redirect('provider/subscription?reason=plan_selection&planid='.$planid);
 					}
 					else
 						redirect('provider/dashboard');

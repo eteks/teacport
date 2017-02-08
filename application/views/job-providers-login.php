@@ -15,8 +15,8 @@
                                 <!-- <img src="images/logo.png" alt="logo" class="img-responsive center-block"> -->
                                 <?php 
 	                                if(isset($_GET['reason']) && $_GET['reason']=='plan_selection'){
-	                                $planid = $_GET['planid'];
-	                                echo form_open('login/provider?reason=plan_selection&planid=$planid', 'id="provider_login_form" class="provider_login_form form-group form-validate reg_login_form"');
+		                                $planid = $_GET['planid'];
+		                                echo form_open('login/provider?reason=plan_selection&planid='.$planid, 'id="provider_login_form" class="provider_login_form form-group form-validate reg_login_form"');
 	                                }
 	                                else
 	                                	echo form_open('login/provider/', 'id="provider_login_form" class="provider_login_form form-group form-validate reg_login_form"'); 
@@ -106,10 +106,11 @@
                             	  		<i class="fa fa-close"></i>
                             	  	</a>
                                 </div><br>
-                                <?php echo "get_data".$_GET['reason']; ?>
                                 <?php 
-	                                if(isset($_GET['reason']) && $_GET['reason']=='plan_selection') 
-	                                	echo form_open('signup/provider?reason=plan_selection','id="form" class="reg_login_form"');
+	                                if(isset($_GET['reason']) && $_GET['reason']=='plan_selection'){ 
+	                                	$planid = $_GET['planid'];
+	                                	echo form_open('signup/provider?reason=plan_selection&planid='.$planid,'id="form" class="reg_login_form"');
+	                                }
 	                                else
 	                                	echo form_open('signup/provider','id="form" class="reg_login_form"'); 
                                 ?>
