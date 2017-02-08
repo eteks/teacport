@@ -4631,6 +4631,7 @@ div.dt-button-background {
 }
 .desc {
     color: #777;
+    line-height:35px;
 }
 .subscription_status {
     margin-bottom: 5px !important;
@@ -4969,6 +4970,7 @@ i#admin_error_login {
     height: 530px !important;
 }
 /* End by Akila */
-	
-	
+.approval{
+    color: red;
+}	
 		

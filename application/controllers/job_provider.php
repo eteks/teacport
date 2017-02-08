@@ -37,7 +37,8 @@ class Job_provider extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+				// $fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+				$fb['reg_server_msg'] = 'Invalid login Details!';	
 				$fb['error'] = 1;
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
 				$this->load->view('job-providers-login',$fb);
@@ -51,12 +52,17 @@ class Job_provider extends CI_Controller {
 				if($checkvaliduser['valid_status'] === 'valid'){
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$checkvaliduser);
-					redirect('provider/dashboard');
+					if(isset($_GET['reason']) && $_GET['reason']=='plan_selection') {
+						$planid = $_GET['planid'];
+						redirect('provider/subscription?reason=plan_selection&planid='.$planid);
+					}
+					else
+						redirect('provider/dashboard');
 				}
 				else{
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+					$fb['reg_server_msg'] = 'Invalid login Details!';
 					$fb['error'] = 1;
 					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-providers-login',$fb);
@@ -85,7 +91,7 @@ class Job_provider extends CI_Controller {
 			/* Set validate condition for registration form */
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
-			$this->form_validation->set_rules('organization_name', 'Organization Name', 'trim|required|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('organization_name', 'Organization Name', 'trim|required|min_length[3]|max_length[50]|is_unique[tr_organization_profile.organization_name]|xss_clean');
 			$this->form_validation->set_rules('registrant_email_id', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_organization_profile.registrant_email_id]');
 			$this->form_validation->set_rules('registrant_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_organization_profile.registrant_mobile_no]');
             $this->form_validation->set_rules('captcha_value', 'Captcha', 'callback_validate_captcha');
@@ -1013,6 +1019,22 @@ class Job_provider extends CI_Controller {
 						$ads_status = $this->job_provider_model->organization_premiun_ad_upload($premium_ad_data);
 						if($ads_status == "success")
 						{
+							$admin_det = $this->common_model->admin_details();
+							// Email configuration
+							$this->config->load('email', true);
+							$emailsetup = $this->config->item('email');
+							$this->load->library('email', $emailsetup);
+							$from_email = $emailsetup['smtp_user'];
+							$subject = 'Ad Details';
+							$message = "Ad posted.";
+							$this->email->initialize($emailsetup);	
+							$this->email->from($from_email, 'Teacher Recruit');
+							$this->email->to($admin_det['admin_user_email']);
+							$this->email->subject($subject);
+							$this->email->message($message);
+							/* Check whether mail send or not*/
+							$this->email->send();
+
 							$data['premiumad_server_msg'] = 'Advertisement Uploaded Successfully. Ads will be flashed soon after administrator approval.';
 							$data['error'] = 2;
 							$this->load->view('company-dashboard-post-adds',$data);
@@ -1080,6 +1102,8 @@ class Job_provider extends CI_Controller {
 									'error_message' 			=> $this->input->post('error_Message'),
 								);
 			if($this->job_provider_model->subscription_transaction_data($transaction_data) && $this->input->post('status')==='success'){
+				$email_data['organization_name'] = $data['organization']['organization_name'];
+				$mail_id = $data['organization']['registrant_email_id'];
 				$transaction_id = $this->db->insert_id();
 				if($options['plan_option'] != "upgrade") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
@@ -1109,6 +1133,21 @@ class Job_provider extends CI_Controller {
 					
 						if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
 							if($options['plan_option'] == "renewal") {
+								$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+								// Email configuration
+								$this->config->load('email', true);
+								$emailsetup = $this->config->item('email');
+								$this->load->library('email', $emailsetup);
+								$from_email = $emailsetup['smtp_user'];
+								$subject = 'Subscription Details';
+								$message = $this->load->view('email_template/renewal', $email_data, TRUE);
+								$this->email->initialize($emailsetup);	
+								$this->email->from($from_email, 'Teacher Recruit');
+								$this->email->to($mail_id);
+								$this->email->subject($subject);
+								$this->email->message($message);
+								/* Check whether mail send or not*/
+								$this->email->send();
 								$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
 								$user_renewal_data = array(
 													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
@@ -1126,6 +1165,21 @@ class Job_provider extends CI_Controller {
 								}
 							}
 							else {
+								$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+								// Email configuration
+								$this->config->load('email', true);
+								$emailsetup = $this->config->item('email');
+								$this->load->library('email', $emailsetup);
+								$from_email = $emailsetup['smtp_user'];
+								$subject = 'Subscription Details';
+								$message = $this->load->view('email_template/subscription', $email_data, TRUE);
+								$this->email->initialize($emailsetup);	
+								$this->email->from($from_email, 'Teacher Recruit');
+								$this->email->to($mail_id);
+								$this->email->subject($subject);
+								$this->email->message($message);
+								/* Check whether mail send or not*/
+								$this->email->send();
 								$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
 							}				
 							// $this->load->view('company-dashboard-subscription',$data);
@@ -1156,6 +1210,22 @@ class Job_provider extends CI_Controller {
 													'organization_subscription_status'				=> 1
 												);
 						if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
+							$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+							// Email configuration
+							$this->config->load('email', true);
+							$emailsetup = $this->config->item('email');
+							$this->load->library('email', $emailsetup);
+							$from_email = $emailsetup['smtp_user'];
+							$subject = 'Subscription Details';
+							$message = $this->load->view('email_template/upgrade', $email_data, TRUE);
+							$this->email->initialize($emailsetup);	
+							$this->email->from($from_email, 'Teacher Recruit');
+							$this->email->to($mail_id);
+							$this->email->subject($subject);
+							$this->email->message($message);
+							/* Check whether mail send or not*/
+							$this->email->send();
+
 							$user_upgrade_data = array(
 													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
 													'is_renewal' 									=> 0,
@@ -1327,11 +1397,11 @@ class Job_provider extends CI_Controller {
 			$candidate_id = $this->input->post('candidate_id');	
 			if($vac_id != '') {
 				$link = base_url()."seeker/vacancy_details/".$vac_id;
-				$msg = "We+are+pleased+to+inform+you+that+you+have+been+shortlisted+for+the+job+you+have+been+applied+and+you+are+invited+to+attend+an+interview.+Please+visit+$link";
+				$msg = "You+have+been+shortlisted+for+the+applied+post+for+our+company.Invited+to+attend+the+interview.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
 			else {
 				$link = base_url()."user-followed-companies/".$org_id;
-				$msg = "We+are+pleased+to+inform+you+that+you+have+been+shortlisted+and+you+are+invited+to+attend+an+interview.+Please+visit+$link";
+				$msg = "You+have+been+shortlisted+to+attend+the+interview+for+our+company.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
 			$url = "http://www.etekchnoservices.com/sms/sendsms.php?uid=7845729671&pwd=iloveindia&phone=".$candidate_det['candidate_mobile_no']."&msg=$msg";
 			$get = file_get_contents($url);

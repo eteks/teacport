@@ -412,13 +412,13 @@ class Home extends CI_Controller {
 		// curl_exec($ch);
 		// curl_close($ch);
 
-			$user           =   'visionachievers';
-		    $password       =   '123456';
-		    $sender_id      =   'NEETEM';
-		    $sender_mobile  =   '7200300448';
-		    $message_text   =   'Hi Testing SMS';
-		    // $priority       =   'ndnd';
-		    $sms_type       =   'normal';
+			// $user           =   'visionachievers';
+		 //    $password       =   '123456';
+		 //    $sender_id      =   'NEETEM';
+		 //    $sender_mobile  =   '7200300448';
+		 //    $message_text   =   'Hi Testing SMS';
+		 //    // $priority       =   'ndnd';
+		 //    $sms_type       =   'normal';
 		 //    // $redirect_link  =   "http://bhashsms.com/api/sendmsg.php?user=$user&pass=$password&sender=$sender_id&phone=$sender_mobile&text=$message_text&priority=$priority&stype=$sms_type";
 		 //    $redirect_link  =   "http://bhashsms.com/api/sendmsg.php?user=$user&pass=$password&sender=$sender_id&phone=$sender_mobile&text=$message_text&stype=$sms_type";
 
@@ -452,7 +452,7 @@ class Home extends CI_Controller {
 		 //    curl_close($ch);
 
 			// //code to message sent properly
-			// file_get_contents("http://www.etekchnoservices.com/sms/sendsms.php?uid=7845729671&pwd=iloveindia&phone=7200300448&msg=Hello+World");
+			file_get_contents("http://www.etekchnoservices.com/sms/sendsms.php?uid=7845729671&pwd=iloveindia&phone=7200300448&msg=this+is+test+message+from+kalai");
 
 
 			// $num = '7200300448';
@@ -464,7 +464,7 @@ class Home extends CI_Controller {
 			// curl_setopt($ch, CURLOPT_HEADER, 0);
 			// curl_exec($ch);
 			// curl_close($ch);
-			file_get_contents("http://bhashsms.com/api/sendmsg.php?user=$user&pass=$password&sender=$sender_id&phone=$sender_mobile&text=$message_text&stype=$sms_type");
+			// file_get_contents("http://bhashsms.com/api/sendmsg.php?user=$user&pass=$password&sender=$sender_id&phone=$sender_mobile&text=$message_text&stype=$sms_type");
 
 		}
 }

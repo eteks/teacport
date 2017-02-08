@@ -70,6 +70,9 @@
 										else if(isset($organization_chosen_plan['subscription_id']) && !empty($organization_chosen_plan['subscription_id']) && $sub_val['sub_id'] == $organization_chosen_plan['subscription_id'] && $chosen_plan=='') {
 												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
+										else if(isset($_GET['reason']) && $_GET['reason']=='plan_selection' && $_GET['planid']==$sub_val['sub_id']){
+												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
+										}
 										else if($sub_val['subscription_status'] == 1){
 											echo "<option class='subplan_act' value='".$sub_val['sub_id']."' data-name='".$sub_val['subscription_plan']."' data-amount='".$sub_val['subscription_price']."'>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
@@ -332,32 +335,32 @@
 													<?php
 													$upgrade_array = array_column($subscription_upgrade_plan[$key]['upgrade_options'],'upgrade_options');
 													?>
- 													<li id="subs_list_upg_sms" class="subs_list_act <?php if(!in_array('sms',$upgrade_array)) echo "disabled"; ?>" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Remaining Sms: <span class="sms_remain_value"><?php echo $current ==1 ?$organization_chosen_plan['organization_sms_remaining_count'] : 0; ?></span><span class="glyphicon glyphicon-edit subs_edit"></span></li>
+ 													<li id="subs_list_upg_sms" class="subs_list_act <?php if(!in_array('sms',$upgrade_array)) echo "disabled"; ?>" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Remaining Sms: <span class="sms_remain_value"><?php echo $current ==1 ?$organization_chosen_plan['organization_sms_remaining_count'] : 0; ?></span><span class="glyphicon glyphicon-edit subs_edit sub_sms"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_sms">
 													    <form>
 												            <div class="form-group">
 													            <label>SMS COUNT</label>
-												                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_sms" maxlength="5" />
+												                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_sms" name="sms_popvalue" maxlength="5" />
 												            </div>
 												            <button type="button" class="btn btn-success popover_upg_sms_save">Save</button>
 											            </form>
 											        </div>
-													<li id="subs_list_upg_email" class="subs_list_act <?php if(!in_array('email',$upgrade_array)) echo "disabled"; ?>">Remaining Email: <?php echo $current ==1 ?$organization_chosen_plan['organization_email_remaining_count'] : 0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
+													<li id="subs_list_upg_email" class="subs_list_act <?php if(!in_array('email',$upgrade_array)) echo "disabled"; ?>">Remaining Email: <?php echo $current ==1 ?$organization_chosen_plan['organization_email_remaining_count'] : 0; ?><span class="glyphicon glyphicon-edit subs_edit sub_email"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_email">
 											            <form>
 												            <label>EMAIL COUNT</label>
 											            	<div class="form-group">
-												                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_email" maxlength="5" />
+												                <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_email" name ="email_popvalue" maxlength="5" />
 												            </div>
 												            <button type="button" class="btn btn-success popover_upg_email_save">Save</button>
 										            	</form>
 											        </div>
-													<li id="subs_list_upg_resume" class="subs_list_act <?php if(!in_array('resume',$upgrade_array)) echo "disabled"; ?>">Remaining Download: <?php echo $current ==1 ?$organization_chosen_plan['organization_remaining_resume_download_count'] :0; ?><span class="glyphicon glyphicon-edit subs_edit"></span></li>
+													<li id="subs_list_upg_resume" class="subs_list_act <?php if(!in_array('resume',$upgrade_array)) echo "disabled"; ?>">Remaining Download: <?php echo $current ==1 ?$organization_chosen_plan['organization_remaining_resume_download_count'] :0; ?><span class="glyphicon glyphicon-edit subs_edit sub_resume"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_resume">
 										           		<form>
 														    <div class="form-group">
 															    <label>RESUME COUNT</label>
-														        <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_resume" maxlength="5" />
+														        <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_resume" name="resume_popvalue" maxlength="5" />
 														    </div>
 														    <button type="button" class="btn btn-success popover_save popover_upg_resume_save">Save</button>
 														</form>
@@ -410,3 +413,10 @@
 <?php include('include/footermenu.php'); ?>
 <?php include('include/footer.php'); ?>
 <?php include('include/footercustom.php'); ?>
+<script>
+	$(document).ready(function(){
+		<?php if(isset($_GET['reason']) && $_GET['reason']=='plan_selection'): ?>
+			$('#provider_subscription_plan_form').submit();  
+		<?php endif; ?> 
+	});
+</script>

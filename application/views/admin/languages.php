@@ -133,6 +133,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php 
                           if ($lan_val['language_status'] == 1) 
                             echo "Active";
+                          else if ($lan_val['language_status'] == 2) 
+                            echo "<span class='approval'>Waiting For Approval</span>";
                           else
                             echo "Inactive";
                           ?>
