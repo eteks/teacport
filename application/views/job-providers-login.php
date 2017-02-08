@@ -127,57 +127,56 @@
 	                                endif;
 	                                ?>
                                 	<div class="col-sm-6 pull-left">
-										<div class="form-group">
-		                                    <label>Institution <sup class="alert">*</sup></label>
-		                                    <select name="registrant_institution_type" id="institution_type" class="form-control form_inputs">
-										<?php
-		                                	foreach ($institutiontype as $institution) {
-												echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
-											}
-			                            ?> 
-			                           		</select>     
-		                            	</div>
+									<div class="form-group">
+	                                    <label>Institution<sup class="alert">*</sup></label>
+	                                    <select name="registrant_institution_type" id="institution_type" class="form-control form_inputs">
+											<?php
+			                                	foreach ($institutiontype as $institution) {
+													echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
+												}
+				                            ?> 
+		                           		</select>     
+	                            	</div>
 									<div class="form-group">
 										<?php echo form_label('Name <sup class="alert">*</sup>'); echo form_error('organization_name'); ?>
-										<?php echo form_input(array('id' => 'organization_name','class' => 'form-control form_inputs alpha_value', 'data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Organization Name','name' => 'organization_name')); ?>
+										<?php echo form_input(array('id' => 'organization_name','data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Organization Name','class' => 'form-control form_inputs', 'name' => 'organization_name')); ?>
 									</div>
 									<div class="form-group">	
 										<?php echo form_label('Email <sup class="alert">*</sup>'); echo form_error('registrant_email_id'); ?>
-										<?php echo form_input(array('id' => 'registrant_email_id','class' => 'form-control form_inputs email_value','placeholder' => 'Email', 'name' => 'registrant_email_id')); ?>
+										<?php echo form_input(array('id' => 'registrant_email_id','class' => 'form-control form_inputs email_value', 'name' => 'registrant_email_id','placeholder' => 'Email')); ?>
 									</div>
-									<div class="form-group">	
+										<div class="form-group">	
 										<?php echo form_label('Mobile No. <sup class="alert">*</sup>'); echo form_error('registrant_mobile_no'); ?>
 										<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control form_inputs numeric_value','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','name' => 'registrant_mobile_no')); ?>
-									</div>	
-									<div class="form-group">
+									</div>								
+								<p id="submit" class="btn btn-default btn-block">Register</p>
+									<?php echo form_close(); ?>
+									</div>
+								<div class="form-group">
 										<?php echo form_label('Captcha'); echo form_error('captcha_value'); ?>
-										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
+										<?php echo ('<div class="form-group"><img  style="width: 218px;" class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
 	                                	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
 	                                </div>	
-	                                	<div class="col-sm-6 captcha_holder nopadding captcha_des_act">
-	                                		<label>Enter Captcha value :<span class="alert">*</span></label>
-	                        				<?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value')); ?>
+	                                	<div class="col-sm-6 captcha_holder nopadding">
+	                        				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control form_inputs','name' => 'captcha_value','placeholder' => 'Captcha Value')); ?>
 	                        			</div>
-	                        			<div class="clearfix"> </div>
-	                        		</div>	
-									<div class="loginbox-terms">
+	                        		</div>
+	                        		<div class="loginbox-terms">
 										<label class="checkbox_word">
-										<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition','class' => 'form_dec')); ?>  I accept</label> <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
-									</div>	
-									<p id="submit" class="btn btn-default btn-block">Register</p>
-								</div>
-								<div class="col-sm-6 pull-left">	
-									<div class="loginbox-title">Sign Up using social accounts </div>
-									<ul class="social-network social-circle onwhite">
+											<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition', 'class' => 'form_dec')); ?> I accept</label> <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
+									</div>
+									
+								<div>	
+									<div>Sign Up using social accounts </div>
+									<ul class="social-network social-circle onwhite pull-left">
 	                                    <li><a href="<?php echo site_url('login/facebook');?>" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
 	                                    <li><a href="<?php echo site_url('login/twitter');?>" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
 	                                    <li><a href="<?php echo site_url('login/google'); ?>" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
 	                                    <li><a href="<?php echo site_url('login/linkedin');?>" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
 	                                </ul>
-									<div class="loginbox-signin pull-right"> Already have account ? <a class="txt_blue remove_error_message_act"> Sign in</a></div>
+									<div class="loginbox-signin"> Already have account ? <a class="txt_blue"> Sign in</a></div>
 								</div>	
 								<div class="clearfix"> </div>
-                            	<?php echo form_close(); ?>
                             </div> <!--End Provider signup-->
                        </div> <!--End .login-container -->
                     </div>
