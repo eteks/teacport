@@ -836,7 +836,7 @@ body .ui_box__inner span{font-size:36px;font-weight:700;}
 .price-features li{font-size:15px;color:#242424;font-family:"Source Sans Pro", sans-serif;}
 .price-features li > strong{}
 .price-footer{margin-top:35px;}
-.price-footer > a{background-color:#29aafe;border:1px solid #29aafe;color:#fff;height:45px;border-radius:0;margin-top:10px;margin-left:2px;padding:10px 35px;text-transform:capitalize;-webkit-transition:all 0.3s ease 0s;-moz-transition:all 0.3s ease- 0s;-o-transition:all 0.3s ease 0s;transition:all 0.3s ease 0s;}
+.price-footer > a{background-color:#29aafe;border:1px solid #29aafe;color:#fff;height:45px;border-radius:0;margin-top:10px;margin-bottom:20px;margin-left:2px;padding:10px 35px;text-transform:capitalize;-webkit-transition:all 0.3s ease 0s;-moz-transition:all 0.3s ease- 0s;-o-transition:all 0.3s ease 0s;transition:all 0.3s ease 0s;}
 .price-footer > a:hover{background-color:#2088cb;border:1px solid #2088cb;color:#fff;}
 .price-footer > a:hover{color:#fff;}
 #featured-price .plan-title{color:#fff;}

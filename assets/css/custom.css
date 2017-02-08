@@ -340,7 +340,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	height:100% !important;
 }
 .subscribe_plan{
-	margin-top: 30px;
+	margin-top: 45px;
 	height:450px;
 }
 .cost_plan{
@@ -434,6 +434,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
     border-radius: 0 !important;
 	margin-bottom: 0px !important;
 	padding: 0px !important;
+	
 }
 #institution_type {
 	margin-bottom: 5px;
@@ -1370,7 +1371,7 @@ label.form-input-error {
 .vacancies_instruction_act{margin-top: 40px !important;}
 .carousel-control.left, .carousel-control.right {background-image: none}
 .news_flash{border: 3px solid rgb(255,165,0);box-shadow: -8px 0px 10px 1px #f47020;}
-.subs_button{background-color:#4CAF50;border:none;color:white;padding:16px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:33px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer}
+.subs_button{background-color:#4CAF50;border:none;color:white;padding:16px 32px;text-align:center;text-decoration:none;font-size:16px;margin:4px 2px;margin-left:30px;-webkit-transition-duration:0.4s;transition-duration:0.4s;cursor:pointer}
 .prem_select{background-color:white;color:black;border:2px solid #00a5ef}
 .prem_select:hover{background-color:#00a5ef;color:white}
 .upg_select{background-color:white;color:black;border:2px solid #da651a}

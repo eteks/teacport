@@ -112,7 +112,8 @@ $route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';
 $route['seeker/jobsapplied'] 							= 'job_seeker/jobsapplied';
 $route['seeker/jobsapplied/(:num)'] 					= 'job_seeker/jobsapplied/$1';
 $route['seeker/jobsapplieddetails/(:num)'] 				= 'job_seeker/applynow/$1';
-// $route['seeker/applynow'] 								= 'job_seeker/applynow';
+$route['seeker/vacancy_details/(:num)'] 				= 'job_seeker/applynow/$1';
+// $route['seeker/applynow'] 							= 'job_seeker/applynow';
 $route['seeker/applynow/(:num)'] 						= 'job_seeker/applynow/$1';
 $route['seeker/password'] 								= 'job_seeker/change_password';
 $route['seeker/inbox/messagecount'] 					= 'job_seeker/inbox_message_count';
@@ -222,8 +223,12 @@ $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';
 $route['main/get_feedback_full_view'] = 'admin/other_module/get_feedback_full_view';
 $route['main/admin_forget'] = 'admin/admin_login/admin_forget';
-$route['test_email'] = 'home/test_email';
 $route['main/district_state'] = 'admin/master_data/district_state';
+
+#Route just for testing purpose
+$route['test_email'] = 'home/test_email';
+$route['test_pdf'] = 'home/test_pdf';
+$route['test_sms'] = 'home/test_sms';
 
 
 /* ===================          Route settings for Admin End     ====================== */

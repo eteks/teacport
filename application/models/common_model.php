@@ -193,14 +193,18 @@ class Common_model extends CI_Model {
 		$moi = $this->db->get();
 		return $moi->result_array(); 
 	}
-	public function applicable_posting($ins_id = '')
+	public function applicable_posting($ins_id = '',$input='')
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_applicable_posting');
-		if($ins_id!='') {
-			$where = '(FIND_IN_SET("'.$ins_id.'",posting_institution_id) !=0 AND posting_status=1)';
-		}else {
-			$where = "(posting_status='1')";	
+		if($ins_id!='' && $input!='') {
+			$where = '(FIND_IN_SET("'.$ins_id.'",posting_institution_id) !=0 AND (posting_status=1 || posting_status=2))';
+		}
+		else if($ins_id!=''){
+			$where = '(FIND_IN_SET("'.$ins_id.'",posting_institution_id) !=0 AND posting_status=1)';	
+		}
+		else {
+			$where = "(posting_status='1')";
 		}		
 		$this->db->where($where);
 		$posting = $this->db->get();
@@ -221,11 +225,16 @@ class Common_model extends CI_Model {
 		$mt = $this->db->get();
 		return $mt->result_array(); 
 	}
-	public function all_languages()
+	public function all_languages($input)
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_languages');
-		$where = "(language_status='1')";
+		if($input != '') {
+			$where = "(language_status='1' || language_status='2')";
+		}
+		else {
+			$where = "(language_status='1')";
+		}	
 		$this->db->where($where);
 		$mt = $this->db->get();
 		return $mt->result_array(); 
@@ -273,10 +282,10 @@ class Common_model extends CI_Model {
 	// Organization choosen plan
 	public function organization_chosen_plan($id) {
 		// $where = '(op.organization_id="'.$id.'" AND ops.organization_subscription_status=1 AND opu.status=1)';
-		$where = '(op.organization_id="'.$id.'" AND ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
+		$where = '(ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
 		$this->db->select('ops.*,opu.*,ops.organization_subscription_id as org_subscription_id');
-		$this->db->from('tr_organization_profile op');
-		$this->db->join('tr_organization_subscription ops','op.organization_id=op.organization_id','inner');
+		$this->db->from('tr_organization_subscription ops');
+		$this->db->join('tr_organization_profile op','ops.organization_id=op.organization_id','inner');
 		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id AND opu.status=1','left');
 		$this->db->where($where);
 		$data = $this->db->get()->row_array();
@@ -323,9 +332,15 @@ class Common_model extends CI_Model {
 	}
 
 	// Get extra curricular details
-	public function get_extra_curricular_details()
+	public function get_extra_curricular_details($input='')
 	{
-		$value = $this->db->get_where('tr_extra_curricular',array('extra_curricular_status' => '1'))->result_array();
+		if($input!='') {
+			$where = '(extra_curricular_status=1 || extra_curricular_status=2)';
+		}
+		else {
+			$where = '(extra_curricular_status=1)';
+		}
+		$value = $this->db->get_where('tr_extra_curricular',$where)->result_array();
 		return $value;
 	}
 	public function get_job_list()
@@ -471,7 +486,7 @@ class Common_model extends CI_Model {
 
 	// Organization Logo
 	public function get_provider_details() {
-		$this->db->select('organization_logo,organization_name');
+		$this->db->select('organization_logo,organization_name,organization_id');
 		$this->db->from('tr_organization_profile');
 		$this->db->where('organization_status','1');
 		$org_data = $this->db->get()->result_array();
@@ -572,8 +587,60 @@ class Common_model extends CI_Model {
 		return $model_data;
 	}
 
-	
-	
+	// To store other option and get id
+	public function insert_other_posting($data) {
+		$already_where = '(posting_name="'.$data['posting_name'].'" AND FIND_IN_SET("'.$data['posting_institution_id'].'",posting_institution_id)!=0)';
+		$check_already = $this->db->get_where('tr_applicable_posting',$already_where);
+		if($check_already->num_rows() == 1) {
+			$row_array = $check_already->row_array();
+			if($row_array['posting_status'] == 0) {
+				$model_data = "inactive";
+			}
+			else if ($row_array['posting_status'] == 1) {
+				$model_data = "active";
+			}
+			else {
+				$model_data = $row_array['posting_id'];
+			}
+		}
+		else {
+			$this->db->insert('tr_applicable_posting',$data);
+			$model_data = $this->db->insert_id();
+		}
+		return $model_data;
+	}
+
+	// To store other option and get id
+	public function insert_other_extracurricular($data) {
+		$already_where = '(extra_curricular="'.$data['extra_curricular'].'")';
+		$check_already = $this->db->get_where('tr_extra_curricular',$already_where);
+		if($check_already->num_rows() == 1) {
+			$row_array = $check_already->row_array();
+			if($row_array['extra_curricular_status'] == 0) {
+				$model_data = "inactive";
+			}
+			else if ($row_array['extra_curricular_status'] == 1) {
+				$model_data = "active";
+			}
+			else {
+				$model_data = $row_array['extra_curricular_id'];
+			}
+		}
+		else {
+			$this->db->insert('tr_extra_curricular',$data);
+			$model_data = $this->db->insert_id();
+		}
+		return $model_data;
+	}
+
+	// To get admin details
+	public function admin_details() {
+		$admin_where = '(admin_user_status=1 AND is_main_admin=1)';
+		$model_data = $this->db->get_where('tr_admin_users',$admin_where)->row_array();
+		return $model_data;
+	}
+
+
 
 } // End
 

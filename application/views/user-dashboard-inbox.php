@@ -209,7 +209,7 @@ if(!empty($provider_values)) :
             $thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
         ?>
         <div class="client-logo">
-            <a href="#"><img src="<?php echo base_url().PROVIDER_UPLOAD.$thumb; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
+            <a href="<?php echo base_url()."user-followed-companies/".$val['organization_id']; ?>"><img src="<?php echo base_url().PROVIDER_UPLOAD.$thumb; ?>" class="img-responsive" alt="Organization Logo" title="<?php echo $val['organization_name']; ?>" /></a>
         </div>
         <?php
         endif;

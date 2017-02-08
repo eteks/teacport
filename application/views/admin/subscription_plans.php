@@ -265,7 +265,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </span>
                       </div>
                       <div class="col6 control-group">
-                        <label class="control-label"> Max Days Ad visisble </label>
+                        <label class="control-label"> Max Days Ad visible </label>
                         <span class="dynamic_data"> 
                           <input type="text" class="form-control numeric_act restrict_zero" maxlength="3" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
                         </span>
