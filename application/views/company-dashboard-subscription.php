@@ -80,10 +80,9 @@
 									?>
 								</select>
 								<p>
-									<b> + 15%</b>
-									service tax applicable
-								</p>
-								<button type='submit' class="btn btn-default payu_submit pull-right" style="margin: 0px !important;"> Proceed to choose </button>
+									
+								</p> 
+								<button type='submit' class="btn btn-default payu_submit pull-right" style="margin-top: 20px !important;"> Proceed to choose </button>
 								<?php echo form_close(); ?>
 							</div>
 							<div class="col-sm-3 nopadding">
@@ -326,11 +325,11 @@
 			                                <div class="resume_block common_box">
 			                                	<input class="subs_input_val_upgact3 resume_count" type="text" disabled="disabled" data-toggle="resume_tooltip" title="No of resume you have selected"/>
 			                                	<!-- <i class="glyphicon glyphicon-cloud-download"></i> -->
-			                                	<span id ="resume_icon"><i class="glyphicon glyphicon-remove-sign" ></i></span>
+			                                	<span id ="resume_icon"><i class="glyphicon glyphicon-remove-sign"></i></span>
 			                                </div>
 			                                <div class="cb"></div>
 			                                <div class="price-features text-center price2">
-			                                    <ul class="subs_count_act <?php if($current == 0) echo "disabled"; ?>">
+			                                    <ul class="subs_count_act <?php if($current == 0) echo "disabled1"; ?>">
 													<!-- <li>Max No of vacancy Posts: 20</li> -->
 													<?php
 													$upgrade_array = array_column($subscription_upgrade_plan[$key]['upgrade_options'],'upgrade_options');
@@ -362,7 +361,7 @@
 															    <label>RESUME COUNT</label>
 														        <input id="popover-value" type="text" placeholder="Enter Value" class="form-control popover_value_upg_resume" name="resume_popvalue" maxlength="5" />
 														    </div>
-														    <button type="button" class="btn btn-success popover_save popover_upg_resume_save">Save</button>
+														    <button type="button" class="btn btn-success popover_save popover_upg_resume_save reset_value">Save</button>
 														</form>
 													</div>
 													<!-- <li>Max No of ads: 20</li> -->
