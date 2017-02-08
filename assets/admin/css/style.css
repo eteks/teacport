@@ -4631,6 +4631,7 @@ div.dt-button-background {
 }
 .desc {
     color: #777;
+    line-height:35px;
 }
 .subscription_status {
     margin-bottom: 5px !important;

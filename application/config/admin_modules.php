@@ -126,11 +126,11 @@ $config['admin_modules'] = array(
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'main/jobprovider_ads' 
 		),
-		array(
-			'name' => 'organization plan notification', 
-			'access_operation' => 'view', 
-			'route_url' => base_url().'main/organization_plan_notification' 
-		),
+		// array(
+		// 	'name' => 'organization plan notification', 
+		// 	'access_operation' => 'view', 
+		// 	'route_url' => base_url().'main/organization_plan_notification' 
+		// ),
 		array(
 			'name' => 'transaction', 
 			'access_operation' => 'view', 
