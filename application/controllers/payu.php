@@ -21,42 +21,47 @@ class Payu extends CI_Controller {
 
 		// To check empty field or not
 		if($data['udf1']!='' && $data['udf2']!='' && ($data['plan_option']=="original" || $data['plan_option']=="upgrade" || $data['plan_option']=="renewal")  && $data['amount'] > 0) {
-			// New plan selection - start
+			// Plan exists or not
 			if(!in_array($data['udf2'],array_column($input['subcription_plan'],'subscription_id')) && $data ['plan_option']!="upgrade") {
 				$this->session->set_userdata('subscription_status',"Your chosen plan not available now. Please try another plan");
 				redirect('provider/subscription');
 			}
-
-
-
-
-			
-			else if($data ['plan_option']!="upgrade") {
-				$valid = $this->job_provider_model->orignial_renewal_validation($data['udf2'],$data['udf1']);
+			// Renewal Plan
+			else if($data ['plan_option']=="renewal") {
+				$valid = $this->job_provider_model->renewal_plan_valid($data['udf2'],$data['udf1']);
 				if($valid == 2) {
-					$proper = 1;
+					$proper = 1; // If correct
 				}
 				else {
-					$this->session->set_userdata('subscription_status',"Your chosen plan not available now. Please try another plan");
+					$this->session->set_userdata('subscription_status',"Your Renewal plan not available now. Please try another plan");
 					redirect('provider/subscription');
 				}
 			}
-			// New plan selection or renewal plan selection - End
-			// Amount validation is pending and max and min value is pending
-			// Upgrade plan - start
+			// Orginal Plan
+			else if($data ['plan_option']=="original") {
+				$valid = $this->job_provider_model->orginal_plan_valid($data['udf2'],$data['udf1']);
+				if($valid == 2) {
+					$proper = 1; // If correct
+				}
+				else if($valid == 1) {
+					$this->session->set_userdata('subscription_status',"Your are already subscribe the plan. Please choose renewal plan");
+					redirect('provider/subscription');
+				}
+				else {
+					$this->session->set_userdata('subscription_status',"Your are already subscribe another plan is active. Please use subscribed plan.");
+					redirect('provider/subscription');
+				}
+			}
+			// Upgrade Plan
 			else {
 				if($data['sms_count'] =='' && $data['email_count'] =='' && $data['resume_count'] =='' ) {
 					$this->session->set_userdata('subscription_status',"Please enter value for upgrade plan ");
 					redirect('provider/subscription');
 				}
 				else {
-					$proper = 1;
+					$proper = 1; // If correct
 				}
 			}
-
-
-
-		// Upgrade plan - end
 		}
 		else {
 			$this->session->set_userdata('subscription_status',"Something went wrong. Please try againg with correct details");
@@ -105,10 +110,6 @@ class Payu extends CI_Controller {
 				}
 			} 
 			$this->load->view('payu',$posted);
-
-
-
-
 		}
 
 	

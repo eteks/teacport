@@ -478,7 +478,7 @@ class Home extends CI_Controller {
 		}
 		public function test_pdf(){
 			$this->load->helper('pdf_helper');
-			$this->load->view('pdfreport', $data);
+			$this->load->view('user_resume', $data);
 		}
 }
 

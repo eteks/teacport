@@ -158,7 +158,6 @@
 	               	<!-- Pricing Table -->  
 					<!--Pricing-->
 					<?php 
-					if(isset($secutiy_msg)) echo "<div class='subscribe_secure_msg'>$secutiy_msg </div>"; 
                     if((!empty($subscription_upgrade_plan) && !empty($organization_chosen_plan)) || (!empty($subscription_upgrade_plan) && !empty($chosen_plan))) :
                     	$current = 0;
 						// If the user already subscripe display current plan or 

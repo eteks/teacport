@@ -751,6 +751,50 @@ class Job_provider_model extends CI_Model {
 		}
 		return $data;
 	}
+    // Payment subscription validation - Renewal Plan
+    public function renewal_plan_valid($plan_id,$org_id) {
+        $data = '';
+        $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+        $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
+        if($check_already -> num_rows() > 1) {
+            $plan_value = $check_already->row_array();
+            $org_status = $plan_value['organization_subscription_status'];
+            $start_date = date_create($plan_value['org_sub_validity_end_date']);
+            $days = date_diff(date_create('today'),$start_date);
+            if($days->invert == 1 || $days->days == 0 || $org_status == 0)
+            {
+                $data = 2; // if correct
+            }
+            else {
+                $data = 1; // if wrong
+            }
+        }
+        else {
+            $data = 1; // if wrong
+        }
+        return $data;
+    }
+
+    // Payment subscription validation - Renewal Plan
+    public function orginal_plan_valid($plan_id,$org_id) {
+        $data = '';
+        $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+        $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
+        if($check_already -> num_rows() > 0) {
+            $data = 1; // if wrong
+        }
+        else {
+            $current_sub_where = '(organization_id = "'.$org_id.'" AND organization_subscription_status = 1)';
+            $current_sub = $this->db->get_where('tr_organization_subscription',$current_sub_where);
+            if($current_sub -> num_rows() > 0) {
+                $data = 3; // if wrong
+            }
+            else {
+               $data = 2; // if correct 
+            }
+        }
+       return $data;
+    }
 
     // Get organization subscription details
     public function organization_subscription_data($org_id,$plan_id){
