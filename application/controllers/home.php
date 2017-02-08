@@ -467,6 +467,10 @@ class Home extends CI_Controller {
 			// file_get_contents("http://bhashsms.com/api/sendmsg.php?user=$user&pass=$password&sender=$sender_id&phone=$sender_mobile&text=$message_text&stype=$sms_type");
 
 		}
+		public function test_pdf(){
+			$this->load->helper('pdf_helper');
+			$this->load->view('pdfreport', $data);
+		}
 }
 
 /* End of file home.php */
