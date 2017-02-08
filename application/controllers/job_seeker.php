@@ -361,7 +361,7 @@ class Job_seeker extends CI_Controller {
 			if ($this->form_validation->run() == FALSE){
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
-				$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+				$fb['reg_server_msg'] = 'Invalid login Details!';	
 				$fb['error'] = 1;
    				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
    				$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -381,7 +381,7 @@ class Job_seeker extends CI_Controller {
 				else{
 					$fb['captcha'] = $this->captcha->main();
 					$this->session->set_userdata('captcha_info', $fb['captcha']);
-					$fb['reg_server_msg'] = 'Not a Registered User!Please Sign Up';	
+					$fb['reg_server_msg'] = 'Invalid login Details!';	
 					$fb['error'] = 1;
    					$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 					$data['institutiontype'] = $this->common_model->get_institution_type();
@@ -1259,6 +1259,12 @@ class Job_seeker extends CI_Controller {
 			}
 		}   	 		
 	}
+	/*Added by thangam*/
+	public function editprofile_fullview(){
+
+		$this->load->view('user-edit-profile-full-view.html');
+	}
+	/*End of full view*/
 
 
 

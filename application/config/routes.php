@@ -105,6 +105,7 @@ $route['seeker/dashboard'] 								= 'job_seeker/dashboard';
 $route['seeker/logout'] 								= 'job_seeker/seeker_logout';
 // $route['seeker/initialdata'] 							= 'job_seeker/initialdata';
 $route['seeker/editprofile'] 							= 'job_seeker/editprofile';
+$route['seeker/editprofile_fullview'] 							= 'job_seeker/editprofile_fullview';
 $route['seeker/inbox'] 								    = 'job_seeker/inbox';
 $route['seeker/findjob'] 								= 'job_seeker/findjob';
 $route['seeker/findjob/(:num)'] 						= 'job_seeker/findjob/$1';

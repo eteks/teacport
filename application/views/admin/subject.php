@@ -127,6 +127,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php 
                           if ($sub_val['subject_status'] == 1) 
                             echo "Active";
+                          else if ($sub_val['subject_status'] == 2) 
+                            echo "<span class='approval'>Waiting For Approval</span>";
                           else
                             echo "Inactive";
                           ?>

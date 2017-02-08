@@ -133,7 +133,7 @@ class Job_Seeker extends CI_Controller {
     			if($this->input->post('index')=="end" && !empty($_FILES['cand_img']['name']))
         		{	
         			$is_end = 1;
-    				$config['upload_path'] = APPPATH . '../'.$upload_path; // APPPATH means our application folder path.
+    				$config['upload_path'] = $upload_path; // APPPATH means our application folder path.
 				    $config['allowed_types'] = 'jpg|jpeg|png'; // Allowed tupes
 				    $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 				    $config['max_size']    = '1000'; // Maximum size - 1MB
@@ -146,7 +146,31 @@ class Job_Seeker extends CI_Controller {
                 		$_POST['cand_img'] = base_url().$upload_path.$upload_data['file_name']; 
                 		$old_file_path = $_POST['old_file_path'] ;
                 		$upload_error = 0;
-                		@unlink(APPPATH.'../'.$old_file_path);
+
+                		//newly added for thumbnail
+                		$candidate_thumb['image_library'] = 'gd2';
+						$candidate_thumb['source_image'] = $upload_path.$upload_data['file_name'];
+						$candidate_thumb['create_thumb'] = TRUE;
+						$candidate_thumb['maintain_ratio'] = TRUE;
+						$candidate_thumb['width']         = 180;
+						$candidate_thumb['height']       = 180;
+						$this->load->library('image_lib');
+						$this->image_lib->initialize($candidate_thumb);
+						// Resize operation
+						if ( ! $this->image_lib->resize())
+						{
+							$upload_error = 1;
+							$data['error'] = 1;
+	                		$data['status'] = strip_tags($this->image_lib->display_errors()); 
+						}
+						$this->image_lib->clear();
+						$keyword = "uploads";
+	        			// To check whether the image path is cdn or local path
+				        if(strpos( $old_file_path , $keyword ) !== false && !empty($old_file_path) ) {
+	               			@unlink(APPPATH.'../'.$old_file_path);
+	               			$thumb_image = explode('.', end(explode('/',$old_file_path)));
+	               			@unlink(APPPATH.'../'.$upload_path.$thumb_image[0]."_thumb.".$thumb_image[1]);
+				        }	
   	            	}
     		      	else
             		{
