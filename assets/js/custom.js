@@ -3,10 +3,10 @@ function provider_inbox_ajax_message_count(url,id,csrf){    var messagecount = 
     //Field change for Others option - Added by Akila
     $('.on_others_act').on('change', function() {
     	if ( this.value == 'others'){
-    		$(this).parents('.form-group').find('.others_txt_field').show();
+    		$(this).parents('.form-group').find('.others_txt_field').show();    		$('.others_txt_field').addClass('form_inputs');
       	}
   		else{
-	        $(this).parents('.form-group').find('.others_txt_field').hide();
+	        $(this).parents('.form-group').find('.others_txt_field').hide();	        $('.others_txt_field').removeClass('form_inputs');
       	}
     });
     
@@ -18,10 +18,10 @@ function provider_inbox_ajax_message_count(url,id,csrf){    var messagecount = 
    });
    if ($.inArray('others', options) != -1)
 		{
-		    $(this).parents('.form-group').find('.others_txt_field').show();
+		    $(this).parents('.form-group').find('.others_txt_field').show();		    $('.others_txt_field').addClass('form_inputs');
 		}
 		else{
-		   $(this).parents('.form-group').find('.others_txt_field').hide();	
+		   $(this).parents('.form-group').find('.others_txt_field').hide();			   $('.others_txt_field').removeClass('form_inputs');
 		}
 	});
 	

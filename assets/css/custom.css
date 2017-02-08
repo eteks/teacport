@@ -1494,11 +1494,15 @@ label.form-input-error {
 	line-height: 45px;
 }
 /* Premium adds */
+#myCarousel {
+	height: auto;
+	width: 100%;
+}	
 .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
+   .carousel-inner > .item > a > img {
       width: 100%;
       margin: auto;
-      height: 300px;
+      height: 380px;
 }
 .tr_latest_updates .Heading-title {
 	margin-bottom: 25px;
@@ -1766,7 +1770,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 /* For Other field option */
 .others_txt_field{
 	margin-top: 10px;
-}	
+}
+
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
