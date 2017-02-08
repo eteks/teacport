@@ -376,7 +376,12 @@ class Job_seeker extends CI_Controller {
 				if($checkvaliduser['valid_status'] === 'valid') {
 					$this->session->set_userdata("login_status", TRUE);
 					$this->session->set_userdata("login_session",$checkvaliduser);
-					redirect('seeker/dashboard');
+					if($this->input->get('redirect')) {
+						redirect(base_url().$this->input->get('redirect'));
+					}
+					else {
+						redirect('seeker/dashboard');
+					}
 				}
 				else{
 					$fb['captcha'] = $this->captcha->main();
@@ -384,7 +389,7 @@ class Job_seeker extends CI_Controller {
 					$fb['reg_server_msg'] = 'Invalid login Details!';	
 					$fb['error'] = 1;
    					$fb['fbloginurl'] = $common->facebookloginurl_seeker();
-					$data['institutiontype'] = $this->common_model->get_institution_type();
+					$fb['institutiontype'] = $this->common_model->get_institution_type();
 					$this->load->view('job-seekers-login',$fb);
 				}
 			}
@@ -1135,7 +1140,10 @@ class Job_seeker extends CI_Controller {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();	
 		if(!isset($session_data['login_session']) || empty($session_data['login_session']) || $session_data['login_session']['user_type'] != 'seeker') {
-     		redirect('login/seeker');
+			if($this->uri->segment(2) == "vacancy_details")
+     			redirect('login/seeker?redirect='.$this->uri->uri_string());
+     		else 
+     			redirect('login/seeker');
      	}
      	$data['provider_values'] = $this->common_model->get_provider_details();
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');

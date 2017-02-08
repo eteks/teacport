@@ -165,7 +165,6 @@ class Job_provider extends CI_Controller {
 				
 			}
 		}
-
 	}
 	public function reload_captcha()
 	{
@@ -1020,13 +1019,14 @@ class Job_provider extends CI_Controller {
 						if($ads_status == "success")
 						{
 							$admin_det = $this->common_model->admin_details();
+							$email_data['ads_details'] = $this->job_provider_model->ads_organization($this->input->post('provider_ad_title'));
 							// Email configuration
 							$this->config->load('email', true);
 							$emailsetup = $this->config->item('email');
 							$this->load->library('email', $emailsetup);
 							$from_email = $emailsetup['smtp_user'];
 							$subject = 'Ad Details';
-							$message = "Ad posted.";
+							$message = $this->load->view('email_template/new_ads', $email_data, TRUE);
 							$this->email->initialize($emailsetup);	
 							$this->email->from($from_email, 'Teacher Recruit');
 							$this->email->to($admin_det['admin_user_email']);
@@ -1034,7 +1034,6 @@ class Job_provider extends CI_Controller {
 							$this->email->message($message);
 							/* Check whether mail send or not*/
 							$this->email->send();
-
 							$data['premiumad_server_msg'] = 'Advertisement Uploaded Successfully. Ads will be flashed soon after administrator approval.';
 							$data['error'] = 2;
 							$this->load->view('company-dashboard-post-adds',$data);

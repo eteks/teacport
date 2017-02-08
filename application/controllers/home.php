@@ -62,6 +62,15 @@ class Home extends CI_Controller {
 	}
 	public function aboutus()
 	{
+// 		$this->load->library('pdf');
+// $pdf = $this->pdf->load();
+// $html=$this->load->view('user_resume',null,true);
+// $pdf->WriteHTML($html);
+
+// // write the HTML into the PDF
+// $output = 'templated_resume' . date('Y_m_d_H_i_s') . '_.pdf';
+// $pdf->Output("$output", 'I');
+// $this->load->view('user_resume');
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$this->load->view('aboutus',$data);
 	}

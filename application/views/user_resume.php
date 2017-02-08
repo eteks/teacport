@@ -143,7 +143,8 @@ h4{
     }
 }
 .resume-block .resume-sub-title span {
-    border: 1px solid #e1e1e1;
+    /*border: 1px solid #e1e1e1;*/
+    border: 1px solid red;
     padding: 15px 30px;
     -webkit-border-radius: 3px !important;
     -moz-border-radius: 3px !important;
