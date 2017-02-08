@@ -88,7 +88,7 @@
 							<div class="col-sm-3 nopadding">
 								<?php 
 		                    	echo form_open('provider/payment','id="provider_subscription_form"');
-								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>$organization['registrant_name']));
+								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>(isset($organization['registrant_name']) && !empty($organization['registrant_name']))?$organization['registrant_name'] : $organization['organization_name']));
 								echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
 								echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
 								echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
@@ -157,12 +157,11 @@
 	               	<!-- Pricing Table -->  
 					<!--Pricing-->
 					<?php 
-					if(isset($secutiy_msg)) echo "<div class='subscribe_secure_msg'>$secutiy_msg </div>"; 
                     if((!empty($subscription_upgrade_plan) && !empty($organization_chosen_plan)) || (!empty($subscription_upgrade_plan) && !empty($chosen_plan))) :
                     	$current = 0;
-						// If the user already subscripe display current plan or 
+						// If the user already subscripe display current plan or not
 		                $key = trim((isset($organization_chosen_plan['subscription_id']) && !empty($organization_chosen_plan['subscription_id']))?array_search($organization_chosen_plan['subscription_id'], array_column($subscription_upgrade_plan, 'sub_id')):'');
-
+		                $original = $key;
 		            	if((!empty($organization_chosen_plan['subscription_id']) && trim($chosen_plan) == $organization_chosen_plan['subscription_id']) || (trim($chosen_plan) == '' && $key!='')){
 		            		$current = 1;
 		            	}
@@ -192,10 +191,10 @@
 	                                				<?php 	
 	                                				$start_date = date_create($organization_chosen_plan['org_sub_validity_end_date']);
 	                                   				$days = date_diff(date_create(date('Y-m-d')),$start_date);
-	                                				if($days->invert == 0 && $days->d > 1) {
+	                                				if($days->invert == 0 && $days->days > 1) {
 	                                					echo "Remaining ".$days->days." days";
 	                                				}
-	                                				else if($days->invert == 0 && $days->d == 1){
+	                                				else if($days->invert == 0 && $days->days == 1){
 														echo "Remaining ".$days->days." day";
 	                                				}
 	                                				else if($days->invert == 0 && $days->days == 0){
@@ -235,9 +234,8 @@
 												</ul>
 			                                </div>
 		                            	</div>
-		                            	
 		                        	</div>
-		                        	<div class="make_payment_option"> <a class="subs_button prem_select <?php if($current == 1) echo "disabled"; ?>" data-option="original" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>" >Make Payment</a> </div>
+		                        	<div class="make_payment_option"> <a class="subs_button prem_select <?php if($original !='') echo "disabled"; ?>" data-option="original" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>" >Make Payment</a> </div>
 		                        </div> 
 		                        <div class="col-md-4 col-sm-6 col-xs-12 plan_selection <?php if($current == 1 && $organization_chosen_plan['status'] == 1) echo "active"; ?>">
 		                        	<div class="price_ui_box subscribe_plan">
@@ -260,13 +258,13 @@
 	                                				$start_date = date_create($organization_chosen_plan['org_sub_validity_end_date']);
 	                                   				$days = date_diff(date_create('today'),$start_date);
 
-	                                				if($days->invert == 0 && $days->d > 1) {
-	                                					echo "For Next ".$days->d." days";
+	                                				if($days->invert == 0 && $days->days > 1) {
+	                                					echo "For Next ".$days->days." days";
 	                                				}
-	                                				else if($days->invert == 0 && $days->d == 1){
-														echo "For Next ".$days->d." day";
+	                                				else if($days->invert == 0 && $days->days == 1){
+														echo "For Next ".$days->days." day";
 	                                				}
-	                                				else if($days->invert == 0 && $days->d == 0){
+	                                				else if($days->invert == 0 && $days->days == 0){
 	                                					$renewal = 1;
 														echo "Last day";
 	                                				}
@@ -287,16 +285,33 @@
                                             }
                                             ?>
 			                                <div class="cost_plan">
-                                            <!-- <?php
+                                            <?php
                                             $available = 0;
-                                            if(!empty($subscription_upgrade_plan[$key]['upgrade_options'])) :
+	                                        if(!empty($subscription_upgrade_plan[$key]['upgrade_options'])) :
                                             foreach ($subscription_upgrade_plan[$key]['upgrade_options'] as $up_key => $val) :
                                             ?>
 			                                	<?php
 			                                	if(!empty($val['upgrade_id']) && $val['upgrade_status']==1) {
 			                                	$available = 1;
 			                                	?>
-			                                	Per <?php echo ucfirst($val['upgrade_options']); ?>: <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_sms" data-minvalue="<?php echo $val['upgrade_min_allowed']; ?>" data-maxvalue="<?php echo $val['upgrade_max_allowed']; ?>"> <?php echo $val['upgrade_price']; ?> </span>;
+			                                	<?php
+			                                	if($val['upgrade_options'] == "sms") {
+			                                	?>
+			                                	<div class="sms_icon icon_box_common" data-toggle="sms_icon_tooltip" title="Cost Per SMS"><i class="glyphicon glyphicon-comment"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_sms" data-minvalue="<?php echo $val['upgrade_min_allowed']; ?>" data-maxvalue="<?php echo $val['upgrade_max_allowed']; ?>"><?php echo $val['upgrade_price']; ?></span></div> 
+			                                	<?php
+			                                	}
+			                                	else if ($val['upgrade_options'] == "email") {
+			                                	?>
+			                                	<div class="email_icon icon_box_common" data-toggle="email_icon_tooltip" title="Cost per Email"> <i class="glyphicon glyphicon-envelope"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_email" data-minvalue="<?php echo $val['upgrade_min_allowed']; ?>" data-maxvalue="<?php echo $val['upgrade_max_allowed']; ?>"><?php echo $val['upgrade_price']; ?></span></br></div>
+			                                	<?php
+			                                	}
+			                                	else if ($val['upgrade_options'] == "resume") {
+			                                	?>
+			                                	<div class="resume_icon icon_box_common" data-toggle="resume_icon_tooltip" title="Cost per Resume Download"> <i class="glyphicon glyphicon-cloud-download"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_resume" data-minvalue="<?php echo $val['upgrade_min_allowed']; ?>" data-maxvalue="<?php echo $val['upgrade_max_allowed']; ?>"><?php echo $val['upgrade_price']; ?></span></div>
+
+			                                	<?php
+			                                	}	
+			                                	?>
 			                                	<?php
 			                                	}
 			                                	?>
@@ -307,11 +322,8 @@
 			                                	$upgrade_options = 0;
 			                                	echo "No options available";
 			                                endif;
-			                                ?> -->
-					                             <div class="sms_icon icon_box_common" data-toggle="sms_icon_tooltip" title="Cost Per SMS"><i class="glyphicon glyphicon-comment"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_sms">10</span></div> 
-					                             <div class="email_icon icon_box_common" data-toggle="email_icon_tooltip" title="Cost per Email"> <i class="glyphicon glyphicon-envelope"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_email">20 </span></br></div>
-					                             <div class="resume_icon icon_box_common" data-toggle="resume_icon_tooltip" title="Cost per Resume Download"> <i class="glyphicon glyphicon-cloud-download"></i> : <i class="fa fa-inr" aria-hidden="true"></i><span id="cost_per_resume">10</span></div>
-			                            	</div>
+			                                ?>
+					                      	</div>
 			                                <div class="sms_block common_box">              	
 			                                	<input class="subs_input_val_upgact1 sms_count" type="text" disabled="disabled" data-toggle="sms_tooltip" title="No of sms you have selected"/>
 			                                	<!-- <i class="glyphicon glyphicon-comment"></i> -->
@@ -329,7 +341,7 @@
 			                                </div>
 			                                <div class="cb"></div>
 			                                <div class="price-features text-center price2">
-			                                    <ul class="subs_count_act <?php if($current == 0) echo "disabled1"; ?>">
+			                                    <ul class="subs_count_act <?php if($current == 0) echo "disabled"; ?>">
 													<!-- <li>Max No of vacancy Posts: 20</li> -->
 													<?php
 													$upgrade_array = array_column($subscription_upgrade_plan[$key]['upgrade_options'],'upgrade_options');

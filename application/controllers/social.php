@@ -94,7 +94,7 @@ class Social extends CI_Controller {
 			$fbdata = array(
 				'registrant_email_id' => $profile['email'],
 				'registrant_name' => $profile['name'],
-				'provider_image_path' => $profile['picture']['url'],
+				'registrant_logo' => $profile['picture']['url'],
 				'registrant_register_type' => 'facebook'
 			);
 			if($this->job_provider_model->social_authendication_registration($fbdata) === 'inserted')

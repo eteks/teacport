@@ -10,7 +10,12 @@
                     			Let's Get Started
                             	<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                             </div><br>
-                            <?php echo form_open('signup/seeker','id="form" class="reg_login_form"'); ?>
+                            <?php 
+                                if($this->input->get('redirect'))
+                                    echo form_open('signup/seeker?redirect='.$this->input->get('redirect'),'id="form" class="reg_login_form"'); 
+                                else 
+                                    echo form_open('signup/seeker','id="form" class="reg_login_form"'); 
+                                ?>
                                 <?php 
                                 if(isset($error)) :
                                     if($error == 2) {
@@ -117,7 +122,12 @@
                     <div class="loginbox-title kaushanscript_font_title">
                       	Job Seekers Login<a class="pull-right" href="<?php echo base_url();?>"><i class="fa fa-close"></i></a>
                     </div>
-                    <?php echo form_open('login/seeker/', 'id="seeker_login_form" class="seeker_login_form reg_login_form form-group"'); ?>
+                    <?php
+                    if($this->input->get('redirect'))
+                    echo form_open('login/seeker?redirect='.$this->input->get('redirect'), 'id="seeker_login_form" class="seeker_login_form form-group reg_login_form"'); 
+                    else 
+                    echo form_open('login/seeker/', 'id="seeker_login_form" class="seeker_login_form form-group reg_login_form"'); 
+                    ?>
                     	<?php 
 	                    if(isset($error)) :
     		                if($error == 2) {
