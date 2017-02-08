@@ -463,6 +463,9 @@ class Job_seeker_model extends CI_Model {
 
 	// Edit profile updation
 	public function editprofile_validation($data=array()) {
+
+
+
 		if(!$this->input->post('cand_fresh')) {
 			$fresh = 0 ;
 		}
@@ -516,7 +519,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_district_id' => $data['cand_native_dis'],
 								'candidate_state_id' => $data['cand_native_state'],						
 								'candidate_mother_tongue' => $data['cand_mother_ton'],
-								'candidate_language_known' => implode(',',$data['cand_known_lan']),
+								'candidate_language_known' => implode(',',$data['cand_known_lan_new']),
 								'candidate_nationality' => $data['cand_nation'],
 								'candidate_religion' => $data['cand_religion'],
 								'candidate_community' => $data['cand_communal'],
@@ -534,7 +537,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_tet_exam_status' => $data['cand_tet'],
 								'candidate_profile_completeness' => $pro_com,
 								// 'candidate_interest_subject_id' => $data['cand_int_sub'],
-								'candidate_extra_curricular_id' => implode(',', $data['cand_extra_cur']),
+								'candidate_extra_curricular_id' => implode(',', $data['cand_extra_cur_new']),
 								'candidate_is_fresher' => $fresh,
 								);
 				$this->db->set($profile_update_data);
@@ -545,11 +548,11 @@ class Job_seeker_model extends CI_Model {
 				// Updation in preference table
 				$prefrence_update_data = array(
 											'candidate_profile_id' => $data['cand_pro'],
-											'candidate_posting_applied_for' => implode(',',$data['cand_posts']),
+											'candidate_posting_applied_for' => implode(',',$data['cand_posts_new']),
 											'candidate_expecting_start_salary' => $data['cand_start_sal'],
 											'candidate_expecting_end_salary' => $data['cand_end_sal'],
 											'candidate_willing_class_level_id' => implode(',',$data['cand_class']),
-											'candidate_willing_subject_id' => implode(',',$data['cand_sub'])
+											'candidate_willing_subject_id' => implode(',',$data['cand_sub_new'])
 											);
 				if(!empty($data['cand_pre'])) {
 					$this->db->set($prefrence_update_data);

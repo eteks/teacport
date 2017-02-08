@@ -18,9 +18,12 @@ class Payu extends CI_Controller {
 		$input['subcription_plan'] = $this->common_model->subcription_plan();
 		$input['organization_chosen_plan'] = $this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$input['organization']['organization_id']);
 		$data = $this->input->post();
+
+
 		// To check empty field or not
 		if($data['udf1']!='' && $data['udf2']!='' && ($data['plan_option']=="original" || $data['plan_option']=="upgrade" || $data['plan_option']=="renewal")  && $data['amount'] > 0) {
-			// New plan selection or renewal plan selection - start
+
+			// New plan selection - start
 			if(!in_array($data['udf2'],array_column($input['subcription_plan'],'subscription_id')) && $data ['plan_option']!="upgrade") {
 				$this->session->set_userdata('subscription_status',"Your chosen plan not available now. Please try another plan");
 				redirect('provider/subscription');
@@ -47,7 +50,10 @@ class Payu extends CI_Controller {
 					$proper = 1;
 				}
 			}
-			// Upgrade plan - end
+
+
+
+		// Upgrade plan - end
 		}
 		else {
 			$this->session->set_userdata('subscription_status',"Something went wrong. Please try againg with correct details");
