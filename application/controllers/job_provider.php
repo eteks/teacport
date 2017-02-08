@@ -1013,6 +1013,22 @@ class Job_provider extends CI_Controller {
 						$ads_status = $this->job_provider_model->organization_premiun_ad_upload($premium_ad_data);
 						if($ads_status == "success")
 						{
+							$admin_det = $this->common_model->admin_details();
+							// Email configuration
+							$this->config->load('email', true);
+							$emailsetup = $this->config->item('email');
+							$this->load->library('email', $emailsetup);
+							$from_email = $emailsetup['smtp_user'];
+							$subject = 'Ad Details';
+							$message = "Ad posted.";
+							$this->email->initialize($emailsetup);	
+							$this->email->from($from_email, 'Teacher Recruit');
+							$this->email->to($admin_det['admin_user_email']);
+							$this->email->subject($subject);
+							$this->email->message($message);
+							/* Check whether mail send or not*/
+							$this->email->send();
+
 							$data['premiumad_server_msg'] = 'Advertisement Uploaded Successfully. Ads will be flashed soon after administrator approval.';
 							$data['error'] = 2;
 							$this->load->view('company-dashboard-post-adds',$data);
@@ -1080,6 +1096,8 @@ class Job_provider extends CI_Controller {
 									'error_message' 			=> $this->input->post('error_Message'),
 								);
 			if($this->job_provider_model->subscription_transaction_data($transaction_data) && $this->input->post('status')==='success'){
+				$email_data['organization_name'] = $data['organization']['organization_name'];
+				$mail_id = $data['organization']['registrant_email_id'];
 				$transaction_id = $this->db->insert_id();
 				if($options['plan_option'] != "upgrade") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
@@ -1109,6 +1127,21 @@ class Job_provider extends CI_Controller {
 					
 						if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
 							if($options['plan_option'] == "renewal") {
+								$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+								// Email configuration
+								$this->config->load('email', true);
+								$emailsetup = $this->config->item('email');
+								$this->load->library('email', $emailsetup);
+								$from_email = $emailsetup['smtp_user'];
+								$subject = 'Subscription Details';
+								$message = $this->load->view('email_template/renewal', $email_data, TRUE);
+								$this->email->initialize($emailsetup);	
+								$this->email->from($from_email, 'Teacher Recruit');
+								$this->email->to($mail_id);
+								$this->email->subject($subject);
+								$this->email->message($message);
+								/* Check whether mail send or not*/
+								$this->email->send();
 								$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
 								$user_renewal_data = array(
 													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
@@ -1126,6 +1159,21 @@ class Job_provider extends CI_Controller {
 								}
 							}
 							else {
+								$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+								// Email configuration
+								$this->config->load('email', true);
+								$emailsetup = $this->config->item('email');
+								$this->load->library('email', $emailsetup);
+								$from_email = $emailsetup['smtp_user'];
+								$subject = 'Subscription Details';
+								$message = $this->load->view('email_template/subscription', $email_data, TRUE);
+								$this->email->initialize($emailsetup);	
+								$this->email->from($from_email, 'Teacher Recruit');
+								$this->email->to($mail_id);
+								$this->email->subject($subject);
+								$this->email->message($message);
+								/* Check whether mail send or not*/
+								$this->email->send();
 								$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
 							}				
 							// $this->load->view('company-dashboard-subscription',$data);
@@ -1156,6 +1204,22 @@ class Job_provider extends CI_Controller {
 													'organization_subscription_status'				=> 1
 												);
 						if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
+							$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+							// Email configuration
+							$this->config->load('email', true);
+							$emailsetup = $this->config->item('email');
+							$this->load->library('email', $emailsetup);
+							$from_email = $emailsetup['smtp_user'];
+							$subject = 'Subscription Details';
+							$message = $this->load->view('email_template/upgrade', $email_data, TRUE);
+							$this->email->initialize($emailsetup);	
+							$this->email->from($from_email, 'Teacher Recruit');
+							$this->email->to($mail_id);
+							$this->email->subject($subject);
+							$this->email->message($message);
+							/* Check whether mail send or not*/
+							$this->email->send();
+
 							$user_upgrade_data = array(
 													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
 													'is_renewal' 									=> 0,

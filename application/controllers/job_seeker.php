@@ -1,6 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 require ('common.php');
 class Job_seeker extends CI_Controller {
+	private $callback_calls=0;
+	private $pos_callback_calls=0;
+	private $sub_callback_calls=0;
+	private $ext_callback_calls=0;
 	public function __construct()
     {
         parent::__construct();
@@ -49,55 +53,165 @@ class Job_seeker extends CI_Controller {
 
  	// To store other option value and get that value - Known Languages
  	function other_known_languages($val) {
+ 		$value = $this->callback_calls++;
  		// print_r($_POST['cand_known_lan']);
-//  		$value = array();
-
-//  		array_push($value,$val);
-
- 		
-//  		if(in_array('others',$value)) {
-//  			echo "tets";
-//  		}
-
-
-
-// $this->form_validation->set_message('other_known_languages', 'Entered %s other option is already inactive by Admin.');
-
-//  		return false;
- 		return TRUE;
- 		// if($val == "others" && $_POST['other_mother_tongue']!='') {
- 		// 	$array = array(
- 		// 					'language_name' => $_POST['other_mother_tongue'],
- 		// 					'is_mother_tangue' => 1,
- 		// 					'is_medium_of_instruction' => 0,
- 		// 					'language_status' => 2 // It means other option
- 		// 				);
- 		// 	$id = $this->common_model->insert_other_mother_tongue($array);
- 		// 	if($id == "active") {
- 		// 		$this->form_validation->set_message('other_mother_tongue', 'Entered %s other option is already exist.');
-	  //      		return FALSE;
- 		// 	}
- 		// 	if($id == "inactive") {
- 		// 		$this->form_validation->set_message('other_mother_tongue', 'Entered %s other option is already inactive by Admin.');
-	  //      		return FALSE;
- 		// 	}
- 		// 	else {
- 		// 		$_POST['cand_known_lan'] = $id;
- 		// 	}
- 		// }
- 		// else if($val == "others") {
-   // 			$this->form_validation->set_message('other_mother_tongue', 'The %s other option is required.');
-	  //      	return FALSE;
- 		// }
+		// // $value = array();
+		// // array_push($value,$val);
+ 		if(in_array('others',$_POST['cand_known_lan']) && $_POST['other_known_lang']!='' && $value == 0) {
+ 			$array = array(
+ 		 					'language_name' => $_POST['other_known_lang'],
+ 		 					'is_mother_tangue' => 0,
+ 		 					'is_medium_of_instruction' => 0,
+ 		 					'language_status' => 2 // It means other option
+ 		 				);
+ 		 	$id = $this->common_model->insert_other_mother_tongue($array);
+ 		 	if($id == "active") {
+ 				$this->form_validation->set_message('other_known_languages', 'Entered %s other option is already exist.');
+	       		return FALSE;
+ 			}
+ 			if($id == "inactive") {
+ 				$this->form_validation->set_message('other_known_languages', 'Entered %s other option is already inactive by Admin.');
+	       		return FALSE;
+ 			}
+ 			else {
+ 				$key = array_search('others', $_POST['cand_known_lan']);
+ 				if(trim($key) != '') {
+ 					$_POST['cand_known_lan'][$key] = $id;
+ 				}
+ 				$_POST['cand_known_lan_new'] = $_POST['cand_known_lan'];
+				return TRUE;
+ 			}
+ 		}
+ 		else if(in_array('others',$_POST['cand_known_lan']) && $value == 0) {
+   			$this->form_validation->set_message('other_known_languages', 'The %s other option is required.');
+	       	return FALSE;
+ 		}
+ 		else if($value == 0) {
+ 			$_POST['cand_known_lan_new'] = $_POST['cand_known_lan'];
+ 			return TRUE;
+ 		}
  	} 
 
- 	   
+ 	// To store other option value and get that value - Posting
+ 	function other_postings($val,$ins_id) {
+ 		$value = $this->pos_callback_calls++;
+ 		// print_r($_POST['cand_known_lan']);
+		// // $value = array();
+		// // array_push($value,$val);
+ 		if(in_array('others',$_POST['cand_posts']) && $_POST['other_posting']!='' && $value == 0) {
+ 			$array = array(
+ 		 					'posting_name' => $_POST['other_posting'],
+ 		 					'posting_institution_id' => $ins_id,
+ 		 					'posting_status' => 2, // It means other option
+ 		 				);
+ 		 	$id = $this->common_model->insert_other_posting($array);
+ 		 	if($id == "active") {
+ 				$this->form_validation->set_message('other_postings', 'Entered %s other option is already exist.');
+	       		return FALSE;
+ 			}
+ 			if($id == "inactive") {
+ 				$this->form_validation->set_message('other_postings', 'Entered %s other option is already inactive by Admin.');
+	       		return FALSE;
+ 			}
+ 			else {
+ 				$key = array_search('others', $_POST['cand_posts']);
+ 				if(trim($key) != '') {
+ 					$_POST['cand_posts'][$key] = $id;
+ 				}
+ 				$_POST['cand_posts_new'] = $_POST['cand_posts'];
+				return TRUE;
+ 			}
+ 		}
+ 		else if(in_array('others',$_POST['cand_posts']) && $value == 0) {
+   			$this->form_validation->set_message('other_postings', 'The %s other option is required.');
+	       	return FALSE;
+ 		}
+ 		else if($value == 0) {
+ 			$_POST['cand_posts_new'] = $_POST['cand_posts'];
+ 			return TRUE;
+ 		}
+ 	} 
 
+ 	function other_subjects($val,$ins_id) {
+ 		$value = $this->sub_callback_calls++;
+ 		// print_r($_POST['cand_known_lan']);
+		// // $value = array();
+		// // array_push($value,$val);
+ 		if(in_array('others',$_POST['cand_sub']) && $_POST['other_subject']!='' && $value == 0) {
+ 			$array = array(
+ 		 					'subject_name' => $_POST['other_subject'],
+ 		 					'subject_institution_id' => $ins_id,
+ 		 					'subject_status' => 2, // It means other option
+ 		 				);
+ 		 	$id = $this->common_model->insert_other_subject($array);
+ 		 	if($id == "active") {
+ 				$this->form_validation->set_message('other_subjects', 'Entered %s other option is already exist.');
+	       		return FALSE;
+ 			}
+ 			if($id == "inactive") {
+ 				$this->form_validation->set_message('other_subjects', 'Entered %s other option is already inactive by Admin.');
+	       		return FALSE;
+ 			}
+ 			else {
+ 				$key = array_search('others', $_POST['cand_sub']);
+ 				if(trim($key) != '') {
+ 					$_POST['cand_sub'][$key] = $id;
+ 				}
+ 				$_POST['cand_sub_new'] = $_POST['cand_sub'];
+				return TRUE;
+ 			}
+ 		}
+ 		else if(in_array('others',$_POST['cand_sub']) && $value == 0) {
+   			$this->form_validation->set_message('other_subjects', 'The %s other option is required.');
+	       	return FALSE;
+ 		}
+ 		else if($value == 0) {
+ 			$_POST['cand_sub_new'] = $_POST['cand_sub'];
+ 			return TRUE;
+ 		}
+ 	}
 
+ 	function other_extracurriculars($val) {
+ 		$value = $this->ext_callback_calls++;
+ 		// print_r($_POST['cand_known_lan']);
+		// // $value = array();
+		// // array_push($value,$val);
+ 		if(in_array('others',$_POST['cand_extra_cur']) && $_POST['other_extracurricular']!='' && $value == 0) {
+ 			$array = array(
+ 		 					'extra_curricular' => $_POST['other_extracurricular'],
+ 		 					'extra_curricular_status' => 2, // It means other option
+ 		 				);
+ 		 	$id = $this->common_model->insert_other_extracurricular($array);
+ 		 	if($id == "active") {
+ 				$this->form_validation->set_message('other_extracurriculars', 'Entered %s other option is already exist.');
+	       		return FALSE;
+ 			}
+ 			if($id == "inactive") {
+ 				$this->form_validation->set_message('other_extracurriculars', 'Entered %s other option is already inactive by Admin.');
+	       		return FALSE;
+ 			}
+ 			else {
+ 				$key = array_search('others', $_POST['cand_extra_cur']);
+ 				if(trim($key) != '') {
+ 					$_POST['cand_extra_cur'][$key] = $id;
+ 				}
+ 				$_POST['cand_extra_cur_new'] = $_POST['cand_extra_cur'];
+				return TRUE;
+ 			}
+ 		}
+ 		else if(in_array('others',$_POST['cand_extra_cur']) && $value == 0) {
+   			$this->form_validation->set_message('other_extracurriculars', 'The %s other option is required.');
+	       	return FALSE;
+ 		}
+ 		else if($value == 0) {
+ 			$_POST['cand_extra_cur_new'] = $_POST['cand_extra_cur'];
+ 			return TRUE;
+ 		}
+ 	}
+ 	
  	
 
-
- 	// Alpha with white space
+	// Alpha with white space
  	public function alpha_dash_space($provider_job_title){
 		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
 			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
@@ -569,15 +683,15 @@ class Job_seeker extends CI_Controller {
     	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
     	$data['mother_language_values'] = $this->common_model->mother_tongue(1);
     	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
-    	$data['known_languages'] = $this->common_model->all_languages();
-    	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type']);
+    	$data['known_languages'] = $this->common_model->all_languages(1);
+    	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type'],1);
     	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
-    	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type'],1);
     	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
     	$data['education_values'] = $this->job_seeker_model->get_seeker_education_details($session['login_session']['candidate_id']);
     	$data['department_values'] = $this->common_model->get_department_details();
     	$data['board_values'] = $this->common_model->get_board_details();
-    	$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details();
+    	$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
     	$data['experience_values'] = $this->job_seeker_model->get_seeker_experience_details($session['login_session']['candidate_id']);
 
     	$data['edit_profile_visible_status'] = 1;
@@ -598,6 +712,7 @@ class Job_seeker extends CI_Controller {
 
 	// Job Seeker Edit Profile Validation - ajax
 	public function edit_profile_validation_ajax() {
+		$session = $this->session->all_userdata();
    		$action = "update"	;
    		// Experience Validation
    		if(!$this->input->post('cand_fresh')) {
@@ -625,11 +740,11 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_communal', 'label' => 'Community','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_phy', 'label' => 'Physical Challenge Status','rules' => 'required|trim|xss_clean'),
 
-			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean|callback_other_postings['.$session['login_session']['candidate_institution_type'].']'),
 			array('field' => 'cand_start_sal', 'label'=> 'Minimum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]'),
 			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('cand_start_sal').']' ),
 			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
-			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean'),
+			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean|callback_other_subjects['.$session['login_session']['candidate_institution_type'].']'),
 
 		   	array('field' => 'cand_qual[]', 'label' => 'Education Qualification','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_yop[]', 'label' => 'Education Year Of Passing','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4}$/]'),
@@ -639,7 +754,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|maxlength[5]|callback_numeric_dot'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
-	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|required|xss_clean'),
+	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|required|xss_clean|callback_other_extracurriculars'),
 			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'trim|xss_clean'),
