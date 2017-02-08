@@ -486,7 +486,7 @@ class Common_model extends CI_Model {
 
 	// Organization Logo
 	public function get_provider_details() {
-		$this->db->select('organization_logo,organization_name');
+		$this->db->select('organization_logo,organization_name,organization_id');
 		$this->db->from('tr_organization_profile');
 		$this->db->where('organization_status','1');
 		$org_data = $this->db->get()->result_array();

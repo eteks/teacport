@@ -991,10 +991,15 @@ class Job_provider extends CI_Controller {
 			        $provider_premium_ad['upload_path'] 		= './uploads/jobprovider/premiumad';
 					$provider_premium_ad['allowed_types'] 		= 'jpg|png|jpeg';
 					$provider_premium_ad['max_size']     		= '2048';
-					$provider_premium_ad['min_width'] 			= '800';
-					$provider_premium_ad['min_height'] 			= '300';
+
+
+					
 					$provider_premium_ad['max_width'] 			= '1268';
 					$provider_premium_ad['max_height'] 			= '768';
+					$provider_premium_ad['min_width'] 			= '800';
+					$provider_premium_ad['min_height'] 			= '300';
+
+
 					$provider_premium_ad['encrypt_name'] 		= TRUE;
 					$provider_premium_ad['file_ext_tolower'] 	= TRUE;
 					$this->load->library('upload', $provider_premium_ad);

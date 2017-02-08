@@ -88,7 +88,7 @@
 							<div class="col-sm-3 nopadding">
 								<?php 
 		                    	echo form_open('provider/payment','id="provider_subscription_form"');
-								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>$organization['registrant_name']));
+								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>(isset($organization['registrant_name']) && !empty($organization['registrant_name']))?$organization['registrant_name'] : $organization['organization_name']));
 								echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
 								echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
 								echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
