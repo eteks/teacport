@@ -1775,8 +1775,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 	margin: 5px auto !important;
 }	
 #org_profile_name{
-	line-height: 20px !important;
+	line-height: 17px !important;
 	max-width: 210px;
+	margin: 5px 0 0;
 }	
 /* Testimonils*/
 .owl-testimonial-2 .single_testimonial{
