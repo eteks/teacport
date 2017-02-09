@@ -41,19 +41,20 @@
 							        	$thumb = $user_type['provider_image_path'];
 							        }              			
     							?>
-        						<img src="<?php echo $thumb; ?>" alt="user-img" class="img-circle" width="36" />
+        						<img src="<?php echo $thumb; ?>" alt="user-img" class="img-circle pull-left" width="36" />
 							    <?php
 							    else :
 							    ?>
-								<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle" width="36">
+								<img src="<?php echo base_url().'assets/images/admin.jpg' ;?>" alt="user-img" class="img-circle pull-left" width="36">
 								<?php
 							    endif;
 							    ?>	
-			                    <span class="hidden-xs hidden-sm">
+			                    <span id="org_profile_name" class="hidden-xs hidden-sm pull-right">
 			                    <?php 
 			                    echo !empty($user_type['registrant_name'])?$user_type['registrant_name']:(isset($user_type['organization_name'])?$user_type['organization_name']:'') ; ?> 
-			                    </span>
 			                    <i class="fa fa-angle-down fa-indicator"></i> 
+			                    </span>
+			                    <div class="clearfix"></div>
 			                </a>
 				            <ul class="drop-down-multilevel left-side">
 				                <li><a href="<?php echo base_url(); ?>provider/dashboard"><i class="fa fa-user"></i> Dashboard</a></li>

@@ -1497,11 +1497,11 @@ label.form-input-error {
 	height: auto;
 	width: 100%;
 }	
-.carousel-inner > .item > img,
-   .carousel-inner > .item > a > img {
+#myCarousel .carousel-inner > .item > img,
+#myCarousel .carousel-inner > .item > a > img {
       width: 100%;
       margin: auto;
-      height: 380px;
+      height: 300px;
 }
 .tr_latest_updates .Heading-title {
 	margin-bottom: 25px;
@@ -1770,7 +1770,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .others_txt_field{
 	margin-top: 10px;
 }
-
+/* For Dashboard user Profile pic*/
+.menu-links .profile-pic{
+	margin: 5px auto !important;
+}	
+#org_profile_name{
+	line-height: 20px !important;
+	max-width: 210px;
+}	
+/* Testimonils*/
+.owl-testimonial-2 .single_testimonial{
+	height: 350px !important;
+}
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
