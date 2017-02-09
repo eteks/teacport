@@ -126,7 +126,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 			                   								<tr>
 			                   									<td class="showtooltip">
 			                   										<?php echo $value['upgrade_options']; ?><span class="arrow_right"></span>
-			                   										<span class="info_tooltip">SMS</span>
+			                   										<span class="info_tooltip">Plan</span>
 			                   									</td>
 			                   									<td class="showtooltip">
 			                   										<?php echo $value['upgrade_price']; ?>
