@@ -990,16 +990,11 @@ class Job_provider extends CI_Controller {
 				if (!empty($_FILES['provider_premium_ad_image']['name'])){
 			        $provider_premium_ad['upload_path'] 		= './uploads/jobprovider/premiumad';
 					$provider_premium_ad['allowed_types'] 		= 'jpg|png|jpeg';
-					$provider_premium_ad['max_size']     		= '2048';
-
-
-					
+					$provider_premium_ad['max_size']     		= '2048';	
 					$provider_premium_ad['max_width'] 			= '1268';
 					$provider_premium_ad['max_height'] 			= '768';
-					$provider_premium_ad['min_width'] 			= '800';
-					$provider_premium_ad['min_height'] 			= '300';
-
-
+					// $provider_premium_ad['min_width'] 			= '800';
+					// $provider_premium_ad['min_height'] 			= '300';
 					$provider_premium_ad['encrypt_name'] 		= TRUE;
 					$provider_premium_ad['file_ext_tolower'] 	= TRUE;
 					$this->load->library('upload', $provider_premium_ad);
@@ -1068,6 +1063,7 @@ class Job_provider extends CI_Controller {
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$check_validity = $this->job_provider_model->check_subscription_validity(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 
 		$server_msg = $this->session->userdata('subscription_status');
@@ -1416,6 +1412,24 @@ class Job_provider extends CI_Controller {
 				$data['status'] = "failure";
 				$data['subscribe_details'] = $status['subscribe_details'];
 				echo json_encode($data);
+			}
+		}
+		else{
+			redirect('missingpage');
+		}
+	}
+	public function templated_resume() {
+		if($this->uri->segment(3) && $this->uri->segment(4)){
+			$candidate_det = $this->job_seeker_model->candidate_profile_by_id($this->uri->segment(3));
+			$org_id = $this->uri->segment(4);
+			$candidate_id = $this->uri->segment(3);	
+			$status = $this->job_provider_model->provider_templated_resume_download_update($candidate_id,$org_id);
+			if($status == 2) {
+				$this->load->helper('pdf_helper');
+				$this->load->view('user_resume', $data);
+			}
+			else {
+				echo "No download count";
 			}
 		}
 		else{

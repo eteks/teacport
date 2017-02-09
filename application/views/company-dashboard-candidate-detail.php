@@ -491,18 +491,20 @@ function ajax_resume_download(id) {
  	});
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
 
 	/* error popup - added by Akila */
 	$('.candidate_email,.candidate_sms,.candidate_resume').on('click',function() {
 		var error = 0;
+		var url = '<?php echo base_url(); ?>';
 		var id =  parseInt($(this).attr('candidate-id'));
+		var org_id = <?php echo $organization['organization_id']; ?>;
 		var name = $(this).data('name');
 		if(!$(this).attr('href')) {
     		var error = 1;
     	}
     	if(id && error ==1 && (name == "sms" || name == "email" || name == "resume" || name == "template_resume")) {
-    		if(name == "template_resume") {
+    		if(name == "template_resume" || name == "resume") {
     			var msg= "Are you sure want to proceed. It will be reduce your resume count ?";
     		}
     		else {
@@ -516,7 +518,8 @@ $(document).ready(function(){
 				ajax_email_send(id);
 			}
 			else if(name == "template_resume") {
-				alert("test");
+				window.open (url+"provider/templated_resume_download/"+id+"/"+org_id);
+				location.reload();
 			}
 			else {
 				ajax_resume_download(id);
