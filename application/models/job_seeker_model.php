@@ -133,6 +133,19 @@ class Job_seeker_model extends CI_Model {
 		$existuser = $this->db->get()->row_array();
 		return $existuser; 
 	} 
+
+	// public function get_candidate_resume_data($id)
+	// {
+	// 	$this->db->select('*');    
+	// 	$this->db->from('tr_candidate_profile cp');
+	// 	$this->db->join('tr_institution_type it', 'cp.candidate_institution_type = it.institution_type_id','inner');
+	// 	$this->db->join('tr_district d', 'tr_candidate_profile.candidate_district_id = tr_district.district_id','left');
+	// 	$this->db->join('tr_state', 'cp.district_state_id = tr_state.state_id','left');
+	// 	$where = "(tr_candidate_profile.candidate_id='".$id."' AND tr_candidate_profile.candidate_status='1')";
+	// 	$this->db->where($where);
+	// 	$existuser = $this->db->get()->row_array();
+	// 	return $existuser; 
+	// } 
 	// public function get_cand_data_by_mail($email)
 	// {
 	// 	$this->db->select('*');    
@@ -238,6 +251,8 @@ class Job_seeker_model extends CI_Model {
 							);
 		return $model_data;
 	}
+
+
 
 	// public function job_seeker_find_job_counts($ins_id)
 	// {

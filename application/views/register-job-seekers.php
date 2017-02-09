@@ -32,21 +32,25 @@
 			                        <?php echo ('<div class="form-group"> <label>Institution<sup class="alert">*</sup></label> <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
 			                        <?php
 			                        foreach ($institutiontype as $institution) {
-			                            echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
+                                        if(set_value('candidate_institution_type') == $institution['institution_type_id'] ) :
+                                            echo "<option value=".$institution['institution_type_id']." selected>".$institution['institution_type_name']."</option>";
+                                        else :
+                                            echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
+                                        endif;
 			                        }
 			                        echo('</div> </select>')
 			                        ?>
 			                        <div class="form-group">
 			                            <?php echo form_label('Name <sup class="alert">*</sup>'); ?> <?php echo form_error('candidate_name'); ?>
-			                        <?php echo form_input(array('id' => 'candidate_name','data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','class' => 'form-control form_inputs alpha_value', 'name' => 'candidate_name')); ?>
+			                        <?php echo form_input(array('id' => 'candidate_name','data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','class' => 'form-control form_inputs alpha_value', 'name' => 'candidate_name','value'=>set_value('candidate_name'))); ?>
 			                        </div>
 			                        <div class="form-group">
 			                            <?php echo form_label('Email <sup class="alert">*</sup>'); ?>
-			                        	<?php echo form_input(array('id' => 'candidate_email','placeholder' => 'Email','class' => 'form-control form_inputs email_value', 'name' => 'candidate_email')); ?>
+			                        	<?php echo form_input(array('id' => 'candidate_email','placeholder' => 'Email','class' => 'form-control form_inputs email_value', 'name' => 'candidate_email','value'=>set_value('candidate_email'))); ?>
 		                            </div>
 		                            <div class="form-group">
 		                                <?php echo form_label('Mobile No.<sup class="alert">*</sup>'); ?> <?php echo form_error('candidate_mobile_no'); ?>
-		                            <?php echo form_input(array('id' => 'candidate_mobile_no','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','class' => 'form-control form_inputs numeric_value','name' => 'candidate_mobile_no')); ?>
+		                            <?php echo form_input(array('id' => 'candidate_mobile_no','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','class' => 'form-control form_inputs numeric_value','name' => 'candidate_mobile_no','value'=>set_value('candidate_mobile_no'))); ?>
 		                            </div>
 		                            <div class="form-group">
 										<?php echo form_label('Captcha'); echo form_error('captcha_value'); ?>
@@ -55,7 +59,7 @@
 		                            </div>
 		                            <div class="col-sm-6 captcha_holder nopadding captcha_des_act">
 		                            	<label>Enter captcha Value :<span class="alert">*</span></label>
-		                            	 <?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value')); ?>
+		                            	 <?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value','value'=>set_value('captcha_value'))); ?>
 		                            </div>
 			                        <div class="clearfix"> </div>
 			                    </div>    
