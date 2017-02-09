@@ -640,6 +640,47 @@ class Job_provider_model extends CI_Model {
 
 		return $data;
 	}
+    // Templated resume
+    public function provider_templated_resume_download_update($candidate_id,$org_id) {
+        $resume_where = '(candidate_id="'.$candidate_id.'")';
+        $cand_resume = $this->db->get_where('tr_candidate_profile',$resume_where)->row_array();
+        $checkquery = $this->db->get_where('tr_organization_activity', array(
+            'activity_organization_id' => $org_id,'activity_candidate_id' => $candidate_id
+        ));
+        $count = $checkquery->num_rows();
+        if ($count === 0) {
+            $this->db->insert('tr_organization_activity', array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id,'is_sms_sent'=>'0','is_email_sent'=>'0','is_resume_downloaded'=>'1'));
+        }
+        else{
+            $check_already = $checkquery->row_array();
+            $this->db->where(array('activity_organization_id'=>$org_id,'activity_candidate_id'=>$candidate_id));
+            $this->db->update('tr_organization_activity', array('is_resume_downloaded'=>'1'));
+        }
+        $valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+        $valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+        if($valid_count['organization_remaining_resume_download_count'] != 0) {
+            if($valid_count['organization_remaining_resume_download_count'] == 1) {
+                $resume_update_data = array(
+                                            "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
+                                            "is_resume_validity" => 0
+                                        );
+                }
+                else {
+                    $resume_update_data = array(
+                                                "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
+                                                "is_resume_validity" => 1
+                                                );
+                }
+        $this->db->where($valid_count_where);
+        $this->db->set($resume_update_data);
+        $this->db->update('tr_organization_subscription');
+        $error = 2; // If correct
+        }
+        else {
+            $error = 1; // If wrong
+        }
+        return $error;
+    }
 	public function provider_mail_send_update($candidate_id,$org_id,$vac_id){
 		$data['status'] = '';
 		// Store details in candidate inbox
@@ -756,7 +797,7 @@ class Job_provider_model extends CI_Model {
         $data = '';
         $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
         $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
-        if($check_already -> num_rows() > 1) {
+        if($check_already -> num_rows() == 1) {
             $plan_value = $check_already->row_array();
             $org_status = $plan_value['organization_subscription_status'];
             $start_date = date_create($plan_value['org_sub_validity_end_date']);
@@ -852,6 +893,25 @@ class Job_provider_model extends CI_Model {
         $this->db->order_by('a.premium_ads_id','desc');
         $model_data = $this->db->get()->row_array();
         return $model_data;
+    }
+
+    // Get Company full details with ads details
+    public function check_subscription_validity($id)
+    {
+        $where = '(organization_id="'.$id.'" and organization_subscription_status=1)';  
+        $data = $this->db->get_where('tr_organization_subscription',$where);
+        if($data -> num_rows() == 1) {
+            $data_array = $data->row_array();
+            $start_date = date_create($data_array['org_sub_validity_end_date']);
+            $days = date_diff(date_create('today'),$start_date);
+            if($days->invert == 1)
+            {
+               $this->db->where($where);
+               $this->db->set('organization_subscription_status', '0', FALSE);
+               $this->db->update('tr_organization_subscription');
+            }
+        }
+        return TRUE;
     }
 
 

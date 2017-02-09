@@ -133,7 +133,7 @@ include ('include/menus.php');
 	                                            	<div class="btn btn-default image-preview-input">
 	                                               	 	<span class="glyphicon glyphicon-folder-open"></span>
 	                                               		<span class="image-preview-input-title">Browse</span>
-	                                                	<input class="image_upload_holder" class="btn_browse_adds" type="file" accept="file_extension" name="provider_premium_ad_image" />
+	                                                	<input class="image_upload_holder_ads" class="btn_browse_adds" type="file" accept="file_extension" name="provider_premium_ad_image" />
 	                                            	</div>
 	                                        	</span>
 	                                    	</div>

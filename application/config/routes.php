@@ -93,6 +93,7 @@ $route['provider/feedback'] 							= 'job_provider/feedback/';
 $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/sendsms'] 								= 'job_provider/sendsms';
 $route['provider/resume'] 								= 'job_provider/resume_download';
+$route['provider/templated_resume_download/(:num)/(:num)'] 	= 'job_provider/templated_resume/$1/$1';
 $route['provider/sendmail'] 							= 'job_provider/sendmail';
 $route['provider/logout'] 								= 'job_provider/provider_logout';
 $route['provider/joblevel'] 							= 'job_provider/joblevel_qualification';
