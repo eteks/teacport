@@ -359,8 +359,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .login-container .loginbox-signin {
 	font-size: 14px;
 	color: #242424;
+	margin-top: 20px;
+	float: right;
+	margin-right: 65px;
 	cursor: pointer;
-	float: left !important;
 }
 .login-container label{
 	font-size: 12px;
