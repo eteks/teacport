@@ -33,7 +33,7 @@ class Payu extends CI_Controller {
 					$proper = 1; // If correct
 				}
 				else {
-					$this->session->set_userdata('subscription_status',"Your Renewal plan not available now. Please try another plan");
+					$this->session->set_userdata('subscription_status',"Your Renewal plan not available now. Please try again later.");
 					redirect('provider/subscription');
 				}
 			}

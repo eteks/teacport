@@ -782,7 +782,7 @@ class Job_provider_model extends CI_Model {
 		}
 		else {
             $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
-            $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where);
+            $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
             if($check_already_sub -> num_rows() == 1) {
                 $data = 1; // if wrong
             }
@@ -795,6 +795,10 @@ class Job_provider_model extends CI_Model {
     // Payment subscription validation - Renewal Plan
     public function renewal_plan_valid($plan_id,$org_id) {
         $data = '';
+        $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+        $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+        $check_already_sub_array = $check_already_sub->row_array();
+
         $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
         $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
         if($check_already -> num_rows() == 1) {
@@ -804,7 +808,12 @@ class Job_provider_model extends CI_Model {
             $days = date_diff(date_create('today'),$start_date);
             if($days->invert == 1 || $days->days == 0 || $org_status == 0)
             {
-                $data = 2; // if correct
+            	if($check_already_sub -> num_rows() == 1 && $check_already_sub_array['subscription_id'] != $plan_id) {
+            		$data = 1; // if correct
+            	}
+            	else {
+            		$data = 2; // if wrong
+            	}
             }
             else {
                 $data = 1; // if wrong
@@ -835,6 +844,13 @@ class Job_provider_model extends CI_Model {
             }
         }
        return $data;
+    }
+
+    // Payment subscription details - Renewal Plan
+    public function organization_chosen_plan_details($org_id) {
+        $already_where = '(organization_id = "'.$org_id.'")';
+        $data = $this->db->get_where('tr_organization_subscription',$already_where)->result_array();
+       	return $data;
     }
 
     // Get organization subscription details
