@@ -87,6 +87,7 @@ class Job_Seekermodel extends CI_Model {
     $this->db->select('*');
     $this->db->from('tr_candidate_profile cp');
     $this->db->join('tr_district d','cp.candidate_live_district_id=d.district_id','left');
+    $this->db->join('tr_state s','cp.candidate_live_state_id=s.state_id','left');
     $this->db->order_by('cp.candidate_id','desc');
     $model_data['seeker_profile'] = $this->db->get()->result_array();
     return $model_data;
