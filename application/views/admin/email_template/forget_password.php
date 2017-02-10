@@ -54,11 +54,11 @@
 									<br />
 									<table>
 										<tr>
-											<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span>Username:</span></div></td>
+											<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span>Username:</span></div></td>
 											<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $admin_user_email; ?></div></td>	
 										</tr>
 										<tr>
-											<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Password:</span></div></td>
+											<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Password:</span></div></td>
 											<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $admin_user_password; ?></div></td>	
 										</tr>		
 									</table>	

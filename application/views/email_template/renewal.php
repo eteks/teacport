@@ -15,7 +15,7 @@
 							</td>							
 							<!--WHITE TEXT AREA-->
 							<td width='250' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='80' valign='middle'>
-								<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;'><span ><img src='images/new_logo.png'></span></span>
+								<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;'><span ><img src='<?php echo base_url(); ?>assets/images/logo/new_logo.png' /></span></span>
 							</td>
 							
 							<!--BLUE TEXT AREA-->
@@ -55,23 +55,23 @@
 												<br/>
 												<table>
 													<tr>
-														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span>No of Vacancy Posts :</span></div></td>
+														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span>No of Vacancy Posts :</span></div></td>
 														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_vacancy_remaining_count']; ?></div></td>	
 													</tr>
 													<tr>
-														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >SMS Count :</span></div></td>
+														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >SMS Count :</span></div></td>
 														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_sms_remaining_count']; ?></div></td>	
 													</tr>
 													<tr>
-														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Email Count :</span></div></td>
+														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Email Count :</span></div></td>
 														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_email_remaining_count']; ?></div></td>	
 													</tr>
 													<tr>
-														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Resume Download :</span></div></td>
+														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Resume Download :</span></div></td>
 														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_remaining_resume_download_count']; ?></div></td>	
 													</tr>
 													<tr>
-														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='images/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Max No of Ads :</span></div></td>
+														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Max No of Ads :</span></div></td>
 														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_ad_remaining_count']; ?></div></td>	
 													</tr>
 												</table>
