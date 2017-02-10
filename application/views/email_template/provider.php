@@ -47,17 +47,17 @@
 </tr>
 <!--GREEN STRIPE-->
 <tr>
-	<td background='<?php echo base_url(); ?>assets/images/email_template/greenback.gif' width='31' bgcolor='#45a853' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF;' height='113'>
+	<td background='<?php echo base_url(); ?>assets/images/email_template/greenback.gif' width='31' bgcolor='#f47020' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF;' height='113'>
 	<div style='line-height: 0px; font-size: 1px; position: absolute;'>&nbsp;</div>
 	</td>
 	
 	<!--WHITE TEXT AREA-->
 	<td width='131' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='113' valign='middle'>
-	<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#339240;'>Success!</span>
+	<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#f47020;'>Success!</span>
 	</td>
 	
 	<!--GREEN TEXT AREA-->
-	<td background='<?php echo base_url(); ?>assets/images/email_template/greenback.gif' bgcolor='#45a853' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:15px;' height='113'>
+	<td background='<?php echo base_url(); ?>assets/images/email_template/greenback.gif' bgcolor='#f47020' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:15px;' height='113'>
 	<span style='color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;'>Thank you for Registering at Teachers Recruit.</span>
 	</td>
 </tr>
@@ -89,14 +89,14 @@
 	<p>Hi,<?php echo $organization_name; ?></p>
 	<p>Thanks for registering at Teachers Recruit. Your login details are below:</p>
 	<br />
-	<div style='padding-left:20px; padding-bottom:10px;color:#339240;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt='spade image' style="display:block" height="15" width="10" title="username" />&nbsp;&nbsp;&nbsp;Username  :  <?php echo $registrant_email_id; ?></div>
+	<div style='padding-left:20px; padding-bottom:10px;color:#f47020;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt='spade image' style="display:block" height="15" width="10" title="username" />&nbsp;&nbsp;&nbsp;Username  :  <?php echo $registrant_email_id; ?></div>
 
-	<div style='padding-left:20px; padding-bottom:10px;color:#339240;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=' spade image' style="display:block" height="15" width="10" title="password"/>&nbsp;&nbsp;&nbsp;Password  : <?php echo $registrant_password; ?></div>
+	<div style='padding-left:20px; padding-bottom:10px;color:#f47020;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=' spade image' style="display:block" height="15" width="10" title="password"/>&nbsp;&nbsp;&nbsp;Password  : <?php echo $registrant_password; ?></div>
 	
 
 	<p>Please change your password on your next login.In the meantime, you can <a href='<?php echo base_url(); ?>'>return to my website</a> to continue browsing.</p>
 	<br/><br/><br/>
-   <p style='color:#339240;'>Best Regards,<br/>
+   <p style='color:#f47020;'>Best Regards,<br/>
    TeachersRecruit Team</p><br/>
    <br/>
 	</td>
@@ -109,7 +109,7 @@
 	<div style='font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold; padding-bottom:10px;'>Add Us To Your Address Book</div>
 	<img src='<?php echo base_url(); ?>assets/images/email_template/addressbook.gif' align='right' style='padding-left:10px; padding-top:10px; padding-bottom:10px;' alt=''/>
 	<p>To help ensure that you receive all email messages consistently in your inbox with images displayed, please add this address to your address book or contacts list:</p>
-	<p style='color:#339240;'><strong> NO.82/2, Thiruvalluvar Road, <br/>UthukottaiTown & Tk,<br/> Thiruvallur Dt - 602026</strong></p>
+	<p style='color:#f47020;'><strong> NO.82/2, Thiruvalluvar Road, <br/>UthukottaiTown & Tk,<br/> Thiruvallur Dt - 602026</strong></p>
 	<br />
 	</td>
 	</tr>
