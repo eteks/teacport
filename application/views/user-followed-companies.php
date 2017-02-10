@@ -75,6 +75,14 @@
                                     endif;
                                     ?>
                                     <?php 
+                                    if(!empty($company_details['organization_state_id'])) :
+                                    ?>
+                                    <dt>Organisation State</dt>
+                                    <dd><?php echo $company_details['state_name']; ?></dd>
+                                    <?php
+                                    endif;
+                                    ?>
+                                    <?php 
                                 	if(!empty($company_details['organization_district_id'])) :
                                 	?>
                                     <dt>Organisation District</dt>

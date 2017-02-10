@@ -230,6 +230,8 @@ $route['main/district_state'] = 'admin/master_data/district_state';
 $route['test_email'] = 'home/test_email';
 $route['test_pdf'] = 'home/test_pdf';
 $route['test_sms'] = 'home/test_sms';
+$route['test_cron'] = 'cron';
+$route['test_cron/foo'] = 'cron/foo';
 
 
 /* ===================          Route settings for Admin End     ====================== */
