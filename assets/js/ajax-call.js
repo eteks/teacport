@@ -300,7 +300,7 @@ $(document).ready(function() {
 			if(!$(this).hasClass('not-required')) {
 				var tag_name = $(this).prop("tagName").toLowerCase();
 				var this_val = $.trim($(this).val()); 
-				if(this_val == '' && $(this).is(':visible')) {
+				if(this_val == '') {
 					error = 1;
 					message ="Please Provide Valid Information!";
 					$(this).addClass('form-field-error');
