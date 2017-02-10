@@ -16,7 +16,7 @@
 							
 							<!--WHITE TEXT AREA-->
 							<td width='250' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='80' valign='middle'>
-							<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;'><span ><img src='http://teachersrecruite.tk/demo/images/logo/new_logo.png'></span></span>
+							<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;'><span ><img src='<?php echo base_url(); ?>assets/images/logo/new_logo.png' /></span></span>
 							</td>
 							<!--BLUE TEXT AREA-->
 							<td background='' bgcolor='#29aafe' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:15px;' height='80'>

@@ -16,7 +16,7 @@
 	<table cellpadding='0' style='border-top:1px solid #e4e4e4; text-align:center; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' cellspacing='0' width='600'>		
 			<tr>		    
 			     <td width='600' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='70' valign='middle'>			     	
-					<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;padding-left: 5px;float: left'><span ><img src='images/new_logo.png'></span></span>
+					<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;padding-left: 5px;float: left'><span ><img src='<?php echo base_url(); ?>assets/images/logo/new_logo.png' /></span></span>
 				</td>
 			</tr>				
 	</table>

@@ -84,6 +84,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <tr class="ajaxTitle">
                           <th> Candidate Name </th>
                           <th> Is Fresher </th>
+                          <th> Live State </th>
                           <th> Live District </th>
                           <th> Email </th>
                           <th> Mobile No </th>
@@ -118,6 +119,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo "No";
                             endif;
                             ?> 
+                          </td>
+                          <td class="">
+                            <?php 
+                            if(!empty($pro_val['district_name'])) {
+                              echo $pro_val['state_name'];
+                            }
+                            else {
+                              echo "NULL";
+                            }
+                            ?>
                           </td>
                           <td class="">
                             <?php 
@@ -540,18 +551,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
-                          <label class="control-label">District Name</label>
-                          <span class="dynamic_data"> 
-                            <?php
-                            if(!empty($seeker_full_profile['native_district_name'])) :
-                              echo $seeker_full_profile['native_district_name'];
-                            else :
-                              echo "NULL";
-                            endif;
-                            ?>
-                          </span>
-                        </div>
                         <div class="span6 control-group">
                           <label class="control-label">Address 1</label>
                           <span class="dynamic_data"> 
@@ -564,9 +563,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </span>
                         </div>
-                      </div>
-                      <div class="span12">
-                        <div class="span6 control-group">                                       
+                        <div class="span6 control-group">   
                           <label class="control-label">Address 2</label>
                           <span class="dynamic_data"> 
                             <?php
@@ -578,8 +575,48 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             ?>
                           </span>
                         </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Native State</label>
+                          <span class="dynamic_data"> 
+                            <?php
+                            if(!empty($seeker_full_profile['native_state_name'])) :
+                              echo $seeker_full_profile['native_state_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">  
+                          <label class="control-label">Native District</label>
+                          <span class="dynamic_data"> 
+                            <?php
+                            if(!empty($seeker_full_profile['native_district_name'])) :
+                              echo $seeker_full_profile['native_district_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
                         <div class="span6 control-group">
-                          <label class="control-label">Live District Name</label>
+                          <label class="control-label">Live State</label>
+                          <span class="dynamic_data"> 
+                            <?php
+                            if(!empty($seeker_full_profile['live_state_name'])) :
+                              echo $seeker_full_profile['live_state_name'];
+                            else :
+                              echo "NULL";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Live District</label>
                           <span class="dynamic_data"> 
                             <?php
                             if(!empty($seeker_full_profile['live_district_name'])) :
@@ -589,10 +626,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?>
                           </span>
-                        </div>
+                        </div>   
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">                                       
+                        <div class="span6 control-group">  
                           <label class="control-label">Pincode</label>
                           <span class="dynamic_data"> 
                             <?php
