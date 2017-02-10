@@ -1239,6 +1239,7 @@ class Job_provider extends CI_Controller {
 
 		// Default Details
 		$data['organization_chosen_plan'] = $this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
+		$data['organization_chosen_plan_details'] = $this->job_provider_model->organization_chosen_plan_details(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
 		$data['subscription_upgrade_plan'] = get_subscription_upgrade($this->common_model->subscription_upgrade_plan());
 		if($this->input->post('subpack') && !in_array($this->input->post('subpack'),array_column($data['subscription_upgrade_plan'],'sub_id'))) {
 			$data['subscription_server_msg'] = "Something went wrong. Please try again with correct details";
