@@ -403,6 +403,7 @@ class Common_model extends CI_Model {
         $this->db->select('*');
         $this->db->from('tr_organization_profile op');
         $this->db->join('tr_district d','op.organization_district_id = d.district_id','left'); 
+         $this->db->join('tr_state s','op.organization_state_id = s.state_id','left'); 
         $this->db->join('tr_institution_type it','op.organization_institution_type_id = it.institution_type_id','left');
         $this->db->where($where);
         $model_data['company_details'] = $this->db->get()->row_array();
