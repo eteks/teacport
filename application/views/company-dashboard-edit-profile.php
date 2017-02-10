@@ -291,10 +291,12 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/zebra_datepicker.js"></script>
 <?php include('include/footercustom.php'); ?>
 <script type="application/javascript">
-  	$('.provider_date_of_birth').Zebra_DatePicker({
-        format: 'd/m/Y',
-        view: 'years'
-    });
+  	/*Restrict over the year in datepicker End*/
+	$('.provider_date_of_birth').Zebra_DatePicker({
+	  	format : 'd/m/Y',
+	    view: 'years',
+	    direction: false
+	});
      	
 </script>
 
