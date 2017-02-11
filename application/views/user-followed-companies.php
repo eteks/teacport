@@ -40,6 +40,12 @@
                             <div class="col-md-12 col-sm-12 col-xs-12 nopadding">
                                 <dl>
                                 	<?php
+                                    if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ 
+                                        $user_type = $this->session->userdata("login_session");
+                                    }
+                                    else{
+                                        $user_type = array('user_type'=>'guest');
+                                    }
                                 	if(!empty($company_details)) :
                                 	?>
                                 	<?php 
@@ -176,12 +182,36 @@
                                 ?>
                                 </i>
 						    </div>
-							<!--Only required rule to the whole div clickable work--> 	                           
-							<div class="feature-post-meta-bottom"><a class="apply pull-right">Apply Now</a> </div>
+							<!--Only required rule to the whole div clickable work--> 	     
+                            <?php 
+                            if($user_type['user_type'] =='provider' ){
+                            ?>
+                                <div class="feature-post-meta-bottom"><a class="apply pull-right">View</a> </div>
+                            <?php   
+                            }
+                            else {
+                            ?>
+                                <div class="feature-post-meta-bottom"><a class="apply pull-right"> Apply Now</a> </div>
+                            <?php
+                            }
+                            ?>
 						</div>
-	                    <a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $rec_val['vacancies_id'];?>" >
-							<span class='featured-jobs-grid-link'></span>
-						</a>
+                        <?php 
+                        if($user_type['user_type'] =='provider' ){
+                        ?>
+                        <a href="<?php echo base_url(); ?>provider/postedjobdetail/<?php echo $rec_val['vacancies_id'];?>" >
+                            <span class='featured-jobs-grid-link'></span>
+                        </a>
+                        <?php   
+                        }
+                        else {
+                        ?>
+                        <a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $rec_val['vacancies_id'];?>" >
+                            <span class='featured-jobs-grid-link'></span>
+                        </a>
+                        <?php
+                        }
+                        ?>
 						<!--end rule-->
                     </div> 
                 </div>
@@ -226,8 +256,19 @@
                             ?>
 	                        <li>
 	                           	<div class="pull-left">
-	                            	<a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $vac_val['vacancies_id'];?>"> <?php echo $vac_val['vacancies_job_title']; ?> </a>
-	                            </div>
+                                    <?php 
+                                    if($user_type['user_type'] =='provider' ){
+                                    ?>
+                                    <a href="<?php echo base_url(); ?>provider/postedjobdetail/<?php echo $vac_val['vacancies_id'];?>"> <?php echo $vac_val['vacancies_job_title']; ?> </a>
+                                    <?php   
+                                    }
+                                    else {
+                                    ?>
+                                    <a href="<?php echo base_url(); ?>seeker/applynow/<?php echo $vac_val['vacancies_id'];?>"> <?php echo $vac_val['vacancies_job_title']; ?> </a>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
 	                            <span class="pull-right"><i class="fa fa-calendar"></i> <?php echo date('d M Y',strtotime($vac_val['vacancies_open_date'])); ?> </span>
 	                            <div class="clearfix"> </div>
 	                            <p><?php echo substr($vac_val['vacancies_instruction'], 0, 100); ?>...</p>

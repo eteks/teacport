@@ -79,6 +79,7 @@ class Job_provider_model extends CI_Model {
 			$user_details['registrant_name'] = $user_data['registrant_name'];
 			$user_details['provider_image_path'] = $user_data['registrant_logo'];
 			$user_details['organization_name'] = $user_data['organization_name'];
+			$user_details['institution_type'] = $user_data['organization_institution_type_id'];
 			$user_details['user_type'] = 'provider';
 			$user_details['valid_status'] = 'valid';
 			$user_detalls['login_type'] = $user_data['registrant_register_type'];
@@ -311,9 +312,9 @@ class Job_provider_model extends CI_Model {
 		if(isset($searchdata['candidate_qualification']) && $searchdata['candidate_qualification'] != ''){
 			$where .= " AND cedu.candidate_education_qualification_id = '".$searchdata['candidate_qualification']."'";
 		}
-		else {
-			$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
-		}
+		// else {
+		// 	$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
+		// }
 		if(empty($data['candidate_max_amount']) && isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '') {
         	$where .= "AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' ";	
         }
@@ -374,9 +375,9 @@ class Job_provider_model extends CI_Model {
 		if(isset($searchdata['candidate_qualification']) && $searchdata['candidate_qualification'] != ''){
 			$where .= " AND cedu.candidate_education_qualification_id = '".$searchdata['candidate_qualification']."'";
 		}
-		else {
-			$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
-		}
+		// else {
+		// 	$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
+		// }
 		if(empty($data['candidate_max_amount']) && isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '') {
         	$where .= "AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' ";	
         }

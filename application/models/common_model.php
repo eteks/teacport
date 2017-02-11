@@ -343,10 +343,16 @@ class Common_model extends CI_Model {
 		$value = $this->db->get_where('tr_extra_curricular',$where)->result_array();
 		return $value;
 	}
-	public function get_job_list()
+	public function get_job_list($ins_id)
 	{
-        $where = '(ov.vacancies_status=1)';
-		$this->db->select('*');
+		if($ins_id != '') {
+        	$where = '(ov.vacancies_status=1 AND op.organization_institution_type_id="'.$ins_id.'")';
+		}
+		else {
+			$where = '(ov.vacancies_status=1)';
+		}
+
+   		$this->db->select('*');
         $this->db->from('tr_organization_vacancies ov');
         $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
         $this->db->where($where);
@@ -355,10 +361,16 @@ class Common_model extends CI_Model {
         $data = $this->db->group_by('ov.vacancies_id')->get()->result_array();
         return $data;           
 	}
-	public function get_allinstitutions_list($limit,$start)
+
+	public function get_allinstitutions_list($limit,$start,$ins_id)
 	{
         // Retrieve data with limit
-        $where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+		if($ins_id != '') {
+			$where = '(organization_status=1 AND organization_profile_completeness >=90 AND organization_institution_type_id="'.$ins_id.'")';  
+		}
+		else {
+			$where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+		}
         $model_data['allinstitutions_results'] = $this->db->limit($limit,$start)->get_where('tr_organization_profile',$where)->result_array();
 
        	// Total count
@@ -640,6 +652,23 @@ class Common_model extends CI_Model {
 		$model_data = $this->db->get_where('tr_admin_users',$admin_where)->row_array();
 		return $model_data;
 	}
+
+	// To set status as for expired ads
+	public function ads_inactive() {
+		$where = '(timestampdiff(DAY, premium_ads_created_date, now()) >= ad_visible_days AND premium_ads_status=1 AND is_admin_verified=1)';
+		$this->db->where($where);
+		$this->db->set('premium_ads_status','0',FALSE);
+		$this->db->update('tr_premium_ads');
+
+		// Check exist or not
+		// $this->db->select('*');
+		// $this->db->from('tr_premium_ads');
+		// // $this->db->where('timestampdiff(DAY, premium_ads_created_date, now()) >= ad_visible_days');
+		// $this->db->where($where);
+		// $model_data = $this->db->get()->result_array();
+		return "success";
+	}
+	
 
 
 

@@ -37,11 +37,14 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
-	    $home['job_results'] = $this->common_model->get_job_list();
+		$session = $this->session->all_userdata();
+		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:'');
+	    $home['job_results'] = $this->common_model->get_job_list($ins_id);
+	    $inative_ads = $this->common_model->ads_inactive();
 		$home['totalvacancy'] = $this->common_model->vacancies_count();
 		$home['totalcandidate'] = $this->common_model->candidate_count();
 		$home['totalorganization'] = $this->common_model->organization_count();
-		$home['allposting'] = $this->common_model->applicable_posting();
+		$home['allposting'] = $this->common_model->applicable_posting($ins_id);
 		$home['latest_news'] = $this->common_model->latest_news();
 		$home['alldistrict'] = $this->common_model->get_all_district();
 		$home['premiumads'] = $this->common_model->get_premiumads();
@@ -164,13 +167,15 @@ class Home extends CI_Controller {
 
 
 	public function allinstitutions(){
+		$session = $this->session->all_userdata();
+		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:'');
 		// $categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
     	// Pagination values
     	$per_page = 20;
 
     	$offset = ($this->uri->segment(2)) ? ($this->uri->segment(2)-1)*$per_page : 0;
-        $results = $this->common_model->get_allinstitutions_list($per_page, $offset);
+        $results = $this->common_model->get_allinstitutions_list($per_page, $offset,$ins_id);
     	$total_rows = $results['total_rows'];
     	$data["allinstitutions_results"] = $results['allinstitutions_results'];
     	$data["provider_totaljobs"] = $results['provider_totaljobs'];
