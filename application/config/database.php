@@ -52,7 +52,7 @@ if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'root';
 	$db['default']['password'] = 'root';
-	$db['default']['database'] = 'teacherrecruite';
+	$db['default']['database'] = 'teacherrecruit_server';
 
 }
 //Testing server
@@ -67,7 +67,7 @@ else{
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'teachrecruit';
 	$db['default']['password'] = 'SC.NAxg3]2kn';
-	$db['default']['database'] = 'teachrecruit';
+	$db['default']['database'] = 'teacher_recruit';
 }
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
