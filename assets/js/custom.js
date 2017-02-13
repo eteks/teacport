@@ -25,3 +25,4 @@ function provider_inbox_ajax_message_count(url,id,csrf){    var messagecount = 
     });
     /*Latest News Functionality End*/									}); // end of document ready
 
+
