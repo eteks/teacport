@@ -232,15 +232,6 @@ $(document).ready(function(){
      $('.extended').slimScroll({
          height: 'auto'
     });
-     // $('.sub_pre_section').slimScroll({
-        // height: 'auto'
-//       
-    // });
-	 // $('.sub_hori_scroll').slimScroll({
-        // height: 'auto',
-        // axis:'x',
-        // width:'auto',        
-    // });
     $('.dropdown_toggle_act').on('click',function() {
         $('.extended').show();
         $('.caret-up').show();
@@ -260,14 +251,26 @@ $(document).ready(function(){
         $('.caret-up').hide();
         $('.top_layer').hide();
     });
-var window_width = $(".navbar-inner").width();    
-var window_height = $(".navbar-inner").height();
-$('.top_layer').width(window_width);
-$('.top_layer').height(window_height);
-$('.top_layer, .message_close').on('click',function() {
-        $('.extended').hide();
-        $('.top_layer').hide();
-    });
+    var window_width = $(".navbar-inner").width();    
+    var window_height = $(".navbar-inner").height();
+    $('.top_layer').width(window_width);
+    $('.top_layer').height(window_height);
+    $('.top_layer, .message_close').on('click',function() {
+            $('.extended').hide();
+            $('.top_layer').hide();
+        });
+    $("#subs_max_val").focusout(function(){
+    
+    
+    if(parseFloat($("#subs_min_val").val()) > parseFloat($("#subs_max_val").val()))
+    {
+        $(".subs_min_max_error").css("display","block").css("color","red");
+}
+    else {
+        $(".subs_min_max_error").css("display","none");      
+    }
+    
+});
 /*Ended by thangam*/
 
 /* slim scroll */
@@ -936,6 +939,8 @@ $('.sub_sidebar_section').css('max-height', footer_height);
     //Initial field counter is 1
     $(addButton,saveButton).click(function() { //Once add button s clicked
     var error = 0;
+    if(parseFloat($("#subs_min_val").val()) > parseFloat($("#subs_max_val").val()))
+            return false;
 	    //validate empty fields
 	    $(this).parents('.plan_creation').find('.customize_plan').each(function(){
 	    if($(this).val() == '')

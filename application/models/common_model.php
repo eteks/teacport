@@ -156,11 +156,17 @@ class Common_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_subject');
-		if($input != '') {
+		if($input != '' && $ins_id != '') {
 			$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND (subject_status=1 || subject_status=2))';	
 		}
-		else {
+		else if ($ins_id != '' && $input == '') {
 			$where = '(FIND_IN_SET("'.$ins_id.'",subject_institution_id) !=0 AND subject_status=1)';
+		}
+		else if ($ins_id == '' && $input != '') {
+			$where = '(subject_status=1 || subject_status=2)';
+		}
+		else {
+			$where = '(subject_status=1)';
 		}
 		$this->db->where($where);
 		$subjectdata = $this->db->get();
@@ -179,7 +185,12 @@ class Common_model extends CI_Model {
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_class_level');
-		$where = '(class_level_inst_type_id="'.$ins_id.'" AND class_level_status=1)';
+		if($ins_id != '') {
+			$where = '(class_level_inst_type_id="'.$ins_id.'" AND class_level_status=1)';
+		}
+		else {
+			$where = '(class_level_status=1)';
+		}
 		$this->db->where($where);
 		$classlevel = $this->db->get();
 		return $classlevel->result_array(); 
@@ -200,11 +211,14 @@ class Common_model extends CI_Model {
 		if($ins_id!='' && $input!='') {
 			$where = '(FIND_IN_SET("'.$ins_id.'",posting_institution_id) !=0 AND (posting_status=1 || posting_status=2))';
 		}
-		else if($ins_id!=''){
+		else if($ins_id!='' && $input==''){
 			$where = '(FIND_IN_SET("'.$ins_id.'",posting_institution_id) !=0 AND posting_status=1)';	
 		}
+		else if ($ins_id=='' && $input!='') {
+			$where = '(posting_status=1 || posting_status=2)';
+		}
 		else {
-			$where = "(posting_status='1')";
+			$where = '(posting_status=1)';
 		}		
 		$this->db->where($where);
 		$posting = $this->db->get();
@@ -668,7 +682,32 @@ class Common_model extends CI_Model {
 		// $model_data = $this->db->get()->result_array();
 		return "success";
 	}
+
+	// To get full candidate details by id.
+	public function candidate_full_profile_by_id($id) {
+		$where = '(candidate_id="'.$id.'"AND candidate_status=1)';
+		$this->db->select('cp.*,cpre.*,d.district_id,d.district_name,s.state_id,s.state_name,l.language_id,l.language_name,cedu.*,cexp.*,eduq.educational_qualification as edu_qualification,edum.language_name as edu_medium,edud.departments_name as edu_department,eduu.university_board_name as edu_board,expc.class_level as exp_class,exps.subject_name as exp_subject,expu.university_board_name as exp_board');
+		$this->db->from('tr_candidate_profile cp');
+		$this->db->join('tr_candidate_preferance cpre','cp.candidate_id=cpre.candidate_profile_id','inner');	
+		$this->db->join('tr_state s','cp.candidate_state_id=s.state_id','inner');
+		$this->db->join('tr_district d','cp.candidate_district_id=d.district_id','inner');	
+		$this->db->join('tr_languages l','cp.candidate_mother_tongue=l.language_id','inner');	
+		$this->db->join('tr_candidate_education cedu','cp.candidate_id=cedu.candidate_profile_id','inner');
+		$this->db->join('tr_educational_qualification eduq','cedu.candidate_education_qualification_id=eduq.educational_qualification_id','inner');
+		$this->db->join('tr_languages edum','cedu.candidate_medium_of_inst_id=edum.language_id','inner');
+		$this->db->join('tr_departments edud','cedu.candidate_education_department_id=edud.departments_id','left');
+		$this->db->join('tr_university_board eduu','cedu.candidate_edu_board=eduu.education_board_id','inner');
+		$this->db->join('tr_candidate_experience cexp','cp.candidate_id=cexp.candidate_profile_id','left');
+		$this->db->join('tr_class_level expc','cexp.candidate_experience_class_level_id=expc.class_level_id','left');
+		$this->db->join('tr_subject exps','cexp.candidate_experience_subject_id=exps.subject_id','left');
+		$this->db->join('tr_university_board expu','cexp.candidate_experience_board=expu.education_board_id','left');
+		$this->db->where($where);
+		$model_data = $this->db->get()->result_array();
+		return $model_data;
+	}
 	
+
+
 
 
 
