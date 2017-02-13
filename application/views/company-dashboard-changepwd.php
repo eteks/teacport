@@ -82,7 +82,7 @@
 											<div class="clearfix"> </div>
 											<label class="col-sm-6">New Password<sup class="alert">*</sup></label>
 											<div class="col-sm-6">
-												<input id="new_pass" placeholder="New Password" data-minlength="8" data-name="New Password" class="form-control form_inputs" name="providernewpassword" max_length="20" size="25" type="password">
+												<input id="new_pass" placeholder="New Password" data-minlength="8" data-name="New Password" class="form-control form_inputs" name="providernewpassword" maxlength="20" size="25" type="password">
 											</div>
 										</div>
 									</div>	
@@ -92,7 +92,7 @@
 											<div class="clearfix"> </div>
 											<label class="col-sm-6">Confirm Password<sup class="alert">*</sup></label>
 											<div class="col-sm-6">
-												<input id="confirm_pass" data-minlength="8" placeholder="Confirm Password" data-name="Confirm Password" max_length="20" class="form-control form_inputs" name="providerconfirmnewpassword" size="25" type="password">
+												<input id="confirm_pass" data-minlength="8" placeholder="Confirm Password" data-name="Confirm Password" maxlength="20" class="form-control form_inputs" name="providerconfirmnewpassword" size="25" type="password">
 											</div>
 										</div>
 									</div>	

@@ -10,6 +10,16 @@ class Job_provider extends CI_Controller {
     }
 	public function index()
 	{
+		$session_data = $this->session->all_userdata();
+		if(!empty($session_data['login_session']['user_type'])) {
+			if($session_data['login_session']['user_type'] == "seeker") {
+				redirect('seeker/dashboard');
+			}
+			else {
+				redirect('provider/dashboard');
+			}
+		}
+
 		/* initialize common controller php file*/
 		$common = new Common();
 		if(!$_POST){
@@ -72,6 +82,16 @@ class Job_provider extends CI_Controller {
 	}
 	public function signup()
 	{
+		$session_data = $this->session->all_userdata();
+		if(!empty($session_data['login_session']['user_type'])) {
+			if($session_data['login_session']['user_type'] == "seeker") {
+				redirect('seeker/dashboard');
+			}
+			else {
+				redirect('provider/dashboard');
+			}
+		}
+
 		/* initialize common controller php file*/
 		$common = new Common();
 		/* initialize mail configuaration and load mail library */
@@ -400,6 +420,8 @@ class Job_provider extends CI_Controller {
 				);
 				if($this->job_provider_model->job_provider_update_profile($data['organization']['organization_id'],$edit_profile_data)=='updated' && $data['upload_provider_logo_error'] == '')
 				{
+					$user_session_data = $this->job_provider_model->get_provider_session_data($session_data['login_session']['pro_userid']);
+					$this->session->set_userdata("login_session",$user_session_data);
 					redirect('provider/dashboard');
 				}
 		    }
@@ -408,7 +430,6 @@ class Job_provider extends CI_Controller {
 		    	$this->load->view('company-dashboard-edit-profile',$data);
 		    }		
 		}
-		
 	}
 	public function initialdata(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
@@ -1421,13 +1442,18 @@ class Job_provider extends CI_Controller {
 	}
 	public function templated_resume() {
 		if($this->uri->segment(3) && $this->uri->segment(4)){
-			$candidate_det = $this->job_seeker_model->candidate_profile_by_id($this->uri->segment(3));
+			$data['candidate_details'] = get_candidate_full_profile($this->common_model->candidate_full_profile_by_id($this->uri->segment(3)));
+			$data['known_languages'] = $this->common_model->all_languages(1);
+			$data['posting_values'] = $this->common_model->applicable_posting('',1);
+			$data['class_values'] = $this->common_model->classlevel_by_institution('');
+			$data['subject_values'] = $this->common_model->subject_by_institution('',1);
+			$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
 			$org_id = $this->uri->segment(4);
 			$candidate_id = $this->uri->segment(3);	
 			$status = $this->job_provider_model->provider_templated_resume_download_update($candidate_id,$org_id);
 			if($status == 2) {
 				$this->load->helper('pdf_helper');
-				$this->load->view('user_resume', $data);
+				$this->load->view('user_resume',$data);
 			}
 			else {
 				echo "No download count";
@@ -1437,6 +1463,10 @@ class Job_provider extends CI_Controller {
 			redirect('missingpage');
 		}
 	}
+
+
+
+
 	/* custom validataion rules */
 	public function valid_date($date)
 	{

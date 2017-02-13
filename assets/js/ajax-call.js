@@ -279,9 +279,11 @@ $(document).ready(function() {
 			// professional_group = $(this).siblings('.professional_profile').html();
 			// $(this).siblings('.professional_profile').remove();	
 			$(this).siblings('.professional_profile').slideUp();
+			$(this).siblings('.professional_profile').attr('data-type','fresh');
 		}
 		else {
 			$(this).siblings('.professional_profile').slideDown();
+			$(this).siblings('.professional_profile').attr('data-type','exp');
 			// $('<div class="professional_profile"> '+professional_group+' </div>').insertAfter($(this));	
 		}
 	});
@@ -413,7 +415,7 @@ $(document).ready(function() {
     	/* Validate correct details with number fields */
     	if(error == '') {
 			$('.numeric_dot').each(function() {
- 				if($(this).is(':visible')) {
+ 				// if($(this).is(':visible')) {
 	    		 	var split_val = $(this).val().split('.');
 	    		 	var number_with_dot = new RegExp("^([0-9]+(.[0-9]+)?)*$");
 		    	 	if(split_val[0].length > 2 || split_val[0].length < 2 || !number_with_dot.test($(this).val())) {
@@ -424,10 +426,26 @@ $(document).ready(function() {
 		    	 	else {
 		    	 		$(this).removeClass('form-field-error');
 		    	 	}
+		    	// }
+    		});
+    	}
+    	/* Validate correct details with number fields */
+    	if(error == '') {
+    		$('.numeric_dot_exp').each(function() {
+ 				if($(this).parents('.professional_profile ').data('type') == "exp") {
+	    		 	var split_val = $(this).val().split('.');
+	    		 	var number_with_dot_exp = new RegExp("^([0-9]+(.[0-9]+)?)*$");
+		    	 	if(split_val[0].length > 2 || split_val[0].length < 1 || !number_with_dot_exp.test($(this).val())) {
+		    	 		error = 1;
+	    				message = "Please Provide Valid Information!";
+		    	 		$(this).addClass('form-field-error');
+		    	 	}
+		    	 	else {
+		    	 		$(this).removeClass('form-field-error');
+		    	 	}
 		    	}
     		});
     	}
-
 
     	/* Check whether the input and select element has error or not */
 		if($('input,select').hasClass('form-field-error')) {
