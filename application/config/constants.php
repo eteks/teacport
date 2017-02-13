@@ -80,8 +80,12 @@ if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 }
 else{
 	//server settings
-	define("FACEBOOKAPPID", "1328481350548849"); //facebook app id
-	define("FACEBOOKAPPSECRET", "6455b91fc9ee69b60f10914c3e0ecb06"); //facebook secret id
+	// define("FACEBOOKAPPID", "1328481350548849"); //facebook app id
+	// define("FACEBOOKAPPSECRET", "6455b91fc9ee69b60f10914c3e0ecb06"); //facebook secret id
+
+	//Teachers recruit live credentials
+	define("FACEBOOKAPPID", "1844976309085887"); //facebook app id
+	define("FACEBOOKAPPSECRET", "cb40b76765ea4bffe8ae12ee6e32e003"); //facebook secret id
 }
 define("FACEBOOKGRAPHVERSION", "v2.5");//facebook graph version
 define("FACEBOOKLOGINURL", APP_URL."login/facebookverify");//facebook login url
@@ -93,7 +97,7 @@ if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 	define("GOOGLEDEVELOPERKEY",'AIzaSyBFL_IJd2SpUhmXCJMJ1mZg5Gy6NckvjI8');
 }
 else{
-	// server settings
+	// server settings (Teachers recruit live credentials)
 	define("GOOGLECLIENTID",'167343618303-us6vlmgsh136s3onjkce6njc20bgmat1.apps.googleusercontent.com');//google client id
 	define("GOOGLECLIENTSECRET",'c8zwR4QdfKZbATZZMCF80gpG');//google client secret
 	define("GOOGLEDEVELOPERKEY",'AIzaSyAeR9CBDl12_fPEmJ-nyjaP9SHjPD13QWM');

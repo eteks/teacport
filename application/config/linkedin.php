@@ -14,11 +14,19 @@ if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 }
 else{
 	//server settings
+	// $config = array(
+	//   'baseURL'    => APP_URL,
+	//   'callbackURL'    => APP_URL.'login/linkedin',
+	//   'linkedinApiKey'    => '81n1o6at6e35kq',
+	//   'linkedinApiSecret' => 'NfqbGWLdIPYKfAJC',
+	//   'linkedinScope'  => 'r_basicprofile r_emailaddress'
+	// );
+	//Teachers recruit live credentials
 	$config = array(
 	  'baseURL'    => APP_URL,
 	  'callbackURL'    => APP_URL.'login/linkedin',
-	  'linkedinApiKey'    => '81n1o6at6e35kq',
-	  'linkedinApiSecret' => 'NfqbGWLdIPYKfAJC',
+	  'linkedinApiKey'    => '810r2dyivfnf25',
+	  'linkedinApiSecret' => 'HKHp50jI1f4mseLk',
 	  'linkedinScope'  => 'r_basicprofile r_emailaddress'
 	);
 }
