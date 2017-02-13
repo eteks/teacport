@@ -1096,7 +1096,7 @@ class Job_provider extends CI_Controller {
 				$transaction_id = $this->db->insert_id();
 				if($options['plan_option'] != "upgrade") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
-					$no_of_days = $subscription_plan_data[0]['subscription_validity_days'];
+					$no_of_days = $subscription_plan_data[0]['subscription_validity_days'] - 1;
 					$user_subscription_data = array(
 													'organization_id' 								=> $this->input->post('udf1'),
 													'subscription_id' 								=> $this->input->post('udf2'),
