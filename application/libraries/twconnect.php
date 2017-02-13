@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Eugene Poberezkin, 2012.

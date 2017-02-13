@@ -12,9 +12,15 @@ if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1')
 }
 else{
 	//server settings
+	// $config = array(
+	//   'consumer_key'    => 'ZbfIXWjXj1ndM0RXp8x2ADJVV',
+	//   'consumer_secret' => 'QzY8y80MRSBxVtCIAZfSIqgzLGYmRZjNWTWkFKpJi8VYBIRLHz',
+	//   'oauth_callback'  => 'login/twitterverify'
+	// );
+	//Teachers recruit live credentials
 	$config = array(
-	  'consumer_key'    => 'ZbfIXWjXj1ndM0RXp8x2ADJVV',
-	  'consumer_secret' => 'QzY8y80MRSBxVtCIAZfSIqgzLGYmRZjNWTWkFKpJi8VYBIRLHz',
+	  'consumer_key'    => 'apUPBrO4jxvqrlKhhUO4fqR0X',
+	  'consumer_secret' => '2nCI1jFrjle3lUJz2VrzchzPWH9qVaoN4zubo0AnPq8Ta9yTAE',
 	  'oauth_callback'  => 'login/twitterverify'
 	);
 }

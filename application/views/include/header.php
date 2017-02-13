@@ -33,7 +33,7 @@
     
     <!--Custom CSS-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/custom.css">
-    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/reset.css">
+    <!-- <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/reset.css"> -->
         
     <!--Datepicker-->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/default.css" type="text/css">  

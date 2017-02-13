@@ -67,7 +67,7 @@ else{
 	$db['default']['hostname'] = 'localhost';
 	$db['default']['username'] = 'teachrecruit';
 	$db['default']['password'] = 'SC.NAxg3]2kn';
-	$db['default']['database'] = 'teachrecruit';
+	$db['default']['database'] = 'teacher_recruit';
 }
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
