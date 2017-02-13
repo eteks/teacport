@@ -223,3 +223,34 @@ if ( ! function_exists('get_subscription_upgrade')){
 		return array_values($out);
 	}
 }
+
+// Job provider - subscription plan with upgrade options
+if ( ! function_exists('get_candidate_full_profile')){
+	function get_candidate_full_profile($value) 
+	{
+		$out = array();
+    	if(!empty($value)) {
+      	foreach ($value as $key => $row) {
+        	foreach ($row as $k => $r) {
+          		if($k=='candidate_education_id' || $k=='candidate_education_qualification_id' || $k=='candidate_education_yop' || $k=='candidate_medium_of_inst_id' || $k=='candidate_education_department_id' || $k=='candidate_education_percentage' || $k=='candidate_edu_board' || $k=='candidate_education_status' || $k=='candidate_education_created_date' || $k=='edu_qualification' || $k=='edu_medium' || $k=='edu_department' || $k=='edu_board')
+					{
+            			if(!isset($out[$row['candidate_id']][$row['candidate_education_id']]))
+				        {
+			            	$out[$row['candidate_id']]['education_details'][$row['candidate_education_id']][$k] = $row[$k];
+				        }
+          			}
+      			else if($k=='candidate_experience_id' || $k=='candidate_experience_class_level_id' || $k=='candidate_experience_year' || $k=='candidate_experience_subject_id' || $k=='candidate_experience_board' || $k=='candidate_experience_status' || $k=='candidate_experience_created_date' || $k=='exp_class' || $k=='exp_subject' || $k=='exp_board') {
+        			if(!isset($out[$row['candidate_id']][$row['candidate_experience_id']]))
+			        {
+		            	$out[$row['candidate_id']]['experience_details'][$row['candidate_experience_id']][$k] = $row[$k];
+			        }
+      			}
+          		else {
+            		$out[$row['candidate_id']][$k] = $row[$k];
+          		}
+        	}
+  		}
+    	}
+		return array_values($out);
+	}
+}

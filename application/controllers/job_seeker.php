@@ -337,7 +337,17 @@ class Job_seeker extends CI_Controller {
     }
 
 	public function index()
-	{
+	{	
+		$session_data = $this->session->all_userdata();
+		if(!empty($session_data['login_session']['user_type'])) {
+			if($session_data['login_session']['user_type'] == "seeker") {
+				redirect('seeker/dashboard');
+			}
+			else {
+				redirect('provider/dashboard');
+			}
+		}
+
 		$common = new Common();
 		if(!$_POST){
 			$data['captcha'] = $this->captcha->main();
@@ -396,7 +406,17 @@ class Job_seeker extends CI_Controller {
 		}
 	}
 	public function signup()
-	{
+	{	
+		$session_data = $this->session->all_userdata();
+		if(!empty($session_data['login_session']['user_type'])) {
+			if($session_data['login_session']['user_type'] == "seeker") {
+				redirect('seeker/dashboard');
+			}
+			else {
+				redirect('provider/dashboard');
+			}
+		}
+
 		/* initialize common controller php file*/
 		$common = new Common();
 		/* initialize mail configuaration and load mail library */
@@ -789,15 +809,15 @@ class Job_seeker extends CI_Controller {
 			if(!$this->input->post('cand_fresh')) {
 				$this->form_validation->set_rules($validation_fields_experience);
 				if($this->form_validation->run() == FALSE) {
-					$validation_error = 1;
 					foreach($validation_fields_experience as $row){
 				        $field = $row['field'];
 				        $error = form_error($field);
 				        if($error){
+							$validation_error = 1;
 					        $data['update_status'] = strip_tags($error);
 				    	    break;
 				        }
-				    }
+				    } 
 				}
 				else {
 					$validation_error = 0;
