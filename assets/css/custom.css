@@ -1363,8 +1363,9 @@ label.form-input-error {
 /*Added by Thangam*/
 #vacancies_page .Heading-title{margin-bottom: 30px;} 
 #vacancies_page label{font-size: 18px;}
+#captcha_value{bottom: 30px;left: 150px;position: absolute;}
 .others_value{position: relative;top: 5px;}
-.captcha_des_act{position: absolute !important;left: 170px;top: 235px;} /*signup captcha design modified*/
+.captcha_label{position: absolute;bottom: 62px;left: 150px;width: 117px;}
 .user_dashboard_popup_act{margin-bottom: 13px;margin-right: 13px;margin-left: 13px;}
 .job_salary_act{top: 25px;}
 .comp_name_act{position: absolute;top: 30px;}

@@ -187,6 +187,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>
       <div class="widget-body form">
         <form action="customize_plan_settings" class="form-horizontal popup_form admin_form upgrade_plan" data-mode="">
+        <p class="subs_min_max_error" style="display:none">Max Value cannot have value less than Min value</p>
         <p class="admin_status"> </p>
         <fieldset>
             <legend> Subscription plan details:</legend>
@@ -216,10 +217,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <input class="form-control customize_plan decimal_act" type="text" value="" name="upgrade_price[]" maxlength="5" placeholder="Price in Rupees">
                   </div>
                   <div class="col3">
-                    <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_min[]" maxlength="5" placeholder="Min Limit">
+                    <input id="subs_min_val" class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_min[]" maxlength="5" placeholder="Min Limit">
                   </div>
                   <div class="col3">
-                    <input class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_max[]" maxlength="5" placeholder="Max Limit">
+                    <input id="subs_max_val" class="form-control customize_plan numeric_value" type="text" value="" name="upgrade_max[]" maxlength="5" placeholder="Max Limit">
                   </div>
                   <div class="">
                     <a class="remove_button dn" title="Remove field"><strong>-</strong></a>

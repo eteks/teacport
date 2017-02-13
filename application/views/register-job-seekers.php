@@ -52,10 +52,10 @@
 										<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" />')?>
 		                            	<a title="reload" class="reload-captcha" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
 		                            </div>
-		                            <div class="col-sm-6 captcha_holder nopadding captcha_des_act">
-		                            	<label>Enter captcha Value :<span class="alert">*</span></label>
-		                            	 <?php echo form_input(array('id' => 'captcha_value','placeholder' => 'Captcha Value','class' => 'form-control form_inputs','name' => 'captcha_value','value'=>set_value('captcha_value'))); ?>
-		                            </div>
+		                            <div class="col-sm-6 captcha_holder nopadding">
+                                            <label class="captcha_label">Enter Captcha value <sup class="alert">*</sup></label>
+                                            <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control form_inputs','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>set_value('captcha_value'))); ?>
+                                        </div>
 			                        <div class="clearfix"> </div>
 			                    </div>    
 		                        <div class="loginbox-terms">
