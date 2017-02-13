@@ -47,6 +47,21 @@ class Job_provider_model extends CI_Model {
 			return $user_details; 
 		}
 	}
+	public function get_provider_session_data($id) {
+		$where = '(organization_id="'.$id.'" AND organization_status=1)';
+		$user_data = $this->db->get_where('tr_organization_profile',$where)->row_array();
+		$user_details['pro_email'] = $user_data['registrant_email_id'];
+		$user_details['pro_userid'] = $user_data['organization_id'];
+		$user_details['pro_mobile'] = $user_data['registrant_mobile_no'];
+		$user_details['provider_image_path'] = $user_data['registrant_logo'];
+		$user_details['registrant_name'] = $user_data['registrant_name'];
+		$user_details['organization_name'] = $user_data['organization_name'];
+		$user_details['user_type'] = 'provider';
+		$user_details['valid_status'] = 'valid';
+		$user_details['institution_type'] = $user_data['organization_institution_type_id'];
+		$user_details['login_type'] = 'teacherrecruit';
+		return $user_details; 
+	}
 
 	public function social_authendication_registration($data)
 	{

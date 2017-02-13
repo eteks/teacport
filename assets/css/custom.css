@@ -1345,10 +1345,10 @@ label.form-input-error {
     /*padding-left: 20px !important;*/
     text-align: left;
     color: #00a5ef;
-    font-weight:bold;
-    margin-left:50px !important;
-    margin-top:0px;	
-    padding-top:4px;
+    font-weight: bold;
+    margin-left: 50px !important;
+    margin-top: 5px;	
+    padding-top: 4px;
 }
 .owl-next{
 	left: 1075px;
@@ -1786,6 +1786,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .owl-testimonial-2 .single_testimonial{
 	height: 350px !important;
 }
+/*Zebra Date Picker*/
+button.Zebra_DatePicker_Icon_Inside_Right{
+	margin: 0 10px !important;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
