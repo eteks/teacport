@@ -82,6 +82,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
+                          <th> Candidate Registered Id </th>
                           <th> Candidate Name </th>
                           <th> Is Fresher </th>
                           <th> Live State </th>
@@ -108,6 +109,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           foreach ($seeker_profile as $pro_val) :
                           ?>                                  
                         <tr class="parents_tr" id="column">
+                          <td class="">
+                            <?php echo $pro_val['candidate_id']; ?>
+                          </td>
                           <td class="">
                             <?php echo $pro_val['candidate_name']; ?>
                           </td>

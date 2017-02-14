@@ -290,10 +290,22 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $extrac_update_data = array( 
+      //To check whether it is waiting for approval
+      $approve_where = '(extra_curricular_id="'.$this->input->post('rid').'")';
+      $approve_query = $this->db->get_where('tr_extra_curricular',$approve_where)->row_array();
+      $wait_for_approve = $approve_query['extra_curricular_status'];
+
+      if(in_array($this->input->post('rid'),$model_data['mapped_data']) && $wait_for_approve !=2) {
+        $extrac_update_data = array( 
+                              'extra_curricular' => $this->input->post('e_name'),
+                            );  
+      }
+      else {
+        $extrac_update_data = array( 
                               'extra_curricular' => $this->input->post('e_name'),
                               'extra_curricular_status' => $this->input->post('e_status')
-                            );
+                            );  
+      }  
       $extrac_update_where = '( extra_curricular_id="'.$this->input->post('rid').'")'; 
       $this->db->set($extrac_update_data); 
       $this->db->where($extrac_update_where);
@@ -370,12 +382,16 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+      //To check whether it is waiting for approval
+      $approve_where = '(language_id="'.$this->input->post('rid').'")';
+      $approve_query = $this->db->get_where('tr_languages',$approve_where)->row_array();
+      $wait_for_approve = $approve_query['language_status'];
+
+      if(in_array($this->input->post('rid'),$model_data['mapped_data']) && $wait_for_approve !=2) {
         $language_update_data = array( 
                                     'language_name' => $this->input->post('l_name'),
                                     'is_mother_tangue' => $this->input->post('l_mother_tongue'),
                                     'is_medium_of_instruction' => $this->input->post('l_instruction'),
-                                    'language_status' => $this->input->post('l_status'),
                                   );
       }
       else {
@@ -383,7 +399,9 @@ class Master_data_model extends CI_Model {
                                     'language_name' => $this->input->post('l_name'),
                                     'is_mother_tangue' => $this->input->post('l_mother_tongue'),
                                     'is_medium_of_instruction' => $this->input->post('l_instruction'),
+                                    'language_status' => $this->input->post('l_status'),
                                   );
+        
       }
       $language_update_where = '(language_id="'.$this->input->post('rid').'")'; 
       $this->db->set($language_update_data); 
@@ -694,18 +712,23 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+      //To check whether it is waiting for approval
+      $approve_where = '(departments_id="'.$this->input->post('rid').'")';
+      $approve_query = $this->db->get_where('tr_departments',$approve_where)->row_array();
+      $wait_for_approve = $approve_query['departments_status'];
+
+      if(in_array($this->input->post('rid'),$model_data['mapped_data']) && $wait_for_approve !=2) {
         $departments_update_data = array( 
                               'departments_name' => $this->input->post('d_name'),
                               'department_educational_qualification_id' => $this->input->post('d_qualification'),
-                              'departments_status' => $this->input->post('d_status'),
                             );
       }
       else {
         $departments_update_data = array( 
                               'departments_name' => $this->input->post('d_name'),
                               'department_educational_qualification_id' => $this->input->post('d_qualification'),
-                            );
+                              'departments_status' => $this->input->post('d_status'),
+                            );   
       }
       $departments_update_where = '(departments_id="'.$this->input->post('rid').'")'; 
       $this->db->set($departments_update_data); 
@@ -788,18 +811,23 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+      //To check whether it is waiting for approval
+      $approve_where = '(subject_id="'.$this->input->post('rid').'")';
+      $approve_query = $this->db->get_where('tr_subject',$approve_where)->row_array();
+      $wait_for_approve = $approve_query['subject_status'];
+
+      if(in_array($this->input->post('rid'),$model_data['mapped_data']) && $wait_for_approve !=2) {
         $subjects_update_data = array( 
                                 'subject_name' => $this->input->post('s_name'),
                                 'subject_institution_id' => $this->input->post('s_inst_type'),
-                                'subject_status' => $this->input->post('s_status'),
                               );
       }
       else {
         $subjects_update_data = array( 
                                 'subject_name' => $this->input->post('s_name'),
                                 'subject_institution_id' => $this->input->post('s_inst_type'),
-                              );
+                                'subject_status' => $this->input->post('s_status'),
+                              );  
       }
       $subjects_update_where = '(subject_id="'.$this->input->post('rid').'")'; 
       $this->db->set($subjects_update_data); 
@@ -942,18 +970,23 @@ class Master_data_model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      if(!in_array($this->input->post('rid'),$model_data['mapped_data'])) {
+      //To check whether it is waiting for approval
+      $approve_where = '(posting_id="'.$this->input->post('rid').'")';
+      $approve_query = $this->db->get_where('tr_applicable_posting',$approve_where)->row_array();
+      $wait_for_approve = $approve_query['posting_status'];
+
+      if(in_array($this->input->post('rid'),$model_data['mapped_data']) && $wait_for_approve !=2) {
         $postings_update_data = array( 
                               'posting_name' => $this->input->post('p_name'),
                               'posting_institution_id' => $this->input->post('p_inst_type'),
-                              'posting_status' => $this->input->post('p_status'),
                             );
       }
       else {
         $postings_update_data = array( 
-                              'posting_name' => $this->input->post('p_name'),
-                              'posting_institution_id' => $this->input->post('p_inst_type'),
-                            );
+                      'posting_name' => $this->input->post('p_name'),
+                      'posting_institution_id' => $this->input->post('p_inst_type'),
+                      'posting_status' => $this->input->post('p_status'),
+                    );
       }
       $postings_update_where = '(posting_id="'.$this->input->post('rid').'")'; 
       $this->db->set($postings_update_data); 
