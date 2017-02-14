@@ -174,8 +174,8 @@ class Master_data_model extends CI_Model {
     $model_data['status'] = 0;
     $model_data['error'] = 0;
 
-     //Check whether the data is mapped or not
-    $mapped_data = $this->db->query("SELECT i.institution_type_id
+    //Check whether the data is mapped or not
+    $mapped_data1 = $this->db->query("SELECT i.institution_type_id
         FROM `tr_institution_type` AS i
         INNER JOIN 
         (
@@ -193,7 +193,11 @@ class Master_data_model extends CI_Model {
         (
           SELECT class_level_inst_type_id
           FROM tr_class_level
-        )AS cl
+        )AS cl where pos.value = i.institution_type_id OR pr.candidate_institution_type = i.institution_type_id OR cl.class_level_inst_type_id = i.institution_type_id group by i.institution_type_id")->result_array();
+
+     //Check whether the data is mapped or not
+    $mapped_data2 = $this->db->query("SELECT i.institution_type_id
+        FROM `tr_institution_type` AS i
         INNER JOIN 
         (
           SELECT educational_qualifcation_inst_type_id
@@ -210,9 +214,10 @@ class Master_data_model extends CI_Model {
           FROM tr_subject sub
           CROSS JOIN numbers n
           WHERE n.n <=1 + ( LENGTH( sub.subject_institution_id ) - LENGTH( REPLACE( sub.subject_institution_id, ',', '' ) ) )
-        )AS sub_i where pos.value = i.institution_type_id OR pr.candidate_institution_type = i.institution_type_id OR cl.class_level_inst_type_id = i.institution_type_id OR eq.educational_qualifcation_inst_type_id = i.institution_type_id OR op.organization_institution_type_id = i.institution_type_id OR sub_i.i_value = i.institution_type_id group by i.institution_type_id");
+        )AS sub_i where eq.educational_qualifcation_inst_type_id = i.institution_type_id OR op.organization_institution_type_id = i.institution_type_id OR sub_i.i_value = i.institution_type_id group by i.institution_type_id")->result_array();
 
-    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'institution_type_id');
+    $mapped_data = array_merge($mapped_data1,$mapped_data2);
+    $model_data['mapped_data'] = array_column($mapped_data, 'institution_type_id');
 
     // Update data
     if($status=='update') {
