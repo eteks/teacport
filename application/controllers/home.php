@@ -3,10 +3,10 @@
 class Home extends CI_Controller {
 	public function __construct()
     {
-    	
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha','iptracker')); 
 		$this->load->model(array('job_provider_model','common_model'));
+		session_start(); 
     }
 
 	/**

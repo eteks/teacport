@@ -23,6 +23,18 @@ class Job_seeker extends CI_Controller {
         return TRUE;
  	}   
 
+	// Terms and condtion validation - Post or not
+ 	public function accept_term_and_condition(){
+		if ($this->input->post('accept_terms')){
+			return TRUE;
+		}
+		else{
+			$error = 'Please accept term and condition!.';
+			$this->form_validation->set_message('accept_term_and_condition', $error);
+			return FALSE;
+		}
+	}
+
  	// To store other option value and get that value - Mother Tongue
  	function other_mother_tongue($val){
  		if($val == "others" && $_POST['other_mother_tongue']!='') {
@@ -449,12 +461,13 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
-			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_terms');
+			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_term_and_condition');
 			/* Check whether registration form server side validation are valid or not */
 			if ($this->form_validation->run() == FALSE)
 	       	{
-	       		/* Registration form invalid stage */
-	       		$fb['reg_server_msg'] = 'Please provide valid information!';	
+
+	      		/* Registration form invalid stage */
+	       		$fb['reg_server_msg'] = 'Please provide valid information11!';	
 	       		$fb['error'] = 1;
 	       		$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -642,7 +655,7 @@ class Job_seeker extends CI_Controller {
         $data['user_data'] = $candidate_data;
         $data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
         $data['job_applied_count'] = $this->job_seeker_model->candidate_job_applied_count($session_data['login_session']['candidate_id']);
-        $data['provider_values'] = $this->common_model->get_provider_details();
+        $data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		$this->load->view('user-dashboard',$data);
 	}
 
@@ -662,7 +675,7 @@ class Job_seeker extends CI_Controller {
 		$data['message'] = $this->job_seeker_model->job_seeker_inbox($session['login_session']['candidate_id']);
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		// print_r($data['candidate_id']);
-		$data['provider_values'] = $this->common_model->get_provider_details();
+		$data['provider_values'] = $this->common_model->get_provider_details(isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:'');
 		$this->load->view('user-dashboard-inbox',$data);
 	}
 
@@ -701,7 +714,7 @@ class Job_seeker extends CI_Controller {
      		redirect('seeker/logout');
      	}
      	$data['update_status'] = '';
-		$data['provider_values'] = $this->common_model->get_provider_details();
+		$data['provider_values'] = $this->common_model->get_provider_details(isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:'');
 		$data['candidate_values'] = $this->job_seeker_model->get_seeker_details($session['login_session']['candidate_id']);
     	$data['district_values'] = $this->common_model->get_all_district();
     	$data['state_values'] = $this->common_model->get_all_state();
@@ -925,7 +938,7 @@ class Job_seeker extends CI_Controller {
      		redirect('seeker/logout');
      	}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
-		$data['provider_values'] = $this->common_model->get_provider_details();
+		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		$data['alldistricts'] = $this->common_model->get_all_district();
 		if(!isset($session_data['login_session']['institution_type_id']) && empty($session_data['login_session']['institution_type_id'])) {
 			$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
@@ -1016,7 +1029,7 @@ class Job_seeker extends CI_Controller {
      		redirect('seeker/logout');
      	}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);		
-		$data['provider_values'] = $this->common_model->get_provider_details();
+		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 
 		// Pagination values
 		$per_page = 20;
@@ -1079,7 +1092,7 @@ class Job_seeker extends CI_Controller {
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		// $data['candidate'] 	= $session_data['login_session']['candidate_id'];
 		// $data['candidate_data'] = $this->job_seeker_model->candidate_profile_by_id($session_data['login_session']['candidate_id']);
-		$data['provider_values'] = $this->common_model->get_provider_details();
+		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		if(!$_POST){
 			$this->load->view('user-dashboard-feedback',$data);
 		}
@@ -1147,7 +1160,7 @@ class Job_seeker extends CI_Controller {
 		    }
 		}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
-		$data['provider_values'] = $this->common_model->get_provider_details();
+		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		$this->load->view('user-dashboard-changepwd',$data);
 	}
 
@@ -1165,7 +1178,7 @@ class Job_seeker extends CI_Controller {
      		else 
      			redirect('login/seeker');
      	}
-     	$data['provider_values'] = $this->common_model->get_provider_details();
+     	$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		$institution_id = (isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		$data['relatedjob_results'] = $this->job_seeker_model->get_relatedjob_list($data["current_jobvacancy_id"],$institution_id);

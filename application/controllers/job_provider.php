@@ -6,7 +6,7 @@ class Job_provider extends CI_Controller {
         parent::__construct();
         $this->load->library(array('form_validation','session','captcha','image_lib','iptracker')); 
 		$this->load->model(array('job_provider_model','common_model','job_seeker_model'));
-		 session_start();
+		session_start();
     }
 	public function index()
 	{
