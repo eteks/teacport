@@ -277,11 +277,11 @@ $(document).ready(function(){
 var win_height= $(window).height();
 var head_height= win_height - $('#header').height();
 var footer_height= head_height -$('#footer').height(); 
-alert (win_height);
-alert($('#header').height());
-alert($('#footer').height());
+// alert (win_height);
+// alert($('#header').height());
+// alert($('#footer').height());
 
-alert(footer_height);  
+// alert(footer_height);  
 $('.sub_pre_section').css('max-height', footer_height);
 $('.sub_sidebar_section').css('max-height', footer_height);
 	

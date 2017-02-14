@@ -114,7 +114,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 			                              </ul>
                                         </td>
                                         <td class="created_date">
-                                          00-00-0000
+                                          11/02/2017
                                         </td>
                                       </tr>
                                       <tr class="parents_tr" id="column">
@@ -143,7 +143,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 			                              </ul>
                                         </td>
                                         <td class="created_date">
-                                          00-00-0000
+                                          11/02/2017
                                         </td>
                                       </tr>
                                     </tbody>
