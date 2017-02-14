@@ -215,11 +215,11 @@ $config['admin_modules'] = array(
 			'access_operation' => 'edit,delete,view', 
 			'route_url' => base_url().'main/feedback_form' 
 		),
-		array(
-			'name' => 'site visits tracking', 
-			'access_operation' => 'view', 
-			'route_url' => base_url().'main/site_visit_tracking' 
-		),
+		// array(
+		// 	'name' => 'site visits tracking', 
+		// 	'access_operation' => 'view', 
+		// 	'route_url' => base_url().'main/site_visit_tracking' 
+		// ),
 		array(
 			'name' => 'latest news', 
 			'access_operation' => 'add,edit,delete,view', 

@@ -80,6 +80,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
                       <thead>
                         <tr class="ajaxTitle">
+                          <th> Organization Registered Id </th>
                           <th> Organization Name </th>
                           <th> Registrant Name </th>
                           <th> Profile Completeness </th>
@@ -102,8 +103,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         ?>  
                         <?php
                         foreach ($provider_profile as $pro_val) :
-                        ?>                               
+                        ?>                              
                         <tr class="parents_tr">
+                          <td class="">
+                            <?php echo $pro_val['organization_id']; ?>
+                          </td> 
                           <td class="">
                             <?php
                             if(!empty($pro_val['organization_name'])) :
