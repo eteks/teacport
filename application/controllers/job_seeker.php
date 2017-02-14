@@ -1209,7 +1209,7 @@ class Job_seeker extends CI_Controller {
 				if ($apply_status == "success") {
 					if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob,$seeker_candidatejob)) {
 						$data["applied_status"] = $this->job_seeker_model->job_seeker_applied_status($session_data['login_session']['candidate_id'],$data["current_jobvacancy_id"]);
-						$data['post_job_server_msg'] = 'Your vacancy successfully posted!';
+						$data['post_job_server_msg'] = 'You Applied for the Job Successfully!';
 						$this->load->view('single-job', $data);
 					} 
 					else {

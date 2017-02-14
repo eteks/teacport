@@ -331,13 +331,13 @@ class Job_provider_model extends CI_Model {
 		// 	$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
 		// }
 		if(empty($data['candidate_max_amount']) && isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' ";	
+        	$where .= "AND cpre.candidate_expecting_end_salary >=".$searchdata['candidate_min_amount']." ";	
         }
         if(empty($data['candidate_min_amount']) && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' ";	
+        	$where .= "AND cpre.candidate_expecting_start_salary <=".$searchdata['candidate_max_amount']." ";	
         }
         if(isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '' && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."'";	
+        	$where .= "AND cpre.candidate_expecting_start_salary <=".$searchdata['candidate_max_amount']." AND cpre.candidate_expecting_end_salary >=".$searchdata['candidate_min_amount']."";	
         }
 		$this->db->limit($limit,$start);
 		$this->db->where('('.$where.')');
@@ -394,13 +394,13 @@ class Job_provider_model extends CI_Model {
 		// 	$where .= "AND cedu.candidate_education_yop=(select max(candidate_education_yop) from tr_candidate_education ce where ce.candidate_profile_id = cp.candidate_id)";
 		// }
 		if(empty($data['candidate_max_amount']) && isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."' ";	
+        	$where .= "AND cpre.candidate_expecting_end_salary >=".$searchdata['candidate_min_amount']."";	
         }
         if(empty($data['candidate_min_amount']) && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' ";	
+        	$where .= "AND cpre.candidate_expecting_start_salary <=".$searchdata['candidate_max_amount']." ";	
         }
         if(isset($searchdata['candidate_min_amount']) && $searchdata['candidate_min_amount'] != '' && isset($searchdata['candidate_max_amount']) && $searchdata['candidate_max_amount'] != '') {
-        	$where .= "AND cpre.candidate_expecting_start_salary <='".$searchdata['candidate_max_amount']."' AND cpre.candidate_expecting_end_salary >='".$searchdata['candidate_min_amount']."'";
+        	$where .= "AND cpre.candidate_expecting_start_salary <=".$searchdata['candidate_max_amount']." AND cpre.candidate_expecting_end_salary >=".$searchdata['candidate_min_amount']."";
         }
 		
 		$this->db->where('('.$where.')');
