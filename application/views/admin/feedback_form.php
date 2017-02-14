@@ -110,11 +110,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $feed['feedback_form_message']; ?>
                           </td>
                           <td style="display: none"><?php echo $feed['feedback_form_message']; ?></td>
-                          <td class="">
-                            <?php echo $feed['is_viewed']; ?>
+                          <td class="center_align">
+                            <?php 
+                            if ($feed['is_viewed'] == 1) 
+                              echo "<span class='icon-ok'> </span> <p class='hidden_values'> Yes </p>";
+                            else
+                              echo "<span class='icon-remove'> </span> <p class='hidden_values'> No </p>";
+                            ?>
                           </td>
                           <td class="">
-                            <?php echo $feed['feedback_form_status']; ?>
+                            <?php 
+                            if ($feed['feedback_form_status'] == 1) 
+                              echo "Active";
+                            else
+                              echo "Inactive";
+                            ?>
                           </td>
                           <td class="">
                             <?php echo $feed['feedback_form_created_date']; ?>
