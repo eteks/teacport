@@ -41,6 +41,7 @@
 			                        </div>
 			                        <div class="form-group">
 			                            <?php echo form_label('Email <sup class="alert">*</sup>'); ?>
+                                        <?php echo form_error('candidate_email'); ?>
 			                        	<?php echo form_input(array('id' => 'candidate_email','placeholder' => 'Email','class' => 'form-control form_inputs email_value', 'name' => 'candidate_email','value'=>set_value('candidate_email'))); ?>
 		                            </div>
 		                            <div class="form-group">
@@ -60,6 +61,7 @@
 			                    </div>    
 		                        <div class="loginbox-terms">
 		                           <label class="checkbox_word">
+                                   <?php echo form_error('accept_terms'); ?>
 		                           <?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'accept_terms', 'class' => 'form_dec')); ?> I accept <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
 	                            </div>
 	                            <div class="loginbox-submit">
