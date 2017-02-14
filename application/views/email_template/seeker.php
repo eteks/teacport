@@ -17,7 +17,7 @@
 			<tr>		    
 			     <td width='250' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='80' valign='middle'>
 			     	
-					<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;padding-left: 5px;float: left'><span ><img src="<?php echo base_url(); ?>assets/admin/img/teachers_recruit_logo.png"></span>&nbsp;Teachers Recruit</span>
+					<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;padding-left: 5px;float: left'><span ><img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png"></span>&nbsp;Teachers Recruit</span>
 				</td>
 			</tr>				
 	</table>
