@@ -764,6 +764,11 @@ class Job_seeker extends CI_Controller {
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
 			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_mother_tongue', 'label' => 'Name','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_known_lang', 'label' => 'Name','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_posting', 'label' => 'Name','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_subject', 'label' => 'Name','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_extracurricular', 'label' => 'Name','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
 			array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'trim|xss_clean|callback_valid_date'),
 			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
