@@ -76,11 +76,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                 	<div class="btn-group">
-                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
-                                      <button id="sample_editable_1_new" class="btn green add_new">
-                                              Add New <i class="icon-plus"></i>
-                                      </button>
-                                    <?php endif; ?>
+                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
+                      <button id="sample_editable_1_new" class="btn green add_new">
+                              Add New <i class="icon-plus"></i>
+                      </button>
+                    <?php endif; ?>
                   </div>
                   <div class="btn-group pull-right">
                   </div>
@@ -138,14 +138,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?> 
                         </td>
-                        <td class="edit_section">
-                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $lat_news['latest_news_id']; ?>">
-                            Edit
-                          </a>
-                        </td>
-                        <td>
-  							       <a class='ajaxDelete' data-id="<?php echo $lat_news['latest_news_id']; ?>">Delete</a>
-                        </td>                          
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                          <td class="edit_section">
+                            <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $lat_news['latest_news_id']; ?>">
+                              Edit
+                            </a>
+                          </td>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                          <td>
+    							         <a class='ajaxDelete' data-id="<?php echo $lat_news['latest_news_id']; ?>">Delete</a>
+                          </td> 
+                        <?php endif; ?>                         
                         </tr>  
                         <?php
                           endforeach;

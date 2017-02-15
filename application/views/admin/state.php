@@ -135,27 +135,31 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                           ?> 
                         </td>
-                        <td class="edit_section">
-                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
-                            Edit
-                          </a>
-                        </td>
-                        <td>
-                          <?php 
-                            if(!empty($mapped_data)){
-                              $state_id = $sta_val['state_id'];  
-                              $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
-                              return $m == $state_id; });
-                              if(count($mapped_result) > 0)
-                                echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
-                              else
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                          <td class="edit_section">
+                            <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $sta_val['state_id']; ?>">
+                              Edit
+                            </a>
+                          </td>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                          <td>
+                            <?php 
+                              if(!empty($mapped_data)){
+                                $state_id = $sta_val['state_id'];  
+                                $mapped_result = array_filter($mapped_data, function($m) use ($state_id) {
+                                return $m == $state_id; });
+                                if(count($mapped_result) > 0)
+                                  echo "<span class='restrict'>Delete<div class='restrict_tooltip'>Mapping has been already done. Delete not possible.</div></span>";
+                                else
+                                  echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
+                              }
+                              else{
                                 echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
-                            }
-                            else{
-                              echo "<a class='ajaxDelete' data-id='".$sta_val['state_id']."'>Delete</a>";
-                            }
-                          ?>      
-                        </td>
+                              }
+                            ?>      
+                          </td>
+                        <?php endif; ?>
                       </tr>
                       <?php
                       endforeach;

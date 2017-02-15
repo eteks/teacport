@@ -57,9 +57,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
+                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
+                                    <?php endif; ?>
                                     </div>
                                 </div>
                                 
@@ -126,19 +128,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                           ?>
                                         </td>
                                         <?php 
-                                        if($usr_det['is_super_admin'] || $usr_det['admin_user_id'] == $session_data['admin_user_id'])
+                                        if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
+                                          if($usr_det['is_super_admin'] || $usr_det['admin_user_id'] == $session_data['admin_user_id']):
                                           echo "<td>-</td>";
-                                        else if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                          else:
+                                        ?> 
                                         <td class="edit_section">
                                         	<a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $usr_det['admin_user_id']; ?>">Edit</a>
                                         </td>
-                                        <?php endif; ?>
                                         <?php 
-                                        if($usr_det['is_super_admin'] || $session_data['admin_user_id'] == $usr_det['admin_user_id'])
+                                          endif;
+                                        endif; ?>
+                                        <?php 
+                                        if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
+                                          if($usr_det['is_super_admin'] || $session_data['admin_user_id'] == $usr_det['admin_user_id']):
                                           echo "<td>-</td>";
-                                        else if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                                          else:
+                                        ?> 
                                         <td><a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
-                                        <?php endif; ?>
+                                        <?php 
+                                          endif;
+                                        endif; ?>
                                     </tr>
                                     <?php
                                       $i++;

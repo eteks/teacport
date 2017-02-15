@@ -75,9 +75,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
 		        			<div class="portlet-body">
 		            			<div class="clearfix add_section">
 		                			<div class="btn-group">
-		                    			<button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
-		                     				 Add New <i class="icon-plus"></i>
-		                    			</button>
+                            <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+  		                    			<button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
+  		                     				 Add New <i class="icon-plus"></i>
+  		                    			</button>
+                            <?php endif; ?>
 		                  			</div>
 		           				</div>                               
 		            			<form method="post" action="customize_plan_settings" class="admin_module_form" id="plan_upgrade_creation_form">
@@ -158,9 +160,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
 													Edit
 													</a>
 												</td> -->
-												 <td>
-		                                          <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_id; ?>">Delete</a>
-		                                        </td>
+                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+    												              <td>
+	                                          <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_id; ?>">Delete</a>
+	                                        </td>
+                                    <?php endif; ?>
 											</tr>
 											<?php
 		                                        $i++;
