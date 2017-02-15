@@ -145,10 +145,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                       </tbody>
                                   </table>
                               </div>
-                          <div class="form-actions">
-                             <button type="submit" class="btn btn-success">Update</button>
-                             <!-- <button type="button" class="btn">Cancel</button> -->
-                          </div>
+                            <div class="form-actions">
+                              <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                                 <button type="submit" class="btn btn-success">Update</button>
+                                 <!-- <button type="button" class="btn">Cancel</button> -->
+                              <?php endif; ?>
+                            </div>
                         </form>
                       
                     </div>

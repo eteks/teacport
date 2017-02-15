@@ -10,7 +10,7 @@ else{
   $access_rights = $this->config->item('access_rights');
 }
 $feedback_data = $this->config->item('feedback_data');
-if(!empty($this->session->userdata("admin_login_status"))): 
+if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>

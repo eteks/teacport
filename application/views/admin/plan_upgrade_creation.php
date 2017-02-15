@@ -76,9 +76,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="portlet-body">
                                 <div class="clearfix">
                                     <div class="btn-group">
+                                    <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                                         <button id="sample_editable_1_new" class="btn green add_new">
                                             Add New <i class="icon-plus"></i>
                                         </button>
+                                    <?php endif; ?>
                                     </div>
                                 </div>                               
                                 <form method="post" action="plan_upgrade_creation" class="admin_module_form" id="plan_upgrade_creation_form">
@@ -155,14 +157,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         ?> 
                                         </td>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
-                                        <td class="edit_section">
-                                          <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Edit</a>
-                                        </td>
+                                          <td class="edit_section">
+                                            <a class="ajaxEdit" id="column<?php echo $i; ?>" href="javascript:;" data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Edit</a>
+                                          </td>
                                         <?php endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                                        <td>
-                                          <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Delete</a>
-                                        </td>
+                                          <td>
+                                            <a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $plan_upgrade['upgrade_id']; ?>">Delete</a>
+                                          </td>
                                         <?php endif; ?>
                                       </tr>
                                       <?php
