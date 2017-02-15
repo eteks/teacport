@@ -17,17 +17,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
 <!-- BEGIN CONTAINER -->
 <div id="container" class="row-fluid">
   <!-- BEGIN SIDEBAR -->
-  <div id="sidebar" class="nav-collapse collapse">
-   <!-- <div class="sidebar-toggler hidden-phone"></div> -->
-   <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+  <!-- <div id="sidebar" class="nav-collapse collapse">
    <div class="navbar-inverse">
       <form class="navbar-search visible-phone">
         <input type="text" class="search-query" placeholder="Search" />
       </form>
    </div>
-   <!-- END RESPONSIVE QUICK SEARCH FORM -->
-   <!-- BEGIN SIDEBAR MENU -->
-  </div>
+  </div> -->
   <!-- END SIDEBAR -->
   <!-- BEGIN PAGE -->
   <div id="main-content">

@@ -797,6 +797,11 @@ class Job_provider_model extends CI_Model {
 		$data['subscribe_details'] = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
 		return $data;
 	}
+	public function organization_subscription_count($org_id){
+		$valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
+		$data = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
+		return $data;
+	}
 
 	// Payment subscription validation
 	public function orignial_renewal_validation($plan_id,$org_id) {

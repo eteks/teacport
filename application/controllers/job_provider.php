@@ -1384,9 +1384,8 @@ class Job_provider extends CI_Controller {
 				$data['subscribe_details'] = $status['subscribe_details'];
 			}
 			else {
-				$status = $this->job_provider_model->provider_mail_send_update($candidate_id,$org_id,$vac_id);
+				$data['subscribe_details'] = $this->job_provider_model->organization_subscription_count($org_id);
 				$data['status'] = "failure";
-				$data['subscribe_details'] = $status['subscribe_details'];
 			}
 			echo json_encode($data);
 		}else{
@@ -1414,25 +1413,28 @@ class Job_provider extends CI_Controller {
 			$vac_id = ($this->input->post('vac_id'))?$this->input->post('vac_id'):'';
 			$candidate_id = $this->input->post('candidate_id');	
 			if($vac_id != '') {
-				$link = base_url()."seeker/vacancy_details/".$vac_id;
+				$link = "http://www.teachersrecruit.com/seeker/vacancy_details/".$vac_id."";
 				$msg = "You+have+been+shortlisted+for+the+applied+post+for+our+company.Invited+to+attend+the+interview.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
 			else {
-				$link = base_url()."user-followed-companies/".$org_id;
-				$msg = "You+have+been+shortlisted+to+attend+the+interview+for+our+company.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
+				$link = "http://www.teachersrecruit.com/user-followed-companies/".$org_id."";
+				$msg = "You+have+been+shortlisted+to+attend+the+interview+for+our_company.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
-			$url = "http://www.etekchnoservices.com/sms/sendsms.php?uid=7845729671&pwd=iloveindia&phone=".$candidate_det['candidate_mobile_no']."&msg=$msg";
+			// $msg = "Please";
+			$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$candidate_det['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+
+			// $url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone=8675846999&text=hii&priority=ndnd&stype=normal';
 			$get = file_get_contents($url);
-			if($get == "true") {
+			$output = explode('.',$get);
+			if($output[0] == "S") {
 				$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id,$vac_id);
 				$data['status'] = ($status['status']!='')?$status['status']:"failure";
 				$data['subscribe_details'] = $status['subscribe_details'];
 				echo json_encode($data);
 			}
 			else {
-				$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id,$vac_id);
+				$data['subscribe_details'] = $this->job_provider_model->organization_subscription_count($org_id);
 				$data['status'] = "failure";
-				$data['subscribe_details'] = $status['subscribe_details'];
 				echo json_encode($data);
 			}
 		}
