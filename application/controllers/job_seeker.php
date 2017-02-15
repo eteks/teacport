@@ -724,7 +724,9 @@ class Job_seeker extends CI_Controller {
     	$data['known_languages'] = $this->common_model->all_languages(1);
     	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type'],1);
     	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['exp_class_values'] = $this->common_model->classlevel_by_institution(NULL);
     	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type'],1);
+    	$data['exp_subject_values'] = $this->common_model->subject_by_institution(NULL,NULL);
     	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
     	$data['education_values'] = $this->job_seeker_model->get_seeker_education_details($session['login_session']['candidate_id']);
     	$data['department_values'] = $this->common_model->get_department_details();
