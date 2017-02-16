@@ -10,7 +10,7 @@ else{
   $access_rights = $this->config->item('access_rights');
 }
 $feedback_data = $this->config->item('feedback_data');
-if(!empty($this->session->userdata("admin_login_status"))): 
+if(!empty($this->session->userdata("admin_login_status"))):
 ?>
 <?php if(!$this->input->is_ajax_request()) { ?>
 <?php include "templates/header.php" ?>
@@ -132,7 +132,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         </td>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
                                           if($grp_val['is_super_admin']):
-                                            echo "<td>-</td>";
+                                            echo "<td class='edit_section'>-</td>";
                                           else:
                                         ?>
                                             <td class="edit_section">
@@ -143,10 +143,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         endif; ?>
                                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): 
                                           if($grp_val['is_super_admin']):
-                                            echo "<td>-</td>";
+                                            echo "<td class='delete_section'>-</td>";
                                           else:
                                         ?>
-                                          <td>
+                                          <td class="delete_section">
                                             <?php 
                                             if(!empty($mapped_data)){
                                               $group_id = $grp_val['user_group_id'];  

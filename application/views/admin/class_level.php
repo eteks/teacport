@@ -64,9 +64,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix">
                   <div class="btn-group">
+                  <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
                     <button id="sample_editable_1_new" class="btn green add_new">
                       Add New <i class="icon-plus"></i>
                     </button>
+                  <?php endif; ?>
                   </div>
                   <div class="btn-group pull-right">
                   </div>
@@ -159,7 +161,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php endif; ?>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                         <td>
+                         <td class="delete_section">
                           <?php 
                           if(!empty($mapped_data)){
                               $class_id = $cla_val['class_level_id'];  

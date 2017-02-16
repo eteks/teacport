@@ -3905,7 +3905,11 @@ jQuery UI Datepicker(new in v1.2.2)
 
 /* Added by siva */
 
-
+.edit_del_act {
+    display: inline-block;
+    width: 45%;
+    text-align : center;
+}
 .col12 {
    clear: both;
    width: 100%;

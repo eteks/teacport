@@ -72,22 +72,31 @@ function confirm_alert(msg, yesFn, noFn) {
 }
 
 // Init new row
-function add_new_record() {
+function add_new_record(column_length) {
     blankrow = '<tr valign="top" class="inputform">';
     for(i=0;i<columns.length;i++) {
         // Create input element as per the definition
         input = createInput(i,'');
         blankrow += '<td class="ajaxReq">'+input+'</td>';
     }
-     if(typeof is_created != "undefined" && is_created=="no") {
-        blankrow += '<td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
-     }
-     else {
-       blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
-     }
-            
-    
-    // prepand blank row at the end of table
+
+    if(typeof is_created != "undefined" && is_created=="no") {
+        if (column_length == 2) {
+            blankrow += '<td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
+        }
+        else {
+            blankrow += '<td><a href="javascript:;" class="'+savebutton+' edit_del_act">Save</a><a href="javascript:;" class="'+removebutton+' edit_del_act">Remove</a></td></tr>';
+        }
+    }
+    else {
+        if (column_length == 2) {
+            blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+'">Save</a></td><td><a href="javascript:;" class="'+removebutton+'">Remove</a></td></tr>';
+        }
+        else {
+            blankrow += '<td></td><td><a href="javascript:;" class="'+savebutton+' edit_del_act">Save</a><a href="javascript:;" class="'+removebutton+' edit_del_act">Remove</a></td></tr>';
+        }
+    } 
+    // prepand blank row - Add new row at top of the table.
     $("."+table).prepend(blankrow);
 }
 
@@ -274,32 +283,44 @@ $(document).ready(function(){
 /*Ended by thangam*/
 
 /* slim scroll */
-var win_height= $(window).height();
-var head_height= win_height - $('#header').height();
-var footer_height= head_height -$('#footer').height(); 
-// alert (win_height);
-// alert($('#header').height());
-// alert($('#footer').height());
 
-// alert(footer_height);  
-$('.sub_pre_section').css('max-height', footer_height);
-$('.sub_sidebar_section').css('max-height', footer_height);
+var window_height= $(window).height();
+var header_height= $('#header').height();
+var footer_height= $('#footer').height(); 
+var content_height = parseInt(window_height - (header_height + footer_height));
+
+// alert(content_height);  
+
+
+$('.sub_sidebar_section').css('max-height', parseInt(content_height-10));
+$('.sub_pre_section').css('max-height', parseInt(content_height-10));
 	
-
-	 $('.sub_section_scroll').slimScroll({
-        height: 'auto'
-     });
-      
-    $('.sub_pre_section').slimScroll({
-        height: 'auto'
-        
-     });
-      $('.sub_sidebar_section').slimScroll({
-        height: 'auto'
-        
-     });
+$('.sub_sidebar_section').slimScroll({
+    height: 'auto'
     
-     $('.sub_site_visites_cont').slimScroll({
+});
+$('.sub_pre_section').slimScroll({
+    height: 'auto'
+});
+
+
+
+$('.sub_section_scroll').slimScroll({
+    height: 'auto'
+});
+
+
+// $('.sub_pre_section').slimScroll({
+//     height: 'auto'
+    
+// });
+// $('.sub_sidebar_section').slimScroll({
+//     height: 'auto'
+// });
+
+    
+
+    $('.sub_site_visites_cont').slimScroll({
         height: 'auto',
        	width: 'auto'
     });
@@ -322,12 +343,18 @@ $('.sub_sidebar_section').css('max-height', footer_height);
     // Add - New record
     $(document).on('click','.add_new',function() {
         // disable_datatable(0);
+        if($(this).parents("#main-content").find('table').find('.edit_section').length > 0 && $(this).parents("#main-content").find('table').find('.delete_section').length > 0) {
+           var column_length = 2;    
+        }
+        else {
+            var column_length = 1;    
+        }
         var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
-        var this_table = $(this).parents("table").find('th');
+        var this_table = $(this).parents("#main-content").find('table').find('th');
         this_overlay.removeClass('dn');
         this_table.addClass('sort-disabled');
         if(editing==0 && ready_save==0) {        	      	 
-            add_new_record();            
+            add_new_record(column_length);            
             handleChoosenSelect();
             scroller_multiselect();
             ready_save=1;
@@ -419,6 +446,12 @@ $('.sub_sidebar_section').css('max-height', footer_height);
         var this_row = $(this).parents("tr").attr('id');
         var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
         var this_table = $(this).parents("table").find('th');
+        if($(this).parents("table").find('.edit_section').length > 0 && $(this).parents("table").find('.delete_section').length > 0) {
+           var column_length = 2;    
+        }
+        else {
+            var column_length = 1;    
+        }
         this_overlay.removeClass('dn');
         this_table.addClass('sort-disabled');
         // disable_datatable(0);
@@ -439,11 +472,22 @@ $('.sub_sidebar_section').css('max-height', footer_height);
                 input = createInput(i,$.trim(val));
                 html +='<td>'+input+'</td>';
             }
+
             if(typeof is_created != "undefined" && is_created=="no") {
-                html += '<td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" class="'+cancelbutton+'">Cancel</a></td>';
+                if (column_length == 2) {
+                    html += '<td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" class="'+cancelbutton+'">Cancel</a></td>';   
+                }
+                else {
+                    html += '<td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+' edit_del_act">Update</a> <a href="javascript:;" class="'+cancelbutton+' edit_del_act">Cancel</a></td>';   
+                }
             }
             else {
-                html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" class="'+cancelbutton+'">Cancel</a></td>';
+                if (column_length == 2) {
+                    html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+'">Update</a></td><td> <a href="javascript:;" class="'+cancelbutton+'">Cancel</a></td>';
+                }
+                else {
+                    html += '<td></td><td><a href="javascript:;" data-id="'+update_id+'" class="'+updatebutton+' edit_del_act">Update</a> <a href="javascript:;" class="'+cancelbutton+' edit_del_act">Cancel</a></td>';
+                }
             }
             
             // Before replacing the TR contents, make a copy so when user clicks on 

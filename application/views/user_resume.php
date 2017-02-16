@@ -52,7 +52,7 @@
         background-color: #f2f2f2;
     }
 </style>
-<img src="<?php echo $candidate_details[0]['candidate_image_path']; ?>" height='150' width='150' />
+<img src="<?php echo $candidate_details[0]['candidate_image_path']; ?>" height="90" width="90" />
 <h2><span class="unbold"> <?php echo $candidate_details[0]['candidate_name']; ?> </span> </h2>
 <h4><span class="orange">Candidate ID : </span> <?php echo sprintf("%010d",$candidate_details[0]['candidate_id']); ?></h4>
 <hr/> 
@@ -307,5 +307,6 @@ endif;
     $content = ob_get_contents();
     ob_end_clean();
     $obj_pdf->writeHTML($content, true, false, true, false, '');
-    $obj_pdf->Output('temp_resume.pdf', 'D');
+    $obj_pdf->Output('temp_resume.pdf', 'D'); // Download
+    // $obj_pdf->Output('temp_resume.pdf', 'I'); // View
 ?>

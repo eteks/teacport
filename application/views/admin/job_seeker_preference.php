@@ -82,8 +82,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <th>End Salary</th>
                         <th>Class Level</th>
                         <th>Subject</th>
-                        <th class="data_action">Edit</th>
-                        <th class="data_action">Delete</th>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?> 
+                          <th class="data_action">Edit</th>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?> 
+                          <th class="data_action">Delete</th>
+                        <?php endif; ?>
                       </tr>
                     </thead>
                     <tbody>
@@ -139,16 +143,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           ?>
                           <input type="hidden" value="<?php echo $pre_val['candidate_willing_subject_id']; ?>" />
                         </td>   
-                        <td class="edit_section">
-                          <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $pre_key; ?>">
-                            Edit
-                          </a>
-                        </td>
-                        <td>
-                          <a class="ajaxDelete" data-id="<?php echo $pre_key; ?>">
-                            Delete
-                          </a>
-                        </td>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?> 
+                          <td class="edit_section">
+                            <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $pre_key; ?>">
+                              Edit
+                            </a>
+                          </td>
+                        <?php endif; ?>
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
+                          <td class="delete_section">
+                            <a class="ajaxDelete" data-id="<?php echo $pre_key; ?>">
+                              Delete
+                            </a>
+                          </td>
+                        <?php endif; ?>
                       </tr>
                       <?php
                       endforeach;

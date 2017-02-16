@@ -184,7 +184,7 @@ if ( ! function_exists('get_provider_subscription')){
     	if(!empty($value)) {
       	foreach ($value as $key => $row) {
         	foreach ($row as $k => $r) {
-          		if($k=='upgrade_or_renewal_id' || $k=='organization_upgrade_id' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
+          		if($k=='upgrade_or_renewal_id' || $k=='organization_subscription_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
             			if(!isset($out[$row['organization_subscription_id']][$row['upgrade_or_renewal_id']]))
 				        {
 			            	$out[$row['organization_subscription_id']]['upgrade_renewal'][$row['upgrade_or_renewal_id']][$k] = $row[$k];

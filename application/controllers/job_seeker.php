@@ -225,7 +225,7 @@ class Job_seeker extends CI_Controller {
 
 	// Alpha with white space
  	public function alpha_dash_space($provider_job_title){
-		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title)) {
+		if (! preg_match('/^[a-zA-Z\s]+$/', $provider_job_title) && $provider_job_title!='') {
 			$this->form_validation->set_message('alpha_dash_space', 'The %s field may only contain alpha characters & White spaces');
 			return FALSE;
 		} else {
@@ -724,7 +724,9 @@ class Job_seeker extends CI_Controller {
     	$data['known_languages'] = $this->common_model->all_languages(1);
     	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type'],1);
     	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['exp_class_values'] = $this->common_model->classlevel_by_institution(NULL);
     	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type'],1);
+    	$data['exp_subject_values'] = $this->common_model->subject_by_institution(NULL,NULL);
     	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
     	$data['education_values'] = $this->job_seeker_model->get_seeker_education_details($session['login_session']['candidate_id']);
     	$data['department_values'] = $this->common_model->get_department_details();
@@ -764,6 +766,11 @@ class Job_seeker extends CI_Controller {
    		// Profile, Preference, Education, Communication Validation	
 	   	$validation_fields = array(	
 			array('field' => 'cand_firstname', 'label' => 'Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_mother_tongue', 'label' => 'Other Mother Tongue','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_known_lang', 'label' => 'Other Known Language','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_posting', 'label' => 'Other Posting','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_subject', 'label' => 'Other Subject','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
+			array('field' => 'other_extracurricular', 'label' => 'Other Extracurricular','rules' => 'trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
 			array('field' => 'cand_gen', 'label' => 'Gender','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_dob', 'label' => 'Date Of Birth','rules' => 'trim|xss_clean|callback_valid_date'),
 			array('field' => 'cand_fa_name', 'label' => 'Father Name','rules' => 'required|trim|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space'),
