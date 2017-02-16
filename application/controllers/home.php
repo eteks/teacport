@@ -38,7 +38,8 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$session = $this->session->all_userdata();
-		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:'');
+		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:NULL);
+		$home['posting'] = $this->common_model->applicable_posting($ins_id);
 	    $home['job_results'] = $this->common_model->get_job_list($ins_id);
 	    $inative_ads = $this->common_model->ads_inactive();
 		$home['totalvacancy'] = $this->common_model->vacancies_count();
