@@ -128,7 +128,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                      </td>
 	                      <?php endif; ?>
 	                      <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-	                      <td>
+	                      <td class="delete_section">
                           <a class="ajaxDelete" data-id=<?php echo $job_val['applied_job_id']; ?>"">Delete</a>
                         </td>
 	                      <?php endif; ?>

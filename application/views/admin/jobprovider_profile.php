@@ -493,7 +493,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <h4>
                         Payment Details 
                         <?php
-                        if(!empty($payment_details)) :
+                        if(!empty($payment_details) && count($payment_details) > 1) :
                         ?>
                         <span class="arrow_section">
                           <a class="subscription_paginate popup_pag_prev"> 
@@ -588,8 +588,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class=""> Subscription Start Date </label>
                               <label class=""> Subscription End Date </label>
                               <label class=""> Transaction Id </label>
-                              <label class=""> Subscription Status </label>
                               <label class=""> Subscription Created Date </label>
+                              <label class=""> Subscription Status </label>
                             </div>
                             <div class="span3 plan_field_section">                                       
                               <h4 class="">Original Plan</h4>
@@ -597,6 +597,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> 31-01-2017</label>
                               <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> 15-12-2017  </label>
                               <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
+                              <label class=""> <?php echo date('d-m-Y',strtotime($pay_val['organization_subscription_created_date'])); ?> </label> 
                               <?php
                               if($pay_val['organization_subscription_status'] == 1) :
                               ?>
@@ -609,17 +610,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <div class='inner-triangle triangle_disabled'> </div>
                               <?php
                               endif;
-                              ?>               
-                              <label class=""> <?php echo date('d-m-Y',strtotime($pay_val['organization_subscription_created_date'])); ?> </label>                   
+                              ?>                               
                             </div>
                             <?php
                             if(!empty($pay_val['upgrade_renewal']) && $pay_key) :
                             $upgrade = 0;
                             $renewal = 0;
+                            $i=0;
+                            $j=0;
+                            // echo "<pre>";
+                            // print_r($pay_val['upgrade_renewal']);
+                            // echo "</pre>";
                             foreach ($pay_val['upgrade_renewal'] as $up_re_key => $up_re_val) :
                             ?>
                             <?php
-                            if(!empty($up_re_val['organization_upgrade_id'])) :
+                            if($up_re_val['is_renewal'] == 0) :
+                            $i++;
                             ?>
                             <div class="upgrade_holder_content upgrade_section_profile plan_field_section">     
                               <h4 class="">Upgrade Plan</h4>
@@ -627,6 +633,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
                               <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
+                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>
                               <?php
                               if($up_re_val['status'] == 1) :
                               ?>
@@ -640,10 +647,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <?php
                               endif;
                               ?>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label> 
                             </div>
                             <?php
-                            if($upgrade == 0) :
+                            if($i > 1) :
                             ?>  
                             <div class="upgrade_holder_content navigation_options">
                               <span class="arrow_section">
@@ -661,6 +667,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php
                             $upgrade++;
                             else :
+                            $j++;
                             ?>                  
                             <div class="renewal_holder_content renewal_section_profile plan_field_section">     
                               <h4 class="">Renewal Plan</h4>
@@ -668,6 +675,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
                               <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
+                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>
                               <?php
                               if($up_re_val['status'] == 1) :
                               ?>
@@ -681,10 +689,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <?php
                               endif;
                               ?>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label> 
                             </div>
                             <?php
-                            if($renewal == 0) :
+                            if($j > 1) :
                             ?>  
                             <div class="renewal_holder_content navigation_options">
                               <span class="arrow_section">

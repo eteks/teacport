@@ -130,7 +130,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                         <?php 
                                         if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
                                           if($usr_det['is_super_admin'] || $usr_det['admin_user_id'] == $session_data['admin_user_id']):
-                                          echo "<td>-</td>";
+                                          echo "<td class='edit_section'>-</td>";
                                           else:
                                         ?> 
                                         <td class="edit_section">
@@ -140,12 +140,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                           endif;
                                         endif; ?>
                                         <?php 
-                                        if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): 
+                                        if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): 
                                           if($usr_det['is_super_admin'] || $session_data['admin_user_id'] == $usr_det['admin_user_id']):
-                                          echo "<td>-</td>";
+                                          echo "<td class='delete_section'>-</td>";
                                           else:
                                         ?> 
-                                        <td><a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
+                                        <td class="delete_section"><a class="ajaxDelete" id="column<?php echo $i; ?>"  data-id="<?php echo $usr_det['admin_user_id']; ?>">Delete</a></td>
                                         <?php 
                                           endif;
                                         endif; ?>

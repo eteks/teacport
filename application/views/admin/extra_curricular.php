@@ -149,7 +149,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php endif; ?>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                        <td>
+                        <td class="delete_section">
                           <?php 
                           if(!empty($mapped_data)){
                             $ext_id = $exac_val['extra_curricular_id'];  

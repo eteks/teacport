@@ -141,7 +141,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <input type="hidden" value="<?php echo $act_val['is_resume_downloaded']; ?>" />
                         </td>  
                         <td style="display: none;"> </td> 
-                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                              
+                        <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                      
                         <td class="edit_section">
                           <a class="ajaxEdit" href="javascript:;" data-id="<?php echo $act_val['activity_id']; ?>">
                             Edit
@@ -149,7 +149,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php endif; ?>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
-                        <td>
+                        <td class="delete_section">
                           <a class="ajaxDelete" data-id="<?php echo $act_val['activity_id']; ?>">
                             Delete
                           </a>

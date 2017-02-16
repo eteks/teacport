@@ -78,7 +78,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               <div class="portlet-body">
                 <div class="clearfix add_section">
                   <div class="btn-group">
-                  <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
+                  <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
                     <button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
                       Add New <i class="icon-plus"></i>
                     </button>
