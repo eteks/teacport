@@ -489,7 +489,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane profile_subscription_tab" id="tab3">
+                    <div class="tab-pane profile_subscription_tab plan_details_scroll" id="tab3">
                       <h4>
                         Payment Details 
                         <?php

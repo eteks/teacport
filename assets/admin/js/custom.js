@@ -304,6 +304,12 @@ $('.sub_sidebar_section').css('max-height', footer_height);
        	width: 'auto'
     });
     
+    $('.plan_details_scroll').slimScroll({
+        height: 'auto',
+       	width: 'auto'
+    });
+    
+    
 	
     if($('.has-sub').length > 0) {
         $('.has-sub').each(function(){
@@ -1031,7 +1037,7 @@ function readURL(input) {
         reader.onload = function (e) {
             $('#imagepreview_templogo').prop('src', e.target.result).show();
             $('.temp_remove_act').show();
-        }
+        };
         reader.readAsDataURL(input.files[0]);
     }
 }

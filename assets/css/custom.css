@@ -1788,6 +1788,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 /*Zebra Date Picker*/
 button.Zebra_DatePicker_Icon_Inside_Right{
 	margin: 0 10px !important;
+}
+/*Popup Signup*/
+.popup_signin, .popup_signup{
+	cursor: pointer;
 }	
 /* Ended by Akila */
 /* For Visitor Count */
