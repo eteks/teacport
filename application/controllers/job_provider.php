@@ -584,6 +584,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
+			$this->form_validation->set_rules('provider_work_type', 'Vacancy Work Type', 'trim|required|xss_clean|');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
 			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|callback_check_greater_value['.$this->input->post('provider_min_salary').']|xss_clean');
 			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
@@ -608,6 +609,7 @@ class Job_provider extends CI_Controller {
 									'vacancies_experience'			=> $this->input->post('provider_experience'),
 									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
 									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
+									'vacancy_type'				    => $this->input->post('provider_work_type'),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
 									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),
@@ -854,7 +856,8 @@ class Job_provider extends CI_Controller {
 			// $this->form_validation->set_rules('provider_department[]', 'Department', 'trim|xss_clean|');
 			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|xss_clean');
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
-			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_university', 'University', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('provider_work_type', 'Vacancy Work Type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('provider_posting', 'Applicable Posting', 'trim|numeric|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
@@ -876,6 +879,7 @@ class Job_provider extends CI_Controller {
 									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
 									'vacancies_applicable_posting_id '=> $this->input->post('provider_posting') !== ''?$this->input->post('provider_posting'):NULL,
 									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
+									'vacancy_type'					=> $this->input->post('provider_work_type'),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
 									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),

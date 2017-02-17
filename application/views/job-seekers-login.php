@@ -130,6 +130,13 @@
 		                                	<?php echo form_input(array('id' => 'candidate_email','class' => 'form-control form_inputs email_value', 'name' => 'candidate_email','placeholder' => 'Email')); ?>
 		                                </div>
 		                                <div class="form-group">
+	                                        <label>Employment Type<sup class="alert">*</sup></label>
+	                                        <select name="candidate_work_type" id="" class="form-control form_inputs">
+	                                        <option value="full">Full Time</option>
+	                                        <option value="part">Part Time</option> 
+	                                        </select>     
+                                    	</div>
+		                                <div class="form-group">
 		                                    <?php echo form_label('Mobile No.<sup class="alert">*</sup>'); ?> <?php echo form_error('candidate_mobile_no'); ?>
 		                                	<?php echo form_input(array('id' => 'candidate_mobile_no','data-minlength' => '10','maxlength' => '10','data-name' => 'Mobile','placeholder' => 'Mobile','class' => 'form-control form_inputs numeric_value','name' => 'candidate_mobile_no')); ?>
 		                                </div>

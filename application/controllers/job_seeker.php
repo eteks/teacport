@@ -460,6 +460,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
 			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_term_and_condition');
 			/* Check whether registration form server side validation are valid or not */
@@ -483,6 +484,7 @@ class Job_seeker extends CI_Controller {
 					'candidate_email' => $this->input->post('candidate_email'),
 					'candidate_mobile_no' => $this->input->post('candidate_mobile_no'),
 					'candidate_registration_type' => 'teacherrecruit',
+					'candidate_type' => $this->input->post('candidate_work_type'),
 					'candidate_password' => $common->generateStrongPassword(),
 				);
 				
@@ -576,19 +578,19 @@ class Job_seeker extends CI_Controller {
      	}
      	// print_r($session_data['login_session']);
 		if($_POST) {
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			if($this->input->post('popup_type') == 'social') {
 				$this->form_validation->set_rules('seeker_email', 'Email', 'trim|required|xss_clean|valid_email');
 				$this->form_validation->set_rules('seeker_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
 				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[20]');
 				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|min_length[8]|max_length[20]|matches[seeker_password]');
 				$this->form_validation->set_rules('seeker_institution', 'Institution Type', 'trim|required|xss_clean|');
-			}
-
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			}		
 			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
 			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
+			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean|');
 			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('seeker_state', 'State', 'trim|required|xss_clean');
 				
