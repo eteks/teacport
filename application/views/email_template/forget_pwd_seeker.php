@@ -6,38 +6,22 @@
 </head>
 <body>
 <center>
-	<table cellpadding='0' style='border-top:1px solid #e4e4e4; text-align:center; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' cellspacing='0' width='600'>
-		<tr>
-			<td height='2' style='border-bottom:1px solid #e4e4e4;'>
-			<div style='line-height: 0px; font-size: 1px; position: absolute;'>&nbsp;</div>
-			</td>
-		</tr>
-	</table>
-	<table cellpadding='0' style='border-top:1px solid #e4e4e4; text-align:center; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' cellspacing='0' width='600'>		
-			<tr>		    
-			     <td width='250' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='80' valign='middle'>
-			     	
-					<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;padding-left: 5px;float: left'><span><img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png"></span>&nbsp;Teachers Recruit</span>
-				</td>
-			</tr>				
-	</table>
-<table width='600' background='#FFFFFF' style='text-align:left;' cellpadding='0' cellspacing='0'>
-<!--BLUE STRIPE-->
-<tr>
-	<td background='<?php echo base_url(); ?>assets/images/email_template/greenback.gif' width='31' bgcolor='#29aafe' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF;' height='113'>
-	<div style='line-height: 0px; font-size: 1px; position: absolute;'>&nbsp;</div>
-	</td>
-	
-	<!--WHITE TEXT AREA-->
-	<td width='131' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='113' valign='middle'>
-	<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;'>Success!</span>
-	</td>
-	
-	<!--BLUE TEXT AREA-->
-	<td background='<?php echo base_url(); ?>assets/images/email_template/greenback.gif' bgcolor='#29aafe' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:15px;' height='113'>
-	<span style='color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;'>Forget Password?</span>
-	</td>
-</tr>
+<table cellpadding='0' style='border-top:1px solid #e4e4e4; text-align:center; font-family:Trebuchet MS, Verdana, Arial; font-size:12px;' cellspacing='0' width='600'>
+						<tr>
+							<td background='' width='31' bgcolor='#29aafe' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF;' height='80'>
+							<div style='line-height: 0px; font-size: 1px; position: absolute;'>&nbsp;</div>
+							</td>
+							
+							<!--WHITE TEXT AREA-->
+							<td width='250' bgcolor='#FFFFFF' style='border-top:1px solid #FFF; text-align:center;' height='80' valign='middle'>
+							<span style='font-size:25px; font-family:Trebuchet MS, Verdana, Arial; color:#29aafe;'><span ><img src='<?php echo base_url(); ?>assets/images/logo/new_logo.png' /></span></span>
+							</td>
+							
+							<!--BLUE TEXT AREA-->
+							<td background='' bgcolor='#29aafe' style='border-top:1px solid #FFF; border-bottom:1px solid #FFF; padding-left:15px;' height='80'>
+							<span style='color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;'>Forgot Password?</span>
+							</td>
+						</tr>
 
 <!--DOUBLE BORDERS BOTTOM-->
 <tr>

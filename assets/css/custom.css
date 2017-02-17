@@ -103,6 +103,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 }
 .txt_blue {
 	color: #29AAFE;
+	cursor: pointer;
 }
 .transform_lowercase {
 	text-transform: lowercase !important;
@@ -1788,7 +1789,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 /*Zebra Date Picker*/
 button.Zebra_DatePicker_Icon_Inside_Right{
 	margin: 0 10px !important;
-}	
+}
+/*Popup Signup*/
+.popup_signin, .popup_signup{
+	cursor: pointer;
+}		
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{

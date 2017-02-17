@@ -372,8 +372,8 @@ section.download-app .download-btns a:hover{opacity:0.5;}
 .feature-post-meta-bottom span small{color:#777;font-weight:600;font-size:14px;text-transform:capitalize;}
 .feature-post-meta-bottom .apply{padding:5px 20px;border:1px solid #29aafe;background-color:#29aafe;color:#FFF;margin-top:6px;text-transform:uppercase;}
 .feature-post-meta-bottom .apply:hover{background-color:#2088cb;color:#FFF;border:1px solid #2088cb;}
-.mata-detail.remote{background-color:#46af4a;padding:1px 5px;color:#FFF;border-radius:5px;}
-.mata-detail.full-time{background-color:#d3b940;padding:1px 5px;color:#FFF;border-radius:5px;}
+.mata-detail.remote{background-color:#46af4a;padding:1px 5px;color:#FFF;border-radius:5px;position: absolute;}
+.mata-detail.full-time{background-color:#d3b940;padding:1px 5px;color:#FFF;border-radius:5px;position: absolute;top: 60px;left: 30px;}
 .mata-detail.intern{background-color:#9d27b3;padding:1px 5px;color:#FFF;border-radius:5px;}
 .mata-detail.part{background-color:#ff5a00;padding:1px 5px;color:#FFF;border-radius:5px;}
 #conter-section{background-color:#FFF;padding:100px 0;}
@@ -864,6 +864,9 @@ label{font-size:12px;font-weight:600;text-transform:capitalize;}
 .contact-us .personal-info li:last-child{border-bottom:none;}
 .contact-us .map-contact-inner{height:400px !important;}
 .contact_block-2{position:relative;overflow:hidden;margin-bottom:50px;clear:both;}
+.contact_block_1{top: 39px;}
+.contact_block_2{top: 30px;}
+.contact_block_3{top: 37px;}
 .content-block-box{position:relative;overflow:hidden;}
 .icon-box{float:left;margin-right:30px;}
 .icon-box i{font-size:40px;color:#999;}
