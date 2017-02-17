@@ -171,34 +171,107 @@
     		</div>
     		<div class="modal-body profile-edit">
 				<form class="" method="post" accept-charset="utf-8">
-					<div style="display:none">
-						<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
-					</div>
-    				<div class="form-group">
-    					<label class="label_height pull-left">I Am  <sup class="required alert">*</sup></label>
-						<div class="provider_radio pull-left">
-							<input class="user_login_category" type="radio" name="user_category" value="provider">Job Provider
-						</div>	
-						<div class="seeker_radio pull-left">
-							<input class="user_login_category" type="radio" name="user_category" value="seeker">Job Seeker
+					<!--SignIn-->
+					<div id="show_signin">
+						<div style="display:none">
+							<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
 						</div>
-						<div class="clearfix"> </div>
-					</div>		
-					<div class="form-group">
-                    	<label>Email / Mobile No. <sup class="required alert">*</sup></label>
-                    	<input placeholder="" class="form-control extra_login_menu_user_name" type="text">
-                	</div>
-                	<div class="form-group">
-                    	<label>Password <sup class="required alert">*</sup></label>
-                    	<input placeholder="" class="form-control extra_login_menu_password" type="password">
-                	</div>
-                	<div class="loginbox-submit">
-                    	<a><input type="submit" class="btn btn-default btn-block extra_login_menu_submit custom_disabled" value="Login"></a>
-                	</div>
-         		</form>    
+	    				<div class="form-group">
+	    					<label class="label_height pull-left">I Am a<sup class="required alert">*</sup></label>
+							<div class="provider_radio pull-left">
+								<input class="user_login_category" type="radio" name="user_category" value="provider">Job Provider
+							</div>	
+							<div class="seeker_radio pull-left">
+								<input class="user_login_category" type="radio" name="user_category" value="seeker">Job Seeker
+							</div>
+							<div class="clearfix"> </div>
+						</div>		
+						<div class="form-group">
+	                    	<label>Email / Mobile No. <sup class="required alert">*</sup></label>
+	                    	<input placeholder="" class="form-control extra_login_menu_user_name" type="text">
+	                	</div>
+	                	<div class="form-group">
+	                    	<label>Password <sup class="required alert">*</sup></label>
+	                    	<input placeholder="" class="form-control extra_login_menu_password" type="password">
+	                	</div>
+	                	<a class="recover_password txt_blue">Forget Password ?</a>
+	                	<div class="loginbox-submit">
+	                    	<a><input type="submit" class="btn btn-default btn-block extra_login_menu_submit custom_disabled" value="Login"></a>
+	                	</div>
+	                	<div class="margin_10 pull-right">Not a registerd user? 
+                			<a class="popup_signup txt_blue"> Sign up</a>
+                		</div> 
+                		<div class="clearfix"> </div>
+	                </div>
+	                <!--End SignIn-->
+	                <!--SignUp-->
+					<div id="show_signup" class="dn">
+						<form class="" method="post" accept-charset="utf-8">
+							<div class="form-group">
+								<label class="label_height pull-left">I Am a<sup class="required alert">*</sup></label>
+								<div class="provider_radio pull-left">
+									<input class="user_login_category" type="radio" name="user_category" value="provider">Job Provider
+								</div>	
+								<div class="seeker_radio pull-left">
+									<input class="user_login_category" type="radio" name="user_category" value="seeker">Job Seeker
+								</div>
+								<div class="clearfix"> </div>
+							</div>
+							<div class="form-group">
+					        	<label>Institution<sup class="required alert">*</sup></label>
+					        	<select class="form-control">
+					        		<option>kinderGarden</option>
+					        		<option>School</option>
+					        		<option>Arts and Science</option>
+					        		<option>Engineering</option>
+					        		<option>Medical</option>
+					        	</select>
+					    	</div>	
+							<div class="form-group">
+					        	<label>Name<sup class="required alert">*</sup></label>
+					        	<input placeholder="Organization Name" class="form-control" type="text">
+					    	</div>	
+							<div class="form-group">
+					        	<label>Email <sup class="required alert">*</sup></label>
+					        	<input placeholder="Register Email id" class="form-control extra_login_menu_user_name" type="text">
+					    	</div>
+					    	<div class="form-group">
+					        	<label>Mobile No. <sup class="required alert">*</sup></label>
+					        	<input placeholder="Mobile Number" class="form-control" type="text">
+					    	</div>
+					    	<div class="form-group">
+					        	<label>Captacha<sup class="required alert">*</sup></label>
+					        	<input class="form-control" type="text">
+					    	</div>
+					    	<div class="form-group">
+					        	<label>Enter Captacha value <sup class="required alert">*</sup></label>
+					        	<input placeholder="Captacha Value" class="form-control" type="password">
+					    	</div>
+					    	<div class="loginbox-submit">
+					        	<a><input type="submit" class="btn btn-default btn-block extra_login_menu_submit custom_disabled" value="Sign Up"></a>
+					    	</div>
+					    </form>
+					    <div class="margin_10 pull-right">Already have an account?
+					    	<a class="popup_signin txt_blue"> Sign In</a>
+					    </div>   
+					    <div class="clearfix"> </div> 
+					</div>
+					<!--End Sign up-->
+					<!--Password-->
+					<div id="show_pwd" class="dn">
+						<div class="form-group">
+				        	<label>Email Id<sup class="required alert">*</sup></label>
+				        	<input class="form-control" type="text">
+				    	</div>
+				    	 <button type="submit" class="btn btn-default btn-block">
+                            <i class="fa fa-unlock"> </i> Retrieve Password
+                        </button>
+					</div>	
+                </form>
+                   
     		</div>
     		<div class="modal-footer">
-    			<div class="home_sociallogin text-center">Sign in using social accounts</div>
+    			<div class="home_sociallogin text-center">SignIn/SignUp using social accounts</div>
         		<ul class="social-network social-circle onwhite social_login_links_home custom_disabled">
             		<li><a href="" class="icoFacebook social_login_home_facebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
             		<li><a href="" class="icoTwitter social_login_home_twitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
@@ -210,4 +283,8 @@
 	</div>
 </div>
 
+
+
+    	
+	
         

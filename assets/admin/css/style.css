@@ -4677,10 +4677,10 @@ div.dt-button-background {
 }
 
 .profile_subscription_tab {
-/*    height: 400px;*/
+	width: 830px;
+	/*height: 400px;
     overflow-x: hidden;
-    width: 830px;
-    overflow-y: auto;
+    overflow-y: auto;*/
 }
 .subscription_organization_inner_section {
     margin : 0 !important;
