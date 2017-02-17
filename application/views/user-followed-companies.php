@@ -165,6 +165,7 @@
 	                        <div class="">
 	                            <h4> <?php echo $rec_val['vacancies_job_title']; ?> </h4>
 	                            <p>  <?php echo $rec_val['organization_name']; ?> </p>
+                                <p> <i class="fa fa-clock-o"></i> <?php echo ($rec_val['vacancy_type'] == "full" ? "Full Time" : ($rec_val['vacancy_type'] == "part" ? "Part Time" : "Not Mention")); ?> </p>
 	                        </div>
 	                        <div class="feature-post-meta">
 	                            <i class="fa fa-clock-o"> 
@@ -270,6 +271,7 @@
                                     ?>
                                 </div>
 	                            <span class="pull-right"><i class="fa fa-calendar"></i> <?php echo date('d M Y',strtotime($vac_val['vacancies_open_date'])); ?> </span>
+                                <p class="pull-right"> <i class="fa fa-clock-o"></i> <?php echo ($vac_val['vacancy_type'] == "full" ? "Full Time" : ($vac_val['vacancy_type'] == "part" ? "Part Time" : "Not Mention")); ?> </p>
 	                            <div class="clearfix"> </div>
 	                            <p><?php echo substr($vac_val['vacancies_instruction'], 0, 100); ?>...</p>
 	                            <span><i class="fa fa-rupee"></i> <?php echo number_format($vac_val['vacancies_start_salary']); ?> - <?php echo number_format($vac_val['vacancies_end_salary']); ?> </span>

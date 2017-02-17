@@ -191,6 +191,10 @@
         <td width="50%" class="heading"> Maximum Salary </td>
         <td width="50%" class="content"> <?php echo $candidate_details[0]['candidate_expecting_end_salary']; ?> </td>
     </tr>
+    <tr>
+        <td width="50%" class="heading"> Work Type </td>
+        <td width="50%" class="content"> <?php echo ucfirst($candidate_details[0]['candidate_type']); ?> </td>
+    </tr>
 </table>
 <!-- Education Profile -->
 <h3 class="resume-sub-title">Educational Profile</h3>

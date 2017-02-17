@@ -608,7 +608,8 @@ class Job_seeker extends CI_Controller {
 					'candidate_address_2' => $this->input->post('seeker_address2'),
 					'candidate_profile_completeness' => $profile_complete,
 					'candidate_state_id' => $this->input->post('seeker_state'),
-					'candidate_district_id' => $this->input->post('seeker_district')
+					'candidate_district_id' => $this->input->post('seeker_district'),
+					'candidate_type' => $this->input->post('candidate_work_type')
 					);
 				if($this->input->post('popup_type') == 'social') {
 					$data_array = array(
@@ -622,7 +623,8 @@ class Job_seeker extends CI_Controller {
 						'candidate_address_2' => $this->input->post('seeker_address2'),
 						'candidate_profile_completeness' => $profile_complete,
 						'candidate_state_id' => $this->input->post('seeker_state'),
-						'candidate_district_id' => $this->input->post('seeker_district')
+						'candidate_district_id' => $this->input->post('seeker_district'),
+						'candidate_type' => $this->input->post('candidate_work_type')
 					);
 				}
 
@@ -968,7 +970,8 @@ class Job_seeker extends CI_Controller {
 	        				'experience' => $this->input->post('search_exp'),
 	        				'posting' => $this->input->post('search_posting'),
 	        				'qualification' => $this->input->post('search_qualification'),
-	        				);
+	        				'candidate_work_type' => $this->input->post('candidate_work_type'),
+           				);
 	    		$this->session->set_userdata('seeker_search_inputs',$inputs); // To store search inputs in session
 	    	}
 	    	$search_inputs = $this->session->userdata('seeker_search_inputs'); // To get search inputs from session

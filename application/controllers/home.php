@@ -292,6 +292,7 @@ class Home extends CI_Controller {
         				'posting' => $this->input->post('search_posting'),
         				'qualification' => $this->input->post('search_qualification'),
         				'institution' => $this->input->post('search_institution'),
+        				'candidate_work_type' => $this->input->post('candidate_work_type'),
         				);
     		$this->session->set_userdata('search_inputs',$inputs); // To store search inputs in session
     	}

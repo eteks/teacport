@@ -1292,8 +1292,14 @@ class Job_provider extends CI_Controller {
 		$data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$candidate_id = $this->uri->segment(3);
 		$institution_type_id = $data['organization']['organization_institution_type_id'];	
-		$data['candidate'] = $this->job_provider_model->candidate_full_data($candidate_id);
-		if($data['candidate']['personnal']['candidate_institution_type'] == $institution_type_id){
+		// $data['candidate'] = $this->job_provider_model->candidate_full_data($candidate_id);
+		$data['candidate'] = get_candidate_full_profile($this->common_model->candidate_full_profile_by_id($candidate_id));
+		$data['known_languages'] = $this->common_model->all_languages(1);
+		$data['posting_values'] = $this->common_model->applicable_posting(NULL,1);
+		$data['class_values'] = $this->common_model->classlevel_by_institution(NULL);
+		$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
+		$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
+		if($data['candidate'][0]['candidate_institution_type'] == $institution_type_id){
 			$this->load->view('company-dashboard-candidate-detail',$data);
 		}
 		else{
@@ -1450,9 +1456,9 @@ class Job_provider extends CI_Controller {
 		if($this->uri->segment(3) && $this->uri->segment(4)){
 			$data['candidate_details'] = get_candidate_full_profile($this->common_model->candidate_full_profile_by_id($this->uri->segment(3)));
 			$data['known_languages'] = $this->common_model->all_languages(1);
-			$data['posting_values'] = $this->common_model->applicable_posting('',1);
-			$data['class_values'] = $this->common_model->classlevel_by_institution('');
-			$data['subject_values'] = $this->common_model->subject_by_institution('',1);
+			$data['posting_values'] = $this->common_model->applicable_posting(NULL,1);
+			$data['class_values'] = $this->common_model->classlevel_by_institution(NULL);
+			$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
 			$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
 			$org_id = $this->uri->segment(4);
 			$candidate_id = $this->uri->segment(3);	

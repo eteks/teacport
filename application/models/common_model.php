@@ -63,6 +63,9 @@ class Common_model extends CI_Model {
         if(!empty($data['institution'])) {
         	$this->db->where('op.organization_institution_type_id',$data['institution']);
         }
+        if(!empty($data['candidate_work_type'])) {
+        	$this->db->where('ov.vacancy_type',$data['candidate_work_type']);
+        }
 
         $this->db->limit($limit,$start);
         $this->db->order_by('ov.vacancies_id','desc');
@@ -110,15 +113,15 @@ class Common_model extends CI_Model {
         if(!empty($data['institution'])) {
         	$this->db->where('op.organization_institution_type_id',$data['institution']);
         }
+        if(!empty($data['candidate_work_type'])) {
+        	$this->db->where('ov.vacancy_type',$data['candidate_work_type']);
+        }
         $this->db->order_by('ov.vacancies_id','desc');
 
         $model_data['total_rows'] = $this->db->get()->num_rows();
 
         return $model_data;
-
     }
-
-
 	public function get_all_district()
 	{
 		$this->db->select('*');    
@@ -692,11 +695,13 @@ class Common_model extends CI_Model {
 	// To get full candidate details by id.
 	public function candidate_full_profile_by_id($id) {
 		$where = '(candidate_id="'.$id.'"AND candidate_status=1)';
-		$this->db->select('cp.*,cpre.*,d.district_id,d.district_name,s.state_id,s.state_name,l.language_id,l.language_name,cedu.*,cexp.*,eduq.educational_qualification as edu_qualification,edum.language_name as edu_medium,edud.departments_name as edu_department,eduu.university_board_name as edu_board,expc.class_level as exp_class,exps.subject_name as exp_subject,expu.university_board_name as exp_board');
+		$this->db->select('cp.*,cpre.*,wd.district_id as willing_district_id,wd.district_name as willing_district,ws.state_id as willing_state_id,ws.state_name as willing_state,d.district_id,d.district_name,s.state_id,s.state_name,l.language_id,l.language_name,cedu.*,cexp.*,eduq.educational_qualification as edu_qualification,edum.language_name as edu_medium,edud.departments_name as edu_department,eduu.university_board_name as edu_board,expc.class_level as exp_class,exps.subject_name as exp_subject,expu.university_board_name as exp_board');
 		$this->db->from('tr_candidate_profile cp');
 		$this->db->join('tr_candidate_preferance cpre','cp.candidate_id=cpre.candidate_profile_id','inner');	
 		$this->db->join('tr_state s','cp.candidate_state_id=s.state_id','inner');
-		$this->db->join('tr_district d','cp.candidate_district_id=d.district_id','inner');	
+		$this->db->join('tr_district d','cp.candidate_district_id=d.district_id','inner');
+		$this->db->join('tr_state ws','cp.candidate_live_state_id=ws.state_id','left');
+		$this->db->join('tr_district wd','cp.candidate_live_district_id=wd.district_id','left');	
 		$this->db->join('tr_languages l','cp.candidate_mother_tongue=l.language_id','inner');	
 		$this->db->join('tr_candidate_education cedu','cp.candidate_id=cedu.candidate_profile_id','inner');
 		$this->db->join('tr_educational_qualification eduq','cedu.candidate_education_qualification_id=eduq.educational_qualification_id','inner');
@@ -712,10 +717,5 @@ class Common_model extends CI_Model {
 		return $model_data;
 	}
 	
-
-
-
-
-
 } // End
 

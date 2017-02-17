@@ -295,7 +295,7 @@ class Job_provider_model extends CI_Model {
     		}
     	}
 
-		$this->db->select('d.district_name,cp.candidate_id,cp.candidate_marital_status,cp.candidate_gender,cp.candidate_date_of_birth,cp.candidate_image_path,cp.candidate_name,(select sum(cex.candidate_experience_year) from tr_candidate_experience cex where cex.candidate_profile_id = cp.candidate_id ) as experience,cpre.candidate_expecting_start_salary,cpre.candidate_expecting_end_salary,eq.educational_qualification');
+		$this->db->select('d.district_name,cp.candidate_id,cp.candidate_type,cp.candidate_marital_status,cp.candidate_gender,cp.candidate_date_of_birth,cp.candidate_image_path,cp.candidate_name,(select sum(cex.candidate_experience_year) from tr_candidate_experience cex where cex.candidate_profile_id = cp.candidate_id ) as experience,cpre.candidate_expecting_start_salary,cpre.candidate_expecting_end_salary,eq.educational_qualification');
 		$this->db->from('tr_candidate_profile cp');
 		$this->db->join('tr_district d', 'cp.candidate_district_id = d.district_id','inner');
 		$this->db->join('tr_candidate_education cedu', 'cp.candidate_id = cedu.candidate_profile_id','inner');
@@ -305,6 +305,9 @@ class Job_provider_model extends CI_Model {
 		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
 			$where .= " AND cp.candidate_district_id ='".$searchdata['candidate_willing_district']."'";
+		}
+		if(isset($searchdata['candidate_work_type']) && $searchdata['candidate_work_type'] != ''){
+			$where .= " AND cp.candidate_type ='".$searchdata['candidate_work_type']."'";
 		}
 		if(isset($searchdata['candidate_tet_status']) && $searchdata['candidate_tet_status'] != ''){
 			$where .= " AND cp.candidate_tet_exam_status = '".$searchdata['candidate_tet_status']."'";
@@ -358,7 +361,7 @@ class Job_provider_model extends CI_Model {
     		}
     	}
 
-		$this->db->select('d.district_name,cp.candidate_id,cp.candidate_marital_status,cp.candidate_gender,cp.candidate_date_of_birth,cp.candidate_image_path,cp.candidate_name,(select sum(cex.candidate_experience_year) from tr_candidate_experience cex where cex.candidate_profile_id = cp.candidate_id ) as experience,cpre.candidate_expecting_start_salary,cpre.candidate_expecting_end_salary,eq.educational_qualification');
+		$this->db->select('d.district_name,cp.candidate_id,cp.candidate_type,cp.candidate_marital_status,cp.candidate_gender,cp.candidate_date_of_birth,cp.candidate_image_path,cp.candidate_name,(select sum(cex.candidate_experience_year) from tr_candidate_experience cex where cex.candidate_profile_id = cp.candidate_id ) as experience,cpre.candidate_expecting_start_salary,cpre.candidate_expecting_end_salary,eq.educational_qualification');
 		$this->db->from('tr_candidate_profile cp');
 		$this->db->join('tr_district d', 'cp.candidate_district_id = d.district_id','inner');
 		$this->db->join('tr_candidate_education cedu', 'cp.candidate_id = cedu.candidate_profile_id','inner');
@@ -368,6 +371,9 @@ class Job_provider_model extends CI_Model {
 		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
 			$where .= " AND cp.candidate_district_id ='".$searchdata['candidate_willing_district']."'";
+		}
+		if(isset($searchdata['candidate_work_type']) && $searchdata['candidate_work_type'] != ''){
+			$where .= " AND cp.candidate_type ='".$searchdata['candidate_work_type']."'";
 		}
 		if(isset($searchdata['candidate_tet_status']) && $searchdata['candidate_tet_status'] != ''){
 			$where .= " AND cp.candidate_tet_exam_status = '".$searchdata['candidate_tet_status']."'";

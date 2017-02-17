@@ -22,7 +22,6 @@
 							<span style='color:#FFFFFF; font-size:18px; font-family:Trebuchet MS, Verdana, Arial;'>Forgot Password?</span>
 							</td>
 						</tr>
-
 <!--DOUBLE BORDERS BOTTOM-->
 <tr>
 	<td height='3' width='31' style='border-top:1px solid #e4e4e4; border-bottom:1px solid #e4e4e4;'>

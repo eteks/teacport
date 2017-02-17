@@ -787,10 +787,12 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
-        if(!empty($data['institution'])) {
-        	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // if(!empty($data['institution'])) {
+        // 	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // }
+        if(!empty($data['candidate_work_type'])) {
+        	$this->db->where('op.vacancies_type',$data['candidate_work_type']);
         }
-
         $this->db->limit($limit,$start);
         $this->db->order_by('ov.vacancies_id','desc');
         $model_data['search_results'] = $this->db->get()->result_array();
@@ -834,8 +836,11 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
-        if(!empty($data['institution'])) {
-        	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // if(!empty($data['institution'])) {
+        // 	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // }
+        if(!empty($data['candidate_work_type'])) {
+        	$this->db->where('op.vacancies_type',$data['candidate_work_type']);
         }
         $this->db->order_by('ov.vacancies_id','desc');
 
