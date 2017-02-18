@@ -1300,6 +1300,14 @@ class Job_provider extends CI_Controller {
 		$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
 		$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
 		if($data['candidate'][0]['candidate_institution_type'] == $institution_type_id){
+
+
+			$params = array('candidate_id' => $candidate_id);
+			$this->load->library('seeker_iptracker');
+			$this->seeker_iptracker->provider_save_site_visit($params);
+
+
+
 			$this->load->view('company-dashboard-candidate-detail',$data);
 		}
 		else{

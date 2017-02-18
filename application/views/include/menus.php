@@ -194,13 +194,13 @@
 	                    	<label>Password <sup class="required alert">*</sup></label>
 	                    	<input placeholder="" class="form-control extra_login_menu_password" type="password">
 	                	</div>
-	                	<a class="recover_password txt_blue">Forget Password ?</a>
+	                	<!-- <a class="recover_password txt_blue">Forget Password ?</a> -->
 	                	<div class="loginbox-submit">
 	                    	<a><input type="submit" class="btn btn-default btn-block extra_login_menu_submit custom_disabled" value="Login"></a>
 	                	</div>
-	                	<div class="margin_10 pull-right">Not a registerd user? 
+	                	<!-- <div class="margin_10 pull-right">Not a registerd user? 
                 			<a class="popup_signup txt_blue"> Sign up</a>
-                		</div> 
+                		</div>  -->
                 		<div class="clearfix"> </div>
 	                </div>
 	                <!--End SignIn-->
