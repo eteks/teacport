@@ -155,8 +155,11 @@ class Job_provider extends CI_Controller {
 					$this->email->message($message);
 					/* Check whether mail send or not*/
 					if($this->email->send()){
+						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
+						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+						$get = file_get_contents($url);				
 						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
+						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
 						$fb['error'] = 2;
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
@@ -164,13 +167,24 @@ class Job_provider extends CI_Controller {
 						$this->load->view('job-providers-login',$fb);
 					}
 					else{
-						/* mail sent error stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
-						$fb['error'] = 1;
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
-						$this->load->view('register-job-providers',$fb);
+						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
+						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+						$get = file_get_contents($url);
+						$output = explode('.',$get);
+						if($output[0] == "S") {
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
+							$fb['error'] = 2;
+							$this->load->view('job-providers-login',$fb);
+						}
+						else {
+							$fb['reg_server_msg'] = 'Some thing wrong in mail sending process and sms sending process. So please register again!';
+							$fb['error'] = 1;
+							$delete_record = $this->job_provider_model->delete_job_provider($data);
+							$this->load->view('register-job-providers',$fb);
+						}
 					}
 				}
 				else{
@@ -584,6 +598,7 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
 			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
+			$this->form_validation->set_rules('provider_work_type', 'Vacancy Work Type', 'trim|required|xss_clean|');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
 			$this->form_validation->set_rules('provider_max_salary', 'Maximum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|callback_check_greater_value['.$this->input->post('provider_min_salary').']|xss_clean');
 			$this->form_validation->set_rules('provider_accom_instruction', 'Accomadation Information', 'trim|required|callback_alpha_dash_space|max_length[150]|xss_clean');
@@ -608,6 +623,7 @@ class Job_provider extends CI_Controller {
 									'vacancies_experience'			=> $this->input->post('provider_experience'),
 									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
 									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
+									'vacancy_type'				    => $this->input->post('provider_work_type'),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
 									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),
@@ -854,7 +870,8 @@ class Job_provider extends CI_Controller {
 			// $this->form_validation->set_rules('provider_department[]', 'Department', 'trim|xss_clean|');
 			$this->form_validation->set_rules('provider_subject', 'Subjects', 'trim|required|numeric|is_natural_no_zero|xss_clean');
 			$this->form_validation->set_rules('provider_experience', 'Experience', 'trim|required|max_length[10]|xss_clean');
-			$this->form_validation->set_rules('provider_university', 'University', 'trim|numeric|is_natural_no_zero|max_length[2]|xss_clean');
+			$this->form_validation->set_rules('provider_university', 'University', 'trim|required|xss_clean');
+			$this->form_validation->set_rules('provider_work_type', 'Vacancy Work Type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('provider_posting', 'Applicable Posting', 'trim|numeric|max_length[2]|xss_clean');
 			$this->form_validation->set_rules('provider_medium_of_instruction[]', 'Medium of Instruction', 'trim|required|xss_clean|callback_multiple_medium');
 			$this->form_validation->set_rules('provider_min_salary', 'Minimum salary', 'trim|required|numeric|is_natural_no_zero|min_length[4]|max_length[9]|xss_clean');
@@ -876,6 +893,7 @@ class Job_provider extends CI_Controller {
 									'vacancies_university_board_id '=> $this->input->post('provider_university') !== ''?$this->input->post('provider_university'):NULL,
 									'vacancies_applicable_posting_id '=> $this->input->post('provider_posting') !== ''?$this->input->post('provider_posting'):NULL,
 									'vacancies_medium'				=> implode(',',$this->input->post('provider_medium_of_instruction')),
+									'vacancy_type'					=> $this->input->post('provider_work_type'),
 									'vacancies_start_salary'		=> $this->input->post('provider_min_salary'),
 									'vacancies_end_salary'			=> $this->input->post('provider_max_salary'),
 									'vacancies_accommodation_info'	=> $this->input->post('provider_accom_instruction'),
@@ -1288,8 +1306,22 @@ class Job_provider extends CI_Controller {
 		$data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$candidate_id = $this->uri->segment(3);
 		$institution_type_id = $data['organization']['organization_institution_type_id'];	
-		$data['candidate'] = $this->job_provider_model->candidate_full_data($candidate_id);
-		if($data['candidate']['personnal']['candidate_institution_type'] == $institution_type_id){
+		// $data['candidate'] = $this->job_provider_model->candidate_full_data($candidate_id);
+		$data['candidate'] = get_candidate_full_profile($this->common_model->candidate_full_profile_by_id($candidate_id));
+		$data['known_languages'] = $this->common_model->all_languages(1);
+		$data['posting_values'] = $this->common_model->applicable_posting(NULL,1);
+		$data['class_values'] = $this->common_model->classlevel_by_institution(NULL);
+		$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
+		$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
+		if($data['candidate'][0]['candidate_institution_type'] == $institution_type_id){
+
+
+			$params = array('candidate_id' => $candidate_id);
+			$this->load->library('seeker_iptracker');
+			$this->seeker_iptracker->provider_save_site_visit($params);
+
+
+
 			$this->load->view('company-dashboard-candidate-detail',$data);
 		}
 		else{
@@ -1446,9 +1478,9 @@ class Job_provider extends CI_Controller {
 		if($this->uri->segment(3) && $this->uri->segment(4)){
 			$data['candidate_details'] = get_candidate_full_profile($this->common_model->candidate_full_profile_by_id($this->uri->segment(3)));
 			$data['known_languages'] = $this->common_model->all_languages(1);
-			$data['posting_values'] = $this->common_model->applicable_posting('',1);
-			$data['class_values'] = $this->common_model->classlevel_by_institution('');
-			$data['subject_values'] = $this->common_model->subject_by_institution('',1);
+			$data['posting_values'] = $this->common_model->applicable_posting(NULL,1);
+			$data['class_values'] = $this->common_model->classlevel_by_institution(NULL);
+			$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
 			$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
 			$org_id = $this->uri->segment(4);
 			$candidate_id = $this->uri->segment(3);	

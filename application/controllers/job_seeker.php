@@ -460,6 +460,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
 			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_term_and_condition');
 			/* Check whether registration form server side validation are valid or not */
@@ -467,7 +468,7 @@ class Job_seeker extends CI_Controller {
 	       	{
 
 	      		/* Registration form invalid stage */
-	       		$fb['reg_server_msg'] = 'Please provide valid information11!';	
+	       		$fb['reg_server_msg'] = 'Please provide valid information!';	
 	       		$fb['error'] = 1;
 	       		$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -483,6 +484,7 @@ class Job_seeker extends CI_Controller {
 					'candidate_email' => $this->input->post('candidate_email'),
 					'candidate_mobile_no' => $this->input->post('candidate_mobile_no'),
 					'candidate_registration_type' => 'teacherrecruit',
+					'candidate_type' => $this->input->post('candidate_work_type'),
 					'candidate_password' => $common->generateStrongPassword(),
 				);
 				
@@ -498,10 +500,14 @@ class Job_seeker extends CI_Controller {
 					$this->email->to($data['candidate_email']);
 					$this->email->subject($subject);
 					$this->email->message($message);
+					
 					/* Check whether mail send or not*/
 					if($this->email->send()){
+						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+						$get = file_get_contents($url);
 						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
+						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
 						$fb['error'] = 2;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
@@ -510,15 +516,26 @@ class Job_seeker extends CI_Controller {
 						$this->load->view('job-seekers-login',$fb);
 					}
 					else{
-						/* mail sent error stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
-						$fb['error'] = 1;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						
-						$this->load->view('register-job-seekers',$fb);
+						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+						$get = file_get_contents($url);
+						$output = explode('.',$get);
+						if($output[0] == "S") {
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
+							$fb['error'] = 2;
+							$this->load->view('job-seekers-login',$fb);
+						}
+						else {
+							$fb['reg_server_msg'] = 'Some thing wrong in mail sending process and sms sending process. So please register again!';
+							$fb['error'] = 1;
+							$delete_record = $this->job_seeker_model->delete_job_seeker($data);
+							$this->load->view('register-job-seekers',$fb);
+						}
+						/* mail sent error stage. send  facebook login link and server message to login page */
 					}
 				} else {
 					/* data exist stage. send  facebook login link and server message to login page */					
@@ -576,19 +593,19 @@ class Job_seeker extends CI_Controller {
      	}
      	// print_r($session_data['login_session']);
 		if($_POST) {
+			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
 			if($this->input->post('popup_type') == 'social') {
 				$this->form_validation->set_rules('seeker_email', 'Email', 'trim|required|xss_clean|valid_email');
 				$this->form_validation->set_rules('seeker_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
 				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[20]');
 				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|min_length[8]|max_length[20]|matches[seeker_password]');
 				$this->form_validation->set_rules('seeker_institution', 'Institution Type', 'trim|required|xss_clean|');
-			}
-
-			$this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+			}		
 			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
 			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
+			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean|');
 			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('seeker_state', 'State', 'trim|required|xss_clean');
 				
@@ -606,7 +623,8 @@ class Job_seeker extends CI_Controller {
 					'candidate_address_2' => $this->input->post('seeker_address2'),
 					'candidate_profile_completeness' => $profile_complete,
 					'candidate_state_id' => $this->input->post('seeker_state'),
-					'candidate_district_id' => $this->input->post('seeker_district')
+					'candidate_district_id' => $this->input->post('seeker_district'),
+					'candidate_type' => $this->input->post('candidate_work_type')
 					);
 				if($this->input->post('popup_type') == 'social') {
 					$data_array = array(
@@ -620,7 +638,8 @@ class Job_seeker extends CI_Controller {
 						'candidate_address_2' => $this->input->post('seeker_address2'),
 						'candidate_profile_completeness' => $profile_complete,
 						'candidate_state_id' => $this->input->post('seeker_state'),
-						'candidate_district_id' => $this->input->post('seeker_district')
+						'candidate_district_id' => $this->input->post('seeker_district'),
+						'candidate_type' => $this->input->post('candidate_work_type')
 					);
 				}
 
@@ -966,7 +985,8 @@ class Job_seeker extends CI_Controller {
 	        				'experience' => $this->input->post('search_exp'),
 	        				'posting' => $this->input->post('search_posting'),
 	        				'qualification' => $this->input->post('search_qualification'),
-	        				);
+	        				'candidate_work_type' => $this->input->post('candidate_work_type'),
+           				);
 	    		$this->session->set_userdata('seeker_search_inputs',$inputs); // To store search inputs in session
 	    	}
 	    	$search_inputs = $this->session->userdata('seeker_search_inputs'); // To get search inputs from session

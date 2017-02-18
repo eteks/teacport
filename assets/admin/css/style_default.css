@@ -1012,6 +1012,23 @@ table {
 .show_planname{
 	background: #ff1a75 none repeat scroll 0 0 !important;
 }
+/*Job Provider Payment Details*/
+.payment_tooltip .control-label, .payment_tooltip .icon-ok{
+    color:yellow;
+}
+/*.subscription_organization_section h4 {
+    font-size: 12.5px;
+}
+.subscription_organization_section label, .subscription_organization_section button{
+    font-size: 10px;
+    line-height: 5px;
+}
+.plan_label_section  h4{
+    margin-bottom: 0 !important;
+}
+.form-wizard .profile_subscription_tab h4{
+    margin-bottom: 10px !important;
+}*/
 /*Added By Akila*/
 /*Footer*/
 #footer {

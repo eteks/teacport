@@ -24,11 +24,19 @@
                         <div class="col-md-4 col-sm-4 col-xs-12">
                             <div class="panel panel-border">
                                 <div class="dashboard-logo-sidebar center-block">
-                                    <?php if (@getimagesize($organization['organization_logo'])) { ?>
-                                    <img src="<?php echo $organization['organization_logo']; ?>" alt="institution" class="img-responsive center-block ">
-                                    <?php } else { ?>
-                                	<img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive">
-                                    <?php } ?>
+                                    <?php
+                                    if(!empty($organization['organization_logo'])) :
+                                        $thumb_image = explode('.', end(explode('/',$organization['organization_logo'])));
+                                        $thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
+                                    ?>
+                                    <img src="<?php echo base_url().PROVIDER_UPLOAD.$thumb; ?>" class="img-responsive center-block" />
+                                    <?php
+                                    else :
+                                    ?>
+                                    <img src="<?php echo base_url().'assets/images/institution.png'; ?>" alt="institution" class="img-responsive center-block" />
+                                    <?php
+                                    endif;
+                                    ?>
                                 </div>
                                 <div class="text-center dashboard-logo-sidebar-title">
                                     <h4><?php echo $organization['organization_name']; ?></h4>
@@ -72,6 +80,7 @@
 	                                    <p class="vacancies_instruction_act"><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?>...</p>
 		                                <div class="job-salary job_salary_act">
 		                                    &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>
+                                            <p> <i class="fa fa-clock-o"></i> <?php echo ($postedjobs['vacancy_type'] == "full" ? "Full Time" : ($postedjobs['vacancy_type'] == "part" ? "Part Time" : "Not Mention")); ?> </p>
 		                                </div>
 	                                </div>
 	                                <div class="col-md-2 col-sm-2 col-xs-2 buttonss">

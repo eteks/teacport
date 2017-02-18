@@ -1180,7 +1180,7 @@ label.form-input-error {
 	height: 70px;
     left: 70px;
     position: absolute;
-    top: 70px;
+    top: 45px;
     width: 70px;
 }
 .subcription_plan_details{
@@ -1885,4 +1885,26 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 	font-size:12px !important;
 	color:#000 !important;
 }	
+.new_news_highlight {
+	background: #29aafe;
+	/*background: red;*/
+    border-radius: 12px;
+    color: #fff;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: text;
+    display: inline-block;
+    animation: shake 0.2s ease-in-out 0.2s infinite alternate;
+}
+@keyframes shake {
+ from {
+    transform: translate(10px, 1px) rotate(5deg);
+ }
+ to {
+   transform-origin:center center;
+   transform: rotate(-5deg);
+ }
 
+}

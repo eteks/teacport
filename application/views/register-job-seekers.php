@@ -46,9 +46,9 @@
 		                            </div>
                                     <div class="form-group">
                                         <label>Employment Type<sup class="alert">*</sup></label>
-                                        <select name="" id="" class="form-control form_inputs">
-                                        <option value="">Full Time</option>
-                                        <option value="">Part Time</option> 
+                                        <select name="candidate_work_type" id="" class="form-control form_inputs">
+                                        <option value="full">Full Time</option>
+                                        <option value="part">Part Time</option> 
                                         </select>     
                                     </div>
 		                            <div class="form-group">

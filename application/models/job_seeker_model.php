@@ -23,6 +23,11 @@ class Job_seeker_model extends CI_Model {
 			return 'exists';
 		}
 	}
+	public function delete_job_seeker($data)
+	{
+		$this->db->delete('tr_candidate_profile',array('candidate_email' => $data['candidate_email']));
+		return TRUE;
+	}
 	public function check_valid_seeker_login($data){
 		/*query for check wheather data exist or not */
 		$where = "(candidate_email='".$data['candidate_login_data']."' AND candidate_password='".$data['candidate_password']."' AND candidate_status='1' OR candidate_mobile_no='".$data['candidate_login_data']."' AND candidate_password='".$data['candidate_password']."' AND candidate_status='1')";
@@ -787,10 +792,12 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
-        if(!empty($data['institution'])) {
-        	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // if(!empty($data['institution'])) {
+        // 	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // }
+        if(!empty($data['candidate_work_type'])) {
+        	$this->db->where('op.vacancies_type',$data['candidate_work_type']);
         }
-
         $this->db->limit($limit,$start);
         $this->db->order_by('ov.vacancies_id','desc');
         $model_data['search_results'] = $this->db->get()->result_array();
@@ -834,8 +841,11 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
-        if(!empty($data['institution'])) {
-        	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // if(!empty($data['institution'])) {
+        // 	$this->db->where('op.organization_institution_type_id',$data['institution']);
+        // }
+        if(!empty($data['candidate_work_type'])) {
+        	$this->db->where('op.vacancies_type',$data['candidate_work_type']);
         }
         $this->db->order_by('ov.vacancies_id','desc');
 
