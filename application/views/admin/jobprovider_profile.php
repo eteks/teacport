@@ -87,6 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
                           <th> Created Date</th>
+                          <th> Visitors Count </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
@@ -153,6 +154,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?> 
                           </td> 
+                          <td class="">
+                          	<a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="show_visitorcount_detail">
+                          		145
+                          	</a>
+                          </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="popup_section_profile">
@@ -231,6 +237,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <span class="desc desc_space"><i class="icon-ok"></i>Payment Details</span>
                             </a>
                           </li>
+                          <li class="span-2">
+                            <a href="#tab4" data-toggle="tab" class="step">
+                            	<span class="number">4</span>
+                              <span class="desc desc_space"><i class="icon-ok"></i>Grace Period</span>
+                            </a>
+                          </li>
                           <!-- <li class="span-2">
                             <a href="#tab4" data-toggle="tab" class="step">
                             	<span class="number">4</span>
@@ -252,12 +264,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <span class="desc desc_space"><i class="icon-ok"></i>Addtional Details</span>
                             </a>
                           </li>
+                          <li class="span-2">
+                            <a href="#tab4" data-toggle="tab" class="step">
+                            	<span class="number">4</span>
+                              <span class="desc desc_space"><i class="icon-ok"></i>Grace Period</span>
+                            </a>
+                          </li>
                           <!-- <li class="span-2">
                             <a href="#tab4" data-toggle="tab" class="step">
                               <span class="number">4</span>
                               <span class="desc"><i class="icon-ok"></i>Validity <br/> Details</span>
                             </a>
                           </li> -->
+                          
                           <?php
                           endif;
                           ?>
@@ -761,6 +780,64 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <?php
                       endif;
                       ?>
+                    </div>
+                    <!--#tab4-->
+                    <div class="tab-pane" id="tab4">
+                      <h4>Grace Period</h4>
+                      <p class="span12 control-group">                                       
+                         <span class="info_color">Note :</span>
+                         Extending grace time is applicable only for the Latest Plan/Current Plan that customer availed. 
+                      </p>
+                      <div class="span12">
+                        <div class="control-group">
+                          <label class="control-label">Plan Name</label>
+                          <span class="dynamic_data icon show_planname"> 
+                            Premium Welcome 365
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="control-group">                                       
+                          <label class="control-label">Plan Start Date</label>
+                          <span class="dynamic_data"> 
+                            15.02.2017
+                          </span>
+                        </div>
+                      </div> 
+                      <div class="span12">
+                        <div class="control-group">
+                          <label class="control-label">Plan End Date</label>
+                          <span class="dynamic_data"> 
+                            25.12.2017
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                      	<div class="control-group">   
+	                      	<label>Plan Current Status</label>                                    
+	                        <span class='icon'> Active </span>
+	                        <span class='icon icon_expired'> Inactive </span>  
+	                    </div>    
+                      </div>
+                      <div class="span12">
+                      	<div class="control-group">
+                      		<input type="checkbox" class="control-group apply_grace_period">Apply Grace period for this provider latest/current plan   
+                        </div>
+                      </div>
+                      <div class="span12 show_grace_period hide_all">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Grace Period Start Date</label>
+                          <span class="dynamic_data"> 
+                            25.03.2017
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Grace Period End Date</label>
+                          <span class="dynamic_data"> 
+                           5.04.2017
+                          </span>
+                        </div>
+                      </div>
                     </div>                   
                     <?php
                     else :
@@ -970,6 +1047,31 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div> -->
                       </div>
                     </div>
+                    <div class="tab-pane" id="tab4">
+                      <h4>Grace Period</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Plan Name</label>
+                          <span>
+                            <input type="text" class="span6 tabfield3 tabfield alpha_value" value="" placeholder="Plan Name" name="" maxlength="50" />
+                          </span>
+                        </div>
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Plan Start Date</label>
+                          <span>
+                            <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan Start Date" maxlength="50" />
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">Plan End Date</label>
+                          <span>
+                            <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan End Date" />
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                     <!-- <div class="tab-pane" id="tab4">
                       <h4>Validity Details</h4>
                       <div class="span12">
@@ -1052,7 +1154,86 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </p>
           <a class="popup-close" data-popup-close="popup_section_profile" href="#">x</a>
         </div>
-      </div>     	
+      </div> <!--end full and Edit-->
+      
+      
+       <!---Visitors Count-->
+      <div class="popup feedback-design" data-popup="show_visitorcount_detail">
+        <div class="popup-inner">
+          <div class="widget box blue" id="popup_wizard_section">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Visitors Count
+              </h4>                        
+            </div>
+            <div class="widget-body">
+            	<table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
+                      <thead>
+                        <tr class="">
+                          <th> Organization Visitor Count Id </th>
+                          <th> Organization Id </th>
+                          <th> Candidate Id </th>
+                          <th>IP Address </th>
+                          <th>User Agent </th>
+                          <th>Count </th>
+                          <th>User Type </th>
+                          <th>Created Date </th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                      	<tr>
+                      		<td>1</td>
+                      		<td>12234</td>
+                      		<td>25</td>
+                      		<td>10.0.0.0</td>
+                      		<td>1</td>
+                      		<td>45</td>
+                      		<td>Registered</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr>
+                      	<tr>
+                      		<td>12</td>
+                      		<td>12234</td>
+                      		<td>20</td>
+                      		<td>10.0.12.200</td>
+                      		<td>1</td>
+                      		<td>14</td>
+                      		<td>Guest</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr><tr>
+                      		<td>13</td>
+                      		<td>12234</td>
+                      		<td>18</td>
+                      		<td>10.0.0.100</td>
+                      		<td>1</td>
+                      		<td>55</td>
+                      		<td>Registered</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr><tr>
+                      		<td>233</td>
+                      		<td>12234</td>
+                      		<td>04</td>
+                      		<td>10.0.0.220</td>
+                      		<td>1</td>
+                      		<td>145</td>
+                      		<td>Registered</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr>
+                      </tbody> 
+                 </table>        
+            </div><!--widget-body-->
+          </div>
+          <p>
+            <a data-popup-close="show_visitorcount_detail" href="#">Close</a>
+          </p>
+          <a class="popup-close" data-popup-close="show_visitorcount_detail" href="#">x</a>
+        </div>
+      </div>
+          	
     </div>
     <!-- END PAGE CONTAINER-->
   </div>

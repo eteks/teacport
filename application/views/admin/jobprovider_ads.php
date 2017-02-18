@@ -85,7 +85,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th class="not-sort">Ads Image</th>
                           <th>Organization Name</th>
                           <th>Ads Visible Days</th>
-                          <th class="not-sort">Admin Vefied </th>
+                          <th class="not-sort">Admin Verified </th>
                           <th>Ads Status</th>
                           <th>Ads Created Date</th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>

@@ -1004,6 +1004,14 @@ table {
 	color: #22878e;
 	font-weight: bold;
 }
+.info_color{
+	color: #22878e;
+	font-weight: bold;
+	width: 5% !important;
+}
+.show_planname{
+	background: #ff1a75 none repeat scroll 0 0 !important;
+}
 /*Added By Akila*/
 /*Footer*/
 #footer {

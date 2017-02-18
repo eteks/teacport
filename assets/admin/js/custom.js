@@ -315,11 +315,7 @@ var content_height = parseInt(window_height - (header_height + footer_height));
         height: 'auto',
        	width: 'auto'
     });
-    $('.tab_content_scroll').slimScroll({
-        height: 'auto',
-       	width: 'auto'
-    });
-   	
+       	
     if($('.has-sub').length > 0) {
         $('.has-sub').each(function(){
             if($(this).hasClass('open')) {
@@ -1026,6 +1022,18 @@ var content_height = parseInt(window_height - (header_height + footer_height));
 	    x--;
 	});
 	//Ended by Akila 
+	
+	//GracePeriod- Added by Akila
+	$(document).on('click','.apply_grace_period', function(){
+		if($(this).is(":checked")) {
+			$('.show_grace_period').removeClass('hide_all');
+		}
+		else {	
+			$('.show_grace_period').addClass('hide_all');
+		}
+	});
+	
+	
 }); // End document
 
 /* Popup pagination with arrow start */

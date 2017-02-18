@@ -87,6 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Mobile No </th>
                           <th> Status </th>
                           <th> Created Date</th>
+                          <th> Grace Period </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
@@ -167,6 +168,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               $created_datetime = explode(' ', $pro_val['candidate_created_date']);
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?>
+                          </td>
+                          <td class=""> 
+                          	<a class="job_edit popup_fields" data-id=" " data-href="teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="seeker_visitorcount_detail">
+                          		150 
+                          	</a>
                           </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
@@ -1351,6 +1357,83 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>  
       <!-- END ADVANCED TABLE widget-->
       <!-- END PAGE CONTENT-->
+      
+      
+      <!---Visitors Count-->
+      <div class="popup feedback-design" data-popup="seeker_visitorcount_detail">
+        <div class="popup-inner">
+          <div class="widget box blue" id="popup_wizard_section">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Visitors Count
+              </h4>                        
+            </div>
+            <div class="widget-body">
+            	<table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
+                      <thead>
+                        <tr class="">
+                          <th> Organization Id </th>
+                          <th> Candidate Id </th>
+                          <th>IP Address </th>
+                          <th>User Agent </th>
+                          <th>Count </th>
+                          <th>User Type </th>
+                          <th>Created Date </th>
+                        </tr>  
+                      </thead>
+                      <tbody>
+                      	<tr>
+                      		<td>14</td>
+                      		<td>25</td>
+                      		<td>10.0.0.0</td>
+                      		<td>1</td>
+                      		<td>45</td>
+                      		<td>Registered</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr>
+                      	<tr>
+                      		<td>12</td>
+                      		<td>20</td>
+                      		<td>10.0.12.200</td>
+                      		<td>1</td>
+                      		<td>14</td>
+                      		<td>Guest</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr>
+                      	<tr>
+                      		<td>13</td>
+                      		<td>18</td>
+                      		<td>10.0.0.100</td>
+                      		<td>1</td>
+                      		<td>55</td>
+                      		<td>Registered</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr>
+                      	<tr>
+                      		<td>233</td>
+                      		<td>04</td>
+                      		<td>10.0.0.220</td>
+                      		<td>1</td>
+                      		<td>145</td>
+                      		<td>Registered</td>
+                      		<td>18.02.2017</td>
+                      		
+                      	</tr>
+                     </tbody> 
+                 </table>        
+            </div><!--widget-body-->
+          </div>
+          <p>
+            <a data-popup-close="seeker_visitorcount_detail" href="#">Close</a>
+          </p>
+          <a class="popup-close" data-popup-close="seeker_visitorcount_detail" href="#">x</a>
+        </div>
+      </div>
+      
+      
     </div>
     <!-- END PAGE CONTAINER-->
   </div>
