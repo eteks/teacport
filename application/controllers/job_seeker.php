@@ -468,7 +468,7 @@ class Job_seeker extends CI_Controller {
 	       	{
 
 	      		/* Registration form invalid stage */
-	       		$fb['reg_server_msg'] = 'Please provide valid information11!';	
+	       		$fb['reg_server_msg'] = 'Please provide valid information!';	
 	       		$fb['error'] = 1;
 	       		$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();

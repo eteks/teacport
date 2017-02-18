@@ -716,6 +716,5 @@ class Common_model extends CI_Model {
 		$model_data = $this->db->get()->result_array();
 		return $model_data;
 	}
-	
 } // End
 
