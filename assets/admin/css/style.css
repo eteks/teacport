@@ -688,7 +688,6 @@ ul.sidebar-menu span.icon-box  {
     padding: 7px !important;
 }
 .tab-content {
-	/*height: 380px;*/
     max-height: 410px;
     overflow-x: hidden;
     overflow-y: auto;
@@ -4549,9 +4548,9 @@ div.dt-button-background {
     color: #fff;
     display: inline-block;
     font-family: sans-serif;
-    font-size: 12px;
-    height: 24px;
-    line-height: 24px;
+    font-size: 10px;
+    height: 20px;
+    line-height: 18px;
     margin: 0 !important;
     overflow: hidden;
     position: relative;

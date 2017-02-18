@@ -457,7 +457,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			/* Set validate condition for registration form */
 			$this->form_validation->set_rules('candidate_institution_type', 'Institution', 'trim|required|numeric|xss_clean');
-			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|alpha|min_length[3]|max_length[50]|xss_clean');
+			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|min_length[3]|max_length[50]|xss_clean|callback_alpha_dash_space');
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
@@ -467,7 +467,7 @@ class Job_seeker extends CI_Controller {
 	       	{
 
 	      		/* Registration form invalid stage */
-	       		$fb['reg_server_msg'] = 'Please provide valid information11!';	
+	       		$fb['reg_server_msg'] = 'Please provide valid information!';	
 	       		$fb['error'] = 1;
 	       		$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 				$fb['institutiontype'] = $this->common_model->get_institution_type();
@@ -498,10 +498,14 @@ class Job_seeker extends CI_Controller {
 					$this->email->to($data['candidate_email']);
 					$this->email->subject($subject);
 					$this->email->message($message);
+					
 					/* Check whether mail send or not*/
 					if($this->email->send()){
+						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+						$get = file_get_contents($url);
 						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your email address!!';	
+						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
 						$fb['error'] = 2;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
@@ -510,15 +514,26 @@ class Job_seeker extends CI_Controller {
 						$this->load->view('job-seekers-login',$fb);
 					}
 					else{
-						/* mail sent error stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Some thing wrong in mail sending process. So please register again!';
-						$fb['error'] = 1;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						
-						$this->load->view('register-job-seekers',$fb);
+						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+						$get = file_get_contents($url);
+						$output = explode('.',$get);
+						if($output[0] == "S") {
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
+							$fb['error'] = 2;
+							$this->load->view('job-seekers-login',$fb);
+						}
+						else {
+							$fb['reg_server_msg'] = 'Some thing wrong in mail sending process and sms sending process. So please register again!';
+							$fb['error'] = 1;
+							$delete_record = $this->job_seeker_model->delete_job_seeker($data);
+							$this->load->view('register-job-seekers',$fb);
+						}
+						/* mail sent error stage. send  facebook login link and server message to login page */
 					}
 				} else {
 					/* data exist stage. send  facebook login link and server message to login page */					
