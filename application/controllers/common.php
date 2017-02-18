@@ -31,7 +31,7 @@ class Common {
 		return $helper->getLoginUrl(FACEBOOKSEEKERLOGINURL, $permissions);	
 	}
 
-	public function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'luds')
+	public function generateStrongPassword($length = 9, $add_dashes = false, $available_sets = 'lud')
 	{
 		/* Generate random password with atleasr one uppercase, atleast one lowercase, atleast one digit, atleast one special character  and return combined password*/
 		$sets = array();
