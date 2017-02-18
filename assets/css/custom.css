@@ -103,6 +103,7 @@ box-shadow:0 8px 6px -6px #da651a !important;
 }
 .txt_blue {
 	color: #29AAFE;
+	cursor:pointer;
 }
 .transform_lowercase {
 	text-transform: lowercase !important;

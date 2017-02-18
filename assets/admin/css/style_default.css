@@ -1005,7 +1005,10 @@ table {
 	font-weight: bold;
 }
 /*Job Provider Payment Details*/
-.subscription_organization_section h4 {
+.payment_tooltip .control-label, .payment_tooltip .icon-ok{
+	color:yellow;
+}
+/*.subscription_organization_section h4 {
     font-size: 12.5px;
 }
 .subscription_organization_section label, .subscription_organization_section button{
@@ -1015,12 +1018,9 @@ table {
 .plan_label_section  h4{
 	margin-bottom: 0 !important;
 }
-.payment_tooltip .control-label, .payment_tooltip .icon-ok{
-	color:yellow;
-}
 .form-wizard .profile_subscription_tab h4{
 	margin-bottom: 10px !important;
-}
+}*/
 
 /*Added By Akila*/
 /*Footer*/
