@@ -1020,15 +1020,16 @@ table {
     font-size: 12.5px;
 }
 .subscription_organization_section label, .subscription_organization_section button{
-    font-size: 10px;
-    line-height: 5px;
+	font-size: 10px;
+	line-height: 5px;
 }
 .plan_label_section  h4{
-    margin-bottom: 0 !important;
+	margin-bottom: 0 !important;
 }
 .form-wizard .profile_subscription_tab h4{
-    margin-bottom: 10px !important;
+	margin-bottom: 10px !important;
 }*/
+
 /*Added By Akila*/
 /*Footer*/
 #footer {

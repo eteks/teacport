@@ -287,7 +287,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <div id="bar" class="progress progress-striped active">
                     <div class="bar"></div>
                   </div>
-                  <div class="tab-content">
+                  <div class="tab-content tab_content_scroll">
                     <?php
                     if(!empty($mode) && $mode=="full_view") :
                     ?>
@@ -508,7 +508,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                     </div>
-                    <div class="tab-pane profile_subscription_tab" id="tab3">
+                    <div class="tab-pane profile_subscription_tab plan_details_scroll" id="tab3">
                       <h4>
                         Payment Details 
                         <?php
