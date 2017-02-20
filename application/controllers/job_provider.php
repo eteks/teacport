@@ -214,6 +214,7 @@ class Job_provider extends CI_Controller {
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
+		$data['visit_count']  = $this->common_model->get_organization_visit_count($session_data['login_session']['pro_userid']);
 		$organization_email = (isset($session_data['login_session']['pro_email'])?$session_data['login_session']['pro_email']:$session_data['login_session']['registrant_email_id']);
 		
 		if($this->job_provider_model->check_has_initial_data($organization_email)=='has_no_data'){
@@ -1314,14 +1315,9 @@ class Job_provider extends CI_Controller {
 		$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
 		$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
 		if($data['candidate'][0]['candidate_institution_type'] == $institution_type_id){
-
-
 			$params = array('candidate_id' => $candidate_id);
 			$this->load->library('seeker_iptracker');
 			$this->seeker_iptracker->provider_save_site_visit($params);
-
-
-
 			$this->load->view('company-dashboard-candidate-detail',$data);
 		}
 		else{

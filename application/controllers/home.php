@@ -273,6 +273,10 @@ class Home extends CI_Controller {
 		// Navigation Links
 		$pagination_links = $this->pagination->create_links();
 		$data["links"] = $pagination_links;
+
+		$params = array('organization_id' => $this->uri->segment('2'));
+		$this->load->library('provider_iptracker');
+		$this->provider_iptracker->seeker_save_site_visit($params);
 		$this->load->view('user-followed-companies',$data);
 	}
 	public function vacancies()

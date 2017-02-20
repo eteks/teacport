@@ -6,6 +6,9 @@
  * Author: Glenn Tan Gevero
  * Website: http://app-arsenal.com
  * File: IP Tracker Library File
+ 0 - Guest
+ 1 - Provider
+ 2 - Seeker
 **********************************************************************/
 class Seeker_Iptracker{
     
@@ -63,7 +66,7 @@ class Seeker_Iptracker{
     $org_id = 0;  
     $session = $this->sys->session->all_userdata();
     if(!empty($session['login_status']) && !empty($session['login_session']) && $session['login_session']['user_type'] == "provider") {
-      $can_id = (isset($cand['candidate_id']) && !empty($cand['candidate_id'])) ?$cand['candidate_id'] : 0;
+      $can_id = (isset($cand['candidate_id']) && !empty($cand['candidate_id'])) ?$cand['candidate_id'] : NULL;
       $org_id = $session['login_session']['pro_userid']; 
       $data = array(
         'ip_address'            => $ip,
@@ -73,7 +76,7 @@ class Seeker_Iptracker{
         'count'                 => '1',
         'user_type'             => '1'
       );
-      $data_count_where = '(ip_address="'.$ip.'" and candidate_id="'.$can_id.'" and organiztion_id="'.$org_id.'" AND DATE(created_date) = DATE(NOW()))';
+      $data_count_where = '(ip_address="'.$ip.'" and candidate_id="'.$can_id.'" and organiztion_id="'.$org_id.'" AND user_type=1 AND DATE(created_date) = DATE(NOW()))';
       $data_count = $this->sys->db->get_where('tr_organization_candidate_visitor_count',$data_count_where);
       if($data_count->num_rows() > 0) {
         $this->sys->db->where($data_count_where);

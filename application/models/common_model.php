@@ -716,5 +716,19 @@ class Common_model extends CI_Model {
 		$model_data = $this->db->get()->result_array();
 		return $model_data;
 	}
+
+	// Candidate visit count
+    public function get_candidate_visit_count($id) {
+		$count = $this->db->group_by(array('organiztion_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',array('candidate_id'=>$id, 'user_type' => 1))->num_rows();
+		return $count;
+	}
+
+	// Candidate visit count
+    public function get_organization_visit_count($id) {
+    	$where = '(organiztion_id="'.$id.'" AND (user_type=2 OR user_type=0))';
+		$count = $this->db->group_by(array('candidate_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',$where)->num_rows();
+		return $count;
+	}
+
 } // End
 
