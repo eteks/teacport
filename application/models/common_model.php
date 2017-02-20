@@ -385,8 +385,7 @@ class Common_model extends CI_Model {
         $this->db->from('tr_organization_vacancies ov');
         $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
         $this->db->where($where);
-        $this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc,ov.vacancies_id desc');
-	    // $this->db->order_by('ov.vacancies_id','desc');
+	    $this->db->order_by('ov.vacancies_id','desc');
         $this->db->limit(15,0);
         $data = $this->db->group_by('ov.vacancies_id')->get()->result_array();
         return $data;           
