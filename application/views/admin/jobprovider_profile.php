@@ -87,7 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
                           <th> Created Date</th>
-                          <th> Visitors Count </th>
+                          <!-- <th> Visitors Count </th> -->
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
@@ -154,11 +154,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?> 
                           </td> 
-                          <td class="">
-                          	<a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="show_visitorcount_detail">
+                          <!-- <td class="">
+                          	<a class="job_edit popup_fields" data-id="<?php //echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="show_visitorcount_detail">
                           		145
                           	</a>
-                          </td>
+                          </td> -->
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="popup_section_profile">

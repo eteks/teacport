@@ -87,7 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Mobile No </th>
                           <th> Status </th>
                           <th> Created Date</th>
-                          <th> Grace Period </th>
+                          <!-- <th> Visitors Count </th> -->
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
@@ -169,11 +169,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?>
                           </td>
-                          <td class=""> 
+                          <!-- <td class=""> 
                           	<a class="job_edit popup_fields" data-id=" " data-href="teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="seeker_visitorcount_detail">
                           		150 
                           	</a>
-                          </td>
+                          </td> -->
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section_seeker_profile">
