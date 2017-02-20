@@ -27,9 +27,13 @@ class Common_model extends CI_Model {
     	}
 
    		// Search with limit
+   		// $this->db->select('s.subscription_id,ov.vacancies_id,op.organization_id,ops.organization_subscription_status,s.subscription_price');
    		$this->db->select('*');
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+   		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id and organization_subscription_status=1','left');
+   		$this->db->join('tr_subscription s','ops.subscription_id=s.subscription_id','left');
+
    		if(!empty($data['keyword'])) {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
@@ -68,7 +72,11 @@ class Common_model extends CI_Model {
         }
 
         $this->db->limit($limit,$start);
-        $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc,ov.vacancies_id desc');
+        // $this->db->order_by('ov.vacancies_id', 'desc');
+        // $this->db->order_by();
+        // $this->db->order_by('');
+
         $model_data['search_results'] = $this->db->get()->result_array();
 
         // echo $this->db->last_query();
@@ -80,6 +88,9 @@ class Common_model extends CI_Model {
         $this->db->select('*');
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+   		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id','left');
+   		$this->db->join('tr_subscription s','ops.subscription_id=s.subscription_id','left');
+
    		if(!empty($data['keyword'])) {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
@@ -116,7 +127,8 @@ class Common_model extends CI_Model {
         if(!empty($data['candidate_work_type'])) {
         	$this->db->where('ov.vacancy_type',$data['candidate_work_type']);
         }
-        $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc,ov.vacancies_id desc');
+        // $this->db->order_by('ov.vacancies_id', 'desc');
 
         $model_data['total_rows'] = $this->db->get()->num_rows();
 
@@ -373,7 +385,8 @@ class Common_model extends CI_Model {
         $this->db->from('tr_organization_vacancies ov');
         $this->db->join('tr_organization_profile op', 'ov.vacancies_organization_id = op.organization_id','inner');
         $this->db->where($where);
-	    $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc,ov.vacancies_id desc');
+	    // $this->db->order_by('ov.vacancies_id','desc');
         $this->db->limit(15,0);
         $data = $this->db->group_by('ov.vacancies_id')->get()->result_array();
         return $data;           
@@ -388,7 +401,19 @@ class Common_model extends CI_Model {
 		else {
 			$where = '(organization_status=1 AND organization_profile_completeness >=90)';  
 		}
-        $model_data['allinstitutions_results'] = $this->db->limit($limit,$start)->get_where('tr_organization_profile',$where)->result_array();
+      	$this->db->select('op.organization_id as org_id,op.*,ops.organization_id,ops.subscription_id,ops.organization_subscription_status,s.subscription_price,s.subscription_id');
+        $this->db->from('tr_organization_profile op');
+		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id and organization_subscription_status=1','left');
+   		$this->db->join('tr_subscription s','ops.subscription_id=s.subscription_id','left');
+   		$this->db->where($where);
+   		$this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc');
+
+        $model_data['allinstitutions_results'] = $this->db->limit($limit,$start)->get()->result_array();
+
+
+        // echo "<pre>";
+        // print_r($model_data['allinstitutions_results']);
+        // echo "</pre>";
 
        	// Total count
        	$model_data['total_rows'] = $this->db->get_where('tr_organization_profile',$where)->num_rows();
@@ -397,8 +422,8 @@ class Common_model extends CI_Model {
        	$total_jobs_where = '(organization_status=1 AND organization_profile_completeness >=90 AND vacancies_status = 1)';  
        	$this->db->select('op.organization_id,ov.vacancies_job_title');
         $this->db->from('tr_organization_profile op');
-        $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');   
-        $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->join('tr_organization_vacancies ov','op.organization_id = ov.vacancies_organization_id','inner');  
+   		$this->db->order_by('ov.vacancies_id','desc');
         $this->db->where($total_jobs_where);
         $provider_job = $this->db->get()->result_array();
         $out=array();

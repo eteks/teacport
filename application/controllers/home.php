@@ -313,6 +313,9 @@ class Home extends CI_Controller {
     	$data['alldistrict'] = $this->common_model->get_all_district();
     	$data["search_results"] = $search_results['search_results'];
 
+		// echo "<pre>";
+  //   	print_r($data['search_results']);
+  //   	echo "</pre>";
 
     	//pagination
 		$this->load->library('pagination');
