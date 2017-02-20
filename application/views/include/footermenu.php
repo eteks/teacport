@@ -22,7 +22,7 @@
                                 <li> <a href="<?php echo base_url(); ?>aboutus">About Us</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>missingpage">Information</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>contactus">Contact Us</a> </li>
-                                <li> <a href="<?php echo base_url(); ?>missingpage">Terms &amp; Conditions</a> </li>
+                                <li> <a href="<?php echo base_url(); ?>terms">Terms &amp; Conditions</a> </li>
                             </ul>
                         </div>
                     </div>

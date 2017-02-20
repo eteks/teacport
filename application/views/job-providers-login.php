@@ -148,7 +148,7 @@
 	                        		</div>	
 									<div class="loginbox-terms">
 										<label class="checkbox_word">
-										<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition','class' => 'form_dec')); ?>  I accept</label> <a href="terms.php" class="txt_blue" target="_blank">Term and conditions?</a>
+										<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition','class' => 'form_dec')); ?>  I accept</label> <a href="<?php echo base_url(); ?>terms" class="txt_blue" target="_blank">Term and conditions?</a>
 									</div>	
 									<p id="submit" class="btn btn-default btn-block">Register</p>
 								</div>

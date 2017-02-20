@@ -1793,7 +1793,13 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 /*Popup Signup*/
 .popup_signin, .popup_signup{
 	cursor: pointer;
-}		
+}	
+.fa-tags{
+	color: #f47020;
+}
+.blog-single p{
+	text-align: justify;
+}			
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
