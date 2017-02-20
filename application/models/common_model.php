@@ -344,7 +344,7 @@ class Common_model extends CI_Model {
 	// Get latest news
 	public function latest_news()
 	{
-		$value = $this->db->get_where('tr_latest_news',array('latest_news_status' => '1'))->result_array();
+		$value = $this->db->order_by('latest_news_id','desc')->get_where('tr_latest_news',array('latest_news_status' => '1'))->result_array();
 		return $value;
 	}
 
@@ -716,6 +716,5 @@ class Common_model extends CI_Model {
 		$model_data = $this->db->get()->result_array();
 		return $model_data;
 	}
-	
 } // End
 

@@ -23,6 +23,11 @@ class Job_provider_model extends CI_Model {
 			return 'exists';
 		}
 	}
+	public function delete_job_provider($data)
+	{
+		$this->db->delete('tr_organization_profile',array('registrant_email_id' => $data['registrant_email_id']));
+		return TRUE;
+	}
 	public function check_valid_provider_login($data){
 		/*query for check wheather data exist or not */
 		$where = "(registrant_email_id='".$data['registrant_login_data']."' AND registrant_password='".$data['registrant_password']."' AND organization_status='1' OR registrant_mobile_no='".$data['registrant_login_data']."' AND registrant_password='".$data['registrant_password']."' AND organization_status='1')";

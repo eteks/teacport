@@ -1794,7 +1794,13 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 /*Popup Signup*/
 .popup_signin, .popup_signup{
 	cursor: pointer;
-}		
+}	
+.fa-tags{
+	color: #f47020;
+}
+.blog-single p{
+	text-align: justify;
+}			
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
@@ -1880,4 +1886,26 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 	font-size:12px !important;
 	color:#000 !important;
 }	
+.new_news_highlight {
+	background: #29aafe;
+	/*background: red;*/
+    border-radius: 12px;
+    color: #fff;
+    padding: 1px 5px;
+    font-size: 10px;
+    font-weight: bold;
+    margin-left: 5px;
+    cursor: text;
+    display: inline-block;
+    animation: shake 0.2s ease-in-out 0.2s infinite alternate;
+}
+@keyframes shake {
+ from {
+    transform: translate(10px, 1px) rotate(5deg);
+ }
+ to {
+   transform-origin:center center;
+   transform: rotate(-5deg);
+ }
 
+}

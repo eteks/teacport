@@ -567,7 +567,7 @@ ul.dashboard-header-c-detail li{}
 .post-title{font-size:20px;font-weight:600;margin-bottom:15px;margin-top:10px;padding:0 20px;text-transform:capitalize;transition:all 0.4s ease 0s;}
 .post-title a:hover{color:#29aafe;}
 .post-excerpt{font-size:14px;line-height:26px;margin-bottom:30px;padding:0 20px;}
-.blog-single{padding:0 20px;position:relative;overflow:hidden;}
+.blog-single{padding:25px 60px;position:relative;overflow:hidden;}
 .blog-single .post-title, .blog-single .post-info{padding:0;}
 blockquote{line-height:25px;border-left:5px solid #29aafe;font-size:14px;}
 .blog-single .tagcloud{border-top:1px solid #F1F1F1;padding:20px 0;}
