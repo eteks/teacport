@@ -6,6 +6,9 @@
  * Author: Glenn Tan Gevero
  * Website: http://app-arsenal.com
  * File: IP Tracker Library File
+ 0 - Guest
+ 1 - Provider
+ 2 - Seeker
 **********************************************************************/
 class Provider_Iptracker{
     
@@ -51,53 +54,43 @@ class Provider_Iptracker{
   }
   
   // Save records in database
-  public function seeker_save_site_visit(){
+  public function seeker_save_site_visit($org){
     $ip   = self::get_seeker_ip_address();
     $page = self::get_seeker_page_visit();
     $agent  = self::get_seeker_user_agent();
     $seg  = explode("-", $page);
-    
     //Uncomment the IF Statement if you do not want your own admin pages to be tracked. Change the value of the needle ('admin) to the segments (URI) found in your admin pages.
     //if(!in_array('admin', $seg)){  
     $can_id = 0;
     $org_id = 0;  
-    if(!empty($this->sys->session->userdata("login_status"))) {
-      $session_data = $this->sys->session->userdata("login_session");
-      if(!empty($session_data['candidate_id'])) {
-        $can_id = $session_data['candidate_id'];
-        $org_id = 0;
-      }
-      else if(!empty($session_data['organization_id'])) {
-        $can_id = 0;
-        $org_id = $session_data['organization_id'];
-      }
-    }
+    $session = $this->sys->session->all_userdata();
 
-    // Inputs
-    $current_date = date("Y-m-d h:i:s");
-    $today = date("Y-m-d");
-    $data = array(
-      'ip_address'            => $ip,
-      'page_view'             => $page,
-      'user_agent'            => $agent,
-      'candidate_id'          => $can_id,
-      'organization_id'       => $org_id,
-      'count'                 => '1',
-      'created_date'          => $current_date
-    );
-    $data_count_where = '(ip_address="'.$ip.'" and page_view="'.$page.'" and candidate_id="'.$can_id.'" and organization_id="'.$org_id.'" AND DATE(created_date) = DATE(NOW()))';
-    $data_count = $this->sys->db->get_where('tr_site_visits',$data_count_where);
-    if($data_count->num_rows() > 0) {
-      $this->sys->db->where($data_count_where);
-      $this->sys->db->set('count', 'count+1', FALSE);
-      $this->sys->db->update('tr_site_visits'); 
+    if((!empty($session['login_status']) && !empty($session['login_session']) && $session['login_session']['user_type'] != "provider") || empty($session['login_status'])) {
+      $can_id = isset($session['login_session']['candidate_id']) ? $session['login_session']['candidate_id'] : 0;
+      $org_id = (isset($org['organization_id']) && !empty($org['organization_id'])) ?$org['organization_id'] : 0; 
+      $user_type = isset($session['login_session']['candidate_id']) ? 2 : 0;
+
+      $data = array(
+        'ip_address'            => $ip,
+        'user_agent'            => $agent,
+        'candidate_id'          => $can_id,
+        'organiztion_id'        => $org_id,
+        'count'                 => '1',
+        'user_type'             => $user_type
+      );
+
+      $data_count_where = '(ip_address="'.$ip.'" and candidate_id="'.$can_id.'" and organiztion_id="'.$org_id.'" AND user_type="'.$user_type.'" AND DATE(created_date) = DATE(NOW()))';
+      $data_count = $this->sys->db->get_where('tr_organization_candidate_visitor_count',$data_count_where);
+      if($data_count->num_rows() > 0) {
+        $this->sys->db->where($data_count_where);
+        $this->sys->db->set('count', 'count+1', FALSE);
+        $this->sys->db->update('tr_organization_candidate_visitor_count'); 
+      }
+      else {
+        $this->sys->db->insert('tr_organization_candidate_visitor_count', $data);     
+      }
     }
-    else {
-      $this->sys->db->insert('tr_site_visits', $data);     
-    }
-    // echo $_SERVER['REMOTE_ADDR'];  
-    // } 
   }
 }
-$tracker = new Provider_Iptracker(); // Object creattion
-$tracker->seeker_save_site_visit(); // Call save method
+// $tracker = new Provider_Iptracker(); // Object creattion
+// $tracker->seeker_save_site_visit(); // Call save method

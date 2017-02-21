@@ -762,7 +762,9 @@ class Job_seeker_model extends CI_Model {
    		$this->db->select('*');
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-   		if(!empty($data['keyword'])) {
+ 		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id and organization_subscription_status=1','left');
+   		$this->db->join('tr_subscription s','ops.subscription_id=s.subscription_id','left');
+  		if(!empty($data['keyword'])) {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
    		}
@@ -799,7 +801,8 @@ class Job_seeker_model extends CI_Model {
         	$this->db->where('op.vacancies_type',$data['candidate_work_type']);
         }
         $this->db->limit($limit,$start);
-        $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc,ov.vacancies_id desc');
+        // $this->db->order_by('ov.vacancies_id','desc');
         $model_data['search_results'] = $this->db->get()->result_array();
 
 	    // echo $this->db->last_query();
@@ -811,6 +814,8 @@ class Job_seeker_model extends CI_Model {
         $this->db->select('*');
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
+   		 		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id and organization_subscription_status=1','left');
+   		$this->db->join('tr_subscription s','ops.subscription_id=s.subscription_id','left');
    		if(!empty($data['keyword'])) {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
@@ -847,7 +852,8 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['candidate_work_type'])) {
         	$this->db->where('op.vacancies_type',$data['candidate_work_type']);
         }
-        $this->db->order_by('ov.vacancies_id','desc');
+        $this->db->order_by('s.subscription_price desc,ops.organization_subscription_status desc,ov.vacancies_id desc');
+        // $this->db->order_by('ov.vacancies_id','desc');
 
         $model_data['total_rows'] = $this->db->get()->num_rows();
 

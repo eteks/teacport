@@ -587,7 +587,7 @@ class Job_seeker extends CI_Controller {
 	// Dashboard
 	public function dashboard() {     
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();	
-     	$session_data = $this->session->all_userdata();  
+     	$session_data = $this->session->all_userdata(); 
      	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
      	}
@@ -674,6 +674,7 @@ class Job_seeker extends CI_Controller {
         $data['user_data'] = $candidate_data;
         $data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
         $data['job_applied_count'] = $this->job_seeker_model->candidate_job_applied_count($session_data['login_session']['candidate_id']);
+     	$data['visit_count']  = $this->common_model->get_candidate_visit_count($session_data['login_session']['candidate_id']);
         $data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 		$this->load->view('user-dashboard',$data);
 	}
