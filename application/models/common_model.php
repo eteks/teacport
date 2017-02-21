@@ -88,7 +88,7 @@ class Common_model extends CI_Model {
         $this->db->select('*');
    		$this->db->from('tr_organization_vacancies ov');
    		$this->db->join('tr_organization_profile op','ov.vacancies_organization_id=op.organization_id','inner');
-   		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id','left');
+   		$this->db->join('tr_organization_subscription ops','op.organization_id=ops.organization_id and organization_subscription_status=1','left');
    		$this->db->join('tr_subscription s','ops.subscription_id=s.subscription_id','left');
 
    		if(!empty($data['keyword'])) {

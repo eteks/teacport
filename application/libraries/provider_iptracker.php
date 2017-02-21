@@ -66,8 +66,8 @@ class Provider_Iptracker{
     $session = $this->sys->session->all_userdata();
 
     if((!empty($session['login_status']) && !empty($session['login_session']) && $session['login_session']['user_type'] != "provider") || empty($session['login_status'])) {
-      $can_id = isset($session['login_session']['candidate_id']) ? $session['login_session']['candidate_id'] : 0;
-      $org_id = (isset($org['organization_id']) && !empty($org['organization_id'])) ?$org['organization_id'] : 0; 
+      $can_id = isset($session['login_session']['candidate_id']) ? $session['login_session']['candidate_id'] : NULL;
+      $org_id = (isset($org['organization_id']) && !empty($org['organization_id'])) ?$org['organization_id'] : NULL; 
       $user_type = isset($session['login_session']['candidate_id']) ? 2 : 0;
 
       $data = array(
@@ -79,7 +79,13 @@ class Provider_Iptracker{
         'user_type'             => $user_type
       );
 
-      $data_count_where = '(ip_address="'.$ip.'" and candidate_id="'.$can_id.'" and organiztion_id="'.$org_id.'" AND user_type="'.$user_type.'" AND DATE(created_date) = DATE(NOW()))';
+      if($can_id != '') {
+        $data_count_where = '(ip_address="'.$ip.'" and candidate_id="'.$can_id.'" and organiztion_id="'.$org_id.'" AND user_type="'.$user_type.'" AND DATE(created_date) = DATE(NOW()))';
+      }
+      else {
+        $data_count_where = '(ip_address="'.$ip.'" and candidate_id is null and organiztion_id="'.$org_id.'" AND user_type="'.$user_type.'" AND DATE(created_date) = DATE(NOW()))';
+      }
+
       $data_count = $this->sys->db->get_where('tr_organization_candidate_visitor_count',$data_count_where);
       if($data_count->num_rows() > 0) {
         $this->sys->db->where($data_count_where);

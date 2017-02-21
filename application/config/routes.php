@@ -231,8 +231,11 @@ $route['main/district_state'] = 'admin/master_data/district_state';
 $route['test_email'] = 'home/test_email';
 $route['test_pdf'] = 'home/test_pdf';
 $route['test_sms'] = 'home/test_sms';
-$route['test_cron'] = 'cron';
-$route['test_cron/foo'] = 'cron/foo';
+// $route['test_cron'] = 'cron';
+// $route['test_cron/foo'] = 'cron/foo';
+
+// To tun cron by cpanel.
+$route['test_cron'] = 'home/test_cron';
 
 
 /* ===================          Route settings for Admin End     ====================== */
