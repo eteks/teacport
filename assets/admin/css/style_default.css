@@ -1009,9 +1009,6 @@ table {
 	font-weight: bold;
 	width: 5% !important;
 }
-.show_planname{
-	background: #ff1a75 none repeat scroll 0 0 !important;
-}
 /*Job Provider Payment Details*/
 .payment_tooltip .control-label, .payment_tooltip .icon-ok{
     color:yellow;
