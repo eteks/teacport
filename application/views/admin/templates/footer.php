@@ -20,6 +20,9 @@
        
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <!-- <script src="<?php echo base_url(); ?>assets/admin/js/jquery-1.11.1.min.js"></script>
+        <script src="<?php echo base_url(); ?>assets/admin/assets/mscroll/jquery.mCustomScrollbar.concat.min.js"></script> -->
+       
          <script src="<?php echo base_url(); ?>assets/admin/js/custom.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/admin/assets/bootstrap/js/bootstrap.min.js"></script>

@@ -38,7 +38,8 @@ Website: http://thevectorlab.net/
 	<!--My custom Fonts--> 
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/css/default.css" type="text/css"> 
-
+	
+	 <link rel="stylesheet" href="<?php echo base_url(); ?>assets/admin/assets/mscroll/jquery.mCustomScrollbar.css" type="text/css">
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
