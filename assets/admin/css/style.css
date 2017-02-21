@@ -4972,6 +4972,10 @@ i#admin_error_login {
     height: 530px !important;
 }
 /*Job Provider profile*/
+.show_plan_name{
+	background-color: #c299ff;
+	color: #fff !important;
+}	
 #pro_profile_tabs > li{
 	margin: 0px !important;
 }

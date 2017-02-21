@@ -997,7 +997,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         	<div class="span6 control-group">                                       
                           		<label class="control-label">Plan Name</label>
                           		<span>
-                            		<input type="text" class="span6 tabfield3 tabfield alpha_value" value="" placeholder="Plan Name" name="" maxlength="50" />
+                            	 <label class="show_plan_name icon"> Welcome 39 </label>	
                           		</span>
                         	</div>
                         	<div class="span6 control-group">
@@ -1009,16 +1009,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span12">
                         	<div class="span6 control-group">                                       
 	                          <label class="control-label">Subscription Start Date</label>
-	                          <span>
-	                            <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan Start Date" maxlength="50" />
-	                          </span>
+	                          <span class="dynamic_data"> 
+                            		25.03.2017
+                          		</span>
 	                        </div>
                             <div class="span6 control-group">                                       
                       		    <label class="control-label">Subscription End Date</label>
-                          			<span>
-                            			<input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan End Date" />
-                          			</span>
-                        	</div>
+                      		    <span class="dynamic_data"> 
+                           			5.04.2017
+                          		</span>
+                          	</div>
                        	</div>
                        	<div class="span12">
                       		<div class="control-group check_grace">
@@ -1028,15 +1028,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       	<div class="span12 show_grace_period hide_all">
                         	<div class="span6 control-group">                                       
                           		<label class="control-label">Grace Period Start Date</label>
-                          		<span class="dynamic_data"> 
-                            		25.03.2017
-                          		</span>
+                          		<span>
+	                            	<input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan Start Date" maxlength="50" />
+	                          	</span>
                         	</div>
                         	<div class="span6 control-group">
                           		<label class="control-label">Grace Period End Date</label>
-                          			<span class="dynamic_data"> 
-                           				5.04.2017
-                          			</span>
+                          		<span>
+                            		<input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan End Date" />
+                          		</span>	
                         	</div>
                       	</div>
                     </div>
