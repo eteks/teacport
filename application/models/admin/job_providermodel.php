@@ -121,6 +121,9 @@ class Job_Providermodel extends CI_Model {
     $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
     $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id','left');
     $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
+    // echo "<pre>";
+    // print_r($model_data['payment_details']);
+    // echo "</pre>";
     return $model_data;
   }
 
