@@ -595,7 +595,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               </div>
                             </a> <?php echo $pay_val['subscription_plan']; ?> </h4>
                           <div class="profile_plan_section">
-                            <div class="span3 plan_label_section">                                       
+                            <div class="span3 plan_label_section">  
                               <h4 class="">Summary</h4>
                               <label class=""> Subscription Price </label>
                               <label class=""> Subscription Start Date </label>
@@ -608,9 +608,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </div>
                             <div class="span3 plan_field_section">                                       
                               <h4 class="">Original Plan</h4>
-                              <label class="">&#x20B9; <span> 50</span></label>
-                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_start_date'])); ?> 31-01-2017</label>
-                              <label class=""> <?php //echo date('d M Y',strtotime($pay_val['subcription_valid_end_date'])); ?> 15-12-2017  </label>
+                              <label class="">&#x20B9; <span> <?php echo $pay_val['subscription_price']; ?></span></label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_start_date'])); ?> 31-01-2017</label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_end_date'])); ?> 15-12-2017  </label>
                               <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
                               <label class="show_grace"> 25.02.2017 </label>
                               <label class="show_grace"> 05.03.2017 </label>
@@ -1029,13 +1029,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         	<div class="span6 control-group">                                       
                           		<label class="control-label">Grace Period Start Date</label>
                           		<span>
-	                            	<input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan Start Date" maxlength="50" />
+                                5.04.2017
+	                            	<!-- <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan Start Date" maxlength="50" /> -->
 	                          	</span>
                         	</div>
                         	<div class="span6 control-group">
                           		<label class="control-label">Grace Period End Date</label>
                           		<span>
-                            		<input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan End Date" />
+                                5.04.2017
+                            		<!-- <input type="text" class="span6 m-ctrl-medium admin_date_picker tabfield3 tabfield" value="" name="" placeholder="Plan End Date" /> -->
                           		</span>	
                         	</div>
                       	</div>
