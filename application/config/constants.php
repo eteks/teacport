@@ -92,9 +92,16 @@ define("FACEBOOKLOGINURL", APP_URL."login/facebookverify");//facebook login url
 define("FACEBOOKSEEKERLOGINURL", APP_URL."login/seeker/facebookverify");
 if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
 	//local settings
-	define("GOOGLECLIENTID",'917333063130-hrjho3c5b53ati7uepe7dsto6jjsk345.apps.googleusercontent.com');//google client id
-	define("GOOGLECLIENTSECRET",'7pgkz0KpxuUVSLgaymVsYNcG');//google client secret
-	define("GOOGLEDEVELOPERKEY",'AIzaSyBFL_IJd2SpUhmXCJMJ1mZg5Gy6NckvjI8');
+	// define("GOOGLECLIENTID",'917333063130-hrjho3c5b53ati7uepe7dsto6jjsk345.apps.googleusercontent.com');//google client id
+	// define("GOOGLECLIENTSECRET",'7pgkz0KpxuUVSLgaymVsYNcG');//google client secret
+	// define("GOOGLEDEVELOPERKEY",'AIzaSyBFL_IJd2SpUhmXCJMJ1mZg5Gy6NckvjI8');
+
+	// server settings (Teachers recruit live credentials)
+	define("GOOGLECLIENTID",'167343618303-us6vlmgsh136s3onjkce6njc20bgmat1.apps.googleusercontent.com');//google client id
+	define("GOOGLECLIENTSECRET",'c8zwR4QdfKZbATZZMCF80gpG');//google client secret
+	define("GOOGLEDEVELOPERKEY",'AIzaSyAeR9CBDl12_fPEmJ-nyjaP9SHjPD13QWM');
+
+
 }
 else{
 	// server settings (Teachers recruit live credentials)
@@ -104,6 +111,7 @@ else{
 }
 define("GOOGLEREDIRECTURL",APP_URL."login/google");//google redirect urlt
 define("GOOGLESEEKERREDIRECTURL",APP_URL."login/seeker/google");//google redirect urlt
-define("GOOGLEAPPNAME", "Login to Teacher Recruit");
+define("GOOGLESEEKERCRONREDIRECTURL",APP_URL."login/seeker_cron/google"); // Google redirect url for cron related vacancy
+define("GOOGLEAPPNAME", "Login to Teacher Recruit"); 
 /* End of file constants.php */
 /* Location: ./application/config/constants.php */

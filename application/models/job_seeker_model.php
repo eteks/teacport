@@ -794,6 +794,9 @@ class Job_seeker_model extends CI_Model {
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
         }
+        if(isset($_GET['pos']) && !empty($_GET['pos'])) {
+        	$this->db->where("FIND_IN_SET(ov.vacancies_applicable_posting_id,'".$_GET['pos']."') !=", 0);
+        }
         // if(!empty($data['institution'])) {
         // 	$this->db->where('op.organization_institution_type_id',$data['institution']);
         // }
@@ -845,6 +848,9 @@ class Job_seeker_model extends CI_Model {
         }
         if(!empty($data['qualification'])) {
         	$this->db->where("FIND_IN_SET('".$data['qualification']."',ov.vacancies_qualification_id) !=", 0);
+        }
+        if(isset($_GET['pos']) && !empty($_GET['pos'])) {
+        	$this->db->where("FIND_IN_SET(ov.vacancies_applicable_posting_id,'".$_GET['pos']."') !=", 0);
         }
         // if(!empty($data['institution'])) {
         // 	$this->db->where('op.organization_institution_type_id',$data['institution']);

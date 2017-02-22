@@ -418,29 +418,6 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 
- 	public function test_cron()
- 	{
-	    // $this->load->library('CronRunner');
-	    // $cron = new CronRunner();
-	    // $cron->run();
-	    // echo "test";
-	    $this->CI =& get_instance();
-	    $this->CI->config->load('email', true);
-		$emailsetup = $this->CI->config->item('email');
-		$this->CI->load->library('email', $emailsetup);
-		$from_email = $emailsetup['smtp_user'];
-		$subject = 'Test email';
-		$message =  "Hello welcome! test message";
-		$this->CI->email->initialize($emailsetup);
-		$this->CI->email->set_newline("\r\n");
-		$this->CI->email->from($from_email, 'Teacher Recruit');
-		$this->CI->email->to('sivaramakannan05@gmail.com');
-		$this->CI->email->subject($subject);
-		$this->CI->email->message($message);
-		$status = $this->CI->email->send();
-	}
-
-
 }
 
 /* End of file home.php */

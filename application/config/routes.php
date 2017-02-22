@@ -56,6 +56,7 @@ $route['login/seeker/facebookverify'] 					= 'social/seekerfacebookverify';
 $route['login/seeker/twitter'] 							= 'social/seekertwitter';
 $route['login/seeker/linkedin'] 						= 'social/seekerlinkedin';
 $route['login/seeker/google'] 							= 'social/seekergoogle';
+$route['login/seeker_cron/google'] 						= 'social/seeker_cron_google';
 $route['login/twitter'] 								= 'social/twitter';
 $route['login/linkedin'] 								= 'social/linkedin';
 $route['login/google'] 									= 'social/google';
@@ -235,7 +236,7 @@ $route['test_sms'] = 'home/test_sms';
 // $route['test_cron/foo'] = 'cron/foo';
 
 // To tun cron by cpanel.
-$route['test_cron'] = 'home/test_cron';
+$route['test_cron'] = 'cron/cron_task';
 
 
 /* ===================          Route settings for Admin End     ====================== */

@@ -570,7 +570,7 @@ class Social extends CI_Controller {
         $this->load->library('googleplus');
 		$this->googleplus->initial_settings(GOOGLESEEKERREDIRECTURL);
        	if($this->session->userdata('login_status') == true){
-			redirect('provider/dashboard');
+			redirect('seeker/dashboard');
 		}
 		
 		if (isset($_GET['code'])) {
@@ -604,6 +604,58 @@ class Social extends CI_Controller {
 			}
 			
 		} 
+		redirect($this->googleplus->loginURL());
+	} /** Google Login for Seeker ( End Here ) **/ 
+
+	// Cron related vacancy redirect url
+	public function seeker_cron_google()
+	{
+		$session = $this->session->all_userdata();
+		if(isset($session['login_session']) && $session['login_session'] == "provider") {
+			redirect('seeker/logout');
+		}
+		else if(isset($session['login_session']) && $session['login_session'] == "seeker"){
+			redirect('provider/logout');
+		}
+		if(isset($_GET['vac'])) {
+			$this->session->set_userdata('posting','');
+			$this->session->set_userdata('vacancy',$_GET['vac']);
+		}
+		else if(isset($_GET['pos'])) {
+			$this->session->set_userdata('vacancy','');
+			$this->session->set_userdata('posting',$_GET['pos']);
+		}
+
+  		$this->load->library('googleplus');
+		$this->googleplus->initial_settings(GOOGLESEEKERCRONREDIRECTURL);
+		
+		if (isset($_GET['code'])) {
+			$this->googleplus->getAuthenticate();
+			$profile = $this->googleplus->getUserInfo();
+		 	$godata = array(
+		 		'candidate_email' => $profile['email'],
+		 		'candidate_name' => $profile['given_name'],
+		 		'candidate_image_path' => $profile['picture'],
+		 		'candidate_registration_type' => 'google'
+		 	);
+		 	$checkvaliduser = $this->job_seeker_model->social_valid_seeker_login($godata);
+		 	if($checkvaliduser['valid_status'] === 'valid'){
+		 		$this->session->set_userdata("login_status", TRUE);
+		 		$this->session->set_userdata("login_session",$checkvaliduser);
+		 		if($this->session->userdata('vacancy')) {
+		 			redirect('seeker/applynow/'.$this->session->userdata('vacancy'));
+		 		}
+		 		else if($this->session->userdata('posting')) {
+		 			redirect('seeker/findjob?pos='.$this->session->userdata('posting'));
+		 		}
+		 		else {
+		 			redirect('seeker/dashboard');
+		 		}
+		 	} 
+		 	else {
+		 		redirect('login/seeker');
+		 	}
+		}
 		redirect($this->googleplus->loginURL());
 	} /** Google Login for Seeker ( End Here ) **/ 
 	
