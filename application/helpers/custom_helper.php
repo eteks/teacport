@@ -178,39 +178,16 @@ if ( ! function_exists('get_cand_pref_pcs')){
 
 // Job provider profile - subscription
 if ( ! function_exists('get_provider_subscription')){
-	// function get_provider_subscription($value) 
-	// {
-	// 	$out = array();
- //    	if(!empty($value)) {
- //      	foreach ($value as $key => $row) {
- //        	foreach ($row as $k => $r) {
- //          		if($k=='upgrade_or_renewal_id' || $k=='organization_subscription_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
- //            			if(!isset($out[$row['organization_subscription_id']][$row['upgrade_or_renewal_id']]))
-	// 			        {
-	// 		            	$out[$row['organization_subscription_id']]['upgrade_renewal'][$row['upgrade_or_renewal_id']][$k] = $row[$k];
-	// 			        }
- //          			}
- //          			else {
- //            			$out[$row['organization_subscription_id']][$k] = $row[$k];
- //          			}
- //        		}
- //      		}
- //    	}
-	// 	return $out;
-	// }
 	function get_provider_subscription($value) 
 	{
-		// echo "<pre>";
-		// print_r($value);
-		// echo "</pre>";
 		$out = array();
     	if(!empty($value)) {
       	foreach ($value as $key => $row) {
         	foreach ($row as $k => $r) {
-          		if($k=='organization_subscription_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
-            			if(!isset($out[$row['organization_subscription_id']]))
+          		if($k=='upgrade_or_renewal_id' || $k=='organization_subscription_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
+            			if(!isset($out[$row['organization_subscription_id']][$row['upgrade_or_renewal_id']]))
 				        {
-			            	$out[$row['organization_subscription_id']]['upgrade_renewal'][$k] = $row[$k];
+			            	$out[$row['organization_subscription_id']]['upgrade_renewal'][$row['upgrade_or_renewal_id']][$k] = $row[$k];
 				        }
           			}
           			else {
@@ -219,9 +196,6 @@ if ( ! function_exists('get_provider_subscription')){
         		}
       		}
     	}
-    	echo "<pre>";
-		print_r($out);
-		echo "</pre>";
 		return $out;
 	}
 }
