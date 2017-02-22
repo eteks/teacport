@@ -1054,7 +1054,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                        	</div>
                        	<div class="span12">
                       		<div class="control-group check_grace">
-                      			<input type="checkbox" class="control-group apply_grace_period">Apply Grace period for this provider latest/current plan 
+                      			<input type="checkbox" class="control-group apply_grace_period" <?php if(empty($latest_plan_details['is_renewal']) && $latest_plan_details['organization_subscription_status'] == 1){ ?> disabled title="cannot assign grace period when provider is active" <?php } ?>>Apply Grace period for this provider latest/current plan 
                             <input type="hidden" class="grace_period_days" name="grace_period_days" value="10">
                       		</div>
                       	</div>

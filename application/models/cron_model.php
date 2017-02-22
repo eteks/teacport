@@ -5,8 +5,9 @@ class Cron_model extends CI_Model {
 	// Related vacancy post by applicable posting
 	public function cron_related_jobs() {
 		$data = array();
-		$where = '(op.organization_status=1 AND ov.vacancies_status=1 AND candidate_status=1)';
-		$this->db->select('op.organization_id,op.organization_name,op.organization_status,ov.vacancies_id,ov.vacancies_start_salary,ov.vacancies_end_salary,ov.vacancies_job_title,ov.vacancies_applicable_posting_id,ov.vacancy_type,ov.vacancies_status,cpre.candidate_profile_id,cpre.candidate_posting_applied_for,cp.candidate_id,cp.candidate_name,cp.candidate_email,cp.candidate_status');
+		$prev_date = date('Y-m-d', strtotime(' -10 day'));  
+		$where = '(op.organization_status=1 AND ov.vacancies_status=1 AND candidate_status=1 AND DATE(vacancies_created_date) >= "'.$prev_date.'")';
+		$this->db->select('op.organization_id,op.organization_name,op.organization_status,ov.vacancies_id,ov.vacancies_start_salary,ov.vacancies_end_salary,ov.vacancies_job_title,ov.vacancies_applicable_posting_id,ov.vacancy_type,ov.vacancies_status,ov.vacancies_created_date,cpre.candidate_profile_id,cpre.candidate_posting_applied_for,cp.candidate_id,cp.candidate_name,cp.candidate_email,cp.candidate_status');
 		$this->db->from('tr_organization_profile op');
 		$this->db->join('tr_organization_vacancies ov','op.organization_id=ov.vacancies_organization_id','inner');
 		$this->db->join('tr_candidate_preferance cpre','FIND_IN_SET(ov.vacancies_applicable_posting_id , cpre.candidate_posting_applied_for)','inner');
