@@ -970,15 +970,15 @@ class Job_provider_model extends CI_Model {
         $data = $this->db->get_where('tr_organization_subscription',$where);
         if($data -> num_rows() == 1) {
             $data_array = $data->row_array();
-            $start_date = date_create($data_array['org_sub_validity_end_date']);
-            $days = date_diff(date_create('today'),$start_date);
+         	$start_date = (!empty($data_array['grace_period_end_date'])) ? date_create(date('Y-m-d',strtotime($data_array['grace_period_end_date']))) : date_create($data_array['org_sub_validity_end_date']);
+			$days = date_diff(date_create('today'),$start_date);
             if($days->invert == 1)
             {
                $this->db->where($where);
                $this->db->set('organization_subscription_status', '0', FALSE);
                $this->db->update('tr_organization_subscription');
             }
-        }
+	    }
         return TRUE;
     }
 

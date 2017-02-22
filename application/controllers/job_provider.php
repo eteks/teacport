@@ -1097,16 +1097,24 @@ class Job_provider extends CI_Controller {
 			}
 		}	
 	}
+
+
+
+
+
+
+
 	public function subscription(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
-		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));		
 		$check_validity = $this->job_provider_model->check_subscription_validity(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
-
 		$server_msg = $this->session->userdata('subscription_status');
+
+
 		if($_POST && !$this->input->post('subpack') && !empty($server_msg)) {
 			$options = json_decode($_POST['productinfo'],true);
 			$transaction_data = array(
@@ -1279,6 +1287,7 @@ class Job_provider extends CI_Controller {
 
 		// Default Details
 		$data['organization_chosen_plan'] = $this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
+
 		$data['organization_chosen_plan_details'] = $this->job_provider_model->organization_chosen_plan_details(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
 		$data['subscription_upgrade_plan'] = get_subscription_upgrade($this->common_model->subscription_upgrade_plan());
 		if($this->input->post('subpack') && !in_array($this->input->post('subpack'),array_column($data['subscription_upgrade_plan'],'sub_id'))) {
@@ -1297,6 +1306,14 @@ class Job_provider extends CI_Controller {
 		$this->session->unset_userdata('subscription_status');	
 		$this->load->view('company-dashboard-subscription',$data);
 	} // End Subscription
+
+
+
+
+
+
+
+
 	
 	public function candidateprofile() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();

@@ -236,7 +236,7 @@ $route['test_sms'] = 'home/test_sms';
 // $route['test_cron/foo'] = 'cron/foo';
 
 // To tun cron by cpanel.
-$route['test_cron'] = 'cron/cron_task';
+$route['cron_task'] = 'cron/cron_task';
 
 
 /* ===================          Route settings for Admin End     ====================== */
