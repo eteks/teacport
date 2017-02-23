@@ -605,7 +605,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
 			$this->form_validation->set_rules('seeker_address1', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
 			$this->form_validation->set_rules('seeker_address2', 'Address', 'trim|xss_clean|min_length[3]|max_length[150]');
-			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean|');
+			// $this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean|');
 			$this->form_validation->set_rules('seeker_district', 'District', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('seeker_state', 'State', 'trim|required|xss_clean');
 				
