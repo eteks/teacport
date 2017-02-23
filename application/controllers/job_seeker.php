@@ -184,41 +184,43 @@ class Job_seeker extends CI_Controller {
  	}
 
  	function other_extracurriculars($val) {
- 		$value = $this->ext_callback_calls++;
- 		// print_r($_POST['cand_known_lan']);
-		// // $value = array();
-		// // array_push($value,$val);
- 		if(in_array('others',$_POST['cand_extra_cur']) && $_POST['other_extracurricular']!='' && $value == 0) {
- 			$array = array(
- 		 					'extra_curricular' => $_POST['other_extracurricular'],
- 		 					'extra_curricular_status' => 2, // It means other option
- 		 				);
- 		 	$id = $this->common_model->insert_other_extracurricular($array);
- 		 	if($id == "active") {
- 				$this->form_validation->set_message('other_extracurriculars', 'Entered %s other option is already exist.');
-	       		return FALSE;
- 			}
- 			if($id == "inactive") {
- 				$this->form_validation->set_message('other_extracurriculars', 'Entered %s other option is already inactive by Admin.');
-	       		return FALSE;
- 			}
- 			else {
- 				$key = array_search('others', $_POST['cand_extra_cur']);
- 				if(trim($key) != '') {
- 					$_POST['cand_extra_cur'][$key] = $id;
- 				}
- 				$_POST['cand_extra_cur_new'] = $_POST['cand_extra_cur'];
-				return TRUE;
- 			}
- 		}
- 		else if(in_array('others',$_POST['cand_extra_cur']) && $value == 0) {
-   			$this->form_validation->set_message('other_extracurriculars', 'The %s other option is required.');
-	       	return FALSE;
- 		}
- 		else if($value == 0) {
- 			$_POST['cand_extra_cur_new'] = $_POST['cand_extra_cur'];
- 			return TRUE;
- 		}
+ 		if($val != ''){
+	 		$value = $this->ext_callback_calls++;
+	 		// print_r($_POST['cand_known_lan']);
+			// // $value = array();
+			// // array_push($value,$val);
+	 		if(in_array('others',$_POST['cand_extra_cur']) && $_POST['other_extracurricular']!='' && $value == 0) {
+	 			$array = array(
+	 		 					'extra_curricular' => $_POST['other_extracurricular'],
+	 		 					'extra_curricular_status' => 2, // It means other option
+	 		 				);
+	 		 	$id = $this->common_model->insert_other_extracurricular($array);
+	 		 	if($id == "active") {
+	 				$this->form_validation->set_message('other_extracurriculars', 'Entered %s other option is already exist.');
+		       		return FALSE;
+	 			}
+	 			if($id == "inactive") {
+	 				$this->form_validation->set_message('other_extracurriculars', 'Entered %s other option is already inactive by Admin.');
+		       		return FALSE;
+	 			}
+	 			else {
+	 				$key = array_search('others', $_POST['cand_extra_cur']);
+	 				if(trim($key) != '') {
+	 					$_POST['cand_extra_cur'][$key] = $id;
+	 				}
+	 				$_POST['cand_extra_cur_new'] = $_POST['cand_extra_cur'];
+					return TRUE;
+	 			}
+	 		}
+	 		else if(in_array('others',$_POST['cand_extra_cur']) && $value == 0) {
+	   			$this->form_validation->set_message('other_extracurriculars', 'The %s other option is required.');
+		       	return FALSE;
+	 		}
+	 		else if($value == 0) {
+	 			$_POST['cand_extra_cur_new'] = $_POST['cand_extra_cur'];
+	 			return TRUE;
+	 		}
+	 	}
  	}
  	
  	
@@ -337,15 +339,18 @@ class Job_seeker extends CI_Controller {
         	}
         	else {
         		$_POST[$field] = NULL; //
-	            $this->form_validation->set_message('validate_file_type', "The %s field is required");
-	            return FALSE;
+        		//Commented by kalai after client request
+	            // $this->form_validation->set_message('validate_file_type', "The %s field is required");
+	            // return FALSE;
+	            return TRUE;
         	}
         }
-        else {
-        	$_POST[$field] = NULL; //
-            $this->form_validation->set_message('validate_file_type', "The %s field is required");
-            return FALSE;
-        }
+        //Commented by kalai after client request
+        // else {
+        // 	$_POST[$field] = NULL; //
+        //     $this->form_validation->set_message('validate_file_type', "The %s field is required");
+        //     return FALSE;
+        // }
     }
 
 	public function index()
@@ -819,7 +824,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|maxlength[5]|callback_numeric_dot'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
-	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'required|trim|required|xss_clean|callback_other_extracurriculars'),
+	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'trim|xss_clean|callback_other_extracurriculars'),
 			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_addr2', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),
 			array('field' => 'cand_live_dis', 'label' => 'Live District','rules' => 'trim|xss_clean'),
@@ -922,7 +927,7 @@ class Job_seeker extends CI_Controller {
 	           	if($error == 0) {
 	           		if(!empty($_FILES['cand_resume']['name'])) {
 					 	$config['upload_path'] = APPPATH . '../'.$upload_resume_path; // APPPATH means our application folder path.
-				        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
+				        $config['allowed_types'] = 'pdf|doc|docx'; // Allowed tupes
 				        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 				        $config['max_size']    = '1024'; // Maximum size - 2MB
 				        $this->upload->initialize($config); // Initialize the configuration
