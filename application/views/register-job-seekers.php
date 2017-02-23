@@ -24,7 +24,7 @@
                                 endif;
                                 ?>  
 	                            <div class="col-sm-6 pull-left">
-			                        <?php echo ('<div class="form-group"> <label>Institution<sup class="alert">*</sup></label> <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
+			                        <?php echo ('<div class="form-group"> <label>Preferred Institution<sup class="alert">*</sup></label> <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
 			                        <?php
 			                        foreach ($institutiontype as $institution) {
                                         if(set_value('candidate_institution_type') == $institution['institution_type_id'] ) :
