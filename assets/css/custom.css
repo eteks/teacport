@@ -1800,13 +1800,44 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 }
 .blog-single p{
 	text-align: justify;
-}			
+}	
+/*Footer*/
+.location_based_list .fa-map-marker{
+	margin: 5px 5px 0 0;
+	font-size: 16px;
+	/*color: #da651a;*/
+}
+.float_location{
+	float:left;
+}
+.location_based_list li> a{
+	padding: 5px 15px;
+	font-size: 14px;
+	font-weight: 400;
+	font-family: Source Sans Pro;
+}
+.footer_block h4{
+	font-weight:600px !important;
+	color:#242424;
+}	
+/*Vacancies*/
+.vacancy_search_section {
+	position:relative;
+}
+.srch_btn{
+	position:absolute;
+	left:150%;
+	text-align: center;
+}	
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{
 	float:left;
-	padding-top:40px;
+	padding-top:15px;
 	pointer-events:none;
+}
+.visitor_count h4{
+	margin-bottom:0 !important;
 }
 .visitor_no h4{
 

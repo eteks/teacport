@@ -3,7 +3,7 @@
    	    <footer class="footer">
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-6 col-md-3 col-xs-12">
+                    <div class="col-sm-6 col-md-4 col-xs-12">
                         <div class="footer_block"> 
                         	<a href="<?php echo base_url(); ?>" id="webpage_title" class="footer_logo"> 
 			                	<img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png" alt="logo" class="img-responsive tr_logo pull-left">
@@ -18,7 +18,7 @@
                         <div class="footer_block">
                             <h4>Quick Links</h4>
                             <ul class="footer-links">
-                                <li> <a href="<?php echo base_url(); ?>">Home</a> </li>
+                                <li><a href="<?php echo base_url(); ?>">Home</a></li>
                                 <li> <a href="<?php echo base_url(); ?>aboutus">About Us</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>missingpage">Information</a> </li>
                                 <li> <a href="<?php echo base_url(); ?>contactus">Contact Us</a> </li>
@@ -26,42 +26,50 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-4 col-xs-12">
+                    <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block dark_gry follow-on">
-                            <h4>Follow Us On</h4>
-                            
-                            <!-- <ul class="recentpost">
-                                <li><a href="<?php echo base_url(); ?>vacancies">Teacher Jobs</a> </li>
-                                <li><a href="<?php echo base_url(); ?>vacancies">Office Admin Jobs </a></li>                      
-                                <li><a href="<?php echo base_url(); ?>vacancies">Hindi Teacher Jobs</a></li>
-                                <li><a href="<?php echo base_url(); ?>vacancies">View all jobs</a></li>
-                            </ul> -->
-                            <ul class="social-network social-circle onwhite">
-                                <li><a href="http://www.facebook.com/teachersrecruit/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="http://www.twitter.com/teacherecruit" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="https://plus.google.com/112001535695316053521" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="visitor_count footer_block">
-                        	 	<h4>Visitor Count</h4>
-                        		<div class="visitor_no"> 
-                        		<h4>
-                                <?php
-                                if(!empty($site_visit_count)) :
-                                    if(strlen($site_visit_count) <= 8) :
-                                        echo sprintf("%08d", $site_visit_count);
-                                    else :
-                                        echo $site_visit_count;
-                                    endif;
-                                else :
-                                    echo sprintf("%08d", 0);
-                                endif;
-                                ?>
-                                </h4>
-                                </div>
-                    	</div>
-                    	</div>
+                            <h4>Location Based Jobs</h4>
+                                <ul class="location_based_list">
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Pudhuchery</a> 
+                                        <span class="clearfix"></span>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Salem</a>
+                                        <span class="clearfix"></span>
+                                    </li>                      
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Trichy</a>
+                                        <span class="clearfix"></span>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Chennai</a>
+                                        <span class="clearfix"></span>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Madurai</a>
+                                        <span class="clearfix"></span>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Villupuram</a>
+                                        <span class="clearfix"></span>
+                                    </li>
+                                    <li>
+                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in TamilNadu</a>
+                                        <span class="clearfix"></span>
+                                    </li>
+                                </ul>
+                        </div> 
+                              
+                        
+                    </div>
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block">
                             <h4>Contact Information</h4>
@@ -87,17 +95,38 @@
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-                                        <p>Copyright ©<?php echo date("Y"); ?> - Teachers Recruit All rights Reserved.<br></p>
+                                        <p>Copyright ©<?php echo date("Y"); ?> - Teachers Recruit All rights Reserved.<br/>
+                                            Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a>
+                                        </p>
                                     </div>
-                                    <div class="col-md-6 col-sm-6 col-xs-12 nopadding">
-                                        <!-- <ul class="social-network social-circle onwhite">
-                                            <li><a href="http://www.facebook.com" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="http://www.twitter.com" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="http://plus.google.com" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 nopadding">
+                                        
+                                        <div class="visitor_count footer_block">
+                                            <h4>Visitor Count</h4>
+                                            <div class="visitor_no"> 
+                                                <h4>
+                                                    <?php
+                                                        if(!empty($site_visit_count)) :
+                                                            if(strlen($site_visit_count) <= 8) :
+                                                                echo sprintf("%08d", $site_visit_count);
+                                                                else :
+                                                                    echo $site_visit_count;
+                                                            endif;
+                                                            else :
+                                                                echo sprintf("%08d", 0);
+                                                        endif;
+                                                    ?>
+                                                </h4>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                    <div class="col-md-3 col-sm-3 col-xs-12 nopadding">
+                                        <ul class="social-network social-circle onwhite">
+                                            <li><a href="http://www.facebook.com/teachersrecruit/" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                                            <li><a href="http://www.twitter.com/teacherecruit" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                                            <li><a href="https://plus.google.com/112001535695316053521" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
                                             <li><a href="http://www.linkedin.com" class="icoLinkedin" title="Linkedin +"><i class="fa fa-linkedin"></i></a></li>
-                                        </ul> -->
-                                        <p class="pull-right">Design and Developed By <a href="http://www.etekchnoservices.com">Etekchnoservices Pvt Ltd </a></p>
-                                        <div class="clearfix"> </div>
+                                        </ul>
                                     </div>
                                 </div>
                             </div> 

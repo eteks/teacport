@@ -39,10 +39,10 @@
 		                                       Job provider / Recruiter after registration with us, can Post the Jobs, Update Profile and other details.
 		                                    </p>
 		                                    <p><i class="fa fa-tags"></i>
-		                                       The Recruiters / Job Providers are requested not to make any payment s by Cash. Only Demand Draft, Cheque, NEFT, RTGS mode of payment is accepted.
+		                                       The Recruiters / Job Providers are requested not to make any payments by Cash. Only Demand Draft, Cheque, NEFT, RTGS mode of payment is accepted.
 		                                    </p>
 		                                    <p><i class="fa fa-tags"></i>
-		                                        Teachers Recruit owns a right to Reject / Delete an Advertisement finding to have objectionable text. A Email will be sent to the Job Provider informing the same.
+		                                        Teachers Recruit owns a right to Reject / Delete an Advertisement finding to have objectionable text. An Email will be sent to the Job Provider informing the same.
 		                                    </p>
 		                                    <p><i class="fa fa-tags"></i>
 		                                       The Communication between the Teachers Recruit and Job Provider / Recruiter will be only through Email.
@@ -83,7 +83,7 @@
 		                                       The Job Seeker, after registration, will be provided with an User-Id and Password. Teachers-Recruit shall not be responsible for the loss or theft or misuse of the Password of Job Seekers.
 		                                    </p>
 		                                    <p><i class="fa fa-tags"></i>
-		                                       Copying or downloading the Data / Contents / Contact details of user and other documents from this site is strictly Prohibited. Any Violation, the Violator is subject to Prosecution Under the Law.
+		                                       Copying or downloading the Data / Contents / Contact details of users and other documents from this site is strictly Prohibited. Any Violation, the Violator is subject to Prosecution Under the Law.
 		                                    </p>
 		                                    <p><i class="fa fa-tags"></i>
 		                                       Teachers Recruit does not guarantee a Job or response to the resume Postings. Offering Jobs is at the sole discretion of Job Providers.
