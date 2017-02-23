@@ -989,6 +989,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </div>
                     <div class="tab-pane" id="tab4">
                     	<h4>Grace Period</h4>
+                      <?php if(isset($latest_plan_details)): ?>
                        	<p class="span12 control-group">                                       
                         	<span class="info_color">Note :</span>
                          	Extending grace time is applicable only for the Latest Plan/Current Plan that customer availed. 
@@ -1074,6 +1075,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           		</span>	
                         	</div>
                       	</div>
+                        <?php else: ?>
+                          <div class="empty_subscription_section">
+                            <p> This Organization has <span> no subscription </span> plans. </p>
+                          </div>
+                        <?php endif; ?>
                     </div>
                     <!-- <div class="tab-pane" id="tab4">
                       <h4>Validity Details</h4>

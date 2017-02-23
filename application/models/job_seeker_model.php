@@ -527,6 +527,11 @@ class Job_seeker_model extends CI_Model {
 
 				$candidate_dob_explode = explode('/', $data['cand_dob']);
 				$candidate_dob = $candidate_dob_explode[2]."-".$candidate_dob_explode[1]."-".$candidate_dob_explode[0];
+				//newly added by kalai for client request
+				if(!empty($data['cand_extra_cur_new']))
+					$data['cand_extra_cur_new'] = implode(',', $data['cand_extra_cur_new']);
+				else
+					$data['cand_extra_cur_new'] = NULL;
 				// Updation in profile table
 				$profile_update_data = array(
 								'candidate_name' => $data['cand_firstname'],
@@ -557,7 +562,8 @@ class Job_seeker_model extends CI_Model {
 								'candidate_tet_exam_status' => $data['cand_tet'],
 								'candidate_profile_completeness' => $pro_com,
 								// 'candidate_interest_subject_id' => $data['cand_int_sub'],
-								'candidate_extra_curricular_id' => implode(',', $data['cand_extra_cur_new']),
+								// 'candidate_extra_curricular_id' => implode(',', $data['cand_extra_cur_new']),
+								'candidate_extra_curricular_id' => $data['cand_extra_cur_new'],
 								'candidate_is_fresher' => $fresh,
 								);
 				$this->db->set($profile_update_data);
