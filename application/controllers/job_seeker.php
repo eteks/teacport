@@ -927,7 +927,7 @@ class Job_seeker extends CI_Controller {
 	           	if($error == 0) {
 	           		if(!empty($_FILES['cand_resume']['name'])) {
 					 	$config['upload_path'] = APPPATH . '../'.$upload_resume_path; // APPPATH means our application folder path.
-				        $config['allowed_types'] = 'pdf|doc'; // Allowed tupes
+				        $config['allowed_types'] = 'pdf|doc|docx'; // Allowed tupes
 				        $config['encrypt_name'] = TRUE; // Encrypted file name for security purpose
 				        $config['max_size']    = '1024'; // Maximum size - 2MB
 				        $this->upload->initialize($config); // Initialize the configuration
