@@ -479,9 +479,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <thead>
                                 <tr>
                                     <!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
-                                    <th>Username</th>
+                                    <th>Organization Name</th>
                                     <th class="hidden-phone">Email</th>
-                                    <th class="hidden-phone">Institution Name</th>
+                                    <th class="hidden-phone">Username</th>
+                                    <th class="hidden-phone">Plan Subscribed</th>
                                     <th class="hidden-phone">Joined</th>
                                 </tr>
                                 </thead>
@@ -494,7 +495,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
                                     <td><?php if(!empty($jobprovider['organization_name'])) echo $jobprovider['organization_name']; else echo "---"; ?></td>
                                     <td class="hidden-phone"><a href="mailto:<?php echo $jobprovider['registrant_email_id'] ?>"><?php echo $jobprovider['registrant_email_id'] ?></a></td>
-                                    <td class="hidden-phone"><?php echo $jobprovider['registrant_name'] ?></td>
+                                    <td class="hidden-phone"><?php if(!empty($jobprovider['registrant_name'])) echo $jobprovider['registrant_name']; else echo "---"; ?></td>
+                                    <td class="hidden-phone"><?php if(!empty($jobprovider['subscription_plan'])) echo $jobprovider['subscription_plan']; else echo "---"; ?></td>
                                     <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobprovider['organization_created_date'])); ?></td>
                                 </tr>
                                 <?php
@@ -526,7 +528,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <tr>
                                     <!-- <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_1 .checkboxes" /></th> -->
                                     <th class="hidden-phone">Job Title</th>
-                                    <th class="hidden-phone">Institution</th>
+                                    <th class="hidden-phone">Organization Name</th>
                                     <th class="hidden-phone">District</th>
                                     <th class="hidden-phone">Job Posted Date</th>
                                     <th class="hidden-phone">Status</th>
@@ -540,7 +542,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <tr class="odd gradeX">
                                     <!-- <td><input type="checkbox" class="checkboxes" value="1" /></td> -->
                                     <td><?php echo $jobs['vacancies_job_title'] ?></td>
-                                    <td class="hidden-phone"><?php echo $jobs['registrant_name'] ?></td>
+                                    <td class="hidden-phone"><?php echo $jobs['organization_name'] ?></td>
                                     <td class="hidden-phone"><?php echo $jobs['district_name'] ?></td>
                                     <td class="center hidden-phone"><?php echo date("d/m/Y", strtotime($jobs['vacancies_created_date'])); ?></td>
                                     <td class="hidden-phone"><span class="label label-success"><?php if($jobs['vacancies_status'] == 1) echo "Approved"; else "Waiting for Approve" ?></span></td>

@@ -275,8 +275,8 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'trim|xss_clean');
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('organization_state', 'State ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your state'));
 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
