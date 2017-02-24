@@ -464,7 +464,7 @@ class Job_seeker extends CI_Controller {
 			$this->form_validation->set_rules('candidate_institution_type', 'Institution', 'trim|required|numeric|xss_clean');
 			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|min_length[3]|max_length[50]|xss_clean|callback_alpha_dash_space');
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
-			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_candidate_profile.candidate_mobile_no]');
 			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
 			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_term_and_condition');

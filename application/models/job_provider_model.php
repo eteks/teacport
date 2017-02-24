@@ -350,6 +350,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->limit($limit,$start);
 		$this->db->where('('.$where.')');
 		$this->db->group_by('cp.candidate_id'); 
+		$this->db->order_by('cp.candidate_created_date desc');
 		$postedjobdata = $this->db->get();
 		return $postedjobdata->result_array();
 	}
@@ -416,6 +417,7 @@ class Job_provider_model extends CI_Model {
 		
 		$this->db->where('('.$where.')');
 		$this->db->group_by('cp.candidate_id'); 
+		$this->db->order_by('cp.candidate_created_date desc');
 		$postedjobdata = $this->db->get();
 		return $postedjobdata->num_rows();
 	}

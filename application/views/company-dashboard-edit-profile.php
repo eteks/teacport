@@ -99,17 +99,17 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-offset-1 col-sm-2" for="address-line2">Address Line2 <sup class="alert">*</sup></label>
+								<label class="col-sm-offset-1 col-sm-2" for="address-line2">Address Line2 <!-- <sup class="alert">*</sup> --></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line2'); ?>
-									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control form_inputs" maxlength="150" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; elseif (set_value('address-line2') !='') { echo set_value('address-line2'); } ?>" placeholder="Locality / Area / Village" type="text">
+									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control" maxlength="150" name="address-line2" size="40" value="<?php if($organization['organization_address_2'] != '') echo $organization['organization_address_2']; elseif (set_value('address-line2') !='') { echo set_value('address-line2'); } ?>" placeholder="Locality / Area / Village" type="text">
 								</div>
 							</div>
 							<div class="form-group">
-								<label class="col-sm-offset-1 col-sm-2" for="address-line3">Address Line3 <sup class="alert">*</sup></label>
+								<label class="col-sm-offset-1 col-sm-2" for="address-line3">Address Line3 <!-- <sup class="alert">*</sup> --></label>
 								<div class="col-sm-8">
 									<?php echo form_error('address-line3'); ?>
-									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control form_inputs" maxlength="150" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
+									<input id="address-line2" data-minlength="3" data-name="Address" class="form-control" maxlength="150" name="address-line3" size="40" value="<?php if($organization['organization_address_3'] != '') echo $organization['organization_address_3']; elseif (set_value('address-line3') !='') { echo set_value('address-line3'); } ?>" placeholder="Taluk / City" type="text">
 								</div>
 							</div>
 							<!-- <div class="form-group">

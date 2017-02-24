@@ -156,7 +156,7 @@ class Dashboard_model extends CI_Model {
       $this->db->join('tr_subscription AS sub', 'sub.subscription_id = org.subscription_id', 'inner');
       $this->db->where($condition);
       $this->db->order_by('count_plan','desc');
-      $this->db->group_by('org.organization_id');
+      $this->db->group_by('sub.subscription_id');
       $query = $this->db->get()->result_array();
       // echo "plan job provider";
       // print_r($query);
@@ -194,9 +194,11 @@ class Dashboard_model extends CI_Model {
       $condition = "org.organization_status = 1";
       $this->db->select('*');
       $this->db->from('tr_organization_profile AS org');
+      $this->db->join('tr_organization_subscription AS org_sub', 'org_sub.organization_id = org.organization_id', 'left');
+      $this->db->join('tr_subscription AS sub', 'sub.subscription_id = org_sub.subscription_id', 'left');
       $this->db->where($condition);
       $this->db->limit(5);
-      $this->db->order_by('organization_id','desc');
+      $this->db->order_by('org.organization_id','desc');
       $query = $this->db->get()->result_array();
       return $query;
   }
