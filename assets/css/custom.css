@@ -486,6 +486,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
   	bottom: -15px;
   	right: 10px;
  }
+ .back2_browse{
+ 	font-size: 16px;
+ }
+ .back2_browse a{
+ 	margin: 5px 0 0;
+ 	padding:0 5px;
+ }
+.back2_browse a:hover, .back2_browse a:focus {
+ 	color: #29aafe;
+ }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
