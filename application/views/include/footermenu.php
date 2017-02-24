@@ -11,7 +11,9 @@
 			                	<span class="clearfix"> </span>
                				</a>
                             <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
-                            <blockquote>"Arise, Awake and Stop Not till you reach your goal" - Swami Vivekananda</blockquote>
+                            <blockquote>"Arise, Awake and Stop Not till you reach your goal"<br-><span class="pull-right"> - Swami Vivekananda</span>
+                            </blockquote>
+                            <span class="clearfix"></span>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-2 col-xs-12">
