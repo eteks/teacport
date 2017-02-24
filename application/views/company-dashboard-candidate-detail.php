@@ -214,17 +214,17 @@ else {
 										<div class="display_seeker_details">
 											<span class="col-sm-4">Wish to Work in State </span>
 											<span class="col-sm-1"> : </span>
-											<div class="col-sm-7"> <?php echo (!empty($candidate[0]['willing_state']) ? $candidate[0]['willing_state'] : "Not mention" ); ?> </div>
+											<div class="col-sm-7"> <?php echo (!empty($candidate[0]['willing_state']) ? $candidate[0]['willing_state'] : "Not mentioned" ); ?> </div>
 										</div>
 										<div class="display_seeker_details">
 											<span class="col-sm-4">Wish to Work in District </span>
 											<span class="col-sm-1"> : </span>
-											<div class="col-sm-7"> <?php echo (!empty($candidate[0]['willing_district']) ? $candidate[0]['willing_district'] : "Not mention" ); ?> </div>
+											<div class="col-sm-7"> <?php echo (!empty($candidate[0]['willing_district']) ? $candidate[0]['willing_district'] : "Not mentioned" ); ?> </div>
 										</div>
 										<div class="display_seeker_details">
 											<span class="col-sm-4">Employment Type </span>
 											<span class="col-sm-1"> : </span>
-											<div class="col-sm-7"> <?php echo ($candidate[0]['candidate_type'] == "full" ? "Full Time" : ($candidate[0]['candidate_type'] == "part" ? "Part Time" : "Not Mention")); ?> </div>
+											<div class="col-sm-7"> <?php echo ($candidate[0]['candidate_type'] == "full" ? "Full Time" : ($candidate[0]['candidate_type'] == "part" ? "Part Time" : "Not Mentioned")); ?> </div>
 										</div>
 									</div> <br> <!---End Post Preference-->	
 									<!--Educatinaol Profile-->
@@ -329,17 +329,17 @@ else {
 		                          	 	<div class="display_seeker_details">
 		                           	 		<span class="col-sm-4">Door No.</span>
 		                           	 		<span class="col-sm-1"> : </span>
-											<div class="col-sm-7">	<?php echo !empty($candidate[0]['candidate_address_1']) ? $candidate[0]['candidate_address_1'] : "Not Mention"; ?> </div>
+											<div class="col-sm-7">	<?php echo !empty($candidate[0]['candidate_address_1']) ? $candidate[0]['candidate_address_1'] : "Not Mentioned"; ?> </div>
 										</div>											
 										<div class="display_seeker_details">
 											<span class="col-sm-4">Post/Village/Taluk</span>
 											<span class="col-sm-1"> : </span>
-											<span class="col-sm-7"> <?php echo !empty($candidate[0]['candidate_address_2']) ? $candidate[0]['candidate_address_2'] : "Not Mention"; ?> </span>
+											<span class="col-sm-7"> <?php echo !empty($candidate[0]['candidate_address_2']) ? $candidate[0]['candidate_address_2'] : "Not Mentioned"; ?> </span>
 										</div>
 										<div class="display_seeker_details">
 											<span class="col-sm-4">Pin-Code</span>
 											<span class="col-sm-1"> : </span>
-											<span class="col-sm-7"> <?php echo !empty($candidate[0]['candidate_pincode']) ? $candidate[0]['candidate_pincode'] : "Not Mention"; ?> </span>
+											<span class="col-sm-7"> <?php echo !empty($candidate[0]['candidate_pincode']) ? $candidate[0]['candidate_pincode'] : "Not Mentioned"; ?> </span>
 										</div>
 										<div class="display_seeker_details">
 											<span class="col-sm-4">Email ID</span>
