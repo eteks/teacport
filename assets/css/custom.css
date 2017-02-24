@@ -801,7 +801,7 @@ select:invalid {
     height: 60px;
     width: 100%;
  } 
-/* FOOTER */
+ /* FOOTER */
 .small-footer p {
 	text-align: justify;
 }
@@ -1538,9 +1538,9 @@ label.form-input-error {
 }
 /* Footer */
 .footer_block blockquote{
-	font-size: 10px;
+	font-size: 12px;
 	color: #f47020;
-	font-weight: bold;
+	font-weight: 600;
 }
 .qualified_level{
 	margin: 15px 0 0;
