@@ -227,7 +227,8 @@ class Job_provider extends CI_Controller {
         $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
 		$data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
         $this->session->set_userdata('registrant_logo',$organization_data['registrant_logo']);
-        if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == ''){
+        // if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == ''){
+		if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_district_id'] == ''){
 			$data['organization'] = $organization_data;
 			$data['district'] = $this->common_model->get_all_district();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
