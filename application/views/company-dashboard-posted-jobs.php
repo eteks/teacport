@@ -80,7 +80,7 @@
 	                                    <p class="vacancies_instruction_act"><?php echo substr($postedjobs['vacancies_instruction'], 0, 100); ?>...</p>
 		                                <div class="job-salary job_salary_act">
 		                                    &#8377;<?php echo $postedjobs['vacancies_start_salary']; ?> - &#8377;<?php echo $postedjobs['vacancies_end_salary']; ?>
-                                            <p> <i class="fa fa-clock-o"></i> <?php echo ($postedjobs['vacancy_type'] == "full" ? "Full Time" : ($postedjobs['vacancy_type'] == "part" ? "Part Time" : "Not Mention")); ?> </p>
+                                            <p> <i class="fa fa-clock-o"></i> <?php echo ($postedjobs['vacancy_type'] == "full" ? "Full Time" : ($postedjobs['vacancy_type'] == "part" ? "Part Time" : "Not Mentioned")); ?> </p>
 		                                </div>
 	                                </div>
 	                                <div class="col-md-2 col-sm-2 col-xs-2 buttonss">
