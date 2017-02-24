@@ -197,6 +197,9 @@ box-shadow:0 8px 6px -6px #da651a !important;
 .latest_news_content img{
 	margin-top:20px !important;	
 }
+#scroller{
+	margin-top: -20px;
+}
 
 /*latest news having news*/
 .latest_news_head_1{
