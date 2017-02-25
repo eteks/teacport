@@ -111,7 +111,7 @@
 	                                ?>
                                 	<div class="col-sm-6 pull-left">
 		                                <?php echo ('<div class="form-group">
-		                                        <label>Institution<sup class="alert">*</sup></label>
+		                                        <label>Preferred Institution<sup class="alert">*</sup></label>
 		                                        <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
 		                                            <?php
 		                                            foreach ($institutiontype as $institution) {

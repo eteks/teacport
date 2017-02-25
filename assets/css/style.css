@@ -258,7 +258,7 @@ li.no-bg .login-header-btn:hover{background-color:#242424 !important;color:#FFF 
 .facts .single-facts-area span{color:#fff;font-size:30px;font-weight:700;line-height:49px;position:relative;text-transform:uppercase;}
 .facts .single-facts-area span:before{background:#fff none repeat scroll 0 0;bottom:-6px;content:"";height:1px;left:28%;position:absolute;width:50%;}
 .facts h3{text-transform:capitalize;position:relative;color:#FFF;text-transform:uppercase;margin-top:10px;}
-.categories{background-color:#FCFCFC;position:relative;overflow:hidden;}
+.categories{background-color:#FCFCFC;position:relative;overflow:hidden;margin-bottom:25px;}
 .categories .category-box{position:relative;overflow:hidden;background-color:#FFF;border:1px solid #F1F1F1;margin-bottom:30px;}
 .categories .category-heading{border-bottom:1px solid #f1f1f1;color:#242424;font-size:18px;font-weight:600;padding:20px 15px;position:relative;text-transform:capitalize;}
 .categories .category-heading:hover{color:#29aafe;}
