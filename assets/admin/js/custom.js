@@ -1028,6 +1028,21 @@ var content_height = parseInt(window_height - (header_height + footer_height));
 			$('.show_grace_period').addClass('hide_all');
 		}
 	});
+
+
+    $(".enable_act").on('click', function(){
+       $(this).addClass("enable_srch");
+       $('.enable_srch a').css('color', 'red');
+       $(".save_search_btn").show();
+       $(".cancel_search_btn").show();
+         
+    });
+    $(".disable_act").on('click', function(){
+       $('.enable_srch a').css('color', '#a1a1a1');
+       $(".save_search_btn").hide();
+       $(".cancel_search_btn").hide();
+         
+    });
 	
 	
 }); // End document
@@ -1077,6 +1092,8 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+    
 
 	
 

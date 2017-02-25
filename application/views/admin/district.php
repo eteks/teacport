@@ -49,7 +49,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>
       <!-- END PAGE HEADER-->
       <!-- BEGIN ADVANCED TABLE widget-->
-      <div class="row-fluid">
+     <div>
+        <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
           <div class="widget">
@@ -72,6 +73,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                   <div class="btn-group pull-right">
                   </div>
+                  <button class="save_search_btn dn" title="Save location based Search">SAVE</button>
+                  <button class="cancel_search_btn dn" title="Cancel location based Search">CANCEL</button>
                 </div>
                 <form method="post" action="district" class="admin_module_form" id="district_form">
                   <?php } ?>
@@ -91,6 +94,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
+                        <th> Enable location <br/> based Search ? </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                             <th class="data_action">Delete</th>
                           <?php endif; ?>
@@ -159,6 +163,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </a>
                         </td>
                         <?php endif; ?>
+                        <td class="loc_srch">
+                           <ul class="enable_location_srch">
+                              <li class="enable_act"><a href="#">Yes</a></li>
+                              <li class="disable_act"><a href="#">No</a></li>
+                          </ul>
+                        </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td class="delete_section">
                           <?php 

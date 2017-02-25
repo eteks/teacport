@@ -10,7 +10,7 @@
 			                	<!-- <h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3> -->
 			                	<span class="clearfix"> </span>
                				</a>
-                            <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
+                            <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched teachersrecruit.com and  the vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
                             <blockquote>"Arise, Awake and Stop Not till you reach your goal"<br-><span class="pull-right"> - Swami Vivekananda</span>
                             </blockquote>
                             <span class="clearfix"></span>
@@ -30,43 +30,39 @@
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block dark_gry follow-on">
-                            <h4>Location Based Jobs</h4>
+                            <h4>Teaching Jobs by District</h4>
                                 <ul class="location_based_list">
                                     <li>
                                         <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Pudhuchery</a> 
+                                        <a href="#" class="float_location">Teacher Jobs in Delhi</a> 
                                         <span class="clearfix"></span>
                                     </li>
                                     <li>
                                         <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Salem</a>
+                                        <a href="#" class="float_location">Teacher Jobs in Bangalore</a>
                                         <span class="clearfix"></span>
                                     </li>                      
                                     <li>
                                         <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Trichy</a>
+                                        <a href="#" class="float_location">Teacher Jobs in Hyderabad</a>
                                         <span class="clearfix"></span>
                                     </li>
                                     <li>
                                         <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Chennai</a>
+                                        <a href="#" class="float_location">Teacher Jobs in Pune</a>
                                         <span class="clearfix"></span>
                                     </li>
                                     <li>
                                         <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Madurai</a>
+                                        <a href="#" class="float_location">Teacher Jobs in Mumbai</a>
                                         <span class="clearfix"></span>
                                     </li>
                                     <li>
                                         <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Villupuram</a>
+                                        <a href="#" class="float_location">Teacher Jobs in Chennai</a>
                                         <span class="clearfix"></span>
                                     </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in TamilNadu</a>
-                                        <span class="clearfix"></span>
-                                    </li>
+                                
                                 </ul>
                         </div> 
                               

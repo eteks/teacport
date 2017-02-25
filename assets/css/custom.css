@@ -1331,9 +1331,9 @@ label.form-input-error {
     width: 100%;
 }
 .app_post{
-	margin-bottom: 50px !important;
+	/*margin-bottom: 50px !important;
     height: 100px;
-    margin-top: 20px;
+    margin-top: 20px;*/
     padding-top: 20px;
 }
 }
@@ -1798,7 +1798,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }	
 /* Testimonils*/
 .owl-testimonial-2 .single_testimonial{
-	height: 350px !important;
+	height: 400px !important;
 }
 /*Zebra Date Picker*/
 button.Zebra_DatePicker_Icon_Inside_Right{
@@ -1816,7 +1816,7 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 }	
 /*Footer*/
 .location_based_list .fa-map-marker{
-	margin: 5px 5px 0 0;
+	margin: 8px 5px 0 0;
 	font-size: 16px;
 	/*color: #da651a;*/
 }
@@ -1824,7 +1824,7 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 	float:left;
 }
 .location_based_list li> a{
-	padding: 5px 15px;
+	padding: 6px 15px;
 	font-size: 14px;
 	font-weight: 400;
 	font-family: Source Sans Pro;
@@ -1953,3 +1953,5 @@ button.Zebra_DatePicker_Icon_Inside_Right{
  }
 
 }
+
+
