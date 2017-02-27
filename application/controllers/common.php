@@ -2,7 +2,7 @@
 
 
 class Common {
-	
+		
 	public function facebookloginurl(){
 		/* Load custom facebook library file and return login url(using email permission) */
 		$CI =& get_instance();
