@@ -461,7 +461,7 @@ class Job_seeker extends CI_Controller {
 			}
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			/* Set validate condition for registration form */
-			$this->form_validation->set_rules('candidate_institution_type', 'Institution', 'trim|required|numeric|xss_clean');
+			$this->form_validation->set_rules('candidate_institution_type[]', 'Institution', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|min_length[3]|max_length[50]|xss_clean|callback_alpha_dash_space');
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
 			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_candidate_profile.candidate_mobile_no]');
@@ -484,7 +484,7 @@ class Job_seeker extends CI_Controller {
 				/* Registration form valid stage */
 				/* Get and store posted data to array */
 				$data = array(
-					'candidate_institution_type' => $this->input->post('candidate_institution_type'),
+					'candidate_institution_type' => implode(',',$this->input->post('candidate_institution_type')),
 					'candidate_name' => $this->input->post('candidate_name'),
 					'candidate_email' => $this->input->post('candidate_email'),
 					'candidate_mobile_no' => $this->input->post('candidate_mobile_no'),
@@ -605,7 +605,7 @@ class Job_seeker extends CI_Controller {
 				$this->form_validation->set_rules('seeker_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
 				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[20]');
 				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|min_length[8]|max_length[20]|matches[seeker_password]');
-				$this->form_validation->set_rules('seeker_institution', 'Institution Type', 'trim|required|xss_clean|');
+				$this->form_validation->set_rules('seeker_institution[]', 'Institution Type', 'trim|required|xss_clean|');
 			}		
 			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
@@ -637,7 +637,7 @@ class Job_seeker extends CI_Controller {
 						'candidate_email' => $this->input->post('seeker_email'),
 						'candidate_mobile_no' => $this->input->post('seeker_mobile'),
 						'candidate_password' => $this->input->post('seeker_password'),
-						'candidate_institution_type' => $this->input->post('seeker_institution'),
+						'candidate_institution_type' => implode(',',$this->input->post('seeker_institution')),
 						'candidate_father_name' => $this->input->post('seeker_father'),
 						'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 						'candidate_address_1' => $this->input->post('seeker_address1'),

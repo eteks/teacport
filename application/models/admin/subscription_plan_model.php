@@ -76,6 +76,7 @@ class Subscription_Plan_Model extends CI_Model {
     // View
     $this->db->select('*');
     $this->db->from('tr_subscription sub');
+    $this->db->where('sub.subscription_price >',0);
     $model_data['subscription_plans'] = $this->db->order_by('sub.subscription_id','desc')->get()->result_array();
     return $model_data;
   }
