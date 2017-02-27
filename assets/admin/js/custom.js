@@ -1029,20 +1029,25 @@ var content_height = parseInt(window_height - (header_height + footer_height));
 		}
 	});
 
-
+    //Enable or disable District based Search-Added By Akila
     $(".enable_act").on('click', function(){
-       $(this).addClass("enable_srch");
-       $('.enable_srch a').css('color', 'red');
+       $(this).addClass("enable_srch")
        $(".save_search_btn").show();
        $(".cancel_search_btn").show();
          
     });
     $(".disable_act").on('click', function(){
-       $('.enable_srch a').css('color', '#a1a1a1');
-       $(".save_search_btn").hide();
-       $(".cancel_search_btn").hide();
-         
+        $(this).parent(".enable_location_srch").find('li').removeClass("enable_srch");
+        $(".save_search_btn").hide();
+        $(".cancel_search_btn").hide();
     });
+    $(".cancel_search_btn").on("click", function(){
+        $(".enable_location_srch").find("li").removeClass("enable_srch");
+        $(".save_search_btn").hide();
+        $(".cancel_search_btn").hide();
+    });
+
+
 	
 	
 }); // End document

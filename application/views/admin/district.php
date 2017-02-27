@@ -73,8 +73,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                   <div class="btn-group pull-right">
                   </div>
-                  <button class="save_search_btn dn" title="Save location based Search">SAVE</button>
-                  <button class="cancel_search_btn dn" title="Cancel location based Search">CANCEL</button>
+                  <button class="save_search_btn dn" title="Hit Save for District Based Search" onclick="confirm_alert()">SAVE</button>
+                  <button class="cancel_search_btn dn" title="Clear District based Search">CANCEL</button>
                 </div>
                 <form method="post" action="district" class="admin_module_form" id="district_form">
                   <?php } ?>
@@ -94,10 +94,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
-                        <th> Enable location <br/> based Search ? </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                             <th class="data_action">Delete</th>
-                          <?php endif; ?>
+                        <?php endif; ?>
+                         <th> Enable District <br/> based Search ? </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -163,12 +163,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </a>
                         </td>
                         <?php endif; ?>
-                        <td class="loc_srch">
-                           <ul class="enable_location_srch">
-                              <li class="enable_act"><a href="#">Yes</a></li>
-                              <li class="disable_act"><a href="#">No</a></li>
-                          </ul>
-                        </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                         <td class="delete_section">
                           <?php 
@@ -187,6 +181,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           ?>      
                         </td>
                         <?php endif; ?>
+                        <td class="loc_srch"> 
+                           <ul class="enable_location_srch">
+                              <li class="enable_act">YES</li>
+                              <li class="disable_act">NO</li>
+                          </ul>
+                        </td>
                       </tr>
                       <?php
                       endforeach;
@@ -208,7 +208,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
     <!-- END PAGE CONTAINER-->
   </div>
   <!-- END PAGE -->
-</div>
+  <!--overlay for all popup in admin-->
+  <div id="dialog-overlay"></div>
+  <!--  Confirm box with yes and no button -->
+  <div id="dialog-box">
+    <h4 class="message">
+      Districts name1, name2, name3, name4 has been selected for District Search, Are you sure want to proceed ?
+    </h4>
+    <div>
+      <span class="del_yes yes">Yes</span>
+      <span class="del_no no">No</span>
+    </div>
+  </div>
+  </div>
 <!-- END CONTAINER -->
   
 <script>
