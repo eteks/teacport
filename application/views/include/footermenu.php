@@ -28,46 +28,48 @@
                             </ul>
                         </div>
                     </div>
+                    <?php
+                    $session = $this->session->all_userdata();
+                    if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ 
+                        $user_type = $this->session->userdata("login_session");
+                    }
+                    else{
+                        $user_type = array('user_type'=>'guest');
+                    }
+                    if(!empty($search_jobs_location) && $user_type['user_type']!="provider") :
+                    ?>         
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block dark_gry follow-on">
                             <h4>Teaching Jobs by District</h4>
-                                <ul class="location_based_list">
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="#" class="float_location">Teacher Jobs in Delhi</a> 
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="#" class="float_location">Teacher Jobs in Bangalore</a>
-                                        <span class="clearfix"></span>
-                                    </li>                      
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="#" class="float_location">Teacher Jobs in Hyderabad</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="#" class="float_location">Teacher Jobs in Pune</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="#" class="float_location">Teacher Jobs in Mumbai</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="#" class="float_location">Teacher Jobs in Chennai</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                
-                                </ul>
-                        </div> 
-                              
-                        
+                            <ul class="location_based_list">
+                                <?php
+                                foreach ($search_jobs_location as $job_key => $job_val) :
+                                ?>
+                                <li>
+                                    <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                    <?php
+                                    if($user_type['user_type']=="seeker") {
+                                    ?>
+                                        <a href="<?php echo base_url()."seeker/findjob?loc=".$job_val['district_id']; ?>" class="float_location">
+                                    <?php
+                                    }
+                                    else {
+                                    ?>
+                                    <a href="<?php echo base_url()."vacancies?loc=".$job_val['district_id']; ?>" class="float_location">
+                                    <?php
+                                    }
+                                    ?> Teacher Jobs in <?php echo $job_val['district_name']; ?></a> 
+                                    <span class="clearfix"></span>
+                                </li>   
+                                <?php
+                                endforeach;
+                                ?>                            
+                            </ul>
+                        </div>                         
                     </div>
+                    <?php
+                    endif;
+                    ?>
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block">
                             <h4>Contact Information</h4>

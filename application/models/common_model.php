@@ -144,6 +144,19 @@ class Common_model extends CI_Model {
 		$alldistrict = $this->db->get();
 		return $alldistrict->result_array(); 
 	}
+
+	public function get_search_jobs_location()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_district');
+		$where = "(district_status='1' AND is_search=1)";
+		// $this->db->order_by('district_name', 'asc');
+		$this->db->where($where);
+		$this->db->limit(7,0);
+		$alldistrict = $this->db->get();
+		return $alldistrict->result_array(); 
+	}
+	
 	public function get_district_by_state($id)
 	{
 		$this->db->select('*');    

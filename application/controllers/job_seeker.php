@@ -592,6 +592,7 @@ class Job_seeker extends CI_Controller {
 	// Dashboard
 	public function dashboard() {     
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();	
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
      	$session_data = $this->session->all_userdata(); 
      	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -691,6 +692,7 @@ class Job_seeker extends CI_Controller {
 	// Candidate inbox
 	public function inbox(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session = $this->session->all_userdata();
 		// print_r($session['login_session']);
 		if(!isset($session['login_session']) || empty($session['login_session'])) {
@@ -733,6 +735,7 @@ class Job_seeker extends CI_Controller {
 	// Job Seeker Edit Profile 
     public function editprofile() {
     	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+    	$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	$session = $this->session->all_userdata();
     	// print_r($session['login_session']);
     	if(!isset($session['login_session']) || empty($session['login_session'])) {
@@ -965,6 +968,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker Find Job
 	public function findjob() {	
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();		
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -982,6 +986,11 @@ class Job_seeker extends CI_Controller {
 
 		if(!empty($session_data['login_session']['institution_type_id'])) {	
 			$search_inputs = array();	
+			// Location based jobs
+			if($this->input->get('loc')  && !$_POST) {
+				$inputs = array('location' => $this->input->get('loc'));
+				$this->session->set_userdata('seeker_search_inputs',$inputs);
+			}
 			if($_POST) {
 	    		$inputs = array(
 	        				'keyword' => $this->input->post('search_keyword'),
@@ -1057,6 +1066,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker Applied jobs
 	public function jobsapplied() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -1118,6 +1128,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker Feedback
 	public function feedback() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -1167,6 +1178,7 @@ class Job_seeker extends CI_Controller {
 	// Change password
 	public function change_password() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();	
     	// print_r($session['login_session']);
     	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
@@ -1204,6 +1216,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker job apply and job description
 	public function applynow() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();	
 		if(!isset($session_data['login_session']) || empty($session_data['login_session']) || $session_data['login_session']['user_type'] != 'seeker') {
 			if($this->uri->segment(2) == "vacancy_details")
@@ -1288,6 +1301,7 @@ class Job_seeker extends CI_Controller {
 	public function forgot_password()
 	{ 
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$ci =& get_instance();	
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
