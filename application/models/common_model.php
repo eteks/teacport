@@ -324,11 +324,23 @@ class Common_model extends CI_Model {
 	// Organization choosen plan
 	public function organization_chosen_plan($id) {
 		// $where = '(op.organization_id="'.$id.'" AND ops.organization_subscription_status=1 AND opu.status=1)';
-		$where = '(ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
+		$where = '(ops.organization_id="'.$id.'")';
 		$this->db->select('ops.*,opu.*,ops.organization_subscription_id as org_subscription_id');
 		$this->db->from('tr_organization_subscription ops');
-		$this->db->join('tr_organization_profile op','ops.organization_id=op.organization_id','inner');
-		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id AND opu.status=1','left');
+		// $this->db->join('tr_organization_profile op','ops.organization_id=op.organization_id','inner');
+		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id and opu.is_renewal=1','left');
+		$this->db->where($where);
+		$this->db->order_by('ops.organizaion_sub_updated_date desc,opu.validity_end_date desc');
+		$data = $this->db->get()->result_array();
+		return $data;
+	}
+
+
+	// Organization current plan
+	public function organization_current_plan($id) {
+		$where = '(organization_id="'.$id.'" AND organization_subscription_status=1)';
+		$this->db->select('*');
+		$this->db->from('tr_organization_subscription');
 		$this->db->where($where);
 		$data = $this->db->get()->row_array();
 		return $data;
@@ -515,6 +527,25 @@ class Common_model extends CI_Model {
 		$this->db->where($where);
 		$providersubcription = $this->db->get();
 		return $providersubcription->row_array(); 
+	}
+
+	public function provider_subscription_active_renewl_plans($org_id,$plan_id){
+		$get_where = '(os.organization_id="'.$org_id.'" AND os.subscription_id="'.$plan_id.'" AND opu.status=1 AND opu.is_renewal=1)';
+		$this->db->select('*');    
+		$this->db->from('tr_organization_subscription os');
+		$this->db->join('tr_organization_upgrade_or_renewal opu', 'os.organization_subscription_id = opu.organization_subscription_id');
+		$this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
+		$this->db->where($get_where);
+		$data = $this->db->get()->row_array();
+		return $data;
+	}
+
+	public function update_subscription_plan($org_id,$plan_id,$data){
+		$update_where = '(organization_id="'.$org_id.'" AND subscription_id="'.$plan_id.'")';
+		$this->db->where($update_where);
+		$this->db->set($data);
+		$this->db->update('tr_organization_subscription');
+		return TRUE;
 	}
 
 	public function posted_jobs_count($org_id){

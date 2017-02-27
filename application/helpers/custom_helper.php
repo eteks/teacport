@@ -208,7 +208,7 @@ if ( ! function_exists('get_subscription_upgrade')){
     	if(!empty($value)) {
       	foreach ($value as $key => $row) {
         	foreach ($row as $k => $r) {
-          		if($k=='upgrade_id' || $k=='upgrade_options' || $k=='upgrade_price' || $k=='upgrade_min_allowed' || $k=='upgrade_max_allowed' || $k=='upgrade_status') {
+          		if($k=='upgrade_id' || $k=='upgrade_options' || $k=='upgrade_price' || $k=='upgrade_min_allowed' || $k=='upgrade_max_allowed' || $k=='upgrade_status' || $k=='upgrade_created_date') {
             			if(!isset($out[$row['sub_id']][$row['upgrade_id']]))
 				        {
 			            	$out[$row['sub_id']]['upgrade_options'][$row['upgrade_id']][$k] = $row[$k];
@@ -216,6 +216,30 @@ if ( ! function_exists('get_subscription_upgrade')){
           			}
           			else {
             			$out[$row['sub_id']][$k] = $row[$k];
+          			}
+        		}
+      		}
+    	}
+		return array_values($out);
+	}
+}
+
+// Job provider - organization chosen subscription plan
+if ( ! function_exists('get_organization_sub_details')){
+	function get_organization_sub_details($value) 
+	{
+		$out = array();
+    	if(!empty($value)) {
+      	foreach ($value as $key => $row) {
+        	foreach ($row as $k => $r) {
+         		if($k=='upgrade_or_renewal_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='renewal_is_grace_period_available' || $k=='renewal_grace_period_start_date' || $k=='renewal_grace_period_end_date' || $k=='status') {
+            			if(!isset($out[$row['org_subscription_id']][$row['upgrade_or_renewal_id']]))
+				        {
+			            	$out[$row['org_subscription_id']]['renewal_option'][$row['upgrade_or_renewal_id']][$k] = $row[$k];
+				        }
+          			}
+          			else {
+            			$out[$row['org_subscription_id']][$k] = $row[$k];
           			}
         		}
       		}
