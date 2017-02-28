@@ -160,6 +160,7 @@ class Master_data_model extends CI_Model {
     $this->db->join('tr_state s','d.district_state_id=s.state_id','inner');
     $this->db->order_by('d.district_id','desc');
     $model_data['districts_values'] = $this->db->get()->result_array();
+    $model_data['search_districts_values'] = $this->db->get_where('tr_district',array('is_search' => 1))->result_array();
 
     return $model_data;
   }
@@ -1035,8 +1036,6 @@ class Master_data_model extends CI_Model {
   }
 
   /* ===========            Postings Model End       ============ */
-
-
 
 }
 

@@ -153,6 +153,7 @@ $route['main/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/state'] = 'admin/master_data/state';
 $route['main/district'] = 'admin/master_data/district';
+$route['main/search_enabled'] = 'admin/master_data/search_enabled_district';
 $route['main/institution_types'] = 'admin/master_data/institution_types';
 $route['main/extra_curricular'] = 'admin/master_data/extra_curricular';
 $route['main/languages'] = 'admin/master_data/languages';

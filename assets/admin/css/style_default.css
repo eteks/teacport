@@ -1131,6 +1131,11 @@ ul li:last-child{
     background: #22878E !important;
     cursor: pointer;
 }
+.enabled_srch {
+    color: #fff !important;
+    background: #22878E !important;
+    cursor: pointer;
+}
 .save_search_btn{
     background-color: #29aafe;
     color:#fff;
