@@ -1088,7 +1088,7 @@ ul li:last-child{
     line-height:23px;
     font-size:11px;
     padding:2px 10px 0; 
-    
+    cursor: pointer;
     background: #E5E5E5;
     background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#F3F3F3), to(#E5E5E5));
     text-shadow:0 1px 0 #FFF;
@@ -1111,9 +1111,6 @@ ul li:last-child{
     text-transform:uppercase;
     color:#a1a1a1;
 }
-.enable_location_srch .enable_act a:active{
-    color: red;
-}
 
 .disable_act{
     background: #505050;
@@ -1129,13 +1126,10 @@ ul li:last-child{
     background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#f1f1f1));
 }
 
-.disable_srch a{
-    color: red;
-    cursor: default;
-}
-.enable_srch a{
-    color: #7BBA47;
-    cursor: default;
+.enable_srch {
+    color: #fff !important;
+    background: #22878E !important;
+    cursor: pointer;
 }
 .save_search_btn{
     background-color: #29aafe;
@@ -1147,10 +1141,7 @@ ul li:last-child{
     color:#fff;
     margin: 5px 0 5px 5px;
 }
-/*.save_search_btn, .cancel_search_btn {
-    position:absolute;
 
-}*/
 
 /*Added By Akila*/
 /*Footer*/

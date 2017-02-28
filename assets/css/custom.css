@@ -1800,6 +1800,15 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 .owl-testimonial-2 .single_testimonial{
 	height: 400px !important;
 }
+.single_testimonial .client_speech{
+	height: 200px;
+}
+.single_testimonial .client_img{
+	height: 100px;
+}
+.single_testimonial .client_name{
+	height: 50px;
+}
 /*Zebra Date Picker*/
 button.Zebra_DatePicker_Icon_Inside_Right{
 	margin: 0 10px !important;
