@@ -584,10 +584,10 @@ class Common_model extends CI_Model {
 
 	// Organization Logo
 	public function get_provider_details($ins_id='') {
-		$this->db->select('organization_logo,organization_name,organization_id');
+		$this->db->select('organization_logo,organization_name,organization_id,organization_institution_type_id');
 		$this->db->from('tr_organization_profile');
 		if($ins_id != '') {
-			$where = '(organization_institution_type_id="'.$ins_id.'" AND organization_status=1)';
+			$where = '(FIND_IN_SET(organization_institution_type_id,"'.$ins_id.'") AND organization_status=1)';
 		}
 		else {
 			$where = '(organization_status=1)';

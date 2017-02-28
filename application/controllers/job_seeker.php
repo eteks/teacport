@@ -671,8 +671,8 @@ class Job_seeker extends CI_Controller {
 				$data['popup_type'] = 'ordinary';
 			}
 		}
-		// $data['district_values'] = $this->common_model->get_all_district();
-		$data['district_values'] = '';
+		$data['district_values'] = $this->common_model->get_all_district();
+		// $data['district_values'] = '';
 		$data['state_values'] = $this->common_model->get_all_state();
 		$data['institution_values'] = $this->common_model->get_institution_type();
         // print_r($candidate_data);
@@ -682,6 +682,7 @@ class Job_seeker extends CI_Controller {
         $data['job_applied_count'] = $this->job_seeker_model->candidate_job_applied_count($session_data['login_session']['candidate_id']);
      	$data['visit_count']  = $this->common_model->get_candidate_visit_count($session_data['login_session']['candidate_id']);
         $data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
+
 		$this->load->view('user-dashboard',$data);
 	}
 
