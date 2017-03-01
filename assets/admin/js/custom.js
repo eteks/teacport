@@ -1162,8 +1162,10 @@ function popup_pagination() {
     // var sections = $(document).find ('div.subscription_organization_section subscription_organization_inner_section');
     sections = $('div.subscription_organization_section .subscription_organization_inner_section');
     lastElem = sections.length-1;
+    // alert(lastElem);
     mask = $('.subscription_organization_section');
-    sections_width = sections.width();  
+    sections_width = sections.width() + 20;  
+    alert(sections_width);
     mask.css('width', sections_width*(lastElem+1) +'px');
     sections.first().addClass('viewed');
     $('.profile_plan_section').each(function() {

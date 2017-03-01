@@ -232,6 +232,9 @@ class Job_Provider extends CI_Controller {
 			$data_values = $this->job_providermodel->get_full_provider_profile($value);
 			$data['provider_full_profile'] = $data_values['provider_full_profile'];
 			$data['payment_details'] = get_provider_subscription($data_values['payment_details']);
+			// echo "<pre>";
+   //  		print_r($data['payment_details']);
+   //  		echo "</pre>";
 			if(!empty($data_values['payment_details'])){
 				$data['latest_plan_details'] = $data_values['payment_details'][0];
 			}

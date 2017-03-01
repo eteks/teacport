@@ -184,19 +184,19 @@ if ( ! function_exists('get_provider_subscription')){
     	if(!empty($value)) {
       	foreach ($value as $key => $row) {
         	foreach ($row as $k => $r) {
-          		if($k=='upgrade_or_renewal_id' || $k=='organization_subscription_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='created_date' || $k=='status') {
-            			if(!isset($out[$row['organization_subscription_id']][$row['upgrade_or_renewal_id']]))
+          		if($k=='upgrade_or_renewal_id' || $k=='is_renewal' || $k=='validity_start_date' || $k=='validity_end_date' || $k=='transaction_id' || $k=='status' || $k=='created_date' || $k=='renewal_is_grace_period_available' || $k=='renewal_grace_period_start_date' || $k=='renewal_grace_period_end_date' || $k=='upg_ren_amount') {
+            			if(!isset($out[$row['org_subscription_id']][$row['upgrade_or_renewal_id']]))
 				        {
-			            	$out[$row['organization_subscription_id']]['upgrade_renewal'][$row['upgrade_or_renewal_id']][$k] = $row[$k];
+			            	$out[$row['org_subscription_id']]['upgrade_renewal'][$row['upgrade_or_renewal_id']][$k] = $row[$k];
 				        }
           			}
           			else {
-            			$out[$row['organization_subscription_id']][$k] = $row[$k];
+            			$out[$row['org_subscription_id']][$k] = $row[$k];
           			}
         		}
       		}
     	}
-		return $out;
+		return array_values($out);
 	}
 }
 
