@@ -96,7 +96,6 @@ class Job_Providermodel extends CI_Model {
     // $this->db->where('os.organization_subscription_status','1');
     // $this->db->or_where('os.organization_subscription_status',NULL);
     $model_data['provider_profile'] = $this->db->get()->result_array();
-
     return $model_data;
   }
 
@@ -115,12 +114,15 @@ class Job_Providermodel extends CI_Model {
     $model_data['provider_full_profile'] = $this->db->where($provider_profile_where)->get()->row_array();
     $model_data['payment_details'] =  array();
 
+    // Payment Details
     $subscription_where = '(tos.organization_id="'.$value.'")';
-    $this->db->select('*');
+    $this->db->select('tos.*,tos.organization_subscription_id as org_subscription_id,ts.subscription_plan,our.*,subt.amount as org_sub_amount,urt.amount as upg_ren_amount');
     $this->db->from('tr_organization_subscription tos');
     $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
     $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id','left');
-    $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organization_subscription_id desc,our.upgrade_or_renewal_id desc')->get()->result_array();
+    $this->db->join('tr_payumoney_transaction subt','tos.organization_transcation_id=subt.transaction_id','left');
+    $this->db->join('tr_payumoney_transaction urt','our.transaction_id=urt.transaction_id','left');
+    $model_data['payment_details'] = $this->db->where($subscription_where)->order_by('tos.organizaion_sub_updated_date desc,our.validity_end_date desc')->get()->result_array();
     // echo "<pre>";
     // print_r($model_data['payment_details']);
     // echo "</pre>";

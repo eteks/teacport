@@ -228,6 +228,7 @@ class Admin_Model extends CI_Model {
     $model_data['latest_news_values'] = $this->db->get_where('tr_latest_news')->result_array();
     return $model_data;
   }
+
   //get_district_by_state via ajax call
   public function get_district_by_state($id)
   {
@@ -238,6 +239,22 @@ class Admin_Model extends CI_Model {
     $this->db->where($where);
     $alldistrict = $this->db->get();
     return $alldistrict->result_array(); 
+  }
+
+  //  Do enable search option for district
+  public function do_enable_search_district($id)
+  {
+    $this->db->where('is_search',1);
+    $this->db->set('is_search',0);
+    $this->db->update('tr_district');
+
+    if($id != '') {
+      $id_array = explode(',',$id);
+      $this->db->where_in('district_id',$id_array);
+      $this->db->set('is_search',1);
+      $this->db->update('tr_district');
+    }
+    return "success"; 
   }
 
 }

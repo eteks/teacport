@@ -272,6 +272,91 @@ $(document).ready(function() {
 		});
 	});
 
+	// Get university based on selected classlevel
+	$(document).on('change','.ins_cand_select',function() {
+		var this_id = $(this).val();
+		var this_posting = $(this).parents('.ins_cand_section').siblings('.ins_posting_section').find('select');
+		var this_subject = $(this).parents('.ins_cand_section').siblings('.ins_subject_section').find('select');
+		$(this).parents('.ins_cand_section').siblings('.ins_posting_section').find('.others_txt_field').val('').removeClass('form-field-error').hide();
+		$(this).parents('.ins_cand_section').siblings('.ins_subject_section').find('.others_txt_field').val('').removeClass('form-field-error').hide();
+		var this_class = $(this).parents('.ins_cand_section').siblings('.ins_class_section').find('.ins_class_check');
+
+		var this_posting_val = this_posting.val();
+		var this_subject_val = this_subject.val();
+		var this_class_val   = [];
+		this_class.find('.form_checkbox').each(function() {
+			if($(this).is(':checked')) {
+				this_class_val.push($(this).val());
+			}
+		});
+
+		var pos_options  = '<option value=""> Select </option>'; 
+		var sub_options  = '<option value=""> Select </option>';   
+		var cls_options = ''; 
+
+		if($.trim(this_id) != '') {
+			this_id = this_id.join(',');
+			$.ajax({
+				type : "POST",
+				url : baseurl+"seeker/candidate_profile_institution",
+				data : { value : this_id, csrf_token : csrf_token_value},
+				success : function(res) {
+					if(res != '') {
+						var obj = JSON.parse(res);
+						var pos = obj.posting;
+						var sub = obj.subject;
+						var cls = obj.class;
+	               		if(pos.length!=0) {  
+	               			var selected = '';   
+			                $.each(pos, function(i){
+			                	selected = '';
+			                	if(jQuery.inArray(pos[i].posting_id, this_posting_val) != -1) {
+			                		selected = "selected";
+			                	}
+			                	pos_options += '<option value="'+pos[i].posting_id+'" '+selected+'>'+pos[i].posting_name+'</option>';
+			            	});  
+		           		}
+		           		if(sub.length!=0) {    
+		           			var selected = '';           
+			                $.each(sub, function(i){
+			                	selected = '';
+			                	if(jQuery.inArray(sub[i].subject_id, this_subject_val) != -1) {
+			                		selected = "selected";
+			                	}
+			                	sub_options += '<option value="'+sub[i].subject_id+'" '+selected+'>'+sub[i].subject_name+'</option>';
+			            	});  
+		           		} 
+		           		if(cls.length!=0) {    
+		           			var selected = '';           
+			                $.each(cls, function(i){
+			                	selected = '';
+			                	if(jQuery.inArray(cls[i].class_level_id, this_class_val) != -1) {
+			                		selected = "checked";
+			                	}
+			                	cls_options += '<label><input class="ace form_checkbox" name="cand_class[]" type="checkbox" value="'+cls[i].class_level_id+'" '+selected+'> <span class="lbl"> '+cls[i].class_level+' </span></label>';
+			            	});  
+		           		}
+		           		pos_options += '<option value="others" > Others </option>';
+			            sub_options += '<option value="others" > Others </option>';
+		           		this_posting.html(pos_options);   
+						this_subject.html(sub_options);    
+						this_class.html(cls_options); 
+		           	}  
+		           	else {
+	           			this_posting.html(pos_options);   
+						this_subject.html(sub_options);    
+						this_class.html(cls_options); 
+		           	}     
+				}
+			});
+		}
+		else {
+			this_posting.html(pos_options);   
+			this_subject.html(sub_options);    
+			this_class.html(cls_options);      
+		}
+	});
+
     /* Professional Profile Restriction */
 	var professional_group;
 	$('.opt_fresh').on('click',function() {

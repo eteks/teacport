@@ -124,6 +124,7 @@ $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
 $route['seeker/inbox/removedata'] 						= 'job_seeker/inbox_removedata';
 $route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
 $route['seeker/feedback'] 								= 'job_seeker/feedback';
+$route['seeker/candidate_profile_institution'] 			= 'job_seeker/candidate_profile_ins';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
@@ -154,6 +155,7 @@ $route['main/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/state'] = 'admin/master_data/state';
 $route['main/district'] = 'admin/master_data/district';
+$route['main/search_enabled'] = 'admin/master_data/search_enabled_district';
 $route['main/institution_types'] = 'admin/master_data/institution_types';
 $route['main/extra_curricular'] = 'admin/master_data/extra_curricular';
 $route['main/languages'] = 'admin/master_data/languages';

@@ -4,11 +4,18 @@
     </div>
     <?php
     if(!empty($sidebar_values['candidate_image_path'])) : 
-        $thumb_image = explode('.', end(explode('/',$sidebar_values['candidate_image_path'])));
-        $thumb = $thumb_image[0]."_thumb.".$thumb_image[1];
+        $keyword = "uploads";
+        // To check whether the image path is cdn or local path
+        if(strpos( $sidebar_values['candidate_image_path'] , $keyword ) !== false) {
+            $thumb_image = explode('.', end(explode('/',$sidebar_values['candidate_image_path'])));
+            $thumb = base_url().SEEKER_UPLOAD."pictures/".$thumb_image[0]."_thumb.".$thumb_image[1];
+        }
+        else {
+            $thumb = $sidebar_values['candidate_image_path'];
+        }         
     ?>
     <div class="user-image">    
-        <img src="<?php echo base_url().SEEKER_UPLOAD."pictures/".$thumb; ?>" class="img-responsive img-circle" alt="Not Found">
+        <img src="<?php echo $thumb; ?>" class="img-responsive img-circle" alt="Not Found">
     </div>
     <?php endif; ?>
     <div class="card-body">

@@ -196,6 +196,7 @@ class Master_Data extends CI_Controller {
 		    $data['status'] = 0;
 	    	$data_values = $this->master_data_model->districts('init');
 			$data['districts_values'] = $data_values['districts_values'];
+			$data['search_districts_values'] = $data_values['search_districts_values'];
 			$data['mapped_data'] = $data_values['mapped_data'];
 			$this->load->view('admin/district',$data);
 		}
@@ -1032,6 +1033,13 @@ class Master_Data extends CI_Controller {
 			$data = $this->admin_model->get_district_by_state($this->input->post('value'));
 		}
 		echo json_encode($data);
+	}
+
+	// Enabled location for search
+	public function search_enabled_district() {
+		$data = '';
+		$data = $this->admin_model->do_enable_search_district($this->input->post('value'));
+		echo $data;
 	}
 
 }
