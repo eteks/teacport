@@ -469,6 +469,11 @@ class Home extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	//Latest News
+	public function latestnews_content(){
+		$this->load->view('latestnews_content');
+	}
+
 }
 
 /* End of file home.php */

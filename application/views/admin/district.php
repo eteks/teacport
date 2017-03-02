@@ -213,7 +213,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   <!--  Confirm box with yes and no button -->
   <div id="dialog-box">
     <h4 class="message">
-      Districts name1, name2, name3, name4 has been selected for District Search, Are you sure want to proceed ?
+      Districts name1, name2, name3, name4 has been selected for District based Search.<br/> Are you sure want to proceed ?
     </h4>
     <div>
       <span class="del_yes yes">Yes</span>

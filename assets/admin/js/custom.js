@@ -1048,6 +1048,19 @@ var content_height = parseInt(window_height - (header_height + footer_height));
     });
 
 
+    $('.newstype_act').on('change', function(){
+        if(this.value=="news_link"){
+            $('.enter_news_link').show();
+            $('.enter_news_content').hide();
+        }
+        else{
+            $('.enter_news_content').show();
+            $('.enter_news_link').hide();
+        }
+
+    });
+
+
 	
 	
 }); // End document

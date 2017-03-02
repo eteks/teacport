@@ -18,6 +18,10 @@ class Other_module extends CI_Controller {
 	{		
 		$this->load->view('admin/feedback_form');
 	}
+	public function latest_news_popup()
+	{		
+		$this->load->view('admin/latest_news_popup');
+	}
 	public function latest_news()
 	{	
 		//Functionality for Both update and save
