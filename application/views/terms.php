@@ -95,7 +95,7 @@
                       </div>
                 </div>
             </div>
-        </section>
+    </section>
         
 <?php include('include/footermenu.php'); ?>
 <?php include('include/footer.php'); ?>		

@@ -1146,8 +1146,39 @@ ul li:last-child{
     color:#fff;
     margin: 5px 0 5px 5px;
 }
-
-
+/* Latest News*/
+.display_newstype{
+    margin: 20px 0;
+}
+/* CKeditor*/
+#cke_1_top{
+    display: block !important;
+}
+.cke_top, .cke_contents, .cke_bottom{
+    display: block !important;
+}
+#cke_1_bottom{
+    margin-bottom: 0 !important;
+}
+.cke_reset_all, .cke_reset_all *, .cke_reset_all a, .cke_reset_all textarea{
+    width: auto !important;
+}
+#ckeditor .tab-content span{
+    display: block;
+    width: auto;
+}
+.cke_toolbox, .cke_toolgroup{
+    display: block !important;
+}
+.cke_voice_label {
+    display: none !important;
+}
+.cke_button_label{
+    display: none !important;
+}
+.cke_button_icon {
+    width: 16px !important;
+}
 /*Added By Akila*/
 /*Footer*/
 #footer {

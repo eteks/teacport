@@ -40,7 +40,7 @@
                     ?>         
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block dark_gry follow-on">
-                            <h4>Teaching Jobs by District</h4>
+                            <h4>Teaching Jobs by City</h4>
                             <ul class="location_based_list">
                                 <?php
                                 foreach ($search_jobs_location as $job_key => $job_val) :
