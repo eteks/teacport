@@ -483,9 +483,6 @@ class Job_seeker_model extends CI_Model {
 
 	// Edit profile updation
 	public function editprofile_validation($data=array()) {
-
-
-
 		if(!$this->input->post('cand_fresh')) {
 			$fresh = 0 ;
 		}
@@ -544,6 +541,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_district_id' => $data['cand_native_dis'],
 								'candidate_state_id' => $data['cand_native_state'],						
 								'candidate_mother_tongue' => $data['cand_mother_ton'],
+								'candidate_institution_type' => implode(',',$data['cand_ins']),
 								'candidate_language_known' => implode(',',$data['cand_known_lan_new']),
 								'candidate_nationality' => $data['cand_nation'],
 								'candidate_religion' => $data['cand_religion'],
