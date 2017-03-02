@@ -124,6 +124,7 @@ $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
 $route['seeker/inbox/removedata'] 						= 'job_seeker/inbox_removedata';
 $route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
 $route['seeker/feedback'] 								= 'job_seeker/feedback';
+$route['seeker/candidate_profile_institution'] 			= 'job_seeker/candidate_profile_ins';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
@@ -139,6 +140,7 @@ $route['vacancies/(:num)']  							= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
 $route['terms'] 										= 'home/terms';
 $route['qualification_posting'] 						= 'home/qua_pos_by_institution';
+$route['latestnews_content'] 							= 'home/latestnews_content';
 
 
 /* ===================          Route settings for Admin Start     ====================== */
@@ -222,6 +224,7 @@ $route['main/template_logo'] = 'admin/setting/template_logo';
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
 $route['main/latest_news'] = 'admin/other_module/latest_news';
+$route['main/latest_news_popup'] = 'admin/other_module/latest_news_popup';
 $route['main/site_log'] = 'admin/other_module/site_log';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';

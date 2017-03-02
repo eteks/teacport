@@ -4704,14 +4704,14 @@ div.dt-button-background {
 .navigation_options {
     position: absolute;
     right: 0;
-    top: -10px;
+    top: -20px;
 }
-.upgrade_holder > div {
+/*.upgrade_holder > div {
     margin-top: -10px;
-}
-.renewal_holder > div {
+}*/
+/*.renewal_holder > div {
     margin-top: -10px;
-}
+}*/
 .upgrade_holder, .renewal_holder {
     position: relative;
 }
@@ -4991,4 +4991,4 @@ i#admin_error_login {
 }	
 .hide_all{
 	display:none !important;
-}			 
+}

@@ -748,15 +748,16 @@ class Job_seeker extends CI_Controller {
     	$data['district_values'] = $this->common_model->get_all_district();
     	$data['state_values'] = $this->common_model->get_all_state();
     	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
-    	$data['mother_language_values'] = $this->common_model->mother_tongue(1);
+    	$data['institution_values'] = $this->common_model->get_institution_type();
+    	$data['mother_language_values'] = $this->common_model->mother_tongue(1); // with other option value
     	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
     	$data['known_languages'] = $this->common_model->all_languages(1);
-    	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type'],1);
-    	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['posting_values'] = $this->common_model->applicable_posting_by_ins($session['login_session']['candidate_institution_type']);
+    	$data['class_values'] = $this->common_model->classlevel_by_ins($session['login_session']['candidate_institution_type']);
+    	$data['subject_values'] = $this->common_model->subject_by_ins($session['login_session']['candidate_institution_type']);
     	$data['exp_class_values'] = $this->common_model->classlevel_by_institution(NULL);
-    	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type'],1);
     	$data['exp_subject_values'] = $this->common_model->subject_by_institution(NULL,NULL);
-    	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
+    	$data['qualification_values'] = $this->common_model->qualification();
     	$data['education_values'] = $this->job_seeker_model->get_seeker_education_details($session['login_session']['candidate_id']);
     	$data['department_values'] = $this->common_model->get_department_details();
     	$data['board_values'] = $this->common_model->get_board_details();
@@ -768,14 +769,7 @@ class Job_seeker extends CI_Controller {
     	// 	$data['edit_profile_visible_status'] = 0;
     	// }
 
-    	// To store session values
-    	$candidate_session_data = $this->job_seeker_model->seeker_session_values($session['login_session']['candidate_id']);
-
-		if(!empty($candidate_session_data)) {
-			$this->session->set_userdata('login_session',$candidate_session_data);
-		}
-
-    	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
+	   	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		$this->load->view('user-edit-profile',$data);
 	}
 
@@ -817,6 +811,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean|callback_other_postings['.$session['login_session']['candidate_institution_type'].']'),
 			array('field' => 'cand_start_sal', 'label'=> 'Minimum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]'),
 			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('cand_start_sal').']' ),
+			array('field' => 'cand_ins[]', 'label' => 'Preference Institution','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean|callback_other_subjects['.$session['login_session']['candidate_institution_type'].']'),
 
@@ -959,6 +954,11 @@ class Job_seeker extends CI_Controller {
 	           	}
 	        }
        	}
+       	if($data['update_status'] == "success") {
+       		// To store session values
+    		$candidate_session_data = $this->job_seeker_model->seeker_session_values($session['login_session']['candidate_id']);
+			$this->session->set_userdata('login_session',$candidate_session_data);
+	   	}
        	echo $data['update_status'];
 	}
 
@@ -976,6 +976,7 @@ class Job_seeker extends CI_Controller {
      	}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
+
 		$data['alldistricts'] = $this->common_model->get_all_district();
 		if(!isset($session_data['login_session']['institution_type_id']) && empty($session_data['login_session']['institution_type_id'])) {
 			$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
@@ -1355,6 +1356,15 @@ class Job_seeker extends CI_Controller {
 	}
 	/*End of full view*/
 
+	public function candidate_profile_ins() {
+		$data = '';
+		if($this->input->post('value')) {
+			$data['posting'] = $this->common_model->applicable_posting_by_ins($this->input->post('value'));
+			$data['class'] = $this->common_model->classlevel_by_ins($this->input->post('value'));
+			$data['subject'] = $this->common_model->subject_by_ins($this->input->post('value'));
+		}
+		echo json_encode($data);
+	}
 
 
 	// Commented by siva

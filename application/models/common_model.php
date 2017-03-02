@@ -152,7 +152,7 @@ class Common_model extends CI_Model {
 		$where = "(district_status='1' AND is_search=1)";
 		// $this->db->order_by('district_name', 'asc');
 		$this->db->where($where);
-		$this->db->limit(7,0);
+		$this->db->limit(6,0);
 		$alldistrict = $this->db->get();
 		return $alldistrict->result_array(); 
 	}
@@ -251,6 +251,59 @@ class Common_model extends CI_Model {
 		$this->db->where($where);
 		$posting = $this->db->get();
 		return $posting->result_array(); 
+	}
+
+	public function applicable_posting_by_ins($ins_id)
+	{
+		$ins_id = explode(',',$ins_id);
+		$a = 1;
+		$this->db->select('*');    
+		$this->db->from('tr_applicable_posting');
+		$where = "(posting_status = 1 OR posting_status = 2) AND (";
+		foreach ($ins_id as $val) {
+			$where .= "FIND_IN_SET('".$val."',posting_institution_id) !=0";
+			if($a < count($ins_id)) {
+			$where .= " OR ";
+			}
+			else if($a == count($ins_id)) {
+			$where .= ")";
+			}
+			$a++;
+		}
+		$this->db->where($where);
+		$posting = $this->db->get();
+		return $posting->result_array(); 
+	}
+	public function classlevel_by_ins($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_class_level');
+		$where = '(FIND_IN_SET(class_level_inst_type_id,"'.$ins_id.'") !=0 AND class_level_status=1)';
+		$this->db->where($where);
+		$classlevel = $this->db->get();
+		return $classlevel->result_array(); 
+	}
+
+	public function subject_by_ins($ins_id)
+	{
+		$ins_id = explode(',',$ins_id);
+		$a = 1;
+		$this->db->select('*');    
+		$this->db->from('tr_subject');
+		$where = "(subject_status = 1 OR subject_status = 2) AND (";	
+		foreach ($ins_id as $val) {
+			$where .= "FIND_IN_SET('".$val."',subject_institution_id) !=0";
+			if($a < count($ins_id)) {
+			$where .= " OR ";
+			}
+			else if($a == count($ins_id)) {
+			$where .= ")";
+			}
+			$a++;
+		}
+		$this->db->where($where);
+		$subjectdata = $this->db->get();
+		return $subjectdata->result_array(); 
 	}
 	
 	public function mother_tongue($input='')
@@ -587,7 +640,7 @@ class Common_model extends CI_Model {
 		$this->db->select('organization_logo,organization_name,organization_id,organization_institution_type_id');
 		$this->db->from('tr_organization_profile');
 		if($ins_id != '') {
-			$where = '(FIND_IN_SET(organization_institution_type_id,"'.$ins_id.'") AND organization_status=1)';
+			$where = '(FIND_IN_SET(organization_institution_type_id,"'.$ins_id.'") != 0 AND organization_status=1)';
 		}
 		else {
 			$where = '(organization_status=1)';

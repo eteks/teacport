@@ -1148,6 +1148,17 @@ var content_height = parseInt(window_height - (header_height + footer_height));
     });
 
     /*     =====     Location based search option end   =====      */
+    $('.newstype_act').on('change', function(){
+        if(this.value=="news_link"){
+            $('.enter_news_link').show();
+            $('.enter_news_content').hide();
+        }
+        else{
+            $('.enter_news_content').show();
+            $('.enter_news_link').hide();
+        }
+
+    });
 
 }); // End document
 
@@ -1162,8 +1173,10 @@ function popup_pagination() {
     // var sections = $(document).find ('div.subscription_organization_section subscription_organization_inner_section');
     sections = $('div.subscription_organization_section .subscription_organization_inner_section');
     lastElem = sections.length-1;
+    // alert(lastElem);
     mask = $('.subscription_organization_section');
-    sections_width = sections.width();  
+    sections_width = sections.width() + 20;  
+    alert(sections_width);
     mask.css('width', sections_width*(lastElem+1) +'px');
     sections.first().addClass('viewed');
     $('.profile_plan_section').each(function() {

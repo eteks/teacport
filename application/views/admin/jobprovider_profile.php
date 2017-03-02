@@ -553,9 +553,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                 <label class="control-label">
                                 <?php 
                                 if($pay_val['is_resume_validity']==1) : 
-                                  echo "<i class='icon-ok'></i><span> Resume Valid </span>"; 
+                                  echo "<i class='icon-ok'></i> <span> Resume Valid </span>"; 
                                 else :
-                                  echo "<i class='icon-ok'></i><span> Resume Invalid </span>"; 
+                                  echo "<i class='icon-remove'></i> <span> Resume Invalid </span>"; 
                                 endif;
                                 ?> </label>
                                 <table>
@@ -595,7 +595,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                   </tbody>
                                 </table>
                               </div>
-                            </a> <?php echo $pay_val['subscription_plan']; ?> </h4>
+                            </a> <?php echo $pay_val['subscription_plan']; ?> 
+                          </h4>
                           <div class="profile_plan_section">
                             <div class="span3 plan_label_section">  
                               <h4 class="">Summary</h4>
@@ -610,13 +611,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             </div>
                             <div class="span3 plan_field_section">                                       
                               <h4 class="">Original Plan</h4>
-                              <label class="">&#x20B9; <span> <?php echo $pay_val['subscription_price']; ?></span></label>
-                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_start_date'])); ?> 31-01-2017</label>
-                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_end_date'])); ?> 15-12-2017  </label>
+                              <label class="">
+                                <?php if(!empty($pay_val['org_sub_amount'])) echo "&#x20B9; ".$pay_val['org_sub_amount']; else echo "Free"; ?>
+                              </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_start_date'])); ?> </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_end_date'])); ?> </label>
                               <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
-                              <label class="show_grace"> 25.02.2017 </label>
-                              <label class="show_grace"> 05.03.2017 </label>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($pay_val['organization_subscription_created_date'])); ?> </label> 
+                              <label class="show_grace"> 
+                                <?php if(!empty($pay_val['grace_period_start_date'])) echo $pay_val['grace_period_start_date']; else echo "Null"; ?>
+                              </label>
+                              <label class="show_grace"> 
+                                <?php if(!empty($pay_val['grace_period_end_date'])) echo $pay_val['grace_period_start_date']; else echo "Null"; ?>
+                              </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($pay_val['organization_subscription_created_date'])); ?> </label> 
                               <?php
                               if($pay_val['organization_subscription_status'] == 1) :
                               ?>
@@ -632,27 +639,28 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               ?>                               
                             </div>
                             <?php
-                            if(!empty($pay_val['upgrade_renewal']) && $pay_key) :
                             $upgrade = 0;
                             $renewal = 0;
-                            $i=0;
-                            $j=0;
-                            // echo "<pre>";
-                            // print_r($pay_val['upgrade_renewal']);
-                            // echo "</pre>";
                             foreach ($pay_val['upgrade_renewal'] as $up_re_key => $up_re_val) :
+                            if(!empty($up_re_key)) {
                             ?>
                             <?php
                             if($up_re_val['is_renewal'] == 0) :
-                            $i++;
+                            $upgrade++;
                             ?>
                             <div class="upgrade_holder_content upgrade_section_profile plan_field_section">     
                               <h4 class="">Upgrade Plan</h4>
-                              <label class=""> &#8377  </label>
+                              <label class=""> &#x20B9; <?php echo $up_re_val['upg_ren_amount']; ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
                               <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>
+                              <label class="show_grace"> 
+                                <?php if(!empty($pay_val['renewal_grace_period_start_date'])) echo $pay_val['renewal_grace_period_start_date']; else echo "Null"; ?>
+                              </label>
+                              <label class="show_grace"> 
+                                <?php if(!empty($pay_val['renewal_grace_period_end_date'])) echo $pay_val['renewal_grace_period_end_date']; else echo "Null"; ?>
+                              </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['created_date'])); ?> </label>
                               <?php
                               if($up_re_val['status'] == 1) :
                               ?>
@@ -668,7 +676,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               ?>
                             </div>
                             <?php
-                            if($i > 1) :
+                            if($upgrade > 1) :
                             ?>  
                             <div class="upgrade_holder_content navigation_options">
                               <span class="arrow_section">
@@ -684,17 +692,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?> 
                             <?php
-                            $upgrade++;
                             else :
-                            $j++;
+                            $renewal++;
                             ?>                  
                             <div class="renewal_holder_content renewal_section_profile plan_field_section">     
                               <h4 class="">Renewal Plan</h4>
-                              <label class=""> &#8377  </label>
+                              <label class=""> &#x20B9; <?php echo $up_re_val['upg_ren_amount']; ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_start_date'])); ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($up_re_val['validity_end_date'])); ?> </label>
                               <label class=""> <?php echo $up_re_val['transaction_id']; ?> </label>
-                              <label class=""> <?php echo date('d-m-Y',strtotime($up_re_val['created_date'])); ?> </label>
+                              <label class="show_grace"> 
+                                <?php if(!empty($pay_val['renewal_grace_period_start_date'])) echo $pay_val['renewal_grace_period_start_date']; else echo "Null"; ?>
+                              </label>
+                              <label class="show_grace"> 
+                                <?php if(!empty($pay_val['renewal_grace_period_end_date'])) echo $pay_val['renewal_grace_period_end_date']; else echo "Null"; ?>
+                              </label>
+                              <label class=""> <?php echo date('d M Y',strtotime($up_re_val['created_date'])); ?> </label>
                               <?php
                               if($up_re_val['status'] == 1) :
                               ?>
@@ -710,7 +723,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               ?>
                             </div>
                             <?php
-                            if($j > 1) :
+                            if($renewal > 1) :
                             ?>  
                             <div class="renewal_holder_content navigation_options">
                               <span class="arrow_section">
@@ -726,31 +739,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?>
                             <?php
-                            $renewal++;
                             endif;
+                            }
                             endforeach;
                             ?>
                             <?php
-                            if($renewal == 0):
-                            ?>
-                            <div class="span3 plan_field_section">     
-                              <h4 class=""> Renewal Plan </h4>  
-                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
-                              <div class="inner-triangle triangle_disabled"></div>                        
-                            </div>
-                            <?php
-                            elseif($upgrade == 0):
-                            ?>
-                            <div class="span3 plan_field_section">     
-                              <h4 class="">Upgrade Plan</h4>
-                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Upgrade <span> </label>
-                              <div class="inner-triangle triangle_disabled"></div>                    
-                            </div>
-                            <?php
-                            endif;
-                            ?>
-                            <?php
-                            else :
+                            if($upgrade == 0 && $renewal == 0) {
                             ?>
                             <div class="span3 plan_field_section">     
                               <h4 class="">Upgrade Plan</h4>
@@ -763,7 +757,25 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <div class="inner-triangle triangle_disabled"></div>                        
                             </div>
                             <?php
-                            endif;
+                            }
+                            else if($renewal == 0) {
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class=""> Renewal Plan </h4>  
+                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Renewal <span> </label>
+                              <div class="inner-triangle triangle_disabled"></div>                        
+                            </div>
+                            <?php
+                            }
+                            else if($upgrade == 0) {
+                            ?>
+                            <div class="span3 plan_field_section">     
+                              <h4 class="">Upgrade Plan</h4>
+                              <label class="subscription_status"> <span class='icon icon_not_activate'> Not Upgrade <span> </label>
+                              <div class="inner-triangle triangle_disabled"></div>                    
+                            </div>
+                            <?php
+                            }
                             ?>
                           </div>
                         </div>
