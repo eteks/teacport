@@ -773,7 +773,8 @@ class Job_seeker_model extends CI_Model {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
    		}
-        $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+        $this->db->where(array('ov.vacancies_status' => '1'));
+        $this->db->where("FIND_IN_SET(op.organization_institution_type_id,'".$ins_id."') !=", 0);
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
@@ -828,7 +829,8 @@ class Job_seeker_model extends CI_Model {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
    		}
-   		$this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+   		$this->db->where(array('ov.vacancies_status' => '1'));
+        $this->db->where("FIND_IN_SET(op.organization_institution_type_id,'".$ins_id."') !=", 0);
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");

@@ -97,13 +97,12 @@ class Job_Seekermodel extends CI_Model {
   public function get_full_seeker_profile($value) {
 
     // Canidate Profile
-    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,live_st.state_id as live_state_id,live_st.state_name as live_state_name,native_st.state_id as native_state_id,native_st.state_name as native_state_name,it.*,lan.*,sub.*');
+    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,live_st.state_id as live_state_id,live_st.state_name as live_state_name,native_st.state_id as native_state_id,native_st.state_name as native_state_name,lan.*,sub.*');
     $this->db->from('tr_candidate_profile cp');
     $this->db->join('tr_state live_st','cp.candidate_live_state_id=live_st.state_id','left');
     $this->db->join('tr_state native_st','cp.candidate_state_id=native_st.state_id','left');
     $this->db->join('tr_district live_dis','cp.candidate_live_district_id=live_dis.district_id','left');
     $this->db->join('tr_district native_dis','cp.candidate_district_id=native_dis.district_id','left');
-    $this->db->join('tr_institution_type it','cp.candidate_institution_type=it.institution_type_id','left');
     $this->db->join('tr_languages lan','cp.candidate_mother_tongue=lan.language_id','left');
     $this->db->join('tr_subject sub','cp.candidate_interest_subject_id=sub.subject_id','left');
     $model_data['seeker_full_profile'] = $this->db->where('cp.candidate_id',$value)->get()->row_array();

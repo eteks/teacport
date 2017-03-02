@@ -38,14 +38,28 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$session = $this->session->all_userdata();
+		$session = $this->session->all_userdata();
+		if(isset($session['login_session']) && !empty($session['login_session'])) {
+			$user_type = $session['login_session']['user_type'];
+		}
+		else {
+			$user_type = "guest";
+		}
 		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:NULL);
-		$home['posting'] = $this->common_model->applicable_posting($ins_id);
-	    $home['job_results'] = $this->common_model->get_job_list($ins_id);
+
+		if($user_type == "provider") {
+			$home['posting'] = $this->common_model->applicable_posting($ins_id);
+			$home['allposting'] = $this->common_model->applicable_posting($ins_id);
+			$home['job_results'] = $this->common_model->get_job_list($ins_id,"org");
+		}
+		else {
+			$home['allposting'] = $this->common_model->applicable_posting_by_ins($ins_id);
+			$home['job_results'] = $this->common_model->get_job_list($ins_id,"cand");
+		}
 	    $inative_ads = $this->common_model->ads_inactive();
 		$home['totalvacancy'] = $this->common_model->vacancies_count();
 		$home['totalcandidate'] = $this->common_model->candidate_count();
 		$home['totalorganization'] = $this->common_model->organization_count();
-		$home['allposting'] = $this->common_model->applicable_posting($ins_id);
 		$home['latest_news'] = $this->common_model->latest_news();
 		$home['alldistrict'] = $this->common_model->get_all_district();
 		$home['premiumads'] = $this->common_model->get_premiumads();

@@ -274,11 +274,22 @@ class Common_model extends CI_Model {
 		$posting = $this->db->get();
 		return $posting->result_array(); 
 	}
+
 	public function classlevel_by_ins($ins_id)
 	{
 		$this->db->select('*');    
 		$this->db->from('tr_class_level');
 		$where = '(FIND_IN_SET(class_level_inst_type_id,"'.$ins_id.'") !=0 AND class_level_status=1)';
+		$this->db->where($where);
+		$classlevel = $this->db->get();
+		return $classlevel->result_array(); 
+	}
+
+	public function qualification_by_ins($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_educational_qualification');
+		$where = '(FIND_IN_SET(educational_qualifcation_inst_type_id,"'.$ins_id.'") !=0 AND educational_qualification_status=1)';
 		$this->db->where($where);
 		$classlevel = $this->db->get();
 		return $classlevel->result_array(); 
@@ -450,10 +461,13 @@ class Common_model extends CI_Model {
 		$value = $this->db->get_where('tr_extra_curricular',$where)->result_array();
 		return $value;
 	}
-	public function get_job_list($ins_id)
+	public function get_job_list($ins_id,$type)
 	{
-		if($ins_id != '') {
+		if($ins_id != '' && $type == "org") {
         	$where = '(ov.vacancies_status=1 AND op.organization_institution_type_id="'.$ins_id.'")';
+		}
+		else if($ins_id != '' && $type == "cand") {
+			$where = '(ov.vacancies_status=1 AND FIND_IN_SET(op.organization_institution_type_id,"'.$ins_id.'") != 0)';
 		}
 		else {
 			$where = '(ov.vacancies_status=1)';
@@ -473,10 +487,10 @@ class Common_model extends CI_Model {
 	{
         // Retrieve data with limit
 		if($ins_id != '') {
-			$where = '(organization_status=1 AND organization_profile_completeness >=90 AND organization_institution_type_id="'.$ins_id.'")';  
+			$where = '(op.organization_status=1 AND op.organization_profile_completeness >=90 AND FIND_IN_SET(op.organization_institution_type_id,"'.$ins_id.'") != 0)';  
 		}
 		else {
-			$where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+			$where = '(op.organization_status=1 AND op.organization_profile_completeness >=90)';  
 		}
       	$this->db->select('op.organization_id as org_id,op.*,ops.organization_id,ops.subscription_id,ops.organization_subscription_status,s.subscription_price,s.subscription_id');
         $this->db->from('tr_organization_profile op');
@@ -493,6 +507,12 @@ class Common_model extends CI_Model {
         // echo "</pre>";
 
        	// Total count
+       	if($ins_id != '') {
+			$where = '(organization_status=1 AND organization_profile_completeness >=90 AND FIND_IN_SET(organization_institution_type_id,"'.$ins_id.'") != 0)';  
+		}
+		else {
+			$where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+		}
        	$model_data['total_rows'] = $this->db->get_where('tr_organization_profile',$where)->num_rows();
 
        	// Get total jobs count

@@ -805,12 +805,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Institution Type</label>
                           <span class="dynamic_data"> 
                             <?php
-                            if(!empty($seeker_full_profile['institution_type_name'])) :
-                              echo $seeker_full_profile['institution_type_name']; 
+                            $ins_array = explode(',',$seeker_full_profile['candidate_institution_type']);
+                            $i = 1;
+                            if(!empty($seeker_full_profile['candidate_institution_type']) && !empty($instution_values)) :
+                            foreach ($instution_values as $ins_val) {
+                                if(in_array($ins_val['institution_type_id'],$ins_array)) {
+                                    echo $ins_val['institution_type_name'];
+                                    if($i < count($ins_array))
+                                        echo ", ";
+                                    $i++;
+                                }
+                            }
                             else :
                               echo "NULL";
                             endif;
-                            ?>
+                            ?> 
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -842,7 +851,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span6 control-group">
                           <label class="control-label">Extra Curricular</label>
                           <span class="dynamic_data"> 
-                             <?php
+                            <?php
                             $ext_array = explode(',',$seeker_full_profile['candidate_extra_curricular_id']);
                             if(!empty($extra_curricular_values) && !empty($seeker_full_profile['candidate_extra_curricular_id'])) :
                             foreach ($extra_curricular_values as $ext_val) :
@@ -1238,23 +1247,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="span12">
                         <div class="span6 control-group">                                       
                           <label class="control-label">Institution Type</label>
-                          <span>
-                            <select name="cand_institution" class="popup_select tabfield4 tabfield">
-                              <option value="">Please select institution</option>
+                          <span class="multi_choice">
+                            <?php
+                            $ins_array = explode(',',$seeker_full_profile['candidate_institution_type']);
+                            ?>
+                            <select data-placeholder="select" name="cand_institution" class="chosen span6 tabfield4 tabfield" multiple="multiple" >
                               <?php
                               if(!empty($instution_values)) :
                               foreach ($instution_values as $ins_val) :
-                              ?>
-                              <?php
-                                if($ins_val['institution_type_id']==$seeker_full_profile['candidate_institution_type']) {
-                                  echo '<option value='.$ins_val["institution_type_id"].' selected> '.$ins_val["institution_type_name"].' </option>';
-                                }
-                                else if($ins_val['institution_type_status']==1){
-                                  echo '<option value='.$ins_val["institution_type_id"].'> '.$ins_val["institution_type_name"].' </option>';
-                                }
+                              if(in_array($ins_val['institution_type_id'], $ins_array)) {
+                                echo '<option value='.$ins_val["institution_type_id"].' selected> '.$ins_val["institution_type_name"].' </option>';
+                              }
+                              else {
+                                echo '<option value='.$ins_val["institution_type_id"].'> '.$ins_val["institution_type_name"].' </option>';
+                              }
                               endforeach;
-                              else :
-                                echo '<option value='.$seeker_full_profile['candidate_institution_type'].' selected> "'.$seeker_full_profile['institution_type_name'].'" </option>';
                               endif;
                               ?>
                             </select> 
@@ -1369,7 +1376,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </h4>                        
             </div>
             <div class="widget-body">
-            	<table class="bordered table table-striped table-hover table-bordered admin_table" id="mple_editable_1">
+            	<table class="bordered table table-striped table-hover table-bordered" id="mple_editable_1">
                       <thead>
                         <tr class="">
                           <th> Organization Id </th>

@@ -307,7 +307,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_experience cexp', 'cp.candidate_id = cexp.candidate_profile_id','left');
 		$this->db->join('tr_candidate_preferance cpre', 'cp.candidate_id = cpre.candidate_profile_id','inner');
 		$this->db->join('tr_educational_qualification eq', 'cedu.candidate_education_qualification_id = eq.educational_qualification_id','inner');
-		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
+		$where = "FIND_IN_SET('".$ins_id."',cp.candidate_institution_type) AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
 			$where .= " AND cp.candidate_district_id ='".$searchdata['candidate_willing_district']."'";
 		}
@@ -374,7 +374,7 @@ class Job_provider_model extends CI_Model {
 		$this->db->join('tr_candidate_experience cexp', 'cp.candidate_id = cexp.candidate_profile_id','left');
 		$this->db->join('tr_candidate_preferance cpre', 'cp.candidate_id = cpre.candidate_profile_id','inner');
 		$this->db->join('tr_educational_qualification eq', 'cedu.candidate_education_qualification_id = eq.educational_qualification_id','inner');
-		$where = "cp.candidate_institution_type ='".$ins_id."' AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
+		$where = "FIND_IN_SET('".$ins_id."',cp.candidate_institution_type) AND cp.candidate_status='1' AND cp.candidate_profile_completeness>='90'";
 		if(isset($searchdata['candidate_willing_district']) && $searchdata['candidate_willing_district'] != ''){
 			$where .= " AND cp.candidate_district_id ='".$searchdata['candidate_willing_district']."'";
 		}

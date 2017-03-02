@@ -1165,7 +1165,7 @@ function popup_pagination() {
     // alert(lastElem);
     mask = $('.subscription_organization_section');
     sections_width = sections.width() + 20;  
-    alert(sections_width);
+    // alert(sections_width);
     mask.css('width', sections_width*(lastElem+1) +'px');
     sections.first().addClass('viewed');
     $('.profile_plan_section').each(function() {

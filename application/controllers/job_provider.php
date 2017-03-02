@@ -576,7 +576,7 @@ class Job_provider extends CI_Controller {
 		$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
 		$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
 		$data['applicable_posting']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->applicable_posting($session_data['login_session']['institution_type']):$this->common_model->applicable_posting($data['organization']['institution_type_id']));
-		$data['qualification']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+		$data['qualification']	= $this->common_model->qualification();
 		$data['medium']			= $this->common_model->medium_of_instruction();
 		$institution_type = isset($session_data['login_session']['institution_type'])?$session_data['login_session']['institution_type']:$data['organization']['institution_type_id'];
 		// $data['university']		= $this->common_model->get_board_details();
@@ -607,7 +607,6 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run())
 			{
-				
 				$vacancy_data = array(
 									'vacancies_course_type'			=> ($this->input->post('provider_ug_or_pg')) ? $this->input->post('provider_ug_or_pg') : NULL, 
 									'vacancies_department_id'		=> ($this->input->post('provider_department')) ? implode(',',$this->input->post('provider_department')) : NULL, 

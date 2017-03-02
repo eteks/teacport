@@ -978,15 +978,11 @@ class Job_seeker extends CI_Controller {
 		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 
 		$data['alldistricts'] = $this->common_model->get_all_district();
-		if(!isset($session_data['login_session']['institution_type_id']) && empty($session_data['login_session']['institution_type_id'])) {
-			$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
-			$session_data['login_session']['institution_type_id'] = $candidate_data['institution_type_id'];
-		}		
-		$data['applicable_postings'] = $this->common_model->applicable_posting($session_data['login_session']['candidate_institution_type']);
-		$data['qualifications'] = $this->common_model->qualification_by_institution($session_data['login_session']['candidate_institution_type']);
+		$data['applicable_postings'] = $this->common_model->applicable_posting_by_ins($session_data['login_session']['candidate_institution_type']);
+		$data['qualifications'] = $this->common_model->qualification_by_ins($session_data['login_session']['candidate_institution_type']);
 		$data["applied_value"] = $this->job_seeker_model->job_seeker_applied_value($session_data['login_session']['candidate_id']);
 
-		if(!empty($session_data['login_session']['institution_type_id'])) {	
+		if(!empty($session_data['login_session']['candidate_institution_type'])) {	
 			$search_inputs = array();	
 			// Location based jobs
 			if($this->input->get('loc')  && !$_POST) {
@@ -1012,7 +1008,7 @@ class Job_seeker extends CI_Controller {
     		$per_page = 20;
 
     		$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
-	        $search_results = $this->job_seeker_model->get_seeker_search_results($per_page, $offset,$session_data['login_session']['institution_type_id'],$search_inputs);
+	        $search_results = $this->job_seeker_model->get_seeker_search_results($per_page, $offset,$session_data['login_session']['candidate_institution_type'],$search_inputs);
 	    	$total_rows = $search_results['total_rows'];
 	    	$data['search_inputs'] = $search_inputs;
 	    	$data["search_results"] = $search_results['search_results'];
