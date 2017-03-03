@@ -1098,8 +1098,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php } ?>
                          	<div class="span12">
                         		<div class="control-group check_grace">
-                              <input type="hidden" name="grace_period_allocate_id" value="<?php if($latest_plan_details['is_renewal'] ==1) echo $latest_plan_details['upgrade_or_renewal_id']; else echo $latest_plan_details['organization_subscription_id']; ?>">
-                        			<input type="checkbox" class="control-group apply_grace_period" <?php if($latest_plan_details['is_grace_period_available'] == 1 || $latest_plan_details['renewal_is_grace_period_available'] == 1){ ?> disabled checked title="Already Grace Period Assigned" <?php } else if(empty($latest_plan_details['is_renewal']) && $latest_plan_details['organization_subscription_status'] == 1){ ?> disabled title="cannot assign grace period when provider is active"  <?php } ?>>Apply Grace period for this provider latest/current plan 
+                              <input type="hidden" name="grace_period_allocate_id" value="<?php if($latest_plan_details['is_renewal'] ==1) echo $latest_plan_details['upgrade_or_renewal_id']; else echo $latest_plan_details['org_subscription_id']; ?>" data-renewal="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>">
+                        			<input type="hidden" name="grace_period_renewal" value="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>">
+                              <input type="checkbox" name="grace_period_applicable_status" class="control-group apply_grace_period" <?php if($latest_plan_details['is_grace_period_available'] == 1 || $latest_plan_details['renewal_is_grace_period_available'] == 1){ ?> disabled checked title="Already Grace Period Assigned" <?php } else if(empty($latest_plan_details['is_renewal']) && $latest_plan_details['organization_subscription_status'] == 1){ ?> disabled title="cannot assign grace period when provider is active"  <?php } ?>>Apply Grace period for this provider latest/current plan 
                               <input type="hidden" class="grace_period_days" name="grace_period_days" value="10">
                         		</div>
                         	</div>
