@@ -968,9 +968,9 @@ class Master_data_model extends CI_Model {
         )AS pre
         INNER JOIN 
         (
-          SELECT vacancies_id
+          SELECT vacancies_id,vacancies_applicable_posting_id
           FROM tr_organization_vacancies
-        )AS vac WHERE pos.posting_id=pre.p_value OR pos.posting_id=vac.vacancies_id group by pos.posting_id");
+        )AS vac WHERE pos.posting_id=pre.p_value OR pos.posting_id=vac.vacancies_applicable_posting_id group by pos.posting_id");
 
     $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'posting_id');
 

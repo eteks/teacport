@@ -129,6 +129,8 @@ class Job_provider extends CI_Controller {
 	        }
 			else
 			{
+				$sms_credentials = $this->common_model->sms_credentials();
+				$this->config->set_item('sms_gateway',$sms_credentials);
 				/* Registration form valid stage */
 				/* Get and store posted data to array */
 				$data = array(
@@ -155,11 +157,17 @@ class Job_provider extends CI_Controller {
 					$this->email->message($message);
 					/* Check whether mail send or not*/
 					if($this->email->send()){
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);				
-						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);				
+							/* mail sent success stage. send  facebook login link and server message to login page */
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						}
+						else {
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email !!';
+						}
 						$fb['error'] = 2;
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
@@ -170,10 +178,19 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);
-						$output = explode('.',$get);
+
+
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";					
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);		
+							$output = explode('.',$get);			
+						}
+						else {
+							$output[0] = "No"; // If config variable is empty.
+						}
+
 						if($output[0] == "S") {
 							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
 							$fb['error'] = 2;
@@ -211,6 +228,7 @@ class Job_provider extends CI_Controller {
 	public function dashboard()
     {
     	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+    	$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -259,6 +277,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function editprofile(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -449,6 +468,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function initialdata(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		if($_POST){
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
@@ -536,7 +556,8 @@ class Job_provider extends CI_Controller {
 	}
 
 	public function inbox(){
-		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$inboxdata['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$inboxdata['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -568,6 +589,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function postjob() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -687,6 +709,7 @@ class Job_provider extends CI_Controller {
 	public function postedjob()
 	{
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -716,6 +739,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function postedjobdetail(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -737,6 +761,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function editjobdetail(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -765,6 +790,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function browse_candidate(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -800,6 +826,11 @@ class Job_provider extends CI_Controller {
 
 		if($_POST){
 			$this->session->set_userdata('pro_search_data', $_POST);
+		}
+		else if($this->input->get('loc')) {
+			// Location based jobs
+			$inputs = array('candidate_willing_district' => $this->input->get('loc'));
+			$this->session->set_userdata('pro_search_data',$inputs);
 		}
 		// if(!empty($this->session->userdata('pro_search_data'))){
 		$provider_search_data = $this->session->userdata('pro_search_data');
@@ -858,6 +889,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function updatejob(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
 		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
@@ -934,6 +966,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function changepassword(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -969,6 +1002,7 @@ class Job_provider extends CI_Controller {
 
 	public function feedback(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1008,6 +1042,7 @@ class Job_provider extends CI_Controller {
 	}
     public function postad(){
     	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+    	$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1100,6 +1135,7 @@ class Job_provider extends CI_Controller {
 
 	public function subscription(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1331,6 +1367,7 @@ class Job_provider extends CI_Controller {
 
 	public function candidateprofile() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1468,6 +1505,8 @@ class Job_provider extends CI_Controller {
 	}
 	public function sendsms(){
 		if($_POST){
+			$sms_credentials = $this->common_model->sms_credentials();
+			$this->config->set_item('sms_gateway',$sms_credentials);
 			$candidate_det = $this->job_seeker_model->candidate_profile_by_id($this->input->post('candidate_id'));
 			$org_id = $this->input->post('org_id');
 			$vac_id = ($this->input->post('vac_id'))?$this->input->post('vac_id'):'';
@@ -1480,12 +1519,17 @@ class Job_provider extends CI_Controller {
 				$link = "http://www.teachersrecruit.com/user-followed-companies/".$org_id."";
 				$msg = "You+have+been+shortlisted+to+attend+the+interview+for+our_company.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
-			// $msg = "Please";
-			$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$candidate_det['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+			if($this->config->item('sms_gateway')) {
+				$sms_cre = $this->config->item('sms_gateway');
+				$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$candidate_det['candidate_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+				$get = file_get_contents($url);		
+				$output = explode('.',$get);			
+			}
+			else {
+				$output[0] = "No";
+			}
 
 			// $url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone=8675846999&text=hii&priority=ndnd&stype=normal';
-			$get = file_get_contents($url);
-			$output = explode('.',$get);
 			if($output[0] == "S") {
 				$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id,$vac_id);
 				$data['status'] = ($status['status']!='')?$status['status']:"failure";

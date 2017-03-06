@@ -58,21 +58,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <label class="control-label">SMS API URL</label>
 	                            <div class="controls">
                                 <?php echo form_error('sms_api_url'); ?>
-	                              <input name="sms_api_url" type="text" value="<?php echo !empty(set_value('sms_api_url')) ? set_value('sms_api_url') : (!empty($payment_values['sms_api_url']) ? $payment_values['sms_api_url'] : '');  ?>" class="span6" />
+	                              <input name="sms_api_url" type="text" value="<?php echo !empty(set_value('sms_api_url')) ? set_value('sms_api_url') : (!empty($payment_values['sms_api_url']) ? $payment_values['sms_api_url'] : '');  ?>" class="span6" placeholder="http://bhashsms.com/api/sendmsg.php" />
 	                             </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">User Name</label>
 	                            <div class="controls">
                                 <?php echo form_error('sms_username'); ?>
-	                              <input name="sms_username" type="text" value="<?php echo !empty(set_value('sms_username')) ? set_value('sms_username') : (!empty($payment_values['sms_username']) ? $payment_values['sms_username'] : '');  ?>" class="span6" />
+	                              <input name="sms_username" type="text" value="<?php echo !empty(set_value('sms_username')) ? set_value('sms_username') : (!empty($payment_values['sms_username']) ? $payment_values['sms_username'] : '');  ?>" class="span6" placeholder="xxxxxx" />
 	                             </div>
 	                          </div>
                             <div class="control-group">
                               <label class="control-label">Password</label>
                               <div class="controls">
                                 <?php echo form_error('sms_password'); ?>
-                                <input name="sms_password" type="password" value="<?php echo !empty(set_value('sms_password')) ? set_value('sms_password') : (!empty($payment_values['sms_password']) ? $payment_values['sms_password'] : '');  ?>" class="span6" />
+                                <input name="sms_password" type="password" value="<?php echo !empty(set_value('sms_password')) ? set_value('sms_password') : (!empty($payment_values['sms_password']) ? $payment_values['sms_password'] : '');  ?>" class="span6" placeholder="******" />
                                 <span class="password_shower"> <i class="icon-eye-open"></i> </span>
                                </div>
                             </div>
@@ -80,21 +80,21 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class="control-label">Sender</label>
                               <div class="controls">
                                 <?php echo form_error('sms_senderid'); ?>
-                                <input name="sms_senderid" type="text" value="<?php echo !empty(set_value('sms_senderid')) ? set_value('sms_senderid') : (!empty($payment_values['sms_senderid']) ? $payment_values['sms_senderid'] : '');  ?>" class="span6" />
+                                <input name="sms_senderid" type="text" value="<?php echo !empty(set_value('sms_senderid')) ? set_value('sms_senderid') : (!empty($payment_values['sms_senderid']) ? $payment_values['sms_senderid'] : '');  ?>" class="span6" placeholder="TCHRCT" />
                                </div>
                             </div>
                             <div class="control-group">
                               <label class="control-label">Priority</label>
                               <div class="controls">
                                 <?php echo form_error('sms_priority'); ?>
-                                <input name="sms_priority" type="text" value="<?php echo !empty(set_value('sms_priority')) ? set_value('sms_priority') : (!empty($payment_values['sms_priority']) ? $payment_values['sms_priority'] : '');  ?>" class="span6" />
+                                <input name="sms_priority" type="text" value="<?php echo !empty(set_value('sms_priority')) ? set_value('sms_priority') : (!empty($payment_values['sms_priority']) ? $payment_values['sms_priority'] : '');  ?>" class="span6" placeholder="ndnd or dnd" />
                                </div>
                             </div>
                             <div class="control-group">
                               <label class="control-label">Type</label>
                               <div class="controls">
                                 <?php echo form_error('sms_type'); ?>
-                                <input name="sms_type" type="text" value="<?php echo !empty(set_value('sms_type')) ? set_value('sms_type') : (!empty($payment_values['sms_type']) ? $payment_values['sms_type'] : '');  ?>" class="span6" />
+                                <input name="sms_type" type="text" value="<?php echo !empty(set_value('sms_type')) ? set_value('sms_type') : (!empty($payment_values['sms_type']) ? $payment_values['sms_type'] : '');  ?>" class="span6" placeholder="normal" />
                                </div>
                             </div>
 	                          <div class="form-actions">

@@ -720,7 +720,7 @@ class Common_model extends CI_Model {
 
 	// To store other option and get id
 	public function insert_other_mother_tongue($data) {
-		$already_where = '(language_name="'.$data['language_name'].'")';
+		$already_where = '(language_name="'.$data['language_name'].'" and is_mother_tangue=1)';
 		$check_already = $this->db->get_where('tr_languages',$already_where);
 		if($check_already->num_rows() == 1) {
 			$row_array = $check_already->row_array();
@@ -871,6 +871,11 @@ class Common_model extends CI_Model {
 		// $count = $this->db->group_by(array('candidate_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',$where)->num_rows();
 		$count = $this->db->get_where('tr_organization_candidate_visitor_count',$where)->num_rows();
 		return $count;
+	}
+
+	public function sms_credentials() {
+		$data = $this->db->get_where('tr_settings_sms_gateway')->row_array();
+		return $data;
 	}
 
 } // End

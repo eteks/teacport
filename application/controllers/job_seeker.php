@@ -480,7 +480,10 @@ class Job_seeker extends CI_Controller {
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$this->load->view('register-job-seekers',$fb);	
-	        } else {	        	
+	        } 
+	        else {	
+	        	$sms_credentials = $this->common_model->sms_credentials();
+				$this->config->set_item('sms_gateway',$sms_credentials);        	
 				/* Registration form valid stage */
 				/* Get and store posted data to array */
 				$data = array(
@@ -508,11 +511,19 @@ class Job_seeker extends CI_Controller {
 					
 					/* Check whether mail send or not*/
 					if($this->email->send()){
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);
-						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);				
+							/* mail sent success stage. send  facebook login link and server message to login page */
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						}
+						else {
+							/* mail sent success stage. send  facebook login link and server message to login page */
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email!!';		
+						}
+
 						$fb['error'] = 2;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
@@ -525,10 +536,18 @@ class Job_seeker extends CI_Controller {
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);
-						$output = explode('.',$get);
+
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);				
+							$output = explode('.',$get);
+						}
+						else {
+							$output[0] = "No";
+						}
 						if($output[0] == "S") {
 							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
 							$fb['error'] = 2;

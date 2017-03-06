@@ -36,11 +36,13 @@
                     else{
                         $user_type = array('user_type'=>'guest');
                     }
-                    if(!empty($search_jobs_location) && $user_type['user_type']!="provider") :
                     ?>         
                     <div class="col-sm-6 col-md-3 col-xs-12">
+                        <?php
+                        if(!empty($search_jobs_location)) :
+                        ?>
                         <div class="footer_block dark_gry follow-on">
-                            <h4>Teaching Jobs by City</h4>
+                            <h4> <?php echo $user_type['user_type']!="provider" ? "Teaching Jobs by City" : "Candidates by City"; ?></h4>
                             <ul class="location_based_list">
                                 <?php
                                 foreach ($search_jobs_location as $job_key => $job_val) :
@@ -50,26 +52,31 @@
                                     <?php
                                     if($user_type['user_type']=="seeker") {
                                     ?>
-                                        <a href="<?php echo base_url()."seeker/findjob?loc=".$job_val['district_id']; ?>" class="float_location">
+                                        <a href="<?php echo base_url()."seeker/findjob?loc=".$job_val['district_id']; ?>" class="float_location"> Teacher Jobs in <?php echo $job_val['district_name']; ?></a> 
+                                    <?php
+                                    }
+                                    else if($user_type['user_type']=="provider"){
+                                    ?>
+                                    <a href="<?php echo base_url()."provider/candidate?loc=".$job_val['district_id']; ?>" class="float_location"> Candidates in <?php echo $job_val['district_name']; ?></a>
                                     <?php
                                     }
                                     else {
                                     ?>
-                                    <a href="<?php echo base_url()."teachersvacancy?loc=".$job_val['district_id']; ?>" class="float_location">
+                                    <a href="<?php echo base_url()."teachersvacancy?loc=".$job_val['district_id']; ?>" class="float_location"> Teacher Jobs in <?php echo $job_val['district_name']; ?></a>
                                     <?php
                                     }
-                                    ?> Teacher Jobs in <?php echo $job_val['district_name']; ?></a> 
+                                    ?> 
                                     <span class="clearfix"></span>
                                 </li>   
                                 <?php
                                 endforeach;
                                 ?>                            
                             </ul>
-                        </div>                         
+                        </div>  
+                        <?php
+                        endif;
+                        ?>                         
                     </div>
-                    <?php
-                    endif;
-                    ?>
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block">
                             <h4>Contact Information</h4>
