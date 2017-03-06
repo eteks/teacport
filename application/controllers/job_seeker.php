@@ -461,10 +461,10 @@ class Job_seeker extends CI_Controller {
 			}
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			/* Set validate condition for registration form */
-			$this->form_validation->set_rules('candidate_institution_type', 'Institution', 'trim|required|numeric|xss_clean');
+			$this->form_validation->set_rules('candidate_institution_type[]', 'Institution', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('candidate_name', 'Name', 'trim|required|min_length[3]|max_length[50]|xss_clean|callback_alpha_dash_space');
 			$this->form_validation->set_rules('candidate_email', 'Email ID', 'trim|required|valid_email|xss_clean|is_unique[tr_candidate_profile.candidate_email]');
-			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean');
+			$this->form_validation->set_rules('candidate_mobile_no', 'Moblie', 'trim|required|numeric|exact_length[10]|xss_clean|is_unique[tr_candidate_profile.candidate_mobile_no]');
 			$this->form_validation->set_rules('candidate_work_type', 'Candidate Work Type', 'trim|required|xss_clean');
 			$this->form_validation->set_rules('captcha_value', 'Captcha', 'trim|required|callback_validate_captcha');
 			$this->form_validation->set_rules('accept_terms','Accept terms and condition', 'callback_accept_term_and_condition');
@@ -480,11 +480,14 @@ class Job_seeker extends CI_Controller {
 				$fb['captcha'] = $this->captcha->main();
 				$this->session->set_userdata('captcha_info', $fb['captcha']);
 				$this->load->view('register-job-seekers',$fb);	
-	        } else {	        	
+	        } 
+	        else {	
+	        	$sms_credentials = $this->common_model->sms_credentials();
+				$this->config->set_item('sms_gateway',$sms_credentials);        	
 				/* Registration form valid stage */
 				/* Get and store posted data to array */
 				$data = array(
-					'candidate_institution_type' => $this->input->post('candidate_institution_type'),
+					'candidate_institution_type' => implode(',',$this->input->post('candidate_institution_type')),
 					'candidate_name' => $this->input->post('candidate_name'),
 					'candidate_email' => $this->input->post('candidate_email'),
 					'candidate_mobile_no' => $this->input->post('candidate_mobile_no'),
@@ -508,11 +511,19 @@ class Job_seeker extends CI_Controller {
 					
 					/* Check whether mail send or not*/
 					if($this->email->send()){
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);
-						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);				
+							/* mail sent success stage. send  facebook login link and server message to login page */
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						}
+						else {
+							/* mail sent success stage. send  facebook login link and server message to login page */
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email!!';		
+						}
+
 						$fb['error'] = 2;
 	       				$fb['fbloginurl'] = $common->facebookloginurl_seeker();
 	       				$fb['captcha'] = $this->captcha->main();
@@ -525,10 +536,18 @@ class Job_seeker extends CI_Controller {
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);
-						$output = explode('.',$get);
+
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['candidate_email']."+Your+Password+:+".$data['candidate_password']."+By+Teachers+Recruit";
+
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['candidate_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);				
+							$output = explode('.',$get);
+						}
+						else {
+							$output[0] = "No";
+						}
 						if($output[0] == "S") {
 							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
 							$fb['error'] = 2;
@@ -592,6 +611,7 @@ class Job_seeker extends CI_Controller {
 	// Dashboard
 	public function dashboard() {     
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();	
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
      	$session_data = $this->session->all_userdata(); 
      	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -604,7 +624,7 @@ class Job_seeker extends CI_Controller {
 				$this->form_validation->set_rules('seeker_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
 				$this->form_validation->set_rules('seeker_password', 'Password', 'trim|required|xss_clean|min_length[8]|max_length[20]');
 				$this->form_validation->set_rules('seeker_confirmpass', 'Confirm Password', 'trim|required|xss_clean|min_length[8]|max_length[20]|matches[seeker_password]');
-				$this->form_validation->set_rules('seeker_institution', 'Institution Type', 'trim|required|xss_clean|');
+				$this->form_validation->set_rules('seeker_institution[]', 'Institution Type', 'trim|required|xss_clean|');
 			}		
 			$this->form_validation->set_rules('seeker_father', 'Father Name', 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			$this->form_validation->set_rules('seeker_dob', 'Date Of Birth', 'trim|required|xss_clean|callback_valid_date');
@@ -636,7 +656,7 @@ class Job_seeker extends CI_Controller {
 						'candidate_email' => $this->input->post('seeker_email'),
 						'candidate_mobile_no' => $this->input->post('seeker_mobile'),
 						'candidate_password' => $this->input->post('seeker_password'),
-						'candidate_institution_type' => $this->input->post('seeker_institution'),
+						'candidate_institution_type' => implode(',',$this->input->post('seeker_institution')),
 						'candidate_father_name' => $this->input->post('seeker_father'),
 						'candidate_date_of_birth' => date('Y-m-d',strtotime($this->input->post('seeker_dob'))),
 						'candidate_address_1' => $this->input->post('seeker_address1'),
@@ -670,8 +690,8 @@ class Job_seeker extends CI_Controller {
 				$data['popup_type'] = 'ordinary';
 			}
 		}
-		// $data['district_values'] = $this->common_model->get_all_district();
-		$data['district_values'] = '';
+		$data['district_values'] = $this->common_model->get_all_district();
+		// $data['district_values'] = '';
 		$data['state_values'] = $this->common_model->get_all_state();
 		$data['institution_values'] = $this->common_model->get_institution_type();
         // print_r($candidate_data);
@@ -681,6 +701,7 @@ class Job_seeker extends CI_Controller {
         $data['job_applied_count'] = $this->job_seeker_model->candidate_job_applied_count($session_data['login_session']['candidate_id']);
      	$data['visit_count']  = $this->common_model->get_candidate_visit_count($session_data['login_session']['candidate_id']);
         $data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
+
 		$this->load->view('user-dashboard',$data);
 	}
 
@@ -691,6 +712,7 @@ class Job_seeker extends CI_Controller {
 	// Candidate inbox
 	public function inbox(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session = $this->session->all_userdata();
 		// print_r($session['login_session']);
 		if(!isset($session['login_session']) || empty($session['login_session'])) {
@@ -733,6 +755,7 @@ class Job_seeker extends CI_Controller {
 	// Job Seeker Edit Profile 
     public function editprofile() {
     	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+    	$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	$session = $this->session->all_userdata();
     	// print_r($session['login_session']);
     	if(!isset($session['login_session']) || empty($session['login_session'])) {
@@ -744,15 +767,16 @@ class Job_seeker extends CI_Controller {
     	$data['district_values'] = $this->common_model->get_all_district();
     	$data['state_values'] = $this->common_model->get_all_state();
     	$data['candidate_job_values'] = $this->job_seeker_model->get_seeker_applied_job($session['login_session']['candidate_id']);
-    	$data['mother_language_values'] = $this->common_model->mother_tongue(1);
+    	$data['institution_values'] = $this->common_model->get_institution_type();
+    	$data['mother_language_values'] = $this->common_model->mother_tongue(1); // with other option value
     	$data['medium_language_values'] = $this->common_model->medium_of_instruction();
     	$data['known_languages'] = $this->common_model->all_languages(1);
-    	$data['posting_values'] = $this->common_model->applicable_posting($session['login_session']['candidate_institution_type'],1);
-    	$data['class_values'] = $this->common_model->classlevel_by_institution($session['login_session']['candidate_institution_type']);
+    	$data['posting_values'] = $this->common_model->applicable_posting_by_ins($session['login_session']['candidate_institution_type']);
+    	$data['class_values'] = $this->common_model->classlevel_by_ins($session['login_session']['candidate_institution_type']);
+    	$data['subject_values'] = $this->common_model->subject_by_ins($session['login_session']['candidate_institution_type']);
     	$data['exp_class_values'] = $this->common_model->classlevel_by_institution(NULL);
-    	$data['subject_values'] = $this->common_model->subject_by_institution($session['login_session']['candidate_institution_type'],1);
     	$data['exp_subject_values'] = $this->common_model->subject_by_institution(NULL,NULL);
-    	$data['qualification_values'] = $this->common_model->qualification($session['login_session']['candidate_institution_type']);
+    	$data['qualification_values'] = $this->common_model->qualification();
     	$data['education_values'] = $this->job_seeker_model->get_seeker_education_details($session['login_session']['candidate_id']);
     	$data['department_values'] = $this->common_model->get_department_details();
     	$data['board_values'] = $this->common_model->get_board_details();
@@ -764,14 +788,7 @@ class Job_seeker extends CI_Controller {
     	// 	$data['edit_profile_visible_status'] = 0;
     	// }
 
-    	// To store session values
-    	$candidate_session_data = $this->job_seeker_model->seeker_session_values($session['login_session']['candidate_id']);
-
-		if(!empty($candidate_session_data)) {
-			$this->session->set_userdata('login_session',$candidate_session_data);
-		}
-
-    	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
+	   	$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session['login_session']['candidate_id']);
 		$this->load->view('user-edit-profile',$data);
 	}
 
@@ -813,6 +830,7 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_posts[]', 'label' => 'Apply Posting','rules' => 'required|trim|xss_clean|callback_other_postings['.$session['login_session']['candidate_institution_type'].']'),
 			array('field' => 'cand_start_sal', 'label'=> 'Minimum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]'),
 			array('field' => 'cand_end_sal', 'label' => 'Maximum Salary','rules' => 'required|trim|xss_clean|regex_match[/^[0-9]{4,9}$/]|callback_check_greater_value['.$this->input->post('cand_start_sal').']' ),
+			array('field' => 'cand_ins[]', 'label' => 'Preference Institution','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_class[]', 'label' => 'Preference Class Level','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_sub[]', 'label' => 'Preference Subject','rules' => 'required|trim|xss_clean|callback_other_subjects['.$session['login_session']['candidate_institution_type'].']'),
 
@@ -955,6 +973,11 @@ class Job_seeker extends CI_Controller {
 	           	}
 	        }
        	}
+       	if($data['update_status'] == "success") {
+       		// To store session values
+    		$candidate_session_data = $this->job_seeker_model->seeker_session_values($session['login_session']['candidate_id']);
+			$this->session->set_userdata('login_session',$candidate_session_data);
+	   	}
        	echo $data['update_status'];
 	}
 
@@ -965,23 +988,26 @@ class Job_seeker extends CI_Controller {
 	// Seeker Find Job
 	public function findjob() {	
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();		
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
      	}
 		$data['sidebar_values'] = $this->job_seeker_model->candidate_sidebar_menu_values($session_data['login_session']['candidate_id']);
 		$data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
+
 		$data['alldistricts'] = $this->common_model->get_all_district();
-		if(!isset($session_data['login_session']['institution_type_id']) && empty($session_data['login_session']['institution_type_id'])) {
-			$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
-			$session_data['login_session']['institution_type_id'] = $candidate_data['institution_type_id'];
-		}		
-		$data['applicable_postings'] = $this->common_model->applicable_posting($session_data['login_session']['candidate_institution_type']);
-		$data['qualifications'] = $this->common_model->qualification_by_institution($session_data['login_session']['candidate_institution_type']);
+		$data['applicable_postings'] = $this->common_model->applicable_posting_by_ins($session_data['login_session']['candidate_institution_type']);
+		$data['qualifications'] = $this->common_model->qualification_by_ins($session_data['login_session']['candidate_institution_type']);
 		$data["applied_value"] = $this->job_seeker_model->job_seeker_applied_value($session_data['login_session']['candidate_id']);
 
-		if(!empty($session_data['login_session']['institution_type_id'])) {	
+		if(!empty($session_data['login_session']['candidate_institution_type'])) {	
 			$search_inputs = array();	
+			// Location based jobs
+			if($this->input->get('loc')  && !$_POST) {
+				$inputs = array('location' => $this->input->get('loc'));
+				$this->session->set_userdata('seeker_search_inputs',$inputs);
+			}
 			if($_POST) {
 	    		$inputs = array(
 	        				'keyword' => $this->input->post('search_keyword'),
@@ -1001,7 +1027,7 @@ class Job_seeker extends CI_Controller {
     		$per_page = 20;
 
     		$offset = ($this->uri->segment(3)) ? ($this->uri->segment(3)-1)*$per_page : 0;
-	        $search_results = $this->job_seeker_model->get_seeker_search_results($per_page, $offset,$session_data['login_session']['institution_type_id'],$search_inputs);
+	        $search_results = $this->job_seeker_model->get_seeker_search_results($per_page, $offset,$session_data['login_session']['candidate_institution_type'],$search_inputs);
 	    	$total_rows = $search_results['total_rows'];
 	    	$data['search_inputs'] = $search_inputs;
 	    	$data["search_results"] = $search_results['search_results'];
@@ -1057,6 +1083,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker Applied jobs
 	public function jobsapplied() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -1118,6 +1145,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker Feedback
 	public function feedback() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
      		redirect('seeker/logout');
@@ -1167,6 +1195,7 @@ class Job_seeker extends CI_Controller {
 	// Change password
 	public function change_password() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();	
     	// print_r($session['login_session']);
     	if(!isset($session_data['login_session']) || empty($session_data['login_session'])) {
@@ -1204,6 +1233,7 @@ class Job_seeker extends CI_Controller {
 	// Seeker job apply and job description
 	public function applynow() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();	
 		if(!isset($session_data['login_session']) || empty($session_data['login_session']) || $session_data['login_session']['user_type'] != 'seeker') {
 			if($this->uri->segment(2) == "vacancy_details")
@@ -1250,7 +1280,7 @@ class Job_seeker extends CI_Controller {
 									'applied_job_status'			=> 1
 									// 'applied_job_date'				=> date("Y-m-d")
 								);
-			if($data["applyjob"]['organization_institution_type_id'] == $institution_id ) {
+			if(in_array($data["applyjob"]['organization_institution_type_id'], explode(',',$institution_id))) {
 				$apply_status = $this->job_seeker_model->job_seeker_apply_status($session_data['login_session']['candidate_id'],$data["applyjob"]['vacancies_id']);
 				if ($apply_status == "success") {
 					if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob,$seeker_candidatejob)) {
@@ -1288,6 +1318,7 @@ class Job_seeker extends CI_Controller {
 	public function forgot_password()
 	{ 
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$ci =& get_instance();	
 		$ci->config->load('email', true);
 		$emailsetup = $ci->config->item('email');
@@ -1340,6 +1371,15 @@ class Job_seeker extends CI_Controller {
 	}
 	/*End of full view*/
 
+	public function candidate_profile_ins() {
+		$data = '';
+		if($this->input->post('value')) {
+			$data['posting'] = $this->common_model->applicable_posting_by_ins($this->input->post('value'));
+			$data['class'] = $this->common_model->classlevel_by_ins($this->input->post('value'));
+			$data['subject'] = $this->common_model->subject_by_ins($this->input->post('value'));
+		}
+		echo json_encode($data);
+	}
 
 
 	// Commented by siva

@@ -223,6 +223,35 @@ ajax = function (params,action,form_id){
     });
 };
 
+// Enable search district
+enable_search_district = function (id,form_id){
+    $(".save_search_btn").hide();
+    $(".cancel_search_btn").hide();
+    var form = $('#'+form_id);
+    var this_loader =  form.parents('#main-content').find('.loader_holder'); //for loader  
+    $.ajax({
+        type : "POST",
+        url : admin_baseurl+"search_enabled",
+        data : 'value='+id+'&'+csrf_name+'='+csfrData[csrf_name],
+        beforeSend: function(){
+            this_loader.removeClass('hide_loader');
+            $(".loader_overlay").css({"display":"block"});
+            
+        },
+        success: function(res) {
+            if(res == "success") {
+                $('.enabled_msg').html("<i class='icon-ok-sign'></i> Updated successfully");
+                $('.enabled_msg').fadeIn(500);
+                $('.enabled_msg').fadeOut(3000);
+                setTimeout(function() { $('.enabled_msg').text(''); }, 3000);
+            }
+        },
+        complete : function(){
+            setTimeout(function() { this_loader.addClass('hide_loader'); $(".loader_overlay").css({"display":"none"});}, 1000);  //Commented for page reload
+        },
+    });
+};
+
 $(document).ready(function(){
     
     default_credentials();
@@ -581,7 +610,7 @@ var content_height = parseInt(window_height - (header_height + footer_height));
     });  
     
     //----- CLOSE
-    $('[data-popup-close]').on('click', function(e)  {
+    $(document).on('click','[data-popup-close]', function(e)  {
         var targeted_popup_class = jQuery(this).attr('data-popup-close');
         $('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
  
@@ -1028,8 +1057,118 @@ var content_height = parseInt(window_height - (header_height + footer_height));
 			$('.show_grace_period').addClass('hide_all');
 		}
 	});
-	
-	
+
+
+    /*     =====     Location based search option start   =====      */
+    //Enable or disable District based Search-Added By Akila
+
+    // alert(JSON.stringify(search_district));
+    // Enable search option
+    $(document).on('click','.enable_act',function(){
+        var table = $(this).parents('.admin_table').DataTable();
+        $(this).addClass("enable_srch");
+        var enable_array = {};
+        table.$('tr.parents_tr').each(function(){
+            if($(this).find('.enable_act').hasClass('enable_srch')){
+               enable_array[$(this).find('.ajaxEdit').data('id')] = $.trim($(this).find('.d_name').text());
+            } 
+        });
+        
+        if(JSON.stringify(search_district) != JSON.stringify(enable_array)){
+            $(".save_search_btn").show();
+            $(".cancel_search_btn").show();
+        }
+        else {
+            $(".save_search_btn").hide();
+            $(".cancel_search_btn").hide();
+        }
+    });
+
+    // Disable search option
+    $(document).on('click','.disable_act',function(){
+        var table = $(this).parents('.admin_table').DataTable();
+        $(this).parent(".enable_location_srch").find('li.enable_act').removeClass("enable_srch");
+        var disable_array = {};
+        table.$('tr.parents_tr').each(function(){
+            if($(this).find('.enable_act').hasClass('enable_srch')){
+               disable_array[$(this).find('.ajaxEdit').data('id')] = $.trim($(this).find('.d_name').text());
+            } 
+        });
+        
+        if(JSON.stringify(search_district) != JSON.stringify(disable_array)){
+            $(".save_search_btn").show();
+            $(".cancel_search_btn").show();
+        }
+        else {
+            $(".save_search_btn").hide();
+            $(".cancel_search_btn").hide();
+        }
+        // if(_.isEqual(search_district, disable_array)){
+        //     alert("true");
+        // }
+    });
+
+    // Cancel option
+    $(document).on('click','.cancel_search_btn',function(){
+        var table = $(this).parents('#main-content').find('.admin_table').DataTable();
+        // Iterate over all checkboxes in the table
+        table.$('tr.parents_tr').each(function(){
+            if($(this).find('.enable_act').data("value") == '') {
+                $(this).find('.enable_act').removeClass("enable_srch");
+            } 
+            else {
+                $(this).find('.enable_act').addClass("enable_srch");
+            }
+        });
+        $(".save_search_btn").hide();
+        $(".cancel_search_btn").hide();
+    });
+
+    // Cancel option
+    $(document).on('click','.save_search_btn',function(){
+        var table = $(this).parents('#main-content').find('.admin_table').DataTable();
+        var form_id = $(this).parents('#main-content').find('form.admin_module_form').attr('id');
+        var id_array = [];
+        table.$('tr.parents_tr').each(function(){
+            if($(this).find('.enable_act').hasClass('enable_srch')){
+               id_array.push($(this).find('.ajaxEdit').data('id'));
+            } 
+        });   
+        if(id_array.length <=6 ) {
+            var id = id_array.join(',');
+            confirm_alert("Are you sure want to proceed?", function yes() {
+                enable_search_district(id,form_id);
+            }, function no() {
+                // do nothing
+            });
+        }
+        else {
+            alert("You have enabled "+id_array.length+" district for search. Only 6 district allowed for search");   
+        }  
+    });
+
+    /*     =====     Location based search option end   =====      */
+    $('.newstype_act').on('change', function(){
+        if(this.value=="news_link"){
+            $('.enter_news_link').show();
+            $('.enter_news_content').hide();
+        }
+        else{
+            $('.enter_news_content').show();
+            $('.enter_news_link').hide();
+        }
+
+    });
+
+    $(document).on('click','.password_shower',function () {
+        if($(this).prev().prop('type') == "text") {
+           $(this).prev().prop('type','password'); 
+        }
+        else {
+            $(this).prev().prop('type','text');
+        }
+    });
+
 }); // End document
 
 /* Popup pagination with arrow start */
@@ -1043,8 +1182,10 @@ function popup_pagination() {
     // var sections = $(document).find ('div.subscription_organization_section subscription_organization_inner_section');
     sections = $('div.subscription_organization_section .subscription_organization_inner_section');
     lastElem = sections.length-1;
+    // alert(lastElem);
     mask = $('.subscription_organization_section');
-    sections_width = sections.width();  
+    sections_width = sections.width() + 20;  
+    // alert(sections_width);
     mask.css('width', sections_width*(lastElem+1) +'px');
     sections.first().addClass('viewed');
     $('.profile_plan_section').each(function() {
@@ -1077,6 +1218,8 @@ function readURL(input) {
         reader.readAsDataURL(input.files[0]);
     }
 }
+
+    
 
 	
 

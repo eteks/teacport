@@ -35,27 +35,33 @@ class Setting extends CI_Controller {
 	}
 
 	public function sms_gateway()
-	{
+	{	
+		$data['status'] = '';
 		if($this->input->post()) {
-			if(!$this->input->post('sms_api_url') && !$this->input->post('sms_api_key') && !$this->input->post('sms_authentication_token')) {
-				$ajax_data['error'] = 1;
-				$ajax_data['status'] = "Please Enter Atleast One Data";
-				echo json_encode($ajax_data);
+			$this->form_validation->set_error_delimiters('<div class="admin_form_error">','</div>');
+			$this->form_validation->set_rules('sms_api_url','Sms Api Url','trim|xss_clean|required');
+			$this->form_validation->set_rules('sms_username','Sms Username','trim|xss_clean|required');
+			$this->form_validation->set_rules('sms_password','Sms Password','trim|xss_clean|required');
+			$this->form_validation->set_rules('sms_senderid','Sms SenderID','trim|xss_clean|required');
+			$this->form_validation->set_rules('sms_priority','Sms Priority','trim|xss_clean|required');
+			$this->form_validation->set_rules('sms_type','Sms Type','trim|xss_clean|required');
+			if($this->form_validation->run()) {
+				$data_values = $this->setting_model->insert_sms_gateway('update');
+				$data['payment_values'] = $data_values['payment_values'];
+				$data['status'] = $data_values['status'];
+				$this->load->view('admin/sms_gateway',$data);
 			}
 			else {
-				$data_values = $this->setting_model->insert_sms_gateway('update');
-				$ajax_data['error'] = 2;
-				$ajax_data['status'] = $data_values['status'];
-				echo json_encode($ajax_data);
+				$this->load->view('admin/sms_gateway');
 			}
 		}
 		else {
-			$ajax_data['status'] = 0;
 			$data_values = $this->setting_model->insert_sms_gateway('init');
 			$data['payment_values'] = $data_values['payment_values'];
 			$this->load->view('admin/sms_gateway',$data);
 		}
 	}
+
 	public function configuration_option()
 	{
 		if($this->input->post()) {

@@ -160,6 +160,7 @@ class Master_data_model extends CI_Model {
     $this->db->join('tr_state s','d.district_state_id=s.state_id','inner');
     $this->db->order_by('d.district_id','desc');
     $model_data['districts_values'] = $this->db->get()->result_array();
+    $model_data['search_districts_values'] = $this->db->get_where('tr_district',array('is_search' => 1))->result_array();
 
     return $model_data;
   }
@@ -967,9 +968,9 @@ class Master_data_model extends CI_Model {
         )AS pre
         INNER JOIN 
         (
-          SELECT vacancies_id
+          SELECT vacancies_id,vacancies_applicable_posting_id
           FROM tr_organization_vacancies
-        )AS vac WHERE pos.posting_id=pre.p_value OR pos.posting_id=vac.vacancies_id group by pos.posting_id");
+        )AS vac WHERE pos.posting_id=pre.p_value OR pos.posting_id=vac.vacancies_applicable_posting_id group by pos.posting_id");
 
     $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'posting_id');
 
@@ -1035,8 +1036,6 @@ class Master_data_model extends CI_Model {
   }
 
   /* ===========            Postings Model End       ============ */
-
-
 
 }
 

@@ -144,6 +144,19 @@ class Common_model extends CI_Model {
 		$alldistrict = $this->db->get();
 		return $alldistrict->result_array(); 
 	}
+
+	public function get_search_jobs_location()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_district');
+		$where = "(district_status='1' AND is_search=1)";
+		// $this->db->order_by('district_name', 'asc');
+		$this->db->where($where);
+		$this->db->limit(6,0);
+		$alldistrict = $this->db->get();
+		return $alldistrict->result_array(); 
+	}
+	
 	public function get_district_by_state($id)
 	{
 		$this->db->select('*');    
@@ -239,6 +252,70 @@ class Common_model extends CI_Model {
 		$posting = $this->db->get();
 		return $posting->result_array(); 
 	}
+
+	public function applicable_posting_by_ins($ins_id)
+	{
+		$ins_id = explode(',',$ins_id);
+		$a = 1;
+		$this->db->select('*');    
+		$this->db->from('tr_applicable_posting');
+		$where = "(posting_status = 1 OR posting_status = 2) AND (";
+		foreach ($ins_id as $val) {
+			$where .= "FIND_IN_SET('".$val."',posting_institution_id) !=0";
+			if($a < count($ins_id)) {
+			$where .= " OR ";
+			}
+			else if($a == count($ins_id)) {
+			$where .= ")";
+			}
+			$a++;
+		}
+		$this->db->where($where);
+		$posting = $this->db->get();
+		return $posting->result_array(); 
+	}
+
+	public function classlevel_by_ins($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_class_level');
+		$where = '(FIND_IN_SET(class_level_inst_type_id,"'.$ins_id.'") !=0 AND class_level_status=1)';
+		$this->db->where($where);
+		$classlevel = $this->db->get();
+		return $classlevel->result_array(); 
+	}
+
+	public function qualification_by_ins($ins_id)
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_educational_qualification');
+		$where = '(FIND_IN_SET(educational_qualifcation_inst_type_id,"'.$ins_id.'") !=0 AND educational_qualification_status=1)';
+		$this->db->where($where);
+		$classlevel = $this->db->get();
+		return $classlevel->result_array(); 
+	}
+
+	public function subject_by_ins($ins_id)
+	{
+		$ins_id = explode(',',$ins_id);
+		$a = 1;
+		$this->db->select('*');    
+		$this->db->from('tr_subject');
+		$where = "(subject_status = 1 OR subject_status = 2) AND (";	
+		foreach ($ins_id as $val) {
+			$where .= "FIND_IN_SET('".$val."',subject_institution_id) !=0";
+			if($a < count($ins_id)) {
+			$where .= " OR ";
+			}
+			else if($a == count($ins_id)) {
+			$where .= ")";
+			}
+			$a++;
+		}
+		$this->db->where($where);
+		$subjectdata = $this->db->get();
+		return $subjectdata->result_array(); 
+	}
 	
 	public function mother_tongue($input='')
 	{
@@ -311,11 +388,23 @@ class Common_model extends CI_Model {
 	// Organization choosen plan
 	public function organization_chosen_plan($id) {
 		// $where = '(op.organization_id="'.$id.'" AND ops.organization_subscription_status=1 AND opu.status=1)';
-		$where = '(ops.organization_id="'.$id.'" AND ops.organization_subscription_status=1)';
+		$where = '(ops.organization_id="'.$id.'")';
 		$this->db->select('ops.*,opu.*,ops.organization_subscription_id as org_subscription_id');
 		$this->db->from('tr_organization_subscription ops');
-		$this->db->join('tr_organization_profile op','ops.organization_id=op.organization_id','inner');
-		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id AND opu.status=1','left');
+		// $this->db->join('tr_organization_profile op','ops.organization_id=op.organization_id','inner');
+		$this->db->join('tr_organization_upgrade_or_renewal opu','ops.organization_subscription_id=opu.organization_subscription_id and opu.is_renewal=1','left');
+		$this->db->where($where);
+		$this->db->order_by('ops.organizaion_sub_updated_date desc,opu.validity_end_date desc');
+		$data = $this->db->get()->result_array();
+		return $data;
+	}
+
+
+	// Organization current plan
+	public function organization_current_plan($id) {
+		$where = '(organization_id="'.$id.'" AND organization_subscription_status=1)';
+		$this->db->select('*');
+		$this->db->from('tr_organization_subscription');
 		$this->db->where($where);
 		$data = $this->db->get()->row_array();
 		return $data;
@@ -372,10 +461,13 @@ class Common_model extends CI_Model {
 		$value = $this->db->get_where('tr_extra_curricular',$where)->result_array();
 		return $value;
 	}
-	public function get_job_list($ins_id)
+	public function get_job_list($ins_id,$type)
 	{
-		if($ins_id != '') {
+		if($ins_id != '' && $type == "org") {
         	$where = '(ov.vacancies_status=1 AND op.organization_institution_type_id="'.$ins_id.'")';
+		}
+		else if($ins_id != '' && $type == "cand") {
+			$where = '(ov.vacancies_status=1 AND FIND_IN_SET(op.organization_institution_type_id,"'.$ins_id.'") != 0)';
 		}
 		else {
 			$where = '(ov.vacancies_status=1)';
@@ -395,10 +487,10 @@ class Common_model extends CI_Model {
 	{
         // Retrieve data with limit
 		if($ins_id != '') {
-			$where = '(organization_status=1 AND organization_profile_completeness >=90 AND organization_institution_type_id="'.$ins_id.'")';  
+			$where = '(op.organization_status=1 AND op.organization_profile_completeness >=90 AND FIND_IN_SET(op.organization_institution_type_id,"'.$ins_id.'") != 0)';  
 		}
 		else {
-			$where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+			$where = '(op.organization_status=1 AND op.organization_profile_completeness >=90)';  
 		}
       	$this->db->select('op.organization_id as org_id,op.*,ops.organization_id,ops.subscription_id,ops.organization_subscription_status,s.subscription_price,s.subscription_id');
         $this->db->from('tr_organization_profile op');
@@ -415,6 +507,12 @@ class Common_model extends CI_Model {
         // echo "</pre>";
 
        	// Total count
+       	if($ins_id != '') {
+			$where = '(organization_status=1 AND organization_profile_completeness >=90 AND FIND_IN_SET(organization_institution_type_id,"'.$ins_id.'") != 0)';  
+		}
+		else {
+			$where = '(organization_status=1 AND organization_profile_completeness >=90)';  
+		}
        	$model_data['total_rows'] = $this->db->get_where('tr_organization_profile',$where)->num_rows();
 
        	// Get total jobs count
@@ -504,6 +602,25 @@ class Common_model extends CI_Model {
 		return $providersubcription->row_array(); 
 	}
 
+	public function provider_subscription_active_renewl_plans($org_id,$plan_id){
+		$get_where = '(os.organization_id="'.$org_id.'" AND os.subscription_id="'.$plan_id.'" AND opu.status=1 AND opu.is_renewal=1)';
+		$this->db->select('*');    
+		$this->db->from('tr_organization_subscription os');
+		$this->db->join('tr_organization_upgrade_or_renewal opu', 'os.organization_subscription_id = opu.organization_subscription_id');
+		$this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
+		$this->db->where($get_where);
+		$data = $this->db->get()->row_array();
+		return $data;
+	}
+
+	public function update_subscription_plan($org_id,$plan_id,$data){
+		$update_where = '(organization_id="'.$org_id.'" AND subscription_id="'.$plan_id.'")';
+		$this->db->where($update_where);
+		$this->db->set($data);
+		$this->db->update('tr_organization_subscription');
+		return TRUE;
+	}
+
 	public function posted_jobs_count($org_id){
 		$posted_jobs = $this->db->query("SELECT * FROM tr_organization_vacancies WHERE vacancies_organization_id =".$org_id);
 		return $posted_jobs->num_rows();
@@ -540,10 +657,10 @@ class Common_model extends CI_Model {
 
 	// Organization Logo
 	public function get_provider_details($ins_id='') {
-		$this->db->select('organization_logo,organization_name,organization_id');
+		$this->db->select('organization_logo,organization_name,organization_id,organization_institution_type_id');
 		$this->db->from('tr_organization_profile');
 		if($ins_id != '') {
-			$where = '(organization_institution_type_id="'.$ins_id.'" AND organization_status=1)';
+			$where = '(FIND_IN_SET(organization_institution_type_id,"'.$ins_id.'") != 0 AND organization_status=1)';
 		}
 		else {
 			$where = '(organization_status=1)';
@@ -603,7 +720,7 @@ class Common_model extends CI_Model {
 
 	// To store other option and get id
 	public function insert_other_mother_tongue($data) {
-		$already_where = '(language_name="'.$data['language_name'].'")';
+		$already_where = '(language_name="'.$data['language_name'].'" and is_mother_tangue=1)';
 		$check_already = $this->db->get_where('tr_languages',$already_where);
 		if($check_already->num_rows() == 1) {
 			$row_array = $check_already->row_array();
@@ -743,15 +860,22 @@ class Common_model extends CI_Model {
 
 	// Candidate visit count
     public function get_candidate_visit_count($id) {
-		$count = $this->db->group_by(array('organiztion_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',array('candidate_id'=>$id, 'user_type' => 1))->num_rows();
+		// $count = $this->db->group_by(array('organiztion_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',array('candidate_id'=>$id, 'user_type' => 1))->num_rows();
+		$count = $this->db->get_where('tr_organization_candidate_visitor_count',array('candidate_id'=>$id, 'user_type' => 1))->num_rows();
 		return $count;
 	}
 
 	// Candidate visit count
     public function get_organization_visit_count($id) {
     	$where = '(organiztion_id="'.$id.'" AND (user_type=2 OR user_type=0))';
-		$count = $this->db->group_by(array('candidate_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',$where)->num_rows();
+		// $count = $this->db->group_by(array('candidate_id','DATE(created_date)'))->get_where('tr_organization_candidate_visitor_count',$where)->num_rows();
+		$count = $this->db->get_where('tr_organization_candidate_visitor_count',$where)->num_rows();
 		return $count;
+	}
+
+	public function sms_credentials() {
+		$data = $this->db->get_where('tr_settings_sms_gateway')->row_array();
+		return $data;
 	}
 
 } // End

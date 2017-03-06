@@ -57,6 +57,8 @@ else {
                 <div id="company-browse-candidate" class="col-md-8 col-sm-8 col-xs-12">
                 	<div class="heading-inner first-heading">
                         <p class="title">Profile Detail</p>
+                        <!-- <div class="pull-right txt_blue back2_browse"><i class="fa fa-backward" aria-hidden="true"></i> <a href="<?php echo base_url();?>provider/candidate"> Back to Browse Candidate </a></div>
+                        <div class="clearfix"></div> -->
                     </div>
                     <div class="all-jobs-list-box2">
                         <div class="job-box job-box-2">
@@ -437,6 +439,7 @@ else {
 			 		<input type="submit" class="btn btn-default alert_no_btn" value="Cancel">
 			 	</div>	
 		 	</div><!--success_msg-->
+
 		 	<!---End Pop up error msg -->
  </section>
 

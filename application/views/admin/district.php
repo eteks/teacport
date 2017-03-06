@@ -49,7 +49,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
       </div>
       <!-- END PAGE HEADER-->
       <!-- BEGIN ADVANCED TABLE widget-->
-      <div class="row-fluid">
+     <div>
+        <div class="row-fluid">
         <div class="span12">
           <!-- BEGIN EXAMPLE TABLE widget-->
           <div class="widget">
@@ -72,15 +73,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   </div>
                   <div class="btn-group pull-right">
                   </div>
+                  <button class="save_search_btn dn" title="Hit Save for District Based Search">SAVE</button>
+                  <button class="cancel_search_btn dn" title="Clear District based Search">CANCEL</button>
                 </div>
                 <form method="post" action="district" class="admin_module_form" id="district_form">
                   <?php } ?>
                   <?php
                   if(!empty($status)) :
-                    echo "<p class='db_status update_success_md'><i class=' icon-ok-sign'></i>  $status </p>";
+                    echo "<p class='db_status update_success_md'><i class='icon-ok-sign'></i>  $status </p>";
                   endif;
                   ?> 
                   <p class='val_error error_msg_md'> <p>
+                  <p class='enabled_msg update_success_md'> <p>
                   <table class="table table-striped table-hover table-bordered admin_table" id="sample_editable_1">
                     <thead>
                       <tr class="ajaxTitle">
@@ -93,7 +97,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php endif; ?>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "delete"))): ?>
                             <th class="data_action">Delete</th>
-                          <?php endif; ?>
+                        <?php endif; ?>
+                         <th> Enable District <br/> based Search ? </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -177,6 +182,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           ?>      
                         </td>
                         <?php endif; ?>
+                        <td class="loc_srch"> 
+                          <ul class="enable_location_srch">
+                            <li class="enable_act <?php if($dis_val['is_search'] == 1)echo "enable_srch"; ?>" data-value="<?php if($dis_val['is_search'] == 1)echo "enabled"; ?>">YES</li>
+                            <li class="disable_act">NO</li>
+                          </ul>
+                        </td>
                       </tr>
                       <?php
                       endforeach;
@@ -221,6 +232,15 @@ if(!empty($this->session->userdata("admin_login_status"))):
     endforeach;
     endif;
     ?>
+    var search_district = {};
+    <?php
+    foreach ($search_districts_values as $dis_val) {
+    ?>
+      search_district["<?php echo $dis_val['district_id']; ?>"] = "<?php echo $dis_val['district_name']; ?>";
+    <?php
+    }
+    ?>
+    // alert(JSON.stringify(search_district));
     var d_status_option = new Array("Please select status","Active","Inactive"); 
     var d_status_value = new Array("","1","0"); 
 </script>

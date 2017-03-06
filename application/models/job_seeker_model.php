@@ -483,9 +483,6 @@ class Job_seeker_model extends CI_Model {
 
 	// Edit profile updation
 	public function editprofile_validation($data=array()) {
-
-
-
 		if(!$this->input->post('cand_fresh')) {
 			$fresh = 0 ;
 		}
@@ -544,6 +541,7 @@ class Job_seeker_model extends CI_Model {
 								'candidate_district_id' => $data['cand_native_dis'],
 								'candidate_state_id' => $data['cand_native_state'],						
 								'candidate_mother_tongue' => $data['cand_mother_ton'],
+								'candidate_institution_type' => implode(',',$data['cand_ins']),
 								'candidate_language_known' => implode(',',$data['cand_known_lan_new']),
 								'candidate_nationality' => $data['cand_nation'],
 								'candidate_religion' => $data['cand_religion'],
@@ -775,7 +773,8 @@ class Job_seeker_model extends CI_Model {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
    		}
-        $this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+        $this->db->where(array('ov.vacancies_status' => '1'));
+        $this->db->where("FIND_IN_SET(op.organization_institution_type_id,'".$ins_id."') !=", 0);
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");
@@ -830,7 +829,8 @@ class Job_seeker_model extends CI_Model {
    			$like_where = '(ov.vacancies_job_title LIKE "%'.$data['keyword'].'%" OR op.organization_name LIKE "%'.$data['keyword'].'%")';
 			$this->db->where($like_where);
    		}
-   		$this->db->where(array('ov.vacancies_status' => '1', 'op.organization_institution_type_id' => $ins_id));
+   		$this->db->where(array('ov.vacancies_status' => '1'));
+        $this->db->where("FIND_IN_SET(op.organization_institution_type_id,'".$ins_id."') !=", 0);
    		if(!empty($data['min_amount']) && !empty($data['max_amount'])) {
         	$this->db->where("ov.vacancies_start_salary <=".$data['max_amount']."");
         	$this->db->where("ov.vacancies_end_salary >=".$data['min_amount']."");

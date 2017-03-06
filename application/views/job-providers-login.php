@@ -114,7 +114,7 @@
 	                                ?>
                                 	<div class="col-sm-6 pull-left">
 										<div class="form-group">
-		                                    <label>Institution <sup class="alert">*</sup></label>
+		                                    <label>Institution Type <sup class="alert">*</sup></label>
 		                                    <select name="registrant_institution_type" id="institution_type" class="form-control form_inputs">
 										<?php
 		                                	foreach ($institutiontype as $institution) {
@@ -124,7 +124,7 @@
 			                           		</select>     
 		                            	</div>
 									<div class="form-group">
-										<?php echo form_label('Name <sup class="alert">*</sup>'); echo form_error('organization_name'); ?>
+										<?php echo form_label('Organization Name <sup class="alert">*</sup>'); echo form_error('organization_name'); ?>
 										<?php echo form_input(array('id' => 'organization_name','class' => 'form-control form_inputs alpha_value', 'data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Organization Name','name' => 'organization_name')); ?>
 									</div>
 									<div class="form-group">	

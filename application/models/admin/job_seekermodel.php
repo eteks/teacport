@@ -63,6 +63,7 @@ class Job_Seekermodel extends CI_Model {
                               // 'candidate_interest_subject_id' => ($this->input->post('cand_int_sub')) ? $this->input->post('cand_int_sub') : NULL,
                               'candidate_extra_curricular_id' => ($this->input->post('cand_extra')) ? $this->input->post('cand_extra') : NULL,
                               'candidate_is_fresher' => ($this->input->post('cand_is_fresh')) ? $this->input->post('cand_is_fresh') : NULL,
+                              'candidate_type' => ($this->input->post('cand_type')) ? $this->input->post('cand_type') : NULL,
                               'candidate_email' => $this->input->post('cand_email')
                             );
           $profile_update_where = '( candidate_id="'.$this->input->post('rid').'")'; 
@@ -84,11 +85,12 @@ class Job_Seekermodel extends CI_Model {
     }
 
     // View
-    $this->db->select('*');
+    $this->db->select('*,(select count(vcv.candidate_id) from tr_organization_candidate_visitor_count vcv where vcv.candidate_id = cp.candidate_id and vcv.user_type=1) as count');
     $this->db->from('tr_candidate_profile cp');
     $this->db->join('tr_district d','cp.candidate_live_district_id=d.district_id','left');
     $this->db->join('tr_state s','cp.candidate_live_state_id=s.state_id','left');
     $this->db->order_by('cp.candidate_id','desc');
+    // $this->db->group_by(array('vcv.organiztion_id','DATE(vcv.created_date)'));
     $model_data['seeker_profile'] = $this->db->get()->result_array();
     return $model_data;
   }
@@ -97,13 +99,12 @@ class Job_Seekermodel extends CI_Model {
   public function get_full_seeker_profile($value) {
 
     // Canidate Profile
-    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,live_st.state_id as live_state_id,live_st.state_name as live_state_name,native_st.state_id as native_state_id,native_st.state_name as native_state_name,it.*,lan.*,sub.*');
+    $this->db->select('cp.*,live_dis.district_id as live_district_id,live_dis.district_name as live_district_name,native_dis.district_id as native_district_id,native_dis.district_name as native_district_name,live_st.state_id as live_state_id,live_st.state_name as live_state_name,native_st.state_id as native_state_id,native_st.state_name as native_state_name,lan.*,sub.*');
     $this->db->from('tr_candidate_profile cp');
     $this->db->join('tr_state live_st','cp.candidate_live_state_id=live_st.state_id','left');
     $this->db->join('tr_state native_st','cp.candidate_state_id=native_st.state_id','left');
     $this->db->join('tr_district live_dis','cp.candidate_live_district_id=live_dis.district_id','left');
     $this->db->join('tr_district native_dis','cp.candidate_district_id=native_dis.district_id','left');
-    $this->db->join('tr_institution_type it','cp.candidate_institution_type=it.institution_type_id','left');
     $this->db->join('tr_languages lan','cp.candidate_mother_tongue=lan.language_id','left');
     $this->db->join('tr_subject sub','cp.candidate_interest_subject_id=sub.subject_id','left');
     $model_data['seeker_full_profile'] = $this->db->where('cp.candidate_id',$value)->get()->row_array();
@@ -233,6 +234,11 @@ class Job_Seekermodel extends CI_Model {
   }
 
   /* ===================          Job Seeker Mail Details and Status Model End     ====================== */
+
+  public function get_candidate_visit_details($id) {
+    $model_data = $this->db->get_where('tr_organization_candidate_visitor_count',array('candidate_id'=>$id, 'user_type' => 1))->result_array();
+    return $model_data;
+  }
 
 }
 /* End of file Job_Seekermodel.php */

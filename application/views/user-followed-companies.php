@@ -7,7 +7,7 @@
                     <div class="bread">
                         <ol class="breadcrumb">
                             <li><a href="<?php echo base_url(); ?>">Home</a> </li>
-                            <li><a href="<?php echo base_url(); ?>">Institution</a> </li>
+                            <li><a href="<?php echo base_url(); ?>allinstitutions">Institution</a> </li>
                             <li class="active">Institutions Details</li>
                         </ol>
                     </div>

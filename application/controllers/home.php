@@ -38,18 +38,33 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$session = $this->session->all_userdata();
+		$session = $this->session->all_userdata();
+		if(isset($session['login_session']) && !empty($session['login_session'])) {
+			$user_type = $session['login_session']['user_type'];
+		}
+		else {
+			$user_type = "guest";
+		}
 		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:NULL);
-		$home['posting'] = $this->common_model->applicable_posting($ins_id);
-	    $home['job_results'] = $this->common_model->get_job_list($ins_id);
+
+		if($user_type == "provider") {
+			$home['posting'] = $this->common_model->applicable_posting($ins_id);
+			$home['allposting'] = $this->common_model->applicable_posting($ins_id);
+			$home['job_results'] = $this->common_model->get_job_list($ins_id,"org");
+		}
+		else {
+			$home['allposting'] = $this->common_model->applicable_posting_by_ins($ins_id);
+			$home['job_results'] = $this->common_model->get_job_list($ins_id,"cand");
+		}
 	    $inative_ads = $this->common_model->ads_inactive();
 		$home['totalvacancy'] = $this->common_model->vacancies_count();
 		$home['totalcandidate'] = $this->common_model->candidate_count();
 		$home['totalorganization'] = $this->common_model->organization_count();
-		$home['allposting'] = $this->common_model->applicable_posting($ins_id);
 		$home['latest_news'] = $this->common_model->latest_news();
 		$home['alldistrict'] = $this->common_model->get_all_district();
 		$home['premiumads'] = $this->common_model->get_premiumads();
 		$home['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$home['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 	    $this->load->view('index',$home);
 	}
 	public function featured_job()
@@ -58,7 +73,7 @@ class Home extends CI_Controller {
 		if(isset($session_data['login_session']))
 		{
 			$categories['search_results'] = $this->common_model->get_search_list();
-        $this->load->view('vacancies',$categories);
+        	$this->load->view('vacancies',$categories);
 		}
 	    else {
 		    redirect('login/seeker');
@@ -66,27 +81,93 @@ class Home extends CI_Controller {
 	}
 	public function aboutus()
 	{
-// 		$this->load->library('pdf');
-// $pdf = $this->pdf->load();
-// $html=$this->load->view('user_resume',null,true);
-// $pdf->WriteHTML($html);
-
-// // write the HTML into the PDF
-// $output = 'templated_resume' . date('Y_m_d_H_i_s') . '_.pdf';
-// $pdf->Output("$output", 'I');
-// $this->load->view('user_resume');
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->view('aboutus',$data);
 	}
+	// public function contactus()
+	// {
+	// 	$ci =& get_instance();	
+	// 	$ci->config->load('email', true);
+	// 	$emailsetup = $ci->config->item('email');
+	// 	$this->load->library('email', $emailsetup);
+	// 	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+	// 	if($_POST){
+	// 		$session_data = $this->session->all_userdata();
+	// 		$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
+	// 		$this->form_validation->set_rules('contact_us_name', 'Name', 'trim|required|alpha|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
+	// 		$this->form_validation->set_rules('contact_us_email', 'Email ID', 'trim|required|xss_clean|valid_email');
+	// 		$this->form_validation->set_rules('contact_us_mobile', 'Mobile', 'trim|required|xss_clean|regex_match[/^[0-9]{10}$/]');
+	// 		$this->form_validation->set_rules('contact_us_subject', 'Subject', 'trim|required|min_length[5]|max_length[100]|xss_clean');
+	// 		$this->form_validation->set_rules('contact_us_message', 'Message', 'trim|required|min_length[10]|max_length[700]|xss_clean');
+	// 		if ($this->form_validation->run()){
+	// 			$contact_us_data = array(
+	// 									'feedback_form_title' => $this->input->post('contact_us_subject'),
+	// 									'feedback_form_message' => 'Hi, My name is '.$this->input->post('contact_us_name').'. '.$this->input->post('contact_us_subject').' Mobile number: '.$this->input->post('contact_us_mobile').' .Email address: '.$this->input->post('contact_us_email'),
+	// 									'is_viewed'=>0,
+	// 									'feedback_form_status'=>1
+	// 								);
+	// 			if($session_data['login_status']=='1'){
+	// 				if($session_data['login_session']['user_type']=='provider'){
+	// 					$contact_us_data['is_organization']=1;
+	// 					$contact_us_data['is_candidate']=0;
+	// 					$contact_us_data['is_guest_user']=0;
+	// 				}
+	// 				else if($session_data['login_session']['user_type']=='seeker') {
+	// 					$contact_us_data['is_organization']=0;
+	// 					$contact_us_data['is_candidate']=1;
+	// 					$contact_us_data['is_guest_user']=0;
+	// 				}
+	// 			}
+	// 			else{
+	// 				$contact_us_data['is_organization']=0;
+	// 				$contact_us_data['is_candidate']=0;
+	// 				$contact_us_data['is_guest_user']=1;
+	// 			}
+	// 			$data['data_value'] = array(
+	// 				'name' => $this->input->post('contact_us_name'),
+	// 				'email' =>$this->input->post('contact_us_email'),
+	// 				'phone' =>$this->input->post('contact_us_mobile'),
+	// 				'subject' =>$this->input->post('contact_us_subject'),
+	// 				'Message' => $this->input->post('contact_us_message')
+	// 			);
+	// 			// print_r($contact_us_data);
+	// 			if($this->common_model->guest_user_feedback($contact_us_data)){
+	// 				$smtp_user = $emailsetup['smtp_user'];
+	// 				$subject = 'Teacher Recruit Contact';
+	// 				$message =  $this->load->view('email_template/contact_form', $data, TRUE);	
+	// 				// print_r($message);		
+	// 				$this->email->initialize($emailsetup);
+	// 				$this->email->from($this->input->post('contact_us_email'),'Teacher Recruit');
+	// 				$this->email->to($smtp_user);
+	// 				$this->email->subject($subject);
+	// 				$this->email->message($message);
+	// 				/* Check whether mail send or not*/
+	// 				$this->email->send();
+	// 				$data['contact_server_msg'] = 'Thank you for contact us! Our customer representative contact you soon!!';
+	// 				$data['error'] = 2;
+	// 				$this->load->view('contactus',$data);
+	// 			}
+	// 			else{
+	// 				$data['contact_server_msg'] = 'Some thing wrong data insertion process! Please try again!!';
+	// 				$data['error'] = 1;
+	// 				$this->load->view('contactus',$data);
+	// 			}
+	// 		}
+	// 		else{
+	// 			$this->load->view('contactus',$data);
+	// 		}
+	// 	}
+	// 	else{
+	// 		$this->load->view('contactus',$data);
+	// 	}
+	// }
 	public function contactus()
 	{
-		$ci =& get_instance();	
-		$ci->config->load('email', true);
-		$emailsetup = $ci->config->item('email');
-		$this->load->library('email', $emailsetup);
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		if($_POST){
-			$session_data = $this->session->all_userdata();
+			// $session_data = $this->session->all_userdata();
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('contact_us_name', 'Name', 'trim|required|alpha|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			$this->form_validation->set_rules('contact_us_email', 'Email ID', 'trim|required|xss_clean|valid_email');
@@ -94,75 +175,49 @@ class Home extends CI_Controller {
 			$this->form_validation->set_rules('contact_us_subject', 'Subject', 'trim|required|min_length[5]|max_length[100]|xss_clean');
 			$this->form_validation->set_rules('contact_us_message', 'Message', 'trim|required|min_length[10]|max_length[700]|xss_clean');
 			if ($this->form_validation->run()){
-				$contact_us_data = array(
-										'feedback_form_title' => $this->input->post('contact_us_subject'),
-										'feedback_form_message' => 'Hi, My name is '.$this->input->post('contact_us_name').'. '.$this->input->post('contact_us_subject').' Mobile number: '.$this->input->post('contact_us_mobile').' .Email address: '.$this->input->post('contact_us_email'),
-										'is_viewed'=>0,
-										'feedback_form_status'=>1
+				$email_data['contact_details'] = array(
+										'contact_name'    => $this->input->post('contact_us_name'),
+										'contact_email'   => $this->input->post('contact_us_email'),
+										'contact_mobile'  => $this->input->post('contact_us_mobile'),
+										'contact_subject' => $this->input->post('contact_us_subject'),
+										'contact_message' => $this->input->post('contact_us_message')
 									);
-				if($session_data['login_status']=='1'){
-					if($session_data['login_session']['user_type']=='provider'){
-						$contact_us_data['is_organization']=1;
-						$contact_us_data['is_candidate']=0;
-						$contact_us_data['is_guest_user']=0;
-					}
-					else if($session_data['login_session']['user_type']=='seeker') {
-						$contact_us_data['is_organization']=0;
-						$contact_us_data['is_candidate']=1;
-						$contact_us_data['is_guest_user']=0;
-					}
-				}
-				else{
-					$contact_us_data['is_organization']=0;
-					$contact_us_data['is_candidate']=0;
-					$contact_us_data['is_guest_user']=1;
-				}
-				$data['data_value'] = array(
-					'name' => $this->input->post('contact_us_name'),
-					'email' =>$this->input->post('contact_us_email'),
-					'phone' =>$this->input->post('contact_us_mobile'),
-					'subject' =>$this->input->post('contact_us_subject'),
-					'Message' => $this->input->post('contact_us_message')
-				);
-				// print_r($contact_us_data);
-				if($this->common_model->guest_user_feedback($contact_us_data)){
-					$smtp_user = $emailsetup['smtp_user'];
-					$subject = 'Teacher Recruit Contact';
-					$message =  $this->load->view('email_template/contact_form', $data, TRUE);	
-					// print_r($message);		
-					$this->email->initialize($emailsetup);
-					$this->email->from($this->input->post('contact_us_email'),'Teacher Recruit');
-					$this->email->to($smtp_user);
-					$this->email->subject($subject);
-					$this->email->message($message);
-					/* Check whether mail send or not*/
-					$this->email->send();
+
+				// Email configuration
+				$this->config->load('email', true);
+				$emailsetup = $this->config->item('email');
+				$this->load->library('email', $emailsetup);
+				$to_email = $emailsetup['smtp_user'];
+				$subject = 'Contact Form Details';
+				$message = $this->load->view('email_template/contact_form', $email_data, TRUE);
+				$this->email->initialize($emailsetup);	
+				$this->email->from($email_data['contact_details']['contact_email'], 'Teacher Recruit');
+				$this->email->to($to_email);
+				$this->email->subject($subject);
+				$this->email->message($message);
+				/* Check whether mail send or not*/
+				if($this->email->send()) {
 					$data['contact_server_msg'] = 'Thank you for contact us! Our customer representative contact you soon!!';
 					$data['error'] = 2;
-					$this->load->view('contactus',$data);
 				}
-				else{
-					$data['contact_server_msg'] = 'Some thing wrong data insertion process! Please try again!!';
+				else {
+					$data['contact_server_msg'] = 'Some thing went wrong in mail sending process! Please try again later!!';
 					$data['error'] = 1;
-					$this->load->view('contactus',$data);
 				}
 			}
-			else{
-				$this->load->view('contactus',$data);
-			}
 		}
-		else{
-			$this->load->view('contactus',$data);
-		}
+		$this->load->view('contactus',$data);
 	}
 	//Akila Created
 	public function pricing(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		$this->load->view('pricing',$data);
 	}
 	public function faq(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->view('faq',$data);
 	}
 
@@ -172,6 +227,7 @@ class Home extends CI_Controller {
 		$ins_id = isset($session['login_session']['institution_type']) ? $session['login_session']['institution_type'] : (isset($session['login_session']['candidate_institution_type'])?$session['login_session']['candidate_institution_type']:'');
 		// $categories['allinstitutions_results'] = $this->common_model->get_allinstitutions_list();
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	// Pagination values
     	$per_page = 20;
 
@@ -224,6 +280,7 @@ class Home extends CI_Controller {
 	public function userfollowedcompanies()
 	{	
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$data_values = $this->common_model->company_details($this->uri->segment('2'));
 		$data['company_details'] = $data_values['company_details'];
 		$data['recent_vacancy_details'] = $data_values['recent_vacancy_details'];
@@ -282,11 +339,17 @@ class Home extends CI_Controller {
 	public function vacancies()
 	{
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$data['applicable_postings'] = $this->common_model->applicable_posting();
 		$data['qualifications'] = $this->common_model->qualification();
 		$data['institution_values'] = $this->common_model->get_institution_type();
-
 		$search_inputs = array();	
+		// Location based jobs
+		if($this->input->get('loc')  && !$_POST) {
+			$inputs = array('location' => $this->input->get('loc'));
+			$this->session->set_userdata('search_inputs',$inputs);
+		}
+
 		if($_POST) {
     		$inputs = array(
         				'keyword' => $this->input->post('search_keyword'),
@@ -321,7 +384,7 @@ class Home extends CI_Controller {
 		$this->load->library('pagination');
 
 		// Pagination configuration
-  		$config['base_url'] = base_url().'vacancies';
+  		$config['base_url'] = base_url().'teachersvacancy';
 		$config['per_page'] = $per_page;
 		$config['total_rows'] = $total_rows;
 		$config['uri_segment'] = 2;
@@ -364,11 +427,13 @@ class Home extends CI_Controller {
 	public function informations()
 	{
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->view('information',$data);
 	}
 	public function terms()
 	{
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->view('terms',$data);
 	}	
 	// State
@@ -416,6 +481,11 @@ class Home extends CI_Controller {
 			$data['posting'] = $this->common_model->applicable_posting();
 		}
 		echo json_encode($data);
+	}
+
+	//Latest News
+	public function latestnews_content(){
+		$this->load->view('latestnews_content');
 	}
 
 }

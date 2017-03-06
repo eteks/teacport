@@ -124,6 +124,7 @@ $route['seeker/inbox/fulldata'] 						= 'job_seeker/inbox_message_full_data';
 $route['seeker/inbox/removedata'] 						= 'job_seeker/inbox_removedata';
 $route['seeker/seeker_edit_form'] 						= 'job_seeker/edit_profile_validation_ajax';
 $route['seeker/feedback'] 								= 'job_seeker/feedback';
+$route['seeker/candidate_profile_institution'] 			= 'job_seeker/candidate_profile_ins';
 
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
@@ -134,11 +135,12 @@ $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['allinstitutions/(:num)'] 						= 'home/allinstitutions/$1';
 $route['user-followed-companies/(:num)'] 				= 'home/userfollowedcompanies/$1';
 $route['user-followed-companies/(:num)/(:num)'] 		= 'home/userfollowedcompanies/$1/$1';
-$route['vacancies'] 									= 'home/vacancies';
-$route['vacancies/(:num)']  							= 'home/vacancies/$1';
+$route['teachersvacancy'] 								= 'home/vacancies';
+$route['teachersvacancy/(:num)']  						= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
 $route['terms'] 										= 'home/terms';
 $route['qualification_posting'] 						= 'home/qua_pos_by_institution';
+$route['latestnews_content'] 							= 'home/latestnews_content';
 
 
 /* ===================          Route settings for Admin Start     ====================== */
@@ -153,6 +155,7 @@ $route['main/dashboard/get_chart_data'] = 'admin/dashboardpage/get_chart_data';
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/state'] = 'admin/master_data/state';
 $route['main/district'] = 'admin/master_data/district';
+$route['main/search_enabled'] = 'admin/master_data/search_enabled_district';
 $route['main/institution_types'] = 'admin/master_data/institution_types';
 $route['main/extra_curricular'] = 'admin/master_data/extra_curricular';
 $route['main/languages'] = 'admin/master_data/languages';
@@ -170,6 +173,7 @@ $route['main/postings'] = 'admin/master_data/posting';
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/job_provider_profile'] = 'admin/job_provider/teacport_job_provider_profile';
 $route['main/job_provider_edit_profile'] = 'admin/job_provider/teacport_job_provider_profile_ajax';
+$route['main/job_provider_visit_details_ajax'] = 'admin/job_provider/job_provider_visit_details_ajax';
 $route['main/job_provider_vacancies'] = 'admin/job_provider/teacport_job_provider_vacancies';
 $route['main/job_provider_edit_vacancy'] = 'admin/job_provider/teacport_job_provider_vacancy_ajax';
 $route['main/jobprovider_activities'] = 'admin/job_provider/teacport_job_provider_activities';
@@ -186,6 +190,7 @@ $route['main/transaction_fullview'] = 'admin/job_provider/get_transaction_full_v
 /* $route['url_path'] = 'folder_name/controller_name/function_name' */
 $route['main/job_seeker_profile'] = 'admin/job_seeker/teacport_job_seeker_profile';
 $route['main/teacport_job_seeker_profile_ajax'] = 'admin/job_seeker/teacport_job_seeker_profile_ajax';
+$route['main/teacport_seeker_visit_details_ajax'] = 'admin/job_seeker/teacport_seeker_visit_details_ajax';
 $route['main/job_seeker_preference'] = 'admin/job_seeker/job_seeker_preference';
 $route['main/job_seeker_applied'] = 'admin/job_seeker/job_seeker_applied';
 $route['main/jobseeker_mailstatus'] = 'admin/job_seeker/teacport_jobseeker_mailstatus';
@@ -221,6 +226,7 @@ $route['main/template_logo'] = 'admin/setting/template_logo';
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
 $route['main/latest_news'] = 'admin/other_module/latest_news';
+$route['main/latest_news_popup'] = 'admin/other_module/latest_news_popup';
 $route['main/site_log'] = 'admin/other_module/site_log';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';

@@ -486,6 +486,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
   	bottom: -15px;
   	right: 10px;
  }
+ .back2_browse{
+ 	font-size: 16px;
+ }
+ .back2_browse a{
+ 	margin: 5px 0 0;
+ 	padding:0 5px;
+ }
+.back2_browse a:hover, .back2_browse a:focus {
+ 	color: #29aafe;
+ }
 /* User Inbox */
 #user_inbox_msg_act .modal-dialog {
 	border: 1px solid #fff;
@@ -801,7 +811,7 @@ select:invalid {
     height: 60px;
     width: 100%;
  } 
-/* FOOTER */
+ /* FOOTER */
 .small-footer p {
 	text-align: justify;
 }
@@ -1321,9 +1331,9 @@ label.form-input-error {
     width: 100%;
 }
 .app_post{
-	margin-bottom: 50px !important;
+	/*margin-bottom: 50px !important;
     height: 100px;
-    margin-top: 20px;
+    margin-top: 20px;*/
     padding-top: 20px;
 }
 }
@@ -1538,9 +1548,9 @@ label.form-input-error {
 }
 /* Footer */
 .footer_block blockquote{
-	font-size: 10px;
+	font-size: 12px;
 	color: #f47020;
-	font-weight: bold;
+	font-weight: 600;
 }
 .qualified_level{
 	margin: 15px 0 0;
@@ -1788,7 +1798,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ebf1f6', end
 }	
 /* Testimonils*/
 .owl-testimonial-2 .single_testimonial{
-	height: 350px !important;
+	height: 400px !important;
+}
+.single_testimonial .client_speech{
+	height: 200px;
+}
+.single_testimonial .client_img{
+	height: 100px;
+}
+.single_testimonial .client_name{
+	height: 50px;
 }
 /*Zebra Date Picker*/
 button.Zebra_DatePicker_Icon_Inside_Right{
@@ -1806,7 +1825,7 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 }	
 /*Footer*/
 .location_based_list .fa-map-marker{
-	margin: 5px 5px 0 0;
+	margin: 8px 5px 0 0;
 	font-size: 16px;
 	/*color: #da651a;*/
 }
@@ -1814,7 +1833,7 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 	float:left;
 }
 .location_based_list li> a{
-	padding: 5px 15px;
+	padding: 6px 15px;
 	font-size: 14px;
 	font-weight: 400;
 	font-family: Source Sans Pro;
@@ -1943,3 +1962,5 @@ button.Zebra_DatePicker_Icon_Inside_Right{
  }
 
 }
+
+

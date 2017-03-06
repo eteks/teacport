@@ -129,6 +129,8 @@ class Job_provider extends CI_Controller {
 	        }
 			else
 			{
+				$sms_credentials = $this->common_model->sms_credentials();
+				$this->config->set_item('sms_gateway',$sms_credentials);
 				/* Registration form valid stage */
 				/* Get and store posted data to array */
 				$data = array(
@@ -155,11 +157,17 @@ class Job_provider extends CI_Controller {
 					$this->email->message($message);
 					/* Check whether mail send or not*/
 					if($this->email->send()){
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);				
-						/* mail sent success stage. send  facebook login link and server message to login page */
-						$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);				
+							/* mail sent success stage. send  facebook login link and server message to login page */
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email or Mobile!!';	
+						}
+						else {
+							$fb['reg_server_msg'] = 'Registration Successful!. Check your Email !!';
+						}
 						$fb['error'] = 2;
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
 						$fb['captcha'] = $this->captcha->main();
@@ -170,10 +178,19 @@ class Job_provider extends CI_Controller {
 						$fb['captcha'] = $this->captcha->main();
 						$this->session->set_userdata('captcha_info', $fb['captcha']);
 						$fb['institutiontype'] = $this->common_model->get_institution_type();
-						$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";
-						$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
-						$get = file_get_contents($url);
-						$output = explode('.',$get);
+
+
+						if($this->config->item('sms_gateway')) {
+							$sms_cre = $this->config->item('sms_gateway');
+							$msg = "Thanks+for+registering+at+Teachers+Recruit.+Your+Username+:+".$data['registrant_email_id']."+Your+Password+:+".$data['registrant_password']."+By+Teachers+Recruit";					
+							$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$data['registrant_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+							$get = file_get_contents($url);		
+							$output = explode('.',$get);			
+						}
+						else {
+							$output[0] = "No"; // If config variable is empty.
+						}
+
 						if($output[0] == "S") {
 							$fb['reg_server_msg'] = 'Registration Successful!. Check your Mobile!!';
 							$fb['error'] = 2;
@@ -211,6 +228,7 @@ class Job_provider extends CI_Controller {
 	public function dashboard()
     {
     	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+    	$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -227,7 +245,8 @@ class Job_provider extends CI_Controller {
         $data['subscrib_plan'] = $this->common_model->provider_subscription_active_plans($organization_data['organization_id']);
 		$data['postedjobs'] = $this->common_model->posted_jobs_count($organization_data['organization_id']);
         $this->session->set_userdata('registrant_logo',$organization_data['registrant_logo']);
-        if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == ''){
+        // if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_address_2'] == '' or $organization_data['organization_address_3'] == '' or $organization_data['organization_district_id'] == ''){
+		if($organization_data['organization_name'] == '' or $organization_data['organization_address_1'] == '' or $organization_data['organization_district_id'] == ''){
 			$data['organization'] = $organization_data;
 			$data['district'] = $this->common_model->get_all_district();
 			$data['institutiontype'] = $this->common_model->get_institution_type();
@@ -258,6 +277,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function editprofile(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -275,8 +295,8 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('organization_name', 'Organization name', 'trim|alpha_numeric_spaces|min_length[3]|max_length[50]|xss_clean');
 			$this->form_validation->set_rules('organization_logo', 'Organization logo', 'trim|xss_clean');
 			$this->form_validation->set_rules('address-line1', 'Address 1', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
-			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|required|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('address-line2', 'Address 2', 'trim|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
+			$this->form_validation->set_rules('address-line3', 'Address 3', 'trim|alpha_numeric_spaces|min_length[3]|max_length[150]|xss_clean');
 			$this->form_validation->set_rules('organization_state', 'State ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your state'));
 			$this->form_validation->set_rules('organization_district', 'District ', 'trim|numeric|required|xss_clean', array('required' => 'Please choose your district'));
 			$this->form_validation->set_rules('provider_logo', 'Your logo', 'trim|xss_clean');
@@ -448,6 +468,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function initialdata(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		if($_POST){
 			$this->form_validation->set_error_delimiters('<div class="error">', '</div>'); // Displaying Errors in Div
 			$this->form_validation->set_rules('registrant_institution_type', 'Institution', 'trim|required|is_natural|xss_clean');
@@ -535,7 +556,8 @@ class Job_provider extends CI_Controller {
 	}
 
 	public function inbox(){
-		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$inboxdata['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$inboxdata['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -567,6 +589,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function postjob() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -575,7 +598,7 @@ class Job_provider extends CI_Controller {
 		$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
 		$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
 		$data['applicable_posting']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->applicable_posting($session_data['login_session']['institution_type']):$this->common_model->applicable_posting($data['organization']['institution_type_id']));
-		$data['qualification']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+		$data['qualification']	= $this->common_model->qualification();
 		$data['medium']			= $this->common_model->medium_of_instruction();
 		$institution_type = isset($session_data['login_session']['institution_type'])?$session_data['login_session']['institution_type']:$data['organization']['institution_type_id'];
 		// $data['university']		= $this->common_model->get_board_details();
@@ -606,7 +629,6 @@ class Job_provider extends CI_Controller {
 			$this->form_validation->set_rules('provider_job_instruction', 'Job instruction', 'trim|required|min_length[50]|max_length[700]|xss_clean');
 			if ($this->form_validation->run())
 			{
-				
 				$vacancy_data = array(
 									'vacancies_course_type'			=> ($this->input->post('provider_ug_or_pg')) ? $this->input->post('provider_ug_or_pg') : NULL, 
 									'vacancies_department_id'		=> ($this->input->post('provider_department')) ? implode(',',$this->input->post('provider_department')) : NULL, 
@@ -687,6 +709,7 @@ class Job_provider extends CI_Controller {
 	public function postedjob()
 	{
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -716,6 +739,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function postedjobdetail(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -737,6 +761,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function editjobdetail(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -765,6 +790,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function browse_candidate(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$this->load->library('pagination');	
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
@@ -800,6 +826,11 @@ class Job_provider extends CI_Controller {
 
 		if($_POST){
 			$this->session->set_userdata('pro_search_data', $_POST);
+		}
+		else if($this->input->get('loc')) {
+			// Location based jobs
+			$inputs = array('candidate_willing_district' => $this->input->get('loc'));
+			$this->session->set_userdata('pro_search_data',$inputs);
 		}
 		// if(!empty($this->session->userdata('pro_search_data'))){
 		$provider_search_data = $this->session->userdata('pro_search_data');
@@ -858,6 +889,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function updatejob(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$common = new Common();
 		$session_data = $this->session->all_userdata();
 		$data['organization'] 			= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
@@ -934,6 +966,7 @@ class Job_provider extends CI_Controller {
 	}
 	public function changepassword(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -969,6 +1002,7 @@ class Job_provider extends CI_Controller {
 
 	public function feedback(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1008,6 +1042,7 @@ class Job_provider extends CI_Controller {
 	}
     public function postad(){
     	$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+    	$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
     	$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1098,22 +1133,18 @@ class Job_provider extends CI_Controller {
 		}	
 	}
 
-
-
-
-
-
-
 	public function subscription(){
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
-		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));		
+		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));	
+
 		$check_validity = $this->job_provider_model->check_subscription_validity(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
+
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		$server_msg = $this->session->userdata('subscription_status');
-
 
 		if($_POST && !$this->input->post('subpack') && !empty($server_msg)) {
 			$options = json_decode($_POST['productinfo'],true);
@@ -1142,7 +1173,9 @@ class Job_provider extends CI_Controller {
 				$email_data['organization_name'] = $data['organization']['organization_name'];
 				$mail_id = $data['organization']['registrant_email_id'];
 				$transaction_id = $this->db->insert_id();
-				if($options['plan_option'] != "upgrade") {
+
+				// Original plan start
+				if($options['plan_option'] == "original") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
 					$no_of_days = $subscription_plan_data[0]['subscription_validity_days'] - 1;
 					$user_subscription_data = array(
@@ -1164,132 +1197,156 @@ class Job_provider extends CI_Controller {
 													'is_resume_validity'							=> 1,
 													'org_sub_validity_start_date'					=> date('Y-m-d'),
 													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+													'organizaion_sub_updated_date'                  => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
 													'organization_subscription_status'				=> 1
 												);
 					
-					if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
-						if($options['plan_option'] == "renewal") {
-							$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
-							$user_renewal_data = array(
-														'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
-														'is_renewal' 									=> 1,
-														'validity_start_date' 							=> $org_sub_id['org_sub_validity_start_date'],
-														'validity_end_date'								=> $org_sub_id['org_sub_validity_end_date'],
-														'transaction_id'								=> $transaction_id,
-														'status'										=> 1
-													);
-							if($this->job_provider_model->subscribe_upgrade_renewal($user_renewal_data)) {
-								$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
-								$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
-								// Email configuration
-								$this->config->load('email', true);
-								$emailsetup = $this->config->item('email');
-								$this->load->library('email', $emailsetup);
-								$from_email = $emailsetup['smtp_user'];
-								$subject = 'Subscription Details';
-								$message = $this->load->view('email_template/renewal', $email_data, TRUE);
-								$this->email->initialize($emailsetup);	
-								$this->email->from($from_email, 'Teacher Recruit');
-								$this->email->to($mail_id);
-								$this->email->subject($subject);
-								$this->email->message($message);
-								/* Check whether mail send or not*/
-								$this->email->send();
-							}
-							else {
-								$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
-							}
-						}
-						else {
-							$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
-							$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
-							// Email configuration
-							$this->config->load('email', true);
-							$emailsetup = $this->config->item('email');
-							$this->load->library('email', $emailsetup);
-							$from_email = $emailsetup['smtp_user'];
-							$subject = 'Subscription Details';
-							$message = $this->load->view('email_template/subscription', $email_data, TRUE);
-							$this->email->initialize($emailsetup);	
-							$this->email->from($from_email, 'Teacher Recruit');
-							$this->email->to($mail_id);
-							$this->email->subject($subject);
-							$this->email->message($message);
-							/* Check whether mail send or not*/
-							$this->email->send();
-								
-						}				
+					if($this->job_provider_model->insert_orignial_plan($user_subscription_data)){
+						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
+						$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+						// Email configuration
+						$this->config->load('email', true);
+						$emailsetup = $this->config->item('email');
+						$this->load->library('email', $emailsetup);
+						$from_email = $emailsetup['smtp_user'];
+						$subject = 'Subscription Details';
+						$message = $this->load->view('email_template/subscription', $email_data, TRUE);
+						$this->email->initialize($emailsetup);	
+						$this->email->from($from_email, 'Teacher Recruit');
+						$this->email->to($mail_id);
+						$this->email->subject($subject);
+						$this->email->message($message);
+						/* Check whether mail send or not*/
+						$this->email->send();
 					}
 					else {
 						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
-							// $this->load->view('company-dashboard-subscription',$data);			
 					}
-				}
-				else {
+
+				} // Orginal plan end
+
+				// Renewal plan start
+				else if($options['plan_option'] == "renewal") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
+					$upgrade_current_plan = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
+					$org_sub_id = $upgrade_current_plan['organization_subscription_id'];
+					$no_of_days = $subscription_plan_data[0]['subscription_validity_days'] - 1;
 					$user_subscription_data = array(
-													'organization_id' 								=> $this->input->post('udf1'),
-													'subscription_id' 								=> $this->input->post('udf2'),
-													'organization_transcation_id' 					=> $transaction_id,
-													'organization_email_count' 						=> $org_sub_id['organization_email_count'] + $options['email'],
-													'organization_sms_count'						=> $org_sub_id['organization_sms_count'] + $options['sms'],
-													'organization_resume_download_count'			=> $org_sub_id['organization_resume_download_count'] + $options['resume'],
-													'organization_email_remaining_count'			=> $org_sub_id['organization_email_remaining_count'] + $options['email'],
-													'organization_sms_remaining_count'				=> $org_sub_id['organization_sms_remaining_count'] + $options['sms'],
-													'organization_remaining_resume_download_count'	=> $org_sub_id['organization_remaining_resume_download_count'] + $options['resume'],
-													'is_email_validity'								=> (($org_sub_id['organization_email_remaining_count'] + $options['email']) > 0 ? 1 : 0),
-													'is_sms_validity'								=> (($org_sub_id['organization_sms_remaining_count'] + $options['sms']) > 0 ? 1 : 0),
-													'is_resume_validity'							=> (($org_sub_id['organization_remaining_resume_download_count'] + $options['resume']) > 0 ? 1 : 0),
+													'organization_post_vacancy_count' 				=> $subscription_plan_data[0]['subscription_max_no_of_posts'],
+													'organization_vacancy_remaining_count' 						=> $subscription_plan_data[0]['subscription_max_no_of_posts'],
+													'organization_post_ad_count' 				=> $subscription_plan_data[0]['subscription_max_no_of_ads'],
+													'organization_ad_remaining_count' 						=> $subscription_plan_data[0]['subscription_max_no_of_ads'],
+													'organization_email_count' 						=> $subscription_plan_data[0]['subscription_email_counts'],
+													'organization_sms_count'						=> $subscription_plan_data[0]['subcription_sms_counts'],
+													'organization_resume_download_count'			=> $subscription_plan_data[0]['subcription_resume_download_count'],
+													'organization_email_remaining_count'			=> $subscription_plan_data[0]['subscription_email_counts'],
+													'organization_sms_remaining_count'				=> $subscription_plan_data[0]['subcription_sms_counts'],
+													'organization_remaining_resume_download_count'	=> $subscription_plan_data[0]['subcription_resume_download_count'],
+													'is_email_validity'								=> 1,
+													'is_sms_validity'								=> 1,
+													'is_resume_validity'							=> 1,
+													'organizaion_sub_updated_date'                  => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
 													'organization_subscription_status'				=> 1
 												);
-					if($this->job_provider_model->subscriped_plan_data($user_subscription_data)){
-						$org_sub_id = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
-						$user_upgrade_data = array(
-													'organization_subscription_id' 					=> $org_sub_id['organization_subscription_id'],
-													'is_renewal' 									=> 0,
-													'validity_start_date' 							=> $org_sub_id['org_sub_validity_start_date'],
-													'validity_end_date'								=> $org_sub_id['org_sub_validity_end_date'],
-													'transaction_id'								=> $transaction_id,
-													'status'										=> 1
-												);
-						if($this->job_provider_model->subscribe_upgrade_renewal($user_upgrade_data)) {
-							$data['subscription_server_msg'] = 'Subscription will upgraded successfully! Your transaction id is '.$transaction_id;
-							$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
-							// Email configuration
-							$this->config->load('email', true);
-							$emailsetup = $this->config->item('email');
-							$this->load->library('email', $emailsetup);
-							$from_email = $emailsetup['smtp_user'];
-							$subject = 'Subscription Details';
-							$message = $this->load->view('email_template/upgrade', $email_data, TRUE);
-							$this->email->initialize($emailsetup);	
-							$this->email->from($from_email, 'Teacher Recruit');
-							$this->email->to($mail_id);
-							$this->email->subject($subject);
-							$this->email->message($message);
-							/* Check whether mail send or not*/
-							$this->email->send();
-						}
-						else {
-							$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
-						}
+					
 
+					$user_renewal_data = array(
+												'organization_subscription_id' 					=> $org_sub_id,
+												'is_renewal' 								    => 1,
+												'validity_start_date' 					        => date('Y-m-d'),
+												'validity_end_date' 				            => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+												'transaction_id' 		          				=> $transaction_id,
+												'status'                         				=> 1
+												);
+
+					if($this->job_provider_model->insert_renewal_plan($user_renewal_data)){
+						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
+						$update_plan = $this->common_model->update_subscription_plan($this->input->post('udf1'),$this->input->post('udf2'),$user_subscription_data);
+						$email_data['subscription_details'] = $this->common_model->provider_subscription_active_renewl_plans($this->input->post('udf1'),$this->input->post('udf2'));
+
+						// Email configuration
+						$this->config->load('email', true);
+						$emailsetup = $this->config->item('email');
+						$this->load->library('email', $emailsetup);
+						$from_email = $emailsetup['smtp_user'];
+						$subject = 'Subscription Details';
+						$message = $this->load->view('email_template/renewal', $email_data, TRUE);
+						$this->email->initialize($emailsetup);	
+						$this->email->from($from_email, 'Teacher Recruit');
+						$this->email->to($mail_id);
+						$this->email->subject($subject);
+						$this->email->message($message);
+						/* Check whether mail send or not*/
+						$this->email->send();
 					}
 					else {
 						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
 					}
-				}
+				} // Renewal plan end
+
+				// Upgrade plan start
+				else {
+					$upgrade_current_plan = $this->job_provider_model->organization_subscription_data($this->input->post('udf1'),$this->input->post('udf2'));
+					$org_sub_id = $upgrade_current_plan['organization_subscription_id'];
+					$user_subscription_data = array(
+													'organization_email_count' 						=> $upgrade_current_plan['organization_email_count'] + $options['email'],
+													'organization_sms_count'						=> $upgrade_current_plan['organization_sms_count'] + $options['sms'],
+													'organization_resume_download_count'			=> $upgrade_current_plan['organization_resume_download_count'] + $options['resume'],
+													'organization_email_remaining_count' 						=> $upgrade_current_plan['organization_email_remaining_count'] + $options['email'],
+													'organization_sms_remaining_count'						=> $upgrade_current_plan['organization_sms_remaining_count'] + $options['sms'],
+													'organization_remaining_resume_download_count'			=> $upgrade_current_plan['organization_remaining_resume_download_count'] + $options['resume'],
+													'is_email_validity'								=> (($upgrade_current_plan['organization_email_remaining_count'] + $options['email']) > 0 ? 1 : 0),
+													'is_sms_validity'								=> (($upgrade_current_plan['organization_sms_remaining_count'] + $options['sms']) > 0 ? 1 : 0),
+													'is_resume_validity'							=> (($upgrade_current_plan['organization_remaining_resume_download_count'] + $options['resume']) > 0 ? 1 : 0),
+													'organization_subscription_status'				=> 1
+												);
+					$user_upgrade_data = array(
+												'organization_subscription_id' 					=> $org_sub_id,
+												'is_renewal' 								    => 0,
+												'validity_start_date' 					        => date('Y-m-d'),
+												'validity_end_date' 				            => $upgrade_current_plan['organizaion_sub_updated_date'],
+												'transaction_id' 		          				=> $transaction_id,
+												'status'                         				=> 1
+												);
+
+					if($this->job_provider_model->subscribe_upgrade_renewal($user_upgrade_data)) {
+						$data['subscription_server_msg'] = 'Subscription will upgraded successfully! Your transaction id is '.$transaction_id;
+						$update_plan = $this->common_model->update_subscription_plan($this->input->post('udf1'),$this->input->post('udf2'),$user_subscription_data);
+						$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
+
+						// Email configuration
+						$this->config->load('email', true);
+						$emailsetup = $this->config->item('email');
+						$this->load->library('email', $emailsetup);
+						$from_email = $emailsetup['smtp_user'];
+						$subject = 'Subscription Details';
+						$message = $this->load->view('email_template/upgrade', $email_data, TRUE);
+						$this->email->initialize($emailsetup);	
+						$this->email->from($from_email, 'Teacher Recruit');
+						$this->email->to($mail_id);
+						$this->email->subject($subject);
+						$this->email->message($message);
+						/* Check whether mail send or not*/
+						$this->email->send();
+					}
+					else {
+						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
+					}
+				} // Upgrade plan end
 			}
 			else {
 				$data['subscription_server_msg'] = 'Transaction failed! please try again later.';
 			}
 		} // End Payment
 
-		// Default Details
-		$data['organization_chosen_plan'] = $this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
 
-		$data['organization_chosen_plan_details'] = $this->job_provider_model->organization_chosen_plan_details(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
+		// All subscription plan with upgrade plan
 		$data['subscription_upgrade_plan'] = get_subscription_upgrade($this->common_model->subscription_upgrade_plan());
+		// Default Details
+		$data['organization_chosen_plan'] = get_organization_sub_details($this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']));
+
+		// $data['organization_chosen_plan_details'] = $this->job_provider_model->organization_chosen_plan_details(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
+
 		if($this->input->post('subpack') && !in_array($this->input->post('subpack'),array_column($data['subscription_upgrade_plan'],'sub_id'))) {
 			$data['subscription_server_msg'] = "Something went wrong. Please try again with correct details";
 			$data['chosen_plan'] = '';
@@ -1305,18 +1362,12 @@ class Job_provider extends CI_Controller {
 		}
 		$this->session->unset_userdata('subscription_status');	
 		$this->load->view('company-dashboard-subscription',$data);
+
 	} // End Subscription
 
-
-
-
-
-
-
-
-	
 	public function candidateprofile() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']))
 			redirect('provider/logout');
@@ -1331,7 +1382,8 @@ class Job_provider extends CI_Controller {
 		$data['class_values'] = $this->common_model->classlevel_by_institution(NULL);
 		$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
 		$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
-		if($data['candidate'][0]['candidate_institution_type'] == $institution_type_id){
+
+		if(in_array($institution_type_id,explode(',',$data['candidate'][0]['candidate_institution_type']))){
 			$params = array('candidate_id' => $candidate_id);
 			$this->load->library('seeker_iptracker');
 			$this->seeker_iptracker->provider_save_site_visit($params);
@@ -1453,6 +1505,8 @@ class Job_provider extends CI_Controller {
 	}
 	public function sendsms(){
 		if($_POST){
+			$sms_credentials = $this->common_model->sms_credentials();
+			$this->config->set_item('sms_gateway',$sms_credentials);
 			$candidate_det = $this->job_seeker_model->candidate_profile_by_id($this->input->post('candidate_id'));
 			$org_id = $this->input->post('org_id');
 			$vac_id = ($this->input->post('vac_id'))?$this->input->post('vac_id'):'';
@@ -1465,12 +1519,17 @@ class Job_provider extends CI_Controller {
 				$link = "http://www.teachersrecruit.com/user-followed-companies/".$org_id."";
 				$msg = "You+have+been+shortlisted+to+attend+the+interview+for+our_company.+Please+click+$link+to+know+more+information.+By+Teachers+Recruit";
 			}
-			// $msg = "Please";
-			$url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone='.$candidate_det['candidate_mobile_no'].'&text='.$msg.'&priority=ndnd&stype=normal';
+			if($this->config->item('sms_gateway')) {
+				$sms_cre = $this->config->item('sms_gateway');
+				$url = $sms_cre['sms_api_url'].'?user='.$sms_cre['sms_username'].'&pass='.$sms_cre['sms_password'].'&sender='.$sms_cre['sms_senderid'].'&phone='.$candidate_det['candidate_mobile_no'].'&text='.$msg.'&priority='.$sms_cre['sms_priority'].'&stype='.$sms_cre['sms_type'].'';
+				$get = file_get_contents($url);		
+				$output = explode('.',$get);			
+			}
+			else {
+				$output[0] = "No";
+			}
 
 			// $url = 'http://bhashsms.com/api/sendmsg.php?user=visionachievers&pass=123456&sender=TCHRCT&phone=8675846999&text=hii&priority=ndnd&stype=normal';
-			$get = file_get_contents($url);
-			$output = explode('.',$get);
 			if($output[0] == "S") {
 				$status = $this->job_provider_model->provider_sms_send_update($candidate_id,$org_id,$vac_id);
 				$data['status'] = ($status['status']!='')?$status['status']:"failure";

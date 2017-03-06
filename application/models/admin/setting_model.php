@@ -52,43 +52,37 @@ public function insert_payment_gateway($status) {
 	}
 
 	}
-public function insert_sms_gateway($status)
+	public function insert_sms_gateway($status)
 	{	
+		$model_data['status'] = '';
 		if($status == 'update') {
-		$data = array(
-							'sms_api_url' => $this->input->post('sms_api_url'),
-                              'sms_api_key' => $this->input->post('sms_api_key'),
-                              'sms_authentication_token' => $this->input->post('sms_authentication_token'),
-				);
-		$pay_rows = $this->db->get('tr_settings_sms_gateway');
-		if($pay_rows -> num_rows() == 0) {
-			$this->db->set('time', 'NOW()', FALSE);
-		    $this->db->insert('tr_settings_sms_gateway', $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Data inserted successfully";
-		}
-		else {
 			$data = array(
 							'sms_api_url' => $this->input->post('sms_api_url'),
-                              'sms_api_key' => $this->input->post('sms_api_key'),
-                              'sms_authentication_token' => $this->input->post('sms_authentication_token'),
-				);
-			$update_where = '( sms_gateway_id="'.$this->input->post('hidden_id_settings').'")';
-			$this->db->set($data); 
-      		$this->db->where($update_where);
-      		$this->db->update("tr_settings_sms_gateway", $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Data Updated successfully";
+	                        'sms_username' => $this->input->post('sms_username'),
+	                        'sms_password' => $this->input->post('sms_password'),
+	                        'sms_senderid' => $this->input->post('sms_senderid'),
+	                        'sms_priority' => $this->input->post('sms_priority'),
+	                        'sms_type' => $this->input->post('sms_type'),
+	                        'sms_updated_date' => date('Y/m/d H:i:s')
+					);
+			$pay_rows = $this->db->get('tr_settings_sms_gateway');
+			if($pay_rows -> num_rows() == 0) {
+			    $this->db->insert('tr_settings_sms_gateway',$data);
+				$model_data['status'] = "Data inserted successfully";
+			}
+			else {
+				$this->db->where('sms_gateway_id',$this->input->post('hidden_id_settings'));
+				$this->db->set($data); 
+	      		$this->db->update("tr_settings_sms_gateway");
+				$model_data['status'] = "Data Updated successfully";
+			}
 		}
-      	return $model_data;
-	}
 
-	// View
-	else {
+		// View
 		$model_data['payment_values'] = $this->db->get('tr_settings_sms_gateway')->row_array();
 		return $model_data;
 	}
-	}
+
 public function insert_configuration_option($status)
 	{	
 		if($status == 'update') {

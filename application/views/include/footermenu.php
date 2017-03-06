@@ -10,8 +10,10 @@
 			                	<!-- <h3	 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h3> -->
 			                	<span class="clearfix"> </span>
                				</a>
-                            <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
-                            <blockquote>"Arise, Awake and Stop Not till you reach your goal" - Swami Vivekananda</blockquote>
+                            <p>In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched teachersrecruit.com and  the vision of this website is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience. </p>
+                            <blockquote>"Arise, Awake and Stop Not till you reach your goal"<br-><span class="pull-right"> - Swami Vivekananda</span>
+                            </blockquote>
+                            <span class="clearfix"></span>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-2 col-xs-12">
@@ -26,49 +28,54 @@
                             </ul>
                         </div>
                     </div>
+                    <?php
+                    $session = $this->session->all_userdata();
+                    if(!empty($this->session->userdata("login_status")) && $this->session->userdata("login_status") == TRUE){ 
+                        $user_type = $this->session->userdata("login_session");
+                    }
+                    else{
+                        $user_type = array('user_type'=>'guest');
+                    }
+                    ?>         
                     <div class="col-sm-6 col-md-3 col-xs-12">
+                        <?php
+                        if(!empty($search_jobs_location)) :
+                        ?>
                         <div class="footer_block dark_gry follow-on">
-                            <h4>Location Based Jobs</h4>
-                                <ul class="location_based_list">
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Pudhuchery</a> 
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Salem</a>
-                                        <span class="clearfix"></span>
-                                    </li>                      
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Trichy</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Chennai</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Madurai</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in Villupuram</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
-                                        <a href="<?php echo base_url(); ?>vacancies" class="float_location">Teacher Jobs in TamilNadu</a>
-                                        <span class="clearfix"></span>
-                                    </li>
-                                </ul>
-                        </div> 
-                              
-                        
+                            <h4> <?php echo $user_type['user_type']!="provider" ? "Teaching Jobs by City" : "Candidates by City"; ?></h4>
+                            <ul class="location_based_list">
+                                <?php
+                                foreach ($search_jobs_location as $job_key => $job_val) :
+                                ?>
+                                <li>
+                                    <span class="pull-left"><i class="fa fa-map-marker" aria-hidden="true"></i></span>
+                                    <?php
+                                    if($user_type['user_type']=="seeker") {
+                                    ?>
+                                        <a href="<?php echo base_url()."seeker/findjob?loc=".$job_val['district_id']; ?>" class="float_location"> Teacher Jobs in <?php echo $job_val['district_name']; ?></a> 
+                                    <?php
+                                    }
+                                    else if($user_type['user_type']=="provider"){
+                                    ?>
+                                    <a href="<?php echo base_url()."provider/candidate?loc=".$job_val['district_id']; ?>" class="float_location"> Candidates in <?php echo $job_val['district_name']; ?></a>
+                                    <?php
+                                    }
+                                    else {
+                                    ?>
+                                    <a href="<?php echo base_url()."teachersvacancy?loc=".$job_val['district_id']; ?>" class="float_location"> Teacher Jobs in <?php echo $job_val['district_name']; ?></a>
+                                    <?php
+                                    }
+                                    ?> 
+                                    <span class="clearfix"></span>
+                                </li>   
+                                <?php
+                                endforeach;
+                                ?>                            
+                            </ul>
+                        </div>  
+                        <?php
+                        endif;
+                        ?>                         
                     </div>
                     <div class="col-sm-6 col-md-3 col-xs-12">
                         <div class="footer_block">

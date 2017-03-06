@@ -146,7 +146,7 @@
              	</ul>
           	</li>
           	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
-          	<li> <a href="<?php echo base_url(); ?>vacancies"> Vacancies </a> </li>
+          	<li> <a href="<?php echo base_url(); ?>teachersvacancy"> Vacancies </a> </li>
           	<li> <a href="<?php echo base_url();?>home/contactus"> Contact Us </a> </li>
 	       	<li class="no-bg login-btn-no-bg">
           	   <a class="login-header-btn index_page_login" data-toggle="modal" data-target="#login_home_btn"  data-backdrop="static" data-keyboard="false">

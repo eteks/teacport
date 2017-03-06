@@ -24,17 +24,17 @@
                                 endif;
                                 ?>  
 	                            <div class="col-sm-6 pull-left">
-			                        <?php echo ('<div class="form-group"> <label>Preferred Institution<sup class="alert">*</sup></label> <select name="candidate_institution_type" id="institution_type" class="form-control form_inputs">');?>
+			                        <?php echo ('<div class="form-group"> <label>Preferred Institution<sup class="alert">*</sup></label> '.form_error("candidate_institution_type[]").' <select name="candidate_institution_type[]" id="institution_type" class="form-control select_seeker_institution form_inputs" multiple="">');?>
 			                        <?php
 			                        foreach ($institutiontype as $institution) {
-                                        if(set_value('candidate_institution_type') == $institution['institution_type_id'] ) :
+                                        if(in_array($institution['institution_type_id'],set_value('candidate_institution_type'))) :
                                             echo "<option value=".$institution['institution_type_id']." selected>".$institution['institution_type_name']."</option>";
                                         else :
                                             echo "<option value=".$institution['institution_type_id'].">".$institution['institution_type_name']."</option>";
                                         endif;
 			                        }
 			                        echo('</div> </select>')
-			                        ?>
+    		                        ?>
 			                        <div class="form-group">
 			                            <?php echo form_label('Name <sup class="alert">*</sup>'); ?> <?php echo form_error('candidate_name'); ?>
 			                        <?php echo form_input(array('id' => 'candidate_name','data-minlength' => '3','data-name' => 'Name' ,'maxlength' => '50','placeholder' => 'Name','class' => 'form-control form_inputs alpha_value', 'name' => 'candidate_name','value'=>set_value('candidate_name'))); ?>
