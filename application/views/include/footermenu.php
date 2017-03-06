@@ -55,7 +55,7 @@
                                     }
                                     else {
                                     ?>
-                                    <a href="<?php echo base_url()."vacancies?loc=".$job_val['district_id']; ?>" class="float_location">
+                                    <a href="<?php echo base_url()."teachersvacancy?loc=".$job_val['district_id']; ?>" class="float_location">
                                     <?php
                                     }
                                     ?> Teacher Jobs in <?php echo $job_val['district_name']; ?></a> 

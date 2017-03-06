@@ -4992,3 +4992,15 @@ i#admin_error_login {
 .hide_all{
 	display:none !important;
 }
+.visit_details_section > div {
+    max-height: 85%;
+    overflow: auto;
+}
+.visit_details_section .popup-close {
+    right: 25px;
+    top: 12px; 
+}
+.admin_form_error {
+    color: red;
+    font-size: 12px;
+}

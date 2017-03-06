@@ -105,7 +105,7 @@ if ( ! function_exists('get_provider_vacancy_by_qua')){
 					{
 						$out[$row['vacancies_id']]['educational_qualification_id'][$row['educational_qualification_id']] = $row['educational_qualification'];
 				   	}
-				   	if($k == 'vacancies_job_title' || $k == 'organization_name' || $k == 'vacancies_available' || $k == 'vacancies_open_date' || $k == 'vacancies_close_date' || $k == 'vacancies_start_salary' || $k == 'vacancies_end_salary' || $k == 'vacancies_status' || $k == 'vacancies_experience' || $k == 'vacancies_class_level_id' || $k == 'vacancies_university_board_id' || $k == 'vacancies_subject_id' || $k == 'class_level' || $k == 'university_board_name' || $k == 'subject_name' || $k == 'vacancies_medium' || $k == 'vacancies_accommodation_info' || $k == 'vacancies_instruction' || $k == 'vacancies_interview_start_date' || $k == 'vacancies_end_date' || $k == 'vacancies_organization_id' || $k == 'vacancies_department_id' || $k == 'departments_name' || $k == 'vacancies_applicable_posting_id' || $k == 'posting_name') {
+				   	if($k == 'vacancies_job_title' || $k == 'vacancy_type' || $k == 'organization_name' || $k == 'vacancies_available' || $k == 'vacancies_open_date' || $k == 'vacancies_close_date' || $k == 'vacancies_start_salary' || $k == 'vacancies_end_salary' || $k == 'vacancies_status' || $k == 'vacancies_experience' || $k == 'vacancies_class_level_id' || $k == 'vacancies_university_board_id' || $k == 'vacancies_subject_id' || $k == 'class_level' || $k == 'university_board_name' || $k == 'subject_name' || $k == 'vacancies_medium' || $k == 'vacancies_accommodation_info' || $k == 'vacancies_instruction' || $k == 'vacancies_interview_start_date' || $k == 'vacancies_end_date' || $k == 'vacancies_organization_id' || $k == 'vacancies_department_id' || $k == 'departments_name' || $k == 'vacancies_applicable_posting_id' || $k == 'posting_name') {
 	     				$out[$row['vacancies_id']][$k] = $row[$k];
 	     			}
 			    }
@@ -278,3 +278,27 @@ if ( ! function_exists('get_candidate_full_profile')){
 		return array_values($out);
 	}
 }
+
+// // Job provider - organization chosen subscription plan
+// if ( ! function_exists('get_profile_visitcount')){
+// 	function get_profile_visitcount($value) 
+// 	{
+// 		$out = array();
+//     	if(!empty($value)) {
+//       	foreach ($value as $key => $row) {
+//         	foreach ($row as $k => $r) {
+//          		if($k=='organization_candidate_visitor_count_id' || $k=='ip_address' || $k=='organiztion_id' || $k=='user_agent' || $k=='count' || $k=='user_type' || $k=='created_date') {
+//             			if(!isset($out[$row['cand_id']][$row['organization_candidate_visitor_count_id']]))
+// 				        {
+// 			            	$out[$row['cand_id']]['visit_details'][$row['organization_candidate_visitor_count_id']][$k] = $row[$k];
+// 				        }
+//           			}
+//           			else {
+//             			$out[$row['cand_id']][$k] = $row[$k];
+//           			}
+//         		}
+//       		}
+//     	}
+// 		return array_values($out);
+// 	}
+// }

@@ -1193,6 +1193,15 @@ ul li:last-child{
 .fixed-top #container{
 	margin-bottom: 20px;
 }
-
-
+.admin_status_sms {
+    color: green;
+    font-size: 14px;
+    padding: 8px 35px 8px 14px !important;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+    text-align: center;
+}
+.password_shower {
+    font-size: 12px;
+    cursor: pointer;
+}
 

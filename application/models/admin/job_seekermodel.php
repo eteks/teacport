@@ -63,6 +63,7 @@ class Job_Seekermodel extends CI_Model {
                               // 'candidate_interest_subject_id' => ($this->input->post('cand_int_sub')) ? $this->input->post('cand_int_sub') : NULL,
                               'candidate_extra_curricular_id' => ($this->input->post('cand_extra')) ? $this->input->post('cand_extra') : NULL,
                               'candidate_is_fresher' => ($this->input->post('cand_is_fresh')) ? $this->input->post('cand_is_fresh') : NULL,
+                              'candidate_type' => ($this->input->post('cand_type')) ? $this->input->post('cand_type') : NULL,
                               'candidate_email' => $this->input->post('cand_email')
                             );
           $profile_update_where = '( candidate_id="'.$this->input->post('rid').'")'; 
@@ -84,11 +85,12 @@ class Job_Seekermodel extends CI_Model {
     }
 
     // View
-    $this->db->select('*');
+    $this->db->select('*,(select count(vcv.candidate_id) from tr_organization_candidate_visitor_count vcv where vcv.candidate_id = cp.candidate_id and vcv.user_type=1) as count');
     $this->db->from('tr_candidate_profile cp');
     $this->db->join('tr_district d','cp.candidate_live_district_id=d.district_id','left');
     $this->db->join('tr_state s','cp.candidate_live_state_id=s.state_id','left');
     $this->db->order_by('cp.candidate_id','desc');
+    // $this->db->group_by(array('vcv.organiztion_id','DATE(vcv.created_date)'));
     $model_data['seeker_profile'] = $this->db->get()->result_array();
     return $model_data;
   }
@@ -232,6 +234,11 @@ class Job_Seekermodel extends CI_Model {
   }
 
   /* ===================          Job Seeker Mail Details and Status Model End     ====================== */
+
+  public function get_candidate_visit_details($id) {
+    $model_data = $this->db->get_where('tr_organization_candidate_visitor_count',array('candidate_id'=>$id, 'user_type' => 1))->result_array();
+    return $model_data;
+  }
 
 }
 /* End of file Job_Seekermodel.php */

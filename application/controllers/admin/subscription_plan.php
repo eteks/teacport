@@ -341,7 +341,7 @@ class Subscription_Plan extends CI_Controller {
 	// }
 
 	public function customize_plan_settings(){
-		$data['subscription_plans'] = $this->subscription_plan_model->plan_subscription_details('init')['subscription_plans'];
+		$data['subscription_plans'] = $this->subscription_plan_model->get_subscription_list();
 		// Update and save data
 	   if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
 	   		$validation_rules = array(

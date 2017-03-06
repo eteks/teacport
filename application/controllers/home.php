@@ -73,7 +73,7 @@ class Home extends CI_Controller {
 		if(isset($session_data['login_session']))
 		{
 			$categories['search_results'] = $this->common_model->get_search_list();
-        $this->load->view('vacancies',$categories);
+        	$this->load->view('vacancies',$categories);
 		}
 	    else {
 		    redirect('login/seeker');
@@ -384,7 +384,7 @@ class Home extends CI_Controller {
 		$this->load->library('pagination');
 
 		// Pagination configuration
-  		$config['base_url'] = base_url().'vacancies';
+  		$config['base_url'] = base_url().'teachersvacancy';
 		$config['per_page'] = $per_page;
 		$config['total_rows'] = $total_rows;
 		$config['uri_segment'] = 2;

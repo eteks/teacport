@@ -88,7 +88,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
                           <th> Created Date</th>
-                          <!-- <th> Visitors Count </th> -->
+                          <th> Visitors Count </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
@@ -155,11 +155,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?> 
                           </td> 
-                          <!-- <td class="">
-                          	<a class="job_edit popup_fields" data-id="<?php //echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="show_visitorcount_detail">
-                          		145
-                          	</a>
-                          </td> -->
+                          <td class=""> 
+                            <a class="visit_count" data-href="job_provider_visit_details_ajax" data-value="<?php echo $pro_val['count']; ?>" data-popup-open="provider_visit_details_section" data-id="<?php echo $pro_val['organization_id']; ?>">
+                              <?php echo $pro_val['count']; ?> 
+                            </a>
+                          </td>
+
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                     
                           <td class="edit_section">
                             <a class="job_edit popup_fields" data-id="<?php echo $pro_val['organization_id']; ?>" data-href="job_provider_edit_profile" data-mode="edit" data-popup-open="popup_section_profile">
@@ -1248,7 +1249,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
       
       
        <!---Visitors Count-->
-      <div class="popup feedback-design" data-popup="show_visitorcount_detail">
+      <div class="popup visit_details_section" data-popup="provider_visit_details_section">
+        <?php } ?>
+        <?php
+        if(!empty($provider_visit_details)) :
+        ?>
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -1257,73 +1262,46 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </h4>                        
             </div>
             <div class="widget-body">
-            	<table class="bordered table table-striped table-hover table-bordered">
+            	<table class="bordered table table-striped table-hover table-bordered visit_details_table">
                       <thead>
                         <tr class="">
-                          <th> Organization Visitor Count Id </th>
-                          <th> Organization Id </th>
                           <th> Candidate Id </th>
-                          <th>IP Address </th>
-                          <th>User Agent </th>
-                          <th>Count </th>
-                          <th>User Type </th>
-                          <th>Created Date </th>
+                          <th> IP Address </th>
+                          <th> User Agent </th>
+                          <th> Count </th>
+                          <th> User Type </th>
+                          <th> Created Date </th>
                         </tr>  
                       </thead>
                       <tbody>
-                      	<tr>
-                      		<td>1</td>
-                      		<td>12234</td>
-                      		<td>25</td>
-                      		<td>10.0.0.0</td>
-                      		<td>1</td>
-                      		<td>45</td>
-                      		<td>Registered</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr>
-                      	<tr>
-                      		<td>12</td>
-                      		<td>12234</td>
-                      		<td>20</td>
-                      		<td>10.0.12.200</td>
-                      		<td>1</td>
-                      		<td>14</td>
-                      		<td>Guest</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr><tr>
-                      		<td>13</td>
-                      		<td>12234</td>
-                      		<td>18</td>
-                      		<td>10.0.0.100</td>
-                      		<td>1</td>
-                      		<td>55</td>
-                      		<td>Registered</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr><tr>
-                      		<td>233</td>
-                      		<td>12234</td>
-                      		<td>04</td>
-                      		<td>10.0.0.220</td>
-                      		<td>1</td>
-                      		<td>145</td>
-                      		<td>Registered</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr>
+                        <?php
+                        foreach ($provider_visit_details as $val) :
+                        ?>
+                        <tr>
+                          <td> <?php if(!empty($val['candidate_id'])) echo $val['candidate_id']; else echo "NULL"; ?> </td>
+                          <td> <?php echo $val['ip_address']; ?> </td>
+                          <td> <?php echo $val['user_agent']; ?> </td>
+                          <td> <?php echo $val['count']; ?> </td>
+                          <td> <?php echo ($val['user_type']==0 ? "Guest" : ($val['user_type']==1 ? "Provider" : "Seeker")); ?> </td>
+                          <td> <?php echo date('d/m/Y',strtotime($val['created_date'])); ?> </td>
+                        </tr>
+                        <?php
+                        endforeach;
+                        ?>
                       </tbody> 
                  </table>        
             </div><!--widget-body-->
           </div>
           <p>
-            <a data-popup-close="show_visitorcount_detail" href="#">Close</a>
+            <a data-popup-close="provider_visit_details_section" href="#">Close</a>
           </p>
-          <a class="popup-close" data-popup-close="show_visitorcount_detail" href="#">x</a>
+          <a class="popup-close" data-popup-close="provider_visit_details_section" href="#">x</a>
         </div>
-      </div>
-          	
+        <?php
+        endif;
+        ?>
+        <?php if(!$this->input->is_ajax_request()) { ?>
+      </div> 
     </div>
    </div> 
     <!-- END PAGE CONTAINER-->

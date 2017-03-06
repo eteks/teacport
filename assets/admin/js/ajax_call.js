@@ -274,6 +274,33 @@ $(document).ready(function(){
         }
     });
 
+    $(document).on('click','.visit_count',function(){
+        var value = $(this).data('value');
+        var id = $(this).data('id');
+        var href = $(this).data('href');
+        var targeted_popup_class = $(this).data('popup-open');
+        var this_ajax_section = $(this).parents('#main-content').find('.visit_details_section');
+
+        if(value > 0) {
+           $.ajax({
+            type : "POST",
+            url : admin_baseurl + href,
+            data : {value : id, csrf_token : csfrData[csrf_name]},
+            success : function(res) {
+                if(res) {
+                    this_ajax_section.html(res);
+                    datatable_initialization_visitor();
+                    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+
+                }
+            }
+
+
+           });
+
+        }
+    });
+
 
 }); // End document
 
@@ -469,3 +496,97 @@ $('#cancel').on("click", function(){
         // endDate: endDate //set end date
     // });
 // });
+
+function datatable_initialization_visitor() {
+    $('.visit_details_table').dataTable({
+        "order": [],
+        // Length of row in grid - row length
+        "lengthMenu" : [
+                        [15, 25, 50, -1], 
+                        [15, 25, 50, "All"]
+                      ],
+        // Page length
+        "pageLength" : 15,
+        // Change default text
+        "language" : {
+                        "lengthMenu": "_MENU_ records per page", // Remove show entries text from entries dropdown like "sLengthMenu": "_MENU_ records per page"
+                        "zeroRecords": "Nothing found - sorry", // empty table message
+                        "info": "Showing _START_ to _END_ of _TOTAL_ entries", // Entries message
+                        "infoEmpty": "No records available", // No results message
+                        "infoFiltered": "(filtered from _MAX_ total records)", // After filtering, message
+                        "search":         "Search:", // Search message
+                        "paginate": {  // Change pagination text
+                            "previous": "Prev", // Change previous pagination text
+                            "next": "Next" // Change next pagination text
+                        }
+        },
+
+        // Export option
+        "dom": 'lBfrtip',
+          
+        "buttons": 
+                [   
+                // Commented by siva.
+                // {
+                //     "extend": 'colvis',
+                //     "columns": ':not(.data_action)',
+                //     "postfixButtons": ['colvisRestore'],
+                //     "text" : ' Column Visibility <i class="icon-angle-down"></i>',
+                //     "className": 'btn dropdown-toggle colvis_button',
+                // },
+                {
+                    "extend": 'collection',
+                    "text" : ' Export <i class="icon-angle-down"></i>',
+                    "className": 'btn dropdown-toggle export_button',
+                    "buttons": 
+                            [
+                                {
+                                    "extend": 'copy',
+                                    "text" : "Copy",
+                                    "className" : "export_options",
+                                    "exportOptions": {
+                                        // "columns" : ':visible:not(.data_action)'
+                                        "columns" : ':not(.data_action)'
+                                    },
+                                },
+                                {
+                                    "extend": 'pdf',
+                                    "text" : "Save as pdf",
+                                    "className" : "export_options",
+                                    "exportOptions": {
+                                        // "columns" : ':visible:not(.data_action)'
+                                        "columns" : ':not(.data_action)'
+                                    },
+                                },
+                                {
+                                    "extend": 'csv',
+                                    "text" : "Save as csv",
+                                    "className" : "export_options",
+                                    "exportOptions": {
+                                        // "columns" : ':visible:not(.data_action)'
+                                        "columns" : ':not(.data_action)'
+                                    },
+                                },
+                                {
+                                    "extend": 'excel',
+                                    "text" : "Save as excel",
+                                    "className" : "export_options",
+                                    "exportOptions": {
+                                        // "columns" : ':visible:not(.data_action)'
+                                        "columns" : ':not(.data_action)'
+                                    },
+                                },
+                                {
+                                    "extend": 'print',
+                                    "text" : "Print",
+                                    "className" : "export_options",
+                                    "exportOptions": {
+                                        // "columns" : ':visible:not(.data_action)'
+                                        "columns" : ':not(.data_action)'
+                                    },
+                                },
+                            ],
+                },                         
+            ]
+    });
+}

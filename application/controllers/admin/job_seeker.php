@@ -248,6 +248,16 @@ class Job_Seeker extends CI_Controller {
 		}
 	}
 
+	// Job seeker profile - Visit details
+	public function teacport_seeker_visit_details_ajax()
+	{
+		if($this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['candidate_visit_details'] = $this->job_seekermodel->get_candidate_visit_details($value);
+			$this->load->view('admin/job_seeker_profile',$data);
+		}
+	}
+
 	/* ===================          Job Seeker Profile Controller End     ====================== */
 
 	/* ===================          Job Seeker Preference Controller Start     ====================== */

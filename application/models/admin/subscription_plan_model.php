@@ -76,7 +76,7 @@ class Subscription_Plan_Model extends CI_Model {
     // View
     $this->db->select('*');
     $this->db->from('tr_subscription sub');
-    $this->db->where('sub.subscription_price >',0);
+    // $this->db->where('sub.subscription_price >',0);
     $model_data['subscription_plans'] = $this->db->order_by('sub.subscription_id','desc')->get()->result_array();
     return $model_data;
   }
@@ -84,6 +84,14 @@ class Subscription_Plan_Model extends CI_Model {
   public function get_plan_subscription_details($value) {
     $plans_where = '(subscription_id="'.$value.'")';
     $model_data = $this->db->get_where('tr_subscription',$plans_where)->row_array();
+    return $model_data;
+  }
+
+  public function get_subscription_list() {
+    $this->db->select('*');
+    $this->db->from('tr_subscription sub');
+    $this->db->where('sub.subscription_price >',0);
+    $model_data = $this->db->order_by('sub.subscription_id','desc')->get()->result_array();
     return $model_data;
   }
   // // Job provider ads

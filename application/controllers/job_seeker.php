@@ -1261,7 +1261,7 @@ class Job_seeker extends CI_Controller {
 									'applied_job_status'			=> 1
 									// 'applied_job_date'				=> date("Y-m-d")
 								);
-			if($data["applyjob"]['organization_institution_type_id'] == $institution_id ) {
+			if(in_array($data["applyjob"]['organization_institution_type_id'], explode(',',$institution_id))) {
 				$apply_status = $this->job_seeker_model->job_seeker_apply_status($session_data['login_session']['candidate_id'],$data["applyjob"]['vacancies_id']);
 				if ($apply_status == "success") {
 					if($this->job_seeker_model->job_seeker_applied_job($seeker_appliedjob,$seeker_candidatejob)) {

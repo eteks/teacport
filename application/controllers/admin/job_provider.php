@@ -246,6 +246,17 @@ class Job_Provider extends CI_Controller {
 
 	/* ===================          Job Provider Profile Controller End     ====================== */
 
+	// Job provider profile - Visit details
+	public function job_provider_visit_details_ajax()
+	{
+		if($this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['provider_visit_details'] = $this->job_providermodel->get_provider_visit_details($value);
+			$this->load->view('admin/jobprovider_profile',$data);
+		}
+	}
+
+
 	/* ===================          Job Provider Vacancy Controller Start     ====================== */
 
 	// Job provider vacancy - Edit View Delete
@@ -263,6 +274,7 @@ class Job_Provider extends CI_Controller {
 			    $validation_rules[] =   array( 'field'   => 'job_min_salary','label'   => 'Start Salary','rules'   => 'trim|required|xss_clean|numeric|is_natural_no_zero|min_length[4]|max_length[9]|' );
 			    $validation_rules[] =   array( 'field'   => 'job_max_salary','label'   => 'End Salary','rules'   => 'trim|required|xss_clean|numeric|is_natural_no_zero|min_length[4]|max_length[9]|callback_check_greater_value['.$this->input->post('job_min_salary').']' );
 			    $validation_rules[] =   array( 'field'   => 'vac_status','label'   => 'Vacancy Status','rules'   => 'trim|required|xss_clean|' );
+			    $validation_rules[] =   array( 'field'   => 'vac_type','label'   => 'Vacancy Employment Type','rules'   => 'trim|required|xss_clean|' );
 	   		}
 	   		if($this->input->post('index')==2 || $this->input->post('index')=="end") {
 	   				$validation_rules[] =	array( 'field'   => 'qualification_name','label'   => 'Qualification Name','rules'   => 'trim|required|xss_clean|callback_multiselect_validate[Qualification Name]' );

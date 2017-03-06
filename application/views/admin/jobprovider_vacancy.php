@@ -310,6 +310,22 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               </span>
                             </div>
                           </div>
+                          <div class="span12">
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> Employment Type </label>
+                              <span class="dynamic_data"> 
+                                <?php 
+                                if($vac_val['vacancy_type']=="part") :
+                                  echo "Part Time";
+                                elseif($vac_val['vacancy_type']=="full"):
+                                  echo "Full Time";
+                                else :
+                                  echo "Not Mentioned";
+                                endif;
+                                ?>
+                              </span>
+                            </div>
+                          </div>
                         </div>
                         <div class="tab-pane" id="tab2">
                           <h4>Vacancies Pre-Requisite</h4>
@@ -488,9 +504,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <label class="control-label"> Status </label>
                               <span>
                                 <select name="vac_status" class="tabfield1 tabfield">
-                                  <option> Please select status </option>
+                                  <option value=""> Please select status </option>
                                   <option value="1" <?php if($vac_val['vacancies_status']==1) echo "selected"; ?>> Active </option>
                                   <option value="0" <?php if($vac_val['vacancies_status']==0) echo "selected"; ?>> Inactive </option>
+                                </select>
+                              </span>
+                            </div>
+                            <div class="span6 control-group">                                       
+                              <label class="control-label"> Employment Type </label>
+                              <span>
+                                <select name="vac_type" class="tabfield1 tabfield">
+                                  <option value=""> Please select employment type </option>
+                                  <option value="part" <?php if($vac_val['vacancy_type']=="part") echo "selected"; ?>> Part Time </option>
+                                  <option value="full" <?php if($vac_val['vacancy_type']=="full") echo "selected"; ?>> Full Time </option>
                                 </select>
                               </span>
                             </div>

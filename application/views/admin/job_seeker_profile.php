@@ -87,7 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Mobile No </th>
                           <th> Status </th>
                           <th> Created Date</th>
-                          <!-- <th> Visitors Count </th> -->
+                          <th> Visitors Count </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                             <th class="data_action">Edit</th>
                           <?php endif; ?>
@@ -169,14 +169,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo date("d/m/Y", strtotime($created_datetime[0]))."&nbsp;&nbsp;&nbsp;".$created_datetime[1]; 
                             ?>
                           </td>
-                          <!-- <td class=""> 
-                          	<a class="job_edit popup_fields" data-id=" " data-href="teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="seeker_visitorcount_detail">
-                          		150 
+                          <td class=""> 
+                          	<a class="visit_count" data-href="teacport_seeker_visit_details_ajax" data-value="<?php echo $pro_val['count']; ?>" data-popup-open="seeker_visitorcount_detail" data-id="<?php echo $pro_val['candidate_id']; ?>">
+                          		<?php echo $pro_val['count']; ?> 
                           	</a>
-                          </td> -->
+                          </td>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>                                      
                           <td class="edit_section">
-                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-href="teacport_job_seeker_profile_ajax" data-mode="edit" data-popup-open="popup_section_seeker_profile">
+                            <a class="job_edit popup_fields" data-id="<?php echo $pro_val['candidate_id']; ?>" data-mode="edit" data-href="teacport_job_seeker_profile_ajax" data-popup-open="popup_section_seeker_profile">
                               Edit
                             </a>
                           </td>
@@ -880,6 +880,23 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>
                       <div class="span12">
                         <div class="span6 control-group">
+                          <label class="control-label"> Employment Type </label>
+                          <span class="dynamic_data"> 
+                            <?php 
+                            if(!empty($seeker_full_profile['candidate_type'])) {
+                            ?>
+                              <span> <?php if($seeker_full_profile['candidate_type'] == "part") echo "Part Time"; else echo "Full Time"; ?> </span>
+                            <?php
+                            }
+                            else {
+                            ?>
+                             <span> Not Mentioned </span>
+                            <?php
+                            }
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
                           <label class="control-label">Resume Uploaded </label>
                           <span class="dynamic_data"> 
                             <?php 
@@ -1336,6 +1353,42 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                       </div>
+                      <div class="span12">
+                        <!-- <div class="span6 control-group">                                       
+                          <label class="control-label">Interest Subject</label>
+                          <span>
+                            <select name="cand_int_sub" class="popup_select tabfield4 tabfield">
+                              <option value="">Please select subject</option>
+                              <?php
+                              // if(!empty($subject_values)) :
+                              // foreach ($subject_values as $sub_val) :
+                              // ?>
+                              // <?php
+                              //   if($sub_val['subject_id']==$seeker_full_profile['candidate_interest_subject_id']) {
+                              //     echo '<option value='.$sub_val["subject_id"].' selected> '.$sub_val["subject_name"].' </option>';
+                              //   }
+                              //   else {
+                              //     echo '<option value='.$sub_val["subject_id"].'> '.$sub_val["subject_name"].' </option>';
+                              //   }
+                              // endforeach;
+                              // else :
+                              //   echo '<option value='.$seeker_full_profile['candidate_interest_subject_id'].' selected> "'.$seeker_full_profile['edu_interest_sub'].'" </option>';
+                              // endif;
+                              ?>
+                            </select> 
+                          </span>
+                        </div> -->
+                        <div class="span6 control-group">
+                          <label class="control-label">Fresher</label>
+                          <span>
+                            <select name="cand_type" class="popup_select tabfield4 tabfield">
+                              <option value="">Please select employment type</option>
+                              <option value="part" <?php if($seeker_full_profile['candidate_type']=="part") echo "selected"; ?>>Part Time</option>
+                              <option value="full" <?php if($seeker_full_profile['candidate_type']=="full") echo "selected"; ?>>Full Time</option>
+                            </select> 
+                          </span>
+                        </div>
+                      </div>
                     </div>
                     <input type="hidden" class="hidden_id" value="<?php echo $seeker_full_profile['candidate_id']; ?>" />  
                     <?php
@@ -1367,7 +1420,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
       
       
       <!---Visitors Count-->
-      <div class="popup feedback-design" data-popup="seeker_visitorcount_detail">
+      <div class="popup visit_details_section" data-popup="seeker_visitorcount_detail">
+        <?php } ?>
+        <?php
+        if(!empty($candidate_visit_details)) :
+        ?>
         <div class="popup-inner">
           <div class="widget box blue" id="popup_wizard_section">
             <div class="widget-title">
@@ -1376,11 +1433,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </h4>                        
             </div>
             <div class="widget-body">
-            	<table class="bordered table table-striped table-hover table-bordered" id="mple_editable_1">
+            	<table class="bordered table table-striped table-hover table-bordered visit_details_table" id="mple_editable_1">
                       <thead>
                         <tr class="">
                           <th> Organization Id </th>
-                          <th> Candidate Id </th>
                           <th>IP Address </th>
                           <th>User Agent </th>
                           <th>Count </th>
@@ -1389,46 +1445,20 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </tr>  
                       </thead>
                       <tbody>
+                        <?php
+                        foreach ($candidate_visit_details as $val) :
+                        ?>
                       	<tr>
-                      		<td>14</td>
-                      		<td>25</td>
-                      		<td>10.0.0.0</td>
-                      		<td>1</td>
-                      		<td>45</td>
-                      		<td>Registered</td>
-                      		<td>18.02.2017</td>
-                      		
+                      		<td> <?php echo $val['organiztion_id']; ?> </td>
+                      		<td> <?php echo $val['ip_address']; ?> </td>
+                      		<td> <?php echo $val['user_agent']; ?> </td>
+                      		<td> <?php echo $val['count']; ?> </td>
+                      		<td> <?php echo ($val['user_type']==0 ? "Guest" : ($val['user_type']==1 ? "Provider" : "Seeker")); ?> </td>
+                      		<td> <?php echo date('d/m/Y',strtotime($val['created_date'])); ?> </td>
                       	</tr>
-                      	<tr>
-                      		<td>12</td>
-                      		<td>20</td>
-                      		<td>10.0.12.200</td>
-                      		<td>1</td>
-                      		<td>14</td>
-                      		<td>Guest</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr>
-                      	<tr>
-                      		<td>13</td>
-                      		<td>18</td>
-                      		<td>10.0.0.100</td>
-                      		<td>1</td>
-                      		<td>55</td>
-                      		<td>Registered</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr>
-                      	<tr>
-                      		<td>233</td>
-                      		<td>04</td>
-                      		<td>10.0.0.220</td>
-                      		<td>1</td>
-                      		<td>145</td>
-                      		<td>Registered</td>
-                      		<td>18.02.2017</td>
-                      		
-                      	</tr>
+                        <?php
+                        endforeach;
+                        ?>
                      </tbody> 
                  </table>        
             </div><!--widget-body-->
@@ -1438,9 +1468,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
           </p>
           <a class="popup-close" data-popup-close="seeker_visitorcount_detail" href="#">x</a>
         </div>
-      </div>
-      
-      
+        <?php
+        endif;
+        ?>
+        <?php if(!$this->input->is_ajax_request()) { ?>
+      </div>   
     </div>
     <!-- END PAGE CONTAINER-->
   </div>
