@@ -402,8 +402,8 @@ section.download-app .download-btns a:hover{opacity:0.5;}
 .job-title-area .apply-button{background-color:#29aafe;color:#FFF;line-height:45px;display:block;text-align:center;font-weight:600;}
 .job-title-area .job-title{margin-bottom:0;}
 .job-short-detail{width:100%;position:relative;overflow:hidden;}
-.job-short-detail dt{width:30%;float:left;line-height:28px;padding:10px 20px;text-align:left;font-size:14px;font-weight:400;background-color:#F1F1F1;border:2px solid #FFF;}
-.job-short-detail dd{width:70%;float:left;padding:10px 20px;text-align:left;font-size:14px;line-height:28px;background-color:#F1F1F1;border:2px solid #FFF;}
+.job-short-detail dt{width:30%;float:left;line-height:28px;padding:10px 20px;text-align:left;font-size:14px;font-weight:400;background-color:#F1F1F1;border:2px solid #FFF;max-height:100px;height:75px;}
+.job-short-detail dd{width:70%;float:left;padding:10px 20px;text-align:left;font-size:14px;line-height:28px;background-color:#F1F1F1;border:2px solid #FFF;max-height:100px;height:75px;}
 .job-short-detail .heading-inner{margin-top:0;}
 .job-short-detail .heading-inner .title{padding-top:0;}
 .apply-job{position:relative;overflow:hidden;}

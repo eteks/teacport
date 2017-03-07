@@ -100,16 +100,14 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <tbody>
                      <tr class="parents_tr" id="column1">
                         <td class="s_name"> WARNING</td>
-                        <td class="s_status"></td>
-                        <td class="s_name"> </td>
                         <td class="s_status">(u'Not Found: /favicon.ico', None)</td>
-                        <td class="s_name"> ((u'/favicon.ico',), 142, '/home/ubuntu/resell_env/lib/python2.7/site-packages/django/core/handlers/base.py')</td>
+                        <td class="s_name">((u'/favicon.ico',), 142, '/home/ubuntu/resell_env/lib/python2.7/site-packages/django/core/handlers/base.py') </td>
                         <td class="created_date">00-00-0000</td>
                         <td class="edit_section">  
                         <a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
                         </td>
                         <td>
-                        <a class="ajaxDelete" href="javascript:;" data-id="column1">     Delete</a>
+                        <a class="ajaxDelete" href="javascript:;" data-id="column1">Delete</a>
                         </td>
                      </tr>
                      <tr class="parents_tr" id="column1">
@@ -121,7 +119,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <a class="ajaxEdit" id="column1" href="javascript:;" data-id="column1">Edit</a>
                         </td>
                         <td>
-                        <a class="ajaxDelete" href="javascript:;" data-id="column1">     Delete</a>
+                        <a class="ajaxDelete" href="javascript:;" data-id="column1">Delete</a>
                         </td>
                      </tr>
                   </tbody>
