@@ -53,9 +53,10 @@ class Home extends CI_Controller {
 			$home['job_results'] = $this->common_model->get_job_list($ins_id,"org");
 		}
 		else {
-			$home['allposting'] = $this->common_model->applicable_posting_by_ins($ins_id);
+			$home['allposting'] = $this->common_model->applicable_posting_by_ins_index($ins_id);
 			$home['job_results'] = $this->common_model->get_job_list($ins_id,"cand");
 		}
+
 	    $inative_ads = $this->common_model->ads_inactive();
 		$home['totalvacancy'] = $this->common_model->vacancies_count();
 		$home['totalcandidate'] = $this->common_model->candidate_count();

@@ -352,12 +352,13 @@ var content_height = parseInt(window_height - (header_height + footer_height));
     // Add - New record
     $(document).on('click','.add_new',function() {
         // disable_datatable(0);
-        if($(this).parents("#main-content").find('table').find('.edit_section').length > 0 && $(this).parents("#main-content").find('table').find('.delete_section').length > 0) {
+        if(($(this).parents("#main-content").find('table').find('.edit_section').length > 0 && $(this).parents("#main-content").find('table').find('.delete_section').length > 0) || $(this).parents("#main-content").find('table').find('tbody>tr>td').length <= 1) {
            var column_length = 2;    
         }
         else {
             var column_length = 1;    
         }
+
         var this_overlay = $(this).parents("#main-content").find('.edit_add_overlay');
         var this_table = $(this).parents("#main-content").find('table').find('th');
         this_overlay.removeClass('dn');

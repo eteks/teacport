@@ -129,7 +129,7 @@ $route['seeker/candidate_profile_institution'] 			= 'job_seeker/candidate_profil
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
 $route['contactus'] 									= 'home/contactus';							
-$route['pricing']										= 'home/pricing';
+// $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['allinstitutions/(:num)'] 						= 'home/allinstitutions/$1';
