@@ -138,7 +138,7 @@ class Other_module extends CI_Controller {
 	public function site_log()
 	{		
 		$this->load->view('admin/site_log');
-	}	
+	}
 }
 /* End of file Job_Srovider.php */ 
 /* Location: ./application/controllers/Job_Seeker.php */
