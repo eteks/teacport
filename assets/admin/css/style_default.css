@@ -1179,6 +1179,16 @@ ul li:last-child{
 .cke_button_icon {
     width: 16px !important;
 }
+/* Provider Profile plan activate*/
+.enable_plan{
+    color: #22878e;
+    font-size: 14px;
+    font-weight: bold;
+}
+.personal_banking label{
+    color: #22878e;
+    font-weight: bold;
+}    
 /*Added By Akila*/
 /*Footer*/
 #footer {

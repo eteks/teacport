@@ -229,7 +229,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab2" data-toggle="tab" class="step">
                             	<span class="number">2</span>
-                                <span class="desc desc_space"><i class="icon-ok"></i>Registrant Details</span>
+                                <span class="desc desc_space"><i class="icon-ok"></i>Organization Address</span>
                             </a>
                           </li>
                           <?php
@@ -259,7 +259,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <li class="span-2">
                             <a href="#tab3" data-toggle="tab" class="step">
                             	<span class="number">3</span>
-                              <span class="desc desc_space"><i class="icon-ok"></i>Addtional Details</span>
+                              <span class="desc desc_space"><i class="icon-ok"></i>Registrant Details</span>
                             </a>
                           </li>
                           <?php if($is_super_admin){ ?>
@@ -1003,6 +1003,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div> -->
                       </div>
+                      <div class="span12 control-group">
+                        <input type="checkbox" value="" class="show_plan_detail"> Activate Plan for this registrant ?
+                        <a class="edit_registrant_Plan" data-id="" data-href="" data-mode="edit" data-popup-open="popup_plan_activate">
+                          Edit
+                        </a>
+                      </div>
                     </div>
                     <?php if($is_super_admin){ ?>
                       <div class="tab-pane" id="tab4">
@@ -1232,8 +1238,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </ul>
                     <div class="clearfix"> </div>
                   </div>  
-                </
-                div>
+                </div>
                 <input type="hidden" class="hidden_id" value="<?php echo $provider_full_profile['org_id']; ?>" />
                 <?php
                 endif;
@@ -1241,7 +1246,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </form>
               <?php if(!$this->input->is_ajax_request()) { ?>
             </div>
-          </div>
+          </div><!--popup body-->
         	<p>
             <a data-popup-close="popup_section_profile" href="#">Close</a>
           </p>
@@ -1303,7 +1308,245 @@ if(!empty($this->session->userdata("admin_login_status"))):
         endif;
         ?>
         <?php if(!$this->input->is_ajax_request()) { ?>
-      </div> 
+      </div> <!--End Visitors count popup-->
+
+      <!--Personal Banking-->
+      <div class="popup personal_banking" data-popup="popup_plan_activate">
+        <div class="popup-inner">
+          <div class="widget box blue" id="popup_wizard_section">
+            <div class="widget-title">
+              <h4>
+                <i class="icon-reorder"></i> Plan Activation for Personal Banking
+              </h4>                        
+            </div>
+            <div class="widget-body form">
+              <form class="tab_form" action="job_provider_profile" data-index="" method="POST" data-mode="update">
+                <div id="rootwizard_activate" class="form-wizard job_pro_form">
+                <!--Navbar steps-->
+                  <div class="navbar steps">
+                    <div class="navbar-inner">
+                      <div class="container">
+                        <ul  id="pro_profile_tabs" class="span12 row-fluid nav nav-pills nav-design">
+                          <li class="span-2">
+                            <a href="#bank_tab1" data-toggle="tab" class="step">
+                              <span class="number">1</span>
+                                <span class="desc desc_space"><i class="icon-ok"></i>Transaction Details</span>
+                            </a>
+                          </li>
+                          <li class="span-2">
+                            <a href="#bank_tab2" data-toggle="tab" class="step">
+                              <span class="number">2</span>
+                              <span class="desc desc_space"><i class="icon-ok"></i>Plan Details</span>
+                            </a>
+                           </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div> 
+                  <!--End Navbar steps-->
+                  <div id="bar" class="progress progress-striped active">
+                    <div class="bar"></div>
+                  </div>
+                  <!--Tab Content-->
+                  <div class="tab-content tab_content_scroll">
+                    <!--Transaction Detail-->
+                    <div class="tab-pane" id="bank_tab1">
+                      <h4>Transaction Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">
+                          <label class="control-label">Transaction Type</label>
+                          <select class="select_banking_type">
+                            <option value="">Select</option>
+                            <option value="cash">Cash</option>
+                            <option value="cheque">Cheque</option>
+                          </select>  
+                        </div>
+                      </div>  
+                      <!--Cash Deposit details-->
+                      <div class="cash_detail_holder dn">
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Provider Name</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Subscription Name</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Amount</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Issued Date</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Contact Person Name</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Contact Mailid</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Contact Number</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Reference description</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                      </div> <!--Cash deposit details-->
+                      <!--Cheque Deposit details-->
+                      <div class="cheque_detail_holder dn">
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Bank Name</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Cheque Number</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Amount</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Issued Date</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Account Number</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Provider Name</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Subscription Name</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Contact Person Name</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Contact Mailid</label>
+                            <input type="text" class="">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Contact Number</label>
+                            <input type="text" class="">
+                          </div>
+                        </div>
+                      </div> <!--Cheque deposit details-->
+                    </div> <!--End Transaction Detail-->
+                    <!--Plan Detail Starts-->
+                    <div class="tab-pane" id="bank_tab2">
+                      <h4>Plan Details</h4>
+                      <div class="span12">
+                        <div class="span6 control-group">
+                          <label class="control-label">Plan Name</label>
+                          <select class="control-group">
+                            <option value="">Name1</option>
+                            <option value="">Name2</option>
+                            <option value="">Name3</option>
+                          </select>  
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Plan type</label>
+                          <select class="control-group choose_plan_type">
+                            <option value="">Select</option>
+                            <option value="original">Original</option>
+                            <option value="upgrade">Upgrade</option>
+                            <option value="renewal">Renewal</option>
+                          </select>  
+                        </div>
+                      </div>  
+                      <div class="display_upgrade_types dn">
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">SMS Count</label>
+                            <input type="text" name="transac_id">
+                          </div>
+                          <div class="span6 control-group">
+                            <label class="control-label">Email Count</label>
+                            <input type="text" name="transac_id">
+                          </div>
+                        </div>
+                        <div class="span12">
+                          <div class="span6 control-group">
+                            <label class="control-label">Resume Count</label>
+                            <input type="text" name="transac_id">
+                          </div>
+                        </div>  
+                      </div>
+                      <div class="span12">  
+                        <div class="span6 control-group">
+                          <label class="control-label">Provider ID with Name</label>
+                          <select class="control-group">
+                            <option value=""></option>
+                            <option value=""></option>
+                            <option value=""></option>
+                          </select>  
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Transaction ID</label>
+                          <input type="text" name="transac_id" readonly>
+                        </div>
+                      </div> 
+                      <div class="span12">
+                        <div class="span6 control-group">
+                          <label class="control-label">Provider Status</label>
+                          <select class="">
+                            <option value="">Active</option>
+                            <option value="">Inactive</option>
+                          </select>  
+                        </div>
+                      </div>  
+                    </div>
+                    <!--Plan Detail Ends-->
+                    <ul class="pager wizard">
+                      <li class="previous"><a href="#"><i class="icon-angle-left"></i>Previous</a></li>
+                      <li class="next"><a href="#">Next<i class="icon-angle-right"></i></a></li>
+                      <li class="finish disabled"><button type="submit">Finish<i class="icon-ok"></i></button></li>
+                    </ul>
+                    <div class="clearfix"> </div>
+                  </div>  
+                  <!--Tab Content-->
+                </div>
+                <input type="hidden" class="hidden_id" value="" />
+    
+              </form>
+
+            </div>
+          </div><!--popup body-->
+          <p>
+            <a data-popup-close="popup_plan_activate" href="#">Close</a>
+          </p>
+          <a class="popup-close" data-popup-close="popup_plan_activate" href="#">x</a>
+        </div>
+      </div> <!--end full and Edit-->
+      
+
     </div>
    </div> 
     <!-- END PAGE CONTAINER-->

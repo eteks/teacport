@@ -1169,6 +1169,49 @@ var content_height = parseInt(window_height - (header_height + footer_height));
         }
     });
 
+    //ACTIVATE PLAN FOR PERSONAL BANKING
+    $(document).on('change','.show_plan_detail',function(){
+        if($(this).is(':checked')){
+            $('.feedback-design').hide();
+            $('.personal_banking').show();
+            handleFormWizards_banking();
+
+        }
+        else{
+            alert('Are you sure to disable plan ?');
+        }    
+    });
+
+    //PLAN FOR PERSONAL BANKING- IF EDIT
+    $(document).on('click','.edit_registrant_Plan',function(){
+            $('.feedback-design').hide();
+            $('.personal_banking').show();
+            handleFormWizards_banking();
+    });
+
+    //BANKING TYPE ON CHANGE
+    $(document).on('change','.select_banking_type',function(){
+        if(this.value=="cash"){
+            $(this).parents('#bank_tab1').find('.cash_detail_holder').show();
+            $(this).parents('#bank_tab1').find('.cheque_detail_holder').hide();
+        }
+        else{
+            $(this).parents('#bank_tab1').find('.cash_detail_holder').hide();
+            $(this).parents('#bank_tab1').find('.cheque_detail_holder').show();
+        }
+
+    });
+
+    //FOR PLAN ACTIVATE
+    $(document).on('change','.choose_plan_type',function(){  
+        if(this.value=="upgrade"){
+            $('.display_upgrade_types').show();
+        }
+        else{
+            $('.display_upgrade_types').hide();
+        }
+    });  
+
 }); // End document
 
 /* Popup pagination with arrow start */
@@ -1219,8 +1262,18 @@ function readURL(input) {
     }
 }
 
-    
-
+// function error_popup(message){
+//     $('.error_popup_msg .success-alert span').text(message);
+//     $('.popup_fade').show();
+//     $('.error_popup_msg').show();
+//     document.body.style.overflow = 'hidden';
+// }
+// close error popup when click ok button or popupfade
+    $(document).on('click','.alert_btn,.cancel_btn',function(){
+        $('.error_popup_msg').hide();
+        $('.popup_fade').hide();
+        document.body.style.overflow = 'auto';
+    });
 	
 
 

@@ -379,6 +379,87 @@ function handleFormWizards() {
                     }
 
     });
+
+}
+
+// Popup with tab menu for personal banking
+function handleFormWizards_banking() {  
+    $('.date-picker').datepicker({
+        format: 'dd/mm/yyyy',
+    });
+
+    $('#rootwizard_activate').bootstrapWizard({
+        onTabShow: function(tab, navigation, index) {
+                        var $total = navigation.find('li').length;
+                        var $current = index+1;
+                        var $percent = ($current/$total) * 100;
+
+                        $('#rootwizard_activate').find('.bar').css({width:$percent+'%'});
+                        // If it's the last tab then hide the last button and show the finish instead
+                        if($current >= $total) {
+                            $('#rootwizard_activate').find('.pager .next').hide();
+                            if($('#rootwizard_activate').find('#popup_mode').val() != 'view')  {
+                                $('#rootwizard_activate').find('.pager .finish').show();
+                                $('#rootwizard_activate').find('.pager .finish').removeClass('disabled');
+                            }
+                        } 
+                        else {
+                            $('#rootwizard_activate').find('.pager .next').show();
+                            $('#rootwizard_activate').find('.pager .finish').hide();
+                        }
+                        $('#rootwizard_activate').parents('form').data('index',$current);
+                    },
+        onNext: function (tab, navigation, index) {
+                    var this_form = $('#rootwizard_activate').parents('form');  
+                    if($('#rootwizard_activate').find('#popup_mode').val() == 'view')  {
+                        jQuery('li', $('#popup_wizard_section')).removeClass("done");
+                        var li_list = navigation.find('li');
+                        for (var i = 0; i < index; i++) {
+                            jQuery(li_list[i]).addClass("done");
+                        } 
+                        var return_val = 1;
+                    }
+                    else {
+                        var return_val = tabmenu_ci_validation('next','popup');
+                         jQuery('li', $('#popup_wizard_section')).removeClass("done");
+                        var li_list = navigation.find('li');
+                        for (var i = 0; i < index; i++) {
+                            jQuery(li_list[i]).addClass("done");
+                        }                        
+                    }  
+
+                    if(return_val == 0) {
+                        return false;
+                    }
+                    else {
+                        return true;
+                    }
+                },
+            onPrevious: function (tab, navigation, index) {
+                var total = navigation.find('li').length;
+                var current = index + 1;
+                // set wizard title
+                $('.step-title', $('#rootwizard_activate')).text('Step ' + (index + 1) + ' of ' + total);
+                // set done steps
+                jQuery('li', $('#rootwizard_activate')).removeClass("done");
+                var li_list = navigation.find('li');
+                for (var i = 0; i < index; i++) {
+                    jQuery(li_list[i]).addClass("done");
+                }
+            },
+        onTabClick: function(tab, navigation, index) {
+                     if($('.tab-content').find('#popup_mode').val() == 'edit')
+                    {
+                        error_popup('on tab click disabled');
+                        return false;
+                       }
+                       else {
+                        return true;
+                       }
+                    }
+
+    });
+    
 }
 
 function tabmenu_ci_validation(value,data) {

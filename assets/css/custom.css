@@ -1850,7 +1850,19 @@ button.Zebra_DatePicker_Icon_Inside_Right{
 	position:absolute;
 	left:150%;
 	text-align: center;
-}	
+}
+/*Pricing-Bank Details*/
+.banking_details{
+	padding: 70px 0 40px 0;
+    background: rgba(60, 146, 202, 0.7) url(../images/bg-patteren.png);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;	
+} 
+.transact_img{
+	padding: 100px 50px;
+}
+
 /* Ended by Akila */
 /* For Visitor Count */
 .visitor_count{

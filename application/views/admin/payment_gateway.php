@@ -51,7 +51,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <span class="loader_holder hide_loader"> </span>
                         </div>
                         <div class="widget-body form">
-                          <form action="payment_gateway" class="form-horizontal payment_gateway_act" method="POST">
+                        <form action="payment_gateway" class="form-horizontal payment_gateway_act" method="POST">
+                        <fieldset>
+                          	<legend>Online Payment Gateway Settings</legend>
                             <p class="admin_status">  </p>
 	                          <!-- <div class="control-group">
 	                            <label class="control-label">Currency Symbol</label>
@@ -61,24 +63,24 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                  </div>
 	                            </div>
 	                          </div> -->
-	                          <div class="control-group">
-	                            <label class="control-label">Merchant Key</label>
+	                        <div class="control-group">
+	                        	<label class="control-label">Merchant Key</label>
 	                            <div class="controls ">
-	                              <input name="online_transfer_merchant_key" class="span6" value="<?php if(!empty($payment_values['online_transfer_merchant_key'])) echo $payment_values['online_transfer_merchant_key']; ?>" type="text">
+	                            	<input name="online_transfer_merchant_key" class="span6" value="<?php if(!empty($payment_values['online_transfer_merchant_key'])) echo $payment_values['online_transfer_merchant_key']; ?>" type="text">
 	                             </div>
-	                          </div>
-	                          <div class="control-group">
-	                            <label class="control-label">Merchant Salt</label>
+	                        </div>
+	                        <div class="control-group">
+	                        	<label class="control-label">Merchant Salt</label>
 	                            <div class="controls">
-	                              <input name="online_transfer_merchant_salt" class="span6" value="<?php if(!empty($payment_values['online_transfer_merchant_salt'])) echo $payment_values['online_transfer_merchant_salt']; ?>" type="text">
-	                             </div>
-	                          </div>
-	                          <div class="control-group">
-	                            <label class="control-label">Payment url</label>
-	                            <div class="controls">
+	                            	<input name="online_transfer_merchant_salt" class="span6" value="<?php if(!empty($payment_values['online_transfer_merchant_salt'])) echo $payment_values['online_transfer_merchant_salt']; ?>" type="text">
+	                            </div>
+	                        </div>
+	                        <div class="control-group">
+	                        	<label class="control-label">Payment url</label>
+	                           	<div class="controls">
 	                            	<input name="online_transfer_payment_base_url" class="span6" value="<?php if(!empty($payment_values['online_transfer_payment_base_url'])) echo $payment_values['online_transfer_payment_base_url']; ?>" type="text">
-	                             </div>
-	                          </div>
+	                            </div>
+	                        </div>
 	                          <!-- <div class="control-group">
 	                            <label class="control-label">Cheques Address</label>
 	                            <div class="controls">
@@ -91,39 +93,104 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                                <textarea class="span6" rows="3"></textarea>
 	                             </div>
 	                          </div> -->
-	                          <div class="control-group">
-	                            <label class="control-label">Account Name</label>
+	                        <div class="control-group">
+	                        	<label class="control-label">Account Name</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_account_name" class="span6 alpha_value" value="<?php if(!empty($payment_values['bank_transfer_account_name'])) echo $payment_values['bank_transfer_account_name']; ?>" type="text">
-	                             </div>
-	                          </div>
-	                          <div class="control-group">
-	                            <label class="control-label">Account Number</label>
+	                            	<input name="bank_transfer_account_name" class="span6 alpha_value" value="<?php if(!empty($payment_values['bank_transfer_account_name'])) echo $payment_values['bank_transfer_account_name']; ?>" type="text">
+	                            </div>
+	                        </div>
+	                        <div class="control-group">
+	                        	<label class="control-label">Account Number</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_account_number" class="span6 numeric_value" value="<?php if(!empty($payment_values['bank_transfer_account_number'])) echo $payment_values['bank_transfer_account_number']; ?>" type="text">
-	                             </div>
-	                          </div>
+	                            	<input name="bank_transfer_account_number" class="span6 numeric_value" value="<?php if(!empty($payment_values['bank_transfer_account_number'])) echo $payment_values['bank_transfer_account_number']; ?>" type="text">
+	                            </div>
+	                        </div>
 	                          <!-- <div class="control-group">
 	                            <label class="control-label">Access Key</label>
 	                            <div class="controls">
 	                              <input class="span6" type="text">
 	                             </div>
 	                          </div> -->
-	                          <div class="control-group">
-	                            <label class="control-label">IFSC Code</label>
+	                        <div class="control-group">
+	                        	<label class="control-label">IFSC Code</label>
 	                            <div class="controls">
-	                              <input name="bank_transfer_ifsc_code" class="span6" value="<?php if(!empty($payment_values['bank_transfer_ifsc_code'])) echo $payment_values['bank_transfer_ifsc_code']; ?>" type="text">
-	                             </div>
-	                          </div>
-	                          <div class="form-actions">
-	                            <button type="submit" class="btn btn-success">Save</button>
-	                            <!-- <button type="button" class="btn">Cancel</button> -->
-                            </div>   
-                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($payment_values['payment_gateway_id'])) echo $payment_values['payment_gateway_id']; ?>" />                       
-                          </form>
+	                            	<input name="bank_transfer_ifsc_code" class="span6" value="<?php if(!empty($payment_values['bank_transfer_ifsc_code'])) echo $payment_values['bank_transfer_ifsc_code']; ?>" type="text">
+	                           	</div>
+	                        </div>
+	                        <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($payment_values['payment_gateway_id'])) echo $payment_values['payment_gateway_id']; ?>" />
+                        </fieldset> 
+
+                        <!--Feed Bank Details-->
+                        <fieldset>
+                            <legend>Feed Bank Details</legend>
+                            <p class="admin_status_sms"> </p>
+	                        <div class="control-group">
+	                         	<label class="control-label">Name of the Bank</label>
+	                            <div class="controls">
+                                	<input name="" type="text" value="" class="span6" placeholder="" />
+                              	</div>
+	                        </div>
+	                        <div class="control-group">
+	                       		<label class="control-label">Name of the Acccount Holder</label>
+	                            <div class="controls">
+                                	<input name="" type="text" value="" class="span6" placeholder="" />
+                                </div>
+	                        </div>
+                            <div class="control-group">
+                             	<label class="control-label">Account Number</label>
+                              	<div class="controls">
+                                	<input name="" type="text" value="" class="span6" placeholder="" />
+                            	</div>
+                            </div>
+                            <div class="control-group">
+                            	<label class="control-label">IFSC Code</label>
+                              	<div class="controls">
+                            		<input name="" type="text" value="" class="span6" placeholder="" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                            	<label class="control-label">Branch Name</label>
+                            	<div class="controls">
+                           			<input name="" type="text" value="" class="span6" placeholder="" />
+                            	</div>
+                            </div>
+                            <div class="control-group">
+                            	<label class="control-label">Branch Code</label>
+                              	<div class="controls">
+                                	<input name="" type="text" value="" class="span6" placeholder="normal" />
+                            	</div>
+                            </div>
+                            <div class="control-group">
+                            	<label class="control-label">Mobile Number</label>
+                            	<div class="controls">
+                                	<input name="" type="text" value="" class="span6" placeholder="normal" />
+                            	</div>
+                            </div>
+                            <div class="control-group">
+                            	<label class="control-label">Email Id</label>
+                            	<div class="controls">
+                              	  <input name="" type="text" value="" class="span6" placeholder="normal" />
+                            	</div>
+                            </div>
+                            <div class="control-group">
+                            	<label class="control-label">Address</label>
+                            	<div class="controls">
+                                	<textarea name="" type="text" value="" class="span6" resize="none"></textarea>
+                              	</div>
+                            </div>
+	                          
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="" />
+                        </fieldset>
+                      	<div class="form-actions">
+                     		 <button type="submit" class="btn btn-success">Save</button>
+                         	<!-- <button type="button" class="btn">Cancel</button> -->
+                      	</div>
+						</form>
                         </div>
                     </div>
                     <!-- END EXAMPLE TABLE widget-->
+
+
                 </div>
             </div>
 
