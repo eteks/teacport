@@ -106,6 +106,12 @@ class Setting extends CI_Controller {
 			$this->load->view('admin/template_logo',$data);
 	}
 }
+
+public function bank_details()
+	{		
+		$this->load->view('admin/bank_details');
+	}	
+
 	
 
 	

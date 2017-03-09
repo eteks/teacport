@@ -227,6 +227,7 @@ $route['main/payment_gateway'] = 'admin/setting/payment_gateway';
 $route['main/sms_gateway'] = 'admin/setting/sms_gateway';
 $route['main/configuration_option'] = 'admin/setting/configuration_option';
 $route['main/template_logo'] = 'admin/setting/template_logo';
+$route['main/bank_details'] = 'admin/setting/bank_details';
 
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';

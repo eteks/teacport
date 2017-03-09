@@ -87,6 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Profile Completeness </th>
                           <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
+                          <th> Transaction Type </th>
                           <th> Created Date</th>
                           <th> Visitors Count </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -149,6 +150,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?> 
                           </td>
+                          <td> Online</td>
                           <td class=""> 
                             <?php 
                               $created_datetime = explode(' ', $pro_val['organization_created_date']);

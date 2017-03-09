@@ -205,11 +205,10 @@ $config['admin_modules'] = array(
 			'route_url' => base_url().'main/template_logo' 
 		),
 		array(
-			'name' => 'template logo', 
+			'name' => 'Feed Bank Details', 
 			'access_operation' => 'view', 
-			'route_url' => base_url().'main/test' 
-		)
-		),
+			'route_url' => base_url().'main/bank_details' 
+		)),
 		'icon_name' => 'icon-cogs'
 	),
 
