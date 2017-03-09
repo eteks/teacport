@@ -88,8 +88,13 @@ $route['provider/updatejob'] 							= 'job_provider/updatejob';
 $route['provider/postedjob/removedata'] 				= 'job_provider/postedjob_remove_data';
 $route['provider/postad'] 								= 'job_provider/postad';
 $route['provider/subscription'] 						= 'job_provider/subscription';
-$route['provider/payment'] 								= 'payu';
-$route['provider/paymentreply'] 						= 'payu/reply';
+/* Payu */
+// $route['provider/payment'] 								= 'payu';
+// $route['provider/paymentreply'] 						= 'payu/reply';
+/* Ccavenue */
+$route['provider/payment'] 								= 'ccavenue';
+$route['provider/paymentreply'] 						= 'ccavenue/reply';
+
 $route['provider/feedback'] 							= 'job_provider/feedback/';
 $route['provider/password'] 							= 'job_provider/changepassword/';
 $route['provider/sendsms'] 								= 'job_provider/sendsms';

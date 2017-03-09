@@ -203,7 +203,13 @@ $config['admin_modules'] = array(
 			'name' => 'template logo', 
 			'access_operation' => 'view', 
 			'route_url' => base_url().'main/template_logo' 
-		)),
+		),
+		array(
+			'name' => 'template logo', 
+			'access_operation' => 'view', 
+			'route_url' => base_url().'main/test' 
+		)
+		),
 		'icon_name' => 'icon-cogs'
 	),
 
