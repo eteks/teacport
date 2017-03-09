@@ -86,26 +86,50 @@
 								<?php echo form_close(); ?>
 							</div>
 							<div class="col-sm-3 nopadding">
+								<!-- Payu Form Submission Start -->
 								<?php 
-		                    	echo form_open('provider/payment','id="provider_subscription_form"');
-								echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>(isset($organization['registrant_name']) && !empty($organization['registrant_name']))?$organization['registrant_name'] : $organization['organization_name']));
-								echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
-								echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
+		     					// echo form_open('provider/payment','id="provider_subscription_form"');
+								// echo form_input(array('name' => 'firstname', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>(isset($organization['registrant_name']) && !empty($organization['registrant_name']))?$organization['registrant_name'] : $organization['organization_name']));
+								// echo form_input(array('name' => 'email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
+								// echo form_input(array('name' => 'phone', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
+								// echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
+								// echo form_input(array('name' => 'productinfo', 'type'=>'hidden', 'id' =>'payu_plan','value'=>''));
+								// echo form_input(array('name' => 'address1', 'type'=>'hidden', 'id' =>'payu_addr1','value'=>$organization['organization_address_1']));
+								// echo form_input(array('name' => 'address2', 'type'=>'hidden', 'id' =>'payu_addr2','value'=>$organization['organization_address_2']));
+								// echo form_input(array('name' => 'city', 'type'=>'hidden', 'id' =>'payu_city','value'=>$organization['district_name']));
+								// echo form_input(array('name' => 'state', 'type'=>'hidden', 'id' =>'payu_state','value'=>$organization['state_name']));
+								// echo form_input(array('name' => 'country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'india'));
+								// echo form_input(array('name' => 'udf1', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
+								// echo form_input(array('name' => 'udf2', 'type'=>'hidden', 'id' =>'payu_planid','value'=>'""'));
+								// echo form_input(array('name' => 'udf5', 'type'=>'hidden', 'id' =>'payu_csrf','value'=>$this->security->get_csrf_hash()));
+								// echo form_input(array('name' => 'plan_option', 'type'=>'hidden', 'id' =>'plan_option','value'=>''));
+								// echo form_input(array('name' => 'sms_count', 'type'=>'hidden', 'id' =>'plan_sms','value'=>''));
+								// echo form_input(array('name' => 'email_count', 'type'=>'hidden', 'id' =>'plan_email','value'=>''));
+								// echo form_input(array('name' => 'resume_count', 'type'=>'hidden', 'id' =>'plan_resume','value'=>''));
+
+	                    		?>
+								<!-- Payu Form Submission End -->
+
+	                  			<!-- Ccavenue Form Submission Start -->
+	                  			<?php
+	                  			echo form_open('provider/payment','id="provider_subscription_form"');
+	                  			echo form_input(array('name' => 'tid', 'type'=>'hidden', 'id' =>'payu_tid','value'=>strtotime(date("Y-m-d H:i:s"))));
+								echo form_input(array('name' => 'billing_name', 'type'=>'hidden', 'id' =>'payu_firstname','value'=>(isset($organization['registrant_name']) && !empty($organization['registrant_name']))?$organization['registrant_name'] : $organization['organization_name']));
+								echo form_input(array('name' => 'billing_email', 'type'=>'hidden', 'id' =>'payu_email','value'=>$organization['registrant_email_id']));
+								echo form_input(array('name' => 'billing_tel', 'type'=>'hidden', 'id' =>'payu_phone','value'=>$organization['registrant_mobile_no']));
 								echo form_input(array('name' => 'amount', 'type'=>'hidden', 'id' =>'payu_amount','value'=>''));
-								echo form_input(array('name' => 'productinfo', 'type'=>'hidden', 'id' =>'payu_plan','value'=>''));
-								echo form_input(array('name' => 'address1', 'type'=>'hidden', 'id' =>'payu_addr1','value'=>$organization['organization_address_1']));
-								echo form_input(array('name' => 'address2', 'type'=>'hidden', 'id' =>'payu_addr2','value'=>$organization['organization_address_2']));
-								echo form_input(array('name' => 'city', 'type'=>'hidden', 'id' =>'payu_city','value'=>$organization['district_name']));
-								echo form_input(array('name' => 'state', 'type'=>'hidden', 'id' =>'payu_state','value'=>$organization['state_name']));
-								echo form_input(array('name' => 'country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'india'));
-								echo form_input(array('name' => 'udf1', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
-								echo form_input(array('name' => 'udf2', 'type'=>'hidden', 'id' =>'payu_planid','value'=>'""'));
-								echo form_input(array('name' => 'udf5', 'type'=>'hidden', 'id' =>'payu_csrf','value'=>$this->security->get_csrf_hash()));
+								echo form_input(array('name' => 'billing_address', 'type'=>'hidden', 'id' =>'payu_addr1','value'=>$organization['organization_address_1'].$organization['organization_address_2']));
+								echo form_input(array('name' => 'billing_city', 'type'=>'hidden', 'id' =>'payu_city','value'=>$organization['district_name']));
+								echo form_input(array('name' => 'billing_state', 'type'=>'hidden', 'id' =>'payu_state','value'=>$organization['state_name']));
+								echo form_input(array('name' => 'billing_country', 'type'=>'hidden', 'id' =>'payu_country','value'=>'India'));					
 								echo form_input(array('name' => 'plan_option', 'type'=>'hidden', 'id' =>'plan_option','value'=>''));
+								echo form_input(array('name' => 'merchant_param2', 'type'=>'hidden', 'id' =>'payu_userid','value'=>$this->session->userdata('login_session')['pro_userid']));
+								echo form_input(array('name' => 'merchant_param3', 'type'=>'hidden', 'id' =>'payu_planid','value'=>'""'));
+								echo form_input(array('name' => 'merchant_param4', 'type'=>'hidden', 'id' =>'payu_csrf','value'=>$this->security->get_csrf_hash()));
 								echo form_input(array('name' => 'sms_count', 'type'=>'hidden', 'id' =>'plan_sms','value'=>''));
 								echo form_input(array('name' => 'email_count', 'type'=>'hidden', 'id' =>'plan_email','value'=>''));
 								echo form_input(array('name' => 'resume_count', 'type'=>'hidden', 'id' =>'plan_resume','value'=>''));
-	                    		?>
+								?>
 	                    		<!-- <button type='submit' class="btn btn-default payu_submit pull-right" style="margin: 0px !important;"> Proceed to pay </button> -->
 		                    	<?php echo form_close(); ?>
 								<a href="<?php echo base_url(); ?>pricing" target="_blank" class="txt_blue pull-right margin_10">View Details &amp; Features</a>

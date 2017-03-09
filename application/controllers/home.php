@@ -37,6 +37,7 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		// echo "test";
 		$session = $this->session->all_userdata();
 		$session = $this->session->all_userdata();
 		if(isset($session['login_session']) && !empty($session['login_session'])) {

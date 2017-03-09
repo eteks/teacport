@@ -58,9 +58,20 @@ define('SEEKER_UPLOAD','uploads/jobseeker/');
 define('PROVIDER_UPLOAD','uploads/jobprovider/');
 
 if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
+	// Payu
 	define('PAYUMERCHANTKEY', 'OwGF14'); 
 	define('PAYUMERCHANTSALT', 'RjWAdXh0');
 	define('PAYUBASEURL', 'https://test.payu.in');
+
+	// Ccavenue
+	define('CCAVENUEMERCHANTID', '126381'); 
+	define('CCAVENUEACCESSCODE', 'AVFV69EC55AL21VFLA');
+	define('CCAVENUEWORKINGKEY', '3E9B5752012653E9615EB2E08981AF96');
+	// Test Link
+	// define('CCAVENUEBASEURL', 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction');
+	// Secure Link
+	define('CCAVENUEBASEURL', 'https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction');
+
 }
 else{
 	// define('PAYUMERCHANTKEY', 'QcroSIn7'); 
@@ -68,10 +79,23 @@ else{
 	define('PAYUMERCHANTKEY', 'OwGF14'); 
 	define('PAYUMERCHANTSALT', 'RjWAdXh0');
 	define('PAYUBASEURL', 'https://test.payu.in');
+
+	// Ccavenue
+	define('CCAVENUEMERCHANTID', '126381'); 
+	define('CCAVENUEACCESSCODE', 'AVFV69EC55AL21VFLA');
+	define('CCAVENUEWORKINGKEY', '3E9B5752012653E9615EB2E08981AF96');
+	// Test Link
+	// define('CCAVENUEBASEURL', 'https://test.ccavenue.com/transaction/transaction.do?command=initiateTransaction');
+	// Secure Link
+	define('CCAVENUEBASEURL', 'https://secure.ccavenue.com/transaction/transaction.do?command=initiateTransaction');
 }
+
 define('PAYUSUCCESSURL', APP_URL.'provider/paymentreply'); 
 define('PAYUFAILUREURL', APP_URL.'provider/paymentreply');
 define('PAYUCANCELURL', APP_URL.'provider/paymentreply');
+
+define('CCAVENUEREDIRECTURL', APP_URL.'provider/paymentreply'); 
+define('CCAVENUECANCELURL', APP_URL.'provider/paymentreply');
 
 if($_SERVER['SERVER_ADDR'] === '::1' || $_SERVER['SERVER_ADDR'] === '127.0.0.1'){
 	//local settings

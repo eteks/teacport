@@ -309,6 +309,7 @@ $config['global_xss_filtering'] = FALSE;
 | 'csrf_expire' = The number in seconds the token should expire.
 */
 //$config['csrf_protection'] = TRUE;
+
 if (stripos($_SERVER["REQUEST_URI"],'/provider/paymentreply') === FALSE) {
 	$config['csrf_protection'] 	= TRUE;
 }else{ 
