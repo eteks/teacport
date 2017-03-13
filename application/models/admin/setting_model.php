@@ -2,55 +2,52 @@
 
 class Setting_Model extends CI_Model {
 
-  public function __construct()
-  {
-    $this->load->database();
-  }
+  	public function __construct()
+  	{
+    	$this->load->database();
+  	}
 
 
-public function insert_payment_gateway($status) {	
-
-	if($status == 'update') {
-		$data = array(
-							'online_transfer_merchant_key' => $this->input->post('online_transfer_merchant_key'),
-                              'online_transfer_merchant_salt' => $this->input->post('online_transfer_merchant_salt'),
-                              'online_transfer_payment_base_url' => $this->input->post('online_transfer_payment_base_url'),
-                              'bank_transfer_account_name' => $this->input->post('bank_transfer_account_name'),
-                              'bank_transfer_account_number' => $this->input->post('bank_transfer_account_number'),
-                              'bank_transfer_ifsc_code' => $this->input->post('bank_transfer_ifsc_code'),
-				);
-		$pay_rows = $this->db->get('tr_settings_payment_gateway');
-		if($pay_rows -> num_rows() == 0) {
-			$this->db->set('time', 'NOW()', FALSE);
-		    $this->db->insert('tr_settings_payment_gateway', $data);
-			$model_data['error'] = 1;
-			$model_data['status'] = "Data inserted successfully";
-		}
-		else {
+	public function insert_payment_gateway($status) {	
+		if($status == 'update') {
 			$data = array(
-							'online_transfer_merchant_key' => $this->input->post('online_transfer_merchant_key'),
-                              'online_transfer_merchant_salt' => $this->input->post('online_transfer_merchant_salt'),
-                              'online_transfer_payment_base_url' => $this->input->post('online_transfer_payment_base_url'),
-                              'bank_transfer_account_name' => $this->input->post('bank_transfer_account_name'),
-                              'bank_transfer_account_number' => $this->input->post('bank_transfer_account_number'),
-                              'bank_transfer_ifsc_code' => $this->input->post('bank_transfer_ifsc_code'),
-				);
-			$update_where = '(payment_gateway_id="'.$this->input->post('hidden_id_settings').'")';
-			$this->db->set($data); 
-      		$this->db->where($update_where);
-      		$this->db->update("tr_settings_payment_gateway",$data);
-			$model_data['error'] = 1;
-			$model_data['status'] = "Data Updated successfully";
+							'online_transfer_merchant_id' => $this->input->post('merchant_id'),
+                            'online_transfer_merchant_accesscode' => $this->input->post('merchant_accesscode'),
+                            'online_transfer_merchant_workingkey' => $this->input->post('merchant_workingkey'),
+                            'online_transfer_payment_base_url' => $this->input->post('payment_base_url'),
+                            'bank_transfer_bank_name' => $this->input->post('bank_name'),
+                            'bank_transfer_account_holder_name' => $this->input->post('holder_name'),
+                            'bank_transfer_account_number' => $this->input->post('account_num'),
+                            'bank_transfer_ifsc_code' => $this->input->post('ifsc_code'),
+                            'bank_transfer_branch_name' => $this->input->post('branch_name'),
+                            'bank_transfer_branch_code' => $this->input->post('branch_code'),
+                            'bank_transfer_mobile_number' => $this->input->post('mobile_num'),
+                            'bank_transfer_email' => $this->input->post('email'),
+                            'bank_transfer_address' => $this->input->post('address'),
+                            'payment_updated_date' => date('Y-m-d H:i:s'),
+						);
+
+			$pay_rows = $this->db->get('tr_settings_payment');
+			if($pay_rows -> num_rows() == 0) {
+			    $this->db->insert('tr_settings_payment', $data);
+				$model_data['error'] = 1;
+				$model_data['status'] = "Data inserted successfully";
+			}
+			else {
+				$update_where = '(payment_gateway_id="'.$this->input->post('hidden_id_settings').'")';
+				$this->db->set($data); 
+      			$this->db->where($update_where);
+      			$this->db->update("tr_settings_payment");
+				$model_data['error'] = 1;
+				$model_data['status'] = "Data Updated successfully";
+			}
+	      	return $model_data;
 		}
-      	return $model_data;
-	}
-
-	// View
-	else {
-		$model_data['payment_values'] = $this->db->get('tr_settings_payment_gateway')->row_array();
-		return $model_data;
-	}
-
+		// View
+		else {
+			$model_data['payment_values'] = $this->db->get('tr_settings_payment')->row_array();
+			return $model_data;
+		}
 	}
 	public function insert_sms_gateway($status)
 	{	

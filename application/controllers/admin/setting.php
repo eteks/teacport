@@ -13,17 +13,91 @@ class Setting extends CI_Controller {
 	public function payment_gateway()
 	{
 		if($this->input->post()) {
-			if(!$this->input->post('online_transfer_merchant_key') && !$this->input->post('online_transfer_merchant_salt') && !$this->input->post('online_transfer_payment_base_url') && !$this->input->post('bank_transfer_account_name') && !$this->input->post('bank_transfer_account_number') && !$this->input->post('bank_transfer_ifsc_code')) {
-				$ajax_data['error'] = 1;
-				$ajax_data['status'] = "Please Enter Atleast One Data";
-				echo json_encode($ajax_data);
+			$validation = array(
+								array(
+									'field'  => 'merchant_id',
+									'label'  => 'Merchant ID',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'merchant_accesscode',
+									'label'  => 'Merchant Access Code',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'merchant_workingkey',
+									'label'  => 'Merchant Working Key',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'payment_base_url',
+									'label'  => 'Payment Base Url',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'bank_name',
+									'label'  => 'Bank Name',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'holder_name',
+									'label'  => 'Account Holder Name',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'account_num',
+									'label'  => 'Account Number',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'ifsc_code',
+									'label'  => 'IFSC Code',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'branch_name',
+									'label'  => 'Branch Name',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'branch_code',
+									'label'  => 'Branch Code',
+									'rules'  =>  'trim|xss_clean|required'
+								),
+								array(
+									'field'  => 'mobile_num',
+									'label'  => 'Mobile Number',
+									'rules'  =>  'trim|xss_clean|required|exact_length[10]'
+								),
+								array(
+									'field'  => 'email',
+									'label'  => 'Email',
+									'rules'  =>  'trim|xss_clean|required|valid_email'
+								),
+								array(
+									'field'  => 'address',
+									'label'  => 'Address',
+									'rules'  =>  'trim|xss_clean|required|'
+								),
+						);
+			$this->form_validation->set_rules($validation);
+			if($this->form_validation->run() == FALSE) {
+				foreach($validation as $row){
+			        $field = $row['field'];
+			        $error = form_error($field);
+			        if($error){
+			    	    $ajax_data['status'] = strip_tags($error);
+			            $ajax_data['error'] = 1;
+			            break;
+			        }
+			    }
 			}
 			else {
 				$data_values = $this->setting_model->insert_payment_gateway('update');
 				$ajax_data['error'] = 2;
-				$ajax_data['status'] = $data_values['status'];
-				echo json_encode($ajax_data);
+				$ajax_data['status'] = $data_values['status'];	
 			}
+			echo json_encode($ajax_data);
 		}
 		else {
 			$ajax_data['status'] = 0;
@@ -31,7 +105,6 @@ class Setting extends CI_Controller {
 			$data['payment_values'] = $data_values['payment_values'];
 			$this->load->view('admin/payment_gateway',$data);
 		}
-
 	}
 
 	public function sms_gateway()
