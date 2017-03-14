@@ -836,6 +836,32 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
+                        <div class="span6 control-group">
+                          <label class="control-label">SET Exam Status</label>
+                          <span class="dynamic_data"> 
+                            <?php
+                            if($seeker_full_profile['candidate_set_exam_status'] == 1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">NET Exam Status</label>
+                          <span class="dynamic_data"> 
+                            <?php
+                            if($seeker_full_profile['candidate_net_exam_status'] == 1) :
+                              echo "Yes";
+                            else :
+                              echo "No";
+                            endif;
+                            ?>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
                         <!-- <div class="span6 control-group">                                       
                           <label class="control-label">Interest Subject</label>
                           <span class="dynamic_data">
@@ -1291,6 +1317,28 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               <option value="">Please select TET status</option>
                               <option value="1" <?php if($seeker_full_profile['candidate_tet_exam_status']==1) echo "selected"; ?>>Yes</option>
                               <option value="0" <?php if($seeker_full_profile['candidate_tet_exam_status']==0) echo "selected"; ?>>No</option>
+                            </select>
+                          </span>
+                        </div>
+                      </div>
+                      <div class="span12">
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">SET Exam Status</label>
+                          <span>
+                            <select name="cand_set_status" class="popup_select tabfield4 tabfield">
+                              <option value="">Please select SET status</option>
+                              <option value="1" <?php if($seeker_full_profile['candidate_set_exam_status']==1) echo "selected"; ?>>Yes</option>
+                              <option value="0" <?php if($seeker_full_profile['candidate_set_exam_status']==0) echo "selected"; ?>>No</option>
+                            </select>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">                                       
+                          <label class="control-label">NET Exam Status</label>
+                          <span>
+                            <select name="cand_net_status" class="popup_select tabfield4 tabfield">
+                              <option value="">Please select NET status</option>
+                              <option value="1" <?php if($seeker_full_profile['candidate_net_exam_status']==1) echo "selected"; ?>>Yes</option>
+                              <option value="0" <?php if($seeker_full_profile['candidate_net_exam_status']==0) echo "selected"; ?>>No</option>
                             </select>
                           </span>
                         </div>

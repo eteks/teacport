@@ -878,5 +878,12 @@ class Common_model extends CI_Model {
 		return $data;
 	}
 
+	public function get_bank_details() {	
+		$this->db->select('bank_transfer_bank_name,bank_transfer_account_holder_name,bank_transfer_account_number,bank_transfer_ifsc_code,bank_transfer_branch_name,bank_transfer_branch_code,bank_transfer_mobile_number,bank_transfer_email,bank_transfer_address');
+		$this->db->from('tr_settings_payment');
+		$model_data = $this->db->get()->row_array();
+		return $model_data;
+	}
+
 } // End
 

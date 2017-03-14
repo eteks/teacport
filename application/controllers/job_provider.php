@@ -1164,6 +1164,7 @@ class Job_provider extends CI_Controller {
 									'bank_referrence_number' 	=> $this->input->post('bank_ref_no'),
 									'transaction_status' 		=> $this->input->post('order_status'),
 									'payment_mode' 				=> $this->input->post('payment_mode'),
+									'payment_type' 				=> "online",
 									'card_name' 				=> $this->input->post('card_name'),
 									'unmapped_status' 			=> $this->input->post('status_message'),
 									'transaction_date_time' 	=> date('Y-m-d H:i:s',strtotime($this->input->post('trans_date'))),

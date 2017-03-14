@@ -266,6 +266,16 @@ else {
 											<div class="col-sm-7">	<?php if($candidate[0]['candidate_tet_exam_status']=="1") echo "Yes"; else echo "No"; ?> </div>
 										</div>
 										<div class="display_seeker_details">
+		                           	 		<span class="col-sm-4">SET Exam Status</span>
+		                           	 		<span class="col-sm-1"> : </span>
+											<div class="col-sm-7">	<?php if($candidate[0]['candidate_set_exam_status']=="1") echo "Yes"; else echo "No"; ?> </div>
+										</div>
+										<div class="display_seeker_details">
+		                           	 		<span class="col-sm-4">NET Exam Status</span>
+		                           	 		<span class="col-sm-1"> : </span>
+											<div class="col-sm-7">	<?php if($candidate[0]['candidate_net_exam_status']=="1") echo "Yes"; else echo "No"; ?> </div>
+										</div>
+										<div class="display_seeker_details">
 		                           	 		<span class="col-sm-4">Extra Curricular Skills </span>
 		                           	 		<span class="col-sm-1"> : </span>
 											<div class="col-sm-7">  <?php 

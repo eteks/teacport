@@ -381,6 +381,231 @@ class Job_Providermodel extends CI_Model {
     return $model_data;
   }
 
+  public function get_recent_transaction($id) {
+
+    // Recent transaction
+    $where = '(pt.organization_id="'.$id.'" AND (pt.payment_type="cheque" OR pt.payment_type="cash"))';
+    $this->db->select('pt.*,os.*,ur.*,pt.transaction_id as trans_id');
+    $this->db->from('tr_payumoney_transaction pt');
+    $this->db->join('tr_organization_subscription os','pt.transaction_id=os.organization_transcation_id','left');
+    $this->db->join('tr_organization_upgrade_or_renewal ur','pt.transaction_id=ur.transaction_id','left');
+    $this->db->where($where);
+    $this->db->order_by('pt.transaction_id','desc');
+    $model_data['recent_transaction'] = $this->db->get()->row_array();
+
+    // Recent subscription plan
+    $subscription_where = '(tos.organization_id="'.$id.'")';
+    $this->db->select('*');
+    $this->db->from('tr_organization_subscription tos');
+    $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
+    $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id AND our.is_renewal=1','left');
+    $model_data['recent_subscription'] = $this->db->where($subscription_where)->order_by('tos.organizaion_sub_updated_date desc,our.validity_end_date desc')->get()->row_array();
+
+    // All plans
+    $where = '(subscription_status=1 AND subscription_price > 0)';
+    $model_data['plan_details'] = $this->db->get_where('tr_subscription',$where)->result_array();
+
+    return $model_data;
+  }
+
+  // To get plan details
+  public function get_plan_details() {
+    $where = '(subscription_status=1 AND subscription_price > 0)';
+    $model_data = $this->db->get_where('tr_subscription',$where)->result_array();
+    return $model_data;
+  }
+
+  // Payment subscription validation - Renewal Plan
+  public function check_renewal_plan_valid($plan_id,$org_id) {
+    $data = '';
+    $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+    $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+    $check_already_sub_array = $check_already_sub->num_rows();
+
+    $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+    $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
+    if($check_already == 1 && $check_already_sub_array == 0) {
+      $data = 2; // if correct
+    }
+    else {
+      $data = 1; // if wrong
+    }
+    return $data;
+  }
+
+  // Payment subscription validation - Orignial Plan
+  public function check_orginal_plan_valid($plan_id,$org_id) {
+    $data = '';
+    $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+    $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+    $check_already_sub_array = $check_already_sub->num_rows();
+
+    $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+    $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
+    if($check_already  == 0 && $check_already_sub_array == 0) {
+      $data = 2; // if correct 
+    }
+    else {
+      $data = 1; // if wrong   
+    }
+    return $data;
+  }
+
+  // Payment subscription validation - Upgrade Plan
+  public function check_upgrade_plan_valid($plan_id,$org_id) {
+    $data = '';
+    $already_where_sub = '(organization_id = "'.$org_id.'" AND subscription_id = "'.$plan_id.'" AND organization_subscription_status=1)';
+    $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+    $check_already_sub_array = $check_already_sub->num_rows();
+    if($check_already_sub_array == 1) {
+      $data = 2; // if correct 
+    }
+    else {
+      $data = 1; // if wrong   
+    }
+    return $data;
+  }
+
+  // Payment and Plan details insertion
+  public function insert_bank_details($data) {
+    if($data['trans_type'] == "cash") {
+      $payment_data  = array(
+                            'organization_id' => $data['org_id'],
+                            'tracking_id'     => strtotime(date("Y-m-d H:i:s")),
+                            'order_id'        => $data['order_id'],
+                            'transaction_status' => 'Success',
+                            'payment_mode'    => 'offline',
+                            'payment_type'    => 'cash',
+                            'unmapped_status' => 'Transaction Successful',
+                            'transaction_date_time' => date('Y-m-d H:i:s',strtotime($data['cash_date'])),
+                            'amount'          => number_format( (float) $data['cash_amt'], 2, '.', ''),
+                            'net_amount_debit' => $data['cash_amt'],
+                            'contact_name'    => $data['cash_name'],
+                            'contact_email'   => $data['cash_mail'],
+                            'contact_number'  => $data['cash_num'],
+                            'error_code'      => 0,
+                            'error_message'   => 'No Error',
+                            'reference_description'  => $data['cash_des']
+                         );
+    }
+    else  if($data['trans_type'] == "cheque") {
+      $payment_data  = array(
+                            'organization_id' => $data['org_id'],
+                            'tracking_id'     => strtotime(date("Y-m-d H:i:s")),
+                            'order_id'        => $data['order_id'],
+                            'bank_referrence_number' => $data['cheque_acc_num'],
+                            'transaction_status' => 'Success',
+                            'payment_mode'    => 'offline',
+                            'payment_type'    => 'cheque',
+                            'unmapped_status' => 'Transaction Successful',
+                            'transaction_date_time' => date('Y-m-d H:i:s',strtotime($data['cheque_date'])),
+                            'amount'          => number_format( (float) $data['cheque_amt'], 2, '.', ''),
+                            'net_amount_debit' => $data['cheque_amt'],
+                            'bank_name'       => $data['cheque_bank_name'],
+                            'cheque_number'   => $data['cheque_code'],
+                            'contact_name'    => $data['cheque_name'],
+                            'contact_email'   => $data['cheque_mail'],
+                            'contact_number'  => $data['cheque_num'],
+                            'error_code'      => 0,
+                            'error_message'   => 'No Error',
+                         );
+    }
+    if($this->db->insert('tr_payumoney_transaction',$payment_data)) {
+      return TRUE;
+    }
+    else {
+      return FALSE;
+    }
+  }
+
+  // Subscription plan by id
+  public function get_subcription_plan($planid)
+  {
+    $where = "(subscription_id = '".$planid."'  AND subscription_status='1')";
+    $model_data = $this->db->get_where('tr_subscription',$where)->row_array();
+    return $model_data; 
+  }
+
+  // Insert original subscription data
+  public function insert_orignial_plan_details($data)
+  {
+    if($this->db->insert('tr_organization_subscription', $data)){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+  }
+
+  // Get organization subscription details
+  public function get_organization_subscription_data($org_id,$plan_id){
+    $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
+    $data = $this->db->get_where('tr_organization_subscription',$already_where)->row_array();
+    return $data;
+  }
+
+  // Insert renewal subscription data
+  public function insert_renewal_plan_details($data)
+  {
+    if($this->db->insert('tr_organization_upgrade_or_renewal', $data)){
+      return TRUE;
+    }
+    else{
+      return FALSE;
+    }
+  }
+
+  // Update plan details after renewal
+  public function update_subscription_plan_details($org_id,$plan_id,$data){
+    $update_where = '(organization_id="'.$org_id.'" AND subscription_id="'.$plan_id.'")';
+    $this->db->where($update_where);
+    $this->db->set($data);
+    $this->db->update('tr_organization_subscription');
+    return TRUE;
+  }
+
+  // Insert upgrade and renewal plan
+  public function subscribe_upgrade_renewal_details($data)
+  {
+    if($this->db->insert('tr_organization_upgrade_or_renewal', $data)){
+        return TRUE;
+    }
+    else{
+        return FALSE;
+    }
+  }
+
+  // Mail sending details - Renewal
+  public function provider_subscription_active_renewl_plans_details($org_id,$plan_id){
+    $get_where = '(os.organization_id="'.$org_id.'" AND os.subscription_id="'.$plan_id.'" AND opu.status=1 AND opu.is_renewal=1)';
+    $this->db->select('*');    
+    $this->db->from('tr_organization_subscription os');
+    $this->db->join('tr_organization_upgrade_or_renewal opu', 'os.organization_subscription_id = opu.organization_subscription_id');
+    $this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
+    $this->db->where($get_where);
+    $data = $this->db->get()->row_array();
+    return $data;
+  }
+
+  // Mail sending details - Orignial
+  public function provider_subscription_active_plans_details($org_id){
+    $this->db->select('*');    
+    $this->db->from('tr_organization_subscription os');
+    $this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
+    $where = "(os.organization_id = '".$org_id."' AND os.organization_subscription_status='1')";
+    $this->db->where($where);
+    $providersubcription = $this->db->get();
+    return $providersubcription->row_array(); 
+  }
+
+  // To get provider basic details
+  public function get_provider_basic_details($org_id) {
+    $where = '(organization_id="'.$org_id.'")';
+    $model_data = $this->db->get_where('tr_organization_profile',$where)->row_array();
+    return $model_data;
+  }
+
+
   /* ===================          Job Provider Transaction Model End    ====================== */
   
 }

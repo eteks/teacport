@@ -214,6 +214,7 @@ class Home extends CI_Controller {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
+		$data['bank_details'] = $this->common_model->get_bank_details();
 		$this->load->view('pricing',$data);
 	}
 	public function faq(){

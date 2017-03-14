@@ -87,7 +87,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Profile Completeness </th>
                           <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
-                          <th> Transaction Type </th>
+                          <!-- <th> Transaction Type </th> -->
                           <th> Created Date</th>
                           <th> Visitors Count </th>
                           <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
@@ -150,7 +150,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             endif;
                             ?> 
                           </td>
-                          <td> Online</td>
+                          <!-- <td> Online</td> -->
                           <td class=""> 
                             <?php 
                               $created_datetime = explode(' ', $pro_val['organization_created_date']);
@@ -856,6 +856,17 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                       </div>
+                      <div class="span12 control-group">
+                       <!--  <input type="checkbox" value="" class="show_plan_detail plan_bank_details" data-id="<?php echo $provider_full_profile['org_id']; ?>" data-mode="add">  -->
+                         <a class="add_registrant_Plan plan_bank_details" data-id="<?php echo $provider_full_profile['org_id']; ?>" data-mode="add" data-href="job_provider_plan_activation" data-popup-open="popup_plan_activate">
+                           Activate 
+                        </a>
+                        <!-- or  -->
+                        <!-- <a class="edit_registrant_Plan plan_bank_details" data-id="<?php echo $provider_full_profile['org_id']; ?>" data-mode="edit" data-href="job_provider_plan_activation" data-popup-open="popup_plan_activate">
+                          Edit
+                        </a> -->
+                        Plan for this organization ?
+                      </div>
                     </div>
                     <div class="tab-pane" id="tab2">
                       <h4>Organization Address</h4>
@@ -1003,12 +1014,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div> -->
                       </div>
-                      <div class="span12 control-group">
-                        <input type="checkbox" value="" class="show_plan_detail"> Activate Plan for this registrant ?
+                      <!-- <div class="span12 control-group">
+                        <input type="checkbox" value="" class="show_plan_detail"> Activate Plan for this organization ?
                         <a class="edit_registrant_Plan" data-id="" data-href="" data-mode="edit" data-popup-open="popup_plan_activate">
                           Edit
                         </a>
-                      </div>
+                      </div> -->
                     </div>
                     <?php if($is_super_admin){ ?>
                       <div class="tab-pane" id="tab4">
@@ -1320,7 +1331,11 @@ if(!empty($this->session->userdata("admin_login_status"))):
               </h4>                        
             </div>
             <div class="widget-body form">
-              <form class="tab_form" action="job_provider_profile" data-index="" method="POST" data-mode="update">
+              <form class="plan_bank_details_form" action="job_provider_plan_validation" data-index="" method="POST" data-mode="update">
+                <?php } ?>
+                <?php
+                if((!empty($bank_details) && !empty($bank_details_mode) && $bank_details_mode=="edit") || (!empty($bank_details_mode) && $bank_details_mode=="add")) :
+                ?>                     
                 <div id="rootwizard_activate" class="form-wizard job_pro_form">
                 <!--Navbar steps-->
                   <div class="navbar steps">
@@ -1350,12 +1365,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                   <!--Tab Content-->
                   <div class="tab-content tab_content_scroll">
                     <!--Transaction Detail-->
+                    <p class="val_error"> </p>
                     <div class="tab-pane" id="bank_tab1">
                       <h4>Transaction Details</h4>
                       <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Transaction Type</label>
-                          <select class="select_banking_type">
+                          <select class="select_banking_type tabfield tabfield1" name="trans_type">
                             <option value="">Select</option>
                             <option value="cash">Cash</option>
                             <option value="cheque">Cheque</option>
@@ -1366,42 +1382,32 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="cash_detail_holder dn">
                         <div class="span12">
                           <div class="span6 control-group">
-                            <label class="control-label">Provider Name</label>
-                            <input type="text" class="">
-                          </div>
-                          <div class="span6 control-group">
-                            <label class="control-label">Subscription Name</label>
-                            <input type="text" class="">
-                          </div>
-                        </div>
-                        <div class="span12">
-                          <div class="span6 control-group">
                             <label class="control-label">Amount</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cash_amt" maxlength="8">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Issued Date</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cash_date">
                           </div>
                         </div>
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Contact Person Name</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cash_name" maxlength="50">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Contact Mailid</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cash_mail" maxlength="100">
                           </div>
                         </div>
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Contact Number</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cash_num" maxlength="10">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Reference description</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cash_des" maxlength="200">
                           </div>
                         </div>
                       </div> <!--Cash deposit details-->
@@ -1410,51 +1416,41 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Bank Name</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_bank_name" maxlength="50">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Cheque Number</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_code" maxlength="50">
                           </div>
                         </div>
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Amount</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_amt" maxlength="8">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Issued Date</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_date">
                           </div>
                         </div>
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Account Number</label>
-                            <input type="text" class="">
-                          </div>
-                          <div class="span6 control-group">
-                            <label class="control-label">Provider Name</label>
-                            <input type="text" class="">
-                          </div>
-                        </div>
-                        <div class="span12">
-                          <div class="span6 control-group">
-                            <label class="control-label">Subscription Name</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_acc_num" maxlength="50">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Contact Person Name</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_name" maxlength="50">
                           </div>
                         </div>
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Contact Mailid</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_mail" maxlength="100">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Contact Number</label>
-                            <input type="text" class="">
+                            <input type="text" class="tabfield tabfield1" name="cheque_num" maxlength="10">
                           </div>
                         </div>
                       </div> <!--Cheque deposit details-->
@@ -1462,18 +1458,39 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <!--Plan Detail Starts-->
                     <div class="tab-pane" id="bank_tab2">
                       <h4>Plan Details</h4>
+                      <?php
+                      if(!empty($current_plan)) :
+                      ?>
+                      <h5 class="bank_details_sub_note">  Note : Recently, this organization has activated <?php echo $current_plan['subscription_plan']; ?> as <?php echo (!empty($current_plan['status']) ? "Renewal" : "New"); ?>. <?php echo (!empty($current_plan['organization_subscription_status']) && $current_plan['organization_subscription_status'] == 1) ? "<span class='icon'> Active </span>" : "<span class='icon icon_expired'> Inactive </span>"; ?> </h5>
+                      <?php
+                      else :
+                      ?>
+                      <h5 class="bank_details_sub_note">  Note : This organization has no subscription plan. </h5>
+                      <?php
+                      endif;
+                      ?>
+
                       <div class="span12">
                         <div class="span6 control-group">
                           <label class="control-label">Plan Name</label>
-                          <select class="control-group">
-                            <option value="">Name1</option>
-                            <option value="">Name2</option>
-                            <option value="">Name3</option>
+                          <select class="control-group tabfield tabfield2" name="plan_name">
+                            <?php
+                            if(!empty($plan_details)) :
+                            foreach ($plan_details as $pla_val) :
+                            if(!empty($current_plan['subscription_id']) && $pla_val['subscription_id'] == $current_plan['subscription_id']) {
+                              echo "<option value=".$pla_val['subscription_id']." selected> ".$pla_val['subscription_plan']." </option>";
+                            }
+                            else {
+                              echo "<option value=".$pla_val['subscription_id']."> ".$pla_val['subscription_plan']." </option>";
+                            }
+                            endforeach;
+                            endif;
+                            ?>
                           </select>  
                         </div>
                         <div class="span6 control-group">
                           <label class="control-label">Plan type</label>
-                          <select class="control-group choose_plan_type">
+                          <select class="control-group choose_plan_type tabfield tabfield2" name="plan_type">
                             <option value="">Select</option>
                             <option value="original">Original</option>
                             <option value="upgrade">Upgrade</option>
@@ -1485,43 +1502,26 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">SMS Count</label>
-                            <input type="text" name="transac_id">
+                            <input type="text" name="plan_sms" class="tabfield tabfield2">
                           </div>
                           <div class="span6 control-group">
                             <label class="control-label">Email Count</label>
-                            <input type="text" name="transac_id">
+                            <input type="text" name="plan_email"  class="tabfield tabfield2">
                           </div>
                         </div>
                         <div class="span12">
                           <div class="span6 control-group">
                             <label class="control-label">Resume Count</label>
-                            <input type="text" name="transac_id">
+                            <input type="text" name="plan_resume" class="tabfield tabfield2">
                           </div>
                         </div>  
                       </div>
                       <div class="span12">  
                         <div class="span6 control-group">
-                          <label class="control-label">Provider ID with Name</label>
-                          <select class="control-group">
-                            <option value=""></option>
-                            <option value=""></option>
-                            <option value=""></option>
-                          </select>  
-                        </div>
-                        <div class="span6 control-group">
                           <label class="control-label">Transaction ID</label>
-                          <input type="text" name="transac_id" readonly>
+                          <input type="text" value="NULL" name="plan_trans_id" class="tabfield tabfield2" readonly>
                         </div>
                       </div> 
-                      <div class="span12">
-                        <div class="span6 control-group">
-                          <label class="control-label">Provider Status</label>
-                          <select class="">
-                            <option value="">Active</option>
-                            <option value="">Inactive</option>
-                          </select>  
-                        </div>
-                      </div>  
                     </div>
                     <!--Plan Detail Ends-->
                     <ul class="pager wizard">
@@ -1531,12 +1531,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     </ul>
                     <div class="clearfix"> </div>
                   </div>  
+                  <input type="hidden" class="tabfield" name="org_id" value="<?php if(!empty($value)) echo $value; ?>" />
                   <!--Tab Content-->
+                  <input type="hidden" class="hidden_id" value="<?php if(!empty($bank_details['trans_id'])) echo $bank_details['trans_id']; ?>" />
                 </div>
-                <input type="hidden" class="hidden_id" value="" />
-    
+                <?php
+                elseif (!empty($bank_details_mode) && $bank_details_mode=="edit") :
+                  echo "<div class='status_message'> Nothing to edit transaction and plan details! </div>";
+                endif;
+                ?>
+                <?php
+                if(!$this->input->is_ajax_request()) {
+                ?>
               </form>
-
             </div>
           </div><!--popup body-->
           <p>

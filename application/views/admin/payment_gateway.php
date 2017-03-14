@@ -127,7 +127,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="control-group">
                             	<label class="control-label">Branch Code</label>
                               	<div class="controls">
-                                  <input name="branch_code" class="span6" value="<?php echo !empty(set_value('branch_code')) ? set_value('branch_code') : (!empty($payment_values['bank_transfer_branch_code']) ? $payment_values['bank_transfer_branch_name'] : '');  ?>" type="text" placeholder="Branch Code">
+                                  <input name="branch_code" class="span6" value="<?php echo !empty(set_value('branch_code')) ? set_value('branch_code') : (!empty($payment_values['bank_transfer_branch_code']) ? $payment_values['bank_transfer_branch_code'] : '');  ?>" type="text" placeholder="Branch Code">
                               	</div>
                             </div>
                             <div class="control-group">

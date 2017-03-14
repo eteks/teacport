@@ -1170,24 +1170,23 @@ var content_height = parseInt(window_height - (header_height + footer_height));
     });
 
     //ACTIVATE PLAN FOR PERSONAL BANKING
-    $(document).on('change','.show_plan_detail',function(){
-        if($(this).is(':checked')){
-            $('.feedback-design').hide();
-            $('.personal_banking').show();
-            handleFormWizards_banking();
+    // $(document).on('change','.show_plan_detail',function(){
+    //     if($(this).is(':checked')){
+    //         $('.feedback-design').hide();
+    //         $('.personal_banking').show();
+    //         handleFormWizards_banking();
+    //     }
+    //     else{
+    //         alert('Are you sure to disable plan ?');
+    //     }    
+    // });
 
-        }
-        else{
-            alert('Are you sure to disable plan ?');
-        }    
-    });
-
-    //PLAN FOR PERSONAL BANKING- IF EDIT
-    $(document).on('click','.edit_registrant_Plan',function(){
-            $('.feedback-design').hide();
-            $('.personal_banking').show();
-            handleFormWizards_banking();
-    });
+    // //PLAN FOR PERSONAL BANKING- IF EDIT
+    // $(document).on('click','.edit_registrant_Plan',function(){
+    //         $('.feedback-design').hide();
+    //         $('.personal_banking').show();
+    //         handleFormWizards_banking();
+    // });
 
     //BANKING TYPE ON CHANGE
     $(document).on('change','.select_banking_type',function(){
@@ -1195,11 +1194,14 @@ var content_height = parseInt(window_height - (header_height + footer_height));
             $(this).parents('#bank_tab1').find('.cash_detail_holder').show();
             $(this).parents('#bank_tab1').find('.cheque_detail_holder').hide();
         }
-        else{
+        else if(this.value == "cheque"){
             $(this).parents('#bank_tab1').find('.cash_detail_holder').hide();
             $(this).parents('#bank_tab1').find('.cheque_detail_holder').show();
         }
-
+        else {
+           $(this).parents('#bank_tab1').find('.cash_detail_holder').hide();
+           $(this).parents('#bank_tab1').find('.cheque_detail_holder').hide(); 
+        }
     });
 
     //FOR PLAN ACTIVATE

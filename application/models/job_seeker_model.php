@@ -559,6 +559,8 @@ class Job_seeker_model extends CI_Model {
 								'candidate_googleplus_url' => $data['cand_google'],
 								'candidate_linkedin_url' => $data['cand_linkedin'],
 								'candidate_tet_exam_status' => $data['cand_tet'],
+								'candidate_set_exam_status' => $data['cand_set'],
+								'candidate_net_exam_status' => $data['cand_net'],
 								'candidate_profile_completeness' => $pro_com,
 								// 'candidate_interest_subject_id' => $data['cand_int_sub'],
 								// 'candidate_extra_curricular_id' => implode(',', $data['cand_extra_cur_new']),

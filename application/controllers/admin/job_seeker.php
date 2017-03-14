@@ -88,7 +88,7 @@ class Job_Seeker extends CI_Controller {
 	  		if($this->input->post('index')==1 || $this->input->post('index')=="end") {
 	  			$validation_rules[] =  	array( 'field'   => 'cand_name','label'   => 'Candidate Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
 			    // $validation_rules[] =   array( 'field'   => 'cand_gen','label'   => 'Candidate Gender','rules'   => 'trim|required|xss_clean|' );
-			    $validation_rules[] =   array( 'field'   => 'cand_fa_name','label'   => 'Candidate Father Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space' );
+			    // $validation_rules[] =   array( 'field'   => 'cand_fa_name','label'   => 'Candidate Father Name','rules'   => 'trim|required|xss_clean|min_length[3]|max_length[50]|callback_alpha_dash_space');
 			   	// $validation_rules[] =   array( 'field'   => 'cand_dob','label'   => 'Candidate DOB','rules'   => 'trim|required|xss_clean|' );
 			   	// $validation_rules[] =   array( 'field'   => 'cand_mar_status','label'   => 'Candidate Marital Status','rules'   => 'trim|required|xss_clean|' );
 			   	// $validation_rules[] =   array( 'field'   => 'cand_moth_ton','label'   => 'Candidate Mother Tongue','rules'   => 'trim|required|xss_clean|' );

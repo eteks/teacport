@@ -217,11 +217,35 @@ $(document).ready(function(){
         });
     }); 
 
+    // Activate plan (Add and Edit option)
+    $(document).on('click','.plan_bank_details',function(e) {
+        var this_ajax_section = $(this).parents('#main-content').find('.plan_bank_details_form');
+        var href = $(this).data('href');
+        var action_data ={};
+        var targeted_popup_class = $(this).attr('data-popup-open');
+        action_data['action'] = $(this).data('mode');
+        action_data['value'] = $(this).data('id');
+        action_data[csrf_name] = csfrData[csrf_name];     
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+href,
+            data : action_data,
+            success: function(res) {
+                if(res) {
+                    $('.feedback-design').hide();   
+                    this_ajax_section.html(res);
+                    handleFormWizards_banking();
+                    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+                }
+            }
+        });
+    }); 
+
     // Tab menu submission - Popup form submission
     $(document).on('submit','.tab_form',function(e) {
         e.preventDefault();
         var formdata = new FormData();
-        $('.tab_form').find('.tabfield').each(function() {
+        $(this).find('.tabfield').each(function() {
             if($(this).attr('type') == 'file') {
                 if($(this)[0].files[0] != '') {
                     formdata.append($(this).attr('name'),$(this)[0].files[0]);                    
@@ -235,6 +259,16 @@ $(document).ready(function(){
             }
         });
         tabmenu_ci_validation('end',formdata);
+    });
+
+     // Tab menu submission - Popup form submission ( Bank details)
+    $(document).on('submit','.plan_bank_details_form',function(e) {
+        e.preventDefault();
+        var formdata = new FormData();
+        $(this).find('.tabfield').each(function() {
+            formdata.append($(this).attr('name'),$(this).val());
+        });
+        tabmenu_ci_validation_bank('end',formdata);
     });
 
     /* Popup module ajax end */ 
@@ -398,10 +432,8 @@ function handleFormWizards_banking() {
                         // If it's the last tab then hide the last button and show the finish instead
                         if($current >= $total) {
                             $('#rootwizard_activate').find('.pager .next').hide();
-                            if($('#rootwizard_activate').find('#popup_mode').val() != 'view')  {
-                                $('#rootwizard_activate').find('.pager .finish').show();
-                                $('#rootwizard_activate').find('.pager .finish').removeClass('disabled');
-                            }
+                            $('#rootwizard_activate').find('.pager .finish').show();
+                            $('#rootwizard_activate').find('.pager .finish').removeClass('disabled');
                         } 
                         else {
                             $('#rootwizard_activate').find('.pager .next').show();
@@ -410,56 +442,37 @@ function handleFormWizards_banking() {
                         $('#rootwizard_activate').parents('form').data('index',$current);
                     },
         onNext: function (tab, navigation, index) {
-                    var this_form = $('#rootwizard_activate').parents('form');  
-                    if($('#rootwizard_activate').find('#popup_mode').val() == 'view')  {
+                        var return_val = tabmenu_ci_validation_bank('next','popup');
                         jQuery('li', $('#popup_wizard_section')).removeClass("done");
                         var li_list = navigation.find('li');
                         for (var i = 0; i < index; i++) {
                             jQuery(li_list[i]).addClass("done");
-                        } 
-                        var return_val = 1;
-                    }
-                    else {
-                        var return_val = tabmenu_ci_validation('next','popup');
-                         jQuery('li', $('#popup_wizard_section')).removeClass("done");
+                        }                        
+         
+                        if(return_val == 0) {
+                            return false;
+                        }
+                        else {
+                            return true;
+                        }
+                    },
+        onPrevious: function (tab, navigation, index) {
+                        var total = navigation.find('li').length;
+                        var current = index + 1;
+                        // set wizard title
+                        $('.step-title', $('#rootwizard_activate')).text('Step ' + (index + 1) + ' of ' + total);
+                        // set done steps
+                        jQuery('li', $('#rootwizard_activate')).removeClass("done");
                         var li_list = navigation.find('li');
                         for (var i = 0; i < index; i++) {
                             jQuery(li_list[i]).addClass("done");
-                        }                        
-                    }  
-
-                    if(return_val == 0) {
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-                },
-            onPrevious: function (tab, navigation, index) {
-                var total = navigation.find('li').length;
-                var current = index + 1;
-                // set wizard title
-                $('.step-title', $('#rootwizard_activate')).text('Step ' + (index + 1) + ' of ' + total);
-                // set done steps
-                jQuery('li', $('#rootwizard_activate')).removeClass("done");
-                var li_list = navigation.find('li');
-                for (var i = 0; i < index; i++) {
-                    jQuery(li_list[i]).addClass("done");
-                }
-            },
+                        }
+                    },
         onTabClick: function(tab, navigation, index) {
-                     if($('.tab-content').find('#popup_mode').val() == 'edit')
-                    {
                         error_popup('on tab click disabled');
                         return false;
-                       }
-                       else {
-                        return true;
-                       }
                     }
-
     });
-    
 }
 
 function tabmenu_ci_validation(value,data) {
@@ -527,6 +540,63 @@ function tabmenu_ci_validation(value,data) {
                         $('[data-popup="' + this_popup + '"]').fadeOut(350);
                         this_table_content.html(res.output);
                         datatable_initialization();
+                        this_popup_content.remove();
+                    },5000);
+            }
+        }
+    });
+    return return_val;
+}
+
+function tabmenu_ci_validation_bank(value,data) {
+    var this_form = $('.plan_bank_details_form');
+    var rid = this_form.find('.hidden_id').val();
+    var this_popup = this_form.parents('.personal_banking').data('popup');
+    var this_popup_content = this_form.find('.tab-content');
+    if(value == 'next') {
+        var this_index = this_form.data('index');
+        var form_data = new FormData();
+        this_form.find('.tabfield'+this_index).each(function() {
+            form_data.append($(this).attr('name'),$(this).val());
+        });
+    }
+    else {
+        var this_index = "end";  
+        var form_data = data;
+    }
+    form_data.append(csrf_name,csfrData[csrf_name]);
+    form_data.append('index',this_index);
+    form_data.append('rid',rid);
+
+    var return_val = "";
+    $.ajax({
+        async: false,
+        type : "POST",
+        url : admin_baseurl+this_form.attr('action'),
+        dataType : 'json',
+        contentType: false,       // The content type used when sending data to the server.
+        cache: false,             // To unable request pages to be cached
+        processData:false, 
+        data : form_data,
+        success: function(res) {
+            if(res.error==1 && res.status!='valid') {
+                $('.val_error').html('<i class="icon-remove-sign"></i>'+res.status);
+                $('.val_error').removeClass('update_success_md');
+                $('.val_error').fadeIn(500);
+                $('.val_error').fadeOut(3000);
+                return_val = 0;
+            }
+            else if(res.error==1 && res.status=='valid') {
+                return_val = 1;
+            }
+            else if(res.error == 2) {
+                $('.val_error').html('<i class=" icon-ok-sign"></i>'+res.status);
+                $('.val_error').addClass('update_success_md');
+                $('.val_error').fadeIn(500);
+                $('.val_error').fadeOut(3000);
+                setTimeout(function()
+                    {
+                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
                         this_popup_content.remove();
                     },5000);
             }

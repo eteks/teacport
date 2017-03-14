@@ -841,6 +841,8 @@ class Job_seeker extends CI_Controller {
 			array('field' => 'cand_board[]', 'label' => 'Education Board','rules' => 'required|trim|xss_clean'),
 			array('field' => 'cand_percen[]', 'label' => 'Education Percentage','rules' => 'required|trim|xss_clean|maxlength[5]|callback_numeric_dot'),
 	    	array('field' => 'cand_tet', 'label' => 'TET Exam Status','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_set', 'label' => 'SET Exam Status','rules' => 'required|trim|xss_clean'),
+	    	array('field' => 'cand_net', 'label' => 'NET Exam Status','rules' => 'required|trim|xss_clean'),
 	    	// array('field' => 'cand_int_sub', 'label' => 'Interest Subject','rules' => 'required|trim|xss_clean'),
 	    	array('field' => 'cand_extra_cur[]', 'label' => 'Extra Curricular','rules' => 'trim|xss_clean|callback_other_extracurriculars'),
 			array('field' => 'cand_addr1', 'label' => 'Address','rules' => 'trim|xss_clean|minlength[3]|maxlength[150]'),

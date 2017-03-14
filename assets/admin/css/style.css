@@ -5004,3 +5004,8 @@ i#admin_error_login {
     color: red;
     font-size: 12px;
 }
+.bank_details_sub_note {
+    color : red;
+    font-size: 12px;
+    text-align : center;
+}

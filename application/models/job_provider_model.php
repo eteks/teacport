@@ -891,17 +891,22 @@ class Job_provider_model extends CI_Model {
         return $data;
     }
 
-    // Payment subscription validation - Renewal Plan
+    // Payment subscription validation - Orignial Plan
     public function orginal_plan_valid($plan_id,$org_id) {
         $data = '';
+        $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+        $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+        $check_already_sub_array = $check_already_sub->num_rows();
+
         $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
-        $check_already = $this->db->get_where('tr_organization_subscription',$already_where);
-        if($check_already -> num_rows() == 1) {
-            $data = 1; // if wrong
+        $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
+
+        if($check_already_sub_array == 0 && $check_already  == 0) {
+        	$data = 2; // if correct 
         }
         else {
-            $data = 2; // if correct 
-         }
+            $data = 1; // if wrong   
+        }
        return $data;
     }
 

@@ -193,7 +193,7 @@
     </tr>
     <tr>
         <td width="50%" class="heading"> Work Type </td>
-        <td width="50%" class="content"> <?php echo ucfirst($candidate_details[0]['candidate_type']); ?> </td>
+        <td width="50%" class="content"> <?php echo ($candidate_details[0]['candidate_type'] == "full") ? "Full Time" : "Part Time"; ?> </td>
     </tr>
 </table>
 <!-- Education Profile -->
@@ -202,6 +202,14 @@
     <tr>
         <td width="50%" class="heading"> Have you passed in Teacher Eligibility Test </td>
         <td width="50%" class="content"> <?php if($candidate_details[0]['candidate_tet_exam_status']=="1") echo "Yes"; else echo "No"; ?> </td>
+    </tr>
+    <tr>
+        <td width="50%" class="heading"> Have you passed in State Eligibility Test </td>
+        <td width="50%" class="content"> <?php if($candidate_details[0]['candidate_set_exam_status']=="1") echo "Yes"; else echo "No"; ?> </td>
+    </tr>
+    <tr>
+        <td width="50%" class="heading"> Have you passed in National Eligibility Test </td>
+        <td width="50%" class="content"> <?php if($candidate_details[0]['candidate_net_exam_status']=="1") echo "Yes"; else echo "No"; ?> </td>
     </tr>
     <tr>
         <td width="50%" class="heading"> Extra Curricular skills </td>
