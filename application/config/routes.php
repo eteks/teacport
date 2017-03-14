@@ -134,7 +134,7 @@ $route['seeker/candidate_profile_institution'] 			= 'job_seeker/candidate_profil
 //OTHER PAGES
 $route['aboutus'] 										= 'home/aboutus';
 $route['contactus'] 									= 'home/contactus';							
-$route['pricing']										= 'home/pricing';
+// $route['pricing']										= 'home/pricing';
 $route['faq'] 											= 'home/faq';
 $route['allinstitutions'] 								= 'home/allinstitutions';
 $route['allinstitutions/(:num)'] 						= 'home/allinstitutions/$1';
@@ -238,7 +238,6 @@ $route['main/feedback_form'] = 'admin/other_module/feedback_form';
 $route['main/latest_news'] = 'admin/other_module/latest_news';
 // $route['main/latest_news_popup'] = 'admin/other_module/latest_news_popup';
 $route['main/latest_news_ajax'] = 'admin/other_module/latest_news_content';
-
 $route['main/site_log'] = 'admin/other_module/site_log';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';

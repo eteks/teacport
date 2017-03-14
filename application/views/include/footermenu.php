@@ -86,7 +86,7 @@
                                 	<span class="clearfix"> </span>
                                 </li>
                                 <li><a class="transform_lowercase" href="mailto:info@teachersrecruit.com"><i class="fa fa-envelope"></i> info@teachersrecruit.com</a></li>
-                                <li><i class="fa fa-phone"></i> +91 95850 12949</li>
+                                <li><i class="fa fa-phone"></i> +91 82707 34126</li>
                                 <li><i class="fa fa-clock-o"></i> Mon - Sun: 8:00 - 17:00</li>
                             </ul>
                         </div>
@@ -113,15 +113,16 @@
                                             <div class="visitor_no"> 
                                                 <h4>
                                                     <?php
-                                                        if(!empty($site_visit_count)) :
-                                                            if(strlen($site_visit_count) <= 8) :
-                                                                echo sprintf("%08d", $site_visit_count);
-                                                                else :
-                                                                    echo $site_visit_count;
-                                                            endif;
-                                                            else :
-                                                                echo sprintf("%08d", 0);
-                                                        endif;
+                                                        // if(!empty($site_visit_count)) :
+                                                        //     if(strlen($site_visit_count) <= 8) :
+                                                        //         echo sprintf("%08d", $site_visit_count);
+                                                        //         else :
+                                                        //             echo $site_visit_count;
+                                                        //     endif;
+                                                        //     else :
+                                                        //         echo sprintf("%08d", 0);
+                                                        // endif;
+                                                        echo sprintf("%08d", 537379);
                                                     ?>
                                                 </h4>
                                             </div>

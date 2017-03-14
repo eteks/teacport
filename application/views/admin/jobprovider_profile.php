@@ -1118,23 +1118,23 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php } ?>
                          	<div class="span12">
                         		<div class="control-group check_grace">
-                              <input type="hidden" name="grace_period_allocate_id" value="<?php if($latest_plan_details['is_renewal'] ==1) echo $latest_plan_details['upgrade_or_renewal_id']; else echo $latest_plan_details['org_subscription_id']; ?>" data-renewal="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>">
-                        			<input type="hidden" name="grace_period_renewal" value="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>">
+                              <input type="hidden" name="grace_period_allocate_id" value="<?php if($latest_plan_details['is_renewal'] ==1) echo $latest_plan_details['upgrade_or_renewal_id']; else echo $latest_plan_details['org_subscription_id']; ?>" data-renewal="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>" readonly>
+                        			<input type="hidden" name="grace_period_renewal" value="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>" readonly>
                               <input type="checkbox" name="grace_period_applicable_status" class="control-group apply_grace_period" <?php if($latest_plan_details['is_grace_period_available'] == 1 || $latest_plan_details['renewal_is_grace_period_available'] == 1){ ?> disabled checked title="Already Grace Period Assigned" <?php } else if(empty($latest_plan_details['is_renewal']) && $latest_plan_details['organization_subscription_status'] == 1){ ?> disabled title="cannot assign grace period when provider is active"  <?php } ?>>Apply Grace period for this provider latest/current plan 
-                              <input type="hidden" class="grace_period_days" name="grace_period_days" value="10">
+                              <input type="hidden" class="grace_period_days" name="grace_period_days" value="10" readonly>
                         		</div>
                         	</div>
                         	<div class="span12 show_grace_period hide_all">
                           	<div class="span6 control-group">    
                                 <label class="control-label">Grace Period Start Date</label>
                             		<span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="15/02/2017">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="15/02/2017" readonly>
   	                          	</span>
                           	</div>
                           	<div class="span6 control-group">
                             		<label class="control-label">Grace Period End Date</label>
                             		<span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="15/02/2017">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="15/02/2017" readonly>
                                 </span>
                           	</div>
                         	</div>
@@ -1142,13 +1142,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">    
                                 <label class="control-label">Email Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="10">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="10" readonly>
                                 </span>
                             </div>
                             <div class="span6 control-group">
                                 <label class="control-label">SMS Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="20">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="20" readonly>
                                 </span>
                             </div>
                           </div>
@@ -1156,13 +1156,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">    
                                 <label class="control-label">Resume Download Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="10">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="10" readonly>
                                 </span>
                             </div>
                             <div class="span6 control-group">
                                 <label class="control-label">Vacancy Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="20">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="20" readonly>
                                 </span>
                             </div>
                           </div>
@@ -1170,7 +1170,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">    
                                 <label class="control-label">Ad Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="30">
+                                  <input type="text" class="grace_period_days" name="grace_period_days" value="30" readonly>
                                 </span>
                             </div>
                           </div>
@@ -1552,8 +1552,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
           <a class="popup-close" data-popup-close="popup_plan_activate" href="#">x</a>
         </div>
       </div> <!--end full and Edit-->
-      
-
     </div>
    </div> 
     <!-- END PAGE CONTAINER-->

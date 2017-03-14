@@ -605,7 +605,6 @@ class Job_Providermodel extends CI_Model {
     return $model_data;
   }
 
-
   /* ===================          Job Provider Transaction Model End    ====================== */
   
 }

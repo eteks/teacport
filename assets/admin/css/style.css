@@ -5009,3 +5009,8 @@ i#admin_error_login {
     font-size: 12px;
     text-align : center;
 }
+#tab4 input{
+    border: none;
+    cursor: default;
+    background-color: #fff;
+}

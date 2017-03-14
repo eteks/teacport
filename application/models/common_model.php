@@ -275,6 +275,30 @@ class Common_model extends CI_Model {
 		return $posting->result_array(); 
 	}
 
+	public function applicable_posting_by_ins_index($ins_id)
+	{
+		if($ins_id != '') {
+			$ins_id = explode(',',$ins_id);
+			$a = 1;
+			$where = "posting_status = 1 AND (";
+			foreach ($ins_id as $val) {
+				$where .= "FIND_IN_SET('".$val."',posting_institution_id) !=0";
+				if($a < count($ins_id)) {
+				$where .= " OR ";
+				}
+				else if($a == count($ins_id)) {
+				$where .= ")";
+				}
+				$a++;
+			}
+		}
+		else {
+			$where = '(posting_status = 1)';
+		}
+		$posting = $this->db->get_where('tr_applicable_posting',$where);
+		return $posting->result_array(); 
+	}
+
 	public function classlevel_by_ins($ins_id)
 	{
 		$this->db->select('*');    

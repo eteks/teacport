@@ -47,9 +47,9 @@ class Master_data_model extends CI_Model {
     else if($status=='save') {
       $state_insert_data = array( 
                             'state_name' => $this->input->post('s_name'),
-                            'state_status' => $this->input->post('s_staus')
+                            'state_status' => $this->input->post('s_status')
                           );
-      $this->db->insert("tr_state", $state_insert_data); 
+      $this->db->insert("tr_state", $state_insert_data);
       $model_data['status'] = "Inserted Successfully";
       $model_data['error'] = 2;
     }

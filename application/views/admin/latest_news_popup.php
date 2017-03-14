@@ -271,4 +271,3 @@ else :
 redirect(base_url().'main');
 endif;
 ?>
-

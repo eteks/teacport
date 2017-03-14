@@ -285,7 +285,6 @@ class Admin_Model extends CI_Model {
     $model_data = $this->db->get_where('tr_latest_news',array('latest_news_id' => $id))->row_array();
     return $model_data;
   }
-
 }
 
 /* End of file Admin_Model.php */

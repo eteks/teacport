@@ -549,6 +549,15 @@ class Job_Provider extends CI_Controller {
 
 	/* ===================          Job Provider Profile Controller End     ====================== */
 
+	// Job provider profile - Visit details
+	public function job_provider_visit_details_ajax()
+	{
+		if($this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['provider_visit_details'] = $this->job_providermodel->get_provider_visit_details($value);
+			$this->load->view('admin/jobprovider_profile',$data);
+		}
+	}
 
 
 	/* ===================          Job Provider Vacancy Controller Start     ====================== */
