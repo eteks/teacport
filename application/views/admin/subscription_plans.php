@@ -79,7 +79,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                 <div class="clearfix add_section">
                   <div class="btn-group">
                   <?php if(($is_super_admin) || (recursiveFind($access_rights, "add"))): ?>
-                    <button id="sample_editable_1_new" data-open="popup_section_subs" class="btn green add_option" data-action="save">
+                    <button id="sample_editable_1_new" data-popup-open="popup_section_subs" class="btn green new_add_option" data-mode="add" data-action="save" data-href="subscription_plans_ajax">
                       Add New <i class="icon-plus"></i>
                     </button>
                   <?php endif; ?>
@@ -152,7 +152,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </td>
                         <?php if(($is_super_admin) || (recursiveFind($access_rights, "edit"))): ?>
                         <td class="edit_section">
-                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section_subs" data-href="subscription_plans_ajax" data-mode="edit" data-popup-open="popup_section_subs" data-action="update">
+                          <a class="edit_option popup_fields" data-id="<?php echo $sub['subscription_id']; ?>" data-popup-open="popup_section_subs" data-href="subscription_plans_ajax" data-mode="edit" data-action="update">
                             Edit
                           </a>
                         </td>
@@ -191,27 +191,27 @@ if(!empty($this->session->userdata("admin_login_status"))):
             </h4>                        
           </div>
           <div class="widget-body form">
-            <form action="subscription_plans" class="form-horizontal popup_form admin_form" data-mode="">
+            <form action="subscription_plans" class="form-horizontal admin_simple_popup_form" data-mode="">
             <p class="admin_status"> </p>
               <fieldset>
                 <legend> Subscription plan details:</legend>
                 <div class="form-wizard pop_details_section">
                 <?php } ?>
                 <?php
-                if(!empty(isset($subscription_plan_details)) || !$this->input->is_ajax_request()) :
+                if(!empty(isset($subscription_plan_details)) || (!empty($mode) && $mode=="add")) :
                 ?>
                   <div class="tab-content">
                     <div class="col12">
                       <div class="col6 control-group">  
                         <label class="control-label">Subscription Plan</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control" maxlength="50" placeholder="Subscription Plan" name="sub_plan" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_plan']; ?>"/> 
+                          <input type="text" class="form-control" maxlength="50" placeholder="Subscription Plan" name="sub_plan" value="<?php if(isset($subscription_plan_details['subscription_plan'])) echo $subscription_plan_details['subscription_plan']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label">Subscription Price</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control decimal_act" maxlength="9" placeholder="Subscription Price" name="sub_price" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_price']; ?>"/> 
+                          <input type="text" class="form-control decimal_act" maxlength="9" placeholder="Subscription Price" name="sub_price" value="<?php if(isset($subscription_plan_details['subscription_price'])) echo $subscription_plan_details['subscription_price']; ?>"/> 
                         </span>
                       </div>
                     </div>
@@ -219,7 +219,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">  
                         <label class="control-label">Validitity Days</label>
                         <span class="dynamic_data"> 
-                           <input class="numeric_value restrict_zero" placeholder="Days of Validity" size="16" type="text" name="validity_days" maxlength='4' value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_validity_days'];//echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
+                           <input class="numeric_value restrict_zero" placeholder="Days of Validity" size="16" type="text" name="validity_days" maxlength='4' value="<?php if(isset($subscription_plan_details['subscription_validity_days'])) echo $subscription_plan_details['subscription_validity_days'];//echo date("d/m/Y", strtotime($subscription_plan_details['subcription_valid_start_date'])) ; ?>"/>
                         </span>
                       </div>
                       <!-- <div class="col6 control-group">  
@@ -239,37 +239,37 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       <div class="col6 control-group">
                         <label class="control-label">Maximum Posts Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Posts Count" name="sub_max_vacancy" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_posts']; ?>"/> 
+                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Posts Count" name="sub_max_vacancy" value="<?php if(isset($subscription_plan_details['subscription_max_no_of_posts'])) echo $subscription_plan_details['subscription_max_no_of_posts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">  
                         <label class="control-label">Maximum SMS Count</label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum SMS Count" name="sub_max_sms" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_sms_counts']; ?>"/> 
+                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum SMS Count" name="sub_max_sms" value="<?php if(isset($subscription_plan_details['subcription_sms_counts'])) echo $subscription_plan_details['subcription_sms_counts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Email Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Email Count" name="sub_max_email" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_email_counts']; ?>"/> 
+                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Email Count" name="sub_max_email" value="<?php if(isset($subscription_plan_details['subscription_email_counts'])) echo $subscription_plan_details['subscription_email_counts']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Resume Count </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Resume Count" name="sub_max_resume" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subcription_resume_download_count']; ?>"/> 
+                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Resume Count" name="sub_max_resume" value="<?php if(isset($subscription_plan_details['subcription_resume_download_count'])) echo $subscription_plan_details['subcription_resume_download_count']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Maximum Ads </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
+                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="5" placeholder="Maximum Ads" name="sub_max_ads" value="<?php if(isset($subscription_plan_details['subscription_max_no_of_ads'])) echo $subscription_plan_details['subscription_max_no_of_ads']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
                         <label class="control-label"> Max Days Ad visible </label>
                         <span class="dynamic_data"> 
-                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="3" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
+                          <input type="text" class="form-control numeric_act restrict_zero" maxlength="3" placeholder="Max Days Ad visisble" name="sub_max_days_ad_visible" value="<?php if(isset($subscription_plan_details['subscription_max_days_ad_visible'])) echo $subscription_plan_details['subscription_max_days_ad_visible']; ?>"/> 
                         </span>
                       </div>
                       <div class="col6 control-group">
@@ -277,8 +277,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <span class="dynamic_data"> 
                           <select name="sub_status">
                             <option value=""> Please select status </option>
-                                <option value="1" <?php if(isset($subscription_plan_details))  if($subscription_plan_details['subscription_status']==1) echo "selected"; ?>> Active </option>
-                                <option value="0" <?php if(isset($subscription_plan_details))  if($subscription_plan_details['subscription_status']==0) echo "selected"; ?>> Inactive </option>
+                                <option value="1" <?php if(isset($subscription_plan_details['subscription_status']))  if($subscription_plan_details['subscription_status']==1) echo "selected"; ?>> Active </option>
+                                <option value="0" <?php if(isset($subscription_plan_details['subscription_status']))  if($subscription_plan_details['subscription_status']==0) echo "selected"; ?>> Inactive </option>
                           </select>
                         </span>
                       </div>
@@ -289,7 +289,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </span>
                       </div> -->
                   </div>
-                  <input type="hidden" name="rid" value="<?php if(isset($subscription_plan_details)) echo $subscription_plan_details['subscription_id']; ?>"/>
+                  <input type="hidden" name="action" value="<?php echo ((isset($mode) && !empty($mode) && $mode == "edit") ? "update" : "save"); ?>"/>
+                  <input type="hidden" name="rid" value="<?php if(isset($subscription_plan_details['subscription_id'])) echo $subscription_plan_details['subscription_id']; ?>"/>
                 </div>
                 <button type="submit" class="btn btn-info save_button">Save</button>
                 <?php

@@ -184,6 +184,7 @@ $(document).ready(function(){
     // Edit and Full view option
     $(document).on('click','.popup_fields',function(e) {
     	// handleFormWizards();
+        var section = $(this).data('section');
         if($(this).data('section') == "header") {
             var this_ajax_section = $(this).parents('#header').find('.pop_details_section');
         }
@@ -212,10 +213,86 @@ $(document).ready(function(){
                     $('.multi_choice').find('ul').slimScroll({
                         height: 'auto'
                     });
+                    if(section == "editor") {
+                        CKEDITOR.replace('ckeditor');
+                        // The height value now applies to the editing area.
+                        editor.resize( '100%', '350', true );
+                    }
                 }
             }
         });
     }); 
+
+    // Add new option - Popup
+    $(document).on('click','.new_add_option',function(e) {
+        // handleFormWizards();
+        var section = $(this).data('section');
+        var this_ajax_section = $(this).parents('#main-content').find('.pop_details_section');
+        var action_data ={};
+        var targeted_popup_class = $(this).attr('data-popup-open');
+        action_data['action'] = $(this).data('mode');
+        action_data[csrf_name] = csfrData[csrf_name];        
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).data('href'),
+            data : action_data,
+            success: function(res) {
+                if(res) {
+                    this_ajax_section.html(res);
+                    $('[data-popup="' + targeted_popup_class + '"]').fadeIn(350);
+                    if(section == "editor") {
+                        CKEDITOR.replace('ckeditor');
+                        // The height value now applies to the editing area.
+                        editor.resize( '100%', '350', true );
+                    }
+                }
+            }
+        });
+    }); 
+
+    // Latest news form
+     $('.admin_simple_popup_form').on('submit',function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+        var this_status = $(this).find('.admin_status');
+        var this_popup = $(this).parents('.popup').data('popup');
+        var this_table_content = $(this).parents('#main-content').find('.table_content_section');
+        var this_popup_content = $(this).find('.tab-content');
+        form_data.append(csrf_name,csfrData[csrf_name]);
+
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('action'),
+            dataType : 'json',
+            data : form_data,
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false,
+            success: function(res) {
+                if(res.error == 1) {
+                    this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                    this_status.removeClass('update_success_md');
+                    this_status.fadeIn(1000);
+                    this_status.fadeOut(3000);
+                }
+                else if(res.error == 2) {
+                    this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                    this_status.addClass('update_success_md');
+                    this_status.fadeIn(1000);
+                    this_status.fadeOut(3000);
+                    $('.admin_table').dataTable().fnDestroy();  //Commented for page reload
+                    setTimeout(function()
+                    {
+                        this_table_content.html(res.output);
+                        $('[data-popup="' + this_popup + '"]').fadeOut(350);
+                        datatable_initialization(); //Commented for page reload
+                        // location.reload();
+                        this_popup_content.remove();
+                    },5000);
+                }
+            },            
+        });
+    });
 
     // Activate plan (Add and Edit option)
     $(document).on('click','.plan_bank_details',function(e) {

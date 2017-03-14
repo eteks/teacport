@@ -885,5 +885,12 @@ class Common_model extends CI_Model {
 		return $model_data;
 	}
 
+	// To get latest news content
+	public function latest_news_content($id) {
+		$where = '(latest_news_id="'.$id.'" AND latest_news_type="content" AND latest_news_status=1)';
+		$model_data = $this->db->get_where('tr_latest_news',$where)->row_array();
+		return $model_data;
+	}
+
 } // End
 

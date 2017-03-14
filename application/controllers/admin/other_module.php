@@ -18,73 +18,58 @@ class Other_module extends CI_Controller {
 	{		
 		$this->load->view('admin/feedback_form');
 	}
-	public function latest_news_popup()
-	{		
-		$this->load->view('admin/latest_news_popup');
-	}
+	// public function latest_news_popup()
+	// {		
+	// 	$this->load->view('admin/latest_news_popup');
+	// }
 	public function latest_news()
 	{	
 		//Functionality for Both update and save
 		if(($this->input->post('action')=='update' && $this->input->post('rid')) || ($this->input->post('action')=='save')){
-				if($this->input->post('action')=='update'){
-					$id = $this->input->post('rid');
-					$validation_rules = array(
-		                            array(
-		                              'field'   => 'l_news_title',
-		                              'label'   => 'Latest News title',
-		                              'rules'   => 'trim|required|xss_clean|min_length[15]|max_length[150]|edit_unique[tr_latest_news.latest_news_id.latest_news_title.'.$id.']'
-		                              //edit_unique is a custom funciton
-		                            ),
-		                            array(
-		                                 'field'   => 'l_redirect_link',
-		                                 'label'   => 'Latest News Link',
-		                                 'rules'   => 'trim|required|xss_clean'
-		                            ),
-		                            array(
-		                                 'field'   => 'l_news_status',
-		                                 'label'   => 'Latest News Status',
-		                                 'rules'   => 'trim|required|xss_clean|'
-		                            ),
-		                        );
+			$validation_rules = array();
+			if($this->input->post('action')=='update'){
+				$id = $this->input->post('rid');
+				$validation_rules[] = array( 'field'   => 'news_title','label'   => 'News title','rules'   => 'trim|required|xss_clean|min_length[15]|max_length[150]|edit_unique[tr_latest_news.latest_news_id.latest_news_title.'.$id.']' );
+				$validation_rules[] = array( 'field'   => 'news_type','label'   => 'News Type','rules'   => 'trim|required|xss_clean' );
+				if($this->input->post('news_type') && $this->input->post('news_type')=="link") {
+					$validation_rules[] = array( 'field'   => 'news_link','label'   => 'News Link','rules'   => 'trim|required|xss_clean' );
 				}
-				else{
-					$validation_rules = array(
-		                            array(
-		                              'field'   => 'l_news_title',
-		                              'label'   => 'Latest News title',
-		                              'rules'   => 'trim|required|xss_clean|min_length[15]|max_length[150]|is_unique[tr_latest_news.latest_news_title]'
-		                            ),
-		                            array(
-		                                 'field'   => 'l_redirect_link',
-		                                 'label'   => 'Latest News Link',
-		                                 'rules'   => 'trim|required|xss_clean'
-		                            ),
-		                            array(
-		                                 'field'   => 'l_news_status',
-		                                 'label'   => 'Group Status',
-		                                 'rules'   => 'trim|required|xss_clean|'
-		                            ),
-		                        );
+				else if($this->input->post('news_type') && $this->input->post('news_type')=="content") {
+					$validation_rules[] = array( 'field'   => 'news_content','label'   => 'News Content','rules'   => 'trim|required|xss_clean' );
 				}
-				$this->form_validation->set_rules($validation_rules);
-		  		if ($this->form_validation->run() == FALSE) {   
-			        foreach($validation_rules as $row){
-			          $field = $row['field'];         //getting field name
-			          $error = form_error($field);    //getting error for field name
-			          //form_error() is inbuilt function
-			          //if error is their for field then only add in $errors_array array
-			          if($error){
-			            $data['status'] = strip_tags($error);
-			            $data['error'] = 1;
-			            break;
-			          }
-			        }
-		  		}
-	      		else {
-	         		$data_values = $this->admin_model->latest_news($this->input->post('action')); //the value here will be pass either "update" or "save"
-	         		$data['error'] = $data_values['error'];
-			        $data['status'] = $data_values['status'];
-	     		}
+				$validation_rules[] = array( 'field'   => 'news_status','label'   => 'News Status','rules'   => 'trim|required|xss_clean' );
+			}
+			else{
+				$validation_rules[] = array( 'field'   => 'news_title','label'   => 'News title','rules'   => 'trim|required|xss_clean|min_length[15]|max_length[150]|is_unique[tr_latest_news.latest_news_title]' );
+				$validation_rules[] = array( 'field'   => 'news_type','label'   => 'News Type','rules'   => 'trim|required|xss_clean' );
+				if($this->input->post('news_type') && $this->input->post('news_type')=="link") {
+					$validation_rules[] = array( 'field'   => 'news_link','label'   => 'News Link','rules'   => 'trim|required|xss_clean' );
+				}
+				else if($this->input->post('news_type') && $this->input->post('news_type')=="content") {
+					$validation_rules[] = array( 'field'   => 'news_content','label'   => 'News Content','rules'   => 'trim|required|xss_clean' );
+				}
+				$validation_rules[] = array( 'field'   => 'news_status','label'   => 'News Status','rules'   => 'trim|required|xss_clean' );
+			}
+
+			$this->form_validation->set_rules($validation_rules);
+	  		if ($this->form_validation->run() == FALSE) {   
+		        foreach($validation_rules as $row){
+		          $field = $row['field'];         //getting field name
+		          $error = form_error($field);    //getting error for field name
+		          //form_error() is inbuilt function
+		          //if error is their for field then only add in $errors_array array
+		          if($error){
+		            $data['status'] = strip_tags($error);
+		            $data['error'] = 1;
+		            break;
+		          }
+		        }
+	  		}
+      		else {
+         		$data_values = $this->admin_model->latest_news($this->input->post('action')); //the value here will be pass either "update" or "save"
+         		$data['error'] = $data_values['error'];
+		        $data['status'] = $data_values['status'];
+     		}
 		}
 		
     	// Delete data
@@ -93,6 +78,7 @@ class Other_module extends CI_Controller {
       		$data['error'] = $data_values['error'];
 		    $data['status'] = $data_values['status'];
       	}
+
       	else {
       		$data['error'] = 0;
 		    $data['status'] = 0;
@@ -108,13 +94,14 @@ class Other_module extends CI_Controller {
 			$data_ajax['latest_news_values'] = $data_values['latest_news_values'];
 			$data_ajax['status'] = $data['status'];
 			$result['error'] = $data['error'];
+			$result['status'] = $data['status'];
 			// print_r($data_ajax['group_values']);
-			$result['output'] = $this->load->view('admin/latest_news',$data_ajax,true);
+			$result['output'] = $this->load->view('admin/latest_news_popup',$data_ajax,true);
 			echo json_encode($result);
 		}
 		else {
 			$data['latest_news_values'] = $data_values['latest_news_values'];
-			$this->load->view('admin/latest_news',$data);
+			$this->load->view('admin/latest_news_popup',$data);
 		}
 		// $this->load->view('admin/latest_news');
 	}
@@ -134,6 +121,22 @@ class Other_module extends CI_Controller {
 	{
 			$admin_feedback_form = $this->admin_model->get_admin_feedback_form();
 			$this->config->set_item('feedback_data',$admin_feedback_form);
+	}	
+	
+	// To get latest news content
+	public function latest_news_content()
+	{
+		if($this->input->post('action') && $this->input->post('value')) {
+			$value = $this->input->post('value');
+			$data['latest_news_details'] = $this->admin_model->get_latest_news_details($value);
+			$data['mode'] = $this->input->post('action');
+			$this->load->view('admin/latest_news_popup',$data);
+		}
+		else if($this->input->post('action') && $this->input->post('action') == "add") {
+			$data['mode'] = $this->input->post('action');
+			$data['latest_news_details'] = array();
+			$this->load->view('admin/latest_news_popup',$data);
+		}
 	}	
 	public function site_log()
 	{		

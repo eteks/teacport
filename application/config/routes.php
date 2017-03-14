@@ -145,7 +145,7 @@ $route['teachersvacancy/(:num)']  						= 'home/vacancies/$1';
 $route['informations'] 									= 'home/informations';
 $route['terms'] 										= 'home/terms';
 $route['qualification_posting'] 						= 'home/qua_pos_by_institution';
-$route['latestnews_content'] 							= 'home/latestnews_content';
+$route['latest_news_content/(:num)'] 					= 'home/latestnews_content/$1';
 
 
 /* ===================          Route settings for Admin Start     ====================== */
@@ -233,8 +233,12 @@ $route['main/bank_details'] = 'admin/setting/bank_details';
 
 $route['main/site_visit_tracking'] = 'admin/other_module/site_visit_tracking';
 $route['main/feedback_form'] = 'admin/other_module/feedback_form';
+
+// $route['main/latest_news'] = 'admin/other_module/latest_news';
 $route['main/latest_news'] = 'admin/other_module/latest_news';
-$route['main/latest_news_popup'] = 'admin/other_module/latest_news_popup';
+// $route['main/latest_news_popup'] = 'admin/other_module/latest_news_popup';
+$route['main/latest_news_ajax'] = 'admin/other_module/latest_news_content';
+
 $route['main/site_log'] = 'admin/other_module/site_log';
 $route['main/admin_login'] = 'admin/admin_login';
 $route['main/subscription_plans_ajax'] = 'admin/subscription_plan/subscription_plans_ajax';

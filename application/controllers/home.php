@@ -486,8 +486,12 @@ class Home extends CI_Controller {
 	}
 
 	//Latest News
-	public function latestnews_content(){
-		$this->load->view('latestnews_content');
+	public function latestnews_content() {
+		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
+		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
+		$id = $this->uri->segment(2);
+		$data['content'] = $this->common_model->latest_news_content($id);
+		$this->load->view('latestnews_content',$data);
 	}
 
 }

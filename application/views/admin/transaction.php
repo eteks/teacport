@@ -84,9 +84,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         <tr class="ajaxTitle">
                           <th> Transaction Id </th>
                           <th> Organization Name </th>
-                          <th> Merchant Transaction Id </th>
-                          <th> Payu Unique Id </th>
-                          <th> Payment Id </th>
+                          <th> Tracking Id </th>
+                          <th> Unique Order Id </th>
+                          <th> Payment Type </th>
                           <th> Payment Mode </th>
                           <th> Transaction Status </th>
                           <th> Transaction Date & Time</th>
@@ -117,10 +117,10 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php echo $trans['tracking_id']; ?>
                           </td>
                           <td class="">
-                            <?php echo $trans['mihpayid']; ?>
+                            <?php echo $trans['order_id']; ?>
                           </td>
                           <td class="">
-                            <?php echo $trans['payumoneyid']; ?>
+                            <?php echo ucfirst($trans['payment_type']); ?>
                           </td>
                           <td class="">
                             <?php echo $trans['payment_mode']; ?>
@@ -195,23 +195,23 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       </div>
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Merchant Transaction Id</label>
+                          <label class="control-label">Tracking Id</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($provider_full_transaction['tracking_id'])) echo $provider_full_transaction['tracking_id']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Payu Unique Id</label>
+                          <label class="control-label">Unique Order Id</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['mihpayid'])) echo $provider_full_transaction['mihpayid']; else echo "-"; ?>
+                            <?php if(!empty($provider_full_transaction['order_id'])) echo $provider_full_transaction['order_id']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
                       <div class="span12">
                         <div class="span6 control-group">  
-                          <label class="control-label">Payment Id</label>
+                          <label class="control-label">Payment Type</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['payumoneyid'])) echo $provider_full_transaction['payumoneyid']; else echo "-"; ?>
+                            <?php if(!empty($provider_full_transaction['payment_type'])) echo ucfirst($provider_full_transaction['payment_type']); else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -220,21 +220,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <?php if(!empty($provider_full_transaction['payment_mode'])) echo $provider_full_transaction['payment_mode']; else echo "-"; ?>
                           </span>
                         </div>
-                      </div>      
-                      <div class="span12">
-                        <div class="span6 control-group">  
-                          <label class="control-label">Merchant Key</label>
-                          <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['merchant_key'])) echo $provider_full_transaction['merchant_key']; else echo "-"; ?>
-                          </span>
-                        </div>
-                        <div class="span6 control-group">
-                          <label class="control-label">Payment Gateway Type</label>
-                          <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['pg_type'])) echo $provider_full_transaction['pg_type']; else echo "-"; ?>
-                          </span>
-                        </div>
-                      </div>      
+                      </div>          
                       <div class="span12">
                         <div class="span6 control-group">  
                           <label class="control-label">Bank Reference Number</label>
@@ -243,31 +229,31 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           </span>
                         </div>
                         <div class="span6 control-group">
-                          <label class="control-label">Bank Code</label>
+                          <label class="control-label">Bank Name</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['bank_code'])) echo $provider_full_transaction['bank_code']; else echo "-"; ?>
+                            <?php if(!empty($provider_full_transaction['bank_name'])) echo $provider_full_transaction['bank_name']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>      
                       <div class="span12">
-                        <div class="span6 control-group">  
-                          <label class="control-label">Card Number</label>
-                          <span class="dynamic_data">
-                            <?php if(!empty($provider_full_transaction['card_number'])) echo $provider_full_transaction['card_number']; else echo "-"; ?> 
-                          </span>
-                        </div>
                         <div class="span6 control-group">
                           <label class="control-label">Card Name</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($provider_full_transaction['card_name'])) echo $provider_full_transaction['card_name']; else echo "-"; ?>
                           </span>
                         </div>
-                      </div>      
-                      <div class="span12">
                         <div class="span6 control-group">  
                           <label class="control-label">Unmapped Status</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($provider_full_transaction['unmapped_status'])) echo $provider_full_transaction['unmapped_status']; else echo "-"; ?>
+                          </span>
+                        </div>
+                      </div>      
+                      <div class="span12">
+                        <div class="span6 control-group">  
+                          <label class="control-label">Amount</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($provider_full_transaction['amount'])) echo $provider_full_transaction['amount']; else echo "-"; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">
@@ -278,16 +264,16 @@ if(!empty($this->session->userdata("admin_login_status"))):
                         </div>
                       </div>
                       <div class="span12">
-                        <div class="span6 control-group">  
-                          <label class="control-label">Amount</label>
-                          <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['amount'])) echo $provider_full_transaction['amount']; else echo "-"; ?>
-                          </span>
-                        </div>
                         <div class="span6 control-group">
                           <label class="control-label">Net Amount Debit</label>
                           <span class="dynamic_data"> 
-                            <?php if(!empty($provider_full_transaction['transaction_id'])) echo $provider_full_transaction['net_amount_debit']; else echo "-"; ?>
+                            <?php if(!empty($provider_full_transaction['net_amount_debit'])) echo $provider_full_transaction['net_amount_debit']; else echo "-"; ?>
+                          </span>
+                        </div>
+                        <div class="span6 control-group">
+                          <label class="control-label">Contact Email</label>
+                          <span class="dynamic_data"> 
+                            <?php if(!empty($provider_full_transaction['contact_email'])) echo $provider_full_transaction['contact_email']; else echo "-"; ?>
                           </span>
                         </div>
                       </div>   
@@ -310,7 +296,6 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <label class="control-label">Transaction Status</label>
                           <span class="dynamic_data"> 
                             <?php if(!empty($provider_full_transaction['transaction_status'])) echo $provider_full_transaction['transaction_status']; else echo "-"; ?>
-                            <?php echo $provider_full_transaction['transaction_status']; ?>
                           </span>
                         </div>
                         <div class="span6 control-group">

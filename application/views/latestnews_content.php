@@ -32,9 +32,24 @@
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
                             <!--News Title-->
-                            <blockquote> Hello teachers Recruit</blockquote>
+                            <blockquote> <?php
+                            if(!empty($content)) :
+                               echo $content['latest_news_title'];
+                            else :
+                                echo "<p> No content found for this news. </p>";
+                            endif;
+                            ?>
+                            </blockquote>
                             <!--News Content-->
-                            <p>Grand Opening Ceremony of our Site at Utthikotai. Join us and Support Us</p>
+                            <p>
+                            <?php
+                            if(!empty($content)) :
+                               echo $content['latest_news_content_or_link'];
+                            else :
+                                echo "";
+                            endif;
+                            ?>
+                            </p>
                         </div>    
                     </div>
                 </div>

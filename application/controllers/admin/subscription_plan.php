@@ -245,6 +245,11 @@ class Subscription_Plan extends CI_Controller {
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/subscription_plans',$data);
 		}
+		else if($this->input->post('action') && $this->input->post('action') == "add") {
+			$data['mode'] = $this->input->post('action');
+			$data['subscription_plan_details'] = array();
+			$this->load->view('admin/subscription_plans',$data);
+		}
 		else {
 			redirect(base_url().'main/admin_error');
 		}

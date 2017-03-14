@@ -191,26 +191,49 @@ class Admin_Model extends CI_Model {
 
     // Update data
     if($status=='update') {
-      $latest_news_update_data = array( 
-                            'latest_news_title' => $this->input->post('l_news_title'),
-                            'latest_news_redirect_link' => $this->input->post('l_redirect_link'),                            
-                            'latest_news_status' => $this->input->post('l_news_status')
-                            );
+      if($this->input->post('news_type') == "link") {
+        $latest_news_update_data = array( 
+                                      'latest_news_title' => $this->input->post('news_title'),
+                                      'latest_news_type' => $this->input->post('news_type'),                            
+                                      'latest_news_content_or_link' => $this->input->post('news_link'),
+                                      'latest_news_status' => $this->input->post('news_status')
+                                    );
+      }
+      else {
+        $latest_news_update_data = array( 
+                                      'latest_news_title' => $this->input->post('news_title'),
+                                      'latest_news_type' => $this->input->post('news_type'),                            
+                                      'latest_news_content_or_link' => $this->input->post('news_content'),
+                                      'latest_news_status' => $this->input->post('news_status')
+                                    );
+      }
+      
       $latest_news_update_where = '( latest_news_id="'.$this->input->post('rid').'")'; 
       $this->db->set($latest_news_update_data); 
       $this->db->where($latest_news_update_where);
-      $this->db->update("tr_latest_news", $latest_news_update_data); 
+      $this->db->update("tr_latest_news"); 
       $model_data['status'] = "Updated Successfully";
       $model_data['error'] = 2;
     }
 
     // Save data
     else if($status=='save') {
-      $latest_news_insert_data = array( 
-                            'latest_news_title' => $this->input->post('l_news_title'),
-                            'latest_news_redirect_link' => $this->input->post('l_redirect_link'),                            
-                            'latest_news_status' => $this->input->post('l_news_status')
-                            );
+      if($this->input->post('news_type') == "link") {
+        $latest_news_insert_data = array( 
+                                      'latest_news_title' => $this->input->post('news_title'),
+                                      'latest_news_type' => $this->input->post('news_type'),                            
+                                      'latest_news_content_or_link' => $this->input->post('news_link'),
+                                      'latest_news_status' => $this->input->post('news_status')
+                                    );
+      }
+      else {
+        $latest_news_insert_data = array( 
+                                      'latest_news_title' => $this->input->post('news_title'),
+                                      'latest_news_type' => $this->input->post('news_type'),                            
+                                      'latest_news_content_or_link' => $this->input->post('news_content'),
+                                      'latest_news_status' => $this->input->post('news_status')
+                                    );
+      }
       $this->db->insert("tr_latest_news", $latest_news_insert_data); 
       $model_data['status'] = "Inserted Successfully";
       $model_data['error'] = 2;
@@ -255,6 +278,12 @@ class Admin_Model extends CI_Model {
       $this->db->update('tr_district');
     }
     return "success"; 
+  }
+
+  // To get latest news details
+  public function get_latest_news_details($id) {
+    $model_data = $this->db->get_where('tr_latest_news',array('latest_news_id' => $id))->row_array();
+    return $model_data;
   }
 
 }
