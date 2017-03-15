@@ -105,7 +105,7 @@ class Ccavenue extends CI_Controller {
 		}
 
 		else if(isset($proper) && $proper == 1 && $data['amount'] <= 0) {
-			$valid = $this->job_provider_model->orginal_plan_valid($data['merchant_param3'],$data['merchant_param2']);
+			$valid = $this->job_provider_model->orginal_plan_valid_free($data['merchant_param3'],$data['merchant_param2']);
 			if($valid == 2) {
 				$subscription_plan_data = $this->common_model->subcription_plan($data['merchant_param3']);
 				$no_of_days = $subscription_plan_data[0]['subscription_validity_days'] - 1;

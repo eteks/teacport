@@ -296,7 +296,7 @@
 			                                </div>
 		                            	</div>
 		                        	</div>
-		                        	<div class="make_payment_option"> <a class="subs_button prem_select <?php if($already == 1 || (isset($organization_chosen_plan[0]['organization_subscription_status']) && $organization_chosen_plan[0]['organization_subscription_status']==1)) echo "disabled"; ?>" data-option="original" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>" >Make Payment</a> </div>
+		                        	<div class="make_payment_option"> <a class="subs_button prem_select <?php if($already == 1 || (isset($organization_chosen_plan[0]['organization_subscription_status']) && $organization_chosen_plan[0]['organization_subscription_status']==1 && $organization_chosen_plan[0]['organization_transcation_id']!='')) echo "disabled"; ?>" data-option="original" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>" >Make Payment</a> </div>
 		                        </div> 
 		                   		<div class="col-md-4 col-sm-6 col-xs-12 plan_selection">
 		                        	<div class="price_ui_box subscribe_plan">
@@ -460,7 +460,7 @@
 			                                </div>
 			                            </div>		                            	
 		                        	</div>
-		                        	<div class="make_payment_option"> <a class="subs_button renew_select <?php if($already == 0 || ($already == 1 && $organization_chosen_plan[$org_key]['organization_subscription_status']==1) || (isset($organization_chosen_plan[0]['organization_subscription_status']) && $organization_chosen_plan[0]['organization_subscription_status']==1) || $subscription_upgrade_plan[$key]['subscription_price'] <= 0) echo "disabled"; ?>" data-option="renewal" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>">Make Payment</a> </div>
+		                        	<div class="make_payment_option"> <a class="subs_button renew_select <?php if($already == 0 || ($already == 1 && $organization_chosen_plan[$org_key]['organization_subscription_status']==1) || (isset($organization_chosen_plan[0]['organization_subscription_status']) && $organization_chosen_plan[0]['organization_subscription_status']==1 && $organization_chosen_plan[0]['organization_transcation_id']!='') || $subscription_upgrade_plan[$key]['subscription_price'] <= 0) echo "disabled"; ?>" data-option="renewal" data-id="<?php echo $subscription_upgrade_plan[$key]['sub_id']; ?>">Make Payment</a> </div>
 		                        </div> 	
 		                    </div>
 				        </div>					       			           

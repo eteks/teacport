@@ -368,7 +368,7 @@ class Job_Provider extends CI_Controller {
 												'status'                         				=> 1
 												);
 
-								if($this->job_providermodel->insert_renewal_plan_details($user_renewal_data)){
+								if($this->job_providermodel->insert_renewal_plan_details($this->input->post('org_id'),$user_renewal_data)){
 									$update_plan = $this->job_providermodel->update_subscription_plan_details($this->input->post('org_id'),$this->input->post('plan_name'),$user_subscription_data);
 									$data['status'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
 									$data['error'] = 2;
@@ -548,16 +548,6 @@ class Job_Provider extends CI_Controller {
 	}
 
 	/* ===================          Job Provider Profile Controller End     ====================== */
-
-	// Job provider profile - Visit details
-	public function job_provider_visit_details_ajax()
-	{
-		if($this->input->post('value')) {
-			$value = $this->input->post('value');
-			$data['provider_visit_details'] = $this->job_providermodel->get_provider_visit_details($value);
-			$this->load->view('admin/jobprovider_profile',$data);
-		}
-	}
 
 
 	/* ===================          Job Provider Vacancy Controller Start     ====================== */

@@ -1185,6 +1185,7 @@ class Job_provider extends CI_Controller {
 				if($plan_name == "Original") {
 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('merchant_param3'));
 					$no_of_days = $subscription_plan_data[0]['subscription_validity_days'] - 1;
+
 					$user_subscription_data = array(
 													'organization_id' 								=> $this->input->post('merchant_param2'),
 													'subscription_id' 								=> $this->input->post('merchant_param3'),
@@ -1229,7 +1230,6 @@ class Job_provider extends CI_Controller {
 					else {
 						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
 					}
-
 				} // Orginal plan end
 
 				// Renewal plan start
@@ -1266,7 +1266,7 @@ class Job_provider extends CI_Controller {
 												'status'                         				=> 1
 												);
 
-					if($this->job_provider_model->insert_renewal_plan($user_renewal_data)){
+					if($this->job_provider_model->insert_renewal_plan($this->input->post('merchant_param2'),$user_renewal_data)){
 						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
 						$update_plan = $this->common_model->update_subscription_plan($this->input->post('merchant_param2'),$this->input->post('merchant_param3'),$user_subscription_data);
 						$email_data['subscription_details'] = $this->common_model->provider_subscription_active_renewl_plans($this->input->post('merchant_param2'),$this->input->post('merchant_param3'));
@@ -1377,118 +1377,9 @@ class Job_provider extends CI_Controller {
 
 	} // End Subscription
 
-// 	public function subscription(){
-// 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
-// 		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
-// 		$session_data = $this->session->all_userdata();
-// 		if(empty($session_data['login_session']))
-// 			redirect('provider/logout');
-// 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));	
+		
 
-// 		$check_validity = $this->job_provider_model->check_subscription_validity(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
 
-// 		$data['subcription_plan'] = $this->common_model->subcription_plan();
-// 		$server_msg = $this->session->userdata('subscription_status');
-// 		$order_id = $this->session->userdata('order_id'); // Secure Purpose
-
-// <<<<<<< HEAD
-// 		if($_POST && !$this->input->post('subpack') && !empty($server_msg) && !empty($order_id) && $_POST['order_id'] == $order_id) {
-// 			// merchant_param1 - plan name
-// 			// merchant_param2 - organization id
-// 			// merchant_param3 - subscription id
-// 			// merchant_param4 - csrf token
-// 			// merchant_param5 - upgrade count ,its oreder like sms,email,resume
-
-// 			$plan_name = $this->input->post('merchant_param1');
-// 			$plan_options = explode('#',$this->input->post('merchant_param5'));
-// 			// print_r($plan_options);
-// =======
-// 		if($_POST && !$this->input->post('subpack') && !empty($server_msg)) {
-// 			$options = json_decode($_POST['productinfo'],true);
-// >>>>>>> 03f255181b55780bada88f2c3c773b0b995aecce
-// 			$transaction_data = array(
-// 									'organization_id' 			=> $this->input->post('merchant_param2'),
-// 									'tracking_id ' 				=> $this->input->post('tracking_id'),
-// 									'order_id' 					=> $this->input->post('order_id'),
-// 									'bank_referrence_number' 	=> $this->input->post('bank_ref_no'),
-// 									'transaction_status' 		=> $this->input->post('order_status'),
-// 									'payment_mode' 				=> $this->input->post('payment_mode'),
-// 									'payment_type' 				=> "gateway",
-// 									'card_name' 				=> $this->input->post('card_name'),
-// 									'unmapped_status' 			=> $this->input->post('status_message'),
-// 									'transaction_date_time' 	=> date('Y-m-d H:i:s',strtotime($this->input->post('trans_date'))),
-// 									'discount_value' 			=> $this->input->post('discount_value'),
-// 									'amount' 					=> $this->input->post('amount'),					
-// 									'net_amount_debit' 			=> $this->input->post('mer_amount'),
-// 									'error_code' 				=> $this->input->post('status_code'),
-// 									'error_message' 			=> $this->input->post('failure_message'),
-// 								);
-
-// 			if($this->job_provider_model->subscription_transaction_data($transaction_data) && $this->input->post('order_status')==='Success') {
-
-// 				$email_data['organization_name'] = $data['organization']['organization_name'];
-// 				$mail_id = $data['organization']['registrant_email_id'];
-// 				$transaction_id = $this->db->insert_id();
-
-// 				// Original plan start
-// <<<<<<< HEAD
-// 				if($plan_name == "Original") {
-// 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('merchant_param3'));
-// =======
-// 				if($options['plan_option'] == "original") {
-// 					$subscription_plan_data = $this->common_model->subcription_plan($this->input->post('udf2'));
-// >>>>>>> 03f255181b55780bada88f2c3c773b0b995aecce
-// 					$no_of_days = $subscription_plan_data[0]['subscription_validity_days'] - 1;
-// 					$user_subscription_data = array(
-// 													'organization_id' 								=> $this->input->post('merchant_param2'),
-// 													'subscription_id' 								=> $this->input->post('merchant_param3'),
-// 													'organization_transcation_id' 					=> $transaction_id,
-// 													'organization_post_vacancy_count' 				=> $subscription_plan_data[0]['subscription_max_no_of_posts'],
-// 													'organization_vacancy_remaining_count' 						=> $subscription_plan_data[0]['subscription_max_no_of_posts'],
-// 													'organization_post_ad_count' 				=> $subscription_plan_data[0]['subscription_max_no_of_ads'],
-// 													'organization_ad_remaining_count' 						=> $subscription_plan_data[0]['subscription_max_no_of_ads'],
-// 													'organization_email_count' 						=> $subscription_plan_data[0]['subscription_email_counts'],
-// 													'organization_sms_count'						=> $subscription_plan_data[0]['subcription_sms_counts'],
-// 													'organization_resume_download_count'			=> $subscription_plan_data[0]['subcription_resume_download_count'],
-// 													'organization_email_remaining_count'			=> $subscription_plan_data[0]['subscription_email_counts'],
-// 													'organization_sms_remaining_count'				=> $subscription_plan_data[0]['subcription_sms_counts'],
-// 													'organization_remaining_resume_download_count'	=> $subscription_plan_data[0]['subcription_resume_download_count'],
-// 													'is_email_validity'								=> 1,
-// 													'is_sms_validity'								=> 1,
-// 													'is_resume_validity'							=> 1,
-// 													'org_sub_validity_start_date'					=> date('Y-m-d'),
-// 													'org_sub_validity_end_date'						=> date('Y-m-d' ,strtotime("+".$no_of_days." day")),
-// 													'organizaion_sub_updated_date'                  => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
-// 													'organization_subscription_status'				=> 1
-// 												);
-					
-// 					if($this->job_provider_model->insert_orignial_plan($user_subscription_data)){
-// 						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
-// <<<<<<< HEAD
-// 						$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('merchant_param2'));
-// =======
-// 						$email_data['subscription_details'] = $this->common_model->provider_subscription_active_plans($this->input->post('udf1'));
-// >>>>>>> 03f255181b55780bada88f2c3c773b0b995aecce
-// 						// Email configuration
-// 						$this->config->load('email', true);
-// 						$emailsetup = $this->config->item('email');
-// 						$this->load->library('email', $emailsetup);
-// 						$from_email = $emailsetup['smtp_user'];
-// 						$subject = 'Subscription Details';
-// 						$message = $this->load->view('email_template/subscription', $email_data, TRUE);
-// 						$this->email->initialize($emailsetup);	
-// 						$this->email->from($from_email, 'Teacher Recruit');
-// 						$this->email->to($mail_id);
-// 						$this->email->subject($subject);
-// 						$this->email->message($message);
-// 						/* Check whether mail send or not*/
-// 						$this->email->send();
-// 					}
-// 					else {
-// 						$data['subscription_server_msg'] = 'Soemthing wrong in data insertion process. Our customer representative will call you soon!. Please note that transaction id <b>('.$transaction_id.')</b> for future reference!';
-// 					}
-
-// 				} // Orginal plan end
 
 // 				// Renewal plan start
 // <<<<<<< HEAD
@@ -1705,31 +1596,7 @@ class Job_provider extends CI_Controller {
 // 		} // End Payment
 
 
-// 		// All subscription plan with upgrade plan
-// 		$data['subscription_upgrade_plan'] = get_subscription_upgrade($this->common_model->subscription_upgrade_plan());
-// 		// Default Details
-// 		$data['organization_chosen_plan'] = get_organization_sub_details($this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']));
 
-// 		// $data['organization_chosen_plan_details'] = $this->job_provider_model->organization_chosen_plan_details(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
-
-// 		if($this->input->post('subpack') && !in_array($this->input->post('subpack'),array_column($data['subscription_upgrade_plan'],'sub_id'))) {
-// 			$data['subscription_server_msg'] = "Something went wrong. Please try again with correct details";
-// 			$data['chosen_plan'] = '';
-// 			$data['organization_chosen_plan'] =array();
-// 		}
-// 		else {
-// 			$data['chosen_plan'] = $this->input->post('subpack')?$this->input->post('subpack'):'';
-// 		}
-
-// 		// Payment Message
-// 		if($server_msg != "success") {
-// 			$data['subscription_server_msg'] = $server_msg;
-// 		}
-// 		$this->session->unset_userdata('subscription_status');	
-// 		$this->session->unset_userdata('order_id');
-// 		$this->load->view('company-dashboard-subscription',$data);
-
-// 	} // End Subscription
 
 	public function candidateprofile() {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
@@ -1749,7 +1616,7 @@ class Job_provider extends CI_Controller {
 		$data['subject_values'] = $this->common_model->subject_by_institution(NULL,1);
 		$data['extra_curricular_values'] = $this->common_model->get_extra_curricular_details(1);
 
-		if(in_array($institution_type_id,explode(',',$data['candidate'][0]['candidate_institution_type']))){
+		if(!empty($data['candidate']) && in_array($institution_type_id,explode(',',$data['candidate'][0]['candidate_institution_type']))){
 			$params = array('candidate_id' => $candidate_id);
 			$this->load->library('seeker_iptracker');
 			$this->seeker_iptracker->provider_save_site_visit($params);
