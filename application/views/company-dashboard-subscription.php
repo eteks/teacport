@@ -281,13 +281,13 @@
 														<?php echo $already ==1 ? $organization_chosen_plan[$org_key]['organization_vacancy_remaining_count'] : $subscription_upgrade_plan[$key]['subscription_max_no_of_posts']; ?>
 													</li>
 													<li>Sms Counts: 
-														<?php echo $already ==1 ? $organization_chosen_plan[$org_key]['organization_sms_remaining_count'] : $subscription_upgrade_plan[$key]['subcription_sms_counts']; ?>
+														<?php echo $already ==1 ? ($organization_chosen_plan[$org_key]['organization_sms_remaining_count'] >= "99999" ? "Unlimited": $organization_chosen_plan[$org_key]['organization_sms_remaining_count']) : ($subscription_upgrade_plan[$key]['subcription_sms_counts'] >= "99999" ? "Unlimited": $subscription_upgrade_plan[$key]['subcription_sms_counts']); ?>
 													</li> 
 													<li>Email-count: 
-														<?php echo $already ==1 ? $organization_chosen_plan[$org_key]['organization_email_remaining_count'] : $subscription_upgrade_plan[$key]['subscription_email_counts']; ?>
+														<?php echo $already ==1 ? ($organization_chosen_plan[$org_key]['organization_email_remaining_count'] >= "99999" ? "Unlimited": $organization_chosen_plan[$org_key]['organization_email_remaining_count']) : ($subscription_upgrade_plan[$key]['subscription_email_counts'] >= "99999" ? "Unlimited": $subscription_upgrade_plan[$key]['subscription_email_counts']); ?>
 													</li> 
 													<li>Resume Download: 
-														<?php echo $already ==1 ? $organization_chosen_plan[$org_key]['organization_remaining_resume_download_count'] : $subscription_upgrade_plan[$key]['subcription_resume_download_count']; ?>
+														<?php echo $already ==1 ? ($organization_chosen_plan[$org_key]['organization_remaining_resume_download_count'] >= "99999" ? "Unlimited": $organization_chosen_plan[$org_key]['organization_remaining_resume_download_count']) : ($subscription_upgrade_plan[$key]['subcription_resume_download_count'] >= "99999" ? "Unlimited": $subscription_upgrade_plan[$key]['subcription_resume_download_count']); ?>
 													</li>
 													<li>Max No of ads: 
 														<?php echo $already ==1 ? $organization_chosen_plan[$org_key]['organization_ad_remaining_count'] : $subscription_upgrade_plan[$key]['subscription_max_no_of_ads']; ?>
@@ -389,7 +389,7 @@
 													$upgrade_array = array_column($subscription_upgrade_plan[$key]['upgrade_options'],'upgrade_options');
 													?>
  													<li id="subs_list_upg_sms" class="subs_list_act <?php if(!in_array('sms',$upgrade_array)) echo "disabled"; ?>" data-toggle="subs_tooltip" title="Click Here To Edit Plan!">Remaining Sms: 
- 													<span class="sms_remain_value"><?php echo $already ==1 ?$organization_chosen_plan[$org_key]['organization_sms_remaining_count'] : 0; ?>
+ 													<span class="sms_remain_value"><?php echo $already ==1 ? ($organization_chosen_plan[$org_key]['organization_sms_remaining_count'] >= 99999 ? "Unlimited" : $organization_chosen_plan[$org_key]['organization_sms_remaining_count']) : 0; ?>
  													</span><span class="glyphicon glyphicon-edit subs_edit sub_sms"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_sms">
 													    <form>
@@ -402,7 +402,7 @@
 											        </div>
 													<li id="subs_list_upg_email" class="subs_list_act <?php if(!in_array('email',$upgrade_array)) echo "disabled"; ?>">Remaining Email: 
 													<span>
-													<?php echo $already ==1 ?$organization_chosen_plan[$org_key]['organization_email_remaining_count'] : 0; ?>
+													<?php echo $already ==1 ? ($organization_chosen_plan[$org_key]['organization_email_remaining_count'] >= 99999 ? "Unlimited" : $organization_chosen_plan[$org_key]['organization_email_remaining_count']) : 0; ?>
 													</span>
 													<span class="glyphicon glyphicon-edit subs_edit sub_email"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_email">
@@ -416,7 +416,7 @@
 											        </div>
 													<li id="subs_list_upg_resume" class="subs_list_act <?php if(!in_array('resume',$upgrade_array)) echo "disabled"; ?>">Remaining Download: 
 													<span>
-													<?php echo $already ==1 ?$organization_chosen_plan[$org_key]['organization_remaining_resume_download_count'] : 0; ?>
+													<?php echo $already ==1 ? ($organization_chosen_plan[$org_key]['organization_remaining_resume_download_count'] >= 99999 ? "Unlimited" : $organization_chosen_plan[$org_key]['organization_remaining_resume_download_count']) : 0; ?>
 													</span>
 													<span class="glyphicon glyphicon-edit subs_edit sub_resume"></span></li>
 													<div id="popover-form" class="hide popover_form_upg_resume">
@@ -452,9 +452,9 @@
 		                                    <div class="price-features text-center">
 		                                  		<ul class="subs_count_act">
 													<li>Max No of vacancy Posts: <?php echo $subscription_upgrade_plan[$key]['subscription_max_no_of_posts']; ?></li>
-													<li>Sms Counts: <?php echo $subscription_upgrade_plan[$key]['subcription_sms_counts']; ?></li> 
-													<li>Email-count: <?php echo $subscription_upgrade_plan[$key]['subscription_email_counts']; ?></li> 
-													<li>Resume Download: <?php echo $subscription_upgrade_plan[$key]['subcription_resume_download_count']; ?></li>
+													<li>Sms Counts: <?php echo $subscription_upgrade_plan[$key]['subcription_sms_counts'] >= 99999 ? "Unlimited" : $subscription_upgrade_plan[$key]['subcription_sms_counts']; ?></li> 
+													<li>Email-count: <?php echo $subscription_upgrade_plan[$key]['subscription_email_counts'] >= 99999 ? "Unlimited" : $subscription_upgrade_plan[$key]['subscription_email_counts']; ?></li> 
+													<li>Resume Download: <?php echo $subscription_upgrade_plan[$key]['subcription_resume_download_count'] >= 99999 ? "Unlimited" : $subscription_upgrade_plan[$key]['subcription_resume_download_count']; ?></li>
 													<li>Max No of ads: <?php echo $subscription_upgrade_plan[$key]['subscription_max_no_of_ads']; ?></li>
 												</ul>                    
 			                                </div>

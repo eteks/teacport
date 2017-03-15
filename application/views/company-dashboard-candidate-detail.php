@@ -368,7 +368,7 @@ else {
 										<div class="clearfix"> </div>
 										<div class="loginbox-submit">
 											<?php 
-											$start_date = date_create($subscrib_plan['org_sub_validity_end_date']);
+											$start_date = date_create($subscrib_plan['organizaion_sub_updated_date']);
                                				$days = date_diff(date_create('today'),$start_date);
                             				if($days->invert == 1) {
                             					$text = "Renewal";
@@ -376,43 +376,60 @@ else {
                             				else {
                             					$text = "Upgrade";
                             				}
-											if($subscrib_plan['is_sms_validity']) { 
+											if($subscrib_plan['is_sms_validity'] && $subscrib_plan['organization_sms_count'] >= 99999) { 
 											?>
-                                  					<a data-name="sms" class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" title="You sent <?php echo $subscrib_plan['organization_sms_count'] - $subscrib_plan['organization_sms_remaining_count']; ?> sms, still you can send <?php echo $subscrib_plan['organization_sms_remaining_count']; ?> more,else you can upgrade the Sms plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Sms</a>
-                              						<?php 
-                              						} 
-                              						else 
-                              						{
-                              						?>
-                              						<a data-name="sms" href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning sms count, you can <?php echo $text; ?> the Sms plan" > <?php echo $text; ?> </a>
-                              						<?php
-                              						}
-                              						?>
-													<?php if($subscrib_plan['is_email_validity']){ ?>
-                                  					<a data-name="email" class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_email_count'] - $subscrib_plan['organization_email_remaining_count']; ?> Email, still you can send <?php echo $subscrib_plan['organization_email_remaining_count']; ?>  more, else you can upgrade the Email plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Email</a>
-                                  					<?php 
-                              						} 
-                              						else 
-                              						{
-                              						?>
-                              						<a data-name="email" href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning email count, you can <?php echo $text; ?> the Email plan" > <?php echo $text; ?> </a>
-                              						<?php
-                              						}
-                              						?>                               					
-													<?php if($subscrib_plan['is_resume_validity']){ ?>
-                                  					<a data-name="resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Resume</a>
-                                  					<a class="dn" id="hidden_download" target="_blank" href="#" download> </a>
-                                  					<a data-name="template_resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>"> Templated Resume</a>
+                      						<a data-name="sms" class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" title="You have unlimited sms count" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Sms</a>
+                      						<?php 
+                      						} 
+                      						else if($subscrib_plan['is_sms_validity']) { 
+                      						?>
+                  							<a data-name="sms" class="btn btn-default btn-medium pull-right candidate_sms" data-toggle="tooltip" title="You sent <?php echo $subscrib_plan['organization_sms_count'] - $subscrib_plan['organization_sms_remaining_count']; ?> sms, still you can send <?php echo $subscrib_plan['organization_sms_remaining_count']; ?> more,else you can upgrade the Sms plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Sms</a>
 
-                                  					<?php 
-                              						} 
-                              						else 
-                              						{
-                              						?>
-                              						<a data-name="resume" href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning download count, you can <?php echo $text; ?> the Download plan" > <?php echo $text; ?> </a>
-                              						<?php
-                              						}
-                              						?>
+                      						<?php
+                      						}
+                      						else 
+                      						{
+                      						?>
+                      						<a data-name="sms" href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning sms count, you can <?php echo $text; ?> the Sms plan" > <?php echo $text; ?> </a>
+                      						<?php
+                      						}
+                      						?>
+											<?php if($subscrib_plan['is_email_validity'] && $subscrib_plan['organization_email_count'] >= 99999){ ?>
+                          						<a data-name="email" class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" title="You have unlimited email count" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Email</a>
+                          					<?php 
+                      						} 
+                      						else if($subscrib_plan['is_email_validity']){
+                      						?>
+                      						<a data-name="email" class="btn btn-default btn-medium pull-right candidate_email" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_email_count'] - $subscrib_plan['organization_email_remaining_count']; ?> Email, still you can send <?php echo $subscrib_plan['organization_email_remaining_count']; ?>  more, else you can upgrade the Email plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Email</a>
+                      						<?php
+                      						}
+                      						else 
+                      						{
+                      						?>
+                      						<a data-name="email" href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning email count, you can <?php echo $text; ?> the Email plan" > <?php echo $text; ?> </a>
+                      						<?php
+                      						}
+                      						?>                               					
+											<?php if($subscrib_plan['is_resume_validity'] && $subscrib_plan['organization_resume_download_count'] >= 99999){ ?>
+                          					<a data-name="resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You have unlimited resume download count" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Resume</a>
+                          					<a class="dn" id="hidden_download" target="_blank" href="#" download> </a>
+                          					<a data-name="template_resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You have unlimited resume download count" candidate-id="<?php echo $candidate[0]['candidate_id'];?>"> Templated Resume</a>
+                          					<?php 
+                      						} 
+                      						else if($subscrib_plan['is_resume_validity']){
+                      						?>
+                      						<a data-name="resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>">Resume</a>
+                          					<a class="dn" id="hidden_download" target="_blank" href="#" download> </a>
+                          					<a data-name="template_resume" class="btn btn-default btn-medium pull-right candidate_resume" data-toggle="tooltip" title="You used <?php echo $subscrib_plan['organization_resume_download_count'] - $subscrib_plan['organization_remaining_resume_download_count']; ?> Download, still you can download <?php echo $subscrib_plan['organization_remaining_resume_download_count']; ?> more, else you can upgrade the Resume download plan" candidate-id="<?php echo $candidate[0]['candidate_id'];?>"> Templated Resume</a>
+                      						<?php
+                      						}
+                      						else 
+                      						{
+                      						?>
+                      						<a data-name="resume" href="<?php echo base_url(); ?>provider/subscription" class="btn btn-default btn-medium pull-right" data-toggle="tooltip" title="No remaning download count, you can <?php echo $text; ?> the Download plan" > <?php echo $text; ?> </a>
+                      						<?php
+                      						}
+                      						?>
                      					</div>
 									</div> <br> <!---Communication Information-->	
 									<?php 
@@ -513,6 +530,9 @@ function ajax_sms_send(id) {
        			this_tag.attr('href',url+'provider/subscription');
        			this_tag.attr('data-original-title','No remaning sms count, you can '+text+' the Sms plan');		
        		}
+       		else if(sub.organization_email_count >= 99999){
+       			this_tag.attr('data-original-title','You have unlimited email count');
+       		}
        		else {
        			this_tag.attr('data-original-title','You sent '+(sub.organization_sms_count - sub.organization_sms_remaining_count)+' sms, still you can download '+sub.organization_sms_remaining_count+' more,else you can upgrade the Sms plan');
        		}
@@ -544,6 +564,9 @@ function ajax_email_send(id) {
        			this_tag.text("Upgrade");
        			this_tag.attr('href',url+'provider/subscription');
        			this_tag.attr('data-original-title','No remaning email count, you can upgrade the Email plan');		
+       		}
+       		else if(sub.organization_sms_count >= 99999){
+       			this_tag.attr('data-original-title','You have unlimited sms count');
        		}
        		else {
        			this_tag.attr('data-original-title','You used '+(sub.organization_email_count - sub.organization_email_remaining_count)+' Email, still you can send '+sub.organization_email_remaining_count+'  more, else you can upgrade the Email plan');
@@ -578,6 +601,9 @@ function ajax_resume_download(id) {
        			this_tag.text("Upgrade");
        			this_tag.attr('href',url+'provider/subscription');
        			this_tag.attr('data-original-title','No remaning download count, you can upgrade the Upgrade plan');		
+       		}
+       		else if(sub.organization_resume_download_count >= 99999){
+       			this_tag.attr('data-original-title','You have unlimited resume download count');
        		}
        		else {
        			this_tag.attr('data-original-title','You used '+(sub.organization_resume_download_count - sub.organization_remaining_resume_download_count)+' Download, still you can download '+sub.organization_remaining_resume_download_count+'  more, else you can upgrade the Resume download plan');

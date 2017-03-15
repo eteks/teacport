@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <![endif]-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
+    <meta name="keywords" content="TeachersRecruit,TeachersRecruiter, Teachers Recruiter, Teachers Recruit, TeachersRecruit.com, education jobs, teaching assistant jobs, teaching jobs, teacher vacancy, english teacher jobs, lecturer jobs,">
+    <meta name="description" content="In line with growing demand of teacher jobs and to build a new bridge between employer-employees in the education institutions, Vision Achievers have launched this teachers job search website. The vision of teachers recruit is to provide "Right Teacher, Right Institute for Right Students". Login with your subject expertise, with experience.">
     <meta name="author" content="Teacher Recruit">
     <title>Teachers Recruit</title>
     <link rel="icon" href="<?php echo base_url(); ?>assets/images/logo/tr_favicon.ico" type="image/x-icon">

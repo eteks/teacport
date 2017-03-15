@@ -60,15 +60,15 @@
 													</tr>
 													<tr>
 														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >SMS Count :</span></div></td>
-														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_sms_remaining_count']; ?></div></td>	
+														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo ($subscription_details['organization_sms_remaining_count'] >= 99999 ? "Unlimited" : $subscription_details['organization_sms_remaining_count']); ?></div></td>	
 													</tr>
 													<tr>
 														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Email Count :</span></div></td>
-														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_email_remaining_count']; ?></div></td>	
+														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo ($subscription_details['organization_email_remaining_count'] >= 99999 ? "Unlimited" : $subscription_details['organization_email_remaining_count']); ?></div></td>	
 													</tr>
 													<tr>
 														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Resume Download :</span></div></td>
-														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo $subscription_details['organization_remaining_resume_download_count']; ?></div></td>	
+														<td><div style='padding-left:20px; padding-bottom:10px;color:#29aafe;'>&nbsp;&nbsp;&nbsp;<?php echo ($subscription_details['organization_remaining_resume_download_count'] >= 99999 ? "Unlimited" : $subscription_details['organization_remaining_resume_download_count']); ?></div></td>	
 													</tr>
 													<tr>
 														<td><div style='padding-left:30px; padding-bottom:10px;color:#29aafe;'><img src='<?php echo base_url(); ?>assets/images/email_template/spade.gif' alt=''/>&nbsp;&nbsp;&nbsp;<span >Max No of Ads :</span></div></td>

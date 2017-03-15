@@ -725,22 +725,28 @@ class Job_provider_model extends CI_Model {
         $valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
         $valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
         if($valid_count['organization_remaining_resume_download_count'] != 0) {
-            if($valid_count['organization_remaining_resume_download_count'] == 1) {
+            if($valid_count['organization_remaining_resume_download_count'] == 1 && $valid_count['organization_resume_download_count'] >= 99999) {
+                $resume_update_data = array(
+                                            "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'],
+                                            "is_resume_validity" => 1
+                                        );
+            }
+            else if($valid_count['organization_remaining_resume_download_count'] == 1) {
                 $resume_update_data = array(
                                             "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
                                             "is_resume_validity" => 0
                                         );
-                }
-                else {
-                    $resume_update_data = array(
-                                                "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
-                                                "is_resume_validity" => 1
-                                                );
-                }
-        $this->db->where($valid_count_where);
-        $this->db->set($resume_update_data);
-        $this->db->update('tr_organization_subscription');
-        $data['status'] = $cand_resume['candidate_resume_upload_path'];
+            }
+            else {
+                $resume_update_data = array(
+                                            "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
+                                            "is_resume_validity" => 1
+                                            );
+            }
+            $this->db->where($valid_count_where);
+            $this->db->set($resume_update_data);
+            $this->db->update('tr_organization_subscription');
+            $data['status'] = $cand_resume['candidate_resume_upload_path'];
         }
         $valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
         $data['subscribe_details'] = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
@@ -766,22 +772,28 @@ class Job_provider_model extends CI_Model {
         $valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
         $valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
         if($valid_count['organization_remaining_resume_download_count'] != 0) {
-            if($valid_count['organization_remaining_resume_download_count'] == 1) {
+            if($valid_count['organization_remaining_resume_download_count'] == 1 && $valid_count['organization_resume_download_count'] >= 99999) {
+                $resume_update_data = array(
+                                            "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'],
+                                            "is_resume_validity" => 1
+                                        );
+            }
+            else if($valid_count['organization_remaining_resume_download_count'] == 1) {
                 $resume_update_data = array(
                                             "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
                                             "is_resume_validity" => 0
                                         );
-                }
-                else {
-                    $resume_update_data = array(
-                                                "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
-                                                "is_resume_validity" => 1
-                                                );
-                }
-        $this->db->where($valid_count_where);
-        $this->db->set($resume_update_data);
-        $this->db->update('tr_organization_subscription');
-        $error = 2; // If correct
+            }
+            else {
+                $resume_update_data = array(
+                                            "organization_remaining_resume_download_count" => $valid_count['organization_remaining_resume_download_count'] - 1,
+                                            "is_resume_validity" => 1
+                                            );
+            }
+            $this->db->where($valid_count_where);
+            $this->db->set($resume_update_data);
+            $this->db->update('tr_organization_subscription');
+            $error = 2; // If correct
         }
         else {
             $error = 1; // If wrong
@@ -815,7 +827,13 @@ class Job_provider_model extends CI_Model {
         $valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
         $valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
         if($valid_count['organization_email_remaining_count'] != 0) {
-            if($valid_count['organization_email_remaining_count'] == 1) {
+            if($valid_count['organization_email_remaining_count'] == 1 && $valid_count['organization_email_count'] >= 99999) {
+                $email_update_data = array(
+                                            "organization_email_remaining_count" => $valid_count['organization_email_remaining_count'],
+                                            "is_email_validity" => 1
+                                            );
+            }
+            else if($valid_count['organization_email_remaining_count'] == 1) {
                 $email_update_data = array(
                                             "organization_email_remaining_count" => $valid_count['organization_email_remaining_count'] - 1,
                                             "is_email_validity" => 0
@@ -861,17 +879,23 @@ class Job_provider_model extends CI_Model {
         $valid_count_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
         $valid_count = $this->db->get_where('tr_organization_subscription',$valid_count_where)->row_array();
         if($valid_count['organization_sms_remaining_count'] != 0) {
-            if($valid_count['organization_sms_remaining_count'] == 1) {
+            if($valid_count['organization_sms_remaining_count'] == 1 && $valid_count['organization_sms_count'] >= 99999) {
+                $email_update_data = array(
+                                            "organization_sms_remaining_count" => $valid_count['organization_sms_remaining_count'],
+                                            "is_sms_validity" => 1
+                                        );
+            }
+            else if ($valid_count['organization_sms_remaining_count'] == 1) {
                 $email_update_data = array(
                                             "organization_sms_remaining_count" => $valid_count['organization_sms_remaining_count'] - 1,
                                             "is_sms_validity" => 0
-                                            );
+                                        );
             }
             else {
                 $email_update_data = array(
                                             "organization_sms_remaining_count" => $valid_count['organization_sms_remaining_count'] - 1,
                                             "is_sms_validity" => 1
-                                            );
+                                        );
             }
             $this->db->where($valid_count_where);
             $this->db->set($email_update_data);
