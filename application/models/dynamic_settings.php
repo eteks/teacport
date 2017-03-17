@@ -10,13 +10,6 @@ class Dynamic_settings extends CI_Model {
 	public function global_variables() {
 		$data['sms_credentials'] = $this->db->get('tr_settings_sms_gateway')->row_array();
 		$this->config->set_item('sms_gateway',$data['sms_credentials']);
-
-
-		
-			$this->session->set_userdata('captcha_info', $data['captcha']);
-
-
-
 	}
 
 	public function popup_signup_form() {
