@@ -170,9 +170,9 @@
       			<h4 class="modal-title">Provider / Seeker Login</h4>
     		</div>
     		<div class="modal-body profile-edit">
-				<form class="" method="post" accept-charset="utf-8">
-					<!--SignIn-->
-					<div id="show_signin">
+				<!--SignIn-->
+				<div id="show_signin">
+					<form class="" method="post" accept-charset="utf-8">
 						<div style="display:none">
 							<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
 						</div>
@@ -194,81 +194,157 @@
 	                    	<label>Password <sup class="required alert">*</sup></label>
 	                    	<input placeholder="" class="form-control extra_login_menu_password" type="password">
 	                	</div>
-	                	<!-- <a class="recover_password txt_blue">Forget Password ?</a> -->
+	                	<a class="recover_password txt_blue">Forget Password ?</a>
 	                	<div class="loginbox-submit">
 	                    	<a><input type="submit" class="btn btn-default btn-block extra_login_menu_submit custom_disabled" value="Login"></a>
 	                	</div>
-	                	<!-- <div class="margin_10 pull-right">Not a registerd user? 
+	                	<div class="margin_10 pull-right">Not a registerd user? 
                 			<a class="popup_signup txt_blue"> Sign up</a>
-                		</div>  -->
+                		</div> 
                 		<div class="clearfix"> </div>
-	                </div>
-	                <!--End SignIn-->
-	                <!--SignUp-->
-					<div id="show_signup" class="dn">
-						<form class="" method="post" accept-charset="utf-8">
-							<div class="form-group">
-								<label class="label_height pull-left">I Am a<sup class="required alert">*</sup></label>
-								<div class="provider_radio pull-left">
-									<input class="user_login_category" type="radio" name="user_category" value="provider">Job Provider
-								</div>	
-								<div class="seeker_radio pull-left">
-									<input class="user_login_category" type="radio" name="user_category" value="seeker">Job Seeker
-								</div>
-								<div class="clearfix"> </div>
-							</div>
-							<div class="form-group">
-					        	<label>Institution<sup class="required alert">*</sup></label>
-					        	<select class="form-control">
-					        		<option>kinderGarden</option>
-					        		<option>School</option>
-					        		<option>Arts and Science</option>
-					        		<option>Engineering</option>
-					        		<option>Medical</option>
-					        	</select>
-					    	</div>	
-							<div class="form-group">
-					        	<label>Name<sup class="required alert">*</sup></label>
-					        	<input placeholder="Organization Name" class="form-control" type="text">
-					    	</div>	
-							<div class="form-group">
-					        	<label>Email <sup class="required alert">*</sup></label>
-					        	<input placeholder="Register Email id" class="form-control extra_login_menu_user_name" type="text">
-					    	</div>
-					    	<div class="form-group">
-					        	<label>Mobile No. <sup class="required alert">*</sup></label>
-					        	<input placeholder="Mobile Number" class="form-control" type="text">
-					    	</div>
-					    	<div class="form-group">
-					        	<label>Captacha<sup class="required alert">*</sup></label>
-					        	<input class="form-control" type="text">
-					    	</div>
-					    	<div class="form-group">
-					        	<label>Enter Captacha value <sup class="required alert">*</sup></label>
-					        	<input placeholder="Captacha Value" class="form-control" type="password">
-					    	</div>
-					    	<div class="loginbox-submit">
-					        	<a><input type="submit" class="btn btn-default btn-block extra_login_menu_submit custom_disabled" value="Sign Up"></a>
-					    	</div>
-					    </form>
-					    <div class="margin_10 pull-right">Already have an account?
-					    	<a class="popup_signin txt_blue"> Sign In</a>
-					    </div>   
-					    <div class="clearfix"> </div> 
+                	</form>
+                </div>
+                <!--End SignIn-->
+	            <!--SignUp-->
+				<div id="show_signup" class="dn">
+					<div class="form-group">
+						<label class="label_height pull-left">I Am a<sup class="required alert">*</sup></label>
+						<div class="provider_radio pull-left">
+							<input class="user_signup_category" type="radio" name="signup_radio" value="provider">Job Provider
+						</div>	
+						<div class="seeker_radio pull-left">
+							<input class="user_signup_category" type="radio" name="signup_radio" value="seeker">Job Seeker
+						</div>
+						<div class="clearfix"> </div>
 					</div>
-					<!--End Sign up-->
-					<!--Password-->
-					<div id="show_pwd" class="dn">
-						<div class="form-group">
-				        	<label>Email Id<sup class="required alert">*</sup></label>
-				        	<input class="form-control" type="text">
-				    	</div>
-				    	 <button type="submit" class="btn btn-default btn-block">
-                            <i class="fa fa-unlock"> </i> Retrieve Password
-                        </button>
-					</div>	
-                </form>
-                   
+
+					<!-- Provider signup  -->
+					<div class="job_provider_signup_section dn">
+						<?php 
+                       	echo form_open('signup/provider','id="form" class=""'); 
+                        ?>
+							<div class="form-group">
+                                <label>Institution Type<sup class="alert">*</sup></label>
+                                <select name="registrant_institution_type" id="institution_type" class="form-control">
+									<?php
+									$institutiontype = $this->config->item('institution_types');
+                                	foreach ($institutiontype as $ins_val) {
+                           				echo "<option value=".$ins_val['institution_type_id'].">".$ins_val['institution_type_name']."</option>";							
+									}
+		                            ?> 
+                           		</select>     
+                        	</div>
+							<div class="form-group">
+								<?php echo 	('Organization Name <sup class="alert">*</sup>'); ?>
+								<?php echo form_input(array('id' => 'organization_name','maxlength' => '50','placeholder' => 'Organization Name','class' => 'form-control', 'name' => 'organization_name','value'=>'')); ?>
+							</div>
+							<div class="form-group">	
+								<?php echo form_label('Email <sup class="alert">*</sup>'); ?>
+								<?php echo form_input(array('id' => 'registrant_email_id','class' => 'form-control', 'name' => 'registrant_email_id','placeholder' => 'Email','value'=>'')); ?>
+							</div>
+							<div class="form-group">	
+								<?php echo form_label('Mobile No. <sup class="alert">*</sup>'); ?>
+								<?php echo form_input(array('id' => 'registrant_mobile_no','class' => 'form-control numeric_value','maxlength' => '10','placeholder' => 'Mobile','name' => 'registrant_mobile_no','value'=>'')); ?>
+							</div>	
+							<?php
+							$captcha = $this->config->item('captcha_value');
+							?>
+							<div class="form-group">
+								<?php echo form_label('Captcha'); ?>
+								<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" /> </div>')?>
+                            	<a title="reload" class="reload_captcha_popup" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
+                            </div>	
+                        	<div class="col-sm-6 captcha_holder nopadding">
+                        		<label class="captcha_label">Enter Captcha value <sup class="alert">*</sup></label>
+                				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>'')); ?>
+                			</div>
+                			<div class="clearfix"> </div>
+							<div class="loginbox-terms">
+								<label class="checkbox_word">
+									<?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'provider_term_and_condition', 'class' => '')); ?> I accept</label> <a href="<?php echo base_url(); ?>terms" class="txt_blue" target="_blank">Term and conditions?</a>
+							</div>							
+							<p id="popup_submit" class="btn btn-default btn-block">Register</p>
+						<?php echo form_close(); ?>
+					</div>
+
+					<!-- Seeker signup  -->
+					<div class="job_seeker_signup_section dn">
+						<?php echo form_open('signup/seeker','id="form" class=""'); ?>
+	                        <?php echo ('<div class="form-group"> <label>Preferred Institution<sup class="alert">*</sup></label> <select name="candidate_institution_type[]" id="institution_type" class="form-control select_seeker_institution" multiple="">');?>
+			                <?php
+			                $institutiontype = $this->config->item('institution_types');
+	                        foreach ($institutiontype as $ins_val) {
+	                            echo "<option value=".$ins_val['institution_type_id'].">".$ins_val['institution_type_name']."</option>";
+	                        }
+	                        echo('</select> </div>');
+	                        ?>
+	                        <div class="form-group">
+	                            <?php echo form_label('Name <sup class="alert">*</sup>'); ?>
+	                        	<?php echo form_input(array('id' => 'candidate_name','maxlength' => '50','placeholder' => 'Name','class' => 'form-control alpha_value', 'name' => 'candidate_name','value'=>'')); ?>
+	                        </div>
+	                        <div class="form-group">
+	                            <?php echo form_label('Email <sup class="alert">*</sup>'); ?>
+	                        	<?php echo form_input(array('id' => 'candidate_email','placeholder' => 'Email','class' => 'form-control', 'name' => 'candidate_email','value'=>'')); ?>
+	                        </div>
+	                        <div class="form-group">
+	                            <label>Employment Type<sup class="alert">*</sup></label>
+	                            <select name="candidate_work_type" id="" class="form-control">
+	                            <option value="full">Full Time</option>
+	                            <option value="part">Part Time</option> 
+	                            </select>     
+	                        </div>
+	                        <div class="form-group">
+	                            <?php echo form_label('Mobile No.<sup class="alert">*</sup>'); ?>
+	                        	<?php echo form_input(array('id' => 'candidate_mobile_no','maxlength' => '10','placeholder' => 'Mobile','class' => 'form-control numeric_value','name' => 'candidate_mobile_no','value'=>'')); ?>
+	                        </div>
+	                        <div class="form-group">
+								<?php echo form_label('Captcha'); ?>
+								<?php echo ('<div class="form-group"><img class="captcha-img" id="captcha_img" src="'.$captcha['image_src'].'" /> </div>')?>
+	                        	<a title="reload" class="reload_captcha_popup" href="#"><img class="loading" src="<?php echo base_url();?>assets/images/refresh.png"></a>
+	                        </div>
+	                        <div class="col-sm-6 captcha_holder nopadding">
+	                            <label class="captcha_label">Enter Captcha value <sup class="alert">*</sup></label>
+	                            <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>'')); ?>
+	                    	</div>
+	                        <div class="clearfix"> </div>
+	                        <div class="loginbox-terms">
+	                           <label class="checkbox_word">
+	                           <?php echo form_input(array('type' => 'checkbox','value' => '1','name' => 'accept_terms', 'class' => '')); ?> I accept <a href="<?php echo base_url(); ?>terms" class="txt_blue" target="_blank">Term and conditions?</a>
+	                        </div>
+	                        <p id="popup_submit" class="btn btn-default btn-block">Register</p>
+	               	 	<?php echo form_close(); ?>
+					</div>
+				    <div class="margin_10 pull-right">Already have an account?
+				    	<a class="popup_signin txt_blue"> Sign In</a>
+				    </div>   
+				    <div class="clearfix"> </div> 
+				</div>
+				<!--End Sign up-->
+				<!--Password-->
+				<div id="show_pwd" class="dn">
+					<div class="form-group">
+						<label class="label_height pull-left">I Am a<sup class="required alert">*</sup></label>
+						<div class="provider_radio pull-left">
+							<input class="user_forget_category" type="radio" name="forget_radio" value="provider">Job Provider
+						</div>	
+						<div class="seeker_radio pull-left">
+							<input class="user_forget_category" type="radio" name="forget_radio" value="seeker">Job Seeker
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+                    <form action="" method="post">
+                    	<div style="display:none">
+							<input type="hidden" value="<?php echo $this->security->get_csrf_hash(); ?>" name="csrf_token">
+						</div>
+	                    <div class="form-group">
+	                    	<label for="exampleInputEmail1"> Email address <span class="alert">*</span> </label>
+	                        <input id="forget_email" name="forget_email" class="form-control" placeholder="Enter Email" type="text">
+	                    </div>
+	                    <button id="submit" type="submit" class="btn btn-default btn-block disabled">
+	                        <i class="fa fa-unlock"> </i> Retrieve Password
+	                    </button>
+                 	</form>
+				</div>                 
     		</div>
     		<div class="modal-footer">
     			<div class="home_sociallogin text-center">SignIn/SignUp using social accounts</div>

@@ -1085,7 +1085,8 @@ class Job_provider_model extends CI_Model {
         if($data -> num_rows() == 1) {
             $data_array = $data->row_array();
             $org_sub_id = $data_array['organization_subscription_id'];
-            $start_date = !empty($data_array['renewal_grace_period_end_date']) ? date_create($data_array['renewal_grace_period_end_date']) : (!empty($data_array['validity_end_date']) ? date_create($data_array['validity_end_date']) : (!empty($data_array['grace_period_end_date']) ? date_create($data_array['grace_period_end_date']) : date_create($data_array['org_sub_validity_end_date'])));
+            // $start_date = !empty($data_array['renewal_grace_period_end_date']) ? date_create($data_array['renewal_grace_period_end_date']) : (!empty($data_array['validity_end_date']) ? date_create($data_array['validity_end_date']) : (!empty($data_array['grace_period_end_date']) ? date_create($data_array['grace_period_end_date']) : date_create($data_array['org_sub_validity_end_date'])));
+            $start_date = date_create($data_array['organizaion_sub_updated_date']);
             $days = date_diff(date_create('today'),$start_date);
             if($days->invert == 1)
             {
@@ -1120,5 +1121,6 @@ class Job_provider_model extends CI_Model {
         }
         return TRUE;
     }
+
 
 }  // End

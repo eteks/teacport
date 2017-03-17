@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'file','form','custom');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('');
 
 
 /*
@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('admin/admin_model');
+$autoload['model'] = array('admin/admin_model','dynamic_settings');
 
 
 /* End of file autoload.php */

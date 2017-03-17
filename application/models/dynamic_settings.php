@@ -4,13 +4,30 @@ class Dynamic_settings extends CI_Model {
 	public function __construct() {
 		parent::__construct();
 		$this->config->load('custom_variables');
+	  	$this->load->library(array('captcha')); 
 	}
 
 	public function global_variables() {
-		$data['sms_credentials'] = $this->db->get_where('tr_settings_sms_gateway')->row_array();
+		$data['sms_credentials'] = $this->db->get('tr_settings_sms_gateway')->row_array();
 		$this->config->set_item('sms_gateway',$data['sms_credentials']);
+
+
+		
+			$this->session->set_userdata('captcha_info', $data['captcha']);
+
+
+
+	}
+
+	public function popup_signup_form() {
+		$data['institution_types'] = $this->db->get_where('tr_institution_type',array('institution_type_status' => 1))->result_array();
+		$this->config->set_item('institution_types',$data['institution_types']);
+		$data['captcha'] = $this->captcha->main();
+		$this->session->set_userdata('captcha_info', $data['captcha']);
+		$this->config->set_item('captcha_value',$data['captcha']);
 	}
 }
 
 $a = new Dynamic_settings();
-$a->global_variables();
+// $a->global_variables();
+$a->popup_signup_form();

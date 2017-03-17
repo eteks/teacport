@@ -37,6 +37,7 @@ class Cron extends CI_Controller
 	    // $cron = new CronRunner();
 	    // $cron->run();
 	    /* Matching Jobs Start */
+
 	    $data['related_jobs'] = cron_related_vacancy($this->cron_model->cron_related_jobs());
     	if(!empty($data['related_jobs'])) {
     		foreach ($data['related_jobs'] as $rel_key => $rel_val) {
@@ -46,12 +47,92 @@ class Cron extends CI_Controller
     			$this->mail_send($message,$subject,$rel_val['candidate_email']);
     		}
 	   	}
+
 	   	/* Matching Jobs End */
+
+	   	/* Plan Expiry Alert Before 10 Days Start */
+
+	   	$data['expiry_before_alert'] = $this->cron_model->plan_expiry_before_alert();
+	   	if(!empty($data['expiry_before_alert'])) {
+		   	foreach ($data['expiry_before_alert'] as $rel_val) {
+	    		$related['organization_name'] = $rel_val['organization_name'];	
+	    		$related['registrant_name'] = $rel_val['registrant_name'];		
+	    		$related['subscription_name'] = $rel_val['subscription_plan'];		
+	    		$subject = "Plan Expiry Alert";
+	    		$message = $this->load->view('email_template/plan_expiry_b10_alert',$related,TRUE);
+	    		$this->mail_send($message,$subject,$rel_val['registrant_email_id']);
+	   		}
+   		}
+
+	   	/* Plan Expiry Alert Before 10 Days End */
+
+	   	/* Grace Period Expiry Alert Before 10 Days Start */
+
+	   	$data['grace_expiry_before_alert'] = $this->cron_model->grace_expiry_before_alert();
+	   	if(!empty($data['grace_expiry_before_alert'])) {
+		   	foreach ($data['grace_expiry_before_alert'] as $rel_val) {
+	    		$related['organization_name'] = $rel_val['organization_name'];	
+	    		$related['registrant_name'] = $rel_val['registrant_name'];		
+	    		$related['subscription_name'] = $rel_val['subscription_plan'];		
+	    		$subject = "Grace Period Expiry Alert";
+	    		$message = $this->load->view('email_template/grace_expiry_b3_alert',$related,TRUE);
+	    		$this->mail_send($message,$subject,$rel_val['registrant_email_id']);
+	   		}
+   		}
+
+	   	/* Grace Period Expiry Alert Before 10 Days End */
+
+	   	/* Plan Expiry Alert Start */
+
+	   	// $data['expiry_alert'] = $this->cron_model->plan_expiry_alert();
+	   	// if(!empty($data['expiry_alert'])) {
+		   // 	foreach ($data['expiry_alert'] as $rel_val) {
+	    // 		$related['organization_name'] = $rel_val['organization_name'];	
+	    // 		$related['registrant_name'] = $rel_val['registrant_name'];		
+	    // 		$related['subscription_name'] = $rel_val['subscription_plan'];		
+	    // 		$subject = "Plan Expiry Alert";
+	    // 		$message = $this->load->view('email_template/plan_expiry_b10_alert',$related,TRUE);
+	    // 		$this->mail_send($message,$subject,$rel_val['registrant_email_id']);
+	   	// 	}
+   		// }
+
+	   	/* Plan Expiry Alert End */
+
+	   	/* Grace Period Expiry Alert Start */
+
+	   	// $data['grace_expiry_alert'] = $this->cron_model->grace_expiry_alert();
+	   	// if(!empty($data['grace_expiry_alert'])) {
+		   // 	foreach ($data['grace_expiry_alert'] as $rel_val) {
+	    // 		$related['organization_name'] = $rel_val['organization_name'];	
+	    // 		$related['registrant_name'] = $rel_val['registrant_name'];		
+	    // 		$related['subscription_name'] = $rel_val['subscription_plan'];		
+	    // 		$subject = "Grace Period Expiry Alert";
+	    // 		$message = $this->load->view('email_template/plan_expiry_b10_alert',$related,TRUE);
+	    // 		$this->mail_send($message,$subject,$rel_val['registrant_email_id']);
+	   	// 	}
+   		// }
+
+	   	/* Grace Period Expiry Alert End */
+   	
+
+		
 
 		// echo "<pre>";
 		// print_r($data['related_jobs']);
 		// echo "</pre>";
  	}
+ 	public function cron_sample()
+ 	{
+    	$subject = "Sample";
+    	$message = "Hii... This is sample mail";
+    	$this->mail_send($message,$subject,"sivaramakannan05@gmail.com");
+   	}
+
+
+ 	
+
+
+
 
 }  // End
 
