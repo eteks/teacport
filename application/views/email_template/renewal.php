@@ -49,7 +49,7 @@
 												<span style='font-family:Trebuchet MS, Verdana, Arial; font-size:17px; font-weight:bold;'>Dear <?php echo $organization_name; ?>, </span>
 												<br/>
 												<p style='font-size:15px'>Thank you for Subscribed with us.</p>
-												<p style='font-size:15px'>You are now in Subscription Plan: <span style='font-size:16px;color:#da651a;'><b><?php echo $subscription_details['subscription_plan']; ?>.</b></span> The Plan details get end on <span style='font-size:16px;color:#da651a;'><b> <?php echo date('d M Y',strtotime($subscription_details['validity_end_date'])); ?></b></span> </p>												
+												<p style='font-size:15px'>You are now in Subscription Plan: <span style='font-size:16px;color:#da651a;'><b><?php echo $subscription_details['subscription_plan']; ?>.</b></span> The Plan details get end on <span style='font-size:16px;color:#da651a;'><b> <?php echo date('d M Y',strtotime($subscription_details['organizaion_sub_updated_date'])); ?></b></span> </p>												
 												<p style='font-size:15px'>Renewal Plan Details are given below :</p>
 												
 												<br/>

@@ -121,11 +121,11 @@ class Cron extends CI_Controller
 		// print_r($data['related_jobs']);
 		// echo "</pre>";
  	}
- 	public function cron_sample()
+ 	public function cron_mail()
  	{
     	$subject = "Sample";
     	$message = "Hii... This is sample mail";
-    	$this->mail_send($message,$subject,"sivaramakannan05@gmail.com");
+    	$this->mail_send($message,$subject,"sweetkannan05@gmail.com");
    	}
 
 

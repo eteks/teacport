@@ -3,7 +3,18 @@
     	<ul class="menu-logo">
             <li>
                 <a href="<?php echo base_url(); ?>" id="webpage_title"> 
+                	<?php 
+                	$logo = $this->config->item('logo');
+                	if(!empty($logo)) :
+                	?>
+                	<img src="<?php echo $logo['template_logo']; ?>" alt="<?php echo $logo['template_logo_text']; ?>" class="img-responsive tr_logo pull-left">
+                	<?php
+                	else :
+                	?>
                 	<img src="<?php echo base_url(); ?>assets/images/logo/new_logo.png" alt="logo" class="img-responsive tr_logo pull-left">
+                	<?php
+                	endif;
+                	?>
                 	<!-- <h4 class="pull-left"><strong><span class="logo_firstword">Teachers</span> <span class="logo_secondword">Recruit</span></strong></h4> -->
                 	<span class="clearfix"> </span>
                 </a>

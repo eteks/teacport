@@ -68,8 +68,84 @@ class Job_Providermodel extends CI_Model {
           $this->db->set($profile_update_org_data);                         
           $this->db->where($profile_update_org_where);
           $this->db->update("tr_organization_profile", $profile_update_org_data); 
+
           $model_data['status'] = "Updated Successfully";
-          $model_data['error'] = 2;   
+          $model_data['error'] = 2; 
+
+          // To assign grace period
+          if($this->input->post('grace_period_applicable_status')) {
+            $already_sub_where = '(organization_id="'.$this->input->post('rid').'" AND organization_subscription_status=1)';
+            $already_sub = $this->db->get_where('tr_organization_subscription',$already_sub_where)->num_rows;
+            if($already_sub == 0) {
+              $grace = $this->db->get('tr_settings_site_configuration')->row_array();
+              $no_of_days = $grace['plan_grace_period_days'] - 1;
+              if($this->input->post('renewal_id') && $this->input->post('org_sub_id')) {
+                $sub_data = array(
+                                  'organization_email_count' => $grace['grace_email_count'],
+                                  'organization_sms_count'   => $grace['grace_sms_count'],
+                                  'organization_resume_download_count' => $grace['grace_resume_count'],
+                                  'organization_post_ad_count' => $grace['grace_ad_count'],
+                                  'organization_post_vacancy_count' => $grace['grace_vacancy_count'],
+                                  'organization_email_remaining_count' => $grace['grace_email_count'],
+                                  'organization_sms_remaining_count' => $grace['grace_sms_count'],
+                                  'organization_remaining_resume_download_count' => $grace['grace_resume_count'],
+                                  'organization_ad_remaining_count' => $grace['grace_ad_count'],
+                                  'organization_vacancy_remaining_count' => $grace['grace_vacancy_count'],
+                                  'is_email_validity' => ($grace['grace_email_count'] > 0 ? 1 : 0 ),
+                                  'is_sms_validity' => ($grace['grace_sms_count'] > 0 ? 1 : 0 ),
+                                  'is_resume_validity' => ($grace['grace_resume_count'] > 0 ? 1 : 0 ),
+                                  'organizaion_sub_updated_date' => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+                                  'organization_subscription_status' => 1
+                                );
+                $renewl_data = array(
+                                    'renewal_is_grace_period_available' => 1,
+                                    'renewal_grace_period_start_date' => date('Y-m-d'),
+                                    'renewal_grace_period_end_date' => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+                                    'status' => 1
+                                  );
+                // Update organization subscription table
+                $this->db->where(array('organization_subscription_id' => $this->input->post('org_sub_id')));
+                $this->db->set($sub_data);
+                $this->db->update('tr_organization_subscription');
+                // Update renewal table
+                $this->db->where(array('upgrade_or_renewal_id' => $this->input->post('renewal_id')));
+                $this->db->set($renewl_data);
+                $this->db->update('tr_organization_upgrade_or_renewal');
+
+                $model_data['status'] = "Updated Successfully And Grace Period Assigned Successfully!";
+                $model_data['error'] = 3; 
+              }
+              else if($this->input->post('org_sub_id')) { 
+                $sub_data = array(
+                                  'organization_email_count' => $grace['grace_email_count'],
+                                  'organization_sms_count'   => $grace['grace_sms_count'],
+                                  'organization_resume_download_count' => $grace['grace_resume_count'],
+                                  'organization_post_ad_count' => $grace['grace_ad_count'],
+                                  'organization_post_vacancy_count' => $grace['grace_vacancy_count'],
+                                  'organization_email_remaining_count' => $grace['grace_email_count'],
+                                  'organization_sms_remaining_count' => $grace['grace_sms_count'],
+                                  'organization_remaining_resume_download_count' => $grace['grace_resume_count'],
+                                  'organization_ad_remaining_count' => $grace['grace_ad_count'],
+                                  'organization_vacancy_remaining_count' => $grace['grace_vacancy_count'],
+                                  'is_email_validity' => ($grace['grace_email_count'] > 0 ? 1 : 0 ),
+                                  'is_sms_validity' => ($grace['grace_sms_count'] > 0 ? 1 : 0 ),
+                                  'is_resume_validity' => ($grace['grace_resume_count'] > 0 ? 1 : 0 ),
+                                  'is_grace_period_available' => 1,
+                                  'grace_period_start_date' => date('Y-m-d'),
+                                  'grace_period_end_date' => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+                                  'organizaion_sub_updated_date' => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
+                                  'organization_subscription_status' => 1
+                                );
+                // Update organization subscription table
+                $this->db->where(array('organization_subscription_id' => $this->input->post('org_sub_id')));
+                $this->db->set($sub_data);
+                $this->db->update('tr_organization_subscription');
+
+                $model_data['status'] = "Updated Successfully And Grace Period Assigned Successfully!";
+                $model_data['error'] = 3; 
+              }
+            }
+          }       
           // $profile_update_org_sub_where = '( organization_id="'.$this->input->post('rid').'" and organization_subscription_status=1)'; 
           // $this->db->set($profile_update_org_sub_data);                         
           // $this->db->where($profile_update_org_sub_where);
@@ -418,10 +494,9 @@ class Job_Providermodel extends CI_Model {
   // Payment subscription validation - Renewal Plan
   public function check_renewal_plan_valid($plan_id,$org_id) {
     $data = '';
-    $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
-    $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
-    $check_already_sub_array = $check_already_sub->num_rows();
-
+    // $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+    // $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+    // $check_already_sub_array = $check_already_sub->num_rows();
 
     $where_sub = '(subscription_id="'.$plan_id.'" AND subscription_price = 0)';
     $already_sub = $this->db->get_where('tr_subscription',$where_sub);
@@ -430,11 +505,11 @@ class Job_Providermodel extends CI_Model {
     $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
     $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
 
-    if($check_already == 1 && ($check_already_sub_array == 0 || $already_sub_array == 0)) {
-        $data = 2; // if correct
+    if($check_already == 1 && $already_sub_array == 0) {
+      $data = 2; // if correct
     }
     else {
-        $data = 1; // if wrong
+      $data = 1; // if wrong
     }
     return $data;
   }
@@ -442,18 +517,18 @@ class Job_Providermodel extends CI_Model {
   // Payment subscription validation - Orignial Plan
   public function check_orginal_plan_valid($plan_id,$org_id) {
     $data = '';
-    $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
-    $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
-    $check_already_sub_array = $check_already_sub->num_rows();
+    // $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+    // $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+    // $check_already_sub_array = $check_already_sub->num_rows();
 
-    $where_sub = '(subscription_id="'.$plan_id.'" AND subscription_price = 0)';
-    $already_sub = $this->db->get_where('tr_subscription',$where_sub);
-    $already_sub_array = $already_sub->num_rows();
+    // $where_sub = '(subscription_id="'.$plan_id.'" AND subscription_price = 0)';
+    // $already_sub = $this->db->get_where('tr_subscription',$where_sub);
+    // $already_sub_array = $already_sub->num_rows();
 
     $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
     $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
 
-    if(($check_already_sub_array == 0 || $already_sub_array == 0) && $check_already  == 0) {
+    if($check_already  == 0) {
       $data = 2; // if correct 
     }
     else {
@@ -541,27 +616,35 @@ class Job_Providermodel extends CI_Model {
   public function insert_orignial_plan_details($data)
   {
     $already_where = '(organization_id="'.$data['organization_id'].'" AND organization_subscription_status=1)';
-    $already_get = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
-    if($already_get > 0) {
-        $this->db->where($already_where);
-        $set_data = array(
-                            'organization_post_vacancy_count'         => 0,
-                            'organization_vacancy_remaining_count'    => 0,
-                            'organization_post_ad_count'              => 0,
-                            'organization_ad_remaining_count'         => 0,
-                            'organization_email_count'                => 0,
-                            'organization_sms_count'                  => 0,
-                            'organization_resume_download_count'      => 0,
-                            'organization_email_remaining_count'      => 0,
-                            'organization_sms_remaining_count'        => 0,
-                            'is_email_validity'                       => 0,
-                            'is_sms_validity'                         => 0,
-                            'is_resume_validity'                      => 0,
-                            'organization_remaining_resume_download_count'  => 0,
-                            'organization_subscription_status'        => 0
-                        );
-        $this->db->set($set_data);
-        $this->db->update('tr_organization_subscription');
+    $already_get = $this->db->get_where('tr_organization_subscription',$already_where);
+    if($already_get->num_rows() > 0) {
+      $org_sub_array = $already_get->row_array();
+      $this->db->where($already_where);
+      $set_data = array(
+                          'organization_post_vacancy_count'         => 0,
+                          'organization_vacancy_remaining_count'    => 0,
+                          'organization_post_ad_count'              => 0,
+                          'organization_ad_remaining_count'         => 0,
+                          'organization_email_count'                => 0,
+                          'organization_sms_count'                  => 0,
+                          'organization_resume_download_count'      => 0,
+                          'organization_email_remaining_count'      => 0,
+                          'organization_sms_remaining_count'        => 0,
+                          'is_email_validity'                       => 0,
+                          'is_sms_validity'                         => 0,
+                          'is_resume_validity'                      => 0,
+                          'organization_remaining_resume_download_count'  => 0,
+                          'organizaion_sub_updated_date'            => date('Y-m-d'),
+                          'organization_subscription_status'        => 0
+                      );
+      $this->db->set($set_data);
+      $this->db->update('tr_organization_subscription');
+
+      $org_sub_id = $org_sub_array['organization_subscription_id'];
+      // Renewal table
+      $this->db->where(array('organization_subscription_id' => $org_sub_id));
+      $this->db->set('status', '0', FALSE);
+      $this->db->update('tr_organization_upgrade_or_renewal');
     }
     if($this->db->insert('tr_organization_subscription', $data)){
       return TRUE;
@@ -582,28 +665,37 @@ class Job_Providermodel extends CI_Model {
   public function insert_renewal_plan_details($org_id,$data)
   {
     $already_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
-    $already_get = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
-    if($already_get > 0) {
-        $this->db->where($already_where);
-        $set_data = array(
-                            'organization_post_vacancy_count'         => 0,
-                            'organization_vacancy_remaining_count'    => 0,
-                            'organization_post_ad_count'              => 0,
-                            'organization_ad_remaining_count'         => 0,
-                            'organization_email_count'                => 0,
-                            'organization_sms_count'                  => 0,
-                            'organization_resume_download_count'      => 0,
-                            'organization_email_remaining_count'      => 0,
-                            'organization_sms_remaining_count'        => 0,
-                            'is_email_validity'                       => 0,
-                            'is_sms_validity'                         => 0,
-                            'is_resume_validity'                      => 0,
-                            'organization_remaining_resume_download_count'  => 0,
-                            'organization_subscription_status'        => 0
-                        );
-        $this->db->set($set_data);
-        $this->db->update('tr_organization_subscription');
+    $already_get = $this->db->get_where('tr_organization_subscription',$already_where);
+    if($already_get->num_rows() > 0) {
+      $org_sub_array = $already_get->row_array();
+      $this->db->where($already_where);
+      $set_data = array(
+                          'organization_post_vacancy_count'         => 0,
+                          'organization_vacancy_remaining_count'    => 0,
+                          'organization_post_ad_count'              => 0,
+                          'organization_ad_remaining_count'         => 0,
+                          'organization_email_count'                => 0,
+                          'organization_sms_count'                  => 0,
+                          'organization_resume_download_count'      => 0,
+                          'organization_email_remaining_count'      => 0,
+                          'organization_sms_remaining_count'        => 0,
+                          'is_email_validity'                       => 0,
+                          'is_sms_validity'                         => 0,
+                          'is_resume_validity'                      => 0,
+                          'organization_remaining_resume_download_count'  => 0,
+                          'organizaion_sub_updated_date'            => date('Y-m-d'),
+                          'organization_subscription_status'        => 0
+                      );
+      $this->db->set($set_data);
+      $this->db->update('tr_organization_subscription');
+
+      $org_sub_id = $org_sub_array['organization_subscription_id'];
+      // Renewal table
+      $this->db->where(array('organization_subscription_id' => $org_sub_id));
+      $this->db->set('status', '0', FALSE);
+      $this->db->update('tr_organization_upgrade_or_renewal');
     }
+
     if($this->db->insert('tr_organization_upgrade_or_renewal', $data)){
       return TRUE;
     }
@@ -664,6 +756,35 @@ class Job_Providermodel extends CI_Model {
 
   /* ===================          Job Provider Transaction Model End    ====================== */
   
+  // Recent subscription plan
+  public function recent_subscription_plan($id) { 
+    $subscription_where = '(tos.organization_id="'.$id.'")';
+    $this->db->select('tos.*,ts.*,our.*,tos.organization_subscription_id as org_sub_id');
+    $this->db->from('tr_organization_subscription tos');
+    $this->db->join('tr_subscription ts','tos.subscription_id=ts.subscription_id','inner');
+    $this->db->join('tr_organization_upgrade_or_renewal our','tos.organization_subscription_id=our.organization_subscription_id AND our.is_renewal=1','left');
+    $model_data = $this->db->where($subscription_where)->order_by('tos.organizaion_sub_updated_date desc,our.validity_end_date desc')->get()->row_array();
+    return $model_data;
+  }
+
+  // Recent subscription plan
+  public function get_grace_period_details() { 
+    $model_data = $this->db->get('tr_settings_site_configuration')->row_array();
+    return $model_data;
+  }
+
+  // To get plan details with organization details
+  public function provider_plan_details($org_id){
+    $this->db->select('*');    
+    $this->db->from('tr_organization_subscription os');
+    $this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
+    $this->db->join('tr_organization_profile op', 'os.organization_id = op.organization_id');
+    $where = "(os.organization_id = '".$org_id."' AND os.organization_subscription_status='1')";
+    $this->db->where($where);
+    $providersubcription = $this->db->get();
+    return $providersubcription->row_array(); 
+  }
+
 }
 
 /* End of file Job_Providermodel.php */

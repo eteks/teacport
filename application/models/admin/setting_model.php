@@ -80,91 +80,83 @@ class Setting_Model extends CI_Model {
 		return $model_data;
 	}
 
-public function insert_configuration_option($status)
+	public function insert_configuration_option($status)
+	{	
+
+		if($status == 'update') {
+			$data = array(
+							'system_email_address'   => $this->input->post('system_email'),
+	                        'enable_facebook_login'  => $this->input->post('fb_status'),
+	                        'facebook_app_id'        => $this->input->post('fb_id'),
+	                        'facebook_app_secret'    => $this->input->post('fb_key'),
+	                        'enable_twitter_login'   => $this->input->post('tw_status'),
+	                    	'twitter_app_id'         => $this->input->post('tw_id'),
+	                        'twitter_app_secret'     => $this->input->post('tw_key'),
+	                        'enable_google_login'    => $this->input->post('go_status'),
+	                        'google_app_id'          => $this->input->post('go_id'),
+	                        'google_app_secret'      => $this->input->post('go_key'),
+	                        'google_developer_key'   => $this->input->post('go_dev_key'),
+	                        'enable_linkedin_login'  => $this->input->post('li_status'),
+	                        'linkedin_app_id'        => $this->input->post('li_id'),
+	                        'linkedin_app_secret'    => $this->input->post('li_key'),
+                          	'plan_grace_period_days' => $this->input->post('grace_days'),
+	                        'grace_sms_count'        => $this->input->post('grace_sms'),
+	                        'grace_email_count'      => $this->input->post('grace_email'),
+	                        'grace_resume_count'     => $this->input->post('grace_resume'),
+	                        'grace_ad_count'         => $this->input->post('grace_ad'),
+	                        'grace_vacancy_count'    => $this->input->post('grace_vac'),
+	                        'configuration_updated_date'  => date('Y-m-d H:i:s')
+						);
+
+
+	
+			$pay_rows = $this->db->get('tr_settings_site_configuration');
+			if($pay_rows -> num_rows() == 0) {
+			    $this->db->insert('tr_settings_site_configuration', $data);
+				$model_data['error'] = 2;
+				$model_data['status'] = "Data inserted successfully";
+			}
+			else {
+				$update_where = '(site_configuration_id="'.$this->input->post('hidden_id').'")';
+				$this->db->set($data); 
+	      		$this->db->where($update_where);
+	      		$this->db->update("tr_settings_site_configuration");
+				$model_data['error'] = 2;
+				$model_data['status'] = "Data Updated successfully";
+			}
+	      	return $model_data;
+		}
+
+		// View
+		else {
+			$model_data['configuration'] = $this->db->get('tr_settings_site_configuration')->row_array();
+			return $model_data;
+		}
+	}
+	public function insert_template_logo($data,$status)
 	{	
 		if($status == 'update') {
-		$data = array(
-							'system_email_address' => $this->input->post('system_email_address'),
-                              'website_time_zone' => $this->input->post('website_time_zone'),
-                              'facebook_app_id' => $this->input->post('facebook_app_id'),
-                              'facebook_app_secret' => $this->input->post('facebook_app_secret'),
-                              'twitter_app_id' => $this->input->post('twitter_app_id'),
-                              'twitter_app_secret' => $this->input->post('twitter_app_secret'),
-                              'google_app_id' => $this->input->post('google_app_id'),
-                              'google_app_secret' => $this->input->post('google_app_secret'),
-                              'linkedin_app_id' => $this->input->post('linkedin_app_id'),
-                              'linkedin_app_secret' => $this->input->post('linkedin_app_secret'),
-				);
-		$pay_rows = $this->db->get('tr_settings_site_configuration');
-		if($pay_rows -> num_rows() == 0) {
-			$this->db->set('time', 'NOW()', FALSE);
-		    $this->db->insert('tr_settings_site_configuration', $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Data inserted successfully";
+			$pay_rows = $this->db->get('tr_settings_template');
+			if($pay_rows -> num_rows() == 0) {
+			    $this->db->insert('tr_settings_template', $data);
+				$model_data['error'] = 2;
+				$model_data['status'] = "Data inserted successfully";
+			}
+			else {
+				$update_where = '( template_id="'.$this->input->post('hidden_id_settings').'")';
+				$this->db->set($data); 
+	      		$this->db->where($update_where);
+	      		$this->db->update("tr_settings_template");
+				$model_data['error'] = 2;
+				$model_data['status'] = "Data Updated successfully";
+			}
+	      	return $model_data;
 		}
+		// View
 		else {
-			$data = array(
-							'system_email_address' => $this->input->post('system_email_address'),
-                              'website_time_zone' => $this->input->post('website_time_zone'),
-                              'facebook_app_id' => $this->input->post('facebook_app_id'),
-                              'facebook_app_secret' => $this->input->post('facebook_app_secret'),
-                              'twitter_app_id' => $this->input->post('twitter_app_id'),
-                              'twitter_app_secret' => $this->input->post('twitter_app_secret'),
-                              'google_app_id' => $this->input->post('google_app_id'),
-                              'google_app_secret' => $this->input->post('google_app_secret'),
-                              'linkedin_app_id' => $this->input->post('linkedin_app_id'),
-                              'linkedin_app_secret' => $this->input->post('linkedin_app_secret'),
-				);
-			$update_where = '( site_configuration_id="'.$this->input->post('hidden_id_settings').'")';
-			$this->db->set($data); 
-      		$this->db->where($update_where);
-      		$this->db->update("tr_settings_site_configuration", $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Data Updated successfully";
+			$model_data['logo_values'] = $this->db->get('tr_settings_template')->row_array();
+			return $model_data;
 		}
-      	return $model_data;
-	}
-
-	// View
-	else {
-		$model_data['payment_values'] = $this->db->get('tr_settings_site_configuration')->row_array();
-		return $model_data;
-	}
-	}
-public function insert_template_logo($status)
-	{	
-		if($status == 'update') {
-		$data = array(
-							'template_logo' => $this->input->post('template_logo'),
-                              'template_logo_text' => $this->input->post('template_logo_text'),
-				);
-		$pay_rows = $this->db->get('tr_settings_template');
-		if($pay_rows -> num_rows() == 0) {
-			$this->db->set('time', 'NOW()', FALSE);
-		    $this->db->insert('tr_settings_template', $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Data inserted successfully";
-		}
-		else {
-			$data = array(
-							'template_logo' => $this->input->post('template_logo'),
-                              'template_logo_text' => $this->input->post('template_logo_text'),
-				);
-			$update_where = '( template_id="'.$this->input->post('hidden_id_settings').'")';
-			$this->db->set($data); 
-      		$this->db->where($update_where);
-      		$this->db->update("tr_settings_template", $data);
-			$model_data['error'] = 2;
-			$model_data['status'] = "Data Updated successfully";
-		}
-      	return $model_data;
-	}
-
-	// View
-	else {
-		$model_data['payment_values'] = $this->db->get('tr_settings_template')->row_array();
-		return $model_data;
-	}
 	}
 
 

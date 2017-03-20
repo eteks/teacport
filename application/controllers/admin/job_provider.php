@@ -174,14 +174,41 @@ class Job_Provider extends CI_Controller {
 	                	$data['error'] = 1;
                 	}	
                 }
+                
      			if($is_end == 1 && $upload_error == 0) {
 					$data_values = $this->job_providermodel->get_provider_profile('update');
-         			$data['error'] = $data_values['error'];
+					if($data_values['error'] == 3) {
+						$data['error'] = 2;
+					}
+					else {
+						$data['error'] = $data_values['error'];
+					}     			
 		        	$data['status'] = $data_values['status'];
 		        }
 		        else if($is_end == 0 && $upload_error == 0 && $this->input->post('index')=="end"){
 		        	$data_values = $this->job_providermodel->get_provider_profile('update');
-         			$data['error'] = $data_values['error'];
+		        	if($data_values['error'] == 3) {
+						$data['error'] = 2;
+						$email_data['subscription_details'] = $this->job_providermodel->provider_plan_details($this->input->post('rid'));
+						$mail_id = $email_data['subscription_details']['registrant_email_id'];
+						// Email configuration
+						$this->config->load('email', true);
+						$emailsetup = $this->config->item('email');
+						$this->load->library('email', $emailsetup);
+						$from_email = $emailsetup['smtp_user'];
+						$subject = 'Subscription Details';
+						$message = $this->load->view('admin/email_template/grace_assigned', $email_data, TRUE);
+						$this->email->initialize($emailsetup);	
+						$this->email->from($from_email, 'Teacher Recruit');
+						$this->email->to($mail_id);
+						$this->email->subject($subject);
+						$this->email->message($message);
+						/* Check whether mail send or not*/
+						$this->email->send();
+					}
+					else {
+						$data['error'] = $data_values['error'];
+					}
 		        	$data['status'] = $data_values['status'];
 		        }
 		        else if($is_end == 0 && $upload_error == 0 ){
@@ -234,10 +261,9 @@ class Job_Provider extends CI_Controller {
 			$data['payment_details'] = get_provider_subscription($data_values['payment_details']);
 			// echo "<pre>";
 			// print_r($data['payment_details']);
-   			// echo "</pre>";
-			if(!empty($data_values['payment_details'])){
-				$data['latest_plan_details'] = $data_values['payment_details'][0];
-			}
+   // 			echo "</pre>";
+			$data['grace_period_details'] = $this->job_providermodel->get_grace_period_details();
+			$data['latest_plan_details']  = $this->job_providermodel->recent_subscription_plan($value);
 			// $data['payment_status'] = $data_values['payment_status'];
 			$data['mode'] = $this->input->post('action');
 			$this->load->view('admin/jobprovider_profile',$data);

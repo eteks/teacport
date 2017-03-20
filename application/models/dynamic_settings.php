@@ -18,6 +18,10 @@ class Dynamic_settings extends CI_Model {
 		$data['captcha'] = $this->captcha->main();
 		$this->session->set_userdata('captcha_info', $data['captcha']);
 		$this->config->set_item('captcha_value',$data['captcha']);
+
+		// Set Logo as dynamic
+		$data['logo'] = $this->db->get('tr_settings_template')->row_array();
+		$this->config->set_item('logo',$data['logo']);
 	}
 }
 

@@ -10,3 +10,4 @@ view and controller
 $config['sms_gateway'] = array();
 $config['institution_types'] = array();
 $config['captcha_value'] = array();
+$config['logo'] = array();

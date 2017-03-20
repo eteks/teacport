@@ -12,6 +12,7 @@ class Ccavenue extends CI_Controller {
 	{	
 		$this->session->set_userdata('subscription_status',"success");
 		$this->session->set_userdata('order_id','0');
+		$payment_settings = $this->common_model->get_payment_settings();
 		$session_data = $this->session->all_userdata();
 		if(empty($session_data['login_session']) || $session_data['login_session']['user_type'] != 'provider')
 			redirect('provider/logout');
@@ -88,14 +89,21 @@ class Ccavenue extends CI_Controller {
 					$posted[$key] = $value;
 				}
 			}
-			$posted['merchant_id']  = CCAVENUEMERCHANTID;
-			$posted['access_code']  = CCAVENUEACCESSCODE;
-			$posted['working_key']  = CCAVENUEWORKINGKEY;
+			if(!empty($payment_settings)) {
+				$posted['merchant_id']  = $payment_settings['online_transfer_merchant_id'];
+				$posted['access_code']  = $payment_settings['online_transfer_merchant_accesscode'];
+				$posted['working_key']  = $payment_settings['online_transfer_merchant_workingkey'];
+				$posted['action']       = $payment_settings['online_transfer_payment_base_url'];	
+			}
+			// $posted['merchant_id']  = CCAVENUEMERCHANTID;
+			// $posted['access_code']  = CCAVENUEACCESSCODE;
+			// $posted['working_key']  = CCAVENUEWORKINGKEY;
+			// $posted['action']       = CCAVENUEBASEURL;	
+
 			$posted['currency']     = 'INR';
 			$posted['redirect_url'] = CCAVENUEREDIRECTURL;
 			$posted['cancel_url']   = CCAVENUECANCELURL;
 			$posted['language']     = 'en';	
-			$posted['action']       = CCAVENUEBASEURL;	
 			// Generate random order id
 			$posted['order_id']     = substr(hash('sha256', mt_rand() . microtime()), 0, 20);
 			$this->session->set_userdata('order_id',$posted['order_id']);

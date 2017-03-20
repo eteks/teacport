@@ -2,9 +2,9 @@
   var baseurl = "<?php echo base_url(); ?>";
   var csrf_token_value = "<?php echo $this->security->get_csrf_hash(); ?>";
 </script>	
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/custom.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validation.js"></script>
-<script src="<?php echo base_url(); ?>assets/js/ajax-call.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/custom_min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/validation_min.js"></script>
+<script src="<?php echo base_url(); ?>assets/js/ajax-call_min.js"></script>
 <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/jquery.fine-uploader.min.js"></script>		 -->
 <?php 
 	$user_type = $this->session->userdata("login_session"); 

@@ -59,23 +59,34 @@ if(!empty($this->session->userdata("admin_login_status"))):
 	                            <div class="controls">
 	                              <span>
 	                                <a name="" class="btn upload_option"> Upload </a>
-	                                <input name="userimage" id="upload_logo" class="form-control hidden_upload" value="<?php if(!empty($payment_values['template_logo'])) echo $payment_values['template_logo']; ?>" type="file" >
-	                                <img id='imagepreview_templogo'>
-                                  <i class="icon-remove-sign temp_remove_act">Remove</i>
+	                                <input name="template_logo" id="upload_logo" class="form-control hidden_upload" value="" type="file" >
+                                  <?php 
+                                  if(!empty($logo_values['template_logo'])) :
+                                  ?>
+	                                <img id='imagepreview_templogo' src="<?php echo $logo_values['template_logo']; ?>" alt="template logo">
+                                  <?php
+                                  else :
+                                  ?>
+                                  <img id='imagepreview_templogo' alt="template logo">
+                                  <?php
+                                  endif;
+                                  ?>
+                                  <!-- <i class="icon-remove-sign temp_remove_act">Remove</i> -->
 	                              </span>
+                                 <input type="hidden" value="<?php if(!empty($logo_values['template_logo'])) echo $logo_values['template_logo']; ?>" name="old_file_path" />
 	                            </div>
 	                          </div>
 	                          <div class="control-group">
 	                            <label class="control-label">Logo Text</label>
 	                            <div class="controls">
-	                              <input name="template_logo_text" value="<?php if(!empty($payment_values['template_logo_text'])) echo $payment_values['template_logo_text']; ?>" type="text" class="span6" />
+	                              <input name="template_logo_text" value="<?php if(!empty($logo_values['template_logo_text'])) echo $logo_values['template_logo_text']; ?>" type="text" class="span6" />
 	                             </div>
 	                          </div>
 	                          <div class="form-actions">
 	                            <button type="submit" class="btn btn-success">Save</button>
 	                            <!-- <button type="button" class="btn">Cancel</button> -->
                             </div>
-                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($payment_values['template_id'])) echo $payment_values['template_id']; ?>" />
+                            <input name="hidden_id_settings" type="hidden" class="hidden_id" value="<?php if(!empty($logo_values['template_id'])) echo $logo_values['template_id']; ?>" />
                           </form>
                         </div>
                     </div>

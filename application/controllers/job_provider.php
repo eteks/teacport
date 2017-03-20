@@ -1137,12 +1137,12 @@ class Job_provider extends CI_Controller {
 		$data['site_visit_count'] = $this->common_model->get_site_visit_count();
 		$data['search_jobs_location'] = $this->common_model->get_search_jobs_location();
 		$session_data = $this->session->all_userdata();
-		if(empty($session_data['login_session']))
+		if(empty($session_data['login_session']) || empty($session_data['login_session']['user_type']) || $session_data['login_session']['user_type'] != "provider")
 			redirect('provider/logout');
+		// To get organization details
 		$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));	
-
+		// To check validity
 		$check_validity = $this->job_provider_model->check_subscription_validity(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']);
-
 		$data['subcription_plan'] = $this->common_model->subcription_plan();
 		$server_msg = $this->session->userdata('subscription_status');
 		$order_id = $this->session->userdata('order_id'); // Secure Purpose
@@ -1152,7 +1152,7 @@ class Job_provider extends CI_Controller {
 			// merchant_param2 - organization id
 			// merchant_param3 - subscription id
 			// merchant_param4 - csrf token
-			// merchant_param5 - upgrade count ,its oreder like sms,email,resume
+			// merchant_param5 - upgrade count ,its order like sms,email,resume with '#' symbol for differenciate Ex : 12#10#20
 
 			$plan_name = $this->input->post('merchant_param1');
 			$plan_options = explode('#',$this->input->post('merchant_param5'));
@@ -1264,7 +1264,7 @@ class Job_provider extends CI_Controller {
 												'validity_end_date' 				            => date('Y-m-d' ,strtotime("+".$no_of_days." day")),
 												'transaction_id' 		          				=> $transaction_id,
 												'status'                         				=> 1
-												);
+											);
 
 					if($this->job_provider_model->insert_renewal_plan($this->input->post('merchant_param2'),$user_renewal_data)){
 						$data['subscription_server_msg'] = 'Subscription will activated successfully! Your transaction id is '.$transaction_id;
@@ -1300,12 +1300,12 @@ class Job_provider extends CI_Controller {
 					$upgrade_current_plan = $this->job_provider_model->organization_subscription_data($this->input->post('merchant_param2'),$this->input->post('merchant_param3'));
 					$org_sub_id = $upgrade_current_plan['organization_subscription_id'];
 					$user_subscription_data = array(
-													'organization_email_count' 						=> $upgrade_current_plan['organization_email_count'] + $plan_options[1],
-													'organization_sms_count'						=> $upgrade_current_plan['organization_sms_count'] + $plan_options[0],
-													'organization_resume_download_count'			=> $upgrade_current_plan['organization_resume_download_count'] + $plan_options[2],
-													'organization_email_remaining_count' 						=> $upgrade_current_plan['organization_email_remaining_count'] + $plan_options[1],
-													'organization_sms_remaining_count'						=> $upgrade_current_plan['organization_sms_remaining_count'] + $plan_options[0],
-													'organization_remaining_resume_download_count'			=> $upgrade_current_plan['organization_remaining_resume_download_count'] + $plan_options[2],
+													'organization_email_count' 						=> (($upgrade_current_plan['organization_email_count'] + $plan_options[1]) >= 99999 ? 99999 : $upgrade_current_plan['organization_email_count'] + $plan_options[1]),
+													'organization_sms_count'						=> (($upgrade_current_plan['organization_sms_count'] + $plan_options[0]) >= 99999 ? 99999 : $upgrade_current_plan['organization_sms_count'] + $plan_options[0]),
+													'organization_resume_download_count'			=> (($upgrade_current_plan['organization_resume_download_count'] + $plan_options[2]) >= 99999 ? 99999 : $upgrade_current_plan['organization_resume_download_count'] + $plan_options[2]),
+													'organization_email_remaining_count' 			=> (($upgrade_current_plan['organization_email_remaining_count'] + $plan_options[1]) >= 99999 ? 99999 : $upgrade_current_plan['organization_email_remaining_count'] + $plan_options[1]),
+													'organization_sms_remaining_count'				=> (($upgrade_current_plan['organization_sms_remaining_count'] + $plan_options[0]) >= 99999 ? 99999 : $upgrade_current_plan['organization_sms_remaining_count'] + $plan_options[0]),
+													'organization_remaining_resume_download_count'	=> (($upgrade_current_plan['organization_remaining_resume_download_count'] + $plan_options[2]) >= 99999 ? 99999 : $upgrade_current_plan['organization_remaining_resume_download_count'] + $plan_options[2]),
 													'is_email_validity'								=> (($upgrade_current_plan['organization_email_remaining_count'] + $plan_options[1]) > 0 ? 1 : 0),
 													'is_sms_validity'								=> (($upgrade_current_plan['organization_sms_remaining_count'] + $plan_options[0]) > 0 ? 1 : 0),
 													'is_resume_validity'							=> (($upgrade_current_plan['organization_remaining_resume_download_count'] + $plan_options[2]) > 0 ? 1 : 0),
@@ -1353,6 +1353,7 @@ class Job_provider extends CI_Controller {
 
 		// All subscription plan with upgrade plan
 		$data['subscription_upgrade_plan'] = get_subscription_upgrade($this->common_model->subscription_upgrade_plan());
+
 		// Default Details
 		$data['organization_chosen_plan'] = get_organization_sub_details($this->common_model->organization_chosen_plan(isset($session_data['login_session']['pro_userid'])?$session_data['login_session']['pro_userid']:$data['organization']['organization_id']));
 

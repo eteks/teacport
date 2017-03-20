@@ -598,7 +598,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                                   </tbody>
                                 </table>
                               </div>
-                            </a> <?php echo $pay_val['subscription_plan']; ?> 
+                            </a> 
+                            <?php echo $pay_val['subscription_plan']; ?> 
+                            <?php echo "( Expiry Date :".date('d/m/Y',strtotime($pay_val['organizaion_sub_updated_date'])).")"; ?>
                           </h4>
                           <div class="profile_plan_section">
                             <div class="span3 plan_label_section">  
@@ -619,7 +621,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               </label>
                               <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_start_date'])); ?> </label>
                               <label class=""> <?php echo date('d M Y',strtotime($pay_val['org_sub_validity_end_date'])); ?> </label>
-                              <label class=""> <?php echo $pay_val['organization_transcation_id']; ?> </label>
+                              <label class=""> <?php echo (!empty($pay_val['organization_transcation_id']) ? $pay_val['organization_transcation_id'] : "NULL"); ?> </label>
                               <label class="show_grace"> 
                                 <?php if(!empty($pay_val['grace_period_start_date'])) echo $pay_val['grace_period_start_date']; else echo "Null"; ?>
                               </label>
@@ -1024,7 +1026,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <?php if($is_super_admin){ ?>
                       <div class="tab-pane" id="tab4">
                       	<h4>Grace Period</h4>
-                        <?php if(isset($latest_plan_details)): ?>
+                        <?php 
+                        if(!empty($latest_plan_details)): 
+                        ?>
                          	<p class="span12 control-group">                                       
                           	<span class="info_color">Note :</span>
                            	Extending grace time is applicable only for the Latest Plan/Current Plan that customer availed. 
@@ -1038,103 +1042,95 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           	</div>
                           	<div class="span6 control-group">
   	                      		<label>Plan Current Status</label>
-                              <?php if(empty($latest_plan_details['is_renewal']))
-                                  $sub_status = $latest_plan_details['organization_subscription_status'];
-                                else
-                                  $sub_status = $latest_plan_details['status'];
-                                if($sub_status==1) :
+                              <?php
+                                if($latest_plan_details['organization_subscription_status']==1) :
                                   echo "<span class='icon'> Active </span>";
                                 else :
                                   echo "<span class='icon icon_expired'> Inactive </span>";
                                 endif;
                               ?> 
-  		                    </div>
+  		                      </div>
                           </div>	
                           <div class="span12">
                           	<div class="span6 control-group">  
-                              <label class="control-label">Subscription Start Date</label>
+                              <label class="control-label"> Plan Type </label>
   	                          <span class="dynamic_data"> 
                                 <?php 
-                                if(empty($latest_plan_details['is_renewal'])):
-                                  if($latest_plan_details['is_grace_period_available']==0)
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['org_sub_validity_start_date'])[0]));
-                                  else
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['grace_period_start_date'])[0]));
+                                if(!empty($latest_plan_details['is_renewal'])):
+                                  echo "Renewal";
                                 else:
-                                  if($latest_plan_details['renewal_is_grace_period_available']==0)
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['validity_start_date'])[0]));
-                                  else
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['renewal_grace_period_start_date'])[0]));
+                                  echo "New";
                                 endif;
                                 ?> 
-                            		</span>
+                            	</span>
   	                        </div>
                               <div class="span6 control-group">  
                                 <label class="control-label">Subscription End Date</label>
                         		    <span class="dynamic_data"> 
-                             			<?php 
-                                if(empty($latest_plan_details['is_renewal'])):
-                                  if($latest_plan_details['is_grace_period_available']==0)
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['org_sub_validity_end_date'])[0]));
-                                  else
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['grace_period_end_date'])[0]));
-                                else:
-                                  if($latest_plan_details['renewal_is_grace_period_available']==0)
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['validity_end_date'])[0]));
-                                  else
-                                    echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['renewal_grace_period_end_date'])[0]));
-                                endif;
-                                ?> 
+                             			<?php echo date('d/m/Y',strtotime($latest_plan_details['organizaion_sub_updated_date'])); ?> 
                             		</span>
                             	</div>
                          	</div>
-                          <?php if($latest_plan_details['is_grace_period_available']==1|| $latest_plan_details['renewal_is_grace_period_available']==1){ ?>
-                            <div class="span12">
-                              <div class="span6 control-group">  
-                                <label class="control-label">Grace Period Start Date</label>
-                                <span class="dynamic_data"> 
-                                  <?php 
-                                    if($latest_plan_details['is_renewal'] == 1):
-                                      echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['renewal_grace_period_start_date'])[0]));
-                                    else:
-                                      echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['grace_period_start_date'])[0]));
-                                    endif;
-                                  ?> 
-                                  </span>
-                              </div>
-                                <div class="span6 control-group">  
-                                  <label class="control-label">Grace Period End Date</label>
-                                  <span class="dynamic_data"> 
-                                    <?php 
-                                    if($latest_plan_details['is_renewal'] == 1):
-                                      echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['renewal_grace_period_end_date'])[0]));
-                                    else:
-                                      echo date("d/m/Y", strtotime(explode(' ', $latest_plan_details['grace_period_end_date'])[0]));
-                                    endif;
-                                  ?> 
-                                  </span>
-                                </div>
+
+                          <?php
+                          if(!empty($latest_plan_details['is_renewal']) && !empty($latest_plan_details['renewal_is_grace_period_available'])) {
+                            $grace = 1;
+                            $start_date = $latest_plan_details['renewal_grace_period_start_date'];
+                            $end_date = $latest_plan_details['renewal_grace_period_end_date'];
+                          }
+                          else if(!empty($latest_plan_details['is_grace_period_available']) && empty($latest_plan_details['is_renewal'])) {
+                            $grace = 1;
+                            $start_date = $latest_plan_details['grace_period_start_date'];
+                            $end_date = $latest_plan_details['grace_period_end_date'];
+                          }
+                          ?>
+                          <?php
+                          if(isset($grace) && $grace == 1) {
+                          ?>  
+                          <div class="span12">
+                            <div class="span6 control-group">  
+                              <label class="control-label">Grace Period Start Date</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $start_date; ?> 
+                              </span>
                             </div>
-                          <?php } ?>
-                         	<div class="span12">
+                            <div class="span6 control-group">  
+                              <label class="control-label">Grace Period End Date</label>
+                              <span class="dynamic_data"> 
+                                <?php echo $end_date; ?> 
+                              </span>
+                            </div>
+                          </div>
+                          <?php
+                          }
+                          else {
+                          ?>                           
+                       	  <div class="span12">
                         		<div class="control-group check_grace">
-                              <input type="hidden" name="grace_period_allocate_id" value="<?php if($latest_plan_details['is_renewal'] ==1) echo $latest_plan_details['upgrade_or_renewal_id']; else echo $latest_plan_details['org_subscription_id']; ?>" data-renewal="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>" readonly>
-                        			<input type="hidden" name="grace_period_renewal" value="<?php if(empty($latest_plan_details['is_renewal'])) echo "0"; else echo $latest_plan_details['is_renewal']; ?>" readonly>
-                              <input type="checkbox" name="grace_period_applicable_status" class="control-group apply_grace_period" <?php if($latest_plan_details['is_grace_period_available'] == 1 || $latest_plan_details['renewal_is_grace_period_available'] == 1){ ?> disabled checked title="Already Grace Period Assigned" <?php } else if(empty($latest_plan_details['is_renewal']) && $latest_plan_details['organization_subscription_status'] == 1){ ?> disabled title="cannot assign grace period when provider is active"  <?php } ?>>Apply Grace period for this provider latest/current plan 
-                              <input type="hidden" class="grace_period_days" name="grace_period_days" value="10" readonly>
+                              <input type="hidden" class="tabfield" name="renewal_id" value="<?php if(!empty($latest_plan_details['upgrade_or_renewal_id'])) echo $latest_plan_details['upgrade_or_renewal_id']; ?>" readonly>
+                        			<input type="hidden" class="tabfield" name="org_sub_id" value="<?php if(!empty($latest_plan_details['org_sub_id'])) echo $latest_plan_details['org_sub_id']; ?>" readonly>
+                              <input type="checkbox" name="grace_period_applicable_status" value="1" class="control-group apply_grace_period tabfield" title="<?php if($latest_plan_details['organization_subscription_status'] == 1) echo 'cannot assign grace period when provider is active'; ?>" <?php if($latest_plan_details['organization_subscription_status'] == 1) echo "disabled"; ?>>Apply Grace period for this provider latest/current plan 
+                              <input type="hidden" class="grace_period_days" value="<?php if(!empty($grace_period_details['plan_grace_period_days'])) echo $grace_period_details['plan_grace_period_days']; ?>" readonly>
                         		</div>
                         	</div>
+
                         	<div class="span12 show_grace_period hide_all">
                           	<div class="span6 control-group">    
                                 <label class="control-label">Grace Period Start Date</label>
                             		<span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="15/02/2017" readonly>
+                                  <input type="text" class="grace_period_days" value="<?php echo date('d/m/Y'); ?>" readonly>
   	                          	</span>
                           	</div>
                           	<div class="span6 control-group">
                             		<label class="control-label">Grace Period End Date</label>
                             		<span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="15/02/2017" readonly>
+                                  <?php 
+                                  if(!empty($grace_period_details['plan_grace_period_days']))
+                                    $date_g = $grace_period_details['plan_grace_period_days']; 
+                                  else 
+                                    $date_g = 0;
+                                  ?>
+                                  <input type="text" class="grace_period_days" value="<?php echo date('d/m/Y',strtotime('+'.$date_g.' day')); ?>" readonly>
                                 </span>
                           	</div>
                         	</div>
@@ -1142,13 +1138,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">    
                                 <label class="control-label">Email Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="10" readonly>
+                                  <input type="text" class="grace_period_days" value="<?php if(!empty($grace_period_details['grace_email_count'])) echo $grace_period_details['grace_email_count']; ?>" readonly>
                                 </span>
                             </div>
                             <div class="span6 control-group">
                                 <label class="control-label">SMS Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="20" readonly>
+                                  <input type="text" class="grace_period_days" value="<?php if(!empty($grace_period_details['grace_sms_count'])) echo $grace_period_details['grace_sms_count']; ?>" readonly>
                                 </span>
                             </div>
                           </div>
@@ -1156,13 +1152,13 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">    
                                 <label class="control-label">Resume Download Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="10" readonly>
+                                  <input type="text" class="grace_period_days" value="<?php if(!empty($grace_period_details['grace_resume_count'])) echo $grace_period_details['grace_resume_count']; ?>" readonly>
                                 </span>
                             </div>
                             <div class="span6 control-group">
                                 <label class="control-label">Vacancy Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="20" readonly>
+                                  <input type="text" class="grace_period_days" value="<?php if(!empty($grace_period_details['grace_vacancy_count'])) echo $grace_period_details['grace_vacancy_count']; ?>" readonly>
                                 </span>
                             </div>
                           </div>
@@ -1170,15 +1166,18 @@ if(!empty($this->session->userdata("admin_login_status"))):
                             <div class="span6 control-group">    
                                 <label class="control-label">Ad Count</label>
                                 <span>
-                                  <input type="text" class="grace_period_days" name="grace_period_days" value="30" readonly>
+                                  <input type="text" class="grace_period_days" value="<?php if(!empty($grace_period_details['grace_ad_count'])) echo $grace_period_details['grace_ad_count']; ?>" readonly>
                                 </span>
                             </div>
                           </div>
-                          <?php else: ?>
-                            <div class="empty_subscription_section">
-                              <p> This Organization has <span> no subscription </span> plans. </p>
-                            </div>
-                          <?php endif; ?>
+                          <?php
+                          }
+                          ?>
+                        <?php else: ?>
+                          <div class="empty_subscription_section">
+                            <p> This Organization has <span> no subscription </span> plans. </p>
+                          </div>
+                        <?php endif; ?>
                       </div>
                     <?php } ?>
                     <!-- <div class="tab-pane" id="tab4">

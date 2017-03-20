@@ -627,10 +627,11 @@ class Common_model extends CI_Model {
 	}
 
 	public function provider_subscription_active_renewl_plans($org_id,$plan_id){
-		$get_where = '(os.organization_id="'.$org_id.'" AND os.subscription_id="'.$plan_id.'" AND opu.status=1 AND opu.is_renewal=1)';
+		// $get_where = '(os.organization_id="'.$org_id.'" AND os.subscription_id="'.$plan_id.'" AND opu.status=1 AND opu.is_renewal=1)';
+		$get_where = '(os.organization_id="'.$org_id.'" AND os.organization_subscription_status=1)';
 		$this->db->select('*');    
 		$this->db->from('tr_organization_subscription os');
-		$this->db->join('tr_organization_upgrade_or_renewal opu', 'os.organization_subscription_id = opu.organization_subscription_id');
+		// $this->db->join('tr_organization_upgrade_or_renewal opu', 'os.organization_subscription_id = opu.organization_subscription_id');
 		$this->db->join('tr_subscription ts', 'os.subscription_id = ts.subscription_id');
 		$this->db->where($get_where);
 		$data = $this->db->get()->row_array();
@@ -915,6 +916,13 @@ class Common_model extends CI_Model {
 		$model_data = $this->db->get_where('tr_latest_news',$where)->row_array();
 		return $model_data;
 	}
+
+	// To get latest news content
+	public function get_payment_settings() {
+		$model_data = $this->db->get('tr_settings_payment')->row_array();
+		return $model_data;
+	}
+	
 
 } // End
 

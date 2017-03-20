@@ -577,8 +577,9 @@ class Job_provider_model extends CI_Model {
     public function insert_orignial_plan($data)
     {
         $already_where = '(organization_id="'.$data['organization_id'].'" AND organization_subscription_status=1)';
-        $already_get = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
-        if($already_get > 0) {
+        $already_get = $this->db->get_where('tr_organization_subscription',$already_where);
+        if($already_get->num_rows() > 0) {
+            $org_sub_array = $already_get->row_array();
             $this->db->where($already_where);
             $set_data = array(
                                 'organization_post_vacancy_count'         => 0,
@@ -594,10 +595,17 @@ class Job_provider_model extends CI_Model {
                                 'is_sms_validity'                         => 0,
                                 'is_resume_validity'                      => 0,
                                 'organization_remaining_resume_download_count'  => 0,
+                                'organizaion_sub_updated_date'            => date('Y-m-d'),
                                 'organization_subscription_status'        => 0
                             );
             $this->db->set($set_data);
             $this->db->update('tr_organization_subscription');
+
+            $org_sub_id = $org_sub_array['organization_subscription_id'];
+            // Renewal table
+            $this->db->where(array('organization_subscription_id' => $org_sub_id));
+            $this->db->set('status', '0', FALSE);
+            $this->db->update('tr_organization_upgrade_or_renewal');
         }
         if($this->db->insert('tr_organization_subscription', $data)){
             return TRUE;
@@ -610,9 +618,10 @@ class Job_provider_model extends CI_Model {
     // Insert renewal subscription data
     public function insert_renewal_plan($org_id,$data)
     {
-        $already_where = '(organization_id="'.$org_id.'" AND organization_subscription_status=1)';
-        $already_get = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
-        if($already_get > 0) {
+        $already_where = '(organization_id="'.$data['organization_id'].'" AND organization_subscription_status=1)';
+        $already_get = $this->db->get_where('tr_organization_subscription',$already_where);
+        if($already_get->num_rows() > 0) {
+            $org_sub_array = $already_get->row_array();
             $this->db->where($already_where);
             $set_data = array(
                                 'organization_post_vacancy_count'         => 0,
@@ -628,11 +637,19 @@ class Job_provider_model extends CI_Model {
                                 'is_sms_validity'                         => 0,
                                 'is_resume_validity'                      => 0,
                                 'organization_remaining_resume_download_count'  => 0,
+                                'organizaion_sub_updated_date'            => date('Y-m-d'),
                                 'organization_subscription_status'        => 0
                             );
             $this->db->set($set_data);
             $this->db->update('tr_organization_subscription');
+
+            $org_sub_id = $org_sub_array['organization_subscription_id'];
+            // Renewal table
+            $this->db->where(array('organization_subscription_id' => $org_sub_id));
+            $this->db->set('status', '0', FALSE);
+            $this->db->update('tr_organization_upgrade_or_renewal');
         }
+    
         if($this->db->insert('tr_organization_upgrade_or_renewal', $data)){
             return TRUE;
         }
@@ -946,10 +963,9 @@ class Job_provider_model extends CI_Model {
     // Payment subscription validation - Renewal Plan
     public function renewal_plan_valid($plan_id,$org_id) {
         $data = '';
-        $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
-        $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
-        $check_already_sub_array = $check_already_sub->num_rows();
-
+        // $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+        // $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+        // $check_already_sub_array = $check_already_sub->num_rows();
 
         $where_sub = '(subscription_id="'.$plan_id.'" AND subscription_price = 0)';
         $already_sub = $this->db->get_where('tr_subscription',$where_sub);
@@ -958,7 +974,7 @@ class Job_provider_model extends CI_Model {
         $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
         $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
 
-        if($check_already == 1 && ($check_already_sub_array == 0 || $already_sub_array == 0)) {
+        if($check_already == 1 && $already_sub_array == 0) {
             $data = 2; // if correct
         }
         else {
@@ -970,18 +986,18 @@ class Job_provider_model extends CI_Model {
     // Payment subscription validation - Orignial Plan
     public function orginal_plan_valid($plan_id,$org_id) {
         $data = '';
-        $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
-        $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
-        $check_already_sub_array = $check_already_sub->num_rows();
+        // $already_where_sub = '(organization_id = "'.$org_id.'" AND organization_subscription_status=1)';
+        // $check_already_sub = $this->db->get_where('tr_organization_subscription',$already_where_sub);
+        // $check_already_sub_array = $check_already_sub->num_rows();
 
-        $where_sub = '(subscription_id="'.$plan_id.'" AND subscription_price = 0)';
-        $already_sub = $this->db->get_where('tr_subscription',$where_sub);
-        $already_sub_array = $already_sub->num_rows();
+        // $where_sub = '(subscription_id="'.$plan_id.'" AND subscription_price = 0)';
+        // $already_sub = $this->db->get_where('tr_subscription',$where_sub);
+        // $already_sub_array = $already_sub->num_rows();
 
         $already_where = '(subscription_id = "'.$plan_id.'" AND organization_id = "'.$org_id.'")';
         $check_already = $this->db->get_where('tr_organization_subscription',$already_where)->num_rows();
 
-        if(($check_already_sub_array == 0 || $already_sub_array == 0) && $check_already  == 0) {
+        if($check_already  == 0) {
             $data = 2; // if correct 
         }
         else {
@@ -1082,6 +1098,7 @@ class Job_provider_model extends CI_Model {
         $this->db->join('tr_organization_upgrade_or_renewal opu','os.organization_subscription_id=opu.organization_subscription_id AND opu.is_renewal=1 AND opu.status=1','left');
         $this->db->where($get_where);
         $data = $this->db->get();
+
         if($data -> num_rows() == 1) {
             $data_array = $data->row_array();
             $org_sub_id = $data_array['organization_subscription_id'];

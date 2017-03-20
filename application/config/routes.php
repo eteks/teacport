@@ -254,7 +254,7 @@ $route['test_sms'] = 'home/test_sms';
 
 // To run cronjob by cpanel.
 $route['cron_task'] = 'cron/cron_task';
-$route['cron_sample'] = 'cron/cron_sample';
+$route['cron_mail'] = 'cron/cron_mail';
 
 
 /* ===================          Route settings for Admin End     ====================== */

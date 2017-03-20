@@ -54,7 +54,7 @@ $(document).ready(function(){
     });
     /* Admin Profile Form End */
     /**/
-    $('.payment_gateway_act,.sms_gateway_act,.configuration_option_act,.template_logo_act').on('submit',function(e) {
+    $('.payment_gateway_act,.sms_gateway_act,.configuration_option_act').on('submit',function(e) {
         e.preventDefault();
         var form_data = $(this).serialize();
         var this_status = $(this).find('.admin_status');
@@ -63,6 +63,36 @@ $(document).ready(function(){
             url : admin_baseurl+$(this).attr('action'),
             data : form_data+'&'+csrf_name+'='+csfrData[csrf_name] ,
             dataType : 'json',
+            success: function(res) {
+                if(res.error == 1) {
+                    this_status.html("<i class='icon-remove-sign'></i>  "+res.status);
+                    this_status.removeClass('update_success_md');
+                    this_status.fadeIn(1000);
+                    this_status.fadeOut(3000);
+                }
+                else if(res.error == 2) {
+                    this_status.html("<i class='icon-ok-sign'></i>  "+res.status);
+                    this_status.addClass('update_success_md');
+                    this_status.fadeIn(1000);
+                    this_status.fadeOut(3000);
+                }
+            }
+        });
+    });
+
+    $('.template_logo_act').on('submit',function(e) {
+        e.preventDefault();
+        var form_data = new FormData(this);
+        form_data.append(csrf_name,csfrData[csrf_name]);
+        var this_status = $(this).find('.admin_status');
+        $.ajax({
+            type : "POST",
+            url : admin_baseurl+$(this).attr('action'),
+            data : form_data,
+            dataType : 'json',
+            contentType: false,       // The content type used when sending data to the server.
+            cache: false,             // To unable request pages to be cached
+            processData:false,
             success: function(res) {
                 if(res.error == 1) {
                     this_status.html("<i class='icon-remove-sign'></i>  "+res.status);

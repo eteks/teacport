@@ -973,30 +973,30 @@ var content_height = parseInt(window_height - (header_height + footer_height));
         $('[name=ads_status]').find("[value=" + select_value + "]").attr('selected', 'selected');
     });
     
-    $("#upload_logo").change(function () {
-        readURL(this);
-        $('#imagepreview_templogo').show();
-    });
+    // $("#upload_logo").change(function () {
+    //     readURL(this);
+    //     $('#imagepreview_templogo').show();
+    // });
 
-    $("#upload_logo").click(function () {
+    // // $("#upload_logo").click(function () {
         
-        $('#imagepreview_templogo').attr('src','');
-    });
+    // //     $('#imagepreview_templogo').attr('src','');
+    // // });
 
 
-    $('#imagepreview_templogo').click(function(){
+    // $('#imagepreview_templogo').click(function(){
 
-        $('#upload_logo').replaceWith($('#upload_logo').clone(true));
-        $('#imagepreview_templogo').hide();
-        $('.temp_remove_act').hide();
+    //     $('#upload_logo').replaceWith($('#upload_logo').clone(true));
+    //     $('#imagepreview_templogo').hide();
+    //     $('.temp_remove_act').hide();
 
-    });
-    $('.temp_remove_act').click(function(e)
-       {
-            $('#imagepreview_templogo').hide();
-            $('.temp_remove_act').hide();
-           $('#imagepreview_templogo').attr("src","");
-       });
+    // });
+    // $('.temp_remove_act').click(function(e)
+    //    {
+    //         $('#imagepreview_templogo').hide();
+    //         $('.temp_remove_act').hide();
+    //        $('#imagepreview_templogo').attr("src","");
+    //    });
 
     /* Accept Only Numbers - Added by Akila */
     $(document).on("keypress",".numeric_value",function (e) {
