@@ -478,7 +478,49 @@ class Master_Data extends CI_Controller {
 	public function qualification()
 	{	
 		$data['institution_types'] = $this->admin_model->get_institution_type();
+		if(isset($_POST['csv_form']) || isset($_FILES['csv'])){
+			// $data['status'] = "Inserted Successfully";
+			//get the csv file 
+		    $file = $_FILES['csv']['tmp_name']; 
+		    $handle = fopen($file,"r"); 	  
+		    while (($sheet_data = fgetcsv($handle, 1000, ",")) !== FALSE) { 
+		    	if ($sheet_data[0]) { 
+		    		//Check data already available in institution table
+		    		$inst_where = '(institution_type_name="'.$sheet_data[2].'")';
+		    		$this->db->select('institution_type_id,institution_type_name');
+					$inst_query = $this->db->get_where('tr_institution_type',$inst_where)->row_array();
+					if(sizeof($inst_query) == 0){ 
+						$inst_query_data = array( 
+	                        'institution_type_name' => $sheet_data[2],
+	                        'institution_type_status' => 1,
+	                      );
+						$this->db->insert("tr_institution_type", $inst_query_data);
+						$inst_id = $this->db->insert_id();
+					}
+					else{
+						$inst_id = $inst_query['institution_type_id'];
+					}
+		            $qual_insert_data = array( 
+	                        'educational_qualification' => $sheet_data[0],
+	                       'educational_qualification_course_type' => ($sheet_data[1]) ? $sheet_data[1] : NULL,
+	                        'educational_qualifcation_inst_type_id' => ($inst_id) ? $inst_id : NULL,
+	                        'educational_qualification_status' => $sheet_data[3]
+	                      );
+		            $check_data = array(
+		            	'educational_qualification' => $sheet_data[0],
+		            	'educational_qualifcation_inst_type_id' => $inst_id
+		            	);
+		            $this->db->select('educational_qualification,educational_qualifcation_inst_type_id');
+					$this->db->from('tr_educational_qualification');
+					$this->db->where($check_data);
+					$query = $this->db->get();
+					if($query -> num_rows() == 0)
+	  					$this->db->insert("tr_educational_qualification", $qual_insert_data);
+      			} 
+		    }  
+		}
 		if($_POST) {
+			echo "after if";
 			$secure_error = '';
 			// Validate add and update data
 		   	if($this->input->post('action')=='update' || $this->input->post('action')=='save') {
@@ -660,6 +702,39 @@ class Master_Data extends CI_Controller {
 	public function departments()
 	{	
 		$data['qualification_list'] = $this->admin_model->get_qualification_values();
+		if(isset($_POST['csv_form']) || isset($_FILES['csv'])){
+			// $data['status'] = "Inserted Successfully";
+			//get the csv file 
+		    $file = $_FILES['csv']['tmp_name']; 
+		    $handle = fopen($file,"r"); 	  
+		    while (($sheet_data = fgetcsv($handle, 1000, ",")) !== FALSE) { 
+		    	if ($sheet_data[0]) { 
+		    			$data_split = explode(",", $sheet_data[1]);
+		    			$group_qual =array();
+		    			foreach ($data_split as $value) {
+		    				//Check data already available in institution table
+			    			$qual_where = '(educational_qualification="'.$value.'")';
+			    			$this->db->select('educational_qualification_id,educational_qualification');
+							$qual_query = $this->db->get_where('tr_educational_qualification',$qual_where)->row_array();
+							if(sizeof($qual_query) > 0){ 
+								$qual_id = $qual_query['educational_qualification_id'];
+								array_push($group_qual,$qual_id);
+							}
+		    			}
+			            $dept_insert_data = array( 
+		                        'departments_name' => $sheet_data[0],
+		                        'department_educational_qualification_id' => implode(",", $group_qual),
+		                        'departments_status' => $sheet_data[2]
+		                      );
+			            $this->db->select('departments_name');
+						$this->db->from('tr_departments');
+						$this->db->where('departments_name',$sheet_data[0]);
+						$query = $this->db->get();
+						if($query -> num_rows() == 0)
+		  					$this->db->insert("tr_departments", $dept_insert_data);
+      			} 
+		    }  
+		}		
 		if($_POST) {
 			$secure_error = '';
 			// Validate add and update data
@@ -846,6 +921,39 @@ class Master_Data extends CI_Controller {
 	public function university()
 	{	
 		$data['class_level_values'] = $this->admin_model->get_class_levels();
+		if(isset($_POST['csv_form']) || isset($_FILES['csv'])){
+			// $data['status'] = "Inserted Successfully";
+			//get the csv file 
+		    $file = $_FILES['csv']['tmp_name']; 
+		    $handle = fopen($file,"r"); 	  
+		    while (($sheet_data = fgetcsv($handle, 1000, ",")) !== FALSE) { 
+		    	if ($sheet_data[0]) { 
+		    			$data_split = explode(",", $sheet_data[1]);
+		    			$group_class =array();
+		    			foreach ($data_split as $value) {
+		    				//Check data already available in institution table
+			    			$class_where = '(class_level="'.$value.'")';
+			    			$this->db->select('class_level_id,class_level,class_level_inst_type_id');
+							$class_query = $this->db->get_where('tr_class_level',$class_where)->row_array();
+							if(sizeof($class_query) > 0){ 
+								$class_id = $class_query['class_level_id'];
+								array_push($group_class,$class_id);
+							}
+		    			}
+			            $univ_insert_data = array( 
+		                        'university_board_name' => $sheet_data[0],
+		                        'university_class_level_id' => implode(",", $group_class),
+		                        'university_board_status' => $sheet_data[2]
+		                      );
+			            $this->db->select('university_board_name');
+						$this->db->from('tr_university_board');
+						$this->db->where('university_board_name',$sheet_data[0]);
+						$query = $this->db->get();
+						if($query -> num_rows() == 0)
+		  					$this->db->insert("tr_university_board", $univ_insert_data);
+      			} 
+		    }  
+		}	
 		if($_POST) {
 			$secure_error = '';
 			// Validate add and update data
