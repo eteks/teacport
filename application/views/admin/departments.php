@@ -72,12 +72,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                     <button id="sample_editable_1_new" class="btn green add_new">
                         Add New <i class="icon-plus"></i>
                     </button>
-                    <form action="departments" method="post" enctype="multipart/form-data" name="csv_form"> 
-                    <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"><br /> 
-                      <input name="csv" type="file" id="csv" /> 
+                    <!--<form action="departments" method="post" enctype="multipart/form-data" name="csv_form"> -->
+                    <!-- <input type="hidden" name="<?php //echo $this->security->get_csrf_token_name(); ?>" value="<?php //echo $this->security->get_csrf_hash(); ?>"><br /> -->
+                      <!-- <input name="csv" type="file" id="csv" /> 
                       <button id="" class="btn green">
                         Import
-                    </form>
+                    </form> -->
                   <?php endif; ?>
                   </div>
                   <div class="btn-group pull-right">

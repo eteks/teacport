@@ -73,12 +73,12 @@ if(!empty($this->session->userdata("admin_login_status"))):
                       Add New <i class="icon-plus"></i>
                     </button>
                   <?php endif; ?>
-                  <form action="qualification" method="post" enctype="multipart/form-data" name="csv_form"> 
-                  <input type="hidden" name="<?php echo $this->security->get_csrf_token_name(); ?>" value="<?php echo $this->security->get_csrf_hash(); ?>"><br /> 
-                    <input name="csv" type="file" id="csv" /> 
-                    <button id="" class="btn green">
+                  <!-- <form action="qualification" method="post" enctype="multipart/form-data" name="csv_form"> --> 
+                  <!--<input type="hidden" name="<?php //echo $this->security->get_csrf_token_name(); ?>" value="<?php //echo $this->security->get_csrf_hash(); ?>"><br /> -->
+                    <!--<input name="csv" type="file" id="csv" />  -->
+                    <!--<button id="" class="btn green">
                       Import
-                  </form> 
+                  </form> -->
                   </div>
                   <div class="btn-group pull-right">
                   </div>
