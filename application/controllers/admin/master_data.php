@@ -520,7 +520,6 @@ class Master_Data extends CI_Controller {
 		    }  
 		}
 		if($_POST) {
-			echo "after if";
 			$secure_error = '';
 			// Validate add and update data
 		   	if($this->input->post('action')=='update' || $this->input->post('action')=='save') {
