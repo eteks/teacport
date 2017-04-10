@@ -1974,5 +1974,6 @@ button.Zebra_DatePicker_Icon_Inside_Right{
  }
 
 }
-
-
+.captcha_value_field {
+	text-transform: none !important;
+}

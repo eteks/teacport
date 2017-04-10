@@ -598,11 +598,28 @@ class Job_provider extends CI_Controller {
 		$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
 		$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type']):$this->common_model->subject_by_institution($data['organization']['institution_type_id']));
 		$data['applicable_posting']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->applicable_posting($session_data['login_session']['institution_type']):$this->common_model->applicable_posting($data['organization']['institution_type_id']));
-		$data['qualification']	= $this->common_model->qualification();
+		//newly update by kalai on 10/04/17
+		// $data['qualification']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification($session_data['login_session']['institution_type']):$this->common_model->qualification($data['organization']['institution_type_id']));
+		$data['qualification']	= $this->common_model->get_full_qualification();
+
 		$data['medium']			= $this->common_model->medium_of_instruction();
 		$institution_type = isset($session_data['login_session']['institution_type'])?$session_data['login_session']['institution_type']:$data['organization']['institution_type_id'];
-		// $data['university']		= $this->common_model->get_board_details();
-		$data['university']		= '';
+
+		if($this->input->post('provider_class_level')) {
+			$data['university']	= $this->common_model->get_board_details_class($this->input->post('provider_class_level'));
+		}
+		else {
+			$data['university']	= $this->common_model->get_board_details();
+		}
+
+		if($this->input->post('provider_qualification')) {
+			$data['departments'] = $this->common_model->get_department_by_qualification($this->input->post('provider_qualification'));
+		}
+		else {
+			$data['departments'] = $this->common_model->get_department_details();
+		}
+
+		// $data['university']		= '';
 		$data['subscrib_plan'] 	= $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		if(!$_POST){
 			$this->load->view('company-dashboard-post-jobs',$data);
@@ -768,15 +785,37 @@ class Job_provider extends CI_Controller {
 		$data["current_jobvacancy_id"] = $this->uri->segment('3');
 		if($data["current_jobvacancy_id"]){
 			$data["applyjob"] = $this->job_seeker_model->job_seeker_detail_jobs($data["current_jobvacancy_id"]);
+
 			if($session_data['login_session']['pro_userid'] === $data["applyjob"]["vacancies_organization_id"]){
 				$data['organization'] 	= (isset($session_data['login_session']['pro_userid'])?$this->job_provider_model->get_org_data_by_id($session_data['login_session']['pro_userid']):$this->job_provider_model->get_org_data_by_mail($session_data['login_session']['registrant_email_id']));
 				$data['classlevel']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->classlevel_by_institution($session_data['login_session']['institution_type']):$this->common_model->classlevel_by_institution($data['organization']['institution_type_id']));
 				$data['subjects']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->subject_by_institution($session_data['login_session']['institution_type'],1):$this->common_model->subject_by_institution($data['organization']['institution_type_id'],1));
 				$data['qualificatoin']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
 				$data['medium']			= $this->common_model->medium_of_instruction();
-				$data['departments']	= $this->common_model->get_department_details();
-				$data['university']		= $this->common_model->get_board_details();
-				$data['qualification']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+
+				if($this->input->post('provider_qualification')) {
+					$data['departments'] = $this->common_model->get_department_by_qualification($this->input->post('provider_qualification'));
+				}
+				else if(!empty($data["applyjob"]['vacancies_qualification_id'])) {
+					$data['departments'] = $this->common_model->department_by_qualification($data["applyjob"]['vacancies_qualification_id']);
+				}
+				else {
+					$data['departments'] = $this->common_model->get_department_details();
+				}
+
+				if($this->input->post('provider_class_level')) {
+					$data['university'] = $this->common_model->get_board_details_class($this->input->post('provider_class_level'));
+				}
+				else if(!empty($data["applyjob"]['vacancies_class_level_id'])) {
+					$data['university'] = $this->common_model->get_board_details_class($data["applyjob"]['vacancies_class_level_id']);
+				}
+				else {
+					$data['university']	= $this->common_model->get_board_details();
+				}
+				//newly update by kalai on 10/04/17
+				// $data['qualification']	= (isset($session_data['login_session']['institution_type'])?$this->common_model->qualification_by_institution($session_data['login_session']['institution_type']):$this->common_model->qualification_by_institution($data['organization']['institution_type_id']));
+				$data['qualification']	= $this->common_model->get_full_qualification();
+
 				$data['applicable_posting']		= (isset($session_data['login_session']['institution_type'])?$this->common_model->applicable_posting($session_data['login_session']['institution_type']):$this->common_model->applicable_posting($data['organization']['institution_type_id']));
 				$this->load->view('company-dashboard-edit-jobs', $data);
 			}
@@ -802,7 +841,10 @@ class Job_provider extends CI_Controller {
 		$data['mother_tongue']			= $this->common_model->mother_tongue();
 		$data['subject']				= $this->common_model->subjects($data['organization']['organization_institution_type_id']);
 		$data['class_level']			= $this->common_model->classlevel_by_institution($data['organization']['organization_institution_type_id']);
-		$data['qualification']			= $this->common_model->qualification($data['organization']['organization_institution_type_id']);
+		//newly update by kalai on 10/04/17
+		// $data['qualification']			= $this->common_model->qualification($data['organization']['organization_institution_type_id']);
+		$data['qualification']	= $this->common_model->get_full_qualification();
+		
 		$data['subscrib_plan'] 			= $this->common_model->provider_subscription_active_plans($data['organization']['organization_id']);
 		$pagination 					= array();
 		$pagination["base_url"] 		= base_url() . "provider/candidate";

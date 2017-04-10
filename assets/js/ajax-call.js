@@ -78,36 +78,37 @@ $(document).ready(function() {
 		}
 	});
 
-	// Get qualification based on selected qualification level
-	$(document).on('click','.qua_level',function() {
-		var this_id = $(this).val();
-		var this_qua = $(this).parents('.level_section').siblings('.qualification_section').find('select');
-    	var options = '<option value="">Select Qualification </option>';   
-		if(this_id != '') {
-			$.ajax({
-				type : "POST",
-				url : baseurl+"provider/joblevel",
-				data : { value : this_id, csrf_token : csrf_token_value},
-				success : function(res) {
-					if(res) {
-						var obj = JSON.parse(res);
-		           		if(obj.length!=0) {               
-		                  $.each(obj, function(i){
-		                    options += '<option value="'+obj[i].educational_qualification_id+'">'+obj[i].educational_qualification+'</option>';
-		                  });  
-		            	}   
-		                else{
-		                    	alert('No qualification added for selected joblevel');    
-		                }  
-		                this_qua.html(options);            
-		            }
-				}
-			});
-		}
-		else {
-			this_qua.html(options);            
-		}
-	});
+	//newly commented by kalai on 10/04/17
+	// // Get qualification based on selected qualification level
+	// $(document).on('click','.qua_level',function() {
+	// 	var this_id = $(this).val();
+	// 	var this_qua = $(this).parents('.level_section').siblings('.qualification_section').find('select');
+ //    	var options = '<option value="">Select Qualification </option>';   
+	// 	if(this_id != '') {
+	// 		$.ajax({
+	// 			type : "POST",
+	// 			url : baseurl+"provider/joblevel",
+	// 			data : { value : this_id, csrf_token : csrf_token_value},
+	// 			success : function(res) {
+	// 				if(res) {
+	// 					var obj = JSON.parse(res);
+	// 	           		if(obj.length!=0) {               
+	// 	                  $.each(obj, function(i){
+	// 	                    options += '<option value="'+obj[i].educational_qualification_id+'">'+obj[i].educational_qualification+'</option>';
+	// 	                  });  
+	// 	            	}   
+	// 	                else{
+	// 	                    	alert('No qualification added for selected joblevel');    
+	// 	                }  
+	// 	                this_qua.html(options);            
+	// 	            }
+	// 			}
+	// 		});
+	// 	}
+	// 	else {
+	// 		this_qua.html(options);            
+	// 	}
+	// });
 
 	// Get department based on selected qualification
 	$(document).on('change','.select_qualification',function() {

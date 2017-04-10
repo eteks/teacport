@@ -675,7 +675,8 @@ class Job_seeker extends CI_Controller {
 				if(!empty($candidate_values['candidate_data'])) {
 					$this->session->set_userdata('login_session',$candidate_values['candidate_data']);
 				}
-			}		
+			}	
+			$post_value = "true";
 		}
 
 		$candidate_data = $this->job_seeker_model->get_cand_data_by_id($session_data['login_session']['candidate_id']);
@@ -702,7 +703,12 @@ class Job_seeker extends CI_Controller {
      	$data['visit_count']  = $this->common_model->get_candidate_visit_count($session_data['login_session']['candidate_id']);
         $data['provider_values'] = $this->common_model->get_provider_details(isset($session_data['login_session']['candidate_institution_type'])?$session_data['login_session']['candidate_institution_type']:'');
 
-		$this->load->view('user-dashboard',$data);
+        if(!isset($data['initial_data']) && isset($post_value)) {
+        	redirect('seeker/editprofile');
+        }
+        else {
+        	$this->load->view('user-dashboard',$data);
+        }
 	}
 
 	/* ==============            Seeker Dashboard End Here          ================ */

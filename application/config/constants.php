@@ -37,8 +37,11 @@ define('FOPEN_WRITE_CREATE_STRICT',				'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT',		'x+b');
 
 //array to get course type 
-define('COURSE_TYPE',serialize(array("UG"=>"Under Graduate",
-        "PG"=>"Post Graduate")));
+define('COURSE_TYPE',serialize(array("se"=>"SCHOOL EDUCATION",
+        "tt"=>"TEACHER TRAINING", "dip" => "DIPLOMA", "ug" => "UNDER GRADUATE", "pg" => "POST GRADUATE", "doc" => "DOCTORATE")));
+
+define('AREA_PREFERENCE',serialize(array("dis"=>"Within District",
+        "sta"=>"Within State", "ind" => "Overall India")));
 
 // Nationality
 define('NATIONALITY',serialize(array("indian"=>"Indian",

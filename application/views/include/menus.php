@@ -31,7 +31,7 @@
         	<li><a href="<?php echo base_url(); ?>provider/dashboard"> Dashboard</a></li>
         	<li><a href="javascript:void(0)"> Job Providers <i class="fa fa-angle-down fa-indicator"></i></a> 
         	<ul class="drop-down-multilevel">
-                    <li><a href="<?php echo base_url();?>pricing">Pricing</a></li>
+                    <!-- <li><a href="<?php echo base_url();?>pricing">Pricing</a></li> -->
              	</ul>
           	</li>
           	<li> <a href="<?php echo base_url(); ?>allinstitutions"> Institutions </a> </li>
@@ -146,7 +146,7 @@
             	<ul class="drop-down-multilevel">
                 	<li><a href="<?php echo base_url();?>login/provider">Sign In</a></li>
                     <li><a href="<?php echo base_url();?>signup/provider">Sign Up</a></li>
-                    <li><a href="<?php echo base_url();?>pricing">Pricing</a></li>
+                    <!-- <li><a href="<?php echo base_url();?>pricing">Pricing</a></li> -->
              	</ul>
           	</li>
           	<li><a href="javascript:void(0)"> Job Seekers <i class="fa fa-angle-down fa-indicator"></i></a> 
@@ -267,7 +267,7 @@
                             </div>	
                         	<div class="col-sm-6 captcha_holder nopadding">
                         		<label class="captcha_label">Enter Captcha value <sup class="alert">*</sup></label>
-                				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>'')); ?>
+                				<?php echo form_input(array('id' => 'captcha_value','class' => 'form-control captcha_value_field','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>'')); ?>
                 			</div>
                 			<div class="clearfix"> </div>
 							<div class="loginbox-terms">
@@ -315,7 +315,7 @@
 	                        </div>
 	                        <div class="col-sm-6 captcha_holder nopadding">
 	                            <label class="captcha_label">Enter Captcha value <sup class="alert">*</sup></label>
-	                            <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>'')); ?>
+	                            <?php echo form_input(array('id' => 'captcha_value','class' => 'form-control captcha_value_field','name' => 'captcha_value','placeholder' => 'Captcha Value','value'=>'')); ?>
 	                    	</div>
 	                        <div class="clearfix"> </div>
 	                        <div class="loginbox-terms">

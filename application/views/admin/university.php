@@ -212,8 +212,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","multiselect","select"); // Set type of input which are you have used like text, select,textarea.
   var columns = new Array("u_name","u_class_level","u_status"); // Set name of input types
   var placeholder = new Array("Enter University Board Name","Please select class level"); // Set placeholder of input types
-  var class_selector = new Array("alpha_value","","");//To set class for element
-  var maxlength = new Array("50","",""); //To set maxlength for element
+  var class_selector = new Array("","","");//To set class for element
+  var maxlength = new Array("100","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var u_class_level_option = new Array();
   var u_class_level_value = new Array();

@@ -134,7 +134,7 @@
 								?>
 	                    		<!-- <button type='submit' class="btn btn-default payu_submit pull-right" style="margin: 0px !important;"> Proceed to pay </button> -->
 		                    	<?php echo form_close(); ?>
-								<a href="<?php echo base_url(); ?>pricing" target="_blank" class="txt_blue pull-right margin_10">View Details &amp; Features</a>
+								<!-- <a href="<?php echo base_url(); ?>pricing" target="_blank" class="txt_blue pull-right margin_10">View Details &amp; Features</a> -->
 					     	</div>
 					    </div>
 						<!--End Select Pricing Plan-->

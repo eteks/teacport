@@ -123,7 +123,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <?php 
                           $course_type = unserialize(COURSE_TYPE);
                           if(!empty($qua_val['educational_qualification_course_type'])) :
-                            echo $course_type[$qua_val['educational_qualification_course_type']];
+                            $type = strtolower($qua_val['educational_qualification_course_type']);
+                            echo $course_type[$type];
                           else :
                             echo "NULL";
                           endif;
@@ -230,7 +231,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var columns = new Array("q_name","q_course_type","q_inst_type","q_status"); // Set name of input types
   var placeholder = new Array("Enter Qualification","","",""); // Set placeholder of input types
   var class_selector = new Array("","","","");//To set class for element
-  var maxlength = new Array("50","","",""); //To set maxlength for element
+  var maxlength = new Array("100","","",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var q_course_type_option = new Array("Please select course"); 
   var q_course_type_value = new Array("");

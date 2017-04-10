@@ -395,6 +395,13 @@ class Common_model extends CI_Model {
 		$qualification = $this->db->get();
 		return $qualification->result_array(); 
 	}
+	public function get_full_qualification()
+	{
+		$this->db->select('*');    
+		$this->db->from('tr_educational_qualification');
+		$qualification = $this->db->get();
+		return $qualification->result_array(); 
+	}
 	public function subcription_plan($planid='')
 	{
 		$this->db->select('*');    
@@ -466,6 +473,14 @@ class Common_model extends CI_Model {
 		return $value;
 	}
 
+	// Get university board details by class level
+	public function get_board_details_class($cls_id)
+	{
+		$where = "university_board_status = '1' AND FIND_IN_SET('".$cls_id."',university_class_level_id) !=0";
+		$dept_data = $this->db->get_where('tr_university_board',$where)->result_array();
+		return $dept_data;
+	}
+	
 	// Get latest news
 	public function latest_news()
 	{
@@ -730,6 +745,23 @@ class Common_model extends CI_Model {
 		$dept_data = $this->db->get_where('tr_departments',$where)->result_array();
 		return $dept_data;
 	}
+
+	// Get department by qualification
+	public function get_department_by_qualification($qua_id) {
+		$a = 1;
+		$where = "departments_status = '1' AND ";
+		foreach ($qua_id as $val) {
+			$where .= "FIND_IN_SET('".$val."',department_educational_qualification_id) !=0";
+			if($a < count($qua_id)) {
+				$where .= " OR ";
+			}
+			$a++;
+		}
+		// $where = '(FIND_IN_SET("'.$id.'",department_educational_qualification_id) !=0 AND departments_status=1)';
+		$dept_data = $this->db->get_where('tr_departments',$where)->result_array();
+		return $dept_data;
+	}
+	
 
 	// Get subscrition ads visible days by subscription id
 	public function subscription_visible_days($id) {

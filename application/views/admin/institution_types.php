@@ -193,8 +193,8 @@ if(!empty($this->session->userdata("admin_login_status"))):
   var inputType = new Array("text","select"); 
   var columns = new Array("i_name","i_status"); 
   var placeholder = new Array("Enter Institution Type Name","");
-  var class_selector = new Array("alpha_value","");//To set class for element
-  var maxlength = new Array("50",""); //To set maxlength for element
+  var class_selector = new Array("","");//To set class for element
+  var maxlength = new Array("100",""); //To set maxlength for element
   var table = "admin_table"; // Set classname of table
   var i_status_option = new Array("Please select status","Active","Inactive"); 
   var i_status_value = new Array("","1","0"); 

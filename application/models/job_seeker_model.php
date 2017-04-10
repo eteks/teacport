@@ -579,7 +579,8 @@ class Job_seeker_model extends CI_Model {
 											'candidate_expecting_start_salary' => $data['cand_start_sal'],
 											'candidate_expecting_end_salary' => $data['cand_end_sal'],
 											'candidate_willing_class_level_id' => implode(',',$data['cand_class']),
-											'candidate_willing_subject_id' => implode(',',$data['cand_sub_new'])
+											'candidate_willing_subject_id' => implode(',',$data['cand_sub_new']),
+											'candidate_location_preference' => $data['cand_loc_pre'],
 											);
 				if(!empty($data['cand_pre'])) {
 					$this->db->set($prefrence_update_data);
