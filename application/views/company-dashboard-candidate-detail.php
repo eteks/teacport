@@ -334,7 +334,8 @@ else {
 										endif;
 										?>
 								  	</div> <br> <!---End Professional Profile-->
-									<?php if(!empty($subscrib_plan)){?>
+									<?php 
+									if(!empty($subscrib_plan) && $subscrib_plan['subscription_price'] !=0){?>
 									<!--Communication Information-->
 			     					<div>
 			     						<h5>Communication Information</h5>

@@ -584,7 +584,7 @@ class Master_data_model extends CI_Model {
     $model_data['error'] = 0;
 
     //Check whether the data is mapped or not
-    $mapped_data = $this->db->query("SELECT class.class_level_id
+    $mapped_data1 = $this->db->query("SELECT class.class_level_id
         FROM `tr_class_level` AS class
         INNER JOIN 
         (
@@ -602,16 +602,20 @@ class Master_data_model extends CI_Model {
         (
           SELECT vacancies_class_level_id
           FROM tr_organization_vacancies
-        )AS vac
+        )AS vac WHERE class.class_level_id=exp.candidate_experience_class_level_id OR class.class_level_id=pre.p_value OR class.class_level_id=vac.vacancies_class_level_id")->result_array();
+
+    $mapped_data2 = $this->db->query("SELECT class.class_level_id
+        FROM `tr_class_level` AS class
         INNER JOIN 
         (
           SELECT SUBSTRING_INDEX( SUBSTRING_INDEX( ub.university_class_level_id, ',', n.n ) , ',', -1 ) ub_value
           FROM tr_university_board ub
           CROSS JOIN numbers n
           WHERE n.n <=1 + ( LENGTH( ub.university_class_level_id ) - LENGTH( REPLACE( ub.university_class_level_id, ',', '' ) ) )
-        )AS uni WHERE class.class_level_id=exp.candidate_experience_class_level_id OR class.class_level_id=pre.p_value OR class.class_level_id=vac.vacancies_class_level_id OR class.class_level_id=uni.ub_value group by class.class_level_id");
+        )AS uni WHERE class.class_level_id=uni.ub_value group by class.class_level_id")->result_array();
 
-    $model_data['mapped_data'] = array_column($mapped_data->result_array(), 'class_level_id');
+    $mapped_data = array_merge($mapped_data1,$mapped_data2);
+    $model_data['mapped_data'] = array_column($mapped_data, 'class_level_id');
 
     // Update data
     if($status=='update') {
