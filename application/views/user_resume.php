@@ -128,12 +128,16 @@
         <td width="50%" class="heading"> Physically Challenged </td>
         <td width="50%" class="content"> <?php if($candidate_details[0]['candidate_is_physically_challenged']=="yes") echo "Yes"; else echo "No"; ?> </td>
     </tr>
+    <tr>
+        <td width="50%" class="heading"> Profile Completeness </td>
+        <td width="50%" class="content"> <?php echo $candidate_details[0]['candidate_profile_completeness']." %"; ?> </td>
+    </tr>
 </table>
 <!-- Post Preference -->
 <h3 class="resume-sub-title">Post Preference</h3>
 <table cellpadding="6" cellspacing="3">
     <tr>
-        <td width="50%" class="heading"> Posts applying for </td>
+        <td width="50%" class="heading"> Job Prefrences </td>
         <td width="50%" class="content"> <?php 
             $pos = explode(',',$candidate_details[0]['candidate_posting_applied_for']);
             $i = 1;
@@ -281,6 +285,7 @@ if($candidate_details[0]['candidate_is_fresher']==0 && !empty($candidate_details
     </tr>
     <?php
     $i = 1;
+    $exp_count = 0;
     foreach ($candidate_details[0]['experience_details'] as $exp_key => $exp_val) :
     if($i % 2 == 0) {
         $class = "even";
@@ -296,9 +301,16 @@ if($candidate_details[0]['candidate_is_fresher']==0 && !empty($candidate_details
         <td class="content"> <?php echo $exp_val['candidate_experience_year']; ?> </td>
     </tr>
     <?php
+    $exp_count = $exp_count + $exp_val['candidate_experience_year']; 
     $i++;
     endforeach;
     ?>
+</table>
+<table cellpadding="6" cellspacing="3">
+    <tr>
+        <td width="50%" class="heading"> Total years of experience </td>
+        <td width="50%" class="content"> <?php echo $exp_count; ?> </td>
+    </tr>
 </table>
 <?php
 endif;
