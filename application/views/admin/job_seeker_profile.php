@@ -85,6 +85,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Live District </th>
                           <th> Email </th>
                           <th> Mobile No </th>
+                          <th> Profile Completeness </th>
                           <th> Status </th>
                           <th> Created Date</th>
                           <th> Visitors Count </th>
@@ -153,6 +154,9 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               echo "NULL";
                             }
                             ?>
+                          </td>
+                          <td class="">
+                            <?php echo $pro_val['candidate_profile_completeness']." %"; ?>      
                           </td>
                           <td class="">
                             <?php 

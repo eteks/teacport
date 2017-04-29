@@ -494,6 +494,7 @@ class Job_seeker extends CI_Controller {
 					'candidate_registration_type' => 'teacherrecruit',
 					'candidate_type' => $this->input->post('candidate_work_type'),
 					'candidate_password' => $common->generateStrongPassword(),
+					'candidate_profile_completeness' => 10
 				);
 				
 			 	/* Check whether data exist or not.exist or not condition handled in job_provider_model.php */

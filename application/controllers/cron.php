@@ -125,7 +125,7 @@ class Cron extends CI_Controller
  	{
     	$subject = "Sample";
     	$message = "Hii... This is sample mail";
-    	$this->mail_send($message,$subject,"sweetkannan05@gmail.com");
+    	$this->mail_send($message,$subject,"kalaiarasi@etekchnoservices.com");
    	}
 
 
