@@ -9,9 +9,9 @@ class Cron extends CI_Controller
    		parent::__construct();
    		$this->load->model('cron_model');
    		$this->load->helper('cron_helper');
-   		if (!$this->input->is_cli_request()) {
-   			show_error('Direct access is not allowed');
-   		}
+   		// if (!$this->input->is_cli_request()) {
+   		// 	show_error('Direct access is not allowed');
+   		// }
  	}
 
  	// Mail sending fucntion
@@ -121,19 +121,30 @@ class Cron extends CI_Controller
 		// print_r($data['related_jobs']);
 		// echo "</pre>";
  	}
- 	public function cron_mail()
- 	{
-    	$subject = "Sample";
-    	$message = "Hii... This is sample mail";
-    	$this->mail_send($message,$subject,"kalaiarasi@etekchnoservices.com");
-   	}
+ 	// public function cron_mail()
+ 	// {
+  //   	$subject = "Sample";
+  //   	$message = "Hii... This is sample mail";
+  //   	$this->mail_send($message,$subject,"kalaiarasi@etekchnoservices.com");
+  //  	}
 
-
- 	
-
-
-
-
+ 	// public function cron_mail()
+ 	// {
+  //   	// Email configuration
+		// $this->config->load('email', true);
+		// $emailsetup = $this->config->item('email');
+		// $this->load->library('email', $emailsetup);
+		// $from_email = $emailsetup['smtp_user'];
+		// $subject = 'Sample to check cron';
+		// $message = "Hii... This is sample mail";
+		// $this->email->initialize($emailsetup);	
+		// $this->email->from($from_email, 'Teacher Recruit');
+		// $this->email->to('kalaiarasi@etekchnoservices.com');
+		// $this->email->subject($subject);
+		// $this->email->message($message);
+		// /* Check whether mail send or not*/
+		// $this->email->send();
+  //  	}
 }  // End
 
 /* cron.php */
