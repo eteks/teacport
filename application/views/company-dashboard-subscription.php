@@ -65,20 +65,38 @@
 								<select id="subpack_act" class="form-control select-plan" name="subpack">
 									<option value=""> Select Package </option>
 									<?php 
+                                                                        $curdate=strtotime("now");                                             
 									foreach ($subscription_upgrade_plan as $sub_val) {
 										if(!empty($chosen_plan) && $chosen_plan==$sub_val['sub_id']) {
 											echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
 										else if(isset($organization_chosen_plan[0]['subscription_id']) && !empty($organization_chosen_plan[0]['subscription_id']) && $sub_val['sub_id'] == $organization_chosen_plan[0]['subscription_id'] && $chosen_plan=='') {
-												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
+                                                                                  if(($organization_chosen_plan[0]['subscription_id'] == 1 ) && ($sub_val['sub_id'] == $organization_chosen_plan[0]['subscription_id'])){
+                                                                                         if($curdate < strtotime($organization_chosen_plan[0]['org_sub_validity_end_date'])){
+                                                                                           echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
+                                                                                        } 
+                                                                                    }else{
+                                                                                       echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>"; 
+                                                                                    }	
 										}
 										else if(isset($_GET['reason']) && $_GET['reason']=='plan_selection' && $_GET['planid']==$sub_val['sub_id']){
 												echo "<option class='subplan_act' value=".$sub_val['sub_id']." data-name=".$sub_val['subscription_plan']." data-amount=".$sub_val['subscription_price']." selected>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
 										}
 										else if(($sub_val['subscription_status'] == 1) || (isset($organization_chosen_plan[0]['subscription_id']) && !empty($organization_chosen_plan[0]['subscription_id']) && $sub_val['sub_id'] == $organization_chosen_plan[0]['subscription_id'] && $organization_chosen_plan[0]['organization_subscription_status'] == 1)){
-											echo "<option class='subplan_act' value='".$sub_val['sub_id']."' data-name='".$sub_val['subscription_plan']."' data-amount='".$sub_val['subscription_price']."'>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
+                                                                                    
+                                                                                     if(($organization_chosen_plan[0]['subscription_id'] == 1 ) && ($sub_val['sub_id'] == $organization_chosen_plan[0]['subscription_id'])){
+                                                                                        if($curdate < strtotime($organization_chosen_plan[0]['org_sub_validity_end_date'])){
+                                                                                           echo "<option class='subplan_act' value='".$sub_val['sub_id']."' data-name='".$sub_val['subscription_plan']."' data-amount='".$sub_val['subscription_price']."'>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";                             
+                                                                                        } 
+                                                                                    }else{
+                                                                                        echo "<option class='subplan_act' value='".$sub_val['sub_id']."' data-name='".$sub_val['subscription_plan']."' data-amount='".$sub_val['subscription_price']."'>".$sub_val['subscription_plan']." Membership plan @ ".$sub_val['subscription_validity_days']." days Rs. ".$sub_val['subscription_price']." </option>";
+                                                                                    }
+                                                                                    
+											
 										}
 									} 
+                                                                        
+                                                                        
 									?>
 								</select>
 								<p>
@@ -194,11 +212,28 @@
                     		}
                     		$key = trim((isset($chosen_plan) && !empty($chosen_plan))?array_search($chosen_plan, array_column($subscription_upgrade_plan, 'sub_id')):'');
                     	}
-                    	else {
-                    		$key = trim((isset($organization_chosen_plan[0]['subscription_id']) && !empty($organization_chosen_plan[0]['subscription_id']))?array_search($organization_chosen_plan[0]['subscription_id'], array_column($subscription_upgrade_plan, 'sub_id')):'');
+                    	else {                            
+                            $key='';
+                                if($organization_chosen_plan[0]['subscription_id'] == 1 ){
+                                     if($curdate < strtotime($organization_chosen_plan[0]['org_sub_validity_end_date'])){                           
+                                      $key = trim((isset($organization_chosen_plan[0]['subscription_id']) && !empty($organization_chosen_plan[0]['subscription_id']))?array_search($organization_chosen_plan[0]['subscription_id'], array_column($subscription_upgrade_plan, 'sub_id')):'');
+                                   }
+                                }else{
+                                    $key = trim((isset($organization_chosen_plan[0]['subscription_id']) && !empty($organization_chosen_plan[0]['subscription_id']))?array_search($organization_chosen_plan[0]['subscription_id'], array_column($subscription_upgrade_plan, 'sub_id')):'');
+                                } 
+                                                                                    
+                                                                                    
+                    		
+                            
                     		$already = 1;
                     	}
-
+                        
+                      
+                        
+                        
+                        //print_r($expired);
+                        
+                        
                     	//         	$current = 0;
 						// // If the user already subscripe display current plan or not
 					    //             $key = trim((isset($organization_chosen_plan[0]['subscription_id']) && !empty($organization_chosen_plan[0]['subscription_id']))?array_search($organization_chosen_plan[0]['subscription_id'], array_column($subscription_upgrade_plan, 'sub_id')):'');
@@ -215,10 +250,10 @@
                     		
                     if($key != '') {
                     	$org_key = trim((isset($subscription_upgrade_plan[$key]['sub_id']) && !empty($subscription_upgrade_plan[$key]['sub_id']) && $already == 1)?array_search($subscription_upgrade_plan[$key]['sub_id'], array_column($organization_chosen_plan, 'subscription_id')):'');
-                	?>
+                        ?>
 			        <div class="subscribe">				           
 		                <div class="row">
-		                    <div class="col-md-12 col-sm-12 col-xs-12">			                    	
+		                    <div class="col-md-12 col-sm-12 col-xs-12">	
 								<div class="col-md-4 col-sm-6 col-xs-12 plan_selection">
 		                        	<div class="price_ui_box subscribe_plan">
 			                            <div class="single-price even" id="featured-price">
