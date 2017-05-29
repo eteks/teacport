@@ -84,6 +84,7 @@ if(!empty($this->session->userdata("admin_login_status"))):
                           <th> Organization Registered Id </th>
                           <th> Organization Name </th>
                           <th> Registrant Name </th>
+                           <th> Mobile </th>
                           <th> Profile Completeness </th>
                           <!-- <th> Subcription Plan </th> -->
                           <th> Status </th>
@@ -129,6 +130,19 @@ if(!empty($this->session->userdata("admin_login_status"))):
                               endif;
                             ?>
                           </td>
+                          
+                          <td class="">
+                            <?php
+                              if(!empty($pro_val['registrant_mobile_no'])) :
+                                echo $pro_val['registrant_mobile_no']; 
+                              else :
+                                echo "NULL";
+                              endif;
+                            ?>
+                          </td>
+                          
+                          
+                          
                           <td class="">
                             <?php echo $pro_val['organization_profile_completeness']." %"; ?>      
                           </td>
